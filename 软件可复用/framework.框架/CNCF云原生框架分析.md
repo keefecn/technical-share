@@ -1080,7 +1080,6 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 表格 4 K8s关键术语
 
 
-
 | 名词                   | 释义                                                         | 设计理念                                                     |
 | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | API对象                | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。 | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
@@ -1281,15 +1280,15 @@ docker run \
 
 
 **第三步：运行service proxy**
-
+```shell
 docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 /hyperkube proxy --master=http://127.0.0.1:8080 
-
+```
  
 
 **测试**
-
+```shell
 kubectl get nodes
-
+```
  
 
 ### 3.3.3  vagrant创建单节点集群
@@ -1311,12 +1310,11 @@ curl -s3 https://get.k8s.io/ |bash
 1）下载安装docker docker-compose
 
 2）进入虚拟机 /vagrant目录，执行下列命令
-
+```shell
 docker-compose -f k8s.yml up -d
-
 docker ps
-
 ./kubectl get nodes
+```shell
 
 ## 3.4     使用篇
 
@@ -1357,17 +1355,11 @@ Prometheus 是一套开源的监控、报警和时间序列数据库的组合，
 **关键功能包括：**
 
 *  多维数据模型：metric，labels
-
 *  灵活的查询语言：PromQL， 在同一个查询语句，可以对多个 metrics 进行乘法、加法、连接、取分数位等操作。
-
 *  可独立部署，拆箱即用，不依赖分布式存储
-
 *  通过Http pull的采集方式
-
 *  通过push gateway来做push方式的兼容
-
 *  通过静态配置或服务发现获取监控项
-
 *  支持图表和dashboard等多种方式
 
 ## 4.1     架构

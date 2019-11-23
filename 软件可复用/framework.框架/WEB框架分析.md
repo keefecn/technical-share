@@ -917,7 +917,7 @@ blog 文件夹中有很多自动生成的文件和文件夹，组成一个 Rails
 | app/                  | 存放程序的控制器、模型、视图、帮助方法、邮件和静态资源文件。本文主要关注的是这个文件夹。 |
 | bin/                  | 存放运行程序的 rails 脚本，以及其他用来部署或运行程序的脚本。 |
 | config/               | 设置程序的路由，数据库等。详情参阅“[设置   Rails 程序](http://guides.ruby-china.org/configuring.html)”一文。 |
-| config.ru             | 基于 Rack 服务器的程序设置，用来启动程序。                   |
+| config.r*             | 基于 Rack 服务器的程序设置，用来启动程序。                   |
 | db/                   | 存放当前数据库的模式，以及数据库迁移文件。                   |
 | Gemfile, Gemfile.lock | 这两个文件用来指定程序所需的 gem 依赖件，用于 Bundler gem。关于 Bundler 的详细介绍，请访问 [Bundler 官网](http://bundler.io/)。 |
 | lib/                  | 程序的扩展模块。                                             |

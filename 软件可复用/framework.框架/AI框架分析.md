@@ -207,6 +207,7 @@ java weka.classifiers.trees.J48 -C 0.25 -M 2 -t D:\my_install\Weka-3-6\data-test
 java weka.classifiers.trees.J48 -p 9 -l D:\my_install\Weka-3-6\data-test\bank.model -T D:\my_install\Weka-3-6\data-test\bank-test.arff
 
 ### 5.2.2  Package Hierarchies
+
 | **Packages**                                                 | Desc                          |
 | ------------------------------------------------------------ | ----------------------------- |
 | [weka.associations](http://weka.sourceforge.net/doc/weka/associations/package-summary.html) | 关联规则, 缺省使用Apriori算法 |
