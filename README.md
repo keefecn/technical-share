@@ -1,10 +1,22 @@
-# technical-share
+#  technical-share
 Personal Technical Share, 我的个人技术分享
 
+```
 版权所有，若需要转载文章，请标明出处。
+```
 
 
-目录
+
+typora支持的md格式与传统md格式的差别
+1. md格式表格头前要有空行，typora没作要求。
+
+**写作技巧**
+
+1. 数字+空格 会变成有序符号且不需额外换行; 仅数字开头仍需换行。
+
+
+
+**目录**
 ```
 │   LICENSE
 │   README.md
@@ -15,7 +27,8 @@ Personal Technical Share, 我的个人技术分享
 │   └───sf_reuse
 │           algo2_001.png
 │           algo_001.png
-│           algo_002.png│           
+│           algo_002.png    
+|
 ├───大数据与AI
 │   │   BI专题.md
 │   │   Hadoop体系.md
@@ -83,4 +96,4 @@ Personal Technical Share, 我的个人技术分享
             stl学习笔记.md
             using_libxml2.md
             
-```            
+```

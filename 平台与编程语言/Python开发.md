@@ -166,7 +166,6 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 ## 1.3     Python解释器
 python是编程语言，而不是运行时环境。python有几个实现，分别是CPython、Cython、Jython、IronPython和PyPy。
 表格 1 各种python解释器比较列表
-
 | 解释器实现 | 简介                                                         | 应用场景                                                     |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Anaconda   | 公司推的，带免费版和商业版插件。成熟的科学计算环境，包括了常用的   Numpy,Scipy，matplotlib和networkx 等，以及 beautiful-soup，requests，flask，tornado   等网络相关的扩展。   提供了Python2.7和Python3.4两个版本，使用conda管理python扩展。 | 科学计算领域包括数据挖掘和机器学习。   $ conda list   $ conda install xxx |
@@ -180,7 +179,6 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 
 ## 1.4     py/pyc/pyo/pyd
 表格 2 python各种文件格式
-
 | 名称 | 简介                                   | 生成方式                                                   |
 | ---- | -------------------------------------- | ---------------------------------------------------------- |
 | py   | python源文件                           |                                                            |
@@ -204,7 +202,6 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
  装饰器就是一个闭包。
 
 表格 3 python对象列表
-
 | 对象名   | 简介                                                         | 内建类型            |
 | -------- | ------------------------------------------------------------ | ------------------- |
 | 对象     |                                                              | ObjectType          |
@@ -304,7 +301,6 @@ copy.copy( )
 内建常量**constant**有：False True None NotImplemented Ellipsis __debug__
 
 表格 4 python标准库/模块列表
-
 | 功能       | 模块或   类名 | 简介                                                         | 备注                                                         |
 | ---------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 系统       | sys           | 系统模块，包含了跟python解析器和环境相关的变量和函数。<br>  [System-specific   parameters and functions](https://docs.python.org/2/library/sys.html). | `sys.modules` 包含了你在 IDE 中运行的所有程序所导入的所有模块。 |
@@ -381,7 +377,6 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 - [5.11. Context      Manager Types](https://docs.python.org/2/library/stdtypes.html#context-manager-types)
 - [5.12. Other      Built-in Types](https://docs.python.org/2/library/stdtypes.html#other-built-in-types)
 - [5.13. Specia*      Attributes](https://docs.python.org/2/library/stdtypes.html#special-attributes)
-
 查看内置类型 types模块
 ```PYTHON
 >>> import types
@@ -425,7 +420,6 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 
 ### 2.2.3  内建函数Built-in Functions
 表格 5 内建函数列表（全）
-
 | [**abs()**](https://docs.python.org/2/library/functions.html#abs) | [**divmod()**](https://docs.python.org/2/library/functions.html#divmod) | [**input()**](https://docs.python.org/2/library/functions.html#input) | [**open()**](https://docs.python.org/2/library/functions.html#open) | [**staticmethod()**](https://docs.python.org/2/library/functions.html#staticmethod) |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [**all()**](https://docs.python.org/2/library/functions.html#all) | [**enumerate()**](https://docs.python.org/2/library/functions.html#enumerate) | [**int()**](https://docs.python.org/2/library/functions.html#int) | [**ord()**](https://docs.python.org/2/library/functions.html#ord) | [**str()**](https://docs.python.org/2/library/functions.html#str) |
@@ -446,7 +440,6 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 备注：**1. classmethod、staticmethod详见****0****下方**
 
 表格 6 常用内建函数列表
-
 | **作用域**   | **函数名**                    | **简介**                                                     |
 | ------------ | ----------------------------- | ------------------------------------------------------------ |
 | **模块**     | **globals**                   | 当前域的全局变量dict，如已导入的模块名                       |
@@ -693,7 +686,6 @@ string.split(l, ':')))
 ### 2.2.4  内建私有方法Built-in Methods
 __xx_xx__: 内置私有方法。 
 表格 7 常见内建私有方法列表
-
 | 类别             | 方法名               | 用途                                                         | 示例                  |
 | ---------------- | -------------------- | ------------------------------------------------------------ | --------------------- |
 | 对象的创建与销毁 | __new__              | 对象创建新实例时调用的类方法。单例Singleton模式需要重载此内置方法，用Super类。 | 单例模式              |
@@ -721,7 +713,6 @@ __xx_xx__: 内置私有方法。
 4、重载使得类的实例看起来更像内置的。
 5、重载是通过特殊命名的类方法来实现的。
 表格 8 可重载的操作符列表
-
 | _操作符_     | 用途            | 示例                  |
 | ------------ | --------------- | --------------------- |
 | __init__     | 构造函数        | 创建对象：class()     |
@@ -742,7 +733,6 @@ __xx_xx__: 内置私有方法。
 ### 2.2.5  常用基础算法
 #### 2.2.5.1 算法列表
 表格 9 常用算法列表
-
 | 函数名     | 示例                                                         | 说明                                                         |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | filter     | >>> def f(x): return x % 2   != 0 and x % 3 != 0     >>> filter(f, range(2, 25))     [5, 7, 11, 13, 17, 19, 23] | 对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。 |
@@ -883,7 +873,6 @@ print type(eval("{'name':'ljq', 'age':24}"))
 **Python转义字符**
 在需要在字符中使用特殊字符时，python用反斜杠(\)转义字符。如下表：
 表格 10Python转义字符列表
-
 | **转义字符** | **描述**                                     |
 | ------------ | -------------------------------------------- |
 | \(在行尾时)  | 续行符                                       |
@@ -906,7 +895,6 @@ print type(eval("{'name':'ljq', 'age':24}"))
 **Python字符串运算符**
 下表实例变量a值为字符串"Hello"，b变量值为"Python"：
 表格 11 Python字符串运算符
-
 | 操作符 | 描述                                                         | 实例                                         |
 | ------ | ------------------------------------------------------------ | -------------------------------------------- |
 | +      | 字符串连接                                                   | a + b 输出结果：   HelloPython               |
@@ -936,7 +924,6 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | %p   | 用十六进制数格式化变量的地址         |
 
 表格 13格式化操作符辅助指令
-
 | 符号  | 功能                                                         |
 | ----- | ------------------------------------------------------------ |
 | *     | 定义宽度或者小数点精度                                       |
@@ -959,7 +946,6 @@ python三引号常用作文档注释。
 字符串方法是从python1.6到2.0慢慢加进来的——它们也被加到了Jython中。 
 这些方法实现了string模块的大部分方法，如下表所示列出了目前字符串内建支持的方法，所有的方法都包含了对Unicode的支持，有一些甚至是专门用于Unicode的。 
 表格 14 Python的字符串内建函数
-
 | 方法                                                         | 描述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [string.capitalize()](http://www.runoob.com/python/att-string-capitalize.html) | 把字符串的第一个字符大写                                     |
@@ -1050,7 +1036,6 @@ re.findal*  返回一个匹配列表
 正则表达式修饰符 - 可选标志
 正则表达式可以包含一些可选标志修饰符来控制匹配的模式。修饰符被指定为一个可选的标志。多个标志可以通过按位 OR(|) 它们来指定。如 re.I | re.M 被设置成 I 和 M 标志：
 表格 15正则表达式修饰符 - 可选标志
-
 | 修饰符 | 描述                                                         |
 | ------ | ------------------------------------------------------------ |
 | re.I   | 使匹配对大小写不敏感                                         |
@@ -1070,7 +1055,6 @@ re.findal*  返回一个匹配列表
 由于正则表达式通常都包含反斜杠，所以你最好使用原始字符串来表示它们。模式元素(如 r'/t'，等价于'//t')匹配相应的特殊字符。
 下表列出了正则表达式模式语法中的特殊元素。如果你使用模式的同时提供了可选的标志参数，某些模式元素的含义会改变。
 表格 16正则表达式模式
-
 | 模式        | 描述                                                         |
 | ----------- | ------------------------------------------------------------ |
 | ^           | 匹配字符串的开头                                             |
@@ -1116,9 +1100,7 @@ re.findal*  返回一个匹配列表
 | 实例   | 描述           |
 | ------ | -------------- |
 | python | 匹配 "python". |
-
-表格 字符类
-
+字符类
 | 实例        | 描述                              |
 | ----------- | --------------------------------- |
 | [Pp]ython]  | 匹配 "Python" 或 "python"         |
@@ -1130,9 +1112,7 @@ re.findal*  返回一个匹配列表
 | [a-zA-Z0-9] | 匹配任何字母及数字                |
 | [^aeiou]    | 除了aeiou字母以外的所有字符       |
 | [^0-9]      | 匹配除了数字外的字符              |
-
-表格 特殊字符类
-
+特殊字符类
 | 实例 | 描述                                                         |
 | ---- | ------------------------------------------------------------ |
 | .    | 匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。 |
@@ -1204,7 +1184,6 @@ traceback ---- 包含调用栈信息的对象。
 
 所有的标准/内建异常都是从根异常派生的，目前，有3个直接从BaseException派生的异常子类：SystemExit，KeyboardInterrupt和Exception。其它的所有的内建异常都是Exception的子类。
 表格 17 python标准异常
-
 | **异常名称**              | **描述**                                           |
 | ------------------------- | -------------------------------------------------- |
 | BaseException             | 所有异常的基类                                     |
@@ -1294,7 +1273,6 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
 表格 18 不同OS下的第三方模块的缺省安装路径
-
 | **Platform**    | **Standard installation location**          | **Default value**                        | **Notes** |
 | --------------- | ------------------------------------------- | ---------------------------------------- | --------- |
 | Unix (pure)     | *prefix*/lib/python*X.Y*/site-packages      | /usr/local/lib/python*X.Y*/site-packages | (1)       |
@@ -1331,7 +1309,6 @@ pip会自动管理包的信息，使卸载/更新更加方便和容易，使用p
 pip提供了对virtualenv更好的整合。
 #### 3.1.2.1  pip安装：3rd第三方模块
 说明：pip实质是个脚本（Linux下可cat查看），其执行与对应的python解释程序相关，其模块安装后也是放在相应的python解释器的site-packages。
-
 |             | 简介                                                         |                                                   |
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------- |
 | 安装pip工具 | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   $ python -m pip install --upgrade pip |
@@ -1760,12 +1737,12 @@ option=value
 上面的setup.py和setup.cfg都是遵循python标准库中的Distutils，而setuptools工具针对Python官方 的distutils做了很多针对性的功能增强，比如依赖检查，动态扩展等。很多高级功能我就不详述了，自己也没有用过，等用的时候再作补充。详情可参见[这里](https://pythonhosted.org/setuptools/setuptools.html)。
 
 #### 3.1.5.5 上传到pypi
+\# github首先更新工具，不更新无法识别long_description
 ```
-# github首先更新工具，不更新无法识别long_description
 python3 -m pip install --user --upgrade setuptools wheel twine
 ```
 
-pypi配置文件 ~/.pypirc
+\# pypi配置文件 ~/.pypirc
 ```shell
 [distutils]
 index-servers = localhost 
@@ -1800,7 +1777,6 @@ python -m pytest
 说明：本章所说的常用模块为个人所常用的。在3.4 见下方 的常见开发库收集了常用标准库和第三方库，两者多有交叉。
 
 表格 19 python常用第三方模块列表
-
 | 模块名                                             | 简介                                                         | 备注                                                         | 模块安装/导入示例                             |
 | -------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
 | mysql-pthon                                        | mysql的python接口。最新[MySQL-python 1.2.5](https://pypi.python.org/pypi/MySQL-python/1.2.5)。 | 官网只提供python 2.7.x的32位版本，64位版本需要自行编译。pip安装易出错，可下载官方二进制文件安装。   64位编译参考：http://blog.csdn.net/daniel_h1986/article/details/49446423 | pip install mysql-python       import MySQLdb |
@@ -1988,7 +1964,6 @@ traceback.print_exception(sys.exc_info())
 参考资料：Python 程序员必知必会的开发者工具http://blog.jobbole.com/58226/
 说明：眼风为为实。经俺测试，get/set attr的运行效率所差无几，没有所谓几十倍的差距，也就是几十分之一的正常差距。
 表格 20 python程序列表
-
 | 程序                                                  | 简介                                                         | 备注                                                         |
 | ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Python 2.6/2.7                                        | 目前大多数应用支持。   python2.7.6以后的版本自带pip。        | 语法与3.x有差别。                                            |
@@ -2006,7 +1981,6 @@ traceback.print_exception(sys.exc_info())
 注：32机只能装32位的python；64位机能同时装32和64位的python程序，具体使用中通过环境变量或全路径来识别版本。
 
 表格 21 python常用开发工具列表（按功能分类）
-
 | 功能     | 相关工具                                                     | 备注                                                         |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | IDE      | IDLE（自带），   pythonwin（简洁版，Win   only），    **Eclipse+Pydev**（开源）；   pycharm（付费 ）   spyder（开源） | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。   spyder用以科学计算。 |
@@ -2148,11 +2122,9 @@ Options:
 [**pydoc**](http://docs.python.org/3.3/library/pydoc.html)模块可以根据源代码中的docstrings为任何可导入模块生成格式良好的文档。
 
 **文档化注释**
-说明：文件头在声明完编码后，加 """ 文件内容描述 DESCRIPTION """
-
-然后，在类名、类的成员函数，函数名下方的块注释会自动被pydoc模块识别。
-
-用help(文件名 或 类/函数)就可得到文档化注释。
+**说明：文件头在声明完编码后，加** *'''* 文件内容描述 DESCRIPTION *'''*
+**然后，在类名、类的成员函数，函数名下方的块注释会自动被pydoc模块识别。**
+**用help(文件名 或 类/函数)就可得到文档化注释。**
 
 **示例：python_doc.py**
 ```python
@@ -2231,13 +2203,12 @@ class Shop:
        pass
  
 if __name__ == "__main__":
-   # 导入的需要自身的文件名，如本文件python_doc
+   \# 导入的需要自身的文件名，如本文件python_doc
    import python_doc
    print help(python_doc)
 ```
 
 ### 3.3.5  测试工具unittest/pytest/nose
-
 | 工具       | 简介                                                       | 导入                        | 使用                                                   |
 | ---------- | ---------------------------------------------------------- | --------------------------- | ------------------------------------------------------ |
 | Doctest    | 该模块可以从源代码或独立文件的例子中抽取出测试用例。       | import doctest              | python -m doctest  xx.py                               |
@@ -2251,7 +2222,6 @@ if __name__ == "__main__":
 备注：pycharm支持 unittest/nosetests/pytest。-v
 
 表格 22 unittest/pytest/nose测试工具比较
-
 |                                          | unittest                                                     | pytest                                                       | nose                           |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
 | 简介                                     | 全功能的自动化测试框架。                                     | 能自动发现并执行测试，并生成报表xml格式。                    | 自动搜索带test串的文件或目录。 |
@@ -2272,17 +2242,14 @@ if __name__ == "__main__":
 | 插件                                     |                                                              | 很多。                                                       |                                |
 | 并发                                     |                                                              | pytest-xdist                                                 | 命令行并发                     |
 备注：1.setup/teardown是特殊的fixture。
-
 2.安装测试模块
 $ pip install pytest nose toxs
-
 #### 3.3.5.1 unittest
    unittest提供了test cases、test suites、test fixtures、test runner相关的类,让测试更加明确、方便、可控。使用unittest编写用例,必须遵守以下规则:
 ·         测试文件必须先import unittest
 ·         测试类必须继承unittest.TestCase
 ·         测试方法必须以“test_”开头
 ·         测试类必须要有unittest.main()方法
-
 #### 3.3.5.2 pytest
 pytest是一个非常成熟的全功能的Python测试框架，主要特点有以下几点：
 1、简单灵活，容易上手，文档丰富； 
@@ -2385,11 +2352,9 @@ pytest.fixture(scope='function', params=None, autouse=False, ids=None)
 #### 3.3.5.3 tox
 tox是命令行工具，它允许测试在多个环境运行。不仅可用tox来测试不同的python环境（如py26,py37)，还可用来测试不同的依赖配置和操作系统配置。
 
-```SHELL
-# 安装、安装
+\# 安装、安装
 $ pip install tox
 $ tox
-```
 
 **配置文件 tox.ini**
 ```
@@ -2589,7 +2554,6 @@ supervisord -c /etc/supervisord.conf
 ## 3.4     Python常用开发库
 ### 3.4.1  常用开发库列表
 表格 23 用过的python常用库（按类别划分）
-
 | **类别**       | 库名                                                         | 介绍                                                         |
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **网络**       | urllib                                                       | Open an arbitrary URL. 仅可接受URL。示例: urllib.urlopen   提供urlencode方法用来GET查询字符串的产生，而urllib2没有。 |
@@ -2633,8 +2597,7 @@ supervisord -c /etc/supervisord.conf
 |                | logging                                                      | 日志记录                                                     |
 |                |                                                              |                                                              |
 备注：1.urllib2在Python3已拆分更名为urllib.request和urllib.error.
-2. 机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。
-
+\2. 机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。
 ### 3.4.2  网络编程
 #### 3.4.2.1 网络
 通用
@@ -2680,15 +2643,12 @@ o    netaddr – 用于显示和操纵网络地址的Python库。
 ·         Crossbar – 开源的应用消息传递路由器（Python实现的用于Autobahn的WebSocket和WAMP）。
 ·         AutobahnPython – 提供了WebSocket协议和WAMP协议的Python实现并且开源。
 ·         WebSocket-for-Python – Python 2和3以及PyPy的WebSocket客户端和服务器库。
-
 #### 3.4.2.5           DNS解析
 ·         dnsyo – 在全球超过1500个的DNS服务器上检查你的DNS。
 ·         pycares – c-ares的接口。c-ares是进行DNS请求和异步名称决议的C语言库。
-
 #### 3.4.2.6           代理服务器
 *  shadowsocks – 一个快速隧道代理，可帮你穿透防火墙（支持TCP和UDP，TFO，多用户和平滑重启，目的IP黑名单）。
 *  tproxy – tproxy是一个简单的TCP路由代理（第7层），基于Gevent，用Python进行配置。
-
 #### 3.4.2.7           电子邮件
 电子邮件解析库
 *  flanker – 电子邮件地址和Mime解析库。
@@ -2706,13 +2666,12 @@ o    netaddr – 用于显示和操纵网络地址的Python库。
 *  xmltodict – 一个可以让你在处理XML时感觉像在处理JSON一样的Python模块。
 *  xhtml2pdf – 将HTML/CSS转换为PDF。
 *  untangle – 轻松实现将XML文件转换为Python对象。
-
 清理
 *  Bleach – 清理HTML（需要html5lib）。
 *  sanitize – 为混乱的数据世界带来清明。
 #### 3.4.3.2           网页内容提取
-
-提取网页内容的库: HTML页面的文本和元数据
+提取网页内容的库。
+·         HTML页面的文本和元数据
 o    newspaper – 用Python进行新闻提取、文章提取和内容策展。
 o    html2text – 将HTML转为Markdown格式文本。
 o    python-goose – HTML内容/文章提取器。
@@ -2722,13 +2681,11 @@ o    sumy -一个自动汇总文本文件和HTML网页的模块
 o    Haul – 一个可扩展的图像爬虫。
 o    python-readability – arc90 readability工具的快速Python接口。
 o    scrapely – 从HTML网页中提取结构化数据的库。给出了一些Web页面和数据提取的示例，scrapely为所有类似的网页构建一个分析器。
-
 **视频**
 *  youtube-dl – 一个从YouTube下载视频的小命令行程序。
 *  you-get – Python3的YouTube、优酷/ Niconico视频下载器。
 **维基**
 *  WikiTeam – 下载和保存wikis的工具。
-
 #### 3.4.3.3           文本处理
 用于解析和操作简单文本的库。
 通用
@@ -2759,7 +2716,6 @@ Slug化
 用户代理字符串
 ·         python-user-agents – 浏览器用户代理的解析器。
 ·         HTTP Agent Parser – Python的HTTP代理分析器。
-
 #### 3.4.3.4           特定格式文件处理
 解析和处理特定文本格式的库。
 通用
@@ -2799,13 +2755,11 @@ HTTP
 *  pefile – 一个多平台的用于解析和处理可移植执行体（即PE）文件的模块。
 PSD
 *  psd-tools – 将Adobe Photoshop PSD（即PE）文件读取到Python数据结构。
-
 ### 3.4.4  多线程和并发
 #### 3.4.4.1 多重处理
 *  threading – Python标准库的线程运行。对于I/O密集型任务很有效。对于CPU绑定的任务没用，因为python GIL。
 *  multiprocessing – 标准的Python库运行多进程。
 *  concurrent-futures – concurrent-futures 模块为调用异步执行提供了一个高层次的接口。
-
 #### 3.4.4.2 队列
 *  celery – 基于分布式消息传递的异步任务队列/作业队列。
 *  huey – 小型多线程任务队列。
@@ -2813,7 +2767,6 @@ PSD
 *  RQ – 基于Redis的轻量级任务队列管理器。
 *  simpleq – 一个简单的，可无限扩展，基于Amazon SQS的队列。
 *  python-gearman – Gearman的Python API。
-
 #### 3.4.4.3 云计算
 *  picloud – 云端执行Python代码。
 *  dominoup.com – 云端执行R，Python和matlab代码。
@@ -2835,7 +2788,6 @@ PSD
 *  Ghost.py – 对PyQt的webkit的封装（需要PyQT）。
 *  Spynner – 对PyQt的webkit的封装（需要PyQT）。
 *  Splinter – 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。
-
 ## 3.5           其他Python库
 #### 3.5.1.1 SQLAlchemy
 
@@ -2879,17 +2831,15 @@ $ /d/dev/python/pypy2/pypy xxx.py   # pypy 2.5.8
 ### 4.1.1   virtualenv切换python版本
 一个环境下同时运行多个项目，而每个项目依赖于不同的模块。
 为了更清楚地理清模块的依赖关系，为了避免模板版本冲突，故可使用virtualenv来管理每个项目自己独特的环境(包括拷贝独立的python.exe、pip/setuptools)，通过独有环境生成requirements.txt。每个virtaulenv环境将占用约15MB。
-```python
-# 1. 在线安装
+
+\# 1. 在线安装
 $ pip install virtualenv
 
-# 下载离线包
+\# 下载离线包
 $ **pip download $package**
 $ **pip install --download ${HOME}/.pip-packages'**
-
-# 2. 离线安装
+\# 2. 离线安装
 $ **pip install --no-index --find-links=file://${HOME}/.pip-packages/'**
-```
 
 **搭建virutalenv环境**
 *  创建环境，会在当前目录下自动生成gameprice-env目录，目录初始大小在30MB左右。若删除此目录，则相当于彻底删除了这个环境。
@@ -2898,18 +2848,16 @@ $ **pip install --no-index --find-links=file://${HOME}/.pip-packages/'**
 *  搭建完成后如果移动环境目录，则需要修改bin目录里的activate和pip里面的环境变量，这样才能保证正常找到环境里python路径。
 *  *virtualenv不能混用，python2和python3都需要安装自己的virtualenv。*
 
-```sh
-# -p 指定解释器,如下目录venv使用python2.7
+\# -p 指定解释器,如下目录venv使用python2.7
 $ virtualenv -p /usr/bin/python2.7 --clear gameprice-env
 
-# 环境初始化时的目录结构
+\# 环境初始化时的目录结构
  (gameprice-env) denny@denny-ubuntu:~/venv/gameprice-env$ ls
 bin  include  lib  loca*  pip-selfcheck.json
-```
 
 \# 启动、停止virtaulenv 
+\# (LINUX环境）
 ```shell
-# (LINUX环境）
 $ source bin/activate
 (venv)$ deactivate
 # (WINDOWS环境）
@@ -2984,7 +2932,6 @@ Python 3.6.5
 3
 ```
 表格 24 python2和python3的比较列表
-
 |            | python 2.x                                                   | python 3                                                     |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | print      | print表达式                                                  | print函数，强制使用()                                        |
@@ -3000,7 +2947,6 @@ Python 3.6.5
 | 搜索路径   | 默认先当前目录，再系统路径sys.path                           | 系统路径之外的要显式指明路径，如当前目录加.                  |
 
 表格 25 urllib/urlib2在python2和python3的变化
-
 |           | python 2                  | python 3                                                     |
 | --------- | ------------------------- | ------------------------------------------------------------ |
 | urllib    |                           | 功能调整为5个模块：request   error parse                     |
@@ -3051,7 +2997,6 @@ except ImportError:
 
 ## 4.2     python安全编码
 表格 26  已知不安全的库列表
-
 | 库名           | 解决方案    | 库名            | 解决方案 |
 | -------------- | ----------- | --------------- | -------- |
 | ast            |             | multiprocessing |          |
@@ -3100,7 +3045,6 @@ n  http密集型：多线程>多进程>line，推荐多线程。
 **说明**：Python的多线程处理计算密集型(CPU Bound)任务是一个众所周知的大坑，比如多线程解析html文件。这时最好用多进程分别做解析任务，然后将解析好的文件收集起来。
 
 表格 27 python进程和线程比较列表
-
 |          | 进程                                                         | 线程                                        |
 | -------- | ------------------------------------------------------------ | ------------------------------------------- |
 | 实现     | multiprocessing.Process                                      | thread 或者   threading                     |
@@ -3112,7 +3056,6 @@ n  http密集型：多线程>多进程>line，推荐多线程。
 3. 协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
 
 表格 28 gunicorn工作方式比较列表
-
 | 工作方式 | IO模式      | 备注          |
 | -------- | ----------- | ------------- |
 | sync     | 同步等待    | 缺省模式      |
@@ -3335,7 +3278,6 @@ gevent.joinall([      # 创建线程并行执行程序，碰到IO就切换
 **WSGI**: Web Server Gateway Interface（Web服务器网关接口）,是一种通信协议，它不是服务器、python模块、框架、API或者任何软件，只是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）通信的规范。wsgi server 他的意义在于 让我们专心去写web application，而不用专注于网络底层实现。
 
 表格 30 gunicorn和uwsgi比较列表
-
 |            | gunicorn                                        | uwsgi/uWSGI                                                  |
 | ---------- | ----------------------------------------------- | ------------------------------------------------------------ |
 | 简介       | master+N worker。缺省同步模式(worker select）   | 2个端口。socker fd监听。使用uwsgi避免了重复解析http协议，处理效率更高。 |
@@ -3394,7 +3336,6 @@ gunicorn \
 图 3 nginx+uwsgi+django关联
 
 ## 4.4     python内存管理
-
 ### 4.4.1  内存使用
 关于内存的限量使用，在实现时可以为缓存设定一个阀值，缓存满了就先暂停所有的文件扫描和解析进程，等缓存快没了的时候再继续，在Linux上使用 SIGSTOP和SIGCONT信号可以很容易就实现这一功能。相比之下，如何准确的获取缓存对象所占用的内存大小倒是比较困难，折中的办法是统计整个进 程的内存占用或是[间接的方法](http://stackoverflow.com/questions/563840/how-can-i-check-the-memory-usage-of-objects-in-ipython/565382#565382)，或者干脆通过限制缓存对象的数目来做限制（这个比较弱智的感觉）。
 关于内存的节约使用，大家都知道一般的Python对象都会自动创建一个[__dict__](https://docs.python.org/2/library/stdtypes.html#object.__dict__)属性来存储其他的属性，然而不太广为人知的是，Python的内置类型dict是一个内存大户，当Python对象少的时候可能很难发现，如果在内存里存储十万或一百万个Python对象时，用Memory Profiler（比如[Heapy](http://guppy-pe.sourceforge.net/#Heapy)）做下profiling你会发现，光是__dict__本身（不包括存在__dict__里的数据）就能吃掉你巨量的内存。
@@ -3432,7 +3373,6 @@ Python 采用引用计数的方式来管理分配的内存。Python 的每个对
 ### 4.6.1  12306抢票
 12306 售票网站新版验证码识别对抗 https://zhuanlan.zhihu.com/p/19979300
 https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2 
-
 ### 4.6.2  QQ模拟登陆
 http://www.2cto.com/Article/201603/493457.html 
 https://github.com/LeoHuang2015/qqloginjs
@@ -3475,11 +3415,10 @@ pypy是用python语言实现的，具有JIT特性的python解释器。在长期�
 **安装篇**
 *  二进制安装。
 *  源码安装：如果linux环境出现库不匹配，可用源码安装。
-* 依赖的python模块：pycparser
-* 依赖的必选C库有：cffi, ctypes，libz，libbz2，libexpat1，libexpat1
-* 编译速度较慢，编译时间达到2小时。
-* 编译时32位机约需3G内存，64位机约需5G内存。
-
+n  依赖的python模块：pycparser
+n  依赖的必选C库有：cffi, ctypes，libz，libbz2，libexpat1，libexpat1
+n  编译速度较慢，编译时间达到2小时。
+n  编译时32位机约需3G内存，64位机约需5G内存。
 编译步骤：
 ```shell
 hg clone https://bitbucket.org/pypy/pypy
@@ -3532,24 +3471,19 @@ mysql语句操作失败一方面是编码问题，字段值含有非ascii字符�
 **特别注意：SET NAMES UTF8;**
 
 **字符转义问题**
-python MySQLdb cursor.execute(query, args)使用两个参数时，会自动进行转义; 其中第二个参数args是一个列表类型。
+pthon MySQLdb cursor.execute(query, args)使用两个参数时，会自动进行转义; 其中第二个参数args是一个列表类型。
 args可以是duple,list，不需将字段值加双引号””，程序中会自动转码。
-
 **示例1：带参数**
-```python
-# name是字符串，id是数值，sql语句一律使用%s,因为paras里类型是string。
+\# name是字符串，id是数值，sql语句一律使用%s,因为paras里类型是string。
 sql = ‘update table set name=%s where id=%s’
 paras=[]
 paras.append(name.encode(‘utf-8’, ‘ignore’)    #若有非ascii字符需明确指定编码
 paras.append(id)
-```
 
 **示例2：不带参数**
 转义函数：MySQLdb.escape_string(str)， str需要是可识别的编码
-```python
 name=name.encode(‘utf-8’, ‘ignore’)   #此时name是可识别编码，否则会报错
 name= MySQLdb.escape_string(name)   #此时转义后，type(name)=’str’
-```
 
 ### 6.1.4  celery broker使用redis集群
 环境：py3.7，celery4.3.0（依赖redis>=3.0），redis-py-cluster1.3.6（依赖redis==2.10.6)。
@@ -3572,7 +3506,6 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。 
 
 表格 32源代码主要目录结构
-
 | 目录    | 简述                                                |
 | ------- | --------------------------------------------------- |
 | Demo    | python的示例程序                                    |
@@ -3590,7 +3523,6 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 备注：
 
 表格 33 cpython中对象的C和python级别对照
-
 | 源码中C对象      | Python对象                | 用途                                                         |
 | ---------------- | ------------------------- | ------------------------------------------------------------ |
 | PyObject         | object                    | 对象基类。是所有python对象的基类。                           |
@@ -3609,7 +3541,6 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 备注：可用type函数或者xxx.__class__来查看对象类型。__bases__用来查看父类类型。
 
 表格 34 python内置对象组成
-
 | 对象           | 成员                                           | 备注 |
 | -------------- | ---------------------------------------------- | ---- |
 | PyObject       | int refConut;   type                           |      |
@@ -3719,7 +3650,6 @@ typedef struct {
 
 
 表格 35 PyCodeObject各个域的含义
-
 | co_argcount    | 未知参数个数                   |
 | -------------- | ------------------------------ |
 | co_nlocals     | 局部变量个数                   |
