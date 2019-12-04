@@ -648,13 +648,13 @@ sys.setdefaultencoding('utf-8')
 
 ### 7.3.2 superset meta
 
-**1****）SQL_ALL**
+**1）SQL_ALL**
 
  ![image-20191201170320110](../media/ai/dv_superset_003.png)
 
  
 
-**2****）datasources**
+**2）datasources**
 
 ![image-20191201170339236](../media/ai/dv_superset_004.png) 
 

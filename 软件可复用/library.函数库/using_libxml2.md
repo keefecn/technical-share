@@ -60,11 +60,11 @@ XML 解析器可以利用这种父子结构来遍历文档，甚至修改文档�
 
 ## 1 tree
 ```c
-/*******************************************
+/***
  * compile: gcc -I/usr/include/libxml2/ -lxml2 tree1.c
  * usage: create a xml tree
  *
-*******************************************/
+***/
 #include <stdio.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>                      
@@ -142,11 +142,11 @@ int main(int argc, char **argv)
 
 对于应用程序来说，读取 XML 文件的第一步是加载该数据并将其解析为一个 `Document` 对象。在此基础上，可以对 DOM 树进行遍历以获取特定的节点。
 ```c
-/*******************************************
+/***
 * compile: gcc -I/usr/include/libxml2/ -lxml2 tree1.c
  * usage: tree2 filename_or_URL
  *
-*******************************************/
+***/
 #include <stdio.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
@@ -503,7 +503,7 @@ int main(void)
 
 使用数据类型：xmlCharEncodingHandlerPtr
 ```c
-/*******************************************
+/***
  * compile: gcc -I/usr/include/libxml2/ -lxml2 convert.c
  * usage:  convert utf-8 string or null
  * input: ./convert 测试
@@ -512,7 +512,7 @@ int main(void)
 ISO-8859-1:虏芒脢脭
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <root>测试</root>
-*******************************************/
+***/
 #include <libxml/encoding.h>
 /**
  * function name: ConvertInput

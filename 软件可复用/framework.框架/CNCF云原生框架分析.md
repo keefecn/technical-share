@@ -159,7 +159,7 @@ Docker 是 [PaaS](http://baike.baidu.com/view/1413359.htm) 提供商 dotCloud �
 
  
 
-**Docker****的应用场景**
+**Docker的应用场景**
 
 *  Web 应用的自动化打包和发布。
 *  自动化测试和持续集成、发布。
@@ -168,10 +168,7 @@ Docker 是 [PaaS](http://baike.baidu.com/view/1413359.htm) 提供商 dotCloud �
 
 
 
-
-
-
-**boot2docker****（**deprecated**）**
+**boot2docker**（deprecated）
 
 boot2docker is a lightweight Linux distribution based on Tiny Core Linux made specifically to run Docker containers. It runs completely from RAM, weighs ~27MB and boots in ~5s (YMMV).
 
@@ -179,7 +176,7 @@ This project is officially deprecated in favor of [Docker Machine](https://docs.
 
  
 
-**Docker Toolbox** **（win7+****）**
+**Docker Toolbox** （win7+）
 
 To run Docker, your machine must have a 64-bit operating system running Windows 7 or higher.
 
@@ -187,7 +184,7 @@ To run Docker, your machine must have a 64-bit operating system running Windows 
 
  
 
-[Docker for Windows](https://docs.docker.com/docker-for-windows/) **（win10+****）**
+[Docker for Windows](https://docs.docker.com/docker-for-windows/) （win10+）
 
 Docker for Windows requires Windows 10 Pro or Enterprise version 14393, or Windows server 2016 RTM to run
 
@@ -215,11 +212,16 @@ Docker 容器通过 Docker 镜像来创建。
 
 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信。
 
- 
-
 表格 2 Docker组件说明表
 
-
+| Docker 镜像(Images)    | Docker 镜像是用于创建 Docker 容器的只读模板，它包含创建Docker容器的说明。 |
+| ---------------------- | ------------------------------------------------------------ |
+| Docker 容器(Container) | 容器是独立运行的一个或一组应用，镜像的可运行实例。镜像和容器的关系类似面向对象中的类和对象的关系。 |
+| Docker  客户端(Client) | Docker  客户端通过命令行或者其他工具使用  Docker API (https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信。 |
+| Docker 主机(Host)      | 一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。       |
+| Docker 仓库(Registry)  | Docker仓库用来保存镜像，类似代码控制中的代码仓库。可分为公有和私有仓库。Docker Hub(https://hub.docker.com)是官方也是默认的Docker仓库，存放着海量镜像，并可通过docker命令下载并使用。 |
+| Docker Daemon          | Docker守护进程。运行在宿主机(Docker Host)的后台进程，可通过Docker客户端与之通信。 |
+| Docker Machine         | Docker Machine是一个简化Docker安装的命令行工具，通过一个简单的命令行即可在相应的平台上安装Docker，比如VirtualBox、 Digital Ocean、Microsoft Azure。 |
 
 备注：docker客户端和服务端daemon可以在同一台机器也可分布在不同机器。
 
@@ -249,61 +251,40 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 
  
 
-**1) 32****位平台**
-
+1)  32位平台
+```SHELL
 $ sudo apt-get install docker.io
-
-\# 导入32位ubuntu 14.04镜像
-
+# 导入32位ubuntu 14.04镜像
 $ sudo cat ubuntu-14.04-x86-minimal.tar.gz | docker import - ubuntu:14.04
-
 $ sudo docker run -it ubuntu:14.04 /bin/bash
-
  
-
 denny@denny-ubuntu:~$ sudo docker version 
-
 [sudo] password for denny: 
-
 Client version: 1.6.2
-
 Client API version: 1.18
-
 Go version (client): go1.2.1
-
 Git commit (client): 7c8fca2
-
 OS/Arch (client): linux/386
-
 Server version: 1.6.2
-
 Server API version: 1.18
-
 Go version (server): go1.2.1
-
 Git commit (server): 7c8fca2
-
 OS/Arch (server): linux/386
+```
 
- 
 
- 
-
-**2)** **正常平台**
-
-\# 会自动检测平台，下载相应最新版本
-
+2) 正常平台
+```SHELL
+# 会自动检测平台，下载相应最新版本
 $ wget -qO- https://get.docker.com/ | sh
-
  
-
-\# 安装后，启动docker后台服务
-
+# 安装后，启动docker后台服务
 $ sudo service docker start
+```
 
 #### windows安装
 
-**win7****、win8** **系统**
+**win7、win8系统**
 
 win7、win8 等需要利用 docker toolbox 来安装，国内可以使用阿里云的镜像来下载，下载地址：http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/
 
@@ -333,18 +314,14 @@ Docker for Windows is a desktop application based on [Docker Community Edition (
 安装成功后，验证docker
 
 step 1: 启动 dockerd守护进程
-
-$ service docker start  # linux
-
-或者
-
+```shell
+$ service docker start  
+# 或者 linux
 $ dockerd -d
+# 或者 windows
+$ docker-machine 
+```
 
-或者
-
-$ docker-machine   # windows
-
- 
 
 step2: 测试运行hello-world镜像
 ```shell
@@ -384,10 +361,6 @@ $ docker run -it ubuntu bash
    ![1574518882918](../../media/sf_reuse/framework/frame_docker_003.png)
 
 图 3 docker_commands
-
- 
-
-
 
 备注：镜像标签tag=$name:$version
 
@@ -545,20 +518,24 @@ Run a command in a new container
 #### 2.4.1.2 进入容器
 
 * 法1：docker attach  <docker_id>
-使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。
-* 法2（推荐）： docker exec -it <docker_id> /bin/bash
-* 法3：SSH
-* 法4：
+  使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。
 
- 
+* 法2（推荐）：  docker exec -it <docker_id> /bin/bash
+
+```shell
+  # 以root身份登陆docker容器
+  $ docker exec -it -u root [docker_id] /bin/bash
+```
+
+* 法3：SSH
+
+* 法4：
 
 ### 2.4.2  docker仓库管理镜像
 
 镜像存储路径
 *  linux:  /var/lib/docker
 *  windows: ~/.docker/
-
- 
 
 镜像管理主要命令：
 
@@ -590,23 +567,22 @@ $ cat ~/.docker/config.json
 
 $ docker login
 $ docker push [image:tag]
-
 ```
 
 #### 2.4.2.2 私有镜像仓库 Registry2
 
 创建私有仓库Docker Registry 2.0（需docker版本高于1.6.0），Registry 2不包含界面、用户管理、权限控制等功能，如果想使用这些功能，可使用Docker Trusted Registry.
 
-配置文件~/ 
+配置文件 ~/ 
 
-docker run -d -p 5000:5000 --restart=always --name registry2 registry:2
-
- 
+```shell
+$ docker run -d -p 5000:5000 --restart=always --name registry2 registry:2
+```
 
 修改tag，如果tag前不加host:port/，缺省将推送到github相应的镜像里（如果有权限）
 ```shell
-docker tag [old_image:tag] [**localhost:**5000/new_image:tag]
-docker push [localhost:5000/new_image:tag]
+$ docker tag [old_image:tag] [localhost:5000/new_image:tag]
+$ docker push [localhost:5000/new_image:tag]
 ```
 
 
@@ -617,14 +593,11 @@ docker push [localhost:5000/new_image:tag]
 * 从已经创建的容器中更新镜像，并且提交这个镜像
 * 使用 Dockerfile 指令来创建一个新的镜像
 
-
-**1.** **更新镜像** **docker commit** 
+**1. 更新镜像docker commit**
 
 docker commit -m='xxx' -a=[author] [contain_id] [dst_image:tag]
 
- 
-
-2. Dockerfile
+**2. Dockerfile**
 
 **容器配置文件 Dockerfile**
 
@@ -731,10 +704,7 @@ Commands:
   unpause            Unpause services
   up                 Create and start containers
   versio*            Show the Docker-Compose version information
-
 ```
-
-
 
 配置文件：docker-compose.yml 或者 xxx.yml
 
@@ -749,11 +719,13 @@ redis:
  image: redis
 ```
 
+#  -d后台启动
+
+```sh 
+$ doccker-compose up -d
+```
 
 
-\# -d后台启动
-
-dcocker-compose up -d
 
 ## 2.5     实例
 
@@ -764,18 +736,28 @@ dcocker-compose up -d
 
 表格 3 常用镜像的实例和启动命令
 
-
+| images            | 实例描述                               | 实例命令                                                     | 状态                               |
+| ----------------- | -------------------------------------- | ------------------------------------------------------------ | ---------------------------------- |
+| hello-world       | 运行：打印帮助文档                     | docker run  hello-world                                      | ok                                 |
+| ui-for-docker     | docker可视化                           | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker | ok  http://<dockerd  host ip>:9000 |
+| register:2        | 后台启动：本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2 | ok                                 |
+| nginx             | 后台启动：nginx后台服务                | docker run --name keefe-nginx -p 8081:80 -d nginx            | ok。访问http://xxx:8081/           |
+| mysql             | 后台启动：mysql                        | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | ok                                 |
+| wordpress  +mysql | 两个容器链接在一起                     | docker run --name  wordpress --link <contain_name]:mysql -p 80:80 -d wordpress |                                    |
+| redis             | 后台启动：redis后台服务                | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes | ok                                 |
+| ubuntu            | 交互式启动：进入操作系统ubuntu         | docker run -i -t ubuntu:15.10 /bin/bash                      | ok                                 |
+| tensorflow        | 交互式启动：进入操作系统ubuntu         | docker run -i -t tensorflow/tensorflow /bin/bash             | ok                                 |
+| python:3.5        | 调用python解释器                       | docker run python:3.5 python3 -c 'import  copy;print("hello")' | ok                                 |
+| jenkis            |                                        | docker run -i -t  jenkins/jenkins:lts /bin/bash              |                                    |
+|                   |                                        |                                                              |                                    |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 
 1. 镜像用 : 分隔版本号。---name指的是当前启动容器名称 
 2. windows下docker环境用docker-machine ip defalut获取虚拟IP，用此IP进行访问。
 
-   
 
- 
-
-**1.** **运行入门容器****hello-world**
+**1.** 运行入门容器hello-world
 
 ```shell
 $ docker run hello-world
@@ -800,8 +782,9 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
-
 ```
+
+
 
 **2.nginx** **部署**
 
@@ -824,7 +807,7 @@ docker run -d -p 8082:80 --name runoob-nginx-test-web -v ~/nginx/www:/usr/share/
 
 备注：官网的ubuntu镜像只含linux内核和基础命令约89.3MB，安装gcc/g++后约增加180MB（合计266MB），再安装vim增加60MB（合计327MB）。
 
-**1.** **运行容器****ubuntu****中Hello World**
+**1.** **运行容器ubuntu中Hello World**
 
 docker run ubuntu:15.10 /bin/echo "Hello world"
 
@@ -836,13 +819,13 @@ docker run -i -t ubuntu:15.10 /bin/bash
 
  
 
-*  **进入到容器里（exec****交互式调用需要容器本身支持tty****终端）**
+*  **进入到容器里（exec交互式调用需要容器本身支持tty终端）**
 
 docker exec -it [images]  /bin/bash 
 
  
 
-*  **Docker****挂载本地目录及实现文件共享**
+*  **Docker挂载本地目录及实现文件共享**
 
 Docker容器启动的时候，如果要挂载宿主机的一个目录，可以用-v参数指定。
 
@@ -866,7 +849,7 @@ docker commit -m='' -a=[author] [contain_id] [dst_image:tag]
 
 ### 2.5.3  CICD之jenkis
 
-**jenkis****进阶使用：详见** **本人另文《运维场景》章节之运维工具****Jenkins**
+**jenkis进阶使用：详见** **本人另文《运维场景》章节之运维工具Jenkins**
 
  
 
@@ -874,19 +857,18 @@ jenkins官网 https://jenkins.io/
 
 镜像：jenkins/jenkins:lts
 
-**docker****启动：创建容器**
+**docker启动：创建容器**
 
-**法1****：****docker run** 
+**法1：docker run** 
 
+```shell
 docker run --name jenkins -d -p 8080:8080 -p 50000:50000 --restart always \
+       jenkins/jenkins:lts
+```
 
-​       jenkins/jenkins:lts
+**法2：docker-compose up**
 
- 
-
-**法2****：docker-compose up**
-
-\# 配置文件：docker-compose.yml
+配置文件：docker-compose.yml
 
 ```yaml
 version: '3'
@@ -903,7 +885,6 @@ services:
       - /e/data/jenkins_home/:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-
 ```
 
 
@@ -912,7 +893,7 @@ services:
 
 ## 2.6     FAQ
 
-**1) windows****下的****docker****后台端口访问失败**
+**1)  windows下的docker后台端口访问失败**
 
 描述：在Windows浏览器中输入localhost:8080后，出现访问失败的情况。
 
@@ -926,7 +907,7 @@ $ docker-machine ip defalut
 
  
 
-**2) docker exec -it returns****: cannot enable tty mode on non tty input**
+**2)  docker exec -it returns: cannot enable tty mode on non tty input**
 
 描述：不要用 -it交互式启动
 
@@ -940,35 +921,31 @@ docker exec -i c $ c> docker exec -it   # 注：未测试成功
 
  
 
-**3).****批量删除****tag****为****None** **的镜像** 
+**3). 批量删除tag为None的镜像** 
 
 **描述**：
 
 **原因**：有时候重新构建镜像(build) 的时候，该镜像正在被某容器使用中，那么在重新构建同名同版本镜像后，docker保留原来的镜像，即容器还是用原来的，除非重启。那么原来的镜像名称变成NONE，TAG也成了NONE。
 
-**解决方法：（****3****种方法，慎用）**
+**解决方法：（3种方法，慎用）**
 
+```shell
 docker images|grep none|awk '{print $3}'|xargs docker rmi
-
 docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
-
 docker rmi $(docker images -f "dangling=true" -q)
 
-在删除镜像前先删除停止的容器，
-
+# 在删除镜像前先删除停止的容器，
 docker rm $(docker ps -a -q)
 
- 
-
-\# 清理当前未运行的容器（未验证）
-
+# 清理当前未运行的容器（未验证）
 docker system prune
+```
 
  
 
 ## 2.7     本章参考
 
-**Docker****官方英文资源**
+**Docker官方英文资源**
 
 docker官网：http://www.docker.com  分社区CE和商业EE版
 
@@ -992,7 +969,7 @@ Github Docker源码：https://github.com/docker/docker
 
  
 
-**Docker****中文资源**
+**Docker中文资源**
 
 Docker中文网站：https://www.docker-cn.com/
 
@@ -1061,7 +1038,7 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 - **开发和运行相分离：**在build或者release阶段创建容器镜像，使得应用和基础设施解耦。
 - **开发，测试和生产环境一致性：**在本地或外网（生产环境）运行的一致性。
 - **云平台或其他操作系统：**可以在 Ubuntu、RHEL、 CoreOS、on-prem、Google      Container Engine或其它任何环境中运行。
-- **Loosely coupled****，分布式，弹性，微服务化：**应用程序分为更小的、独立的部件，可以动态部署和管理。
+- **Loosely coupled，分布式，弹性，微服务化：**应用程序分为更小的、独立的部件，可以动态部署和管理。
 - **资源隔离**
 - **资源利用：**更高效
 
@@ -1222,7 +1199,17 @@ Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的�
 
 表格 5 Kubernatess发行版
 
-
+| 发行版                                                       | 简介                                                         | 许可和定价模型                             | 安装                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------ |
+| 原版开源 Kubernetes                                          | Kubernetes 由 Cloud Native Computing Foundation（云原生计算资金会）和 Kubernetes 用户组成的多样化社区支持，也是第一个从 CNCF 毕业的项目。 | 开源且 100％免费                           |                                                              |
+| 红帽 [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) | 在 Kubernetes 之前，OpenShift 作为一个单独项目并使用完全不同的技术运行。后来，红帽意识到 Kubernetes 的能力越来越强大，因此在第 3 版中明智地将其作为 OpenShift 的核心。 | 三种定价模式：                             | 不是很复杂，但需要特定配置。                                 |
+| CoreOS  [Tectonic](https://coreos.com/tectonic/)             | 由 CoreOS 创建，CoreOS 是一家致力于发展容器技术公司，但已被红帽收购，目前正在与红帽集成。优势功能如下：易于设置、用户友好的 Web UI、用户管理 对供应商的支持 | 拥有商业许可模式，最多可免费提供 10 个节点 | 可以通过安装程序或 Terraform 安装。                          |
+| Stackube                                                     | 以 Kubernetes 为中心的 OpenStack 发行版。可根据所用容器运行时环境提供不同程度的多租户机制，用户可选择 Docker 或者虚拟机进行配置。 | KDC 和 Containerum 平台都是 100％开源      | 设置相对容易                                                 |
+| [Rancher](https://rancher.com/kubernetes/)                   | 包含 Kubernetes 的容器管理平台。主要特点如下：跨供应商集群部署、用户管理 Web、用户界面、集成CI/CD管道。 | 100％开源，该公司可提供咨询和支持服务      | 可使用名为 RKE 的 Kubernetes 安装工具。                      |
+| Canonical  Distribution of Kubernetes（[CDK](https://ubuntu.com/kubernetes)） | 由 Linux 发行版 Ubuntu 背后的公司 Canonical 支持，相当于是一个可在主流公有云提供商和 OpenStack 等私有云解决方案上轻松部署的  vanilla Kubernetes，能够轻松设置并管理跨供应商的 Kubernetes 集群，用户界面是官方 Kubernetes 仪表板。 | 完全免费。但是，每个虚拟节点有几个支持包   | 可使用 Canonical 开发的部署工具 Conjure-up 或 Juju 来完成安装。 |
+| [Docker ](https://www.docker.com/products/kubernetes)社区版 /企业版 | Docker  Enterprise 3.0添加了Docker Kubernetes服务            |                                            |                                                              |
+| Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service)) | 突出的特性是与VMware虚拟机堆栈紧密集成                       |                                            |                                                              |
+| [SUSE ](https://www.suse.com/products/caas-platform/)容器服务平台 | SUSE CaaS平台让人想起CoreOS Tectonic，它结合了运行容器的裸机“微型”操作系统、Kubernetes、内置的镜像仓库和集群配置工具。 |                                            |                                                              |
 
  
 
@@ -1278,75 +1265,62 @@ docker run \
 ```
 
 
-
 **第三步：运行service proxy**
 ```shell
 docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 /hyperkube proxy --master=http://127.0.0.1:8080 
 ```
- 
 
 **测试**
 ```shell
 kubectl get nodes
 ```
- 
+
 
 ### 3.3.3  vagrant创建单节点集群
 
 \# vagrant启动每个虚拟机约需1G内存。get.k8s.ios可能需翻墙访问。
 
-**法1****：脚本部署**
-
+**法1：脚本部署**
+```shell
 export KUBERNATES_PROVIDER=vagrant 
-
 export NUM_MINIORS=2
-
 curl -s3 https://get.k8s.io/ |bash
+```
 
- 
 
-**法****2****：****docker-compose****部署**
+**法2：docker-compose部署**
 
 1）下载安装docker docker-compose
 
 2）进入虚拟机 /vagrant目录，执行下列命令
+
 ```shell
 docker-compose -f k8s.yml up -d
 docker ps
 ./kubectl get nodes
-```shell
+```
 
 ## 3.4     使用篇
 
 ### 3.4.1  kubectl
 
 kubectl用于运行Kubernetes集群命令的管理工具。
-
-```
+```shell
 kubectl [command] [TYPE] [NAME] [flags]
 ```
 
- 
-
 ## 3.5     本章参考
-
 [1].     Kubernetes中文社区 | 中文文档 http://docs.kubernetes.org.cn/
-
 [2].     容器十年 ——一部软件交付编年史 https://blog.csdn.net/weixin_43970890/article/details/94569105
-
 [3].     云原生时代， Kubernetes 多集群架构初探 https://blog.csdn.net/weixin_43970890/article/details/98959354 
-
 [4].     解锁云原生 AI 技能|在 Kubernetes 上构建机器学习系统 https://blog.csdn.net/weixin_43970890/article/details/97134534 
-
 [5].     云原生应用 Kubernetes 监控与弹性实践 https://blog.csdn.net/weixin_43970890/article/details/94570862 
-
 [6].     阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335 
-
 [7].     10个业界最流行的Kubernetes发行版 https://blog.csdn.net/RancherLabs/article/details/98478755
-
 [8].     基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5 
 
-# 4       Prometheus
+
+# 4  Prometheus
 
 Prometheus 是一套开源的监控、报警和时间序列数据库的组合，成立于 2012 年，由 SoundCloud 公司开发，此后许多组织接受和采用了 Prometheus，遂将其独立为开源项目。该项目使用 Go 语言开发，社区氛围非常活跃。
 
@@ -1447,7 +1421,7 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 *  支持多种语言（可以把proto文件看做IDL文件）
 *  Netty等一些框架集成
 
- 
+
 
 **缺点：**
 *  GRPC尚未提供连接池，需要自行实现
@@ -1500,4 +1474,7 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 # 参考资料
 
- 
+
+```
+
+```

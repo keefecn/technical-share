@@ -225,7 +225,7 @@ mysqldump： 用来mysql备份
 
  
 
-**INSERT****：
+**INSERT：
 
 INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
 
@@ -313,7 +313,7 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
 
  
 
-**INSERT ... SELECT****语法**
+**INSERT ... SELECT语法**
 
 INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
 
@@ -337,7 +337,7 @@ INSERT INTO tbl_temp2 (fld_id)
 
  
 
- **DO****语法**
+ **DO语法**
 
 ```
 DO expr [, expr] ...
@@ -590,7 +590,7 @@ mysql> SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
 
 要根据列类型的时间和日期类型来进行转化。
 
-时间和日期类型有五种**：****DATE****（格式：YY-MM-DD****）, TIME****（格式：HH:MM:SS****）, DATETIME, TIMESTAMP****（格式：秒数）, YEAR****（格式：YYYY****）。**
+时间和日期类型有五种**：DATE（格式：YY-MM-DD）, TIME（格式：HH:MM:SS）, DATETIME, TIMESTAMP（格式：秒数）, YEAR（格式：YYYY）。**
 
  
 
@@ -617,7 +617,7 @@ mysql> SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
 
  
 
-**2）** **时间戳函数TIMESTAMP****：**
+**2）** **时间戳函数TIMESTAMP：**
 *  unix_timestamp：返回1970年至今的秒数。
 *  from_unixtime：将秒数转化为可读的时间格式。
 
@@ -700,7 +700,7 @@ mysql> SELECT EXTRACT(YEAR FROM '1999-07-02');
 
 ### 2.4.3  日期和时间统计
 
-**1)**   **按年/****月/****日/****时的汇总统计**
+**1)**   **按年/月/日/时的汇总统计**
 
 **按年汇总，统计：**
 
@@ -784,13 +784,13 @@ SELECT * FROM tbl_name WHERE TO_DAYS(NOW())-TO_DAYS(时间字段)<=N
 
  
 
-**//****获取指定时间段的数据行统计数：** **时间戳秒数**
+**//获取指定时间段的数据行统计数：** **时间戳秒数**
 
 select count(*) from xyq7 where insert_time<unix_timestamp() and insert_time>unix_timestamp('2016-04-13');
 
  
 
-**//****统计一天内更新的数据行数，约2500****行。**
+**//统计一天内更新的数据行数，约2500行。**
 
 mysql> select count(*) from xyq7 where unix_timestamp()-insert_time<3600*24;
 
@@ -802,7 +802,7 @@ mysql> select count(*) from xyq7 where unix_timestamp()-insert_time<3600*24;
 
  
 
-**3****）统计案例
+**3）统计案例
 
 **//** **查询指定日期的行**
 
@@ -935,7 +935,7 @@ mysql> **CREATE TRIGGER ins_sum BEFORE INSERT ON account**
 
  
 
-**触发器创建语句****
+**触发器创建语句
 ** CREATE TRIGGER trigger_name
  trigger_time
  trigger_event ON tbl_name
@@ -1255,7 +1255,7 @@ $ cat relay-log.info
 
 ### 3.3.1  读写分离
 
-**1) mysql-proxy****实现读写分离****
+**1) mysql-proxy实现读写分离
 ** MySQL Proxy是一个处于你的client端和MySQL server端之间的简单程序，它可以监测、分析或改变它们的通信。它使用灵活，没有限制，常见的用途包括：负载平衡，故障、查询分析，查询过滤和修改等等。
  MySQL Proxy就是这么一个中间层代理，简单的说，MySQL Proxy就是一个连接池，负责将前台应用的连接请求转发给后台的数据库，并且通过使用lua脚本，可以实现复杂的连接控制和过滤，从而实现读写分离和负载平衡。对于应用来说，MySQL Proxy是完全透明的，应用则只需要连接到MySQL Proxy的监听端口即可。当然，这样proxy机器可能成为单点失效，但完全可以使用多个proxy机器做为冗余，在应用服务器的连接池配置中配置到多个proxy的连接参数即可。
  MySQL Proxy更强大的一项功能是实现“读写分离”，基本原理是让主数据库处理事务性查询，让从库处理SELECT查询。数据库复制被用来把事务性查询导致的变更同步到集群中的从库。
@@ -1299,7 +1299,7 @@ $ mysql -uadmin -padmin -h192.168.1.220 -P4041
 
  
 
-**2) mysqlnd_ms****实现mysql****读写分离****
+**2) mysqlnd_ms实现mysql读写分离
 ** mysqlnd_ms是mysqlnd的一个插件，该插件实现了连接保存和切换、负载均衡、读写分离的功能。要想使用mysqlnd_ms的读写分离功能必须在安装php时使用–with-mysqlnd。mysqlnd实现的功能是可以不需要在php服务器上安装mysql，在php5.3之前编译安装php需要通过–with-mysql=/path/to/mysql指定mysql的安装路径。
 
 ### 3.3.2  双主互备
@@ -1367,7 +1367,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
  
 
-**INSERT****语句的速度**
+**INSERT语句的速度**
 
 插入一个记录需要的时间由下列因素组成，其中的数字表示大约比例：
 
@@ -1384,7 +1384,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
  
 
-**UPDATE****语句的速度**
+**UPDATE语句的速度**
 
 更新查询的优化同SELECT查询一样，需要额外的写开销。写速度依赖于更新的数据大小和更新的索引的数量。没有更改的索引不被更新。
 
@@ -1394,13 +1394,13 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
  
 
-**DELETE****语句的速度**
+**DELETE语句的速度**
 
 删除一个记录的时间与索引数量确切成正比。为了更快速地删除记录，可以增加键高速缓冲的大小
 
  
 
-**SELECT****语句**
+**SELECT语句**
 
 参考：索引
 
@@ -1571,7 +1571,7 @@ table_cache = 512
 
  
 
-**提升性能的建议****:
+**提升性能的建议:
 ** 1.如果opened_tables太大,应该把my.cnf中的table_cache变大
 
 2.如果Key_reads太大,则应该把my.cnf中key_buffer_size变大.可以用Key_reads/Key_read_requests计算出cache失败率
@@ -1600,7 +1600,7 @@ shell> mysqladmin extended-status
 
 *  MySQL客户端查看常用命令
 
-**SHOW VARIABLES; //****查看DB实际变量**
+**SHOW VARIABLES; //查看DB实际变量**
 
 show database; //查看数据库
 
@@ -1966,7 +1966,7 @@ typedef struct st_mysql {
 
  
 
-**MySQL****结构大小：**
+**MySQL结构大小：**
 
 printf("size = %u\n", sizeof(MySQL));
 
@@ -2168,7 +2168,7 @@ MySQL *mysql_init(MySQL *mysql)
 
 ​    printf("l_mysql=%x, ll_mysql=%x\n", l_mysql, ll_mysql);
 
-**测试结果1****：**
+**测试结果1：**
 
  [wuqifu@localhost sqltest]$ ./a.out 
 
@@ -2188,7 +2188,7 @@ MySQL *mysql_real_connect(MySQL *mysql, const char *host, const char *user, cons
 
  
 
-**20.4.40****.1** **说明**
+**20.4.40.1** **说明**
 
 mysql_real_connect()试图建立到运行host的一个MySQL数据库引擎的一个连接。 mysql_real_connect()在你可以执行任何其他API函数之前必须成功地完成，除了mysql_get_client_info()。
 
@@ -2200,13 +2200,13 @@ mysql_real_connect()试图建立到运行host的一个MySQL数据库引擎的一
 
  
 
-**20.4.40****.2** **返回值**
+**20.4.40.2** **返回值**
 
 如果连接成功，一个 MySQL*连接句柄。如果连接失败，NULL。对一个成功的连接，**返回值与第一个参数值相同**，除非你传递NULL给该参数。
 
  
 
-**20.4.40****.3** **错误**
+**20.4.40.3** **错误**
 
 CR_CONN_HOST_ERROR 
 
@@ -2380,13 +2380,13 @@ ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 21 from 2)
 
  
 
-**4****）一次调用mysql_real_connect****后的内存管理**　
+**4）一次调用mysql_real_connect后的内存管理**　
 
 　如果是new出来的MySQL对象，那么一定要自己delete, 然后调用mysql_close; 而如果是由NULL生成的MySQL对象，那么只需mysql_close. 上面如果不那么做，就一定会引起内存泄露。
 
  
 
-**5****）二次调用mysql_real_connect****后的内存管理**
+**5）二次调用mysql_real_connect后的内存管理**
 
 调用后，虽然用了
 
@@ -2460,7 +2460,7 @@ ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 21 from 2)
 
 #### 6.1.5.2     其它事项
 
-**1****）MySQL****连接有效性维护：mysql_ping**
+**1）MySQL连接有效性维护：mysql_ping**
 
 ```
 int mysql_ping(MySQL *mysql)
@@ -2530,13 +2530,13 @@ common versiong:
 
  
 
-**2****）MySQL****连接使用次数控制**
+**2）MySQL连接使用次数控制**
 
 通常使用次数可由程序来控制，让程序计算使用次数，进行控制。MySQL本身没对使用次数进行限制。
 
  
 
-**3****）MySQL****如何解决打开文件描述符的数量限制**
+**3）MySQL如何解决打开文件描述符的数量限制**
 
 /var/lib/mysql.sock　//for v5.1.12
 
@@ -2550,7 +2550,7 @@ The MySQL socket file is created as `/tmp/mysql.sock' by default.
 
 ### 6.2.1  [MySQL PHP API](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/apis.html#php)
 
-**使用MySQL****和PHP****的常见问题**
+**使用MySQL和PHP的常见问题**
 
 错误：超出了最大执行时间，这是一种PHP限制，如果需要，进入文件php.ini，并设置最大执行时间（开始为30秒。max_execution_time = 30）。此外，还可以将每脚本允许使用的RAM增加一倍，从8MB变为16MB，这也是个不错的主意。
 
@@ -2713,7 +2713,7 @@ character_set_server 是最先开始的,在编译时缺省设置,而linux缺省�
 
 character_set_database 创建数据库时若未设定,则缺省同character_set_server;创建表时未設定,则缺省为character_set_database; 创建字段时则缺省为表的选项.
 
-**下面命令如果是在刚进入mysql****客户端，未调用use database****前查看，则显示的是缺省字符集；否则显示的是当前正在使用数据的字符集。其中命令SET NAMES****会立即改变client/connect/result****的值。**
+**下面命令如果是在刚进入mysql客户端，未调用use database前查看，则显示的是缺省字符集；否则显示的是当前正在使用数据的字符集。其中命令SET NAMES会立即改变client/connect/result的值。**
 
 
 ```shell
@@ -2757,9 +2757,9 @@ mysql> SHOW VARIABLES LIKE 'collation_%';
 ```
 
 
-**3)**    **查看当前数据库/****表/****列的字符集** 
+**3)**    **查看当前数据库/表/列的字符集** 
 
-**注：SHOW VARIABLES****看到的字符集就是当前正在使用数据库的字符集，非缺省字符集。**
+**注：SHOW VARIABLES看到的字符集就是当前正在使用数据库的字符集，非缺省字符集。**
 
 mysql> status; 
 
@@ -2777,9 +2777,9 @@ mysql> status;
 
  
 
-**4)**    **修改MySQL****字符集**
+**4)**    **修改MySQL字符集**
 
-**以下set****只能影响当前数据库，如果要影响缺省项，可修改my.ini****或my.cnf**
+**以下set只能影响当前数据库，如果要影响缺省项，可修改my.ini或my.cnf**
 
 **//my.cnf**
 
@@ -2832,7 +2832,7 @@ mysql_query("set names ’utf8’ ");
 
  
 
-**MySQL****字符集小结:** 
+**MySQL字符集小结:** 
 
 目前的处理方式是字段如果包含中文，使用GBK存储。而内部存储为UTF-8(charset_set_system)，而客户端取数据时，要将字段转化成GBK.要想显示正常，
 
@@ -2844,7 +2844,7 @@ mysql_query("set names ’utf8’ ");
 
  
 
-**2****）平台locale****和termianl****要与表内容的实际字符集一致。**
+**2）平台locale和termianl要与表内容的实际字符集一致。**
 
 附录：很烦很复杂的MySQL字符集
 
@@ -2872,9 +2872,9 @@ collation_server latin1_swedish_ci
 
 **备注：**
 
-**utf8_general_ci****和utf8_unicode_ci****的差别**：主要在德语和法语上。对于我们中国人来说，一般使用general，因为general更快。
+**utf8_general_ci和utf8_unicode_ci的差别**：主要在德语和法语上。对于我们中国人来说，一般使用general，因为general更快。
 
-**utf8_bin_ci****：**在字符对比时，unicode和general都不是大小写敏感的；如果要求大小写敏感的话，就使用**utf8_bin_ci.**
+**utf8_bin_ci：**在字符对比时，unicode和general都不是大小写敏感的；如果要求大小写敏感的话，就使用**utf8_bin_ci.**
 
  
 
@@ -2884,7 +2884,7 @@ collation_server latin1_swedish_ci
 
 数据库存储中常使用latin1，如果字段编码也是latin1，并且字段值出现了中文，那么这在MySQL客户端/PHPMYADMIN都不能正确显示中文。
 
-如果要得到中文结果，需设置SET NAMES为支持中文正确显示的编码如GBK或者UTF8**（注意不是UTF-8****）。**
+如果要得到中文结果，需设置SET NAMES为支持中文正确显示的编码如GBK或者UTF8**（注意不是UTF-8）。**
 
 注意：如果字段编码是latin1。
 
@@ -2907,7 +2907,7 @@ alter table game3 change name name varchar(255) character set utf8
 
 以原数据库表字段编码为latin1为例，目标编码utf8，数据库名test, 表名game3。
 
-**方法1****：手动和脚本处理（5****步）**
+**方法1：手动和脚本处理（5步）**
 
 1） 确定目标字段的编码：latin1（ISO-8859-1）
 
@@ -2939,9 +2939,9 @@ mysql -uroot -p12341234 -f test < data2-u.sql
 
  
 
-**方法2****：phpmyadmin****导入导出处理（3****步）**
+**方法2：phpmyadmin导入导出处理（3步）**
 
-**1****）\*导出\*格式为文件编码为latin1****的数据和结构SQL****文件（导出文件中的中文要保证能正常显示。**导出数据是插入操作；导出结构只是创建索引，真正的导出结构是在show create table ）。此步建议只导出数据，因为导出结构生成索引的过程常会出现索引过长的问题，可在数据导完后，单独创建索引。
+**1）\*导出\*格式为文件编码为latin1的数据和结构SQL文件（导出文件中的中文要保证能正常显示。**导出数据是插入操作；导出结构只是创建索引，真正的导出结构是在show create table ）。此步建议只导出数据，因为导出结构生成索引的过程常会出现索引过长的问题，可在数据导完后，单独创建索引。
 
 2）**修改**表或字段结构：包括清空原表，修改表或字段编码。可能需要手动在文件头添加SET NAMES语句和编码变量赋值语句。
 
@@ -2954,13 +2954,13 @@ mysql -uroot -p12341234 -f test < data2-u.sql
 #### 8.2.2.2     字段中文乱码常见情形
 
 **字段内容中文的正常显示主要出现在三种情形：**
-*  **情形1****：MySQL****客户端**
-*  **情形2****：PHPMyadmin**
-*  **情形3****：目标HTML****页**
+*  **情形1：MySQL客户端**
+*  **情形2：PHPMyadmin**
+*  **情形3：目标HTML页**
 
  
 
-**情形1****：MySQL****客户端中文显示乱码。**
+**情形1：MySQL客户端中文显示乱码。**
 
 **问题描述**：unix平台，locale和terminal都是GBK的情况下，进入mysql cmd, 查询可以正常显示中文内容。windows平台：cmd下进入mysql cmd, 查询显示中文乱码。
 
@@ -2974,7 +2974,7 @@ SHOW VARIABLES LIKE 'character%'; 可获取到服务端缺省的连接/系统/�
 
  
 
-**情形2****：phpmyadin****中文显示乱码**
+**情形2：phpmyadin中文显示乱码**
 
 在phpMyAdmin首页右侧中查看服务器字符集如下：
 
@@ -2990,7 +2990,7 @@ SHOW VARIABLES LIKE 'character%'; 可获取到服务端缺省的连接/系统/�
 
  
 
-**情形3****：HTML****页面中文显示乱码**
+**情形3：HTML页面中文显示乱码**
 
 解决页面中文乱码可从下面三个角度综合分析：（三者要保持一致，或最终显示文档要转化成相应编码）
 
@@ -3048,7 +3048,7 @@ MATCH(title, content)里的字段必须和FULLTEXT(title, content)里的字段�
 
  
 
-**MySQL****的FULLTEXT****怎么断字： 
+**MySQL的FULLTEXT怎么断字： 
 ** 字母、数字、底线的组合视为一个字，不会把底线断字。 
  会被断字的字符：空白、逗号（,）与点（.），但不用这些断字的语言，如中文，就得自行手动断字。 
 

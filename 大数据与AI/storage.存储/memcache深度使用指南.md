@@ -84,9 +84,9 @@ http://memcached.org/
 
 ## 1.1   服务器端程序
 
-**linux****下载:** http://memcached.org/
+**linux下载:** http://memcached.org/
 
-**windows****下载：**[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/) 
+**windows下载：**[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/) 
 
 1)    安装
 
@@ -175,7 +175,7 @@ Information about libmemcached can be found at http://libmemcached.org/libMemcac
 
 2)    install
 
-如果是编译安装，则加上**--with-libmemcached-dir=DIR****选项****;** **若需要压缩支持，则加上****--with-zlib-dir=DIR****;** Session handler support is enabled by default. To disable it, use **--disable-memcached-session** switch.
+如果是编译安装，则加上**--with-libmemcached-dir=DIR选项;** **若需要压缩支持，则加上--with-zlib-dir=DIR;** Session handler support is enabled by default. To disable it, use **--disable-memcached-session** switch.
 
  
 
@@ -223,7 +223,7 @@ print "$ret\n";
 
 **2)**    **性能测试**
 
-**//****测试add**
+**//测试add**
 ```php
 <?php
 ini_set('memcache.chunk_size',1024*15); //设置到15K
@@ -237,7 +237,7 @@ for($i=14000;$i>11000;$i--){
 echo microtime(true)-$start;
 echo "<br>finish.<br>"
 ?>
-**//****测试get**
+**//测试get**
 $mem->get($i);
 //测试del
 $mem->delete($i);
@@ -487,7 +487,7 @@ bool **Memcache::flush** ( void )
 
  
 
-**其它如：存回命令****get,** **删除命令****delete,** 增加减少命令incr/decr，状态stat
+**其它如：存回命令get,** **删除命令delete,** 增加减少命令incr/decr，状态stat
 
  
 
@@ -519,9 +519,9 @@ bool **Memcache::flush** ( void )
 
  
 
-**memcache****客户端**的实现：通过socket网络连接 + memcache字符串协议。
+**memcache客户端**的实现：通过socket网络连接 + memcache字符串协议。
 
-**memcache****服务端**的实现：libevent网络通讯 + slab allocation
+**memcache服务端**的实现：libevent网络通讯 + slab allocation
 
  
 

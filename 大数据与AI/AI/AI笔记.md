@@ -10,7 +10,7 @@
 | 6    | 2018-7-10  | 增加知识图谱章节                       | 同上   |        |
 | 7    | 2018-10-28 | 更新机器学习流程和建模章节             | 同上   |        |
 |      |            |                                        |        |        |
-|      |            |                                        |        |        |
+---
 
  
 
@@ -224,7 +224,7 @@
 
  
 
-**智能媒介****Intelligent Agents**
+**智能媒介Intelligent Agents**
 
 智能媒介又叫智能体，是指某种能够行动的东西．
 
@@ -268,7 +268,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
  
 
-**数学的贡献：形式表示与证明****/****算法****/****可计算性****/****可操作性****/****概率性**
+**数学的贡献：形式表示与证明/算法/可计算性/可操作性/概率性**
 
 **［可计算和不可计算］**
 
@@ -343,7 +343,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
  
 
-**研究****领域**
+**研究领域**
 *  [自然语言处理](http://zh.wikipedia.org/wiki/自然語言處理)(NLP; Natural Language Processing)，听者和说者之间的通讯。
 *  [知识表现](http://zh.wikipedia.org/wiki/知識表現) (Knowledge Representation)，储存信息。
 *  自动推理，运用储存的信息来回答或提取新的结论。
@@ -374,7 +374,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 人工智能的杰出人物主要分布在CMU, MIT, Stanford，IBM，是达特茅斯会议参与者的主要工作场所．
 
-[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon) **(****西蒙****, 1916~2001)**
+[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon) **(西蒙, 1916~2001)**
 
 他是AI研究的先驱者, 经济组织决策管理大师，于1978年获得诺贝尔经济学奖, 是因为他早年的工作: 基于满意度的模型-制定"足够好"的决策, 而不是艰苦计算获得最优化决策-能更好地描述真实人类行为.　CMU
 
@@ -392,7 +392,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
  
 
-**Noam Chomsky(****乔姆斯基****, 1928~)**
+**Noam Chomsky(乔姆斯基, 1928~)**
 
 他是[麻省理工学院](http://zh.wikipedia.org/zh-cn/麻省理工学院)[语言学](http://zh.wikipedia.org/zh-cn/语言学)的荣誉退休教授，在语言学，心理学和哲学上有杰出贡献。乔姆斯基的[生成语法](http://zh.wikipedia.org/zh-cn/生成语法)被认为是[20世纪](http://zh.wikipedia.org/zh-cn/20世纪)[理论语言学](http://zh.wikipedia.org/w/index.php?title=理论语言学&action=edit&redlink=1)研究上的重要贡献。他对[伯尔赫斯·弗雷德里克·斯金纳](http://zh.wikipedia.org/zh-cn/伯尔赫斯·弗雷德里克·斯金纳)所著《[口语行为](http://zh.wikipedia.org/w/index.php?title=口語行为&action=edit&redlink=1)》的评论，也有助于发动[心理学](http://zh.wikipedia.org/zh-cn/心理学)的[认知革命](http://zh.wikipedia.org/w/index.php?title=认知革命&action=edit&redlink=1)，挑战[1950年代](http://zh.wikipedia.org/zh-cn/1950年代)研究[人类行为](http://zh.wikipedia.org/zh-cn/人類行為)和[语言](http://zh.wikipedia.org/zh-cn/语言)方式中占主导地位的[行为主义](http://zh.wikipedia.org/zh-cn/行为主义)。他所采用以自然为本来研究语言的方法也大大地影响了语言和心智的[哲学](http://zh.wikipedia.org/zh-cn/哲学)研究。他的另一大成就是建立了[乔姆斯基层级](http://zh.wikipedia.org/zh-cn/乔姆斯基层级)：根据文法[生成力](http://zh.wikipedia.org/w/index.php?title=生成力&action=edit&redlink=1)不同而对[形式语言](http://zh.wikipedia.org/zh-cn/形式语言)做的分类。
 
@@ -506,7 +506,7 @@ ECAI AAAI 各一年一次
 
  
 
-**分类二：学术界****UCLA****朱松纯将****AI****分为六个领域，分别是：**
+**分类二：学术界UCLA朱松纯将AI分为六个领域，分别是：**
 
 （1）计算机视觉（暂且把模式识别，图像处理等问题归入其中）、
 
@@ -676,16 +676,11 @@ ECAI AAAI 各一年一次
 学习的**思想**: 感知不仅对进行中的行动有用,而且应该能够改进智能体未来的行动能力.
 
 学习的**类型**: 有监督的Supervises和无监督的, 强化学习，分析学习和*归纳学习**.*
-
-Ø 有监督的学习（有指导）是指从输入和输出的实例中学习一个函数, 如归纳学习.
-
-Ø 无监督的学习（无指导）是指未明确提供输入值的情况下,学习输入的模式. 如聚类。
-
-Ø 强化学习是指从强化物中进行学习. 如效用分析.
-
-Ø **分析学习**是指寻找拟合先验知识的一般假设，同时使它覆盖训练数据。如Prolog-EBG.
-
-Ø *归纳学习*是指拟合训练数据的一般假设。如决策树DT，神经网络反向传播等。
+* 有监督的学习（有指导）是指从输入和输出的实例中学习一个函数, 如归纳学习.
+* 无监督的学习（无指导）是指未明确提供输入值的情况下,学习输入的模式. 如聚类。
+* 强化学习是指从强化物中进行学习. 如效用分析.
+* **分析学习**是指寻找拟合先验知识的一般假设，同时使它覆盖训练数据。如Prolog-EBG.
+* *归纳学习*是指拟合训练数据的一般假设。如决策树DT，神经网络反向传播等。
 
  
 
@@ -703,7 +698,7 @@ ECAI AAAI 各一年一次
 
  
 
-**概念学习算法****Concept Learning**
+**概念学习算法Concept Learning**
 
 1)     Find-S算法
 
@@ -744,24 +739,15 @@ ECAI AAAI 各一年一次
  ![image-20191201145814884](../../media/ai/ai_algo_003.png)
 
 #### 2.2.2.2 贝叶斯网络
-
-u 主要问题
+* 主要问题
 
 网络结构可能已知或未知
 
 训练样本提供了所有网络变量的值或者仅仅提供部分变量的值。
-
-u 三种情况
-
-Ø .结构已知并且所有变量值都能在训练样本中观察到
-
-很简单，可如同学习朴素贝叶斯分类器一样学习贝叶斯网络
-
-Ø 结构已知但从训练样本中仅能观察到部分变量的值
-
-比较困难,如剃度上升算法（类似神经网络），EM 算法
-
-Ø 结构未知：最困难
+**三种情况**
+* 结构已知并且所有变量值都能在训练样本中观察到很简单，可如同学习朴素贝叶斯分类器一样学习贝叶斯网络
+* 结构已知但从训练样本中仅能观察到部分变量的值比较困难,如剃度上升算法（类似神经网络），EM 算法
+* 结构未知：最困难
 
  
 
@@ -797,16 +783,14 @@ u 三种情况
 两层神经网络－包含一个隐层
 
 N层神经网络－包含N-1个隐层
-
-u 连接方式
+* 连接方式
 
 前馈式网络：连接是单向的
 
 反馈式网络：最后一层单元可作为输入
 
 全连接神经网络
-
-u 学习
+* 学习
 
 有指导学习，用于分类. 如感知器（上世纪50年代）, 反向传播网络（上世纪80年代）。
 
@@ -863,7 +847,7 @@ http://www.support-vector.net/
 
  
 
-**PAC****算法**：PCA(Principal Component Analysis ，PCA) 是主成分分析，主要用于数据降维。 目的是找那些变化大的元素，即方差大的那些维，而去除掉那些变化不大的维，从而使特征留下的都是“精品”，而且计算量也变小了。
+**PAC算法**：PCA(Principal Component Analysis ，PCA) 是主成分分析，主要用于数据降维。 目的是找那些变化大的元素，即方差大的那些维，而去除掉那些变化不大的维，从而使特征留下的都是“精品”，而且计算量也变小了。
 
 参见 http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html 
 
@@ -907,24 +891,17 @@ C4.5算法有如下优点：产生的分类规则易于理解，准确率较高�
 有两种类型用来决定线性分类器。分别是**生成模型和判别模型** Generative models vs. discriminative models
 
 第一种模型[条件概率](http://zh.wikipedia.org/wiki/條件機率)。 这类的算法包括：
-
-Ø [线性判别分析](http://zh.wikipedia.org/wiki/線性判別分析) (LDA) --- 假设为[高斯](http://zh.wikipedia.org/wiki/常態分佈)条件密度模型。（条件概率*P*（*A*|*B*））
-
-Ø [单纯贝叶斯分类器](http://zh.wikipedia.org/w/index.php?title=單純貝葉斯分類器&action=edit&redlink=1) --- 假设为[独立](http://zh.wikipedia.org/w/index.php?title=獨立隨機變數&action=edit&redlink=1) [binomial](http://zh.wikipedia.org/wiki/二項分佈)条件密度模型。（独立条件概率—先验概率）
-
-Ø [Linear Discriminant Analysis (or Fisher's linear discriminant)](http://en.wikipedia.org/wiki/Linear_discriminant_analysis) (LDA)—assumes [Gaussian](http://en.wikipedia.org/wiki/Normal_distribution) conditional density models
-
-Ø [Naive Bayes classifier](http://en.wikipedia.org/wiki/Naive_Bayes_classifier)—assumes [independent](http://en.wikipedia.org/wiki/Independent_random_variables) [binomial](http://en.wikipedia.org/wiki/Binomial_distribution) conditional density models.
+* [线性判别分析](http://zh.wikipedia.org/wiki/線性判別分析) (LDA) --- 假设为[高斯](http://zh.wikipedia.org/wiki/常態分佈)条件密度模型。（条件概率*P*（*A*|*B*））
+* [单纯贝叶斯分类器](http://zh.wikipedia.org/w/index.php?title=單純貝葉斯分類器&action=edit&redlink=1) --- 假设为[独立](http://zh.wikipedia.org/w/index.php?title=獨立隨機變數&action=edit&redlink=1) [binomial](http://zh.wikipedia.org/wiki/二項分佈)条件密度模型。（独立条件概率—先验概率）
+* [Linear Discriminant Analysis (or Fisher's linear discriminant)](http://en.wikipedia.org/wiki/Linear_discriminant_analysis) (LDA)—assumes [Gaussian](http://en.wikipedia.org/wiki/Normal_distribution) conditional density models
+* [Naive Bayes classifier](http://en.wikipedia.org/wiki/Naive_Bayes_classifier)—assumes [independent](http://en.wikipedia.org/wiki/Independent_random_variables) [binomial](http://en.wikipedia.org/wiki/Binomial_distribution) conditional density models.
 
  
 
 第二种方式则称为[判别模型](http://zh.wikipedia.org/w/index.php?title=判別模型&action=edit&redlink=1) (discriminative models)，会去最大化一个[训练集](http://zh.wikipedia.org/w/index.php?title=訓練集&action=edit&redlink=1)(training set)输出的质。 在训练的成本函数中有一个额外的项加入，可以容易地表示[正则化](http://zh.wikipedia.org/w/index.php?title=正則化_(數學)&action=edit&redlink=1)。例子包含：
-
-Ø [Logit模型](http://zh.wikipedia.org/wiki/Logit模型) ---输入的特征向量的[最大似然估计](http://zh.wikipedia.org/wiki/最大似然估计)，其假设观察到的训练集是由一个相依于分类器的输出的二元模型所产生。
-
-Ø [感知元](http://zh.wikipedia.org/wiki/感知元)(Perceptron) --- 一个试图去修正在训练集中遇到错误的算法。
-
-Ø [支持向量机](http://zh.wikipedia.org/wiki/支持向量机)SVM --- 一个试图去最佳化在决策超平面上，训练集中的例子间的[边界](http://zh.wikipedia.org/w/index.php?title=邊界_(機器學習)&action=edit&redlink=1)(margin)的算法。
+* [Logit模型](http://zh.wikipedia.org/wiki/Logit模型) ---输入的特征向量的[最大似然估计](http://zh.wikipedia.org/wiki/最大似然估计)，其假设观察到的训练集是由一个相依于分类器的输出的二元模型所产生。
+* [感知元](http://zh.wikipedia.org/wiki/感知元)(Perceptron) --- 一个试图去修正在训练集中遇到错误的算法。
+* [支持向量机](http://zh.wikipedia.org/wiki/支持向量机)SVM --- 一个试图去最佳化在决策超平面上，训练集中的例子间的[边界](http://zh.wikipedia.org/w/index.php?title=邊界_(機器學習)&action=edit&redlink=1)(margin)的算法。
 
  
 
@@ -1152,16 +1129,14 @@ Apriori算法对于一条规则L->R，有以下度量：
  
 
 **２）实验分析**
-
-u 性能标准
+* 性能标准
 
 在新样本上的正确性
 
 时间代价：学习所需时间，分类新样本所需要的时间
 
 空间代价
-
-u 实施策略
+* 实施策略
 
 重复利用训练集/测试集估计分类器的性能
 
@@ -1253,7 +1228,7 @@ u 实施策略
 
 信息抽取是一种自动化地从半结构化和无结构数据中抽取实体、关系以及实体属性等结构化信息的技术。涉及的关键技术包括：实体抽取、关系抽取和属性抽取。
 
-**实体抽取(****命名实体识别NER) 
+**实体抽取(命名实体识别NER) 
 ** 监督学习和规则相结合的办法：Lin等人采用字典辅助下的最大熵算法，在基于Medline论文摘要的GENIA数据集上取得了实体抽取准确率和召回率均超过70%的实验结果。
 
  
@@ -1287,7 +1262,7 @@ u 实施策略
 **合并关系数据库 
 ** 使用RDB2RDF的开源工具：Triplify、D2RServer、OpenLink Virtuoso、SparqlMap等。
 
-**其他半结构化方式存储(XML****、CSV****、JSON) 
+**其他半结构化方式存储(XML、CSV、JSON) 
 ** 从XML转化为RDF：XSPARQL 
  从XML和CSV转化为RDF：Datalift 
  转化的知识元素经过实体链接，就可以加入到知识库中，实现知识的合并。
@@ -1351,12 +1326,9 @@ u 实施策略
 图 5 AI产业链
 
 整个AI产业链通过三个层级将从业的公司分为了20个子类，简要说明如下：
-
-Ø 基础层为整体产业提供算力，其中硬件部分包括芯片、传感器与中间件。芯片领域典型公司如寒武纪、深鉴科技，从事包括GPU、FPGA及ASIC等各类AI芯片的研发设计，由于技术门槛过高、投资周期长，目前国内仅有极少部分具备足够技术积累的初创企业参与其中。而计算能力平台以云计算为整个AI产业链提供算力，除了3A(AWS、Azure、阿里云)外，国内典型的初创公司有如七牛云、青云，由于深度学习的持续火爆让全球AI产业普遍面临算力瓶颈，未来预期将有更多参与者进入计算能力平台这一领域。
-
-Ø 技术层主要为整体产业链提供通用AI技术能力。其中感知层包括计算机视觉和语言识别两项重要的机器感知任务，由于这两项技术由于相对成熟，目前有大量的初创公司选择了这两个领域，如计算机视觉云集了商汤科技、旷视科技、云从科技等大量独角兽;而认知层定位为“机器大脑”，包括知识图谱/语义分析，以及智能问答/虚拟助手两个核心领域，顶部的平台层则以通用技术应用平台的形式提供深度学习、模式识别等技术应用服务，对接应用层。
-
-Ø 应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
+* 基础层为整体产业提供算力，其中硬件部分包括芯片、传感器与中间件。芯片领域典型公司如寒武纪、深鉴科技，从事包括GPU、FPGA及ASIC等各类AI芯片的研发设计，由于技术门槛过高、投资周期长，目前国内仅有极少部分具备足够技术积累的初创企业参与其中。而计算能力平台以云计算为整个AI产业链提供算力，除了3A(AWS、Azure、阿里云)外，国内典型的初创公司有如七牛云、青云，由于深度学习的持续火爆让全球AI产业普遍面临算力瓶颈，未来预期将有更多参与者进入计算能力平台这一领域。
+* 技术层主要为整体产业链提供通用AI技术能力。其中感知层包括计算机视觉和语言识别两项重要的机器感知任务，由于这两项技术由于相对成熟，目前有大量的初创公司选择了这两个领域，如计算机视觉云集了商汤科技、旷视科技、云从科技等大量独角兽;而认知层定位为“机器大脑”，包括知识图谱/语义分析，以及智能问答/虚拟助手两个核心领域，顶部的平台层则以通用技术应用平台的形式提供深度学习、模式识别等技术应用服务，对接应用层。
+* 应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
 
 最后需要说明的是，深耕AI行业应用场景的公司往往也具备了技术层的一些核心技术能。
 
@@ -1395,8 +1367,6 @@ ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向�
 机器学习的大致流程：初始化数据、特征工程、多次建模迭代、模型评估、优化和预测
 
 表格 9 《实用机器学习》书中的实际应用例子
-
-
 
 | 案例             | 数据可视化       | 定义问题                                        | 特征工程                            | 建模                                           | 模型启示                                   |
 | ---------------- | ---------------- | ----------------------------------------------- | ----------------------------------- | ---------------------------------------------- | ------------------------------------------ |
@@ -1468,7 +1438,7 @@ ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向�
 
 ## 其它资源
 
-***人工智能******的******科普和影视作品***
+***人工智能**的**科普和影视作品***
 
 电影　
 
@@ -1483,20 +1453,13 @@ ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向�
 ## 数据集
 
 参考：http://python.jobbole.com/86586/
-
-Ø [SMS 垃圾短信语料库](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
-
-Ø [Enron 数据集](http://www.aueb.gr/users/ion/data/enron-spam/)
-
-Ø [SpamAssassin 公共邮件语料库](http://spamassassin.apache.org/publiccorpus/)、[TREC 公共垃圾邮件语料库](http://trec.nist.gov/data/spam.html) 、[Spambase 数据集](http://archive.ics.uci.edu/ml/datasets/Spambase)
-
-Ø [Twitter 情感分析训练语料库](http://thinknook.com/twitter-sentiment-analysis-training-corpus-dataset-2012-09-22/)
-
-Ø [影评数据集](http://www.cs.cornell.edu/People/pabo/movie-review-data/)
-
-Ø [MovieLens](http://grouplens.org/datasets/movielens/) 
-
-Ø UCI datasets http://archive.ics.uci.edu/ml/datasets/
+* [SMS 垃圾短信语料库](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
+* [Enron 数据集](http://www.aueb.gr/users/ion/data/enron-spam/)
+* [SpamAssassin 公共邮件语料库](http://spamassassin.apache.org/publiccorpus/)、[TREC 公共垃圾邮件语料库](http://trec.nist.gov/data/spam.html) 、[Spambase 数据集](http://archive.ics.uci.edu/ml/datasets/Spambase)
+* [Twitter 情感分析训练语料库](http://thinknook.com/twitter-sentiment-analysis-training-corpus-dataset-2012-09-22/)
+* [影评数据集](http://www.cs.cornell.edu/People/pabo/movie-review-data/)
+* [MovieLens](http://grouplens.org/datasets/movielens/) 
+* UCI datasets http://archive.ics.uci.edu/ml/datasets/
 
  
 

@@ -437,7 +437,7 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 | [**delattr()**](https://docs.python.org/2/library/functions.html#delattr) | [**help()**](https://docs.python.org/2/library/functions.html#help) | [**next()**](https://docs.python.org/2/library/functions.html#next) | [**setattr()**](https://docs.python.org/2/library/functions.html#setattr) |                                                              |
 | [**dict()**](https://docs.python.org/2/library/functions.html#func-dict) | [**hex()**](https://docs.python.org/2/library/functions.html#hex) | [**object()**](https://docs.python.org/2/library/functions.html#object) | [**slice()**](https://docs.python.org/2/library/functions.html#slice) |                                                              |
 | [**dir()**](https://docs.python.org/2/library/functions.html#dir) | [**id()**](https://docs.python.org/2/library/functions.html#id) | [**oct()**](https://docs.python.org/2/library/functions.html#oct) | [**sorted()**](https://docs.python.org/2/library/functions.html#sorted) |                                                              |
-备注：**1. classmethod、staticmethod详见****0****下方**
+备注：**1. classmethod、staticmethod详见0下方**
 
 表格 6 常用内建函数列表
 | **作用域**   | **函数名**                    | **简介**                                                     |
@@ -456,7 +456,7 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 @标记是装饰器的语法糖（syntactic sugar），可以让你以简单易读得方式装饰目标对象。装饰器放在类或函数前面。
 
 **1. 函数装饰器**
-**示例：不带参数的****use_logging****和带参数的****use_logging2****。**
+**示例：不带参数的use_logging和带参数的use_logging2。**
 ```python
 # no args
 def **use_logging**(func): 
@@ -1692,7 +1692,7 @@ List of available distribution formats:
  是一个包含Extension实例的列表，Extension的定义也有一些参数。
  4、ext_package
  定义extension的相对路径
- **5****、requires** 定义依赖哪些模块
+ **5、requires** 定义依赖哪些模块
  6、provides
  定义可以为哪些模块提供依赖
  7、scripts

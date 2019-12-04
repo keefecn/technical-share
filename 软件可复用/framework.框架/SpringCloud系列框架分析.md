@@ -61,7 +61,7 @@ Spring Boot基于Maven构建。
 
  
 
-**Eclipse****集成****Spring Intializer**
+**Eclipse集成Spring Intializer**
 
 安装方式：Eclipse Marketplace -> 搜索 STS
 

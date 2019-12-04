@@ -313,7 +313,7 @@ Smaty的一些特点:
 
 安装Smarty发行版在/libs/目录
 
-**Smarty****库文件**
+**Smarty库文件**
 
 Smarty.class.php
 
@@ -329,7 +329,7 @@ debug.tpl
 
  
 
-**一个smarty****的应用实例：**
+**一个smarty的应用实例：**
 
 法1：使用全路径
 
@@ -644,7 +644,7 @@ Node.js自带运行时环境可在Javascript脚本的基础上可以解释和执
 
 Node.js还提供了各种丰富的JavaScript模块库，它极大简化了使用Node.js来扩展Web应用程序的研究与开发。
 
-**Node.js =** **运行环境+ JavaScript****库**
+**Node.js =** **运行环境+ JavaScript库**
 
  
 
@@ -656,7 +656,7 @@ Node.js还提供了各种丰富的JavaScript模块库，它极大简化了使用
 
  
 
-**在哪里可以使用Node.js****？**
+**在哪里可以使用Node.js？**
 
 以下是Node.js证明自己完美的技术的合作伙伴的领域。
 *  I/O 绑定应用程序
@@ -667,7 +667,7 @@ Node.js还提供了各种丰富的JavaScript模块库，它极大简化了使用
 
  
 
-**在哪些地方不要使用Node.js****？**
+**在哪些地方不要使用Node.js？**
 
 不建议使用Node.js的就是针对CPU密集型应用。
 
@@ -965,7 +965,7 @@ Django采用了MVC的软件设计模式，即模型M，视图V和控制器C。
 
 ## 7.1     入门实例
 
-**Django****安装**
+**Django安装**
 
 ```shell
 $ pip instal*  django          #安装最新版本的Django
@@ -1012,7 +1012,7 @@ cmdb/
 
 
 
-**4****、编写路由规则**
+**4、编写路由规则**
 
 路由都在urls文件里，它将浏览器的URL映射到响应的业务处理逻辑。
 
@@ -1031,7 +1031,7 @@ urlpatterns = [
 
  
 
-**5****、编写业务处理逻辑views**
+**5、编写业务处理逻辑views**
 
 ```python
 # views.py
@@ -1048,7 +1048,7 @@ def index(request):
 
 ```
 
-**运行Web****服务**
+**运行Web服务**
 
 $ python manage.py runserver 127.0.0.1 8080
 
@@ -1236,7 +1236,7 @@ Commands:
 
 
 
-**#** **创建app****目录结构**
+**#** **创建app目录结构**
 
 ```shell
 keefe@LENOVO-PC /e/Workspaces/python.ws/flask_project
@@ -1412,7 +1412,7 @@ Cache()
 
  
 
-**app dispatch****技术**
+**app dispatch技术**
 
 [Application Dispatching](http://flask.pocoo.org/docs/0.12/patterns/appdispatch/#app-dispatch)是WSGI工具箱[werkzeug](http://werkzeug.pocoo.org/)提供的一种技术，目的是将多个Flask应用按URL前缀组合成一个应用
 
