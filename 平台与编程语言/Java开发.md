@@ -88,7 +88,11 @@
 [图8各种垃圾收集器__ 34](#_Toc516381312)
 
 
+
+---
+
 # 1.   Java概述
+
 Java: A simple, object-oriented, distributed,  interpreted, robust, secure, architecture-
 neutral, portable, high- performance, multi-threaded, and dynamic language。
 Java具有简单、面向对象、分布式、解释执行、健壮、安全、结构中立、可移植、高性能、多线程、动态的特点。
@@ -168,7 +172,7 @@ The JDK is a superset of the JRE, and contains everything that is in the JRE, pl
 | [JRE](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#jre-jdk) | [RIAs](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/index.html) | [Java     Web Start ](http://download.oracle.com/javase/6/docs/technotes/guides/javaws/index.html)               [Applet     / Java Plug-in ](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/applet/applet_dev_guide.html) |                                                              |
 | [User   Interface   Toolkits ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#userinterface) | [AWT     ](http://download.oracle.com/javase/6/docs/technotes/guides/awt/index.html)               [Swing     ](http://download.oracle.com/javase/6/docs/technotes/guides/swing/index.html)               [Java     2D ](http://download.oracle.com/javase/6/docs/technotes/guides/2d/index.html)                       [Accessibility     ](http://download.oracle.com/javase/6/docs/technotes/guides/access/index.html)               [Drag     n Drop ](http://download.oracle.com/javase/6/docs/technotes/guides/dragndrop/index.html)               [Input     Methods ](http://download.oracle.com/javase/6/docs/technotes/guides/imf/index.html)               [Image     I/O ](http://download.oracle.com/javase/6/docs/technotes/guides/imageio/index.html)               [Print     Service ](http://download.oracle.com/javase/6/docs/technotes/guides/jps/index.html)               [Sound     ](http://download.oracle.com/javase/6/docs/technotes/guides/sound/index.html) |                                                              |                                                              |
 | [Integration   Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#integration) | [ID*     ](http://download.oracle.com/javase/6/docs/technotes/guides/idl/index.html)               [JDBC](http://download.oracle.com/javase/6/docs/technotes/guides/jdbc/index.html)                    [JNDI](http://download.oracle.com/javase/6/docs/technotes/guides/jndi/index.html)               [RMI     ](http://download.oracle.com/javase/6/docs/technotes/guides/rmi/index.html)               [RMI-IIOP     ](http://download.oracle.com/javase/6/docs/technotes/guides/rmi-iiop/index.html)               [Scripting     ](http://download.oracle.com/javase/6/docs/technotes/guides/scripting/index.html) |                                                              |                                                              |
-| [Other   Base   Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#otherbase) | [Beans     ](http://download.oracle.com/javase/6/docs/technotes/guides/beans/index.html)               [Int*     Support ](http://download.oracle.com/javase/6/docs/technotes/guides/intl/index.html)               [Input/Output](http://download.oracle.com/javase/6/docs/technotes/guides/io/index.html)               [JMX     ](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html)               [JNI     ](http://download.oracle.com/javase/6/docs/technotes/guides/jni/index.html)               [Math     ](http://download.oracle.com/javase/6/docs/technotes/guides/math/index.html)                       [Networking     ](http://download.oracle.com/javase/6/docs/technotes/guides/net/index.html)               [Override     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/standards/index.html)               [Security     ](http://download.oracle.com/javase/6/docs/technotes/guides/security/index.html)               [Serialization](http://download.oracle.com/javase/6/docs/technotes/guides/serialization/index.html)                    [Extension     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/extensions/index.html)               [XM*     JAXP ](http://download.oracle.com/javase/6/docs/technotes/guides/xml/index.html) |                                                              |                                                              |
+| [Other   Base   Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#otherbase) | [Beans     ](http://download.oracle.com/javase/6/docs/technotes/guides/beans/index.html)               [Int*     Support ](http://download.oracle.com/javase/6/docs/technotes/guides/intl/index.html)               [Input/Output](http://download.oracle.com/javase/6/docs/technotes/guides/io/index.html)               [JMX     ](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html)               [JNI     ](http://download.oracle.com/javase/6/docs/technotes/guides/jni/index.html)               [Math     ](http://download.oracle.com/javase/6/docs/technotes/guides/math/index.html)                       [Networking     ](http://download.oracle.com/javase/6/docs/technotes/guides/net/index.html)               [Override     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/standards/index.html)               [Security     ](http://download.oracle.com/javase/6/docs/technotes/guides/security/index.html)               [Serialization](http://download.oracle.com/javase/6/docs/technotes/guides/serialization/index.html)                    [Extension     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/extensions/index.html)               [xml     JAXP ](http://download.oracle.com/javase/6/docs/technotes/guides/xml/index.html) |                                                              |                                                              |
 | [lang   and uti*   Base Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#langutil) | [lang     and util ](http://download.oracle.com/javase/6/docs/technotes/guides/lang/index.html)               [Collections     ](http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html)               [Concurrency     Utilities ](http://download.oracle.com/javase/6/docs/technotes/guides/concurrency/index.html)               [JAR     ](http://download.oracle.com/javase/6/docs/technotes/guides/jar/index.html)               [Logging     ](http://download.oracle.com/javase/6/docs/technotes/guides/logging/index.html)               [Management     ](http://download.oracle.com/javase/6/docs/technotes/guides/management/index.html)                       [Preferences     API](http://download.oracle.com/javase/6/docs/technotes/guides/preferences/index.html)               [Ref     Objects ](http://download.oracle.com/javase/6/docs/api/java/lang/ref/package-summary.html)               [Reflection     ](http://download.oracle.com/javase/6/docs/technotes/guides/reflection/index.html)               [Regular     Expressions ](http://download.oracle.com/javase/6/docs/api/java/util/regex/package-summary.html)               [Versioning     ](http://download.oracle.com/javase/6/docs/technotes/guides/versioning/index.html)               [Zip     ](http://download.oracle.com/javase/6/docs/api/java/util/zip/package-summary.html)               [Instrumentation](http://download.oracle.com/javase/6/docs/technotes/guides/instrumentation/index.html) |                                                              |                                                              |
 | [Java   Virtua*   Machine ](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) | [Java     Hotspot Client and Server VM](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) |                                                              |                                                              |
 说明：RPC（Remote Procedure Call Protocol）远程过程调用协议，通过网络从远程计算机上请求调用某种服务。
@@ -200,7 +204,10 @@ The JDK is a superset of the JRE, and contains everything that is in the JRE, pl
 [4].     Oracle Java Archive http://www.oracle.com/technetwork/java/archive-139210.html
 [5].     Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
 
-# 2       Java语言教程
+
+
+# 2   Java语言教程
+
 Java与C++的比较
 Java是纯面向对象语言，而C++是混合语言，即支持结构化也支持面向对象。
 
@@ -316,8 +323,11 @@ LinkedBlockingQueue也是阻塞的队列，入队和出队都用了加锁，当�
 ## 2.3     本章参考
 [1].     Java教程 http://www.runoob.com/java/
 
-# 3       Java开发环境
-## 3.1     Java开发工具
+
+
+# 3   Java开发环境
+
+## 3.1   Java开发工具
 参见《多语言开发》
 表格 6 Java常用工具列表
 
@@ -384,7 +394,7 @@ sample_webapp/	// (Webapp RootFolder)
   |— images 
   |— META-INF 
   |— WEB-INF 
-          |   web.xm*                // WAR包的描述文件 
+          |   web.xml                // WAR包的描述文件 
           |— classes 
           |          action.class       // java类文件，编译后的字节码
           |— lib 
@@ -487,20 +497,20 @@ Tomcat提供了servlet与JSP规范的实现。
 手动布署：指定程序位置：在$CATILINA_HOME/conf/server.xml修改Host和其下的Context路径。
 管理布署程序：manager
 布署细节：
-1)       布署servlet：在WEB-INF/web.xml修改servlet-mapping元素。
-2)       布署JSP：JSP文件可以安装在WEB应用程序任何位置除了WEB-INF下。
-3)       构建JAR和WAR包：使用JDK命令tar打解包，也可将文件后缀名改为zip后，用相应解压工具操作。WAR包只需放在webapps目录下，运行时会自动解压缩（自动部署）。
+1)   布署servlet：在WEB-INF/web.xml修改servlet-mapping元素。
+2)  布署JSP：JSP文件可以安装在WEB应用程序任何位置除了WEB-INF下。
+3)   构建JAR和WAR包：使用JDK命令tar打解包，也可将文件后缀名改为zip后，用相应解压工具操作。WAR包只需放在webapps目录下，运行时会自动解压缩（自动部署）。
 
 ### 3.2.5  配置文件
 表格9 tomcat配置文件列表
 
 | 路径                | 文件名       | 详细说明                                                 |
 | ------------------- | ---------------- | ------------------------------------------------------------ |
-| $CATALINA_HOME/conf | server.xm*       | tomcat的主要配置文件.核心元素包括{server{service{connector,engine{realm,host{context}}}}}   server.xml元素属性详解如下:   [http://ideabean.Javaeye.com/blog/437067](http://ideabean.javaeye.com/blog/437067) |
-|                     | web.xm*          | servlet与其它WEB应用程序设定的配置文件，需符合servlet规范的标准格式 |
+| $CATALINA_HOME/conf | server.xml       | tomcat的主要配置文件.核心元素包括{server{service{connector,engine{realm,host{context}}}}}   server.xml元素属性详解如下:   [http://ideabean.Javaeye.com/blog/437067](http://ideabean.javaeye.com/blog/437067) |
+|                     | web.xml          | servlet与其它WEB应用程序设定的配置文件，需符合servlet规范的标准格式 |
 |                     | tomcat-users.xml | tomcat的userDatabaseRealm作验证用的角色，用户以及密码的默认清单 |
 |                     | catalina.policy  | tomcat的J2Se的安全防护原则文件                               |
-| $WEBDIR/WEB-INF     | web.xm*          | 应用程序servlet的配置文件                                    |
+| $WEBDIR/WEB-INF     | web.xml          | 应用程序servlet的配置文件                                    |
 
 配置示例:
 1)         servlet的配置
@@ -572,7 +582,11 @@ Java_OPTS='-server –Xms256m -Xmx1536m -XX:PermSize=128M -XX:MaxPermSize=256M'
 [2].     eclipse  http://www.Eclipse.org/downloads/ 
 [3].     tomcat  http://tomcat.apache.org/ 
 [4].     [Java中的JAR/EAR/WAR包的文件夹结构说明（转）](http://www.cnblogs.com/EasonJim/p/6498804.html)
-# 4       Java高级开发
+
+
+
+# 4   Java高级开发
+
 ## 4.1     并发
 ### 4.1.1  多线程
 在Java中实现一个线程有两种方法，
@@ -603,16 +617,20 @@ Servlet提供了不同的方法用于响应客户端请求。
 
 Servlet的配置        编译好的Servlet源文件并不能响应用户请求，还必须将其编译成class文件。将编译后的.class 文件放在WEB-INF/classes路径下，如果Servlet有包，则还应该将class文件放在对应的包路径下。 
        为了让Servlet能响应用户请求，还必须将Servlet配置在Web应用中。配置Servlet时，需要修改web.xml文件。 
+
 配置Servlet需要配置两个部分：   
- \* 配置Servlet的名字：对应web.xml中的<servlet/>元素 
- \* 配置Servlet的URL ：对应web.xml中的<servlet-mapping/>元素 
+
+* 配置Servlet的名字：对应web.xml中的<servlet/>元素 
+* 配置Servlet的URL ：对应web.xml中的<servlet-mapping/>元素 
 
 Servlet的生命周期 
 Servlet在容器中运行，其实例的创建以及销毁等都不是由程序员决定的，而是由容器进行控制的。 
 Servlet的创建有两个选择： 
-  *客户端请求对应的Servlet时，创建Servlet实例：大部分的Servlet都是这种Servlet 
-  *Web应用启动时，立刻创建Servlet实例：即load-on-startup Servlet 
-Servlet的生命周期: 
+
+- 客户端请求对应的Servlet时，创建Servlet实例：大部分的Servlet都是这种Servlet 
+- Web应用启动时，立刻创建Servlet实例：即load-on-startup Servlet 
+
+**Servlet的生命周期: **
 Begin 
   ---> 创建实例完成 
   ---> 初始化[init] 
@@ -622,12 +640,19 @@ End
 
 使用Servlet作为控制器 
 使用Servlet作为表现层的工作量太大，所有的HTML标签都需要使用页面输出流生成。 
+
 因此使用Servlet作为表现层有如下三个劣势： 
-\* 开发效率低，所有的HTML标签都需使用页面输出流完成 
-\* 不利于团队协作，美工人员无法参与Servlet界面的开发 
-\* 程序可维护性差，即使修改一个按钮的标题，读需要重新编辑Java代码，并重新编译
+
+* 开发效率低，所有的HTML标签都需使用页面输出流完成 
+
+* 不利于团队协作，美工人员无法参与Servlet界面的开发 
+
+* 程序可维护性差，即使修改一个按钮的标题，读需要重新编辑Java代码，并重新编译
+
+
 
 ## 4.3     GUI开发
+
 GUI：图形用户界面。
 
 | 框架  | 简介                                                         | 应用场景或实例               |
@@ -639,8 +664,11 @@ GUI：图形用户界面。
 
 ## 4.4     本章参考
 
-# 5       Java FAQ
-## 5.1     Java新手问题
+
+
+# 5  Java FAQ
+
+## 5.1  Java新手问题
 编译问题javac
 1）Public class helloworld must be defined in a file called"HelloWorld.java".
 Java有规定：一个.java源文件只能定义一个public的类（和多个非public的类），且文件名必须与这个public的类名一致。
@@ -698,7 +726,10 @@ publicv oiddoFilter(ServletRequest request, ServletResponse response,
 }
 ```
 
-# 6       JVM原理
+
+
+# 6   JVM原理
+
 JVM：Java Virtual Machine, JVM实例对应了一个独立运行的Java程序，而JVM执行引擎实例则对应了属于用户运行程序的线程。
 
 HotSpot VM
@@ -902,9 +933,14 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 [6].     Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html 
 [7].     JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
 
+
+
 # 7       Java源码分析
 
+
+
 # Reference
+
 官网
 *  JDK 9  http://openjdk.java.net/projects/jdk9/
 *  Oracle Java Archive  http://www.oracle.com/technetwork/java/archive-139210.html

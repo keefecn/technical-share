@@ -23,6 +23,7 @@ typora支持的md格式与传统md格式的差别
 │   
 ├───media
 │   ├───ai
+│   ├───bigdata
 │   ├───program_lang
 │   └───sf_reuse
 │           algo2_001.png
@@ -31,11 +32,8 @@ typora支持的md格式与传统md格式的差别
 |
 ├───大数据与AI
 │   │   BI专题.md
-│   │   Hadoop体系.md
 │   │   superset二次开发.md
 │   │   云计算专题cloud.md
-│   │   大数据分析及案例.md
-│   │   大数据开发.md
 │   │   数据可视化.md
 │   │   
 │   ├───AI
@@ -43,7 +41,10 @@ typora支持的md格式与传统md格式的差别
 │   │       NLP-中文分词技术.md
 │   │       自然语言处理.md
 │   │       计算机视觉.md
-│   │       
+│   ├───bigdata   
+│   │       Hadoop体系.md
+│   │       大数据分析及案例.md
+│   │       大数据开发.md
 │   └───storage.存储
 │           memcache深度使用指南.md
 │           MySQL使用指南.md
@@ -97,3 +98,4 @@ typora支持的md格式与传统md格式的差别
             using_libxml2.md
             
 ```
+

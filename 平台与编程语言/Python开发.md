@@ -764,7 +764,7 @@ dict调用sorted的缺省排序是字典序（即若是字符串按字母排序�
  dic = {'a':31, 'bc':5, 'c':3, 'asd':4, 'aa':74, 'd':0}
  dict= sorted(dic.iteritems(), key=lambda d:d[0])  #d[0]表示字典的键
  print dict
-```
+ ```
 输出的结果：
  [('a', 31), ('aa', 74), ('asd', 4), ('bc', 5), ('c', 3), ('d', 0)]
 
@@ -1323,9 +1323,9 @@ Usage:
   pip <command> [options]
  
 Commands:
-  instal*                     Install packages.
+  install                     Install packages.
   download                    Download packages.
-  uninstal*                   Uninstall packages.
+  uninstall                   Uninstall packages.
   freeze                      Output installed packages in requirements format.
   list                        List installed packages.
   show                        Show information about installed packages.
@@ -1654,7 +1654,7 @@ setup(name='foo',
 **setup.py文件的使用:**
 ```
 $ python setup.py build #编译 
-$ python setup.py instal*    #安装 
+$ python setup.py install    #安装 
  
 # 执行以下不同命令分别生成不同的分发包，在dist目录下。
 $ python setup.py sdist   # 源码包，生成$name.tar.gz或$name.zip
@@ -2213,7 +2213,7 @@ if __name__ == "__main__":
 | ---------- | ---------------------------------------------------------- | --------------------------- | ------------------------------------------------------ |
 | Doctest    | 该模块可以从源代码或独立文件的例子中抽取出测试用例。       | import doctest              | python -m doctest  xx.py                               |
 | Unittest   | 标准库。Unittest,   TestCase,TestSuit   setUp(),tearDown() | import unittest             | python -m unittest  xx.py                              |
-| pytest     | 第三方模块，能自动发现并执行测试，并生成报表xml格式。      | import pytest               | pytest --junix-xml =xxx.xm*                            |
+| pytest     | 第三方模块，能自动发现并执行测试，并生成报表xml格式。      | import pytest               | pytest --junix-xml =xxx.xml                            |
 | nosetests  | 自动搜索带test串的文件或目录                               |                             | nosetests <cmd>                                        |
 | pytest-cov | pytest的覆盖率报告                                         |                             | pytest   --cov=<src>                                   |
 | coverage   | 代码覆盖率工具。                                           |                             | coverage   --source=<src> -m pytest && coverage report |
@@ -3085,18 +3085,18 @@ n  http密集型：多线程>多进程>line，推荐多线程。
  ```python
 >>> dir(threading)
 ['BoundedSemaphore', 'Condition', 'Event', 'Lock', 'RLock', 'Semaphore', 'Thread', 'ThreadError', 'Timer', '_BoundedSemaphore', '_Condition', '_DummyThread', '_Event', '_MainThread', '_RLock', '_Semaphore', '_Timer', '_VERBOSE', '_Verbose', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_active', '_active_limbo_lock', '_after_fork', '_allocate_lock', '_count', '_counter', '_deque', '_enumerate', '_format_exc', '_get_ident', '_limbo', '_newname', '_pickSomeNonDaemonThread', '_profile_hook', '_shutdown', '_sleep', '_start_new_thread', '_sys', '_test', '_time', '_trace_hook', 'activeCount', 'active_count', 'currentThread', 'current_thread', 'enumerate', 'local', 'setprofile', 'settrace', 'stack_size', 'warnings']
- ```python
- ```
+
 >>> dir(threading.Thread)
 ['_Thread__bootstrap', '_Thread__bootstrap_inner', '_Thread__delete', '_Thread__exc_clear', '_Thread__exc_info', '_Thread__initialized', '_Thread__stop', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_block', '_note', '_reset_internal_locks', '_set_daemon', '_set_ident', 'daemon', 'getName', 'ident', 'isAlive', 'isDaemon', 'is_alive', 'join', 'name', 'run', 'setDaemon', 'setName', 'start']
+
 >>> import thread
 >>> dir(thread)
 ['LockType', '__doc__', '__name__', '__package__', '_count', '_local', 'allocate', 'allocate_lock', 'error', 'exit', 'exit_thread', 'get_ident', 'interrupt_main', 'stack_size', 'start_new', 'start_new_thread']
  ```
 
 **全局解释性锁（Global Interpreter Lock, GIL）**
-Python并不支持真正意义上的多线程。Python中提供了[多线程包](https://docs.python.org/2/library/threading.html)，但是如果你想通过多线程提高代码的速度，使用多线程包并不是个好主意。Python中有一个被称为Global Interpreter Lock（GIL）的东西，它会确保任何时候你的多个线程中，只有一个被执行。线程的执行速度非常之快，会让你误以为线程是并行执行的，但是实际上都是轮流执行。经过GIL这一道关卡处理，会增加执行的开销。这意味着，如果你想提高代码的运行速度，使用`threading`包并不是一个很好的方法。
- 
+Python并不支持真正意义上的多线程。Python中提供了[多线程包](https://docs.python.org/2/library/threading.html)，但是如果你想通过多线程提高代码的速度，使用多线程包并不是个好主意。Python中有一个被称为Global Interpreter Lock（GIL）的东西，它会确保任何时候你的多个线程中，只有一个被执行。线程的执行速度非常之快，会让你误以为线程是并行执行的，但是实际上都是轮流执行。经过GIL这一道关卡处理，会增加执行的开销。这意味着，如果你想提高代码的运行速度，使用threading包并不是一个很好的方法。
+
 表格 29 python多线程模块列表
 | 模块名称     | 说明                                                         | 备注               |
 | ------------ | ------------------------------------------------------------ | ------------------ |
@@ -3105,18 +3105,18 @@ Python并不支持真正意义上的多线程。Python中提供了[多线程包]
 | Queue        | 同步的先进先出队列FIFO。源码在lib/Queue.c                    | python2已删        |
 | mutex        | 互斥对象。                                                   |                    |
 | SocketServer | 具有线程控制的TCP和UDP管理器                                 |                    |
- 
+
 #### 4.3.2.1 线程安全
 python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)是线程安全的（使用了threading模块的同步机制Lock/Condition），而其它的容器如list/dict是线程不安全的。
 多线程编程的准标准库[posix pthread](https://computing.llnl.gov/tutorials/pthreads/)库拥有rwlock, 而python2.7自带的threading库没有读写锁，只有可重入锁RLock。
 *  可重入锁。 可重入锁是指同一个锁可以多次被同一线程加锁而不会死锁。 实现可重入锁的目的是防止递归函数内的加锁行为，或者某些场景内无法获取锁A是否已经被加锁，这时如果不使用可重入锁就会对同一锁多次重复加锁，导致立即死锁。
-*  读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。)
-**读写锁的特点是：**
-*  当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
-*  当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
- 
+*  读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
+  *  当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
+  *  当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
+
 **多锁的嵌套使用方式**
 正确的实现应该是按照C++中的RAII（resource acquisition is initialization， 资源获取初始化）原则加解锁， 在Python中使用with语法
+
  ```
 lockA=threading.lock()
 lockB=threading.lock()
@@ -3124,44 +3124,48 @@ with lockA:
   with lockB:
    Foo();
   Bar()
-```
- 
+ ```
+
 在python的threading模块中，提供了三种锁，如下
 *  基本锁 threading.Lock
 *  读锁 threading.RLock 可读入锁，嵌套锁
 *  threading.BoundedSemaphore 
- 
+
 #### 4.3.2.2 子线程销毁
 1)   与父线程一起销毁：set Daemon=True，当父线程关闭时子线程也跟着释放。Thread.join用于等待线程数据。
 2)   退出标记：子线程中循环判断一个标志位，在主线程中改变该标志位，子线程读到标志位改变，就结束自己。
 3)   （不推荐）使用ctypes强行杀掉线程。强行杀线程，可能会导致进程资源崩溃。
- 
-**# 法2：退出标记法**
-​```python
+
+
+
+**法2：退出标记法**
+
+```python
 def consumer_threading():
   t1_stop= threading.Event()
   t1 = threading.Thread(target=thread1, args=(1, t1_stop))
- 
+
   t2_stop = threading.Event()
   t2 = threading.Thread(target=thread2,  args=(2, t2_stop))
- 
+
   time.sleep(duration)
-  #stop the thread2
+  # stop the thread2
   t2_stop.set()
- 
+
 def thread1(arg1, stop_event):
   while(not stop_event.is_set()):
      #similar to time.sleep()
      stop_event.wait(time)
      pass
- 
+
 def thread2(arg1, stop_event):
   while(not stop_event.is_set()):
      stop_event.wait(time)
      pass
 ```
 
-**# 法3：ctypes**
+**法3：ctypes**
+
 ```python
 import ctypes
 def terminate_thread(thread):
@@ -3278,49 +3282,48 @@ gevent.joinall([      # 创建线程并行执行程序，碰到IO就切换
 **WSGI**: Web Server Gateway Interface（Web服务器网关接口）,是一种通信协议，它不是服务器、python模块、框架、API或者任何软件，只是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）通信的规范。wsgi server 他的意义在于 让我们专心去写web application，而不用专注于网络底层实现。
 
 表格 30 gunicorn和uwsgi比较列表
-|            | gunicorn                                        | uwsgi/uWSGI                                                  |
-| ---------- | ----------------------------------------------- | ------------------------------------------------------------ |
-| 简介       | master+N worker。缺省同步模式(worker select）   | 2个端口。socker fd监听。使用uwsgi避免了重复解析http协议，处理效率更高。 |
-| 实现语言   | python                                          | c                                                            |
-| 支持协议   | http、tcp socket、unix domain、WSGI             | http、tcp socket、unix domain 、uwsgi、WSGI                  |
-| 超时       | --timeout                                       |                                                              |
-| 常连接     | 缺省                                            | --http-keepalive                                             |
-| gevent支持 | -k gevent                                       | --gevent                                                     |
-| 启动       | gunicorn -w 3 -b 0.0.0.1:5000 app:app -k gevent | /usr/local/bin/uwsgi  --gevent 500 --gevent-monkey-patch  --http   127.0.0.1:5000  --callable app   --wsgi-file app.py --http-keepalive --master |
-| 优点       | 专门提供给python。                              | 性能会更些。                                                 |
+|            | gunicorn                                       | uwsgi/uWSGI                                                  |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| 简介       | master+N worker。缺省同步模式(worker select）  | 2个端口。socker fd监听。使用uwsgi避免了重复解析http协议，处理效率更高。 |
+| 实现语言   | python                                         | c                                                            |
+| 支持协议   | http、tcp socket、unix domain、WSGI            | http、tcp socket、unix domain 、uwsgi、WSGI                  |
+| 超时       | --timeout                                      |                                                              |
+| 常连接     | --keepalive (缺省)                             | --http-keepalive                                             |
+| gevent支持 | -k gevent                                      | --gevent                                                     |
+| 启动       | gunicorn -w 3 -b 0.0.0.1:5000 xx:app -k gevent | uwsgi  --gevent 500 --gevent-monkey-patch  --http   127.0.0.1:5000  --callable app   --wsgi-file xx.py --http-keepalive --master |
+| 优点       | 专门提供给python。                             | 性能会更些。                                                 |
 备注：二者都是prefork模式。gunicorn和uWSGI都是工具，需要安装。wsgi和uwsgi是二种不同协议，uwsgi的传输速度更快。
 #### 4.3.4.1 gunicorn
 wsgi是服务端和客户端交互的接口规范，wsgi服务器的作用是接受和分析用户的请求，调用应用程序进行处理并返回结果。wsgi服务器或叫做应用服务器，python里面一般用uwsgi和gunicorn，都是广泛应用和比较成熟的。
 
 gunicorn是一个python Wsgi http server，只支持在Unix系统上运行(依赖于linux的fcntl)，来源于Ruby的unicorn项目。Gunicorn使用prefork master-worker模型（在gunicorn中，master被称为arbiter），能够与各种wsgi web框架协作。
-示例：
+示例
+
+```sh
 gunicorn \
-       -w 10 \
-    
-       -k gevent \
-    
-       --timeout 120 \
-    
-       -b  0.0.0.0:6666 \
-    
-       --limit-request-line 0 \
-    
-       --limit-request-field_size 0 \
-    
-       --statsd-host localhost:8125 \
-    
-       superset:app
+    -w 10 \
+    -k gevent \
+    --timeout 120 \
+    -b 0.0.0.0:6666 \
+    --limit-request-line 0 \
+    --limit-request-field_size 0 \
+    --statsd-host localhost:8125 \
+    superset:app    # flask框架是 <filename:$Flask>；django框架是 <dirname.wsgi>
+```
 
+**参数说明：（可归类为Server、调试、安全、日志）**
 
-**参数说明：（可归类为Server、调试、安全、日志）** -w [nums] 工作进程数。建议值2-4 x $(NUM_CORES)， 缺省为1。
+```sh
+-w [nums] 工作进程数。建议值2-4 x $(NUM_CORES)， 缺省为1。
 -D 后台运行
 -k gevent采用事件模型（缺省是同步模式sync）。worker进程的工作方式，有 sync, eventlet, gevent, tornado, gthread。
 -threads [nums]  工作进程中线程的数量。建议值2-4 x $(NUM_CORES)， 缺省值1。此配置只适用于gthread 进程工作方式。 
--b监听IP和端口
---timeout 连接超时时间
---preload 预加载数据，所有进程共用一份数据（共享数据只读，不可写）
---reload 当代码有修改时，自动重启workers。适用于开发环境。
+-b 	监听IP和端口
+--timeout 	连接超时时间
+--preload 	预加载数据，所有进程共用一份数据（共享数据只读，不可写）
+--reload 	当代码有修改时，自动重启workers。适用于开发环境。
 --keepalive [seconds] server保持长连接时间
+```
 
 **gunicorn和nginx**
 1.nginx用作https，gunicorn在0.16 之前是不支持https的
@@ -3328,14 +3331,103 @@ gunicorn \
 3.有了反向代理的存在，可以使后端使用不同版本的server成为可能，可以做到灰度发布等。
 4.日志，nginx输出的标准日志包含了常用的访问信息，可以直接做简单的访问分析，而gunicorn的日志还需要配置。
 
+
+
 #### 4.3.4.2 uWSGI
+
 *  uWSGI：uWSGI是一个全功能的HTTP服务器，实现了WSGI协议、uwsgi协议、http协议等。它要做的就是把HTTP协议转化成语言支持的网络协议。比如把HTTP协议转化成WSGI协议，让Python可以直接使用。
 *  uwsgi：是uWSGI服务器的独占通信协议（线路协议），用于定义传输信息的类型(type of information)。每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。定义了在uWSGI服务器上与其他网络服务器进行数据的通讯。
 
    ![1574530867822](../media/program_lang/lang_python_002.png)
 图 3 nginx+uwsgi+django关联
 
+
+
+**安装 uwsgi**
+
+uwsgi: https://pypi.python.org/pypi/uWSGI
+
+uwsgi 参数详解：http://uwsgi-docs.readthedocs.org/en/latest/Options.html
+
+```shell
+pip install uwsgi
+uwsgi --version    # 查看 uwsgi 版本
+```
+
+测试 uwsgi 是否正常：
+
+新建 test.py 文件，内容如下：
+
+```python
+def application(env, start_response):
+    start_response('200 OK', [('Content-Type','text/html')])
+    return "Hello World"
+```
+
+
+
+**方法1： 终端运行：**
+
+```shell
+uwsgi --http :8001 --wsgi-file test.py
+```
+
+
+
+**方法2：配置nginx**
+
+**uwsgi 配置**
+
+uwsgi支持ini、xml等多种配置方式，本文以 ini 为例， 在/etc/目录下新建uwsgi9090.ini，添加如下配置：
+
+```shell
+[uwsgi]
+socket = 127.0.0.1:9090
+master = true         //主进程
+vhost = true          //多站模式
+no-site = true        //多站模式时不设置入口模块和文件
+workers = 2           //子进程数
+reload-mercy = 10     
+vacuum = true         //退出、重启时清理文件
+max-requests = 1000   
+limit-as = 512
+buffer-size = 30000
+pidfile = /var/run/uwsgi9090.pid    //pid文件，用于下面的脚本启动、停止该进程
+daemonize = /website/uwsgi9090.log
+```
+
+**Nginx 配置**
+
+找到nginx的安装目录（如：/usr/local/nginx/），打开conf/nginx.conf文件，修改server配置：
+
+```nginx
+server {
+        listen       80;
+        server_name  localhost;
+        
+        location / {            
+            include  uwsgi_params;
+            uwsgi_pass  127.0.0.1:9090;              //必须和uwsgi中的设置一致
+            uwsgi_param UWSGI_SCRIPT demosite.wsgi;  //入口文件，即wsgi.py相对于项目根目录的位置，“.”相当于一层目录
+            uwsgi_param UWSGI_CHDIR /demosite;       //项目根目录
+            index  index.html index.htm;
+            client_max_body_size 35m;
+        }
+    }
+```
+
+```shell
+# 运行
+uwsgi --ini /etc/uwsgi9090.ini &
+/usr/local/nginx/sbin/nginx
+```
+
+在浏览器内输入：http://127.0.0.1:8001，查看是否有"Hello World"输出，若没有输出，请检查你的安装过程。
+
+
+
 ## 4.4     python内存管理
+
 ### 4.4.1  内存使用
 关于内存的限量使用，在实现时可以为缓存设定一个阀值，缓存满了就先暂停所有的文件扫描和解析进程，等缓存快没了的时候再继续，在Linux上使用 SIGSTOP和SIGCONT信号可以很容易就实现这一功能。相比之下，如何准确的获取缓存对象所占用的内存大小倒是比较困难，折中的办法是统计整个进 程的内存占用或是[间接的方法](http://stackoverflow.com/questions/563840/how-can-i-check-the-memory-usage-of-objects-in-ipython/565382#565382)，或者干脆通过限制缓存对象的数目来做限制（这个比较弱智的感觉）。
 关于内存的节约使用，大家都知道一般的Python对象都会自动创建一个[__dict__](https://docs.python.org/2/library/stdtypes.html#object.__dict__)属性来存储其他的属性，然而不太广为人知的是，Python的内置类型dict是一个内存大户，当Python对象少的时候可能很难发现，如果在内存里存储十万或一百万个Python对象时，用Memory Profiler（比如[Heapy](http://guppy-pe.sourceforge.net/#Heapy)）做下profiling你会发现，光是__dict__本身（不包括存在__dict__里的数据）就能吃掉你巨量的内存。
@@ -3389,16 +3481,19 @@ https://github.com/LeoHuang2015/qqloginjs
 [9].     gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e 
 [10].    深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/) 
 
+[11] Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
+
+
+
 # 5       python扩展与嵌入
+
 ## 5.1     直接使用C语言程序
-```
+```python
 # 调用C语言写的动态库so
 from ctypes import cdll 
 check_prime_type = cdll.LoadLibrary('./xxx.so').check_prime()
-```
 
-\# 调用C标准库
-```
+# 调用C标准库
 from ctypes import cdll 
 dll =  cdll.LoadLibrary('libc.so.6')  # linux
 dll = msvcrt  # windows
@@ -3406,10 +3501,15 @@ random_num = (dll.random(100))
 ```
 
 
+
+
 ## 5.2     扩展C库
 详见 《多语言开发》之跨语言开发章节。
 
+
+
 ## 5.3     pypy
+
 pypy是用python语言实现的，具有JIT特性的python解释器。在长期运行程序中，能自动优化，效率有若干倍的提升。
 
 **安装篇**
@@ -3489,9 +3589,14 @@ name= MySQLdb.escape_string(name)   #此时转义后，type(name)=’str’
 环境：py3.7，celery4.3.0（依赖redis>=3.0），redis-py-cluster1.3.6（依赖redis==2.10.6)。
 问题：问py3.7如何同时用redis集群和celery？celery borken如何配置多节点Redis集群。
 
+
+
 ## 6.2     本章参考
 
-# 7       Python源码分析
+
+
+# 7   Python源码分析
+
 源码下载
 *  [Python 2.7.14rc1 - 2017-08-27](https://www.python.org/downloads/release/python-2714rc1/) 
 Download [XZ compressed source tarball](https://www.python.org/ftp/python/2.7.14/Python-2.7.14rc1.tar.xz)
