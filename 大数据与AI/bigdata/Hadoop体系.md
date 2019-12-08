@@ -1763,8 +1763,8 @@ $ sudo apt-get install openssh-server ssh rsync
 $ sudo apt-get install openjdk-7-jdk 
 ```
 
+step 4.下载Hadoop系列软件，并安装（详见下节）
 
-# step 4.下载Hadoop系列软件，并安装（详见下节）
 ```sh
 # apt-get 安装：spark zookeeper
 $ sudo apt-get install spark zookeeper
@@ -1909,7 +1909,7 @@ denny@denny-ubuntu:~$ jps
 12652 SecondaryNameNode
 16161 Jps
  
-将输入文件拷贝到分布式文件系统：
+# 将输入文件拷贝到分布式文件系统：
  $ bin/Hadoop fs -put conf input
 # 在分布式模式查看输出文件
 $ bin/hdfs dfs -cat output/*
@@ -1925,8 +1925,6 @@ $ sbin/stop-dfs.sh
 ### 3.3.1  Hadoop组件的版本配置
 
 表格 11 Hadoop系列版本配置
-
-
 
 | 程序                                          | stable   版本 | 2017stable   版本 | 简介                                                         | 下载                                                         |
 | --------------------------------------------- | ------------- | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -1944,8 +1942,6 @@ $ sbin/stop-dfs.sh
  
 
 表格 12 Hadoop节点规划
-
-
 
 | 节点  | 安装软件                                          | 进程                                                         |
 | ----- | ------------------------------------------------- | ------------------------------------------------------------ |
