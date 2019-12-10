@@ -196,7 +196,7 @@ http   #http块
 
 ### 3.3.1 location和匹配优先级
 
-**location URL****匹配规则**
+**location URL匹配规则**
 
 语法: locaton [=|~|~*|^~] /uri/ { }
 
@@ -219,13 +219,14 @@ http   #http块
 * 正则匹配（位置有序）：正则匹配到一个，就不往下搜索。
 
 
-**location****和****alias****的差别**
+
+**location和alias的差别**
 
 root与alias主要区别在于nginx如何解释location后面的uri，这会使两者分别以不同的方式将请求映射到服务器文件上。
 * root的处理结果是：root路径＋location路径
 * alias的处理结果是：使用alias路径替换location路径
 
-alias是一个目录别名的定义，root则是最上层目录的定义。alias必须以/结尾。
+alias是一个目录别名的定义，root则是最上层目录的定义。alias必须以 / 结尾。
 
  
 
@@ -242,17 +243,46 @@ nginx rewrite指令执行顺序：
 
  
 
+### 3.3.3 网页重定向
+
+1. http重定向到https：需要添加证书
+
+2. www.xxx.com/bbs  -->  bbs.xxx.com
+
+   ```nginx
+   server {
+       server_name www.xxx.com;
+       rewrite ^/bbs$ http://www.xxx.com permanent;  #permanent永久重定向，返回301
+       location / { ... }
+   }
+   ```
+
+3. bbs.xxx.com  --> www.xxx.com/bbs
+
+   ```nginx
+   server {
+       server_name www.xxx.com bbs.xxx.com;
+       if ( $host == 'bbs.xxx.com'){
+       		rewrite ^/(.*)$ http://www.xxx.com/bbs/$1 permanent;
+           }
+       location / { ... }
+   }
+   ```
+
+   
+
 ## 3.4   Nginx反向代理配置
 
 ### 3.4.1 wsgi配置
 
 **1. 使用uwsgi**
 
-$ sudo apt-get install uwsgi-plugin-python
+`$ sudo apt-get install uwsgi-plugin-python`
 
-**示例：通过域名****xx.com****访问****flask****应用****abc**
+**示例：通过域名xx.com访问flask应用abc**
 
 **代码目录**
+
 ```sh        
 ├── env
 │  ├── bin
@@ -268,15 +298,17 @@ $ sudo apt-get install uwsgi-plugin-python
   └── views.py
 ```
 
-**# /etc/nginx/nginx.conf**
+**/etc/nginx/nginx.conf**
 ```nginx
 http {
   ...
   #include /etc/nginx/conf.d/*.conf;
   include /etc/nginx/sites-enabled/*.conf;
 }
- 
-**# /etc/nginx/sites-enabled/www.xxx.com.conf**
+```
+
+**/etc/nginx/sites-enabled/www.xxx.com.conf**
+```nginx
 server {
   listen 80;
   server_name www.xxx.com xxx.com;
@@ -291,7 +323,7 @@ server {
 ```
 
 
-**# /etc/uwsgi/apps-enabled/www.xxx.com.ini**
+**/etc/uwsgi/apps-enabled/www.xxx.com.ini**
 ```ini
 [uwsgi]
 plugins = python
@@ -349,11 +381,11 @@ upstream后端服务器代理参数设置
 * 轮询（默认）： 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
 * weight：指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
 * ip_hash： 每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
-其它：
 * fair（第三方） ：按后端服务器的响应时间来分配请求，响应时间短的优先分配。 
 * url_hash（第三方）
 
-示例1：权重
+**示例1：权重**
+
 ```nginx
 upstream bbs.linuxtone.org {  # 定义负载均衡设备的Ip及设备状态 
     server 127.0.0.1:9090 down;  # 表示单前的server暂时不参与负载
@@ -373,7 +405,7 @@ upstream bbs.linuxtone.org {  # 定义负载均衡设备的Ip及设备状态
 
  
 
-**示例****2****：****ip_hash**
+**示例2：ip_hash**
 ```nginx
 upstream backend {
   ip_hash;
@@ -398,7 +430,7 @@ Nginx官方版本限制IP的连接和并发分别有两个模块：
 
 $binary_remote_addr 每个独立IP
 
-**示例1****：限制访问速率**
+**示例1：限制访问速率**
 ```nginx
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s; #10m区域，2次/秒
 server { 
@@ -409,7 +441,7 @@ server {
 ```
 
 
-**实例****2****： burst****缓存处理**
+**实例2： burst缓存处理**
 ```nginx
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;
 server { 
@@ -421,7 +453,7 @@ server {
 ```
 
 
-**实例****3****：限制并发连接**
+**实例3：限制并发连接**
 ```NGINX
 limit_conn_zone $binary_remote_addr zone=addr:10m;
 server {
@@ -431,20 +463,87 @@ server {
 }
 ```
 
-## 3.7   FAQ
+## 3.7  Nginx灰度发布
 
-**1. ProxyPass****尾的****/****的区别**
+灰度发布是指在黑与白之间，能够平滑过渡的一种发布方式。AB test就是一种灰度发布方式，让一部分用户继续用A，一部分用户开始用B，如果用户对B没有什么反对意见，那么逐步扩大范围，把所有用户都迁移到B上面来。
+
+灰度发布可以保证整体系统的稳定，在初始灰度的时候就可以发现、调整问题，以保证其影响度。
+
+Nginx的灰度发布的常用方式如下：
+
+* 基于IP
+* 基于 gip的地理位置限制
+* 根据cookie、headers，需要依赖nginx_lua模块
+
+
+
+### 基于IP
+如果是内部IP，则反向代理到serv_grav(预发布环境)；如果不是则反向代理到serv_prod(生产环境)。
+```nginx
+upstream serv_prod {
+    server 192.168.1.100:8080 max_fails=1 fail_timeout=60;
+}
+upstream serv_grav {
+    server 192.168.1.200:8080 max_fails=1 fail_timeout=60;
+}
+
+
+server {
+  listen 80;
+  server_name  www.xxx.com;
+  access_log  logs/www.xxx.com.log  main;
+
+  set $group serv_prod;
+  if ($remote_addr ~ "211.118.119.11") {    # 对于测试IP，指向预发布环境
+      set $group serv_grav;
+  }
+
+location / {                       
+    proxy_pass http://$group;
+    proxy_set_header   Host             $host;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    index  index.html index.htm;
+  }
+}
+```
+
+如果你只有单台服务器，可以根据不同的IP设置不同的网站根目录来达到相同的目的。
+```nginx
+server {
+  listen 80;
+  server_name  www.xxx.com;
+  access_log  logs/www.xxx.com.log  main;
+
+  set $rootdir "/var/www/html";
+    if ($remote_addr ~ "211.118.119.11") {  # 对于测试IP，指向不同目录
+       set $rootdir "/var/www/test";
+    }
+
+    location / {
+      root $rootdir;
+    }
+}
+```
+
+## FAQ
+
+**1. ProxyPass尾的/的区别**
 
 示例如下： 
 ```nginx
-proxyPass http://ip:port/; # 表明是绝对路径，转发URL只有匹配部分。
+proxyPass http://ip:port/; # 表明是绝对路径，转发URL会去除location匹配部分。
 proxyPass http://ip:port; # 表明是相对路径，转发URL和原始URL一致。
 ```
 
 
-## 3.8   本章参考
 
-[1].   死磕nginx系列--nginx 限流配置 https://www.cnblogs.com/biglittleant/p/8979915.html 
+## 本章参考
+
+[1]: https://blog.csdn.net/weixin_43328213/article/details/87913328  "nginx几种网页重定向（rewirte）的配置"
+[2]: https://www.cnblogs.com/biglittleant/p/8979915.html  "死磕nginx系列--nginx 限流配置 "
+[3]:  https://www.cnblogs.com/weifeng1463/p/7353710.html  "使用nginx实现灰度"
+
 
 
 
