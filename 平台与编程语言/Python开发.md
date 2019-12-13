@@ -15,116 +15,225 @@
  
 
 
+
 # 目录
+
 [目录. 1](#_Toc18274951)
+
 [1       Python概述. 4](#_Toc18274952)
+
 [1.1         Python简介. 4](#_Toc18274953)
+
 [1.2         Python语言. 4](#_Toc18274954)
+
 [1.3         Python解释器. 5](#_Toc18274955)
+
 [1.4         py/pyc/pyo/pyd 6](#_Toc18274956)
+
 [2       Python语言教程. 6](#_Toc18274957)
+
 [2.1         python对象. 6](#_Toc18274958)
+
 [2.1.1            对象概述. 6](#_Toc18274959)
+
 [2.1.2            对象引用、深拷贝和浅拷贝. 8](#_Toc18274960)
+
 [2.2         标准库Standard Library 9](#_Toc18274961)
+
 [2.2.1            内建模块__builtin__/builtins/__builtins__ 10](#_Toc18274962)
+
 [2.2.2            内建类型Build-in Types 11](#_Toc18274963)
+
 [2.2.3            内建函数Built-in Functions 12](#_Toc18274964)
+
 [2.2.4            内建私有方法Built-in  Methods 19](#_Toc18274965)
+
 [2.2.5            常用基础算法. 21](#_Toc18274966)
+
 [2.2.6            常用数据结构. 22](#_Toc18274967)
+
 [2.3         表达式. 23](#_Toc18274968)
+
 [2.3.1            控制流. 23](#_Toc18274969)
+
 [2.3.2   with语句与上下文管理. 24](#_Toc18274970)
+
 [2.3.3            三元表达式. 24](#_Toc18274971)
+
 [2.4         字符串与字符串函数. 24](#_Toc18274972)
+
 [2.5         正则表达式. 30](#_Toc18274973)
+
 [2.5.1            正则表达式修饰符与模式. 31](#_Toc18274974)
+
 [2.5.2            正则表达式实例. 33](#_Toc18274975)
+
 [2.6         异常处理. 34](#_Toc18274976)
+
 [2.6.1            异常捕捉、抛出. 34](#_Toc18274977)
+
 [2.6.2            跟踪异常. 35](#_Toc18274978)
+
 [2.6.3            用户自定义异常. 36](#_Toc18274979)
+
 [2.7         函数式编程. 37](#_Toc18274980)
+
 [2.8         中文编码. 37](#_Toc18274981)
+
 [2.9         本章参考. 38](#_Toc18274982)
+
 [3       Python开发环境. 38](#_Toc18274983)
+
 [3.1         模块module 38](#_Toc18274984)
+
 [3.1.1   python的名字空间. 38](#_Toc18274985)
+
 [3.1.2            模块安装. 39](#_Toc18274986)
+
 [3.1.3            模块导入import 43](#_Toc18274987)
+
 [3.1.4            模块的搜索路径. 46](#_Toc18274988)
+
 [3.1.5            项目结构和模块分发包. 47](#_Toc18274989)
+
 [3.2         Python常用模块. 52](#_Toc18274990)
+
 [3.2.1            主模块__main__ 53](#_Toc18274991)
+
 [3.2.2   site模块. 54](#_Toc18274992)
+
 [3.2.3   sys模块. 54](#_Toc18274993)
+
 [3.2.4   traceback模块. 58](#_Toc18274994)
+
 [3.3         Python常用开发工具. 58](#_Toc18274995)
+
 [3.3.1   IDE 60](#_Toc18274996)
+
 [3.3.2            静态检测pylint/pycheck 62](#_Toc18274997)
+
 [3.3.3            反向建模pyreverse 62](#_Toc18274998)
+
 [3.3.4            文档化工具pydoc 64](#_Toc18274999)
+
 [3.3.5            测试工具unittest/pytest 66](#_Toc18275000)
+
 [3.3.6            监控调试trace/cgitb/pdb 70](#_Toc18275001)
+
 [3.3.7   exe打包py2exe/PyInstaller 71](#_Toc18275002)
+
 [3.3.8            性能优化  cProfile/pstats/timeit 71](#_Toc18275003)
+
 [3.3.9   fabric 72](#_Toc18275004)
+
 [3.3.10         supervisor 73](#_Toc18275005)
+
 [3.3.11         其它python工具. 75](#_Toc18275006)
+
 [3.3.12         本节参考. 75](#_Toc18275007)
+
 [3.4         Python常用开发库. 75](#_Toc18275008)
+
 [3.4.1            常用开发库列表. 75](#_Toc18275009)
+
 [3.4.2            网络编程. 77](#_Toc18275010)
+
 [3.4.3   HTML/XML等数据解析和处理. 79](#_Toc18275011)
+
 [3.4.4            多线程和并发. 83](#_Toc18275012)
+
 [3.4.5            网络爬虫框架. 83](#_Toc18275013)
+
 [3.4.6     浏览器自动化与仿真. 84](#_Toc18275014)
+
 [3.5         其他Python库. 84](#_Toc18275015)
+
 [3.6         本章参考. 85](#_Toc18275016)
+
 [4       Python高级开发. 85](#_Toc18275017)
+
 [4.1         python多版本并存. 85](#_Toc18275018)
+
 [4.1.1   virtualenv切换python版本. 86](#_Toc18275019)
+
 [4.1.2   python2和python3的区别. 88](#_Toc18275020)
+
 [4.2         python安全编码. 90](#_Toc18275021)
+
 [4.3         python并发. 91](#_Toc18275022)
+
 [4.3.1            多进程. 92](#_Toc18275023)
+
 [4.3.2            多线程. 92](#_Toc18275024)
+
 [4.3.3            协程. 94](#_Toc18275025)
+
 [4.3.4   wsgi 97](#_Toc18275026)
+
 [4.4         python内存管理. 98](#_Toc18275027)
+
 [4.4.1            内存使用. 98](#_Toc18275028)
+
 [4.4.2            内存回收机制GC 99](#_Toc18275029)
+
 [4.5         SOAP 99](#_Toc18275030)
+
 [4.6         项目实例. 100](#_Toc18275031)
+
 [4.6.1   12306抢票. 100](#_Toc18275032)
+
 [4.6.2   QQ模拟登陆. 100](#_Toc18275033)
+
 [4.7         本章参考. 100](#_Toc18275034)
+
 [5       python扩展与嵌入. 100](#_Toc18275035)
+
 [5.1         直接使用C语言程序. 100](#_Toc18275036)
+
 [5.2         扩展C库. 101](#_Toc18275037)
+
 [5.3         pypy 101](#_Toc18275038)
+
 [5.4         Jython~Java 102](#_Toc18275039)
+
 [5.5         本章参考. 102](#_Toc18275040)
+
 [6       Python FAQ 102](#_Toc18275041)
+
 [6.1         常见问题. 102](#_Toc18275042)
+
 [6.1.1   Segment Error(core store) 102](#_Toc18275043)
+
 [6.1.2   pyquey & beautifulSoup 102](#_Toc18275044)
+
 [6.1.3   mysql操作失败. 103](#_Toc18275045)
+
 [6.2         本章参考. 103](#_Toc18275046)
+
 [7       Python源码分析. 103](#_Toc18275047)
+
 [7.1         源码目录文件结构. 104](#_Toc18275048)
+
 [7.2         Python对象实现. 105](#_Toc18275049)
+
 [7.3         python虚拟机PVM 107](#_Toc18275050)
+
 [7.3.1            虚拟机执行流程. 107](#_Toc18275051)
+
 [7.3.2   pyc文件和code对象. 107](#_Toc18275052)
+
 [7.3.3   python访问PyCodeObject: compile/dis 109](#_Toc18275053)
+
 [7.4         本章参考. 110](#_Toc18275054)
+
 [8       参考资料. 110](#_Toc18275055)
+
 [8.1         参考链接. 110](#_Toc18275056)
+
 [8.2         参考书目. 111](#_Toc18275057)
 
- 
+
+
 
 
 
@@ -149,7 +258,15 @@ Python 本身也是由诸多其他语言发展而来的,这包括 ABC、Modula-3
 9.GUI编程：Python支持GUI可以创建和移植到许多系统调用。
 10.可嵌入: 你可以将Python嵌入到C/C++程序，让你的程序的用户获得"脚本化"的能力。
 
+
+
+```bash
+# 进入python的交互式界面
+$ python -i
+```
+
 ## 1.2     Python语言
+
 Python是一种解释型、面向对象、动态数据类型的高级程序设计语言。
 Python由Guido van Rossum于1989年底发明，第一个公开发行版发行于1991年。
 像Perl语言一样, Python 源代码同样遵循 GPL(GNU General Public License)协议。
@@ -166,6 +283,7 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 ## 1.3     Python解释器
 python是编程语言，而不是运行时环境。python有几个实现，分别是CPython、Cython、Jython、IronPython和PyPy。
 表格 1 各种python解释器比较列表
+
 | 解释器实现 | 简介                                                         | 应用场景                                                     |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Anaconda   | 公司推的，带免费版和商业版插件。成熟的科学计算环境，包括了常用的   Numpy,Scipy，matplotlib和networkx 等，以及 beautiful-soup，requests，flask，tornado   等网络相关的扩展。   提供了Python2.7和Python3.4两个版本，使用conda管理python扩展。 | 科学计算领域包括数据挖掘和机器学习。   $ conda list   $ conda install xxx |
@@ -179,19 +297,21 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 
 ## 1.4     py/pyc/pyo/pyd
 表格 2 python各种文件格式
+
 | 名称 | 简介                                   | 生成方式                                                   |
 | ---- | -------------------------------------- | ---------------------------------------------------------- |
 | py   | python源文件                           |                                                            |
 | pyc  | python编译后的字节码                   | python -m py_compile *.py                                  |
 | pyo  | python编译优化后的字节码。   -O 或 -OO | python -O -m py_compile *.py   或 -OO 去除注释，文件更小。 |
 | pyd  | python动态库。                         |                                                            |
-*备注：1.字节码bytecode是二进制文件，pyo和pyc文件都是字节码。*
-*2. py_compile**模块可编译生成各种文件格式。*
+备注：1.字节码bytecode是二进制文件，pyo和pyc文件都是字节码。
+2. py_compile**模块可编译生成各种文件格式。*
 
 # 2       Python语言教程
 ## 2.1     python对象
-**在 Python 中，一切都是对象，**并且几乎一切都有属性和方法。所有的函数都有一个内置的 __doc__ 属性，它会返回在函数源代码中定义的 doc string。
-**self** 只有对象实例化（即隐式调用__init__）才能使用self, public属性不需实例化也能调用。因此对于结构类要求在__init__外初始化所有公共属性。
+在 Python 中，一切都是对象，并且几乎一切都有属性和方法。所有的函数都有一个内置的 __doc__ 属性，它会返回在函数源代码中定义的 doc string。
+self 只有对象实例化（即隐式调用__init__）才能使用self, public属性不需实例化也能调用。因此对于结构类要求在__init__外初始化所有公共属性。
+
 ### 2.1.1  对象概述
 **包package**
 包是一个分层次的文件目录结构，它定义了一个由模块及子包，和子包下的子包等组成的 Python 的应用环境。
@@ -202,6 +322,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
  装饰器就是一个闭包。
 
 表格 3 python对象列表
+
 | 对象名   | 简介                                                         | 内建类型            |
 | -------- | ------------------------------------------------------------ | ------------------- |
 | 对象     |                                                              | ObjectType          |
@@ -228,6 +349,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 4. 对象调用callable(object) ： 用来确定对象是否可以函数操作符()来调用。
 Return [True](https://docs.python.org/2/library/constants.html#True) if the object argument appears callable, [False](https://docs.python.org/2/library/constants.html#False) if not.
 class instances are callable if they have a [__call__()](https://docs.python.org/2/reference/datamodel.html#object.__call__) method.
+
 示例：
 ```python
 >>> callable(dir)
@@ -267,9 +389,8 @@ AttributeError: 'tuple' object has no attribute 'pop'
 ```
 **说明：上述例子中dict有clear 访求，tuple无pop方法，list有pop方法。**
 
-1）对象引用，引用和原对象的修改会同步变化。python中对象的赋值（=）都是进行对象引用（内存地址）传递。
-
-**2）深拷贝**deepcopy
+1）对象引用，引用和原对象的修改会同步变化。python中对象的赋值（=）都是进行对象引用（内存地址）传递。 
+2）深拷贝deepcopy
 ```python
 import copy
 copy.deepcopy( )
@@ -294,13 +415,14 @@ copy.copy( )
 ·         对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说 
 ·         如果元祖变量只包含原子类型对象，则不能深拷。
 
-## 2.2     标准库Standard Library
+## 2.2  标准库Standard Library
 **保留关键字keyword**有：
 *  简单表达式：assert pass del print return yield break continue import global exec
 *  控制流：if while for try with
 内建常量**constant**有：False True None NotImplemented Ellipsis __debug__
 
 表格 4 python标准库/模块列表
+
 | 功能       | 模块或   类名 | 简介                                                         | 备注                                                         |
 | ---------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 系统       | sys           | 系统模块，包含了跟python解析器和环境相关的变量和函数。<br>  [System-specific   parameters and functions](https://docs.python.org/2/library/sys.html). | `sys.modules` 包含了你在 IDE 中运行的所有程序所导入的所有模块。 |
@@ -317,6 +439,7 @@ copy.copy( )
 |            |               |                                                              |                                                              |
 |            |               |                                                              |                                                              |
 备注：
+
 ### 2.2.1  内建模块__builtin__/builtins/__builtins__
 在Python2.X版本中，内建模块被命名为__builtin__，而到了Python3.X版本中，却更名为builtins。
 __builtin__包含了Python许多内建的函数，你不必手动导入此模块,就可直接调用许多内建的函数。对于__builtins__，它却同时存在于Python2.X和Python3.X中。其实简单地说，它就是对内建模块一个引用。
@@ -362,6 +485,7 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 *  内建数据结构有：bytearray dict tupl set list
 *  内建基础数据类型有：int bool float long str
 *  内建方法有：xrange enumerate slice super type
+
 ### 2.2.2  内建类型Build-in Types
 [5. Built-in Types](https://docs.python.org/2/library/stdtypes.html)
 - [5.1. Truth Value      Testing](https://docs.python.org/2/library/stdtypes.html#truth-value-testing)
@@ -377,6 +501,7 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 - [5.11. Context      Manager Types](https://docs.python.org/2/library/stdtypes.html#context-manager-types)
 - [5.12. Other      Built-in Types](https://docs.python.org/2/library/stdtypes.html#other-built-in-types)
 - [5.13. Specia*      Attributes](https://docs.python.org/2/library/stdtypes.html#special-attributes)
+
 查看内置类型 types模块
 ```PYTHON
 >>> import types
@@ -420,26 +545,28 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 
 ### 2.2.3  内建函数Built-in Functions
 表格 5 内建函数列表（全）
-| [**abs()**](https://docs.python.org/2/library/functions.html#abs) | [**divmod()**](https://docs.python.org/2/library/functions.html#divmod) | [**input()**](https://docs.python.org/2/library/functions.html#input) | [**open()**](https://docs.python.org/2/library/functions.html#open) | [**staticmethod()**](https://docs.python.org/2/library/functions.html#staticmethod) |
+
+| [abs()](https://docs.python.org/2/library/functions.html#abs) | [divmod()](https://docs.python.org/2/library/functions.html#divmod) | [input()](https://docs.python.org/2/library/functions.html#input) | [open()](https://docs.python.org/2/library/functions.html#open) | [staticmethod()](https://docs.python.org/2/library/functions.html#staticmethod) |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [**all()**](https://docs.python.org/2/library/functions.html#all) | [**enumerate()**](https://docs.python.org/2/library/functions.html#enumerate) | [**int()**](https://docs.python.org/2/library/functions.html#int) | [**ord()**](https://docs.python.org/2/library/functions.html#ord) | [**str()**](https://docs.python.org/2/library/functions.html#str) |
-| [**any()**](https://docs.python.org/2/library/functions.html#any) | [**eval()**](https://docs.python.org/2/library/functions.html#eval) | [**isinstance()**](https://docs.python.org/2/library/functions.html#isinstance) | [**pow()**](https://docs.python.org/2/library/functions.html#pow) | [**sum()**](https://docs.python.org/2/library/functions.html#sum) |
-| [**basestring()**](https://docs.python.org/2/library/functions.html#basestring) | [**execfile()**](https://docs.python.org/2/library/functions.html#execfile) | [**issubclass()**](https://docs.python.org/2/library/functions.html#issubclass) | [**print()**](https://docs.python.org/2/library/functions.html#print) | [**super()**](https://docs.python.org/2/library/functions.html#super) |
-| [**bin()**](https://docs.python.org/2/library/functions.html#bin) | [**file()**](https://docs.python.org/2/library/functions.html#file) | [**iter()**](https://docs.python.org/2/library/functions.html#iter) | [**property()**](https://docs.python.org/2/library/functions.html#property) | [**tuple()**](https://docs.python.org/2/library/functions.html#tuple) |
-| [**bool()**](https://docs.python.org/2/library/functions.html#bool) | [**filter()**](https://docs.python.org/2/library/functions.html#filter) | [**len()**](https://docs.python.org/2/library/functions.html#len) | [**range()**](https://docs.python.org/2/library/functions.html#range) | [**type()**](https://docs.python.org/2/library/functions.html#type) |
-| [**bytearray()**](https://docs.python.org/2/library/functions.html#bytearray) | [**float()**](https://docs.python.org/2/library/functions.html#float) | [**list()**](https://docs.python.org/2/library/functions.html#func-list) | [**raw_input()**](https://docs.python.org/2/library/functions.html#raw_input) | [**unichr()**](https://docs.python.org/2/library/functions.html#unichr) |
-| [**callable()**](https://docs.python.org/2/library/functions.html#callable) | [**format()**](https://docs.python.org/2/library/functions.html#format) | [**locals()**](https://docs.python.org/2/library/functions.html#locals) | [**reduce()**](https://docs.python.org/2/library/functions.html#reduce) | [**unicode()**](https://docs.python.org/2/library/functions.html#unicode) |
-| [**chr()**](https://docs.python.org/2/library/functions.html#chr) | [**frozenset()**](https://docs.python.org/2/library/functions.html#func-frozenset) | [**long()**](https://docs.python.org/2/library/functions.html#long) | [**reload()**](https://docs.python.org/2/library/functions.html#reload) | [**vars()**](https://docs.python.org/2/library/functions.html#vars) |
-| [**classmethod()**](https://docs.python.org/2/library/functions.html#classmethod) | [**getattr()**](https://docs.python.org/2/library/functions.html#getattr) | [**map()**](https://docs.python.org/2/library/functions.html#map) | [**repr()**](https://docs.python.org/2/library/functions.html#func-repr) | [**xrange()**](https://docs.python.org/2/library/functions.html#xrange) |
-| [**cmp()**](https://docs.python.org/2/library/functions.html#cmp) | [**globals()**](https://docs.python.org/2/library/functions.html#globals) | [**max()**](https://docs.python.org/2/library/functions.html#max) | [**reversed()**](https://docs.python.org/2/library/functions.html#reversed) | [**zip()**](https://docs.python.org/2/library/functions.html#zip) |
-| [**compile()**](https://docs.python.org/2/library/functions.html#compile) | [**hasattr()**](https://docs.python.org/2/library/functions.html#hasattr) | [**memoryview()**](https://docs.python.org/2/library/functions.html#func-memoryview) | [**round()**](https://docs.python.org/2/library/functions.html#round) | [**__import__()**](https://docs.python.org/2/library/functions.html#__import__) |
-| [**complex()**](https://docs.python.org/2/library/functions.html#complex) | [**hash()**](https://docs.python.org/2/library/functions.html#hash) | [**min()**](https://docs.python.org/2/library/functions.html#min) | [**set()**](https://docs.python.org/2/library/functions.html#func-set) |                                                              |
-| [**delattr()**](https://docs.python.org/2/library/functions.html#delattr) | [**help()**](https://docs.python.org/2/library/functions.html#help) | [**next()**](https://docs.python.org/2/library/functions.html#next) | [**setattr()**](https://docs.python.org/2/library/functions.html#setattr) |                                                              |
-| [**dict()**](https://docs.python.org/2/library/functions.html#func-dict) | [**hex()**](https://docs.python.org/2/library/functions.html#hex) | [**object()**](https://docs.python.org/2/library/functions.html#object) | [**slice()**](https://docs.python.org/2/library/functions.html#slice) |                                                              |
-| [**dir()**](https://docs.python.org/2/library/functions.html#dir) | [**id()**](https://docs.python.org/2/library/functions.html#id) | [**oct()**](https://docs.python.org/2/library/functions.html#oct) | [**sorted()**](https://docs.python.org/2/library/functions.html#sorted) |                                                              |
-备注：**1. classmethod、staticmethod详见0下方**
+| [all()](https://docs.python.org/2/library/functions.html#all) | [enumerate()](https://docs.python.org/2/library/functions.html#enumerate) | [int()](https://docs.python.org/2/library/functions.html#int) | [ord()](https://docs.python.org/2/library/functions.html#ord) | [str()](https://docs.python.org/2/library/functions.html#str) |
+| [any()](https://docs.python.org/2/library/functions.html#any) | [eval()](https://docs.python.org/2/library/functions.html#eval) | [isinstance()](https://docs.python.org/2/library/functions.html#isinstance) | [pow()](https://docs.python.org/2/library/functions.html#pow) | [sum()](https://docs.python.org/2/library/functions.html#sum) |
+| [basestring()](https://docs.python.org/2/library/functions.html#basestring) | [execfile()](https://docs.python.org/2/library/functions.html#execfile) | [issubclass()](https://docs.python.org/2/library/functions.html#issubclass) | [print()](https://docs.python.org/2/library/functions.html#print) | [super()](https://docs.python.org/2/library/functions.html#super) |
+| [bin()](https://docs.python.org/2/library/functions.html#bin) | [file()](https://docs.python.org/2/library/functions.html#file) | [iter()](https://docs.python.org/2/library/functions.html#iter) | [property()](https://docs.python.org/2/library/functions.html#property) | [tuple()](https://docs.python.org/2/library/functions.html#tuple) |
+| [bool()](https://docs.python.org/2/library/functions.html#bool) | [filter()](https://docs.python.org/2/library/functions.html#filter) | [len()](https://docs.python.org/2/library/functions.html#len) | [range()](https://docs.python.org/2/library/functions.html#range) | [type()](https://docs.python.org/2/library/functions.html#type) |
+| [bytearray()](https://docs.python.org/2/library/functions.html#bytearray) | [float()](https://docs.python.org/2/library/functions.html#float) | [list()](https://docs.python.org/2/library/functions.html#func-list) | [raw_input()](https://docs.python.org/2/library/functions.html#raw_input) | [unichr()](https://docs.python.org/2/library/functions.html#unichr) |
+| [callable()](https://docs.python.org/2/library/functions.html#callable) | [format()](https://docs.python.org/2/library/functions.html#format) | [locals()](https://docs.python.org/2/library/functions.html#locals) | [reduce()](https://docs.python.org/2/library/functions.html#reduce) | [unicode()](https://docs.python.org/2/library/functions.html#unicode) |
+| [chr()](https://docs.python.org/2/library/functions.html#chr) | [frozenset()](https://docs.python.org/2/library/functions.html#func-frozenset) | [long()](https://docs.python.org/2/library/functions.html#long) | [reload()](https://docs.python.org/2/library/functions.html#reload) | [vars()](https://docs.python.org/2/library/functions.html#vars) |
+| [classmethod()](https://docs.python.org/2/library/functions.html#classmethod) | [getattr()](https://docs.python.org/2/library/functions.html#getattr) | [map()](https://docs.python.org/2/library/functions.html#map) | [repr()](https://docs.python.org/2/library/functions.html#func-repr) | [xrange()](https://docs.python.org/2/library/functions.html#xrange) |
+| [cmp()](https://docs.python.org/2/library/functions.html#cmp) | [globals()](https://docs.python.org/2/library/functions.html#globals) | [max()](https://docs.python.org/2/library/functions.html#max) | [reversed()](https://docs.python.org/2/library/functions.html#reversed) | [zip()](https://docs.python.org/2/library/functions.html#zip) |
+| [compile()](https://docs.python.org/2/library/functions.html#compile) | [hasattr()](https://docs.python.org/2/library/functions.html#hasattr) | [memoryview()](https://docs.python.org/2/library/functions.html#func-memoryview) | [round()](https://docs.python.org/2/library/functions.html#round) | [__import__()](https://docs.python.org/2/library/functions.html#__import__) |
+| [complex()](https://docs.python.org/2/library/functions.html#complex) | [hash()](https://docs.python.org/2/library/functions.html#hash) | [min()](https://docs.python.org/2/library/functions.html#min) | [set()](https://docs.python.org/2/library/functions.html#func-set) |                                                              |
+| [delattr()](https://docs.python.org/2/library/functions.html#delattr) | [help()](https://docs.python.org/2/library/functions.html#help) | [next()](https://docs.python.org/2/library/functions.html#next) | [setattr()](https://docs.python.org/2/library/functions.html#setattr) |                                                              |
+| [dict()](https://docs.python.org/2/library/functions.html#func-dict) | [hex()](https://docs.python.org/2/library/functions.html#hex) | [object()](https://docs.python.org/2/library/functions.html#object) | [slice()](https://docs.python.org/2/library/functions.html#slice) |                                                              |
+| [dir()](https://docs.python.org/2/library/functions.html#dir) | [id()](https://docs.python.org/2/library/functions.html#id) | [oct()](https://docs.python.org/2/library/functions.html#oct) | [sorted()](https://docs.python.org/2/library/functions.html#sorted) |                                                              |
+备注：1. classmethod、staticmethod详见0下方
 
 表格 6 常用内建函数列表
+
 | **作用域**   | **函数名**                    | **简介**                                                     |
 | ------------ | ----------------------------- | ------------------------------------------------------------ |
 | **模块**     | **globals**                   | 当前域的全局变量dict，如已导入的模块名                       |
@@ -451,6 +578,7 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 | **其它**     | len(object)                   | 打印序列或集合容器的元素个数。                               |
 | **不常用项** | apple(object[,args[,kwargs]]) |                                                              |
 备注：
+
 #### python装饰器符号@
 装饰器**decorator**是一种特殊的函数，要么接受函数作为输入参数，并返回一个函数；要么接受一个类作为输入参数，并返回一个类。它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 @标记是装饰器的语法糖（syntactic sugar），可以让你以简单易读得方式装饰目标对象。装饰器放在类或函数前面。
@@ -686,6 +814,7 @@ string.split(l, ':')))
 ### 2.2.4  内建私有方法Built-in Methods
 __xx_xx__: 内置私有方法。 
 表格 7 常见内建私有方法列表
+
 | 类别             | 方法名               | 用途                                                         | 示例                  |
 | ---------------- | -------------------- | ------------------------------------------------------------ | --------------------- |
 | 对象的创建与销毁 | __new__              | 对象创建新实例时调用的类方法。单例Singleton模式需要重载此内置方法，用Super类。 | 单例模式              |
@@ -713,6 +842,7 @@ __xx_xx__: 内置私有方法。
 4、重载使得类的实例看起来更像内置的。
 5、重载是通过特殊命名的类方法来实现的。
 表格 8 可重载的操作符列表
+
 | _操作符_     | 用途            | 示例                  |
 | ------------ | --------------- | --------------------- |
 | __init__     | 构造函数        | 创建对象：class()     |
@@ -733,6 +863,7 @@ __xx_xx__: 内置私有方法。
 ### 2.2.5  常用基础算法
 #### 2.2.5.1 算法列表
 表格 9 常用算法列表
+
 | 函数名     | 示例                                                         | 说明                                                         |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | filter     | >>> def f(x): return x % 2   != 0 and x % 3 != 0     >>> filter(f, range(2, 25))     [5, 7, 11, 13, 17, 19, 23] | 对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。 |
@@ -873,6 +1004,7 @@ print type(eval("{'name':'ljq', 'age':24}"))
 **Python转义字符**
 在需要在字符中使用特殊字符时，python用反斜杠(\)转义字符。如下表：
 表格 10Python转义字符列表
+
 | **转义字符** | **描述**                                     |
 | ------------ | -------------------------------------------- |
 | \(在行尾时)  | 续行符                                       |
@@ -895,6 +1027,7 @@ print type(eval("{'name':'ljq', 'age':24}"))
 **Python字符串运算符**
 下表实例变量a值为字符串"Hello"，b变量值为"Python"：
 表格 11 Python字符串运算符
+
 | 操作符 | 描述                                                         | 实例                                         |
 | ------ | ------------------------------------------------------------ | -------------------------------------------- |
 | +      | 字符串连接                                                   | a + b 输出结果：   HelloPython               |
@@ -907,6 +1040,7 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | %      | 格式字符串                                                   |                                              |
 
 表格 12 python字符串格式化符号
+
 | 符号 | 描述                                 |
 | ---- | ------------------------------------ |
 | %c   | 格式化字符及其ASCII码                |
@@ -924,6 +1058,7 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | %p   | 用十六进制数格式化变量的地址         |
 
 表格 13格式化操作符辅助指令
+
 | 符号  | 功能                                                         |
 | ----- | ------------------------------------------------------------ |
 | *     | 定义宽度或者小数点精度                                       |
@@ -1273,6 +1408,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
 表格 18 不同OS下的第三方模块的缺省安装路径
+
 | **Platform**    | **Standard installation location**          | **Default value**                        | **Notes** |
 | --------------- | ------------------------------------------- | ---------------------------------------- | --------- |
 | Unix (pure)     | *prefix*/lib/python*X.Y*/site-packages      | /usr/local/lib/python*X.Y*/site-packages | (1)       |
@@ -1309,6 +1445,7 @@ pip会自动管理包的信息，使卸载/更新更加方便和容易，使用p
 pip提供了对virtualenv更好的整合。
 #### 3.1.2.1  pip安装：3rd第三方模块
 说明：pip实质是个脚本（Linux下可cat查看），其执行与对应的python解释程序相关，其模块安装后也是放在相应的python解释器的site-packages。
+
 |             | 简介                                                         |                                                   |
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------- |
 | 安装pip工具 | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   $ python -m pip install --upgrade pip |
@@ -1318,6 +1455,7 @@ pip提供了对virtualenv更好的整合。
 | 离线安装    | $ pip install --no-index -f [DST_DIR] [package]              |                                                   |
 备注：1. pypy下pip的下载路径：https://bootstrap.pypa.io/get-pip.py
 2.  pip command
+
 ```SH
 Usage:
   pip <command> [options]
@@ -1336,6 +1474,7 @@ Commands:
   completion                  A helper command used for command completion.
   help                        Show help for commands.
 ```
+
 **# 查看已安装模块**
 ```
 $ pip freeze
@@ -1652,7 +1791,7 @@ setup(name='foo',
 ```
 
 **setup.py文件的使用:**
-```
+```SH
 $ python setup.py build #编译 
 $ python setup.py install    #安装 
  
@@ -2299,19 +2438,19 @@ general:
                        which have names assigned directly to them.
   -m MARKEXPR           only run tests matching given mark expression.
                        example: -m 'mark1 and not mark2'.
-  --markers             show markers (builtin, plugin and per-project ones).
+  --markers             show markers (builtin, plugin and per-project ones)
  ```
 
 **部分参数介绍**
 ​```SH
    # 运行指定 marker 的测试，如smoke冒烟测试
-  pytest -m MARKEXPR
-   
-  # 运行匹配的测试
-  py.test -k stringexpr
-   
-  # 失败时调用 PDB
-  py.test --pdb
+  pytest -m MARKEXPR
+   
+  # 运行匹配的测试
+  py.test -k stringexpr
+   
+  # 失败时调用 PDB
+  py.test --pdb
 ​```
  
  
@@ -2755,11 +2894,13 @@ HTTP
 *  pefile – 一个多平台的用于解析和处理可移植执行体（即PE）文件的模块。
 PSD
 *  psd-tools – 将Adobe Photoshop PSD（即PE）文件读取到Python数据结构。
+
 ### 3.4.4  多线程和并发
 #### 3.4.4.1 多重处理
 *  threading – Python标准库的线程运行。对于I/O密集型任务很有效。对于CPU绑定的任务没用，因为python GIL。
 *  multiprocessing – 标准的Python库运行多进程。
 *  concurrent-futures – concurrent-futures 模块为调用异步执行提供了一个高层次的接口。
+
 #### 3.4.4.2 队列
 *  celery – 基于分布式消息传递的异步任务队列/作业队列。
 *  huey – 小型多线程任务队列。
@@ -2767,6 +2908,7 @@ PSD
 *  RQ – 基于Redis的轻量级任务队列管理器。
 *  simpleq – 一个简单的，可无限扩展，基于Amazon SQS的队列。
 *  python-gearman – Gearman的Python API。
+
 #### 3.4.4.3 云计算
 *  picloud – 云端执行Python代码。
 *  dominoup.com – 云端执行R，Python和matlab代码。
@@ -2788,6 +2930,7 @@ PSD
 *  Ghost.py – 对PyQt的webkit的封装（需要PyQT）。
 *  Spynner – 对PyQt的webkit的封装（需要PyQT）。
 *  Splinter – 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。
+
 ## 3.5           其他Python库
 #### 3.5.1.1 SQLAlchemy
 
@@ -2797,26 +2940,35 @@ dialect+driver://username:password@host:port/database
 
 **MySQL**
 The MySQL dialect uses mysql-python as the default DBAPI. There are many MySQL DBAPIs available, including MySQL-connector-python and OurSQL:
-\# default: pip install mysql-python
+```python
+# default: pip install mysql-python
 engine = create_engine('mysql://scott:tiger@localhost/foo')
-\# mysql-python
+# mysql-python
 engine = create_engine('mysql+mysqldb://scott:tiger@localhost/foo')
-\# MySQL-connector-python
+# MySQL-connector-python
 engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
-\# OurSQL
+# OurSQL
 engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
+```
 
- 
 
 ## 3.6     本章参考
-[1].     关于python中的setup.py  http://python.jobbole.com/82077/
-[2].     python下import 模块使用相对路径 http://www.dai3.com/python-import.html 
-[3].     10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html 
-[4].     Python六大框架对比，Web2py略胜一筹http://www.pythontab.com/html/2014/pythonweb_0106/659.html
-[5].     彻底解决 error: Unable to find vcvarsall.bat http://blog.csdn.net/secretx/article/details/17472107 
-[6].     python常用开发库  http://www.jb51.net/article/78960.htm 
-[7].     fabric https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html#making-connections 
-[8].     Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/ 
+[1].  关于python中的setup.py  http://python.jobbole.com/82077/
+
+[2].  python下import 模块使用相对路径 http://www.dai3.com/python-import.html 
+
+[3].  10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html 
+
+[4].  Python六大框架对比，Web2py略胜一筹http://www.pythontab.com/html/2014/pythonweb_0106/659.html
+
+[5].  彻底解决 error: Unable to find vcvarsall.bat http://blog.csdn.net/secretx/article/details/17472107 
+
+[6].  python常用开发库  http://www.jb51.net/article/78960.htm 
+
+[7].  fabric https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html#making-connections 
+
+[8].  Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/ 
+
 
 # 4       Python高级开发
 ## 4.1     python多版本并存
@@ -2831,15 +2983,17 @@ $ /d/dev/python/pypy2/pypy xxx.py   # pypy 2.5.8
 ### 4.1.1   virtualenv切换python版本
 一个环境下同时运行多个项目，而每个项目依赖于不同的模块。
 为了更清楚地理清模块的依赖关系，为了避免模板版本冲突，故可使用virtualenv来管理每个项目自己独特的环境(包括拷贝独立的python.exe、pip/setuptools)，通过独有环境生成requirements.txt。每个virtaulenv环境将占用约15MB。
-
-\# 1. 在线安装
+1. 在线安装
+```sh
 $ pip install virtualenv
 
-\# 下载离线包
-$ **pip download $package**
-$ **pip install --download ${HOME}/.pip-packages'**
-\# 2. 离线安装
-$ **pip install --no-index --find-links=file://${HOME}/.pip-packages/'**
+# 下载离线包
+$ pip download $package
+$ pip install --download ${HOME}/.pip-packages'
+```
+
+2. 离线安装
+ $ pip install --no-index --find-links=file://${HOME}/.pip-packages/'
 
 **搭建virutalenv环境**
 *  创建环境，会在当前目录下自动生成gameprice-env目录，目录初始大小在30MB左右。若删除此目录，则相当于彻底删除了这个环境。
@@ -2848,16 +3002,18 @@ $ **pip install --no-index --find-links=file://${HOME}/.pip-packages/'**
 *  搭建完成后如果移动环境目录，则需要修改bin目录里的activate和pip里面的环境变量，这样才能保证正常找到环境里python路径。
 *  *virtualenv不能混用，python2和python3都需要安装自己的virtualenv。*
 
-\# -p 指定解释器,如下目录venv使用python2.7
+```sh
+# -p 指定解释器,如下目录venv使用python2.7
 $ virtualenv -p /usr/bin/python2.7 --clear gameprice-env
 
-\# 环境初始化时的目录结构
+# 环境初始化时的目录结构
  (gameprice-env) denny@denny-ubuntu:~/venv/gameprice-env$ ls
 bin  include  lib  loca*  pip-selfcheck.json
+```
 
-\# 启动、停止virtaulenv 
-\# (LINUX环境）
+**启动、停止virtaulenv**
 ```shell
+# (LINUX环境）
 $ source bin/activate
 (venv)$ deactivate
 # (WINDOWS环境）
@@ -2910,7 +3066,7 @@ Options:
 高级篇：virtualenvwrapper
 
 virtualenvwrapper管理虚拟环境，可将虚拟环境都安装在一个目录。
-```
+```sh
 $ pip install virtualenvwrapper
 $ mkdir $HOME/.virtualenvs
 # 修改.bashrc
@@ -2932,6 +3088,7 @@ Python 3.6.5
 3
 ```
 表格 24 python2和python3的比较列表
+
 |            | python 2.x                                                   | python 3                                                     |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | print      | print表达式                                                  | print函数，强制使用()                                        |
@@ -2947,6 +3104,7 @@ Python 3.6.5
 | 搜索路径   | 默认先当前目录，再系统路径sys.path                           | 系统路径之外的要显式指明路径，如当前目录加.                  |
 
 表格 25 urllib/urlib2在python2和python3的变化
+
 |           | python 2                  | python 3                                                     |
 | --------- | ------------------------- | ------------------------------------------------------------ |
 | urllib    |                           | 功能调整为5个模块：request   error parse                     |
@@ -2997,6 +3155,7 @@ except ImportError:
 
 ## 4.2     python安全编码
 表格 26  已知不安全的库列表
+
 | 库名           | 解决方案    | 库名            | 解决方案 |
 | -------------- | ----------- | --------------- | -------- |
 | ast            |             | multiprocessing |          |
@@ -3045,6 +3204,7 @@ n  http密集型：多线程>多进程>line，推荐多线程。
 **说明**：Python的多线程处理计算密集型(CPU Bound)任务是一个众所周知的大坑，比如多线程解析html文件。这时最好用多进程分别做解析任务，然后将解析好的文件收集起来。
 
 表格 27 python进程和线程比较列表
+
 |          | 进程                                                         | 线程                                        |
 | -------- | ------------------------------------------------------------ | ------------------------------------------- |
 | 实现     | multiprocessing.Process                                      | thread 或者   threading                     |
@@ -3056,6 +3216,7 @@ n  http密集型：多线程>多进程>line，推荐多线程。
 3. 协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
 
 表格 28 gunicorn工作方式比较列表
+
 | 工作方式 | IO模式      | 备注          |
 | -------- | ----------- | ------------- |
 | sync     | 同步等待    | 缺省模式      |
@@ -3282,6 +3443,7 @@ gevent.joinall([      # 创建线程并行执行程序，碰到IO就切换
 **WSGI**: Web Server Gateway Interface（Web服务器网关接口）,是一种通信协议，它不是服务器、python模块、框架、API或者任何软件，只是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）通信的规范。wsgi server 他的意义在于 让我们专心去写web application，而不用专注于网络底层实现。
 
 表格 30 gunicorn和uwsgi比较列表
+
 |            | gunicorn                                       | uwsgi/uWSGI                                                  |
 | ---------- | ---------------------------------------------- | ------------------------------------------------------------ |
 | 简介       | master+N worker。缺省同步模式(worker select）  | 2个端口。socker fd监听。使用uwsgi避免了重复解析http协议，处理效率更高。 |
@@ -3471,14 +3633,23 @@ https://github.com/LeoHuang2015/qqloginjs
 
 ## 4.7     本章参考
 [1].     python2和python3的区别http://www.runoob.com/python/python-2x-3x.html 
+
 [2].     Python 安全编码指南 http://python.jobbole.com/82746/
+
 [3].     使用python实现可重入的公平读写锁 http://blog.csdn.net/vcbin/article/details/51181121 
+
 [4].     Python多进程通信Queue、Pipe、Value、Array实例 http://www.jb51.net/article/57666.htm 
+
 [5].     gunicorn  http://gunicorn.org/
+
 [6].     http://gunicorn.readthedocs.io/en/latest/ 
+
 [7].     Python协程深入理解https://www.cnblogs.com/zhaof/p/7631851.html 
+
 [8].     python3之协程 https://www.cnblogs.com/zhangxinqi/p/8337207.html
+
 [9].     gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e 
+
 [10].    深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/) 
 
 [11] Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
@@ -3611,6 +3782,7 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。 
 
 表格 32源代码主要目录结构
+
 | 目录    | 简述                                                |
 | ------- | --------------------------------------------------- |
 | Demo    | python的示例程序                                    |
@@ -3628,6 +3800,7 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 备注：
 
 表格 33 cpython中对象的C和python级别对照
+
 | 源码中C对象      | Python对象                | 用途                                                         |
 | ---------------- | ------------------------- | ------------------------------------------------------------ |
 | PyObject         | object                    | 对象基类。是所有python对象的基类。                           |
@@ -3646,6 +3819,7 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 备注：可用type函数或者xxx.__class__来查看对象类型。__bases__用来查看父类类型。
 
 表格 34 python内置对象组成
+
 | 对象           | 成员                                           | 备注 |
 | -------------- | ---------------------------------------------- | ---- |
 | PyObject       | int refConut;   type                           |      |
@@ -3755,6 +3929,7 @@ typedef struct {
 
 
 表格 35 PyCodeObject各个域的含义
+
 | co_argcount    | 未知参数个数                   |
 | -------------- | ------------------------------ |
 | co_nlocals     | 局部变量个数                   |

@@ -9,31 +9,57 @@
 # 目录
  
 [目录... 1](#_Toc492291440)
+
 [1       概述... 2](#_Toc492291441)
+
 [1.1        C语言概述... 2](#_Toc492291442)
+
 [1.1.1         C语言关键字... 2](#_Toc492291443)
+
 [1.2        C++语言概述... 3](#_Toc492291444)
+
 [1.2.1         C++关键字... 3](#_Toc492291445)
+
 [1.3        本章参考... 4](#_Toc492291446)
+
 [2       C语言基础... 4](#_Toc492291447)
+
 [2.1        C数据类型... 4](#_Toc492291448)
+
 [2.1.1         typedef 5](#_Toc492291449)
+
 [2.1.2         强制类型转换... 6](#_Toc492291450)
+
 [2.2        C预处理器... 6](#_Toc492291451)
+
 [2.3        变量与变量作用域... 7](#_Toc492291452)
+
 [2.3.1         C 存储类... 8](#_Toc492291453)
+
 [2.3.2         位域... 8](#_Toc492291454)
+
 [2.4        指针、函数指针与回调函数... 9](#_Toc492291455)
+
 [2.5        本章参考... 9](#_Toc492291456)
+
 [3       C++语言教程... 10](#_Toc492291457)
+
 [3.1        操作符重载... 10](#_Toc492291458)
+
 [3.2        C++模板... 10](#_Toc492291459)
+
 [3.3        异常处理... 10](#_Toc492291460)
+
 [3.4        本章参考... 11](#_Toc492291461)
+
 [4       C++高级开发... 11](#_Toc492291462)
+
 [4.1        STL函数库... 11](#_Toc492291463)
+
 [4.2        本章参考... 11](#_Toc492291464)
+
 [5       参考资料... 11](#_Toc492291465)
+
  
 
  
@@ -275,11 +301,18 @@ try
 ## 4.2     本章参考
  
 # 5       参考资料
-[1].     C语言教程 http://www.runoob.com/cprogramming/c-tutorial.html
-[2].     C++语言教程 http://www.runoob.com/cplusplus/cpp-tutorial.html
-[3].     [C++ Programming Language Tutorials](http://www.cs.wustl.edu/~schmidt/C++/) − C++ 编程语言教程。
-[4].     [C++ Programming](http://en.wikibooks.org/wiki/C++_Programming) − 这本书涵盖了 C++ 语言编程、软件交互设计、C++ 语言的现实生活应用。
-[5].     [C++ FAQ](http://www.parashift.com/c++-faq-lite/index.html#table-of-contents) − C++ 常见问题
-[6].     [Free Country](http://www.thefreecountry.com/sourcecode/cpp.shtml) − Free Country 提供了免费的 C++ 源代码和 C++ 库，这些源代码和库涵盖了压缩、存档、游戏编程、标准模板库和 GUI 编程等 C++ 编程领域。
-[7].     [C and C++ Users Group](http://www.hal9k.com/cug/) − C 和 C++ 的用户团体提供了免费的涵盖各种编程领域 C++ 项目的源代码，包括 AI、动画、编译器、数据库、调试、加密、游戏、图形、GUI、语言工具、系统编程等。
+[1]: C语言教程 http://www.runoob.com/cprogramming/c-tutorial.html
+
+[2]: C++语言教程 http://www.runoob.com/cplusplus/cpp-tutorial.html
+
+[3]: [C++ Programming Language Tutorials](http://www.cs.wustl.edu/~schmidt/C++/) − C++ 编程语言教程。
+
+[4]: [C++ Programming](http://en.wikibooks.org/wiki/C++_Programming) − 这本书涵盖了 C++ 语言编程、软件交互设计、C++ 语言的现实生活应用。
+
+[5]: [C++ FAQ](http://www.parashift.com/c++-faq-lite/index.html#table-of-contents) − C++ 常见问题
+
+[6]: [Free Country](http://www.thefreecountry.com/sourcecode/cpp.shtml) − Free Country 提供了免费的 C++ 源代码和 C++ 库，这些源代码和库涵盖了压缩、存档、游戏编程、标准模板库和 GUI 编程等 C++ 编程领域。
+
+[7]: [C and C++ Users Group](http://www.hal9k.com/cug/) − C 和 C++ 的用户团体提供了免费的涵盖各种编程领域 C++ 项目的源代码，包括 AI、动画、编译器、数据库、调试、加密、游戏、图形、GUI、语言工具、系统编程等。
+
  
