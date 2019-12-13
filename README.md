@@ -9,6 +9,7 @@ Personal Technical Share, 我的个人技术分享
 
 typora支持的md格式与传统md格式的差别
 1. md格式表格头前要有空行，typora没作要求。
+2. 目录和参考链接也要保持显式换行。
 
 **写作技巧**
 

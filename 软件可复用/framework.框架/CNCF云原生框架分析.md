@@ -137,7 +137,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 |      | Helm        | Kubernetes的包管理器。                                       |                               |
 |      | Etcd        | 可靠的分布式键值存储项目，可用于存储分布式系统中关键的数据。 | 分布式键值存储                |
 |      | CRI-O       | 遵守开放容器倡议(OCI)的情况下实现了Kubernetes运行时接口。    | 针对K8s的轻量运行时           |
-|      |             |                                                              |                               |
+| 2019 | KubeEdge    | 3月，华为云开源智能边缘项目KubeEdge加入CNCF社区，成为CNCF在智能边缘领域的首个正式项目。 |                               |
 
 备注：
 
@@ -427,7 +427,7 @@ Commands:
     import    Create a new filesystem image from the contents of a tarball
     info      Display system-wide information
     inspect   Return low-level information on a container or image
-    kil*      Kill a running container
+    kill      Kill a running container
     load      Load an image from a tar archive
     logi*     Register or log in to a Docker registry server
     logout    Log out from a Docker registry server
@@ -435,13 +435,13 @@ Commands:
     port      Lookup the public-facing port that is NAT-ed to PRIVATE_PORT
     pause     Pause all processes within a container
     ps        List containers  查看正在运行镜像实例
-    pul*      Pull an image or a repository from a Docker registry server 拉取镜像
+    pull      Pull an image or a repository from a Docker registry server 拉取镜像
     push      Push an image or a repository to a Docker registry server 上传镜像
     rename    Rename an existing container
     restart   Restart a running container
     rm        Remove one or more containers
     rmi       Remove one or more images
-    ru*       Run a command in a new container 启动容器
+    run       Run a command in a new container 启动容器
     save      Save an image to a tar archive
     search    Search for an image on the Docker Hub
     start     Start a stopped container
@@ -450,7 +450,7 @@ Commands:
     tag       Tag an image into a repository
     top       Lookup the running processes of a container
     unpause   Unpause a paused container
-    versio*   Show the Docker version information
+    version   Show the Docker version information
     wait      Block until a container stops, then print its exit code
 
 Run 'docker COMMAND --help' for more information on a command.
@@ -662,7 +662,7 @@ Options:
   --verbose                   Show more output
   --log-level LEVE*           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
-  -v, --versio*               Print version and exit
+  -v, --version               Print version and exit
   -H, --host HOST             Daemon socket to connect to
 
   --tls                       Use TLS; implied by --tlsverify
@@ -682,28 +682,28 @@ Commands:
   bundle             Generate a Docker bundle from the Compose file
   config             Validate and view the Compose file
   create             Create services
-  dow*               Stop and remove containers, networks, images, and volumes
+  down               Stop and remove containers, networks, images, and volumes
   events             Receive real time events from containers
   exec               Execute a command in a running container
   help               Get help on a command
   images             List images
-  kil*               Kill containers
+  kill               Kill containers
   logs               View output from containers
   pause              Pause services
   port               Print the public port for a port binding
   ps                 List containers
-  pul*               Pull service images
+  pull               Pull service images
   push               Push service images
   restart            Restart services
   rm                 Remove stopped containers
-  ru*                Run a one-off command
+  run                Run a one-off command
   scale              Set number of containers for a service
   start              Start services
   stop               Stop services
   top                Display the running processes
   unpause            Unpause services
   up                 Create and start containers
-  versio*            Show the Docker-Compose version information
+  version            Show the Docker-Compose version information
 ```
 
 配置文件：docker-compose.yml 或者 xxx.yml

@@ -21,70 +21,135 @@
 # 目录
 ```
 [目录... 1](#_Toc516381252)
+
 [1.      Java概述... 4](#_Toc516381253)
+
 [1.1          Java历史... 4](#_Toc516381254)
+
 [1.1.1         JDK. 5](#_Toc516381255)
+
 [1.1.2         Java平台... 7](#_Toc516381256)
+
 [1.2          Java SE Component. 8](#_Toc516381257)
+
 [1.3          本章参考... 10](#_Toc516381258)
+
 [2       Java语言教程... 10](#_Toc516381259)
+
 [2.1          Java的面向对象OO.. 11](#_Toc516381260)
+
 [2.2          Java的数据结构... 12](#_Toc516381261)
+
 [2.3          本章参考... 14](#_Toc516381262)
+
 [3       Java开发环境... 14](#_Toc516381263)
+
 [3.1          Java开发工具... 14](#_Toc516381264)
+
 [3.1.1         Java的环境变量... 15](#_Toc516381265)
+
 [3.1.2         WAR和JAR打包... 16](#_Toc516381266)
+
 [3.2          Tomcat使用手册... 17](#_Toc516381267)
+
 [3.2.1         简介... 17](#_Toc516381268)
+
 [3.2.2         Tomcat框架... 18](#_Toc516381269)
+
 [3.2.3         启动与程序环境... 19](#_Toc516381270)
+
 [3.2.4         应用程序布署... 19](#_Toc516381271)
+
 [3.2.5         配置文件... 20](#_Toc516381272)
+
 [3.2.6         Tomcat性能调优... 21](#_Toc516381273)
+
 [3.3          本章参考... 22](#_Toc516381274)
+
 [4       Java高级开发... 22](#_Toc516381275)
+
 [4.1          多线程... 22](#_Toc516381276)
+
 [4.2          Servlet. 22](#_Toc516381277)
+
 [4.2.1         Servlet的开发... 22](#_Toc516381278)
+
 [4.3          GUI开发... 24](#_Toc516381279)
+
 [4.4          本章参考... 24](#_Toc516381280)
+
 [5       Java FAQ.. 24](#_Toc516381281)
+
 [5.1          Java新手问题... 24](#_Toc516381282)
+
 [5.2          Java常见调试问题... 25](#_Toc516381283)
+
 [6       JVM原理... 26](#_Toc516381284)
+
 [6.1         JVM的体系结构... 28](#_Toc516381285)
+
 [6.1.1         Java的类加载过程... 29](#_Toc516381286)
+
 [6.1.2         JVM的运行时数据区... 31](#_Toc516381287)
+
 [6.1.3         JVM堆内存分布... 32](#_Toc516381288)
+
 [6.2          JVM的垃圾回收(GC) 32](#_Toc516381289)
+
 [6.3          JVM性能调优... 35](#_Toc516381290)
+
 [6.3.1         JVM参数... 35](#_Toc516381291)
+
 [6.3.2         JVM内存查看工具... 36](#_Toc516381292)
+
 [6.4          本章参考... 37](#_Toc516381293)
+
 [7       Java源码分析... 37](#_Toc516381294)
+
 [Reference. 37](#_Toc516381295)
+
 ```
 
+
+
 表目录
+
 [表格 1 Java history. 4](#_Toc516381296)
+
 [表格 2 JDK版本列表... 5](#_Toc516381297)
+
 [表格 3 J2SE component 8](#_Toc516381298)
+
 [表格 4 J2SE基本组件说明... 9](#_Toc516381299)
+
 [表格 6 抽象类和接口的区别列表... 11](#_Toc516381300)
+
 [表格 5 Java常用工具列表... 14](#_Toc516381301)
+
 [表格7 Java开发工具列表... 14](#_Toc516381302)
+
 [表格8tomcat版本... 17](#_Toc516381303)
+
 [表格9 tomcat配置文件列表... 20](#_Toc516381304)
 
+
+
 图目录
+
 [图 1 JDK结构图__ 5](#_Toc516381305)
+
 [图2 Java集合框架(Collection)体系图__ 13](#_Toc516381306)
+
 [图3 tomcat framework_ 18](#_Toc516381307)
+
 [图4JVM架构__ 28](#_Toc516381308)
+
 [图5JVM的内部结构图__ 29](#_Toc516381309)
+
 [图6JVM运行时数据区的垃圾回收比例统计(IBM) 31](#_Toc516381310)
+
 [图 7 JVM堆内存划分__ 32](#_Toc516381311)
+
 [图8各种垃圾收集器__ 34](#_Toc516381312)
 
 
@@ -236,8 +301,8 @@ Java重写(Override)与重载(Overload)
 *  抽象类，抽象类除了不能实例化对象之外，类的其它功能依然存在，成员变量、成员方法和构造方法的访问方式和普通类一样。Abstract关键字同样可以用来声明抽象方法，抽象方法只包含一个方法名，而没有方法体（抽象类中不一定包含抽象方法，但是有抽象方法的类必定是抽象类）。
 *  接口（英文：Interface），在Java编程语言中是一个抽象类型，是抽象方法的集合，接口通常以interface来声明。一个类通过继承接口的方式，从而来继承接口的抽象方法。接口不是类。类描述对象的属性和方法。接口则包含类要实现的方法。
 小结：抽象类和接口都不能实例化，两者都要由子类的extends继承来实现。
-表格 5 抽象类和接口的区别列表
 
+表格 5 抽象类和接口的区别列表
 
 |            | Abstract   class                                             | Interface                                                    |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -364,20 +429,24 @@ $ apt-get install oracle-java8-installer
 openjdk 9要求64位机器。
 
 ### 3.1.1  Java的环境变量
+```INI
 Java_HOME=/usr/lib/jvm/Java-6-sun
 CLASSPATH=.:$Java_HOME/lib
 PATH=$Java_HOME/bin:$PATH
 exportJava_HOMECLASSPATHPATH
+```
 备注：在classpath未设置好的情况下，编码和运行需指定classpath,示例如下：
-$Javac-classpath./weka.jar;./MessageClassifier.Java
+`$ javac-classpath./weka.jar;./MessageClassifier.Java`
 
 //检查java命令和JAVA_HOME环境变量，以下命令在ubuntu14.04下执行。
+```sh
 $java-version
 javaversion"1.7.0_121"
-OpenJDKRuntimeEnvironment(IcedTea2.6.8)(7u121-2.6.8-1ubuntu0.14.04.1)
-OpenJDK64-BitServerVM(build24.121-b00,mixedmode)
-$echo$JAVA_HOME
+OpenJDK Runtime Environment(IcedTea2.6.8)(7u121-2.6.8-1ubuntu0.14.04.1)
+OpenJDK 64-Bit ServerVM(build24.121-b00, mixedmode)
+$echo $JAVA_HOME
 /usr/lib/jvm/java-7-openjdk-i386
+```
 
 ### 3.1.2  WAR和JAR打包
 Java Servlet规定定义了WAR(Web Application Archive)的文件格式及结构。
@@ -479,6 +548,7 @@ lrwxrwxrwx1 root  root 172010-05-0919:03 logs->../../log/tomcat6
 drwxrwxr-x4 root tomcat640962010-05-0921:20 webapps
 lrwxrwxrwx1 root  root 192010-05-0919:03 work->../../cache/tomcat6 
 ```
+
 | $CATALINA_HOME下目录 | 详细说明                                                 |
 | -------------------- | ------------------------------------------------------------ |
 | conf                 | 配置文件，详情参考上节                                       |
@@ -902,7 +972,6 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 老生代[old generation]: 存储着长寿的对象
 永久代[permanent generation]: 存储需要伴随整个JVM生命周期的对象 比如已加载的对象的类定义或者String对象内部Cache
 
-
 | 参数                                                | 参数详述                                                     | 备注                   |
 | --------------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
 | -Xms 和    -Xmx                                     | -Xms是 -XX:InitialHeapSize的简写 表示的是初始化堆的大小   -Xmx 是 -XX:MaxHeapSize的简写 表示的是设置堆的最大大小 | 一般这两者值设置相同。 |
@@ -914,6 +983,7 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 
 ### 6.3.2  JVM内存查看工具
+
 | 工具     | 简介                                                         | 备注                                            |
 | -------- | ------------------------------------------------------------ | ----------------------------------------------- |
 | jps      | 查看java进程，常用参数   -m查看main方法名及参数；   -v查看JVM参数   -l列出main方法包全称。 | 很适合用来查看Java进程，再根据进程PID详细定位。 |
@@ -954,7 +1024,10 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 *  《HotSpot实战》 陈涛 人民邮电出版社 2014
 
 参考资料
-[1].     [Java资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-java-cn/)https://github.com/jobbole/awesome-java-cn
-[2].     EJB的体系结构http://www.uml.org.cn/j2ee/2009112011.asp
-[3].     我的java问题排查工具单https://yq.aliyun.com/articles/69520?spm=5176.100238.goodcont.99.Mm6xRL
-[4].     Java实例http://www.runoob.com/java/java-examples.html
+[1].  [Java资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-java-cn/)https://github.com/jobbole/awesome-java-cn)
+
+[2].  EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp
+
+[3].  我的java问题排查工具单 https://yq.aliyun.com/articles/69520?spm=5176.100238.goodcont.99.Mm6xRL
+
+[4].  Java实例 http://www.runoob.com/java/java-examples.html

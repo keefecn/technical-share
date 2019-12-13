@@ -6,8 +6,9 @@
 | 4    | 2016-10-24 | 增加云应用章节，大幅更新内容。 | 同上   |        |
 | 5    | 2017-2-25  | 增加云架构实例章节             | 同上   |        |
 | 6    | 2018-7-18  | 调整目录结构，更新云服务章节   | 同上   |        |
-|      |            |                                |        |        |
-|      |            |                                |        |        |
+| 7    | 2019-12-14           | 更新头部云服务提供商相关内容                               |   同上     |        |
+
+---
 
  
 
@@ -159,9 +160,9 @@
 
 [图 10 SAE安全架构... 18](#_Toc519720738)
 
-[图 11 全球公有云(LAAS)服务市场份额2017H1（IDC) 20](#_Toc519720739)
+[图 11 全球公有云(IAAS)服务市场份额2017H1（IDC) 20](#_Toc519720739)
 
-[图 12 中国公有云(LAAS)服务市场份额2017H1（IDC) 21](#_Toc519720740)
+[图 12 中国公有云(IAAS)服务市场份额2017H1（IDC) 21](#_Toc519720740)
 
 [图 13 云存储系统结构模型... 26](#_Toc519720741)
 
@@ -203,11 +204,11 @@
 
  
 
-
+---
 
  
 
-# 1                                     概述
+# 1   概述
 
 **定义**
 
@@ -239,25 +240,51 @@ management effort or service provider interaction.
 
  
 
+2009年年初，也就是金融危机最严重的时候，美国Salesforce公司公布了2008财年年度报告，数据显示公司云服务收入超过了10亿美元。从此很多公司开始进入云计算业务。
+
+
+
 ## 1.1  云计算的演进
 
- ![image-20191201164836092](../media/ai/cloud_001.png)
+ ![image-20191201164836092](../media/cloud/cloud_001.png)
 
 图 1 云计算的演进图
 
  
 
-## 1.2  云计算的服务和部署模型
+![公有云发展史](E:\project\technical-share\media\cloud\cloud_009.png)
+
+图  公有云发展史（2005~2014）
+
+
+
+## 1.2  云计算模型
 
 根据NIST的定义，云计算分为：
 *  三种服务模型：SaaS, PaaS, IaaS
-*  四种部署模型：私有云、社区云、公有云、混合云
+*  三种部署模型：私有云、公有云、混合云
 
  
 
- ![image-20191201164903786](../media/ai/cloud_002.png)
+ ![image-20191201164903786](../media/cloud/cloud_002.png)
 
 图 2 SPI云服务模型
+
+
+
+### 服务模型
+
+
+
+![cloud_service_mode_001.jpg](../media/cloud/cloud_service_mode_001.jpg)
+
+图 云计算服务模型-典型云服务
+
+
+
+### 部署模型
+
+
 
  表格 三种部署云的比较
 
@@ -271,7 +298,7 @@ management effort or service provider interaction.
 
 ## 1.3  云计算的参考体系结构
 
- ![image-20191201164919331](../media/ai/cloud_003.png)
+ ![image-20191201164919331](../media/cloud/cloud_003.png)
 
 图 3 云计算参考体系结构
 
@@ -287,7 +314,7 @@ management effort or service provider interaction.
 | Cloud  Broker   | An  entity that manages the use, performance and delivery of cloud services, and  negotiates relationships between Cloud Providers and Cloud Consumers. | 云经纪人 |
 | Cloud  Carrier  | An  intermediary that provides connectivity and transport of cloud services from  Cloud Providers to Cloud Consumers. 如网络运营网 | 云载体   |
 
- ![image-20191201164935647](../media/ai/cloud_004.png)
+ ![image-20191201164935647](../media/cloud/cloud_004.png)
 
 图 4 云计算技术层次
 
@@ -322,14 +349,12 @@ management effort or service provider interaction.
 
 ## 2.1  简介
 
- ![image-20191201164951627](../media/ai/cloud_005.png)
-
- 
+ ![image-20191201164951627](../media/cloud/cloud_005.png)
 
 图 5 云计算产业图
 
 说明：
-*  laaS: 如云存储，各个提供相片文档存储的企业属于此范围。
+*  IAAS: 如云存储，各个提供相片文档存储的企业属于此范围。
 *  PaaS: google的appengine提供了开发平台, 百度的框计算。
 *  SaaS: 如瑞星云安全，阿里云软件等。
 
@@ -337,55 +362,64 @@ management effort or service provider interaction.
 
 云计算受到国内外高度重视，业界纷纷推出不同类型(IaaS, PaaS, SaaS)的云平台。
 
-**国外**
-*  Amazon AWSEC2/S3
-*  GoogleApp Engine/Compute
-*  Engine/Cloud Storage
-*  微软Windows Azure
-*  IBMSoftLayer
-*  苹果iCloud 等
+2009年始，硬件厂商IBM、惠普、思科、富士通选择OpenStack的研发路线，最终硬件厂商的云计划宣告失败。 2016年惠普宣布关闭公有云平台Helion转向混合云，2017年3月，思科关闭公有云平台Inter-cloud转向混合云。
 
- 
 
-**国内**
-*  阿里云
-*  百度云
-*  腾讯QCloud
-*  浪潮云海V3.0
-*  华为FusionCloud
-*  奇虎360 云盘云主机等
 
- 
-
- ![image-20191201165007350](../media/ai/cloud_006.png)
+ ![image-20191201165007350](../media/cloud/cloud_006.png)
 
 图 6 国内外各云服务提供商
 
- 
 
- 
+
 
 ## 2.2  国外云服务提供商
 
- ![image-20191201165022531](../media/ai/cloud_007.png)
+| 公司       | 研发进展                                                     |
+| ---------- | ------------------------------------------------------------ |
+| Amazon     | 向用户提供基于Amazon万亿级计算业务架构的云计算服务提供商。2019年占据全球48%的云计算市场。 |
+| Google     | 推出自主研发的万亿级数据中心架构。                           |
+| 微软       | 推出Windows Azure产品。                                      |
+| IBM        | 推出Hulk和Main集群NAS硬件及软件产品。                        |
+| Dell/EMC   | 推出Hulk和Main集群NAS硬件及软件产品。2015年10月，EMC被Dell收购。 |
+| Oracle/Sun | 推出ZFS文件系统、低端x4500存储服务器和开源Solaris 10软件。   |
+| NetApp     | 专门针对 NAS和AN产品的操作系统ONtap GX中提供了集群技术。     |
+| 惠普       | 联播英特尔、雅虎推出云计算试验台。                           |
+| ISilon     | 推出目前全球最大的NAS集群，此集群有100个节点，理论上支持2.3PB存储。 |
 
-备注：2015.10，Dell已收购EMC。
+
 
 ### 2.2.1  Amazon~ AWS
 
-用 Amazon Web Services 进行云计算
+https://aws.amazon.com/
 
-http://www.ibm.com/developerworks/cn/web/ar-cloudaws1/ 
+http://www.amazonaws.cn/  ->  https://aws.amazon.com/cn
 
-http://www.amazonaws.cn/ 
+ Amazon Web Services (AWS) 是全球最全面、应用最广泛的云平台，从全球数据中心提供超过 175 项功能齐全的服务。数百万客户（包括增长最快速的初创公司、最大型企业和主要的政府机构）都在使用 AWS 来降低成本、提高敏捷性并加速创新。
 
- 
+
+
+![AWS产品体系](E:\project\technical-share\media\cloud\cloud_aws_001.png)
+
+
+
+AWS产品服务 
+
+* 弹性存储：Simple Storage Service(S3)、块存储EBS、对象存储
+
+* 服务器租用与托管服务Elastic Compute( EC) 。
+
+* 数据库服务：Amazon Aurora(RDS)、DynomoDB(NoSQL)、ElasticCache(Cache)
+
+* Lambda：无服务器，事件驱动的计算服务
+
+  
 
 ### 2.2.2  Microsoft~Azure
 
-**微软云架构**
+https://docs.azure.cn/zh-cn/
 
- ![image-20191201165039398](../media/ai/cloud_ms_001.png)
+ ![image-20191201165039398](../media/cloud/cloud_ms_001.png)
 
 图 7  MS云计算架构
 
@@ -395,21 +429,29 @@ http://www.amazonaws.cn/
 
 私有云：部署在客户的数据中心内部，基于客户个性化的性能和成本要求、面向服务的内部应用环境。这个云平台基于成熟的Windows Server和System Center等系列产品，并且能够与现有应用程序兼容。
 
- 
 
-**Windows live**
 
- 面对Google的挑战，微软试图以Windows Live为基础，联结起数以亿计的Windows用户，并向他们提供云计算，在线存储是微软迈出的关键一步，比尔.盖茨在2007年夏天说：“当你想到存储，就会想到Windows Live。”
-*   Find and Discover Information（个人信息获取），如：Windows Live Search(个
+**Windows Azure**
+
+Windows Azure是微软基于[云计算](https://baike.baidu.com/item/云计算/9969353)的操作系统，现在更名为“Microsoft Azure”，和Azure Services Platform一样，是微软“软件和服务”技术的名称。Windows Azure的主要目标是为开发者提供一个平台，帮助开发可运行在[云服务器](https://baike.baidu.com/item/云服务器/6392664)、[数据中心](https://baike.baidu.com/item/数据中心/967340)、Web和PC上的应用程序。
+
+![cloud_azure_001.png](../media/cloud/cloud_azure_001.png)
+
+
+
+Windows live**
+
+ 面对Google的挑战，微软试图以Windows Live为基础，联结起数以亿计的Windows用户，并向他们提供云计算，在线存储是微软迈出的关键一步，比尔.盖茨在2007年夏天说：“当你想到存储，就会想到Windows Live。”
+*  Find and Discover Information（个人信息获取），如：Windows Live Search(个
 *  性化搜索)
-*   Enhance and Deepen Relationship（个人信息管理），如：Windows Live Mail(邮
+*  Enhance and Deepen Relationship（个人信息管理），如：Windows Live Mail(邮
 *  件) ，Windows Live Messenger(即时通讯)
-*   Explore and Find New Interest（社会化网络），如：Windows Live Spaces(Blog)
-*   Protection and Performance（安全与维护），如：Windows Live Safety Center(在
+*  Explore and Find New Interest（社会化网络），如：Windows Live Spaces(Blog)
+*  Protection and Performance（安全与维护），如：Windows Live Safety Center(在
 *  线安全中心)
-*   Microsoft Office Live（中小企业在线发布和管理系统），如：Microsoft Office
+*  Microsoft Office Live（中小企业在线发布和管理系统），如：Microsoft Office
 *  Live Basics(类似于企业Blog)
-*   Xbox Live（游戏在线服务），如：Xbox Live Arcade on Xbox 360(游戏的在线下
+*  Xbox Live（游戏在线服务），如：Xbox Live Arcade on Xbox 360(游戏的在线下
 
 载及购买服务)
 
@@ -417,28 +459,28 @@ http://www.amazonaws.cn/
 
 **微软MSN服务将整合到Skype的网络**
 
- 微软今日（2012年11月7日）正式宣布MSN服务将在2013年第一季度停止使用（中国除外），整合到Skype的网络中。微软想要对Messenger 用户表明的价值主张如下：
-*   Skype能支持更加广泛的设备，其中包括iPad和Android平板。
-*   Skype能将IM(即时通信）、视频以及固网和移动通话服务合为一体。
-*   Skype能提供手机视频通话服务。
-*   Skype能提供Facebook好友视频通话服务。
-*   Skype能提供群视频通话服务。
+微软今日（2012年11月7日）正式宣布MSN服务将在2013年第一季度停止使用（中国除外），整合到Skype的网络中。微软想要对Messenger 用户表明的价值主张如下：
+*  Skype能支持更加广泛的设备，其中包括iPad和Android平板。
+*  Skype能将IM(即时通信）、视频以及固网和移动通话服务合为一体。
+*  Skype能提供手机视频通话服务。
+*  Skype能提供Facebook好友视频通话服务。
+*  Skype能提供群视频通话服务。
+
+
 
 ### 2.2.3  Google
-
- 
 
 Google和微软之间日益激烈的对立将是一场史诗般的企业战争，将对两家公司的成功和发展产生重要影响，并规定着消费者和企业如何工作、购物、通讯，以及“过他们的数字生活”。
 
 Google认为这一切将发生在遥远的数据中心中的服务器，用户可以通过许多有线和无线设备访问这些服务，这就是所谓的“云计算”（cloud computing）；微软也认为未来在于Web，但它的重心仍然是其桌面PC软件。而这正是它们的冲突之源。
 
-施密特认为：“当今年早些时候Google推出一款名为Google Apps的软件包时，没有人认为微软会被彻底打败。而[Google Apps](javascript:linkredwin('Google Apps');)只 不过是Google通过互联网向用户提供更大计算能力计划的一个步骤。他表示，对于大多数人而言，计算机是复杂而不可靠的。如果Google能够通过 Web提供计算服务，将是人们计算体验的真正改进。随着互联网连接速度的提高和互联网软件的改进，“云计算”能够完成的任务会越来越多。90%计算任务都 能够通过“云计算”技术完成，其中包括几乎所有的企业计算任务和白领员工的任务”。 
+施密特认为：“当今年早些时候Google推出一款名为Google Apps的软件包时，没有人认为微软会被彻底打败。而Google Apps只 不过是Google通过互联网向用户提供更大计算能力计划的一个步骤。他表示，对于大多数人而言，计算机是复杂而不可靠的。如果Google能够通过 Web提供计算服务，将是人们计算体验的真正改进。随着互联网连接速度的提高和互联网软件的改进，“云计算”能够完成的任务会越来越多。90%计算任务都 能够通过“云计算”技术完成，其中包括几乎所有的企业计算任务和白领员工的任务”。 
 
-施密特相信，无论他如何努力地避免激怒微软，Google与微软的摩擦是不可避免的。当然了，微软也不会停滞不前，它已经在搜索和互联网广告领域投资数十亿美元，以赶超Google，但迄今为止并没有获得成功。它们还在其它一些领域相互争斗，例如Web地图、[在线视频](javascript:linkredwin('在线视频');)、手机软件。
+施密特相信，无论他如何努力地避免激怒微软，Google与微软的摩擦是不可避免的。当然了，微软也不会停滞不前，它已经在搜索和互联网广告领域投资数十亿美元，以赶超Google，但迄今为止并没有获得成功。它们还在其它一些领域相互争斗，例如Web地图、手机软件。
 
 对于微软而言，施密特的言论无异于是战书。在计算机上安装的传统软件是微软的根本，其官员认为90%的计算任务将转移到基于Web的“云计算”环境中的想法是一种幻想。
 
-微软企业部门总裁[莱科斯](javascript:linkredwin('莱科斯');)表示，拿目前的市场与未来的市场进行比较是错误的。在莱科斯看来，Google的挑战在理下，对微软的攻击被误导了，也是自大的。Google关注的是自己的利益，它是为了削弱微软，而不是满足客户的需求。 
+微软企业部门总裁莱科斯表示，拿目前的市场与未来的市场进行比较是错误的。在莱科斯看来，Google的挑战在理下，对微软的攻击被误导了，也是自大的。Google关注的是自己的利益，它是为了削弱微软，而不是满足客户的需求。 
 
 莱科斯指出，微软在产品开发和客户研究上花费了数年时间并投入了数十亿美元，仔细研究了员工和企业使用软件的方式。确实，微软的优势在于其在办公软件市场上巨大的领先优势。业界分析人士称，Google不能在桌面软件领域与微软直接对抗。桌面软件正在向Web软件转型。
 
@@ -448,8 +490,8 @@ Google认为这一切将发生在遥远的数据中心中的服务器，用户�
 
  
 
-**Google (appengine)
-** http://code.google.com/intl/zh-CN/appengine/
+**Google (appengine)**
+http://code.google.com/intl/zh-CN/appengine/
 
 http://appgallery.appspot.com/
 
@@ -462,12 +504,11 @@ http://code.google.com/appengine/
 Google Apps
 *  Google Docs：将文档存储在Google的服务器上，而不是自己的电脑上。
 *  Google Gmail ：当用户需求激增，Google的云计算系统会自动为Gmail增加容量和处理器的数量，而无需人工干预。
+依赖云计算，谷歌能以几乎可以忽略不计的成本增加新的服务
+  - 如果新增的服务失败了，那没关系，关掉并且忘掉它就可以。
+  - 如果成功了，系统会自动为它增加空间和处理能力。
 
- 依赖云计算，谷歌能以几乎可以忽略不计的成本增加新的服务
 
- 如果新增的服务失败了，那没关系，关掉并且忘掉它就可以。
-
- 如果成功了，系统会自动为它增加空间和处理能力。
 
 ### 2.2.4  IBM
 
@@ -475,23 +516,21 @@ IBM计划建立一个相当规模的商业模式，在大型数据中心方面�
 
 据分析人士称，在面向企业级云计算的市场中，IBM正在着力把自己打造成行业的领导者。这个公司的战略是，销售更多为云计算量身定制的硬件、软件和服务。从2008年春季开始，IBM将会提供适用于云计算的服务器电脑，包括主机。
 
-IBM正在封装的云计算软件名为[Hsdoop](javascript:linkredwin('Hsdoop');)，运行在[Linux](http://www.hudong.com/wiki/Linux)操作系统上。Hadoop基于名为Nutch的开源搜索项目以及Google的MapReduce（映射化简）软件，MapReduce用于连接大量电脑扩展复杂的计算任务，用于大规模数据集（大于1TB）的并行运算。
+IBM正在封装的云计算软件名为Hsdoop，运行在Linux操作系统上。Hadoop基于名为Nutch的开源搜索项目以及Google的MapReduce（映射化简）软件，MapReduce用于连接大量电脑扩展复杂的计算任务，用于大规模数据集（大于1TB）的并行运算。
 
 IBM的执行官认为，这个策略就如同他对Linux的支持，Linux是一款开源的操作系统，向人们提供微软之外的新的选择。IBM对Linux的支持从2000年便已经开始，包括了在市场开拓和技术开发方面的投入，加速了Linux在企业用户之中的应用。
 
-IBM负责系统和技术团队的高级副总裁[Willian M.Zeilter](javascript:linkredwin('Willian M.Zeilter');)宣称：“对我来说，这种感觉就像2000年对Linux。”
+IBM负责系统和技术团队的高级副总裁Willian M.Zeilter宣称：“对我来说，这种感觉就像2000年对Linux。”
 
-IBM现在有200位[研究员](http://www.hudong.com/wiki/研究员)专注于云计算的工作，并且Zeitler先生表示，在今后三年的阶段规划中，IBM还会投入巨资，但是他没有透露具体数量。
+IBM现在有200位研究员专注于云计算的工作，并且Zeitler先生表示，在今后三年的阶段规划中，IBM还会投入巨资，但是他没有透露具体数量。
 
 IBM在数据中心高效运行上做了很多努力，并且集中桌面电脑和其他设备，在数据中心中运行更多的计算任务。它们被命名为“自动的”、“有效的”[网格计算](http://www.hudong.com/wiki/网格计算)。
 
- ![image-20191201165112667](../media/ai/cloud_008.png)
-
-**IBM** **云计算架构体系**
-
- 
+ ![image-20191201165112667](../media/cloud/cloud_008.png)
 
 图 8 IBM云计算架构体系
+
+
 
 ### 2.2.5  Oralce/Sun
 
@@ -499,7 +538,7 @@ IBM在数据中心高效运行上做了很多努力，并且集中桌面电脑�
 
 2009年Sun被Oracle收购。
 
-2008 年5月，Sun在2008JavaOne开发者大会上宣布推出“Hydrazine”计划。至此，集结在“云计算”旗帜之下的软件供应商又增加了一位重量 级成员。基于“Hydrazine”计划，Sun希望利用其核心技术打造一个包含网络环境、数据中心和其他基础设施组件在内的完整解决方案，如Sun的 JavaFX丰富互联网应用程序技术、Sun的Glassfish应用服务器、Sun企业服务总线、Sun目录服务器、[MySQL](http://www.hudong.com/wiki/MySQL#_blank)、 “廉价存储”和Sun的硬件，从而使得开发人员利用Sun平台创建托管应用与服务，并且不用到任何其它地方就可以利用这些应用程序和服务赚钱。此外，作为 “Hydrazine计划”的一部分，Sun还推出了“Insight计划”。这个分析功能可以让开发人员知道谁在使用他们的产品，并且利用这个功能注入[广告](http://www.hudong.com/wiki/广告)或者赚钱。
+2008 年5月，Sun在2008JavaOne开发者大会上宣布推出“Hydrazine”计划。至此，集结在“云计算”旗帜之下的软件供应商又增加了一位重量 级成员。基于“Hydrazine”计划，Sun希望利用其核心技术打造一个包含网络环境、数据中心和其他基础设施组件在内的完整解决方案，如Sun的 JavaFX丰富互联网应用程序技术、Sun的Glassfish应用服务器、Sun企业服务总线、Sun目录服务器、MySQL、 “廉价存储”和Sun的硬件，从而使得开发人员利用Sun平台创建托管应用与服务，并且不用到任何其它地方就可以利用这些应用程序和服务赚钱。此外，作为 “Hydrazine计划”的一部分，Sun还推出了“Insight计划”。这个分析功能可以让开发人员知道谁在使用他们的产品，并且利用这个功能注入广告或者赚钱。
 
 凭借此举，Sun正式进军“云计算”领域，也由此展开了与IBM、微软、Google等巨头的新一轮竞技。
 
@@ -541,21 +580,19 @@ https://www.aliyun.com/
 
 **阿里云大事记**
 
-2009年9月，阿里云计算有限公司正式成立。
-
-2009年2月，飞天团队在北京写下第一行代码。
+2008年9月，阿里巴巴确定“云计算”和“大数据”战略，决定自主研发大规模分布式计算操作系统“飞天” 。
 
 2008年10月，**飞天**团队正式组建。
 
-2008年9月，阿里巴巴确定“云计算”和“大数据”战略，决定自主研发大规模分布式计算操作系统“飞天” [17] 。
+2009年9月，阿里云计算有限公司正式成立。
 
-2018年11月26日，阿里巴巴集团宣布阿里云升级阿里云智能，加强技术、智能互联网的投入和建设。 [18] 
+2018年11月26日，阿里巴巴集团宣布阿里云升级阿里云智能，加强技术、智能互联网的投入和建设。
 
-2019年6月18日，**阿里钉钉**进入阿里云智能事业群，钉钉CEO陈航向阿里巴巴集团CTO兼阿里云智能事业群总裁张建锋汇报 [19] 。
+2019年6月18日，**阿里钉钉**进入阿里云智能事业群，钉钉CEO陈航向阿里巴巴集团CTO兼阿里云智能事业群总裁张建锋汇报。
 
-2019年9月26日，在云栖大会上，阿里云智能副总裁、阿里云智能计算平台事业部总经理贾扬清宣布，阿里云与Facebook达成合作。Facebook旗下的开源深度学习框架PyTorch将进驻阿里云机器学习平台。 [20] 
+2019年9月26日，在云栖大会上，阿里云智能副总裁、阿里云智能计算平台事业部总经理贾扬清宣布，阿里云与Facebook达成合作。Facebook旗下的开源深度学习框架PyTorch将进驻阿里云机器学习平台。
 
-2019年10月11日，阿里云确认拟全资收购长亭科技，收购完成后，长亭科技品牌及团队均保持独立。 [21] 
+2019年10月11日，阿里云确认拟全资收购长亭科技，收购完成后，长亭科技品牌及团队均保持独立。
 
 2019年10月25日，IDC公布中国金融云市场排名：阿里云第一。
 
@@ -563,13 +600,25 @@ https://www.aliyun.com/
 
 ### 2.3.2  百度云
 
-云盘： http://pan.baidu.com
+https://cloud.baidu.com/
 
 早初百度云是网盘，但不受集团重视，发展滞后。
+
+2012.8，百度推出云存储服务~百度云，免费最大2T永久空间。2016.10更名为[百度网盘](http://pan.baidu.com)。 
+
+2015年，百度开放云正式开放运营；2016.10正式更名百度云。
+
+2016年，百度正式对外发布了“[云计算](https://baike.baidu.com/item/云计算/9969353)+[大数据](https://baike.baidu.com/item/大数据/1356941)+[人工智能](https://baike.baidu.com/item/人工智能/9180)“（ABC战略~AI/Bigdata/Cloud）三位一体的云计算战略。
+
+2019年4月11日，“百度云”品牌升级为“百度智能云”。
 
 
 
 ### 2.3.3  腾讯云
+
+http://yun.qq.com/
+
+云产品：TStack、TCE
 
 
 
@@ -577,19 +626,58 @@ https://www.aliyun.com/
 
 公有云  https://www.huaweicloud.com/
 
-私有云 fusioncloud 
+2008年开始投入，2011年成立云BU，2017.8年升级为一级部门。2019.12.6成立华为云计算公司。
+
+2019年3月，华为云发布全球合作伙伴体系HCPN（Huawei Cloud Partner Network），为伙伴赋能并提供全方位支持。2019年7月，华为云推出了鲲鹏云服务，并联合25家伙伴发布“华为云鲲鹏凌云伙伴计划”。
 
 
+
+![img](E:\project\technical-share\media\cloud\cloud_huaweicloud_001.png)
+
+图  华为云全栈技术
+
+华为云产品（云计算&大数据据，云BU）的解决方案可分为四部分，分别是私有云FusionCloud、大数据&AI FusionInsight、桌面云FusionAccess和虚拟化FusionSphere。
+
+表格  华为的大数据&AI解决方案
+
+| 解决方案                 | 简介                                                         | 备注                                                         |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 私有云 FusionCloud       | 华为FusionCloud私有云解决方案充分利用云计算和大数据技术，提供资源池化、全栈云服务能力，为客户提供融合资源池、托管云、混合云等场景下的解决方案。适配各个行业客户需求，帮助客户实现业务全面云化，推进行业数字化转型 | 2017年，IDC评的中国政务云市场领导者第一、中国OpenStock市场第一；GlobalData评的全球NFVI解决方案领导者。 |
+| 桌面云  FusionAccess     | FusionAccess桌面云是基于华为云平台的一种虚拟桌面应用。通过在云平台上部署桌面云软件，终端用户可通过瘦客户端或者其他任何与网络相连的设备来访问跨平台应用程序及整个桌面。华为桌面云已经在全球拥有超过110万+用户，同时在中国保持市场销量第一。 | 2016年，IDC评的中国桌面虚拟化市场第一；Gartner评的全球桌面虚拟化关键能力第三。 |
+| 虚拟化 FusionSphere      | 华为虚拟化解决方案是华为提供的服务器虚拟化产品套件，由服务器虚拟化产品、云管理软件、容灾备份软件、及系统运行洞察软件共同组成。主要实现硬件资源虚拟化，对虚拟资源、硬件资源集中管理，提供基础备份、容灾、多资源池（含异构）管理、云基础服务和基础设施性能可视化、性能管理等能力。 | 2016年，IDC评的服务器虚拟化市场全球第三，中国第一。          |
+| 大数据&AI  FusionInsight | 华为大数据&AI平台是企业级大数据集成、存储、查询、分析以及人工智能统一基础平台，为企业快速构建海量数据信息处理系统。通过实时和非实时的分析和挖掘，帮助企业从海量数据信息中获取到真正的价值，及时洞察机会、预防风险。 | 2017年,Gartner、IDC的中国大数据厂商都排第一。                |
+
+ **最新荣誉：**
+
+2017年3月10日，[华为成为亚洲首家OpenStack白金会员](http://www.huawei.com/cn/news/2017/3/huawei-openstacks)
+
+2017年4月20日，[华为荣膺六项云计算开源产业联盟大奖](http://www.huawei.com/cn/news/2017/4/huawei-OSCAR)（中国工信部主办）
+
+2017年4月26日，[CarbonData成为Apache软件基金会顶级开源项目](http://www.huawei.com/cn/news/2017/4/Huawei-CarbonData)
+
+2017年10月30日，[华为获得首届Kubernetes指导委员会席位 持续提升开源影响力](http://www.huawei.com/cn/news/2017/10/Huawei-Kubernetes-member)
+
+ 
+
+**开源社区荣誉**
+
+top2 OpenStack基金会白金会员及白金董事，社区贡献度全球排名第二
+
+top6 CNCF白金会员，社区贡献国内第一，全球第六
+
+top3 Hadoop社区全球第三
+
+top4 Spark社区全球第四
 
 
 
 ### 2.3.5  瑞星云
 
- ![image-20191201165130658](../media/ai/cloud_011.png)
+
+
+ ![image-20191201165130658](../media/cloud/cloud_011.png)
 
 图 9 瑞星云计算安全架构
-
- 
 
  
 
@@ -599,11 +687,9 @@ SAE: Sina App Engine. http://sae.sina.com.cn/
 
 ​    SAE是新浪云计算（简称浪云）战略的核心组成部分。自2009年上旬在新浪研发中心开始内部开发，2009年11月3日正式推出第一个Alpha版本（国内首个公有云计算平台），2010年2月1日发布了alpha2版本，2010年9月1日发布了beta版本，2011年5月17日正式开放注册。
 
-  SAE就是分布式Web服务的开发、运行平台。（PAAS云服务平台）
+   SAE就是分布式Web服务的开发、运行平台。（PAAS云服务平台）
 
- 
-
-SAE的服务http://sae.sina.com.cn/?m=apistore存储类
+ SAE的服务http://sae.sina.com.cn/?m=apistore存储类
 
 | 服务类型 | 服务                                          | 备注 |
 | -------- | --------------------------------------------- | ---- |
@@ -614,7 +700,7 @@ SAE的服务http://sae.sina.com.cn/?m=apistore存储类
 
  
 
- ![image-20191201165145510](../media/ai/cloud_012.png)
+ ![image-20191201165145510](../media/cloud/cloud_012.png)
 
 图 10 SAE安全架构
 
@@ -622,64 +708,91 @@ SAE的服务http://sae.sina.com.cn/?m=apistore存储类
 
 ## 2.4  各家云服务比较
 
-### 2.4.1  云技术比较
+### 主要云服务提供商比较
+
+| 公司            | 云产品                                                 | 云计算发展史                                                 | 优势                                          | 生态链                                                       |
+| --------------- | ------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------ |
+| Amazon          | [AWS](https://aws.amazon.com/)                         | 2002年开始布局。<br>2006年推出云平台，发布服务S3和EC2。2009年，推出虚拟私有云（Virtual Private Cloud）。2013年发布数据仓库服务RedShift。2014年发布无服务器计算Lambda。2015年发布AWS发布Snowball和Snowmobile。 | 全球TOP1。2019年占据全球公有云48%的市场份额。 | 2012年起，每年举办AWS re:Invent大会。                        |
+| Microsoft       | [Azure](https://azure.microsoft.com)                   | 2010年启动Azure。2013.5微软授权世纪互联在中国运营和提供Windows Azure服务。 | 全球TOP2                                      |                                                              |
+| Alibaba阿里巴巴 | [AliCloud](https://www.aliyun.com/ )                   | 2008.12组建飞天团队；2009.9成立阿里云计算公司。              | 中国TOP1。2019年中国IAAS 43%的市场份额。      | 云栖大会（2009为地方网站峰值；2011阿里云开发者大会；2015年现名） |
+| Google          |                                                        | 2008年，推出云业务Google App Engine（GAE）。                 |                                               | Google开发者大会，分地区巡办。                               |
+| IBM             |                                                        | 2013年IBM 20亿美元收购SoftLayer，正式进入公有云市场。<br>2016年初，IBM正式宣布将转型成为一家认知解决方案和云平台公司。<br>2018年8月，IBM 340亿美元收购红帽，转向混合云服务。 |                                               | IBM Think大会                                                |
+| 华为            | [华为云](https://www.huaweicloud.com/) <br>FusionCloud | 2008年开始投入；2011年成立Cloud BU；2017.8年升级为一级部门。<br>2019.12，成立华为云计算公司。 |                                               | 华为全联连大会。                                             |
+| 腾讯            | [腾讯云](yun.qq.com)                                   | 2010.10，腾讯开放平台接入首批应用，腾讯云正式对外提供云服务（包括CDN 等）。<br>2013.9，腾讯云对外开放，云安全上线。<br>2014.6，腾讯云计算有限公司成立。2015.1，腾讯云服务市场上线。 | 中国TOP2。                                    | 腾讯开发者大会。                                             |
+| 百度            | [百度智能云](https://cloud.baidu.com/)                 | 2003年，分布式搜索系统。<br>2012.8，百度推出云存储服务~百度云（盘）。<br>2015年，百度开放云正式开放运营；2016.10发布百度云计算ABC战略，百度开放云正式更名百度云，原百度云（盘）更名为[百度网盘](http://pan.baidu.com)。<br>2019.4，百度云更名为百度智能云。 | 拥有中国最多的AI人才。                        | 百度开发者大会。                                             |
+|                 |                                                        |                                                              |                                               |                                                              |
+
+
+
+### 云技术比较
 
 表格 3 各家云计算技术对比表
 
-|                   | 技术特性                              | 核心技术                            | 企业服务                                                     | 开发语言或工具     | 开源程序                 |
-| ----------------- | ------------------------------------- | ----------------------------------- | ------------------------------------------------------------ | ------------------ | ------------------------ |
-| Amazon~AWS        | 可弹性配置的通用虚拟机器              | 虚拟化技术xgen                      | EC2(已商品化)  S3                                            | 不限定             | 完全开源                 |
-| Microsoft~Azure   | 整合不同装置与网络服务                | 10月PDC会议发表                     | 动态数据中心（IaaS） 解决方案。  开发测试云、（SaaS）。  Hyper-V™ Cloud  Windows Azure、Appliance  桌面虚拟化解决方案 | 与桌面开发方式相似 | 未知                     |
-| Google            | 储存与计算的水平扩充能力（基础+平台） | MapReduce,  BigTable,  GFS          | 应用代管服务（Google App Engine）                            | python、Tensorflow | 公共设计架构，代码未开源 |
-| ~~Yahoo~~         | ~~储存与计算的水平扩充能力~~          | ~~Hadoop, MapReduce,  Hbase, HDFS~~ | ~~YAP~~                                                      | ~~PHP~~            | ~~完全开源~~             |
-| 阿里巴巴~AliCloud |                                       | 飞天、阿里钉钉                      |                                                              |                    |                          |
-| 腾讯云            |                                       | TStack、TCloud                      |                                                              |                    |                          |
-| 百度云            |                                       |                                     |                                                              |                    |                          |
-| 华为云            | 全栈                                  | FusionCloud、FusionInsight、welink  |                                                              |                    |                          |
+|                 | 技术特性                              | 核心技术                           | 企业服务                                                     | 开发语言或工具     | 开源程序                 |
+| --------------- | ------------------------------------- | ---------------------------------- | ------------------------------------------------------------ | ------------------ | ------------------------ |
+| Amazon~AWS      | 可弹性配置的通用虚拟机器              | 虚拟化技术xgen                     | EC2(已商品化)  S3                                            | 不限定             | 完全开源                 |
+| Microsoft~Azure | 整合不同装置与网络服务                | 10月PDC会议发表                    | 动态数据中心（IaaS） 解决方案。  开发测试云、（SaaS）。  Hyper-V™ Cloud  Windows Azure、Appliance  桌面虚拟化解决方案 | 与桌面开发方式相似 | 未知                     |
+| Google          | 储存与计算的水平扩充能力（基础+平台） | MapReduce,  BigTable,  GFS         | 应用代管服务（Google App Engine）                            | python、Tensorflow | 公共设计架构，代码未开源 |
+| ~~Yahoo~~       | 储存与计算的水平扩充能力              | Hadoop, MapReduce,  Hbase, HDFS    | YAP                                                          | PHP                | 完全开源                 |
+| 阿里巴巴~Aliyun |                                       | 飞天、阿里钉钉                     |                                                              |                    |                          |
+| 腾讯云          |                                       | TStack、TCloud                     |                                                              |                    |                          |
+| 百度云          |                                       |                                    |                                                              |                    |                          |
+| 华为云          | 全栈                                  | FusionCloud、FusionInsight、welink |                                                              |                    |                          |
 
 
 
-### 2.4.2  云市场排名
+### 云市场排名
 
- ![image-20191201165218301](../media/ai/cloud_021.png)
+####  IAAS
 
-图 11 全球公有云(LAAS)服务市场份额2017H1（IDC)
+
+
+![Gartner：全球云基础设施即服务魔力象限](../media/cloud/cloud_iaas_gartner_2019.png)
+
+图 Gartner：全球云基础设施即服务魔力象限（2019 年）
+
+说明：全球IAAS市场领导者是Amazon、Microsoft和Google。
+
+
+
+ ![image-20191201165218301](../media/cloud/cloud_021.png)
+
+图 11 全球公有云(IAAS)服务市场份额2017H1（IDC)
 
 说明：AWS领头羊优势明显。前五排名分别是AWS、微软云、IBM、阿里云和Google。
 
 
 
- ![image-20191201165231923](../media/ai/cloud_022.png)
+ ![image-20191201165231923](../media/cloud/cloud_022.png)
 
-图 12 中国公有云(LAAS)服务市场份额2017H1（IDC)
+图 12 中国公有云(IAAS)服务市场份额2017H1（IDC)
 
 说明：中国市场中国提供商占据前五，分别是阿里云、腾讯云、金山云、天翼云和Ucloud。
 
  
 
- 
-
 ## 2.5  本章参考
 
-[1].  http://code.google.com/intl/zh-CN/appengine/
+[1]: http://code.google.com/intl/zh-CN/appengine/	"“google code”"
+[2]: http://www.microsoft.com/china/cloud/solutions.aspx "微软云计算解决方案"
+[3]: http://www.microsoft.com/windowsazure/
+[4]: http://aws.amazon.com/documentation/ "Amazon (AWS)弹性计算云"
+[5]: https://www.aliyun.com/
+[6]: http://pan.baidu.com
+[7]: http://sae.sina.com.cn/ "Sina App Engine"
+[8]: https://yq.aliyun.com/articles/64374?spm=5176.8275292.620824.4.XsNEeL "盘古：阿里云飞天分布式存储系统设计深度解析"
+[9]: http://yuanchuang.caijing.com.cn/2017/1122/4365196.shtml "华为的第四件大事：布局七年，隐形三年"
+[10]: https://cloud.tencent.com/about/event "腾讯云发展历程"
+[11]:  http://www.ibm.com/developerworks/cn/web/ar-cloudaws1/   "用 Amazon Web Services 进行云计算"
+[12]:  https://www.gartner.com/doc/reprints?id=1-1CMAPXNO&ct=190709&st=sb  "Gartner IAAS 2019"
 
-**[2].**  **微软云计算解决方案** http://www.microsoft.com/china/cloud/solutions.aspx 
+[13]:   http://www.cniteyes.com/archives/34476   "回望：AWS历史上的那些重要时刻"
 
-[3].  http://www.microsoft.com/windowsazure/
+[14]: www.cnr.cn/rdzx/cxxhl/zxxx/20190802/t20190802_524716762.shtml "中国公有云市场份额最新排名出炉，华为云增速超300%，位列Top5厂商增速第一"
 
-[4].  **Amazon (AWS)** **弹性计算云** http://aws.amazon.com/documentation/
 
-[5].  https://www.aliyun.com/ 
 
-[6].  http://pan.baidu.com
-
-[7].  Sina App Engine. http://sae.sina.com.cn/
-
-[8].  盘古：阿里云飞天分布式存储系统设计深度解析 https://yq.aliyun.com/articles/64374?spm=5176.8275292.620824.4.XsNEeL
-
-[9].  华为的第四件大事：布局七年，隐形三年http://yuanchuang.caijing.com.cn/2017/1122/4365196.shtml 
-
-# 3    云应用
+# 3   云应用
 
 ## 3.1  云安全
 
@@ -846,7 +959,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 *  术保障用户隐私和和数据安全；
 *  冗余编码、数据备份和容灾技术保证云存储中的数据的可靠性。
 
- ![image-20191201165255614](../media/ai/cloud_010.png)
+ ![image-20191201165255614](../media/cloud/cloud_010.png)
 
 图 13 云存储系统结构模型
 
@@ -900,16 +1013,12 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 降低运营成本；专注于管理；摆脱与硬件打交道的工作；加速应用部署；
 
 提高应用兼容性
-
-•各种平台、操作系统、中间件的兼容性
-
-•技术角度进行封装、隔离
+- 各种平台、操作系统、中间件的兼容性
+- 技术角度进行封装、隔离
 
 提高服务可用性
-
-•提高兼容性
-
-•便于备份、恢复
+- 提高兼容性
+- 便于备份、恢复
 
 提升资源利用率
 
@@ -919,7 +1028,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
  
 
- ![image-20191201165320966](../media/ai/cloud_015.png)
+ ![image-20191201165320966](../media/cloud/cloud_015.png)
 
  
 
@@ -941,7 +1050,6 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 |          | XEN                                                   |                                                              |
 | 软件     | Java虚拟机                                            |                                                              |
 | 计算     | CPU虚拟化                                             | 传统方式：通过一系列手段改变序列次序。如  时间片轮转；短进程优先；中断。  •本质是一种指令序列的调度机制 |
-|          |                                                       |                                                              |
 
  
 
@@ -975,11 +1083,11 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 多租户技术的实现重点，在于不同租户间应用程序环境的隔离（application context isolation）以及数据的隔离（data isolation)，以维持不同租户间应用程序不会相互干扰，同时数据的保密性也够强。
 
-•应用程序部份：通过进程或是支持多应用程序同时运行的装载环境（例如Web Server，像是Apache或IIS等）来做进程间的隔离，或是在同一个伺服程序（server）进程内以运行绪的方式隔离。
+- 应用程序部份：通过进程或是支持多应用程序同时运行的装载环境（例如Web Server，像是Apache或IIS等）来做进程间的隔离，或是在同一个伺服程序（server）进程内以运行绪的方式隔离。
 
-•数据部份：通过不同的机制将不同租户的数据隔离，Force是采用中介数据（metadata）的技术来切割，微软MSDN 的技术文件则是展示了使用结构描述的方式隔离。
+- 数据部份：通过不同的机制将不同租户的数据隔离，Force是采用中介数据（metadata）的技术来切割，微软MSDN 的技术文件则是展示了使用结构描述的方式隔离。
 
- ![image-20191201165345528](../media/ai/cloud_016.png)
+ ![image-20191201165345528](../media/cloud/cloud_016.png)
 
 图 14 多租户技术图
 
@@ -994,7 +1102,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 Gartner对当前云应用“多租户”架构进行了总结并给出了参考架构，如下：
 
- ![image-20191201165401201](../media/ai/cloud_017.png)
+ ![image-20191201165401201](../media/cloud/cloud_017.png)
 
 图 15 多租户架构图
 
@@ -1002,7 +1110,9 @@ Gartner对当前云应用“多租户”架构进行了总结并给出了参考�
 
 ## 4.3  Hadoop体系
 
-详见 《Hadoop体系》
+详见 [《Hadoop体系》](./bigdata/Hadoop体系.md)
+
+
 
 ## 4.4  OpenStack
 
@@ -1037,13 +1147,13 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
  
 
- ![image-20191201165418356](../media/ai/cloud_018.png)
+ ![image-20191201165418356](../media/cloud/cloud_018.png)
 
 图 16 云计算系统的体系框架图
 
  
 
- ![image-20191201165433786](../media/ai/cloud_019.png)
+ ![image-20191201165433786](../media/cloud/cloud_019.png)
 
 图 17 云计算安全架构
 
@@ -1058,7 +1168,7 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 ### 5.1.1  IBM的云安全架构
 
- ![image-20191201165451153](../media/ai/cloud_023.png)
+ ![image-20191201165451153](../media/cloud/cloud_023.png)
 
 图 18 IBM信息安全框架
 
@@ -1066,17 +1176,15 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 ### 5.1.2  华为的云安全架构
 
- ![image-20191201165506718](../media/ai/cloud_024.png)
+ ![image-20191201165506718](../media/cloud/cloud_024.png)
 
 图 19 华为端管云协同的安全解决方案
 
  
 
 云计算安全的核心控制点在云操作系统，云操作系统需要安全可控。
-
-\1. 从云平台的角度：虚拟机是云计算操作系统的一个应用
-
-\2. 从虚拟机的角度：云计算操作系统就是原来的硬件层
+1. 从云平台的角度：虚拟机是云计算操作系统的一个应用
+2. 从虚拟机的角度：云计算操作系统就是原来的硬件层
 
  
 
@@ -1097,7 +1205,7 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 ### 5.2.1  小伽秀的云服务架构
 
- ![image-20191201165528885](../media/ai/cloud_025.png)
+ ![image-20191201165528885](../media/cloud/cloud_025.png)
 
 图 20 小咖秀云服务结构
 
@@ -1124,12 +1232,12 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 | 地域                                              | 华北 2                         |
 | ------------------------------------------------- | ------------------------------ |
 | 可用区                                            | 随机分配                       |
-| **I/O** 优化实例                                  | I/O 优化实例                   |
+| I/O 优化实例                                  | I/O 优化实例                   |
 | 实例规格                                          | 1 核 2GB                       |
 | 网络类型                                          | 专有网络                       |
-| **带宽**                                          | 1Mbps（按固定带宽）            |
+| 带宽                                          | 1Mbps（按固定带宽）            |
 | 操作系统                                          | Ubuntu 14.04 64位              |
-| **系统盘**                                        | 40GB 高效云盘                  |
+| 系统盘                                        | 40GB 高效云盘                  |
 | 数据盘                                            | 20GB（高效云盘，不随实例释放） |
 | 密码                                              | 已设置                         |
 | 实例名称                                          | aws_ubuntu                     |
@@ -1151,17 +1259,17 @@ https://aws.amazon.com/cn/free/?sc_ichannel=ha&sc_icampaign=signin_prospects&sc_
 
 ## 7.1  参考资料
 
-**[1].**  **云计算新闻** http://www.cloudcomputing-china.cn/Article/Index.html
+[1].  云计算新闻 http://www.cloudcomputing-china.cn/Article/Index.html
 
-**[2].**  **中云网** [http://www.china-cloud.com](http://www.china-cloud.com/)
+[2].  中云网 [http://www.china-cloud.com](http://www.china-cloud.com/)
 
-**[3].**  **中国云计算网** http://www.cloudcomputing-china.cn/
+[3].  中国云计算网 http://www.cloudcomputing-china.cn/
 
-**[4].**  **云计算网** http://cloud.saaser.cn/
+[4].  云计算网 http://cloud.saaser.cn/
 
-**[5].**  **企业云计算网** http://www.ecloud.com.cn/
+[5].  企业云计算网 http://www.ecloud.com.cn/
 
-[6].  **中国云计算联盟百科全书** http://www.chinacloud.org/wiki
+[6].  中国云计算联盟百科全书 http://www.chinacloud.org/wiki
 
 [7].  http://www.aboutyun.com 
 
@@ -1169,9 +1277,7 @@ https://aws.amazon.com/cn/free/?sc_ichannel=ha&sc_icampaign=signin_prospects&sc_
 
 [9].  Bigtable: A Distributed Storage System for Structured Data
 
-[10].HFile: A Block-Indexed File Format to Store Sorted Key-Value Pairs for a thorough introduction Hbase Architecture 101
-
- 
+[10]. HFile: A Block-Indexed File Format to Store Sorted Key-Value Pairs for a thorough introduction Hbase Architecture 101
 
  
 
@@ -1214,29 +1320,21 @@ https://aws.amazon.com/cn/free/?sc_ichannel=ha&sc_icampaign=signin_prospects&sc_
 
 **1.中国通信标准化协会（CCSA）**
 
-组织简介：
+组织简介：2002年12月18日在北京正式成立。
 
-2002年12月18日在北京正式成立。
+ 该协会是国内企、事业单位自愿联合组织起来，经业务主管部门批准，国家社团登记管理机关登记，开展通信技术领域标准化活动的非营利性法人社会团体。
 
-该协会是国内企、事业单位自愿联合组织起来，经业务主管部门批准，国家社团登记管理机关登记，开展通信技术领域标准化活动的非营利性法人社会团体。
+组织成员：目前已有277个研究组织和企业加盟。
 
-组织成员：目前已有277个研究组织和企业加盟。
-
-相关云安全标准：
+相关云安全标准： 
 *  《移动环境下云计算安全技术研究》 由中国联合网络通信集团有限公司牵头，针对移动环境中云计算中面临的安全关键问题进行详细分析和研究。
-*  《电信业务云安全需求和框架》 由中兴通讯股份有限公司牵头，旨在构建电信业务云环境的安全业务云体系框架。
+*   《电信业务云安全需求和框架》 由中兴通讯股份有限公司牵头，旨在构建电信业务云环境的安全业务云体系框架。
 
  
 
 **2、全国信息技术标准化技术委员**
 
-组织简介：
-
-成立于1983年
-
-受国家标准化管理委员会和工业和信息化部的共同领导
-
-下设17分技术委员会和10个直属工作组
+组织简介：成立于1983年。受国家标准化管理委员会和工业和信息化部的共同领导，下设17分技术委员会和10个直属工作组。
 
 SOA标准工作组（WGSOA）负责云计算领域的相关标准
 
@@ -1244,55 +1342,53 @@ GB/T32400-2015《信息技术云计算概览与词汇》
 
 GB/T32399-2015《信息技术云计算参考架构》
 
-目前尚未发布与云安全相关标准
+ 目前尚未发布与云安全相关标准
 
  
 
 目前可借鉴信息安全领域标准，身份认证与隐私保护
 
-《隐私保护框架》、《隐私参照体系架构》等等数据隐私与安全
+ 《隐私保护框架》、《隐私参照体系架构》等等 数据隐私与安全
 
-《公钥基础设施安全支撑平台技术框架》、《证书认证系统密码及其相关安全技术规范》等等风险评估
+ 《公钥基础设施安全支撑平台技术框架》、《证书认证系统密码及其相关安全技术规范》等等 风险评估
 
-《信息安全管理系统》、《风险管理--风险评估技术》等等
+ 《信息安全管理系统》、《风险管理--风险评估技术》等等
 
  
 
 **3、全国信息安全标准化技术委员**
 
-组织简介：
+**组织简介：**
 
-成立于2002年
+ 成立于2002年。直属于国家标准化管理委员会，主要负责国家网络安全标准申报、立项、评审等工作。
 
-直属于国家标准化管理委员会，主要负责国家网络安全标准申报、立项、评审等工作
+ 技术委员会主要工作范围包括：安全技术、安全机制、安全服务、安全管理、安全评估等领域的标准化技术工作。
 
-技术委员会主要工作范围包括：安全技术、安全机制、安全服务、安全管理、安全评估等领域的标准化技术工作。
-
-SWG-BDS大数据安全特别工作组
+**SWG-BDS大数据安全特别工作组**
 
 负责大数据和云计算相关的安全标准化研制工作。具体职责包括调研急需标准化需求，研究提出标准研制路线图，明确年度标准研制方向，及时组织开展关键标准研制工作。
 
-正在制定的标准包括：
+**正在制定的标准包括：**
 
-信息安全技术云计算安全参考架构
+ 信息安全技术云计算安全参考架构
 
-云计算服务安全能力评估方法
+ 云计算服务安全能力评估方法
 
-桌面云安全技术要求
+ 桌面云安全技术要求
 
-信息安全技术政府门户网站云计算服务安全指南
+ 信息安全技术政府门户网站云计算服务安全指南
 
-网站安全云防护平台技术要求
+ 网站安全云防护平台技术要求
 
-云计算服务持续监管框架及技术规范
+ 云计算服务持续监管框架及技术规范
 
-信息安全技术云计算服务安全指南
+ 信息安全技术云计算服务安全指南
 
-信息安全技术云计算服务安全能力要求
+ 信息安全技术云计算服务安全能力要求
 
  
 
-|              | **中国通信标准化协会（CCSA）**                       | **全国信息技术标准化技术委员**                               | **全国信息安全标准化技术委员**                               |
+|              | 中国通信标准化协会（CCSA）                       | 全国信息技术标准化技术委员                               | 全国信息安全标准化技术委员                               |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 成立         | 2002                                                         | 1983                                                         | 2002                                                         |
 | 组织简介     | 该协会是国内企、事业单位自愿联合组织起来，经业务主管部门批准，国家社团登记管理机关登记，开展通信技术领域标准化活动的非营利性法人社会团体。  组织成员：目前已有277个研究组织和企业加盟。 | SOA标准工作组（WGSOA）负责云计算领域的相关标准               | 直属于国家标准化管理委员会，主要负责国家网络安全标准申报、立项、评审等工作  技术委员会主要工作范围包括：安全技术、安全机制、安全服务、安全管理、安全评估等领域的标准化技术工作。   SWG-BDS大数据安全特别工作组：负责大数据和云计算相关的安全标准化研制工作。具体职责包括调研急需标准化需求，研究提出标准研制路线图，明确年度标准研制方向，及时组织开展关键标准研制工作。 |
@@ -1314,6 +1410,6 @@ GB/T32399-2015《信息技术云计算参考架构》
 
  
 
- ![image-20191201165559830](../media/ai/cloud_020.png)
+ ![image-20191201165559830](../media/cloud/cloud_020.png)
 
- ![image-20191201165622095](../media/ai/cloud_020_2.png)
+ ![image-20191201165622095](../media/cloud/cloud_020_2.png)
