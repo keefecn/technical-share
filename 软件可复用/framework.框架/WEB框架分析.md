@@ -6,7 +6,7 @@
 | 4    | 2018-4-25  | 补充更新前端框架           | 同上   |        |
 | 5    | 2018-7-3   | 增加Python WEB程序部署章节 | 同上   |        |
 | 6    | 2018-11-18 | 汇总python web框架         | 同上   |        |
-|      |            |                            |        |        |
+| 7    | 2019-12-15 | 迁移前端框架/Nodejs另文    | 同上   |        |
 ---
 
  
@@ -154,9 +154,9 @@
 
 
 
-# 1       WEB框架概述
+# 1  WEB框架概述
 
-## 1.1     WEB框架列表
+## 1.1  WEB框架列表
 
 表格 1 WEB常用框架列表
 
@@ -245,380 +245,21 @@
 
 备注：
 
-## 1.4     本章参考
+## 1.4  本章参考
 
 [1].    6种Web框架测评 http://www.alrond.com/en/2007/jan/25/performance-test-of-6-leading-frameworks/ 
 
-[2].    全面解读python web 程序的9种部署方式 https://www.cnblogs.com/flish/p/5267902.html 
+[2].    全面解读python web 程序的9种部署方式 https://www.cnblogs.com/flish/p/5267902.html
 
-# 2       前端框架
 
-前端框架主要指HTML+CSS+JS组成的框架库。此外还包括模板引擎。
 
-表格 6 前端框架列表
+# 2 前端框架
 
-| 语言   | 框架名称                                              | 简介                                                         | 特性                                                         |
-| ------ | ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| php    | Smarty                                                | 一个php模板引擎。更准确的说,它分开了逻辑程序和外在的内容,提供了一种易于管理的方法。 |                                                              |
-| python | Jinja2                                                | 设计思想来源于[Django](https://baike.baidu.com/item/Django/61531)的模板引擎，并扩展了其语法和一系列强大的功能。 | 完全支持[unicode](https://baike.baidu.com/item/unicode)，并具有集成的沙箱执行环境 |
-| J2EE   | [Freemarker](https://baike.baidu.com/item/Freemarker) |                                                              |                                                              |
-| JS     | Bootstrap                                             | 来自 Twitter，目前最受欢迎的前端框架。                       |                                                              |
-| JS     | JQuery                                                | 轻量级好用的AJAX开发框架。                                   |                                                              |
-| JS     | Prototype                                             | 轻量级好用的AJAX开发框架。                                   | 功能实用而且尺寸较小，适合中小型的Web应用。                  |
-| JS     | D3                                                    | Data-Driven Documents，数据可视化框架。                      |                                                              |
-| JS     | React                                                 | 起源于 Facebook，用来构建UI。                                |                                                              |
-| JS     | Vue                                                   | 构建用户界面的渐进式框架。                                   | 只关注视图层， 采用自底向上增量开发的设计。                  |
-| JS     | ECharts                                               | 百度开源的商业级数据图表。缩写来自Enterprise Charts。        |                                                              |
+详见 [前端框架](前端框架分析.md)
 
- 
 
-## 2.1     前端框架概述
 
-前端开发模式的演进，觉得主要有四个阶段。
-
-1)    基于模板渲染的动态页面：此阶段无前后端的分离。
-
-2)    基于 AJAX 的前后端分离：2005~。20015年AJAX出现，开始出现前端工程师职位。
-
-3)    基于 Node.js 的前端工程化：2009~。2009年Node.js出现，随着 Node.js 一同出现的还有 CommonJS 规范和 npm 包管理机制。随后也出现了 Grunt、Gulp、Webpack 等一系列基于 Node.js 的前端开发构建工具。2013 年前后，前端三大框架 React.js/Angular/Vue.js 相继发布第一个版本。前端开发开始变得规范化、标准化、工程化。
-
-4)   基于 Node.js 的全栈开发。随着微服务的兴起，在微服务和前端中间，加了一个 BFFF（Backend For Frontend） 层，由 BFF 对接口进行聚合、裁剪后，再输出给前端。
-
- 
-
-## 2.2     模板引擎
-
-### 2.2.1   Smarty（PHP）
-
-  Smarty的特点之一是"模板编译"。意思是Smarty读取模板文件然后用他们创建php脚本。这些脚本创建以后将被执行。因此并没有花费模板文件的语法解析,同时每个模板可以享受到诸如Zend加速器(http://www.zend.com ) 或者PHP加速器(http://www.php-accelerator.co.uk )。这样的php编译器高速缓存解决方案。
-
-Smaty的一些特点:
-
-*  非常非常的快!
-
-*  用php分析器干这个苦差事是有效的
-
-*  不需要多余的模板语法解析,仅仅是编译一次
-*  仅对修改过的模板文件进行重新编译
-*  可以编辑'自定义函数'和自定义'变量',因此这种模板语言完全可以扩展
-*  可以自行设置模板定界符,所以你可以使用{}, {{}}, <!--{}-->, 等等
-*  诸如 if/elseif/else/endif 语句可以被传递到php语法解析器,所以 {if ...} 表达式是简单的或者是复合的,随你喜欢啦
-*  如果允许的话,section之间可以无限嵌套
-*  引擎是可以定制的.可以内嵌php代码到你的模板文件中,虽然这可能并不需要(不推荐)
-*  内建缓存支持
-*  独立模板文件
-*  可自定义缓存处理函数
-*  插件体系结构
-
- 
-
-安装Smarty发行版在/libs/目录
-
-**Smarty库文件**
-
-Smarty.class.php
-
-Smarty_Compiler.class.php
-
-Config_File.class.php
-
-debug.tpl
-
-/core/*.php (all of them)
-
-/plugins/*.php (all of them)
-
- 
-
-**一个smarty的应用实例：**
-
-法1：使用全路径
-
-`require('/usr/local/lib/php/Smarty/Smarty.class.php');`
-
-法2：使用'SMARTY_DIR'的php常量作为它的系统库目录
-
-```php
-define('SMARTY_DIR','/usr/local/lib/php/Smarty/');
-require(SMARTY_DIR.'Smarty.class.php');
-```
-
-法3：使用库路径
-
-```php
-require('Smarty.class.php');
-$smarty = new Smarty;
-```
-
-创建index.tpl文件让smarty载入.这个文件放在 $template_dir目录里
-
-{* Smarty *}
-
-Hello, {$name}!
-
-说明：{* *}为注释。
-
-实例：
-
-```php
-require('Smarty.class.php');
-$smarty = new Smarty;
-$smarty->assign('name','Ned');
-$smarty->display('index.tpl');
-```
-
-结果：
-
-在浏览器打开 index.php,你应该看到"Hello, Porky!"
-
-### 2.2.2   Jiaja2 (Python)
-
-Jinja2是基于[python](https://baike.baidu.com/item/python)的[模板引擎](https://baike.baidu.com/item/模板引擎)，功能比较类似于于[PHP](https://baike.baidu.com/item/PHP/9337)的[smarty](https://baike.baidu.com/item/smarty)，[J2ee](https://baike.baidu.com/item/J2ee)的[Freemarker](https://baike.baidu.com/item/Freemarker)和[velocity](https://baike.baidu.com/item/velocity)。 它能完全支持[unicode](https://baike.baidu.com/item/unicode)，并具有集成的沙箱执行环境，应用广泛。jinja2使用[BSD](https://baike.baidu.com/item/BSD)授权。
-
-Jinja2是Python下一个被广泛应用的模版引擎，他的设计思想来源于[Django](https://baike.baidu.com/item/Django/61531)的模板引擎，并扩展了其语法和一系列强大的功能。其中最显著的一个是增加了沙箱执行功能和可选的自动转义功能，这对大多应用的安全性来说是非常重要的。
-
- 
-
-Jinja is Beautiful
-
-```jinja2
-{% extends "layout.html" %}
-{% block body %}
-  <ul>
-  {% for user in users %}
-    <li><a href="{{ user.url }}">{{ user.username }}</a></li>
-  {% endfor %}
-  </ul>
-{% endblock %}
-```
-
- 
-
-## 2.3     AJAX
-
-### 2.3.1   Prototype
-
-Prototype是目前应用广泛的AJAX开发框架，其的特点是功能实用而且尺寸较小，非常适合在中小型的Web应用中使用。
-
-[Prototype.js](http://baike.baidu.com/view/1112205.htm)是由Sam Stephenson写的一个javascript类库。该框架的设计思路巧妙，而且兼容标准的类库，能够帮助开发人员轻松建立有[交互性](http://baike.baidu.com/subview/4889540/4890306.htm)良好的web2.0特性[富客户端](http://baike.baidu.com/view/1330363.htm)页面。
-
-开发Ajax应用需要编写大量的客户端JavaScript脚本，而Prototype框架可以大大地简化JavaScript代码的编写工作。更难得的是，Prototype具备兼容各个浏览器的优秀特性，使用该框架可以不必考虑[浏览器兼容性](http://baike.baidu.com/subview/6746126/6874381.htm)的问题。
-
-Prototype对JavaScript的内置对象（如“String”对象、“[Array](http://baike.baidu.com/subview/120900/120900.htm)”对象等）进行了很多有用的扩展，同时该框架中也新增了不少自定义的对象，包括对Ajax开发的支持等都是在自定义对象中实现的。Prototype可以帮助开发人员实现以下的目标：
-
-（1）对字符串进行各种处理
-
-（2）使用枚举的方式访问集合对象
-
-（3）以更简单的方式进行常见的DOM操作
-
-（4）使用[CSS选择符](http://baike.baidu.com/subview/1414548/1414548.htm)定位页面元素
-
-（5）发起Ajax方式的[HTTP请求](http://baike.baidu.com/subview/641736/641736.htm)并对响应进行处理
-
-（6）监听DOM事件并对事件进行处理
- 　　“Prototype”框架功能详解—使用实用函数，“Prototype”框架的实现仅仅包含一个JavaScript即可，1.6版本的“[Prototype.js](http://baike.baidu.com/subview/1112205/1112205.htm)”的文件大小为127K字节，约4220行。在页面中应用的语法类似于：
-
-<script
-type=”text/javascript” src=”inc"js"Prototype.js” ></script>
-
-然后就可以在后继的脚本中享受该框架带来的便利了。
-
- 
-
-该框架中有很多预定义的对象和实用函数，可以将程序员从重复的打字中解放出来。
-
-（1）使用“$()”函数。
-
-（2）使用“$F()”函数。此函数是另一个大受欢迎的“快捷键”，能用于返回任何表单输入控件的值，比如[多行文本框](http://baike.baidu.com/subview/3144766/3144766.htm)和下拉[列表框](http://baike.baidu.com/subview/1143828/1143828.htm)等控件。此个方法也能用元素id或元素本身做为参数。
-
-（3）使用“$A()”函数。此函数能将其接收到的单个的参数转换成一个Array对象。
-
-（4）使用“$H()”函数。此函数把一些对象转换成一个可枚举的和联合数组类似的[Hash](http://baike.baidu.com/subview/20089/20089.htm)对象。
-
-（5）使用“$R()”函数。此函数是“new ObjectRange(lowBound,upperBound,excludeBounds)”的缩写，用于建立一个范围对象。
-
-（6）使用“Try.these()”函数。“Try.these()” 方法用于调用不同的方法直到其中的一个成功。此函数把一系列的方法作为参数，并且按顺序的一个一个的执行这些方法，直到其中的一个成功执行。返回成功执行 的那个方法的返回值。“Try.these()”函数可以用于处理兼容性问题。
-
- 
-
-### 2.3.2   JQuery
-
-JQuery是继[Prototype](http://baike.baidu.com/view/1217697.htm)之后又一个优秀的[Javascript](http://baike.baidu.com/view/16168.htm)库。它是轻量级的js库 ，它兼容[CSS3](http://baike.baidu.com/view/1713027.htm)，还兼容各种浏览器（[IE](http://baike.baidu.com/subview/703/10271308.htm) 6.0+, [FF](http://baike.baidu.com/subview/31049/5089479.htm) 1.5+, [Safari](http://baike.baidu.com/subview/110484/5036395.htm) 2.0+, [Opera](http://baike.baidu.com/subview/10019/7098372.htm) 9.0+），JQuery2.0及后续版本将不再支持IE6/7/8浏览器。JQuery使用户能更方便地处理[HTML](http://baike.baidu.com/view/692.htm)（[标准通用标记语言](http://baike.baidu.com/view/5286041.htm)下的一个应用）、events、实现动画效果，并且方便地为网站提供[AJAX](http://baike.baidu.com/subview/1641/5762264.htm)交互。JQuery还有一个比较大的优势是，它的文档说明很全，而且各种应用也说得很详细，同时还有许多成熟的[插件](http://baike.baidu.com/view/18979.htm)可供选择。JQuery能够使用户的html页面保持代码和html内容分离，也就是说，不用再在html里面插入一堆js来调用命令了，只需要定义id即可。
-
-JQuery是一个兼容多浏览器的[javascript](http://baike.baidu.com/view/16168.htm)库，核心理念是write less,do more(写得更少,做得更多)。JQuery在2006年1月由美国人[John Resig](http://baike.baidu.com/view/3141971.htm)在纽约的[barcamp](http://baike.baidu.com/view/1135515.htm)发布，吸引了来自世界各地的众多JavaScript高手加入，由Dave Methvin率领团队进行开发。如今，JQuery已经成为最流行的javascript库，在世界前10000个访问最多的网站中，有超过55%在使用JQuery。
-
-JQuery是免费、开源的，使用[MIT](http://baike.baidu.com/subview/74918/8382747.htm)许可协议。JQuery的语法设计可以使开发更加便捷，例如操作[文档](http://baike.baidu.com/view/55621.htm)对象、选择[DOM](http://baike.baidu.com/view/14806.htm)元素、制作动画效果、事件处理、使用[Ajax](http://baike.baidu.com/view/1641.htm)以及其他功能。除此以外，JQuery提供API让开发者编写插件。其模块化的使用方式使开发者可以很轻松的开发出功能强大的静态或动态网页。
-
-JQuery，顾名思义，也就是JavaScript和查询（Query），即是辅助JavaScript开发的库。
-
- 
-
-## 2.4     Bootstrap 
-
-Bootstrap来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。
-
- 
-
- 
-
-## 2.5     View层-数据可视化
-
-### 2.5.1   React
-
-React 是一个用于构建用户界面的 JAVASCRIPT 库。React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。
-
-React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。
-
-React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。
-
- 
-
-**React** **特点**
-
-1.声明式设计  −React采用声明范式，可以轻松描述应用。
-
-2.高效  −React通过对DOM的模拟，最大限度地减少与DOM的交互。
-
-3.灵活  −React可以与已知的库或框架很好地配合。
-
-4.JSX  −JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。
-
-5.组件Component   −通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。
-
-6.单向响应的数据流  −React 实现了单向响应（父组件流向子组件）的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。通过prop和state来实现。
-
- 
-
-\# 第一个例子
-
-```xml
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello React!</title>
-    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
-    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
-    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      ReactDOM.render(
-        <h1>Hello world!</h1>,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
-</html>
-```
-
-
-
-### 2.5.2   Vue
-
-Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的渐进式框架。
-
-Vue 只关注视图层， 采用自底向上增量开发的设计。
-
-Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
-
-
-
-第一个例子
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
-<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
-</head>
-<body>
-<div id="app">
-  <p>{{ message }}</p>
-</div>
-
-<script>
-new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue.js!'
-  }
-})
-</script>
-</body>
-</html>
-```
-
-
-
-### 2.5.3   D3/nvd3
-
-D3 的全称是（Data-Driven Documents），顾名思义可以知道是一个**被数据驱动的文档**。听名字有点抽象，说简单一点，其实就是一个 JavaScript 的函数库，使用它主要是用来做数据可视化的。
-
-D3 是一个开源项目，作者是纽约时报的工程师。D3 项目的代码托管于 GitHub。
-
-\# 引用D3
-
-<script src="http://d3js.org/d3.v3.min.js"
-charset="utf-8"></script>
-
- 
-
-nvd3就基于D3的实现。
-
- 
-
-### 2.5.4   Echarts
-
-http://echarts.baidu.com/echarts2/doc/doc.html
-
-ECharts，缩写来自Enterprise Charts，商业级数据图表，一个纯Javascript的图表库，可以流畅的运行在PC和移动设备上，兼容当前绝大部分浏览器（IE6/7/8/9/10/11，chrome，firefox，Safari等），底层依赖轻量级的Canvas类库[ZRender](http://ecomfe.github.io/zrender/)，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。创新的拖拽重计算、数据视图、值域漫游等特性大大增强了用户体验，赋予了用户对数据进行挖掘、整合的能力。
-
-支持折线图（区域图）、柱状图（条状图）、散点图（气泡图）、K线图、饼图（环形图）、雷达图（填充雷达图）、和弦图、力导向布局图、地图、仪表盘、漏斗图、事件河流图等12类图表，同时提供标题，详情气泡、图例、值域、数据区域、时间轴、工具箱等7个可交互组件，支持多图表、组件的联动和混搭展现。
-
- ![1574518011899](../../media/sf_reuse/framework/frame_web_ehart_01.png)
-
-​                                                  
-
- 
-
-## 2.6     Serverless
-
-Serverless = FaaS + BaaS。
-*  FaaS（Function as a Service） 就是一些运行函数的平台，比如阿里云的函数计算、AWS 的 Lambda 等。
-*  BaaS（Backend as a Service）则是一些后端云服务，比如云数据库、对象存储、消息队列等。利用 BaaS，可以极大简化我们的应用开发难度。
-
-Serverless 的主要特点有：
-*  事件驱动
-*  函数在 FaaS 平台中，需要通过一系列的事件来驱动函数执行。
-*  无状态
-*  因为每次函数执行，可能使用的都是不同的容器，无法进行内存或数据共享。如果要共享数据，则只能通过第三方服务，比如 Redis 等。
-*  无运维
-*  使用 Serverless 我们不需要关心服务器，不需要关心运维。这也是 Serverless 思想的核心。
-*  低成本
-*  使用 Serverless 成本很低，因为我们只需要为每次函数的运行付费。函数不运行，则不花钱，也不会浪费服务器资源
-
-   ![1574518037319](../../media/sf_reuse/framework/frame_web_001.png)
-
-图 1 Serverless 服务中的前端解决方案架构图
-
- 
-
- 
-
-## 2.7     本章参考
-
-*  Bootstrap  [http://www.runoob.com/try/Bootstrap](http://www.runoob.com/try/bootstrap) 
-*  http://react-china.org/ 
-*  React 教程 http://www.runoob.com/react/react-tutorial.html 
-*  vue http://www.runoob.com/vue2/vue-tutorial.html 
-*  知乎ServerLess https://zhuanlan.zhihu.com/p/65914436
-
-# 3       php-yil
+# 3  php-yil
 
 Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面是一个简短的清单。
 
@@ -633,328 +274,11 @@ Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面�
 
  
 
-# 4       node.js
-
-## 4.1     简介
-
-Node.js是建立在谷歌Chrome的JavaScript引擎(V8引擎)的Web应用程序框架。Node.js在[官方网站](https://nodejs.org/)的定义文件内容如下：
-
-Node.js® is a platform built on [Chrome's JavaScript runtime](http://code.google.com/p/v8/) for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
-
-Node.js自带运行时环境可在Javascript脚本的基础上可以解释和执行(这类似于JVM的Java字节码)。这个运行时允许在浏览器以外的任何机器上执行JavaScript代码。由于这种运行时在Node.js上，所以JavaScript现在可以在服务器上执行。
-
-Node.js还提供了各种丰富的JavaScript模块库，它极大简化了使用Node.js来扩展Web应用程序的研究与开发。
-
-**Node.js =** **运行环境+ JavaScript库**
-
- 
-
-下图描述了 Node.js 的一些重要组成部分
-
-   ![1574518074852](../../media/sf_reuse/framework/frame_web_nodejs_01.png)
-
-图 2 Node.js Concept
-
- 
-
-**在哪里可以使用Node.js？**
-
-以下是Node.js证明自己完美的技术的合作伙伴的领域。
-*  I/O 绑定应用程序
-*  数据流应用
-*  数据密集型实时应用(DIRT)
-*  JSON API的应用程序
-*  单页面应用
-
- 
-
-**在哪些地方不要使用Node.js？**
-
-不建议使用Node.js的就是针对CPU密集型应用。
-
- 
-
-**与node.js** **相关的工具**
-
-*  gulp 基于 node 实现 Web 前端自动化开发的工具，利用它能够极大的提高开发效率。
-
-*  ghost  node.js和ghost安装配置工具
-
-*  grunt  node.js自动化项目构建工具
-
-## 4.2     入门实例
-
-### 4.2.1   安装篇
-
-linux用nvm安装和管理Node.js
-
-表格 7 node.js常用工具列表
-
-| 工具        | 简介                                                         | 安装                                                         | 使用                                    |
-| ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------- |
-| node.js     | 建立在谷歌Chrome的JavaScript引擎(V8引擎)的Web应用程序框架。最新版本8.11.3 | `nvm install 5.1.0`   或者<br>`apt-get install nodejs`       | node -v                                 |
-| npm/   cnpm | 用来安装npm包。cnpm为中国区。                                |                                                              | npm -v   npm install   [xxx]            |
-| nvm         | node.js的包管理工具。                                        | curl  -o https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh \|   bash | nvm  --version   nvm install [version]  |
-| bower       | npm包，前端管理工具，专门用来管理WEB前端依赖包（JS/CSS/IMAGES/fonts） | npm  install bower                                           | # 初始化生成bower.json   $ bower   init |
-| gulp        | nodejs代码部署发布工具。                                     | npm install gulp --global  npm install gulp --save-dev       | gulp [js_pipe]   gulp deploy            |
-
-备注：cnpm类似npm，只是源在中国。
-
- 
-
-表格 8 node.js常用插件或npm包
-
-| 工具    | 简介                        | 安装                          | 使用 |
-| ------- | --------------------------- | ----------------------------- | ---- |
-| D3.js   | 数据可视化前端开发包。      | bower install d3 --save       |      |
-| Express | 基于node.js的框架。脚手架。 | npm install express--save-dev |      |
-| ejs     | 模板引擎                    |                               |      |
-| github  | github   api                |                               |      |
-|         |                             |                               |      |
-|         |                             |                               |      |
-
-备注：参数选项--save-dev为保存到开发目录。
-
-1. npm包安装： npm/cnpm install [npm]--save-dev
-
-2. 前端相关的包安装:  bower install [npm] --save
-
- 
-
-### 4.2.2   示例1：hello world
-
-Node.js应用程序由以下三个重要部分组成：
-*  导入所需模块: 使用require指令来加载javascript模块
-*  创建一个服务器: 服务器这将听监听在Apache HTTP服务器客户端的请求。
-*  读取请求并返回响应： 在前面的步骤中创建的服务器将响应读取由客户机发出的HTTP请求(可以是一个浏览器或控制台)并返回响应。
-
- 文件 helloworld.js
-
-```javascript
-var http = require("http")
-http.createServer(function (request, response) {  
-   response.writeHead(200, {'Content-Type': 'text/plain'});  
-   response.end('Hello World\n');
-}).listen(8081);
-console.log('Server running at http://127.0.0.1:8081/');
-```
-
-
-
-现在执行helloworld.js来启动服务器，如下：
-
-`$ node helloworld.js`
-
-在任何浏览器中打开地址：http://127.0.0.1:8081/，看看下面的结果。
-
- 
-
-### 4.2.3   示例2：sacdl-project
-
-源码：https://github.com/imfly/sacdl-project 
-
-演示：http://imfly.github.io/sacdl-project/ 
-
-SDCDL是加密货币开发语言统计分析, Statistical Analysis of Cryptocurrency Development Languages，是[《Nodejs开发加密货币》](https://github.com/imfly/bitcoin-on-nodejs) 入门部门实例程序。是一个基于gihub的Api进行二次开发的统计分析工具。
-
- 
-
-**功能**
-
-*  自定义搜索。可以代替github针对版本库的高级搜索，自定义搜索任何关键字（不限于加密货币）;
-
-*  数据可视化。可以输出列表、柱状图、矩阵图等交互性视图，方便、直观;
-
-*  扩展性能好。集成了d3.js，可以根据自己喜好，添加和定制任何视图样式; ...
-
-*  开发
-
- ```shell
-# 安装依赖包
-git clone https://github.com/imfly/sacdl-project.git
-cd sacdl-project
-npm install   # 自动查找package.json里依赖包并安装
-bower install
-
-# 构建代码
-gulp 
-# 部署到 gh-pages
-gulp deploy
- ```
-
-
-
-## 4.3     技术原理篇
-
-### 4.3.1   并发处理：事件和回调
-
-Node JS是单线程应用程序，但它通过事件和回调概念，支持并发。 由于Node JS每一个API是异步的，作为一个单独的线程，它使用异步函数调用，以保持并发性。Node JS使用观察者模式。Node线程保持一个事件循环，每当任何任务得到完成，它触发这标志着该事件侦听器函数执行相应的事件。
-
- 
-
-**什么是回调?**
-
-回调是一个异步等效的功能。在完成特定任务回调函数被调用。 Node大量使用了回调。Node的所有的API都支持回调这样的一种方式。
-
- 
-
-**事件**
-
-Node.js运行在一个单线程模式，但它使用一个事件驱动范例来处理并发。它还有助于创建子进程，以充分利用并行处理的多核CPU系统。
-
-子进程总是有三个流child.stdin，child.stdout和child.stderr这可能与父进程stdio流共享。
-
-Node提供child_process模块，该模块具有以下三个主要的方法来创建子进程。
-*  exec - child_process.exec方法在shell/控制台运行一个命令并缓冲输出。
-*  spawn - child_process.spawn启动一个新的过程，一个给定的指令
-*  fork - child_process.fork方法是指定spawn()来创建子进程的一个特例。
-
- 
-
-### 4.3.2   全局对象和模块
-
-Node.js的全局对象是具有全局性的，它们可在所有的模块中应用。我们并不需要包括这些对象在应用中，而可以直接使用它们。这些对象的模块，函数，字符串和对象本身，如下所述。
-
-表格 9 node.js全局对象列表
-
-| 全局对象            | 简介                                                         | 备注 |
-| ------------------- | ------------------------------------------------------------ | ---- |
-| __filename          | 表示正在执行的代码的文件名，解析绝对路径。                   |      |
-| __dirname           | 表示当前正在执行的脚本所在目录的名称。                       |      |
-| setTimeout(cb, ms)  | 用于至少毫秒毫秒后运行回调cb。实际延迟取决于外部因素，如OS计时器粒度和系统负载。计时器不能跨越超过24.8天。 |      |
-| clearTimeout(t)     | 用来停止以前用的setTimeout()创建一个定时器。这里t是由setTimeout()函数返回的计时器。 |      |
-| setInterval(cb, ms) | 用来至少毫秒后重复运行回调cb。实际延迟取决于外部因素，如OS计时器粒度和系统负载。计时器不能跨越超过24.8天。 |      |
-|                     |                                                              |      |
-
- 
-
-表格 10 node.js内置模块列表
-
-| 模块    | 简介                                                        | 备注 |
-| ------- | ----------------------------------------------------------- | ---- |
-| Console | 用于打印输出和错误信息                                      |      |
-| Process | 用于获取当前进程的信息。提供处理活动有关的多个事件          |      |
-| OS      | 提供基本的操作系统相关的实用功能                            |      |
-| Path    | 提供工具，用于处理和转换文件的路径                          |      |
-| NET     | 提供服务器和客户端的数据流。充当网络包装                    |      |
-| DNS     | 提供做实际DNS查询的功能，以及使用底层操作系统的名称解析功能 |      |
-| Domain  | 提供一个方式来处理多个不同的I/O操作，作为一个组             |      |
-
- 
-
-## 4.4     相关框架：Express
-
-**Express**
-
-Express是一个最小的，灵活的Node.js Web应用程序框架，它提供了一套强大的功能来开发Web和移动应用程序。 它有助于基于Node Web应用程序的快速开发。下面是一些Express框架的核心功能：
-
-*  允许设立中间件响应HTTP请求
-
-*  定义了用于执行基于HTTP方法和URL不同动作的路由表
-
-*  允许动态渲染基于参数传递给模板HTML页面
-
- 
-
-## 4.5     本章参考
-
-[1].Node.js 教程 https://www.runoob.com/nodejs/nodejs-tutorial.html
-
- 
-
-# vue
-
-## vue-cli
-
-Vue CLI 是一个基于 Vue.js 进行快速开发的完整系统，提供：
-
-- 通过 `@vue/cli` 搭建交互式的项目脚手架。
-- 通过 `@vue/cli` + `@vue/cli-service-global` 快速开始零配置原型开发。
-- 一个运行时依赖 (@vue/cli-service)，该依赖：
-  - 可升级；
-  - 基于 webpack 构建，并带有合理的默认配置；
-  - 可以通过项目内的配置文件进行配置；
-  - 可以通过插件进行扩展。
-- 一个丰富的官方插件集合，集成了前端生态中最好的工具。
-- 一套完全图形化的创建和管理 Vue.js 项目的用户界面。
-
-CLI 服务是构建于 [webpack](http://webpack.js.org/)[ ](http://webpack.js.org/) 和 [webpack-dev-server](https://github.com/webpack/webpack-dev-server)[ ](https://github.com/webpack/webpack-dev-server) 之上的。它包含了：
-
-- 加载其它 CLI 插件的核心服务；
-- 一个针对绝大部分应用优化过的内部的 webpack 配置；
-- 项目内部的 `vue-cli-service` 命令，提供 `serve`、`build` 和 `inspect` 命令。
-
-
-
-![img](E:\project\technical-share\media\sf_reuse\framework\frame_vue_001.png)
-
-vue生命周期示意图
-
-
-
-## vue项目结构      
-
-**package.json** :  npm init产生。本地项目的包定义文件。
-
-```json
-{ 
- "author": "keefe <wuqifu@gmail.com>", 
- "name": "hello", 
- "description": "A example for write a module", 
- "version": "0.0.1", 
- "repository": { 
- "url": ""
- }, 
- "main": "hello.js", 
- "engines": { 
- "node": "*"
- }, 
- "dependencies": {}, 
- "devDependencies": {} 
-} 
-```
-
-nodejs/vue项目典型结构如下图
-
-![https://www.runoob.com/wp-content/uploads/2016/10/1476690721-1278-854231-ea029fb82e865d5d.jpg](E:\project\technical-share\media\sf_reuse\framework\frame_nodejs_01.png)
-
-vue项目结构说明表
-
-| 一级目录或文件    | 二级目录或文件 | 说明                                                         |
-| ----------------- | -------------- | ------------------------------------------------------------ |
-| node_modules      |                | 项目全局模块目录 -g                                          |
-| src               |                |                                                              |
-|                   | assets         | 静态资源目录                                                 |
-|                   | component      | 组件目录，里面文件类似app.vue格式                            |
-|                   | app.vue        | 项目入口文件。定义vue的template、script、style               |
-|                   | main.js        | 项目的核心文件                                               |
-| .babelrc          |                |                                                              |
-| package.json      |                | 项目的包定义文件，包括依赖组件、脚本等。npm init [proj] 时初始化。 |
-| package-lock.json |                | `npm install`时候生成一份文件，用以记录当前状态下实际安装的各个npm package的具体来源和版本号。不能update依赖组件。 |
-| webpack.config.js |                |                                                              |
-|                   |                |                                                              |
-|                   |                |                                                              |
-
-```vue
-# App.uve, 导入其它地方定义的vue组件 
-<script>
-import firstcomponent from './component/firstcomponent.vue'
-</script>
-```
-
-
-
-## 本章参考
-
-[1]: Vue2.0 新手入门 — 从环境搭建到发布 https://www.runoob.com/w3cnote/vue2-start-coding.html
-
-
-
 # 5. ruby-on-rails
 
-## 5.1     入门实例
+## 入门实例
 
-### 5.1.1   安装rails
+### 安装rails
 
 必需安装软件
 
@@ -973,7 +297,9 @@ $ sudo apt-get install ruby sqlite
 $ gem install rails
 ```
 
-### 5.1.2   创建 Blog 程序
+
+
+### 创建 Blog 程序
 
 Rails 提供了多个被称为“生成器”的脚本，可以简化开发，生成某项操作需要的所有文件。其中一个是新程序生成器，生成一个 Rails 程序骨架，不用自己一个一个新建文件。
 
@@ -1024,17 +350,17 @@ $ rails server
 
  
 
-## 5.2     本章参考
+## 本章参考
 
  
 
-# 6       python-Tornado
+# 6   python-Tornado
 
 ## 6.1     本章参考
 
  
 
-# 7       python-Django
+# 7  python-Django
 
 Django是一个开放源代码的Web应用框架，由Python写成。 
 
@@ -1046,7 +372,7 @@ Django采用了MVC的软件设计模式，即模型M，视图V和控制器C。
 
  
 
-## 7.1     入门实例
+## 7.1   入门实例
 
 **Django安装**
 
