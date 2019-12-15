@@ -233,7 +233,6 @@
 [8.2         参考书目. 111](#_Toc18275057)
 
 
-
 ---
 
 
@@ -258,6 +257,7 @@ Python 本身也是由诸多其他语言发展而来的,这包括 ABC、Modula-3
 9.GUI编程：Python支持GUI可以创建和移植到许多系统调用。
 10.可嵌入: 你可以将Python嵌入到C/C++程序，让你的程序的用户获得"脚本化"的能力。
 
+
 ```bash
 # 进入python的交互式界面
 $ python -i
@@ -266,6 +266,7 @@ $ python -i
 
 
 ## 1.2   Python语言
+
 
 Python是一种解释型、面向对象、动态数据类型的高级程序设计语言。
 Python由Guido van Rossum于1989年底发明，第一个公开发行版发行于1991年。
@@ -283,6 +284,7 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 ## 1.3   Python解释器
 python是编程语言，而不是运行时环境。python有几个实现，分别是CPython、Cython、Jython、IronPython和PyPy。
 表格 1 各种python解释器比较列表
+
 
 | 解释器实现 | 简介     | 应用场景  |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -309,6 +311,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 
 # 2   Python语言教程
 ## 2.1   python对象
+
 在 Python 中，一切都是对象，并且几乎一切都有属性和方法。所有的函数都有一个内置的 __doc__ 属性，它会返回在函数源代码中定义的 doc string。
 self 只有对象实例化（即隐式调用__init__）才能使用self, public属性不需实例化也能调用。因此对于结构类要求在__init__外初始化所有公共属性。
 
@@ -404,20 +407,21 @@ copy.copy( )
 
 浅拷贝就只会使用原始元素的引用（内存地址）
 当我们使用下面的操作的时候，会产生浅拷贝的效果：
-·         使用切片[:]操作
-·         使用工厂函数（如list/dir/set）
-·         使用copy模块中的copy()函数
+* 使用切片[:]操作
+* 使用工厂函数（如list/dir/set）
+* 使用copy模块中的copy()函数
 
 **小结：**
-·         Python中对象的赋值都是进行对象引用（内存地址）传递 
-·         使用copy.copy()，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，依然使用原始的引用. 
-·         如果需要复制一个容器对象，以及它里面的所有元素（包含元素的子元素），可以使用copy.deepcopy()进行深拷贝。
-·         对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说 
-·         如果元祖变量只包含原子类型对象，则不能深拷。
+* Python中对象的赋值都是进行对象引用（内存地址）传递 
+* 使用copy.copy()，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，依然使用原始的引用. 
+* 如果需要复制一个容器对象，以及它里面的所有元素（包含元素的子元素），可以使用copy.deepcopy()进行深拷贝。
+* 对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说 
+* 如果元祖变量只包含原子类型对象，则不能深拷。
 
 
 
 ## 2.2  标准库Standard Library
+
 
 **保留关键字keyword**有：
 *  简单表达式：assert pass del print return yield break continue import global exec
@@ -425,6 +429,7 @@ copy.copy( )
 内建常量**constant**有：False True None NotImplemented Ellipsis __debug__
 
 表格 4 python标准库/模块列表
+
 
 | 功能       | 模块或   类名 | 简介     | 备注     |
 | ---------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -564,20 +569,21 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 | [delattr()](https://docs.python.org/2/library/functions.html#delattr) | [help()](https://docs.python.org/2/library/functions.html#help) | [next()](https://docs.python.org/2/library/functions.html#next) | [setattr()](https://docs.python.org/2/library/functions.html#setattr) |          |
 | [dict()](https://docs.python.org/2/library/functions.html#func-dict) | [hex()](https://docs.python.org/2/library/functions.html#hex) | [object()](https://docs.python.org/2/library/functions.html#object) | [slice()](https://docs.python.org/2/library/functions.html#slice) |          |
 | [dir()](https://docs.python.org/2/library/functions.html#dir) | [id()](https://docs.python.org/2/library/functions.html#id) | [oct()](https://docs.python.org/2/library/functions.html#oct) | [sorted()](https://docs.python.org/2/library/functions.html#sorted) |          |
+
 备注：1. classmethod、staticmethod详见0下方
 
 表格 6 常用内建函数列表
 
-| **作用域**   | **函数名**       | **简介**  |
+| 作用域   | 函数名       | 简介  |
 | ------------ | ----------------------------- | ------------------------------------------------------------ |
-| **模块**     | **globals**      | 当前域的全局变量dict，如已导入的模块名          |
-| | **locals**       | 当前域的局部变量dict，包括了globals. <br>Update and return a dictionary   representing the current local symbol table. Free variables are returned  by [locals()](https://docs.python.org/2/library/functions.html#locals) when it is called in function blocks, but not   in class blocks. |
+| 模块     | globals      | 当前域的全局变量dict，如已导入的模块名          |
+| | locals       | 当前域的局部变量dict，包括了globals. <br>Update and return a dictionary   representing the current local symbol table. Free variables are returned  by [locals()](https://docs.python.org/2/library/functions.html#locals) when it is called in function blocks, but not   in class blocks. |
 | | vars([object]) -> dictionary  | Without arguments, equivalent to   locals(). <br>With an argument, equivalent to   object.__dict__. |
-| **对象**     | dir(object)      | list of strings，打印对象（包括模块/类/）的属性和方法        |
+| 对象     | dir(object)      | list of strings，打印对象（包括模块/类/）的属性和方法        |
 | | help(object)     | 打印出对象的格式化文档 |
 | | type(object)     | 打印对象的类型        |
-| **其它**     | len(object)      | 打印序列或集合容器的元素个数。     |
-| **不常用项** | apple(object[,args[,kwargs]]) |          |
+| 其它     | len(object)      | 打印序列或集合容器的元素个数。     |
+| 不常用项 | apple(object[,args[,kwargs]]) |          |
 备注：
 
 #### python装饰器符号@
@@ -1008,7 +1014,7 @@ print type(eval("{'name':'ljq', 'age':24}"))
 在需要在字符中使用特殊字符时，python用反斜杠(\)转义字符。如下表：
 表格 10Python转义字符列表
 
-| **转义字符** | **描述**           |
+| 转义字符 | 描述           |
 | ------------ | -------------------------------------------- |
 | \(在行尾时)  | 续行符 |
 | \\           | 反斜杠符号         |
@@ -1412,7 +1418,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
 表格 18 不同OS下的第三方模块的缺省安装路径
 
-| **Platform**    | **Standard installation location**          | **Default value**           | **Notes** |
+| Platform    | Standard installation location          | Default value           | Notes |
 | --------------- | ------------------------------------------- | ---------------------------------------- | --------- |
 | Unix (pure)     | *prefix*/lib/python*X.Y*/site-packages      | /usr/local/lib/python*X.Y*/site-packages | (1)       |
 | Unix (non-pure) | *exec-prefix*/lib/python*X.Y*/site-packages | /usr/local/lib/python*X.Y*/site-packages | (1)       |
@@ -1488,7 +1494,7 @@ Commands:
 ```
 
 查看已安装模块
-```
+```SH
 $ pip freeze
 click==6.7
 Flask==0.12.2
@@ -1499,6 +1505,7 @@ MarkupSafe==1.0
 numpy==1.13.3
 opencv-python==3.3.0.10d
 ```
+
 #### 3.1.2.2  ez_setup/setuptools安装(egg方式已弃)
 ```sh
 # 安装 setuptools
@@ -2403,10 +2410,10 @@ if __name__ == "__main__":
 
 #### 3.3.5.1 unittest
    unittest提供了test cases、test suites、test fixtures、test runner相关的类,让测试更加明确、方便、可控。使用unittest编写用例,必须遵守以下规则:
-·         测试文件必须先import unittest
-·         测试类必须继承unittest.TestCase
-·         测试方法必须以“test_”开头
-·         测试类必须要有unittest.main()方法
+* 测试文件必须先import unittest
+* 测试类必须继承unittest.TestCase
+* 测试方法必须以“test_”开头
+* 测试类必须要有unittest.main()方法
 
 #### 3.3.5.2 pytest
 pytest是一个非常成熟的全功能的Python测试框架，主要特点有以下几点：
@@ -2793,23 +2800,23 @@ redirect_stderr=true
 
 #### 3.4.2.3           网址和网络地址操作
 解析/修改网址和网络地址库。
-·         URL
+* URL
 o    furl – 一个小的Python库，使得操纵URL简单化。
 o    purl – 一个简单的不可改变的URL以及一个干净的用于调试和操作的API。
 o    urllib.parse – 用于打破统一资源定位器（URL）的字符串在组件（寻址方案，网络位置，路径等）之间的隔断，为了结合组件到一个URL字符串，并将“相对URL”转化为一个绝对URL，称之为“基本URL”。
 o    tldextract – 从URL的注册域和子域中准确分离TLD，使用公共后缀列表。
-·         网络地址
+* 网络地址
 o    netaddr – 用于显示和操纵网络地址的Python库。
 
 #### 3.4.2.4           WebSocket
 用于WebSocket的库。
-·         Crossbar – 开源的应用消息传递路由器（Python实现的用于Autobahn的WebSocket和WAMP）。
-·         AutobahnPython – 提供了WebSocket协议和WAMP协议的Python实现并且开源。
-·         WebSocket-for-Python – Python 2和3以及PyPy的WebSocket客户端和服务器库。
+* Crossbar – 开源的应用消息传递路由器（Python实现的用于Autobahn的WebSocket和WAMP）。
+* AutobahnPython – 提供了WebSocket协议和WAMP协议的Python实现并且开源。
+* WebSocket-for-Python – Python 2和3以及PyPy的WebSocket客户端和服务器库。
 
 #### 3.4.2.5           DNS解析
-·         dnsyo – 在全球超过1500个的DNS服务器上检查你的DNS。
-·         pycares – c-ares的接口。c-ares是进行DNS请求和异步名称决议的C语言库。
+* dnsyo – 在全球超过1500个的DNS服务器上检查你的DNS。
+* pycares – c-ares的接口。c-ares是进行DNS请求和异步名称决议的C语言库。
 
 #### 3.4.2.6           代理服务器
 *  shadowsocks – 一个快速隧道代理，可帮你穿透防火墙（支持TCP和UDP，TFO，多用户和平滑重启，目的IP黑名单）。
@@ -2840,7 +2847,7 @@ o    netaddr – 用于显示和操纵网络地址的Python库。
 
 #### 3.4.3.2           网页内容提取
 提取网页内容的库。
-·         HTML页面的文本和元数据
+* HTML页面的文本和元数据
 o    newspaper – 用Python进行新闻提取、文章提取和内容策展。
 o    html2text – 将HTML转为Markdown格式文本。
 o    python-goose – HTML内容/文章提取器。
@@ -2860,68 +2867,68 @@ o    scrapely – 从HTML网页中提取结构化数据的库。给出了一些W
 #### 3.4.3.3           文本处理
 用于解析和操作简单文本的库。
 通用
-·         difflib – （Python标准库）帮助进行差异化比较。
-·         Levenshtein – 快速计算Levenshtein距离和字符串相似度。
-·         fuzzywuzzy – 模糊字符串匹配。
-·         esmre – 正则表达式加速器。
-·         ftfy – 自动整理Unicode文本，减少碎片化。
+* difflib – （Python标准库）帮助进行差异化比较。
+* Levenshtein – 快速计算Levenshtein距离和字符串相似度。
+* fuzzywuzzy – 模糊字符串匹配。
+* esmre – 正则表达式加速器。
+* ftfy – 自动整理Unicode文本，减少碎片化。
 转换
-·         unidecode – 将Unicode文本转为ASCII。
+* unidecode – 将Unicode文本转为ASCII。
 字符编码
-·         uniout – 打印可读字符，而不是被转义的字符串。
-·         chardet – 兼容 Python的2/3的字符编码器。
-·         xpinyin – 一个将中国汉字转为拼音的库。
-·         pangu.py – 格式化文本中CJK和字母数字的间距。
+* uniout – 打印可读字符，而不是被转义的字符串。
+* chardet – 兼容 Python的2/3的字符编码器。
+* xpinyin – 一个将中国汉字转为拼音的库。
+* pangu.py – 格式化文本中CJK和字母数字的间距。
 Slug化
-·         awesome-slugify – 一个可以保留unicode的Python slugify库。
-·         python-slugify – 一个可以将Unicode转为ASCII的Python slugify库。
-·         unicode-slugify – 一个可以将生成Unicode slugs的工具。
-·         pytils – 处理俄语字符串的简单工具（包括pytils.translit.slugify）。
+* awesome-slugify – 一个可以保留unicode的Python slugify库。
+* python-slugify – 一个可以将Unicode转为ASCII的Python slugify库。
+* unicode-slugify – 一个可以将生成Unicode slugs的工具。
+* pytils – 处理俄语字符串的简单工具（包括pytils.translit.slugify）。
 通用解析器
-·         PLY – lex和yacc解析工具的Python实现。
-·         pyparsing – 一个通用框架的生成语法分析器。
+* PLY – lex和yacc解析工具的Python实现。
+* pyparsing – 一个通用框架的生成语法分析器。
 人的名字
-·         python-nameparser -解析人的名字的组件。
+* python-nameparser -解析人的名字的组件。
 电话号码
-·         phonenumbers -解析，格式化，存储和验证国际电话号码。
+* phonenumbers -解析，格式化，存储和验证国际电话号码。
 用户代理字符串
-·         python-user-agents – 浏览器用户代理的解析器。
-·         HTTP Agent Parser – Python的HTTP代理分析器。
+* python-user-agents – 浏览器用户代理的解析器。
+* HTTP Agent Parser – Python的HTTP代理分析器。
 
 #### 3.4.3.4           特定格式文件处理
 解析和处理特定文本格式的库。
 通用
-·         tablib – 一个把数据导出为XLS、CSV、JSON、YAML等格式的模块。
-·         textract – 从各种文件中提取文本，比如 Word、PowerPoint、PDF等。
-·         messytables – 解析混乱的表格数据的工具。
-·         rows – 一个常用数据接口，支持的格式很多（目前支持CSV，HTML，XLS，TXT – 将来还会提供更多！）。
+* tablib – 一个把数据导出为XLS、CSV、JSON、YAML等格式的模块。
+* textract – 从各种文件中提取文本，比如 Word、PowerPoint、PDF等。
+* messytables – 解析混乱的表格数据的工具。
+* rows – 一个常用数据接口，支持的格式很多（目前支持CSV，HTML，XLS，TXT – 将来还会提供更多！）。
 Office
-·         python-docx – 读取，查询和修改的Microsoft Word2007/2008的docx文件。
-·         xlwt / xlrd – 从Excel文件读取写入数据和格式信息。
-·         XlsxWriter – 一个创建Excel.xlsx文件的Python模块。
-·         xlwings – 一个BSD许可的库，可以很容易地在Excel中调用Python，反之亦然。
-·         openpyxl – 一个用于读取和写入的Excel2010 XLSX/ XLSM/ xltx/ XLTM文件的库。
-·         Marmir – 提取Python数据结构并将其转换为电子表格。
+* python-docx – 读取，查询和修改的Microsoft Word2007/2008的docx文件。
+* xlwt / xlrd – 从Excel文件读取写入数据和格式信息。
+* XlsxWriter – 一个创建Excel.xlsx文件的Python模块。
+* xlwings – 一个BSD许可的库，可以很容易地在Excel中调用Python，反之亦然。
+* openpyxl – 一个用于读取和写入的Excel2010 XLSX/ XLSM/ xltx/ XLTM文件的库。
+* Marmir – 提取Python数据结构并将其转换为电子表格。
 PDF
-·         PDFMiner – 一个从PDF文档中提取信息的工具。
-·         PyPDF2 – 一个能够分割、合并和转换PDF页面的库。
-·         ReportLab – 允许快速创建丰富的PDF文档。
-·         pdftables – 直接从PDF文件中提取表格。
+* PDFMiner – 一个从PDF文档中提取信息的工具。
+* PyPDF2 – 一个能够分割、合并和转换PDF页面的库。
+* ReportLab – 允许快速创建丰富的PDF文档。
+* pdftables – 直接从PDF文件中提取表格。
 Markdown
-·         Python-Markdown – 一个用Python实现的John Gruber的Markdown。
-·         Mistune – 速度最快，功能全面的Markdown纯Python解析器。
-·         markdown2 – 一个完全用Python实现的快速的Markdown。
+* Python-Markdown – 一个用Python实现的John Gruber的Markdown。
+* Mistune – 速度最快，功能全面的Markdown纯Python解析器。
+* markdown2 – 一个完全用Python实现的快速的Markdown。
 YAML
-·         PyYAML – 一个Python的YAML解析器。
+* PyYAML – 一个Python的YAML解析器。
 CSS
-·         cssutils – 一个Python的CSS库。
+* cssutils – 一个Python的CSS库。
 ATOM/RSS
-·         feedparser – 通用的feed解析器。
+* feedparser – 通用的feed解析器。
 SQL
-·         sqlparse – 一个非验证的SQL语句分析器。
+* sqlparse – 一个非验证的SQL语句分析器。
 HTTP
-·         HTTP
-·         http-parser – C语言实现的HTTP请求/响应消息解析器。
+* HTTP
+* http-parser – C语言实现的HTTP请求/响应消息解析器。
 微格式
 *  opengraph – 一个用来解析Open Graph协议标签的Python模块。可移植的执行体
 *  pefile – 一个多平台的用于解析和处理可移植执行体（即PE）文件的模块。
@@ -2948,15 +2955,15 @@ PSD
 
 ### 3.4.5            网络爬虫框架
 功能齐全的爬虫
-·         grab – 网络爬虫框架（基于pycurl/multicur）。
-·         scrapy – 网络爬虫框架（基于twisted），不支持Python3。
-·         pyspider – 一个强大的爬虫系统。
-·         cola – 一个分布式爬虫框架。
+* grab – 网络爬虫框架（基于pycurl/multicur）。
+* scrapy – 网络爬虫框架（基于twisted），不支持Python3。
+* pyspider – 一个强大的爬虫系统。
+* cola – 一个分布式爬虫框架。
 
 其他
-·         portia – 基于Scrapy的可视化爬虫。
-·         restkit – Python的HTTP资源工具包。它可以让你轻松地访问HTTP资源，并围绕它建立的对象。
-·         demiurge – 基于PyQuery的爬虫微框架。
+* portia – 基于Scrapy的可视化爬虫。
+* restkit – Python的HTTP资源工具包。它可以让你轻松地访问HTTP资源，并围绕它建立的对象。
+* demiurge – 基于PyQuery的爬虫微框架。
 
 ### 3.4.6            浏览器自动化与仿真
 *  selenium – 自动化真正的浏览器（Chrome浏览器，火狐浏览器，Opera浏览器，IE浏览器）。
@@ -3005,6 +3012,7 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 
 # 4   Python高级开发
 ## 4.1   python多版本并存
+
 **使用**：直接调用全路径python，区分CPU位数（32/64位）、操作系统（linux/windows/mac），区分python2.7和python 3.x。
 $ /d/dev/python/python27/python xxx.py   # python 2.7
 $ /d/dev/python/python35/python xxx.py   # python 3.5
@@ -3152,8 +3160,9 @@ Python 3.6.5
 | CookieJar | cookielib.CookieJar       | http.CookieJar        |
 
 **兼容python 2.7和python 3.5**
-\# compatible.py
+
 ```python
+# compatible.py
 # print
 # print in python 2.x is keyword, but in python 3.x is functions
 # method 1: don't recommend
@@ -3634,11 +3643,11 @@ uwsgi --ini /etc/uwsgi9090.ini &
 Python作为一种动态类型的语言，其对象和引用分离。为了有效的释放内存，Python内置了垃圾回收的支持。Python采取了一种相对简单的垃圾回收机制，即引用计数，并因此需要解决孤立引用环的问题。
 
 python内存基本特性
-·         变量无须事先声明
-·         变量无须指定类型
-·         不用关心内存管理
-·         变量名会被"回收"
-·         del 语句能够直接释放资源。
+* 变量无须事先声明
+* 变量无须指定类型
+* 不用关心内存管理
+* 变量名会被"回收"
+* del 语句能够直接释放资源。
 
 **引用计数**
 Python 采用引用计数的方式来管理分配的内存。Python 的每个对象都有一个引用计数，这个引用计数表明了有多少对象在指向它。当这个引用计数为 0 时，该对象就释放了。
@@ -3648,9 +3657,9 @@ Python 采用引用计数的方式来管理分配的内存。Python 的每个对
 不再被使用的内存会被一种称为垃圾收集的机制释放
  注: 解释器跟踪对象的引用计数, 垃圾回收机制负责释放内存, 垃圾收集器是一块独立代码, 它用来寻找引用计数为0的对象, 它也负责检查虽然引用计数大于0但是也应该被销毁的对象。
 比如：l=[]; l.append(l); del l;
-·         垃圾收集算法：根寻找法、引用计数
-·         垃圾回收算法：标记-复制-清除
-·         垃圾回收策略：分代回收。
+* 垃圾收集算法：根寻找法、引用计数
+* 垃圾回收算法：标记-复制-清除
+* 垃圾回收策略：分代回收。
 
 
 ## 4.5   SOAP

@@ -8,13 +8,13 @@
 | 6    | 2018-7-18  | 调整目录结构，更新云服务章节   | 同上   |        |
 | 7    | 2019-12-14           | 更新头部云服务提供商相关内容                               |   同上     |        |
 
+
+
+
+
+
+
 ---
-
- 
-
- 
-
- 
 
 # 目录
 
@@ -364,13 +364,9 @@ management effort or service provider interaction.
 
 2009年始，硬件厂商IBM、惠普、思科、富士通选择OpenStack的研发路线，最终硬件厂商的云计划宣告失败。 2016年惠普宣布关闭公有云平台Helion转向混合云，2017年3月，思科关闭公有云平台Inter-cloud转向混合云。
 
-
-
  ![image-20191201165007350](../media/cloud/cloud_006.png)
 
 图 6 国内外各云服务提供商
-
-
 
 
 ## 2.2  国外云服务提供商
@@ -630,11 +626,10 @@ http://yun.qq.com/
 
 2019年3月，华为云发布全球合作伙伴体系HCPN（Huawei Cloud Partner Network），为伙伴赋能并提供全方位支持。2019年7月，华为云推出了鲲鹏云服务，并联合25家伙伴发布“华为云鲲鹏凌云伙伴计划”。
 
-
-
 ![img](E:\project\technical-share\media\cloud\cloud_huaweicloud_001.png)
 
 图  华为云全栈技术
+
 
 华为云产品（云计算&大数据据，云BU）的解决方案可分为四部分，分别是私有云FusionCloud、大数据&AI FusionInsight、桌面云FusionAccess和虚拟化FusionSphere。
 
@@ -668,6 +663,7 @@ top6 CNCF白金会员，社区贡献国内第一，全球第六
 top3 Hadoop社区全球第三
 
 top4 Spark社区全球第四
+
 
 
 
@@ -746,7 +742,6 @@ SAE: Sina App Engine. http://sae.sina.com.cn/
 ####  IAAS
 
 
-
 ![Gartner：全球云基础设施即服务魔力象限](../media/cloud/cloud_iaas_gartner_2019.png)
 
 图 Gartner：全球云基础设施即服务魔力象限（2019 年）
@@ -785,9 +780,7 @@ SAE: Sina App Engine. http://sae.sina.com.cn/
 [10]: https://cloud.tencent.com/about/event "腾讯云发展历程"
 [11]:  http://www.ibm.com/developerworks/cn/web/ar-cloudaws1/   "用 Amazon Web Services 进行云计算"
 [12]:  https://www.gartner.com/doc/reprints?id=1-1CMAPXNO&ct=190709&st=sb  "Gartner IAAS 2019"
-
 [13]:   http://www.cniteyes.com/archives/34476   "回望：AWS历史上的那些重要时刻"
-
 [14]: www.cnr.cn/rdzx/cxxhl/zxxx/20190802/t20190802_524716762.shtml "中国公有云市场份额最新排名出炉，华为云增速超300%，位列Top5厂商增速第一"
 
 
