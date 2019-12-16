@@ -33,15 +33,15 @@
  
 
 
- 
 
- 
 
- 
 
- 
 
-# 1       Spring框架概述
+
+
+
+
+# 1   Spring框架概述
 
 微服务是一种架构的理念，提出了微服务的设计原则，从理论为具体的技术落地提供了指导思想。
 
@@ -51,7 +51,7 @@
 
 Spring Boot / Cloud 是微服务实践的最佳落地方案。
 
-# 2       Spring Boot
+# 2   Spring Boot
 
 Spring Boot 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
@@ -75,11 +75,11 @@ Spring Boot基于Maven构建。
 
  
 
-# 3       Spring Cloud
+# 3   Spring Cloud
 
 Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 Spring Boot 的开发风格做到一键启动和部署。
 
-## 3.1     Spring Cloud架构
+## 3.1  Spring Cloud架构
 
 **Spring Cloud** **的核心功能：**
 
@@ -144,7 +144,7 @@ Spring Cloud 共集成了 19 个子项目，里面都包含一个或者多个第
 Spring cloud包含两个基本模块，spring cloud context和spring cloud commons。
 *  spring cloud context即spring cloud应用上下文，包含引导上下文(加载bootstrap配置)、配置加密、配置刷新范围(RefreshScope)、控制端点(/env/reset，/refresh，/restart等)功能。
 *  Spring cloud commons 提供服务注册发现，负载均衡，断路器等模式的一个共用抽象层，为具体现实提供统一抽象。
- 
+
 
 实际应用过程中，我们使用了
 
@@ -158,11 +158,11 @@ Spring cloud包含两个基本模块，spring cloud context和spring cloud commo
 
  
 
-# 4       实例
+# 4  实例
 
 
 
-## 4.1     Docker-Compose编排微服务实例
+## 4.1  Docker-Compose编排微服务实例
 
 来源： https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml 
 
@@ -182,19 +182,12 @@ Spring cloud包含两个基本模块，spring cloud context和spring cloud commo
 
 ### 4.1.1  执行步骤
 
-1)         编辑pom.xml
-
-2)         每个项目的根目录执行以下命令，构建docker镜像
-
-mvn clean package docker:build
-
-3)         编辑docker-compose.yml
-
-4)         启动
-
-docker-compose up
-
- 
+1. 编辑pom.xml
+2.  每个项目的根目录执行以下命令，构建docker镜像
+`mvn clean package docker:build`
+3. 编辑docker-compose.yml
+4. 启动
+`docker-compose up`
 
 测试
 

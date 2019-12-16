@@ -522,14 +522,15 @@ Run a command in a new container
 
 * 法2（推荐）：  docker exec -it <docker_id> /bin/bash
 
-```shell
-  # 以root身份登陆docker容器
+  ```sh
+  # 以root身份登陆docker容器 -u root
   $ docker exec -it -u root [docker_id] /bin/bash
-```
+  ```
 
 * 法3：SSH
 
-* 法4：
+
+
 
 ### 2.4.2  docker仓库管理镜像
 
@@ -719,7 +720,7 @@ redis:
  image: redis
 ```
 
-#  -d后台启动
+后台启动： -d 
 
 ```sh 
 $ doccker-compose up -d
@@ -727,7 +728,7 @@ $ doccker-compose up -d
 
 
 
-## 2.5     实例
+## 2.5  实例
 
 ### 2.5.1  docker镜像使用示例
 
@@ -807,45 +808,41 @@ docker run -d -p 8082:80 --name runoob-nginx-test-web -v ~/nginx/www:/usr/share/
 
 备注：官网的ubuntu镜像只含linux内核和基础命令约89.3MB，安装gcc/g++后约增加180MB（合计266MB），再安装vim增加60MB（合计327MB）。
 
-**1.** **运行容器ubuntu中Hello World**
+1. 运行容器ubuntu中Hello World
 
-docker run ubuntu:15.10 /bin/echo "Hello world"
+`docker run ubuntu:15.10 /bin/echo "Hello world"`
 
- 
+2. -i -t 交互式启动，交互式启动时不能使用 -name
 
-**2. -i -t** **交互式启动，交互式启动时不能使用** **-name**
+```sh
+$ docker run -i -t ubuntu:15.10 /bin/bash
 
-docker run -i -t ubuntu:15.10 /bin/bash
+# 进入到容器里（exec交互式调用需要容器本身支持tty终端）
+$ docker exec -it [images]  /bin/bash 
+```
 
- 
-
-*  **进入到容器里（exec交互式调用需要容器本身支持tty终端）**
-
-docker exec -it [images]  /bin/bash 
-
- 
-
-*  **Docker挂载本地目录及实现文件共享**
+3. **Docker挂载本地目录及实现文件共享**
 
 Docker容器启动的时候，如果要挂载宿主机的一个目录，可以用-v参数指定。
 
 譬如我要启动一个centos容器，宿主机的/test目录挂载到容器的/soft目录，可通过以下方式指定：（要求两边都是全路径，不能出现相对路径）
 
-$ docker run -it -v /test:/soft centos /bin/bash
+`$ docker run -it -v /test:/soft centos /bin/bash`
 
 这样在容器启动后，容器内会自动创建/soft的目录。通过这种方式，我们可以明确一点，即-v参数中，冒号":"前面的目录是宿主机目录，后面的目录是容器内目录。
 
-\# 复制文件
-
+```sh
+# 复制文件
 $ docker cp [contain_id]:/xx xxx
+```
 
- 
+4. **保存新镜像**
 
-*  **保存新镜像**
-
-docker commit -m='' -a=[author] [contain_id] [dst_image:tag]
+`docker commit -m='' -a=[author] [contain_id] [dst_image:tag]`
 
 如 docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
+
+
 
 ### 2.5.3  CICD之jenkis
 
@@ -1033,14 +1030,14 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
 **容器优势总结：**
 
-- **快速创建/部署应用：**与VM虚拟机相比，容器镜像的创建更加容易。
-- **持续开发、集成和部署：**提供可靠且频繁的容器镜像构建/部署，并使用快速和简单的回滚(由于镜像不可变性)。
-- **开发和运行相分离：**在build或者release阶段创建容器镜像，使得应用和基础设施解耦。
-- **开发，测试和生产环境一致性：**在本地或外网（生产环境）运行的一致性。
-- **云平台或其他操作系统：**可以在 Ubuntu、RHEL、 CoreOS、on-prem、Google      Container Engine或其它任何环境中运行。
-- **Loosely coupled，分布式，弹性，微服务化：**应用程序分为更小的、独立的部件，可以动态部署和管理。
-- **资源隔离**
-- **资源利用：**更高效
+- 快速创建/部署应用：与VM虚拟机相比，容器镜像的创建更加容易。
+- 持续开发、集成和部署：提供可靠且频繁的容器镜像构建/部署，并使用快速和简单的回滚(由于镜像不可变性)。
+- 开发和运行相分离：在build或者release阶段创建容器镜像，使得应用和基础设施解耦。
+- 开发，测试和生产环境一致性：在本地或外网（生产环境）运行的一致性。
+- 云平台或其他操作系统：可以在 Ubuntu、RHEL、 CoreOS、on-prem、Google      Container Engine或其它任何环境中运行。
+- Loosely coupled，分布式，弹性，微服务化：应用程序分为更小的、独立的部件，可以动态部署和管理。
+- 资源隔离
+- 资源利用：更高效
 
  
 
@@ -1048,9 +1045,9 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
  ![1574519369627](../../media/sf_reuse/framework/frame_k8s_002.png)
 
-   
+   图 4 K8s组件
 
-图 4 K8s组件
+
 
 ### 3.1.2  K8s术语
 
@@ -1241,7 +1238,7 @@ $ git clone https://github.com/kubernetes/kubernetes.git
 
 **第一步：运行Etcd**
 
-docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd --addr=127.0.0.1:4001 --bind-addr=0.0.0.0:4001 --data-dir=/var/etcd/data
+`docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd --addr=127.0.0.1:4001 --bind-addr=0.0.0.0:4001 --data-dir=/var/etcd/data`
 
  
 
@@ -1272,7 +1269,7 @@ docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 
 
 **测试**
 ```shell
-kubectl get nodes
+$ kubectl get nodes
 ```
 
 

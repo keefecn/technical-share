@@ -99,47 +99,38 @@
 
 ## 1.2     J2EE
 
-J2EE的分层架构是设计模式MVC（详见 《软件设计系列》MVC模式。
+J2EE的分层架构是设计模式MVC（详见 《软件设计系列》MVC模式）的优秀实践。Java平台的动态网站编程技术经历了Model 1和Model2两个阶段。
 
-）的优秀实践。Java平台的动态网站编程技术经历了Model 1和Model2两个阶段。
-
- 
-
-**J2EE是**SUN公司基于Java的体系结构，是4层结构，包括客户层(客户端), WEB层(JSP/Servlets), 业务层(Java Bean), EIS层(DBMS)
+J2EE是SUN公司基于Java的体系结构，是4层结构，包括客户层(客户端), WEB层(JSP/Servlets), 业务层(Java Bean), EIS层(DBMS)
 
  
 
-### 1.2.1   Model 1:JSP + Beans（已淘汰）
+### 1.2.1   Model 1: JSP + Beans（已淘汰）
 
 Model 1体系中，JSP页面充当VIEW+CONTROLLER的角色。控制逻辑和表现逻辑混在一起，代码可用性和维护性差，不利于大型项目开发。
 
 ​         ![1574517098015](../../media/sf_reuse/framework/frame_java_001.png)                                         
 
-### 1.2.2   Model 2:JSP + Servlet + Beans
+### 1.2.2   Model 2: JSP + Servlet + Beans
 
    ![1574517114652](../../media/sf_reuse/framework/frame_java_002.png)
 
-*  Java **Servlet**：运行于服务器上的一个小程序, 提供应用程序接口, 通过它可以简单快速地开发并扩展服务器功能, 将来有可能取代CGI。Servlet处理业务逻辑。
-
-*  **JSP**：Java Server Page, 提供一种简单快速的方法来*创建动态网页*。JSP生成表示层的内容
+*  Java Servlet：运行于服务器上的一个小程序, 提供应用程序接口, 通过它可以简单快速地开发并扩展服务器功能, 将来有可能取代CGI。Servlet处理业务逻辑。
+*  JSP：Java Server Page, 提供一种简单快速的方法来*创建动态网页*。JSP生成表示层的内容
 
  
 
 Servlet 是在[服务器](http://baike.baidu.com/view/899.htm)上运行的小程序。这个词是在 Java [applet](http://baike.baidu.com/view/150834.htm)的环境中创造的，Java applet 是一种当作单独文件跟网页一起发送的小程序，它通常用于在客户端运行，结果得到为用户进行运算或者根据用户互作用定位图形等服务。
 
 最早支持 Servlet 技术的是 JavaSoft 的 Java Web Server。此后，一些其它的基于 Java 的 Web Server 开始支持标准的 Servlet API。Servlet 的主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。这个过程为：
-
-1)        客户端发送请求至服务器端；
-
-2)        服务器将请求信息发送至 Servlet；
-
-3)        Servlet 生成响应内容并将其传给服务器。响应内容动态生成，通常取决于客户端的请求；
-
-4)        服务器将响应返回给客户端。
+1. 客户端发送请求至服务器端；
+2. 服务器将请求信息发送至 Servlet；
+3. Servlet 生成响应内容并将其传给服务器。响应内容动态生成，通常取决于客户端的请求；
+4. 服务器将响应返回给客户端。
 
  
 
-   ![1574517138184](E:\project\technical-share\media\sf_reuse\mvc_05.jpg)
+   ![mvc_05.png](../../media/sf_reuse/mvc_05.png)
 
 图 1 J2EE里的 MVC (JSP + Servlet + Beans) 
 
@@ -151,12 +142,9 @@ Servlet 是在[服务器](http://baike.baidu.com/view/899.htm)上运行的小程
 *  控制器control由Servlets实现。
 
 控制器流程如下: 
-
-1) 根据用户权限,导航到不同界面; 
-
-2) 根据用户功能请求, 实例化功能模块Bean； 
-
-3) 将Bean处理结果导航给JSP显示给客户端.
+1. 根据用户权限,导航到不同界面; 
+2. 根据用户功能请求, 实例化功能模块Bean； 
+3..将Bean处理结果导航给JSP显示给客户端.
 
  
 
@@ -230,11 +218,11 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 ## 1.5     本章参考
 
-[1].    EJB的体系结构[http：//www.uml.org.cn/j2ee/2009112011.asp](http://www.uml.org.cn/j2ee/2009112011.asp)
+[1]: EJB的体系结构[http：//www.uml.org.cn/j2ee/2009112011.asp](http://www.uml.org.cn/j2ee/2009112011.asp)
 
-[2].    EJB  https://baike.baidu.com/item/EJB
+[2]: EJB  https://baike.baidu.com/item/EJB
 
-[3].    J2EE [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
+[3]: J2EE [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
 
  
 
@@ -246,11 +234,11 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 表格 3 Java SSH框架列表
 
-| **框架名称**                             | **简介**      | **介绍**                                                     |
+|   框架名称                               |   简介        |   介绍                                                       |
 | ---------------------------------------- | ------------- | ------------------------------------------------------------ |
-| [**Struts**](https://struts.apache.org/) | Web框架       | **Struts** 是一个基于Sun J2EE平台的MVC框架，主要是采用Servlet和JSP技术来实现的。2001年诞生struts 1，最新版本是struts 2。 |
-| [**Spring**](https://spring.io/)         | J2EE/IOC/AOP  | 作为EJB模型的一个替换选择，是IOC和AOP的容器框架。初版2003年发布，最新版本是Spring   3。 |
-| [**Hibernate**](http://hibernate.org/)   | ORM持久层框架 | 一个开放源代码的对象关系映射ORM框架，它对JDBC进行了非常轻量级的对象封装。 |
+| [  Struts  ](https://struts.apache.org/) | Web框架       |   Struts   是一个基于Sun J2EE平台的MVC框架，主要是采用Servlet和JSP技术来实现的。2001年诞生struts 1，最新版本是struts 2。 |
+| [  Spring  ](https://spring.io/)         | J2EE/IOC/AOP  | 作为EJB模型的一个替换选择，是IOC和AOP的容器框架。初版2003年发布，最新版本是Spring   3。 |
+| [  Hibernate  ](http://hibernate.org/)   | ORM持久层框架 | 一个开放源代码的对象关系映射ORM框架，它对JDBC进行了非常轻量级的对象封装。 |
 
 *备注：SSH~ Struts + Spring + Hibrnate**，Java**最经典的开发框架组合。* 
 
@@ -259,24 +247,50 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 SSH框架是Java平台企业级的最基础的框架之一。
 
 集成步骤总结： 
-
-1)        获取所有的依赖库(很多)。 
-
-2)        注册 Spring 的 ContextLoaderListener 来整合 Struts2 和 Spring。 
-
-3)        使用 Spring 的 LocalSessionFactoryBean 来集成 Spring 和 Hibernate。 
-
-4)        完成所有连接。 
+1. 获取所有的依赖库(很多)。 
+2. 注册 Spring 的 ContextLoaderListener 来整合 Struts2 和 Spring。 
+3. 使用 Spring 的 LocalSessionFactoryBean 来集成 Spring 和 Hibernate。 
+4. 完成所有连接。 
 
 Struts 2 <-- (ContextLoaderListener) --> Spring <-- (LocalSessionFactoryBean) --> Hibernate
 
-| 组件      | 配置文件及配置项                                             | 主要源文件                     | 要点                                 |
-| --------- | ------------------------------------------------------------ | ------------------------------ | ------------------------------------ |
-| Struts    | // 配置文件 strucs.xml strucs.properties   配置action       <**package** name="default" namespace="/"   extends="struts-default">       <!-- 定义一个名为user的Action，实现类为com.qst.chapter02.action.UserAction   -->       <action   name="user" class="com.qst.chapter02.action.UserAction">       <!-- 配置execute()方法返回值与视图资源之间的映射关系 -->       <**result**   name="success">/result.jsp</result>       <result name="error">/error.jsp</result>       </action>       </package> | action类   需要实现execute方法 | action类需要struts.xml里配置action。 |
-| Spring    | spring.xml   bean.xml                                        | bean类                         | bean类和bean.xml一一对应。           |
-| Hibernate | # hibernate.cfg.xml，可配置dialect、driver、url、username、password等等   <hibernate-configuration>       <session-factory>          <!-- 配置访问Oracle数据库参数信息 -->          <property name="dialect">              org.hibernate.dialect.OracleDialect          </property>          <!-- 注册所有ORM映射文件 -->          <mapping resource="com/qst/chapter05/pojos/Student.hbm.xml"   />       </session-factory>   </hibernate-configuration> | ORM类                          | ORM类对应同名.hbm.xml                |
+| 组件      | 配置文件及配置项                  | 配置项                                       | 主要源文件                     | 要点                                 |
+| --------- | --------------------------------- | -------------------------------------------- | ------------------------------ | ------------------------------------ |
+| Struts    | strucs.xml  <br>strucs.properties | 配置action                                   | action类   需要实现execute方法 | action类需要struts.xml里配置action。 |
+| Spring    | spring.xml   bean.xml             |                                              | bean类                         | bean类和bean.xml一一对应。           |
+| Hibernate | hibernate.cfg.xml                 | dialect、driver、url、username、password等等 | ORM类                          | ORM类对应同名.hbm.xml                |
 
 备注：WEB程序都要有一个配置文件web.xml，主要配置Filter。
+
+**strucs.xml**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<package name="default" namespace="/" extends="struts-default"> 
+  <!-- 定义一个名为user的Action，实现类为com.qst.chapter02.action.UserAction   -->  
+  <action name="user" class="com.qst.chapter02.action.UserAction"> 
+    <!-- 配置execute()方法返回值与视图资源之间的映射关系 -->  
+    <result name="success">/result.jsp</result>  
+    <result name="error">/error.jsp</result> 
+  </action> 
+</package>
+```
+
+**hibernate.cfg.xml**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-configuration> 
+  <session-factory> 
+    <!-- 配置访问Oracle数据库参数信息 -->  
+    <property name="dialect">org.hibernate.dialect.OracleDialect</property>  
+    <!-- 注册所有ORM映射文件 -->  
+    <mapping resource="com/qst/chapter05/pojos/Student.hbm.xml"/> 
+  </session-factory> 
+</hibernate-configuration>
+```
+
+
 
 ## 2.2     Strucs
 
@@ -539,9 +553,9 @@ IoC是一个很大的概念,可以用不同的方式实现。其主要形式有�
 
  
 
-**//** **依赖注入1：Setter设值注入** **配置文件**
+** 依赖注入1：Setter设值注入配置文件**
 
-// bean.xml 
+bean.xml 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -558,19 +572,23 @@ IoC是一个很大的概念,可以用不同的方式实现。其主要形式有�
 		<property name="price" value="70.25" />
 	</bean>
 </beans>
-
 ```
 
 
 
-**//** **依赖注入2：Constructor构造器注入** **配置文件**
+**依赖注入2：Constructor构造器注入配置文件** 
 
 ```xml
-	<bean id="book" class="com.qst.chapter08.Book">
-		<constructor-arg name="name" value="SSH开发" />
-	</beans>
+<bean id="book" class="com.qst.chapter08.Book">
+    <constructor-arg name="name" value="SSH开发" />
+</beans>
+```
 
-// ApplicationContextExample.java
+
+
+示例：ApplicationContextExample.java
+
+```java
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationContextExample {
@@ -598,14 +616,13 @@ Spring AOP的模块化方面横切关注点。简单地说，就是一个拦截�
 
 
 **AOP的实现策略**
+1. Java SE动态代理：使用动态代理可以为一个或多个接口在运行期动态生成实现对象，生成的对象中实现接口的方法时可以添加增强代码，从而实现AOP。缺点是只能针对接口进行代理，另外由于动态代理是通过反射实现的，有时可能要考虑反射调用的开销。
 
-**（1）Java SE动态代理：**     使用动态代理可以为一个或多个接口在运行期动态生成实现对象，生成的对象中实现接口的方法时可以添加增强代码，从而实现AOP。缺点是只能针对接口进行代理，另外由于动态代理是通过反射实现的，有时可能要考虑反射调用的开销。
- **（2）字节码生成（CGLib** **动态代理）**     动态字节码生成技术是指在运行时动态生成指定类的一个子类对象，并覆盖其中特定方法，覆盖方法时可以添加增强代码，从而实现AOP。其常用工具是cglib。
- **（3）定制的类加载器**     当需要对类的所有对象都添加增强，动态代理和字节码生成本质上都需要动态构造代理对象，即最终被增强的对象是由AOP框架生成，不是开发者new出来的。解决的办法就是实现自定义的类加载器，在一个类被加载时对其进行增强。JBoss就是采用这种方式实现AOP功能。
- **（4）代码生成**     利用工具在已有代码基础上生成新的代码，其中可以添加任何横切代码来实现AOP。
- **（5）语言扩展**     可以对构造方法和属性的赋值操作进行增强，AspectJ是采用这种方式实现AOP的一个常见Java语言扩展。
+2. 字节码生成（CGLib动态代理）：动态字节码生成技术是指在运行时动态生成指定类的一个子类对象，并覆盖其中特定方法，覆盖方法时可以添加增强代码，从而实现AOP。其常用工具是cglib。
+3. 定制的类加载器：当需要对类的所有对象都添加增强，动态代理和字节码生成本质上都需要动态构造代理对象，即最终被增强的对象是由AOP框架生成，不是开发者new出来的。解决的办法就是实现自定义的类加载器，在一个类被加载时对其进行增强。JBoss就是采用这种方式实现AOP功能。
+4. 代码生成：利用工具在已有代码基础上生成新的代码，其中可以添加任何横切代码来实现AOP。
+5. 语言扩展：可以对构造方法和属性的赋值操作进行增强，AspectJ是采用这种方式实现AOP的一个常见Java语言扩展。
 
- 
 
 AOP中的切面封装了增强（Advice）和切点（Pointcut）。
 
@@ -640,25 +657,17 @@ POJO：Java普通对象。
 说明：
 
 1. SessionFactory:生成session的工程，依赖ConnectionProvider。单个数据库映射关系经过编译后的内存镜像，线程安全的。
-
 2. Session:应用程序与持久层之间交互操作的一个单线程对象。所有的持久化对象必须在Session管理下才能进行持久化操作。它底层封装了JDBC连接，是Transaction工厂。
-
 3. 持久化对象（PO）：系统创建的POJO实例，一旦与特定的Session关联，并对应数据表的指定记录，该对象就处于持久化状态。
-
 4. 瞬态对象：通过new等关键字创建的Java实例，没有与特定session关联的对象。
-
 5. 托管对象：曾经的持久化对象，一旦session关闭，则对象进入托管状态。
-
 6. 事务（Transaction）：代表一次原子操作，Hibernate事务是对底层具体的JDBC，JTA以及CORBA事务的抽象。
-
 7. 连接提供者（ConnectionProvider）：生成JDBC连接的工厂，通过抽象将应用程序与底层的DataSource或DriverManager隔离开。
 
- 
 
  ![1574517549490](../../media/sf_reuse/framework/frame_java_hibernate_003.png)
 
    
-
 图 9 hibernate核心接口图
 
 说明：
@@ -747,7 +756,7 @@ POJO：Java普通对象。
 
 hibernate 有两个配置文件，分别是hibernate.cfg.xml, hiberntate.properties，一个XML，另一个键值文件，互为补充。
 
-**# hibernate.cfg.xml**
+示例：hibernate.cfg.xml
 
 ```xml
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
@@ -783,46 +792,44 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
- 
-
 ## 2.5     本章参考
 
-[1].    struts  https://struts.apache.org/ 
+[1]: struts  https://struts.apache.org/ 
 
-[2].    **Spring** https://spring.io/ 
+[2]: Spring https://spring.io/ 
 
-[3].    Spring官方文档 - http://www.springsource.org/documentation
+[3]: Spring官方文档 - http://www.springsource.org/documentation
 
-[4].    **Spring** **教程** [**https://www.w3cschool.cn/wkspring/**](https://www.w3cschool.cn/wkspring/)
+[4]: Spring 教程 [https://www.w3cschool.cn/wkspring/](https://www.w3cschool.cn/wkspring/)
 
-[5].    **Hibernate** http://hibernate.org/ 
+[5]: Hibernate http://hibernate.org/ 
 
-[6].    Java中SSH框架怎样搭建 http://jingyan.baidu.com/article/066074d6564b39c3c21cb018.html 
+[6]: Java中SSH框架怎样搭建 http://jingyan.baidu.com/article/066074d6564b39c3c21cb018.html 
 
-[7].    Struts2+Spring+Hibernate集成实例https://www.yiibai.com/struts_2/struts-2-spring-hibernate-integration-example.html
+[7]: Struts2+Spring+Hibernate集成实例 https://www.yiibai.com/struts_2/struts-2-spring-hibernate-integration-example.html
 
-[8].    struts 2教程  https://www.yiibai.com/struts_2/ 
+[8]: struts 2教程  https://www.yiibai.com/struts_2/ 
 
-[9].    Spring Framework (Wiki) - http://en.wikipedia.org/wiki/Spring_Framework
+[9]: Spring Framework (Wiki) - http://en.wikipedia.org/wiki/Spring_Framework
 
-[10].Spring 3.0文档 - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/
+[10]: Spring 3.0文档 - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/
 
-[11].Spring之AOP由浅入深 https://www.cnblogs.com/zhaozihan/p/5953063.html
+[11]: Spring之AOP由浅入深 https://www.cnblogs.com/zhaozihan/p/5953063.html
 
-[12].Spring 框架简介  Spring AOP 和 IOC 容器入门https://www.ibm.com/developerworks/cn/java/wa-spring1/ 
+[12]: Spring 框架简介  Spring AOP 和 IOC 容器入门https://www.ibm.com/developerworks/cn/java/wa-spring1/ 
 
  
 
-# 3       Java其它第三方框架
+# 3  Java其它第三方框架
 
 表格 5 Java第三方框架列表
 
-| **框架名称**  | **简介**      | **介绍**                                               |
+| 框架名称  | 简介      | 介绍                                               |
 | ------------- | ------------- | ------------------------------------------------------ |
-| **IBATIS**    | ORM持久层框架 | 相对于Hibernate, ibatis 则要求开发者编写具体的SQL 语句 |
-| **Quartz**    | Job调度       |                                                        |
-| **Velocity**  | 模板引擎      |                                                        |
-| **XPlanner**  | 项目管理      |                                                        |
+| IBATIS    | ORM持久层框架 | 相对于Hibernate, ibatis 则要求开发者编写具体的SQL 语句 |
+| Quartz    | Job调度       |                                                        |
+| Velocity  | 模板引擎      |                                                        |
+| XPlanner  | 项目管理      |                                                        |
 | Guice         | IOC           | google开发的轻量级的依赖注入框架(IOC）。               |
 | PicoContainer | IOC           | 极小的容器。                                           |
 | AspectJ       | AOP           |                                                        |
@@ -832,11 +839,11 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
-## 3.1     本章参考
+## 3.1 本章参考
 
  
 
-# 4       Android框架
+# 4  Android框架
 
    ![1574517637282](../../media/sf_reuse/framework/frame_android_001.png)
 
@@ -844,12 +851,12 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
-## 4.1     本章参考
+## 4.1 本章参考
 
  
 
-# 5       参考资料
+# 5  参考资料
 
-[1].    JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
+[1]: JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
 
 ---
