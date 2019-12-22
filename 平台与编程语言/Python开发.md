@@ -3228,8 +3228,8 @@ Python中的random模块用于生成随机数，虽然提供了多种方法，�
 
 ## 4.3     python并发
  ```python
-from multiprocessing import Poo*  # 进程池 
-from multiprocessing.dummy import Pool as ThreadPoo*  # 线程池
+from multiprocessing import Pool  # 进程池 
+from multiprocessing.dummy import Pool as ThreadPool  # 线程池
  ```
 
 python并发主要有多进程multiprocessing、多线程thread。

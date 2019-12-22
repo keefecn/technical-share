@@ -215,7 +215,9 @@ http   #http块
 | $server_protocol      | 请求的协议版本，HTTP/1.0   或http/1.1                        |
 | $uri                  | 请求的不带请求参数的URL，可能和最初的值有不同，比如经过重定向之类的 |
 
- 
+ 备注：$scheme://$host$uri
+
+
 
 ###  Nginx配置语法 
 
@@ -332,7 +334,8 @@ user  nobody;           #全局块
 worker_processes  1;
 
 events {    #events块
-    worker_connections  1024;   
+    worker_connections  1024;  
+    use epoll;
 }
 
 http {  #http块
