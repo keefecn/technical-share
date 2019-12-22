@@ -925,7 +925,7 @@ Any git command accepting any <object> can also use the following symbolic notat
 
  
 
-# 6    git仓库托管
+# 6  git仓库托管
 
 常见托管仓库：[oschina ](http://git.oschina.net/)[github](http://wwww.github.com) [repo.or.cz](http://repo.or.cz)
 
@@ -947,7 +947,8 @@ Any git command accepting any <object> can also use the following symbolic notat
 
 ### 6.1.1 filter-branch：全局修改分支历史纪录
 
-**1) 开源前修改用户信息**
+**1)  开源前修改用户信息**
+
 ```sh
 do_commit_filter()
 {       # '=' seems 完全相同，通配符＊不起作用
@@ -986,17 +987,38 @@ do_env_filter()
 
 **2）删除历史纪录中某个文件**
 
-\# remove unnecessay file or directory， 如passwords.txt
-
+```sh
+# remove unnecessay file or directory， 如passwords.txt
 git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
+```
 
- 
 
-## 6.2   git.oschina.net
+
+## 6.2 gitlab本地搭建
+
+gitlab是开源仓库，可以在本地搭建私有仓库。
+
+```sh
+[root@server1 ~]# yum install -y git
+[root@server1 ~]# yum install gitlab-ce-11.2.0-ce.0.el7.x86_64.rpm -y   #安装gitlab
+[root@server1 ~]# cd /etc/gitlab/
+[root@server1 gitlab]# ls
+gitlab.rb
+[root@server1 gitlab]# vim gitlab.rb  #更新本地IP
+  13 external_url 'http://172.25.76.1'
+
+[root@server1 gitlab]# gitlab-ctl reconfigure 
+```
+
+在浏览器输入172.25.76.1，即可修改ROOT密码。
+
+
+
+## 6.3 git.oschina.net
 
 相对于github，oschina支持免费私有仓库。
 
-### 6.2.1 项目用户权限
+### 项目用户权限
 
 用户权限：管理者、开发者、报告者和观察者
 
@@ -1007,7 +1029,7 @@ git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 
  
 
-### 6.2.2 开源协同开发
+### 开源协同开发
 
 示例：git@github.com:looly/elasticsearch-definitive-guide-cn.git
 
@@ -1023,6 +1045,12 @@ git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 1~3是初始化操作，执行一次即可。在翻译前必须执行第4步同步我的库（这样避免冲突），然后执行5~7既可。
 
  
+
+## 本章参考
+
+[1]: https://blog.csdn.net/zcx1203/article/details/90734055 "gitlab本地仓库搭建|Jenkins关联gitlab"
+
+
 
 # 7    FAQ
 
@@ -1142,7 +1170,9 @@ cpan> install XXX:XXX
 
 GitBook is a command line tool (and Node.js library) for building beautiful books using **GitHub**/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
 
- 
+ GitBook 分布式协作写书。
+
+
 
 ## 8.1   Getting started
 

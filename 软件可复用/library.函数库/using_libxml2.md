@@ -5,22 +5,16 @@
 
  
 
- 
-
+---
 # 简介 
 
 Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform), it is free software available under the [MIT License](http://www.opensource.org/licenses/mit-license.html).
 
- 
 
 **数据类型：**
-
 * xmlChar  替代char,使用UTF-8编码的一字节字符串。如果你的数据使用其它编码，它必须被转换到UTF-8才能使用libxml的函数。
-
 * XmlDoc  包含由解析文档建立的树结构，xmlDocPtr是指向这个结构的指针。
-
 * xmlNodePtr and xmlNode 包含单一结点的结构
-
 * xmlNodePtr是指向这个结构的指针，它被用于遍历文档树。
 
  
@@ -31,6 +25,8 @@ Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usa
 
 ​       在学习libxml2中，最好的学习手册就是由官方开发者提供的开发手册就是libxml2-devel-2.6.19，rpm –q –d libxml2获得文档路径，就是它了。
 
+
+
 ## 关于xml
 
 开始研究 LibXML2 库之前，让我们先来巩固一下 XML 的相关基础。XML 是一种基于文本的格式，它可用来创建能够通过各种语言和平台访问的结构化数据。它包括一系列类似 HTML 的标记，并以树型结构来对这些标记进行排列。
@@ -38,19 +34,22 @@ Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usa
 例如，可参见[清单 1](http://www-128.ibm.com/developerworks/cn/aix/library/au-libxml2.html?ca=drs-#listing1#listing1) 中介绍的简单文档。这是[配置文件](http://www-128.ibm.com/developerworks/cn/aix/library/au-libxml2.html?ca=drs-#configfile#configfile)部分中研究的配置文件示例的简化版本。为了更清楚地显示 XML 的一般概念，所以对其进行了简化。
 
 
- **清单** **1.** **一个简单的** **XML** **文件**
+ 清单1.一个简单的XML文件
 
 ```xml
-` ``<?xml version="1.0" encoding="UTF-8"?>``<files>``  <owner>root</owner>``  <action>delete</action>``  <age units="days">10</age>``</files>`
+<?xml version="1.0" encoding="utf-8"?>
+<files> 
+  <owner>root</owner>  
+  <action>delete</action>  
+  <age units="days">10</age>
+</files>
 ```
-
- 
 
 [清单 1](http://www-128.ibm.com/developerworks/cn/aix/library/au-libxml2.html?ca=drs-#listing1#listing1) 中的第一行是 XML 声明，它告诉负责处理 XML 的应用程序，即解析器，将要处理的 XML 的版本。大部分的文件使用版本 1.0 编写，但也有少量的版本 1.1 的文件。它还定义了所使用的编码。大部分文件使用 UTF-8，但是，XML 设计用来集成各种语言中的数据，包括那些不使用英语字母的语言。
 
 接下来出现的是元素。一个元素以*开始标记* 开始（如 <files>），并以*结束标记* 结束（如 </files>），其中使用斜线 (/) 来区别于开始标记。
 
-元素是 `Node` 的一种类型。XML 文档对象模型 (DOM) 定义了几种不同的 `Nodes` 类型，包括 `Elements`（如 `files` 或者 `age`）、`Attributes`（如 `units`）和 Text（如 `root` 或者 `10`）。元素可以具有子节点。例如，age 元素有一个子元素，即文本节点 `10`。而 files 元素有七个子元素。其中三个很明显。它们分别是三个子元素：`owner`、`action` 和 `age`。其他四个分别是元素前后的空白文本符号。
+元素是 Node 的一种类型。XML 文档对象模型 (DOM) 定义了几种不同的 Nodes 类型，包括 Elements（如 files 或者 age）、Attributes（如 units）和 Text（如 root 或者 10）。元素可以具有子节点。例如，age 元素有一个子元素，即文本节点 10。而 files 元素有七个子元素。其中三个很明显。它们分别是三个子元素：owner、action 和 age。其他四个分别是元素前后的空白文本符号。
 
 XML 解析器可以利用这种父子结构来遍历文档，甚至修改文档的结构或内容。LibXML2 是这样的解析器中的其中一种，并且文中的示例应用程序正是使用这种结构来实现该目的。对于各种不同的环境，有许多不同的解析器和库。LibXML2 是用于 UNIX 环境的解析器和库中最好的一种，并且经过扩展，它提供了对几种脚本语言的支持，如 Perl 和 Python。
 
@@ -59,7 +58,7 @@ XML 解析器可以利用这种父子结构来遍历文档，甚至修改文档�
 # 示例
 
 ## 1 tree
-```c
+```c++
 /***
  * compile: gcc -I/usr/include/libxml2/ -lxml2 tree1.c
  * usage: create a xml tree
@@ -103,9 +102,7 @@ int main(int argc, char **argv)
 生成的xml:
 ```shell
 [denny@localhost xml]$ gcc -I/usr/include/libxml2/ -lxml2 tree1.c
-
 [denny@localhost xml]$ ./a.out 
-
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <node1>content of node1</node1>
@@ -117,31 +114,24 @@ int main(int argc, char **argv)
 
 
 **执行序列：**
+1. 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
+2. 生成文档doc：xmlNewDoc
+3. 生成根结点root_node： xmlNewDocNode ，xmlNewNode
+4. 文档与根结点捆绑： xmlDocSetRootElement
+5. 结点操作
+    1)创建子结点：xmlNewChild或xmlNewNode
 
-1 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
+    2)设置结点属性：xmlNewProp
 
-2 生成文档doc：xmlNewDoc
+    3)设置结点值：xmlNewText，xmlNewChild， xmlAddChild
 
-3 生成根结点root_node： xmlNewDocNode ，xmlNewNode
-
-4 文档与根结点捆绑： xmlDocSetRootElement
-
-5 结点操作
-
-1)创建子结点：xmlNewChild或xmlNewNode
-
-2)设置结点属性：xmlNewProp
-
-3)设置结点值：xmlNewText，xmlNewChild， xmlAddChild
-
-6 释放内存：xmlFreeDoc，xmlMemoryDump
-
-7 lib的载入退出:  LIBXML_TEST_VERSION , xmlCleanupParser
+6. 释放内存：xmlFreeDoc，xmlMemoryDump
+7. lib的载入退出:  LIBXML_TEST_VERSION , xmlCleanupParser
 
 ## 2 parse
 
 对于应用程序来说，读取 XML 文件的第一步是加载该数据并将其解析为一个 `Document` 对象。在此基础上，可以对 DOM 树进行遍历以获取特定的节点。
-```c
+```c++
 /***
 * compile: gcc -I/usr/include/libxml2/ -lxml2 tree1.c
  * usage: tree2 filename_or_URL
@@ -209,25 +199,18 @@ int main(void) {
 
 **执行序列：**
 
-1 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
+1. 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
+2. 得到文档doc:  xmlReadFile
+3. 得到根结点root_node：xmlDocGetRootElement
+4. 结点操作：
+    1)获得到结点值：xmlNodeGetContent(对应于xmlFree)
+    2)遍历：
+    - 指向下一个结点：xmlNodePtr ->children
+    - 结点值：xmlNodePtr->name,
+    - 结点内遍历：xmlNodePtr->next
 
-2 得到文档doc:  xmlReadFile
+5. 释放内存：xmlFreeDoc，xmlFree 
 
-3 得到根结点root_node：xmlDocGetRootElement
-
-4 结点操作：
-
-  1)获得到结点值：xmlNodeGetContent(对应于xmlFree)
-
-2)遍历：
-
-指向下一个结点：xmlNodePtr ->children
-
-结点值：xmlNodePtr->name,
-
-结点内遍历：xmlNodePtr->next
-
-5 释放内存：xmlFreeDoc，xmlFree 
 
 
 ## 3 reader & writer
@@ -235,7 +218,7 @@ int main(void) {
 在大型的xml文件中，使用专用的xml reader and xml writer, 读和写是分开的，这样可提高效率。
 
 (writer )使用不同的API来写xml文件：(下面4个函数接口使用了writer的四种途径)
-```c
+```c++
 void testXmlwriterFilename(const char *uri);  
 void testXmlwriterMemory(const char *file);
 void testXmlwriterDoc(const char *file);
@@ -243,14 +226,18 @@ void testXmlwriterTree(const char *file);
 ```
 
 
+
 ## 4 xpath & I/O
+
+
 
 ## 5 API Menu
 
 ### 5.1 加载文档
 
-5.1.1 文件加载(文件I/O)
-```c
+5.1.1 **文件加载(文件I/O)**
+
+```c++
 // parse an XML file from the filesystem or the network.
 xmlDocPtr	xmlReadFile(const char * filename, 
 					 const char * encoding, 
@@ -267,9 +254,9 @@ xmlDocPtr	xmlReadIO(xmlInputReadCallback ioread,
 xmlDocPtr	xmlRecoverFile(const char * filename)
 ```
 
+5.1.2 **DOM(内存占用)**
 
-5.1.2 DOM(内存占用)
-```c
+```c++
 // parse an XML in-memory document and build a tree.
 xmlDocPtr	xmlReadMemory(const char * buffer, 
 					 int size, 
@@ -282,10 +269,12 @@ xmlDocPtr	xmlRecoverDoc(xmlChar * cur)
 // parse an XML in-memory block and build a tree. In the case the document is not Well Formed, a tree is built anyway
 xmlDocPtr	xmlRecoverMemory(const char * buffer, 
 					 int size)
-
 ```
 
-5.1.3 from parse
+
+
+5.1.3 **from parse**
+
 ```c++
 // Creates a new XML document
 xmlDocPtr	xmlNewDoc		(const xmlChar * version)
@@ -299,7 +288,7 @@ xmlDocPtr	xmlParseFile		(const char * filename)
 ```
 
 ### 5.2 释放，保存文档内容
-```c
+```c++
 // Dump the current DOM tree into memory using the character encoding specified by the caller. Note it is up to the caller of this function to free the allocated memory with xmlFree().
 void	xmlDocDumpMemoryEnc(xmlDocPtr out_doc, 
 					 xmlChar ** doc_txt_ptr, 
@@ -333,7 +322,7 @@ int	xmlSaveFormatFileTo		(xmlOutputBufferPtr buf,
 ```
 
 ### 5.3 根结点
-```c
+```c++
 // Get the root element of the document (doc->children is a list containing possibly comments, PIs, etc ...).
 xmlNodePtr	xmlDocGetRootElement	(xmlDocPtr doc)
 // Set the root element of the document (doc->children is a list containing possibly comments, PIs, etc ...).
@@ -342,7 +331,7 @@ xmlNodePtr	xmlDocSetRootElement	(xmlDocPtr doc, xmlNodePtr root)
 ```
 
 ### 5.4 结点创建释放操作
-```c
+```c++
 // Search the last child of a node.
 xmlNodePtr	xmlGetLastChild		(xmlNodePtr parent)
 // Build a structure based Path for the given node
@@ -379,7 +368,7 @@ xmlNodePtr	xmlReplaceNode		(xmlNodePtr old,
 ```
 
 ### 5.5 结点属性操作
-```c
+```c++
 //Create a new property carried by a node.
 xmlAttrPtr	xmlNewProp		(xmlNodePtr node, 
 					 const xmlChar * name, 
@@ -401,7 +390,7 @@ Returns:	the attribute value or NULL if not found. It's up to the caller to free
 ```
 
 ### 5.6 结点内容操作
-```c
+```c++
 //Read the value of a node, this can be either the text carried directly by this node if it's a TEXT node or the aggregate string of the values carried by this node child's (TEXT and ENTITY_REF). Entity references are substituted.
 cur:	the node being read
 Returns:	a new #xmlChar * or NULL if no content is available. It's up to the caller to free the memory with xmlFree().
@@ -410,7 +399,7 @@ xmlChar *	xmlNodeGetContent	(xmlNodePtr cur)
 ```
 
 ### 5.7 内存
-```c
+```c++
 // Free up all the structures used by a document, tree included
 void	xmlFreeDoc			(xmlDocPtr cur)
 // Free a node, this is a recursive behaviour, all the children are freed too. This doesn't unlink the child from the list, use xmlUnlinkNode() first.
@@ -420,23 +409,10 @@ void	xmlFreeProp			(xmlAttrPtr cur)
 ```
 
 
+
 ## 6 xml encapsulation(c++)
 
-# 附录：
 
-## 参考资料
-
-[1].  官方网站：http://xmlsoft.org/
-
-[2].  [使用LibXML2 处理配置文件](http://www.ibm.com/developerworks/cn/aix/library/au-libxml2.html) http://www.ibm.com/developerworks/cn/aix/library/au-libxml2.html
-
-[3].  解决libxml2不支持中文的问题
-
-http://blog.csdn.net/force_eagle/archive/2005/03/03/309644.aspx
-
- 
-
- 
 
 ## 中文支持
 
@@ -502,7 +478,7 @@ int main(void)
 2)  xmlFindCharEncodingHandler
 
 使用数据类型：xmlCharEncodingHandlerPtr
-```c
+```c++
 /***
  * compile: gcc -I/usr/include/libxml2/ -lxml2 convert.c
  * usage:  convert utf-8 string or null
@@ -594,3 +570,16 @@ int	main(int argc, char **argv)
 ```
 
  
+
+## 参考资料
+
+[1].  官方网站：http://xmlsoft.org/
+
+[2].  [使用LibXML2 处理配置文件](http://www.ibm.com/developerworks/cn/aix/library/au-libxml2.html) http://www.ibm.com/developerworks/cn/aix/library/au-libxml2.html
+
+[3].  解决libxml2不支持中文的问题
+
+http://blog.csdn.net/force_eagle/archive/2005/03/03/309644.aspx
+
+ 
+

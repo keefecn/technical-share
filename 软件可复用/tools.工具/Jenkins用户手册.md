@@ -87,7 +87,7 @@ $ sudo apt-get install jenkins
 
 ### 项目/作业类型 
 
-![项目/作业类型](..\..\media\sf_reuse\tools\tools_jenkins_001.png)               
+![项目/作业类型](../../media/sf_reuse/tools/tools_jenkins_001.png)               
 
 
 
@@ -117,7 +117,7 @@ $ sudo apt-get install jenkins
 
 插件代理：https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 
- ![image-20191222121218726](..\..\media\sf_reuse\tools\tools_jenkins_002.png)
+ ![image-20191222121218726](../../media/sf_reuse/tools/tools_jenkins_002.png)
 
 图 3 安装时缺省插件
 
