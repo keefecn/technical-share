@@ -56,7 +56,6 @@
 
  
 
- 
 ---
 # 1    简介
 
@@ -176,46 +175,74 @@ http   #http块
 
 ###　Nginx内部变量
 
-表格 1 Nginx内部变量列表
+表格 1 Nginx内部变量列表 （示例请求：curl -I http://test.wanglei.com/192.168.1.200?a=10  )
 
-| 变量名称              | 变量用途                                                     |
-| --------------------- | ------------------------------------------------------------ |
-| $atg_PARAMETER        | 客户端GET请求中  PARAMETER字段的值                           |
-| $args                 | 客户端请求中的参数                                           |
-| $binary_remote_addr   | 远程地址的二进制表示                                         |
-| $body_bytes_sent      | 已发送的消息体字节数                                         |
-| $content_length       | HTTP请求信息里的Content-Length字段                           |
-| $content_type         | 请求信息里的Content-Type字段                                 |
-| $cookie_COOKIE        | 客户端请求中COOKIE头域的值                                   |
-| $document_root        | 针对当前请求的根路径设置值                                   |
-| $host                 | 请求信息中的Host头域值，如果请求中没有Host行，则等于设置的服务器名 |
-| $http_HEADER          | http请求信息中的HEADER字段                                   |
-| $http_host            | 与$host相同，但如果请求信息中没有host行，则可能不同          |
-| $http_cookie          | 客户端的cookie信息                                           |
-| $http_referer         | 引用地址                                                     |
-| $http_user_agent      | 客户端代理信息                                               |
-| $http_via             | 最后一个访问服务器的ip地址                                   |
-| $http_x_forwarded_for | 相当于网络访问路径                                           |
-| $is_args              | 如果$args有值，则等于"?";否则等于空                          |
-| $limit_rate           | 对连接速率的限制                                             |
-| $nginx_version        | 当前nginx服务器的版本                                        |
-| $pid                  | 当前nginx服务器主进程的进程ID                                |
-| $query_string         | 与$args相同                                                  |
-| $remote_addr          | 客户端ip地址                                                 |
-| $remote_port          | 客户端端口号                                                 |
-| $remote_user          | 客户端用户 名 用于AUth Basic Module验证                      |
-| $request              | 客户端请求                                                   |
-| $request_body         | 客户端请求的报文体                                           |
-| $request_body_file    | 发往后端服务器的本地临时缓存文件的名称                       |
-| $request_filename     | 当前请求的文件路径名，由root或alias指令与URL请求生成         |
-| $request_method       | 请求的方法 比如 GET POST等                                   |
-| $scheme               | 所用的协议 比如 http或者HTTPS 比如 rewrite ^(.+)$ $scheme://mysite.name$1 redirect |
-| $server_addr          | 服务器地址，如果没有用listen指明服务器地址。使用这个变量将发起一次系统调用以取得地址 |
-| $server_port          | 请求到达的服务器端口号                                       |
-| $server_protocol      | 请求的协议版本，HTTP/1.0   或http/1.1                        |
-| $uri                  | 请求的不带请求参数的URL，可能和最初的值有不同，比如经过重定向之类的 |
+| 变量名称              | 变量用途                                                     | 示例值                                  |
+| --------------------- | ------------------------------------------------------------ | --------------------------------------- |
+| $atg_PARAMETER        | 客户端GET请求中  PARAMETER字段的值                           |                                         |
+| $args                 | 客户端请求中的参数                                           | a=10                                    |
+| $binary_remote_addr   | 远程地址的二进制表示                                         |                                         |
+| $body_bytes_sent      | 已发送的消息体字节数                                         | 264                                     |
+| $content_length       | HTTP请求信息里的Content-Length字段                           | 264                                     |
+| $content_type         | 请求信息里的Content-Type字段                                 | text/html                               |
+| $cookie_COOKIE        | 客户端请求中COOKIE头域的值                                   |                                         |
+| $document_root        | 针对当前请求的根路径设置值                                   | /usr/local/nginx/html                   |
+| $document_url         | 同$uri                                                       |                                         |
+| $host                 | 请求信息中的Host头域值，如果请求中没有Host行，则等于设置的服务器名 |                                         |
+| $hostname             | 表示Nginx所在的机器的名称,与gethostbyname调用返回的值相同    | centos7-201                             |
+| $http_HEADER          | http请求信息中的HEADER字段                                   |                                         |
+| $http_host            | 与$host相同，但如果请求信息中没有host行，则可能不同          |                                         |
+| $http_cookie          | 客户端的cookie信息                                           |                                         |
+| $http_referer         | 引用地址                                                     |                                         |
+| $http_user_agent      | 客户端代理信息                                               | curl/7.29.0                             |
+| $http_via             | 最后一个访问服务器的ip地址                                   |                                         |
+| $http_x_forwarded_for | 相当于网络访问路径                                           |                                         |
+| $is_args              | 如果$args有值，则等于"?";否则等于空                          | ?                                       |
+| $limit_rate           | 对连接速率的限制。如配置: limit_rate 50k;                    | 51200                                   |
+| $nginx_version        | 当前nginx服务器的版本                                        | 1.8.1                                   |
+| $pid                  | 当前nginx服务器主进程的进程ID                                |                                         |
+| $query_string         | 与$args相同                                                  | a=10                                    |
+| $remote_addr          | 客户端ip地址                                                 | 192.168.1.200                           |
+| $remote_port          | 表示客户端连接使用的端口,这个是随机的                        |                                         |
+| $remote_user          | 客户端用户 名 用于AUth Basic Module验证                      |                                         |
+| $request              | 客户端请求的头部信息                                         | HEAD /192.168.1.200?a=10 HTTP/1.1       |
+| $request_time         | 返回从接受用户请求的第一个字节到发送完响应数据的时间，即包括接收请求数据时间、程序响应时间、输出响应数据时间。 | 0.012                                   |
+| $request_body         | 客户端请求的报文体                                           | postman                                 |
+| $request_body_file    | 发往后端服务器的本地临时缓存文件的名称                       |                                         |
+| $request_filename     | 当前请求的文件路径名，由root或alias指令与URL请求生成         | /usr/local/nginx/html/<br>192.168.1.200 |
+| $request_method       | 请求的方法 比如 GET POST等                                   | HEAD                                    |
+| $response_time        | 返回从Nginx向后端(upstream)建立连接开始到接受完数据然后关闭连接为止的时间。 | 0.011                                   |
+| $scheme               | 所用的协议 比如 http或者HTTPS 比如 rewrite ^(.+)$ $scheme://mysite.name$1 redirect | http、https                             |
+| $server_addr          | 服务器地址，如果没有用listen指明服务器地址。使用这个变量将发起一次系统调用以取得地址 | 192.168.1.200                           |
+| $server_name          | 服务器名称                                                   | test.wanglei.com                        |
+| $server_port          | 请求到达的服务器端口号                                       | 80                                      |
+| $server_protocol      | 请求的协议版本，HTTP/1.0   或http/1.1                        | HTTP/1.1                                |
+| $status               | 客户端请求服务器的HTTP返回码                                 | 200                                     |
+| $time_local           | 服务器当前的本地时间                                         | 25/Mar/2017:22:10:51 +0800              |
+|                       |                                                              |                                         |
+| $uri                  | 请求的不带请求参数的URL，可能和最初的值有不同，比如经过重定向之类的 | /192.168.1.200                          |
+| $request_uri          | 表示客户端发来的原始URL,带完整的参数,$request_uri永远不会变,始终是用户的原始URL | /192.168.1.200?a=10                     |
 
- 备注：$scheme://$host$uri
+ 备注：1. $scheme://$host$uri
+
+
+
+表格 nginx upstream变量
+
+| 变量名称                 | 变量用途                                              | 示例值          |
+| ------------------------ | ----------------------------------------------------- | --------------- |
+| upstream_addr            | 上游服务器的IP地址                                    | 127.0.0.1：8012 |
+| upstream_connect_time    | 与上游服务器建立连接花费的时间                        | 0.240           |
+| upstream_header_time     | 接收上游服务发回响应中HTTP头部花费的时间              | 0.002           |
+| upstream_response_time   | 接收完整上游服务响应花费时间                          | 0.242           |
+| upstream_http            | 从上游服务返回响应头部的值                            |                 |
+| upstream_bytes_received  | 从上游服务接收到的响应长度，单位为字节                |                 |
+| upstream_response_length | 从上游服务返回响应包体长度                            |                 |
+| upstream_status          | 从上游服务返回HTTP响应状态码。如果未连接上，则是502。 | 502             |
+| upstream_cookie          | 从上游服务响应头set-cookie中取到的值                  |                 |
+| upstream_trailer         | 从上游服务响应尾部取到的值                            |                 |
+
+备注：request_time=upstream_connect_time + upstream_response_time （其中upstream_response_time > upstream_header_time）
 
 
 
