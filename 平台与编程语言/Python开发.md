@@ -232,7 +232,6 @@
 
 [8.2         参考书目. 111](#_Toc18275057)
 
-
 ---
 
 
@@ -487,7 +486,7 @@ __builtin__ - Built-in functions, exceptions, and other objects.
        xrange
 ```
 
-说明：__builtin__
+说明：`__builtin__`
 *  内建数据结构有：bytearray dict tupl set list
 *  内建基础数据类型有：int bool float long str
 *  内建方法有：xrange enumerate slice super type
@@ -503,10 +502,10 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 - [5.7. Set Types — **set**, **frozenset**](https://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset)
 - [5.8. Mapping Types      — **dict**](https://docs.python.org/2/library/stdtypes.html#mapping-types-dict)
 - [5.9. File Objects](https://docs.python.org/2/library/stdtypes.html#file-objects)
-- [5.10. memoryview      type](https://docs.python.org/2/library/stdtypes.html#memoryview-type)
-- [5.11. Context      Manager Types](https://docs.python.org/2/library/stdtypes.html#context-manager-types)
-- [5.12. Other      Built-in Types](https://docs.python.org/2/library/stdtypes.html#other-built-in-types)
-- [5.13. Specia*      Attributes](https://docs.python.org/2/library/stdtypes.html#special-attributes)
+- [5.10. memoryview  type](https://docs.python.org/2/library/stdtypes.html#memoryview-type)
+- [5.11. Context  Manager Types](https://docs.python.org/2/library/stdtypes.html#context-manager-types)
+- [5.12. Other  Built-in Types](https://docs.python.org/2/library/stdtypes.html#other-built-in-types)
+- [5.13. Special   Attributes](https://docs.python.org/2/library/stdtypes.html#special-attributes)
 
 查看内置类型 types模块
 ```PYTHON
@@ -594,10 +593,10 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 **示例：不带参数的use_logging和带参数的use_logging2。**
 ```python
 # no args
-def **use_logging**(func): 
-   def **wrapper**(*args, **kwargs): 
+def use_logging(func): 
+   def wrapper(*args, **kwargs): 
        # logging.warn("%s is running" % func.__name__) 
-       print(*"%s is running"* % func.__name__)
+       print("%s is running" % func.__name__)
        return func(*args, **kwargs) 
    return wrapper
  
@@ -605,14 +604,14 @@ def **use_logging**(func):
 def use_logging2(level): 
    def decorator(func):
        def wrapper(*args, **kwargs): 
-           print(*"%s is running: %s"* % (func.__name__, level))
+           print("%s is running: %s" % (func.__name__, level))
            return func(*args)
        return wrapper
    return decorator
  
-@use_logging*
+@use_logging
 def log_bar(): 
-   print(*"i am log_bar"*) 
+   print("i am log_bar")
      
 @use_logging2(level="warn")    
 def log_bar2(): 
@@ -623,12 +622,15 @@ def log_bar2():
    log_bar()
    log_bar2()
 输出：
+
+```
 log_bar is running
 i am log_bar
 log_bar2 is running: warn
 i am log_bar2
+```
 
-**说明：因为bar函数定义前使用@use_logging，后面调用bar()相当于调用bar = use_logging(bar)**
+**明**：因为bar函数定义前使用@use_logging，后面调用bar()相当于调用bar = use_logging(bar)
 
 **2. 类装饰器**
 类有三种常见方法（注：方法为类中定义的函数），
@@ -645,9 +647,15 @@ i am log_bar2
 **classmethod(function)**
 Return a class method for function.
 A class method receives the class as implicit first argument, just like an instance method receives the instance. To declare a class method, use this idiom:
+
+```python
 class C(object):
    @classmethod
    def f(cls, arg1, arg2, ...):
+        pass
+```
+
+
 
 **staticmethod(function)**
 Return a static method for function.
@@ -676,23 +684,97 @@ class Rabbit(object):
    Rabbit.newRabbit(*'fuck'*)
    Rabbit.newRabbit2()
 输出：
+
+```sh
 __init__ fuck
 __init__
+```
+
+
 
 #### 迭代器/生成器/yield
-**迭代器(Iterator)**
+可迭代对象可以分为，
+
+* 第一类是集合数据类型
+
+* 第二类是generator，包括生成器和带yield的函数
+
+**迭代器 (Iterator)**
 可以使用“for··· in ···”来操作，就是迭代对象，如list, string, files
 
-**生成器(Generators)**
-生成器同样是可迭代对象，但是你只能读取一次，因为它并没有把所有值存放内存中，它动态的生成值，内存晚获取lazy get。
+支持迭代器协议就是实现对象的`__iter__()`和next()方法。其中`__iter__()`方法返回迭代器对象本身；next()方法返回容器的下一个元素（通过迭代器的`__next__`()实现），在结尾时引发StopIteration异常。
 
-**示例：**
+```python
+>>> test_list = [1,2,3,4]
+>>> iter_list = test_list.__iter__()   ##通过这种方法把iter_list变为迭代器
+>>> print(type(iter_list))
+<class 'list_iterator'>        
+>>> print(iter_list.__next__())     ##用__next__()方法实现
+1
+>>> next(iter_list)           ##用next()方法实现
+2
+```
+
+
+
+**生成器 (Generators)**
+生成器同样是可迭代对象，但是你只能读取一次，因为它并没有把所有值存放内存中，它动态生成值。
+
+```python
+In [15]: iter1=(i for i in range(3))
+In [16]: type(iter1)
+Out[16]: generator
+In [17]: dir(iter1)
+Out[17]:
+['__class__',
+ '__del__',
+ '__delattr__',
+ '__dir__',
+ '__doc__',
+ '__eq__',
+ '__format__',
+ '__ge__',
+ '__getattribute__',
+ '__gt__',
+ '__hash__',
+ '__init__',
+ '__init_subclass__',
+ '__iter__',
+ '__le__',
+ '__lt__',
+ '__name__',
+ '__ne__',
+ '__new__',
+ '__next__',
+ '__qualname__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ 'close',
+ 'gi_code',
+ 'gi_frame',
+ 'gi_running',
+ 'gi_yieldfrom',
+ 'send',   #send相当于next()方法
+ 'throw']	#throw抛出异常
+```
+
+说明： 生成器generator内部有send方法用来传送数据，相当于next()方法。
+
+
+
+**示例：** 列表对象 和 生成器对象
 说明：用[]即为列表对象，用()为生成器对象，不管使用的是range还是xrange
+
 ```python
 mylist = [x*x for x in range(3)]
 for i in mylist: print i  # 此行执行多遍，结果一样。
-执行过程：range会导致生成一个 1000 个元素的 List
 ```
+执行过程：range会导致生成一个 1000 个元素的 List
 
 ```python
 mygenerator = (x*x for x in range(3))
@@ -700,33 +782,117 @@ for i in mygenerator: print i  # 此行执行多遍，只有第一遍有结果�
 ```
 执行过程：xrange每次迭代中返回下一个数值，内存空间占用很小。
 
+
+
 **yield**
 **yield** 的作用就是把一个函数变成一个 generator，带有yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator。所以带有 yield 的函数在 Python 中被称之为 generator（生成器）。
-如何判断一个函数是否是一个特殊的 generator 函数？可以利用 isgeneratorfunction 判断：
+
+利用 isgeneratorfunction 判断一个函数是否是一个特殊的 generator 函数：
+
 ```python
 >>> from inspect import isgeneratorfunction 
 >>> isgeneratorfunction(fab) 
 True
 ```
 
-yiele在 函数内部也相当于return，但只这个值只会在第一次迭代时打印出来。
-示例：
+yield在 函数内部也相当于return，但只这个值只会在第一次迭代时打印出来。yield每调用一次会返回值，下一次调用从yield之下的语句开始执行，这也是python基于事件的异步编程的基础。
+
+**yield的典型场景**：迭代生成数据（生产者，如示例1-fib数列）、 接收数据（消费者，如示例2-按固定块写大文件）、中断（协作式的任务，如示例协程）
+
+**示例1： fib数列，获取前N个值**
+
+```python
+def fib(n):
+    i, a, b = 0, 1, 1
+    while i < n:
+        yield a  #每调用一次时，执行到这相当于return
+        a, b = b, a+b 	#第二次调用开始从这开始，变量保存了上次调用的值
+        i = i +1
+print(fib(10))
+for j in fib(5): print(j)  
+```
+
+输出：
+
+```sh
+<generator object fib at 0x0000000AA3B32CA8> 
+1	#while内执行了1次
+1	#while内执行了2次
+2	#while内执行了3次
+3	#while内执行了4次
+5	#while内执行了5次
+```
+
+
+
+**示例2：python版本的unix命令 `tail  -f`**
+
+```python
+def follow(thefile):
+    # thefile.
+    while True:
+        line = thefile.readline()
+        if not line:
+            time.sleep(1)
+            continue
+        yield line
+ 
+ 
+with open('test.txt', 'r') as logfile:
+    for line in follw(logfile):
+        print line
+```
+
+
+
+**示例3：协程**
+
+```python
+from functools import wraps
+def coroutine(func):	#装饰器，调用next()方法获取生成器的值
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        f = func(*args, **kwargs)
+        next(f)
+        return f
+    return wrapper
+
+@coroutine
+def grep(pattern):
+    print 'Now im looking for the :{}'.format(pattern)
+    try:
+        while True:
+            line = yield
+            if pattern in line:
+                print line
+    except GeneratorExit:
+        print 'now the exit the coroutine'
+ 
+g = grep('python')
+g.close()
+g.send('nice')
+```
+
+说明： 使用yield语句的函数返回的是生成器。每次碰到yield会返回并记录当前位置。
+
+
 
 #### range/xrange
 range: 返回一个列表list[]
-xrange：返回一个 iterable 对象。
+xrange：返回一个 iterable 对象（python3 中取消了 range 函数，而把 xrange 函数重命名为 range）。
+
 ```python
-class xrange(object)
- |  xrange(stop) -> xrange object
- |  xrange(start, stop[, step]) -> xrange object
+class range(object)
+ |  range(stop) -> xrange object
+ |  range(start, stop[, step]) -> xrange object
  |  
  |  Like range(), but instead of returning a list, returns an object that
  |  generates the numbers in the range on demand.
  
 >>> type(range(9))
-<type 'list'>
+<type 'range'>
 >>> type(xrange(9))
-<type 'xrange'>
+NameError: name 'xrange' is not defined   #python3已将其重命名为 range
 ```
 
 #### super
@@ -742,16 +908,17 @@ Note：[super()](https://docs.python.org/2/library/functions.html#super) only wo
 　5. 混用super类和非绑定的函数是一个危险行为，这可能导致应该调用的父类函数没有调用或者一个父类函数被调用多次。
 
 **应用1：单例singleton**
-   **在__new__调用了super(class_name, self),**   
+   在`__new__`调用了super(class_name, self)
 
 **应用2：多重继承**
+
 ```python
 class A(B,C)
 def __init__(self):
       pass  # 如果只有pass，则不调用任何父类的 构造函数。
       super(A,self)  # 详见关于super类
    B.__init__(self)   #调用了父类B的构造函数，self必需，B类的参数可以有A类不同。
-   如果不重新实现__init__，那么默认调用左边第一个父类的构造函数，此例中为B。
+   #如果不重新实现__init__，那么默认调用左边第一个父类的构造函数，此例中为B。
 ```
 
 #### filter/map/reduce/lambda
@@ -809,6 +976,7 @@ lambda [arg1[,arg2,arg3....argN]]:expression
 
 我们也可以把filter map reduce 和lambda结合起来用，函数就可以简单的写成一行。
  例如：
+
 ```python
 kmpathes = filter(lambda kmpath: kmpath,     
 map(lambda kmpath: string.strip(kmpath),
@@ -819,25 +987,23 @@ string.split(l, ':')))
 
 
 ### 2.2.4  内建私有方法Built-in Methods
-__xx_xx__: 内置私有方法。 
-表格 7 常见内建私有方法列表
+`__xx__`: 内置私有方法，用__开头和结尾。 
+表格 7 常见内建私有方法列表 
 
 | 类别 | 方法名  | 用途     | 示例     |
 | ---------------- | -------------------- | ------------------------------------------------------------ | --------------------- |
-| 对象的创建与销毁 | __new__ | 对象创建新实例时调用的类方法。单例Singleton模式需要重载此内置方法，用Super类。 | 单例模式 |
-| __init__         | 初始化新实例时调用。 |          |          |
-| __del__          | **销毁**实例时调用。 |          |          |
+| 对象的创建与销毁 | `__new__` | 对象创建新实例时调用的类方法。单例Singleton模式需要重载此内置方法，用Super类。 | 单例模式 |
+|         | `__init__` | 初始化新实例时调用。 |          |
+|                  | `__del__`     | 销毁实例时调用。 |          |
 |     |         |          |          |
-| 对象的字符串表示 | __format__           | 创建格式化的表示      |          |
-| __repr__         | 创建字符串表示       |          |          |
-| __str__          | 创建简单的字符串表示 |          |          |
-| __all__          | __all__ | 在模块中使用__all__属性可避免在相互引用时的命名冲突。        | 通常出现在__init.py__ |
-| 对象内存管理     | __slots__            | 用来限制该class能添加的属性，对继承的子类是不起作用的。不用__dict__来保存属性数据，可以显著减少内存占用。 |          |
-|     | __iter__ |          |          |
-| 可调用接口       | __call__ | 对象可通过此对象来模拟函数的形为。  |          |
+| 对象的字符串表示 | `__format__ `          | 创建格式化的表示      |          |
+|         | `__repr__ ` | 创建字符串表示 |          |
+|           | `__str__` | 创建简单的字符串表示 |          |
+| `__all__`          | `__all__` | 在模块中使用__all__属性可避免在相互引用时的命名冲突。        | 通常出现在`__init__.py` |
+| 对象内存管理     | `__slots__`            | 用来限制该class能添加的属性，对继承的子类是不起作用的。不用`__dict__`来保存属性数据，可以显著减少内存占用。 |          |
+|     | `__iter__` | 返回迭代器本身。 |          |
+| 可调用接口       | `__call__` | 对象可通过此对象来模拟函数的形为。  |          |
 | 对象比较         | 操作符重载           | 详见操作符重载。      |          |
-|     |         |          |          |
-|     |         |          |          |
 
 
 #### 操作符operator重载
@@ -848,26 +1014,29 @@ __xx_xx__: 内置私有方法。
 3、类可以重载对象操作：print,函数调用，限定等。
 4、重载使得类的实例看起来更像内置的。
 5、重载是通过特殊命名的类方法来实现的。
+
 表格 8 可重载的操作符列表
 
 | _操作符_     | 用途            | 示例     |
 | ------------ | --------------- | --------------------- |
-| __init__     | 构造函数        | 创建对象：class()     |
-| __del__      | 析构函数        | 释放对象的时候        |
-| __add__      | “+” | x+y      |
-| __or__       | “\|”            | x\|y     |
-| __repr__     | 打印，转换      | print x,'x'           |
-| __call__     | 函数调用        | X()      |
-| __getattr__  | 属性引用        | x.undefined           |
-| __getitem__  | 索引获取        | x[key],for循环,in测试 |
-| __setitem__  | 索引赋值        | x[key]=value          |
-| __getslice__ | 分片            | x[low:high]           |
-| __len__      | 长度            | len(x)   |
-| __cmp__      | 比较            | x==y, x<y |
-| __radd__     | 右边的操作符"+" | 非实例+ x |
+| `__init__`     | 构造函数        | 创建对象：class()     |
+| `__del__`      | 析构函数        | 释放对象的时候        |
+| `__add__`      | “+” | x+y      |
+| `__or__`       | “\|”            | x\|y     |
+| `__repr__`     | 打印，转换      | print x,'x'           |
+| `__call__`     | 函数调用        | X()      |
+| `__getattr__`  | 属性引用        | x.undefined           |
+| `__getitem__`  | 索引获取        | x[key],for循环,in测试 |
+| `__setitem__`  | 索引赋值        | x[key]=value          |
+| `__getslice__` | 分片            | x[low:high]           |
+| `__len__`      | 长度            | len(x)   |
+| `__cmp__`      | 比较            | x==y, x<y |
+| `__radd__`     | 右边的操作符"+" | 非实例+ x |
+
 
 
 ### 2.2.5  常用基础算法
+
 #### 2.2.5.1 算法列表
 表格 9 常用算法列表
 
@@ -879,17 +1048,23 @@ __xx_xx__: 内置私有方法。
 | sorted     |          | 标准库内建函数,缺省字典排序。      |
 | list.sort  |          | 列表的排序            |
 | round      | round(1.4)=1.0   round(1.5)=2.0   round(1.55, 1)=1.6         | 标准库内建函数，四舍五入。   第二参数是精度。   |
-| math.cei*  | math.ceil(1.55)=2.0   | 向上取整  |
+| math.ceil  | math.ceil(1.55)=2.0   | 向上取整  |
 | math.floor | math.floor(1.55)=1.0   | 向下取整  |
 
+
+
 #### 2.2.5.2 math数学库
+
 ```python
 >>> import math
 >>> dir(math)
 ['__doc__', '__name__', '__package__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'copysign', 'cos', 'cosh', 'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'hypot', 'isinf', 'isnan', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc']
 ```
 
+
+
 #### 2.2.5.3 sorted/sort
+
 在Python 中sorted是内建函数(BIF)，而sort()是列表类型的内建函数list.sort()。
 **sorted()**
 sorted(iterable[, cmp[, key[, reverse]]])
@@ -921,7 +1096,9 @@ dict= sorted(dic.iteritems(), key=lambda d:(d[1],D[0]))
  [('d', 0), ('c', 3), ('asd', 4), ('bc', 5), ('a', 31), ('aa', 74)]
 
 
+
 ### 2.2.6  常用数据结构
+
 dict/list/tuple/set/
 dict: 字典，内部实现hash_table
 
@@ -947,23 +1124,28 @@ Queue模块下三种队列实现，分别是
 **multiprocessing.Queue**
 函数function，返回一个跨进程通信队列。
 
-## 2.3     表达式
+
+
+## 2.3   表达式
+
 ### 2.3.1  控制流
 注：if/for/while的表达式可以用()圈起来，也可以不用。pass空语句，可用来填充空函数或空表达式。
-if：if语句组成有if/elif/else. 
-   if xx:  #非常强大的判断语句，支持NULL,容器空(无需len函数)的判断
-**for** iterating_var **in** sequence: 
-while: 支持continue, break.
+
+* if：if语句组成有if/elif/else. 
+     if xx:  #非常强大的判断语句，支持NULL,容器空(无需len函数)的判断
+* for iterating_var in sequence: 
+* while: 支持continue, break.
 
 ### 2.3.2  with语句与上下文管理
 with语句支持在上下文管理器对象控制下的上下文中执行一系列语句。已经加入对上下文管理协议支持的还有模块 threading、decimal 等。
-上下文管理**协议**（Context Management Protocol）：包含方法 __enter__() 和 __exit__()，支持该协议的对象要实现这两个方法。
+上下文管理**协议**（Context Management Protocol）：包含方法 `__enter__`() 和 `__exit__`()，支持该协议的对象要实现这两个方法。
 上下文**管理器**（Context Manager）：支持上下文管理协议的对象，这种对象实现了 
 __enter__() 和 __exit__() 方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。
 with 语句的语法格式
 with context_expression [as target(s)]:
    with-body
 示例：
+
 ```python
 with open(r'somefileName') as somefile:
    for line in somefile:
@@ -1741,8 +1923,8 @@ python模块导入有个搜索路径顺序，分别是python安装程序和安�
   -- MANIFEST.in   # 可选，指定捆绑的文件
   -- README.rst   # 开发环境设置流程，现在常用markdown文件
   -- packagename/
-   -- __init__.py
-   -- module.py
+     -- __init__.py
+     -- module.py
   -- setup.py  # 必选，设置程序包的基本信息
   -- requirements.txt # 可选，管理依赖包。
 ```
@@ -3257,15 +3439,17 @@ python并发主要有多进程multiprocessing、多线程thread。
 2. 精灵进程/线程：加上daemon属性。
 3. 协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
 
+
+
 表格 28 gunicorn工作方式比较列表
 
 | 工作方式 | IO模式      | 备注          |
 | -------- | ----------- | ------------- |
 | sync     | 同步等待    | 缺省模式      |
 | eventlet | 协程        |  |
-| gevent   | 协程，epoll |  |
+| gevent   | 协程，epoll | pip install gevent |
 | tornado  | | 装饰器+Future |
-| gthread  | 线程        | glib的线程    |
+| gthread  | 线程        | glib的线程，--threads只在这种方式下起作用。 |
 备注：python3.4+里concurrent.futures.Future和asyncio.Future这两个类都来表示可能完成或者尚未完成的延迟计算。与Twisted中的Deferred类、Tornado框架中的Future类的功能类似。
 ### 4.3.1  多进程
 ```python
@@ -3417,7 +3601,7 @@ Python对协程的支持是通过generator实现的。
 **（1）yield实现协程效果示**
 Python的yield不但可以返回一个值，它还可以接收调用者发出的参数。
 ```python
-def consumer():
+def consumer():	#消费者
    r = ''
    while True:
        n = yield r  # r为产出值。若yield后无表达式，则产出为None，
@@ -3426,8 +3610,8 @@ def consumer():
        print('[CONSUMER] Consuming %s...' % n)
        r = '200 OK'
  
-def produce(c):
-   c.send(None)  # 激活生成器，也可调用next
+def produce(c):	#生产者，生成数据
+   c.send(None)  # 激活生成器，也可调用next(c)?
    n = 0
    while n < 5:
        n = n + 1
@@ -3440,10 +3624,33 @@ c = consumer()
 produce(c)
 ```
 
+输出
+
+```sh
+[PRODUCER] Producing 1...
+[CONSUMER] Consuming 1...
+[PRODUCER] Consumer return: 200 OK
+[PRODUCER] Producing 2...
+[CONSUMER] Consuming 2...
+[PRODUCER] Consumer return: 200 OK
+[PRODUCER] Producing 3...
+[CONSUMER] Consuming 3...
+[PRODUCER] Consumer return: 200 OK
+[PRODUCER] Producing 4...
+[CONSUMER] Consuming 4...
+[PRODUCER] Consumer return: 200 OK
+[PRODUCER] Producing 5...
+[CONSUMER] Consuming 5...
+[PRODUCER] Consumer return: 200 OK
+```
+
+
+
 **（2）greenlet模块实现程序间切换执行**
+
 ```python
 import greenlet
-   def A():
+def A():
     print('a.....')
     g2.switch()  #切换至B
     print('a....2')
@@ -3456,6 +3663,16 @@ g1 = greenlet.greenlet(A) #启动一个线程
 g2 = greenlet.greenlet(B)
 g1.switch()
 ```
+
+输出 
+
+```sh
+a.....
+b.....
+a....2
+b....2
+```
+
 
 
 （3）gevent实现协程
@@ -3478,7 +3695,21 @@ gevent.joinall([      # 创建线程并行执行程序，碰到IO就切换
 ])
 ```
 
+输出 
+
+```sh
+running in foo
+running in bar
+com back from bar in to foo
+com back from foo in to bar
+
+[<Greenlet at 0xaa2e4ea48: _run>, <Greenlet at 0xaa2e4ed48: _run>]
+```
+
+
+
 ### 4.3.4  wsgi
+
    ![1574530834766](../media/program_lang/lang_python_001.png)
 备注：上图nginx主要处理静态文件，动态文件通过wsgi http server转发请求到web server。
 
@@ -3808,7 +4039,10 @@ name=name.encode(‘utf-8’, ‘ignore’)   #此时name是可识别编码，�
 name= MySQLdb.escape_string(name)   #此时转义后，type(name)=’str’
 ```
 
+
+
 ### 6.1.4  celery broker使用redis集群
+
 环境：py3.7，celery4.3.0（依赖redis>=3.0），redis-py-cluster1.3.6（依赖redis==2.10.6)。
 问题：问py3.7如何同时用redis集群和celery？celery borken如何配置多节点Redis集群。
 
@@ -3881,7 +4115,10 @@ Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python
 | PyListObject   |         |      |
 | PyDictObject   |         |      |
 
+
+
 ## 7.2   Python对象实现
+
 python对象：
 *  PyObject  对象（成员=引用计数int + 类型对象指针）
 *  PyTypeObject-->(type int str dict)  类型对象（成员=PyObject + 名称name + 函数指针）
@@ -3933,7 +4170,10 @@ typedef struct tagPyTypeObject
 }PyTypeObject;
 ```
 
+
+
 ## 7.3   python虚拟机PVM
+
 ### 7.3.1  虚拟机执行流程
 **虚拟机它是怎么执行脚本的：**
 *  完成模块的加载和链接；
@@ -3948,7 +4188,9 @@ $ python hello.py  # 不生成pyc
 ```
 
 
+
 ### 7.3.2  pyc文件和code对象
+
 **字节码bytecode**
 python源代码在执行前会编译成python的字节码指令序列，PVM根据这些字节码来进行一系列操作。在python2.5中，一共规定了104条字节码指令。
 pyc文件和PyCodeObject都是字节码的表现形式，前者存储在磁盘里，后者在python虚拟机中。
@@ -4074,8 +4316,8 @@ In [10]: dis.dis(co)
 
 ## 8.2   参考书目
 [1]. Toby Segaran / 莫映、王开福 《集体智慧编程》/ 电子工业出版社 / 2015-3 
-[2]. Wesley J. Chun 《**Python核心编程**》（第2版）  人民邮电出版社  2008-6 http://www.linuxidc.com/Linux/2013-06/85425.htm
-[3]. Wesley J. Chun 《**Python核心编程**》（第3版）  人民邮电出版社  2016-5
+[2]. Wesley J. Chun 《Python核心编程》（第2版）  人民邮电出版社  2008-6 http://www.linuxidc.com/Linux/2013-06/85425.htm
+[3]. Wesley J. Chun 《Python核心编程》（第3版）  人民邮电出版社  2016-5
 [4]. 《[Python性能分析与优化 ](https://book.douban.com/subject/26819420/)Mastering Python High Performance》Fernando Doglio / 陶俊杰、陈小莉 / 人民邮电出版社 / 2016-6-1
 [5]. [Python数据分析与挖掘实战 ](https://book.douban.com/subject/26677686/) 机械工业出版社 2016-1
 [6]. pthon基础教程（第2版） 说明：最后十章是十个有意思的项目。

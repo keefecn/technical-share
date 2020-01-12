@@ -1,7 +1,7 @@
 | 序号 | 修改时间   | 修改内容                           | 修改人 | 审稿人 |
 | ---- | ---------- | ---------------------------------- | ------ | ------ |
 | 1    | 2019-12-24 | 创建。从《CNCF原生框架分析》拆分。 | 吴启福 |        |
-|      |            |                                    |        |        |
+| 2    | 2020-1-11  | 更新容器使用经验。                 | 同上   |        |
 
 ---
 
@@ -282,7 +282,7 @@ $ docker run -it ubuntu bash
 
 
 
-### 4.1.1 命令行
+#### 4.1.1 命令行
 
 ```shell
 $ docker
@@ -293,8 +293,8 @@ Options:
   --api-cors-header=                   Set CORS headers in the remote API
   -b, --bridge=                        Attach containers to a network bridge
   --bip=                               Specify network bridge IP
-  -D, --debug=false                    Enable debug mode
-  -d, --daemon=false                   Enable daemon mode
+  -D, --debug=false                    Enable debug mode 	#调度模式	
+  -d, --daemon=false                   Enable daemon mode   #后台模式
   --default-ulimit=[]                  Set default ulimits for containers
   --dns=[]                             DNS server to use
   --dns-search=[]                      DNS search domains to use
@@ -392,7 +392,7 @@ Run a command in a new container
   --device=[]                Add a host device to the container
   --dns=[]                   Set custom DNS servers
   --dns-search=[]            Set custom DNS search domains
-  -e, --env=[]               Set environment variables
+  -e, --env=[]               Set environment variables  #环境变量
   --entrypoint=              Overwrite the default ENTRYPOINT of the image
   --env-file=[]              Read in a file of environment variables
   --expose=[]                Expose a port or a range of ports
@@ -430,15 +430,15 @@ Run a command in a new container
 
 
 
-### 4.1.2 进入容器
+#### 4.1.2 进入容器
 
-* 法1：docker attach  <docker_id>
-  使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。
+* 法1：`docker attach  <docker_id>`
+  使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。另外退出窗口时，可能也会导出容器退出。
 
 * 法2（推荐）：  docker exec -it <docker_id> /bin/bash
 
   ```sh
-  # 以root身份登陆docker容器 -u root
+  # 以root身份登陆docker容器 -u root 
   $ docker exec -it -u root [docker_id] /bin/bash
   ```
 
@@ -461,7 +461,7 @@ Run a command in a new container
 
 
 
-### 4.2.1 官方镜像仓库 docker Hub
+#### 4.2.1 官方镜像仓库 docker Hub
 
 Docker Hub ( http://hub.docker.com )是缺省的官方仓库。
 
@@ -487,7 +487,7 @@ $ docker push [image:tag]
 
 
 
-### 4.2.2 私有镜像仓库 Registry2
+#### 4.2.2 私有镜像仓库 Registry2
 
 创建私有仓库Docker Registry 2.0（需docker版本高于1.6.0），Registry 2不包含界面、用户管理、权限控制等功能，如果想使用这些功能，可使用Docker Trusted Registry.
 
@@ -513,7 +513,10 @@ $ docker push [localhost:5000/new_image:tag]
 
 **1. 更新镜像docker commit**
 
+```sh
+#容器有修改后，重新执行commit命令，会覆盖上一次标签
 docker commit -m='xxx' -a=[author] [contain_id] [dst_image:tag]
+```
 
 
 
@@ -558,7 +561,10 @@ CMD /usr/sbin/ngnix
 命令读取指定路径下（包括子目录）所有的Dockefile，并且把目录下所有内容发送到服务端，由服务端创建镜像。另外可以通过创建.dockerignore文件（每一行添加一个匹配模式）让docker忽略指定目录或者文件。-t 创建标签。
 
 例如：Dockerfile路径为 /tmp/docker_build/，生成镜像的标签为build_repo/my_images
- $ docker build -t build_repo/my_images /tmp/docker_build/
+
+````sh
+$ docker build -t build_repo/my_images /tmp/docker_build/
+````
 
 
 
@@ -659,16 +665,16 @@ $ doccker-compose up -d
 | images            | 实例描述                               | 实例命令                                                     | 状态                               |
 | ----------------- | -------------------------------------- | ------------------------------------------------------------ | ---------------------------------- |
 | hello-world       | 运行：打印帮助文档                     | docker run  hello-world                                      | ok                                 |
-| ui-for-docker     | docker可视化                           | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker | ok  http://<dockerd  host ip>:9000 |
+| ui-for-docker     | docker可视化                           | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker | ok  http://<dockerd  host_ip>:9000 |
 | register:2        | 后台启动：本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2 | ok                                 |
 | nginx             | 后台启动：nginx后台服务                | docker run --name keefe-nginx -p 8081:80 -d nginx            | ok。访问http://xxx:8081/           |
 | mysql             | 后台启动：mysql                        | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | ok                                 |
 | wordpress  +mysql | 两个容器链接在一起                     | docker run --name  wordpress --link <contain_name]:mysql -p 80:80 -d wordpress |                                    |
 | redis             | 后台启动：redis后台服务                | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes | ok                                 |
 | ubuntu            | 交互式启动：进入操作系统ubuntu         | docker run -i -t ubuntu:15.10 /bin/bash                      | ok                                 |
-| tensorflow        | 交互式启动：进入操作系统ubuntu         | docker run -i -t tensorflow/tensorflow /bin/bash             | ok                                 |
+| tensorflow        | 交互式启动：进入操作系统ubuntu         | docker run -it tensorflow/tensorflow /bin/bash               | ok                                 |
 | python:3.5        | 调用python解释器                       | docker run python:3.5 python3 -c 'import  copy;print("hello")' | ok                                 |
-| jenkis            |                                        | docker run -i -t  jenkins/jenkins:lts /bin/bash              |                                    |
+| jenkis            | 后台启动jenkis服务                     | docker run -d  jenkins/jenkins:lts /bin/bash                 | ok. 访问http://xxx:8080/           |
 |                   |                                        |                                                              |                                    |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
@@ -707,7 +713,9 @@ For more examples and ideas, visit:
 
 **2. nginx部署**
 
+```sh
 docker run -d -p 8082:80 --name runoob-nginx-test-web -v ~/nginx/www:/usr/share/nginx/html -v ~/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v ~/nginx/logs:/var/log/nginx nginx
+```
 
 命令说明：
 
@@ -762,9 +770,10 @@ $docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
 ```
 
 
-### 5.3  CICD之jenkis
 
-**jenkis进阶使用：详见** **本人另文《运维场景》章节之运维工具Jenkins**
+### 5.3  CICD之Jenkis
+
+jenkis进阶使用详见：  [Jenkins用户手册](./Jenkins用户手册.md)
 
 
 
@@ -772,7 +781,7 @@ jenkins官网 https://jenkins.io/
 
 镜像：jenkins/jenkins:lts
 
-**docker启动：创建容器**
+docker启动：创建容器，缺省8080端口。
 
 **法1：docker run**
 
@@ -783,7 +792,7 @@ docker run --name jenkins -d -p 8080:8080 -p 50000:50000 --restart always \
 
 
 
-法2：docker-compose up**
+**法2：docker-compose up**
 
 配置文件：docker-compose.yml
 
@@ -860,6 +869,12 @@ docker rm $(docker ps -a -q)
 # 清理当前未运行的容器（未验证）
 docker system prune
 ```
+
+
+
+4. **环境变量优化级**
+
+docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
 
 
 
