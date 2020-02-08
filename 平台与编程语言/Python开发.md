@@ -245,16 +245,16 @@ Python 本身也是由诸多其他语言发展而来的,这包括 ABC、Modula-3
 现在 Python 是由一个核心开发团队在维护，Guido van Rossum 仍然占据着至关重要的作用，指导其进展。
 
 **Python 特点**
-1.易于学习：Python有相对较少的关键字，结构简单，和一个明确定义的语法，学习起来更加简单。
-2.易于阅读：Python代码定义的更清晰。
-3.易于维护：Python的成功在于它的源代码是相当容易维护的。
-4.一个广泛的标准库：Python的最大的优势之一是丰富的库，跨平台的，在UNIX，Windows和Macintosh兼容很好。
-5.互动模式：互动模式的支持，您可以从终端输入执行代码并获得结果的语言，互动的测试和调试代码片断。
-6.可移植：基于其开放源代码的特性，Python已经被移植（也就是使其工作）到许多平台。
-7.可扩展：如果你需要一段运行很快的关键代码，或者是想要编写一些不愿开放的算法，你可以使用C或C++完成那部分程序，然后从你的Python程序中调用。
-8.数据库：Python提供所有主要的商业数据库的接口。
-9.GUI编程：Python支持GUI可以创建和移植到许多系统调用。
-10.可嵌入: 你可以将Python嵌入到C/C++程序，让你的程序的用户获得"脚本化"的能力。
+1. 易于学习：Python有相对较少的关键字，结构简单，和一个明确定义的语法，学习起来更加简单。
+2. 易于阅读：Python代码定义的更清晰。
+3. 易于维护：Python的成功在于它的源代码是相当容易维护的。
+4. 一个广泛的标准库：Python的最大的优势之一是丰富的库，跨平台的，在UNIX，Windows和Macintosh兼容很好。
+5. 互动模式：互动模式的支持，您可以从终端输入执行代码并获得结果的语言，互动的测试和调试代码片断。
+6. 可移植：基于其开放源代码的特性，Python已经被移植（也就是使其工作）到许多平台。
+7. 可扩展：如果你需要一段运行很快的关键代码，或者是想要编写一些不愿开放的算法，你可以使用C或C++完成那部分程序，然后从你的Python程序中调用。
+8. 数据库：Python提供所有主要的商业数据库的接口。
+9. GUI编程：Python支持GUI可以创建和移植到许多系统调用。
+10. 可嵌入: 你可以将Python嵌入到C/C++程序，让你的程序的用户获得"脚本化"的能力。
 
 
 ```bash
@@ -294,7 +294,10 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 | Jython     | Python用于JVM的一个成熟实验。      | 与Java混用。          |
 | Rython     | Python与R语言的结合。  | 与R混用。 |
 | IronPython | 微软针对自家开发的，基于.NET的python实现。      | 与C#混用。            |
+
 备注：pypy在长期运行脚本中，提升性能显著。
+
+
 
 ## 1.4   py/pyc/pyo/pyd
 表格 2 python各种文件格式
@@ -305,14 +308,18 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 | pyc  | python编译后的字节码      | python -m py_compile *.py        |
 | pyo  | python编译优化后的字节码。   -O 或 -OO | python -O -m py_compile *.py   或 -OO 去除注释，文件更小。 |
 | pyd  | python动态库。            |        |
-备注：1.字节码bytecode是二进制文件，pyo和pyc文件都是字节码。
+
+备注：1. 字节码bytecode是二进制文件，pyo和pyc文件都是字节码。
 2. py_compile**模块可编译生成各种文件格式。*
 
-# 2   Python语言教程
+
+
+# 2  Python语言教程
+
 ## 2.1   python对象
 
-在 Python 中，一切都是对象，并且几乎一切都有属性和方法。所有的函数都有一个内置的 __doc__ 属性，它会返回在函数源代码中定义的 doc string。
-self 只有对象实例化（即隐式调用__init__）才能使用self, public属性不需实例化也能调用。因此对于结构类要求在__init__外初始化所有公共属性。
+在 Python 中，一切都是对象，并且几乎一切都有属性和方法。所有的函数都有一个内置的` __doc__` 属性，它会返回在函数源代码中定义的 doc string。
+self 只有对象实例化（即隐式调用`__init__`）才能使用self, public属性不需实例化也能调用。因此对于结构类要求在__init__外初始化所有公共属性。
 
 ### 2.1.1  对象概述
 **包package**
@@ -323,7 +330,7 @@ self 只有对象实例化（即隐式调用__init__）才能使用self, public�
 如果在一个内部函数里，对在外部作用域的变量进行引用，那么内部函数就被认为是闭包。用Python的语言介绍就是，调用一个函数A，这个函数A返回了一个函数B给你，这个返回的函数B就叫做闭包。
  装饰器就是一个闭包。
 
-表格 3 python对象列表
+表格 3 python对象列表 types
 
 | 对象名   | 简介     | 内建类型            |
 | -------- | ------------------------------------------------------------ | ------------------- |
@@ -344,10 +351,10 @@ self 只有对象实例化（即隐式调用__init__）才能使用self, public�
 | 迭代器   | 可以使用“for··· in ···”来操作。迭代器是访问集合元素的一种方式，可以从头访问到尾。 |        |
 | xrange   |          | XRangeType          |
 | None     | python的NULL对象      | 'NoneType'          |
-|          |          |        |
+
 备注：1. 对象类型详见内建类型。常用数据结构也有各自的内置类型。
 2. 查看对象的类型：type(object)。
-3. 查看对象能引用的名字列表：dir(object)。一般都具有以下属性：'__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__'。
+3. 查看对象能引用的名字列表：dir(object)。一般都具有以下属性：`__all__, __builtins__, __doc__, __file__, __name__, __package__`。
 4. 对象调用callable(object) ： 用来确定对象是否可以函数操作符()来调用。
 Return [True](https://docs.python.org/2/library/constants.html#True) if the object argument appears callable, [False](https://docs.python.org/2/library/constants.html#False) if not.
 class instances are callable if they have a [__call__()](https://docs.python.org/2/reference/datamodel.html#object.__call__) method.
@@ -376,7 +383,7 @@ False
 ### 2.1.2  对象引用、深拷贝和浅拷贝
 **可用getattr获取对象引用。**
 **getattr(...)**
-   **getattr(object, name[, default]) -> value**
+    getattr(object, name[, default]) -> value
    Get a named attribute from an object; getattr(x, 'y') is equivalent to x.y.
 
 ```PYTHON
@@ -389,10 +396,11 @@ Traceback (most recent call last):
   File "<interactive input>", line 1, in <module>
 AttributeError: 'tuple' object has no attribute 'pop'
 ```
-**说明：上述例子中dict有clear 访求，tuple无pop方法，list有pop方法。**
+**说明：上述例子中dict有clear 方法，tuple无pop方法，list有pop方法。**
 
 1）对象引用，引用和原对象的修改会同步变化。python中对象的赋值（=）都是进行对象引用（内存地址）传递。 
 2）深拷贝deepcopy
+
 ```python
 import copy
 copy.deepcopy( )
@@ -434,7 +442,7 @@ copy.copy( )
 | ---------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 系统       | sys           | 系统模块，包含了跟python解析器和环境相关的变量和函数。<br>  [System-specific   parameters and functions](https://docs.python.org/2/library/sys.html). | `sys.modules` 包含了你在 IDE 中运行的所有程序所导入的所有模块。 |
 |            | os            | 操作系统相关的模块，如路径path     |          |
-| 内建       | __builtin__   | [**__builtin__** —   Built-in objects](https://docs.python.org/2/library/__builtin__.html) |          |
+| 内建       | `__builtin__` | [**__builtin__** —   Built-in objects](https://docs.python.org/2/library/__builtin__.html) |          |
 | 字符串     | string        | 字符串操作函数库      |          |
 |            | re            | 正则表达 式           |          |
 | 日期时间   | datetime      |          |          |
@@ -447,7 +455,8 @@ copy.copy( )
 
 ### 2.2.1  内建模块__builtin__/builtins/__builtins__
 在Python2.X版本中，内建模块被命名为__builtin__，而到了Python3.X版本中，却更名为builtins。
-__builtin__包含了Python许多内建的函数，你不必手动导入此模块,就可直接调用许多内建的函数。对于__builtins__，它却同时存在于Python2.X和Python3.X中。其实简单地说，它就是对内建模块一个引用。
+`__builtin__`包含了Python许多内建的函数，你不必手动导入此模块,就可直接调用许多内建的函数。对于`__builtins__`，它却同时存在于Python2.X和Python3.X中。其实简单地说，它就是对内建模块一个引用。
+
 ```python
 >>> __builtins__ is __builtin__
 True
@@ -491,7 +500,10 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 *  内建基础数据类型有：int bool float long str
 *  内建方法有：xrange enumerate slice super type
 
+
+
 ### 2.2.2  内建类型Build-in Types
+
 [5. Built-in Types](https://docs.python.org/2/library/stdtypes.html)
 - [5.1. Truth Value      Testing](https://docs.python.org/2/library/stdtypes.html#truth-value-testing)
 - [5.2. Boolean      Operations — **and**, **or**, **not**](https://docs.python.org/2/library/stdtypes.html#boolean-operations-and-or-not)
@@ -544,9 +556,14 @@ True
 list1 = zip(('a','b','c','d','e'),(1,2,3,4,5))
 A0 = dict(list1)
 ```
-输出：
+输出：（dict是无序的，有序list转化成dict时，原次序可能打乱。）
+
+```sh
 list1 = [('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5)]
-A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list转化成dict时，原次序可能打乱。
+A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  
+```
+
+
 
 ### 2.2.3  内建函数Built-in Functions
 表格 5 内建函数列表（全）
@@ -569,7 +586,7 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  # dict是无序的，有序list�
 | [dict()](https://docs.python.org/2/library/functions.html#func-dict) | [hex()](https://docs.python.org/2/library/functions.html#hex) | [object()](https://docs.python.org/2/library/functions.html#object) | [slice()](https://docs.python.org/2/library/functions.html#slice) |          |
 | [dir()](https://docs.python.org/2/library/functions.html#dir) | [id()](https://docs.python.org/2/library/functions.html#id) | [oct()](https://docs.python.org/2/library/functions.html#oct) | [sorted()](https://docs.python.org/2/library/functions.html#sorted) |          |
 
-备注：1. classmethod、staticmethod详见0下方
+备注：1. classmethod、staticmethod 详见下表
 
 表格 6 常用内建函数列表
 
@@ -616,11 +633,12 @@ def log_bar():
 @use_logging2(level="warn")    
 def log_bar2(): 
    print("i am log_bar2")
+
+#调用
+log_bar()
+log_bar2()
 ```
 
-调用：
-   log_bar()
-   log_bar2()
 输出：
 
 ```
@@ -630,10 +648,13 @@ log_bar2 is running: warn
 i am log_bar2
 ```
 
-**明**：因为bar函数定义前使用@use_logging，后面调用bar()相当于调用bar = use_logging(bar)
+**说明明**：因为bar函数定义前使用@use_logging，后面调用bar()相当于调用bar = use_logging(bar)。
+
+
 
 **2. 类装饰器**
 类有三种常见方法（注：方法为类中定义的函数），
+
 *  实例方法: 实例方法是实例作为第一个参数传递给方法，根据约定该参数为self。
 *  类方法classmethod，第一参数为cls。可以修改类中的值。
 *  静态方法staticmathod,相当于函数，可以实例或类去调用它。
@@ -642,7 +663,7 @@ i am log_bar2
 相比函数装饰器，类装饰器具有灵活度大、高内聚、封装性等优点。使用类装饰器还可以依靠类内部的\_\_call\_\_方法，当使用@形式将装饰器附加到类名上时，就会调用此方法（。
 **类的内置装饰器（3个）**
 @staticmathod、@classmethod、@property，作用分别是把类中定义的实例方法变成静态方法、类方法和类属性。
-就是说可以直接用类名调用，而不需要实例化类，相当于把一个类的**方法不需要实例化也能直接像函数一样调用，类名此时相当于模块名。**
+就是说可以直接用类名调用，而不需要实例化类，相当于把一个类的方法不需要实例化也能直接像函数一样调用，类名此时相当于模块名。
 
 **classmethod(function)**
 Return a class method for function.
@@ -679,10 +700,12 @@ class Rabbit(object):
    # @property
    def name(self):
        return self._name
+
+#调用
+Rabbit.newRabbit(*'fuck'*)
+Rabbit.newRabbit2()
 ```
-调用：
-   Rabbit.newRabbit(*'fuck'*)
-   Rabbit.newRabbit2()
+
 输出：
 
 ```sh
@@ -785,7 +808,7 @@ for i in mygenerator: print i  # 此行执行多遍，只有第一遍有结果�
 
 
 **yield**
-**yield** 的作用就是把一个函数变成一个 generator，带有yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator。所以带有 yield 的函数在 Python 中被称之为 generator（生成器）。
+yield的作用就是把一个函数变成一个 generator，带有yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator。所以带有 yield 的函数在 Python 中被称之为 generator（生成器）。
 
 利用 isgeneratorfunction 判断一个函数是否是一个特殊的 generator 函数：
 
@@ -808,6 +831,7 @@ def fib(n):
         yield a  #每调用一次时，执行到这相当于return
         a, b = b, a+b 	#第二次调用开始从这开始，变量保存了上次调用的值
         i = i +1
+#调用
 print(fib(10))
 for j in fib(5): print(j)  
 ```
@@ -837,7 +861,7 @@ def follow(thefile):
             continue
         yield line
  
- 
+#调用 
 with open('test.txt', 'r') as logfile:
     for line in follw(logfile):
         print line
@@ -867,7 +891,8 @@ def grep(pattern):
                 print line
     except GeneratorExit:
         print 'now the exit the coroutine'
- 
+
+#调用        
 g = grep('python')
 g.close()
 g.send('nice')
@@ -895,7 +920,10 @@ class range(object)
 NameError: name 'xrange' is not defined   #python3已将其重命名为 range
 ```
 
+
+
 #### super
+
 **super(type[, object-or-type])**
 Return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class. 
 Note：[super()](https://docs.python.org/2/library/functions.html#super) only works for [new-style class](https://docs.python.org/2/glossary.html#term-new-style-class)es.
@@ -921,7 +949,10 @@ def __init__(self):
    #如果不重新实现__init__，那么默认调用左边第一个父类的构造函数，此例中为B。
 ```
 
+
+
 #### filter/map/reduce/lambda
+
 **filter**
 ```python
 >>> help(filter)
@@ -940,9 +971,11 @@ filter(function, sequence)：对sequence中的item依次执行function(item)，�
 'bcdef'
 ```
 
+
+
 **map(function, sequence)**：
 对sequence中的item依次执行function(item)，见执行结果组成一个List返回。另外map也支持多个sequence，这就要求function也支持相应数量的参数输入：
-​
+
 ```python
 >>> def add(x, y): return x+y 
 >>> map(add, range(8), range(8)) 
@@ -986,7 +1019,9 @@ string.split(l, ':')))
 功能解说：对 l 中的所有元素以':'做分割，得出一个列表。对这个列表的每一个元素做字符串strip，形成一个列表。对这个列表的每一个元素做直接返回操作(这个地方 可以加上过滤条件限制)，最终获得一个字符串被':'分割的列表，列表中的每一个字符串都做了strip，并可以对特殊字符串过滤。
 
 
+
 ### 2.2.4  内建私有方法Built-in Methods
+
 `__xx__`: 内置私有方法，用__开头和结尾。 
 表格 7 常见内建私有方法列表 
 
@@ -1177,7 +1212,10 @@ max = (a > b and a or b)
 如 len=2; str=’len=%d’ %(len)
 说明：%格式化符号的速度会比+的性能会高些。
 
+
+
 字符串转化为元组、列表和字典:  
+
 ```python
 eval(str)
 #字符串转为元组，返回：(1, 2, 3)
@@ -1188,7 +1226,7 @@ print list(eval("(1,2,3)"))
 print type(eval("{'name':'ljq', 'age':24}"))
 ```
 
-**元组、列表和字典转化为字符串:  str(sequence)**
+**元组、列表和字典转化为字符串**:  str(sequence)
 
 
 
@@ -1358,7 +1396,9 @@ re.findal*  返回一个匹配列表
 ```
 
 
+
 ### 2.5.1  正则表达式修饰符与模式
+
 正则表达式修饰符 - 可选标志
 正则表达式可以包含一些可选标志修饰符来控制匹配的模式。修饰符被指定为一个可选的标志。多个标志可以通过按位 OR(|) 它们来指定。如 re.I | re.M 被设置成 I 和 M 标志：
 表格 15正则表达式修饰符 - 可选标志
@@ -1421,7 +1461,10 @@ re.findal*  返回一个匹配列表
 | \1...\9     | 匹配第n个分组的子表达式。          |
 | \10         | 匹配第n个分组的子表达式，如果它经匹配。否则指的是八进制字符码的表达式。 |
 
+
+
 ### 2.5.2  正则表达式实例 
+
 字符匹配
 | 实例   | 描述           |
 | ------ | -------------- |
@@ -1448,9 +1491,13 @@ re.findal*  返回一个匹配列表
 | \S   | 匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。     |
 | \w   | 匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。         |
 | \W   | 匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。    |
-## 2.6     异常处理
+
+
+## 2.6   异常处理
+
 断言：assert
-__debug__：内置的只读变量，可用在DEBUG模式下进行额外的检查。
+`__debug__`：内置的只读变量，可用在DEBUG模式下进行额外的检查。
+
 ### 2.6.1  异常捕捉、抛出
 **异常捕捉：try语句、try-except、try-finally。**
 ```python
@@ -1482,7 +1529,9 @@ try:
 except:
     traceback.print_exc()
 ```
-示例:…excpetion/traceback.py
+示例:  excpetion/traceback.py
+
+
 
 **2） 采用sys模块回溯最后的异常**
 ```python
@@ -1505,7 +1554,10 @@ value/message ---- 异常的信息或者参数
 traceback ---- 包含调用栈信息的对象。
 从这点上可以看出此方法涵盖了traceback.
 
+
+
 ### 2.6.3  用户自定义异常
+
 通过创建一个新的异常类，程序可以命名它们自己的异常。异常应该是典型的继承自Exception类，通过直接或间接的方式。
 
 所有的标准/内建异常都是从根异常派生的，目前，有3个直接从BaseException派生的异常子类：SystemExit，KeyboardInterrupt和Exception。其它的所有的内建异常都是Exception的子类。
@@ -1559,17 +1611,23 @@ traceback ---- 包含调用栈信息的对象。
 | SyntaxWarning | 可疑的语法的警告         |
 | UserWarning  | 用户代码生成的警告       |
 
-## 2.7     函数式编程
+## 2.7  函数式编程
 *  装饰器@：可以把函数作为参数。
 *  yield和生成器。
 *  lamda运算符
 
-## 2.8     中文编码
+
+
+## 2.8  中文编码
+
 详见《中文化专题》python章节。
 
 **mysql字符编码**：表存储，查询/连接/结果(SET NAMES)都要用UTF8，这样才能保证中文正常显示。如果原始网页数据源是GB2312，下载下来后要decode('gb2312')，然后在插入DB时encode('utf8').
 
-## 2.9     本章参考
+
+
+## 2.9  本章参考
+
 [1]. http://www.jb51.net/article/64040.htm
 [2]. 如何理解Python装饰器？ https://www.zhihu.com/question/26930016
 [3]. Python LEGB规则 http://www.jianshu.com/p/3b72ba5a209c
@@ -1577,8 +1635,8 @@ traceback ---- 包含调用栈信息的对象。
 [5]. python 多继承详解http://www.pythontab.com/html/2013/pythonhexinbiancheng_0828/550.html
 [6]. 浅谈 Python 的 with 语句https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/ 
 
-# 3       Python开发环境
-## 3.1     模块module
+# 3  Python开发环境
+## 3.1  模块module
 **模块module**
 Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Python 对象定义和Python语句。
 *  模块让你能够有逻辑地组织你的 Python 代码段。
@@ -1728,7 +1786,7 @@ windows平台安装python扩展模块，需要指定编译器。
 compiler=mingw32
 
 **2）VC运行库支持**
-**说明：VS2008作为运行库的基础，是为了让python扩展库支持WINDOWS主流编译器VS2008以后的版本，并不是版本越高就越适用，版本太低将不再支持。**
+说明：VS2008作为运行库的基础，是为了让python扩展库支持WINDOWS主流编译器VS2008以后的版本，并不是版本越高就越适用，版本太低将不再支持。
 **可以下载 VCForPython27**
 SET VS90COMNTOOLS=%VS100COMNTOOLS%
 如果是VS2008, 为VS90
@@ -1831,7 +1889,7 @@ windows: C:\dev\Python27_x86/lib/dist-packages
 另外测试程序中使用了logging模块的相对路径，因此要测试程序目录放相应的配置文件。
 
 ```shell
-#! /bin/bash
+#!/bin/bash
 #$dir
 if []; then  
   # linux
@@ -1852,6 +1910,7 @@ $MV mypkpath.pth $dstdir
 ```
 
 
+
 **问题描述2：相对路径导入错误**
 相对路径导入，如from  .  ..  … import ，..直接与模块名相连，不留空格。
 错误1：ValueError: Attempted relative import in non-package
@@ -1866,7 +1925,7 @@ $MV mypkpath.pth $dstdir
 错误描述：在指定路径下没有找到该模块。
 另外：在main.py执行的时候，没有指定路径的文件默认与main.py是同一路径。
 
-#### 3.1.3.4 包的导入__init__.py
+#### 3.1.3.4 包的导入`__init__.py`
 假如子目录中也有 __init__.py 那么它就是这个包的子包了。当你将一个包作为模块导入（比如从 xml 导入 dom ）的时候，实际上导入了它的 __init__.py 文件。
 __init__.py 文件定义了包的属性和方法。其实它可以什么也不定义；可以只是一个空文件，但是必须存在。如果 __init__.py 不存在，这个目录就仅仅是一个目录，而不是一个包，它就不能被导入或者包含其它的模块和嵌套包。
 
@@ -2023,7 +2082,6 @@ List of available distribution formats:
   --formats=msi      Microsoft Installer
 ```
 
-
 **setup函数还有一些参数：**
 1、packages
  告诉Distutils需要处理那些包（包含__init__.py的文件夹）
@@ -2033,7 +2091,7 @@ List of available distribution formats:
  是一个包含Extension实例的列表，Extension的定义也有一些参数。
  4、ext_package
  定义extension的相对路径
- **5、requires** 定义依赖哪些模块
+ 5、requires 定义依赖哪些模块
  6、provides
  定义可以为哪些模块提供依赖
  7、scripts
@@ -2051,9 +2109,12 @@ List of available distribution formats:
 *  README.txt或README，setup.py，setup.cfg
 *  所有package_data或data_files指定的文件
 
+
+
 **MANIFEST.in**
 MANIFEST.in 文件的编写规则可参考：https://docs.python.org/3.6/distutils/sourcedist.html
 打包数据文件，manifest template，名为MANIFEST.in，定义如何生成MANIFEST文件，内容就是需要包含在分发包中的文件。一个MANIFEST.in文件如下：
+
 ```sh
 include *.txt
 recursive-include examples *.txt *.py
@@ -2066,7 +2127,10 @@ $ pip freeze > requirements.txt
 $ pip install -r requirements.txt
 ```
 
+
+
 #### 3.1.5.3 setup.cfg
+
 setup.cfg提供一种方式，可以让包的开发者提供命令的默认选项，同时为用户提供修改的机会。对setup.cfg的解析，是在setup.py之后，在命令行执行前。
 setup.cfg文件的形式类似于
 [command]
@@ -2114,7 +2178,7 @@ python -m pytest
 
 
 
-## 3.2     Python常用模块
+## 3.2   Python常用模块
 说明：本章所说的常用模块为个人所常用的。在3.4 见下方 的常见开发库收集了常用标准库和第三方库，两者多有交叉。
 
 表格 19 python常用第三方模块列表
@@ -2131,7 +2195,7 @@ python -m pytest
 3. *wxPython*是Python语言的一套优秀的GUI图形库。允许Python程序员很方便的创建完整的、功能键全的GUI用户界面。
 
 ### 3.2.1  主模块__main__
-在Python中，一个代码文件就是一个模块，一个模块就是一个代码文件;用来启动Python或者说首先执行的那个文件(相当 于C语言中main主函数所在的C文件)的模块名被Python命名为__main__，称为主模块，而对于其它被主模块或其他非主模块导入的模块，它们 的模块名则是文件名本身(除了后缀.py、.pyc或.pyo等)。每个模块都有一个名为__name__的属性，它表示着该模块的名字。除此之外，主模 块与其它非主模块之间还有一点区别，比如：from __future__ import absolute_import语句在非主模块中可以正常使用，反而在主模块中，好像没有什么效果——有等无。
+在Python中，一个代码文件就是一个模块，一个模块就是一个代码文件;用来启动Python或者说首先执行的那个文件(相当 于C语言中main主函数所在的C文件)的模块名被Python命名为__main__，称为主模块，而对于其它被主模块或其他非主模块导入的模块，它们 的模块名则是文件名本身(除了后缀.py、.pyc或.pyo等)。每个模块都有一个名为`__name__`的属性，它表示着该模块的名字。除此之外，主模 块与其它非主模块之间还有一点区别，比如：`from __future__ import absolute_import`语句在非主模块中可以正常使用，反而在主模块中，好像没有什么效果——有等无。
 
 **__name__ = "__main__"**  使用了此名，在作为模块调用时就不会执行(__main__缩进体内)的代码。对于测试程序非常实用。
    调用外部模块时，除非使用reload(module_name)，否则只会执行调用方法体。
@@ -2301,10 +2365,11 @@ print(traceback.format_exc()
 traceback.print_exc()
 traceback.print_exception(sys.exc_info()) 
 ```
-## 3.3     Python常用开发工具
+## 3.3  Python常用开发工具
 参考资料：Python 程序员必知必会的开发者工具http://blog.jobbole.com/58226/
 说明：眼风为为实。经俺测试，get/set attr的运行效率所差无几，没有所谓几十倍的差距，也就是几十分之一的正常差距。
 表格 20 python程序列表
+
 | 程序           | 简介     | 备注     |
 | ----------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Python 2.6/2.7  | 目前大多数应用支持。   python2.7.6以后的版本自带pip。        | 语法与3.x有差别。     |
@@ -2318,10 +2383,11 @@ traceback.print_exception(sys.exc_info())
 | pyreverse      | 代码转化成模型        | 安装pylint即已安装，但显示dot文件需graphviz支持。            |
 | IDLE           | 缺省GUI   |          |
 | pythonwin      | Python for Window Extensions       | [pypiwin32 219](https://pypi.python.org/pypi/pypiwin32/219)   http://sourceforge.net/projects/pywin32/files/pywin32 |
-|    |          |          |
-注：32机只能装32位的python；64位机能同时装32和64位的python程序，具体使用中通过环境变量或全路径来识别版本。
+
+备注：32机只能装32位的python；64位机能同时装32和64位的python程序，具体使用中通过环境变量或全路径来识别版本。
 
 表格 21 python常用开发工具列表（按功能分类）
+
 | 功能     | 相关工具  | 备注     |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | IDE      | IDLE（自带），   pythonwin（简洁版，Win   only），    **Eclipse+Pydev**（开源）；   pycharm（付费 ）   spyder（开源） | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。   spyder用以科学计算。 |
@@ -2334,9 +2400,28 @@ traceback.print_exception(sys.exc_info())
 | 性能     | profile/   timeit     |          |
 | exe打包  | py2exe/pyinstaller    |          |
 | 反编译   | uncompyle2            |          |
+
 备注：
-​          
-图 1常见python IDE
+​
+
+表格 常见python IDE
+
+| IDE                     | 自动补全 | 代码更改检测 | 调试 | 语法 检查 | 开源 | 备注       | 推荐度 |
+| ----------------------- | -------- | ------------ | ---- | --------- | ---- | ---------- | ------ |
+| Eclipse+Pydev           | 有       | 有           | 类VC | 有        | 开源 | 比较费资源 | 高     |
+| Ulipad                  | 有       | 有           | WPDB | 自动      | 开源 |            | 高     |
+| Eric                    | 有       | 有           | 类VC | 自动      | 开源 |            | 高     |
+| PythonWin               | 手动     | 有           | 用库 | 无        | 开源 | win only   | 中     |
+| IDLE                    | 手动     | 有           | 用库 | 无        | 开源 |            | 低     |
+| SPE                     | 无       | 有           | WPDB | 存盘      | 开源 |            | 中     |
+| BoA                     | 手动     | 手动         | 类VC | 无        | 开源 | 中文支持差 | 中     |
+| WingIDE                 | 有       | 有           | 类VC | 手动      | 共享 |            | 中+    |
+| Komodo                  | 无       | 有           | 类VC | 手动      | 共享 |            | 中+    |
+| VIM+插件                | 有       | 无           | 无   | 无        | 开源 |            | 中     |
+| Emacs+插件              | 有       | 无           | 无   | 无        | 开源 |            | 中     |
+| VS.net+<br>VisualPython | 无       | 有           | 类VC | 无        | 共享 | 弃         | 差     |
+
+
 
 ### 3.3.1  IDE
 #### 3.3.1.1  Eclipse + Pydev
@@ -2599,18 +2684,18 @@ if __name__ == "__main__":
 
 #### 3.3.5.2 pytest
 pytest是一个非常成熟的全功能的Python测试框架，主要特点有以下几点：
-1、简单灵活，容易上手，文档丰富； 
-2、支持**参数化**，可以细粒度地控制要测试的测试用例；
-3、能够支持简单的单元测试和复杂的**功能测试**，还可以用来做selenium/appnium等自动化测试、接口自动化测试（pytest+requests）;
-4、pytest具有很多**第三方插件**，并且可以自定义扩展，比较好用的如pytest-selenium（集成selenium）、pytest-html（完美html测试报告生成）、pytest-rerunfailures（失败case重复执行）、pytest-xdist（多CPU分发）等；
-5、测试用例的skip和xfail处理；
-6、可以很好的和CI工具结合，例如jenkins
-
-**7、兼容unittest和nose测试集**
+1. 简单灵活，容易上手，文档丰富； 
+2. 支持**参数化**，可以细粒度地控制要测试的测试用例；
+3. 能够支持简单的单元测试和复杂的**功能测试**，还可以用来做selenium/appnium等自动化测试. 接口自动化测试（pytest+requests）;
+4. pytest具有很多**第三方插件**，并且可以自定义扩展，比较好用的如pytest-selenium（集成selenium）. pytest-html（完美html测试报告生成）. pytest-rerunfailures（失败case重复执行）. pytest-xdist（多CPU分发）等；
+5. 测试用例的skip和xfail处理；
+6. 可以很好的和CI工具结合，例如jenkins
+7. 兼容unittest和nose测试集**
 
 **配置文件查找规则**
-pytest默认的ini文件查找顺序为：pytest.ini, tox.ini, setup.cfg。只到第一个[pytest]部分被发现。setup.cfg的配置段已升级为
-[tool:pytest]
+pytest默认的ini文件查找顺序为：pytest.ini, tox.ini, setup.cfg。只到第一个[pytest]部分被发现。
+
+setup.cfg的配置段已升级为 [tool:pytest]
 
 **用例查找规则**
 如果不带参数运行 pytest，那么其先从配置文件(pytest.ini，tox.ini，setup.cfg)中查找配置项 testpaths指定的路径中的 test case，如果没有则从当前目录开始查找，否者，命令行参数就用于目录、文件查找。查找的规则如下：
@@ -2673,7 +2758,9 @@ general:
 fixture 是 pytest 特有的功能，它用 pytest.fixture 标识，定义在函数前面。在编写测试函数的时候，可以将此函数名称做为传入参数，pytest 将会以依赖注入方式，将该函数的返回值作为测试函数的传入参数。
 s`etup/teardown` 是指在模块、函数、类开始运行以及结束运行时执行一些动作。比如在一个函数中测试一个数据库应用，测需要在函数开始前连接数据库，在函数运行结束后断开与数据库的连接。setup/teardown 是特殊的 fixture.
 pytest.fixture(scope='function', params=None, autouse=False, ids=None)
+
 **作用范围 ：**
+
 *  scope: session/modules/class/function
 *  auto_use=True，默认是False，是否自动调用
 调用方式：
@@ -2756,8 +2843,9 @@ setup(console=['main.py'])
 
 **2)** **PyInstaller**
 步骤如下：(打包后exe在dist/)
-1.输入pip install PyInstaller
-2.进入需要打包的程序目录
+
+1. 输入pip install PyInstaller
+2. 进入需要打包的程序目录
 3. SHELL端命令：pyinstaller  [需要打包的程序（脚本）名称]
 
 ### 3.3.8  性能优化 cProfile/pstats/timeit
@@ -2810,7 +2898,7 @@ def deploy():
         run("touch app.wsgi")
 ```
 
-### 3.3.10    supervisor
+### 3.3.10  supervisor
 supervisor是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具。可以很方便的监听、启动、停止、重启一个或多个进程。用supervisor管理的进程，当一个进程意外被杀死，supervisor监听到进程死后，会自动将它重启，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
 
 \# 安装，安装好后在/etc/会生成一个supervisord.conf文件及一个supervisord.d文件目录
@@ -2901,7 +2989,10 @@ redirect_stderr=true
 [3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html 
 [4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html 
 
+
+
 ## 3.4  Python常用开发库
+
 ### 3.4.1  常用开发库列表
 表格 23 用过的python常用库（按类别划分）
 | 类别       | 库名     | 介绍     |
@@ -2923,8 +3014,8 @@ redirect_stderr=true
 |   | celery    | 基于分布式消息传递的异步任务队列/作业队列。     |
 |   | subprocess            | 完全跳过线程，使用进程来实现。父子进程。        |
 | 存储       | pysqlite  | 嵌入式数据库SQLite的python接口。   |
-|   | python_mysq*          | mysq*    |
-|   | cx_Oracle | orac*    |
+|   | python_mysql          | mysql   |
+|   | cx_Oracle | oracle   |
 |   | pymongo   | mongo DB  |
 |   | pyredis   | redis    |
 | 机器学习   | numpy    | 数学函数库，提供数组、一组与线性代数相关的函数以及傅里叶变换函数。 |
@@ -2937,7 +3028,7 @@ redirect_stderr=true
 |   | Gensim    | 用来作文本主题挖掘的库 |
 |   | jieba    | 中文分词  |
 |   | mmseg    | 中文分词  |
-| 可视化     | PI*      | Python Imaging Library，图像生成和处理库。   pillow          |
+| 可视化     | PIL    | Python Imaging Library，图像生成和处理库。   pillow          |
 |   | matplotlib            | 绘图库    |
 |   | wordcloud | 词云     |
 | WEB框架    | flask    | 轻量级WEB服务器框架，提供REST访问。 |
@@ -2945,7 +3036,6 @@ redirect_stderr=true
 |   |          |          |
 | 其它       | config    | 配置文件  |
 |   | logging   | 日志记录  |
-|   |          |          |
 备注：1.urllib2在Python3已拆分更名为urllib.request和urllib.error.
 2. 机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。
 
@@ -3551,6 +3641,8 @@ def thread2(arg1, stop_event):
      pass
 ```
 
+
+
 **法3：ctypes**
 
 ```python
@@ -3659,6 +3751,8 @@ def B():
     print('b.....')
     g1.switch()  #切换至A
     print('b....2')
+
+#调用    
 g1 = greenlet.greenlet(A) #启动一个线程
 g2 = greenlet.greenlet(B)
 g1.switch()
@@ -4006,8 +4100,13 @@ LINUX下可用dmesg查看错误信息。
 ### 6.1.2  pyquey & beautifulSoup
 **错误1：AttributeError: 'XPathExpr' object has no attribute 'add_post_condition'**
 解决方案：版本问题。重新安装pyquery
-`pip uninstall pyquery`
-`pip install git+git://github.com/gawel/pyquery.git`
+
+```sh
+pip uninstall pyquery
+pip install git+git://github.com/gawel/pyquery.git
+```
+
+
 
 **错误2：定位标签的类型错误**
 解决方案：beautifulsoup使用unicode标签，pyquery使用str标签。
@@ -4016,7 +4115,10 @@ LINUX下可用dmesg查看错误信息。
 encoding error : input conversion failed due to input error,
  I/O error : encoder error
 
+
+
 ### 6.1.3  mysql操作失败
+
 mysql语句操作失败一方面是编码问题，字段值含有非ascii字符，将字符编码转化为UTF-8基本可解决； 另一方面主要是字符转义问题，字段值中有特殊字符需要转义（如,引号）。
 **特别注意：SET NAMES UTF8;**
 
@@ -4036,7 +4138,7 @@ paras.append(id)
 转义函数：MySQLdb.escape_string(str)， str需要是可识别的编码
 ```python
 name=name.encode(‘utf-8’, ‘ignore’)   #此时name是可识别编码，否则会报错
-name= MySQLdb.escape_string(name)   #此时转义后，type(name)=’str’
+name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 ```
 
 
@@ -4222,6 +4324,7 @@ typedef struct {
  ```
 
 
+
 表格 35 PyCodeObject各个域的含义
 
 | co_argcount    | 未知参数个数      |
@@ -4240,7 +4343,10 @@ typedef struct {
 | co_firstlineno | 源文件中对应起始行 |
 | co_lnotab      | 字节码与源文件中行号对应关系   |
 
+
+
 ### 7.3.3  python访问PyCodeObject: compile/dis
+
 ```
 In [6]: help(compile)
 Help on built-in function compile in module builtins:
@@ -4291,7 +4397,10 @@ In [10]: dis.dis(co)
  34 RETURN_VALUE
 ```
 
+
+
 ## 7.4   本章参考
+
 [1]. 《python源码剖析》 2008
 [2]. 《python源码剖析》之实现small python https://blog.csdn.net/wangyuquanliuli/article/details/8654478
 [3]. Python2.7.7源码分析  http://www.linuxidc.com/Linux/2015-08/121168.htm
@@ -4301,9 +4410,9 @@ In [10]: dis.dis(co)
 
 
 
-# 8   参考资料
+# 8  参考资料
 
-## 8.1   参考链接
+## 8.1  参考链接
 [1]. python官网[Python.org](http://www.python.org/)  https://www.python.org/doc/
 [2]. [python.cn](http://python.cn/) 
 [3]. pythoon官方扩展库package index  https://pypi.python.org 
@@ -4314,7 +4423,7 @@ In [10]: dis.dis(co)
 [8]. [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
 [9]. wxpython https://www.wxpython.org 
 
-## 8.2   参考书目
+## 8.2  参考书目
 [1]. Toby Segaran / 莫映、王开福 《集体智慧编程》/ 电子工业出版社 / 2015-3 
 [2]. Wesley J. Chun 《Python核心编程》（第2版）  人民邮电出版社  2008-6 http://www.linuxidc.com/Linux/2013-06/85425.htm
 [3]. Wesley J. Chun 《Python核心编程》（第3版）  人民邮电出版社  2016-5
@@ -4329,3 +4438,4 @@ In [10]: dis.dis(co)
 [12].    [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/) 
 [13].    [*Thinking in Python*](http://www.mindview.net/Books/TIPython)
 [14].    周伟,宗杰 《Python开发技术详解》 http://www.linuxidc.com/Linux/2013-11/92693.htm
+
