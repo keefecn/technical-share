@@ -1317,6 +1317,10 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 [1].   知识图谱构建技术综述 《计算机研究与发展》, 2016, 53 (3):582-600 https://blog.csdn.net/qq_34435926/article/details/79926633
 
+[2]: https://blog.csdn.net/eastmount/article/details/86714051  [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)
+
+
+
 # 5    AI产业
 
 ## 5.1   简介

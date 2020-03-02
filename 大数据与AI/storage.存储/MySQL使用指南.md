@@ -153,21 +153,28 @@
 
 **常用的程序**
 
+```
 mysqld： mysql后台服务器
-
-mysql: mysql客户端
-
-mysqladmin：: 用来管理,常用于用户密码设定更改，权限刷新，创建数据库
-
+mysql:   mysql客户端
+mysqladmin： 用来管理,常用于用户密码设定更改，权限刷新，创建数据库
 mysqldump： 用来mysql备份
+mysqld_safe 安全方式启动，可重设root密码
+/usr/include/mysql/　   头文件路径
+/usr/lib/mysql/libmysqlclient  库路径与库
+```
 
- 
 
-/usr/include/mysql/　头文件路径
 
-/usr/lib/mysql/libmysqlclient 库路径与库
+启动后台服务器: 
 
- 
+```shell
+mysqld --port=3307 --defaults-file=/data/mysql3307/my.cnf  # 常规启动
+mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf  #安全方式启动
+```
+
+客户端连接： `mysql -u [user] -h [host] -P [port] -p`
+
+
 
 # 2    MySQL基础教程
 
@@ -662,8 +669,8 @@ mysql> SELECT EXTRACT(YEAR FROM '1999-07-02');
 
 **1) 按年/月/日/时的汇总统计**
 
-* 按年汇总，统计： SELECT date_format(ctime, '%Y') AS YEAR, count(*) FROM news GROUP BY YEAR;
-* 按月汇总，统计：SELECT date_format(ctime, '%Y-%m') AS MONTH, count(*) FROM news GROUP BY MONTH;
+* 按年汇总，统计： `SELECT date_format(ctime, '%Y') AS YEAR, count(*) FROM news GROUP BY YEAR;`
+* 按月汇总，统计：`SELECT date_format(ctime, '%Y-%m') AS MONTH, count(*) FROM news GROUP BY MONTH;`
 * 按季度汇总，统计： 
 ```mysql
 SELECT date_format(ctime, '%Y') AS YEAR,FLOOR((date_format(ctime, '%m')+2)/3) AS QUARTER, count(*) 
@@ -706,8 +713,6 @@ SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*)
 
 **本周统计:**
 `SELECT * FROM tbl_name WHERE month(my_time1) = month(curdate()) and week(my_time2) = week(curdate())`
-
- 
 
  
 
@@ -804,15 +809,18 @@ ON SCHEDULE schedule ------------------------------------*标注3
 DO sql_statement -----------------------------------------------*标注7
 ```
 
+
+
 ## 2.5  集合运算
 
 在MySQL中，只支持Union(并集)集合运算，而对于交集Intersect和差集Except并不支持。那么如何才能在MySQL中实现交集和差集呢？ 
 
- 
+ 一般在MySQL中，我们可以通过in和not in来间接实现交集和差集，当然也有一定局限性，面对少量数据还可以，但数据量大了效率就会变得很低。
 
-一般在MySQL中，我们可以通过in和not in来间接实现交集和差集，当然也有一定局限性，面对少量数据还可以，但数据量大了效率就会变得很低。
 
-// 求差集：使用not in 求差集，但效率低
+
+**求差集**：使用not in 求差集，但效率低
+
 ```mysql 
 SELECT t1.* FROM t1  
 WHERE 
@@ -821,7 +829,9 @@ name NOT IN
 ```
 
 
-// 求交集： 表t1/t2中，字段id、name和age都一样
+
+**求交集**： 表t1/t2中，字段id、name和age都一样
+
 ```mysql 
 SELECT id, NAME, age, COUNT(*) 
   FROM (SELECT id, NAME, age 
@@ -844,9 +854,11 @@ SELECT id, NAME, age, COUNT(*)
 
 [1].   http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#date-and-time-functions
 
-[2].   实战mysql存储程序与定时器 http://lobert.iteye.com/blog/1953827
+[2].   http://lobert.iteye.com/blog/1953827  "实战mysql存储程序与定时器"
 
-[3].   MySQL交集和差集的实现方法 https://www.w3cschool.cn/mysql/mysql-vge12oye.html
+[3].   https://www.w3cschool.cn/mysql/mysql-vge12oye.html  "MySQL交集和差集的实现方法"
+
+
 
 
 
@@ -1235,7 +1247,294 @@ $ /usr/local/mysql-proxy/bin/mysql-proxy --plugins=proxy --plugins=admin --defau
 
  
 
-## 3.4  本章参考
+## 3.4 分区存储
+
+### MySQL分区类型
+
+*　RANGE: 基于属于一个给定连续区间的列值，把多行分配给分区。datetime类型字段要用TO_DAYS转换，timestamp类型字段要用UNIX_TIMESTAMP转换。
+*　RANGE COLUMNS: 类型RANGE，但可作用到列
+*　HASH: 基于用户定义的表达式的返回值来进行选择的分区，该表达式使用将要插入到表中的这些行的列值进行计算。这个函数可以包含MySQL中有效的、产生非负整数值的任何表达式。
+*　KEY：类似于按HASH分区，区别在于KEY分区只支持计算一列或多列，且MySQL服务器提供其自身的哈希函数。必须有一列或多列包含整数值。
+*　复合分区： 基于RANGE/LIST 类型的分区表中每个分区的再次分割。子分区可以是 HASH/KEY 等类型。
+
+
+
+**分区常用操作**
+
+创建表时分区： id分区
+
+
+```mysql
+CREATE TABLE `test`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `description` varchar(512) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `state` tinyint(4) NULL DEFAULT 0 COMMENT '0:未处理，1：处理中，2：处理完成，3：异常订单',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `etc_cg_document_i4`(`state`) USING BTREE,
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact PARTITION BY RANGE (`id`)
+    PARTITIONS 2
+    (PARTITION `p1` VALUES LESS THAN (10000) ENGINE = InnoDB MAX_ROWS = 0 MIN_ROWS = 0 ,
+    PARTITION `p2` VALUES LESS THAN (20000) ENGINE = InnoDB MAX_ROWS = 0 MIN_ROWS = 0 )
+;
+```
+
+
+增加分区
+
+```mysql
+alter table test partition by range(id)(    
+  partition p1 values less than (10000),    
+  partition p2 values less than (20000));
+);
+```
+
+删除指定分区： 如果删除分区，指定分区的数据也会同步删除。
+
+```mysql
+alter table test drop partition p1;
+```
+
+删除所有分区： 
+
+`Alter table test remove partitioning; `   
+
+ 
+
+查看分区信息
+
+```mysql
+SELECT PARTITION_NAME, TABLE_ROWS 
+FROM INFORMATION_SCHEMA.PARTITIONS 
+WHERE TABLE_NAME = 'test';
+```
+
+
+###  时间分区存储
+
+对于datetime类型的字段（下面示例字段是`hiredata` ），Range和Range Columns能达到分区效果，HASH则无分区效果。最好将用于分区的字段与主键联合作为复合主键。
+
+常见错误 ：
+
+1. [Err] 1503 - A UNIQUE INDEX must include all columns in the table's partitioning function
+
+```mysql
+# 将原主键id 改为 联合主键(id,create_time)
+alter table anchor2 modify id int;  	#取消自增
+alter table anchor2 drop PRIMARY KEY;　 #删除主键
+alter table anchor2 add PRIMARY KEY(id,room_utime);  #添加复合主键
+alter table anchor2 modify  id int AUTO_INCREMENT; #id 改为自增
+```
+
+
+
+**RANGE示例**：用 TO_DAYS函数，分区对象只能是整数
+
+```mysql
+CREATE TABLE range_datetime(
+    id INT,
+    hiredate DATETIME
+)
+PARTITION BY RANGE (TO_DAYS(hiredate) ) (   #分区字段
+    PARTITION p1 VALUES LESS THAN ( TO_DAYS('20151202') ),
+    PARTITION p2 VALUES LESS THAN ( TO_DAYS('20151203') ),
+    PARTITION p10 VALUES LESS THAN ( TO_DAYS('20151211') )
+);
+```
+
+**RANGE COLUMNS示例**：基于列
+
+```mysql
+CREATE TABLE range_datetime(
+    id INT,
+    hiredate DATETIME
+)
+PARTITION BY RANGE COLUMNS(hiredate) ) (
+    PARTITION p1 VALUES LESS THAN ( TO_DAYS('20151202') ),
+    PARTITION p2 VALUES LESS THAN ( TO_DAYS('20151203') ),
+    PARTITION p10 VALUES LESS THAN ( TO_DAYS('20151211') )
+);
+```
+
+
+
+验证
+
+```mysql
+mysql> insert into range_columns select * from test;                                                                    
+Query OK, 1000000 rows affected (9.20 sec)
+Records: 1000000  Duplicates: 0  Warnings: 0
+
+mysql> explain partitions select * from range_columns where hiredate >= '20151207124503' and hiredate<='20151210111230'; 
++----+-------------+---------------+--------------+------+---------------+------+---------+------+--------+-------------+
+| id | select_type | table         | partitions   | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
++----+-------------+---------------+--------------+------+---------------+------+---------+------+--------+-------------+
+|  1 | SIMPLE      | range_columns | p7,p8,p9,p10 | ALL  | NULL          | NULL | NULL    | NULL | 400210 | Using where |
++----+-------------+---------------+--------------+------+---------------+------+---------+------+--------+-------------+
+1 row in set (0.11 sec)
+```
+
+
+
+mysql重建表分区并保留数据的方法：
+
+ 1. 创建与原始表一样结构的新表，新分区。 
+ 2.  将原始表中数据复制到新表。  `insert into log2 select * from log;`
+
+3. 删除原始表。 
+
+4. 将新表名称改为原始表名称。 
+
+
+
+### 每天自动增加分区
+
+以下语句都可以在SQL编辑框里执行。
+
+```mysql
+#1.开启事件调度器（默认关闭）
+SET GLOBAL event_scheduler = ON;  
+#2.对已有数据先进行分区
+ALTER TABLE position PARTITION BY RANGE(TO_DAYS(date))
+(
+    PARTITION p20181028 VALUES LESS THAN (TO_DAYS('2018-10-29')),
+    PARTITION p20181029 VALUES LESS THAN (TO_DAYS('2018-10-30')),
+    PARTITION p20181030 VALUES LESS THAN (TO_DAYS('2018-10-31'))
+)
+```
+
+3. 分区脚本 
+
+```mysql
+use test;
+
+DELIMITER ||
+-- 删除存储过程
+drop procedure if exists auto_set_partitions ||
+-- 注意：使用该存储过程必须保证相应数据库表中至少有一个手动分区
+-- 创建存储过程[通过数据库名和对应表名]-建多少个分区，分区时间间隔为多少
+-- databasename：创建分区的数据库
+-- tablename：创建分区的表的名称
+-- partition_number：一次创建多少个分区
+-- partitiontype：分区类型[0按天分区，1按月分区，2按年分区]
+-- gaps：分区间隔，如果分区类型为0则表示每个分区的间隔为 gaps天；
+--       如果分区类型为1则表示每个分区的间隔为 gaps月
+--            如果分区类型为2则表示每个分区的间隔为 gaps年
+create procedure auto_set_partitions (in databasename varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,in tablename varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, in partition_number int, in partitiontype int, in gaps int)
+L_END:
+begin     
+    declare max_partition_description varchar(255) default '';
+    declare p_name varchar(255) default 0;       
+    declare p_description varchar(255) default 0;   
+    declare isexist_partition varchar(255) default 0; 
+ declare i int default 1;
+  
+ -- 查看对应数据库对应表是否已经有手动分区[自动分区前提是必须有手动分区]
+    select partition_name into isexist_partition from information_schema.partitions where table_schema = databasename  and table_name = tablename limit 1;
+    -- 如果不存在则打印错误并退出存储过程
+    if isexist_partition <=> "" then
+       select "partition table not is exist" as "ERROR";
+       leave L_END;
+    end if;
+ 
+    -- 获取最大[降序获取]的分区描述[值]
+    select partition_description into max_partition_description  from information_schema.partitions where table_schema = databasename  and table_name = tablename order by partition_description desc limit 1;
+   
+    -- 如果最大分区没有,说明没有手动分区,则无法创建自动分区
+    if max_partition_description <=> "" then
+       select "partition table is error" as "ERROR";
+       leave L_END;
+    end if;
+ 
+    -- 替换前后的单引号[''两个引号表示一个单引号的转义]
+    -- set max_partition_description = REPLACE(max_partition_description, '''', '');
+     -- 或使用如下语句
+     set max_partition_description = REPLACE(max_partition_description-1, '\'', '');
+ 
+   -- 自动创建number个分区
+    while (i <= partition_number) do
+                 if (partitiontype = 0) then
+                     -- 每个分区按天递增,递增gaps天
+                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps day); 
+                 elseif (partitiontype = 1) then
+                     -- 每个分区按月递增,递增gaps月
+                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps month); 
+                 else 
+                     -- 每个分区按年递增,递增gaps年
+                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps year);
+                 end if;
+                 -- 删除空格
+                 set p_name = REPLACE(p_description, ' ', '');
+                 -- 例如10.20的记录实际是less than 10.21
+                 set p_description = DATE_ADD(p_description, interval 1 day); 
+                 -- 如果有横杆替换为空
+          set p_name = REPLACE(p_name, '-', '');
+                 -- 删除时间冒号
+                 set p_name = REPLACE(p_name, ':', '');
+                 -- alter table tablename add partition ( partition pname values less than ('2017-02-20 10:05:56') );
+          set @sql=CONCAT('ALTER TABLE ', tablename ,' ADD PARTITION ( PARTITION p', p_name ,' VALUES LESS THAN (TO_DAYS(\'', p_description ,'\')))');
+                 -- set @sql=CONCAT('ALTER TABLE ', tablename ,' ADD PARTITION ( PARTITION p', p_name ,' VALUES LESS THAN (TO_DAYS(\'', p_description ,'\')))');
+                 -- 打印sql变量
+          -- select @sql;
+                 -- 准备sql语句
+          PREPARE stmt from @sql;
+                 -- 执行sql语句
+          EXECUTE stmt;
+                 -- 释放资源
+          DEALLOCATE PREPARE stmt;
+                 -- 递增变量
+          set i = (i + 1) ;
+ 
+    end while;          
+end ||
+-- 恢复语句中断符
+DELIMITER ;
+```
+
+4. 添加事件处理，每天执行一次  （下面示例数据库名test，表名position）
+
+```mysql
+DELIMITER ||
+drop event if exists auto_set_partitions  ||
+create event auto_set_partitions 
+on schedule every 1 day
+starts '2018-10-30 23:59:59'
+do
+BEGIN
+    call auto_set_partitions('test', 'position', 1, 0, 1);
+END ||
+DELIMITER ;
+```
+
+
+
+- **修改事件**
+
+```sql
+ALTER EVENT
+event_name
+
+ON SCHEDULE schedule
+[RENAME TO new_event_name][ON COMPLETION [NOT] PRESERVE]
+[ENABLE | DISABLE][COMMENT 'comment']
+DO sql_statement
+```
+
+**删除事件**
+
+```sql
+DROP EVENT [IF EXISTS] auto_set_partitions;
+```
+
+**查看事件是否开启**
+
+```sql
+show variables like 'event_scheduler';
+```
+
+
+
+## 3.5  本章参考
 
 [1].   MySQL触发器使用详解 http://www.jb51.net/article/59552.htm
 
@@ -1243,9 +1542,15 @@ $ /usr/local/mysql-proxy/bin/mysql-proxy --plugins=proxy --plugins=admin --defau
 
 [3].   MySQL主从同步、读写分离配置步骤 http://www.jb51.net/article/29818.htm
 
- 
+[4].  https://www.cnblogs.com/ExMan/p/10395615.html  "MySQL基于时间字段进行分区的方案总结"
 
-# 4    MySQL优化
+[5]. https://blog.csdn.net/fdipzone/article/details/79769524  "mysql重建表分区并保留数据的方法"
+
+[6]. https://www.jianshu.com/p/52f83d55eae5  "mysql分区：每天自动添加新分区"
+
+
+
+# 4  MySQL优化
 
 当使用MyISAM存储引擎时，MySQL使用极快速的表锁定，以便允许多次读或一次写。使用该存储引擎的最大问题出现在同一个表中进行混合稳定数据流更新与慢速选择。如果这只是某些表的问题，你可以使用另一个存储引擎。参见[第15章：](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html)[存储引擎和表类型](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html)。
 
@@ -1408,7 +1713,7 @@ CREATE INDEX part_of_name ON customer (name(10));
 
  
 
-## 4.4  优化数据库服务器mysql_serverd
+## 4.4  优化数据库服务器 mysql_serverd
 
 [7.5.1. 系统因素和启动参数的调节](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/optimization.html#system)
 
@@ -1424,7 +1729,7 @@ CREATE INDEX part_of_name ON customer (name(10));
 
  
 
-## 4.5  修改配置文件my.cnf/my.ini
+## 4.5  修改配置文件 my.cnf/my.ini
 
 参考： 
 
@@ -1464,7 +1769,8 @@ table_cache = 512
 
 
 
-**提升性能的建议:
+**提升性能的建议**:
+
 1. 如果opened_tables太大,应该把my.cnf中的table_cache变大
 2. 如果Key_reads太大,则应该把my.cnf中key_buffer_size变大.可以用Key_reads/Key_read_requests计算出cache失败率
 3. 如果Handler_read_rnd太大,则你写的SQL语句里很多查询都是要扫描整个表,而没有发挥索引的键的作用
@@ -1479,17 +1785,15 @@ table_cache = 512
 
 MySQL命令不区分大小写。建议程序中MySQL命令使用大写，字段名称用小写，便于区分。
 *  SHELL端查看命令
-```mysql
+```shell
 shell> mysqld --verbose –help //得到mysqld服务器 默认缓存区的大小
-
 shell> mysqladmin variables  //获得系统变量和状态信息
-
 shell> mysqladmin extended-status
-​```
+```
 
 *  MySQL客户端查看常用命令
-​```mysql
-SHOW VARIABLES; //查看DB实际变量**
+```mysql
+SHOW VARIABLES; //查看DB实际变量
 show database; //查看数据库
 show tables; //查看表
 SELECT count(*) from [table]; //获取表中记录条数
@@ -1499,24 +1803,25 @@ use [db_name]; //使用某数据库
 
 *  查看数据库/表的实时状态
 
+```mysql
  show status;  //运行服务器的统计和状态指标
-
  show table status from [db_name];
+```
 
 
-*  查看表的各种状况：存储。。。（示例表名称为‘pet’）
+*  查看表的各种状况：存储等 （示例表名称为 `pet` ）
 
-表存储分析：SELECT * FROM tal_name **PROCEDURE** **ANALYSE** ( )
+表存储分析： `SELECT * FROM tal_name PROCEDURE ANALYSE ( )`
 
-检查表：CHECK TABLE `pet`  //检查表的错误，并且为MyISAM更新键的统计内容
+检查表：`CHECK TABLE pet`    //检查表的错误，并且为MyISAM更新键的统计内容
 
-分析表：ANALYZE TABLE `pet` //分析并存储MyISAM和BDB表中键的分布
+分析表：`ANALYZE TABLE pet`   //分析并存储MyISAM和BDB表中键的分布
 
-修复表：REPAIR TABLE `pet`  //修复被破坏的MyISAM表
+修复表：`REPAIR TABLE pet`    //修复被破坏的MyISAM表
 
-优化表：OPTIMIZE TABLE `pet` //可以清除已分配未使用的空间，常用在删除表中数据后
+优化表：`OPTIMIZE TABLE pet`   //可以清除已分配未使用的空间，常用在删除表中数据后
 
-强制更新表：FLUSH TABLE `pet`
+强制更新表：`FLUSH TABLE pet`
 
  
 
@@ -1620,7 +1925,6 @@ $ /data/mysql3307/bin/mysqld --defaults-file=/data/mysql3307/my.cnf --port=3307 
 ```sh
 # 启动
 ./bin/mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf
-
 # 关闭
 ./bin/mysqladmin –uroot –p –P 3307 shutdown
 ```
@@ -1651,7 +1955,7 @@ shell> mysqladmin -u root password new_password
 
  
 
-#### 5.2.2.3     向MySQL增加新用户权限~`GRANT` 
+#### 5.2.2.3     向MySQL增加新用户权限~GRANT
 
 你可以通过发出`GRANT`语句增加新用户：
 
@@ -1670,11 +1974,11 @@ mysql> GRANT ALL PRIVILEGES ON game.* TO test@'%' IDENTIFIED BY '123456';
 
 1.先停止mysql 
 
-> shell >/etc//init.d/mysql stop 
+> shell > `/etc//init.d/mysql stop `
 
 2.以--skip-grant-table 的参数启动mysqld 
 
-> shell >mysqld_safe --skip-grant-table
+> shell > `mysqld_safe --skip-grant-table`
 
 3. 更改root 密码 123456 
 ```MYSQL
@@ -1708,9 +2012,11 @@ shell >/etc//init.d/mysql restart
 3. 停止mysqld如果它正在运行，然后以--log-update选项启动它。你将得到一个名为“hostname.n”形式的日志文件， 这里n是随着你每次执行mysqladmin refresh或mysqladmin     flush-logs、FLUSH LOGS语句、或重启服务器而递增的一个数字。这些日志文件向你提供了在你执行mysqldump处后面进行的复制数据库改变的所需信息。 
 此外，要形成备份日志脚本，要系统自动进行常规备份和渐进式备份．
 
-PS: 
 
-压缩备份：`shell> mysqldump samp_db ｜tar zxvf >/usr/archives/mysql/samp_db.1999-10-02.tar.gz`
+
+压缩备份：
+
+`shell> mysqldump samp_db ｜tar zxvf >/usr/archives/mysql/samp_db.1999-10-02.tar.gz`
 
  
 
@@ -1722,6 +2028,8 @@ PS:
 
 --where  #导出WHERE语句，如导出一万行为'1 limit 10000'
 
+
+
 ### 5.3.2  MySQL恢复
 
 根据备份的两种方法，选择对应的措施．
@@ -1730,9 +2038,15 @@ PS:
 
 指定--one-database选项使得mysql只执行你有兴趣恢复的数据库的查询。
 
-shell>mysql --one-database db_name 　< update.392
+```shell
+shell> mysql --one-database db_name < update.392
+```
 
-数据库恢复： mysql -u[user] -p [dbname] < [xxx.sql]
+数据库恢复： 
+
+```shell
+shell> mysql -u[user] -p [dbname] < [xxx.sql]
+```
 
 
 
@@ -2903,7 +3217,7 @@ $SHOW VARIABLES LIKE 'ft_min_word_len'
 
 **解决方案1**：整句的中文分词，并按urlencode、区位码、base64、拼音等进行编码使之以“字母+数字”的方式存储于数据库中。
 
-**解决方案2: 扩展插件sphinx**
+**解决方案2:  扩展插件sphinx**
 
 详见 《搜索引擎实现方案》章节SPHINX+MySQL
 
@@ -2918,6 +3232,7 @@ $SHOW VARIABLES LIKE 'ft_min_word_len'
 通常图片存储到数据库，只适用于图片很小且数量较少的情形。
 
 **图片表结构**
+
 ```sql
 create table images (
 image_id  serial,

@@ -6,7 +6,7 @@
 | 4    | 2016-7-23  | 增加常见中文分词法       | 同上   |        |
 | 5    | 2016-8-31  | 增加分词实现章节         | 同上   |        |
 | 6    | 2019-5-10  | 增加机器学习分词章节     | 同上   |        |
-|      |            |                          |        |        |
+| 7    | 2020-2-26  | 增加Jieba分词章节        | 同上   |        |
 ---
 
 
@@ -62,25 +62,24 @@
 
 中文分词实现方法有**词典，规则和统计方法，**或者多种方法相互结合。
 
-技术难点包括歧义识别，新词(未登录词)识别等
-
- 
+技术难点包括歧义识别，新词(未登录词)识别等。
 
 中文分词算法大概分为两大类
- a.第一类是基于**字符串匹配**，即扫描字符串，如果发现字符串的子串和词相同，就算匹配。
- 这类分词通常会加入一些启发式规则，比如“正向/反向最大匹配”, “长词优先” 等策略
- 这类算法优点是速度块，都是O(n)时间复杂度，实现简单，效果尚可。
- 也有缺点，就是对歧义和未登录词处理不好。
- 歧义的例子很简单"长春市/长春/药店" "长春/市长/春药/店".
- 未登录词即词典中没有出现的词，当然也就处理不好。
- ikanalyzer,paoding 等就是基于字符串匹配的分词。
 
+1. 第一类是基于**字符串匹配**，即扫描字符串，如果发现字符串的子串和词相同，就算匹配。
+    这类分词通常会加入一些启发式规则，比如“正向/反向最大匹配”, “长词优先” 等策略。
+    这类算法优点是速度块，都是O(n)时间复杂度，实现简单，效果尚可。
+    也有缺点，就是对歧义和未登录词处理不好。
+    歧义的例子很简单"长春市/长春/药店" "长春/市长/春药/店".
+    未登录词即词典中没有出现的词，当然也就处理不好。
+    ikanalyzer,paoding 等就是基于字符串匹配的分词。
 
- **b.第二类是基于统计以及机器学习的分词方式**
- 这类分词基于人工标注的词性和统计特征，对中文进行建模，即根据观测到的数据（标注好的语料）对模型参数进行估计，即训练。 在分词阶段再通过模型计算各种分词出现的概率，将概率最大的分词结果作为最终结果。常见的序列标注模型有HMM和CRF。
- 这类分词算法能很好处理歧义和未登录词问题，效果比前一类效果好，但是需要大量的人工标注数据，以及较慢的分词速度。
- ICTCLAS是基于HMM的分词库。
- **除了标注量，准确率和效果的考量，分词粒度也是一个需要考虑的指标。**
+2. 第二类是基于统计以及机器学习的分词方式
+    这类分词基于人工标注的词性和统计特征，对中文进行建模，即根据观测到的数据（标注好的语料）对模型参数进行估计，即训练。 在分词阶段再通过模型计算各种分词出现的概率，将概率最大的分词结果作为最终结果。常见的序列标注模型有HMM和CRF。
+    这类分词算法能很好处理歧义和未登录词问题，效果比前一类效果好，但是需要大量的人工标注数据，以及较慢的分词速度。
+    ICTCLAS是基于HMM的分词库。
+    **除了标注量，准确率和效果的考量，分词粒度也是一个需要考虑的指标。**
+
 
 
 ## 1.1   常见的中文分词法
@@ -99,7 +98,9 @@
 | 最大熵马尔科夫模型MEMM                     |                                                              |          |
 | **CRF**~Conditional Random Field条件随机场 | 基于HMM和MEMM为基础的出的一种判别式概率无向图学习模型，是一处用户标注和切分有序数据的条件概念模型。 |          |
 
-N gram，N元切词：N为切词的长度，如N=1~单字法，N=2~二元分词法，N=3~三元组。
+备注：Ngram，N元切词：N为切词的长度，如N=1~单字法，N=2~二元分词法，N=3~三元组。
+
+
 
 ## 1.2   常见的中文分词开源项目
 
@@ -123,21 +124,20 @@ N gram，N元切词：N为切词的长度，如N=1~单字法，N=2~二元分词�
 
 | 分词组件                 | 开发语言 | 准确率(%)  | 速度(/sec) | 主要技术      | 简介                                                         | 总评   |
 | ------------------------ | -------- | ---------- | ---------- | ------------- | ------------------------------------------------------------ | ------ |
-| **SCWS**                 | C/C++    | 90% ~  95% | 1.2MB      |               | 基于词频词典的机械中文分词引擎  http://www.ftphp.com/scws/   |        |
-| **ICTCLAS**              | C/C++    | 98.45%     | 996KB      | Bigram+  HMM  | 中科院发布，最早和最实用的中文开源分词项目之一。张平主导。  http://ictclas.org/ | 推荐   |
-| **ANSJ**                 | Java     |            |            |               | 孙捷，ICTCAS的JAVA版本，做了一些工程上的优化。               |        |
-| **HTTPCWS**              | Java     |            |            |               | 基于HTTP协议的开源中文分词系统，目前仅支持Linux系统。HTTPCWS 使用“ICTCLAS 3.0 2009共享版中文分词算法”的API进行分词处理，得出分词结果。 |        |
-| **CC-CEDICT**            | Java     |            |            |               | 提供一份以汉语拼音为中文辅助的汉英辞典, Chrome中文版就是使用的这个词典进行中文分词的。  http://cc-cedict.org/wiki/ |        |
-| **IK--**  **IKAnalyzer** | Java     |            | 600KB      |               | 开源的，基于java语言开发的轻量级的中文分词工具包。采用了“正向迭代最细粒度切分算法“.  http://code.google.com/p/ik-analyzer/ | 现用   |
-| **Paoding**              | Java     |            | 1MB        |               | Paoding  （庖丁解牛）基于Java的开源中文分词组件，提供lucene和solr 接口，具有极高效率和高扩展性 。  http://code.google.com/p/paoding/ | 可试用 |
-| **MMSEG4J**              | Java     | 98.41%     | 1.2+MB     |               | 基于Java的开源中文分词组件，提供lucene和solr 接口. MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。http://code.google.com/p/mmseg4j/ | 可试用 |
+| SCWS                 | C/C++    | 90% ~  95% | 1.2MB      |               | 基于词频词典的机械中文分词引擎  http://www.ftphp.com/scws/   |        |
+| ICTCLAS              | C/C++    | 98.45%     | 996KB      | Bigram+  HMM  | 中科院发布，最早和最实用的中文开源分词项目之一。张平主导。  http://ictclas.org/ | 推荐   |
+| ANSJ                 | Java     |            |            |               | 孙捷，ICTCAS的JAVA版本，做了一些工程上的优化。               |        |
+| HTTPCWS              | Java     |            |            |               | 基于HTTP协议的开源中文分词系统，目前仅支持Linux系统。HTTPCWS 使用“ICTCLAS 3.0 2009共享版中文分词算法”的API进行分词处理，得出分词结果。 |        |
+| CC-CEDICT            | Java     |            |            |               | 提供一份以汉语拼音为中文辅助的汉英辞典, Chrome中文版就是使用的这个词典进行中文分词的。  http://cc-cedict.org/wiki/ |        |
+| IK--  IKAnalyzer | Java     |            | 600KB      |               | 开源的，基于java语言开发的轻量级的中文分词工具包。采用了“正向迭代最细粒度切分算法“.  http://code.google.com/p/ik-analyzer/ | 现用   |
+| Paoding              | Java     |            | 1MB        |               | Paoding  （庖丁解牛）基于Java的开源中文分词组件，提供lucene和solr 接口，具有极高效率和高扩展性 。  http://code.google.com/p/paoding/ | 可试用 |
+| MMSEG4J              | Java     | 98.41%     | 1.2+MB     |               | 基于Java的开源中文分词组件，提供lucene和solr 接口. MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。http://code.google.com/p/mmseg4j/ | 可试用 |
 | 海量中文智能分词         | C        | 99.7％     | 1.67MB     |               | 商业版本  http://www.hylanda.com/pro.php?smid=20             |        |
 | Jieba                    | Python   |            |            | Unigram+  HMM | 由fxsjy开源。http://python.jobbole.com/86603/                |        |
 | LTP                      |          |            |            | SP            | 哈工大2011年开源。  SP~结构化感知器                          |        |
 | FNLP                     | Java     |            |            | PA            | 复旦大学2014年开源。  PA~Passive-Aggressive                  |        |
 | THUAC                    |          |            |            | SP            | 清华大学2016年开源。                                         |        |
 | HanLP                    | Java     |            |            |               |                                                              |        |
-|                          |          |            |            |               |                                                              |        |
 
  
 
@@ -169,7 +169,7 @@ N gram，N元切词：N为切词的长度，如N=1~单字法，N=2~二元分词�
 
 　　 MMSEG4J 基于Java的开源中文分词组件，提供lucene和solr 接口.
 
-1、mmseg4j 用 Chih-Hao Tsai 的 MMSeg 算法实现的中文分词器，并实现lucene的analyzer 和solr的TokenizerFactory 以方便在Lucene和Solr中使用。2、MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。Complex 加了四个规则过虑。官方说：词语的正确识别率达到了98.41%。mmseg4j 已经实现了这两种分词算法。
+1）、mmseg4j 用 Chih-Hao Tsai 的 MMSeg 算法实现的中文分词器，并实现lucene的analyzer 和solr的TokenizerFactory 以方便在Lucene和Solr中使用。2）、MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。Complex 加了四个规则过虑。官方说：词语的正确识别率达到了98.41%。mmseg4j 已经实现了这两种分词算法。
 
  
 
@@ -205,9 +205,9 @@ N gram，N元切词：N为切词的长度，如N=1~单字法，N=2~二元分词�
     int       nID;          //关键字ID
    };
 ```
+
+
 词表及一级、二级、三级索引之间的关系如下图所示：
-
-
 
 |      |                                                            |
 | ---- | ---------------------------------------------------------- |
@@ -340,6 +340,159 @@ typedef struct LexIconNode{
 4）分词。
 
  
+
+## 2.3 Jieba分词（Python）
+
+### 简介
+
+**依赖包**：`pip install jieba`
+
+**主要功能**：分词、自定义词典、词性标注、关键词抽取、并行分词（类Unix）
+
+**特色**： 支持繁体分词、MIT 授权协议
+
+支持三种分词模式：
+
+- 精确模式，试图将句子最精确地切开，适合文本分析；
+- 全模式，把句子中所有的可以成词的词语都扫描出来, 速度非常快，但是不能解决歧义；
+- 搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适合用于搜索引擎分词。
+
+**在线演示：**http://jiebademo.ap01.aws.af.cm/
+
+**网站代码**：https://github.com/fxsjy/jiebademo
+
+
+
+**算法：**  Bigram + HMM
+
+- 基于前缀词典实现高效的词图扫描，生成句子中汉字所有可能成词情况所构成的有向无环图 (DAG)
+- 采用了动态规划查找最大概率路径, 找出基于词频的最大切分组合
+- 对于未登录词，采用了基于汉字成词能力的 HMM 模型，使用了 Viterbi 算法
+
+
+
+### 示例
+
+表格 Jieba主要功能和函数
+
+| 功能       | 函数                                                         | 参数                                                         | 功能                                                         |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 分词       | cut(self, sentence, cut_all=False, HMM=True)/<br>lcut        | sentence需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型 | 切词。cut=                                                   |
+|            | cut_for_search/<br>lcut_for_search                           | 二个参数：需要分词的字符串；是否使用 HMM 模型。              | 该方法适合用于搜索引擎构建倒排索引的分词，粒度比较细         |
+|            | Tokenizer(dictionary=DEFAULT_DICT)                           | `jieba.dt` 为默认分词器，所有全局分词相关函数都是该分词器的映射。 | 新建自定义分词器，可用于同时使用不同词典。                   |
+| 自定义词典 | load_userdict(file_name)                                     | file_name 为文件类对象或自定义词典的路径。`file_name` 若为路径或二进制方式打开的文件，则文件必须为 UTF-8 编码。 | 词典格式和 `dict.txt` 一样，一个词占一行；每一行分三部分：词语、词频（可省略）、词性（可省略），用空格隔开，顺序不可颠倒。词频省略时使用自动计算的能保证分出该词的词频。 |
+|            | add_word(word, freq=None, tag=N)                             |                                                              | 添加新词到词典                                               |
+|            | del_word(word)                                               |                                                              | 删除词典的词语                                               |
+|            | suggest_freq(self, segment, tune=False)                      |                                                              | 可调节单个词语的词频，使其能（或不能）被分出来。自动计算的词频在使用 HMM 新词发现功能时可能无效。 |
+| 词性标注   | import jieba.posseg as pseg <br>pseg.cut(sentence, HMM=True) |                                                              | word, flag<br>示例：李小福 / nr , 是 / v， 创新办 / i , 主任 / b , |
+| 关键词抽取 | import jieba.analyse<br>jieba.analyse.extract_tags(sentence, topK=20, withWeight=False, allowPOS=()) |                                                              | 基于 TF-IDF 算法的关键词抽取                                 |
+|            | jieba.analyse.textrank(content, topK=topK)                   |                                                              | 基于 TextRank 算法 的关键词抽取                              |
+
+备注：1. 分词： cut返回可迭代类型generator，lcut返回列表。
+
+2. 自定义词典：自定义调节词典解决歧义分词问题。
+
+3. 更改分词器（默认为 `jieba.dt`）的 `tmp_dir` 和 `cache_file` 属性，可分别指定缓存文件所在的文件夹及其文件名，用于受限的文件系统。
+
+4. 并行分词：原理：将目标文本按行分隔后，把各行文本分配到多个 Python 进程并行分词，然后归并结果，从而获得分词速度的可观提升。基于 python 自带的 multiprocessing 模块，目前暂不支持 Windows。
+
+   ```python
+   # 例子：https://github.com/fxsjy/jieba/blob/master/test/parallel/test_file.py
+   jieba.enable_parallel(4) # 开启并行分词模式，参数为并行进程数
+   jieba.disable_parallel() # 关闭并行分词模式
+   ```
+
+5. 延迟加载机制：`import jieba` 和 `jieba.Tokenizer()` 不会立即触发词典的加载，一旦有必要才开始加载词典构建前缀字典。如果你想手工初始 jieba，也可以手动初始化`jieba.initialize()`。
+
+
+
+类C函数  （2个分词器： POSTokenizer， Tokenizer-缺省）
+
+```python
+# default Tokenizer instance
+dt = Tokenizer()
+
+# global functions
+get_FREQ = lambda k, d=None: dt.FREQ.get(k, d)
+add_word = dt.add_word
+calc = dt.calc
+cut = dt.cut   # def cut(self, sentence, cut_all=False, HMM=True):
+lcut = dt.lcut
+cut_for_search = dt.cut_for_search
+lcut_for_search = dt.lcut_for_search
+del_word = dt.del_word
+get_DAG = dt.get_DAG
+get_dict_file = dt.get_dict_file
+initialize = dt.initialize
+load_userdict = dt.load_userdict
+set_dictionary = dt.set_dictionary	# 设置主词典路径
+suggest_freq = dt.suggest_freq
+tokenize = dt.tokenize # def tokenize(self, unicode_sentence, mode="default", HMM=True):
+user_word_tag_tab = dt.user_word_tag_tab
+```
+
+示例1：分词 （三种分词模式：精确、全、搜索引擎）
+
+```python
+import jieba
+# 全模式
+text = "我来到北京清华大学"
+seg_list = jieba.cut(text, cut_all=True)
+print(u"[全模式]: ", "/ ".join(seg_list))
+ 
+# 精确模式
+seg_list = jieba.cut(text, cut_all=False)
+print(u"[精确模式]: ", "/ ".join(seg_list))
+ 
+# 默认是精确模式
+seg_list = jieba.cut(text)
+print(u"[默认模式]: ", "/ ".join(seg_list))
+ 
+# 搜索引擎模式
+seg_list = jieba.cut_for_search(text)
+print(u"[搜索引擎模式]: ", "/ ".join(seg_list))
+ 
+### 运行结果
+Building prefix dict from the default dictionary ...
+Dumping model to file cache C:\Users\keefe\AppData\Local\Temp\jieba.cache
+Loading model cost 1.436 seconds.
+Prefix dict has been built succesfully.
+[全模式]: 我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学
+[精确模式]: 我/ 来到/ 北京/ 清华大学
+[默认模式]: 我/ 来到/ 北京/ 清华大学
+[搜索引擎模式]: 我/ 来到/ 北京/ 清华/ 华大/ 大学/ 清华大学
+```
+
+
+
+示例2：dict.txt
+
+```shell
+创新办 3 i
+云计算 5
+凱特琳 nz
+台中
+```
+
+示例3： 词性标注
+
+```python
+    import jieba.posseg as pseg
+    test_sent = ("李小福是创新办主任也是云计算方面的专家")
+    result = pseg.cut(test_sent)    # 词性标注
+    for w in result:
+    	print(w.word, "/", w.flag, ", ", end=' ')
+```
+
+
+
+## 本章参考
+
+[1]:  https://blog.csdn.net/qq_22022063/article/details/78987531 "Python jieba分词知识整合"
+[2]: http://www.cnblogs.com/baiboy/p/jieba1.html "《结巴中文分词官方文档分析》"
+[3]:   http://www.cnblogs.com/baiboy/p/jieba2.html  " 《结巴中文分词源码分析》"
+
+
 
 # 3    中文分词评测
 
