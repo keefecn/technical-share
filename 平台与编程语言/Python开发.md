@@ -2433,6 +2433,9 @@ Eclipse可以在它的官方网站[Eclipse.org](http://eclipse.org/)找到并下
 运行Eclipse之后，选择help-->Install new Software，如下图所示。
 
 #### 3.3.1.2  pycharm
+
+PyCharm是一种Python IDE，带有一整套可以帮助用户在使用Python语言开发时提高其效率的工具，比如调试、语法高亮、Project管理、代码跳转、智能提示、自动完成、单元测试、版本控制。此外，该IDE提供了一些高级功能，以用于支持Django框架下的专业Web开发。
+
 **问题1：目录下出现带有test字符串的文件或子目录，结果RUN 只能使用'unittest'方式 。**
 问题原因：PyCharm默认支持Python自带的单元测试包“unittest”，会自动将名称带test字符串的文件或目录识别为单元测试源码，按照单元测试的方式执行。
 **解决方法：**
@@ -2442,7 +2445,23 @@ Eclipse可以在它的官方网站[Eclipse.org](http://eclipse.org/)找到并下
 备注：pycham的单元测试unittest：缺省会将所有TestCase类的所有方法加入TestSuite,可不需写unittest.TestSuite().addTest(),若需执行单个方法，可覆盖方法代码直接Run.
 3) 法3~（已验证）：关闭项目，删除.idea，重开项目。
 
+
+
+**问题2： pycharm中添加扩展工具pylint**
+
+File > Settings... > Tools > External Tools，点击 + 号添加，如下图配置，
+
+* Program设置为： 指向 pylint 的实际目录，此处以 Linux 目录为例。
+* Parameters 设置为 (用户可根据自己的情况，选择 pylint 输出信息显示格式和要 disable 的项目)：--output-format=parseable --disable=R --disable=C0102,C0103,C0111,C0301,C0302,C0303,C0304,C0305,W0120,W0123,W0401,W0603,W0612,W0614,W0621,W0622,W0703,E1003,E1101 $FilePath$
+
+注：为了防止 Pylint 打印找不到 配置文件的 warning，可以在当前工程目录下新建一个空的文件，取名为 .pylintrc，再在上述参数中加入选项 --rcfile=path/to/.pylintrc 即可。
+
+* Working Direcroty 设置为：$FileDir$
+
+
+
 #### 3.3.1.3  jupyter
+
 http://jupyter.org/ 
 2014年出现的科学计算IDE。
 Jupyter Notebook（此前被称为 IPython notebook）是一个交互式笔记本，支持运行 40 多种编程语言。
@@ -3388,6 +3407,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 ```
 
 ### 4.1.2   python2和python3的区别
+
+说明：python2.7于2020.1.1起终止支持。
+
 **查看python版本**
 1）未进入python shell
 ```sh
@@ -3467,7 +3489,26 @@ except ImportError:
        from StringIO import StringIO
 ```
 
+
+
+表格 PEP：Python Enhancement Proposals（python加强特性）
+
+| feature          | optional in（可选） | mandatory in（必需） | effect                                             |
+| ---------------- | ------------------- | -------------------- | -------------------------------------------------- |
+| nested_scopes    | 2.1.0b1             | 2.2                  | PEP 227: Statically Nested Scopes                  |
+| generators       | 2.2.0a1             | 2.3                  | PEP 255: Simple Generators                         |
+| division         | 2.2.0a2             | 3                    | PEP 238: Changing the Division Operator            |
+| absolute_import  | 2.5.0a1             | 2.7                  | PEP 328: Imports: Multi-Line and Absolute/Relative |
+| with_statement   | 2.5.0a1             | 2.6                  | PEP 343: The “with” Statement                      |
+| print_function   | 2.6.0a2             | 3                    | PEP 3105: Make print a function                    |
+| unicode_literals | 2.6.0a2             | 3                    | PEP 3112: Bytes literals in Python 3000            |
+
+说明：python2.7于2020.1.1终止支持，因此现在的python3版本无需再使用上述导入，已经默认支持。
+
+
+
 ## 4.2     python安全编码
+
 表格 26  已知不安全的库列表
 
 | 库名           | 解决方案    | 库名            | 解决方案 |

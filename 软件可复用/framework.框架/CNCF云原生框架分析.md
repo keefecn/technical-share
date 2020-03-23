@@ -162,10 +162,6 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
  ![1574519347217](../../media/sf_reuse/framework/frame_k8s_001.png)
 
- ![1574519369627](../../media/sf_reuse/framework/frame_k8s_002.png)
-
-   图 4 K8s组件
-
 
 
 ### 3.1.2  K8s术语
@@ -232,21 +228,33 @@ Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod�
 
    ![1574519428231](../../media/sf_reuse/framework/frame_k8s_003.png)
 
-图 6 Kubernetes架构
+图  Kubernetes架构
+
+
 
 ![1574519488689](../../media/sf_reuse/framework/frame_k8s_004.png)
 
+图 K8s master
+
 备注：K8s master由四部分组成，分别是API Server、Scheduler、Controller和etcd。
+
+* API Server 提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制；
+
+* Scheduler 负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；
+
+* Controller manager 负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；
+
+* etcd 保存了整个集群的状态；
+
+  
 
    ![1574519522443](../../media/sf_reuse/framework/frame_k8s_005.png)
 
-Kubernetes主要由以下几个核心组件组成：
+图 K8s Node
 
-*  etcd保存了整个集群的状态；
-*  apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制；
-*  controller manager负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；
-*  scheduler负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；
-*  kubelet负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
+Kubernetes主要由以下几个核心组件组成： K8s Master的4个和K8s Node的3个。
+
+*  kubelet: 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
 *  Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）；
 *  kube-proxy负责为Service提供cluster内部的服务发现和负载均衡；
 
@@ -260,11 +268,12 @@ Kubernetes主要由以下几个核心组件组成：
 *  Fluentd-elasticsearch提供集群日志采集、存储与查询
 
 
+
 **分层架构**
 
 Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，如下图所示
 
-   ![1574519541207](../../media/sf_reuse/framework/frame_k8s_006.png)
+   ![1574519541207](../../media/sf_reuse/framework/frame_k8s_002.png)
 
 图 7 K8s分层架构
 
