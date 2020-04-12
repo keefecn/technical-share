@@ -3518,12 +3518,12 @@ except ImportError:
 | commands       | | os.popen        |          |
 | cookie         | | os.spawn        |          |
 | cPickle/pickle | | os.system       |          |
-| eval           | | parser          |          |
+| eval           | 换用ast.literal_eval | parser          |          |
 | marshal        | | pipes           |          |
 | mktemp         | 使用mktemps | pty |          |
 | rexec          | | urlib2          |          |
 | shelve         | | urlparse        |          |
-| subprocess     | | yam*            |          |
+| subprocess     | | yaml          |          |
 | tarfile        | | zipfile         |          |
 备注：
 1.time.sleep
@@ -3539,7 +3539,74 @@ Python中的random模块用于生成随机数，虽然提供了多种方法，�
  
  ```
 
+
+
+### 安全遍历容器
+
+python的dict和list不是线程安全的。可用list(dict.keys())获取副本进行遍历。
+
+```python
+def save_del():
+    dict1 = {"a": "apple", "b": "banana", "c": "0", "d": "0", "o": "orange"}
+    # for k in list(dict1):  # get copy of keys for traversal，list->list(xx.keys())
+    for k in [k for k in dict1]:
+        print(k, dict1[k])
+        if dict1[k] == '0':
+            dict1.pop(k)
+        print(k, dict1.get(k), dict1)
+```
+
+输出：
+
+```shell
+a apple
+a apple {'a': 'apple', 'b': 'banana', 'c': '0', 'd': '0', 'o': 'orange'}
+b banana
+b banana {'a': 'apple', 'b': 'banana', 'c': '0', 'd': '0', 'o': 'orange'}
+c 0
+c None {'a': 'apple', 'b': 'banana', 'd': '0', 'o': 'orange'}
+d 0
+d None {'a': 'apple', 'b': 'banana', 'o': 'orange'}
+o orange
+o orange {'a': 'apple', 'b': 'banana', 'o': 'orange'}
+```
+
+
+
+遍历性能比较如下：keys性能最好。
+
+```python
+#!/usr/bin/python 
+from time import clock
+def calc_loop_time():
+    l = [(x, x) for x in range(10000)]
+    d = dict(l)
+    t0 = clock()
+    for i in d:
+        t = i + d[i]
+    t1 = clock()
+
+    for k, v in d.items():
+        t = k + v
+    t2 = clock()
+
+    # for k, v in d.iteritems(): # unexist methods
+    #     t = k + v
+    t3 = clock()
+
+    for k, v in zip(d.keys(), d.values()):
+        t = k + v
+    t4 = clock()
+
+    print(t1 - t0, t2 - t1, t3 - t2, t4 - t3)
+```
+
+
+
+
+
 ## 4.3     python并发
+
  ```python
 from multiprocessing import Pool  # 进程池 
 from multiprocessing.dummy import Pool as ThreadPool  # 线程池
@@ -3620,13 +3687,14 @@ Python并不支持真正意义上的多线程。Python中提供了[多线程包]
 | ------------ | ------------------------------------------------------------ | ------------------ |
 | thread       | 只有一种原子操作。不支持守护线程。  | 不建议使用此模块。 |
 | threading    | 线程对象threading.Thread，支持较多的同步机制。没有读写锁，只有可重入锁RLock。 | OK    |
-| Queue        | 同步的先进先出队列FIFO。源码在lib/Queue.c       | python2已删        |
+| Queue        | python2已删，同步的先进先出队列FIFO。源码在lib/Queue.c。<br>python3的Queue是线程安全的，from queue import Queue | OK                 |
 | mutex        | 互斥对象。            |       |
 | SocketServer | 具有线程控制的TCP和UDP管理器       |       |
 
 #### 4.3.2.1 线程安全
 python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)是线程安全的（使用了threading模块的同步机制Lock/Condition），而其它的容器如list/dict是线程不安全的。
 多线程编程的准标准库[posix pthread](https://computing.llnl.gov/tutorials/pthreads/)库拥有rwlock, 而python2.7自带的threading库没有读写锁，只有可重入锁RLock。
+
 *  可重入锁。 可重入锁是指同一个锁可以多次被同一线程加锁而不会死锁。 实现可重入锁的目的是防止递归函数内的加锁行为，或者某些场景内无法获取锁A是否已经被加锁，这时如果不使用可重入锁就会对同一锁多次重复加锁，导致立即死锁。
 *  读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
   *  当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁

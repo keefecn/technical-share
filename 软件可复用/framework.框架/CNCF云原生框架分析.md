@@ -160,7 +160,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
  
 
- ![1574519347217](../../media/sf_reuse/framework/frame_k8s_001.png)
+ <img src="../../media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
 
 
 
@@ -172,11 +172,11 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 | 名词                   | 释义                                                         | 设计理念                                                     |
 | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | API对象                | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。 | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
-| Pod                    | 微服务。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。 |
+| Pod                    | 微服务，也称实例。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。 |
 | 复制控制器 RC          | （Replication Controller，RC），RC是K8s集群中最早的保证Pod高可用的API对象。 | 通过监控运行中的Pod来保证集群中运行指定数目的Pod副本（1~多个）。 |
 | 副本集 RS              | （Replica Set，RS）新一代RC，提供同样的高可用能力，区别主要在于RS后来居上，能支持更多种类的匹配模式。 | 副本集对象一般不单独使用，而是作为Deployment的理想状态参数使用。 |
 | 部署(Deployment)       | 部署表示用户对K8s集群的一次更新操作。部署是一个比RS应用模式更广的API对象，可以是创建/更新/滚动升级新服务 |                                                              |
-| 服务（Service）        | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。 | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。 |
+| 服务（Service）        | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。Servcie Type目前有四种。 | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。 |
 | 任务（Job）            | Job是K8s用来控制批处理型任务的API对象。                      | Job管理的Pod根据用户的设置把任务成功完成就自动退出了。       |
 | 后台支撑服务集         | （DaemonSet）后台支撑型服务的核心关注点在K8s集群中的节点（物理机或虚拟机），要保证每个节点上都有一个此类Pod运行。 |                                                              |
 | 有状态服务集（PetSet） | PetSet用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。 | 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。 |
@@ -194,11 +194,14 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
    1. 元数据是用来标识API对象的，每个对象都至少有3个元数据：namespace，name和uid；除此以外还有各种各样的标签labels用来标识和匹配不同的对象，例如用户可以用标签env来标识区分不同的服务部署环境，分别用env=dev、env=testing、env=production来标识开发、测试、生产的不同服务。
    2. 规范描述了用户期望K8s集群中的分布式系统达到的理想状态（Desired State），例如用户可以通过复制控制器Replication Controller设置期望的Pod副本数为3；
    3. status描述了系统实际当前达到的状态（Status），例如系统当前实际的Pod副本数为2；那么复制控制器当前的程序逻辑就是自动启动新的Pod，争取达到副本数为3。
-
 2. Pod: 目前K8s中的业务主要可以分为长期伺服型（long-running）、批处理型（batch）、节点后台支撑型（node-daemon）和有状态应用型（stateful application）；分别对应的小机器人控制器为Deployment、Job、DaemonSet和PetSet.
-
 3. RC、RS和Deployment只是保证了支撑服务的微服务Pod的数量，但是没有解决如何访问这些服务的问题。Service解决服务访问的问题。RC和RS主要是控制提供无状态服务的，其所控制的Pod的名字是随机设置的，名字不重要，重要的是Pod总数。
 4. 在云计算环境中，服务的作用距离范围从近到远一般可以有：同主机（Host，Node）、跨主机同可用区（Available Zone）、跨可用区同地区（Region）、跨地区同服务商（Cloud Service Provider）、跨云平台。K8s的设计定位是单一集群在同一个地域内，因为同一个地区的网络性能才能满足K8s的调度和计算存储连接要求。而联合集群服务就是为提供跨Region跨服务商K8s集群服务而设计的。
+5. Service的四种type:
+   - *ClusterIP*（默认） - 在集群中内部IP上暴露服务。此类型使Service只能从集群中访问。
+   - *NodePort* - 通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 <NodeIP>:<NodePort>，可以从集群的外部访问一个 NodePort 服务。
+   - *LoadBalancer* - 使用云提供商的负载均衡器（如果支持），可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
+   - *ExternalName* - 通过返回 `CNAME` 和它的值，可以将服务映射到 `externalName` 字段的内容，没有任何类型代理被创建。这种类型需要v1.7版本或更高版本`kube-dnsc`才支持。
 
 
 
@@ -256,7 +259,9 @@ Kubernetes主要由以下几个核心组件组成： K8s Master的4个和K8s Nod
 
 *  kubelet: 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
 *  Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）；
-*  kube-proxy负责为Service提供cluster内部的服务发现和负载均衡；
+*  kube-proxy: 负责为Service提供cluster内部的服务发现和负载均衡；
+
+
 
 除了核心组件，还有一些推荐的Add-ons：
 
@@ -346,11 +351,53 @@ Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的�
 
 $ git clone https://github.com/kubernetes/kubernetes.git
 
- $ ./kubernetes/cluster/get-kube-binaries.sh
+1)  翻墙访问： googleapis. com  gcr.io
 
-./kubernetes/server/bin/kube-apiserver.tar  # 目标二进制文件
+```shell
+# ./kubernetes/server/bin/kube-apiserver.tar  # 目标二进制文件
+$ ./kubernetes/cluster/get-kube-binaries.sh
+```
 
- 
+ 2)  国内源下载:  apt-get install
+
+| 组件          | 下载入口                                                    | 备注                                                         |
+| ------------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| kubectl       | https://github.com/kubernetes/kubernetes/releases           | 集群命令的管理工具                                           |
+| minikube      | https://github.com/AliyunContainerService/minikube/releases | 缺省Minikube使用VirtualBox驱动来创建Kubernetes本地环境-单节点集群。 |
+| kubeadm       |                                                             | 高可用                                                       |
+| kube-apiserve |                                                             |                                                              |
+
+1. kubectl
+
+   ```sh
+   # apt-get方式安装，国内镜像：https://mirrors.aliyun.com/kubernetes/apt/
+   apt-get update && apt-get install -y apt-transport-https
+   curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+   cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+   deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+   EOF  
+   apt-get update
+   # 安装kubectl kubeadm
+   apt-get install -y kubelet kubeadm kubectl
+   ```
+
+2. minikube
+
+   K8S 官方为了开发者能在个人电脑上运行 K8S 而提供的一套工具。实现上是通过 Go 语言编写，通过调用虚拟化管理程序，创建出一个运行在虚拟机内的单节点集群。Minikube CLI可用于启动，停止，删除，获取状态，并在虚拟机上执行其他操作。一旦Minikube虚拟机启动，Kubectl CLI会在Kubernetes集群上执行操作。
+
+   ```shell
+   $ curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.7.3/minikube-linux-amd64 
+   $ chmod +x minikube && sudo mv minikube /usr/local/bin
+   # 启动方式1：Minikube缺省使用VirtualBox驱动，windows环境下vbox和hyper-v只能选择一个
+   $ minikube start --registry-mirror=https://registry.docker-cn.com
+   # 启动方式2：安装了docker， none driver
+   $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com 
+   
+   $ 打开k8s控制台
+   minikube dashboard
+   ```
+
+   
 
 **选择镜像**
 
@@ -429,14 +476,88 @@ $docker ps
 $./kubectl get nodes
 ```
 
+
+
 ## 3.4  使用篇
 
 ### 3.4.1  kubectl
 
-kubectl用于运行Kubernetes集群命令的管理工具。
+kubectl用于运行Kubernetes集群命令的管理工具。通过kubectl能够对集群本身进行管理，并能够在集群上进行容器化应用的安装部署。
 ```shell
 kubectl [command] [TYPE] [NAME] [flags]
 ```
+
+* comand：指定要对资源执行的操作，例如create、get、describe和delete
+
+* TYPE：指定资源类型，资源类型是大小学敏感的，开发者能够以单数、复数和缩略的形式。例如：pod/pods/po
+* NAME:  指定资源的名称，名称也大小写敏感的。如果省略名称，则会显示所有的资源。
+* flags：指定可选的参数。例如，可以使用-s或者–server参数指定Kubernetes API server的地址和端口。
+
+```shell
+Basic Commands (Beginner):
+  create         Create a resource from a file or from stdin.
+  expose         使用 replication controller, service, deployment 或者 pod 并暴露它作为一个新的Kubernetes Service
+  run            在集群中运行一个指定的镜像
+  set            为 objects 设置一个指定的特征
+ 
+Basic Commands (Intermediate):
+  explain        查看资源的文档
+  get            显示一个或更多 resources
+  edit           在服务器上编辑一个资源
+  delete         Delete resources by filenames, stdin, resources and names, or by resources and label selector
+ 
+Deploy Commands:
+  rollout        Manage the rollout of a resource
+  scale          为 Deployment, ReplicaSet, Replication Controller 或者 Job 设置一个新的副本数量
+  autoscale      自动调整一个 Deployment, ReplicaSet, 或者 ReplicationController 的副本数量
+ 
+Cluster Management Commands:
+  certificate    修改 certificate 资源.
+  cluster-info   显示集群信息
+  top            Display Resource (CPU/Memory/Storage) usage.
+  cordon         标记 node 为 unschedulable
+  uncordon       标记 node 为 schedulable
+  drain          Drain node in preparation for maintenance
+  taint          更新一个或者多个 node 上的 taints
+ 
+Troubleshooting and Debugging Commands:
+  describe       显示一个指定 resource 或者 group 的 resources 详情
+  logs           输出容器在 pod 中的日志
+  attach         Attach 到一个运行中的 container
+  exec           在一个 container 中执行一个命令
+  port-forward   Forward one or more local ports to a pod
+  proxy          运行一个 proxy 到 Kubernetes API server
+  cp             复制 files 和 directories 到 containers 和从容器中复制 files 和 directories.
+  auth           Inspect authorization
+ 
+Advanced Commands:
+  apply          通过文件名或标准输入流(stdin)对资源进行配置
+  patch          使用 strategic merge patch 更新一个资源的 field(s)
+  replace        通过 filename 或者 stdin替换一个资源
+  wait           Experimental: Wait for one condition on one or many resources
+  convert        在不同的 API versions 转换配置文件
+ 
+Settings Commands:
+  label          更新在这个资源上的 labels
+  annotate       更新一个资源的注解
+  completion     Output shell completion code for the specified shell (bash or zsh)
+ 
+Other Commands:
+  alpha          Commands for features in alpha
+  api-resources  Print the supported API resources on the server
+  api-versions   Print the supported API versions on the server, in the form of "group/version"
+  config         修改 kubeconfig 文件
+  plugin         Runs a command-line plugin
+  version        输出 client 和 server 的版本信息
+```
+
+
+
+### 3.4.2 kube-proxy
+
+kubue-proxy：负责服务发现和负载均衡（轮询）。
+
+
 
 
 
@@ -450,6 +571,12 @@ kubectl [command] [TYPE] [NAME] [flags]
 [6].     阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335 
 [7].     10个业界最流行的Kubernetes发行版 https://blog.csdn.net/RancherLabs/article/details/98478755
 [8].     基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5 
+
+[9].  Kubernetes之kubectl命令行工具简介、安装配置及常用命令 https://blog.csdn.net/bbwangj/article/details/80814568 
+
+[10].  "minikube国内安装步骤"  https://www.jianshu.com/p/18441c7434a6   
+
+[11].  "Minikube - Kubernetes本地实验环境" https://yq.aliyun.com/articles/221687
 
 
 

@@ -134,10 +134,10 @@ Docker 容器通过 Docker 镜像来创建。
 | Docker 镜像(Images)    | Docker 镜像是用于创建 Docker 容器的只读模板，它包含创建Docker容器的说明。 |
 | ---------------------- | ------------------------------------------------------------ |
 | Docker 容器(Container) | 容器是独立运行的一个或一组应用，镜像的可运行实例。镜像和容器的关系类似面向对象中的类和对象的关系。 |
-| Docker  客户端(Client) | Docker  客户端通过命令行或者其他工具使用  Docker API (https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信。 |
+| Docker  客户端(Client) | Docker  客户端通过命令行或者其他工具使用  Docker API (https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信。比如docker，docker-compose |
 | Docker 主机(Host)      | 一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。       |
 | Docker 仓库(Registry)  | Docker仓库用来保存镜像，类似代码控制中的代码仓库。可分为公有和私有仓库。Docker Hub(https://hub.docker.com)是官方也是默认的Docker仓库，存放着海量镜像，并可通过docker命令下载并使用。 |
-| Docker Daemon          | Docker守护进程。运行在宿主机(Docker Host)的后台进程，可通过Docker客户端与之通信。 |
+| Docker Daemon          | Docker守护进程。运行在宿主机(Docker Host)的后台进程，可通过Docker客户端与之通信。比如**dockerd**。 |
 | Docker Machine         | Docker Machine是一个简化Docker安装的命令行工具，通过一个简单的命令行即可在相应的平台上安装Docker，比如VirtualBox、 Digital Ocean、Microsoft Azure。 |
 
 备注：docker客户端和服务端daemon可以在同一台机器也可分布在不同机器。
@@ -232,24 +232,110 @@ Docker for Windows is a desktop application based on [Docker Community Edition (
 
 安装成功后，验证docker
 
-step 1: 启动 dockerd守护进程
+step 1: 启动 Docker守护进程 ( dockerd:  Docker Daemon，服务端)
 ```shell
-$ service docker start
-# 或者 linux
+# ubuntu/linux下服务启动
+$ sudo service docker start
+# 或者 centos
+$ sudo systemctl restart docker
+# 或者 linux环境直接二进制程序启动
 $ dockerd -d
 # 或者 windows
 $ docker-machine
 ```
 
 
-step2: 测试运行hello-world镜像
+step2: docker客户端运行hello-world镜像 （docker：Docker客户端）
 ```shell
 $ docker run hello-world
 $ docker run -it ubuntu bash
 ```
 
+备注：dockerd服务端和docker客户端可以同主机也要在不同host里，它们之间可以通过socket或REST进行通讯。
 
-**镜像加速**
+
+
+### 4.1 Docker配置文件 daemon.json
+
+Docker Engine V1.12 之后版本，用户可以自行创建 daemon.json 文件对 Docker Engine 进行配置和调整。要点如下：
+
+- 该文件作为 Docker Engine 的配置管理文件, 里面几乎涵盖了所有 docker 命令行启动可以配置的参数。
+- 不管是在哪个平台以何种方式启动, Docker 默认都会来这里读取配置。使用户可以统一管理不同系统下的 docker daemon 配置。
+- 相关参数的使用说明，可以参阅 `man dockerd` 帮助信息，或者参阅[官方文档](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon)。
+
+修改配置文件之后需要重启 docker守护进程生效
+
+```shell
+systemctl restart docker.service
+# 或者
+killall dockerd | xargs dockerd -d
+```
+
+
+
+daemon.json 示例配置文件
+
+```json
+
+	"registry-mirrors": ["http://hub-mirror.c.163.com"], # 镜像加载仓库，可用docker info查看
+    "insecure-registries": [], #配置docker的私库地址
+    "authorization-plugins": [],
+    "data-root": "",  #Docker运行时使用的根路径,根路径下的内容稍后介绍，默认/var/lib/docker
+    "dns": [],  
+     #设定容器DNS的地址，在容器的 /etc/resolv.conf文件中可查看
+    "dns-opts": [],
+     #容器 /etc/resolv.conf 文件，其他设置
+    "dns-search": [],
+     #设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的 主机时，DNS不仅搜索host，还会搜索host.example.com。注意：如果不设置，Docker 会默认用主机上的 /etc/resolv.conf来配置容器。
+    "exec-opts": [],
+    "exec-root": "",
+    "experimental": false,
+    "features": {},
+    "storage-driver": "",
+    "storage-opts": [],
+    "labels": [],
+     #docker主机的标签，很实用的功能,例如定义：–label nodeName=host-121
+    "live-restore": true,
+    "debug": true, 
+     #启用debug的模式，启用后，可以看到很多的启动信息。默认false
+    "hosts": [],
+    #设置容器hosts
+    "log-level": "",
+    "tls": true,  
+     #默认 false, 启动TLS认证开关
+
+}
+```
+
+
+
+```shell
+$ docker info
+Containers: 10
+Images: 19
+Storage Driver: aufs
+ Root Dir: /mnt/sda1/var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 75
+ Dirperm1 Supported: true
+Execution Driver: <not supported>
+Logging Driver: json-file
+Kernel Version: 4.9.89-boot2docker
+Operating System: Boot2Docker 18.03.0-ce (TCL 8.2.1); HEAD : 404ee40 - Thu Mar 22 17:12:23 UTC 2018
+CPUs: 1
+Total Memory: 995.6 MiB
+Name: default
+ID: NCA4:CCKW:YBLC:PFLP:OTOQ:UJVG:EJGR:FE2K:HRJJ:NWMT:TS3J:NVA2
+Username: keefewu
+Registry: https://index.docker.io/v1/
+Labels:
+ provider=virtualbox
+
+```
+
+
+
+#### 镜像加速
 
 鉴于国内网络问题，后续拉取 Docker 镜像十分缓慢，我们可以需要配置加速器来解决。
 
@@ -262,8 +348,6 @@ $ docker run -it ubuntu bash
 * Windows： %programdata%\docker\config\daemon.json
 * Windows： %HOME%\.docker\machine\machines\default\config.json
 
-
-
 请在该配置文件中加入（没有该文件的话，请先建一个）：
 ```shell
 {
@@ -272,7 +356,14 @@ $ docker run -it ubuntu bash
 ```
 
 
-### 4.1  docker命令组
+
+#### 非root用户启动dockerd
+
+建立docker组，将目标用户加入到 docker组。
+
+
+
+### 4.2  docker命令组
 
    ![1574518882918](../../media/sf_reuse/framework/frame_docker_003.png)
 
@@ -282,7 +373,7 @@ $ docker run -it ubuntu bash
 
 
 
-#### 4.1.1 命令行
+#### 4.2.1 命令行
 
 ```shell
 $ docker
@@ -430,7 +521,7 @@ Run a command in a new container
 
 
 
-#### 4.1.2 进入容器
+#### 4.2.2 进入容器
 
 * 法1：`docker attach  <docker_id>`
   使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。另外退出窗口时，可能也会导出容器退出。
@@ -447,7 +538,7 @@ Run a command in a new container
 
 
 
-### 4.2  docker仓库管理镜像
+### 4.3  docker仓库管理镜像
 
 镜像存储路径
 *  linux:  /var/lib/docker
@@ -461,7 +552,7 @@ Run a command in a new container
 
 
 
-#### 4.2.1 官方镜像仓库 docker Hub
+#### 4.3.1 官方镜像仓库 docker Hub
 
 Docker Hub ( http://hub.docker.com )是缺省的官方仓库。
 
@@ -487,7 +578,7 @@ $ docker push [image:tag]
 
 
 
-#### 4.2.2 私有镜像仓库 Registry2
+#### 4.3.2 私有镜像仓库 Registry2
 
 创建私有仓库Docker Registry 2.0（需docker版本高于1.6.0），Registry 2不包含界面、用户管理、权限控制等功能，如果想使用这些功能，可使用Docker Trusted Registry.
 
@@ -504,7 +595,7 @@ $ docker push [localhost:5000/new_image:tag]
 ```
 
 
-### 4.3  容器镜像制作
+### 4.4  容器镜像制作
 
 当我们从docker镜像仓库中下载的镜像不能满足我们的需求时，我们可以通过以下两种方式对镜像进行更改。
 
@@ -568,7 +659,7 @@ $ docker build -t build_repo/my_images /tmp/docker_build/
 
 
 
-### 4.4  docker-compose管理多个容器
+### 4.5  docker-compose管理多个容器
 
 docker-compose简化了容器的管理与配置，避开了运行多个容器中容易出错的手工步骤。
 
@@ -650,6 +741,12 @@ redis:
 ```sh
 $ doccker-compose up -d
 ```
+
+
+
+### 本节参考
+
+[1]: https://www.jianshu.com/p/c7c7dc24b9e3 "Docker配置文件daemon.json解析"
 
 
 
