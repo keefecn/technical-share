@@ -103,7 +103,6 @@ Mediawiki分析版本v1-26.0
 | skins       |            |                  |                     |
 | tests       |            |                  |                     |
 | vendor      |            |                  |                     |
-|             |            |                  |                     |
 
  
 
@@ -115,7 +114,7 @@ Mediawiki分析版本v1-26.0
 
 ​    ![image-20191208232311794](E:\project\technical-share\media\sf_reuse\tools\tools_mediawiki_001.png)                           
 
-图表 1 按功能划分表格
+图 1 按功能划分表格
 
 注：功能分为users，
 
@@ -180,13 +179,12 @@ Mediawiki分析版本v1-26.0
 
 注：2016_为表前缀。共49个表。
 
-各表缺省存储引擎类型是InnoDB，**整理（排序）**是binary。
+* 数据库：整理是**latin1_swedish_ci（系统缺省）。**
 
-数据库的整理是**latin1_swedish_ci（系统缺省）。**
+* Searchindex表： 引擎类型是MyISAM，整理是*utf8_general_ci。*
+* 其它表：各表缺省存储引擎类型是InnoDB，整理（排序）是binary。
 
-**Searchindex表**的引擎类型是MyISAM，整理是*utf8_general_ci。*
-
-导出的SQL是UTF8编码，可以正常显示中文条目名称，但条目内容是用binary存储的。
+* 存储：导出的SQL是UTF8编码，可以正常显示中文条目名称，但条目内容是用binary存储的。
 
  
 
@@ -278,55 +276,55 @@ Mediawiki分析版本v1-26.0
 
 表格 4 DefaultSettings.PHP可设置变量
 
-|                                               | 简介 | 典型字段                                              | 字段简介                         | 备注                                                         |
-| --------------------------------------------- | ---- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------------------------ |
-| 通用设置                                      |      | $wgServer  L                                          | 服务器的UR                       | $wgServer最好改成IP，如果使用缺省localhost，会导致两台机器在同一台访问时重载出错。 |
-|                                               |      | $wgServerName                                         |                                  |                                                              |
-|                                               |      | $wgSitename                                           |                                  |                                                              |
-| 路径                                          |      | $IP                                                   |                                  |                                                              |
-|                                               |      |                                                       |                                  |                                                              |
-| 共享上载                                      |      | $wgCacheSharedUploads                                 | 在memcached中缓存共享的元数据    |                                                              |
-|                                               |      | $wgSharedUploadDirectory                              | 共享的上载目录所在的文件系统路径 |                                                              |
-|                                               |      | $wgSharedUploadPath  $wgUseSharedUploads              |                                  |                                                              |
-| Email 设置                                    |      | $wgEmergencyContact                                   | 站点管理员的email地址。          |                                                              |
-|                                               |      | $wgEnableEmail  $wgEnableUserEmail                    |                                  |                                                              |
-| [数据库](http://lib.csdn.net/base/14)设置 |      | $wgDBconnection                                       |                                  |                                                              |
-|                                               |      | $wgDBname  $wgDBpassword                              | 名称、密码                       |                                                              |
-|                                               |      | $wgDBprefix                                           |                                  |                                                              |
-| 共享数据库设置                                |      | $wgSharedDB                                           | 多个wiki站点共享的数据库名称     |                                                              |
-| 系统管理员SQL查询                             |      | $wgAllowSysopQueries   $wgDBsqlpassword  $wgDBsqluser |                                  |                                                              |
-| memcached  的设置                             |      | $wgLinkCacheMemcached  $wgMemCachedServers  …         |                                  |                                                              |
-| 本地化配置                                    |      | $wgInputEncoding                                      | 输入文本编码方式                 |                                                              |
-| 调试/日志记录                                 |      |                                                       |                                  |                                                              |
-| Profiling                                     |      |                                                       |                                  |                                                              |
-| 网站定制                                      |      |                                                       |                                  |                                                              |
-| 名称空间                                      |      |                                                       |                                  |                                                              |
-| 皮肤                                          |      | $wgDefaultSkin   $wgSkipSkin                          |                                  |                                                              |
-| 分类                                          |      |                                                       |                                  |                                                              |
-| 缓存                                          |      |                                                       |                                  |                                                              |
-| Persistent链接缓存                            |      |                                                       |                                  |                                                              |
-| Interwiki                                     |      | $wgInterwikiExpiry  $wgLocalInterwiki                 | interwiki表的缓存有效期。        |                                                              |
-| 权限设置                                      |      |                                                       |                                  |                                                              |
-| 频率限制器                                    |      | $wgRateLimitLog   $wgRateLimits                       |                                  |                                                              |
-| 代理                                          |      |                                                       |                                  |                                                              |
-| Squid                                         |      |                                                       |                                  |                                                              |
-| Cookies                                       |      |                                                       |                                  |                                                              |
-| 缩减某些网站功能                              |      |                                                       |                                  |                                                              |
-| 上载                                          |      |                                                       |                                  |                                                              |
-| MIME类型                                      |      |                                                       |                                  |                                                              |
-| 防止病毒                                      |      |                                                       |                                  |                                                              |
-| 解释器                                        |      |                                                       |                                  |                                                              |
-| HTML                                          |      |                                                       |                                  |                                                              |
-| TeX                                           |      |                                                       |                                  |                                                              |
-| Tidy                                          |      |                                                       |                                  |                                                              |
-| 图像                                          |      |                                                       |                                  |                                                              |
-| 最新更改                                      |      |                                                       |                                  |                                                              |
-| UDP更新                                       |      |                                                       |                                  |                                                              |
-| 版权                                          |      |                                                       |                                  |                                                              |
-| 扩展                                          |      |                                                       |                                  |                                                              |
-| HTCP  multicast purging                       |      |                                                       |                                  |                                                              |
-| 其他设置                                      |      |                                                       |                                  |                                                              |
-|                                               |      |                                                       |                                  |                                                              |
+|                         | 简介 | 典型字段                                              | 字段简介                         | 备注                                                         |
+| ----------------------- | ---- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------------------------ |
+| 通用设置                |      | $wgServer  L                                          | 服务器的UR                       | $wgServer最好改成IP，如果使用缺省localhost，会导致两台机器在同一台访问时重载出错。 |
+|                         |      | $wgServerName                                         |                                  |                                                              |
+|                         |      | $wgSitename                                           |                                  |                                                              |
+| 路径                    |      | $IP                                                   |                                  |                                                              |
+|                         |      |                                                       |                                  |                                                              |
+| 共享上载                |      | $wgCacheSharedUploads                                 | 在memcached中缓存共享的元数据    |                                                              |
+|                         |      | $wgSharedUploadDirectory                              | 共享的上载目录所在的文件系统路径 |                                                              |
+|                         |      | $wgSharedUploadPath  $wgUseSharedUploads              |                                  |                                                              |
+| Email 设置              |      | $wgEmergencyContact                                   | 站点管理员的email地址。          |                                                              |
+|                         |      | $wgEnableEmail  $wgEnableUserEmail                    |                                  |                                                              |
+| 数据库设置              |      | $wgDBconnection                                       |                                  |                                                              |
+|                         |      | $wgDBname  $wgDBpassword                              | 名称、密码                       |                                                              |
+|                         |      | $wgDBprefix                                           |                                  |                                                              |
+| 共享数据库设置          |      | $wgSharedDB                                           | 多个wiki站点共享的数据库名称     |                                                              |
+| 系统管理员SQL查询       |      | $wgAllowSysopQueries   $wgDBsqlpassword  $wgDBsqluser |                                  |                                                              |
+| memcached  的设置       |      | $wgLinkCacheMemcached  $wgMemCachedServers  …         |                                  |                                                              |
+| 本地化配置              |      | $wgInputEncoding                                      | 输入文本编码方式                 |                                                              |
+| 调试/日志记录           |      |                                                       |                                  |                                                              |
+| Profiling               |      |                                                       |                                  |                                                              |
+| 网站定制                |      |                                                       |                                  |                                                              |
+| 名称空间                |      |                                                       |                                  |                                                              |
+| 皮肤                    |      | $wgDefaultSkin   $wgSkipSkin                          |                                  |                                                              |
+| 分类                    |      |                                                       |                                  |                                                              |
+| 缓存                    |      |                                                       |                                  |                                                              |
+| Persistent链接缓存      |      |                                                       |                                  |                                                              |
+| Interwiki               |      | $wgInterwikiExpiry  $wgLocalInterwiki                 | interwiki表的缓存有效期。        |                                                              |
+| 权限设置                |      |                                                       |                                  |                                                              |
+| 频率限制器              |      | $wgRateLimitLog   $wgRateLimits                       |                                  |                                                              |
+| 代理                    |      |                                                       |                                  |                                                              |
+| Squid                   |      |                                                       |                                  |                                                              |
+| Cookies                 |      |                                                       |                                  |                                                              |
+| 缩减某些网站功能        |      |                                                       |                                  |                                                              |
+| 上载                    |      |                                                       |                                  |                                                              |
+| MIME类型                |      |                                                       |                                  |                                                              |
+| 防止病毒                |      |                                                       |                                  |                                                              |
+| 解释器                  |      |                                                       |                                  |                                                              |
+| HTML                    |      |                                                       |                                  |                                                              |
+| TeX                     |      |                                                       |                                  |                                                              |
+| Tidy                    |      |                                                       |                                  |                                                              |
+| 图像                    |      |                                                       |                                  |                                                              |
+| 最新更改                |      |                                                       |                                  |                                                              |
+| UDP更新                 |      |                                                       |                                  |                                                              |
+| 版权                    |      |                                                       |                                  |                                                              |
+| 扩展                    |      |                                                       |                                  |                                                              |
+| HTCP  multicast purging |      |                                                       |                                  |                                                              |
+| 其他设置                |      |                                                       |                                  |                                                              |
+|                         |      |                                                       |                                  |                                                              |
 
 注：总共可分为三十九大设置，N多设置字段。
 
@@ -387,7 +385,7 @@ $wgRawHtml = true;
 
 ## 3.2   首页修改
 
-### 3.2.1 左侧导航[MediaWiki:Sidebar](http://localhost/mediawiki-1.26.0/index.php/MediaWiki:Sidebar)
+### 3.2.1 左侧导航 [MediaWiki:Sidebar](http://localhost/mediawiki-1.26.0/index.php/MediaWiki:Sidebar)
 
 在搜索框中直接输入：mediawiki:sidebar
  点击确定，你会看到左侧导航的设置的相关代码。可以用编辑普通条目的方式编辑， 下面是原始页面，二级分类下的每个词都是mediawiki预定义变量，可用mediawiki:xx编辑（xx如heppage)。 
@@ -489,9 +487,7 @@ wiki首页：http://localhost/wiki/test/index.php/
 
 优点：不用安装扩展，不用安装多个wiki，融合了方案1和方案2的优点。uri可任意，可以使用“Hello”和“你好”，也可以使用“Hello”和“Hello/zh”。
 
-todo：界面随着文章内容变化，比如Hello的界面是英文的，Hello/zh的界面是汉字的。需要自己修改一下mediawiki的代码。
-
- 
+备注：界面随着文章内容变化，比如Hello的界面是英文的，Hello/zh的界面是汉字的。需要自己修改一下mediawiki的代码。
 
 **步骤：**
 
@@ -503,18 +499,16 @@ mysql> INSERT INTO `interwiki` VALUES('en','./$1',0,0);
 
 然后建立“Hello”页面，内容如下：
 
+```
 [[zh:你好]]
-
 Hello World.
+```
 
 然后建立“你好”页面，内容如下：
 
-[[en:Hello]]
-
-你好，世界。
-
 ```
- 
+[[en:Hello]]
+你好，世界。
 ```
 
 ## 3.5   手机版
@@ -616,7 +610,7 @@ OK，可以用了。
 
 **mediawiki数据库的安装配置选项**
 
-详见:http://www.mediawiki.org/wiki/Manual:$wgDBmysql5 
+详见: http://www.mediawiki.org/wiki/Manual:$wgDBmysql5 
  缺省参数(首项):　Mysql(InnoDB), BIN 
 
 $wgDBTableOptions  = "TYPE=InnoDB";
@@ -691,25 +685,25 @@ character_set_system  utf8
 
 在Linux命令行下操作：
 ```sh
-vi oldpath/LocalSettings.php  ; 修改老目录配置文件，增加$wgReadOnly="Read Only Now"，老网站改为只读方式
-
-cp newpath/AdminSettings.sample newpath/AdminSettings.php ; 复制生成AdminSetting.php文件供maintenance程序使用
-
-vi newpath/AdminSettings.php ; 设置数据库用户名、密码
-
-cd newpath/maintenance ; 进入升级程序所在的维护目录
-
-php update.php ; 运行升级程序（如果遇到DPL扩展报错，也可以Web方式使用重新安装的办法来进行升级）
-
-rm -fdr newpath/images ; 删除新目录中的images目录及其下面的所有子目录、文件
-
-mv oldpath/images newpath ; 移动老目录中的images目录到新目录
-
-vi /usr/local/apache2/conf/httpd.conf ; 修改Apache配置文件中站点对应的目录从老目录改为新目录
-
-cd /usr/local/apache2/bin ; 进入Apache运行程序目录
-
-./httpd -k restart ; 重启Apache程序，启用新目录中的mediawiki新版本
+# ; 修改老目录配置文件，增加$wgReadOnly="Read Only Now"，老网站改为只读方式
+vi oldpath/LocalSettin# gs.php  
+# ; 复制生成AdminSetting.php文件供maintenance程序使用
+cp newpath/AdminSettings.sample newpath/AdminSettings.php 
+# 设置数据库用户名、密码
+vi newpath/AdminSettings.php 
+#　进入升级程序所在的维护目录
+cd newpath/maintenance  
+# 运行升级程序（如果遇到DPL扩展报错，也可以Web方式使用重新安装的办法来进行升级）
+php update.php 
+# 删除新目录中的images目录及其下面的所有子目录、文件
+rm -fdr newpath/images 
+; 移动老目录中的images目录到新目录
+mv oldpath/images newpath 
+; 修改Apache配置文件中站点对应的目录从老目录改为新目录
+vi /usr/local/apache2/conf/httpd.conf 
+# 进入Apache运行程序目录, 重启Apache程序，启用新目录中的mediawiki新版本
+cd /usr/local/apache2/bin
+./httpd -k restart
 ```
 
 
@@ -780,3 +774,4 @@ IT类
 - [wikihow](http://www.wikihow.com/)      Ｔhe How to Manual 一个提供做一件事步骤的专题站点，蛮有创意的。
 
  
+

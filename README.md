@@ -16,9 +16,14 @@ typora支持的md格式与传统md格式的差别
 
 1. 数字+空格 会变成有序符号且不需额外换行; 仅数字开头仍需换行。
 
+2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
+
+     https://www.zybuluo.com/codeep/note/163962 
+
 
 
 **目录**
+
 ```
 │   LICENSE
 │   README.md

@@ -9,6 +9,8 @@
 
 [TOC]
 
+
+
 ---
 
 ## 1  概述
@@ -205,7 +207,7 @@ Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用�
 
 
 
-## 3  安装配置篇
+## 3  安装篇
 
 工具Vagrant & VirtualBox 详见 《运维专题》
 
@@ -373,13 +375,52 @@ $./kubectl get nodes
 
 ### 4.1   配置文件
 
-K8S的配置文件是YAML格式，每个K8S资源对象都可以通过YAML或JSON格式的Manifest文件表示。Manifest文件定义了资源对象的所有属性。
+K8S的配置文件是YAML格式，每个K8S资源对象都可以通过YAML或JSON格式的Manifest文件表示。Manifest文件定义了资源对象的所有属性如kind, metadata, spec。
 
-Pod的Manifest文件示例：kind, metadata, spec
+namespace 就好比是一个大的分组，一个k8s集群内可以创建多个namespace ，在它之下才能创建deployment ，然后在 deployment 之下可以启动多个名字一样的 pod（名字一样，id不同，pod全名是pod名加id组成的） ，在一个pod内可以启动多个 container ，一般情况下，一个pod内只跑一个容器，有些特殊的场景才会在pod内启动多个容器；创建了 service 可以将 pod 对 k8s 集群内进行dns解析，并且提供负载均衡能力，同一个namespace下的service可以直接使用 service名字进行解析，不同namespace执行的 service 需要加上 servicename.namespace 才能解析，并且，要解析service的话，只能在pod的容器内进行，容器之外无法解析。
+
+关系： namespace - deployment  -  pod - container 
+
+| 文件             | 说明           | 配置关键信息                              | 资源查看命令           |
+| ---------------- | -------------- | ----------------------------------------- | ---------------------- |
+| ?_namespace.yaml | Namespace配置  | name, labels                              | kubectl get namespaces |
+| xxx_deploy.yaml  | Deployment配置 | selector,template,<br>strategy,containers | kubectl get deploy     |
+| xxx_pod.yaml     | Pod配置        | nodeSelector,containers,volumes           | kubectl get pod        |
+| xxx_service.yaml | Service配置    | ports, selector                           | kubectl get svc        |
+
+说明： 1. 查看资源命令： `kubectl get [namespace/deploy/pod/svc] -n $namespace_name`
+
+2. yaml文件操作命令
+
+```shell
+# 创建资源对象命令
+$kubectl create -f xxx.yaml
+# 更新yaml文件
+$kubectl apply -f xxx.yaml
+# 通过yaml文件删除此文件对应的资源对象，也可不用yaml文件删除资源对象
+$kubectl delete -f xxx.yaml
+```
+
+
+
+**Namespace示例**
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+   name: product
+   labels: 
+     name: product
+```
+
+
+
+**Pod示例**
 
 ```yaml
 apiVersion: v1             #指定api版本，此值必须在kubectl apiversion中  
-kind: Pod                  #指定创建资源的角色/类型  
+kind: Pod                  #指定创建资源的角色/类型,如Pod、Deployment、Namespace  
 metadata:                  #资源的元数据/属性  
   name: web04-pod          #资源的名字，在同一个namespace中必须唯一  
   labels:                  #设定资源的标签，详情请见http://blog.csdn.net/liyingke112/article/details/77482384
@@ -449,10 +490,142 @@ spec:  #specification of the resource content 指定该资源的内容
   - name: volume           #定义一个挂载设备的名字  
     #meptyDir: {}  
     hostPath:  
-      path: /opt           #挂载设备类型为hostPath，路径为宿主机下的/opt,这里设备类型支持很多种  
+      path: /opt           #挂载设备类型为hostPath，路径为宿主机下的/opt,这里设备类型支持很多种 
 ```
 
 
+
+**Deployment示例** 
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: aas
+  namespace: product
+  labels:
+    app: aas
+spec:
+  selector:	
+    matchLabels:	#定义pod启动在labels为aas的Deployment内
+      app: aas
+  revisionHistoryLimit: 5
+  replicas: 2
+  minReadySeconds: 60
+  strategy:	#策略：回滚、升级
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:	#定义pod模板:如标签、详细启动参数
+    metadata:
+      labels:
+        app: aas 
+    spec:	# 
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - aas
+            topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 60
+      imagePullSecrets:
+      - name: resecret-product
+      nodeSelector:
+        apptype: memnode
+      containers:
+      - name: aas 
+        readinessProbe:
+          httpGet:
+            path: /aas/
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 80
+          timeoutSeconds: 20
+        livenessProbe:
+          httpGet:
+            path: /aas/
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 80
+          timeoutSeconds: 20
+        env:
+        - name: JAVA_OPTS
+          value: "-Xms1024M -Xmx1024M -server -Duser.timezone=GMT+08"
+        image: registry.test.com/appimage/aas:AAS.01.00.001.release
+        resources:
+          limits:
+            cpu: "600m"
+            memory: 2048Mi
+          requests:
+            cpu: "300m"
+            memory: 1280Mi
+        volumeMounts:
+        - mountPath: /etc/localtime
+          readOnly: false
+          name: localtime
+        - mountPath: /home/gooagoo/config
+          readOnly: false
+          name: appconfig
+        - mountPath: /home/gooagoo/resource
+          readOnly: false
+          name: appresource
+        - mountPath: /home/gooagoo/log
+          readOnly: false
+          name: log
+        - mountPath: /opt/tomcat/logs
+          readOnly: false
+          name: tomcatlog
+        - mountPath: /mnt/mfs
+          readOnly: false
+          name: mnt
+        
+      volumes:
+      - name: "localtime"
+        hostPath:
+          path: "/etc/localtime"
+          type: File
+      - name: "tomcatlog"
+        hostPath:
+          path: "/home/app/log/aas/tomcatlogs"
+      - name: "log"
+        hostPath:
+          path: "/home/app/log/aas"
+      - name: "appconfig"
+        hostPath:
+            path: "/home/app/config"
+      - name: "appresource"
+        hostPath:
+            path: "/home/app/resource"
+      - name: "mnt"
+        flexVolume:
+          driver: "alicloud/nas"
+          options:
+            server: "15123496df-bee90.cn-beijing.nas.aliyuncs.com"
+            path: "/"
+            vers: "4.0"
+```
+
+
+
+**Service示例**
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: aas
+  namespace: product
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: aas
+```
 
 
 
@@ -554,4 +727,6 @@ kubue-proxy：负责服务发现和负载均衡（轮询）。
 [10].  "minikube国内安装步骤"  https://www.jianshu.com/p/18441c7434a6   
 
 [11].  "Minikube - Kubernetes本地实验环境" https://yq.aliyun.com/articles/221687
+
+[12]. "k8s之启动namespace 、pod 、service，yaml配置文件详解，以及如何启动pod、service，如何删除pod、service"  https://blog.csdn.net/qq_31547771/article/details/102526403
 
