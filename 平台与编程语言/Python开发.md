@@ -2365,7 +2365,21 @@ print(traceback.format_exc()
 traceback.print_exc()
 traceback.print_exception(sys.exc_info()) 
 ```
+日志模块logging里也集成了traceback模块
+
+```python
+import logging
+try:
+    z=5/0
+except Exception:
+    logging.exception("divide 0 error")		# 相当于 traceback.print_exc()
+    logging.error("divide 0 error", exc_info=True) # 同上
+```
+
+
+
 ## 3.3  Python常用开发工具
+
 参考资料：Python 程序员必知必会的开发者工具http://blog.jobbole.com/58226/
 说明：眼风为为实。经俺测试，get/set attr的运行效率所差无几，没有所谓几十倍的差距，也就是几十分之一的正常差距。
 表格 20 python程序列表
