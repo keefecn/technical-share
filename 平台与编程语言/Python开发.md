@@ -3617,7 +3617,18 @@ def calc_loop_time():
 
 
 
+### 安全库 
 
+* [PyCrypto](https://pypi.org/project/pycrypto/):  最新版本2.6.1（更新于2013.10.18），PyCrypto is written and tested using Python version 2.1 through 3.3.  由于长期不更新且不支持python3.3+，不建议再使用此库，请换用PyCryptodome。
+
+* [PyCryptodome](https://pypi.org/project/pycryptodome/): PyCryptodome是PyCrypto的一个分支。基于PyCrypto2.6.1. 最新版本3.9.1（更新于2020.2.21）。It supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.
+
+  ```shell
+  $pip install PyCryptodome 
+  ```
+
+
+* [cryptography](https://cryptography.io)：也是常用的加密库。
 
 ## 4.3     python并发
 
@@ -3629,6 +3640,7 @@ from multiprocessing.dummy import Pool as ThreadPool  # 线程池
 python并发主要有多进程multiprocessing、多线程thread。
 并发机制包括socket、[asynchat](https://docs.python.org/2/library/asynchat.html#module-asynchat)、 [asyncore](https://docs.python.org/2/library/asyncore.html#module-asyncore)(select)。
 **应用场景：**
+
 * cpu密集型: line>多进程>多线程；
 * io密集型：多进程>line>多线程
 * http密集型：多线程>多进程>line，推荐多线程。
@@ -3670,7 +3682,19 @@ python并发主要有多进程multiprocessing、多线程thread。
 ```
 继承自multiprocessing.Process
 进程间通信IPC包括signal、pipe(popen2)、subprocess、Queue（python 3中为queue模块）和共享内存。
-进程池实现：multiprocessing.Pool(POOLSIZE)
+进程池实现：
+
+```python
+# 进程池1：简单进程池 Pool(), map, map_async, apply, apply_async
+from multiprocessing import Pool
+pool = Pool(3)　　# 池的工作进程数为3个;不传入参数，会创建一个动态控制大小的进程池
+# testFL:要处理的数据列表，run：处理testFL列表中数据的函数
+pool.map(run, testFL)	# map会使进程阻塞直到结果返回
+pool.close()  # 关闭进程池，不再接受新的进程
+pool.join()  # 主进程阻塞等待子进程的退出
+```
+
+
 
 共享内存：实际机制是mmap，创建共享值和数组，即Value()和Array()。
 对于python复杂对象提供托管对象来共享对象，sharedctypes与Manager，
