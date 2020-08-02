@@ -2858,8 +2858,11 @@ for x in range(1,10):
 input("waiting")
 ```
 
+
+
 **1) py2exe** 
 版本需求：RuntimeError: This package requires Python 3.3 or later
+
 ```python
 # 配置脚本：setup.py
 from distutils.core import setup
@@ -2874,14 +2877,78 @@ setup(console=['main.py'])
 2. 进入需要打包的程序目录
 3. SHELL端命令：python setup.py py2exe
 
+
+
 **2)** **PyInstaller**
 步骤如下：(打包后exe在dist/)
 
 1. 输入pip install PyInstaller
+
 2. 进入需要打包的程序目录
+
 3. SHELL端命令：pyinstaller  [需要打包的程序（脚本）名称]
 
+   ```shell
+   pyinstaller -f xxx.py  # 生成单个二进制文件
+   pyinstaller -D xxx  # 生成目录
+   ```
+
+   
+
+以一个多文件和目录的Python项目为例，项目文件包含：1.Python源代码文件；2.图标资源文件；3.其它资源文件。
+
+编辑打包的配置文件.spec文件（pyinstaller -d xxx.py打包时会自动生成默认的xxx.spec）
+
+```python
+# -*- mode: python -*-
+block_cipher = None
+
+SETUP_DIR = 'D:\\install_test\\FASTPLOT\\'
+a = Analysis(	# 输入，分析py文件的依赖模块，并生成相应的信息
+    		['fastplot.py',
+        	 'D:\\install_test\\FASTPLOT\\lib\\app\\start.py']	
+             pathex=['D:\\install_test\\DAGUI-0.1\\bin'],
+             binaries=[],
+             datas=[(SETUP_DIR+'lib\\icon','lib\\icon'),(SETUP_DIR+'data','data')],	# 数据/资源文件，如图标、文档
+    		# 隐藏依赖模块，打包后执行程序出现no module name xxx时，要手动在这加入遗漏模块
+             hiddenimports=['pandas','pandas._libs','pandas._libs.tslibs.np_datetime'],
+             hookspath=[],
+             runtime_hooks=[],
+             excludes=[],	# 不打包的依赖模块
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
+             cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data,	# 包含程序运行需要的所有依赖
+             cipher=block_cipher)
+exe = EXE(pyz,	#　根据上面两项生成
+          a.scripts,
+          exclude_binaries=True,
+          name='fastplot',
+          debug=False,
+          strip=False,
+          upx=True,
+          console=False )
+coll = COLLECT(exe,	# 生成其他部分的输出文件夹，COLLECT也可以没有
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='fastplot')
+```
+
+
+
+pyinstaller 打包常见问题
+
+* 目录路径发生变化： 使用相对路径的冻结目录。
+* no moudle name xxx:  将隐藏依赖包添加 上spec文件
+* xxx.dll 没找到
+
+
+
 ### 3.3.8  性能优化 cProfile/pstats/timeit
+
 详见 《性能优化》
 
 ### 3.3.9  fabric
@@ -3021,6 +3088,8 @@ redirect_stderr=true
 [2]. pytest https://docs.pytest.org/en/latest/example/markers.html
 [3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html 
 [4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html 
+
+[5]. Python项目的打包方法  https://blog.csdn.net/weixin_42052836/article/details/82315118
 
 
 
@@ -3319,10 +3388,16 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 ## 4.1   python多版本并存
 
 **使用**：直接调用全路径python，区分CPU位数（32/64位）、操作系统（linux/windows/mac），区分python2.7和python 3.x。
+
+```shell
+# 全路径调用python的解释器
 $ /d/dev/python/python27/python xxx.py   # python 2.7
 $ /d/dev/python/python35/python xxx.py   # python 3.5
-$ /d/dev/python/pypy2/pypy xxx.py   # pypy 2.5.8
+$ /d/dev/python/pypy2/pypy xxx.py   	# pypy 2.5.8
+```
+
 **备注**：32位的python 2.7可算是第三方库支持最丰富的版本。
+
 *  用virtualenv来管理不同版本的python，
 *  或用全路径访问python，各个python版本有自己的安装路径。
 
@@ -3619,7 +3694,7 @@ def calc_loop_time():
 
 ### 安全库 
 
-* [PyCrypto](https://pypi.org/project/pycrypto/):  最新版本2.6.1（更新于2013.10.18），PyCrypto is written and tested using Python version 2.1 through 3.3.  由于长期不更新且不支持python3.3+，不建议再使用此库，请换用PyCryptodome。
+* [PyCrypto](https://pypi.org/project/pycrypto/) （弃）:  最新版本2.6.1（更新于2013.10.18），PyCrypto is written and tested using Python version 2.1 through 3.3.  由于长期不更新且不支持python3.3+，不建议再使用此库，请换用PyCryptodome。
 
 * [PyCryptodome](https://pypi.org/project/pycryptodome/): PyCryptodome是PyCrypto的一个分支。基于PyCrypto2.6.1. 最新版本3.9.1（更新于2020.2.21）。It supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.
 
@@ -3631,11 +3706,6 @@ def calc_loop_time():
 * [cryptography](https://cryptography.io)：也是常用的加密库。
 
 ## 4.3     python并发
-
- ```python
-from multiprocessing import Pool  # 进程池 
-from multiprocessing.dummy import Pool as ThreadPool  # 线程池
- ```
 
 python并发主要有多进程multiprocessing、多线程thread。
 并发机制包括socket、[asynchat](https://docs.python.org/2/library/asynchat.html#module-asynchat)、 [asyncore](https://docs.python.org/2/library/asyncore.html#module-asyncore)(select)。
@@ -3655,13 +3725,39 @@ python并发主要有多进程multiprocessing、多线程thread。
 
 |          | 进程     | 线程  |
 | -------- | ------------------------------------------------------------ | ------------------------------------------- |
-| 实现     | multiprocessing.Process            | thread 或者   threading        |
-| 同步机制 | 包括锁Lock、RLock、Condition条件变量、   Semaphore、BoundedSemaphore边界信号量、Event事件等。 | 同进程。          |
+| 实现     | from multiprocessing import Process | from threading import Thread |
+| 同步机制 | 包括锁Lock、RLock、Condition条件变量、<br>Semaphore、BoundedSemaphore边界信号量、Event事件等。 | 同进程。          |
 | 优点     | 综合性能较好。        | 网络IO性能较好，适合http密集型。            |
 | 缺点     |          | GIL存在，实质是串行执行，不能发挥多核优势。 |
-备注：1.同步机制在进程和线程都同样适用。
-2. 精灵进程/线程：加上daemon属性。
-3. 协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
+备注：1. 同步机制在进程和线程都同样适用。
+2.  精灵进程/线程：加上daemon属性。
+3.  协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
+
+
+
+表格 池化比较
+
+|             | 进程                                               | 线程                                                 |
+| ----------- | -------------------------------------------------- | ---------------------------------------------------- |
+| 实现1（弃） | from multiprocessing import Pool                   | from multiprocessing.dummy import Pool as ThreadPool |
+| futures实现 | from concurrent.futures import ProcessPoolExecutor | from concurrent.futures import ThreadPoolExecutor    |
+
+备注：concurrent.futures池化实现保持了接口一致，主要方法submit、shutdown；done、result。
+
+```python
+    from concurrent.futures import ThreadPoolExecutor, wait
+    pool = ThreadPoolExecutor(max_workers=POOL_SIZE)
+    f_list = []
+    for i in range(TASK_SIZE):
+        msg = "hello %d" % (i)
+        future = pool.submit(work, msg, 1)
+        f_list.append(future)
+        print(future.done())  # 线程任务一提交即往下执行,
+    wait(f_list)  # 此处缺省会阻塞等待任务都执行完
+    for future in f_list:
+        print(future.result())
+    pool.shutdown()
+```
 
 
 
@@ -3675,7 +3771,11 @@ python并发主要有多进程multiprocessing、多线程thread。
 | tornado  | | 装饰器+Future |
 | gthread  | 线程        | glib的线程，--threads只在这种方式下起作用。 |
 备注：python3.4+里concurrent.futures.Future和asyncio.Future这两个类都来表示可能完成或者尚未完成的延迟计算。与Twisted中的Deferred类、Tornado框架中的Future类的功能类似。
+
+
+
 ### 4.3.1  多进程
+
 ```python
 >>> dir(multiprocessing)
 ['Array', 'AuthenticationError', 'BoundedSemaphore', 'BufferTooShort', 'Condition', 'Event', 'JoinableQueue', 'Lock', 'Manager', 'Pipe', 'Pool', 'Process', 'ProcessError', 'Queue', 'RLock', 'RawArray', 'RawValue', 'SUBDEBUG', 'SUBWARNING', 'Semaphore', 'TimeoutError', 'Value', '__all__', '__author__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '__path__', '__version__', '_multiprocessing', 'active_children', 'allow_connection_pickling', 'cpu_count', 'current_process', 'freeze_support', 'get_logger', 'log_to_stderr', 'os', 'process', 'set_executable', 'sys', 'util']
