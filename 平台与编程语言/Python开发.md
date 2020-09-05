@@ -3801,7 +3801,10 @@ pool.join()  # 主进程阻塞等待子进程的退出
 *  Manager效率较低，但支持远程共享内存。
 *  sharedctypes效率较高，快Manager两个数量级，在多进程访问时与普通内存访问相当
 
+
+
 ### 4.3.2  多线程
+
 **Pthread和Gthread**
 *  Pthread即POSIX thread，Posix线程是一个POSIX标准线程，该标准定义内部API创建和操纵线程。
 *  Gthread调用的是Glib库中的线程部分；GLib是GTK+和GNOME工程的基础底层核心程序库，是一个综合用途的实用的轻量级的C程序库。
@@ -3829,7 +3832,10 @@ Python并不支持真正意义上的多线程。Python中提供了[多线程包]
 | mutex        | 互斥对象。            |       |
 | SocketServer | 具有线程控制的TCP和UDP管理器       |       |
 
+
+
 #### 4.3.2.1 线程安全
+
 python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)是线程安全的（使用了threading模块的同步机制Lock/Condition），而其它的容器如list/dict是线程不安全的。
 多线程编程的准标准库[posix pthread](https://computing.llnl.gov/tutorials/pthreads/)库拥有rwlock, 而python2.7自带的threading库没有读写锁，只有可重入锁RLock。
 
@@ -3855,10 +3861,75 @@ with lockA:
 *  读锁 threading.RLock 可读入锁，嵌套锁
 *  threading.BoundedSemaphore 
 
+
+
 #### 4.3.2.2 子线程销毁
+
 1)   与父线程一起销毁：set Daemon=True，当父线程关闭时子线程也跟着释放。Thread.join用于等待线程数据。
 2)   退出标记：子线程中循环判断一个标志位，在主线程中改变该标志位，子线程读到标志位改变，就结束自己。
 3)   （不推荐）使用ctypes强行杀掉线程。强行杀线程，可能会导致进程资源崩溃。
+
+
+
+法1：父线程法
+
+```python
+# 实现Thread获取结果: get_result
+class MyThread(threading.Thread):
+    result = None
+    def __init__(self, target, args, name=''):
+        threading.Thread.__init__(self)
+        self.name = name
+        self.target = target
+        self.args = args
+
+    def get_result(self):
+        """ get result """
+        return self.result
+
+    def run(self):
+        print('starting', self.name, 'at:', ctime())
+        self.result = self.target(*self.args)
+        print(self.name, 'finished at:', ctime())
+        
+# 为了限制真实请求时间或函数执行时间的装饰器
+def timeout_limit_by_parent_thread(limit_time):
+    """
+    :param limit_time: 设置最大允许执行时长,单位:秒
+    :return: 未超时返回被装饰函数返回值,超时则返回 None
+    """
+
+    def functions(func):
+        # 执行操作
+        def run(*params):
+            from mythread import MyThread
+            thre_func = MyThread(target=func, args=params)
+            # 主线程结束(超出时长),则线程方法结束
+            thre_func.setDaemon(True)  # 必需
+            thre_func.start()
+            # 计算分段沉睡次数
+            sleep_num = int(limit_time // 1)
+            sleep_nums = round(limit_time % 1, 1)
+            # 多次短暂沉睡并尝试获取返回值
+            for i in range(sleep_num):
+                time.sleep(1)
+                infor = thre_func.get_result()
+                if infor:
+                    return infor
+            time.sleep(sleep_nums)
+            # 最终返回值(不论线程是否已结束)
+            res = thre_func.get_result()
+            if res:
+                return res
+            else:
+                return "请求超时"  # 超时返回  可以自定义
+
+        return run
+
+    return functions
+```
+
+
 
 
 
@@ -4199,6 +4270,48 @@ uwsgi --ini /etc/uwsgi9090.ini &
 ```
 
 在浏览器内输入：http://127.0.0.1:8001，查看是否有"Hello World"输出，若没有输出，请检查你的安装过程。
+
+
+
+### 4.3.5 函数超时的处理方法
+
+函数超时处理的主要场合是长时间任务卡住了，主动放弃；限制某个任务的最长执行时间。 
+
+* 进程超时：
+* 线程超时：有三种方法，分别是与父线程一起退出，退出标记法 和 杀线程
+
+| 方法              | 原理                                                       | 函数所在线程退出 | 缺点                                 |
+| ----------------- | ---------------------------------------------------------- | ---------------- | ------------------------------------ |
+| event_let         | 事件通知。`import eventlet`                                | 否               | 不能用在执行函数里出现子进程         |
+| signal 设置装饰器 | signal信号通知机制。`import signal`                        |                  | 只能用在UNIX系列。                   |
+| Timer             | 定时器监听，只能用在本线程。`from threading import Timer ` | 否               | 只用在本线程，卡死线程并不能真正终止 |
+| 父线程退出        | 子进程跟踪着父线程退出。`son_thread.setDaemon(True)`       | 否               |                                      |
+| 杀线程            | `import ctypes`                                            | 是               | 可能导致进程崩溃                     |
+| pebble            | 进程超时。                                                 |                  |                                      |
+
+备注：线程的函数超时退出机制实质上并没有真正终止执行函数所在线程的实际运行，只是切换了线程执行，需要显式杀线程才能真正终止执行函数的运行。
+
+```python
+from pebble import concurrent
+from concurrent.futures import TimeoutError
+from third_party_lib import unstable_function
+
+@concurrent.process(timeout=10)
+def function(arg, kwarg=0):
+    unstable_function(arg, kwarg=kwarg)
+
+future = function(1, kwarg=1)
+
+try:
+    results = future.result()
+except TimeoutError as error:
+    print("unstable_function took longer than %d seconds" % error.args[1])
+except ProcessExpired as error:
+    print("%s. Exit code: %d" % (error, error.exitcode))
+except Exception as error:
+    print("unstable_function raised %s" % error)
+    print(error.traceback)  # Python's traceback of remote process
+```
 
 
 
