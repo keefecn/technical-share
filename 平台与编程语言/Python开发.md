@@ -658,7 +658,7 @@ i am log_bar2
 *  实例方法: 实例方法是实例作为第一个参数传递给方法，根据约定该参数为self。
 *  类方法classmethod，第一参数为cls。可以修改类中的值。
 *  静态方法staticmathod,相当于函数，可以实例或类去调用它。
-备注：实例方法和类方法为types. MethodType,静态方法为types.FunctionType。
+备注：实例方法和类方法为types. MethodType, 静态方法为types.FunctionType。
 
 相比函数装饰器，类装饰器具有灵活度大、高内聚、封装性等优点。使用类装饰器还可以依靠类内部的\_\_call\_\_方法，当使用@形式将装饰器附加到类名上时，就会调用此方法（。
 **类的内置装饰器（3个）**
@@ -901,6 +901,43 @@ g.send('nice')
 说明： 使用yield语句的函数返回的是生成器。每次碰到yield会返回并记录当前位置。
 
 
+
+#### 推导式 (列表/字典/集合)
+
+* 列表推导式：使用[]生成列表，使用()生成generator。  示例格式如  list1 = [ d for d in iteration ]
+
+  ```python
+  # 列表[]
+  def squared(x):
+      return x*x
+  multiples = [squared(i) for i in range(30) if i % 3 is 0]
+  print multiples
+  #  Output: [0, 9, 36, 81, 144, 225, 324, 441, 576, 729]
+  
+  # () 生成器generator
+  multiples = (i for i in range(30) if i % 3 is 0)
+  print(type(multiples))
+  #  Output: <type 'generator'>
+  ```
+
+* 字典推导式： d1 = { k : fun(k)  for k in iteration }
+
+  ```python
+  mcase = {'a': 10, 'b': 34}
+  mcase_frequency = {v: k for k, v in mcase.items()}
+  print mcase_frequency
+  #  Output: {10: 'a', 34: 'b'}
+  ```
+
+* 集合推导式：类似列表推导式。唯一的区别在于它使用大括号{}。
+
+  ```python
+  squared = {x**2 for x in [1, 1, 2]}
+  print(squared)
+  # Output: set([1, 4])
+  ```
+
+  
 
 #### range/xrange
 range: 返回一个列表list[]
@@ -1880,7 +1917,15 @@ pip说明：
 影响：测试模块只能移动到main.py(主程序)的主目录下执行，很麻烦，也很乱。对自动化批量测试影响更大。
 解决途径：这个问题实际是python模块搜索路径的问题。
 法1：sys.path.append()无效。
-法2：修改系统环境变量PYTHONPATH。
+法2：修改系统环境变量 PYTHONPATH。
+
+```shell
+# shell
+export PYTHONPATH=<YOUR MODULE PATH>
+# cmd
+set PYTHONPATH=<YOUR MODULE PATH>
+```
+
 法3：增加mypkpath.pth到python可识别的路径（mypkpath为自己全名的路径文件，后缀pth必需)，里面写上模块所在的目录全路径即可。
 如：mypkpath.pth d:/project/topicspider/newspider
 linux(ubuntu)：/usr/local/lib/python2.7/dist-packages
