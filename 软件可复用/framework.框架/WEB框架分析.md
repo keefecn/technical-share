@@ -381,16 +381,14 @@ $ pip install django  #安装最新版本的Django
 $ pip install -v django==1.7.1   #或者指定安装版本
 ```
 
-
-
-**命令行创建项目** (示例项目名mysite)
+**1. 命令行创建项目** (示例项目名mysite)
 
 `$ django-admin.py startproject mysite`
 
 Django将自动生成下面的目录结构：
 
 ```shell
-mysite/
+mysite/		# startproject生成的站点目录
 ├── manage.py   # Django管理主程序
 ├── mysite
 │   ├── __init__.py
@@ -400,13 +398,15 @@ mysite/
 └── template  # 该目录放置HTML文件模板
 ```
 
-**创建APP** （示例app名为cmdb）
+
+
+**2. 创建APP** （示例app名为cmdb）
 
 在每个Django项目中可以包含多个APP，相当于一个大型项目中的分系统、子模块、功能部件等等，相互之间比较独立，但也有联系，所有的APP共享项目资源。
 
 ```shell
 $ python manage.py startapp cmdb
-cmdb/
+cmdb/	# startapp生成的app目录
 ├── admin.py   
 ├── apps.py  
 ├── __init__.py
@@ -417,6 +417,72 @@ cmdb/
 └── views.py	# 页面
 
 ```
+
+**project 和 app 的区别**
+
+* project包含一些全局配置，这些配置构成一个全局的运行平台，各个APP都运行在这个全局的运行平台上.
+* APP代表的是一个相对独立的功能模块，所以程序的逻辑都在APP中。
+
+
+
+**3.  manger.py命令**
+
+```
+$ python manage.py --help
+
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[contenttypes]
+    remove_stale_contenttypes
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush	#清空数据库数据
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations	#生成数据库文件
+    migrate
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+[sessions]
+    clearsessions
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver	#启动监听服务
+
+```
+
+1).  数据库表和表字段的创建、更新
+
+可通过 makemigrations, migrate来管理。当app目录下自动生成目录migrates里的文件过多时，可进行重置回0001__init.py
+
+2) . 
+
+
 
 **4、编写路由规则**
 
@@ -474,6 +540,8 @@ $ python manage.py runserver 127.0.0.1 8080
 ![1574518414753](../../media/sf_reuse/framework/frame_web_003_02.png)
 
 备注：核心在于 middleware（中间件），django 所有的请求、返回都由中间件来完成。中间件，就是处理 HTTP 的 request 和 response 的，类似插件，比如有 Request 中间件、view 中间件、response 中间件、exception 中间件等，Middleware 都需要在 “project/settings.py” 中 MIDDLEWARE_CLASSES 的定义。
+
+
 
 ## 7.3  本章参考
 
