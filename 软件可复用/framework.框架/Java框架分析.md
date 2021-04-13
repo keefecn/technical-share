@@ -218,7 +218,7 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 ## 1.5     本章参考
 
-[1]: EJB的体系结构[http：//www.uml.org.cn/j2ee/2009112011.asp](http://www.uml.org.cn/j2ee/2009112011.asp)
+[1]: EJB的体系结构http：//www.uml.org.cn/j2ee/2009112011.asp(http://www.uml.org.cn/j2ee/2009112011.asp)
 
 [2]: EJB  https://baike.baidu.com/item/EJB
 
@@ -667,7 +667,7 @@ POJO：Java普通对象。
 
  ![1574517549490](../../media/sf_reuse/framework/frame_java_hibernate_003.png)
 
-   
+
 图 9 hibernate核心接口图
 
 说明：

@@ -2014,9 +2014,12 @@ python模块导入有个搜索路径顺序，分别是python安装程序和安�
 
 **修改搜索路径**
 法1：sys.path.append('xxx')
-法2：修改SHELL环境变量PYTHONPATH
+法2：修改SHELL环境变量 PYTHONPATH
+
+
 
 ### 3.1.5  项目结构和模块分发包
+
 **代码配置：setup.py/setup.cfg/setuptools/pip**
 源码的入口是setup.py文件中插件式开发入口点entry_points。
 
@@ -2060,7 +2063,7 @@ Information display options (just display information, ignore any commands)
   --contact           print the maintainer's name if known, else the author's
   --contact-emai*     print the maintainer's email address if known, else the
         author's
-  --ur*  print the URL for this package
+  --url  print the URL for this package
   --license           print the license of the package
   --licence           alias for --license
   --description       print the package description
@@ -2893,13 +2896,27 @@ markers =
 一旦发现了问题出在哪里后，就需要使用到交互式调试器进入到代码中进行调试工作了，[pdb](http://docs.python.org/3.3/library/pdb.html)模块能够很好地胜任这项工作。该模块可以显示出程序在错误产生时的执行路径，同时可以动态地调整对象和代码进行调试。当程序通过测试并调试后，下一步就是要将注意力放到性能上了。
 
 ### 3.3.7  exe打包py2exe/PyInstaller
+代码冻结freeze。
+
 常用的python打包exe工具有：cxfreeze、py2exe、pyinstaller
+
+| Solution    | Windows | Linux | OS X | Python 3 | License | One-file mode | Zipfile import | Eggs | pkg_resources support |
+| :---------- | :------ | :---- | :--- | :------- | :------ | :------------ | :------------- | :--- | :-------------------- |
+| bbFreeze    | yes     | yes   | yes  | no       | MIT     | no            | yes            | yes  | yes                   |
+| py2exe      | yes     | no    | no   | yes      | MIT     | yes           | yes            | no   | no                    |
+| pyInstaller | yes     | yes   | yes  | yes      | GPL     | yes           | no             | yes  | no                    |
+| cx_Freeze   | yes     | yes   | yes  | yes      | PSF     | no            | yes            | yes  | no                    |
+| py2app      | no      | no    | yes  | yes      | MIT     | no            | yes            | yes  | yes                   |
+
+>  所有解决方案，除了py2app以外，需要在目标机器上安装了Microsoft Visual C++ dll。 只有PyInstaller可通过传递 `--onefile` 到 `Configure.py` 中， 创建绑定了合适dll、可以自运行的exe文件。
+
+
 
 ```python
 # 测试源码：main.py
 print('This is a py2exe test.')
 for x in range(1,10):
-   print('This num is '+str(x))
+   print('Twhis num is '+str(x))
 input("waiting")
 ```
 
@@ -3150,7 +3167,7 @@ redirect_stderr=true
 |   | httplib   | httplib实现了HTTP和HTTPS的客户端协议，一般不直接使用，在更高层的封装模块中（urllib,urllib2）使用了它的http实现。 |
 |   | requests  | Requests HTTP library，依赖urllib3  |
 |   | Twisted   | 基于事件驱动的网络引擎框架。       |
-|   | pycur*    | 网络库（绑定libcurl）。            |
+|   | pycurl    | 网络库（绑定libcurl）。           |
 | 数据解析   | pyquery   | jquery的python版本。   |
 | beautiful soup |          |          |
 | feedparse      | feed协议解析器        |          |
@@ -3372,7 +3389,7 @@ PSD
 *  picloud – 云端执行Python代码。
 *  dominoup.com – 云端执行R，Python和matlab代码。
 
-### 3.4.5            网络爬虫框架
+### 3.4.5   网络爬虫框架
 功能齐全的爬虫
 * grab – 网络爬虫框架（基于pycurl/multicur）。
 * scrapy – 网络爬虫框架（基于twisted），不支持Python3。
@@ -3390,7 +3407,7 @@ PSD
 *  Spynner – 对PyQt的webkit的封装（需要PyQT）。
 *  Splinter – 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。
 
-## 3.5           其他Python库
+## 3.5   其他Python库
 #### 3.5.1.1 SQLAlchemy
 
 图 2 SQLAlchemy architecture
@@ -4391,19 +4408,47 @@ Python 采用引用计数的方式来管理分配的内存。Python 的每个对
 * 垃圾回收算法：标记-复制-清除
 * 垃圾回收策略：分代回收。
 
+## 4.5  图形端开发
 
-## 4.5   SOAP
+* Tkinter/tikinter: python gui标准库
+* wxPython：wxPython是一款开源软件，是 Python 语言的一套优秀的 GUI 图形库，允许 Python 程序员很方便的创建完整的、功能健全的 GUI 用户界面。
+* Jython：Jython  程序可以和 Java 无缝集成。除了一些标准模块，Jython 使用 Java 的模块。Jython 几乎拥有标准的Python 中不依赖于 C 语言的全部模块。比如，Jython 的用户界面将使用 Swing，AWT或者 SWT。Jython 可以被动态或静态地编译成 Java 字节码。
+* pyautogui：纯Python的GUI自动化工具，其目的是可以用程序自动控制鼠标和键盘操作，多平台支持（Windows，OS X，Linux）。
+* Qt
+* GTK
+
+
+
+### Tkinter
+
+Tkinter模块("Tk 接口")是Python的标准Tk GUI工具包的接口。
+Tk 和 Tkinter 可以在大多数的 Unix 平台下使用,同样可以应用在 Windows 和 Macintosh 系统里。
+Tk8.0 的后续版本可以实现本地窗口风格,并良好地运行在绝大多数平台中。
+
+python2.x 版本使用的库名为 Tkinter。
+Python3.x 版本使用的库名为 tkinter,即首写字母 T 为小写。
+```python
+import tkinter
+```
+
+
+
+## 4.6 SOAP
+
 在深入学习 SOAP web 服务之前，你需要安装三个库：PyXML、fpconst 和 SOAPpy。
 
-## 4.6   项目实例
-### 4.6.1  12306抢票
+## 4.7  项目实例
+### 4.7.1  12306抢票
 12306 售票网站新版验证码识别对抗 https://zhuanlan.zhihu.com/p/19979300
 https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2 
-### 4.6.2  QQ模拟登陆
+### 4.7.2  QQ模拟登陆
 http://www.2cto.com/Article/201603/493457.html 
 https://github.com/LeoHuang2015/qqloginjs
 
-## 4.7   本章参考
+
+
+## 本章参考
+
 [1]. python2和python3的区别http://www.runoob.com/python/python-2x-3x.html 
 
 [2]. Python 安全编码指南 http://python.jobbole.com/82746/
@@ -4828,7 +4873,14 @@ In [10]: dis.dis(co)
 [8]. [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
 [9]. wxpython https://www.wxpython.org 
 
+[10]. Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/ 
+
+[11]. Tkinter教程 https://tkdocs.com/tutorial/index.html
+
+
+
 ## 8.2  参考书目
+
 [1]. Toby Segaran / 莫映、王开福 《集体智慧编程》/ 电子工业出版社 / 2015-3 
 [2]. Wesley J. Chun 《Python核心编程》（第2版）  人民邮电出版社  2008-6 http://www.linuxidc.com/Linux/2013-06/85425.htm
 [3]. Wesley J. Chun 《Python核心编程》（第3版）  人民邮电出版社  2016-5
