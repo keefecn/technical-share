@@ -1209,3 +1209,4 @@ GitBook can be used either on your computer for building local books or on GitBo
 可将工程分为项目project 和 产品 product。
 * 项目级版本号：日期，如$project-2019.11.12
 * 产品级版本号：major-minjor-patchlevel，其中偶数minjor表示稳定版本，奇数minjor表示不稳定分支。如$product-0.2.1
+

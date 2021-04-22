@@ -661,7 +661,7 @@ upstream backend {
 Nginx按请求速率限速模块使用的是漏桶算法，即能够强行保证请求的实时处理速度不会超过设置的阈值， 超量请求会被丢弃。
 
 Nginx官方版本限制IP的连接和并发分别有两个模块：
-* limit_req_zone 用来限制单位时间内的请求数，即速率限制,采用的漏桶算法 "leaky bucket"。
+* limit_req_zone 用来限制单位时间内的请求数，即速率限制，采用的漏桶算法 "leaky bucket"。
 * limit_req_conn 用来限制同一时间连接数，即并发限制。
 
  

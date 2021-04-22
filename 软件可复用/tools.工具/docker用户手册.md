@@ -744,7 +744,7 @@ $ doccker-compose up -d
 
 
 
-### 本节参考
+### 本章参考
 
 [1]: https://www.jianshu.com/p/c7c7dc24b9e3 "Docker配置文件daemon.json解析"
 
@@ -912,7 +912,7 @@ services:
 
 
 
-### 5.4  本节参考
+### 本章参考
 
 
 
@@ -975,7 +975,7 @@ docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
 
 
 
-## 本章参考
+## 参考资料
 
 **Docker官方英文资源**
 

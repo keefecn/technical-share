@@ -828,6 +828,8 @@ Hive 构建在 Hadoop 之上，
 
 图 10 Spark与Hadoop关系
 
+
+
 ## 1.5  Hadoop安全机制
 
 参见 另文《安全开发》
@@ -835,8 +837,6 @@ Hive 构建在 Hadoop 之上，
 Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认证和安全层)进行安全认证。具体认证方法涉及DIGEST-MD5和Kerberos两种。
 
 ## 1.6  Hadoop前景
-
-
 
 |                  | 目的                                                         | 应用场景                                                     |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -846,6 +846,8 @@ Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认�
 | 简化实时应用 |                                                              |                                                              |
 
 备注：以后驱动Hadoop前进的因素可能有物联网、硬件和云计算（现在50%计算在云端，未来扩展到80%？）。
+
+
 
 ## 1.7  本章参考
 
@@ -1359,176 +1361,15 @@ HBase数据操作流程如[图5](http://localhost:7890/pages/YZH0518G/01/YZH0518
 
 为了提升数据操作的效率，HBase Client会在内存中缓存“hbase:meta”和用户表Region的信息，当应用程序发起下一次数据操作时，HBase Client会首先从内存中获取这些信息；当未在内存缓存中找到对应数据信息时，HBase Client会重复上述操作。
 
-## 2.6  MapReduce
+## 2.6  MapReduce 
 
-**简介**
-
-MapReduce是一种简化并行计算的编程模型，名字源于该模型中的两项核心操作：Map和Reduce。Map将一个作业分解成为多个任务，Reduce将分解后多个任务处理的结果汇总起来，得出最终的分析结果。
-
- 
-
-**结构**
-
-如[图1](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0085563595.html?ft=0&fe=10&hib=2.2.3.13.1&id=ZH-CN_TOPIC_0085563595#ZH-CN_TOPIC_0085563595__f6e8934d9ed084e648008f4be941e4ab8)所示，MapReduce通过实现YARN的Client和ApplicationMaster接口集成到YARN中，利用YARN申请计算所需资源。 详见 2.2.2.2 见上方
-
- 
-
-**与组件的关系**
-
-MapReduce和HDFS的配合关系
-* HDFS是Hadoop分布式文件系统，具有高容错和高吞吐量的特性，可以部署在价格低廉的硬件上，存储应用程序的数据，适合有超大数据集的应用程序。
-* MapReduce是一种编程模型，用于大数据集（大于1TB）的并行运算。在MapReduce程序中计算的数据可以来自多个数据源，如Local FileSystem、HDFS、数据库等。最常用的是HDFS，可以利用HDFS的高吞吐性能读取大规模的数据进行计算。同时在计算完成后，也可以将数据存储到HDFS。
-
- 
+详见 《[大数据计算框架](大数据计算框架.md)》 相关章节
 
 ## 2.7  Spark
 
-Spark是基于内存的分布式计算框架。在迭代计算的场景下，数据处理过程中的数据可以存储在内存中，提供了比MapReduce高10到100倍的计算能力。Spark可以使用HDFS作为底层存储，使用户能够快速地从MapReduce切换到Spark计算平台上去。Spark提供一站式数据分析能力，包括小批量流式处理、离线批处理、SQL查询、数据挖掘等，用户可以在同一个应用中无缝结合使用这些能力。
-
-Spark的特点如下：
-
-·     通过分布式内存计算和DAG（无回路有向图）执行引擎提升数据处理能力，比MapReduce性能高10倍到100倍。 
-
-·     提供多种语言开发接口（Scala/Java/Python），并且提供几十种高度抽象算子，可以很方便构建分布式的数据处理应用。 
-
-·     结合SQL、Streaming、MLlib、GraphX等形成数据处理栈，提供一站式数据处理能力。 
-
-·     完美契合Hadoop生态环境，Spark应用可以运行在Standalone、Mesos或者YARN上，能够接入HDFS、HBase、Hive等多种数据源，支持MapReduce程序平滑转接。
-
-### 2.7.1  Spark架构
-
-Spark的架构如[图1](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html?ft=0&fe=10&hib=2.2.3.20.1&id=ZH-CN_TOPIC_0096285099#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_f5e8bc32e86ca4762a600fb2dac7eac78)所示，各模块的说明如[表1](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html?ft=0&fe=10&hib=2.2.3.20.1&id=ZH-CN_TOPIC_0096285099#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_ta9fe6df20ea54c11ad5df62acbcc075e)所示。
-
-![image-20191205205024732](../../media/bigdata/hadoop/hadoop_051.png)
-
-**图 Spark架构**
+详见 《[大数据计算框架](大数据计算框架.md)》
 
 
-
-
-| 表1 基本概念说明 |                                                              |
-| ---------------- | ------------------------------------------------------------ |
-| 模块             | 说明                                                         |
-| Cluster  Manager | 集群管理器，管理集群中的资源。Spark支持多种集群管理器，Spark自带的Standalone集群管理器、Mesos或YARN。华为Spark集群默认采用YARN模式。 |
-| Application      | Spark应用，由一个Driver Program和多个Executor组成。          |
-| Deploy  Mode     | 部署模式，分为cluster和client模式。cluster模式下，Driver会在集群内的节点运行；而在client模式下，Driver在客户端运行（集群外）。 |
-| Driver  Program  | 是Spark应用程序的主进程，运行Application的main()函数并创建SparkContext。负责应用程序的解析、生成Stage并调度Task到Executor上。通常SparkContext代表Driver Program。 |
-| Executor         | 在Work Node上启动的进程，用来执行Task，管理并处理应用中使用到的数据。一个Spark应用一般包含多个Executor，每个Executor接收Driver的命令，并执行一到多个Task。  在Spark on Yarn模式下，其进程名称为CoarseGrainedExecutor Backend。 |
-| Worker  Node     | 集群中负责启动并管理Executor以及资源的节点。  在Standalone模式中指的是通过slave文件配置的Worker节点，在Spark on Yarn模式下就是NoteManager节点。 |
-| Job              | 一个Action算子（比如collect算子）对应一个Job，由并行计算的多个Task组成。 |
-| Stage            | 每个Job由多个Stage组成，每个Stage是一个Task集合，由DAG分割而成。 |
-| Task             | 承载业务逻辑的运算单元，是Spark平台中可执行的最小工作单元。一个应用根据执行计划以及计算量分为多个Task。 |
-
-**Job、Task和Stage**
-
-* Task: 被送到某个Executor上的工作单元，但hadoopMR中的MapTask和ReduceTask概念一样，是运行Application的基本单位，多个Task组成一个Stage，而Task的调度和管理等是由TaskScheduler负责
-* Job: 包含多个Task组成的并行计算，往往由Spark Action触发生成， 一个Application中往往会产生多个Job
-* Stage: 每个Job会被拆分成多组Task， 作为一个TaskSet， 其名称为Stage，Stage的划分和调度是有DAGScheduler来负责的，Stage有非最终的Stage（Shuffle Map Stage）和最终的Stage（Result Stage）两种，Stage的边界就是发生shuffle的地方。
-
- 
-
-Spark的应用运行架构如[图2](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html?ft=0&fe=10&hib=2.2.3.20.1&id=ZH-CN_TOPIC_0096285099#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_f0a7bc02a87b940238a8357dd733f3b8c)所示，运行流程如下所示：
-
-1.    应用程序（Application）是作为一个进程的集合运行在集群上的，由Driver进行协调。 
-2.    在运行一个应用时，Driver会去连接集群管理器（Standalone、Mesos、YARN）申请运行Executor资源，并启动ExecutorBackend。然后由集群管理器在不同的应用之间调度资源。Driver同时会启动应用程序DAG调度、Stage划分、Task生成。 
-3.    然后Spark会把应用的代码（传递给SparkContext的JAR或者Python定义的代码）发送到Executor上。 
-4.    所有的Task执行完成后，用户的应用程序运行结束。
-
-![image-20191205205050853](../../media/bigdata/hadoop/hadoop_052.png)
-
-图 Spark应用运行架构
-
-Spark采用Master和worker的模式，如[图3](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html?ft=0&fe=10&hib=2.2.3.20.1&id=ZH-CN_TOPIC_0096285099#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_fb981a1c0bbdf4703a38d7ec3db12dc67)所示。用户在Spark客户端提交应用程序，调度器将Job分解为多个Task发送到各个Worker中执行，各个Worker将计算的结果上报给Driver（即Master），Driver聚合结果返回给客户端。
-
-
-
-![image-20191205205108273](../../media/bigdata/hadoop/hadoop_053.png)
-
-**图 Spark的Master和Worker**
-
-
-在此结构中，有几个说明点：
-
-·     应用之间是独立的。 
-
-每个应用有自己的executor进程，Executor启动多个线程，并行地执行任务。无论是在调度方面，或者是executor方面。各个Driver独立调度自己的任务；不同的应用任务运行在不同的JVM上，即不同的Executor。
-
-·     不同Spark应用之间是不共享数据的，除非把数据存储在外部的存储系统上（比如HDFS）。 
-
-·     因为Driver程序在集群上调度任务，所以Driver程序最好和worker节点比较近，比如在一个相同的局部网络内。
-
- ![image-20191205205128251](../../media/bigdata/hadoop/hadoop_054.png)
-
-图 12 spark应用架构分层示意图
-
-说明：
-* Spark Core：包含Spark的基本功能；尤其是定义RDD的API、操作以及这两者上的动作。其他Spark的库都是构建在RDD和Spark Core之上的 
-* Spark SQL：提供通过Apache Hive的SQL变体Hive查询语言（HiveQL）与Spark进行交互的API。每个数据库表被当做一个RDD，Spark SQL查询被转换为Spark操作。 
-* Spark Streaming：对实时数据流进行处理和控制。Spark Streaming允许程序能够像普通RDD一样处理实时数据 
-* MLlib：一个常用机器学习算法库，算法被实现为对RDD的Spark操作。这个库包含可扩展的学习算法，比如分类、回归等需要对大量数据集进行迭代的操作。 
-* GraphX：控制图、并行图操作和计算的一组算法和工具的集合。GraphX扩展了RDD API，包含控制图、创建子图、访问路径上所有顶点的操作。
-
- 
-
-### 2.7.2  Spark Streaming
-
- 
-
-### 2.7.3  版本差异
-
-Spark2x版本相对于Spark 1.5版本新增了一些开源特性。具体特性或相关概念如下：
-
-·     DataSet，详见[SparkSQL和DataSet原理](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_sa94044b1fb404d68bd102a41c33fdc5e)。 
-
-·     Spark SQL Native DDL/DML，详见[SparkSQL和DataSet原理](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_sa94044b1fb404d68bd102a41c33fdc5e)。 
-
-·     SparkSession，详见[SparkSession原理](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_s6497bd5bdc544a2cadce8b84402736f5)。 
-
-·     Structured Streaming，详见[Structured Streaming原理](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0096285099.html#ZH-CN_TOPIC_0096285099__zh-cn_topic_0085589707_s67f5370fa81e436c99628ab81c89d80b)。 
-
-·     小文件优化。 
-
-·     聚合算法优化。 
-
-·     Datasource表优化。 
-
-·     合并CBO优化。
-
- 
-
-### 2.7.4  与组件的关系
-
-#### 2.7.4.1 Spark和HDFS的配合关系
-
-通常，Spark中计算的数据可以来自多个数据源，如Local File、HDFS等。最常用的是HDFS，用户可以一次读取大规模的数据进行并行计算。在计算完成后，也可以将数据存储到HDFS。
-
-分解来看，Spark分成控制端(Driver)和执行端（Executor）。控制端负责任务调度，执行端负责任务执行。
-
-读取文件的过程如[图1](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0085563722.html?ft=0&fe=10&hib=2.2.3.19.3&id=ZH-CN_TOPIC_0085563722#ZH-CN_TOPIC_0085563722__fa4b797ba877b48a9887616253937f2ff)所示。
-
-![image-20191205205151125](../../media/bigdata/hadoop/hadoop_055.png)
-
-图 读取文件过程
-
-
-读取文件步骤的详细描述如下所示： 
-
-1.    Driver与HDFS交互获取File A的文件信息。 
-2.    HDFS返回该文件具体的Block信息。 
-3.    Driver根据具体的Block数据量，决定一个并行度，创建多个Task去读取这些文件Block。 
-4.    在Executor端执行Task并读取具体的Block，作为RDD(弹性分布数据集)的一部分。
-
-写入文件的过程如[图2](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0085563722.html?ft=0&fe=10&hib=2.2.3.19.3&id=ZH-CN_TOPIC_0085563722#ZH-CN_TOPIC_0085563722__fd0c7d400d05a40c1b12b1a5f9921b09a)所示。
-
-![image-20191205205214931](../../media/bigdata/hadoop/hadoop_056.png)
-
-图 Spark写入文件过程
-
-
-HDFS文件写入的详细步骤如下所示： 
-1.    Driver创建要写入文件的目录。 
-2.    根据RDD分区分块情况，计算出写数据的Task数，并下发这些任务到Executor。 
-3.    Executor执行这些Task，将具体RDD的数据写入到步骤[1](http://localhost:7890/pages/YZH0518G/01/YZH0518G/01/resources/zh-cn_topic_0085563722.html?ft=0&fe=10&hib=2.2.3.19.3&id=ZH-CN_TOPIC_0085563722#ZH-CN_TOPIC_0085563722__la0d49754431847d9ba121414f074589b)创建的目录下。
 
 ## 2.8  Hue
 
@@ -1674,11 +1515,11 @@ Oozie工作流提供各种类型的“Action Node”用于支持不同的业务�
 
  
 
-## 2.10   本章参考
+## 本章参考
 
  
 
-# 3    软件安装篇
+# 3  软件安装篇
 
 ## 3.1  安装概述
 
@@ -2094,7 +1935,8 @@ Connect 'jdbc:derby://Hadoop1:1527/metastore_db;create=true';
 ```
 
 
-## 3.6  本章参考
+
+## 本章参考
 
 [1].  [http://Hadoop.apache.org/docs/stable/Hadoop-project-dist/Hadoop-common/SingleCluster.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html) 
 
@@ -2104,7 +1946,7 @@ Connect 'jdbc:derby://Hadoop1:1527/metastore_db;create=true';
 
 
 
-# 4    集群运维篇
+# 4  集群运维篇
 
 ## 4.1  集群
 
@@ -2425,389 +2267,13 @@ Usage: hdfs [--config confdir] [--loglevel loglevel] COMMAND
 
 [5].  [Hadoop YARN](http://spark.apache.org/docs/latest/running-on-yarn.html)
 
-# 5    Spark
 
-## 5.1  简介
 
-Apache Spark是一个开源的通用集群计算系统，它提供了High-level编程API，支持Scala、Java和Python三种编程语言。Spark内核使用Scala语言编写，通过基于Scala的函数式编程特性，在不同的计算层面进行抽象，代码设计非常优秀。
 
-Spark提供了一个全面、统一的框架用于管理各种有着不同性质（文本数据、图表数据等）的数据集和数据源（批量数据或实时的流数据）的大数据处理的需求。
 
- 
+# FAQ
 
-Spark是UC Berkeley AMP lab (加州大学伯克利分校的AMP实验室)所开源的类Hadoop MapReduce的通用并行框架，2009年开发，2010年开源。Spark拥有Hadoop MapReduce所具有的优点；但不同于MapReduce的是Job中间输出结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的MapReduce的算法。
-
-Spark 是在 [Scala](http://baike.baidu.com/view/1588150.htm) 语言中实现的，它将 Scala 用作其应用程序框架。与 Hadoop 不同，Spark 和 Scala 能够紧密集成，其中的 Scala 可以像操作本地集合对象一样轻松地操作分布式数据集。
-
- 
-
-尽管创建 Spark 是为了支持分布式数据集上的迭代作业，但是实际上它是对 Hadoop 的补充，可以在 Hadoop 文件系统中并行运行。通过名为 Mesos 的第三方集群框架可以支持此行为。Spark 由加州大学伯克利分校 AMP 实验室 (Algorithms, Machines, and People Lab) 开发，可用来构建大型的、低延迟的数据分析应用程序。
-
- 
-
-**Spark演进时间表**
-
-演进时间表：
-
-2009年由Berkeley's AMPLab开始编写最初的源代码
-
-2010年开放源代码
-
-2013年6月进入Apache孵化器项目
-
-2014年2月成为Apache的较高级项目（8个月时间）
-
-2014年5月底Spark1.0.0发布
-
-2014年9月Spark1.1.0发布
-
-2014年12月Spark1.2.0发布
-
-**目前情况：**
-
-目前已经有30+公司100+开发者在提交代码
-
-Hadoop较大的厂商Cloudera宣称加大Spark框架的投入来取代Mapreduce
-
-Hortonworks
-
-Hadoop厂商MapR投入Spark阵营
-
-Apache Mahout放弃MapReduce，将使用Spark作为后续算子的计算平台
-
- 
-
-**Spark生态系统**
-
-**Shark**：Shark基本上就是在Spark的框架基础上提供和Hive一样的HiveQL命令接口，为了最大程度的保持和Hive的[兼容性](http://baike.baidu.com/view/80015.htm)，Shark使用了Hive的API来实现query Parsing和 Logic Plan generation，最后的PhysicalPlan execution阶段用Spark代替[Hadoop](http://baike.baidu.com/view/908354.htm)[MapReduce](http://baike.baidu.com/view/2902.htm)。通过配置Shark参数，Shark可以自动在内存中缓存特定的RDD，实现数据重用，进而加快特定数据集的检索。同时，Shark通过UDF用户自定义函数实现特定的数据分析学习算法，使得SQL数据查询和运算分析能结合在一起，最大化RDD的重复使用。
-
-**SparkR**：SparkR是一个为R提供了轻量级的Spark前端的R包。 SparkR提供了一个分布式的data frame数据结构，解决了 R中的data frame只能在单机中使用的瓶颈，它和R中的data frame 一样支持许多操作，比如select,filter,aggregate等等。（类似dplyr包中的功能）这很好的解决了R的大数据级瓶颈问题。 SparkR也支持分布式的机器学习算法，比如使用MLib机器学习库。SparkR为Spark引入了R语言社区的活力，吸引了大量的数据科学家开始在Spark平台上直接开始数据分析之旅。
-
-## 5.2  Spark安装使用篇
-
-下载：http://spark.apache.org/downloads.html 
-
- 
-
-**winutils**
-
-Windows上运行Hadoop/Spark需要hadoop.dll和winutils.exe，但是官网提供的binary中并不包括这两个文件，利用源代码编译可以生成它们。
-
- 
-
-### 5.2.1  示例1：交互终端
-
-使用：支持python/R/scala三种交互式环境。
-
-|          | python                                   | scala（缺省）                             | R             |
-| -------- | ---------------------------------------- | ----------------------------------------- | ------------- |
-| 进入终端 | ./bin/pyspark                            | ./bin/spark-shell                         | ./bin/r-shell |
-| 示例     | >>>  sc.parallelize(range(1000)).count() | scala>  sc.parallelize(1 to 1000).count() |               |
-| 输出结果 | 1000                                     |                                           |               |
-|          |                                          |                                           |               |
-
-备注：进入交互环境，实质是调用spark-submit。在这之前要先启动spark。
-* 调用脚本 
-```sh
-$ ./bin/spark-submit --class [x.jar]  # scala/java
-$ ./bin/spark-submit [script]  # python/r
-```
-
-* 示例程序：./bin/run-example SparkPi
-
- 
-
-### 5.2.2  示例2：文件 sc.textFile().count()
-
-```sh
-# 首先要将文件放在hdfs的路径
-denny@denny-ubuntu:~/spark$ hdfs dfs -put README.md /user/denny/
-denny@denny-ubuntu:~/spark$ hdfs dfs -find /
-/
-/user
-/user/denny
-/user/denny/README.md
-/user/denny/input
- 
-# pyspark 多行
->>> lines=sc.textFile('README.md')
->>>lnes.count()
-
-# 单行
->>> sc.textFile('README.md').count()
-104
-```
-
-
-## 5.3  Spark技术原理篇
-
-### 5.3.1  作业执行流程
-
- ![image-20191205205607334](../../media/bigdata/hadoop/hadoop_064.png)
-
-图 15 spark运行流程图
-
-流程如下：
-
-1)    构建Spark Application的运行环境，启动SparkContext
-
-2)    SparkContext向资源管理器（可以是Standalone，Mesos，Yarn）申请运行Executor资源，并启动StandaloneExecutorbackend，
-
-3)    Executor向SparkContext申请Task
-
-4)    SparkContext将应用程序分发给Executor
-
-5)    SparkContext构建成DAG图，将DAG图分解成Stage、将Taskset发送给Task Scheduler，最后由Task Scheduler将Task发送给Executor运行
-
-6)    Task在Executor上运行，运行完释放所有资源
-
-说明：Job=多个stage，Stage=多个同种task, Task分为ShuffleMapTask和ResultTask，Dependency分为ShuffleDependency和NarrowDependency
-
- 
-
-### 5.3.2  作业调度
-
-DAG：Directed Acyclic Graph有向无环图
-
- 
-
-## 5.4  Spark开发篇
-
-### 5.4.1  spark各种语言开发
-
-#### 5.4.1.1 交互终端示例
-
-Spark构建起一个程序支持三种语言：Scala (with SBT), Java (with Maven), and Python. 
-
-表格 21 python/scala/java在spark开发示例
-
-| 示例               | python                                                       | scala                                                        | Java                                                         |
-| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 变量声明           | xx =                                                         | val xx =                                                     | [TYPE] xx =                                                  |
-| 初始化SparkContext | from pyspark import SparkConf,  SparkContext  conf = SparkConf().setMaster('local').setAppName('my  app')  sc = SparkContext(conf=conf) | import org.apache.spark.SparkConf  , SparkContext, SparkContext._  val conf =  val sc = new SparkContext(conf) | import org.apache.spark.SparkConf  import org.apache.spark.api.java.JavaSparkConftext  SparkConf conf =  JavaSparkConftext sc = new  JavaSparkConftext(conf); |
-
- 
-
-#### 5.4.1.2 pyspark开发
-
-配置开发环境
-
-[A brief note about Scala](https://enahwe.wordpress.com/category/spark/#Note_about_Scala)
- [Step 1: Installing Eclipse](https://enahwe.wordpress.com/category/spark/#Install_Eclipse)
- [Step 2: Installing Spark](https://enahwe.wordpress.com/category/spark/#Install_Spark)
- [Step 3: Installing PyDev](https://enahwe.wordpress.com/category/spark/#Install_PyDev)
- [Step 4: Configuring PyDev with a Python interpreter](https://enahwe.wordpress.com/category/spark/#Configure_PyDev_with_Python_Interpreter)
- [Step 5: Configuring PyDev with Py4J](https://enahwe.wordpress.com/category/spark/#Configure_PyDev_with_Py4J)
- [Step 6: Configuring PyDev with Spark’s variables](https://enahwe.wordpress.com/category/spark/#Configure_PyDev_with_Spark_variables)
- [Step 7: Creating your Python-Spark project “CountWords”](https://enahwe.wordpress.com/category/spark/#Create_Python-Spark_project_CountWords)
- [Step 8: Executing your Python-Spark application with Eclipse](https://enahwe.wordpress.com/category/spark/#Run_Python-Spark_application_LocalMode)
- [Step 9: Reading a CSV file directly as a Spark DataFrame for processing SQL](https://enahwe.wordpress.com/category/spark/#Read_CSV_file_as_Spark_DataFrame)
- [Step 10: Executing your Python-Spark application on a cluster with Hadoop YARN](https://enahwe.wordpress.com/category/spark/#Execute_application_cluster_mode_YARN)
- [Step 11: Deploying your Python-Spark application in a Production environment](https://enahwe.wordpress.com/category/spark/#Deploy_application_in_Production)
-
- 
-
-windows下配置连接远程spark
-
-不需要配置step 6环境变量。
-
-但需增加**winutils**
-
- 
-
-表格 22 pyspark核心类
-
-| 类名                                                         | 简介                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [pyspark.SparkContext](http://spark.apache.org/docs/2.1.0/api/python/pyspark.html#pyspark.SparkContext) | Main entry point for Spark functionality.                    |
-| [pyspark.RDD](http://spark.apache.org/docs/2.1.0/api/python/pyspark.html#pyspark.RDD) | A Resilient Distributed Dataset (RDD),  the basic abstraction in Spark. |
-| [pyspark.streaming.StreamingContext](http://spark.apache.org/docs/2.1.0/api/python/pyspark.streaming.html#pyspark.streaming.StreamingContext) | Main entry point for Spark Streaming  functionality.         |
-| [pyspark.streaming.DStream](http://spark.apache.org/docs/2.1.0/api/python/pyspark.streaming.html#pyspark.streaming.DStream) | A Discretized Stream (DStream), the basic  abstraction in Spark Streaming. |
-| [pyspark.sql.SQLContext](http://spark.apache.org/docs/2.1.0/api/python/pyspark.sql.html#pyspark.sql.SQLContext) | Main entry point for DataFrame and SQL  functionality.       |
-| [pyspark.sql.DataFrame](http://spark.apache.org/docs/2.1.0/api/python/pyspark.sql.html#pyspark.sql.DataFrame) | A distributed collection of data grouped  into named columns. |
-
- 
-
-### 5.4.2  RDD
-
-#### 5.4.2.1 概述
-
-RDD：Resilient Distributed Datasets，弹性分布式数据集， 是分布式内存的一个抽象概念，RDD提供了一种高度受限的共享内存模型，即RDD是只读的记录分区的集合，只能通过在其他RDD执行确定的转换操作（如map、join和group by）而创建，然而这些限制使得实现容错的开销很低。
-
-RDD作为数据结构，本质上是一个只读的分区记录集合。
-
- 
-
-目前有两种类型的RDD，如下，
-
-表格 23 RDD类型
-
-| 类型                                 | 简述                                                         | 示例                                                    |
-| ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- |
-| 并行集合（Parallelized Collections） | 接收一个已经存在的Scala集合，然后进行各种并行计算。          | data = [1, 2, 3, 4, 5]  distData = sc.parallelize(data) |
-| Hadoop数据集（Hadoop Datasets）      | 在一个文件的每条记录上运行函数。只要文件系统是HDFS，或者Hadoop支持的任意存储系统（包括本地文件，Amazon S3， Hypertable， HBase等等）即可。 | distFile =  sc.textFile("data.txt")                     |
-
- 
-
-定义：[spark](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0)/[core](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core)/[src](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src)/[main](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main)/[scala](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main/scala)/[org](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main/scala/org)/[apache](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main/scala/org/apache)/[spark](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main/scala/org/apache/spark)/[rdd](https://github.com/apache/spark/tree/6c00c069e3c3f5904abd122cea1d56683031cca0/core/src/main/scala/org/apache/spark/rdd)/**RDD.scala**
-
-
-```scala
-abstract class RDD[T:ClassTag](
-	    @transient private var _sc: SparkContext,
-	    @transient private var deps: Seq[Dependency[_]]
-	  ) extends Serializable with Logging {
-private var dependencies_ : Seq[Dependency[_]] = null
-@transient private var partitions_ : Array[Partition] = null
-@transient val partitioner: Option[Partitioner] = None 
-def compute(split: Partition, context: TaskContext): Iterator[T]
-protected def getPreferredLocations(split: Partition): Seq[String] = Nil
-}
-```
-
-**说明：**
-
-**Internally, each RDD is characterized by five main properties:**
-
- - A list of partitions
- - A function for computing each split
- - A list of dependencies on other RDDs
- - Optionally, a Partitioner for key-value RDDs (e.g. to say that the RDD is hash-partitioned)
- - Optionally, a list of preferred locations to compute each split on (e.g. block locations foran HDFS file)
-
-五个核心属性，分别是
-* 3个属性（分区列表partitions，依赖列表dependencies，分区器partitioner），
-* 2个函数（计算函数compute, 优先计算位置getPreferredLocations）。
-
- 
-
-RDD的三个子类：MapPartitionsRDD CoalescedRDD HashPartitioner
-
-#### 5.4.2.2 两种操作类型
-
-两种操作类型：
-* 转化transformation：从现有的数据集创建一个新的数据集。如map, filter
-* 动作action：map reduce
-
-备注：转换是惰性的，直到动作开始才会执行。
-
-##### 5.4.2.2.1    Transformations
-
-The following table lists some of the common transformations supported by Spark. Refer to the RDD API doc ([Scala](http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD), [Java](http://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/JavaRDD.html), [Python](http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD), [R](http://spark.apache.org/docs/latest/api/R/index.html)) and pair RDD functions doc ([Scala](http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions), [Java](http://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/JavaPairRDD.html)) for details.
-
-| Transformation                                        | Meaning                                                      |
-| ----------------------------------------------------- | ------------------------------------------------------------ |
-| map(func)                                             | Return a new distributed dataset formed  by passing each element of the source through a function func. |
-| filter(func)                                          | Return a new dataset formed by selecting  those elements of the source on which funcreturns true. |
-| flatMap(func)                                         | Similar to map, but each input item can  be mapped to 0 or more output items (so func should return a Seq  rather than a single item). |
-| mapPartitions(func)                                   | Similar to map, but runs separately on  each partition (block) of the RDD, so func must be of type  Iterator<T> => Iterator<U> when running on an RDD of type T. |
-| mapPartitionsWithIndex(func)                          | Similar to mapPartitions, but also  provides func with an integer value representing the index of the  partition, so func must be of type (Int, Iterator<T>) =>  Iterator<U> when running on an RDD of type T. |
-| sample(withReplacement, fraction, seed)               | Sample a fraction fraction of  the data, with or without replacement, using a given random number generator  seed. |
-| union(otherDataset)                                   | Return a new dataset that contains the  union of the elements in the source dataset and the argument. |
-| intersection(otherDataset)                            | Return a new RDD that contains the  intersection of elements in the source dataset and the argument. |
-| distinct([numTasks]))                                 | Return a new dataset that contains the  distinct elements of the source dataset. |
-| groupByKey([numTasks])                                | When called on a dataset of (K, V) pairs,  returns a dataset of (K, Iterable<V>) pairs.    Note: If you are grouping in order to perform an aggregation (such as a  sum or average) over each key,  using reduceByKey or aggregateByKey will yield much  better performance.    Note: By default, the level of parallelism in the output depends on the  number of partitions of the parent RDD. You can pass an  optional numTasks argument to set a different number of tasks. |
-| reduceByKey(func, [numTasks])                         | When called on a dataset of (K, V) pairs,  returns a dataset of (K, V) pairs where the values for each key are  aggregated using the given reduce function func, which must be of type  (V,V) => V. Like in groupByKey, the number of reduce tasks is  configurable through an optional second argument. |
-| aggregateByKey(zeroValue)(seqOp, combOp,  [numTasks]) | When called on a dataset of (K, V) pairs,  returns a dataset of (K, U) pairs where the values for each key are  aggregated using the given combine functions and a neutral "zero"  value. Allows an aggregated value type that is different than the input value  type, while avoiding unnecessary allocations. Like in groupByKey, the  number of reduce tasks is configurable through an optional second argument. |
-| sortByKey([ascending], [numTasks])                    | When called on a dataset of (K, V) pairs  where K implements Ordered, returns a dataset of (K, V) pairs sorted by keys  in ascending or descending order, as specified in the  boolean ascending argument. |
-| join(otherDataset, [numTasks])                        | When called on datasets of type (K, V)  and (K, W), returns a dataset of (K, (V, W)) pairs with all pairs of elements  for each key. Outer joins are supported through leftOuterJoin, rightOuterJoin,  and fullOuterJoin. |
-| cogroup(otherDataset, [numTasks])                     | When called on datasets of type (K, V)  and (K, W), returns a dataset of (K, (Iterable<V>, Iterable<W>))  tuples. This operation is also called groupWith. |
-| cartesian(otherDataset)                               | When called on datasets of types T and U,  returns a dataset of (T, U) pairs (all pairs of elements). |
-| pipe(command, [envVars])                              | Pipe each partition of the RDD through a  shell command, e.g. a Perl or bash script. RDD elements are written to the  process's stdin and lines output to its stdout are returned as an RDD of  strings. |
-| coalesce(numPartitions)                               | Decrease the number of partitions in the  RDD to numPartitions. Useful for running operations more efficiently after  filtering down a large dataset. |
-| repartition(numPartitions)                            | Reshuffle the data in the RDD randomly to  create either more or fewer partitions and balance it across them. This  always shuffles all data over the network. |
-| repartitionAndSortWithinPartitions(partitioner)       | Repartition the RDD according to the  given partitioner and, within each resulting partition, sort records by their  keys. This is more efficient than calling repartition and then  sorting within each partition because it can push the sorting down into the  shuffle machinery. |
-
-##### 5.4.2.2.2    Actions
-
-The following table lists some of the common actions supported by Spark. Refer to the RDD API doc ([Scala](http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD), [Java](http://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/JavaRDD.html), [Python](http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD), [R](http://spark.apache.org/docs/latest/api/R/index.html))
-
-and pair RDD functions doc ([Scala](http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions), [Java](http://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/JavaPairRDD.html)) for details.
-
-| Action                                       | Meaning                                                      |
-| -------------------------------------------- | ------------------------------------------------------------ |
-| reduce(func)                                 | Aggregate the elements of the dataset  using a function func (which takes two arguments and returns one).  The function should be commutative and associative so that it can be computed  correctly in parallel. |
-| collect()                                    | Return all the elements of the dataset as  an array at the driver program. This is usually useful after a filter or  other operation that returns a sufficiently small subset of the data. |
-| count()                                      | Return the number of elements in the  dataset.               |
-| first()                                      | Return the first element of the dataset  (similar to take(1)). |
-| take(n)                                      | Return an array with the  first n elements of the dataset.   |
-| takeSample(  withReplacement,   num, [seed]) | Return an array with a random sample  of num elements of the dataset, with or without replacement,  optionally pre-specifying a random number generator seed. |
-| takeOrdered(n, [ordering])                   | Return the first n elements of  the RDD using either their natural order or a custom comparator. |
-| saveAsTextFile(path)                         | Write the elements of the dataset as a  text file (or set of text files) in a given directory in the local  filesystem, HDFS or any other Hadoop-supported file system. Spark will call  toString on each element to convert it to a line of text in the file. |
-| saveAsSequenceFile(path)    (Java and Scala) | Write the elements of the dataset as a  Hadoop SequenceFile in a given path in the local filesystem, HDFS or any  other Hadoop-supported file system. This is available on RDDs of key-value  pairs that implement Hadoop's Writable interface. In Scala, it is also available  on types that are implicitly convertible to Writable (Spark includes  conversions for basic types like Int, Double, String, etc). |
-| saveAsObjectFile(path)    (Java and Scala)   | Write the elements of the dataset in a  simple format using Java serialization, which can then be loaded  usingSparkContext.objectFile(). |
-| countByKey()                                 | Only available on RDDs of type (K, V).  Returns a hashmap of (K, Int) pairs with the count of each key. |
-| foreach(func)                                | Run a function func on each  element of the dataset. This is usually done for side effects such as  updating an [Accumulator](http://spark.apache.org/docs/latest/rdd-programming-guide.html#accumulators) or  interacting with external storage systems.    Note: modifying variables other than Accumulators outside of  the foreach() may result in undefined behavior. See [Understanding   closures ](http://spark.apache.org/docs/latest/rdd-programming-guide.html#understanding-closures-a-nameclosureslinka)for more details. |
-
- 
-
-#### 5.4.2.3 RDD持久化
-
-当你持久化一个RDD，每一个结点都将把它的计算分块结果保存在内存中，并在对此数据集（或者衍生出的数据集）进行的其它动作中重用。这将使得后续的动作(Actions)变得更加迅速（通常快10倍）。缓存是用Spark构建迭代算法的关键。 使用以下两种方法可以标记要缓存的RDD：
-
-lineLengths.persist() 
-
-lineLengths.cache() 
-
-取消缓存则用：
-
-`lineLengths.unpersist() `
-
- 
-
-### 5.4.3  Spark SQL
-
- 
-
-### 5.4.4  Spark Streaming
-
-Spark Streaming是核心Spark API的一个扩展，它并不会像Storm那样一次一个地处理数据流，而是在处理前按时间间隔预先将其切分为一段一段的批处理作业。Spark针对持续性数据流的抽象称为DStream（DiscretizedStream），一个DStream是一个微批处理（micro-batching）的RDD（弹性分布式数据集）；而RDD则是一种分布式数据集，能够以两种方式并行运作，分别是任意函数和滑动窗口数据的转换。
-
- ![image-20191205205633139](../../media/bigdata/hadoop/hadoop_065.png)
-
-图 16 Spark Streaming架构图
-
- 
-
-### 5.4.5  Spark MLlib
-
- 
-
-### 5.4.6  Spark [GraphX](http://spark.apache.org/docs/latest/graphx-programming-guide.html)
-
- 
-
-## 5.5  本章参考
-
-[1].  spark的前世今生以及其组件介绍和应用 - Spark高速集群计算平台http://f.dataguru.cn/thread-621195-1-1.html
-
-[2].  Spark架构简明分析  http://www.aboutyun.com/thread-20781-1-1.html
-
-[3].  [Spark(一): 基本架构及原理](http://www.cnblogs.com/tgzhu/p/5818374.html) http://www.cnblogs.com/tgzhu/p/5818374.html
-
-[4].  [Spark(二): 内存管理](http://www.cnblogs.com/tgzhu/p/5822370.html)
-
-[5].  [Spark(三): 安装与配置](http://www.cnblogs.com/tgzhu/p/5821421.html)
-
-[6].  Configuring Eclipse with Python and Spark on Hadoop https://enahwe.wordpress.com/category/spark/#Configure_PyDev_with_Spark_variables 
-
-[7].  eclipse配置spark开发环境  http://blog.csdn.net/Luckyzhou_/article/details/71411661 
-
-[8].  使用Eclipse IDE搭建Apache Spark的Java开发环境http://blog.csdn.net/farawayzheng_necas/article/details/54574279
-
-[9].  [Spark Streaming](http://spark.apache.org/docs/latest/streaming-programming-guide.html): processing real-time data streams
-
-[10].[Spark SQL, Datasets, and DataFrames](http://spark.apache.org/docs/latest/sql-programming-guide.html): support for structured data and relational queries
-
-[11].[MLlib](http://spark.apache.org/docs/latest/ml-guide.html): built-in machine learning library
-
-[12].[GraphX](http://spark.apache.org/docs/latest/graphx-programming-guide.html): Spark’s new API for graph processing
-
- 
-
-# 6    FAQ
-
-## 6.1  Hadoop
+## Hadoop
 
 **1. Hadoop namenode启动不能成功**
 
@@ -2847,7 +2313,7 @@ Spark Streaming是核心Spark API的一个扩展，它并不会像Storm那样一
 
  
 
-# 7    参考资料
+# 参考资料
 
 [1].  FusionInsight V100R002C30SPC100 产品描述 01
 

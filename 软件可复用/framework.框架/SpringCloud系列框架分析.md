@@ -8,7 +8,11 @@
 
  
 
+
+
  
+
+[TOC]
 
  
 
@@ -38,20 +42,113 @@
 
 
 
+---
 
 
-
-# 1   Spring框架概述
+# 1  Spring框架概述
 
 微服务是一种架构的理念，提出了微服务的设计原则，从理论为具体的技术落地提供了指导思想。
 
 *  Spring **Boot** 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
-*  Spring **Cloud** 是一个基于 Spring Boot 实现的服务治理工具包;Spring Boot 专注于快速、方便集成的单个微服务个体;Spring Cloud 关注全局的服务治理框架。
+*  Spring **Cloud** 是一个基于 Spring Boot 实现的服务治理工具包。Spring Boot 专注于快速、方便集成的单个微服务个体。Spring Cloud 关注全局的服务治理框架。
 
 Spring Boot / Cloud 是微服务实践的最佳落地方案。
 
-# 2   Spring Boot
+
+
+## Spring版本号
+
+Spring Cloud 自 2016 年 1 月发布第一个 Angel.SR5 版本，到目前 2020 年 3 月发布 Hoxton.SR3 版本，已经历经了 4 年时间。这 4 年时间里，Spring Cloud 一共发布了 46 个版本，支持的组件数从 5 个增加到 21 个。
+
+关于maven仓库的版本列表
+spring-cloud-dependencies 版本列表可查看：
+https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
+spring-boot-starter-parent 版本列表可查看：
+https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+
+
+
+表格 Sprint Boot和Sprint Cloud的版本号构成
+
+|                | Sprint Boot                         | Sprint Cloud                         |
+| -------------- | ----------------------------------- | ------------------------------------ |
+| 版本号         | 数字（主.次.修改）                  | 单词表示，首字母越靠后表示版本号越大 |
+| 版本tag        | 希腊字母（Base/Alpha/Beta/RELEASE） | 英文单词（BUILD、GA、PRE、RC、SR）   |
+| 完整版本号示例 | 2.0.3 RELEASE                       | Greenwich.SR5                        |
+
+备注：1. 用版本tag表示当前版本处于哪个开发阶段。tag详细含义可参见 [开源软件开发指南](../开源软件开发指南.MD)
+
+2. SprintCloud版本号这样设计的目的是为了更好的管理每个SpringCloud子项目的清单，避免自己的版本号与子项目的版本号混淆。
+
+
+
+表格  Spring Cloud大版本发布时间和兼容的Spring Boot版本
+
+| 英文        | 中文       | 终结版本 | 发布时间       | boot大版本 | boot代表 | 说明 |
+| ----------- | ---------- | -------- | -------------- | ---------- | -------- | ---- |
+| Angel       | 安吉尔     | SR6      | 2016.1         | 1.2.x      | 1.2.8    | GA   |
+| Brixton     | 布里克斯顿 | SR7      |                | 1.3.x      | 1.3.8    | GA   |
+| Camden      | 卡梅登     | SR7      |                | 1.4.x      | 1.4.2    | GA   |
+| Dalston     | 达斯顿     | SR5      |                | 1.5.x      | *        | GA   |
+| Edgware     | 艾奇韦尔   | SR5      |                | 1.5.x      | 1.5.19   | GA   |
+| Finchley    | 芬奇利     | SR2      |                | 2.0.x      | 2.0.8    | GA   |
+| Greenwich   | 格林威治   | SR6      |                | 2.1.x      | 2.1.2    | GA   |
+| Hoxton      | 霍克斯顿   | SR8      | 2019.11-2020.3 | 2.2.x      | 2.2.6    | GA   |
+| 2020.0.0-M3 | xx         | xx       | 2020.x-?       | 2.4.x      | xx       | GA   |
+
+备注：2020年起，用年份开头来记录版本号。
+
+
+
+表格 Sprint Boot版本对应的Sprint Cloud示例
+
+| Spring Boot                  | Spring Cloud            |
+| ---------------------------- | ----------------------- |
+| 1.5.2.RELEASE                | Dalston.RC1             |
+| 1.5.9.RELEASE                | Edgware.RELEASE         |
+| 2.0.2.RELEASE                | Finchley.BUILD-SNAPSHOT |
+| 2.0.3.RELEASE                | Finchley.RELEASE        |
+| 2.1.0.RELEASE-2.1.14.RELEASE | Greenwich.SR5           |
+| 2.2.0.M4                     | Hoxton.SR4              |
+
+
+
+## Spring Cloud规范实现分支
+
+ Spring Cloud 规范目前的实现者也不单单只有 Netflix 这一套。目前有 Spring Cloud Alibaba、Spring Cloud Consul、Spring Cloud Zookeeper、Spring Cloud Kubernetes，甚至 Spring Cloud 官方也有对应的实现组件比如 Spring Cloud Config 集成了 Git、SVN 或 Database 提供配置服务、Spring Cloud Stream RabbitMQ/Kafka 提供消息抽象的实现者。
+
+表格 Sprint Cloud实现方案
+
+|               | Spring Cloud官方                 | Netflix  | Alibaba       | Consul | Kubernetes | Zookeeper |
+| ------------- | -------------------------------- | -------- | ------------- | ------ | ---------- | --------- |
+| 分布式配置    | SCC Client/Server                | Archaius | Nacos         | Consul | Config Map | Zookeeper |
+| 服务注册/发现 | Service Register/Discover        | Eureka   | Nacos         | Consul | Api Server | Zookeeper |
+| 服务熔断      | Circuit Breaker                  | Hystrix  | Sentinel      |        |            |           |
+| 服务调用      | OpenFeign/<br>RestTemplate       | Feign    | Dubbo RPC     |        |            |           |
+| 服务路由      | SC Gateway                       | Zuul     | Dubbo+Servlet |        |            |           |
+| 分布式消息    | SC Stream/<br>SCS RabbitMQ/Kafka |          | SCS RocketMQ  |        |            |           |
+| 消息总线      | SC Bus                           |          | SCB           |        |            |           |
+| 负载均衡      | SC LoadBalancer                  | Ribbon   | Dubbo LB      |        |            |           |
+| 分布式事务    |                                  |          | Seata         |        |            |           |
+
+> 备注：1. 表格中SC是Spring Cloud的缩写。
+>
+> 2. Netflix是Spring Cloud的最早实现者和开源者。
+
+
+
+## 本章参考
+
+[1].  4 年 46 个版本，一文读懂 Spring Cloud 发展历史 https://blog.csdn.net/csdnnews/article/details/105304531
+
+[2]. 初识SpringCloud 整体架构 https://blog.csdn.net/Strive_Peter/article/details/113887255
+
+
+
+# 2  Spring Boot
+
+SpringBoot是由Pivotal团队在2013年开始研发、2014年4月发布第一个版本的全新开源的轻量级框架。它基于Spring4.0设计，不仅继承了Spring框架原有的优秀特性，而且还通过简化配置来进一步简化了Spring应用的整个搭建和开发过程。另外SpringBoot通过集成大量的框架使得依赖包的版本冲突，以及引用的不稳定性等问题得到了很好的解决。 
 
 Spring Boot 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
@@ -75,7 +172,7 @@ Spring Boot基于Maven构建。
 
  
 
-# 3   Spring Cloud
+# 3  Spring Cloud
 
 Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 Spring Boot 的开发风格做到一键启动和部署。
 
@@ -106,16 +203,16 @@ Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发
 各组件的运行流程：
 
 *  所有请求都统一通过 API 网关(Zuul)来访问内部服务。
-
 *  网关接收到请求后，从注册中心(Eureka)获取可用服务。
 *  由 Ribbon 进行均衡负载后，分发到后端的具体实例。
 *  微服务之间通过 Feign 进行通信处理业务。
 *  Hystrix 负责处理服务超时熔断。
 *  Turbine 监控服务间的调用和熔断相关指标。
+*  Zipkin 负责请求链接追踪。
 
  
 
-## 3.2     Spring Cloud 工具框架
+## 3.2  Spring Cloud 工具框架
 
 Spring Cloud 共集成了 19 个子项目，里面都包含一个或者多个第三方的组件或者框架!
 
@@ -139,9 +236,11 @@ Spring Cloud 共集成了 19 个子项目，里面都包含一个或者多个第
 - Spring Cloud Starters，项目已经终止并且在 Angel.SR2 后的版本和其他项目合并。
 - Spring Cloud CLI，插件用 Groovy 快速的创建 Spring Cloud 组件应用。
 
-## 3.3     Spring cloud配置
 
-Spring cloud包含两个基本模块，spring cloud context和spring cloud commons。
+
+## 3.3   Spring Cloud配置
+
+Spring Cloud包含两个基本模块，spring cloud context和spring cloud commons。
 *  spring cloud context即spring cloud应用上下文，包含引导上下文(加载bootstrap配置)、配置加密、配置刷新范围(RefreshScope)、控制端点(/env/reset，/refresh，/restart等)功能。
 *  Spring cloud commons 提供服务注册发现，负载均衡，断路器等模式的一个共用抽象层，为具体现实提供统一抽象。
 
@@ -153,7 +252,7 @@ Spring cloud包含两个基本模块，spring cloud context和spring cloud commo
 *  spring cloud bus 作为消息总线用于刷新分布式应用配置
 *  spring boot admin 作为统一的应用监控后台
 *  spring cloud Netflix feign  作为rest服务调用client
-*  spring cloud Netflix zuu*  作为路由、过滤网关
+*  spring cloud Netflix zuul  作为路由、过滤网关
 *  spring cloud consul
 
  
@@ -175,7 +274,7 @@ Spring cloud包含两个基本模块，spring cloud context和spring cloud commo
 | microservice-discovery-eureka-ha           | 服务发现组件       |
 | microservice-provider-user                 | 服务提供者         |
 | microservice-consumer-movie-ribbon-hystrix | 服务消费者         |
-| microservice-gateway-zuu*                  | API Gateway        |
+| microservice-gateway-zuul                  | API Gateway        |
 | microservice-hystrix-turbine               | Hystrix聚合工具    |
 
  
@@ -288,9 +387,11 @@ services:
 说明：
  双节点的Eureka Server集群。
 
+
+
 # 参考资料
 
-**官网**
+## **官网**
 
 [1].     https://spring.io/ 
 
@@ -300,10 +401,14 @@ services:
 
  
 
-参考文献
+## 参考文献
 
-[1].     《Spring Cloud与Docke微服务架构实战》v2 https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml 
+[1].  《Spring Cloud与Docke微服务架构实战》v2 https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml 
 
-[2].     http://docs.docker.com/composq/faq 
+[2].   http://docs.docker.com/composq/faq 
+
+[3]:  http://c.biancheng.net/spring_cloud/  "Spring Cloud入门教程：Spring Cloud框架经典学习资料"
+[4]:   https://blog.csdn.net/Strive_Peter/article/details/113887255  "初识SpringCloud 整体架构 "
 
  
+

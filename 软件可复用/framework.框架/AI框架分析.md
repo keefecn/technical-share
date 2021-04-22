@@ -46,21 +46,21 @@
 ## 1.1     python常用AI库
 表格 1 python常用AI库列表
 
-| **类别**     | 库名                                                         | 介绍                                                         |
-| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **机器学习** | numpy                                                        | 数学函数库，提供数组、一组与线性代数相关的函数以及傅里叶变换函数。 |
-| pandas       | a powerful data  analysis and manipulation library for Python |                                                              |
-| scipy        | 提供矩阵支持，以及矩阵相关的数值计算模块                     |                                                              |
-|              | statsModels                                                  | 统计建模和计量经济学                                         |
-|              | sckit-Learn                                                  | 强大的机器学习库，支持回归、分类、聚类。                     |
-|              | keras                                                        | 深度学习库，用于建立神经网络以及深度学习模型。windows下速度会变慢。依赖库有numpy/scipy/theano。 |
-|              | libsvm                                                       | 机器学习库，SVM                                              |
-|              | Gensim                                                       | 用来作文本主题挖掘的库                                       |
-|              | jieba                                                        | 中文分词                                                     |
-|              | mmseg                                                        | 中文分词                                                     |
-| **可视化**   | PIL                                                          | Python Imaging  Library，图像生成和处理库。  pillow          |
-|              | matplotlib                                                   | 绘图库                                                       |
-|              | wordcloud                                                    | 词云                                                         |
+| **类别**     | 库名        | 介绍                                                         |
+| ------------ | ----------- | ------------------------------------------------------------ |
+| **机器学习** | numpy       | 数学函数库，提供数组、一组与线性代数相关的函数以及傅里叶变换函数。 |
+|              | pandas      | a powerful data  analysis and manipulation library for Python |
+|              | scipy       | 提供矩阵支持，以及矩阵相关的数值计算模块                     |
+|              | statsModels | 统计建模和计量经济学                                         |
+|              | sckit-Learn | 强大的机器学习库，支持回归、分类、聚类和降维。               |
+|              | keras       | 深度学习库，用于建立神经网络以及深度学习模型。windows下速度会变慢。依赖库有numpy/scipy/theano。 |
+|              | libsvm      | 机器学习库，SVM                                              |
+|              | gensim      | 用来作文本主题挖掘的库                                       |
+|              | jieba       | 中文分词                                                     |
+|              | mmseg       | 中文分词                                                     |
+| **可视化**   | PIL         | Python Imaging  Library，图像生成和处理库。  pillow          |
+|              | matplotlib  | 绘图库                                                       |
+|              | wordcloud   | 词云                                                         |
 
 
 
@@ -75,6 +75,8 @@
 | 统计作图   | plot pie hist boxplot  plot(logy=True) plot(yerr=error) | 饼图、拆线图、直方图、箱形图、对数图、误差条形图 |
 | 数据预处理 | unique isnull  notnull                                  |                                                  |
 |            |                                                         |                                                  |
+
+
 
 表格 3 sklearn(scikit-learn)库方法
 
@@ -118,7 +120,7 @@
 
 
 
-### 1.1.3  vision 计算机视觉 
+### 1.1.3  Vision 计算机视觉 
 
 *  OpenCV – 开源计算机视觉库。
 *  SimpleCV – 用于照相机、图像处理、特征提取、格式转换的简介，可读性强的接口（基于OpenCV）。
@@ -135,9 +137,9 @@
 
 
 
-## 1.2  ML框架
+## 1.2  AI主流引擎/框架
 
-表格 6 AI主流框架比较
+表格 6 AI主流引擎/框架比较
 
 | 比较项   | Caffe         | Torch        | Theano          | TensorFlow     | MXNet             |
 | -------- | ------------- | ------------ | --------------- | -------------- | ----------------- |
@@ -155,24 +157,22 @@
 | 接口     | protobuf      | Lua          | Python          | C++/Python     | Python/R/Julia/Go |
 | 网络结构 | 分层方法      | 分层方法     | 符号张量图      | 符号张量图     | ?                 |
 
- 
+ 备注：
+
+
 
 ## 1.3     本章参考
 
 
-# 2  OpenCV
-
-OpenCV于1999年由[Intel](https://baike.baidu.com/item/Intel)建立，如今由Willow Garage提供支持。OpenCV是一个基于BSD许可[1]  （开源）发行的跨平台计算机视觉库，可以运行在[Linux](https://baike.baidu.com/item/Linux)、[Windows](https://baike.baidu.com/item/Windows)和[Mac OS](https://baike.baidu.com/item/Mac OS)操作系统上。它轻量级而且高效——由一系列 C 函数和少量 C++ 类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了[图像处理](https://baike.baidu.com/item/图像处理)和计算机视觉方面的很多通用算法。最新版本是3.3 ，2017年8月3日发布。
-OpenCV 拥有包括 500 多个C函数的跨平台的中、高层 API。它不依赖于其它的外部库——尽管也可以使用某些外部库。
-
-## 2.1     本章参考
-[1].     opencv https://baike.baidu.com/item/opencv 
 
 
 
-# 3  Tensorflow
 
-## 3.1     简介
+
+# 2  AI主流框架
+
+## 2.1 Tensorflow
+
 ​    TensorFlow是[谷歌](https://baike.baidu.com/item/谷歌)基于DistBelief进行研发的第二代[人工智能](https://baike.baidu.com/item/人工智能/9180)[学习系统](https://baike.baidu.com/item/学习系统)，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。
 ​    TensorFlow可被用于[语音识别](https://baike.baidu.com/item/语音识别)或[图像识别](https://baike.baidu.com/item/图像识别)等多项机器深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用。
 ​    TensorFlow由谷歌[人工智能](https://baike.baidu.com/item/人工智能/9180)团队[谷歌大脑](https://baike.baidu.com/item/谷歌大脑/4649855)（Google Brain）开发和维护，拥有包括TensorFlow Hub、TensorFlow Lite、TensorFlow Research Cloud在内的多个项目以及各类[应用程序接口](https://baike.baidu.com/item/应用程序接口/10418844)API。自2015年11月9日起，TensorFlow依据[阿帕奇授权协议](https://baike.baidu.com/item/阿帕奇授权协议/1642155)（Apache 2.0 open source license）开放源代码。
@@ -182,9 +182,60 @@ OpenCV 拥有包括 500 多个C函数的跨平台的中、高层 API。它不依
 
 
 
-## 3.2   本章参考
+**TensorFlow和Keras**
 
-[1].     TensorFlow中文社区  http://www.tensorfly.cn/
+TensorFlow 的高阶 API 基于 Keras API 标准，用于定义和训练神经网络。Keras 通过用户友好的 API 实现快速原型设计、先进技术研究和生产。
+
+
+
+**术语**
+
+| 术语         | 解释                                                   |
+| ------------ | ------------------------------------------------------ |
+| one hot编码  |                                                        |
+| tensor 张量  | 表示数据，一组多维数据。在python numpy里类型是narray。 |
+| OP 算子      |                                                        |
+| Session 会话 |                                                        |
+| 变量         | 用来维护状态                                           |
+|              |                                                        |
+
+
+
+
+### 原理篇
+
+
+
+
+
+### 开发篇
+
+
+
+## 2.2 Torch
+
+
+
+## 本章参考
+
+[1].  TensorFlow官网 https://tensorflow.google.cn/overview/?hl=zh_cn
+
+[2].  TensorFlow中文社区  http://www.tensorfly.cn/
+
+
+
+# 3  AI其它框架
+
+## OpenCV
+
+OpenCV于1999年由[Intel](https://baike.baidu.com/item/Intel)建立，如今由Willow Garage提供支持。OpenCV是一个基于BSD许可[1]  （开源）发行的跨平台计算机视觉库，可以运行在[Linux](https://baike.baidu.com/item/Linux)、[Windows](https://baike.baidu.com/item/Windows)和[Mac OS](https://baike.baidu.com/item/Mac OS)操作系统上。它轻量级而且高效——由一系列 C 函数和少量 C++ 类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了[图像处理](https://baike.baidu.com/item/图像处理)和计算机视觉方面的很多通用算法。最新版本是3.3 ，2017年8月3日发布。
+OpenCV 拥有包括 500 多个C函数的跨平台的中、高层 API。它不依赖于其它的外部库——尽管也可以使用某些外部库。
+
+## 本章参考
+
+[1].     opencv https://baike.baidu.com/item/opencv 
+
+
 
 
 
@@ -234,7 +285,7 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 ![MADlib功能.png](../../media/sf_reuse/framework/frame_ai_002_2.png)
 图 3 MADlib功能
 
-## 4.2     Apache Mahout
+## 4.2  Apache Mahout
 
 
 
@@ -249,7 +300,7 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 
 # 5  DM工具
 
-## 5.1     DM工具比较
+## 5.1  DM工具比较
 表格 8 DM工具比较1
 
 | 工具名 | 功能                                                         | 特点                                                         | 适用场景                                                     |

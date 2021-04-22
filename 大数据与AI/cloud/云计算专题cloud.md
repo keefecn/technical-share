@@ -256,6 +256,8 @@ management effort or service provider interaction.
 
 图  公有云发展史（2005~2014）
 
+备注：2015年成立CNCF（云原生计算设施）。
+
 
 
 ## 1.2  云计算模型
@@ -280,11 +282,15 @@ management effort or service provider interaction.
 
 图 云计算服务模型-典型云服务
 
+新增二种服务
+
+* DAAS：DaaS是数据即服务，英文全称是Date as a Server。云端部署好各种环境，收集大量数据并开始从中分析。最后把筛选、分析出来的数据作为服务。直白地说，就是大数据的一个类。涉及的服务有：客户关系管理（CRM）、企业资源规划（ERP）等等。
+
+* AIAAS： AI作为一种服务。
+
 
 
 ### 部署模型
-
-
 
  表格 三种部署云的比较
 
@@ -664,7 +670,7 @@ Gartner对当前云应用“多租户”架构进行了总结并给出了参考�
 
  ![image-20191201165401201](../../media/cloud/cloud_017.png)
 
-图 15 多租户架构图
+图 15 多租户参考架构图
 
  
 
@@ -813,9 +819,21 @@ https://aws.amazon.com/cn/free/?sc_ichannel=ha&sc_icampaign=signin_prospects&sc_
 
 包括Amazon EC2、Amazon S3和RDBS。
 
+
+
+## 6.3 华为云HuaweiCloud
+
  
 
-# 7    附录
+## 本章参考
+
+[1].  华为云
+
+[2]. ModelArts https://support.huaweicloud.com/modelarts/index.html 
+
+
+
+# 7  附录
 
 ## 7.1  参考资料
 

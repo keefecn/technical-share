@@ -186,13 +186,13 @@
 
  
 
-# 1    人工智能AI
+# 1  人工智能AI
 
 ## 1.1   人工智能简介intro
 
 **人工智能**（Artificial Intelligence或简称AI）有时也称作**机器智能**，是指由人工制造出来的系统所表现出来的智能。通常人工智能是指通过普通计算机实现的智能。该词同时也指研究这样的智能系统是否能够实现，以及如何实现的科学领域。
 
-**人工智能定义**：人工智能=人工(计算机)　＋　智能（特殊化程序）．从智能体角度来看，有两类智能，人类和计算机．
+**人工智能定义**：人工智能=人工(计算机)　＋　智能（特殊化程序）．从智能体角度来看，有两类智能，人类和计算机。
 
 人工智能的定义有以下四种方法： [4]
 *  Action humanly: 图灵测试方法1950年提出
@@ -277,25 +277,24 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 图 1 AI发展历程
 
-1950年， 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像．
+| 年代  | 事件                                                         | 备注 |
+| ----- | ------------------------------------------------------------ | ---- |
+| 1950  | 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像 |      |
+| 1953  | [博弈论](http://zh.wikipedia.org/wiki/博弈論)。<br>Metropolis提出 模拟退火算法SA 的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。 |      |
+| 1956  | 美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生。参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)． 约翰·麦卡锡首度提出「人工智能」这一概念，提出者约翰·麦卡锡也被誉为「人工智能之父」。 |      |
+| 1960s | 1960年产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)。<br>1963 年，「人工智能之父」约翰·麦卡锡创建了斯坦福人工智能实验室（SAIL，Stanford Ar[ti](http://www.elecfans.com/tags/ti/)ficial [Intel](http://www.elecfans.com/tags/intel/)ligence Laboratory）。该实验室拥有多个领域的专家，涉及机器人技术、计算机视觉、机器学习、图像处理、自然语言处理等多个领域，代表人物包括一大批在人工智能领域闻名遐迩的人物，如 Christopher Manning 、吴恩达、李飞飞等。。<br>1966 年，MIT 计算机科学家 Joseph Weizenbaum 开发出首个自然语言处理程序——ELIZA，它是一个模拟罗杰斯心理治疗的聊天机器人。<br>1967 年，斯坦福大学 E.A. Feigenbaum 领导开发出第一个「专家系统」——DENRAL， 使得人工智能的研究以推理算法为主转变为以知识为主。<br>1969 年，阿瑟·布莱森（Arthur Bryson）和何毓琦（Yu-Chi Ho）提出机器学习领域最重要的算法——反向传播算法（Backpropaga[TI](http://bbs.elecfans.com/zhuti_715_1.html)on）。这种算法可用于多层人工[神经网络](http://www.elecfans.com/tags/神经网络/)，2000 年至今[深度学习](http://www.elecfans.com/tags/深度学习/)的发展都离不开它的启发。 |      |
+| 1970s | 1973年，[生产系统](http://zh.wikipedia.org/wiki/生產系統)。1973年产生[PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)。<br>美国斯坦福国际研究所（Stanford Research Ins[TI](http://bbs.elecfans.com/zhuti_715_1.html)tu[te](http://www.elecfans.com/tags/te/)， SRI）研制出首台采用了人工智能学的移动机器人——Shakey。<br>1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。<br>1976年，[框架理论](http://zh.wikipedia.org/wiki/框架理論) <br>1979年，汉斯·摩拉维克（Hans Moravec）在斯坦福大学就读研究生时期发明的 Stanford Cart，在无人干预的情况下自动穿过摆满椅子的房间并前后行驶了 5 小时。Stanford Cart 相当于早期[无人驾驶](http://www.elecfans.com/tags/无人驾驶/)汽车。 |      |
+| 1988  | IBM 沃森研究中心发表《机器翻译的统计方法》（A STA[TI](http://bbs.elecfans.com/zhuti_715_1.html)S[TI](http://bbs.elecfans.com/zhuti_715_1.html)CAL APPROACH TO LANGUAGE TRANSLATION），预示着基于规则的机器翻译方法开始转变为基于概率的方法，并反映了一个更为广泛的转变：从「理解」眼前的任务的「机器学习」方法转变为基于已知例子的统计分析方法。 |      |
+| 1990s | 1991年，蒂姆·伯纳斯－李（Tim Berne[rs](http://www.elecfans.com/tags/rs/)-Lee）发明的万维网首次上线。<br>1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。<br>1997 年，IBM 研发的「深蓝」（Deep Blue）成为第一个击败人类象棋冠军 Garry Kasparov 的电脑程序。<br>1998 年，斯坦福大学教授肯尼斯·萨里斯伯里（Kenneth Salisbury）公开外科机器人（robotic surgery）专利。 |      |
+| 2000s | 2005 年，斯坦福大学教授 Sebastian Thrun 联合斯坦福大学 AI 实验室发明的第一辆自动驾驶汽车完成了 132 英里的 Mojava 沙漠路线，在 DARPA 超级挑战赛（DARPA Grand Challenge）上一举夺冠。<br/>2009 年，李飞飞主导的 ImageNet 项目诞生了一个含有 1500 万张照片的数据库，涵盖了 22000 种物品。这个项目以及后来的一系列工作影响了整个计算机视觉领域发展。<br/>2010 年，苹果公司推出一款内建在苹果 iOS 系统中的人工智能助理软件 Siri。 |      |
+| 2010s | 2011 年，IBM 开发的自然语言问答计算机沃森在美国老牌益智节目「危险边缘」（Jeopardy！）中击败人类。<br/>2012 年，杰夫·迪恩（Jeff Dean）和吴恩达（Andrew Ng）发布一份实验报告，他们给一个大型神经网络展示 1000 万张未标记的网络图片，发现神经网络能够识别出猫的形象。<br/>2014 年，亚马逊推出了智能音箱 Echo 以及智能语音助手 Alexa。<br/>2016 年，谷歌 DeepMind 研发的 AlphaGo 击败围棋世界冠军李世石。 |      |
+| 2020  |                                                              |      |
 
-1953年， [博弈论](http://zh.wikipedia.org/wiki/博弈論)
-
-1953年，Metropolis提出*模拟退火算法**SA*的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。
-
-1956年，美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生．参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)．
-
-1960年, 产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)．1973 [PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)．
-
-1973年， [生产系统](http://zh.wikipedia.org/wiki/生產系統)
-
-1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。
-
-1976年， [框架理论](http://zh.wikipedia.org/wiki/框架理論)
-
-1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。
+> 备注：1990s表示1990-1999十年间，同理类推。
 
 典型案例：MIT Eliza程序—聊天机器人，积木世界，中文屋等
+
+
 
 ### 1.1.3 学派，研究领域和分类
 
@@ -306,6 +305,8 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 (2)　**连接**主义(connectionism)，又称为*仿生*学派(bionicsism)或生理学派(physiologism)，其主要原理为神经网络及神经网络间的连接机制与学习算法。
 
 (3)　**行为主义**(actionism)，又称为*进化*主义(evolutionism)或*控制论*学派(cyberneticsism)，其原理为控制论及感知-动作型控制系统。
+
+
 
 表格 1 AI三大学派比较
 
@@ -394,9 +395,9 @@ Home: http://www.cs.cmu.edu/~tom/
 
 **会议杂志**
 
-IJCAI　二年一次
+* IJCAI　二年一次
 
-ECAI AAAI 各一年一次
+* ECAI AAAI 各一年一次
 
  
 
@@ -416,7 +417,7 @@ ECAI AAAI 各一年一次
 
 智能体的功能分解：感知－＞建模－＞规划－＞行动，如20世纪60年代Stanford产生的认识机器人－沙基shakey.
 
-新人工智能的三大原则：实体化，现场性，自底向上设计．如基于行为的机器人．
+新人工智能的三大原则：实体化，现场性，自底向上设计。如基于行为的机器人．
 
  
 
@@ -503,15 +504,20 @@ ECAI AAAI 各一年一次
 分类三：工业界按应用场景将AI分为
 *  自动驾驶
 *  机器人
-*   
+
+
 
 ### 1.3.1 机器学习
 
 机器学习是经典符号主义和联结主义的结合．它是人工智能AI一个极重要的研究领域。
 
+
+
 ### 1.3.2 自然语言处理
 
-详见 《自然语言处理》
+详见 《[自然语言处理](自然语言处理.md)》
+
+
 
 ### 1.3.3 模式识别
 
@@ -531,19 +537,38 @@ ECAI AAAI 各一年一次
 
 模式识别可用于文字和语音识别、遥感和医学诊断等方面。
 
+
+
 ### 1.3.4 计算机视觉vision
 
-详见 《计算机视觉》
+详见 《[计算机视觉](计算机视觉.md)》
+
+
 
 ### 1.3.5 机器人学
 
  
 
-## 1.4   AI术语
+## 1.4 AI业界
 
- 
+表格： AI行业巨头的AI全栈技术
 
-## 1.5   本章参考
+|      | 分类         | GCP        | Azure                  | AWS        | Ali            | HW        |
+| ---- | ------------ | ---------- | ---------------------- | ---------- | -------------- | --------- |
+| 生态 | 联盟         |            |                        |            |                |           |
+|      | 开发者       |            | 收购github             |            |                |           |
+| SAAS | 行业应用     | 医疗、ADAS | 医疗、ADAS、零售、金融 | 医疗、ADAS | ET大脑六大行业 | 智能体    |
+|      | AI基础服务   | 11种       | 20+                    | 11+        | 20%            | 15+       |
+| PAAS | AI自动化工具 | AutoML     |                        |            |                |           |
+|      | AI开发工具   | GME        | MLS                    | Sagemaker  | Dataworks PAI  | ModelArts |
+|      | AI框架       | Tensorflow | CNTK                   | MXNET      | XD Euler       | Mindspore |
+| IAAS | 芯片         | TPU        |                        |            |                | D系列     |
+
+> 备注：GCP - Google Cloud Platform, HW - Huawei, ADAS-自动辅助驾驶。
+
+
+
+## 本章参考
 
 [1].一文纵览人工智能的23个分支 http://www.chaoqi.net/xinchao/2018/0102/107317.html 
 
@@ -551,21 +576,23 @@ ECAI AAAI 各一年一次
 
 [3].   模式识别 [https://baike.baidu.com/item/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB](https://baike.baidu.com/item/模式识别)
 
+[4].  逐个看看全球 18 件 AI 大事记 www.elecfans.com/rengongzhineng/892836.html 
+
  
 
-# 2    机器学习ML 
+# 2  机器学习ML 
 
 程序 = 算法＋数据结构＋领域知识
 
-编程人员 -à知识工程师 -à领域专家expert
+编程人员  + 知识工程师  + 领域专家expert
 
  
 
-机器学习的任务是通过一定的学习算法来达到改进智能体未来的行动能力 [1]．
+机器学习的任务是通过一定的学习算法来达到改进智能体未来的行动能力。
 
-样本 + 背景知识 à 学习算法 -à 概念描述
+样本 + 背景知识： 学习算法，概念描述
 
-学习算法可分为二类，一是黑箱法；二是基于知识的方法．AQ－主动覆盖．
+学习算法可分为二类，一是黑箱法；二是基于知识的方法。AQ－主动覆盖．
 
  
 
@@ -635,6 +662,8 @@ ECAI AAAI 各一年一次
 
 **10.** **上线：**
 
+
+
 ### 2.1.2 常用术语
 
 表格 2 ML常用术语
@@ -645,7 +674,6 @@ ECAI AAAI 各一年一次
 | 模型     | model        | 描述特征和目标之间关系的数学对象                           |
 | 监督ML   | supervised   | ML给定样本的输出值是已知的，采用输入和输出的函数进行训练。 |
 | 无监督ML | unsupervised | 不依赖于已知样本，试图寻找非标记数据的内在结构。           |
-|          |              |                                                            |
 
  
 
@@ -749,7 +777,7 @@ ECAI AAAI 各一年一次
 
 1969年，Minsky和Paper发表《认知论》，指出单层神经网络无法解决“异或”问题，神经网络进入低谷
 
-1982，Hopfield模型的提出，以及逆向传播算法又推动了神经网络的发展。
+1982年，Hopfield模型的提出，以及逆向传播算法又推动了神经网络的发展。
 
  
 
@@ -807,7 +835,7 @@ http://www.support-vector.net/
 | 模型       | 模型特点                                                     |
 | ---------- | ------------------------------------------------------------ |
 | 逻辑回归   | 比较基础的线性分类模型                                       |
-| SVM        | 强大的模型，可以用来回归、预测、分类等。根据不同的核函数，模型可以是线性/非线发性 |
+| SVM        | 强大的模型，可以用来回归、预测、分类等。根据不同的核函数，模型可以是线性/非线发性。 |
 | 决策树     | 基于‘分类讨论、细化’思想的分类模型，模型直观，易解释。       |
 | 随机森林   | 思想类似决策树，精度通常比决策树高，缺点是由于随机性，丧失了决策树的可解释性。 |
 | 朴素贝叶斯 | 基于概率思想的简单有效的分类模型，能够给出容易理解的概率解释。 |
@@ -895,11 +923,11 @@ C4.5算法有如下优点：产生的分类规则易于理解，准确率较高�
 
 ### 2.3.3 文本分类示例
 
-文本分类的***基本假设\***是：文档的内容与其中所包含的词有必然的关联，而同一类的文档之间总存在共同的词，不同类别的文档之间的词有较大的差异。因此分类器通过词与文档之间的向量关系可以用来识别文档的类别。{term , category}的向量空间模型。
+文本分类的**基本假设**：文档的内容与其中所包含的词有必然的关联，而同一类的文档之间总存在共同的词，不同类别的文档之间的词有较大的差异。因此分类器通过词与文档之间的向量关系可以用来识别文档的类别。{term , category}的向量空间模型。
 
  
 
-文本分类算法有：词匹配法，基于知识工程的方法和机器学习方法。**错误！未找到引用源。**
+文本分类算法有：词匹配法，基于知识工程的方法和机器学习方法。
 
 其中机器学习方法是目前最实用的方法。
 
@@ -1023,12 +1051,12 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 解决方案：交叉验证
 
- 
-
 交叉验证注意事项
 *  训练数据要有代表性。
 *  某些数据集的特征是有时间顺序的。
 *  K折交叉（将数据集分成K个包，对于某个包，取其它包作为训练集，N个包处理完后，将每个包的预测值进行汇总，综合评估其准确率）的包数量越大，估计误差越好，但花费时间越多。
+
+
 
 ### 2.6.2 分类模型评估
 
@@ -1060,6 +1088,8 @@ Apriori算法对于一条规则L->R，有以下度量：
 | 召回率Recall    | R，给定分词结果中切分正确的词次数/标准答案中的总词次数   |
 | F值             | (P+R)/2                                                  |
 | 调和平均数      | 2PR/  ( R + P )                                          |
+
+
 
 #### 2.6.2.2 准确度权衡和ROC典线
 
@@ -1097,6 +1127,8 @@ Apriori算法对于一条规则L->R，有以下度量：
 
  
 
+
+
 #### 2.6.2.4 分类性能评估
 
 **１）理论分析**
@@ -1126,6 +1158,8 @@ Apriori算法对于一条规则L->R，有以下度量：
 
  
 
+
+
 ### 2.6.4 参数调整优化模型
 
  
@@ -1142,7 +1176,7 @@ Apriori算法对于一条规则L->R，有以下度量：
 
  
 
-# 3    深度学习
+# 3  深度学习
 
 ​     深度学习的概念由Hinton等人于2006年提出。基于深度置信网络(DBN)提出非监督贪心逐层训练算法，为解决深层结构相关的优化难题带来希望，随后提出多层自动编码器深层结构。此外Lecun等人提出的卷积神经网络是第一个真正多层结构学习算法，它利用空间相对关系减少参数数目以提高训练性能。
 
@@ -1168,7 +1202,7 @@ Apriori算法对于一条规则L->R，有以下度量：
 
  
 
-# 4    知识图谱
+# 4  知识图谱
 
 ## 4.1   简介
 
@@ -1379,7 +1413,7 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 ## 其它资源
 
-***人工智能**的**科普和影视作品***
+**人工智能的科普和影视作**
 
 电影　
 

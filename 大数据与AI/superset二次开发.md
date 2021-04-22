@@ -439,7 +439,7 @@ gunicorn \
 
 说明：-w为工作进程数；-k为通信方式，缺省为同步，可改为gevent；-b为监听端口。
 ```
- 
+
 
 ### 5.2.2 nginx
 
@@ -462,7 +462,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 #SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
 #SQLALCHEMY_DATABASE_URI = 'postgresql://root:password@localhost/myapp'
 ```
- 
+
 
 **数据迁移**
 
@@ -547,7 +547,7 @@ AUTH_LDAP_SEARCH="dc=mycompany,dc=com" //己方LDAP服务器的根路径
 //关键: flask会把你输入的用户名替换进去，得到一个完整的DN，比如输入用户名是admin，那么flask就会在LDAP中寻找"cn=admin,OU=Users,DC=mycompany,DC=com"，然后匹配密码，没有这个是不可能找到用户的。
 AUTH_LDAP_USERNAME_FORMAT = "cn=%s,OU=Users,DC=mycompany,DC=com"
 ```
- 
+
 
 ## 6.3   配置文件
 
@@ -582,7 +582,7 @@ import sys
 reload(sys) 
 sys.setdefaultencoding('utf-8') 
 ```
- 
+
 
 # 7    架构篇
 
@@ -618,8 +618,6 @@ sys.setdefaultencoding('utf-8')
 
  
 
- 
-
 ## 7.3   数据架构（数据模型）
 
 
@@ -636,9 +634,11 @@ sys.setdefaultencoding('utf-8')
 
 备注：1. fab通过给role授权数据源(view_menu)和权项限(persionn)访问权限来控制可访问的view，粒度从数据源级别到数据源内的list/add/show/del/edit权限。
 
-\2. 通过修改视图的Owner来管理修改权限。
+2. 通过修改视图的Owner来管理修改权限。
 
-\3. superset_meta通过ab_role来关联fab的安全管理功能。
+3. superset_meta通过ab_role来关联fab的安全管理功能。
+
+
 
 ### 7.3.1 fabmanger
 
@@ -685,7 +685,7 @@ sys.setdefaultencoding('utf-8')
 
  
 
- 1. npm打包流程
+**npm打包流程**
 
 打包的依据是assets/webpack.config.js文件中的配置。
 

@@ -480,8 +480,6 @@ Available subcommands:
 
 可通过 makemigrations, migrate来管理。当app目录下自动生成目录migrates里的文件过多时，可进行重置回0001__init.py
 
-2) . 
-
 
 
 **4、编写路由规则**
