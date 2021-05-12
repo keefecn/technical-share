@@ -621,10 +621,9 @@ git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>]
 git rebase --continue | --skip | --abort | --edit-todo
 ```
 
+示例：
 
-
-
-**$ git rebase -i [branch|********]**
+`$ git rebase -i [branch|********]`
 
 你可以直接进入某个分支的 rebase 也可以进入某次 commit 的 rebase，如果你是项将某些 commit 合并，那么建议使用 `$ git rebase -i `。
 

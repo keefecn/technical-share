@@ -339,23 +339,23 @@ self 只有对象实例化（即隐式调用`__init__`）才能使用self, publi
 | 类       |          | ClassType           |
 | 实例     | 对象赋值后即为一个实例。           | InstanceType        |
 | 函数     | 类似C中的函数，无需实例化即可调用。 | FunctionType        |
-| 方法     | 类中定义的函数叫方法，第一个参数为实例，约定名称为self       | MethodType          |
+| 方法     | 类中定义的函数叫方法，第一个参数为实例，约定名称为self。<br>类的方法若用了@staticmethod 就成了FunctionType | MethodType          |
 | 内建函数 |          | BuiltinFunctionType |
 | 内建方法 |          | BuiltinMethodType   |
-| 切片     | 如使用符号[start:end:step]         | slice  |
-| 代码     | 通过调用内建函数compile()可得到代码对象。       | code   |
+| 切片     | 如使用符号 `[start:end:step]`    | slice  |
+| 代码     | 通过调用内建函数compile() 可得到代码对象。      | code   |
 | 跟踪对象 | 异常诊断信息。        | TracebackType       |
 | 帧对象   | python执行栈。        | FrameType           |
 | 省略器   | 用在切片对象中，起记号使用。       | EllipsisType        |
 | 生成器   | 带有yield的函数被称为生成器。类似迭代器，但生成一次，每次迭代返回当前迭代值。调用生成器函数时会创建生成器对象。 | GeneratorType       |
-| 迭代器   | 可以使用“for··· in ···”来操作。迭代器是访问集合元素的一种方式，可以从头访问到尾。 |        |
-| xrange   |          | XRangeType          |
-| None     | python的NULL对象      | 'NoneType'          |
+| 迭代器   | 可以使用 “for··· in ···” 来操作。<BR>迭代器是访问集合元素的一种方式，可以从头访问到尾。 |        |
+| xrange   | python3.x去除了此类型 | XRangeType          |
+| None     | python的NULL对象      | NoneType          |
 
 备注：1. 对象类型详见内建类型。常用数据结构也有各自的内置类型。
 2. 查看对象的类型：type(object)。
 3. 查看对象能引用的名字列表：dir(object)。一般都具有以下属性：`__all__, __builtins__, __doc__, __file__, __name__, __package__`。
-4. 对象调用callable(object) ： 用来确定对象是否可以函数操作符()来调用。
+4. 对象调用callable(object) ： 用来确定对象是否可以函数操作符() 来调用。
 Return [True](https://docs.python.org/2/library/constants.html#True) if the object argument appears callable, [False](https://docs.python.org/2/library/constants.html#False) if not.
 class instances are callable if they have a [__call__()](https://docs.python.org/2/reference/datamodel.html#object.__call__) method.
 
@@ -438,7 +438,7 @@ copy.copy( )
 表格 4 python标准库/模块列表
 
 
-| 功能       | 模块或   类名 | 简介     | 备注     |
+| 功能       | 模块 或类名 | 简介     | 备注     |
 | ---------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 系统       | sys           | 系统模块，包含了跟python解析器和环境相关的变量和函数。<br>  [System-specific   parameters and functions](https://docs.python.org/2/library/sys.html). | `sys.modules` 包含了你在 IDE 中运行的所有程序所导入的所有模块。 |
 |            | os            | 操作系统相关的模块，如路径path     |          |
@@ -450,7 +450,7 @@ copy.copy( )
 | 数据持久化 |  | 包括mysql_python, sqlite3          |          |
 | 文件格式   |  | zip, csv, |          |
 | 模块分发   | distutils     | [Building   and installing Python modules](https://docs.python.org/2/library/distutils.html) |          |
-|            | ensurepip     | [Bootstrapping   the **pip** installer](https://docs.python.org/2/library/ensurepip.html) |          |
+|            | ensurepip     | [Bootstrapping the pip installer](https://docs.python.org/2/library/ensurepip.html) |          |
 备注：
 
 ### 2.2.1  内建模块__builtin__/builtins/__builtins__
@@ -504,20 +504,21 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 
 ### 2.2.2  内建类型Build-in Types
 
-[5. Built-in Types](https://docs.python.org/2/library/stdtypes.html)
-- [5.1. Truth Value      Testing](https://docs.python.org/2/library/stdtypes.html#truth-value-testing)
-- [5.2. Boolean      Operations — **and**, **or**, **not**](https://docs.python.org/2/library/stdtypes.html#boolean-operations-and-or-not)
-- [5.3. Comparisons](https://docs.python.org/2/library/stdtypes.html#comparisons)
-- [5.4. Numeric Types      — **int**, **float**, **long**, **complex**](https://docs.python.org/2/library/stdtypes.html#numeric-types-int-float-long-complex)
-- [5.5. Iterator Types](https://docs.python.org/2/library/stdtypes.html#iterator-types)
-- [5.6. Sequence Types      — **str**, **unicode**, **list**, **tuple**, **bytearray**, **buffer**, **xrange**](https://docs.python.org/2/library/stdtypes.html#sequence-types-str-unicode-list-tuple-bytearray-buffer-xrange)
-- [5.7. Set Types — **set**, **frozenset**](https://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset)
-- [5.8. Mapping Types      — **dict**](https://docs.python.org/2/library/stdtypes.html#mapping-types-dict)
-- [5.9. File Objects](https://docs.python.org/2/library/stdtypes.html#file-objects)
-- [5.10. memoryview  type](https://docs.python.org/2/library/stdtypes.html#memoryview-type)
-- [5.11. Context  Manager Types](https://docs.python.org/2/library/stdtypes.html#context-manager-types)
-- [5.12. Other  Built-in Types](https://docs.python.org/2/library/stdtypes.html#other-built-in-types)
-- [5.13. Special   Attributes](https://docs.python.org/2/library/stdtypes.html#special-attributes)
+- [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
+  - [Truth Value      Testing](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
+  - [Boolean      Operations — and, or, not](https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not)
+  - [Comparisons](https://docs.python.org/3/library/stdtypes.html#comparisons)
+  - [Numeric      Types — int, float, complex](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex)
+  - [Iterator      Types](https://docs.python.org/3/library/stdtypes.html#iterator-types)
+  - [Sequence      Types — list, tuple, range](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)
+  - [Text      Sequence Type — str](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str)
+  - [Binary      Sequence Types — bytes, bytearray, memoryview](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview)
+  - [Set Types      — set, frozenset](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset)
+  - [Mapping      Types — dict](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)
+  - [Context      Manager Types](https://docs.python.org/3/library/stdtypes.html#context-manager-types)
+  - [Generic      Alias Type](https://docs.python.org/3/library/stdtypes.html#generic-alias-type)
+  - [Other      Built-in Types](https://docs.python.org/3/library/stdtypes.html#other-built-in-types)
+  - [Special      Attributes](https://docs.python.org/3/library/stdtypes.html#special-attributes)
 
 查看内置类型 types模块
 ```PYTHON
@@ -599,15 +600,29 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}
 | | help(object)     | 打印出对象的格式化文档 |
 | | type(object)     | 打印对象的类型        |
 | 其它     | len(object)      | 打印序列或集合容器的元素个数。     |
-| 不常用项 | apple(object[,args[,kwargs]]) |          |
+|  | apple(object[,args[,kwargs]]) |          |
 备注：
 
+
+
 #### python装饰器符号@
+
 装饰器**decorator**是一种特殊的函数，要么接受函数作为输入参数，并返回一个函数；要么接受一个类作为输入参数，并返回一个类。它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 @标记是装饰器的语法糖（syntactic sugar），可以让你以简单易读得方式装饰目标对象。装饰器放在类或函数前面。
 
 **1. 函数装饰器**
-**示例：不带参数的use_logging和带参数的use_logging2。**
+
+可变参数
+
+* `*args`:  tuple类型，存储无名参数，如 args = (arg1, arg2, arg3)
+* `**kwargs`:  dict类型，存储键值对参数，如 kwargs =  {'a': 1, 'c': 3, 'b': 2} 
+
+@wraps 装饰器作用：不改变使用装饰器原有函数的结构 (如`__name__, __doc__`)
+
+`from functools import wraps`
+
+示例：不带参数的use_logging  和带参数的use_logging2。
+
 ```python
 # no args
 def use_logging(func): 
@@ -2533,7 +2548,7 @@ File > Settings... > Tools > External Tools，点击 + 号添加，如下图配�
 
 
 
-### 3.3.2  静态检测pylint/pycheck
+### 3.3.2  静态检测 pylint/pycheck
 EG:  pylint –E [*.py]
 
 ```sh
@@ -2547,7 +2562,7 @@ Usage:  pylint [options] module_or_package
 ```
 
 
-### 3.3.3  反向建模pyreverse
+### 3.3.3  反向建模 pyreverse
 * -A包括父类，-S包括关联，-p生成的文件名，以.dot为后缀
 $ pyreverse -A -S [xxx.py] -p xxx
 * dot的查看：需软件graphviz支持。
@@ -2599,7 +2614,7 @@ Options:
  ```
 
 
-### 3.3.4  文档化工具pydoc
+### 3.3.4  文档化工具 pydoc
 [pydoc](http://docs.python.org/3.3/library/pydoc.html)模块可以根据源代码中的docstrings为任何可导入模块生成格式良好的文档。
 
 **文档化注释**
@@ -2689,7 +2704,7 @@ if __name__ == "__main__":
    
 ```
 
-### 3.3.5  测试工具unittest/pytest/nose
+### 3.3.5  测试工具 unittest/pytest/nose
 
 | 工具       | 简介    | 导入           | 使用            |
 | ---------- | ---------------------------------------------------------- | --------------------------- | ------------------------------------------------------ |
@@ -2987,7 +3002,7 @@ pyinstaller 打包常见问题
 
 ### 3.3.9  运维工具：Ansible/Fabric/SaltStack
 
-详见 《[运维专题](../运维专题.MD)》
+详见 《[运维专题](../运维专题.md)》
 
 
 
@@ -3113,28 +3128,11 @@ redirect_stderr=true
 |   | pyredis   | redis    |
 | 可视化     | PIL    | Python Imaging Library，图像生成和处理库。   pillow          |
 |   | matplotlib            | 绘图库    |
+| | [seaborn](http://seaborn.pydata.org/) | 基于matplotlib的加强版。可以很方便画各种图。 |
 |   | wordcloud | 词云     |
 | 其它       | config    | 配置文件  |
 |   | logging   | 日志记录  |
 备注：1.urllib2在Python3已拆分更名为urllib.request和urllib.error.
-
-
-
-表格 机器学习库
-| 功能         | 库                   | 简介                                                         |
-| ------------ | -------------------- | ------------------------------------------------------------ |
-| 机器学习   | numpy    | 数学函数库，提供数组、一组与线性代数相关的函数以及傅里叶变换函数。 |
-|                | pandas          | a powerful data analysis and manipulation   library for Python |
-|                | scipy           | 提供矩阵支持，以及矩阵相关的数值计算模块 |
-|   | statsModels           | 统计建模和计量经济学   |
-|   | sckit-Learn           | 强大的机器学习库，支持回归、分类、聚类。        |
-|   | keras    | 深度学习库，用于建立神经网络以及深度学习模型。windows下速度会变慢。依赖库有numpy/scipy/theano。 |
-|   | libsvm    | 机器学习库，SVM       |
-|   | Gensim    | 用来作文本主题挖掘的库 |
-|   | jieba    | 中文分词  |
-|   | mmseg    | 中文分词  |
-
-> 备注：机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。
 
 
 
@@ -3352,7 +3350,10 @@ PSD
 *  Spynner – 对PyQt的webkit的封装（需要PyQT）。
 *  Splinter – 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。
 
+
+
 ## 3.5   其他Python库
+
 #### 3.5.1.1 SQLAlchemy
 
 图 2 SQLAlchemy architecture
@@ -3373,7 +3374,9 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 ```
 
 
-## 3.6     本章参考
+
+## 本章参考
+
 [1].  关于python中的setup.py  http://python.jobbole.com/82077/
 
 [2].  python下import 模块使用相对路径 http://www.dai3.com/python-import.html 
@@ -4350,7 +4353,8 @@ Python 采用引用计数的方式来管理分配的内存。Python 的每个对
 **垃圾收集GC**
 不再被使用的内存会被一种称为垃圾收集的机制释放
  注: 解释器跟踪对象的引用计数, 垃圾回收机制负责释放内存, 垃圾收集器是一块独立代码, 它用来寻找引用计数为0的对象, 它也负责检查虽然引用计数大于0但是也应该被销毁的对象。
-比如：l=[]; l.append(l); del l;
+比如：`l=[]; l.append(l); del l;`
+
 * 垃圾收集算法：根寻找法、引用计数
 * 垃圾回收算法：标记-复制-清除
 * 垃圾回收策略：分代回收。

@@ -52,7 +52,7 @@
 |              | pandas      | a powerful data  analysis and manipulation library for Python |
 |              | scipy       | 提供矩阵支持，以及矩阵相关的数值计算模块                     |
 |              | statsModels | 统计建模和计量经济学                                         |
-|              | sckit-Learn | 强大的机器学习库，支持回归、分类、聚类和降维。               |
+|              | sklearn     | sckit-Learn。强大的机器学习库，支持回归、分类、聚类和降维。  |
 |              | keras       | 深度学习库，用于建立神经网络以及深度学习模型。windows下速度会变慢。依赖库有numpy/scipy/theano。 |
 |              | libsvm      | 机器学习库，SVM                                              |
 |              | gensim      | 用来作文本主题挖掘的库                                       |
@@ -62,11 +62,13 @@
 |              | matplotlib  | 绘图库                                                       |
 |              | wordcloud   | 词云                                                         |
 
+> 备注：机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。
+
 
 
 ### 1.1.1  科学计算常用库的方法
 
-表格 2 pandas库方法
+表格 2 pandas库方法（依赖于numpy）
 
 | 功能       | 主要方法                                                | 备注                                             |
 | ---------- | ------------------------------------------------------- | ------------------------------------------------ |
@@ -74,24 +76,15 @@
 | 拓展统计   | cumsum cumprod  cummax cmumin rolling_sum rolling_xxx   | 累积统计                                         |
 | 统计作图   | plot pie hist boxplot  plot(logy=True) plot(yerr=error) | 饼图、拆线图、直方图、箱形图、对数图、误差条形图 |
 | 数据预处理 | unique isnull  notnull                                  |                                                  |
-|            |                                                         |                                                  |
+
+安装： `pip install pandas`
+
+```python
+import numpy as np
+import pandas as pd
+```
 
 
-
-表格 3 sklearn(scikit-learn)库方法
-
-| 功能       | 函数                    | 主要方法或方法简介                                           | 备注     |
-| ---------- | ----------------------- | ------------------------------------------------------------ | -------- |
-| 分类       |                         | linear_model svm  tree ensemable naive_bayes                 | classify |
-| 聚类       |                         | kmeans                                                       | cluster  |
-|            | kmeans                  | K均值聚类                                                    |          |
-|            | affinityPropagation     | 吸引力传播聚类，2007年提出，几乎优于所有其它方法，不需要指定聚类数，但运行效率低。 |          |
-|            | meanshift               | 均值漂移聚类                                                 |          |
-|            | spectralClustering      | 谱聚类                                                       |          |
-|            | AgglomerativeClustering | 层次聚类                                                     |          |
-|            | DBSCAN                  | 具有噪声的基于密度的聚类方法。                               |          |
-|            | BIRCH                   | 综合的层次聚类算法，可以处理大规模数据的聚类。               |          |
-| 数据预处理 | PCA                     | 主成分分析                                                   |          |
 
 
 
@@ -161,11 +154,9 @@
 
 
 
-## 1.3     本章参考
+## 本章参考
 
-
-
-
+[1]. Pandas中文教程  https://www.w3cschool.cn/hyspo/
 
 
 
@@ -216,6 +207,12 @@ TensorFlow 的高阶 API 基于 Keras API 标准，用于定义和训练神经�
 
 
 
+## 2.3 Caffe
+
+
+
+
+
 ## 本章参考
 
 [1].  TensorFlow官网 https://tensorflow.google.cn/overview/?hl=zh_cn
@@ -228,14 +225,167 @@ TensorFlow 的高阶 API 基于 Keras API 标准，用于定义和训练神经�
 
 ## OpenCV
 
+官网：
+
 OpenCV于1999年由[Intel](https://baike.baidu.com/item/Intel)建立，如今由Willow Garage提供支持。OpenCV是一个基于BSD许可[1]  （开源）发行的跨平台计算机视觉库，可以运行在[Linux](https://baike.baidu.com/item/Linux)、[Windows](https://baike.baidu.com/item/Windows)和[Mac OS](https://baike.baidu.com/item/Mac OS)操作系统上。它轻量级而且高效——由一系列 C 函数和少量 C++ 类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了[图像处理](https://baike.baidu.com/item/图像处理)和计算机视觉方面的很多通用算法。最新版本是3.3 ，2017年8月3日发布。
 OpenCV 拥有包括 500 多个C函数的跨平台的中、高层 API。它不依赖于其它的外部库——尽管也可以使用某些外部库。
 
+
+
+## scikit-learn
+
+官网：scikit-learn https://scikit-learn.org/
+
+* [tutorial](https://scikit-learn.org/stable/tutorial/index.html)  用户向导，简易入门指南。
+* [user_guide](https://scikit-learn.org/stable/user_guide.html) 介绍了算法。
+* [API](https://scikit-learn.org/stable/modules/classes.html)  库调用的方法，算法的实现函数
+* [Example](https://scikit-learn.org/stable/auto_examples/index.html)  示例
+* FAQ  常见问题
+
+**sklearn**是一个**Python**第三方提供的非常强力的机器学习库，它包含了从数据预处理到训练模型的各个方面。sklearn是包名。
+
+表格 sklearn六大功能
+
+| 功能                                                         | **Applications**                                             | **Algorithms**                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Classification](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Spam detection, image recognition.                           | [SVM](https://scikit-learn.org/stable/modules/svm.html#svm-classification), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#classification), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
+| [Regression](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Drug response, Stock prices.                                 | [SVR](https://scikit-learn.org/stable/modules/svm.html#svm-regression), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#regression), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
+| [Clustering](https://scikit-learn.org/stable/modules/clustering.html#clustering) | Customer segmentation, Grouping experiment outcomes          | [k-Means](https://scikit-learn.org/stable/modules/clustering.html#k-means), [spectral clustering](https://scikit-learn.org/stable/modules/clustering.html#spectral-clustering), [mean-shift](https://scikit-learn.org/stable/modules/clustering.html#mean-shift), and [more...](https://scikit-learn.org/stable/modules/clustering.html#clustering) |
+| [Dimensionality reduction](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) | Visualization, Increased efficiency                          | [k-Means](https://scikit-learn.org/stable/modules/decomposition.html#pca), [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [non-negative matrix factorization](https://scikit-learn.org/stable/modules/decomposition.html#nmf), and [more...](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) |
+| [Model selection](https://scikit-learn.org/stable/model_selection.html#model-selection) | Improved accuracy via parameter tuning                       | [grid search](https://scikit-learn.org/stable/modules/grid_search.html#grid-search), [cross validation](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation), [metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#model-evaluation), and [more...](https://scikit-learn.org/stable/model_selection.html) |
+| [Preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing) | Transforming input data such as text for use with machine learning algorithms. | [preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing), [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#feature-extraction), and [more...](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing) |
+
+
+
+![ai_sklearn_algo](..\..\media\ai\ai_sklearn_algo.png)
+
+图  sklean的算法学习图
+
+从上图可以看出，sklearn主要包括四类算法，分别是分类、聚类、回归和降维。
+
+
+
+### sklearn模块介绍
+
+依赖：numpy scipy matplotlib
+
+安装：`pip install sklearn`
+
+模块导入示例  ：`from sklearn import preprocessing`
+
+    __all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
+               'datasets', 'decomposition', 'dummy', 'ensemble', 'exceptions',
+               'experimental', 'externals', 'feature_extraction',
+               'feature_selection', 'gaussian_process', 'inspection',
+               'isotonic', 'kernel_approximation', 'kernel_ridge',
+               'linear_model', 'manifold', 'metrics', 'mixture',
+               'model_selection', 'multiclass', 'multioutput',
+               'naive_bayes', 'neighbors', 'neural_network', 'pipeline',
+               'preprocessing', 'random_projection', 'semi_supervised',
+               'svm', 'tree', 'discriminant_analysis', 'impute', 'compose',
+               # Non-modules:
+               'clone', 'get_config', 'set_config', 'config_context',
+               'show_versions']
+
+
+
+以下是针对不同任务的增量估算器列表：
+
+- Classification（分类）
+  - [`sklearn.naive_bayes.MultinomialNB`](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB)
+  - [`sklearn.naive_bayes.BernoulliNB`](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB)
+  - [`sklearn.linear_model.Perceptron`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron)
+  - [`sklearn.linear_model.SGDClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier)
+  - [`sklearn.linear_model.PassiveAggressiveClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier)
+  - [`sklearn.neural_network.MLPClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier)
+- Regression（回归）
+  - [`sklearn.linear_model.SGDRegressor`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor)
+  - [`sklearn.linear_model.PassiveAggressiveRegressor`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html#sklearn.linear_model.PassiveAggressiveRegressor)
+  - [`sklearn.neural_network.MLPRegressor`](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html#sklearn.neural_network.MLPRegressor)
+- Clustering（聚类）
+  - [`sklearn.cluster.MiniBatchKMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans)
+  - [`sklearn.cluster.Birch`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch)
+- Decomposition / feature Extraction（分解/特征提取）
+  - [`sklearn.decomposition.MiniBatchDictionaryLearning`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning)
+  - [`sklearn.decomposition.IncrementalPCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA)
+  - [`sklearn.decomposition.LatentDirichletAllocation`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation)
+- Preprocessing（预处理）
+  - [`sklearn.preprocessing.StandardScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler)
+  - [`sklearn.preprocessing.MinMaxScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler)
+  - [`sklearn.preprocessing.MaxAbsScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler)
+
+
+
+表格  sklearn(scikit-learn)库方法
+
+| 功能       | 模块目录 或算法         | 方法列表 或方法简介                                          |
+| ---------- | ----------------------- | ------------------------------------------------------------ |
+| 分类<br>   |                         | linear_model svm  tree ensemable naive_bayes                 |
+| 聚类       | cluster                 | kmeans.K均值聚类                                             |
+|            | affinityPropagation     | 吸引力传播聚类，2007年提出，几乎优于所有其它方法，不需要指定聚类数，但运行效率低。 |
+|            | meanshift               | 均值漂移聚类                                                 |
+|            | spectralClustering      | 谱聚类                                                       |
+|            | AgglomerativeClustering | 层次聚类                                                     |
+|            | DBSCAN                  | 具有噪声的基于密度的聚类方法。                               |
+|            | BIRCH                   | 综合的层次聚类算法，可以处理大规模数据的聚类。               |
+| 回归       |                         |                                                              |
+| 数据预处理 | preprocessing           | Binarizer二值化，Normalizer归一化，StandardScaler标准化，MinMaxScaler区间缩放，OneHotEncoder哑编码，Imputer缺失值计算，PolynomialFeatures多项式数据转换，FunctionTransformer, mean/std， |
+|            | feature_selection       | 特征选择分为Filter：过滤法，按照发散性或者相关性对各个特征进行评分，如VarianceThreshold, SelectKBest<br>Wrapper<br>Embedded |
+|            | feature_extraction      | 特征抽取                                                     |
+|            |                         | 降维如PCA 主成分分析，线性判别分析法（LDA）                  |
+| 模型选择   | model_selection         |                                                              |
+
+> 特征处理是特征工程的核心部分，sklearn 提供了较为完整的特征处理方法，包括数据预处理，特征选择，降维等。
+
+
+
+表格：sklearn的特征选择
+
+| 类                | 所属方式 | 说明                                                   |
+| :---------------- | :------- | :----------------------------------------------------- |
+| VarianceThreshold | Filter   | 方差选择法                                             |
+| SelectKBest       | Filter   | 可选关联系数、卡方校验、最大信息系数作为得分计算的方法 |
+| RFE               | Wrapper  | 递归地训练基模型，将权值系数较小的特征从特征集合中消除 |
+| SelectFromModel   | Embedded | 训练基模型，选择权值系数较高的特征                     |
+
+
+
+**sklearn**拥有可以用于监督和无监督学习的方法，一般来说监督学习使用的更多。**sklearn**中的大部分函数可以归为**估计器(Estimator)**和**转化器(Transformer)**两类。
+
+**估计器(Estimator)**其实就是模型，它用于对数据的预测或回归。基本上估计器都会有以下几个方法：
+
+- **fit(x,y)** :传入数据以及标签即可训练模型，训练的时间和参数设置，数据集大小以及数据本身的特点有关
+- **score(x,y)**用于对模型的正确率进行评分(范围0-1)。但由于对在不同的问题下，评判模型优劣的的标准不限于简单的正确率，可能还包括召回率或者是查准率等其他的指标，特别是对于类别失衡的样本，准确率并不能很好的评估模型的优劣，因此在对模型进行评估时，不要轻易的被score的得分蒙蔽。
+- **predict(x)**用于对数据的预测，它接受输入，并输出预测标签，输出的格式为numpy数组。我们通常使用这个方法返回测试的结果，再将这个结果用于评估模型。
+
+**转化器(Transformer)**用于对数据的处理，例如标准化、降维以及特征选择等等。同与估计器的使用方法类似:
+
+- **fit(x,y)** :该方法接受输入和标签，计算出数据变换的方式。
+- **transform(x)** :根据已经计算出的变换方式，返回对输入数据**x**变换后的结果（不改变x）
+- **fit_transform(x,y) :**该方法在计算出数据变换方式之后对输入**x**就地转换。
+
+
+
+### sklearn数据集
+
+详见 《dataset.数据集说明》
+
+
+
+### sklearn使用示例
+
+
+
 ## 本章参考
 
-[1].     opencv https://baike.baidu.com/item/opencv 
+[1]. opencv https://baike.baidu.com/item/opencv 
 
+[2]. scikit-learn https://scikit-learn.org/
 
+[3]. scikit-learn (sklearn) 官方文档中文版 https://sklearn.apachecn.org/docs/0.21.3/47.html
+[4]. w3cschool sklearn https://www.w3cschool.cn/doc_scikit_learn/scikit_learn-modules-generated-sklearn-datasets-load_digits.html
+
+[5]. sklearn库的学习 https://blog.csdn.net/u014248127/article/details/78885180
 
 
 

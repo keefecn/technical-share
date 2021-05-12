@@ -36,7 +36,7 @@ Devops：部署、批处理、DB备份与恢复
 
 ### 低代码平台LCDP
 
-Forrester和Gartner低代码测评领导者角色的平台如Outsystems、Mendix、Appian和Kony等国外知名公司对自己产品的定义，总结下来，低代码开发平台**必须具备**的核心要素叫“3+1” ：
+Forrester和Gartner低代码测评领导者角色的平台如Outsystems、Mendix、Appian和Kony等国外知名公司对自己产品的定义，总结下来，低代码开发平台**必须具备**的核心要素叫 “3+1” ：
 
 **3个能力：**可视化（拖拽式）、MADP（移动优先）、aPaaS（云上开发环境） 。
 

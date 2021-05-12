@@ -196,22 +196,22 @@
 
 表格 3 python WEB框架列表
 
-| 框架    | 简介    | 特性   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------- |
-| [Django](https://www.djangoproject.com/download/)  | 一个开源的重量级Web框架，并且采用MVC设计模式。它源自一个在线新闻 Web 站点，于 2005 年以开源的形式被释放出来。 | 简便、快速的开发数据库驱动的网站。 |
-| [flask](http://flask.pocoo.org/)    | 使用 [Python](http://baike.so.com/doc/1790119-1892991.html) 编写的轻量级 Web 应用框架。其 [WSGI](http://baike.so.com/doc/1142343-1208497.html) 工具箱采用 Werkzeug ，[模板引擎](http://baike.so.com/doc/5846906-6059743.html)则使用 Jinja2 。Flask使用 BSD 授权。 | 使用简单的核心。    |
-| tornado      | 使用Python编写出来的一个极轻量级、高可伸缩性和非阻塞IO的Web服务器软件。   著名的Friendfeed 网站就是使用它搭建的。 |   |
-| [Zope 2](http://zope2.zope.org/releases)   | 一款基于Python的Web应用框架，是所有Python Web应用程序、工具的鼻祖，是Python家族一个强有力的分支。Zope 2的“对象发布”系统非常适合面向对象开发方法，并且可以减轻开发者的学习曲线，还可以帮助你发现应用程序里一些不好的功能。 |   |
-| [Web2py](http://web2py.com/examples/default/download)   | 一个用Python语言编写的免费的开源Web框架，旨在敏捷快速的开发Web应用，具有快速、可扩展、安全以及可移植的数据库驱动的应用，遵循LGPLv3开源协议。   　　Web2py提供一站式的解决方案，整个开发过程都可以在浏览器上进行，提供了Web版的在线开发，HTML模版编写，静态文件的上传，数据库的编写的功能。其它的还有日志功能，以及一个自动化的admin接口。 | 推荐   |
-| [Web.py](http://webpy.org/install)    | 一个轻量级的开源Python Web框架，小巧灵活、简单并且非常强大，在使用时没有任何限制。目前Web.py被广泛运用在许多大型网站，如西班牙的社交网站Frinki、主页日平均访问量达7000万次的Yandex等。 |   |
-| [Pyramid](http://www.pylonsproject.org/projects/pyramid/download) | 一款轻量级的开源Python Web框架，是Pylons项目的一部分。Pyramid只能运行在Python 2.x或2.4以后的版本上。在使用后端数据库时无需声明，在开发时也不会强制使用一些特定的模板系统。 |   |
-| pylons    | 对WSGI标准进行了扩展应用，提升了重用性且将功能分割到独立的模块中。 |   |
-| [CubicWeb](http://docs.cubicweb.org/admin/setup)   | 不仅是一个Web开发框架，而且还是一款语义Web开发框架。CubicWeb使用关系查询语言（RQL Relation Query Language）与数据库之间进行通信。 |   |
-| [turbogears](http://www.turbogears.org/)   | 一个可以扩展为全栈解决方案的微型框架。   |   |
+| 框架    | 简介    | 特点  | 优点 | 缺点 | 推荐 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| [Django](https://www.djangoproject.com/download/)  | 它源自一个在线新闻 Web 站点，于 2005 年开源。<br>一个开源的重量级Web框架，并且采用MVC设计模式。 | 全能型，重量级 | 自带ORM/template/view，全自动全功能的管理后台。 | 容易 臃肿 | 管理态后端 |
+| [flask](http://flask.pocoo.org/)    | 使用 [Python](http://baike.so.com/doc/1790119-1892991.html) 编写的轻量级 Web 应用框架。其 [WSGI](http://baike.so.com/doc/1142343-1208497.html) 工具箱采用 Werkzeug ，[模板引擎](http://baike.so.com/doc/5846906-6059743.html)则使用 Jinja2 。Flask使用 BSD 授权。 | 轻量级，原生组件几乎没有 | 简单；配置灵活；入门简单；低耦合                             | 不适用大网站，路由 | 微服务 |
+| tornado      | 著名的Friendfeed 网站就是使用它搭建的。<br>在IO密集性和多任务上性能很好。 | 轻量、异步非阻塞 | 异步非阻塞。高可伸缩性（单线程异步）；websocket长连接。自定义模块。 |  | 微服务 |
+| [Zope 2](http://zope2.zope.org/releases)   | 一款基于Python的Web应用框架，是所有Python Web应用程序、工具的鼻祖，是Python家族一个强有力的分支。<br>Zope 2的“对象发布”系统非常适合面向对象开发方法，并且可以减轻开发者的学习曲线，还可以帮助你发现应用程序里一些不好的功能。 |  |   |   |   |
+| [Web2py](http://web2py.com/examples/default/download)   | 一个用Python语言编写的免费的开源Web框架，旨在敏捷快速的开发Web应用，具有快速、可扩展、安全以及可移植的数据库驱动的应用，遵循LGPLv3开源协议。   Web2py提供一站式的解决方案，整个开发过程都可以在浏览器上进行，提供了Web版的在线开发，HTML模版编写，静态文件的上传，数据库的编写的功能。其它的还有日志功能，以及一个自动化的admin接口。 |  |                                                              |                    |            |
+| [Web.py](http://webpy.org/install)    | 一个轻量级的开源Python Web框架，小巧灵活、简单并且非常强大，在使用时没有任何限制。目前Web.py被广泛运用在许多大型网站，如西班牙的社交网站Frinki、主页日平均访问量达7000万次的Yandex等。 |  |   |   |   |
+| [Pyramid](http://www.pylonsproject.org/projects/pyramid/download) | 一款轻量级的开源Python Web框架，是Pylons项目的一部分。Pyramid只能运行在Python 2.x或2.4以后的版本上。在使用后端数据库时无需声明，在开发时也不会强制使用一些特定的模板系统。 |  |   |   |   |
+| pylons    | 对WSGI标准进行了扩展应用，提升了重用性且将功能分割到独立的模块中。 |  |   |   |   |
+| [CubicWeb](http://docs.cubicweb.org/admin/setup)   | 不仅是一个Web开发框架，而且还是一款语义Web开发框架。CubicWeb使用关系查询语言（RQL Relation Query Language）与数据库之间进行通信。 |  |   |   |   |
+| [turbogears](http://www.turbogears.org/)   | 一个可以扩展为全栈解决方案的微型框架。   |    |   |   |   |
 
  
 
-表格 4 python WEB框架比较
+表格 4 python WEB框架性能比较
 
 |   |  | 性能 nums/sec |    | 依赖组件    | 启动方式   |
 | ---------------- | -------- | ------------- | ------- | --------------------------------------------------- | ------------------------------ |
@@ -223,7 +223,7 @@
 | uwsgi + Flask    |  | 343   | 4651    |     | uwsgi --wsgi-file <file>  |
 | gunicorn + Flask |  |  |    |     | gunicorn -w 2 <filename.Flask> |
 
-备注：uwsgi启动4个工作进程。uwsgi使用C实现性能更高，gunicorn更易使用。
+备注：uwsgi启动4个工作进程。uwsgi使用C实现性能更高，gunicorn更易使用。Django/Falsk/Tornago都是单进程，可以搭配gunicorn/uwsgi才能发挥多核CPU性能。
 
  
 
@@ -245,11 +245,15 @@
 
 备注：
 
+
+
 ## 1.4  本章参考
 
-[1].    6种Web框架测评 http://www.alrond.com/en/2007/jan/25/performance-test-of-6-leading-frameworks/ 
+[1].  6种Web框架测评 http://www.alrond.com/en/2007/jan/25/performance-test-of-6-leading-frameworks/ 
 
-[2].    全面解读python web 程序的9种部署方式 https://www.cnblogs.com/flish/p/5267902.html
+[2].  全面解读python web 程序的9种部署方式 https://www.cnblogs.com/flish/p/5267902.html
+
+[3].  Flask, Tornado, GEvent组合运行与性能比较 https://blog.csdn.net/lcylln/article/details/33731183
 
 
 
@@ -270,7 +274,8 @@ Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面�
 *  Joomla:Yii 引用其模块化设计和信息翻译方案。
 
 
-## 3.1  本章参考
+
+## 本章参考
 
  
 
@@ -305,19 +310,16 @@ Rails 提供了多个被称为“生成器”的脚本，可以简化开发，�
 
 打开终端，进入有写权限的文件夹，执行以下命令生成一个新程序：
 
+```shell
 // 1.会在文件夹 blog 中新建一个Rails 程序
-
 $ rails new blog
 
 // 2.安装 Gemfile 中列出的 gem。
-
 $ bundle install 
 
-// 3.生成 blog 程序后，进入该文件夹：
-
-
-
-执行 rails new -h 可以查看新程序生成器的所有命令行选项。
+// 3.生成 blog 程序后，进入该文件夹, 查看新程序生成器的所有命令行选项。
+$ rails new -h 
+```
 
 blog 文件夹中有很多自动生成的文件和文件夹，组成一个 Rails 程序。本文大部分时间都花在 app 文件夹上。下面简单介绍默认生成的文件和文件夹的作用：
 
@@ -356,7 +358,11 @@ $ rails server
 
 # 6   python-Tornado
 
-## 6.1  本章参考
+
+
+
+
+## 本章参考
 
  
 
