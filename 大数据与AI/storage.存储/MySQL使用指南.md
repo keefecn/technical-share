@@ -163,6 +163,12 @@ mysqld_safe 安全方式启动，可重设root密码
 /usr/lib/mysql/libmysqlclient  库路径与库
 ```
 
+安装：
+
+```
+$ yum install mysql-server
+```
+
 
 
 启动后台服务器: 
@@ -173,6 +179,41 @@ mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf  #安全方式启
 ```
 
 客户端连接： `mysql -u [user] -h [host] -P [port] -p`
+
+
+
+## 阿里云ECS安装MySQL
+
+参考： 阿里云服务器安装MYSQL数据库 https://blog.csdn.net/Edward_hjh/article/details/108483309?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&spm=1001.2101.3001.4242
+
+对于阿里云ECS centos镜像里没有mysql-server包，需先下载，再安装，命令如下：
+
+```
+# 安装
+$ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
+$ yum install mysql-server
+
+# 设置开启服务，并启动服务
+systemctl enable mysqld.service
+systemctl start mysqld.service 
+
+# 获取临时密码
+grep 'temporary password' /var/log/mysqld.log
+
+# 登陆
+mysql -u root -p
+
+# 修改密码
+SET PASSWORD = PASSWORD('12341234');
+
+# 授权远程访问
+GRANT ALL PRIVILEGES ON . TO ‘root’@’%’ IDENTIFIED BY 'xxxxxx' WITH GRANT OPTION;
+ 
+# 立即激活权限
+flush privileges;
+```
+
+
 
 
 

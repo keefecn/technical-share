@@ -35,6 +35,17 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 
 
+解决一个机器学习问题通常包含以下步骤：
+
+- 获得训练数据。
+- 定义模型。
+- 定义损失函数。
+- 遍历训练数据，从目标值计算损失。
+- 计算该损失的梯度，并使用*optimizer*调整变量以适合数据。
+- 计算结果。
+
+
+
 ### 1.1 AI算法应用场景
 
 表格 AI算法类别及应用场景
@@ -49,9 +60,49 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 |            | 统计分析 | 适合从大量数据中获取分布式或进行推断 | 统计检验：T、Chi、相关性<br>拟合统计：KS<br>统计推断：最大似然、<br>统计分析抽样： | P值、贝叶斯因子                        | ICT物料质量趋势预警 |
 | 知识挖掘类 |          | 适合从数据中抽取知识结构             | 频繁集挖掘：Aprbri, TG-Growth                                | Confidence, Support                    |                     |
 
+> 备注：优化类工具包首选google ortools，预测类可选sklearn框架。tensorflow框架适用于海量数据的深度学习。
+
 
 
 ### 1.2 AI算法评价指标
+
+表格 sklean框架支持的模型选择和评价指标
+
+| Scoring（得分）                      | Function（函数）                                             | Comment                                        |
+| ------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------- |
+| **Classification（分类）**           |                                                              |                                                |
+| ‘accuracy’                           | [`metrics.accuracy_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html#sklearn.metrics.accuracy_score) |                                                |
+| ‘average_precision’                  | [`metrics.average_precision_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score) |                                                |
+| ‘f1’                                 | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | for binary targets（用于二进制目标）           |
+| ‘f1_micro’                           | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | micro-averaged                                 |
+| ‘f1_macro’                           | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | macro-averaged（宏平均）                       |
+| ‘f1_weighted’                        | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | weighted average（加权平均）                   |
+| ‘f1_samples’                         | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | by multilabel sample                           |
+| ‘neg_log_loss’                       | [`metrics.log_loss`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html#sklearn.metrics.log_loss) | requires `predict_proba` support               |
+| ‘precision’ etc.                     | [`metrics.precision_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
+| ‘recall’ etc.                        | [`metrics.recall_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
+| ‘roc_auc’                            | [`metrics.roc_auc_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score) |                                                |
+| **Clustering（聚类）**               |                                                              |                                                |
+| ‘adjusted_mutual_info_score’         | [`metrics.adjusted_mutual_info_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score) |                                                |
+| ‘adjusted_rand_score’                | [`metrics.adjusted_rand_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score) |                                                |
+| ‘completeness_score’                 | [`metrics.completeness_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score) |                                                |
+| ‘fowlkes_mallows_score’              | [`metrics.fowlkes_mallows_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.fowlkes_mallows_score.html#sklearn.metrics.fowlkes_mallows_score) |                                                |
+| ‘homogeneity_score’                  | [`metrics.homogeneity_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score) |                                                |
+| ‘mutual_info_score’                  | [`metrics.mutual_info_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mutual_info_score.html#sklearn.metrics.mutual_info_score) |                                                |
+| ‘normalized_mutual_info_score’       | [`metrics.normalized_mutual_info_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score) |                                                |
+| ‘v_measure_score’                    | [`metrics.v_measure_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score) |                                                |
+| **Regression（回归）**               |                                                              |                                                |
+| ‘explained_variance’                 | [`metrics.explained_variance_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.explained_variance_score.html#sklearn.metrics.explained_variance_score) |                                                |
+| ‘neg_mean_absolute_error’            | [`metrics.mean_absolute_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error) |                                                |
+| ‘neg_mean_squared_error’             | [`metrics.mean_squared_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error) |                                                |
+| ‘neg_mean_squared_log_error’         | [`metrics.mean_squared_log_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_log_error.html#sklearn.metrics.mean_squared_log_error) |                                                |
+| ‘neg_median_absolute_error’          | [`metrics.median_absolute_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.median_absolute_error.html#sklearn.metrics.median_absolute_error) |                                                |
+| ‘r2’                                 | [`metrics.r2_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score) |                                                |
+| ‘neg_mean_poisson_deviance’          | [`metrics.mean_poisson_deviance`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_poisson_deviance.html#sklearn.metrics.mean_poisson_deviance) |                                                |
+| ‘neg_mean_gamma_deviance’            | [`metrics.mean_gamma_deviance`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_gamma_deviance.html#sklearn.metrics.mean_gamma_deviance) |                                                |
+| ‘neg_mean_absolute_percentage_error’ | [`metrics.mean_absolute_percentage_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_percentage_error.html#sklearn.metrics.mean_absolute_percentage_error) |                                                |
+
+
 
 #### 混淆矩阵/P/R/F值 
 
@@ -245,6 +296,12 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 
 第二种方式是计算出每一个类的 Precison 和Recall 后计算F1，最后将F1平均。这种方式叫做Macro-F1宏平均。
 
+> 注意：Macro F1受样本数量少的类别影响大。
+
+![2](..\..\media\ai\ai_algo_007.png)
+
+**图  N分类混淆矩阵**
+
 
 
 ### 1.3 AI算法性能评估
@@ -275,9 +332,106 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 
  
 
+### 1.4 模型优化
+
+AI模型优化过程包括模型编译compile（调参）、模型训练、模型保存和加载、模型预测。
+
+* 模型编译 compile:  可以调参，指定loss, optiomizer和metrics。
+* 模型训练 fit：一般epochs次数 越多 ，效果越好。
+* 模型保存和加载: save load_model，模型占用的空间比较大。
+* 模型预测 predict：
+* 模型评估 evaluate:  用测试集进行验证，输出loss值和指标（如准确率）。
+
+
+
+大多数机器学习问题最终都会涉及一个最优化问题，只是有的是基于最大化后验概率，例如贝叶斯算法，有的是最小化类内距离，例如k-means，而有的是根据预测值和真实值构建一个损失函数，用优化算法来最优化这个损失函数达到学习模型参数的目的。
+
+最优化算法有三要素：变量（Decision Variable）、约束条件（Constraints）和目标函数（Objective function）。
+
+优化分为参数优化和超参数优化
+
+* 参数： 模型f(x;Θ)中的Θ称为模型的参数，可以通过优化算法进行自动学习得到。
+* 超参数： 用来定义模型结构或优化策略
+  
+
+
+
+#### 模型参数
+
+模型编译步骤时，可以指定损失函数，优化器和指标。
+
+- *损失函数*  loss- 用于测量模型在训练期间的准确率。希望最小化此函数，以便将模型“引导”到正确的方向上。
+- *优化器* optimizer - 决定模型如何根据其看到的数据和自身的损失函数进行更新。
+- *指标* metrics - 用于监控训练和测试步骤。以下示例使用了*准确率*，即被正确分类的图像的比率。
+
+
+
+##### 损失函数 loss
+
+loss损失函数有很多种：均方误差（MSE）、SVM的合页损失（hinge loss）、交叉熵（cross entropy）。
+
+penalty补偿函数：
+
+
+
+##### 优化器 optimizer
+
+优化算法有很多种，如果按梯度的类型进行分类，可以分为有梯度优化算法和无梯度优化算法。
+
+* 梯度优化算法：主要有梯度下降法、动量法momentum、Adagrad、RMSProp、Adadelta、Adam等。
+* 无梯度优化算法：粒子群优化算法、蚁群算法群体智能优化算法，也有贝叶斯优化、ES、SMAC这一类的黑盒优化算法。
+
+
+
+梯度下降法包括 批量梯度下降BGD、随机剃度下降SGD和小批量剃度下降MBGD。
+
+| 名词           | 定义                                                         |
+| -------------- | ------------------------------------------------------------ |
+| original-loss  | 整个训练集上的loss                                           |
+| minibatch-loss | 在一个mini batch上的loss                                     |
+| BGD            | 最原始的梯度下降算法，为了计算original-loss上的梯度，需要使用训练集全部数据 |
+| SGD            | Stochastic Gradient Descent，随机梯度下降法。<br>（近似）计算original-loss梯度时，只使用一个mini  batch，相当于用minibatch-loss上的梯度去近似original-loss梯度 |
+| 奇点           | local minimal和saddle point                                  |
+
+
+
+**随机梯度下降(SGD)** 
+
+SGD是一种简单但又非常高效的方法，主要用于凸损失函数下线性分类器的判别式学习，例如(线性) [支持向量机](https://en.wikipedia.org/wiki/Support_vector_machine) 和 [Logistic 回归](https://en.wikipedia.org/wiki/Logistic_regression) 。
+
+SGD 已成功应用于在文本分类和自然语言处理中经常遇到的大规模和稀疏的机器学习问题。对于稀疏数据，本模块的分类器可以轻易的处理超过 10^5 的训练样本和超过 10^5 的特征。
+
+SGD的优势:
+
+- 高效。
+- 易于实现 (有大量优化代码的机会)。
+
+SGD的劣势:
+
+- SGD 需要一些超参数，例如 regularization （正则化）参数和 number of iterations （迭代次数）。
+- SGD 对 feature scaling （特征缩放）敏感。
+
+
+
+#### 泛化和验证
+
+问题：欠拟合(underfiting) 和 过拟合(overfitting)
+
+解决方案：交叉验证
+
+交叉验证注意事项
+
+*  训练数据要有代表性。
+*  某些数据集的特征是有时间顺序的。
+*  K折交叉（将数据集分成K个包，对于某个包，取其它包作为训练集，N个包处理完后，将每个包的预测值进行汇总，综合评估其准确率）的包数量越大，估计误差越好，但花费时间越多。
+
+
+
 ### 本章参考
 
 [1]. 一文详尽混淆矩阵、准确率、精确率、召回率、F1值、P-R 曲线、ROC 曲线、AUC 值、Micro-F1 和 Macro-F1 https://blog.csdn.net/weixin_37641832/article/details/104434509
+
+[2]. ROC曲线 [https://baike.baidu.com/item/ROC%E6%9B%B2%E7%BA%BF](https://baike.baidu.com/item/ROC曲线)
 
 
 
@@ -293,9 +447,13 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 
 ### 2.1  文本特征
 
-*  词袋(bags of word)：将文本拆分成词的组合。
+文本向量化的算法通常有TF-IDF, Word2Vec
 
-*  文本向量化：word2vec{词，词频}~最初由google开发，由深度神经网络构成，可将稀疏特征转化为稠密矩阵。实现如python Gensim库。
+Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，可将稀疏特征转化为稠密矩阵。实现方式有连续词袋模型（CBOW）和Skip-Gram模型。实现框架如python Gensim库。
+
+*  词袋(bags of word)：将文本拆分成词的组合。
+*  连续词袋模型（CBOW）：
+*  Skip-Gram模型：主要是通过输入句子中特定的单词来预测该单词周边的其他单词。
 
  
 
@@ -304,6 +462,8 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 *  TF-IDF、
 
 *  潜在语义索引（Latent Semantic Analysis, LSA）：使用奇异值分解（SVD），将词语-文档矩阵分解成3个矩阵（T~关联术语和概念、S~奇异值、D~关联文档和概念） 
+
+
 
 ### 2.2  图像特征
 
@@ -340,9 +500,9 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 | 距离               | 定义                                                         | 应用                                                         |
 | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 欧氏距离           | 最常见的距离度量，衡量的是多维空间中各个点之间的绝对距离。   dist(x,y)=   dist1 = np.linalg.norm( x - y )   dist2 = np.sqrt(np.sum(np.square(x -   y))) | 欧氏度量需要保证各维度指标在相同的刻度级别，比如对身高（cm）和体重（kg）两个单位不同的指标使用欧式距离可能使结果失效。 |
-| 余弦距离           | 用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。   sim(x,y)=cos = xy/(\|\|x\|\| \|\|y\|\|)   或 cos(x,y)   = (x*y)/(L(x)*L(y))，即两向量的内积除于两向量的L2范式   实现：   dist1 = 1 - np.dot(x,y)/(np.linalg.norm(x)*np.linalg.norm(y)) | 相比距离度量，余弦相似度更加注重两个向量在方向上的差异，而非距离或长度上。  余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。计算文本相似度时要加入*词频*作为权重。 |
+| 余弦距离.cos       | 用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。   sim(x,y)=cos = xy/(\|\|x\|\| \|\|y\|\|)   或 cos(x,y)   = (x*y)/(L(x)*L(y))，即两向量的内积除于两向量的L2范式   实现：   dist1 = 1 - np.dot(x,y)/(np.linalg.norm(x)*np.linalg.norm(y)) | 相比距离度量，余弦相似度更加注重两个向量在方向上的差异，而非距离或长度上。  余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似。计算文本相似度时要加入*词频*作为权重。 |
 | Jaccard距离        | 用于计算符号度量或者布尔值度量的两个个体之间的相似度，由于个体的特征属性是用符号或者布尔值度量的，所以只能统计包含的共同特征个数。   Jacard(x,y)   = (x 交y)/(x并 y) | 用来衡量两个集合的相似度                                     |
-| 编辑距离           | 俄罗斯Vladimir Levenshtein在1965年提出。设有字符串A和B，B为模式串，现给定以下操作：从字符串中删除一个字符；从字符串中插入一个字符；从字符串中替换一个字符。通过以上三种操作，将字符串A编辑为模式串B所需的最小操作数称为A和B的最短编辑距离，记为ED(A,B)。 | 主要用来计算两个字符串的相似度。编辑距离越小，说明两个字符串越相似。反之，越不相似。 |
+| 编辑距离.lev       | 俄罗斯Vladimir Levenshtein在1965年提出。设有字符串A和B，B为模式串，现给定以下操作：从字符串中删除一个字符；从字符串中插入一个字符；从字符串中替换一个字符。通过以上三种操作，将字符串A编辑为模式串B所需的最小操作数称为A和B的最短编辑距离，记为ED(A,B)。 | 主要用来计算两个字符串的相似度。编辑距离越小，说明两个字符串越相似。反之，越不相似。 |
 | SimHash + 汉明距离 | SimHash是谷歌发明的。                                        |                                                              |
 | 曼哈顿距离         | 十九世纪的赫尔曼·闵可夫斯基所创，用以标明两个点上在标准坐标系上的绝对轴距总和。 |                                                              |
 | 海明距离           | 两个码字的对应比特取值不同的比特数称为这两个码字的海明距离。即两个向量中不同分量的个数。   score = 1 /   (euclideanDistance+1) | 用于编码的检错和纠错                                         |
@@ -375,6 +535,67 @@ $$
 
  
 
+### 3.2 决策树算法
+
+决策树是用于分类和预测的主要技术之一，决策树学习是以实例为基础的归纳学习算法，它着眼于从一组无次序、无规则的实例中推理出以决策树表示的分类规则。 构造决策树的目的是找出属性和类别间的关系，用它来预测将来未知类别的记录的类别。它采用自顶向下的递归方式，在决策树的内部节点进行属性的比较，并根据不同属性值判断从该节点向下的分支，在决策树的叶节点得到结论。 
+
+主要的决策树算法有ID3、C4.5（C5.0）、CART、PUBLIC、SLIQ和SPRINT算法等。它们在选择测试属性采用的技术、生成的决策树的结构、剪枝的方法以及时刻，能否处理大数据集等方面都有各自的不同之处。
+
+决策树分为两大类，回归树和分类树，GBDT中的树都是回归树，不是分类树。
+
+
+
+[**C4.5**](http://blog.csdn.net/aladdina/archive/2009/04/30/4141048.aspx)
+
+C4.5算法是机器学习算法中的一种分类决策树算法,其核心算法是ID3算法. C4.5算法继承了ID3算法的优点，并在以下几方面对ID3算法进行了改进：
+
+1)    用信息增益率来选择属性，克服了用信息增益选择属性时偏向选择取值多的属性的不足；
+
+2)    在树构造过程中进行剪枝；
+
+3)    能够完成对连续属性的离散化处理；
+
+4)    能够对不完整数据进行处理。
+
+C4.5算法有如下优点：产生的分类规则易于理解，准确率较高。其缺点是：在构造树的过程中，需要对数据集进行多次的顺序扫描和排序，因而导致算法的低效。
+
+
+
+**CART**
+
+Classification and Regression *Trees* 分类与回归树，是二叉树，可以用于分类，也可以用于回归问题，最先由 Breiman 等提出。CART是一棵二叉树，每一次分裂会产生两个子节点。CART树分为分类树和回归树。
+
+分类树主要针对目标标量为分类变量，比如预测一个动物是否是哺乳动物。
+
+回归树针对目标变量为连续值的情况，比如预测一个动物的年龄。
+
+如果是分类树，将选择能够最小化分裂后节点GINI值的分裂属性；
+
+如果是回归树，选择能够最小化两个节点样本方差的分裂属性。CART跟其他决策树算法一样，需要进行剪枝，才能防止算法过拟合从而保证算法的泛化性能。
+
+
+
+### 3.3 时序模式算法 
+
+时间序列一般有以下特殊：趋势性、周期性、季节性和随机性。
+
+表格 6 趋势预测常见算法
+
+| 算法         | 概念                                                         | 算法步骤 | 应用               |
+| ------------ | ------------------------------------------------------------ | -------- | ------------------ |
+| 移动平均法   | 分为简单移动平均和加权移动平均。                             |          |                    |
+| 指数平滑法   | 特殊的加权移动平均法。                                       |          |                    |
+| ARIMA模型    | Auto   Regressive Integrated Movig Average, 自回归移动平均模型。 |          | 只能挖掘线性关系。 |
+| 神经网络模型 |                                                              |          |                    |
+
+
+
+### 本章参考
+
+
+
+
+
 ## 4 ML机器学习算法
 
 参考 《AI笔记》相关章节
@@ -395,7 +616,7 @@ $$
 
  
 
-### 分类.Classify
+### 分类.Classification
 
 分类器算法分类
 
@@ -458,7 +679,7 @@ $$
 | K-means  | K平均也称为K均值、快速聚类法。在最小化误差函数的基础上将数据划分为预定的类数K。此算法原理简单并便于处理大数据。 |
 | K-中心法 | K中心点算法不采用簇中对象的平均值作为簇中心，而选用簇中离平均值最近的对象作为簇中心。 |
 | 系统聚类 | 也称多层次聚类，分类的单位由高到低呈树形结构，且所处的位置越低，其所包含的对象就越少，但这些对象间的共同特征越多。此算法只适合在小数据量的时候使用，大数据时会非常慢。 |
-| EM       |                                                              |
+| EM       | 最大期望。                                                   |
 
 
 
@@ -503,17 +724,39 @@ $$
 
  
 
-### 常用算法介绍
+#### **降维**
 
-#### **决策树算法**
-
-决策树是用于分类和预测的主要技术之一，决策树学习是以实例为基础的归纳学习算法，它着眼于从一组无次序、无规则的实例中推理出以决策树表示的分类规则。 构造决策树的目的是找出属性和类别间的关系，用它来预测将来未知类别的记录的类别。它采用自顶向下的递归方式，在决策树的内部节点进行属性的比较，并根据不同属性值判断从该节点向下的分支，在决策树的叶节点得到结论。 
-
-主要的决策树算法有ID3、C4.5（C5.0）、CART、PUBLIC、SLIQ和SPRINT算法等。它们在选择测试属性采用的技术、生成的决策树的结构、剪枝的方法以及时刻，能否处理大数据集等方面都有各自的不同之处。
+**PAC算法**：PCA(Principal Component Analysis ，PCA) 是主成分分析，主要用于数据降维。 目的是找那些变化大的元素，即方差大的那些维，而去除掉那些变化不大的维，从而使特征留下的都是“精品”，而且计算量也变小了。
 
 
 
-#### 集成学习算法 
+### Ensemble集成学习算法 
+
+集成学习算法常用于解决分类、回归和异常点检测问题。
+
+集成学习，顾名思义，就是将多个单一模型进行组合，最后形成一个更好的模型的过程。之所以组合多个单一学习器，是因为很多时候单一学习器的效果不够理想，多个模型组合可以互帮互助，各取所长，从而能够更好的完成任务。集成学习一般的结构是先学习单一的学习器，之后通过某种策略将其组合在一起。
+
+**条件**
+
+（a）首先应该保证分类器之间的差异性，如果分类器都相同，那么组合的出来的结果是不会有变化的。
+
+（b）每个个体分类器的精度必须大于0.5，如果个体分类器的精度低于0.5，那集成之后的精度低于规模的增大而降低。但如果精度是大于0.5的，最后的分类结果会趋于1。
+
+
+
+**集成学习的类别**
+
+根据个体学习器的生成方式，目前的集成学习方法大致可以分成两类：
+
+* 第一类是单个学习器之间有着很强的依赖关系，需要以串行的序列化的方式生成，代表方法：Boosting。
+
+  Boosting方法中也有很多分类如Adaboost、GBDT等等。
+
+* 第二类就是个体学习器之间不存在很强的依赖关系，学习器可以并行生成，代表方法：Bagging 和Random Forest。
+
+
+
+#### **Boosting**
 
 Boosting就是指用一系列的模型线性组合来完成模型任务。在Boosting学习中，逐步的确定每一个模型之间，每一个子模型叠加到复合模型当中来，在这个过程中保证损失函数随着子模型的增加而逐渐减少。
 
@@ -523,59 +766,55 @@ Boosting有两种，AdaBoost和Gradient Boost。
 
 * Gradient Boosting: 直接修改样本label，新的样本的label将变成原来的label和已知形成的模型预测值之间的残差。
 
-从两者来看，gradient boosting 更倾向于降低训练误差的角度去完成算法乘积。
+从两者来看，Gradient Boosting 更倾向于降低训练误差的角度去完成算法乘积。
 
 表格 Boosting算法列表
 
 | 算法     | 算法原理                                                     | 优点                                                         | 缺点                                |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------- |
-| **GBDT** | Gradient Boosting Decison Tree，梯度下降决策树。<br>一轮一轮迭代弱学习器，使用前向分布算法，但是它限定弱学习器只能是决策树(CART回归树）。 |                                                              | 不能处理海量数据                    |
+| **GBDT** | Gradient Boosting Decison Tree，梯度提升决策树。<br>一轮一轮迭代弱学习器，使用前向分布算法，但是它限定弱学习器只能是决策树(CART回归树）。 |                                                              | 不能处理海量数据                    |
 | AdaBoost | 利用前一轮迭代弱学习器的误差率来更新训练集的权重，这样一轮轮的迭代下去。 |                                                              |                                     |
-| XGBoost  | 基于GBDT改进而来的。基于预排序方法的决策树算法。             | 能精确地找到分割点。                                         | 空间时间消耗大，对cache优化不友好。 |
+| XGB      | Extreme Gradient Boosting。陈天奇等人开发，高效地实现了GBDT算法并进行了算法和工程上的许多改进。<br>基于预排序方法的决策树算法。 | 能精确地找到分割点。                                         | 空间时间消耗大，对cache优化不友好。 |
 | LGB      | Light Gradient Boosting Machine。基于Histogram的决策树算法。<br>单边梯度采样 Gradient-based One-Side Sampling(GOSS)。互斥特征捆绑 Exclusive Feature Bundling(EFB)。直接支持类别特征(Categorical Feature)。 | 更快的训练速度、更低的内存消耗、更好的准确率、支持分布式可以快速处理海量数据等 |                                     |
+| HGB      | Histogram-based Gradient Boosting                            |                                                              |                                     |
+
+
 
 **GBDT**
 
-GBDT - Gradient Boosting Decison Tree，全称梯度下降树，在传统机器学习算法里面是对真实分布拟合的最好的几种算法之一。
+GBDT - Gradient Boosting Decison Tree，全称梯度提升树，在传统机器学习算法里面是对真实分布拟合的最好的几种算法之一。GBDT是集成学习Boosting算法中的一种。
 
-GBDT是集成学习Boosting算法中的一种，它与Adaboost相比，Adaboost算法利用前一轮迭代弱学习器的误差率来更新训练集的权重，这样一轮轮的迭代下去，GBDT也是一轮一轮迭代弱学习器，使用前向分布算法，但是它限定弱学习器只能是决策树(CART回归树）。决策树分为两大类，回归树和分类树，GBDT中的树都是回归树，不是分类树。
-
-GBDT通过多轮迭代,每轮迭代产生一个弱分类器，每个分类器在上一轮分类器的**残差**基础上进行训练。对弱分类器的要求一般是足够简单，并且是低方差和高偏差的。因为训练的过程是通过降低偏差来不断提高最终分类器的精度， 弱分类器一般会选择为CART TREE（也就是分类回归树）。由于上述高偏差和简单的要求 每个分类回归树的深度不会很深。最终的总分类器 是将每轮训练得到的弱分类器加权求和得到的（也就是加法模型）。
+GBDT使用前向分布算法，通过多轮迭代,每轮迭代产生一个弱分类器（限定弱学习器只能是决策树，实际选择CART回归树），每个分类器在上一轮分类器的**残差**基础上进行训练。对弱分类器的要求一般是足够简单，并且是低方差和高偏差的。因为训练的过程是通过降低偏差来不断提高最终分类器的精度， 弱分类器一般会选择为CART TREE的回归树。由于上述高偏差和简单的要求 每个分类回归树的深度不会很深。最终的总分类器 是将每轮训练得到的弱分类器加权求和得到的（也就是加法模型）。
 
 
 
 **LGB**
 
-LightGBM（Light Gradient Boosting Machine）， 微软于2007年开源。是一个实现GBDT算法的框架，支持高效率的并行训练，并且具有更快的训练速度、更低的内存消耗、更好的准确率、支持分布式可以快速处理海量数据等优点。
+LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推出的可扩展机器学习系统，是微软旗下DMKT的一个开源项目，由2014年首届阿里巴巴大数据竞赛获胜者之一柯国霖老师带领开发。是一个实现GBDT算法的框架，支持高效率的并行训练，并且具有更快的训练速度、更低的内存消耗、更好的准确率、支持分布式可以快速处理海量数据等优点。
+
+
 
 
 
 ### 本章参考
 
-[1].  机器学习算法GBDT https://www.cnblogs.com/bnuvincent/p/9693190.html
+[1]. 机器学习算法GBDT https://www.cnblogs.com/bnuvincent/p/9693190.html
 
-[2].  GBDT集成算法（梯度提升树） https://www.jianshu.com/p/1da813fde4a3
+[2]. XGBoost入门系列第一讲 https://zhuanlan.zhihu.com/p/27816315
 
-[3].  LightGBM（lgb）介绍 https://www.jianshu.com/p/1cbbe01541fd
+[3]. GBDT集成算法（梯度提升树） https://www.jianshu.com/p/1da813fde4a3
 
-[4].  超全！LightGBM算法框架前世今生！ https://baijiahao.baidu.com/s?id=1671278750268233539&wfr=spider&for=pc
+[4]. LightGBM（lgb）介绍 https://www.jianshu.com/p/1cbbe01541fd
+
+[5]. 超全！LightGBM算法框架前世今生！ https://baijiahao.baidu.com/s?id=1671278750268233539&wfr=spider&for=pc
+
+[6]. 机器学习集成学习 Ensemble Learning（常用集成算法汇总） https://blog.csdn.net/weixin_39948381/article/details/106442535?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest 
+
+[7]. PCA http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html 
 
 
 
-## 5 时序模式算法 
 
-时间序列一般有以下特殊：趋势性、周期性、季节性和随机性。
-
-表格 6 趋势预测常见算法
-
-| 算法         | 概念                                                         | 算法步骤 | 应用               |
-| ------------ | ------------------------------------------------------------ | -------- | ------------------ |
-| 移动平均法   | 分为简单移动平均和加权移动平均。                             |          |                    |
-| 指数平滑法   | 特殊的加权移动平均法。                                       |          |                    |
-| ARIMA模型    | Auto   Regressive Integrated Movig Average, 自回归移动平均模型。 |          | 只能挖掘线性关系。 |
-| 神经网络模型 |                                                              |          |                    |
-
- 
 
 ## 6 仿生学算法系列
 
@@ -643,22 +882,32 @@ LightGBM（Light Gradient Boosting Machine）， 微软于2007年开源。是一
 
 ### 神经网络算法
 
-神经网络技术起源于上世纪五、六十年代，当时叫感知机（perceptron），包含有输入层、输出层和一个隐藏层。输入的特征向量通过隐藏层变换到达输出层，由输出层得到分类结果。80年代后，增加到多层感知机。2006年，Hition提出了深度学习的概念，引发了深度学习的热潮。具体是利用预训练的方式缓解了局部最优解的问题，将隐藏层增加到了7层，实现了真正意义上的“深度”。
-
 **原理：**人工神经网络是根据人的认识过程而开发出的一种算法。假如我们现在只有一些输入和相应的输出,而对如何由输入得到输出的机理并不清楚,那么我们可以把输入与输出之间的未知过程看成是一个“网络”,通过不断地给这个网络输入和相应的输出来“训练”这个网络,网络根据输入和输出不断地调节自己的各节点之间的权值来满足输入和输出。这样,当训练结束后,我们给定一个输入,网络便会根据自己已调节好的权值计算出一个输出。这就是神经网络的简单原理。
+
+
 
 表格 8 神经网络(Neural Network)算法分类
 
 | 分类                | 简述                                                         | 应用场景       |
 | ------------------- | ------------------------------------------------------------ | -------------- |
-| 卷积.CNN            | Convolutions，前馈神经网络。通过卷积核将上下层进行链接，同一个卷积核在所有图像中是共享的，图像通过卷积操作后仍然保留原先的位置关系。 | 时间序列、分类 |
+| 卷积.CNN            | Convolutions卷积，前馈神经网络。通过卷积核将上下层进行链接，同一个卷积核在所有图像中是共享的，图像通过卷积操作后仍然保留原先的位置关系。 | 时间序列、分类 |
 | 深度.DNN            | Deep。为了克服梯度消失，ReLU、maxout等传输函数代替了sigmoid，形成了如今DNN的基本形式。 |                |
 | RNN                 | Roop循环或者Recurrent递归。                                  |                |
 | 长短期记忆网络.LSTM |                                                              |                |
 
  
 
+**卷积**
+
+在[泛函分析](https://baike.baidu.com/item/泛函分析/4151)中，卷积、旋积或摺积(英语：Convolution)是通过两个[函数](https://baike.baidu.com/item/函数/301912)f和g 生成第三个函数的一种[数学](https://baike.baidu.com/item/数学/107037)[算子](https://baike.baidu.com/item/算子/970194)，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
+
+
+
 ## 7 NLP常用算法
+
+2001年，Lafferty 等人提出CRF（Conditional Random Field, 条件随机场），结合了 **最大熵模型** 和 **隐马尔科夫模型** 的特点，能对隐含状态建模，学习状态序列的特点，但它的缺点是需要手动提取序列特征。
+
+2013年，谷歌的 Mikolov 提出了一套新的词嵌入方法Word2Vec。
 
 2017年，谷歌发表《Attention Is All You Need》，提出Transformer模型。
 
@@ -679,15 +928,27 @@ LightGBM（Light Gradient Boosting Machine）， 微软于2007年开源。是一
 
 
 
+### 文本向量化
+
+文本向量化的方法主要有：词频、TF-IDF、Word2Vec
+
+**Word2Vec**
+
+Word2Vec是 Word Embedding 的方法之一。他是 2013 年由谷歌的 Mikolov 提出了一套新的词嵌入方法。
+
+Word2vec，是一群用来产生词向量的相关模型。这些模型为浅而双层的神经网络，用来训练以重新建构语言学之词文本。网络以词表现，并且需猜测相邻位置的输入词，在word2vec中词袋模型假设下，词的顺序是不重要的。训练完成之后，word2vec模型可用来映射每个词到一个向量，可用来表示词对词之间的关系，该向量为神经网络之隐藏层。
+
+
+
 ### N-gram
 
 马尔可夫假设（Markov assumption）指的是下一个词的出现仅依赖于它前面的一个或几个词。这样就可以有效减少使用链式法则后的长度，同时很少的几个词在语料中同时出现的概率较大，使它不容易崩溃。即：假设当前词出现的概率只依赖于前 n-1 个词，使用公式表示马尔可夫假设：
 
 基于马尔科夫假设，提出了n-gram模型如下：
 
-- 当 n=1 时，每个词的出现只与自己有关，因此每个词相互独立，被称之为Unigram
-- 当 n=2时，每个词的出现只与前一个词有关，被称为Bigram
-- 当 n=3时，每个词的出现只与前两个词有关，被称为Trigram
+- 当 n=1 时，每个词的出现只与自己有关，因此每个词相互独立，被称之为Uni-gram
+- 当 n=2时，每个词的出现只与前一个词有关，被称为Bi-gram
+- 当 n=3时，每个词的出现只与前两个词有关，被称为Tri-gram
 
 所以n-gram的n表示下一个单词的出现依赖于前 n-1 个单词，这个n可以根据具体情况来取，但是一般Unigram、Bigram、Trigram比较常用，n太大也会出现上面提到的问题。
 
@@ -701,6 +962,29 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 
 
+### 主题建模
+
+主题建模是一种无监督的机器学习方法，它帮助我们发现文档(语料库)中隐藏的语义结构，它使我们能够快速的发现文档中所包含的主题。 主题模型可以应用于推荐系统和论坛中的帖子自动加注标签等这样的应用中。开源包sklearn和gensim都实现了主题建模包。
+
+主题建模的实现算法有：
+
+**潜在狄利克雷分配(LDA)** ：Latent Dirichlet Allocatio，该算法是主题建模中最流行的算法。 它使用概率图形模型来实现主题建模。 我们需要在 Python 中导入 gensim 包以使用 LDA slgorithm。
+
+**潜在语义分析(LDA)或潜在语义索引(LSI)** 该算法基于线性代数。 基本上它在文档术语矩阵上使用 SVD(奇异值分解)的概念。
+
+**非负矩阵分解(NMF)**： 它也基于线性代数。
+
+上述所有用于话题建模的算法都将主题数量作为参数，将文档 - 词汇矩阵（词袋模型，行表示文档，列为语料库中某单词在此文档的计数）作为输入，将 WTM(词-主题矩阵)和TDM(主题-文档矩阵)作为输出。
+表格 文档-词汇矩阵
+
+|       | 词1  | 词2  | ...  | 词n  |
+| ----- | ---- | ---- | ---- | ---- |
+| 文档1 | 20   | 9    | 30   | 34   |
+| 文档2 |      |      |      | .    |
+| ...   |      |      |      |      |
+| 文档n |      |      |      |      |
+
+
 
 
 ### 本章参考
@@ -711,6 +995,90 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 
 
+## 8 推荐引擎算法
+
+详见 《推荐系统设计说明书》
+
+
+
+**推荐系统算法常见分类**
+
+*  关联规则挖掘。基于频繁集的挖掘。范围是所有用户和商品直接挖掘。
+
+*  协同过滤CF~collaborative filtering。基于产品或用户之间的相似性，其中，我们使用余弦相似性。思想是首先利用用户的历史信息**计算相似性**，然后利用与目标用户相似性极高的邻居对其它产品的评价来预测目标用户对特定产品的喜好程序．系统根据这喜好度来对目标用户进行推荐．(产品的评价意见)
+
+*  基于用户-产品的CF（UCF)
+
+*  基于产品-产品的CF（ICF）
+
+*  基于模型的CF：基于矩阵分解，其中，我们使用SVD来分解矩阵。
+
+*  基于内容的推荐Content-based。思想是对用户和产品分别生成配置文件，根据产品使用情况更新用户配置文件，用分类方法来得到用户的关联性。基于内容的推荐不需要用户评价数据，解决了冷启动问题。
+
+*  基于记忆的算法
+
+*  基于用户的推荐。范围是用户相似的用户和他们感兴趣的信息。
+
+*  基于协同tag推荐。就是用户的兴趣点和商品特征和匹配对应。(用户-产品)
+
+
+
+### 关联规则
+
+**目的**：给定一组记录，记录由项目组成，获取项目之间的依赖关系．如购物分析，推荐系统．
+
+**衡量准则**: 支持度（Support）和置信度（Confidence）等
+
+ 
+
+表格 6 常用关联规则算法列表
+
+| 算法       | 算法描述                                                     |
+| ---------- | ------------------------------------------------------------ |
+| Apriori    | 最常用的。其核心思想是通过连接产生候选项及其支持度然后通过剪枝生成频繁项集。 |
+| FP-Tree    | 针对Apriori算法的固有的多次扫描事务数据集的缺陷，提出的不产生候选频繁项集的方法。 |
+| Eclat      | 深度优先算法，采用垂直数据表示形式，在概念格理论的基础上利用基于前缀的等价关系将搜索空间划分为较小的子空间。 |
+| 灰色关联法 | 分析和确定各因素之间的影响程度或是若干个子因素（子序列）对主因素（母序列）的贡献主而进行的一种分析方法。 |
+
+ 
+
+#### Apriori算法
+
+**算法说明：**
+
+对于一条关联规则L->R，我们常用支持度（Support）和置信度（Confidence）来衡量它的重要性。规则的支持度是用来估计在一个购物篮中同时观察到L和R的概率P(L,R)，而规则的置信度是估计购物栏中出现了L时也出会现R的条件概率P(R|L)。关联规则的目标一般是产生支持度和置信度都较高的规则。
+
+Apriori算法对于一条规则L->R，有以下度量：
+
+*  支持度（Support）同时观察到L和R的概率P(L,R)
+*  置信度（Confidence）出现了L时也出会现R的条件概率P(R|L)
+*  Lift（提升度）： P(L,R)/(P(L)P(R))
+*  Leverage（杠杆）：P(L,R)-P(L)P(R)
+*  Conviction（判断度?）：P(L)P(!R)/P(L,!R)
+
+说明：以上度量中，支持度，置信度和conviction越大越好。当Lift=1, Leverage=0时说明L与R是独立事件。
+
+ 
+
+
+
 # 参考资料
 
 ## 参考链接 
+
+[1].  干货！机器学习平台优质学习资源推荐 https://zhuanlan.zhihu.com/p/55819467
+
+[2]. 练手|常见26种深度学习模型的实现 https://zhuanlan.zhihu.com/p/51331280
+
+[3]. 练手|常见30种NLP任务的练手项目 https://zhuanlan.zhihu.com/p/51279338
+
+[4]. 一文看懂深度学习发展史和常见26个模型 https://zhuanlan.zhihu.com/p/50967380
+
+[5].  一文回顾深度学习发展史上最重要经典模型 https://zhuanlan.zhihu.com/p/269488005
+
+[6].  深度学习入门指南：25个初学者要知道的概念 https://zhuanlan.zhihu.com/p/27186569
+
+[7].  干货|机器学习超全综述！ https://zhuanlan.zhihu.com/p/46320419
+
+[8]. 推荐算法设计综述 https://zhuanlan.zhihu.com/p/69478126
+
