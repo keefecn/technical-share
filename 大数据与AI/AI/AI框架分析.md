@@ -223,12 +223,38 @@ import pandas as pd
 
 
 
+**术语**
+
+| 术语         | 解释                                                         |
+| ------------ | ------------------------------------------------------------ |
+| one hot编码  |                                                              |
+| tensor 张量  | 表示数据，一组多维数据（一维标量Scalar、二维矢量/向量vector，在tensorflow里都可以泛叫张量）。<br>在python numpy里类型是narray。 |
+| OP 算子      |                                                              |
+| Session 会话 | 在tensorflow 1.x里用来启动一个训练。                         |
+| 变量         | 用来维护状态                                                 |
+
+
+
+### 入门篇
+
+表格 tensorflow版本说明
+
+| 版本 | 发布时间 | 功能&备注                                                    |
+| ---- | -------- | ------------------------------------------------------------ |
+| v1.0 | 2015.11  | 用于处理静态计算图                                           |
+| v2.0 | 2019.1   | 采用动态图（优先）模式开发。集成keras。提供了不同等级API减少开发门槛。。 |
+| v2.4 |          |                                                              |
+
+TensorFlow提供Python语言下的四个不同版本：CPU版本（tensorflow）、包含GPU加速的版本（tensorflow-gpu），以及它们的每日编译版本（tf-nightly、tf-nightly-gpu）。
+
+
+
 **Tensorflow 1.x和2.x**
 
 TensorFlow 1.x主要是用于处理静态计算图的框架。计算图中的节点是Tensors，当图形运行时，它将保持n维数组;图中的边表示在运行图以实际执行有用计算时将在张量上运行的函数。先创建计算图后运行的方式即为**符号式编程**。
 
 Tensorflow 2.0出现于2019年1月。Tensorflow 2.0中，采用动态图（优先）模式开发，动态图开发效率高，运行效率可能不如静态图；TensorFlow 2 也支持通过 `tf.function` 将动态图优先模式的代码转化为静态图模式
-这种运算同时创建计算图和数值结果的方式叫做**命令式编程**.
+这种运算同时创建计算图和数值结果的方式叫做**命令式编程**。
 
 Tensorflow目前发布了两个版本：1.x和2.0，通过对这两个版本的使用，相较于Tensorflow1.x,有以下感触：
 
@@ -252,26 +278,27 @@ Tensorflow2使用了Eager execution机制，与python运行时集成度更高，
 
 
 
-**术语**
-
-| 术语         | 解释                                                         |
-| ------------ | ------------------------------------------------------------ |
-| one hot编码  |                                                              |
-| tensor 张量  | 表示数据，一组多维数据（一维标量Scalar、二维矢量/向量vector，在tensorflow里都可以泛叫张量）。<br>在python numpy里类型是narray。 |
-| OP 算子      |                                                              |
-| Session 会话 | 在tensorflow 1.x里用来启动一个训练。                         |
-| 变量         | 用来维护状态                                                 |
-
-
-
-
-### 入门篇
-
-
-
-
-
 ### 开发篇
+
+#### tensorflow 1.x迁移到2.x
+
+使用tensorflow提供的迁移工具
+
+* 单脚本转换
+ 先进入到你要转换脚本(eg:yolov3.py)的目录，然后：
+
+`tf_upgrade_v2 --infile yolov3.py --outfile yolov3.py`
+
+* 文件夹批量转换
+ 先进入你要转换的文件夹根目录（eg:yolov3/），然后可以转换文件下所有py文件：
+
+`tf_upgrade_v2 --intree yolov3/ --outtree yolov3/ --copyotherfiles False`
+
+注意事项： 
+
+tf.compat.v1.disable_eager_execution()  # 兼容V1：禁止动态图
+
+
 
 #### 预训练模型 pre-trained models
 
@@ -497,7 +524,7 @@ Paddle即Parallel Distributed Deep Learning(并行分布式深度学习)。
 
 2016年8月，PaddlePaddle发布。
 
-**2018年7月，开源框架 v0.14发布**——提供从数据预处理到模型部署在内的深度学习全流程的底层能力支持。官方首次开源CV/NLP/语音/强化学习等10个模型。
+2018年7月，开源框架 v0.14发布——提供从数据预处理到模型部署在内的深度学习全流程的底层能力支持。官方首次开源CV/NLP/语音/强化学习等10个模型。
 
 
 

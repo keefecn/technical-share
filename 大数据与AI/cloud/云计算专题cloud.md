@@ -282,6 +282,8 @@ management effort or service provider interaction.
 
 图 云计算服务模型-典型云服务
 
+> 备注：SAAS是最成熟的模式，SAAS可以基于PAAS提供，也可基于IAAS提供。
+
 新增二种服务
 
 * DAAS：DaaS是数据即服务，英文全称是Date as a Server。云端部署好各种环境，收集大量数据并开始从中分析。最后把筛选、分析出来的数据作为服务。直白地说，就是大数据的一个类。涉及的服务有：客户关系管理（CRM）、企业资源规划（ERP）等等。

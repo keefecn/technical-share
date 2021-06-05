@@ -188,7 +188,7 @@ mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf  #安全方式启
 
 对于阿里云ECS centos镜像里没有mysql-server包，需先下载，再安装，命令如下：
 
-```
+```shell
 # 安装
 $ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
 $ yum install mysql-server
@@ -207,7 +207,7 @@ mysql -u root -p
 SET PASSWORD = PASSWORD('12341234');
 
 # 授权远程访问
-GRANT ALL PRIVILEGES ON . TO ‘root’@’%’ IDENTIFIED BY 'xxxxxx' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON $DB$.* TO root@'%' IDENTIFIED BY '$PASSWD$' WITH GRANT OPTION;
  
 # 立即激活权限
 flush privileges;

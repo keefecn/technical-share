@@ -1169,7 +1169,7 @@ cpan> install XXX:XXX
 
 GitBook is a command line tool (and Node.js library) for building beautiful books using **GitHub**/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
 
- GitBook 分布式协作写书。
+GitBook 分布式协作写书。
 
 
 
@@ -1177,7 +1177,104 @@ GitBook is a command line tool (and Node.js library) for building beautiful book
 
 GitBook can be used either on your computer for building local books or on GitBook.com for hosting them. To get started, check out [the installation instructions in the documentation](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md).
 
- 
+安装: `npm install gitbook-cli -g`
+
+项目初始化：`gitbook-cli init`   //gitbook创建 README.md 和 SUMMARY.md 两个项目必须的文件
+
+本地调试： `gitbook serve`
+
+打包发布：`gitbook build`
+
+格式化书： `gitbook pdf|epub|mobi  ../xx.pdf`    #依赖插件 ebook-convert
+
+
+
+
+
+## 8.2 插件
+
+book.json模板
+
+```
+{
+  "title": "UI",
+  "description": "UI组件库",
+  "author": "zhuyongbo",
+  "language": "zh-hans",
+  "links": {
+    "sidebar": {
+      "开放平台": "http://e.cnpc.com.cn/opensdk/"
+    }
+  },
+  "styles":{
+    "website":"style.css"
+  },
+  "plugins": [
+    "-lunr",
+    "-search",
+    "-livereload",
+    "-sharing",
+    "expandable-chapters",
+    "search-plus",
+    "splitter",
+    "github",
+    "-sharing",
+    "emphasize",
+    "include-codeblock",
+    "tbfed-pagefooter",
+    "back-to-top-button",
+    "anchor-navigation-ex"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/webzhuyongbo"
+    },
+    "sharing": {
+      "douban": false,
+      "facebook": false,
+      "google": false,
+      "hatenaBookmark": false,
+      "instapaper": false,
+      "line": false,
+      "linkedin": false,
+      "messenger": false,
+      "pocket": false,
+      "qq": false,
+      "qzone": false,
+      "stumbleupon": false,
+      "twitter": false,
+      "viber": false,
+      "vk": false,
+      "weibo": false,
+      "whatsapp": false,
+      "all": [
+        "weibo","qq","qzone","google","douban"
+      ]
+    },
+    "anchor-navigation-ex": {
+      "associatedWithSummary":false,
+      "showLevel":true,
+      "multipleH1": true,
+      "mode": "float",
+
+      "pageTop": {
+        "showLevelIcon": false,
+        "level1Icon": "fa fa-hand-o-right",
+        "level2Icon": "fa fa-hand-o-right",
+        "level3Icon": "fa fa-hand-o-right"
+      }
+    },
+    "tbfed-pagefooter": {
+      "copyright": "&copy;北京信息技术有限责任公司",
+      "modify_label": "文档更新时间：",
+      "modify_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  }
+}
+
+```
+
+
 
 # 参考资料
 

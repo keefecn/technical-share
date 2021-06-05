@@ -477,11 +477,11 @@ Prefix dict has been built succesfully.
 示例3： 词性标注
 
 ```python
-    import jieba.posseg as pseg
-    test_sent = ("李小福是创新办主任也是云计算方面的专家")
-    result = pseg.cut(test_sent)    # 词性标注
-    for w in result:
-    	print(w.word, "/", w.flag, ", ", end=' ')
+import jieba.posseg as pseg
+test_sent = ("李小福是创新办主任也是云计算方面的专家")
+result = pseg.cut(test_sent)    # 词性标注
+for w in result:
+    print(w.word, "/", w.flag, ", ", end=' ')
 ```
 
 

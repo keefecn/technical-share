@@ -859,10 +859,10 @@ http://www.support-vector.net/
 
 **核函数** 可以是以下任何形式：:
 
-- linear 线性: ![\langle x, x'\rangle](https://sklearn.apachecn.org/docs/master/img/587f27ca8cf947779c1929d65c697e0c.jpg).
-- poly 多项式: ![(\gamma \langle x, x'\rangle + r)^d](https://sklearn.apachecn.org/docs/master/img/58d86a5573e0796f320435a8ce8346ea.jpg). ![d](https://sklearn.apachecn.org/docs/master/img/adf83056bc2bd05628e24c40cb728b3d.jpg) 是关键词 `degree`, ![r](https://sklearn.apachecn.org/docs/master/img/451ef7ed1a14a6cdc38324c8a5c7c683.jpg) 指定 `coef0`。
-- rbf: ![\exp(-\gamma \|x-x'\|^2)](https://sklearn.apachecn.org/docs/master/img/ba90d4193a98b9023d3d8526a20fe1ac.jpg). ![\gamma](https://sklearn.apachecn.org/docs/master/img/6552bde3d3999c1a9728016416932af7.jpg) 是关键词 `gamma`, 必须大于 0。
-- sigmoid (![\tanh(\gamma \langle x,x'\rangle + r)](https://sklearn.apachecn.org/docs/master/img/ed407df5e0211da2859805a96e271751.jpg)), 其中 ![r](https://sklearn.apachecn.org/docs/master/img/451ef7ed1a14a6cdc38324c8a5c7c683.jpg) 指定 `coef0`。
+- linear 线性:  $$\tanh(\gamma \langle x,x'\rangle + r)$$
+- poly 多项式:  $$(\gamma \langle x, x'\rangle + r)^d$$   d是关键词 `degree`, r 是指定 `coef0`。
+- rbf:  $$\exp(-\gamma \|x-x'\|^2)$$    $$\gamma$$是关键词 , 必须大于 0。
+- sigmoid： $$\tanh(\gamma \langle x,x'\rangle + r)$$   其中r 指定 `coef0`。
 
 
 

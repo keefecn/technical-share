@@ -7,13 +7,14 @@
 | 5    | 2018-7-3   | 增加Python WEB程序部署章节 | 同上   |   |
 | 6    | 2018-11-18 | 汇总python web框架    | 同上   |   |
 | 7    | 2019-12-15 | 迁移前端框架/Nodejs另文    | 同上   |   |
+
+
+
+
+
+
+
 ---
-
- 
-
- 
-
- 
 
 # 目录
 
@@ -184,7 +185,7 @@
 
  
 
-表格 2 WEB框架列表
+表格 2 WEB框架详细信息
 
 | softwareName  | Desc    | currnet   version    | Copyright(c)     | License   | Note  |
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------- | --------------------------------------------------------- | ----------------------- |
@@ -259,7 +260,7 @@
 
 # 2 前端框架
 
-详见 [前端框架](前端框架分析.md)
+详见 [前端框架分析](前端框架分析.md)
 
 
 
@@ -360,6 +361,8 @@ $ rails server
 
 
 
+## 入门篇
+
 
 
 ## 本章参考
@@ -368,17 +371,43 @@ $ rails server
 
 # 7  python-Django
 
-Django是一个开放源代码的Web应用框架，由Python写成。 
+## 7.1 简介
 
-Django遵守BSD版权，初次发布于2005年7月, 并于2008年9月发布了第一个正式版本1.0 。
-
-Django采用了MVC的软件设计模式，即模型M，视图V和控制器C。
+Django是一个开放源代码的Web应用框架，遵守BSD版权，由Python写成。 
 
 框架本身集成了ORM、模型绑定、模板引擎、缓存、Session等诸多功能。
 
- 
+django3.0之前django的Web服务器网关接口一直用的是WSGI，ASGI的A就是Async，也就是异步的意思，ASGI简单的来说就是异步的WSGI。
 
-## 7.1   入门实例
+
+
+表格 Django版本说明
+
+| 版本号 | 发布时间 | 功能或更新说明                                               |
+| ------ | -------- | ------------------------------------------------------------ |
+| v0.x   | 2005.7   |                                                              |
+| v1.0   | 2008.9   | 正式版本。                                                   |
+| v2.0   | 2018     | 不再支持python2.x                                            |
+| v3.0   | 2020     | 新增三个特性：ASGI、支持MariaDB10.1+和自定义枚举类型（TextChoices，IntegerChoices）。 |
+
+
+
+## 7.2 架构分析
+
+Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现的template和视图view的差异，另外MTV少了URL分发的逻辑。
+
+* MVC：模型Model，视图View和控制器Control。
+* MTC: T-Tempalte模板 
+
+   ![1574518389091](../../media/sf_reuse/framework/frame_web_003.png)
+
+图  django运行视图
+
+
+
+## 7.3 django开发篇
+
+### 入门实例
 
 **Django安装**
 
@@ -387,7 +416,19 @@ $ pip install django  #安装最新版本的Django
 $ pip install -v django==1.7.1   #或者指定安装版本
 ```
 
-**1. 命令行创建项目** (示例项目名mysite)
+流程小结： xx开头表示这是用户自己命名的变量。
+
+* 创建项目（全局定义）：`django-admin.py startproject xxproject`
+* 创建APP（具体业务应用，app目录下会生成models.py/views.py）:  `python manage.py startapp xxapp`
+* 编辑 xxapp/models.py：完成数据库表结构创建。
+* 编辑 xxapp/views.py：完成业务处理逻辑。此处可引入DRF框架进行数据序列化和反序列化。
+* 编辑 xxproject/urls.py：处理URL路由，支持path/repath，path又支持视图-FBV和CBV。
+
+
+
+**1. 命令行创建项目**
+
+ (示例项目名mysite)
 
 `$ django-admin.py startproject mysite`
 
@@ -399,8 +440,8 @@ mysite/		# startproject生成的站点目录
 ├── mysite
 │   ├── __init__.py
 │   ├── settings.py  # 主配置文件
-│   ├── urls.py   	# URL路由系统文件
-│   └── wsgi.py  	# 网络通信接口
+│   ├── urls.py   	# URL路由系统文件，相当于MVC中的C
+│   └── asgi.py  	# 网络通信接口, djaongo3.0之前是wsgi.py
 └── template  # 该目录放置HTML文件模板
 ```
 
@@ -418,9 +459,9 @@ cmdb/	# startapp生成的app目录
 ├── __init__.py
 ├── migrations
 │   └── __init__.py
-├── models.py    
+├── models.py   # 模型，负责业务对象和数据对象的ORM映射
 ├── tests.py	
-└── views.py	# 页面
+└── views.py	# 视图，业务处理逻辑
 
 ```
 
@@ -484,7 +525,17 @@ Available subcommands:
 
 1).  数据库表和表字段的创建、更新
 
-可通过 makemigrations, migrate来管理。当app目录下自动生成目录migrates里的文件过多时，可进行重置回0001__init.py
+可通过 makemigrations, migrate来管理。
+
+数据库表的创建或更新
+
+```shll
+$ python3 manage.py migrate   # 创建表结构 或 更新
+$ python3 manage.py makemigrations xxapp  # 新增加app时，才执行此步
+$ python3 manage.py migrate xxapp   # 创建xxapp的表结构
+```
+
+常见问题：当app目录下自动生成目录migrates里的文件过多时，可进行重置回0001__init.py
 
 
 
@@ -499,29 +550,93 @@ from django.contrib import admin
 from cmdb import views
  
 urlpatterns = [
-    #url(r'^admin/', admin.site.urls),
-    url(r'^index/', views.index),
+    url(r'^admin/', admin.site.urls),	# FBV
+    url(r'^index/', Indexviews.as_view()),	# CBV基于类的视图
 ]
 ```
 
  
 
-**5、编写业务处理逻辑views**
+**5、编写业务处理逻辑 views或者template** 
+
+```
+# view有很多，基础的是View，此外有ListView/TemplateView等等，View用HttpRequest/HttpResponse
+from django.views.generic import View
+from django.shortcuts import HttpResponse 
+
+# APIView是DRF提供的，特性是请求响应用Request/Response
+from rest_framework.views import APIView
+from rest_framework.response import Response
+```
+
+
+
+视图实现二种方法： FBV和CBV
+
+* **FBV（function base views）** 基于函数的视图，就是在视图里使用函数处理请求。
+
+* **CBV（class base views）** 基于类的视图，就是在视图里使用类处理请求。
+
+
+
+视图实现 FBV
 
 ```python
+# urls.py
+urlpatterns = [
+    path("/login", views.login),
+]
+
 # views.py
 from django.shortcuts import render
-#首先导入HttpResponse模块
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse  #首先导入HttpResponse模块
+
 # Create your views here.
-def index(request):
+def login(request):
     """
     :param request: 这个参数必须有，类似self的默认规则，可以改，它封装了用户请求的所有内容
     :return: 不能直接返回字符串，必须有HttpResponse这个类封装起来，这是Django的规则
     """
-    return HttpResponse("Hello,World")
-
+    if request.method == "GET":
+        return HttpResponse("GET 方法")
+    if request.method == "POST":
+        user = request.POST.get("user")
+        pwd = request.POST.get("pwd")  
+        if user == "runoob" and pwd == "123456":
+            return HttpResponse("POST 方法")
+        else:
+            return HttpResponse("POST 方法1")
+    return HttpResponse("other method")
 ```
+
+
+
+视图实现 CBV
+
+```python
+# urls.py
+urlpatterns = [
+    path("login/", xxView.as_view()),
+]
+
+# views.py
+from django.shortcuts import render,HttpResponse
+from django.views import View
+
+class Login(View):
+    def get(self,request):
+        return HttpResponse("GET 方法")
+
+    def post(self,request):
+        user = request.POST.get("user")
+        pwd = request.POST.get("pwd")
+        if user == "runoob" and pwd == "123456":
+            return HttpResponse("POST 方法")
+        else:
+            return HttpResponse("POST 方法 1")
+```
+
+
 
 **运行Web服务**
 
@@ -533,13 +648,49 @@ $ python manage.py runserver 127.0.0.1 8080
 
 
 
-## 7.2  架构分析
+### **Django权限管理**
 
-   
+创建超级用户 admin
 
-   ![1574518389091](../../media/sf_reuse/framework/frame_web_003.png)
+```shell
+python manage.py createsuperuser --email admin@example.com --username admin
+```
 
-图 3 django组件视图
+
+
+### WSGI/ASGI部署
+
+**WSGI部署**
+
+```
+# 安装gunicron
+pip install gunicorn
+
+# 启动项目
+gunicorn xxxproject.wsgi
+```
+
+
+
+**ASGI部署**
+
+ASGI服务器组件，我们有两种应用服务器可以来启动它，一种是用Uvicorn，Uvicorn是基于uvloop和httptools的ASGI服务器，它理论上是Python中最高性能的框架了。另一种是Daphne，Daphne是Django软件基金会开发的一个基于ASGI (HTTP/WebSocket)的服务器。
+
+```SHELL
+# 安装uvicorn 或者 daphne，用 daphne 代替相应的uvicorn即可。
+pip install uvicorn
+
+# 安装好之后我们用下面的命令来启动我们的项目
+uvicorn django_cn.asgi:application
+```
+
+
+
+### 中间件 middleware
+
+Django 中间件是修改 Django request 或者 response 对象的钩子，可以理解为是介于 HttpRequest 与 HttpResponse 处理之间的一道处理过程。
+
+浏览器从请求到响应的过程中，Django 需要通过很多中间件来处理，可以看如下图所示：
 
 ![1574518414753](../../media/sf_reuse/framework/frame_web_003_02.png)
 
@@ -547,9 +698,51 @@ $ python manage.py runserver 127.0.0.1 8080
 
 
 
-## 7.3  本章参考
+Django 中间件作用：
 
-[1]:  Django教程 https://www.runoob.com/django/django-tutorial.html
+- 修改请求，即传送到 view 中的 HttpRequest 对象。
+- 修改响应，即 view 返回的 HttpResponse 对象。
+
+中间件组件配置在 settings.py 文件的 MIDDLEWARE 选项列表中。
+
+配置中的每个字符串选项都是一个类，也就是一个中间件。
+
+Django 默认的中间件配置：
+
+```python
+MIDDLEWARE = [
+  'django.middleware.security.SecurityMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.common.CommonMiddleware',
+  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.messages.middleware.MessageMiddleware',
+  'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+```
+
+
+
+中间件可以定义四个方法，分别是：
+
+process_request(self,request)
+process_view(self, request, view_func, view_args, view_kwargs)
+process_exception(self, request, exception)
+process_response(self, request, response)
+
+
+
+
+
+
+
+## 本章参考
+
+[1]:  Django官网	"https://docs.djangoproject.com/"
+
+[2]:  https://www.django-rest-framework.org/	"DRF"
+
+[3]:  Django教程 https://www.runoob.com/django/django-tutorial.html
 
 
 
@@ -573,7 +766,7 @@ $ python manage.py runserver 127.0.0.1 8080
 
  
 
-## 8.2  flask使用篇
+## 8.2  flask开发篇
 
 ### 8.2.1   入门实例
 
@@ -617,7 +810,7 @@ if __name__ == "__main__":
 
  
 
-### 8.2.2   项目结构
+**项目结构如下**
 
    ![1574518502921](../../media/sf_reuse/framework/frame_web_flask_001.png)
 
@@ -625,7 +818,7 @@ if __name__ == "__main__":
 
  
 
-## 8.3  flask开发篇
+### 8.2.2 flask进阶开发
 
 使用实例文件夹
  我们使用 app.config.from_pyfile() 来从一个实例文件夹中加载配置变量。当我们调用 Flask() 来创建我们的应用的时候，如果我们设置了 instance_relative_config=True， app.config.from_pyfile() 将会从 instance/ 目录加载指定文件。
@@ -639,9 +832,7 @@ app.config.from_pyfile('config.py')
 
 
 
-## 8.4  flask架构篇
 
- 
 
 # 9  python-flask扩展
 
