@@ -837,7 +837,7 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
-## 3.1 本章参考
+## 本章参考
 
  
 

@@ -990,6 +990,7 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 |                                                     |                                                              |                        |
 
 
+
 ### 6.3.2  JVM内存查看工具
 
 | 工具     | 简介                                                         | 备注                                            |
@@ -1002,7 +1003,10 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 |          |                                                              |                                                 |
 备注：非root或属主用户的进程无法查看。
 
+
+
 ## 6.4  本章参考
+
 [1].    JVM [http://www.pusuo.net/2010/jvmresearch/](http://www.pusuo.net/2010/jvmresearch/)
 [2].    深入理解JVM--JVM垃圾回收机制http://jbutton.iteye.com/blog/1569746
 [3].    《深入理解JAVA虚拟机》——学习笔记[http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
@@ -1012,8 +1016,6 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 [7].     JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
 
 
-
-# 7   Java源码分析
 
 
 

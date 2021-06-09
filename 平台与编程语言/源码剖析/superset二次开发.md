@@ -1,14 +1,17 @@
-| 序号 | 修改时间 | 修改内容                     | 修改人 | 审稿人 |
-| ---- | -------- | ---------------------------- | ------ | ------ |
-| 1    | 2018-5-5 | 创建，从《BI专题》迁移至此。 | 吴启福 |        |
-|      |          |                              |        |        |
+| 序号 | 修改时间  | 修改内容                           | 修改人 | 审稿人 |
+| ---- | --------- | ---------------------------------- | ------ | ------ |
+| 1    | 2018-5-5  | 创建，从《BI专题》迁移至此。       | Keefe  |        |
+| 2    | 2021-6-11 | 调整部分内容，迁移到源码剖析目录。 | 同上   |        |
+
+
+
+
+
+
+
+
+
 ---
-
- 
-
- 
-
- 
 
 目录
 
@@ -104,7 +107,7 @@
 
  
 
-# 1    用户使用篇
+# 1 用户使用篇
 
 **术语**
 *  Dashboard（仪表盘、看板）：由多个slice组合而成。
@@ -114,7 +117,11 @@
 
  
 
-# 2    安装篇
+superset说明：数据可视化
+
+
+
+# 2 安装篇
 
 版本：superser-0.24
 
@@ -124,59 +131,37 @@
 
 ## 2.1   PIP安装
 
-\# 在线安装
-
+```shell
+# 安装法1：在线安装
 pip install superset
 
-\# 离线安装
-
+# 安装法2：离线安装
 pip download -d <dir> superset
-
 pip install --no-index -f <dir> superset
 
-\# 升级安装
-
+# 安装法3: 升级安装
 pip install superset --upgrade
 
- 
-
-\# Create an admin user (you will be prompted to set username, first and last name before setting a password)
-
+# Create an admin user (you will be prompted to set username, first and last name before setting a password)
 fabmanager create-admin --app superset
 
- 
-
-\# Initialize the database，若版本更新，运行前需要先执行此句
-
+# Initialize the database，若版本更新，运行前需要先执行此句
 superset db upgrade
 
- 
-
-\# Load some data to play with，非必需。
-
+# Load some data to play with，非必需。
 superset load_examples
 
- 
-
-\# Create default roles and permissions
-
+# Create default roles and permissions
 superset init
-
  
-
-\# Start the web server on port 8088, use -p to bind to another port
-
+# Start the web server on port 8088, use -p to bind to another port
 superset runserver
 
- 
-
-\# -d调试；­-p监听端口，缺省8088
-
+# 启动法2：指定端口 -d调试；-p监听端口，缺省8088
 superset runserver -d -p 8088
+```
 
- 
-
-**#** **查看页面，缺省端口8088**
+**查看页面，缺省端口8088**
 
 http://localhost:8088
 
@@ -205,33 +190,31 @@ http://localhost:8088
 
 备注：以kylin示例URL：kylin://user: Greenplum pwd@host:port/project?charset=utf-8
 
-\1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，其它的数据库插件需要安装才能使用。
+1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，其它的数据库插件需要安装才能使用。
 
-\2. URI前缀相同的表示使用相同协议，如Postgres /Greenplum/ Redshift，Postgres是RDBS；Greenplum是基于Postgres开发的海量（50PB）级别的RDBS；Redshift是AWS的云化数据仓库。
+2. URI前缀相同的表示使用相同协议，如Postgres /Greenplum/ Redshift，Postgres是RDBS；Greenplum是基于Postgres开发的海量（50PB）级别的RDBS；Redshift是AWS的云化数据仓库。
 
-\3. 数据源类型分类：RDBS有MySQL/Postgres/Oracle/MSSQL；数据仓库有Presto/Impala/SparkSQL/ Athena/ Vertica；预计算有Kylin
+3. 数据源类型分类：RDBS有MySQL/Postgres/Oracle/MSSQL；数据仓库有Presto/Impala/SparkSQL/ Athena/ Vertica；预计算有Kylin
+
+
 
 ## 2.2   编译安装
 
+```shell
 cd incubator-superset-xxx
-
 pip install .
-
 cd superset/assets
 
-\# 安装编译工具 yarn
-
+# 安装编译工具 yarn
 npm install -g yarn
-
 yarn config set registry https://registry.npm.taobao.org
-
 yarn
-
 yarn run build
+```
 
- 
 
-# 3    使用篇
+
+# 3 使用篇
 
 数据源 - 数据表 -- 切片/图表 -- 看板
 
@@ -245,8 +228,6 @@ yarn run build
 
 表格 1 各数据库的时间字段使用技巧
 
-
-
 | database   | 时间字段格式               | timestamp转化                          | 其它 |
 | ---------- | -------------------------- | -------------------------------------- | ---- |
 | MySQL      | 常规。                     | FROM_*UNIXTIME*(unix_timestamp,format) |      |
@@ -257,7 +238,9 @@ yarn run build
 
 备注：字段格式使用D3格式。
 
-# 4    开发篇
+
+
+# 4 开发篇
 
 ## 4.1   组件概述
 
@@ -393,7 +376,9 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 备注：superset里的数据存储中文乱码主要是由sqlalchemy的create_engine参数引起的。
 
-# 5    性能优化篇
+
+
+# 5   性能优化篇
 
 ## 5.1   缓存 flask-cache
 
@@ -402,8 +387,6 @@ superset使用Flask-Cache来缓存数据。
 修改文件：*flask_cache/__init__.py, superset/config.py*
 
 *# superset/config.py*
-
- 
 
  
 
@@ -451,8 +434,6 @@ gunicorn \
 
 当数据量大时，可用MySQL或Postgresql替代。
 
- 
-
 只需替换配置文件。
 
 修改文件：superset/config.py
@@ -462,6 +443,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 #SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
 #SQLALCHEMY_DATABASE_URI = 'postgresql://root:password@localhost/myapp'
 ```
+
 
 
 **数据迁移**
@@ -479,11 +461,9 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
  
 
- 
+# 6 运维篇
 
-# 6    运维篇
-
-## 6.1   权限管理
+## 6.1  权限管理
 
 权限管理：权限项有287项，可分为两大类分别是基本权限和视图列表的操作权限。
 
@@ -519,7 +499,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
  
 
-## 6.2   安全认证
+## 6.2  安全认证
 
 细粒度高可扩展性的安全访问模型，支持主要的认证供应商（数据库、OpenID、LDAP、OAuth 等）。
 
@@ -549,7 +529,8 @@ AUTH_LDAP_USERNAME_FORMAT = "cn=%s,OU=Users,DC=mycompany,DC=com"
 ```
 
 
-## 6.3   配置文件
+
+## 6.3  配置文件
 
 配置文件的优先级
 
@@ -559,7 +540,7 @@ superset_config.py > config.py > superset.config
 
  
 
-## 6.4   常见问题FAQ
+## 6.4  常见问题FAQ
 
 Q1：连接MySQL中文乱码
 
@@ -567,9 +548,11 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
  mysql://superset_nbdata_r:XXXXXXXXXX@10.64.1.248:3338/spider?charset=utf8
 
 
+
 Q2：py3在windows安装失败
 
 A2: 需vc++ 14.0（即vs 2005）支持，此工具占用好几GB。
+
 
 
 Q3：py2.7编码乱码问题
@@ -584,7 +567,8 @@ sys.setdefaultencoding('utf-8')
 ```
 
 
-# 7    架构篇
+
+# 7 架构篇
 
 本章架构篇的分析方法采用了TOGAF和UML视图法。
 
@@ -602,11 +586,15 @@ sys.setdefaultencoding('utf-8')
 
 ### 7.2.1 部署视图
 
- 
+ 略
+
+
 
 ### 7.2.2 开发视图（组件）
 
-​               ![image-20191201170208395](../media/ai/dv_superset_001.png)                
+​               ![image-20191201170208395](../../media/ai/dv_superset_001.png)                
+
+
 
 ### 7.2.3 逻辑视图
 
@@ -616,7 +604,7 @@ sys.setdefaultencoding('utf-8')
 
  
 
- 
+
 
 ## 7.3   数据架构（数据模型）
 
@@ -626,7 +614,7 @@ sys.setdefaultencoding('utf-8')
 | ---------------------- | ---------------------------- | ------------------------------------------------------------ |
 | Flask  Appbuilder(fab) | fabmanger    create-admin    | 共创建8张表，以ab_开头。  user  -> role -> premission_view-> (permission, view_menu) |
 | superset  meta         | superset  db upgrade         | 共创建24张表。                                               |
-|                        | datasources:  druid/database | 数据源包括两种组织形式：druid和database  druid:  cluster - datasources - columns/metrics  database：dbs - tables -  tablecolumn/sql_metrics |
+|                        | datasources:  druid/database | 数据源包括两种组织形式：druid和database  <br>druid:  cluster - datasources - columns/metrics  <br>database：dbs - tables -  tablecolumn/sql_metrics |
 |                        | views:    slice/dashboard    | slice：slices slice_user  slice_dashboard  dashboard:  dashboard dashboard_user |
 |                        | sql                          | query  saved_query                                           |
 |                        | other                        | KV,  url(短网址）                                            |
@@ -642,7 +630,7 @@ sys.setdefaultencoding('utf-8')
 
 ### 7.3.1 fabmanger
 
- ![image-20191201170256358](../media/ai/dv_superset_002.png)
+ ![image-20191201170256358](../../media/ai/dv_superset_002.png)
 
  
 
@@ -650,29 +638,29 @@ sys.setdefaultencoding('utf-8')
 
 **1）SQL_ALL**
 
- ![image-20191201170320110](../media/ai/dv_superset_003.png)
+ ![image-20191201170320110](../../media/ai/dv_superset_003.png)
 
  
 
 **2）datasources**
 
-![image-20191201170339236](../media/ai/dv_superset_004.png) 
+![image-20191201170339236](../../media/ai/dv_superset_004.png) 
 
  
 
 3) slice/dashboard
 
- ![image-20191201170353037](../media/ai/dv_superset_005.png)
+ ![image-20191201170353037](../../media/ai/dv_superset_005.png)
 
  
 
 4) other
 
- ![image-20191201170410559](../media/ai/dv_superset_006.png)
+ ![image-20191201170410559](../../media/ai/dv_superset_006.png)
 
  
 
-# 8    superset组件分析
+# 8 superset组件分析
 
 ## 8.1   整体流程
 1. npm run dev --将每个模块打包成一个单独的js文件（在webpack.config.js中配置）
@@ -707,7 +695,7 @@ sys.setdefaultencoding('utf-8')
 
  
 
-# 9    源码分析
+# 9 源码分析
 
  
 

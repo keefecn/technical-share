@@ -442,9 +442,17 @@ QCC(Quality Control Circle,品管圈)
 
 **品管圈**就是由相同、相近或互补之工作场所的人们自动自发组成数人一圈的小圈团体（又称[QC小组](http://wiki.mbalib.com/wiki/QC小组)，一般6人左右），然后全体合作、集思广益，按照一定的活动程序，活用[品管七大手法](http://wiki.mbalib.com/wiki/Category:品管七大手法)（QC7手法），来解决工作现场、管理、文化等方面所发生的问题及课题。它是一种比较活泼的品管形式。品管圈的特点是参加人员强调领导、技术人员、员工三结合。现代的QCC管理内容和目标突破了原有的质量管理范围，向着更高的技术、工艺、管理方面扩展。
 
+
+
+### 性能基准测试 benchmarks
+
+* 数据库： https://db-engines.com/en/
+
+* WEB框架： https://www.techempower.com/benchmarks/
+
  
 
-## 4.3   本章参考
+## 本章参考
 
  
 

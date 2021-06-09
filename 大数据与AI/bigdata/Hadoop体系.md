@@ -1361,6 +1361,8 @@ HBase数据操作流程如[图5](http://localhost:7890/pages/YZH0518G/01/YZH0518
 
 为了提升数据操作的效率，HBase Client会在内存中缓存“hbase:meta”和用户表Region的信息，当应用程序发起下一次数据操作时，HBase Client会首先从内存中获取这些信息；当未在内存缓存中找到对应数据信息时，HBase Client会重复上述操作。
 
+
+
 ## 2.6  MapReduce 
 
 详见 《[大数据计算框架](大数据计算框架.md)》 相关章节
