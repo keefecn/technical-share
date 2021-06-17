@@ -44,7 +44,7 @@ Enterprise Architect 使你能够：
 * 生成详细、高质量的RTF，PDF和HTML格式的报告
 * 符合行业标准的企业架构
 * 10多种语言的正向和反向代码工程1
-* 数据库建模, DDL 脚本生成,和通过ODBC进行反向工程数据库模式*
+* 数据库建模, DDL 脚本生成,和通过ODBC进行反向工程数据库模式
 * 使用基线模型合并及审计功能来管理, 跟踪和控制修改
 * 集中生成企业范围的信息系统和处理文档
 * 建模元素间动态的、与状态相关的依赖关系
@@ -95,6 +95,18 @@ EA支持包括TOGAF在内的多种架构框架，因此支持很多的视图。
 
 ## 逻辑视图
 
+**主要概念**
+
+- 结点（Node）：结点是存在与运行时的代表计算机资源的物理元素，可以是硬件也可以是运行其上的软件系统，比如64主机、Windows server 2008操作系统、防火墙等。
+- 结点实例（Node Instance）：结点实例名称格式：Node Instance : node  与结点的区别在于名称有下划线和结点类型前面有冒号，冒号前面可以有示例名称也可以没有示例名称。
+- 执行环境（excute environment）：执行环境是一个节点，它以可执行工件的形式为部署在其上的特定类型的组件提供执行环境。
+- 结点类型（Node Stereotypes）：结点类型有：«cdrom», «cd-rom», «computer», «disk array», «pc», «pc client», «pc server», «secure», «server», «storage», «unix server», «user pc»，并在结点的右上角用不同的图标表示。
+- 物件（Artifact）：物件是软件开发过程中的产物，包括过程模型（比如用例图、设计图等等）、源代码、可执行程序、设计文档、测试报告、需求原型、用户手册等等。物件表示如下，带有关键字«artifact»和文档图标。
+- 连接（Association）：结点之间的连线表示系统之间进行交互的通信路径，这个通信路径称为连接（Association）连接中有网络协议。
+- 结点容器（Node as Container）：一个结点可以包括其他的结点，比如组件或者物件，则称此结点为结点容器（Node as Container）。如下图所示，结点（Node）包容了物件（Artifact）。
+
+
+
 
 
 ## 部署视图
@@ -108,6 +120,23 @@ EA支持包括TOGAF在内的多种架构框架，因此支持很多的视图。
 
 
 # 3 数据库建模
+
+数据库建模, DDL 脚本生成,和通过ODBC进行反向工程数据库模式
+
+## 数据库反向工程
+
+以MySQL为例：  （数据源驱动要用 5.x版本，否则不兼容）
+
+1. 安装MySQL数据源驱动程序
+
+2. 配置ODBC用户DSN
+
+控制面板---管理工具----ODBC数据源（32位）-----添加 用户DSN（注：EA无法访问系统DSN，且只能用MySQL数据源32位）
+
+![image-20210618112609848](..\..\media\sf_reuse\tools\tools_ea_001.png)
+
+3. 右击---源码工程----从ODBC中导入数据库
+4. 导入所有表，达成目标。
 
 
 
@@ -182,7 +211,7 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 
 
 
-# EA小技巧
+# FAQ
 
 说明：文中使用的EA版本是13.0
 
@@ -190,7 +219,9 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 
 选择  publish  -> save Image—> Save to file， 选择路径保存。默认导出文件名：当前视图名.png
 
+2. 边框怎么画
 
+common里的boundary。
 
 
 
@@ -199,3 +230,5 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 [1]. EA官网教程  https://sparxsystems.cn/resources/index.html
 
 [2]. 火龙果EA介绍 http://tool.uml.com.cn/ToolsEA/introduce.asp
+
+[3]. EA数据库反向工程 https://blog.csdn.net/u013040472/article/details/69936108

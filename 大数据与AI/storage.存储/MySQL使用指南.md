@@ -7,14 +7,16 @@
 | 5    | 2016-8-4  | 增加定时统计、触发器和视图。                                 | 同上   |        |
 | 6    | 2017-2-6  | 调整目录结构，增加MySQL主从复制和读写分离章节。              | 同上   |        |
 | 7    | 2018-6-30 | 将MySQL底层实现章节迁移到《数据库技术》，本文只针对MySQL用户。 | 同上   |        |
-|      |           |                                                              |        |        |
+| 8    | 2021-6-18 | 增加MySQL版本和产品线章节。                                  | 同上   |        |
+
+
+ 
+
+ 
+
+
+
 ---
-
- 
-
- 
-
- 
 
 # 目录
 
@@ -148,8 +150,117 @@
 
 ---
 
+# 1 MySQL简介
 
-# 1    MySQL安装
+**官网**
+
+* [dev.mysql.com](http://dev.mysql.com/doc/mysql/en)
+
+* http://doc.mysql.cn/
+
+**下载**
+
+- [MySQL Yum Repository](https://dev.mysql.com/downloads/repo/yum/)
+
+- [MySQL APT Repository](https://dev.mysql.com/downloads/repo/apt/)
+
+- [MySQL SUSE Repository](https://dev.mysql.com/downloads/repo/suse/)
+
+  
+
+- [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+
+- [MySQL Cluster](https://dev.mysql.com/downloads/cluster/)
+
+- [MySQL Router](https://dev.mysql.com/downloads/router/)
+
+- [MySQL Shell](https://dev.mysql.com/downloads/shell/)
+
+- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+
+  
+
+- [MySQL Installer for Windows](https://dev.mysql.com/downloads/windows/)
+
+- [MySQL for Visual Studio](https://dev.mysql.com/downloads/windows/visualstudio/)
+
+- [C API (libmysqlclient)](https://dev.mysql.com/downloads/c-api/)
+
+- [Connector/C++](https://dev.mysql.com/downloads/connector/cpp/)
+
+- [Connector/J](https://dev.mysql.com/downloads/connector/j/)
+
+- [Connector/NET](https://dev.mysql.com/downloads/connector/net/)
+
+- [Connector/Node.js](https://dev.mysql.com/downloads/connector/nodejs/)
+
+- [Connector/ODBC](https://dev.mysql.com/downloads/connector/odbc/)
+
+- [Connector/Python](https://dev.mysql.com/downloads/connector/python/)
+
+- [MySQL Native Driver for PHP](https://dev.mysql.com/downloads/connector/php-mysqlnd/)
+
+  
+
+- [MySQL Benchmark Tool](https://dev.mysql.com/downloads/benchmarks.html)
+
+- [Time zone description tables](https://dev.mysql.com/downloads/timezones.html)
+
+- [Download Archives](https://downloads.mysql.com/archives/)
+
+
+
+## MySQL版本和产品线说明
+
+表格 MySQL版本说明
+
+| 版本号 | 发布时间 | 特性说明                                                     |
+| ------ | -------- | ------------------------------------------------------------ |
+| 7.1    |          |                                                              |
+| 6.0    |          | MySQL Cluster版本。                                          |
+| 5.7    | 2015     | 查询性能得以大幅提升，比 MySQL 5.6 提升 1 倍降低了建立数据库连接的时间。 |
+| 5.6    | 2013.2   | InnoDB可以限制大量表打开的时候内存占用过多的问题，InnoDB性能加强。 |
+| 5.5    | 2010.12  | 默认存储引擎更改为InnoDB。多个回滚段（Multiple Rollback Segments）。<br>InnoDB版本从原来的1023个并发提高到128K并发事务。 |
+| 5.1    | 2008     | 增加了崩溃恢复功能的MyISAM，使用表级锁，但可以做到读写不冲突。 |
+| 5.0    |          | MyISAM引擎默认支持的表大小从4G提升到256T；<br>添加了存储过程、服务端游标、触发器、查询优化以及分布式事务功能。 |
+| 4.0    | 2002     | 早期MySQL版本，基本没人用了。                                |
+| 3.x    |          | 早期MySQL版本，基本没人用了。                                |
+
+版本类别分为四种：Alpha版、Beta版、RC版(Release Candidate)、GA版(Generally Available)。
+
+
+
+表格 MySQL产品线说明
+
+| 产品                     | 用途                                                         | 备注 |
+| ------------------------ | ------------------------------------------------------------ | ---- |
+| MySQL Community Server   | 社区版本，免费，但是Mysql不提供官方技术支持。                |      |
+| MySQL Enterprise Edition | 该版本是收费版本，可以试用30天，包含以下组件                 |      |
+| MySQL Cluster            | 免费版本                                                     |      |
+| MySQL Cluster CGE        | 付费版本                                                     |      |
+| MySQL Workbench SE       | MySQL Workbench （GUI Tool）是一款专为MySQL设计的ER/数据库建模工具。它是著名的数据库设计工具DBDesigner4的继任者。<br>你可以用MySQL Workbench设计和创建新的数据库图示，建立数据库文档，以及进行复杂的MySQL 迁移。<br>MySQL Workbench SE是商用版本。 |      |
+| MySQL Workbench OSS      | 社区版                                                       |      |
+
+
+
+### MySQL版本兼容 
+
+**问题1： 在mysql5.6升级到5.7时常出现show_compatibility_56 报错**
+
+报错信息：DBD::mysql::st execute failed: The 'INFORMATION_SCHEMA.GLOBAL_VARIABLES' feature is disabled; see the documentation for 'show_compatibility_56' at myawr.pl line 760.
+
+背景：从mysql5.7.6开始information_schema.global_status已经开始被舍弃，为了兼容性，此时需要打开show_compatibility_56
+
+解决方法： 打开show_compatibility_56 开头。
+
+```mysql
+MySQL> show variables like '%show_compatibility_56%';
+mysql> set global show_compatibility_56=on;
+```
+
+
+
+## MySQL安装
 
 **常用的程序**
 
@@ -165,7 +276,7 @@ mysqld_safe 安全方式启动，可重设root密码
 
 安装：
 
-```
+```shell
 $ yum install mysql-server
 ```
 
@@ -182,7 +293,7 @@ mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf  #安全方式启
 
 
 
-## 阿里云ECS安装MySQL
+### 阿里云ECS安装MySQL
 
 参考： 阿里云服务器安装MYSQL数据库 https://blog.csdn.net/Edward_hjh/article/details/108483309?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&spm=1001.2101.3001.4242
 
@@ -217,7 +328,7 @@ flush privileges;
 
 
 
-# 2    MySQL基础教程
+# 2  MySQL基础教程
 
 ## 2.1  SQL语法：SELECT/INSERT/UPDATE/DELETE
 
@@ -1820,7 +1931,7 @@ table_cache = 512
 
  
 
-# 5    MySQL管理
+# 5 MySQL管理
 
 ## 5.1  MySQL管理常用命令
 
@@ -2145,7 +2256,7 @@ shell> mysql -u[user] -p [dbname] < [xxx.sql]
 
  
 
-# 6    [MySQL应用开发：API](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/apis.html#c)和库
+# 6  [MySQL应用开发：API](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/apis.html#c)和库
 
 ## 6.1  Connector~C API：MySQL连接对象探讨
 
@@ -2855,13 +2966,13 @@ memory_limit = 128M
 ```
 
 
-# 7    MySQL底层实现
+# 7  MySQL底层实现
 
-详见： 《数据库技术》MySQL实现章节。
+详见： 《[数据库架构](数据库架构.md)》MySQL实现章节。
 
  
 
-# 8    常见问题
+# 8  常见问题
 
 ## 8.1  使用的常见问题
 
@@ -3297,9 +3408,15 @@ cursor.execute( "INSERT INTO Dem_Picture (PicData) VALUES (%s)" , (MySQLdb.Binar
 
 # 参考资料
 
-[1].  [dev.mysql.com](http://dev.mysql.com/doc/mysql/en)
+**官网**
 
-[2].  http://doc.mysql.cn/
+* [dev.mysql.com](http://dev.mysql.com/doc/mysql/en)
+
+* http://doc.mysql.cn/
+
+
+
+**参考链接**
 
 [3].  MySQL5.1参考手册 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/
 

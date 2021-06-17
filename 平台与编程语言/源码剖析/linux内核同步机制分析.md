@@ -90,6 +90,8 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 
   同步机制用来保护数据或代码。当存在并发特性时，必须使用同步方法。如当在同一时间段出现两个或更多进程并且这些进程彼此交互（例如，共享相同的资源）时，就存在*并发* 现象。下表是并发的重要定义；
 
+**表 1. 并发中的重要定义**
+
 | 术语     | 定义                                                         |      |
 | -------- | ------------------------------------------------------------ | ---- |
 | 竞态条件 | 两个或更多线程同时操作资源时将会导致不一致的结果。           |      |
@@ -97,9 +99,7 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 | 互斥锁   | 确保对共享资源进行排他访问的软件特性。                       |      |
 | 死锁     | 由两个或更多进程和资源锁导致的一种特殊情形，将会降低进程的工作效率。 |      |
 
-**表 1. 并发中的重要定义**
 
- 
 
   在单处理器（uniprocessor，UP）主机上可能发生并发，在这种主机中多个线程共享同一个 CPU 并且抢占（preemption）创建竞态条件。*抢占* 通过临时中断一个线程以执行另一个线程的方式来实现 CPU 共享。*竞态条件* 发生在两个或更多线程操纵一个共享数据项时，其结果取决于执行的时间。在多处理器（MP）计算机中也存在并发，其中每个处理器中共享相同数据的线程同时执 行。注意在 MP 情况下存在真正的并行（parallelism），因为线程是同时执行的。而在 UP 情形中，并行是通过抢占创建的。两种模式中实现并发都较为困难.
 
@@ -109,12 +109,14 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 
 ​    linux内核早期版本是单处理器，不支持内核抢占。后来硬件发展到了多处理器（多核），内核中加入了对MP的支持。再后来为了增强linux内核的实时性，加入了内核抢占机制，由此形成了现在的同步机制。Linux的同步机制由下面的两个宏密切相关。
 
+表2 linux kernel对并发的支持宏
+
 | 配置宏         | 含义               | 出现版本                  |      |
 | -------------- | ------------------ | ------------------------- | ---- |
 | CONFIG_SMP     | 是否SMP机器        | V1.3.42开始支持，不断完善 |      |
 | CONFIG_PREEMPT | 配置内核是否可抢占 | V2.5.4开始支持            |      |
 
-表2 linux kernel对并发的支持宏
+
 
 ## 1 单CPU的同步机制
 
@@ -151,7 +153,7 @@ competion机制是一种轻量级的同步机制,用来解决慢设备IO操作�
 
 ## 2 SMP的同步机制
 
-​    SMP——对称多处理是目前耦合程度最高的一种多处理器系统。在对称多处理器系统中，资源为系统中的所有处理器共享，每个处理器能平等地访问共享存储器、I/O部件以及操作系统服务，系统负载能有效地分配到所有的处理器上。
+​    SMP（Symmetrical Multi-Processing，对称多处理，简称SMP）是目前耦合程度最高的一种多处理器系统。在对称多处理器系统中，资源为系统中的所有处理器共享，每个处理器能平等地访问共享存储器、I/O部件以及操作系统服务，系统负载能有效地分配到所有的处理器上。
 
 SMP系统中增加更多处理器的难点是系统不得不消耗资源来支持处理器抢占内存，以及内存同步两个主要问题。
 
@@ -193,6 +195,8 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
   各种同步机制的实现是用汇编语句来实现，需要硬件支持。与硬件架构密切相关，下表是linux内核支持的架构列表。
 
+**表3 Linux内核支持的架构列表**
+
 | General architecture   dependent  options（arch) | 描述                                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | alpha                                            | DEC公司1992年推出的完全RISC指令集的64位架构                  |
@@ -201,8 +205,6 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 | x86                                              | Intel  CPU的架构，为当前最主流的CPU架构.使用x86指令集，64位处理使用扩展内存方式。（多核实现方式：1CPU 2计算器）。 |
 | arm（Advanced  RISC Machine）                    | 进阶精简指令集机器，是一个32位RISC指令集处理器，广泛使用于嵌入式系统中  。Acorn电脑公司（Acorn Computers Ltd）于1983年开始开发的。 |
 | 其余：                                           | avr32 blackfin cris frv h8300 m32r m68k m68knommu  microblaze mips mn10300 parisc powerpc s390 sh sparc um xtensa |
-
-**表3 Linux内核支持的架构列表**
 
  
 
@@ -226,9 +228,9 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 不提供下面保证：
 
-\# volatile 声明不保证读写和运算操作的原子性。
+* volatile 声明不保证读写和运算操作的原子性。
 
-\# volatile 声明不保证对其进行的读写操作直接发生在主内存。相反，CPU 会尽可能让这些读写操作发生在 L1/L2 cache 上。除非：
+* volatile 声明不保证对其进行的读写操作直接发生在主内存。相反，CPU 会尽可能让这些读写操作发生在 L1/L2 cache 上。除非：
 
 1. 发生了一个未命中的读请求。
 
@@ -236,7 +238,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
   3. 目标地址为 non-cacheable 区（主要是其它设备映射到内存地址空间的通信接口。例如：网卡的板载缓冲区、显卡板载显存、WatchDog 寄存器等等）。
 
-\# 编译器仅保证自己在优化时不会变更多个 volatile 变量间的操作顺序。 但编译器并不保证代码在处理器执行时的顺序。 即：如果处理器支持乱序发射（out-of-order）执行的话，程序员预期的内存访问顺序仍然会被打乱。这时，程序员需要显式使用内存屏障指令来通知处理器期望的内存访问顺序
+编译器仅保证自己在优化时不会变更多个 volatile 变量间的操作顺序。 但编译器并不保证代码在处理器执行时的顺序。 即：如果处理器支持乱序发射（out-of-order）执行的话，程序员预期的内存访问顺序仍然会被打乱。这时，程序员需要显式使用内存屏障指令来通知处理器期望的内存访问顺序
 
 **3)原子操作**
 
@@ -259,23 +261,23 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 内在屏障用于消除 CPU 乱序执行优化对内存访问顺序的影响。可分为
 
-·     全屏障语义： 操作序列为｛向前：OP: 向后双向同步｝
+·     全屏障语义：操作序列为｛向前：OP: 向后双向同步｝
 
-·     Acquire语义: 操作序列为（OP：向后同步），如互斥加锁。
+·     Acquire语义：操作序列为（OP：向后同步），如互斥加锁。
 
-·     Release语义:操作序列为（向前同步：OP），如互斥解锁。
+·     Release语义：操作序列为（向前同步：OP），如互斥解锁。
 
-·     无屏障语义： 不作任何处理
+·     无屏障语义：不作任何处理
 
 适用最广的是全屏障语义，使得所有在设置全屏障之前发起的内存访问，必须先于在设置屏障之后发起的内存访问之前完成，确保内存访问按程序的顺序完成。x86架构中对硬件进行操作的汇编语言指令是“串行的”，也具有内存屏障的作用．如：对I/O端口进行操作的所有指令、带lock前缀的指令以及写控制寄存器、系统寄存器或调试寄存器的所有指令。
 
-linux内核提供的屏蔽函数有: mb, rmb, wmb及对应的smp_mb,smp_rmb,smp_wmb. 这些函数的实现是架构相关的.
+linux内核提供的屏蔽函数有: mb, rmb, wmb及对应的smp_mb,smp_rmb,smp_wmb. 这些函数的实现是架构相关的。
 
  
 
 **6) likely, unlikely** (from: [include/linux/compiler.h](http://lxr.linux.no/linux+*/include/linux/compiler.h#L107))
 
-这是调用gcc的内嵌函数__builtin_expect,用来比较值. likely(x)是指x=1时做某事, unlikely(x)指若x=1时不做某做.常用来与某个互斥变量比较.
+这是调用gcc的内嵌函数__builtin_expect,用来比较值。 likely(x)是指x=1时做某事, unlikely(x)指若x=1时不做某做。常用来与某个互斥变量比较。
 
  
 
@@ -304,13 +306,15 @@ __asm__　__volatile__(“汇编语句“
 
   Linux 中最简单的同步方法就是原子操作。原子运算符的每个函数都是原子操作。
 
-n 原子量的类型是atomic_t。 
+* 原子量的类型是atomic_t。 
 
-n 原子量的函数用来操作整数或位。 
+* 原子量的函数用来操作整数或位。 
 
-n 原子量常实现为计数器。 
+* 原子量常实现为计数器。 
 
 ### 1)原子量实现的架构相关性
+
+表4 各架构下的原子量实现关键指令
 
 | 架构名称 | 关键宏或指令(内存屏蔽 | 说明                                                         |      |
 | -------- | --------------------- | ------------------------------------------------------------ | ---- |
@@ -318,9 +322,7 @@ n 原子量常实现为计数器。
 | alpha    | ldl_l/stl_c           | ldl_:l Load Sign Extended Longword Locked   stl_c: Store Longword Conditional |      |
 | arm      | ldrex/strex           | Load and Store Register Exclusive                            |      |
 
-表4 各架构下的原子量实现关键指令
 
- 
 
 示例：x86构架的LOCK_PREFIX实现分析
 
@@ -355,9 +357,7 @@ from: [arch/x86/include/asm/alternative.h, line 30](http://localhost/lxr/http/so
 
 代码说明：[3]
 
-  这段代码汇编后，在 .text 段生成一条 lock 指令前缀 0xf0，在 .smp_locks 段生成四个字节的 lock 前缀的地址，链接的时候，所有的 .smp_locks 段合并起来，形成一个
- 所有 lock 指令地址的数组，这样统计 .smp_locks 段就能知道代码里有多少个加锁的
- 指令被生成，猜测是为了调试目的。
+  这段代码汇编后，在 .text 段生成一条 lock 指令前缀 0xf0，在 .smp_locks 段生成四个字节的 lock 前缀的地址，链接的时候，所有的 .smp_locks 段合并起来，形成一个所有 lock 指令地址的数组，这样统计 .smp_locks 段就能知道代码里有多少个加锁的指令被生成，猜测是为了调试目的。
 
 ​    在IA-32多处理器环境中，声明LOCK，确保了处理器对于共享内存的独占式访问。声明LOCK可能会导致堵塞(locking)。lock后面的指令将会按序进行.
 
@@ -456,7 +456,7 @@ static inline void atomic_add(int i, atomic_t *v)
 
  
 
-## 2自旋锁spinlock
+## 2 自旋锁spinlock
 
 一个自旋锁就是一个互斥设备，它只能有两个值："锁定"和"解锁"。如果锁可用，则"锁定"位被设置，而代码继续进入临界区；相反，如果锁被其他进程争 用，则代码进入忙循环并重复检查这个锁，直到锁可用为止。这个循环就是自旋锁的"自旋"。自旋锁最多只能被一个可执行的线程持有。如果一个执行线程试图获 得一个被争用的自旋锁，那么该线程就会一直进行忙循环-旋转-等待锁重新可用。注意，同一个锁可以用在多个位置。缺点：一个被争用的自旋锁使得请求它的线 程在等待锁重新可用时自旋(特别浪费处理器时间)。所以，自旋锁不应该被长时间持有。当然，可以采用另外的方式处理对锁的争用：让请求线程睡眠，直到锁重 新可用时在唤醒它。但是，这里有两次明显的上下文切换，被阻塞的线程要换入或换出。因此，持有自旋锁的时间最好小于完成两次上下文切换的耗时。
 
@@ -525,7 +525,7 @@ do{
 		b = test_and_set(&lock);	//测试变量lock,此句不断执行,直至b可用
 		unlock(bus);	//解锁
 	}
-	临界区处理 
+	临界区处理... 
 }while(1)
 ```
 
@@ -578,7 +578,6 @@ do{
 183         LOCK_CONTENDED(lock, _raw_spin_trylock, _raw_spin_lock);
 184 }
 186 EXPORT_SYMBOL(_spin_lock);
-
 ```
 
 
@@ -607,7 +606,7 @@ form: /include/linux/lockdep.h
 
 说明: 在不可调试且试探锁状态时, 此函数为空
 
-```
+```c
  420#ifdef CONFIG_DEBUG_LOCK_ALLOC    //是否可调试
  421# ifdef CONFIG_PROVE_LOCKING
 422#  define spin_acquire(l, s, t, i)    lock_acquire(l, s, t, 0, 2, NULL, i)
@@ -625,7 +624,7 @@ c) LOCK_CONTENDED
 
 说明: 定义了锁统计为尝试检查锁状态,进行锁连接, 否则此宏执行真正的加锁函数lock(_lock)
 
-```
+```c
  343#ifdef CONFIG_LOCK_STAT
  348#define LOCK_CONTENDED(_lock, try, lock)                        \
  349do {                                                            \
@@ -656,7 +655,7 @@ raw_spin_lock -->_raw_spin_lock -->__raw_spin_lock
 原理:  [6]
 lock->slock初始为0,未上锁状态. x86中spinlock用排队自旋锁实现,保存申请顺序来解决不公平问题. slock由next和owner组成, 其中next表示申请序号,owner表示申请已否标记. 当cpu不超过255时,slock(16bit)=高8位 next + 低8位owner; 否则next和owner都是16bit. 当next和owner均为0时,锁无人使用. 内核执行线程申请自旋锁时，原子地将 Next 域加 1，并将原值返回作为自己的票据序号。如果返回的票据序号等于申请时的 Owner 值，说明自旋锁处于未使用状态，则直接获得锁；否则，该线程忙等待检查 Owner 域是否等于自己持有的票据序号，一旦相等，则表明锁轮到自己获取。线程释放锁时，原子地将 Owner 域加 1 即可，下一个线程将会发现这一变化，从忙等待状态中退出。
 
-```
+```c
   58#if (NR_CPUS < 256)        
   59#define TICKET_SHIFT 8
   60
@@ -715,7 +714,7 @@ lock->slock初始为0,未上锁状态. x86中spinlock用排队自旋锁实现,�
 
 示例2: arm架构下加锁的实现[__raw_spin_lock](http://lxr.linux.no/linux+*/+code=__raw_spin_lock) /arch/arm/include/asm/spinlock.h
 
-```
+```c
   26static inline void __raw_spin_lock(raw_spinlock_t *lock)
   27{
   28        unsigned long tmp;
@@ -769,7 +768,7 @@ typedef struct {
 
 
 
-声明于 /arch/x86/include/asm/spinlock_types.h
+raw_rwlock_t 声明于 /arch/x86/include/asm/spinlock_types.h
 
 ```c
 typedef struct {
@@ -781,13 +780,13 @@ typedef struct {
 
 ### 2)读写锁操作函数 
 
-| 函数声明function  prototype | 用途description                          |      |
-| --------------------------- | ---------------------------------------- | ---- |
-| `rwlock_init(lock)   `      | init                                     |      |
-| `write_lock   `             | `critical section -- can read and write` |      |
-| read_lock                   | `critical section -- can read only`      |      |
-| write_unlock                | unlock                                   |      |
-| read_unlock                 | unlock                                   |      |
+| 函数声明function  prototype | 用途description                          |
+| --------------------------- | ---------------------------------------- |
+| `rwlock_init(lock)   `      | init                                     |
+| `write_lock   `             | `critical section -- can read and write` |
+| read_lock                   | `critical section -- can read only`      |
+| write_unlock                | unlock                                   |
+| read_unlock                 | unlock                                   |
 
  
 
@@ -845,8 +844,8 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
 
 保存中断上下文iresave，看信号量是否可用，是，则获取；否，则保存上下文，循环睡眠等待，直至被焕醒。
 
-```
-实现链: down-->__down-->__down_common
+```c
+//实现链: down-->__down-->__down_common
   53void down(struct semaphore *sem)
   54{
   55        unsigned long flags;
@@ -861,7 +860,7 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
   64EXPORT_SYMBOL(down);
 ```
 
-```
+```C
  236static noinline void __sched __down(struct semaphore *sem)
  237{
  238        __down_common(sem, TASK_UNINTERRUPTIBLE, MAX_SCHEDULE_TIMEOUT);
@@ -905,9 +904,9 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
 
 **b)** **信号量释放函数up**
 
-//up 释放信号量
+up 释放信号量
 
-```
+```c
  171/**
  172 * up - release the semaphore
  173 * @sem: the semaphore to release
@@ -935,6 +934,8 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
 
 ## 1 同步机制列表
 
+表 内核同步机制列表(全)
+
 | 同步机制名称           | 为什么出现                        | 实现原理                        | 锁粒度与可否嵌套 | 适用场景     | 内核文件定位(v2.6.30)                                        |
 | ---------------------- | --------------------------------- | ------------------------------- | ---------------- | ------------ | ------------------------------------------------------------ |
 | 中断位标志             | 为了屏蔽中断                      | 如x86中修改标志寄存器EF中IF标记 | 低粒度           | 屏蔽中断     | 无, 各架构提供相应指令,如x86中cli/sti                        |
@@ -950,8 +951,6 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
 | RCU: Read-Copy  Update | 类似读写锁,保护的是指针, v2.6加入 |                                 |                  | 读多写少     | [include/linux/rcupreempt.h](http://lxr.linux.no/linux+*/include/linux/rcupreempt.h#L67) |
 | BKL                    | 大内核锁,锁代码                   | lock_kernel()  unlock_kernel()  | 粗粒度           |              | [include/linux/smp_lock.h](http://lxr.linux.no/linux+*/include/linux/smp_lock.h#L44)  lib/kernel_lock.c |
 
-表 内核同步机制列表(全)
-
 
 
 ## 2 spinlock与semaphore比较
@@ -964,9 +963,9 @@ semaphore使用时若发现资源暂不可用，则保存上下文irqsave,睡眠
 
 1）不允许睡眠的上下文要使用spinlock,允许睡眠的上下文可用semaphore,在中断上下文的竞争资源要使用spinlock;
 
-2)临界区使用较长的建议使用semaphore，临界区使用较短的则可使用spinlock;
+2）临界区使用较长的建议使用semaphore，临界区使用较短的则可使用spinlock;
 
-3)需要关中断的场合需要调用spinlock_irq或者spinlock_irqsave，不明确当前中断状态的地方需要调用spinlock_irqsave，否则调用spinlock_irq。一个资源既在中断上下文中访问，又在用户上下文中访问，那么需要关中断，如果仅仅在用户上下文中被访问，那么无需关中断。
+3）需要关中断的场合需要调用spinlock_irq或者spinlock_irqsave，不明确当前中断状态的地方需要调用spinlock_irqsave，否则调用spinlock_irq。一个资源既在中断上下文中访问，又在用户上下文中访问，那么需要关中断，如果仅仅在用户上下文中被访问，那么无需关中断。
 
  
 

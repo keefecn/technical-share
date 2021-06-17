@@ -91,11 +91,11 @@
 
  
 
-## 1.1     JVM
+## 1.1  JVM
 
 详见 《Java开发》相应章节。
 
-## 1.2     J2EE
+## 1.2  J2EE
 
 J2EE的分层架构是设计模式MVC（详见 《软件设计系列》MVC模式）的优秀实践。Java平台的动态网站编程技术经历了Model 1和Model2两个阶段。
 
@@ -208,7 +208,18 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 表格 18 Java框架列表
 
-
+| softwareName  | Desc                   | currnet  version | Copyright(c)         | License   | Note                                                         |
+| ------------- | ---------------------- | ---------------- | -------------------- | --------- | ------------------------------------------------------------ |
+| tomcat        | web server             | 6.08  2006-10-24 | ASF                  | Apache2.0 | http://tomcat.apache.org/                                    |
+| spring        | MVC中的View  Framework |                  | 2002--  springsource | Apache2.0 | http://www.springsource.org  Author: Rod Johnson             |
+| **Struts**    |                        |                  |                      |           | **Struts** 是一个基于Sun J2EE平台的MVC框架，主要是采用Servlet和JSP技术来实现的。 |
+| **Hibernate** | 持久层框架             |                  |                      |           | 一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装。 |
+| ibatis        | 持久层框架             |                  |                      |           | 相对于Hibernate,  ibatis 则要求开发者编写具体的SQL 语句      |
+| **Quartz**    | Job调度                |                  |                      |           |                                                              |
+| **Velocity**  | 模板引擎               |                  |                      |           |                                                              |
+| **Eclipse**   | IDE                    |                  |                      |           | 2001年IBM开发并开源.  [http://www.Eclipse.org/downloads/](http://www.eclipse.org/downloads/) |
+| NetBeans      | IDE                    |                  |                      |           |                                                              |
+| XPlanner      | 项目管理               |                  |                      |           |                                                              |
 
  
 
@@ -849,11 +860,13 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
-## 4.1 本章参考
+## 本章参考
 
  
 
-# 5  参考资料
+
+
+# 参考资料
 
 [1]: JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
 

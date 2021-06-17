@@ -384,9 +384,9 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 superset使用Flask-Cache来缓存数据。
 
-修改文件：*flask_cache/__init__.py, superset/config.py*
+修改文件：`flask_cache/__init__.py`, superset/config.py
 
-*# superset/config.py*
+// superset/config.py
 
  
 
@@ -576,7 +576,7 @@ sys.setdefaultencoding('utf-8')
 
 架构工具：Enterprise Architect
 
-## 7.1   IT架构
+## 7.1 IT架构
 
 在TOGAF体系中，IT架构包括了应用架构、数据架构和技术架构。
 
@@ -662,7 +662,7 @@ sys.setdefaultencoding('utf-8')
 
 # 8 superset组件分析
 
-## 8.1   整体流程
+## 8.1  整体流程
 1. npm run dev --将每个模块打包成一个单独的js文件（在webpack.config.js中配置）
 2. superset runserver  --启动服务
 3. 浏览器登录
@@ -679,15 +679,15 @@ sys.setdefaultencoding('utf-8')
 
  
 
-## 8.2   flask
+## 8.2  flask
 
-详见 《WEB框架分析》
+详见 《python框架分析》
 
  
 
 ## 8.3   D3/NVD3
 
-详见 《WEB框架分析》
+详见 《WEB前端框架分析》
 
  
 
@@ -698,6 +698,10 @@ sys.setdefaultencoding('utf-8')
 # 9 源码分析
 
  
+
+
+
+
 
 # 参考资料
 

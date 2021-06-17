@@ -132,7 +132,7 @@ Heritrix 包含以下关键特性：
 
 [**User Manual**](http://localhost:8089/docs/articles/user_manual/index.html)
 
-## 2.1   安装运行
+## 2.1  安装运行
 
 l 安装：直接下载源码包，解压即可。
 
@@ -266,7 +266,7 @@ heritrix以创建一个job开始。jobs创建有四种方式。（详见WEBUI）
 
  
 
-## 2.4   配置开发环境eclipse
+## 2.4  配置开发环境eclipse
 
 获取heritrix源码中以下文件目录。（主要是src目录）
 
@@ -306,9 +306,9 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
 说明：它的工作流程是一个循环，具体流程是：
 
-1)     在预定的URI中选择一个。
+1)   在预定的URI中选择一个。
 
-2)     从选择的URI的网址下载远程文件
+2)   从选择的URI的网址下载远程文件
 
 3)     分析，归档下载到的内容
 
@@ -318,9 +318,7 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
  
 
- 
-
-## 3.2   heritrix组件结构
+## 3.2 heritrix组件结构
 
 Heritrix是一个爬虫框架，可加如入一些可互换的组件。主要组件有：
 
@@ -386,7 +384,7 @@ order.xml
 
 # 4  应用开发
 
-## 4.1   参数配置
+## 4.1  参数配置
 
 **Select URI Frontier** 
 

@@ -85,15 +85,14 @@ int main()
          apr_pool_t *child;
          apr_pool_create(&child,root);//创建子池，指定父池为root。分配子默认为父池分配子
          void *pBuff=apr_palloc(child,sizeof(int));//从子池分配内存
-         int *pInt=new (pBuff)  int(5);//随便举例下基于已分配内存后，面向对象构造函数的调用。
+         int *pInt=new (pBuff)  int(5);//随便举例下基于已分配内存后，面向对象构造函数的调用
          printf("pInt=%d\n",*pInt);
-           {
+         {
              apr_pool_t *grandson;
              apr_pool_create(&grandson,root);
              void *pBuff2=apr_palloc(grandson,sizeof(int));
              int *pInt2=new (pBuff2)  int(15);
              printf("pInt2=%d\n",*pInt2);    
- 
              apr_pool_destroy(grandson);
          }
          apr_pool_destroy(child);//释放子池，将内存归还给分配子
@@ -106,7 +105,7 @@ int main()
 
 
 
-## 2) 模块管理
+## 2）模块管理
 
 开源世界最经典的模块加载方式。
 
@@ -117,3 +116,12 @@ int main()
 ## 3）高性能的网络服务器
 
  
+
+
+
+
+
+
+
+# 参考资料
+

@@ -56,41 +56,21 @@
 
 ## 简述
 
-### 实现方式比较
-
-表格  python三大框架的实现方式比较
-
-|                | Django                                              | Flask                                            | tornado          |
-| -------------- | --------------------------------------------------- | ------------------------------------------------ | ---------------- |
-| 简述           | 全能、重量级框架                                    | 轻量级框架，原生组件少                           | 轻量、异步高性能 |
-| 全局WEB实例    | startproject                                        | `from flask import Flask  g_app=Flask(__name__)` |                  |
-| 应用app实例    | startapp                                            | 蓝图Blureprint                                   |                  |
-| restful扩展    | djangorestframework                                 | flask_restplus                                   |                  |
-| 类基础视图View | from django.views import View                       | from flask.views import View                     |                  |
-| 类视图APIView  | from rest_framework.views import APIView            |                                                  |                  |
-| 路由映射       | urlpatterns = [    path('admin/', admin.site.urls), | add_url_rule('/xx', viewfun=xxView.as_view())    |                  |
-| ORM            | DRF                                                 | flask_sqlalchemy                                 |                  |
-| swagger        | drf-yasg 或 coreapi                                 | flassger 或 restplus                             |                  |
-
-
-
 ### 性能比较
 
 表格 4 python WEB框架性能比较
 
-|                  |          | 性能 nums/sec |         | 依赖组件                                            | 启动方式                       |
-| ---------------- | -------- | ------------- | ------- | --------------------------------------------------- | ------------------------------ |
-| 框架名           | 代码行数 | 单进程        | 并发100 |                                                     |                                |
-| Django           | 120K     | 255           | x       | babel(10k)                                          | python manger.py runserver     |
-| Tornago          | 42K      | 387           | 918     |                                                     |                                |
-| Flask            | 6.5K     | 342           | 1694    | Jinjia2(12k), <br>MarkupSafe(22k),  <br>click(6.6k) | python xx.py                   |
-| uwsgi + Django   |          | 280           | 2947    |                                                     |                                |
-| uwsgi + Flask    |          | 343           | 4651    |                                                     | uwsgi --wsgi-file <file>       |
-| gunicorn + Flask |          |               |         |                                                     | gunicorn -w 2 <filename.Flask> |
+|                  | 性能 nums/sec |         | 依赖组件                                            | 启动方式                       |
+| ---------------- | ------------- | ------- | --------------------------------------------------- | ------------------------------ |
+| 框架名           | 单进程        | 并发100 |                                                     |                                |
+| Django           | 255           | x       | babel(10k)                                          | python manger.py runserver     |
+| Tornago          | 387           | 918     |                                                     |                                |
+| Flask            | 342           | 1694    | Jinjia2(12k), <br>MarkupSafe(22k),  <br>click(6.6k) | python xx.py                   |
+| uwsgi + Django   | 280           | 2947    |                                                     |                                |
+| uwsgi + Flask    | 343           | 4651    |                                                     | uwsgi --wsgi-file <file>       |
+| gunicorn + Flask |               |         |                                                     | gunicorn -w 2 <filename.Flask> |
 
 备注：测试环境4U8G。uwsgi启动4个工作进程。uwsgi使用C实现性能更高，gunicorn更易使用。Django/Falsk/Tornago都是单进程，可以搭配gunicorn/uwsgi才能发挥多核CPU性能。
-
-
 
 
 
@@ -898,6 +878,8 @@ class Parameter(SwaggerDict):
 
 
 
+
+
 ### FAQ 常见问题
 
 1. Django2.x版本与MySQL5.6以下版本不适配！
@@ -1419,9 +1401,43 @@ python manage.py print
 
 ## 2.3 python-Tornado
 
+### 简介
+
+表格 tornado版本说明
+
+| 版本号 | 发布时间  | 功能或更新说明 |
+| ------ | --------- | -------------- |
+| 1.0    | 2010.7.22 |                |
+| 2.0    | 2011.6.21 |                |
+| 3.0    | 2013.3.29 |                |
+| 4.0    | 2014.7.15 |                |
+| 5.0    | 2018.3.5  |                |
+| 6.0    | 2019.3.1  |                |
+
+备注：最新版本 6.1.0，发布于2020.10.30.
+
 
 
 ### 入门篇
+
+**程序demo**
+
+```python
+import tornado.ioloop
+import tornado.web
+  
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+  
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+])
+  
+if __name__ == "__main__":
+    application.listen(8888)
+    tornado.ioloop.IOLoop.instance().start()
+```
 
 
 
@@ -1613,6 +1629,6 @@ flask 官网 http://flask.pocoo.org/
 
 [3].  Flask, Tornado, GEvent组合运行与性能比较 https://blog.csdn.net/lcylln/article/details/33731183
 
-[4].    flask中文文档 http://docs.jinkan.org/docs/flask  
+[4].  flask中文文档 http://docs.jinkan.org/docs/flask  
 
-[5].    初识Django框架 https://www.cnblogs.com/phennry/p/5849445.html 
+[5].  初识Django框架 https://www.cnblogs.com/phennry/p/5849445.html 
