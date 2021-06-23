@@ -1,10 +1,17 @@
 | 序号 | 修改时间   | 修改内容            | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------------------- | ------ | ------ |
 | 1    | 2021-6-11 | 创建。从《python开发》迁移同名章节 | Keefe | Keefe |
+| 2 | 2021-7-2 | 重组内容章节结构 | 同上 |  |
 
 
 
 
+
+
+
+---
+
+[TOC]
 
 
 
@@ -27,6 +34,8 @@
 
 说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。 
 
+
+
 表格 源代码主要目录结构
 
 | 目录    | 简述                                                |
@@ -46,6 +55,10 @@
 
 
 
+# 2 Python运行环境
+
+## Python对象实现
+
 表格  cpython中对象的C和python级别对照
 
 | 源码中C对象      | Python对象                   | 用途                                                         |
@@ -62,7 +75,6 @@
 | PyModuleObject   | module,   sys, `__builtin__` | sys和`__builtin__`是两个内置初始模块。                       |
 | PyThreadState    |                              | 线程状态                                                     |
 | PyInterpreter    |                              | 进程                                                         |
-|                  |                              |                                                              |
 
 备注：可用type函数或者`xxx.__class__`__来查看对象类型。` __bases__`用来查看父类类型。
 
@@ -70,28 +82,22 @@
 
 表格  python内置对象组成
 
-| 对象           | 成员                                           | 备注 |
-| -------------- | ---------------------------------------------- | ---- |
-| PyObject       | int refConut;   type                           |      |
-| PyTypeObject   | PyObject_HEAD;   char* name；   若干函数指针。 |      |
-| PyIntObject    |                                                |      |
-| PyStringObject |                                                |      |
-| PyListObject   |                                                |      |
-| PyDictObject   |                                                |      |
+| 对象           | 成员                                           | 说明                                     |
+| -------------- | ---------------------------------------------- | ---------------------------------------- |
+| PyObject       | int refConut;   type                           | 引用计数int + 类型对象指针               |
+| PyTypeObject   | PyObject_HEAD;   char* name；   若干函数指针。 | 类型对象：PyObject + 名称name + 函数指针 |
+| PyIntObject    |                                                |                                          |
+| PyStringObject |                                                |                                          |
+| PyListObject   |                                                |                                          |
+| PyDictObject   |                                                |                                          |
 
 
-
-# 2 Python对象实现
-
-python对象：
-
-*  PyObject  对象（成员=引用计数int + 类型对象指针）
-*  PyTypeObject-->(type int str dict)  类型对象（成员=PyObject + 名称name + 函数指针）
-*  PyIntObject PyStringObject PyDictObject ...
 
 在Python的世界里，一切都是对象。在Python中，对象就是C中的结构体在堆上申请的一块内存。
 
 Python 中的对象有定长对象PyObject (如 int 对象)，变长对象PyVarObject（如 list 对象）， Python 的对象都属于这两种之一。对象中包含引用计数和类型信息，管理和创建对象需要用到。还包含属性值的存储空间。
+
+
 
 PyObject 对象在内存中的结构类似下面代码：
 
@@ -138,7 +144,52 @@ typedef struct tagPyTypeObject
 
 
 
-# 3  python虚拟机PVM
+## 内存分配
+
+Python作为一种动态类型的语言，其对象和引用分离。为了有效的释放内存，Python内置了垃圾回收的支持。Python采取了一种相对简单的垃圾回收机制，即引用计数，并因此需要解决孤立引用环的问题。
+
+python内存基本特性
+
+* 变量无须事先声明
+* 变量无须指定类型
+* 不用关心内存管理
+* 变量名会被"回收"
+* del 语句能够直接释放资源。
+
+
+
+**引用计数**
+Python 采用引用计数的方式来管理分配的内存。Python 的每个对象都有一个引用计数，这个引用计数表明了有多少对象在指向它。当这个引用计数为 0 时，该对象就释放了。
+然而，引用计数有一个本质上的缺陷，是由于循环引用引起的。
+
+**垃圾收集GC**
+不再被使用的内存会被一种称为垃圾收集的机制释放。
+备注: 解释器跟踪对象的引用计数，垃圾回收机制负责释放内存，垃圾收集器是一块独立代码，它用来寻找引用计数为0的对象，它也负责检查虽然引用计数大于0但是也应该被销毁的对象。
+比如：`l=[]; l.append(l); del l;`
+
+* 垃圾收集算法：根寻找法、引用计数
+* 垃圾回收算法：标记-复制-清除
+* 垃圾回收策略：分代回收。
+
+
+
+## 编译优化
+
+python源码安装时，可带上编译优化开关:  `./configure --enable-optimizations`
+
+该标志启用轮廓引导优化(PGO)和链接时间优化(LTO).  
+
+* [LTO implementation in gcc](https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html)
+* [PGO](https://en.wikipedia.org/wiki/Profile-guided_optimization)  https://en.wikipedia.org/wiki/Profile-guided_optimization
+
+| 编译开关               | 用途                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| --enable-optimizations | 启用轮廓引导优化(PGO)和链接时间优化(LTO)。<br>加上这个 flag 编译后，性能有 10% 左右的优化 |
+| -enable-shared         | **启用共享**，方便其他依赖python的一些内置库（比如 mysqlclient) 的资源的正常安装。不启用，可能后续安装可能报错。 |
+
+
+
+# 3  Python虚拟机PVM 
 
 ## 3.1  虚拟机执行流程
 
@@ -147,7 +198,7 @@ typedef struct tagPyTypeObject
 *  完成模块的加载和链接；
 *  将源代码翻译为PyCodeObject对象，并将其写入内存当中（方便CPU读取，起到加速程序运行的作用）；
 *  从上述内存空间中读取指令并执行；
-*  程序结束后，根据命令行调用情况（即运行程序的方式）决定是否将PyCodeObject写回硬盘当中（也就是直接复制到.pyc或.pyo文件中）；
+*  程序结束后，根据命令行调用情况（即运行程序的方式）决定是否将 PyCodeObject 写回硬盘当中（也就是直接复制到.pyc或.pyo文件中）；
 *  之后若再次执行该脚本，则先检查本地是否有上述字节码文件。有则执行，否则重复上述步骤。
    说明：.pyc或.pyo文件是否生成，是取决于我们如何运行程序的。模块在每次导入前总会检查其字节码文件的修改时间是否与自身的一致。若是则直接从该字节码文件读取内容，否则源模块重新导入，并在最后生成同名文件覆盖当前已有的字节码，从而完成内容的更新（详见import.py）。这样，就避免了修改源代码后与本地字节码文件产生冲突。
 
@@ -268,7 +319,7 @@ In [10]: dis.dis(co)
 
 
 
-# 4 python标准库
+# 4 Python标准库
 
 ## 标准库简介
 
@@ -296,7 +347,7 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 | ctypes        |                                                              |                                                              |
 | email         |                                                              |                                                              |
 | encodings     |                                                              |                                                              |
-| ensurepip     |                                                              |                                                              |
+| ensurepip     | `__ini__.py`::_run_pip()                                     | 模块用pip安装                                                |
 | html          |                                                              |                                                              |
 | http          |                                                              |                                                              |
 | idlelib       |                                                              |                                                              |
@@ -320,10 +371,12 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 | asyncore.py   |                                                              |                                                              |
 | cmd.py        |                                                              |                                                              |
 | functools.py  | 方法：wraps update_wrapper <br>class: partial partialmethod  | 装饰器方式更新对象属性                                       |
-| dis.py        |                                                              |                                                              |
 | getopt.py     |                                                              | 命令行参数解析                                               |
-| 其它1         | datetime.py time.py                                          |                                                              |
+| runpy.py      | run_module run_path                                          | 用模块名字定位和运行python代码                               |
+| 其它1         | dis.py datetime.py time.py                                   |                                                              |
 | 其它2         | lzma.py operation.py optparse.py pdb.py <br/>pickle.py platform.pypy_compile.py re.py <br/>queue.py shell.py socket.py sockserver.py<br/>ssl.py string.py subprocess.py tempfile.py<br/>this.py thread.py token.py traceback.py<br/>types.py uu.py uuid.py |                                                              |
+
+>可导出符号：文件可对外导出的符号在 `__all__` 里查找，若无`__all__`则可以全部导出（不推荐）。
 
 
 
@@ -336,6 +389,7 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 | filter     | >>> def f(x): return x % 2   != 0 and x % 3 != 0     <br>>>> filter(f, range(2, 25))     [5, 7, 11, 13, 17, 19, 23] | 对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。 |
 | map        | >>> def add(x, y): return   x+y     >>> map(add, range(8), range(8))     [0, 2, 4, 6, 8, 10, 12, 14] | 对sequence中的item依次执行function(item)，见执行结果组成一个List返回。map支持多个sequence。 |
 | reduce     | >>> def add(x,y): return x +   y     >>> reduce(add, range(1, 11)) <br>55 | 对sequence中的item顺序迭代调用function。   # （注：1+2+3+4+5+6+7+8+9+10） |
+| lambda     |                                                              |                                                              |
 | sorted     |                                                              | 标准库内建函数，缺省字典排序。                               |
 | list.sort  |                                                              | 列表的排序                                                   |
 | round      | round(1.4)=1.0   round(1.5)=2.0   round(1.55, 1)=1.6         | 标准库内建函数，四舍五入。   第二参数是精度。                |
@@ -344,13 +398,76 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 
 
 
-#### math数学库
+#### filter/map/reduce/lambda
+
+**filter**
 
 ```python
->>> import math
->>> dir(math)
-['__doc__', '__name__', '__package__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'copysign', 'cos', 'cosh', 'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'hypot', 'isinf', 'isnan', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc']
+>>> help(filter)
+filter(function or None, sequence) -> list, tuple, or string
+Return those items of sequence for which function(item) is true.  If
+   function is None, return the items that are true.  If sequence is a tuple
+   or string, return the same type, else return a list.
+filter(function, sequence)：对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回：
+
+>>> def f(x): return x % 2 !=
+0 and x % 3 != 0 
+>>> filter(f, range(2, 25)) 
+[5, 7, 11, 13, 17, 19, 23]
+>>> def f(x): return x != 'a' 
+>>> filter(f, "abcdef") 
+'bcdef'
 ```
+
+
+
+**map(function, sequence)**：
+对sequence中的item依次执行function(item)，见执行结果组成一个List返回。另外map也支持多个sequence，这就要求function也支持相应数量的参数输入：
+
+```python
+>>> def add(x, y): return x+y 
+>>> map(add, range(8), range(8)) 
+ [0, 2, 4, 6, 8, 10, 12, 14]
+```
+
+
+**reduce(function, sequence, starting_value)**：
+对sequence中的item顺序迭代调用function，如果有starting_value，还可以作为初始值调用，例如可以用来对List求和：
+
+```python
+>>> def add(x,y): return x + y 
+>>> reduce(add, range(1, 11)) 
+ 55 （注：1+2+3+4+5+6+7+8+9+10）
+>>> reduce(add, range(1, 11), 20) 
+ 75 （注：1+2+3+4+5+6+7+8+9+10+20
+```
+
+
+**lambda**：
+这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，类似与C语言中的宏，这些叫做lambda的函数，是从LISP借用来的，可以用在任何需要函数的地方：
+
+```
+lambda [arg1[,arg2,arg3....argN]]:expression
+```
+
+```python
+>>> g = lambda x: x * 2 
+>>> g(3) 
+ 6 
+>>> (lambda x: x * 2)(3) 
+ 6
+```
+
+我们也可以把filter map reduce 和lambda结合起来用，函数就可以简单的写成一行。
+ 例如：
+
+```python
+kmpathes = filter(lambda kmpath: kmpath,     
+map(lambda kmpath: string.strip(kmpath),
+string.split(l, ':'))) 
+```
+
+功能解说：对 l 中的所有元素以':'做分割，得出一个列表。对这个列表的每一个元素做字符串strip，形成一个列表。对这个列表的每一个元素做直接返回操作(这个地方 可以加上过滤条件限制)，最终获得一个字符串被':'分割的列表，列表中的每一个字符串都做了strip，并可以对特殊字符串过滤。
 
 
 
@@ -391,6 +508,16 @@ dict= sorted(dic.iteritems(), key=lambda d:(d[1],D[0]))
 
 输出的结果：
  [('d', 0), ('c', 3), ('asd', 4), ('bc', 5), ('a', 31), ('aa', 74)]
+
+
+
+#### math数学库
+
+```python
+>>> import math
+>>> dir(math)
+['__doc__', '__name__', '__package__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'copysign', 'cos', 'cosh', 'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'hypot', 'isinf', 'isnan', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc']
+```
 
 
 
@@ -1090,79 +1217,6 @@ def __init__(self):
 
 
 
-#### filter/map/reduce/lambda
-
-**filter**
-
-```python
->>> help(filter)
-filter(function or None, sequence) -> list, tuple, or string
-Return those items of sequence for which function(item) is true.  If
-   function is None, return the items that are true.  If sequence is a tuple
-   or string, return the same type, else return a list.
-filter(function, sequence)：对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回：
-
->>> def f(x): return x % 2 !=
-0 and x % 3 != 0 
->>> filter(f, range(2, 25)) 
-[5, 7, 11, 13, 17, 19, 23]
->>> def f(x): return x != 'a' 
->>> filter(f, "abcdef") 
-'bcdef'
-```
-
-
-
-**map(function, sequence)**：
-对sequence中的item依次执行function(item)，见执行结果组成一个List返回。另外map也支持多个sequence，这就要求function也支持相应数量的参数输入：
-
-```python
->>> def add(x, y): return x+y 
->>> map(add, range(8), range(8)) 
- [0, 2, 4, 6, 8, 10, 12, 14]
-```
-
-
-**reduce(function, sequence, starting_value)**：
-对sequence中的item顺序迭代调用function，如果有starting_value，还可以作为初始值调用，例如可以用来对List求和：
-
-```python
->>> def add(x,y): return x + y 
->>> reduce(add, range(1, 11)) 
- 55 （注：1+2+3+4+5+6+7+8+9+10）
->>> reduce(add, range(1, 11), 20) 
- 75 （注：1+2+3+4+5+6+7+8+9+10+20
-```
-
-
-**lambda**：
-这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，类似与C语言中的宏，这些叫做lambda的函数，是从LISP借用来的，可以用在任何需要函数的地方：
-
-```
-lambda [arg1[,arg2,arg3....argN]]:expression
-```
-
-```python
->>> g = lambda x: x * 2 
->>> g(3) 
- 6 
->>> (lambda x: x * 2)(3) 
- 6
-```
-
-我们也可以把filter map reduce 和lambda结合起来用，函数就可以简单的写成一行。
- 例如：
-
-```python
-kmpathes = filter(lambda kmpath: kmpath,     
-map(lambda kmpath: string.strip(kmpath),
-string.split(l, ':'))) 
-```
-
-功能解说：对 l 中的所有元素以':'做分割，得出一个列表。对这个列表的每一个元素做字符串strip，形成一个列表。对这个列表的每一个元素做直接返回操作(这个地方 可以加上过滤条件限制)，最终获得一个字符串被':'分割的列表，列表中的每一个字符串都做了strip，并可以对特殊字符串过滤。
-
-
-
 ### 3）内建私有方法Built-in Methods
 
 `__xx__`: 内置私有方法，用__开头和结尾。 
@@ -1216,10 +1270,12 @@ string.split(l, ':')))
 
 ## 标准模块 asyncio
 
-asyncio是Python 3.4 试验性引入的异步I/O框架（PEP 3156），提供了基于协程做异步I/O编写单线程并发代码的基础设施。其核心组件有事件循环（Event Loop）、协程(Coroutine）、任务(Task)、未来对象(Future)以及其他一些扩充和辅助性质的模块。
+asyncio是Python 3.4 试验性引入的异步I/O框架（[PEP 3156](https://www.python.org/dev/peps/pep-3156)），提供了基于协程做异步I/O编写单线程并发代码的基础设施。其核心组件有事件循环（Event Loop）、协程(Coroutine）、任务(Task)、未来对象(Future)以及其他一些扩充和辅助性质的模块。
 在引入asyncio的时候，还提供了一个装饰器@asyncio.coroutine用于装饰使用了yield from的函数，以标记其为协程。但并不强制使用这个装饰器。
 
-**使用示例**
+python3.5增加了带async/await语法的协程（[PEP492](https://www.python.org/dev/peps/pep-0492/))。
+
+**示例1**
 
 ```python
 import asyncio
@@ -1243,6 +1299,39 @@ asyncio.ensure_future(slow_operation(future))
 # 给future实例（第一个future）添加回调函数
 future.add_done_callback(got_result)
 try: # 持续运行
+    loop.run_forever()
+finally:
+    loop.close()
+```
+
+
+
+示例2：
+
+```python
+import asyncio
+
+async def echo_server():
+    print('Serving on localhost:8000')
+    await asyncio.start_server(handle_connection,	#实际读写函数
+                               'localhost', 8000)
+
+async def handle_connection(reader, writer):
+    print('New connection...')
+
+    while True:
+        data = await reader.read(8192)
+
+        if not data:
+            break
+
+        print('Sending {:.10}... back'.format(repr(data)))
+        writer.write(data)
+
+loop = asyncio.get_event_loop()
+# 获取事件并处理
+loop.run_until_complete(echo_server())
+try:
     loop.run_forever()
 finally:
     loop.close()
@@ -1288,6 +1377,7 @@ def update_wrapper(wrapper,
     wrapper.__wrapped__ = wrapped
     # Return the wrapper so this can be used as a decorator via partial()
     return wrapper
+
 
 class partial:
     """New function with partial application of the given arguments
@@ -1416,7 +1506,118 @@ Foo.__init__
 
 
 
-## 参考资料
+# 5 常见源码
+
+## 命令行启动模块
+
+命令行启动的常见系统脚本：ipython, pip, virtuanenv
+
+命令行启动的常见应用脚本：flask celery superset
+
+ipython
+
+```python
+import re
+import sys
+ 
+from IPython import start_ipython
+ 
+if __name__ == '__main__':
+    #移除-script.pyw或者.exe结尾的部分，如test-script.pyw或test.exe处理后是test
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(start_ipython())
+```
+
+
+
+pip3
+
+```python
+# -*- coding: utf-8 -*-
+import re
+import sys
+from pip._internal.cli.main import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
+    
+# windows环境 pip3.exe
+from pkg_resources import load_entry_point
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('pip==19.0.3', 'console_scripts', 'pip3')()
+    )
+```
+
+
+
+virtualenv
+
+```python
+[root@ecs-ce1a bin]# cat /usr/bin/virtualenv 
+#!/usr/local/bin/python3/bin/python3.8
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+from virtualenv.__main__ import run_with_catch
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(run_with_catch())
+```
+
+
+
+flask/celery/superset
+
+```python
+[root@ecs-ce1a bin]# cat flask
+# -*- coding: utf-8 -*-
+import re
+import sys
+from flask.cli import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
+    
+    
+[root@ecs-ce1a bin]# cat celery 
+# -*- coding: utf-8 -*-
+import re
+import sys
+from celery.__main__ import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())    
+```
+
+
+
+示例：superset命令行脚本和打包入口路径
+
+```python
+# bin/superset
+# -*- coding: utf-8 -*-
+import re
+import sys
+from superset.cli import superset
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(superset())
+
+# setup.py 在这找到脚本的入口路径，pip安装时会在python环境bin或script目录下生成命令行脚本superset
+setup(
+	entry_points={"console_scripts": ["superset=superset.cli:superset"]},
+)
+```
+
+
+
+
+
+# 参考资料
 
 **官网**
 

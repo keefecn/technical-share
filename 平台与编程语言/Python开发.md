@@ -287,17 +287,33 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 
 表格 python版本活跃状态
 
-| version | Maintenance status | First released | End of support | Release schedule                                    | 摘要                       |
-| ------- | ------------------ | -------------- | -------------- | --------------------------------------------------- | -------------------------- |
-| 3.9     | bugfix             | 2020/10/5      | 2025-10        | [PEP 596](https://www.python.org/dev/peps/pep-0596) |                            |
-| 3.8     | bugfix             | 2019/10/14     | 2024-10        | [PEP 569](https://www.python.org/dev/peps/pep-0569) |                            |
-| 3.7     | security           | 2018/6/27      | 2023/6/27      | [PEP 537](https://www.python.org/dev/peps/pep-0537) |                            |
-| 3.6     | security           | 2016/12/23     | 2021/12/23     | [PEP 494](https://www.python.org/dev/peps/pep-0494) | asyncio成为标准库          |
-| 3.5     |                    |                |                | PEP 492                                             | 新增了async/await语法      |
-| 3.4     |                    |                |                | PEP 3156                                            | 实验引入异步I/O框架asyncio |
-| 2.7     | end-of-life        | 2010/7/3       | 2020/1/1       | [PEP 373](https://www.python.org/dev/peps/pep-0373) | 2.x系列的最终版本          |
+| version | Maintenance status | First released | End of support | Release schedule                                    | 摘要              |
+| ------- | ------------------ | -------------- | -------------- | --------------------------------------------------- | ----------------- |
+| main    | features           | TBD            | TBD            | TBD                                                 | 主分支            |
+| 3.10    | prerelease         | 2021-10-04     |                | [PEP 619](https://www.python.org/dev/peps/pep-0619) |                   |
+| 3.9     | bugfix             | 2020-10-5      | 2025-10        | [PEP 596](https://www.python.org/dev/peps/pep-0596) |                   |
+| 3.8     | bugfix             | 2019-10-14     | 2024-10        | [PEP 569](https://www.python.org/dev/peps/pep-0569) |                   |
+| 3.7     | security           | 2018-6-27      | 2023-6-27      | [PEP 537](https://www.python.org/dev/peps/pep-0537) |                   |
+| 3.6     | security           | 2016-12-23     | 2021-12-23     | [PEP 494](https://www.python.org/dev/peps/pep-0494) | asyncio成为标准库 |
 
->  备注:  *PEP*是*Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。   
+>  备注:  *PEP*, *Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。   
+>
+>  TBD: To Be Discussed 待讨论
+
+
+
+表格 End-of-life branches
+
+| Branch | Schedule                                                | First release | End-of-life | Release manager                     | 摘要            |
+| ------ | ------------------------------------------------------- | ------------- | ----------- | ----------------------------------- | --------------- |
+| 3.5    | [**PEP 478**](https://www.python.org/dev/peps/pep-0478) | 2015-09-13    | 2020-09-30  | Larry Hastings                      |                 |
+| 3.4    | [**PEP 429**](https://www.python.org/dev/peps/pep-0429) | 2014-03-16    | 2019-03-18  | Larry Hastings                      |                 |
+| 3.3    | [**PEP 398**](https://www.python.org/dev/peps/pep-0398) | 2012-09-29    | 2017-09-29  | Georg Brandl,<br>Ned Deily (3.3.7+) |                 |
+| 3.2    | [**PEP 392**](https://www.python.org/dev/peps/pep-0392) | 2011-02-20    | 2016-02-20  | Georg Brandl                        |                 |
+| 3.1    | [**PEP 375**](https://www.python.org/dev/peps/pep-0375) | 2009-06-27    | 2012-04-09  | Benjamin Peterson                   |                 |
+| 3.0    | [**PEP 361**](https://www.python.org/dev/peps/pep-0361) | 2008-12-03    | 2009-06-27  | Barry Warsaw                        |                 |
+| 2.7    | [**PEP 373**](https://www.python.org/dev/peps/pep-0373) | 2010-07-03    | 2020-01-01  | Benjamin Peterson                   | 2.x系列最终版本 |
+| 2.6    | [**PEP 361**](https://www.python.org/dev/peps/pep-0361) | 2008-10-01    | 2013-10-29  | Barry Warsaw                        |                 |
 
 
 
@@ -332,7 +348,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 | pyd  | python动态库。            |        |
 
 备注：1. 字节码bytecode是二进制文件，pyo和pyc文件都是字节码。
-2. py_compile**模块可编译生成各种文件格式。*
+2. **py_compile**模块可编译生成各种文件格式。
 
 
 
@@ -961,7 +977,6 @@ traceback ---- 包含调用栈信息的对象。
 
 # 3  Python开发环境
 ## 3.1  模块module
-**模块module**
 Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Python 对象定义和Python语句。
 *  模块让你能够有逻辑地组织你的 Python 代码段。
 *  把相关的代码分配到一个模块里能让你的代码更好用，更易懂。
@@ -1272,8 +1287,11 @@ from modualA import *
 导入模块modualA里的所有成员（如果定义了__all__那么就导出列表中的所有，否则默认导出不以下划线开头的所有成员~即非内置成员）。
 
 ### 3.1.4  模块的搜索路径
+
+打印模块的搜索路径 ： `sys.path`
+
 **1) windows**
-\# 打印出模块的搜索路径 
+
 ```python
 >>> import sys
 >>> sys.path
@@ -1284,7 +1302,7 @@ from modualA import *
 ```
 
 **2) linux**
-\# 打印出模块的搜索路径 
+
 ```python
 >>> import sys
 >>> sys.path
@@ -2628,7 +2646,10 @@ PSD
 
 #### 3.5.1.1 SQLAlchemy
 
+![image-20210702103104836](..\media\sf_reuse\framework\frame_sqlalchema.png)
+
 图 2 SQLAlchemy architecture
+
 **Database Urls**
 dialect+driver://username:password@host:port/database
 
@@ -3261,7 +3282,7 @@ def terminate_thread(thread):
 ```
 
 ### 4.3.3  协程
-协程，又称微线程，纤程。英文名Coroutine。
+协程，又称微线程，纤程。英文名Coroutine。python3.5 PEP492引入带async/await语法的协程。
 
 *协程*是一种用户态的轻量级线程。 协程拥有自己的寄存器上下文和栈。线程是由操作系统调度分配CPU，而协程是程序控制执行。
 
@@ -3288,6 +3309,23 @@ def terminate_thread(thread):
 
 Python对协程的支持是通过generator实现的。
 在generator中，我们不但可以通过for循环来迭代，还可以不断调用next()函数获取由yield语句返回的下一个值。
+
+python3.4+后的协程*coroutine*标准用法
+
+```python
+# 定义1：原生协程async + 处理异常await
+async def read_data(db):
+    data = await db.fetch('SELECT ...')
+    ...
+
+# 定义2：
+@types.coroutine
+def process_data(db):
+    data = yield from read_data(db)
+    ...
+```
+
+
 
 **python3 线程实现**
 **（1）yield实现协程效果示**
@@ -3610,36 +3648,17 @@ except Exception as error:
 
 ### 4.4.1  内存使用
 关于内存的限量使用，在实现时可以为缓存设定一个阀值，缓存满了就先暂停所有的文件扫描和解析进程，等缓存快没了的时候再继续，在Linux上使用 SIGSTOP和SIGCONT信号可以很容易就实现这一功能。相比之下，如何准确的获取缓存对象所占用的内存大小倒是比较困难，折中的办法是统计整个进 程的内存占用或是[间接的方法](http://stackoverflow.com/questions/563840/how-can-i-check-the-memory-usage-of-objects-in-ipython/565382#565382)，或者干脆通过限制缓存对象的数目来做限制（这个比较弱智的感觉）。
-关于内存的节约使用，大家都知道一般的Python对象都会自动创建一个[__dict__](https://docs.python.org/2/library/stdtypes.html#object.__dict__)属性来存储其他的属性，然而不太广为人知的是，Python的内置类型dict是一个内存大户，当Python对象少的时候可能很难发现，如果在内存里存储十万或一百万个Python对象时，用Memory Profiler（比如[Heapy](http://guppy-pe.sourceforge.net/#Heapy)）做下profiling你会发现，光是__dict__本身（不包括存在__dict__里的数据）就能吃掉你巨量的内存。
-通过设置类属性[__slots__](https://docs.python.org/release/2.5.2/ref/slots.html)可以禁止__dict__属性的自动创建，其中一个成功故事在[这里](http://tech.oyster.com/save-ram-with-python-slots/)，这个哥们通过__slots__节约了9G内存。需要说明的是，__slots__会带来一些[负面作用](http://stackoverflow.com/questions/472000/python-slots)，比较明显的一个是，使用version 0版本的pickle协议序列化定义了__slots__属性的对象会有报错，但使用更高级别的pickle协议则没问题[4](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:4)（一般很少用到cPickle的[protocol version 0](https://docs.python.org/2.7/library/pickle.html#data-stream-format)，因为又慢又占空间)。
+关于内存的节约使用，大家都知道一般的Python对象都会自动创建一个[`__dict__`](https://docs.python.org/2/library/stdtypes.html#object.__dict__)属性来存储其他的属性，然而不太广为人知的是，Python的内置类型dict是一个内存大户，当Python对象少的时候可能很难发现，如果在内存里存储十万或一百万个Python对象时，用Memory Profiler（比如[Heapy](http://guppy-pe.sourceforge.net/#Heapy)）做下profiling你会发现，光是__dict__本身（不包括存在__dict__里的数据）就能吃掉你巨量的内存。
+通过设置类属性[`__slots__`](https://docs.python.org/release/2.5.2/ref/slots.html)可以禁止__dict__属性的自动创建，其中一个成功故事在[这里](http://tech.oyster.com/save-ram-with-python-slots/)，这个哥们通过__slots__节约了9G内存。需要说明的是，__slots__会带来一些[负面作用](http://stackoverflow.com/questions/472000/python-slots)，比较明显的一个是，使用version 0版本的pickle协议序列化定义了__slots__属性的对象会有报错，但使用更高级别的pickle协议则没问题[4](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:4)（一般很少用到cPickle的[protocol version 0](https://docs.python.org/2.7/library/pickle.html#data-stream-format)，因为又慢又占空间)。
 另外缓存所使用的数据结构也比较重要，直接用Python的内置类型list肯定不行，因为缓存应该是一个FIFO的队列，而del(list[0])操作是O(n)的复杂度[5](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:5)，用collections.deque比较合适。
 
+
+
 ### 4.4.2  内存回收机制GC
-类似JVM的GC机制。
-Python作为一种动态类型的语言，其对象和引用分离。为了有效的释放内存，Python内置了垃圾回收的支持。Python采取了一种相对简单的垃圾回收机制，即引用计数，并因此需要解决孤立引用环的问题。
 
-python内存基本特性
-* 变量无须事先声明
-* 变量无须指定类型
-* 不用关心内存管理
-* 变量名会被"回收"
-* del 语句能够直接释放资源。
+类似JVM的GC机制，Python内存回收机制主要是引用计数。
 
-
-
-**引用计数**
-Python 采用引用计数的方式来管理分配的内存。Python 的每个对象都有一个引用计数，这个引用计数表明了有多少对象在指向它。当这个引用计数为 0 时，该对象就释放了。
-然而，引用计数有一个本质上的缺陷，是由于循环引用引起的。
-
-**垃圾收集GC**
-不再被使用的内存会被一种称为垃圾收集的机制释放
-备注: 解释器跟踪对象的引用计数, 垃圾回收机制负责释放内存, 垃圾收集器是一块独立代码, 它用来寻找引用计数为0的对象, 它也负责检查虽然引用计数大于0但是也应该被销毁的对象。
-比如：`l=[]; l.append(l); del l;`
-
-* 垃圾收集算法：根寻找法、引用计数
-* 垃圾回收算法：标记-复制-清除
-* 垃圾回收策略：分代回收。
-
+详见 《Python源码剖析》内存分配章节
 
 
 ## 4.5  图形端开发
@@ -3775,7 +3794,9 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 可用help(module/method)获取到代码的文档化串。
 
 ## 6.1  常见问题
-**indent** 缩进，python对格式要求非常来历。建议要求tab = 4 space，且extand tab(tab instead by space)，编辑器要求能够显示tab符号，
+**indent** 缩进，python对格式要求非常来历。建议要求tab = 4 space，且extand tab(tab instead by space)，编辑器要求能够显示tab符号。
+
+
 
 ### 6.1.1  Segment Error(core store)
 LINUX下可用dmesg查看错误信息。
@@ -3832,6 +3853,19 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 问题：问py3.7如何同时用redis集群和celery？ celery borken如何配置多节点Redis集群。
 
 答：要用celery最新版本，并且redis-py-cluster版本也要升级。
+
+
+
+### 6.1.6 pip升级后报错 no module pip
+
+解决方法：执行下列命令后即修复。
+
+```shell
+pip -m ensurepip
+python -m pip install --upgrade pip
+```
+
+
 
 
 

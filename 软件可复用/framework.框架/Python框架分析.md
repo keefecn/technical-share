@@ -482,7 +482,7 @@ Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现�
 * ViewModel，视图模型，Model层之上，用来在视图里传递和处理数据的模型。
 
 
-  ![1574518389091](E:/project/technical-share/media/sf_reuse/framework/frame_web_003.png)
+  ![1574518389091](..\..\media/sf_reuse/framework/frame_web_003.png)
 
 图  django运行视图
 
@@ -494,7 +494,7 @@ Django 中间件是修改 Django request 或者 response 对象的钩子，可�
 
 浏览器从请求到响应的过程中，Django 需要通过很多中间件来处理，可以看如下图所示：
 
-![1574518414753](E:/project/technical-share/media/sf_reuse/framework/frame_web_003_02.png)
+![1574518414753](..\..\media/sf_reuse/framework/frame_web_003_02.png)
 
 备注：核心在于 middleware（中间件），django 所有的请求、返回都由中间件来完成。中间件，就是处理 HTTP 的 request 和 response 的，类似插件，比如有 Request 中间件、view 中间件、response 中间件、exception 中间件等，Middleware 都需要在 “project/settings.py” 中 MIDDLEWARE_CLASSES 的定义。
 
@@ -1012,42 +1012,13 @@ if __name__ == "__main__":
 
 **项目结构如下**
 
-   ![1574518502921](E:/project/technical-share/media/sf_reuse/framework/frame_web_flask_001.png)
+   ![1574518502921](../../media/sf_reuse/framework/frame_web_flask_001.png)
 
 备注：
 
  
 
-### flask进阶篇
-
-#### 路由映射原理 
-
-flask/app.py
-
-```python
-class Flask(_PackageBoundObject): 
-	def route(self, rule, **options):	#装饰器route
-        def decorator(f):
-            endpoint = options.pop("endpoint", None)
-            self.add_url_rule(rule, endpoint, f, **options) #实际调用类方法
-            return f
-
-        return decorator
-
-    @setupmethod
-    def add_url_rule(
-        self,
-        rule,
-        endpoint=None,
-        view_func=None,
-        provide_automatic_options=None,
-        **options
-    ):
-```
-
-
-
-使用示例：
+#### 路由映射
 
 ```python
 @[xxapp|blureprint].route('/xx')  # 装饰器route调用，实质调用 add_url_rule
@@ -1091,8 +1062,6 @@ if __name__ == "__main__":
 
 
 
-
-
 #### 其它
 
 **1. 使用实例文件夹**
@@ -1114,7 +1083,7 @@ app.config.from_pyfile('config.py')
 | flask_restplus   | 构建restful标准的API，包含swagger UI                         |                                                              |
 | flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | fabmanager [OPTIONS] COMMAND [ARGS]...                       |
 | flask-login      | 登陆。                                                       |                                                              |
-| flask-migrate    | 数据库迁移、升级。                                           | `$python manage.py db migrate   $python manage.py db upgrade` |
+| flask-migrate    | 数据库迁移、升级。                                           | `$python manage.py db migrate $python manage.py db upgrade`  |
 | flask-cache      | 缓存，支持redis/memcache/filesystem                          |                                                              |
 | flask-script     | 命令行脚本                                                   | from flask-script import Manager   Manager().run()           |
 | flask-sqlalchemy | DB的ORM模型。                                                | from flask_sqlalchemy   import SQLAlchemy<br>db =   SQLAlchemy(app) |
@@ -1254,7 +1223,7 @@ Use config.py to configure the following parameters. By default it will use SQLL
 | UPLOAD_FOLDER                                                | Files upload folder. Mandatory for file   uploads.           | No        |
 | FILE_ALLOWED_EXTENSIONS                                      | Tuple with allower extensions.   FILE_ALLOWED_EXTENSIONS = (‘txt’,’doc’) | No        |
 | IMG_UPLOAD_FOLDER                                            | Image upload folder. Mandatory for image   uploads.          | No        |
-| IMG_UPLOAD_UR*                                               | Image relative URL. Mandatory for image   uploads.           | No        |
+| IMG_UPLOAD_URL                                               | Image relative URL. Mandatory for image   uploads.           | No        |
 | IMG_SIZE                                                     | tuple to define default image resize.   (width, height, True\|False). | No        |
 | BABEL_DEFAULT_LOCALE                                         | Babel’s default language.                                    | No        |
 | LANGUAGES                                                    | A dictionary mapping the existing   languages with th        |           |
@@ -1282,64 +1251,15 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 结果：/superset/welcome
 
-代码实现：
-
-```python
-# superset/flask_appbuilder/baseview.py
-def expose(url='/', methods=('GET',)):
-    """
-   Use this decorator to expose views on your view classes.
-   :param url:  Relative URL for the view
-   :param methods:  Allowed HTTP methods. By default only GET is allowed.
-    """
-    def wrap(f):
-   if not hasattr(f, '_urls'):
-  f._urls = []
-   f._urls.append((url, methods))
-   return f
-    return wrap
-
-def expose_api(name='', url='', methods=('GET',), description=''):
-    def wrap(f):
-   api_name = name or f.__name__
-   api_url = url or "/api/{0}".format(name)
-   if not hasattr(f, '_urls'):
-  f._urls = []
-  f._extra = {}
-   f._urls.append((api_url, methods))
-   f._extra[api_name] = (api_url, f.__name__, description)
-   return f
-    return wrap
-
-```
-
 
 
 3. 类图
 
-   ![1574518633167](E:/project/technical-share/media/sf_reuse/framework/frame_web_flask_002.png)
+   ![1574518633167](..\..\media/sf_reuse/framework/frame_web_flask_002.png)
 
 图 4 flask-appbuilder view
 
  
-
-#### flask-cache
-
-Flask-Cache支持多个缓存后端（Redis，Memcached，SimpleCache（内存中）或本地文件系统）。
-
-```python
-# flask_cache/__init__.py
-Cache()
-    def init_app(self, app, config=None):
-		...
-   config.setdefault('CACHE_DEFAULT_TIMEOUT', 300)  # 缓存过期时间缺省300秒
-   config.setdefault('CACHE_DIR', None)   # 设置缓存路径
-		# null改为'filesystem'，如果是redis/memache，则需要相应的服务器支持和安装python客户端模块
-   config.setdefault('CACHE_TYPE', 'null')  
-
-```
-
-
 
 #### flask-login
 
@@ -1365,29 +1285,7 @@ class DispatcherMiddleware(__builtin__.object)
 
  
 
-#### flask-script
 
-```python
-# flask-script/__init__.py: Manager
-class Print(Command):
-    def run(self):
-   print "hello"
-
-from flask import Flask
-from flask_script import Manager
-
-app = Flask(__name__)
-manager = Manager(app)
-manager.add_command("print", Print())
-if __name__ == "__main__":
-    manager.run()
-
-python manage.py print
-> hello
-
-```
-
- 
 
 ### 本节参考
 

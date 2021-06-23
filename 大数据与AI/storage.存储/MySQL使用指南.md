@@ -10,9 +10,8 @@
 | 8    | 2021-6-18 | 增加MySQL版本和产品线章节。                                  | 同上   |        |
 
 
- 
 
- 
+
 
 
 
@@ -214,19 +213,24 @@
 
 表格 MySQL版本说明
 
-| 版本号 | 发布时间 | 特性说明                                                     |
-| ------ | -------- | ------------------------------------------------------------ |
-| 7.1    |          |                                                              |
-| 6.0    |          | MySQL Cluster版本。                                          |
-| 5.7    | 2015     | 查询性能得以大幅提升，比 MySQL 5.6 提升 1 倍降低了建立数据库连接的时间。 |
-| 5.6    | 2013.2   | InnoDB可以限制大量表打开的时候内存占用过多的问题，InnoDB性能加强。 |
-| 5.5    | 2010.12  | 默认存储引擎更改为InnoDB。多个回滚段（Multiple Rollback Segments）。<br>InnoDB版本从原来的1023个并发提高到128K并发事务。 |
-| 5.1    | 2008     | 增加了崩溃恢复功能的MyISAM，使用表级锁，但可以做到读写不冲突。 |
-| 5.0    |          | MyISAM引擎默认支持的表大小从4G提升到256T；<br>添加了存储过程、服务端游标、触发器、查询优化以及分布式事务功能。 |
-| 4.0    | 2002     | 早期MySQL版本，基本没人用了。                                |
-| 3.x    |          | 早期MySQL版本，基本没人用了。                                |
+| 版本  | 发布时间  | 特性说明                                                     |
+| ----- | --------- | ------------------------------------------------------------ |
+| 8.0   | 2016-9-12 | 最新版本8.0.27(2021-05)。<br/>Data dictionary. Atomic DDL. Upgrade procedure. 安全和账号管理。<br>资源管理。表加密管理。InnoDB提升。优化...<br>数据库的缺省编码将改为 utf8mb4. 要先创建用户再授权。 |
+| 7.1   |           |                                                              |
+| 6.0   |           | MySQL Cluster版本。                                          |
+| 5.7   | 2013-4-23 | 最新版本5.7.36(2021-05)。<br/>查询性能得以大幅提升，比 MySQL 5.6 提升 1 倍降低了建立数据库连接的时间。 |
+| 5.6   | 2011-4-11 | 最新版本5.6.51(2021-01-20)。<br>InnoDB可以限制大量表打开的时候内存占用过多的问题，InnoDB性能加强。 |
+| 5.5   | 2010.12   | 默认存储引擎更改为InnoDB。多个回滚段（Multiple Rollback Segments）。<br>InnoDB版本从原来的1023个并发提高到128K并发事务。 |
+| 5.1   | 2008      | 增加了崩溃恢复功能的MyISAM，使用表级锁，但可以做到读写不冲突。 |
+| 5.0.x |           | MyISAM引擎默认支持的表大小从4G提升到256T；<br>添加了存储过程、服务端游标、触发器、查询优化以及分布式事务功能。 |
+| 4.0   | 2002      | 早期MySQL版本，基本没人用了。                                |
+| 3.x   |           | 早期MySQL版本，基本没人用了。                                |
 
-版本类别分为四种：Alpha版、Beta版、RC版(Release Candidate)、GA版(Generally Available)。
+> Release Note: https://dev.mysql.com/doc/relnotes/mysql/8.0/en/
+>
+> 持续维护版本： 8.0/5.7/5.6这三个版本是MySQL Server官网持续更新维护的版本。
+
+> 版本类别分为四种：Alpha版、Beta版、RC版(Release Candidate)、GA版(Generally Available)。
 
 
 
@@ -315,7 +319,7 @@ grep 'temporary password' /var/log/mysqld.log
 mysql -u root -p
 
 # 修改密码
-SET PASSWORD = PASSWORD('12341234');
+SET PASSWORD = PASSWORD('xxxxxx');
 
 # 授权远程访问
 GRANT ALL PRIVILEGES ON $DB$.* TO root@'%' IDENTIFIED BY '$PASSWD$' WITH GRANT OPTION;
@@ -2115,10 +2119,10 @@ grant 权限 on 数据库.* to 用户名@'登录主机' identified by '密码'
 
  注1：'登陆主机'：'%'表示所有ip; 'localhost' 表示本机;  '192.168.10.2' 特定IP 
 
- 注2：登陆主机和密码必须用引号圈起来。 
+ 注2：登陆主机和密码必须用引号圈起来。若有特殊符号如_等，数据库用``圈起来。 
 ```mysql
 shell> mysql --user=root mysql
-mysql> GRANT ALL PRIVILEGES ON game.* TO test@'%' IDENTIFIED BY '123456';
+mysql> GRANT ALL PRIVILEGES ON `game`.* TO test@'%' IDENTIFIED BY '123456';
 ```
 
 

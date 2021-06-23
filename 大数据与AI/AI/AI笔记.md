@@ -1394,23 +1394,25 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 ## 参考文献
 
-[1].   http://zh.wikipedia.org/zh-cn/人工智能
+[1].   [机器学习论文-CiteSeer](http://citeseer.ist.psu.edu/cis?q=machine+learning)  http://citeseerx.ist.psu.edu/?q=machine+learning
 
-[2].   [http://zh.wikipedia.org/zh-cn/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98](http://zh.wikipedia.org/zh-cn/数据挖掘)
+[2].   图灵测试－洛伯纳奖[Loebner Prize website](http://www.loebner.net/Prizef/loebner-prize.html)  1990~present
 
-[3].   中科院计算所智能信息处理重点实验室智能科学课题组 http://www.intsci.ac.cn/
+[3].  T. Mitchell, Generative and Discriminative Classifiers: Naive Bayes and Logistic Regression. Draft Version, 2005 [download](http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf)
 
 [4].   中国人工智能网 http://www.chinaai.org/
 
 [5].   http://ai-depot.com/
 
-[6].   http://en.wikipedia.org/wiki/List_of_notable_artificial_intelligence_projects
 
-[7].   [机器学习论文-CiteSeer](http://citeseer.ist.psu.edu/cis?q=machine+learning)  http://citeseerx.ist.psu.edu/?q=machine+learning
 
-[8].   图灵测试－洛伯纳奖[Loebner Prize website](http://www.loebner.net/Prizef/loebner-prize.html)  1990~present
+## **参考链接** 
 
-[9].   T. Mitchell, Generative and Discriminative Classifiers: Naive Bayes and Logistic Regression. Draft Version, 2005 [download](http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf)
+* http://zh.wikipedia.org/zh-cn/人工智能
+* [http://zh.wikipedia.org/zh-cn/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98](http://zh.wikipedia.org/zh-cn/数据挖掘)
+* http://en.wikipedia.org/wiki/List_of_notable_artificial_intelligence_projects
+* AI 算法是如何改变智能风控的 https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/117432876
+* 风控模型算法系列文章目录 https://zhuanlan.zhihu.com/p/85582351
 
  
 
@@ -1419,11 +1421,18 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 ## 学术资源
 
 **学术会议和机构**
+
 *  [IJCAI  ](http://www.ijcai.org/)[International Joint Conferences on Artificial Intelligence](http://www.ijcai.org/)，AI领域最好的会议
 *  [SIGIR](http://www.sigir.org/) [ *Special Interest Group on Information Retrieval* ](http://www.sigir.org/)，IR领域最好的会议
 *  [TREC](http://trec.nist.gov/) Text Retrieval Conference， 文本检索领域人气最旺、最权威的评测会议, 由美国国防部高等研究计划署(DARPA)与美国国家标准和技术局(NIST)共同举办的TREC(文本信息检索会议)就是一直基于此方法组织信息检索评测和技术交流论坛。提供跨语言检索(CLIR)、博客、问答系统等多个track的评测及相关数据。每年一次。
 
  
+
+**科研组织**
+
+* 中科院计算所智能信息处理重点实验室智能科学课题组 http://www.intsci.ac.cn/
+
+
 
 ## 其它资源
 
@@ -1441,17 +1450,4 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 ## 数据集
 
-参考：http://python.jobbole.com/86586/
-* [SMS 垃圾短信语料库](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
-* [Enron 数据集](http://www.aueb.gr/users/ion/data/enron-spam/)
-* [SpamAssassin 公共邮件语料库](http://spamassassin.apache.org/publiccorpus/)、[TREC 公共垃圾邮件语料库](http://trec.nist.gov/data/spam.html) 、[Spambase 数据集](http://archive.ics.uci.edu/ml/datasets/Spambase)
-* [Twitter 情感分析训练语料库](http://thinknook.com/twitter-sentiment-analysis-training-corpus-dataset-2012-09-22/)
-* [影评数据集](http://www.cs.cornell.edu/People/pabo/movie-review-data/)
-* [MovieLens](http://grouplens.org/datasets/movielens/) 
-* UCI datasets http://archive.ics.uci.edu/ml/datasets/
-
- 
-
-其它数据集
-*  http://www.andresmh.com/nyctaxitrips/ 纽约出租车数据（2013年）
-*  https://s3-eu-west-1.amazonaws.com/criteo-labs/dac.tar.gz kaggle显示广告挑战赛（需登陆kaggle）
+参考 《[开放数据集说明](../开放数据集说明.md)》

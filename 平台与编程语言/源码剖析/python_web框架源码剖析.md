@@ -523,6 +523,24 @@ class MiddlewareMixin:
 
 ### djangorestframework-DRF
 
+安装：`pip install djangorestframework ` 
+
+```shell
+$ pip show djangorestframework
+Name: djangorestframework
+Version: 3.12.4
+Summary: Web APIs for Django, made easy.
+Home-page: https://www.django-rest-framework.org/
+Author: Tom Christie
+Author-email: tom@tomchristie.com
+License: BSD
+Location: e:\dev\python\bin\python37\lib\site-packages
+Requires: django
+Required-by: drf-yasg, django-rest-swagger
+```
+
+
+
 1. 序列化
 
 序列化类层次:  
@@ -622,6 +640,8 @@ class Field:
 
 #  2 flask源码剖析
 
+flask是基于Werkzeug的微框架，是可扩展的最佳实践。
+
 源码版本：flask-1.1.2
 
 依赖组件：click, Werkzeug, Jinja2, itsdangerous
@@ -681,6 +701,7 @@ if __name__ == "__main__":
 | 目录或文件    | 主要类或函数                                                 | 说明                              |
 | ------------- | ------------------------------------------------------------ | --------------------------------- |
 | ext           |                                                              | 扩展模块                          |
+| _compat.ppy   | with_metaclass                                               | python2&3的兼容处理：类型和元类   |
 | app.py        | Flask<br>::run route add_url_rule register_blueprint         | 全局WEB实例                       |
 | blueprints.py | Blueprint<br>::route add_url_rule                            | 蓝图，相当于django中的app，某应用 |
 | cli.py        | main run_command                                             | 命令行处理                        |
@@ -702,9 +723,13 @@ if __name__ == "__main__":
 
 ## WEB核心对象 
 
-### Flask全局实例
+### Flask全局实例 app.py
 
-app.py
+flask.app该模块近2000行代码，主要完成应用的配置、初始化、蓝图注册、请求装饰器定义、应用的启动和监听。
+
+类：Flask
+
+类方法： run  create_app  register_blueprint  register_db route/add_url_route
 
 ```python
 from .helpers import _PackageBoundObject
@@ -782,7 +807,7 @@ class Flask(_PackageBoundObject):
             host = '127.0.0.1'
         if port is None:
             server_name = self.config['SERVER_NAME']
-            if server_name and ':' in server_name:
+            if server_name and ':' in server_name:  #支持配置变量带:方式获取端口
                 port = int(server_name.rsplit(':', 1)[1])
             else:
                 port = 5000
@@ -798,16 +823,108 @@ class Flask(_PackageBoundObject):
             # reset the first request information if the development server
             # reset normally.  This makes it possible to restart the server
             # without reloader and that stuff from an interactive shell.
-            self._got_first_request = False        
+            self._got_first_request = False     
+            
+
+	def route(self, rule, **options):	
+        """ 路由映射装饰器 route， 实际调用add_url_rule类静态方法 """
+        def decorator(f):
+            endpoint = options.pop("endpoint", None)
+            self.add_url_rule(rule, endpoint, f, **options) #实际调用类方法
+            return f
+
+        return decorator
+
+    @setupmethod
+    def add_url_rule(
+        self,
+        rule,
+        endpoint=None,
+        view_func=None,
+        provide_automatic_options=None,
+        **options
+    ):            
+
+        
+if __name__ == '__main__':
+    # 实际应用app定义，一般需要弄成全局实例
+    app = Flask(__name__)
+    with app.app_context():
+        app.run(host='0.0.0.0', port=5001)          
 ```
 
 
 
-### Blueprints 蓝图
+**调试示例 ipython**
 
-blueprints.py
+Flask实例关键变量有：cli, config, view_functions, url_map, blueprints, import_name, root_path...
 
 ```python
+In [11]: from flask import Flask
+
+In [12]: app=Flask('demo_app')
+
+In [13]: type(app)
+Out[13]: flask.app.Flask
+
+In [14]: app.__dict__
+Out[14]:
+{'import_name': 'demo_app',
+ 'template_folder': 'templates',
+ 'root_path': 'e:\\isoftstone\\project\\repos\\superset\\joshua_code-superset-js
+ohua\\superset',
+ '_static_folder': 'static',
+ '_static_url_path': None,
+ 'cli': <AppGroup demo_app>,
+ 'instance_path': 'e:\\isoftstone\\project\\repos\\superset\\joshua_code-superse
+t-jsohua\\superset\\instance',
+ 'config': <Config {'ENV': 'production', 'DEBUG': False, 'TESTING': False, 'PROP
+AGATE_EXCEPTIONS': None, 'PRESERVE_CONTEXT_ON_EXCEPTION': None, 'SECRET_KEY': No
+ne, 'PERMANENT_SESSION_LIFETIME': datetime.timedelta(days=31), 'USE_X_SENDFILE':
+ False, 'SERVER_NAME': None, 'APPLICATION_ROOT': '/', 'SESSION_COOKIE_NAME': 'se
+ssion', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COO
+KIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE':
+None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FI
+LE_MAX_AGE_DEFAULT': datetime.timedelta(seconds=43200), 'TRAP_BAD_REQUEST_ERRORS
+': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREF
+ERRED_URL_SCHEME': 'http', 'JSON_AS_ASCII': True, 'JSON_SORT_KEYS': True, 'JSONI
+FY_PRETTYPRINT_REGULAR': False, 'JSONIFY_MIMETYPE': 'application/json', 'TEMPLAT
+ES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093}>,
+ 'view_functions': {'static': <bound method _PackageBoundObject.send_static_file
+ of <Flask 'demo_app'>>},
+ 'error_handler_spec': {},
+ 'url_build_error_handlers': [],
+ 'before_request_funcs': {},
+ 'before_first_request_funcs': [],
+ 'after_request_funcs': {},
+ 'teardown_request_funcs': {},
+ 'teardown_appcontext_funcs': [],
+ 'url_value_preprocessors': {},
+ 'url_default_functions': {},
+ 'template_context_processors': {None: [<function flask.templating._default_temp
+late_ctx_processor()>]},
+ 'shell_context_processors': [],
+ 'blueprints': {},
+ '_blueprint_order': [],
+ 'extensions': {},
+ 'url_map': Map([<Rule '/static/<filename>' (HEAD, OPTIONS, GET) -> static>]),
+ 'subdomain_matching': False,
+ '_got_first_request': False,
+ '_before_request_lock': <unlocked _thread.lock object at 0x000000C940D4FB40>,
+ 'name': 'demo_app'}
+```
+
+
+
+
+
+### Blueprint蓝图 blueprints.py
+
+类Flask和Blueprint 都继承自  _PackageBoundObject， Bluepring粒度更小，一个Flask实例内可以有多个蓝图。
+
+```python
+from .helpers import _PackageBoundObject
+
 class Blueprint(_PackageBoundObject):
     """Represents a blueprint.  A blueprint is an object that records
     functions that will be called with the
@@ -840,19 +957,70 @@ class Blueprint(_PackageBoundObject):
 
 
 
-### 全局变量
+### 导出模块/全局变量
 
-globals.py
+* `flask/__init__.py`:  导入了一堆对外使用的类、函数、变量
+* flask/globals.py:  依赖于werkzeug的Local对象
 
-依赖于werkzeug的Local对象，详看下面章节。
+
+
+`flask/__init__.py`    
+
+```python
+__version__ = '0.12.2'
+
+# utilities we import from Werkzeug and Jinja2 that are unused
+# in the module but are exported as public interface.
+from werkzeug.exceptions import abort
+from werkzeug.utils import redirect
+from jinja2 import Markup, escape
+
+from .app import Flask, Request, Response
+from .config import Config
+from .helpers import url_for, flash, send_file, send_from_directory, \
+     get_flashed_messages, get_template_attribute, make_response, safe_join, \
+     stream_with_context
+from .globals import current_app, g, request, session, _request_ctx_stack, \
+     _app_ctx_stack
+from .ctx import has_request_context, has_app_context, \
+     after_this_request, copy_current_request_context
+from .blueprints import Blueprint
+from .templating import render_template, render_template_string
+
+# the signals
+from .signals import signals_available, template_rendered, request_started, \
+     request_finished, got_request_exception, request_tearing_down, \
+     appcontext_tearing_down, appcontext_pushed, \
+     appcontext_popped, message_flashed, before_render_template
+
+# We're not exposing the actual json module but a convenient wrapper around
+# it.
+from . import json
+
+# This was the only thing that Flask used to export at one point and it had
+# a more generic name. 这个jsonify方法比较常用，将参数转化成JSON响应格式返回给浏览器
+jsonify = json.jsonify
+
+# backwards compat, goes away in 1.0
+from .sessions import SecureCookieSession as Session
+json_available = True
+```
+
+
+
+flask/globals.py
+
+依赖于werkzeug的Local对象，详看下面werkzeug章节。
 
 ```python
 from functools import partial
 from werkzeug.local import LocalStack, LocalProxy
 
 # context locals
+# LocalStack: 请求上下文、应用上下文
 _request_ctx_stack = LocalStack()
 _app_ctx_stack = LocalStack()
+# LocalProxy: 
 current_app = LocalProxy(_find_app)
 request = LocalProxy(partial(_lookup_req_object, 'request'))
 session = LocalProxy(partial(_lookup_req_object, 'session'))
@@ -861,9 +1029,448 @@ g = LocalProxy(partial(_lookup_app_object, 'g'))
 
 
 
-## 扩展 ext
+### 配置文件
 
-exthook.py
+flask/config.py
+
+```python
+from werkzeug.utils import import_string
+
+class Config(dict):
+    def __init__(self, root_path, defaults=None):
+        dict.__init__(self, defaults or {})
+        self.root_path = root_path
+        
+    def from_envvar(self, variable_name, silent=False)：
+    	""" """
+        
+    def from_pyfile(self, filename, silent=False)：
+     	""" 从config.py加载数据 """
+        filename = os.path.join(self.root_path, filename)
+        d = types.ModuleType("config")
+        d.__file__ = filename
+        try:
+            with open(filename, mode="rb") as config_file:
+                exec(compile(config_file.read(), filename, "exec"), d.__dict__)
+        except IOError as e:
+            if silent and e.errno in (errno.ENOENT, errno.EISDIR, errno.ENOTDIR):
+                return False
+            e.strerror = "Unable to load configuration file (%s)" % e.strerror
+            raise
+        self.from_object(d)
+        return True
+    
+    def from_object(self, obj):
+    	""" 加载字符串或者对象，K/V形式保存到字典结构里 """
+        if isinstance(obj, string_types):
+            obj = import_string(obj)
+        for key in dir(obj):
+            if key.isupper():
+                self[key] = getattr(obj, key)
+                
+    def from_json(self, filename, silent=False):        
+    	""" """     
+        
+    def from_mapping(self, *mapping, **kwargs):
+    	""" """      
+        
+    def get_namespace(self, namespace, lowercase=True, trim_namespace=True):        
+    	""" """
+
+    def __repr__(self):
+        return "<%s %s>" % (self.__class__.__name__, dict.__repr__(self))        
+```
+
+flask/app.py   `flask.app:__init__`时加载app实例所在目录下的config.py
+
+```python
+# flask/app.py
+from .config import Config
+from .config import ConfigAttribute
+
+class Flask(_PackageBoundObject):
+    
+    config_class = Config    
+    def __init__(...):
+        ...
+		self.config = self.make_config(instance_relative_config)
+        
+    def make_config(self, instance_relative=False):
+        """Used to create the config attribute by the Flask constructor.
+        The `instance_relative` parameter is passed in from the constructor
+        of Flask (there named `instance_relative_config`) and indicates if
+        the config should be relative to the instance path or the root path
+        of the application.
+
+        .. versionadded:: 0.8
+        """
+        root_path = self.root_path
+        if instance_relative:
+            root_path = self.instance_path
+        defaults = dict(self.default_config)
+        defaults["ENV"] = get_env()
+        defaults["DEBUG"] = get_debug_flag()
+        return self.config_class(root_path, defaults)        
+```
+
+
+
+## flask命令
+
+flask命令基于click库实现。
+
+* `flask/__main__.py`： 命令行调用入口demo
+* flask/cli.py:  命令行实现
+
+**常用命令**：
+
+* flask run:  运行开发服务器
+* flask shell:  启动一个交互python shell
+* flask db:  数据库迁移相关。不能直接使用，需要获取Migrate实例。
+
+flask支持命令： v1.1.2只支持run/shell，v1.1.4增加了routes，fab是flask_appbuilder模块命令组，db是flask_migrate模块命令组
+
+```shell
+Usage: flask [OPTIONS] COMMAND [ARGS]...
+
+  A general utility script for Flask applications.
+
+  Provides commands from Flask, extensions, and the application. Loads the
+  application defined in the FLASK_APP environment variable, or from a
+  wsgi.py file. Setting the FLASK_ENV environment variable to 'development'
+  will enable debug mode.
+
+    $ export FLASK_APP=hello.py
+    $ export FLASK_ENV=development
+    $ flask run
+
+Options:
+  --version  Show the flask version
+  --help     Show this message and exit.
+
+Commands:
+  db      Perform database migrations.
+  fab     FAB flask group commands
+  routes  Show the routes for the app.
+  run     Run a development server.
+  shell   Run a shell in the app context.
+```
+
+
+
+**环境变量**：
+
+* FLASK_ENV： FLASK环境变量，development环境会启用交互式调试和自动重载。
+* FLASK_DEBUG：FLASK调试标识 boolean，FLASK_ENV=='development'
+* FLASK_APP： FLASK APP实例路径
+
+
+
+**app模块导入的搜索顺序** (flask.cli:ScriptInfo::load_app)
+
+1. 有create_app，用create_app/~~make_app~~函数返回的实例
+2. 有设置环境变量FLASK_APP，导入路径为FLASK_APP(flask.cli:find_default_import_path)；没有设置，导入路径为传参路径。
+3. 有导入路径 locate_app()
+   - ~~如果未设置FLASK_APP，flask命令会查找`wsgi.py`或`app.py`文件并探测应用实例或工厂函数。~~
+   - (flask.cli:find_best_app)flask命令在给定的module导入内寻找一个名为`app`或者`application`的应用实例 或者 `module.__dict__`查找类型为Flask实例的值。
+
+
+
+**脚本入口定义**(setup.py)： 配置`entry_points -> flask.commands`
+
+
+
+ flask命令真正调用处
+
+```python
+# `flask/__main__.py`
+if __name__ == '__main__':
+    from .cli import main
+    main(as_module=True)
+```
+
+
+
+flask/cli.py 
+
+```python
+import click
+
+cli = FlaskGroup(help="""  """)
+
+def main(as_module=False):
+    this_module = __package__ + '.cli'
+    args = sys.argv[1:]
+
+    if as_module:
+        if sys.version_info >= (2, 7):
+            name = 'python -m ' + this_module.rsplit('.', 1)[0]
+        else:
+            name = 'python -m ' + this_module
+
+        # This module is always executed as "python -m flask.run" and as such
+        # we need to ensure that we restore the actual command line so that
+        # the reloader can properly operate.
+        sys.argv = ['-m', this_module] + sys.argv[1:]
+    else:
+        name = None
+
+    cli.main(args=args, prog_name=name)
+    
+    
+class AppGroup(click.Group):
+    """ 继承click.Group """
+    
+class FlaskGroup(AppGroup): 
+    def __init__(self, add_default_commands=True, create_app=None,
+                 add_version_option=True, **extra):
+        """
+        :param add_default_commands True时添加run/shell命令
+        :param create_app app创建方法
+        :param add_version_option True时添加版本命令
+        """
+        params = list(extra.pop('params', None) or ())
+
+        if add_version_option:	#缺省添加版本命令 
+            params.append(version_option)
+
+        AppGroup.__init__(self, params=params, **extra)
+        self.create_app = create_app  #app初始化方法
+
+        if add_default_commands: #缺省添加命令 run/shell
+            self.add_command(run_command)
+            self.add_command(shell_command)
+
+        self._loaded_plugin_commands = False
+        
+    def main(self, *args, **kwargs):
+        obj = kwargs.get('obj')
+        if obj is None:
+            obj = ScriptInfo(create_app=self.create_app)
+        kwargs['obj'] = obj
+        kwargs.setdefault('auto_envvar_prefix', 'FLASK')
+        return AppGroup.main(self, *args, **kwargs)
+    
+    
+class ScriptInfo(object):
+    """ 脚本帮助，如查找模块路径 """
+    def __init__(self, app_import_path=None, create_app=None):
+        """
+        :param app_import_path app导入路径，优先查找
+        :param create_app 可选方法加载app
+        """
+        if create_app is None:
+            if app_import_path is None:  #查找缺省导入路径 FLASK_APP
+                app_import_path = find_default_import_path()
+            self.app_import_path = app_import_path
+        else:
+            app_import_path = None
+
+        #: Optionally the import path for the Flask application.
+        self.app_import_path = app_import_path
+        #: Optionally a function that is passed the script info to create
+        #: the instance of the application.
+        self.create_app = create_app
+        #: A dictionary with arbitrary data that can be associated with
+        #: this script info.
+        self.data = {}
+        self._loaded_app = None   #用来保存已经导入的APP
+        
+    def load_app(self):
+        """Loads the Flask app (if not yet loaded) and returns it.  Calling
+        this multiple times will just result in the already loaded app to
+        be returned.
+        """
+        __traceback_hide__ = True
+        if self._loaded_app is not None: #已导入，直接返回
+            return self._loaded_app
+        if self.create_app is not None:  #通过create_app方法导入app
+            rv = self.create_app(self)
+        else:
+            if not self.app_import_path:  #找不到app导入路径时，抛出异常
+                raise NoAppException(
+                    'Could not locate Flask application. You did not provide '
+                    'the FLASK_APP environment variable.\n\nFor more '
+                    'information see '
+                    'http://flask.pocoo.org/docs/latest/quickstart/')
+            rv = locate_app(self.app_import_path)
+        debug = get_debug_flag()
+        if debug is not None:
+            rv.debug = debug
+        self._loaded_app = rv
+        return rv     
+    
+def locate_app(app_id):
+    """Attempts to locate the application. app导入的搜索路径顺序：
+    1.支持aa.bb:cc，import aa.bb; 
+    2.find_best_app：查找变量名app/application, module.__dict__是否有值类型是Flask
+    """
+    __traceback_hide__ = True
+    if ':' in app_id:
+        module, app_obj = app_id.split(':', 1)
+    else:
+        module = app_id
+        app_obj = None
+
+    try:
+        __import__(module)
+    except ImportError:
+        # Reraise the ImportError if it occurred within the imported module.
+        # Determine this by checking whether the trace has a depth > 1.
+        if sys.exc_info()[-1].tb_next:
+            raise
+        else:
+            raise NoAppException('The file/path provided (%s) does not appear'
+                                 ' to exist.  Please verify the path is '
+                                 'correct.  If app is not on PYTHONPATH, '
+                                 'ensure the extension is .py' % module)
+
+    mod = sys.modules[module]
+    if app_obj is None:
+        # 查找Flask实例：通过变量名app/application，遍历module.__dict__的v值
+        app = find_best_app(mod)
+    else:
+        app = getattr(mod, app_obj, None)
+        if app is None:
+            raise RuntimeError('Failed to find application in module "%s"'
+                               % module)
+
+    return app
+    
+def find_best_app(module):
+    """Given a module instance this tries to find the best possible
+    application in the module or raises an exception.
+    """
+    from . import Flask
+
+    # Search for the most common names first. 查找 app/application 变量名
+    for attr_name in 'app', 'application':
+        app = getattr(module, attr_name, None)
+        if app is not None and isinstance(app, Flask):
+            return app
+
+    # Otherwise find the only object that is a Flask instance.
+    matches = [v for k, v in iteritems(module.__dict__)
+               if isinstance(v, Flask)]
+
+    if len(matches) == 1:
+        return matches[0]
+    raise NoAppException('Failed to find application in module "%s".  Are '
+                         'you sure it contains a Flask application?  Maybe '
+                         'you wrapped it in a WSGI middleware or you are '
+                         'using a factory function.' % module.__name__)    
+```
+
+
+
+### flask run命令
+
+flask/cli.py
+
+```python
+import click
+
+pass_script_info = click.make_pass_decorator(ScriptInfo, ensure=True)
+
+# click.command作为一个命令，click.option可选项
+@click.command('run', short_help='Runs a development server.')
+@click.option('--host', '-h', default='127.0.0.1',
+              help='The interface to bind to.')
+@click.option('--port', '-p', default=5000,
+              help='The port to bind to.')
+@click.option('--reload/--no-reload', default=None,
+              help='Enable or disable the reloader.  By default the reloader '
+              'is active if debug is enabled.')
+@click.option('--debugger/--no-debugger', default=None,
+              help='Enable or disable the debugger.  By default the debugger '
+              'is active if debug is enabled.')
+@click.option('--eager-loading/--lazy-loader', default=None,
+              help='Enable or disable eager loading.  By default eager '
+              'loading is enabled if the reloader is disabled.')
+@click.option('--with-threads/--without-threads', default=False,
+              help='Enable or disable multithreading.')
+@pass_script_info
+def run_command(info, host, port, reload, debugger, eager_loading,
+                with_threads):
+    """Runs a local development server for the Flask application.
+	flask应用程序启动一个开发服务器，只推荐开发时使用
+    This local server is recommended for development purposes only but it
+    can also be used for simple intranet deployments.  By default it will
+    not support any sort of concurrency at all to simplify debugging.  This
+    can be changed with the --with-threads option which will enable basic
+    multithreading.
+    """
+    from werkzeug.serving import run_simple
+
+    debug = get_debug_flag()
+    if reload is None:
+        reload = bool(debug)
+    if debugger is None:
+        debugger = bool(debug)
+    if eager_loading is None:
+        eager_loading = not reload
+
+    app = DispatchingApp(info.load_app, use_eager_loading=eager_loading)
+
+    # Extra startup messages.  This depends a bit on Werkzeug internals to
+    # not double execute when the reloader kicks in.
+    if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
+        # 打印 APP导入路径 和 调试开关信息
+        if info.app_import_path is not None:
+            print(' * Serving Flask app "%s"' % info.app_import_path)
+        if debug is not None:
+            print(' * Forcing debug mode %s' % (debug and 'on' or 'off'))
+
+    run_simple(host, port, app, use_reloader=reload,
+               use_debugger=debugger, threaded=with_threads)
+```
+
+
+
+### flask shell命令
+
+```python
+
+@click.command("shell", short_help="Run a shell in the app context.")
+@with_appcontext
+def shell_command():
+    """Run an interactive Python shell in the context of a given
+    Flask application.  The application will populate the default
+    namespace of this shell according to it's configuration.
+
+    This is useful for executing small snippets of management code
+    without having to manually configure the application.
+    """
+    import code
+    from .globals import _app_ctx_stack
+
+    app = _app_ctx_stack.top.app
+    banner = "Python %s on %s\nApp: %s [%s]\nInstance: %s" % (
+        sys.version,
+        sys.platform,
+        app.import_name,
+        app.env,
+        app.instance_path,
+    )
+    ctx = {}
+
+    # Support the regular Python interpreter startup script if someone
+    # is using it.
+    startup = os.environ.get("PYTHONSTARTUP")
+    if startup and os.path.isfile(startup):
+        with open(startup, "r") as f:
+            eval(compile(f.read(), startup, "exec"), ctx)
+
+    ctx.update(app.make_shell_context())
+
+    code.interact(banner=banner, local=ctx)
+```
+
+
+
+## 扩展 exthook.py
+
+flask/exthook.py
 
 ```python
 class ExtensionImporter(object):
@@ -907,11 +1514,14 @@ Requires:
 Required-by: tensorboard, Flask
 ```
 
+* werkzeug/serving.py： 请求处理方式
+* werkzeug/local.py： 本地代理/数据栈
 
 
-#### 请求处理方式 werkzeug/serving.py
 
-**说明**：Flask::run (flask/app.py) 调用了 serving.py里的run_simple函数， 最终make_server调用了HTTPServer.serve_forever (lib/socketserver.py)
+#### 请求处理方式 serving.py
+
+**说明**：Flask::run (flask/app.py) 调用了 serving.py里的run_simple函数， 最终make_server() 调用了HTTPServer.serve_forever (lib/socketserver.py)
 
 **处理链**： run_simple ->  inner -> make_server 
 
@@ -1201,7 +1811,7 @@ class BaseServer:
 
 
 
-#### 本地代理/数据栈 werkzeug/local.py
+#### 本地代理/数据栈 local.py 
 
 背景：使用thread local对象（`from threading import local`）虽然可以基于线程存储全局变量，但是在Web应用中可能会存在如下问题：
 
@@ -1214,6 +1824,17 @@ class BaseServer:
 * LocalStack：是先进先出队列，封装操作: pop/push/top。
 * LocalProxy:  用于代理Local对象和LocalStack对象，而所谓代理就是作为中间的代理人来处理所有针对被代理对象的操作。
 * LocalManager：管理Local对象。
+
+
+
+**上下文需要放在栈中的原因**
+　　1. 应用上下文 _app_ctx_stack
+　　flask底层是基于werkzeug，werkzeug是可以包含多个app的，所以这个时候用一个栈来保存，如果要使用app1，则app1需在栈的顶部，如果用完了app1，则app1应该从栈中删除，方便其他代码使用下面的app。
+
+　2. 请求上下文  _request_ctx_stack
+　　如果在写测试代码或者离线脚本的时候，有时候可能需要穿件多个请求上下文，这个时候就需要存放到另一个栈中，使用哪个请求上下文的时候，就把对应的请求上下文放到栈的顶部，用完了就要把这个请求上下文从栈中移除掉。
+
+
 
 ```python
 _identity = lambda x: x
@@ -1235,12 +1856,27 @@ class Local(object):
         # 初始化__storage__为空字典，__ident_func__调用get_ident
         object.__setattr__(self, "__storage__", {})
         object.__setattr__(self, "__ident_func__", get_ident)
+
         
 class LocalStack(object):
-    """ 相当于一个本地数据先进先出stack, 使用Local()存储数据 """
+    """ 相当于一个本地数据先进先出stack, 使用Local()存储数据, 方法有push/pop/top """
     def __init__(self):
         self._local = Local()   
+        
+    def push(self, obj):        
+        """Pushes a new item to the stack"""
+        rv = getattr(self._local, "stack", None)
+        if rv is None:
+            self._local.stack = rv = []
+        rv.append(obj)
+        return rv
 
+    def pop(self):
+        """Removes the topmost item from the stack, will return the
+        old value or `None` if the stack was already empty.
+        """
+                
+        
 class LocalManager(object):
     def __init__(self, locals=None, ident_func=None):
         if locals is None:
@@ -1268,12 +1904,509 @@ class LocalProxy(object):
             # LocalManager: mark it as a wrapped function.
             object.__setattr__(self, "__wrapped__", local)
  
+```
+
+
+
+### click
+
+可组合命令行接口工具包。命令组 Group - >  命令Command
+
+```shell
+$ pip show click
+Name: click
+Version: 7.1.2
+Summary: Composable command line interface toolkit
+Home-page: https://palletsprojects.com/p/click/
+Author: None
+Author-email: None
+License: BSD-3-Clause
+Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
+Requires:
+Required-by: Flask, Flask-AppBuilder, apache-superset
+```
+
+源文件
+
+* click/core.py: 实现核心，定义了Group及其父类， Argument, Option
+* click/decorator.py 常用装饰器
+
+
+
+click/core.py 
+
+```python
+class BaseCommand(object):
+    """ """
+    
+class Command(BaseCommand):
+    """ """
+    
+class MultiCommand(Command):
+    """ 多个命令类 继承单个命令 """
+    
+class Group(MultiCommand):
+    """命令组可以跟命令绑定
+    :param commands: a dictionary of commands.
+    类方法：command group add_command  get_command list_command
+    """
+   def group(self, *args, **kwargs):
+        """快速绑定命令组到另一个命令组的装饰器.
+        """
+        from .decorators import group
+
+        def decorator(f):
+            cmd = group(*args, **kwargs)(f)
+            self.add_command(cmd)
+            return cmd
+
+        return decorator
+    
+    def command(self, *args, **kwargs):
+        """A shortcut decorator for declaring and attaching a command to
+        the group.  This takes the same arguments as :func:`command` but
+        immediately registers the created command with this instance by
+        calling into :meth:`add_command`.
+        用来作为快速创建命令的装饰器，实质调用 add_command方法
+        """
+        from .decorators import command
+
+        def decorator(f):
+            cmd = command(*args, **kwargs)(f)
+            self.add_command(cmd)
+            return cmd
+
+        return decorator    
+```
+
+
+
+click/decorator.py 
+
+命令处理常用装饰器，包括group, command, argument, option, make_pass_decorator
+
+```python
+from functools import update_wrapper
+
+from ._compat import iteritems
+from ._unicodefun import _check_for_unicode_literals
+from .core import Argument
+from .core import Command
+from .core import Group
+from .core import Option
+
+def group(name=None, **attrs):
+    """Creates a new :class:`Group` with a function as callback.  This
+    works otherwise the same as :func:`command` just that the `cls`
+    parameter is set to :class:`Group`.
+    """
+    attrs.setdefault("cls", Group)
+    return command(name, **attrs)
+
+def command(name=None, cls=None, **attrs):
+    if cls is None:
+        cls = Command
+
+    def decorator(f):
+        cmd = _make_command(f, name, attrs, cls)
+        cmd.__doc__ = f.__doc__
+        return cmd
+
+    return decorator
+
+# 必选参数
+def argument(*param_decls, **attrs):
+    """Attaches an argument to the command.  All positional arguments are
+    passed as parameter declarations to :class:`Argument`; all keyword
+    arguments are forwarded unchanged (except ``cls``).
+    This is equivalent to creating an :class:`Argument` instance manually
+    and attaching it to the :attr:`Command.params` list.
+
+    :param cls: the argument class to instantiate.  This defaults to
+                :class:`Argument`.
+    """
+
+    def decorator(f):
+        ArgumentClass = attrs.pop("cls", Argument)
+        _param_memo(f, ArgumentClass(param_decls, **attrs))
+        return f
+
+    return decorator
+
+# 可选参数
+def option(*param_decls, **attrs):
+    """Attaches an option to the command.  All positional arguments are
+    passed as parameter declarations to :class:`Option`; all keyword
+    arguments are forwarded unchanged (except ``cls``).
+    This is equivalent to creating an :class:`Option` instance manually
+    and attaching it to the :attr:`Command.params` list.
+
+    :param cls: the option class to instantiate.  This defaults to
+                :class:`Option`.
+    """
+
+    def decorator(f):
+        # Issue 926, copy attrs, so pre-defined options can re-use the same cls=
+        option_attrs = attrs.copy()
+
+        if "help" in option_attrs:
+            option_attrs["help"] = inspect.cleandoc(option_attrs["help"])
+        OptionClass = option_attrs.pop("cls", Option)
+        _param_memo(f, OptionClass(param_decls, **option_attrs))
+        return f
+
+    return decorator
+```
+
+
+
+click高效的装饰器： 以 flask fab命令组为例
+
+* @xx.group()   将当前方法名作为一个xx命令组的子命令组，如xx为click，那么fab的上级命令组是app实例
+
+  ```python
+  import click
+  
+  # 示例： flask fab命令组定义
+  @click.group()
+  def fab():
+      """ FAB flask group commands"""
+      pass
+  ```
+
+* @xx.command()， 将当前方法名作为xx命令组里的最终命令，如`flask fab create-admin`
+
+  ```python
+  @fab.command("create-admin")
+  @click.option("--username", default="admin", prompt="Username")
+  @click.option("--firstname", default="admin", prompt="User first name")
+  @click.option("--lastname", default="user", prompt="User last name")
+  @click.option("--email", default="admin@fab.org", prompt="Email")
+  @click.password_option()
+  @with_appcontext
+  def create_admin(username, firstname, lastname, email, password):
+      """
+          Creates an admin user
+      """
+  ```
+
+
+
+
+## 相关模块
+
+### flask_appbuilder
+
+Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
+
+*  Google charts CSS and JS
+*  BootStrap CSS and JS
+*  BootsWatch Themes
+*  Font-Awesome CSS and FontsFlask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
+   *  Google charts CSS and JS
+   *  BootStrap CSS and JS
+   *  BootsWatch Themes
+   *  Font-Awesome CSS and Fonts
+
+
+
+```shell
+$ pip show Flask-AppBuilder
+Name: Flask-AppBuilder
+Version: 3.1.1
+Summary: Simple and rapid application development framework, built on top of Flask. includes detailed security, auto CRUD generation for your models, google charts and much more.
+Home-page: https://github.com/dpgaspar/flask-appbuilder/
+Author: Daniel Vaz Gaspar
+Author-email: danielvazgaspar@gmail.com
+License: BSD
+Location: /home/keefe/venv/superset-py36-env/lib/python3.6/site-packages
+Requires: email-validator, click, marshmallow, marshmallow-enum, PyJWT, Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, apispec, python-dateutil, marshmallow-sqlalchemy, jsonschema, Flask-Babel, Flask-WTF, sqlalchemy-utils, prison, colorama, Flask-OpenID
+Required-by: 
+```
+
+Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
+
+
+#### fab管理
+
+
+
+#### 路由&视图
+
+1. 路由扩展装饰器：expose expose_api
+
+作用：在原有路由基础上增加次级路由
+
+示例：原路由/superset，调用 @expose('/welcome')
+
+结果：/superset/welcome
+
+代码实现： flask_appbuilder/baseview.py
+
+```python
+def expose(url='/', methods=('GET',)):
+    """
+   Use this decorator to expose views on your view classes.
+   :param url:  Relative URL for the view
+   :param methods:  Allowed HTTP methods. By default only GET is allowed.
+    """
+    def wrap(f):
+        if not hasattr(f, "_urls"):
+            f._urls = []
+        f._urls.append((url, methods))
+        return f
+
+    return wrap
+
+
+def expose_api(name="", url="", methods=("GET",), description=""):
+    """ API扩展路由，增加了API版本号name """
+    def wrap(f):
+        api_name = name or f.__name__
+        api_url = url or "/api/{0}".format(name)
+        if not hasattr(f, "_urls"):
+            f._urls = []
+            f._extra = {}
+        f._urls.append((api_url, methods))
+        f._extra[api_name] = (api_url, f.__name__, description)
+        return f
+
+    return wrap
+```
+
+
+
+2. 视图
+
+    flask_appbuilder/baseview.py
+
+```python
+class BaseView(object):
+    """
+        All views inherit from this class.
+        it's constructor will register your exposed urls on flask as a Blueprint.
+
+        This class does not expose any urls, but provides a common base for all views.
+
+        Extend this class if you want to expose methods for your own templates
+    """
+
+    appbuilder = None
+    blueprint = None
+    endpoint = None
+
+    route_base = None
+    """ Override this if you want to define your own relative url """
+
+    template_folder = "templates"
+    """ The template folder relative location """
+    static_folder = "static"
+    """  The static folder relative location """
+    base_permissions = None
+    """
+        List with allowed base permission.
+        Use it like this if you want to restrict your view to readonly::
+
+            class MyView(ModelView):
+                base_permissions = ['can_list','can_show']
+    """
+    class_permission_name = None
+    previous_class_permission_name = None
+    """
+        If set security cleanup will remove all permissions tuples
+        with this name
+    """
+    method_permission_name = None
+    """
+        Override method permission names, example::
+
+            method_permissions_name = {
+                'get_list': 'read',
+                'get': 'read',
+                'put': 'write',
+                'post': 'write',
+                'delete': 'write'
+            }
+    """
+    previous_method_permission_name = None
+    """
+        Use same structure as method_permission_name. If set security converge
+        will replace all method permissions by the new ones
+    """
+    exclude_route_methods = set()
+    """
+        Does not register routes for a set of builtin ModelView functions.
+        example::
+
+            class ContactModelView(ModelView):
+                datamodel = SQLAInterface(Contact)
+                exclude_route_methods = {"delete", "edit"}
+
+    """
+    include_route_methods = None
+    """
+        If defined will assume a white list setup, where all endpoints are excluded
+        except those define on this attribute
+        example::
+
+            class ContactModelView(ModelView):
+                datamodel = SQLAInterface(Contact)
+                include_route_methods = {"list"}
+
+
+        The previous example will exclude all endpoints except the `list` endpoint
+    """
+    default_view = "list"
+    """ the default view for this BaseView, to be used with url_for (method name) """
+    extra_args = None
+
+    """ dictionary for injecting extra arguments into template """
+    _apis = None
+
+    def __init__(self):
+        """
+            Initialization of base permissions
+            based on exposed methods and actions
+
+            Initialization of extra args
+        """
+```
+
+
+
+### flask_caching
+
+Flask-Caching支持多个缓存后端（Redis，Memcached，SimpleCache（内存中）或本地文件系统）。
+
+```python
+# flask_caching/__init__.py
+class Cache(object):
+    """This class is used to control the cache objects."""
+
+    def __init__(
+        self,
+        app: Optional[Flask] = None,
+        with_jinja2_ext: bool = True,
+        config=None,
+    ) -> None:
+        if not (config is None or isinstance(config, dict)):
+            raise ValueError("`config` must be an instance of dict or None")
+
+        self.with_jinja2_ext = with_jinja2_ext
+        self.config = config
+
+        self.source_check = None
+
+        if app is not None:
+            self.init_app(app, config)
+
+    def init_app(self, app: Flask, config=None) -> None:
+        """This is used to initialize cache with your app object"""
+        if not (config is None or isinstance(config, dict)):
+            raise ValueError("`config` must be an instance of dict or None")
+
+		...
+       config.setdefault('CACHE_DEFAULT_TIMEOUT', 300)  # 缓存过期时间缺省300秒
+       config.setdefault('CACHE_DIR', None)   # 设置缓存路径
+       # null改为'filesystem'，如果是redis/memache，则需要相应的服务器支持和安装python客户端模块
+       config.setdefault('CACHE_TYPE', 'null')  
 
 ```
 
 
 
+### flask_babel
 
+国际化支持，依赖于标准库babel。
+
+```python
+# flask_babel/__init__.py
+from flask import current_app, request
+from flask.ctx import has_request_context
+from babel import dates, numbers, support, Locale
+
+class Babel(object):
+    """Central controller class that can be used to configure how
+    Flask-Babel behaves.  Each application that wants to use Flask-Babel
+    has to create, or run :meth:`init_app` on, an instance of this class
+    after the configuration was initialized.
+    """
+
+    default_date_formats = ImmutableDict({
+        'time':             'medium',
+        'date':             'medium',
+        'datetime':         'medium',
+        'time.short':       None,
+        'time.medium':      None,
+        'time.full':        None,
+        'time.long':        None,
+        'date.short':       None,
+        'date.medium':      None,
+        'date.full':        None,
+        'date.long':        None,
+        'datetime.short':   None,
+        'datetime.medium':  None,
+        'datetime.full':    None,
+        'datetime.long':    None,
+    })
+    
+    def __init__(self, app=None, default_locale='en', default_timezone='UTC',
+                 default_domain='messages', date_formats=None,
+                 configure_jinja=True):
+        self._default_locale = default_locale
+        self._default_timezone = default_timezone
+        self._default_domain = default_domain
+        self._date_formats = date_formats
+        self._configure_jinja = configure_jinja
+        self.app = app
+        self.locale_selector_func = None
+        self.timezone_selector_func = None
+
+        if app is not None:
+            self.init_app(app)
+
+    def init_app(self, app):
+        """ 初始化APP，用到一些传入变量： """
+        self.app = app
+        app.babel_instance = self
+        if not hasattr(app, 'extensions'):
+            app.extensions = {}
+        app.extensions['babel'] = self
+
+        # 重要变量：BABEL_DEFAULT_LOCALE语种 BABEL_DEFAULT_TIMEZONE时区
+        app.config.setdefault('BABEL_DEFAULT_LOCALE', self._default_locale)
+        app.config.setdefault('BABEL_DEFAULT_TIMEZONE', self._default_timezone)
+        app.config.setdefault('BABEL_DOMAIN', self._default_domain)
+        if self._date_formats is None:
+            self._date_formats = self.default_date_formats.copy()        
+```
+
+
+
+### flask_script
+
+```python
+# flask_script/__init__.py: Manager
+class Print(Command):
+    def run(self):
+   print "hello"
+
+from flask import Flask
+from flask_script import Manager
+
+app = Flask(__name__)
+manager = Manager(app)
+manager.add_command("print", Print())
+
+
+if __name__ == "__main__":
+    manager.run()
+
+python manage.py print
+> hello
+```
+
+ 
 
 ## 本章参考
 
@@ -1380,6 +2513,12 @@ if __name__ == "__main__":
 
 
 ## WEB核心对象
+
+* web.py web核心对象，包括Application、RequestHandler
+* routing.py 路由对象 
+* tcpserver.py TCP服务器
+
+
 
 web.py 包括
 
@@ -1543,7 +2682,7 @@ class TCPServer(object):
 
 
 
-## 网络处理 
+## 网络处理 ioloop.py
 
 tornado.ioloop.IOLoop.instance().start()
 

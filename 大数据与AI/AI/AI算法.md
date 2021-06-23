@@ -116,7 +116,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 * 准确率accuracy = 分类正确的样本 / 总样本的个数。
 
-  ![1574500598482](E:/project/technical-share/media/sf_reuse/algo/algo_006.png)
+  ![1574500598482](../../media/sf_reuse/algo/algo_006.png)
 
  
 
@@ -237,7 +237,7 @@ AUC 是一个模型评价指标，用于二分类模型的评价。
 
 使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。
 
-   ![1574500778396](E:/project/technical-share/media/sf_reuse/algo/algo_formula_004_auc.png)
+   ![1574500778396](../../media/sf_reuse/algo/algo_formula_004_auc.png)
 
 备注：ROC曲线的下方面积为AUC。
 
@@ -512,7 +512,7 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 
  
 
-   ![1574500467125](E:/project/technical-share/media/sf_reuse/algo/algo_002.png)
+   ![1574500467125](../../media/sf_reuse/algo/algo_002.png)
 
 图 2 欧氏距离和余弦距离的差别
 

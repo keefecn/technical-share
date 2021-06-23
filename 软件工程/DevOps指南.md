@@ -145,6 +145,23 @@ Serverless 的应用场景有很多，比如：为小程序、Web、Mobile 提�
 
 
 
+![devops_001](..\media\software_enginer\devops_001.jpg)
+
+图 Devops常用技术
+
+* 计划、构建、部署、运营、
+* 持续集成、持续反馈
+
+
+
+![devops_002](..\media\software_enginer\devops_002.png)
+
+图 DevOps工具链（敏捷开发-持续集成-持续测试-持续部署）
+
+
+
+
+
 ## Microsoft TFS
 
 TFS下载 https://visualstudio.microsoft.com/zh-hans/vso/?rr=https%3A%2F%2Fwww.cnblogs.com%2F
