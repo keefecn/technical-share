@@ -160,7 +160,7 @@ python内存基本特性
 
 **引用计数**
 Python 采用引用计数的方式来管理分配的内存。Python 的每个对象都有一个引用计数，这个引用计数表明了有多少对象在指向它。当这个引用计数为 0 时，该对象就释放了。
-然而，引用计数有一个本质上的缺陷，是由于循环引用引起的。
+然而，引用计数有一个本质上的缺陷，是由于循环引用引起的。因此下面又引入了其它的垃圾回收机制来弥补引用计数的缺陷。
 
 **垃圾收集GC**
 不再被使用的内存会被一种称为垃圾收集的机制释放。
@@ -170,6 +170,19 @@ Python 采用引用计数的方式来管理分配的内存。Python 的每个对
 * 垃圾收集算法：根寻找法、引用计数
 * 垃圾回收算法：标记-复制-清除
 * 垃圾回收策略：分代回收。
+
+
+
+**内存池机制**
+Python提供了对内存的垃圾收集机制，但是它是将不用的内存放到内存池，而不是返回给系统。
+
+python中内存机制呈现出金字塔形状，-1、-2层主要由操作系统进行操作。第0层是c中的malloc，free等内存分配和释放函数进行操作。
+
+（1）第1层和第2层是内存池，有Python的接口函数PyMem_Malloc函数实现。Python 中所有小于256个字节的对象都使用pymalloc实现的分配器，而大的对象则使用系统的malloc。不过，通过修改Python源代码，我们可以改变这个默认值，从而改变Python的默认内存管理行为。
+
+（2）Python引入了一个内存池机制，是为了加速Python的执行效率，用于管理对小块内存的申请和释放。
+
+（3）对于python对象，如整数、浮点数、List，都有其独立的私有内存池，对象间不共享它们的内存池。也就是说，如果你分配又释放了大量的整数，用于缓存这些整数的内存就不能再分配给浮点数。
 
 
 
@@ -1512,7 +1525,7 @@ Foo.__init__
 
 命令行启动的常见系统脚本：ipython, pip, virtuanenv
 
-命令行启动的常见应用脚本：flask celery superset
+命令行启动的常见应用脚本：flask celery gunicorn superset
 
 ipython
 
@@ -1570,7 +1583,7 @@ if __name__ == '__main__':
 
 
 
-flask/celery/superset
+flask/celery/gunicorn
 
 ```python
 [root@ecs-ce1a bin]# cat flask
@@ -1591,9 +1604,20 @@ from celery.__main__ import main
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(main())    
+    
+[root@ecs-ce1a bin]# cat gunicorn    
+# -*- coding: utf-8 -*-
+import re
+import sys
+from gunicorn.app.wsgiapp import run
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(run())    
 ```
 
 
+
+**superset**
 
 示例：superset命令行脚本和打包入口路径
 

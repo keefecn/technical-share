@@ -99,24 +99,24 @@
 | include              | D    | 公开使用的头文件集合                          | eg: hlink,uri,stack的对外接口头文件                 |
 | lib                  | D    | 公开使用的实现集合                            |                                                     |
 | stack                | D    | stack数据结构的实现                           |                                                     |
-| Crawl                | F    | crawler实现类                                 |                                                     |
-| DatabaseEngine       | F    |                                               |                                                     |
-| DataEngine           | F    | 基类                                          |                                                     |
-| IsamFile             | F    | ISAM文件存储格式类                            |                                                     |
-| FileEngine           | F    | 文件存储格式的基类                            |                                                     |
-| Http                 | F    | http连接处理类                                |                                                     |
-| Search               | F    | 搜索器的实现类                                |                                                     |
-| Link4SEFile          | F    |                                               |                                                     |
-| Main                 | F    | Tse主程序                                     |                                                     |
-| Md5                  | F    | MD5编码的一个实现                             |                                                     |
-| Res                  | F    |                                               |                                                     |
-| StrFun               | F    | 一些字符串处理函数                            |                                                     |
-| Stat                 | F    | 小测试程序                                    | 统计url                                             |
-| tfind                | F    | 小测试程序                                    | 测试url是否被过滤                                   |
-| tfindForeign         | F    | 小测试程序                                    | 过滤指定类型的url                                   |
-| TianwangFile         | F    |                                               |                                                     |
-| Url                  | F    | url解析类                                     | 从一个url提取出各种信息，包括protocol,host,request… |
-| CommonDef.h          | F    | 全局的头文件，公共变量，宏                    |                                                     |
+| Crawl.cpp            | F    | crawler实现类                                 |                                                     |
+| DatabaseEngine.cpp   | F    |                                               |                                                     |
+| DataEngine.cpp       | F    | 基类                                          |                                                     |
+| IsamFile.cpp         | F    | ISAM文件存储格式类                            |                                                     |
+| FileEngine.cpp       | F    | 文件存储格式的基类                            |                                                     |
+| Http.cpp             | F    | http连接处理类                                |                                                     |
+| Search.cpp           | F    | 搜索器的实现类                                |                                                     |
+| Link4SEFile.cpp      | F    |                                               |                                                     |
+| Main.cpp             | F    | Tse主程序                                     |                                                     |
+| Md5.cpp              | F    | MD5编码的一个实现                             |                                                     |
+| Res.cpp              | F    |                                               |                                                     |
+| StrFun.cpp           | F    | 一些字符串处理函数                            |                                                     |
+| Stat.cpp             | F    | 小测试程序                                    | 统计url                                             |
+| tfind.cpp            | F    | 小测试程序                                    | 测试url是否被过滤                                   |
+| tfindForeign.cpp     | F    | 小测试程序                                    | 过滤指定类型的url                                   |
+| TianwangFile.cpp     | F    |                                               |                                                     |
+| Url.cpp              | F    | url解析类                                     | 从一个url提取出各种信息，包括protocol,host,request… |
+| CommonDef.h.cpp      | F    | 全局的头文件，公共变量，宏                    |                                                     |
 | tse_seed.img         |      | 一开始指定要访问的url,  主向是imgSE(图片搜索) |                                                     |
 | tse_seed.pku         |      | 一开始指定要访问的url（正常的网页搜索）       |                                                     |
 | tse_unreachHost.list |      | unreachable hosts according to PKU IP block   |                                                     |
@@ -240,21 +240,21 @@ VOID SAVEREPLICAS(CONST CHAR* FILENAME);
 
  在同一个局域网内的多台机器，每个机器多个进程并发的工作 
 
-– 一方面可以利用局域网的高带宽，低延时，各节点充分交流数据， 
+* 一方面可以利用局域网的高带宽，低延时，各节点充分交流数据， 
 
-–另一方面采用多进程并发方式降低Internet高延迟的副作用。 
+* 另一方面采用多进程并发方式降低Internet高延迟的副作用。 
 
  
 
-计算理论值： 
+**计算理论值**： 
 
-–平均纯文本网页大小为13KB 
+* 平均纯文本网页大小为13KB 
 
-–在连接速率为100Mbps快速以太网络上，假设线路的最大利用率是100%，则最多允许同时传输（1.0e+8b/s）/ （1500B*8b/B）≈8333个数据帧，也即同时传输8333个网页 
+* 在连接速率为100Mbps快速以太网络上，假设线路的最大利用率是100%，则最多允许同时传输（1.0e+8b/s）/ （1500B*8b/B）≈8333个数据帧，也即同时传输8333个网页 
 
-–如果假设局域网与Internet的连接为100Mbs，Internet带宽利用率低于50%（网络的负载超过80%，性能是趋向于下降的；路由），则同时传输的网页数目平均不到4000个。 
+* 如果假设局域网与Internet的连接为100Mbs，Internet带宽利用率低于50%（网络的负载超过80%，性能是趋向于下降的；路由），则同时传输的网页数目平均不到4000个。 
 
-－则由n个节点组成的搜集系统，单个节点启动的Robot数目应该低于4000/n。 
+* 则由n个节点组成的搜集系统，单个节点启动的Robot数目应该低于4000/n。 
 
  而根据经验值：要考虑CPU和磁盘的使用率问题，通常CPU使用率不应该超过50%，磁盘的使用率不应该超过80%，否则机器会响应很慢，影响程序的正常运行。 
 
@@ -266,10 +266,10 @@ VOID SAVEREPLICAS(CONST CHAR* FILENAME);
 
 以太网数据帧的物理特性是其长度必须在46~1500字节之间。 
 
-˜在一个网络往返时间RTT为200ms的广域网中，服务器处理时间SPT为100ms，那么TCP上的事务时间就大约500ms（2 RTT+SPT）。 
+* 在一个网络往返时间RTT为200ms的广域网中，服务器处理时间SPT为100ms，那么TCP上的事务时间就大约500ms（2 RTT+SPT）。 
 
-˜网页的发送是分成一系列帧进行的，则发送1个网页的最少时间是 (13KB/1500B) * 500ms ≈4s。 
+* 网页的发送是分成一系列帧进行的，则发送1个网页的最少时间是 (13KB/1500B) * 500ms ≈4s。 
 
-˜如果系统中单个节点启动100个Robot程序，则每个节点每天应该搜集（24 *60 *60s/4s）* 100 = 2,160,000个网页。 
+* 如果系统中单个节点启动100个Robot程序，则每个节点每天应该搜集（24 *60 *60s/4s）* 100 = 2,160,000个网页。 
 
-˜考虑到Robot实际运行中可能存在超时，搜集的网页失效等原因，每个节点的搜集效率小于2,160,000个网页/天。 
+* 考虑到Robot实际运行中可能存在超时，搜集的网页失效等原因，每个节点的搜集效率小于2,160,000个网页/天。 

@@ -125,7 +125,7 @@ Installation
 
 **PIP安装**
 
-安装版本： superset-0.24
+安装版本： superset-0.x
 
 安装需求：要求python 2.7.8+或者python 3.6+。python 2.7环境pip安装时需预安装pytest-runner.
 
@@ -143,7 +143,7 @@ pip install superset --upgrade
 
 
 
-安装版本：apache-superset-1.0
+安装版本：apache-superset-1.x
 
 安装需求：Python ~=3.7
 
@@ -341,45 +341,142 @@ BABEL_DEFAULT_LOCALE = 'zh'
 
 主要修改二部分
 
-* translates/zh/LC_MESSAGES/message.json
-* JSX文件： superset-frontend/explore/controls.jsx,   修改label, description值即可，修改了需要重新构建
+1. 基础汉化
 
-```jsx
-# 用t()圈起来的内容一般可以用 pybabel提取出来  
-color_scheme: {
-    type: 'ColorSchemeControl',
-    label: t('Color scheme 彩色主题'),
-    default: categoricalSchemeRegistry.getDefaultKey(),
-    renderTrigger: true,
-    choices: () => categoricalSchemeRegistry.keys().map(s => [s, s]),
-    description: t('The color scheme for rendering chart 渲染图表用彩色主题'),
-    schemes: () => categoricalSchemeRegistry.getMap(),
-  },
-```
+修改 superset/translates/zh/LC_MESSAGES/message.json  （可以通过工具 从message.po转化），这个文件会被前后端都用到。
 
-
-
-以中文翻译为例 
+ 流程如下：
 
 ```shell
 # 使用pybabel：提取 message.pot，再转化成 message.po
+$ pybabel extract -F translations\babel.cfg -k _ -k __ -k t -k tn -k tct -o translations\messages.pot .
 
-# step1: 人工翻译 messages.po, 纯文本格式，示例如下：en 中文
-msgid "Annotation Layers"
-msgstr "注解层"
+# step1: 人工翻译 messages.po
 
-# step2: 编译 messages.po -> messages.mo
-pybabel compile -d translations
+# step2: 编译 messages.po -> messages.mo, 可以用 pybabel或者msgfmt 进行转化
+$ cd ./superset/translations/zh/LC_MESSAGES
+$ pybabel compile -d translations
+# 或者
+$ msgfmt ./messages.po -o ./messages.mo
 
 # step3: 文件格式转化 message.mo -> message.json, json格式为最后源码加载文件
-po2json -d superset -f jed1.x translations/zh/LC_MESSAGES/messages.po translations/zh/LC_MESSAGES/messages.json
+$ po2json -d superset -f jed1.x ./messages.po ./messages.json
 ```
+
+
+
+babel.cfg 示例
+
+```ini
+[ignore: superset-frontend/node_modules/**]
+[python: superset/**.py]
+[jinja2: superset/**/templates/**.html]
+[javascript: superset-frontend/src/**.js]
+[javascript: superset-frontend/src/**.jsx]
+[javascript: superset-frontend/src/**.tsx]
+
+encoding = utf-8
+```
+
+
+
+**messages.po示例**
+
+纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）
+
+```ini
+# Chinese translations for Apache Superset.
+msgid ""
+msgstr ""
+"Project-Id-Version: Apache Superset 0.22.1\n"
+"Report-Msgid-Bugs-To: zhouyao94@qq.com\n"
+"POT-Creation-Date: 2021-01-22 15:56-0300\n"
+"PO-Revision-Date: 2019-01-04 22:19+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh <benedictjin2016@gmail.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Generated-By: Babel 2.8.0\n"
+
+# 说明：纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。示例如下：
+#: superset/app.py:225
+msgid "Home"
+msgstr ""
+
+#: superset/app.py:230 superset/views/annotations.py:119
+msgid "Annotation Layers"
+msgstr "注解层"
+```
+
+
+
+2. JSX文件：
+
+   用__ 或者 t 圈起来的可以补充到message.json；没圈起来的修改label, description值即可，修改了需要重新构建。
+
+   示例文件：superset-frontend/explore/controls.jsx
+
+   ```jsx
+   color_scheme: {
+       type: 'ColorSchemeControl',
+       label: t('Color scheme'),	# 译：彩色主题
+       default: categoricalSchemeRegistry.getDefaultKey(),
+       renderTrigger: true,
+       choices: () => categoricalSchemeRegistry.keys().map(s => [s, s]),
+       description: t('The color scheme for rendering chart'), # 译：渲染图表用彩色主题
+       schemes: () => categoricalSchemeRegistry.getMap(),
+     },
+   ```
+
+
+* flask_babel法:  使用 __
+
+  ```jsx
+  from flask_babel import gettext as __, lazy_gettext as _
+  #汉化语法为
+  _('需要汉化的字符')
+  
+  #按钮需要加上{{  }}才可行。
+  {{_('需要汉化的按钮字符')}}
+  ```
+
+* @superset-ui:  使用 t
+
+  ```jsx
+  import {t, validateNonEmpty} from '@superset-ui/core';
+  
+  color_scheme: {
+      type: 'ColorSchemeControl',
+      label: t('Color scheme'),
+  	description: t('The color scheme for rendering chart')        
+  }
+  ```
+
+  
+
+**需要翻译的内容示例**
+
+new 和 SQL Query 在 templates/appbuilder/general/navbar_right.html
+filter list和 Refresh 在 templates/appbuilder/general/widgets/search.html
+
+
+
+**暂不可翻译的内容**
+
+deck_screengrid
 
 
 
 ### 网页外部嵌入
 
 嵌入页面缺少鉴权。
+
+图表：
+
+看板：
 
 
 
@@ -528,15 +625,16 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 
 **环境变量**： 
 
+* PYTHONPATH  python模块搜索路径，如果部署包不在虚拟环境的site-packages下，那么应该设置此值。用flask run启动会自动搜索当前路径是否有app，如果当前目录内能搜索到，则可避免设置此值。
 * SUPERSET_HOME    元数据文件和日志文件目录，影响到变量DATA_DIR
 * SUPERSET_CONFIG_PATH   superset配置路径，superset_config.py所在路径，赋值给CONFIG_PATH_ENV_VAR
 * SUPERSET_CONFIG  配置文件路径，缺省为superset.config (即superset/config.py)
-* FLASK_ENV  设置是否调试 development/prod，缺省development是debug模式
+* FLASK_ENV  设置是否调试 development/prod，缺省development是debug模式  （用FLASK_开头的变量通常是flask模块内置支持的环境变量，如FLASK_APP，FLASK_ENV）。
 * MAPBOX_API_KEY  是否支持MAPBOX可视化，缺省False
 
 
 
-superset/config.py  （一般不改这个文件内容）
+superset/config.py  （一般不修改这个文件）
 
 ```python
 from flask import Blueprint
@@ -803,7 +901,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
 ## 5.3   数据架构（数据模型）
 
-
+表格 superset元数据的来源模块说明
 
 | 模块                   | 次模块或命令                 | *说明*                                                       |
 | ---------------------- | ---------------------------- | ------------------------------------------------------------ |
@@ -865,86 +963,105 @@ fab: flask_appbuild
 
 源码分析版本： superset-1.0
 
+```shell
+$ pip show superset
+Name: superset
+Version: 0.30.1
+Summary: Superset has moved to apache-superset, as of 0.34.0 onwards, please pip install apache-superset
+Home-page: https://superset.apache.org/
+Author: Apache Software Foundation
+Author-email: dev@superset.incubator.apache.org
+License: Apache License, Version 2.0
+Location: /home/keefe/venv/superset-py36-env/lib/python3.6/site-packages
+Requires: flask, boto3, gunicorn, python-dateutil, simplejson, future, contextlib2, pandas, pyyaml, bleach, colorama, pydruid, flask-migrate, python-geohash, sq
+lalchemy-utils, thrift, sqlparse, pathlib2, sqlalchemy, unidecode, celery, flask-compress, geopy, humanize, cryptography, parsedatetime, flower, flask-appbuilder, requests, six, unicodecsv, polyline, flask-testing, flask-wtf, markdown, thrift-sasl, pyhive, flask-script, idna, flask-caching
+Required-by: 
+```
+
+
+
  ## 源码结构 
 
-表格  项目顶级目录结构
+表格  项目顶层目录结构
 
-| 目录               | 二级目录或文件                 | 简介                                                         |
-| ------------------ | ------------------------------ | ------------------------------------------------------------ |
-| dist               | xx.tar.gz                      | 打包时`python setup.py sdist`自动生成                        |
-| docker             |                                | docker相关的脚本                                             |
-| helm               |                                | helm镜像仓库的配置目录                                       |
-| RELEASING          |                                | 发布日志                                                     |
-| requirements       |                                | 各种安装方式的模块依赖文件                                   |
-| tests              |                                | 测试目录                                                     |
-| docs               |                                | 文档，使用spinx生成                                          |
-| scripts            | pypi_push.sh   python_tests.sh | superset常用的脚本                                           |
-|                    | setup.py setup.cfg             | 部署常用的一些文件。  requirement.txt 组件需求，pip freeze   README.md     CHANGELOG.md |
-| superset           |                                | superse后端源码目录                                          |
-| superset-frontend  |                                | superset前端源码目录                                         |
-| CHANGELOG.md       |                                | 版本更新日志                                                 |
-| setup.py setup.cfg |                                | 安装脚本，包括了依赖组件                                     |
+| 目录                  | 二级目录或文件                 | 简介                                                         |
+| --------------------- | ------------------------------ | ------------------------------------------------------------ |
+| dist                  | xx.tar.gz                      | 打包时`python setup.py sdist`自动生成                        |
+| docker                |                                | docker相关的脚本                                             |
+| helm                  |                                | helm镜像仓库的配置目录                                       |
+| RELEASING             |                                | 发布日志                                                     |
+| requirements          |                                | 各种安装方式的模块依赖文件                                   |
+| tests                 |                                | 测试目录                                                     |
+| docs                  |                                | 文档，使用spinx生成                                          |
+| scripts               | pypi_push.sh   python_tests.sh | superset常用的脚本                                           |
+|                       | setup.py setup.cfg             | 部署常用的一些文件。  requirement.txt 组件需求，pip freeze   README.md     CHANGELOG.md |
+| **superset**          |                                | superse后端源码目录                                          |
+| **superset-frontend** |                                | superset前端源码目录                                         |
+| CHANGELOG.md          |                                | 版本更新日志                                                 |
+| setup.py setup.cfg    |                                | 安装脚本，包括了依赖组件                                     |
 
  
 
 表格  源码后端目录superset里的结构
 
-| 目录或文件        | 次模块             | 简介                                                         |
-| ----------------- | ------------------ | ------------------------------------------------------------ |
-| annotation_layers |                    | 锚点层                                                       |
-| assets            |                    | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
-| async_events      |                    | 异步事件                                                     |
-| cachekeys         |                    |                                                              |
-| charts            |                    | 图表                                                         |
-| commands          |                    | 支持的命令                                                   |
-| common            |                    |                                                              |
-| connectors        |                    | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
-| db_engines        |                    |                                                              |
-| dao               |                    |                                                              |
-| dashboards        |                    |                                                              |
-| databases         |                    |                                                              |
-| datasets          |                    |                                                              |
-| db_engines        |                    | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
-| db_engine_spec    |                    | 同上                                                         |
-| examples          |                    |                                                              |
-| migrations        |                    | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
-| models            |                    | 存放项目的model，如果要修改字段，优先到这里寻找。            |
-| quaries           |                    |                                                              |
-| reports           |                    |                                                              |
-| security          |                    | 修改权限入口                                                 |
-| sql_validators    |                    |                                                              |
-| static            |                    | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。 |
-| tasks             |                    | celery 任务脚本                                              |
-| templates         |                    | JinJa2模板目录，几乎项目所有的HTML文件都在这里。basic.html提供web整体的样式风格。 |
-| translations      |                    | 翻译文件，只需修改字段对应的名称。                           |
-| utils             |                    |                                                              |
-| views             | health.py  core.py | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
-| app.py            |                    | WEB实例初始化，也是调试入口                                  |
-| cli.py            |                    | superset命令                                                 |
-| viz.py            |                    | 所有得图表类型 后端数据处理入口                              |
-| extensions.py     |                    | 定义 celery， logger 等中间件                                |
+| 目录或文件        | 次模块                             | 简介                                                         |
+| ----------------- | ---------------------------------- | ------------------------------------------------------------ |
+| annotation_layers |                                    | 锚点层                                                       |
+| (弃) assets       |                                    | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
+| async_events      |                                    | 异步事件                                                     |
+| cachekeys         |                                    | 缓存键K-V                                                    |
+| charts            |                                    | 图表                                                         |
+| commands          |                                    | 支持的命令                                                   |
+| common            |                                    |                                                              |
+| connectors        |                                    | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
+| db_engines        |                                    | DB引擎                                                       |
+| dao               |                                    | 数据访问                                                     |
+| dashboards        |                                    | 看板                                                         |
+| databases         |                                    | 数据库dbs/数据源                                             |
+| datasets          |                                    | 数据集                                                       |
+| db_engines        |                                    | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
+| db_engine_spec    |                                    | 同上                                                         |
+| examples          |                                    | 示例数据，用 superset load-examples加载，需从网络下载        |
+| migrations        |                                    | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
+| models            |                                    | 存放项目的model，如果要修改字段，优先到这里寻找。            |
+| quaries           |                                    | 查询SQL相关                                                  |
+| reports           |                                    |                                                              |
+| security          |                                    | 修改权限入口                                                 |
+| sql_validators    |                                    | SQL验证                                                      |
+| **static**        | assets                             | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
+| tasks             |                                    | celery 任务脚本                                              |
+| **templates**     | appbuilder, email, slack, superset | JinJa2模板目录，几乎项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
+| translations      | zh en ...                          | 翻译文件，只需修改字段对应的名称。                           |
+| utils             |                                    | 工具                                                         |
+| views             | health.py  core.py                 | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
+| app.py            |                                    | WEB实例初始化，也是调试入口                                  |
+| cli.py            |                                    | superset命令                                                 |
+| viz.py            |                                    | 所有得图表类型 后端数据处理入口                              |
+| extensions.py     |                                    | 定义 celery， logger 等中间件                                |
 
- >superset后端用到的组件主要有：flask, sqlalchemy, pandas
+ >superset后端用到的组件主要有：flask_appbuilder, flask_sqlalchemy, Jinja2, pandas
 
 
 
 表格  前端目录superset-frontend源码结构
 
-| 目录或文件        | 二级目录或文件 | 简介                                               |
-| ----------------- | -------------- | -------------------------------------------------- |
-| webpack.config.js |                | 前端入口文件。定义了 以src文件夹去生成打包js文件。 |
-| src               |                | 源码                                               |
-|                   | explore        |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
-|                   |                |                                                    |
+| 目录或文件        | 二级目录或文件 | 简介                                                         |
+| ----------------- | -------------- | ------------------------------------------------------------ |
+| .eslintrc.js      |                | eslint配置文件                                               |
+| babel.config.js   |                | babel配置文件。可将jsx文件编译成js。                         |
+| package.json      |                | 前端模块依赖，用npm/yarn管理                                 |
+| webpack.config.js |                | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
+| src               |                | 源码                                                         |
+|                   | components     | 组件                                                         |
+|                   | explore        | 菜单数据探索 生成图表的表单项相关。<br>controls.jsx 表单项列表 |
+|                   | filters        | 过滤器                                                       |
+|                   | visualizations | 可视化图表类型实现                                           |
+|                   | ...            |                                                              |
+| branding          |                | 存放项目logo                                                 |
+| cypress-base      | cypress        | UI自动化测试框架                                             |
+| images            |                | 图片                                                         |
+| spec              |                |                                                              |
+| stylesheets       |                |                                                              |
 
 > superset前端用到的组件主要有：React, D3
 
@@ -957,7 +1074,7 @@ fab: flask_appbuild
 前端组件
 
 *  React：交互
-*  Jiaja2：模板引擎
+*  Jinja2：模板引擎
 *  D3/NVD3：图表
 
 后端组件
@@ -998,6 +1115,14 @@ FLASK_ENV=development FLASK_APP="superset.app:create_app()" \
 flask run -p 8088 --with-threads --reload --debugger --host=0.0.0.0
 ```
 
+说明： flask, superset这二个脚本都要在$PATH路径下。
+
+导出 SUPERSET_CONFIG_PATH时，
+
+* flask 若未指定FLASK_APP，将会启用自动搜索识别APP路径（先当前目录，其次SUPSET_CONFIG_PATH所在目录，再site-packages。）。建议使用flask命令前先要 `export FLASK_APP=superset`
+
+* superset run 只能识别 site-packages下的superset目录。
+
 
 
 flask 或者 superset 脚本
@@ -1008,13 +1133,16 @@ import re
 import sys
 
 # flask脚本  
-from flask.cli import main
+from flask.cli import main  # flask脚本入口
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(main())
     
 # 或者 superset脚本    
-from superset.cli import superset
+from superset.cli import superset  # superset脚本入口
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(superset())
 ```
 
 
@@ -1086,17 +1214,39 @@ Commands:
   worker                    Starts a Superset worker for async SQL query...
 ```
 
-说明：上面命令属于flask模块命令组的有run/shell/routes/version，属于flask_appbuild命令组有fab，属于flask_migrate命令组有db，其它命令属于superset本身命令组。
+说明：1. 上面命令属于flask模块命令组的有run/shell/routes/version，属于flask_appbuild模块命令组有fab，属于flask_migrate模块命令组有db，其它命令属于superset本身命令组。
+
+2. 命令方法名里的_会替换成-，如load_examples替换成load-examples
 
 
-
-命令方法名里的_会替换成-，如load_examples替换成load-examples
 
 ### superset load-examples命令
 
-load_examples 加载测试数据，需要从网络上下载数据
+load_examples 加载测试数据，需要从网络上下载数据。
+
+* /superset/cli.py  命令定义
+* /superset/examples/helpers.py  实际的样例加载方法
+
+**下载网络失败的解决办法** （官方例子网站不稳定，经常挂）
+
+- 在github上下载官方例子文件 网址：https://github.com/apache-superset/examples-data
+
+- npm安装http-server： `npm install http-server`
+
+- 在examples-data所在的文件下下开启服务，即：http-server
+
+- 修改superset/examples/helpers.py文件，修改 BASE_URL
+
+  ```python
+  #根据实际情况填写ip:port
+  BASE_URL = "http://ip:8080/examples-data-master/"
+  ```
+
+- 最后执行命令： `superset load-examples`
 
 ```python
+# /superset/cli.py
+
 # superset.command()装饰说明是superset这个命令组的次级命令
 @with_appcontext
 @superset.command()
@@ -1121,16 +1271,92 @@ def load_examples_run(
     if only_metadata:
         print("Loading examples metadata")
     else:
-        examples_db = utils.get_example_database()
+        examples_db = utils.get_example_database()  #创建或加载数据库examples 
         print(f"Loading examples metadata and related data into {examples_db}")
 
-    from superset import examples
+    from superset import examples  #导入examples样例
 
-    examples.load_css_templates()   
+    examples.load_css_templates()   #从表css_templates加载数据
+    
+    print("Loading energy related dataset")
+	#从表energy_usage获取数据，如果没有，则从网络上下载数据    
+    examples.load_energy(only_metadata, force)  
     ...
 ```
 
 
+
+`/superset/examples/__init__.py`    导入了所有的样例数据加载方法
+
+```python
+from .bart_lines import load_bart_lines
+from .birth_names import load_birth_names
+from .country_map import load_country_map_data
+from .css_templates import load_css_templates
+from .deck import load_deck_dash
+from .energy import load_energy
+from .flights import load_flights
+from .long_lat import load_long_lat_data
+from .misc_dashboard import load_misc_dashboard
+from .multi_line import load_multi_line
+from .multiformat_time_series import load_multiformat_time_series
+from .paris import load_paris_iris_geojson
+from .random_time_series import load_random_time_series_data
+from .sf_population_polygons import load_sf_population_polygons
+from .tabbed_dashboard import load_tabbed_dashboard
+from .utils import load_from_configs
+from .world_bank import load_world_bank_health_n_pop
+```
+
+
+
+/superset/examples/helpers.py
+
+```python
+from superset import app, db
+from superset.connectors.connector_registry import ConnectorRegistry
+from superset.models import core as models
+from superset.models.slice import Slice
+
+BASE_URL = "https://github.com/apache-superset/examples-data/blob/master/"
+
+
+# 示例：加载能源数据集，表名energy_usage，数据集energy.json.gz
+def load_energy(
+    only_metadata: bool = False, force: bool = False, sample: bool = False
+) -> None:
+    """Loads an energy related dataset to use with sankey and graphs"""
+    tbl_name = "energy_usage"
+    database = utils.get_example_database()
+    table_exists = database.has_table_by_name(tbl_name)
+
+    if not only_metadata and (not table_exists or force):
+        data = get_example_data("energy.json.gz")
+        pdf = pd.read_json(data)
+        pdf = pdf.head(100) if sample else pdf
+        pdf.to_sql(
+            tbl_name,
+            database.get_sqla_engine(),
+            if_exists="replace",
+            chunksize=500,
+            dtype={"source": String(255), "target": String(255), "value": Float()},
+            index=False,
+            method="multi",
+        )
+     ...
+    
+def get_example_data(
+    """ 从 BASE_URL下载样例数据 """
+    filepath: str, is_gzip: bool = True, make_bytes: bool = False
+) -> BytesIO:
+    content = request.urlopen(f"{BASE_URL}{filepath}?raw=true").read()
+    if is_gzip:
+        content = zlib.decompress(content, zlib.MAX_WBITS | 16)
+    if make_bytes:
+        content = BytesIO(content)
+    return content
+    
+```
 
 
 
@@ -1163,7 +1389,8 @@ from superset.security import SupersetSecurityManager
 #  in subsequent PRs as things are migrated towards the factory pattern
 app: Flask = current_app
 cache = cache_manager.cache
-# LocalProxy本地代理数据：conf results_backend 数据缓存、缩略图缓存
+
+# LocalProxy本地代理数据：conf results_backend data_cache数据缓存、缩略图缓存
 conf = LocalProxy(lambda: current_app.config)
 get_feature_flags = feature_flag_manager.get_feature_flags
 get_manifest_files = manifest_processor.get_manifest_files
@@ -1342,14 +1569,223 @@ talisman = Talisman()
 
 ## superset-frontend 前端
 
+###  控制菜单 controls.jsx
+
+/superset-frontend/src/explorer/controls.jsx
+
+```jsx
+import React from 'react';
+import {
+  t,
+  getCategoricalSchemeRegistry,
+  getSequentialSchemeRegistry,
+  legacyValidateInteger,
+  validateNonEmpty,
+} from '@superset-ui/core';
+import { ColumnOption } from '@superset-ui/chart-controls';
+import { formatSelectOptions, mainMetric } from 'src/modules/utils';
+import { TIME_FILTER_LABELS } from './constants';
+
+const categoricalSchemeRegistry = getCategoricalSchemeRegistry();
+const sequentialSchemeRegistry = getSequentialSchemeRegistry();
+
+export const PRIMARY_COLOR = { r: 0, g: 122, b: 135, a: 1 };
+
+// groupby控制按键
+const groupByControl = {
+  type: 'SelectControl',
+  multi: true,
+  freeForm: true,
+  label: t('Group by'),
+  default: [],
+  includeTime: false,
+  description: t('One or many controls to group by'),
+  optionRenderer: c => <ColumnOption column={c} showType />,
+  valueRenderer: c => <ColumnOption column={c} />,
+  valueKey: 'column_name',
+  allowAll: true,
+  filterOption: ({ data: opt }, text) =>
+    (opt.column_name &&
+      opt.column_name.toLowerCase().indexOf(text.toLowerCase()) >= 0) ||
+    (opt.verbose_name &&
+      opt.verbose_name.toLowerCase().indexOf(text.toLowerCase()) >= 0),
+  promptTextCreator: label => label,
+  mapStateToProps: (state, control) => {
+    const newState = {};
+    if (state.datasource) {
+      newState.options = state.datasource.columns.filter(c => c.groupby);
+      if (control && control.includeTime) {
+        newState.options.push(timeColumnOption);
+      }
+    }
+    return newState;
+  },
+  commaChoosesOption: false,
+};
+```
+
+
+
 
 
 ## 前后端联动
 
-**1.前后端打包**： 
+**1. 前后端打包**： 
 
-* 后端打包setup.py 取的版本号来自  前端superset-frontend/package.son:  `python setup.py sdist`
+* 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
 * 前端生成的包 在superset/static目录： `npm run build`
+
+前后端分离不能彻底的原因
+
+1. 前端用了Jinja2模板，导航栏菜单是前后端一起来完成的。
+2. 前端生成包还不能单独部署到WEB服务器。
+
+
+
+### 导航菜单更改
+
+菜单更改 要涉及到 Jinja2模板的更改，appbuilder菜单权限的管控等。
+
+以菜单项 datasources 为例
+
+/superset/templates/appbuilder/navbar.html
+
+```html
+{% set menu = appbuilder.menu %}
+{% set app_icon_width = appbuilder.app.config['APP_ICON_WIDTH'] %}
+{% set logo_target_path = appbuilder.app.config['LOGO_TARGET_PATH'] or '/profile/{}/'.format(current_user.username) %}
+{% set root_path = logo_target_path if not logo_target_path.startswith('/') else '/superset' + logo_target_path if current_user.username is defined else '#'  %}
+
+{% block navbar %}
+  <div id="app-menu">
+    <div class="navbar navbar-static-top {{menu.extra_classes}}" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ root_path }}">
+            <img
+              width="{{ app_icon_width }}"
+              src="{{ appbuilder.app_icon }}"
+              alt="{{ appbuilder.app_name }}"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+```
+
+
+
+/superset/app.py  添加菜单
+
+```python
+appbuilder.add_link(
+    "New Menu",
+    label=__("New Menu"),
+    href="/superset/new",
+    icon="fa-cloud-upload",
+    category="New",
+    category_label=__("New"),
+    category_icon="fa-wrench",
+)
+```
+
+
+
+/superset/views/core.py  添加处理函数
+
+```python
+class Superset(BaseSupersetView):
+    """The base views for Superset!"""
+
+    logger = logging.getLogger(__name__)
+    
+    @has_access_api
+    @event_logger.log_this
+    @expose("/datasources/")  # 实际指向 /superset/datasources/
+    def datasources(self) -> FlaskResponse:
+        return self.json_response(
+            sorted(
+                [
+                    datasource.short_data
+                    for datasource in ConnectorRegistry.get_all_datasources(db.session)
+                    if datasource.short_data.get("name")
+                ],
+                key=lambda datasource: datasource["name"],
+            )
+        ) 
+```
+
+
+
+/superset-frontend/webpack.config.js  添加入口文件
+
+ ```js
+const config = {
+  node: {
+    fs: 'empty',
+  },
+  entry: {
+    theme: path.join(APP_DIR, '/src/theme.ts'),
+    preamble: PREAMBLE,
+    addSlice: addPreamble('/src/addSlice/index.tsx'),
+    explore: addPreamble('/src/explore/index.jsx'),
+    dashboard: addPreamble('/src/dashboard/index.jsx'),
+    sqllab: addPreamble('/src/SqlLab/index.tsx'),
+    crudViews: addPreamble('/src/views/index.tsx'),
+    menu: addPreamble('src/views/menu.tsx'),
+    profile: addPreamble('/src/profile/index.tsx'),
+    showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
+  },
+}    
+ ```
+
+
+
+superset-frontend/src/xxx/index.js  
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("app"));
+```
+
+
+
+
+
+## 依赖模块
+
+### 后端依赖 模板Jinja2
+
+
+
+
+
+### 前端依赖 @superset-ui
+
+前端依赖这个项目 superset-ui。
+
+
+
+
+
+## 本章参考
+
+* 知乎专栏-superset开发 https://zhuanlan.zhihu.com/c_100045590
+* superset二次开发及汉化、图标等 https://blog.csdn.net/qq_34521526/article/details/116708025
+* Superset 代码结构分析(前后端如何联动) https://zhuanlan.zhihu.com/p/163495199
+* 从前端角度记录superset二次开发 http://sunjl729.cn/2020/08/07/superset二次开发/
+* Superset安装及汉化 https://www.jianshu.com/p/c751278996f8
 
 
 
@@ -1382,7 +1818,7 @@ ERROR: Failed building wheel for python-geohash
 
 报错信息： command '[gcc](https://www.laozuo.org/tag/gcc)' failed with exit status 1
 
-原因：缺少openssl-devel库
+原因：缺少各种开发库如openssl-devel
 
 解决方法：
 
@@ -1408,13 +1844,13 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 原因：实际上是typing.py和标准库里重名了。
 
-解决方法1（推荐superset后续版本）：将superset/typing.py 改名 superset/superset_typing.py ，并修改相关多处导入 
+**解决方法1**（推荐superset后续版本）：将superset/typing.py 改名 superset/superset_typing.py ，并修改相关多处导入 
 
 ` from superset.typing 处改为 from superset.superset_typing
 
 重命名superset目录下的typing.py文件为superset_typing.py：该文件与python3自带的模块typing重名，不修改会导致项目运行报错。注意使用Shitf + F6选项来更新文件名，pycharm 会自动更新被引用位置的名字。
 
-**解决方法2**：在pycarm terminal定义`PYTHON_PATH`为当前脚本路径，则在pycharm termianl启动没问题。但在pycahrm run/debug方式启动仍然报错（估计是 PYTHON_PATH路径未在整个pycharm生效）。
+**解决方法2**：在pycarm terminal定义`PYTHONPATH`为当前脚本路径，则在pycharm termianl启动没问题。但在pycahrm run/debug方式启动仍然报错（估计是 PYTHONPATH路径未在整个pycharm生效）。
 
 
 
@@ -1446,6 +1882,8 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 
 
+
+
 # 参考资料
 
 **组件官网**
@@ -1456,12 +1894,8 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 **参考链接**
 
-*  知乎专栏-superset开发 https://zhuanlan.zhihu.com/c_100045590
 *  superset的缓存配置 https://blog.csdn.net/qq_33440665/article/details/65628551
 *  增加自定义数据源 https://zhuanlan.zhihu.com/p/179162221 
 *  利用Flask-AppBuilder 快速构建Web后台管理应用 https://blog.csdn.net/oxuzhenyi/article/details/77586500
 * Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
-* Superset 代码结构分析(前后端如何联动) https://zhuanlan.zhihu.com/p/163495199
-* 从前端角度记录superset二次开发 http://sunjl729.cn/2020/08/07/superset二次开发/
-* Superset安装及汉化 https://www.jianshu.com/p/c751278996f8
 
