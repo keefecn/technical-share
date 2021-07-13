@@ -2183,11 +2183,301 @@ Required-by:
 Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
 
 
-#### fab管理
+
+#### 源码结构
+
+表格 flask_appbuilder源码结构
+
+| 目录或文件     | 主要类或函数                                                 | 说明                    |
+| -------------- | ------------------------------------------------------------ | ----------------------- |
+| api            |                                                              |                         |
+| babel          | BabelManager LocaleView                                      | 依赖于flask_babel       |
+| charts         |                                                              | 图表                    |
+| models         |                                                              | 模型                    |
+| security       |                                                              | 安全                    |
+| static         | css datapicker fonts img js select2                          | 静态                    |
+| templates      | xx.html                                                      | Jinja2模板              |
+| tests          |                                                              | 测试                    |
+| translations   |                                                              | 翻译                    |
+| utils          |                                                              | 工具                    |
+| `__init__.py`  | BaseApi BaseModelApi ModelRestApi                            |                         |
+| actions.py     |                                                              |                         |
+| base.py        | AppBuilder dynamic_class_import                              |                         |
+| basemanager.py | BaseManager                                                  | 所有管理类的父类        |
+| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView |                         |
+| cli.py         | fab create_admin create_user...                              |                         |
+| console.py     |                                                              |                         |
+| const.py       |                                                              | 常量                    |
+| fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块 |
+| filters.py     | app_template_filter TemplateFilters                          |                         |
+| forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf         |
+| hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                |
+| menu.py        | MenuItem Menu MenuApi MenuApiManager                         |                         |
+| views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                |
+| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于Flask-WTF         |
 
 
 
-#### 路由&视图
+#### fab命令 cli.py
+
+fab命令：
+
+```shell
+$ flask fab --help
+Usage: flask fab [OPTIONS] COMMAND [ARGS]...
+
+  FAB flask group commands
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  babel-compile       Babel, Compiles all translations
+  babel-extract       Babel, Extracts and updates all messages marked for...
+  collect-static      Copies flask-appbuilder static files to your projects...
+  create-addon        Create a Skeleton AddOn (needs internet connection to...
+  create-admin        Creates an admin user
+  create-app          Create a Skeleton application (needs internet...
+  create-db           Create all your database objects (SQLAlchemy...
+  create-permissions  Creates all permissions and add them to the ADMIN...
+  create-user         Create a user
+  list-users          List all users on the database
+  list-views          List all registered views
+  reset-password      Resets a user's password
+  security-cleanup    Cleanup unused permissions from views and roles.
+  security-converge   Converges security deletes...
+  version             Flask-AppBuilder package version
+      1 [sig] bash 10116! get_proc_lock: Couldn't acquire sync_proc_subproc for(5,1), last 7, Win32 error 0
+   2249 [sig] bash 10116! proc_subproc: couldn't get proc lock. what 5, val 1
+```
+
+
+
+**命令示例 create-admin**
+
+```python
+import click
+from flask import current_app
+from flask.cli import with_appcontext
+
+@click.group()
+def fab():
+    """ FAB flask group commands"""
+    pass
+
+
+@fab.command("create-admin")
+@click.option("--username", default="admin", prompt="Username")
+@click.option("--firstname", default="admin", prompt="User first name")
+@click.option("--lastname", default="user", prompt="User last name")
+@click.option("--email", default="admin@fab.org", prompt="Email")
+@click.password_option()
+@with_appcontext
+def create_admin(username, firstname, lastname, email, password):
+    """
+        Creates an admin user
+    """
+    auth_type = {
+        AUTH_DB: "Database Authentications",
+        AUTH_OID: "OpenID Authentication",
+        AUTH_LDAP: "LDAP Authentication",
+        AUTH_REMOTE_USER: "WebServer REMOTE_USER Authentication",
+        AUTH_OAUTH: "OAuth Authentication",
+    }
+    click.echo(
+        click.style(
+            "Recognized {0}.".format(
+                auth_type.get(current_app.appbuilder.sm.auth_type, "No Auth method")
+            ),
+            fg="green",
+        )
+    )
+    # username排重
+    user = current_app.appbuilder.sm.find_user(username=username)
+    if user:
+        click.echo(click.style(f"Error! User already exists {username}", fg="red"))
+        return
+    # email排重
+    user = current_app.appbuilder.sm.find_user(email=email)
+    if user:
+        click.echo(click.style(f"Error! User already exists {username}", fg="red"))
+        return
+    role_admin = current_app.appbuilder.sm.find_role(
+        current_app.appbuilder.sm.auth_role_admin
+    )
+    # 创建管理员权限的用户
+    user = current_app.appbuilder.sm.add_user(
+        username, firstname, lastname, email, role_admin, password
+    )
+    if user:
+        click.echo(click.style("Admin User {0} created.".format(username), fg="green"))
+    else:
+        click.echo(click.style("No user created an error occured", fg="red"))
+
+```
+
+
+
+#### app构建 base.py
+
+菜单相关的操作 self.menu.xx()
+
+* add_separator  添加菜单分隔符，后面创建的菜单顶在这个menu内
+* add_link 给菜单项点击加链接
+* add_view 给菜单项关联上视图，会调用add_link
+
+菜单无关的操作
+
+* add_api同 add_view_no_menu  添加非菜单项的API视图
+
+```python
+from flask import Blueprint, current_app, url_for
+
+from . import __version__
+from .api.manager import OpenApiManager
+from .babel.manager import BabelManager
+
+from .filters import TemplateFilters
+from .menu import Menu, MenuApiManager
+from .views import IndexView, UtilView
+
+
+class AppBuilder(object):
+   baseviews = []
+    security_manager_class = None
+    # Flask app
+    app = None
+    # Database Session
+    session = None
+    # Security Manager Class
+    sm = None
+    # Babel Manager Class
+    bm = None
+    # OpenAPI Manager Class
+    openapi_manager = None
+    # dict with addon name has key and intantiated class has value
+    addon_managers = None
+    # temporary list that hold addon_managers config key
+    _addon_managers = None
+
+    menu = None
+    indexview = None
+
+    static_folder = None
+    static_url_path = None
+
+    template_filters = None
+
+    def __init__(
+        self,
+        app=None,
+        session=None,
+        menu=None,
+        indexview=None,
+        base_template="appbuilder/baselayout.html",
+        static_folder="static/appbuilder",
+        static_url_path="/appbuilder",
+        security_manager_class=None,
+        update_perms=True,
+    ):
+    	""" 定义app/session/menu/static/..."""   
+        self.baseviews = []
+        self._addon_managers = []
+        self.addon_managers = {}
+        self.menu = menu
+        self.base_template = base_template
+        self.security_manager_class = security_manager_class
+        self.indexview = indexview
+        self.static_folder = static_folder
+        self.static_url_path = static_url_path
+        self.app = app
+        self.update_perms = update_perms
+
+        if app is not None:
+            self.init_app(app, session)    
+            
+    def init_app(self, app, session):
+        """
+            Will initialize the Flask app, supporting the app factory pattern.
+
+            :param app:
+            :param session: The SQLAlchemy session
+
+        """
+        # 从配置中更新
+        ...
+        
+      	self._addon_managers = app.config["ADDON_MANAGERS"]
+        self.session = session
+        self.sm = self.security_manager_class(self)
+        self.bm = BabelManager(self)
+        # 菜单和菜单路由管理
+        self.openapi_manager = OpenApiManager(self)
+        self.menuapi_manager = MenuApiManager(self)
+        self._add_global_static()
+        self._add_global_filters()
+        app.before_request(self.sm.before_request)
+        # 增加2个视图：admin, addon
+        self._add_admin_views()
+        self._add_addon_views()
+        if self.app:	# 添加菜单权限
+            self._add_menu_permissions()
+        else:
+            self.post_init()
+        self._init_extension(app)        
+        
+        
+    def add_view_no_menu(self, baseview, endpoint=None, static_folder=None):
+        """
+            Add your views without creating a menu.
+			添加无菜单视图
+        :param baseview:
+            A BaseView type class instantiated.
+        """
+        baseview = self._check_and_init(baseview)
+        log.info(LOGMSG_INF_FAB_ADD_VIEW.format(baseview.__class__.__name__, ""))
+
+        if not self._view_exists(baseview):
+            baseview.appbuilder = self
+            self.baseviews.append(baseview)
+            self._process_inner_views()
+            if self.app:
+                self.register_blueprint(
+                    baseview, endpoint=endpoint, static_folder=static_folder
+                )
+                self._add_permission(baseview)
+        else:
+            log.warning(LOGMSG_WAR_FAB_VIEW_EXISTS.format(baseview.__class__.__name__))
+        return baseview
+    
+    def add_api(self, baseview):
+        """ 调用 add_view_no_menu """
+        return self.add_view_no_menu(baseview)     
+    
+    def add_link(self, name, href, icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None,):
+        """ 添加 菜单链接 """
+        self.menu.add_link(
+            name=name,
+            href=href,
+            icon=icon,
+            label=label,
+            category=category,
+            category_icon=category_icon,
+            category_label=category_label,
+            baseview=baseview,
+            cond=cond,
+        )
+        if self.app:
+            self._add_permissions_menu(name)
+            if category:
+                self._add_permissions_menu(category)        
+```
+
+
+
+
+
+#### 路由&视图 baseviews.py
 
 1. 路由扩展装饰器：expose expose_api
 
@@ -2330,6 +2620,136 @@ class BaseView(object):
 
 
 
+### flask_migrate
+
+```shell
+$ pip show flask_migrate
+Name: Flask-Migrate
+Version: 3.0.1
+Summary: SQLAlchemy database migrations for Flask applications using Alembic
+Home-page: http://github.com/miguelgrinberg/flask-migrate/
+Author: Miguel Grinberg
+Author-email: miguelgrinberg50@gmail.com
+License: MIT
+Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
+Requires: Flask-SQLAlchemy, alembic, Flask
+Required-by: apache-superset
+```
+
+
+
+`/flask_migrate/__init__.py`  
+
+全局定义了模板在templates目录，DB迁移文件在 migrations目录 
+
+```python
+from flask import current_app
+
+class _MigrateConfig(object):
+    def __init__(self, migrate, db, **kwargs):
+        self.migrate = migrate
+        self.db = db
+        self.directory = migrate.directory
+        self.configure_args = kwargs
+
+    @property
+    def metadata(self):
+        return self.db.metadata
+        
+        
+class Config(AlembicConfig):
+    def get_template_directory(self):
+        """ 获取template模板目录 """
+        package_dir = os.path.abspath(os.path.dirname(__file__))
+        return os.path.join(package_dir, 'templates')
+
+
+class Migrate(object):
+    """ 迁移对象类，生成的文件在migrations目录 """
+    def __init__(self, app=None, db=None, directory='migrations', **kwargs):
+        self.configure_callbacks = []
+        self.db = db
+        self.directory = str(directory)
+        self.alembic_ctx_kwargs = kwargs
+        if app is not None and db is not None:
+            self.init_app(app, db, directory)
+
+    def init_app(self, app, db=None, directory=None, **kwargs):    
+        """ """
+  
+
+def catch_errors(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        try:
+            f(*args, **kwargs)
+        except (CommandError, RuntimeError) as exc:
+            log.error('Error: ' + str(exc))
+            sys.exit(1)
+    return wrapped
+
+@catch_errors  # 异常时打印日志
+def upgrade(directory=None, revision='head', sql=False, tag=None, x_arg=None):
+    """Upgrade to a later version"""
+    config = current_app.extensions['migrate'].migrate.get_config(directory,
+                                                                  x_arg=x_arg)
+    command.upgrade(config, revision, sql=sql, tag=tag)        
+```
+
+
+
+#### db命令 cli.py
+
+```python
+import click
+from flask_migrate import upgrade as _upgrade
+
+@click.group()
+def db():  # db命令组
+    """Perform database migrations."""
+    pass
+
+# 示例命令：flask db upgrade
+@db.command()
+@click.option('-d', '--directory', default=None,
+              help=('Migration script directory (default is "migrations")'))
+@click.option('--sql', is_flag=True,
+              help=('Don\'t emit SQL to database - dump to standard output '
+                    'instead'))
+@click.option('--tag', default=None,
+              help=('Arbitrary "tag" name - can be used by custom env.py '
+                    'scripts'))
+@click.option('-x', '--x-arg', multiple=True,
+              help='Additional arguments consumed by custom env.py scripts')
+@click.argument('revision', default='head')
+@with_appcontext
+def upgrade(directory, sql, tag, x_arg, revision):
+    """Upgrade to a later version"""
+    _upgrade(directory, revision, sql, tag, x_arg)        
+```
+
+
+
+### flask_sqlalchemy
+
+依赖于 sqlalchemy.
+
+```shell
+$ pip show flask_sqlalchemy
+Name: Flask-SQLAlchemy
+Version: 2.5.1
+Summary: Adds SQLAlchemy support to your Flask application.
+Home-page: https://github.com/pallets/flask-sqlalchemy
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
+Requires: Flask, SQLAlchemy
+Required-by: Flask-Migrate, Flask-AppBuilder
+```
+
+
+
 ### flask_caching
 
 Flask-Caching支持多个缓存后端（Redis，Memcached，SimpleCache（内存中）或本地文件系统）。
@@ -2434,7 +2854,35 @@ class Babel(object):
         app.config.setdefault('BABEL_DEFAULT_TIMEZONE', self._default_timezone)
         app.config.setdefault('BABEL_DOMAIN', self._default_domain)
         if self._date_formats is None:
-            self._date_formats = self.default_date_formats.copy()        
+            self._date_formats = self.default_date_formats.copy()    
+      
+
+def gettext(string, **variables):
+    """Translates a string with the current locale and passes in the
+    given keyword arguments as mapping to a string formatting string.
+    ::
+        gettext(u'Hello World!')
+        gettext(u'Hello %(name)s!', name='World')
+    """
+    t = get_translations()
+    if t is None:
+        return string if not variables else string % variables
+    s = t.ugettext(string)
+    return s if not variables else s % variables
+_ = gettext
+ 
+    
+def lazy_gettext(string, **variables):
+    """ 晚获取，作为字符串时才翻译 """
+    return LazyString(gettext, string, **variables)    
+```
+
+使用示例：
+
+```python
+from flask_babel import gettext as __
+
+label = __('good man')
 ```
 
 
@@ -2458,6 +2906,7 @@ manager.add_command("print", Print())
 if __name__ == "__main__":
     manager.run()
 
+# ipython运行    
 python manage.py print
 > hello
 ```

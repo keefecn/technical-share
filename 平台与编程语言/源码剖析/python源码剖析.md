@@ -352,42 +352,43 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 
 表格 python标准库的标准模块列表
 
-| 目录或文件    | 子目录或文件                                                 | 功能                                                         |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| asyncio       |                                                              | 异步IO，python3.4实验引入，<br>python3.5新增关键字async await，<br>python3.6成为标准库。 |
-| collections   |                                                              |                                                              |
-| concurrent    |                                                              |                                                              |
-| ctypes        |                                                              |                                                              |
-| email         |                                                              |                                                              |
-| encodings     |                                                              |                                                              |
-| ensurepip     | `__ini__.py`::_run_pip()                                     | 模块用pip安装                                                |
-| html          |                                                              |                                                              |
-| http          |                                                              |                                                              |
-| idlelib       |                                                              |                                                              |
-| importlib     |                                                              |                                                              |
-| json          |                                                              |                                                              |
-| lib2to3       |                                                              |                                                              |
-| logging       |                                                              |                                                              |
-| mslib         |                                                              |                                                              |
-| mulitiprocess |                                                              |                                                              |
-| pydoc_data    |                                                              |                                                              |
-| sqlite        |                                                              |                                                              |
-| test          |                                                              |                                                              |
-| tkinter       |                                                              |                                                              |
-| unittest      |                                                              |                                                              |
-| urlib         |                                                              |                                                              |
-| venv          |                                                              |                                                              |
-| wsgiref       |                                                              |                                                              |
-| xml           |                                                              |                                                              |
-| xmlrpc        |                                                              |                                                              |
-| asynchat.py   |                                                              |                                                              |
-| asyncore.py   |                                                              |                                                              |
-| cmd.py        |                                                              |                                                              |
-| functools.py  | 方法：wraps update_wrapper <br>class: partial partialmethod  | 装饰器方式更新对象属性                                       |
-| getopt.py     |                                                              | 命令行参数解析                                               |
-| runpy.py      | run_module run_path                                          | 用模块名字定位和运行python代码                               |
-| 其它1         | dis.py datetime.py time.py                                   |                                                              |
-| 其它2         | lzma.py operation.py optparse.py pdb.py <br/>pickle.py platform.pypy_compile.py re.py <br/>queue.py shell.py socket.py sockserver.py<br/>ssl.py string.py subprocess.py tempfile.py<br/>this.py thread.py token.py traceback.py<br/>types.py uu.py uuid.py |                                                              |
+| 目录或文件    | 子目录或文件                                                 | 功能                               |
+| ------------- | ------------------------------------------------------------ | ---------------------------------- |
+| asyncio       |                                                              | 异步IO                             |
+| collections   | `__all__ = ['deque', 'defaultdict', 'namedtuple', 'UserDict', 'UserList', 'UserString', 'Counter', 'OrderedDict', 'ChainMap']` | 常用数据结构                       |
+| concurrent    | `__all__ = ( 'FIRST_COMPLETED', 'FIRST_EXCEPTION', 'ALL_COMPLETED', 'CancelledError', 'TimeoutError', 'BrokenExecutor', 'Future', 'Executor', 'wait', 'as_completed', 'ProcessPoolExecutor', 'ThreadPoolExecutor',)` | 并发 futures                       |
+| ctypes        |                                                              | 类型                               |
+| email         |                                                              |                                    |
+| encodings     |                                                              | 编码                               |
+| ensurepip     | `__ini__.py`::_run_pip()                                     | 模块用pip安装                      |
+| html          |                                                              |                                    |
+| http          |                                                              |                                    |
+| idlelib       |                                                              |                                    |
+| importlib     |                                                              |                                    |
+| json          |                                                              |                                    |
+| lib2to3       |                                                              | python2&3兼容库                    |
+| logging       |                                                              | 日志                               |
+| mslib         |                                                              |                                    |
+| mulitiprocess |                                                              |                                    |
+| pydoc_data    |                                                              |                                    |
+| sqlite        |                                                              |                                    |
+| test          |                                                              |                                    |
+| tkinter       |                                                              |                                    |
+| unittest      |                                                              |                                    |
+| urlib         |                                                              |                                    |
+| venv          |                                                              |                                    |
+| wsgiref       |                                                              |                                    |
+| xml           |                                                              |                                    |
+| xmlrpc        |                                                              |                                    |
+| abc.py        | abstractmethod ABC ABCMeta                                   | 抽象类Abstract Base Classes (ABCs) |
+| asynchat.py   |                                                              |                                    |
+| asyncore.py   |                                                              |                                    |
+| cmd.py        |                                                              |                                    |
+| functools.py  | 方法：wraps update_wrapper <br>class: partial partialmethod  | 装饰器方式更新对象属性             |
+| getopt.py     |                                                              | 命令行参数解析                     |
+| runpy.py      | run_module run_path                                          | 用模块名字定位和运行python代码     |
+| 其它1         | dis.py datetime.py time.py                                   |                                    |
+| 其它2         | lzma.py operation.py optparse.py pdb.py <br/>pickle.py platform.pypy_compile.py re.py <br/>queue.py shell.py socket.py sockserver.py<br/>ssl.py string.py subprocess.py tempfile.py<br/>this.py thread.py token.py traceback.py<br/>types.py uu.py uuid.py |                                    |
 
 >可导出符号：文件可对外导出的符号在 `__all__` 里查找，若无`__all__`则可以全部导出（不推荐）。
 
@@ -1283,10 +1284,31 @@ def __init__(self):
 
 ## 标准模块 asyncio
 
+python3.4实验引入，python3.5新增关键字async await，python3.6成为标准库。
+
 asyncio是Python 3.4 试验性引入的异步I/O框架（[PEP 3156](https://www.python.org/dev/peps/pep-3156)），提供了基于协程做异步I/O编写单线程并发代码的基础设施。其核心组件有事件循环（Event Loop）、协程(Coroutine）、任务(Task)、未来对象(Future)以及其他一些扩充和辅助性质的模块。
 在引入asyncio的时候，还提供了一个装饰器@asyncio.coroutine用于装饰使用了yield from的函数，以标记其为协程。但并不强制使用这个装饰器。
 
 python3.5增加了带async/await语法的协程（[PEP492](https://www.python.org/dev/peps/pep-0492/))。
+
+`asyncio.__init__.py`   导出模块
+
+```python
+__all__ = (base_events.__all__ +
+           coroutines.__all__ +
+           events.__all__ +
+           futures.__all__ +
+           locks.__all__ +
+           protocols.__all__ +
+           runners.__all__ +
+           queues.__all__ +
+           streams.__all__ +
+           subprocess.__all__ +
+           tasks.__all__ +
+           transports.__all__)
+```
+
+
 
 **示例1**
 

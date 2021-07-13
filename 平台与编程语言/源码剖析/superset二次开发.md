@@ -98,11 +98,13 @@ Find out more about how the roadmap is managed in [SIP (Superset Improvement Pro
 ## 术语
 
 *  Dashboard（仪表盘、看板）：由多个Slice组合而成。
-*  Slice（切片）：即数据集Datasets 或者 Chart。Slice就是配置好数据表的图表。一个Slice指向一个数据表和一种图表类型Chart。
-*  Table：数据表可以是数据源里的物理单表，也可以是多表关联查询而成的子查询虚拟表，另外也可导入CSV文件作为数据表。
-*  Datasource 数据源：支持11+种数据源和文件CSV格式。
+*  Slice（切片）：即Chart。Slice就是配置好数据表的图表。一个Slice指向一个数据表和一种图表类型Chart。
+*  Dataset 数据集：有时也称数据表table。数据表可以是数据源里的物理单表，也可以是多表关联查询而成的子查询虚拟表，另外也可导入CSV文件作为数据表。
+*  Datasource 数据源：有时也称数据库database。支持11+种数据源和文件CSV格式。
 
- 
+ 说明：从数据顺序流来看，先有数据源，再有数据集，再有Slice，然后若干个Slice组合在一起形成看板。
+
+
 
 # 2 用户篇
 
@@ -204,7 +206,7 @@ yarn run build
 
 
 
-## 2.2 支持的数据源
+## 2.2 支持数据源
 
 **Database dependencies** (superset 1.0)
 
@@ -252,7 +254,63 @@ yarn run build
 
 
 
-## 2.3 基本功能
+## 2.3 支持图表
+
+38+张图表
+
+| 图表类别 | 图表英文名         | 图表中文名         | 用途 | 支持情况 |
+| -------- | ------------------ | ------------------ | ---- | -------- |
+| 常用类   | line               | 线图               |      | √        |
+|          | histogram          | 直方图             |      | √        |
+|          | table              | 表                 |      | √        |
+|          | filter_box         | 筛选盒             |      | √        |
+|          | dist_bar           | 柱状图             |      | √        |
+|          | area               | 面积图             |      | √        |
+|          | pie                | 饼图               |      | √        |
+|          | pivot_table        | 透视表             |      | √        |
+|          | country_map        | 国家地图           |      | √        |
+|          | world_map          | 世界地图           |      | √        |
+| 时间序列 | bar                | 时间序列柱状图     |      | √        |
+|          | time_table         | 时间序列表         |      | √        |
+|          | time_pivot         | 时间序列周期轴     |      | √        |
+|          | echarts_timeseries | 时间序列           |      | √        |
+|          | compare            | 时间序列百分比变化 |      | √        |
+|          | cal_heatmap        | 时间热力图         |      | √        |
+|          | big_number_total   | 数字               |      | √        |
+| 趋势类   | big_number         | 数字和趋势线       |      | √        |
+|          | heatmap            | 热力图             |      | √        |
+|          | dual_line          | 双线图             |      | √        |
+|          | line_multi         | 多线图             |      | √        |
+|          |                    |                    |      | √        |
+| 复杂图   | rose               | 夜莺玫瑰图         |      | √        |
+|          | bubble             | 气泡图             |      | √        |
+|          | treemap            | 树状图             |      | √        |
+|          | box_plot           | 箱线图             |      | √        |
+|          | sunburst           | 旭日图             |      | √        |
+|          | sankey             | 桑基图             |      | √        |
+|          | word_cloud         | 词汇云             |      | √        |
+|          | mapbox             | 地图盒             |      | √        |
+|          | partition          | 分区图             |      | √        |
+|          | event_flow         | 事件流             |      | √        |
+|          | deck_path          | 平面路径图         |      | √        |
+|          | directed_force     | 力导向图           |      | √        |
+|          | bullet             | 子弹图             |      | √        |
+|          | paired_ttest       | paired_ttest       |      | √        |
+|          | para               | 平行坐标           |      | √        |
+|          | chord              | 弦图               |      | √        |
+|          | horizon            | 范围图             |      | √        |
+| deck图   | deck_polygon       | 多边形装饰         |      |          |
+|          | deck_arc           | 3D路径图           |      |          |
+|          | deck_screengrid    | deck_screengrid    |      |          |
+|          | deck_scatter       | 散射图             |      |          |
+|          | deck_hex           | deck_hex           |      |          |
+|          | deck_multi         | deck_multi         |      |          |
+|          | deck_grid          | deck_grid          |      |          |
+|          | deck_geojson       | deck_geojson       |      |          |
+
+
+
+## 2.4 基本功能
 
 数据流向： 数据源 - 数据表 -- 切片/图表 -- 看板
 
@@ -297,28 +355,221 @@ yarn run build
 路由映射方法 
 
 * 主要使用 flask_appbuild 模块提供的装饰器:  expose 和 expose_api
-  * expose 用于网页,  返回HTML。如/xx
+  * expose   路由会在父路由基础上添加，如 expose('expore_json')，实际上指向 /superset/explore_json
   * （没用到）expose_api 用于API，返回JSON。如/api/v1/xxx
-* route flask原生路由，仅用于 /healthy
-* /api/
+* xxAPP.route:  flask原生路由，仅用于 /healthy
+* RestApi的路由前缀：`{route_base}`  或者 `/api/{version}/{resource_name}`  ，如 /api/v1/chart/
+* ModelView的路由前缀：/superset/{route_base}，如 /superset/explore_json
+* 路由返回结果有二种，一是返回JSON格式；二是HTML，用到模板。
 
-superset API实现在各个目录下的api.py
+API实现： superset API实现在各个目录下的api.py
+
+备注：下面查询参数里的字符串 xxx表示 某个具体的查询字符串。
 
 
 
-### 图表（模型） Chart
+表格 superset API列表
+
+| API类别            | API路径                     | API说明 |
+| ------------------ | --------------------------- | ------- |
+| Annotaion Layers   | /annotaion_layers/          |         |
+| AsyncEventsRestApi | /async_event/               |         |
+| CacheRestApi       | /cachekey/invalidate        |         |
+| Charts             | /chart/                     |         |
+| CSS Templates      | /css_template/              |         |
+| Dashboards         | /dashboard/                 |         |
+| Database           | /database/                  |         |
+| Datasets           | /dataset/                   |         |
+| LogRestApi         | /log/                       |         |
+| Menu               | /menu/                      |         |
+| OpenApi            | /openapi/{version}/_openapi |         |
+| Queries            | /query/                     |         |
+| Report Schedules   | /report/                    |         |
+| Security           | /security/                  |         |
+
+
+
+### explore系列
+
+/superset/models/xx.py
+
+这个目录下生成的路由都是以 /superset开头的。
+
+
+
+### 图表 Chart列表页
 
 此页是为了展示 模型列表。
 
-![image-20210702145252701](E:\mydocs\repos\technical-share\media\code\code_superset_001.png)
+![image-20210702145252701](..\..\media\code\code_superset_001.png)
 
-/chart/list/?pageIndex=0&sortColumn=changed_on_delta_humanized&sortOrder=desc&viewMode=table
+* 图表列表页：/chart/list/?pageIndex=0&sortColumn=changed_on_delta_humanized&sortOrder=desc&viewMode=table
+
+* 图表页：/superset/explore/?form_data=%7B%22slice_id%22%3A%20464%7D
+
+表格 图表列表页所包括的接口
+
+| 接口名                            | 用途           | 详细参数 GET方法                                             | 参数说明                                    | 响应结果                                                     |
+| --------------------------------- | -------------- | ------------------------------------------------------------ | ------------------------------------------- | ------------------------------------------------------------ |
+| /api/v1/chart/related/owners      | 修改人<br>     | ?q=()                                                        |                                             | {"count":3,"result":[{"text":"adminuser","value":1},{"text":"","value":2},{"text":"","value":3}]} |
+| /api/v1/chart/related/created_by  | 创建人         | ?q=()                                                        |                                             | 同上                                                         |
+| /api/v1/dataset/                  | 数据集列表     | ?q=(columns:!(datasource_name,datasource_id),keys:!(none),order_column:table_name,order_direction:asc) | order_column排序列，order_direction排序方向 |                                                              |
+| /api/v1/chart/                    | 图表列表       | ?q=(order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25) | page, page_size                             |                                                              |
+|                                   | 图表列表的过滤 | ?q=(filters:!((col:slice_name,opr:chart_all_text,value:xxx)),) | value                                       |                                                              |
+| /api/v1/chart/_info               | 权限信息       | ?q=(keys:!(permissions))                                     |                                             | {"permissions":["can_write","can_read"]}                     |
+| /api/v1/chart/favorite_status/    | 收藏状态       | ?q=xxxxxx                                                    |                                             | {"result":[{"id":464,"value":false},{"id":438,"value":false}]} |
+|                                   |                |                                                              |                                             |                                                              |
+| /superset/explore/                | 图表入口       | ?form_data=%7B%22slice_id%22%3A%20464%7D                     |                                             |                                                              |
+| /superset/explore/table/<dbs_id>/ | 数据集入口     |                                                              |                                             |                                                              |
+| /superset/profile/<user>          | 修改人入口     |                                                              |                                             |                                                              |
+
+说明：查询参数的语法类似 ES查询语法。
+
+示例：**图表列表/api/v1/chart/  的响应结果 JSON**
+
+```json
+{
+  "count": 0,
+  "description_columns": {
+    "column_name": "A Nice description for the column"
+  },
+  "ids": [
+    "string"
+  ],
+  "label_columns": {
+    "column_name": "A Nice label for the column"
+  },
+  "list_columns": [
+    "string"
+  ],
+  "list_title": "List Items",
+  "order_columns": [
+    "string"
+  ],
+  "result": [
+    {
+      "cache_timeout": 0,
+      "changed_by": {
+        "first_name": "string",
+        "last_name": "string"
+      },
+      "created_by": {
+        "first_name": "string",
+        "id": 0,
+        "last_name": "string"
+      },
+      "datasource_id": 0,
+      "datasource_type": "string",
+      "description": "string",
+      "id": 0,
+      "owners": {
+        "first_name": "string",
+        "id": 0,
+        "last_name": "string",
+        "username": "string"
+      },
+      "params": "string",
+      "slice_name": "string",
+      "table": {
+        "default_endpoint": "string",
+        "table_name": "string"
+      },
+      "viz_type": "string"
+    }
+  ]
+}
+```
 
 
 
+### 看板 Dashboard列表页
+
+* 看板列表页 /dashboard/list/?pageIndex=0&sortColumn=changed_on_delta_humanized&sortOrder=desc&viewMode=table
+* 看板页 /superset/dashboard/<id>/?form_data=%7B%22slice_id%22%3A%20464%7D
+
+表格 看板列表页所包括的接口
+
+| 接口名                               | 用途           | 详细参数 GET方法                                             | 参数说明                                    | 响应结果                                                     |
+| ------------------------------------ | -------------- | ------------------------------------------------------------ | ------------------------------------------- | ------------------------------------------------------------ |
+| /api/v1/dashboard/related/owners     | 修改人<br>     | ?q=()                                                        |                                             | {"count":3,"result":[{"text":"adminuser","value":1},{"text":"","value":2},{"text":"","value":3}]} |
+| /api/v1/dashboard/related/created_by | 创建人         | ?q=()                                                        |                                             | 同上                                                         |
+| /api/v1/dataset/                     | 数据集列表     | ?q=(columns:!(datasource_name,datasource_id),keys:!(none),order_column:table_name,order_direction:asc) | order_column排序列，order_direction排序方向 |                                                              |
+| /api/v1/dashboard/                   | 图表列表       | ?q=(order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25) | page, page_size                             |                                                              |
+|                                      | 图表列表的过滤 | ?q=(filters:!((col:slice_name,opr:chart_all_text,value:%E6%97%B6%E9%97%B4)),) | value                                       |                                                              |
+| /api/v1/dashboard/_info              | 权限信息       | ?q=(keys:!(permissions))                                     |                                             | {"permissions":["can_write","can_read"]}                     |
+| /api/v1/dashboard/favorite_status/   | 收藏状态       | ?q=xxxxxx                                                    |                                             | {"result":[{"id":464,"value":false},{"id":438,"value":false}]} |
+|                                      |                |                                                              |                                             |                                                              |
+| /superset/dashboard/<id>/            | 看板入口       | ?form_data=%7B%22slice_id%22%3A%20464%7D                     |                                             |                                                              |
+
+说明：看板和图表 5个RESTFUL接口类似（将chart替换成相应的dashboard）：创建人、修改人、权限信息、列表、收藏状态。
 
 
-### 看板 Dashboard
+
+### 新增图表页
+
+表格 看板列表页所包括的接口
+
+| 接口名                  | 用途         | 详细参数 GET方法                                             | 参数说明                  | 响应结果                                                     |
+| ----------------------- | ------------ | ------------------------------------------------------------ | ------------------------- | ------------------------------------------------------------ |
+| /api/v1/time_range/     | 时间区域     | ?q=%E5%91%A8                                                 | 周/                       | {"result": {"since": "", "until": "2021-07-12T00:00:00", "timeRange": "\u5468"}} |
+| /api/v1/chart/<id>      | 图表配置信息 |                                                              |                           |                                                              |
+| /api/v1/dataset/        | 数据集列表   | ?q=(order_column:changed_on_delta_humanized,order_direction:asc,page:0,page_size:20) |                           |                                                              |
+| /api/v1/dataset/_info   | 权限信息     | ?q=(keys:!(permissions))                                     |                           |                                                              |
+|                         |              |                                                              |                           |                                                              |
+| /superset/explore_json/ | 数据查询结果 | /?form_data=%7B%22slice_id%22%3A464%7D&result=true           | form_data, result是否展示 |                                                              |
+|                         |              |                                                              |                           |                                                              |
+
+说明：
+
+示例：**数据集查询/api/v1/dataset/ 的响应结果 JSON**
+
+```json
+{
+  "count": 1,
+  "description_columns": {
+    "column_name": "A Nice description for the column"
+  },
+  "ids": [
+    "string"
+  ],
+  "label_columns": {
+    "column_name": "A Nice label for the column"
+  },
+  "list_columns": [
+    "string"
+  ],
+  "list_title": "List Items",
+  "order_columns": [
+    "string"
+  ],
+  "result": [
+    {
+      "changed_by": {
+        "first_name": "string",
+        "username": "string"
+      },
+      "database": {
+        "database_name": "string",
+        "id": 0
+      },
+      "default_endpoint": "string",
+      "extra": "string",
+      "id": 0,
+      "owners": {
+        "first_name": "string",
+        "id": 0,
+        "last_name": "string",
+        "username": "string"
+      },
+      "schema": "string",
+      "sql": "string",
+      "table_name": "string"
+    }
+  ]
+}
+```
+
+
 
 
 
@@ -525,17 +776,26 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 ### 根路由定制（改动复杂）
 
-路由部分主要是由 flask_appbuilder 来完成的。
+superset路由涉及主要分二部分：
+
+* fab后台管理：后台管理包括安全权限这块完全由flask_appbuilder来单独实现，因此这块路由都要在 flask_appbuiulder模块修改。
+
+* superset本身功能：区分HTML页面和RestAPI，相应修改。
 
 修改项：修改flask_appbuilder的各种view的route_base，以及superset JS里链接跳转的硬编码部分。
 
 ```shell
-flask_appbuilder/
+# 1.flask_appbuilder
+/flask_appbuilder/
     modified:  babel/views.py
     modified:  baseviews.py
     modified:  const.py
     modified:  security/views.py
     modified:  views.py
+    
+# 2.superset
+/superset/app.py		# 修改首页路由
+/superset/views/xx.py	# 修改各视图类的route_base
 ```
 
 
@@ -578,7 +838,7 @@ flask_appbuilder/
 | ab_premission | 权限     | 如can list/can del等保存在此表 |
 | ab_view_menu  | 被管对象 | 菜单、视图、数据源等等。       |
 
-备注：权限和被管对象通过表ab_permission_view关联起来。
+备注：权限和被管对象通过表`ab_permission_view`关联起来。
 
  
 
@@ -634,7 +894,7 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 
 
 
-superset/config.py  （一般不修改这个文件）
+/superset/config.py  （一般不修改这个文件）
 
 ```python
 from flask import Blueprint
@@ -706,7 +966,7 @@ AUTH_TYPE = AUTH_DB
 
 
 
- superset/superset_config.py  
+ /superset/superset_config.py  
 
 用户个性化部分修改示例：
 
@@ -736,7 +996,7 @@ ENABLE_CORS = True
 # SESSION_COOKIE_SECURE = False  # Prevent cookie from being transmitted over non-tls?
 # SESSION_COOKIE_SAMESITE = "None"  # One of [None, 'None', 'Lax', 'Strict']
 
-# Add endpoints that need to be exempt from CSRF protection
+# Add endpoints that need to be exempt from CSRF protection 需要CSRF保持的API
 WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log", "superset.charts.api.data",
                         "superset.views.core.explore_json"]
 
@@ -745,10 +1005,10 @@ WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log", "superset.charts.api.data",
 # and it's more secure to turn it off in production settings.
 SHOW_STACKTRACE = True
 
-# Will allow user self registration
+# Will allow user self registration 是否允许用户注册
 AUTH_USER_REGISTRATION = True
 
-# The default user self registration role
+# The default user self registration role 缺省用户角色
 AUTH_USER_REGISTRATION_ROLE = "Gamma"
  ```
 
@@ -851,13 +1111,9 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 **页面删除操作注意事项**
 
 *  删除数据库会同时删除表，删除表不会影响到数据库。数据源删除后，看板和图板所关联的数据源将指向为None.
-*  删除图表会影响到看板，删除看板不会影响到图片。
+*  删除图表会影响到看板，删除看板不会影响到图表。
 
  
-
-## 日志
-
-* DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志文件（superset.log）。依赖环境变量SUPERSET_HOME，缺省~/.superset
 
 
 
@@ -906,16 +1162,21 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 | 模块                   | 次模块或命令                 | *说明*                                                       |
 | ---------------------- | ---------------------------- | ------------------------------------------------------------ |
 | Flask  Appbuilder(fab) | `superset fab create-admin`  | 创建角色和管理员用户。1.x用superset fab替换fabmanger。<br>共创建8张表，以ab_开头。  user  -> role -> premission_view-> (permission, view_menu) |
-| superset meta          | `superset db upgrade`        | 数据库初始化（版本更新时也要执行此命令）。<br>共创建24张表。 |
-|                        | datasources:  druid/database | 数据源包括两种组织形式：druid和database  <br>druid:  cluster - datasources - columns/metrics  <br>database：dbs - tables -  tablecolumn/sql_metrics |
-|                        | views:    slice/dashboard    | slice：slices slice_user  slice_dashboard <br>dashboard:  dashboard dashboard_user |
+| superset meta          | `superset db upgrade`        | 数据库初始化（版本更新时也要执行此命令）。<br>共创建24张表。v1.x增加到47张表。 |
+|                        | datasources:  druid/database | 共8张。数据源包括两种组织形式：druid 和 database  <br>druid:  cluster - datasources - columns/metrics  <br>database：dbs - tables -  tablecolumn/sql_metrics |
+|                        | views:    slice/dashboard    | 共7张。<br>slice：slices slice_user  slice_dashboard <br>dashboard:  dashboard dashboard_user |
 |                        | css/template                 | css_templates annotation annotation_layer                    |
-|                        | sql                          | query  saved_query                                           |
+|                        | sql                          | query  saved_query sql_observations sqltable_user            |
+|                        | report/alert                 | report_execute_log report_recipient report_schedule report_schedule_user alert_logs alert_owner alerts |
 |                        | other                        | KV,  url(短网址）  favstar logs                              |
-|                        | 1.x新增7张表                 | access_request user_attribute sqltable_user<br>dashboard_email_schedules slice_email_schedules <br>tab_state tagged_object |
+|                        | 1.x新增表01                  | access_request user_attribute  dashboard_email_schedules <br>slice_email_schedules tab_state tagged_object |
+|                        | 1.x新增表02                  | dynamic_plugin rls_filter_roles rls_filter_tables row_level_security_filters |
 | CSV文件                |                              | 每个CSV文件会转成元数据库里的一张表。  database为main        |
+| load-exampels          | superset load-examples       | 样例数据集会生成很多张表，大概是17张表。最好是加载样例到另外一个数据库。 |
 
-备注：1. fab通过给role授权数据源(view_menu)和权项限(persionn)访问权限来控制可访问的view，粒度从数据源级别到数据源内的list/add/show/del/edit权限。
+备注：
+
+1. fab通过给role授权数据源(view_menu)和权项限(persionn)访问权限来控制可访问的view，粒度从数据源级别到数据源内的list/add/show/del/edit权限。
 
 2. 通过修改视图的Owner来管理修改权限。
 
@@ -980,7 +1241,7 @@ Required-by:
 
 
 
- ## 源码结构 
+ ## 6.1 源码结构 
 
 表格  项目顶层目录结构
 
@@ -1004,40 +1265,40 @@ Required-by:
 
 表格  源码后端目录superset里的结构
 
-| 目录或文件        | 次模块                             | 简介                                                         |
-| ----------------- | ---------------------------------- | ------------------------------------------------------------ |
-| annotation_layers |                                    | 锚点层                                                       |
-| (弃) assets       |                                    | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
-| async_events      |                                    | 异步事件                                                     |
-| cachekeys         |                                    | 缓存键K-V                                                    |
-| charts            |                                    | 图表                                                         |
-| commands          |                                    | 支持的命令                                                   |
-| common            |                                    |                                                              |
-| connectors        |                                    | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
-| db_engines        |                                    | DB引擎                                                       |
-| dao               |                                    | 数据访问                                                     |
-| dashboards        |                                    | 看板                                                         |
-| databases         |                                    | 数据库dbs/数据源                                             |
-| datasets          |                                    | 数据集                                                       |
-| db_engines        |                                    | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
-| db_engine_spec    |                                    | 同上                                                         |
-| examples          |                                    | 示例数据，用 superset load-examples加载，需从网络下载        |
-| migrations        |                                    | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
-| models            |                                    | 存放项目的model，如果要修改字段，优先到这里寻找。            |
-| quaries           |                                    | 查询SQL相关                                                  |
-| reports           |                                    |                                                              |
-| security          |                                    | 修改权限入口                                                 |
-| sql_validators    |                                    | SQL验证                                                      |
-| **static**        | assets                             | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
-| tasks             |                                    | celery 任务脚本                                              |
-| **templates**     | appbuilder, email, slack, superset | JinJa2模板目录，几乎项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
-| translations      | zh en ...                          | 翻译文件，只需修改字段对应的名称。                           |
-| utils             |                                    | 工具                                                         |
-| views             | health.py  core.py                 | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
-| app.py            |                                    | WEB实例初始化，也是调试入口                                  |
-| cli.py            |                                    | superset命令                                                 |
-| viz.py            |                                    | 所有得图表类型 后端数据处理入口                              |
-| extensions.py     |                                    | 定义 celery， logger 等中间件                                |
+| 目录或文件        | 次模块                                       | 简介                                                         |
+| ----------------- | -------------------------------------------- | ------------------------------------------------------------ |
+| annotation_layers |                                              | 锚点层                                                       |
+| (弃) assets       |                                              | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
+| async_events      |                                              | 异步事件                                                     |
+| cachekeys         |                                              | 缓存键K-V                                                    |
+| charts            | api.py dao.py filters.py schemas.py          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
+| commands          | BaseCommand ExportModelsCommand              | 支持的命令                                                   |
+| common            |                                              |                                                              |
+| connectors        |                                              | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
+| db_engines        |                                              | DB引擎                                                       |
+| dao               | BaseDAO DAOException                         | 数据访问基类、数据访问异常类                                 |
+| dashboards        |                                              | 看板。结构类似图表。                                         |
+| databases         |                                              | 数据库dbs/数据源。结构类似图表。                             |
+| datasets          |                                              | 数据集。结构类似图表。                                       |
+| db_engines        |                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
+| db_engine_spec    |                                              | 同上                                                         |
+| examples          |                                              | 17个示例数据集，用 superset load-examples加载，需从网络下载  |
+| migrations        |                                              | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
+| models            |                                              | 存放项目的model，如果要修改字段，优先到这里寻找。            |
+| quaries           |                                              | 查询SQL相关。结构类似图表。                                  |
+| reports           |                                              | 报表相关。结构类似图表。                                     |
+| security          | SupersetSecurityManager  DBSecurityException | 安全权限管理                                                 |
+| sql_validators    |                                              | SQL验证                                                      |
+| **static**        | assets                                       | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
+| tasks             |                                              | celery 任务脚本                                              |
+| **templates**     | appbuilder, email, slack, superset           | JinJa2模板目录，几乎项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
+| translations      | zh en ...                                    | 翻译文件，只需修改字段对应的名称。                           |
+| utils             |                                              | 工具                                                         |
+| views             | health.py  core.py                           | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
+| app.py            | create_app                                   | WEB实例初始化，也是调试入口                                  |
+| cli.py            |                                              | superset命令                                                 |
+| viz.py            | BaseViz NVD3Viz viz_types                    | 可视化图表类型的基类及派生类。viz_sip38.py是替换版本。       |
+| extensions.py     |                                              | 定义 celery， logger 等中间件                                |
 
  >superset后端用到的组件主要有：flask_appbuilder, flask_sqlalchemy, Jinja2, pandas
 
@@ -1056,6 +1317,7 @@ Required-by:
 |                   | explore        | 菜单数据探索 生成图表的表单项相关。<br>controls.jsx 表单项列表 |
 |                   | filters        | 过滤器                                                       |
 |                   | visualizations | 可视化图表类型实现                                           |
+|                   | views          | 各个页面的控制逻辑，如/welcome/是首页                        |
 |                   | ...            |                                                              |
 | branding          |                | 存放项目logo                                                 |
 | cypress-base      | cypress        | UI自动化测试框架                                             |
@@ -1067,7 +1329,7 @@ Required-by:
 
 
 
-## 组件概述 
+## 6.2 组件概述 
 
 **依赖组件**：
 
@@ -1088,8 +1350,8 @@ Required-by:
 **整体流程**
 
 1. npm run dev --将每个模块打包成一个单独的js文件（在webpack.config.js中配置）
-2. superset runserver  --启动服务
-3. 浏览器登录
+2. superset run  --启动http服务
+3. 浏览器登录  --记录cookie
 4. 点击某一菜单
 5. wsgi 将请求重定向到python侧，执行views/core.py中的对应函数
 6. core.py中的函数用render_template构造html页面（render_template的参数entry用户指定所需的js文件，此文件即npm打包而成的单一js）
@@ -1103,9 +1365,386 @@ Required-by:
 
 
 
+### 前后端联动
+
+**1. 前后端打包**： 
+
+* 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
+* 前端生成的包 在superset/static目录： `npm run build`
+
+前后端分离不能彻底的原因
+
+1. 前端用了Jinja2模板，导航栏菜单是前后端一起来完成的。
+2. 前端生成包还不能单独部署到WEB服务器。
 
 
-## 命令行处理 cli.py
+
+#### 扩展 extensions.py
+
+* /superset/extensions.py 包括ResultsBackendManager和UIManifestProcessor，UIManifestProcessort管理前端脚本文件（用到mainfest.json)。
+* /superset/static/assets/manifest.json  前端脚本文件信息
+
+/superset/extensions.py
+
+```python
+import json
+import os
+from typing import Any, Callable, Dict, List, Optional
+
+import celery
+from cachelib.base import BaseCache
+from flask import Flask
+from flask_appbuilder import AppBuilder, SQLA
+from flask_migrate import Migrate
+from flask_talisman import Talisman
+from flask_wtf.csrf import CSRFProtect
+from werkzeug.local import LocalProxy
+
+from superset.utils.async_query_manager import AsyncQueryManager
+from superset.utils.cache_manager import CacheManager
+from superset.utils.feature_flag_manager import FeatureFlagManager
+from superset.utils.machine_auth import MachineAuthProviderFactory
+
+class ResultsBackendManager:
+    """ 后端结果管理 """
+    def __init__(self) -> None:
+        self._results_backend = None	#后端结果存储
+        self._use_msgpack = False		#后端消息队列
+
+    def init_app(self, app: Flask) -> None:
+        self._results_backend = app.config["RESULTS_BACKEND"]
+        self._use_msgpack = app.config["RESULTS_BACKEND_USE_MSGPACK"]
+
+    @property
+    def results_backend(self) -> Optional[BaseCache]:
+        return self._results_backend
+
+    @property
+    def should_use_msgpack(self) -> bool:
+        return self._use_msgpack
+
+    
+class UIManifestProcessor:
+    """ UI主文件处理器 """
+    def __init__(self, app_dir: str) -> None:
+        self.app: Optional[Flask] = None
+        self.manifest: Dict[str, Dict[str, List[str]]] = {}
+        self.manifest_file = f"{app_dir}/static/assets/manifest.json"
+
+    def init_app(self, app: Flask) -> None:
+        self.app = app
+        # Preload the cache
+        self.parse_manifest_json()
+        
+   def parse_manifest_json(self) -> None:
+        try:	# 读取json文件，取值entrypoints
+            with open(self.manifest_file, "r") as f:
+                full_manifest = json.load(f)
+                self.manifest = full_manifest.get("entrypoints", {})
+        except Exception:  # pylint: disable=broad-except
+            pass
+        
+        
+APP_DIR = os.path.dirname(__file__)
+appbuilder = AppBuilder(update_perms=False)
+# 异步查询管理、缓存管理
+async_query_manager = AsyncQueryManager()  
+cache_manager = CacheManager()
+celery_app = celery.Celery()
+csrf = CSRFProtect()
+db = SQLA()
+# 本地代理LocalProxy：事件日志、安全管理
+_event_logger: Dict[str, Any] = {}
+event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
+feature_flag_manager = FeatureFlagManager()
+machine_auth_provider_factory = MachineAuthProviderFactory()
+manifest_processor = UIManifestProcessor(APP_DIR)
+migrate = Migrate()
+results_backend_manager = ResultsBackendManager()
+security_manager = LocalProxy(lambda: appbuilder.sm)
+talisman = Talisman()    
+```
+
+
+
+**/superset/static/assets/manifest.json  前端脚本配置**
+
+前端构建时生成，罗列了前端用到的静态文件js/css。entrypoints是入口。
+
+```json
+{
+  "app": "superset",
+  "entrypoints": {
+    "theme": {
+      "css": [
+        "/static/assets/theme.d2b6a75182b640fe1d54.entry.css"
+      ],
+      "js": [
+        "/static/assets/theme.d2b6a75182b640fe1d54.entry.js"
+      ]
+    },
+    "preamble": {
+      "css": [],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/dc683cbf32f0aef035a1.chunk.js",
+        "/static/assets/preamble.5e6f4a5179518c022dee.entry.js"
+      ]
+    },
+    "addSlice": {
+      "css": [
+        "/static/assets/addSlice.d41169c29a209c310582.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/1892de5deadee276f4a2.chunk.js",
+        "/static/assets/b10f92a903cc38d8427a.chunk.js",
+        "/static/assets/addSlice.d41169c29a209c310582.entry.js"
+      ]
+    },
+    "explore": {
+      "css": [
+        "/static/assets/explore.3d9deffb55fed5cd873e.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/1892de5deadee276f4a2.chunk.js",
+        "/static/assets/b10f92a903cc38d8427a.chunk.js",
+        "/static/assets/explore.3d9deffb55fed5cd873e.entry.js"
+      ]
+    },
+    "dashboard": {
+      "css": [
+        "/static/assets/dashboard.ed6e450574e9c2b600ae.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/1892de5deadee276f4a2.chunk.js",
+        "/static/assets/b10f92a903cc38d8427a.chunk.js",
+        "/static/assets/dashboard.ed6e450574e9c2b600ae.entry.js"
+      ]
+    },
+    "sqllab": {
+      "css": [
+        "/static/assets/sqllab.3bf302f60a7d158e1af2.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/dc683cbf32f0aef035a1.chunk.js",
+        "/static/assets/sqllab.3bf302f60a7d158e1af2.entry.js"
+      ]
+    },
+    "crudViews": {
+      "css": [
+        "/static/assets/crudViews.25fc76dd77af13aa3e2d.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/1892de5deadee276f4a2.chunk.js",
+        "/static/assets/b10f92a903cc38d8427a.chunk.js",
+        "/static/assets/crudViews.25fc76dd77af13aa3e2d.entry.js"
+      ]
+    },
+    "menu": {
+      "css": [],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/dc683cbf32f0aef035a1.chunk.js",
+        "/static/assets/menu.8f8be0ac12b9b0b96090.entry.js"
+      ]
+    },
+    "profile": {
+      "css": [
+        "/static/assets/profile.be686dc9c5bf9d7c0496.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/dc683cbf32f0aef035a1.chunk.js",
+        "/static/assets/profile.be686dc9c5bf9d7c0496.entry.js"
+      ]
+    },
+    "showSavedQuery": {
+      "css": [
+        "/static/assets/showSavedQuery.852d0a2e94dc0d585568.entry.css"
+      ],
+      "js": [
+        "/static/assets/62972ce831e91d2dca0d.chunk.js",
+        "/static/assets/showSavedQuery.852d0a2e94dc0d585568.entry.js"
+      ]
+    }
+  }
+}
+```
+
+
+
+#### 导航栏布局
+
+导航栏指 页面顶层的一排导航菜单项，导航栏进入到各个页面都保持不变
+
+导航栏： `导航左侧navbar   菜单    导航`
+
+* 导航左侧 /superset/templates/appbuilder/navbar.html
+* 菜单
+* 导航右侧 /superset/templates/appbuilder/navbar_right.html
+
+/superset/templates/appbuilder/navbar.html  
+
+```html
+{% set menu = appbuilder.menu %}
+{% set app_icon_width = appbuilder.app.config['APP_ICON_WIDTH'] %}
+{% set logo_target_path = appbuilder.app.config['LOGO_TARGET_PATH'] or '/profile/{}/'.format(current_user.username) %}
+{% set root_path = logo_target_path if not logo_target_path.startswith('/') else '/superset' + logo_target_path if current_user.username is defined else '#'  %}
+
+{% block navbar %}
+  <div id="app-menu">
+    <div class="navbar navbar-static-top {{menu.extra_classes}}" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ root_path }}">
+            <img
+              width="{{ app_icon_width }}"
+              src="{{ appbuilder.app_icon }}"
+              alt="{{ appbuilder.app_name }}"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+```
+
+
+
+/superset/templates/appbuilder/navbar.html  
+
+```html
+
+```
+
+
+
+#### 导航菜单
+
+菜单更改 要涉及到 Jinja2模板的更改，appbuilder菜单权限的管控等。
+
+* /superset/templates/appbuilder/navbar.html  Jinja2模板布局页面
+* /superset/app.py  添加菜单链接，调用flask_appbuilder.add_link()
+* /superset/views/core.py  添加菜单视图函数
+* /superset-frontend/webpack.config.js   前端构建脚本添加入口文件
+* superset-frontend/src/xxx/index.js    前端脚本实现逻辑
+
+
+
+以菜单项 Datasets 为例
+
+1. /superset/templates/appbuilder/navbar.html  
+
+
+
+/superset/app.py  
+
+SupersetAppInitializer.init_views()
+
+```python
+# add_link：给菜单添加链接，点击菜单跳转到链接href
+appbuilder.add_link(
+    "Datasets",
+    label=__("Datasets"),
+    href="/tablemodelview/list/?_flt_1_is_sqllab_view=y",
+    icon="fa-table",
+    category="Data",
+    category_label=__("Data"),
+    category_icon="fa-table",
+)
+appbuilder.add_separator("Data")
+# add_view：增加视图
+appbuilder.add_view(
+    SliceModelView,
+    "Charts",
+    label=__("Charts"),
+    icon="fa-bar-chart",
+    category="",
+    category_icon="",
+)
+```
+
+
+
+/superset/views/core.py  添加处理函数
+
+```python
+class Superset(BaseSupersetView):
+    """The base views for Superset!"""
+
+    logger = logging.getLogger(__name__)
+    
+    @has_access_api
+    @event_logger.log_this
+    @expose("/datasources/")  # 实际指向 /superset/datasources/
+    def datasources(self) -> FlaskResponse:
+        return self.json_response(
+            sorted(
+                [
+                    datasource.short_data
+                    for datasource in ConnectorRegistry.get_all_datasources(db.session)
+                    if datasource.short_data.get("name")
+                ],
+                key=lambda datasource: datasource["name"],
+            )
+        ) 
+```
+
+
+
+/superset-frontend/webpack.config.js  添加入口文件
+
+ ```js
+const config = {
+  node: {
+    fs: 'empty',
+  },
+  // entry, 指定src目录下各目录的打包入口
+  entry: {
+    theme: path.join(APP_DIR, '/src/theme.ts'),
+    preamble: PREAMBLE,
+    addSlice: addPreamble('/src/addSlice/index.tsx'),
+    explore: addPreamble('/src/explore/index.jsx'),
+    dashboard: addPreamble('/src/dashboard/index.jsx'),
+    sqllab: addPreamble('/src/SqlLab/index.tsx'),
+    crudViews: addPreamble('/src/views/index.tsx'),
+    menu: addPreamble('src/views/menu.tsx'),
+    profile: addPreamble('/src/profile/index.tsx'),
+    showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
+  },
+}    
+ ```
+
+
+
+/superset-frontend/src/xxx/index.js  
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("app"));
+```
+
+
+
+
+
+## 6.3 后端 /superset/
+
+### 命令行处理 cli.py
 
 启动命令： `falsk run xxx`  或者  `superset run xxx`
 
@@ -1220,7 +1859,7 @@ Commands:
 
 
 
-### superset load-examples命令
+#### superset load-examples命令
 
 load_examples 加载测试数据，需要从网络上下载数据。
 
@@ -1286,7 +1925,7 @@ def load_examples_run(
 
 
 
-`/superset/examples/__init__.py`    导入了所有的样例数据加载方法
+`/superset/examples/__init__.py`    导入了所有的样例数据加载方法 
 
 ```python
 from .bart_lines import load_bart_lines
@@ -1344,9 +1983,10 @@ def load_energy(
             method="multi",
         )
      ...
-    
-def get_example_data(
-    """ 从 BASE_URL下载样例数据 """
+ 
+
+""" 从 BASE_URL下载样例数据 """    
+def get_example_data(    
     filepath: str, is_gzip: bool = True, make_bytes: bool = False
 ) -> BytesIO:
     content = request.urlopen(f"{BASE_URL}{filepath}?raw=true").read()
@@ -1354,15 +1994,14 @@ def get_example_data(
         content = zlib.decompress(content, zlib.MAX_WBITS | 16)
     if make_bytes:
         content = BytesIO(content)
-    return content
-    
+    return content  
 ```
 
 
 
-## 全局实例或变量
+### 全局实例或变量
 
-superset/`__init__.py`
+/superset/`__init__.py`
 
 ```python
 from flask import current_app, Flask
@@ -1405,7 +2044,7 @@ thumbnail_cache = LocalProxy(lambda: cache_manager.thumbnail_cache)
 
 
 
-### 配置文件
+#### 配置文件
 
 **配置文件的优先级**:  superset_config.py >  config.py  
 
@@ -1451,9 +2090,9 @@ def create_app() -> Flask:
 
 
 
-### WEB实例 app.py
+#### WEB实例 app.py
 
-superset/app.py
+/superset/app.py
 
 ```python
 # 加载配置文件，初始化app(调用init_app)
@@ -1499,8 +2138,8 @@ class SupersetAppInitializer:
         Main entry point which will delegate to other methods in
         order to fully init the app
         """
-        self.pre_init()		#
-        self.setup_db()		# 数据库加载
+        self.pre_init()		#初始化前，创建DATA_DIR
+        self.setup_db()		# APP和数据库绑定
         self.configure_celery()
         self.setup_event_logger()
         self.setup_bundle_manifest()
@@ -1509,65 +2148,974 @@ class SupersetAppInitializer:
         self.configure_logging()
         self.configure_middlewares()
         self.configure_cache()
+        
+        with self.flask_app.app_context():  # type: ignore
+            self.init_app_in_ctx()  #更新APP上下文，包括更新视图init_views()
+
+        self.post_init()        
               
     def init_views(self) -> None:
-        """ 构建首页的导航栏、"""
+        """ 初始化视图
+        构建路由视图类CBV,首页导航菜单、
+        调用 flask_appbuilder.add_link, add_view
+        """
 ```
 
 
 
-### 扩展 extensions.py
+#### 抽象类ABC
 
-superset/extensions.py
+* /superset/commands/base.py  ORM CRUD命令抽象类，抽象方法有run, validate
+* /superset/utils/log.py   日志抽象类，抽象方法有log
+* /superset/utils/log_configurator.py 日志配置抽象类， 抽象方法有configure_logging
+
+```python
+# /superset/commands/base.py
+from abc import ABC, abstractmethod
+from typing import Any
+
+class BaseCommand(ABC):
+    @abstractmethod
+    def run(self) -> Any:
+        """
+        Run executes the command. Can raise command exceptions
+        :raises: CommandException
+        """
+
+    @abstractmethod
+    def validate(self) -> None:
+        """
+        Validate is normally called by run to validate data.
+        Will raise exception if validation fails
+        :raises: CommandException
+        """    
+        
+
+# /superset/utils/log.py        
+class AbstractEventLogger(ABC): 
+    @abstractmethod 
+    def log( self, user_id: Optional[int], action: str, dashboard_id: Optional[int], duration_ms: Optional[int], slice_id: Optional[int], referrer: Optional[str], *args: Any, **kwargs: Any, ) -> None: pass  
+    
+    
+# /superset/utils/log_configurator.py
+class LoggingConfigurator(abc.ABC):
+    @abc.abstractmethod
+    def configure_logging(
+        self, app_config: flask.config.Config, debug_mode: bool
+    ) -> None:
+        pass
+```
+
+
+
+### 原始数据查询 
+
+数据的查询和展示是superset的核心功能，前端用D3.js来渲染各种图标，后端用pandas来处理各种数据。
+
+**superset数据查询过程**：
+
+1.将前端的配置信息form_data传给explore_json函数  /superset/views/core.py
+2.根据所选的图表类型，找到对应的图表类	/superset/viz.py
+3.根据过滤条件生成sql查询语句	/superset/charts/filters.py
+4.根据数据库的连接条件找到对应的数据库engine，创建engine	
+5.使用pandas的read_sql函数获取查询结果，并生成一个dataframe
+
+
+
+/superset/views/core.py
+
+```python
+class Superset(BaseSupersetView): 
+    
+	@api
+    @has_access_api
+    @handle_api_exception
+    @event_logger.log_this
+    @expose(
+        "/explore_json/<datasource_type>/<int:datasource_id>/",
+        methods=EXPLORE_JSON_METHODS,
+    )
+    @expose("/explore_json/", methods=EXPLORE_JSON_METHODS)
+    @etag_cache()
+    @check_resource_permissions(check_datasource_perms)
+    def explore_json(
+        self, datasource_type: Optional[str] = None, datasource_id: Optional[int] = None
+    ) -> FlaskResponse:
+        response_type = utils.ChartDataResultFormat.JSON.value
+        responses: List[
+            Union[utils.ChartDataResultFormat, utils.ChartDataResultType]
+        ] = list(utils.ChartDataResultFormat)
+        responses.extend(list(utils.ChartDataResultType))
+        for response_option in responses:
+            if request.args.get(response_option) == "true":
+                response_type = response_option
+                break
+		# 获取form数据
+        form_data = get_form_data()[0]
+
+        try:
+            datasource_id, datasource_type = get_datasource_info(
+                datasource_id, datasource_type, form_data
+            )
+
+            force = request.args.get("force") == "true"
+
+            # TODO: support CSV, SQL query and other non-JSON types  异步处理支持
+            if (
+                is_feature_enabled("GLOBAL_ASYNC_QUERIES")
+                and response_type == utils.ChartDataResultFormat.JSON
+            ):
+                try: # 异步查询
+                    async_channel_id = async_query_manager.parse_jwt_from_request(
+                        request
+                    )["channel"]
+                    job_metadata = async_query_manager.init_job(async_channel_id)
+                    load_explore_json_into_cache.delay(
+                        job_metadata, form_data, response_type, force
+                    )
+                except AsyncQueryTokenException:
+                    return json_error_response("Not authorized", 401)
+
+                return json_success(json.dumps(job_metadata), status=202)
+
+            # 获取图表类型
+            viz_obj = get_viz(
+                datasource_type=cast(str, datasource_type),
+                datasource_id=datasource_id,
+                form_data=form_data,
+                force=force,
+            )
+			# 返回数据JSON格式
+            return self.generate_json(viz_obj, response_type)
+        except SupersetException as ex:
+            return json_error_response(utils.error_msg_from_exception(ex), 400)   
+        
+    def generate_json(
+        self, viz_obj: BaseViz, response_type: Optional[str] = None
+    ) -> FlaskResponse:
+        if response_type == utils.ChartDataResultFormat.CSV:
+            return CsvResponse(
+                viz_obj.get_csv(),
+                status=200,
+                headers=generate_download_headers("csv"),
+                mimetype="application/csv",
+            )
+
+        if response_type == utils.ChartDataResultType.QUERY:
+            return self.get_query_string_response(viz_obj)
+
+        if response_type == utils.ChartDataResultType.RESULTS:
+            return self.get_raw_results(viz_obj)
+
+        # 数据采样返回，调用了 get_df_payload (pandas)
+        if response_type == utils.ChartDataResultType.SAMPLES:
+            return self.get_samples(viz_obj)
+
+        payload = viz_obj.get_payload()
+        return data_payload_response(*viz_obj.payload_json_and_has_error(payload))        
+```
+
+
+
+#### 可视化图表
+
+* /superset/viz.py 定义了可视化基类BaseViz及各个子类，可视化列表viz_types
+* /superset/superset_config.py  此处变量VIZ_TYPE_DENYLIST会被 viz_types用到
+* /superset/views/utils.py  get_viz()会根据传参类型返回BaseViz的实际子类。
+
+
+
+/superset/viz.py  可视化图表类型的基类和子类
+
+```python
+from flask_babel import lazy_gettext as _
+
+
+class BaseViz:
+
+    """All visualizations derive this base class"""
+
+    viz_type: Optional[str] = None
+    verbose_name = "Base Viz"
+    credits = ""
+    is_timeseries = False
+    cache_type = "df"
+    enforce_numerical_metrics = True
+
+    def __init__(
+        self,
+        datasource: "BaseDatasource",
+        form_data: Dict[str, Any],
+        force: bool = False,
+        force_cached: bool = False,
+    ) -> None:
+        if not datasource:
+            raise QueryObjectValidationError(_("Viz is missing a datasource"))
+
+        self.datasource = datasource
+        self.request = request
+        self.viz_type = form_data.get("viz_type")
+        self.form_data = form_data
+
+        self.query = ""
+        self.token = utils.get_form_data_token(form_data)
+
+        self.groupby: List[str] = self.form_data.get("groupby") or []
+        self.time_shift = timedelta()
+
+        self.status: Optional[str] = None
+        self.error_msg = ""
+        self.results: Optional[QueryResult] = None
+        self.errors: List[Dict[str, Any]] = []
+        self.force = force
+        self._force_cached = force_cached
+        self.from_dttm: Optional[datetime] = None
+        self.to_dttm: Optional[datetime] = None
+        self._extra_chart_data: List[Tuple[str, pd.DataFrame]] = []
+
+        self.process_metrics()
+
+        self.applied_filters: List[Dict[str, str]] = []
+        self.rejected_filters: List[Dict[str, str]] = []
+
+          
+class NVD3Viz(BaseViz):
+
+    """Base class for all nvd3 vizs"""
+
+    credits = '<a href="http://nvd3.org/">NVD3.org</a>'
+    viz_type: Optional[str] = None
+    verbose_name = "Base NVD3 Viz"
+    is_timeseries = False
+        
+
+class BubbleViz(NVD3Viz):
+
+    """Based on the NVD3 bubble chart"""
+
+    viz_type = "bubble"
+    verbose_name = _("Bubble Chart")
+    is_timeseries = False
+
+    def query_obj(self) -> QueryObjectDict:
+        
+        
+def get_subclasses(cls: Type[BaseViz]) -> Set[Type[BaseViz]]:
+    return set(cls.__subclasses__()).union(
+        [sc for c in cls.__subclasses__() for sc in get_subclasses(c)]
+    )
+
+
+viz_types = {
+    o.viz_type: o
+    for o in get_subclasses(BaseViz)
+    if o.viz_type not in config["VIZ_TYPE_DENYLIST"]
+}            
+```
+
+
+
+/supetset/superset_config.py 
+
+```python
+设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
+VIZ_TYPE_DENYLIST = ['pivot_table', 'treemap']
+```
+
+
+
+/superset/views/utils.py 
+
+get_viz()根据传参viz_type返回相应的图表类。
+
+```python
+if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):
+    from superset import viz_sip38 as viz
+else:
+    from superset import viz  # type: ignore
+    
+def get_viz(
+    form_data: FormData,
+    datasource_type: str,
+    datasource_id: int,
+    force: bool = False,
+    force_cached: bool = False,
+) -> BaseViz:
+    viz_type = form_data.get("viz_type", "table")
+    datasource = ConnectorRegistry.get_datasource(
+        datasource_type, datasource_id, db.session
+    )
+    viz_obj = viz.viz_types[viz_type](  # 如果viz_types不存在或配置文件里的限制类型，将返回KeyError
+        datasource, form_data=form_data, force=force, force_cached=force_cached
+    )
+    return viz_obj
+```
+
+
+
+
+
+### 视图逻辑 /views/
+
+Views可分为二大类
+
+* CBV，类实现视图，通常与数据库CRUD密切相关的 ModelView.  
+* FBV，函数实现视图，通常不涉及到数据库操作。
+
+
+
+#### **基础视图**  base.py
+
+/superset/views/base.py
+
+```python
+from flask_appbuilder import BaseView, Model, ModelView
+
+
+class SupersetModelView(ModelView):
+    # 数据库CRUD相关
+    page_size = 100
+    list_widget = SupersetListWidget
+
+    def render_app_template(self) -> FlaskResponse:
+        payload = {
+            "user": bootstrap_user_data(g.user),
+            "common": common_bootstrap_payload(),
+        }
+        return self.render_template(
+            "superset/crud_views.html",
+            entry="crudViews",
+            bootstrap_data=json.dumps(
+                payload, default=utils.pessimistic_json_iso_dttm_ser
+            ),
+        )
+    
+    
+class BaseSupersetView(BaseView):
+    # HTML返回，需要用到模板页面
+    @staticmethod
+    def json_response(
+        obj: Any, status: int = 200
+    ) -> FlaskResponse:  # pylint: disable=no-self-use
+        return Response(
+            json.dumps(obj, default=utils.json_int_dttm_ser, ignore_nan=True),
+            status=status,
+            mimetype="application/json",
+        )
+
+    def render_app_template(self) -> FlaskResponse:
+        payload = {
+            "user": bootstrap_user_data(g.user),
+            "common": common_bootstrap_payload(),
+        }
+        return self.render_template(
+            "superset/crud_views.html",
+            entry="crudViews",
+            bootstrap_data=json.dumps(
+                payload, default=utils.pessimistic_json_iso_dttm_ser
+            ),
+        )    
+```
+
+
+
+#### 普通视图 core.py
+
+此文件的路由都是 /superset/开头，共有63个API。
+
+```python
+from flask import abort, flash, g, Markup, redirect, render_template, request, Response
+from flask_appbuilder import expose
+from flask_appbuilder.models.sqla.interface import SQLAInterface
+from flask_appbuilder.security.decorators import (
+    has_access,
+    has_access_api,
+    permission_name,
+)
+from flask_appbuilder.security.sqla import models as ab_models
+from flask_babel import gettext as __, lazy_gettext as _, ngettext
+from jinja2.exceptions import TemplateError
+from jinja2.meta import find_undeclared_variables
+
+
+class Superset(BaseSupersetView): 
+
+    logger = logging.getLogger(__name__)
+
+    @has_access_api
+    @event_logger.log_this
+    @expose("/datasources/")
+    def datasources(self) -> FlaskResponse:
+```
+
+
+
+
+
+#### ModelView逻辑
+
+**ModelView层次体系**：
+
+*flask_appbuilders模块*：BaseView(object)  -> BaseModelView -> BaseCRUDView-> RestCRUDView -> ModelView
+
+*superset模块*：		 			-> SupersetModelView  (/superset/views/base.py)
+
+​														-> DashboardModelView  (/superset/views/chart/views.py)
+
+​										    			-> SliceModelView
+
+说明：ModelView的路由前缀是 `/superset/{route_base}`,  实现API常用方法 list/show/get/post/add/edit/download
+
+
+
+/superset/views/chart/views.py
 
 ```python
 import json
-import os
-from typing import Any, Callable, Dict, List, Optional
 
-import celery
-from cachelib.base import BaseCache
-from flask import Flask
-from flask_appbuilder import AppBuilder, SQLA
-from flask_migrate import Migrate
-from flask_talisman import Talisman
-from flask_wtf.csrf import CSRFProtect
-from werkzeug.local import LocalProxy
+from flask import g
+from flask_appbuilder import expose, has_access
+from flask_appbuilder.models.sqla.interface import SQLAInterface
+from flask_babel import lazy_gettext as _
 
-from superset.utils.async_query_manager import AsyncQueryManager
-from superset.utils.cache_manager import CacheManager
-from superset.utils.feature_flag_manager import FeatureFlagManager
-from superset.utils.machine_auth import MachineAuthProviderFactory
+from superset import db, is_feature_enabled
+from superset.connectors.connector_registry import ConnectorRegistry
+from superset.constants import MODEL_VIEW_RW_METHOD_PERMISSION_MAP, RouteMethod
+from superset.models.slice import Slice
+from superset.typing import FlaskResponse
+from superset.utils import core as utils
+from superset.views.base import (
+    check_ownership,
+    common_bootstrap_payload,
+    DeleteMixin,
+    SupersetModelView,
+)
+from superset.views.chart.mixin import SliceMixin
+from superset.views.utils import bootstrap_user_data
 
-class ResultsBackendManager:
-    """ 后端结果管理 """
-    
-class UIManifestProcessor:
-    """ UI主文件处理器 """
-    
-APP_DIR = os.path.dirname(__file__)
-appbuilder = AppBuilder(update_perms=False)
-# 异步查询管理、缓存管理
-async_query_manager = AsyncQueryManager()  
-cache_manager = CacheManager()
-celery_app = celery.Celery()
-csrf = CSRFProtect()
-db = SQLA()
-# 本地代理LocalProxy：事件日志、安全管理
-_event_logger: Dict[str, Any] = {}
-event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
-feature_flag_manager = FeatureFlagManager()
-machine_auth_provider_factory = MachineAuthProviderFactory()
-manifest_processor = UIManifestProcessor(APP_DIR)
-migrate = Migrate()
-results_backend_manager = ResultsBackendManager()
-security_manager = LocalProxy(lambda: appbuilder.sm)
-talisman = Talisman()    
+
+class SliceModelView(
+    SliceMixin, SupersetModelView, DeleteMixin
+):  # pylint: disable=too-many-ancestors
+    """
+    SliceMixin:  Slice的数据成员类，不涉及到方法。 导入在同级目录下的 mixin.py
+    DeleteMixin： 定义了删除方法。导入在上级目录的../base.py
+    SupersetModelView： 此类实现render_app_template方法
+    """    
+    route_base = "/chart"	# 路由路径前缀
+    datamodel = SQLAInterface(Slice)
+    include_route_methods = RouteMethod.CRUD_SET | {
+        RouteMethod.DOWNLOAD,
+        RouteMethod.API_READ,
+        RouteMethod.API_DELETE,
+    }
+    class_permission_name = "Chart"
+    method_permission_name = MODEL_VIEW_RW_METHOD_PERMISSION_MAP
+
+    def pre_add(self, item: "SliceModelView") -> None:
+        utils.validate_json(item.params)
+
+    def pre_update(self, item: "SliceModelView") -> None:
+        utils.validate_json(item.params)
+        check_ownership(item)
+
+    def pre_delete(self, item: "SliceModelView") -> None:
+        check_ownership(item)
+
+    @expose("/add", methods=["GET", "POST"])
+    @has_access
+    def add(self) -> FlaskResponse:
+        datasources = [
+            {"value": str(d.id) + "__" + d.type, "label": repr(d)}
+            for d in ConnectorRegistry.get_all_datasources(db.session)
+        ]
+        payload = {
+            "datasources": sorted(datasources, key=lambda d: d["label"]),
+            "common": common_bootstrap_payload(),
+            "user": bootstrap_user_data(g.user),
+        }
+        # render_template方法是在此项目根路径下的 templates目录再取相应模块页面, 
+        # 实际调用 /suserset/templates/superset/add_slice.html
+        return self.render_template(
+            "superset/add_slice.html", bootstrap_data=json.dumps(payload)
+        )
+
+    @expose("/list/")
+    @has_access
+    def list(self) -> FlaskResponse:
+        if not is_feature_enabled("ENABLE_REACT_CRUD_VIEWS"):
+            return super().list()
+
+        return super().render_app_template()
 ```
 
 
 
-## superset-frontend 前端
+
+
+### 图表逻辑 /charts/
+
+图表charts、看板dashboards、databases和datasets 这4个的代码结构和处理逻辑类似。
+
+* commands/  元数据CRUD操作命令
+* api.py RestAPI接口
+* dao.py 更复杂的SQL语句实现，如bulk_delete
+* filters.py  过滤条件
+
+
+
+#### 元数据CRUD命令 /commands/
+
+/superset/charts/commands/create.py
+
+```python
+import logging
+from typing import Any, Dict, List, Optional
+
+from flask_appbuilder.models.sqla import Model
+from flask_appbuilder.security.sqla.models import User
+from marshmallow import ValidationError
+
+from superset.charts.commands.exceptions import (
+    ChartCreateFailedError,
+    ChartInvalidError,
+    DashboardsNotFoundValidationError,
+)
+from superset.charts.dao import ChartDAO
+from superset.commands.base import BaseCommand
+from superset.commands.utils import get_datasource_by_id, populate_owners
+from superset.dao.exceptions import DAOCreateFailedError
+from superset.dashboards.dao import DashboardDAO
+
+
+class CreateChartCommand(BaseCommand):
+    def __init__(self, user: User, data: Dict[str, Any]):
+        self._actor = user
+        self._properties = data.copy()
+
+    def run(self) -> Model:
+        self.validate()
+        try:
+            chart = ChartDAO.create(self._properties)
+        except DAOCreateFailedError as ex:
+            logger.exception(ex.exception)
+            raise ChartCreateFailedError()
+        return chart
+
+    def validate(self) -> None:
+```
+
+
+
+#### RestApi逻辑 api.py
+
+**RestApi层次体系**：
+
+*flask_appbuilders模块*：BaseApi(object)  -> BaseModelApi -> ModelRestApi 
+
+*superset模块*：		 			-> BaseSupersetModelRestApi (/superset/views/base_api.py)
+
+​														-> ChartRestApi (/superset/charts/api.py)
+
+​										    			-> DashboardRestApi (/superset/dashboards/api.py)
+
+说明：RestApi类有一个关键属性resource_name。本处路由前缀是`{route_base}` 或者  `/api/{version}/{resource_name}/`
+
+```python
+from flask import g, make_response, redirect, request, Response, send_file, url_for
+from flask_appbuilder.api import expose, protect, rison, safe
+from flask_appbuilder.models.sqla.interface import SQLAInterface
+
+
+class ChartRestApi(BaseSupersetModelRestApi):
+    datamodel = SQLAInterface(Slice)
+
+    resource_name = "chart"
+    allow_browser_login = True
+    
+    @expose("/export/", methods=["GET"])
+    @protect()
+    @safe
+    @statsd_metrics
+    @rison(get_export_ids_schema)
+    @event_logger.log_this_with_context(
+        action=lambda self, *args, **kwargs: f"{self.__class__.__name__}.export",
+        log_to_statsd=False,
+    )
+    def export(self, **kwargs: Any) -> Response:
+        
+```
+
+
+
+#### **dao逻辑 dao.py**
+
+dao逻辑实现了 操作数据库的事务方法，如bulk_delete, save, overwrite等等
+
+```python
+from superset.charts.filters import ChartFilter
+from superset.dao.base import BaseDAO
+
+
+class ChartDAO(BaseDAO):
+    model_cls = Slice
+    base_filter = ChartFilter
+
+    @staticmethod
+    def bulk_delete(models: Optional[List[Slice]], commit: bool = True) -> None:
+```
+
+
+
+#### **过滤逻辑 filters.py**
+
+```python
+from typing import Any
+
+from flask_babel import lazy_gettext as _
+from sqlalchemy import or_
+from sqlalchemy.orm.query import Query
+
+from superset import security_manager
+from superset.connectors.sqla.models import SqlaTable
+from superset.models.slice import Slice
+from superset.views.base import BaseFilter
+from superset.views.base_api import BaseFavoriteFilter
+
+
+class ChartAllTextFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    name = _("All Text")
+    arg_name = "chart_all_text"
+
+    def apply(self, query: Query, value: Any) -> Query:
+        if not value:
+            return query
+        ilike_value = f"%{value}%"
+        return query.filter(
+            or_(
+                Slice.slice_name.ilike(ilike_value),
+                Slice.description.ilike(ilike_value),
+                Slice.viz_type.ilike(ilike_value),
+                SqlaTable.table_name.ilike(ilike_value),
+            )
+        )
+
+
+class ChartFavoriteFilter(BaseFavoriteFilter):  # pylint: disable=too-few-public-methods
+    """
+    Custom filter for the GET list that filters all charts that a user has favored
+    """
+
+    arg_name = "chart_is_favorite"
+    class_name = "slice"
+    model = Slice
+
+
+class ChartFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    def apply(self, query: Query, value: Any) -> Query:
+        if security_manager.can_access_all_datasources():
+            return query
+        perms = security_manager.user_view_menu_names("datasource_access")
+        schema_perms = security_manager.user_view_menu_names("schema_access")
+        return query.filter(
+            or_(self.model.perm.in_(perms), self.model.schema_perm.in_(schema_perms))
+        )
+
+```
+
+
+
+
+
+### 安全权限控制 
+
+依赖于flask_appbuilder的权限管理
+
+* /flask_appbuilder/security/   fab的权限管理实现
+* /superset/security/   superset的权限管理
+* /superset/xxx/api.py   superset某个API的实现
+* /superset/app.py  superset菜单权限
+
+
+
+**Superset权限管理类**
+
+/superset/security/manager.py
+
+```python
+from flask import current_app, g
+from flask_appbuilder import Model
+from flask_appbuilder.security.sqla.manager import SecurityManager
+from flask_appbuilder.security.sqla.models import (
+    assoc_permissionview_role,
+    assoc_user_role,
+    PermissionView,
+    User,
+)
+from flask_appbuilder.security.views import (
+    PermissionModelView,
+    PermissionViewModelView,
+    RoleModelView,
+    UserModelView,
+    ViewMenuModelView,
+)
+
+
+class SupersetSecurityManager(SecurityManager):
+    userstatschartview = None
+    READ_ONLY_MODEL_VIEWS = {"Database", "DruidClusterModelView", "DynamicPlugin"}
+
+    USER_MODEL_VIEWS = {
+        "UserDBModelView",
+        "UserLDAPModelView",
+        "UserOAuthModelView",
+        "UserOIDModelView",
+        "UserRemoteUserModelView",
+    }
+    ...
+```
+
+
+
+**API访问权限**
+
+API示例 /superset/charts/api.py
+
+```python
+from flask_appbuilder.api import expose, protect, rison, safe  # 都是在API实现中直接使用的装饰器
+
+from superset.views.base_api import (
+    BaseSupersetModelRestApi,
+    RelatedFieldFilter,
+    statsd_metrics,
+)
+
+
+class ChartRestApi(BaseSupersetModelRestApi):
+    ...
+    
+    def __init__(self) -> None:
+        if is_feature_enabled("THUMBNAILS"):
+            self.include_route_methods = self.include_route_methods | {
+                "thumbnail",
+                "screenshot",
+                "cache_screenshot",
+            }
+        super().__init__()
+
+    @expose("/", methods=["POST"])
+    @protect()
+    @safe
+    @statsd_metrics
+    @event_logger.log_this_with_context(
+        action=lambda self, *args, **kwargs: f"{self.__class__.__name__}.post",
+        log_to_statsd=False,
+    )
+    def post(self) -> Response:
+        """ 以上装饰器分别是路由、权限检查、异常处理、API统计、日志处理 """
+        
+```
+
+* expose: API路由
+* **protect**:  判断API权限
+* rison  捕捉入参的Rison参数
+* safe 捕捉异常，返回异常时的JSON
+* has_access_api  
+
+
+
+**菜单权限**
+
+使用flask_appbuilder模块的AppBuilder 来处理菜单权限。
+
+
+
+### 模板 /templates/
+
+* 模板渲染 /flask_appbuilder/baseviews.py:render_template
+* 网页渲染 render
+
+/superset/templates/superset/basic.html
+
+
+
+### 日志
+
+DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志文件（superset.log）。依赖环境变量SUPERSET_HOME，缺省~/.superset/
+
+几种logger
+
+* STATS_LOGGER   实时统计的日志，方法有incr, decr, timing计时, gauge
+* EVENT_LOGGER  操作DB的日志
+* QUERY_LOGGER  查询日志
+
+常用logger的定义如下
+
+```python
+# /superset/config.py
+STATS_LOGGER = DummyStatsLogger()
+EVENT_LOGGER = DBEventLogger()
+QUERY_LOGGER = None
+
+# /superset/extensions.py 
+# 其实不是日志，是一个本地代理
+_event_logger: Dict[str, Any] = {}
+event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
+
+# xx.py
+logger = logging.getLogger(__name__)
+
+# /superset/utils/log.py
+# /superset/stats_logger.py
+```
+
+/superset/utils/log.py
+
+```python
+from abc import ABC, abstractmethod
+
+
+class AbstractEventLogger(ABC):
+    
+class DBEventLogger(AbstractEventLogger):
+    def log(,,,,)   
+```
+
+
+
+
+
+## 6.4  前端 /superset-frontend/
+
+前端文件格式有：jsx（JS扩展）、ts/tsx（typescript扩展）、js
+
+
+
+### 前端构建逻辑 
+
+* webpack.conf.json  构建配置文件
+* src/xx/xx.tsx  某个目录的脚本
+
+/superset-frontend/webpack.config.js  
+
+ ```js
+const config = {
+  node: {
+    fs: 'empty',
+  },
+  // entry, 指定src目录下各目录的打包入口
+  entry: {
+    theme: path.join(APP_DIR, '/src/theme.ts'),
+    preamble: PREAMBLE,
+    addSlice: addPreamble('/src/addSlice/index.tsx'),
+    explore: addPreamble('/src/explore/index.jsx'),
+    dashboard: addPreamble('/src/dashboard/index.jsx'),
+    sqllab: addPreamble('/src/SqlLab/index.tsx'),
+    crudViews: addPreamble('/src/views/index.tsx'),
+    menu: addPreamble('src/views/menu.tsx'),
+    profile: addPreamble('/src/profile/index.tsx'),
+    showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
+  },
+}    
+ ```
+
+
+
+/src/addSlice/index.tsx
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+
+
+### 首页控制逻辑 
+
+/superset-frontend/src/views/CRUD/welcome/
+
+* ActivityTable.tsx  Recents栏切换表格
+* ChartTable.tsx
+* DashboardTable.tsx
+* SavedQueries.tsx
+* Welcome.tsx
+
+
+
+1. Recents栏切换表格
+
+/superset-frontend/src/views/CRUD/welcome/ActivityTable.tsx:127
+
+```tsx
+import React from 'react';
+import moment from 'moment';
+import { styled, t } from '@superset-ui/core';
+
+import Loading from 'src/components/Loading';
+import ListViewCard from 'src/components/ListViewCard';
+import SubMenu from 'src/components/Menu/SubMenu';
+import { ActivityData } from './Welcome';
+import { mq, CardStyles } from '../utils';
+import EmptyState from './EmptyState';
+
+// 函数-活动表格
+export default function ActivityTable({
+  loading,
+  activeChild,
+  setActiveChild,
+  activityData,
+}: ActivityProps) {
+  const getFilterTitle = (e: ActivityObjects) => {
+    if (e.dashboard_title) return e.dashboard_title;
+    if (e.label) return e.label;
+    if (e.url && !e.table) return e.item_title;
+    if (e.item_title) return e.item_title;
+    return e.slice_name;
+  };
+    
+ // 三个tab: Viewed Edited Created   
+ const tabs = [
+    {
+      name: 'Edited',
+      label: t('Edited'),
+      onClick: () => {
+        setActiveChild('Edited');
+      },
+    },
+    {
+      name: 'Created',
+      label: t('Created'),
+      onClick: () => {
+        setActiveChild('Created');
+      },
+    },
+  ];
+
+  if (activityData?.Viewed) {
+    tabs.unshift({
+      name: 'Viewed',
+      label: t('Viewed'),
+      onClick: () => {
+        setActiveChild('Viewed');
+      },
+    });
+  } else {
+    tabs.unshift({
+      name: 'Examples',
+      label: t('Examples'),
+      onClick: () => {
+        setActiveChild('Examples');
+      },
+    });
+  }
+```
+
+
+
+
 
 ###  控制菜单 controls.jsx
 
@@ -1628,146 +3176,22 @@ const groupByControl = {
 
 
 
-## 前后端联动
-
-**1. 前后端打包**： 
-
-* 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
-* 前端生成的包 在superset/static目录： `npm run build`
-
-前后端分离不能彻底的原因
-
-1. 前端用了Jinja2模板，导航栏菜单是前后端一起来完成的。
-2. 前端生成包还不能单独部署到WEB服务器。
-
-
-
-### 导航菜单更改
-
-菜单更改 要涉及到 Jinja2模板的更改，appbuilder菜单权限的管控等。
-
-以菜单项 datasources 为例
-
-/superset/templates/appbuilder/navbar.html
-
-```html
-{% set menu = appbuilder.menu %}
-{% set app_icon_width = appbuilder.app.config['APP_ICON_WIDTH'] %}
-{% set logo_target_path = appbuilder.app.config['LOGO_TARGET_PATH'] or '/profile/{}/'.format(current_user.username) %}
-{% set root_path = logo_target_path if not logo_target_path.startswith('/') else '/superset' + logo_target_path if current_user.username is defined else '#'  %}
-
-{% block navbar %}
-  <div id="app-menu">
-    <div class="navbar navbar-static-top {{menu.extra_classes}}" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{ root_path }}">
-            <img
-              width="{{ app_icon_width }}"
-              src="{{ appbuilder.app_icon }}"
-              alt="{{ appbuilder.app_name }}"
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
-
-```
-
-
-
-/superset/app.py  添加菜单
-
-```python
-appbuilder.add_link(
-    "New Menu",
-    label=__("New Menu"),
-    href="/superset/new",
-    icon="fa-cloud-upload",
-    category="New",
-    category_label=__("New"),
-    category_icon="fa-wrench",
-)
-```
-
-
-
-/superset/views/core.py  添加处理函数
-
-```python
-class Superset(BaseSupersetView):
-    """The base views for Superset!"""
-
-    logger = logging.getLogger(__name__)
-    
-    @has_access_api
-    @event_logger.log_this
-    @expose("/datasources/")  # 实际指向 /superset/datasources/
-    def datasources(self) -> FlaskResponse:
-        return self.json_response(
-            sorted(
-                [
-                    datasource.short_data
-                    for datasource in ConnectorRegistry.get_all_datasources(db.session)
-                    if datasource.short_data.get("name")
-                ],
-                key=lambda datasource: datasource["name"],
-            )
-        ) 
-```
-
-
-
-/superset-frontend/webpack.config.js  添加入口文件
-
- ```js
-const config = {
-  node: {
-    fs: 'empty',
-  },
-  entry: {
-    theme: path.join(APP_DIR, '/src/theme.ts'),
-    preamble: PREAMBLE,
-    addSlice: addPreamble('/src/addSlice/index.tsx'),
-    explore: addPreamble('/src/explore/index.jsx'),
-    dashboard: addPreamble('/src/dashboard/index.jsx'),
-    sqllab: addPreamble('/src/SqlLab/index.tsx'),
-    crudViews: addPreamble('/src/views/index.tsx'),
-    menu: addPreamble('src/views/menu.tsx'),
-    profile: addPreamble('/src/profile/index.tsx'),
-    showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
-  },
-}    
- ```
-
-
-
-superset-frontend/src/xxx/index.js  
-
-```js
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-
-ReactDOM.render(<App />, document.getElementById("app"));
-```
-
-
-
-
-
 ## 依赖模块
 
 ### 后端依赖 模板Jinja2
 
+Jinja2 是一个现代的，设计者友好的，仿照 Django 模板的 Python 模板语言。 它速度快，被广泛使用，并且提供了可选的沙箱模板执行环境保证安全:
 
+示例
+
+```jinja2
+<title>{% block title %}{% endblock %}</title>
+<ul>
+{% for user in users %}
+  <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+{% endfor %}
+</ul>
+```
 
 
 
@@ -1775,7 +3199,24 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 前端依赖这个项目 superset-ui。
 
+@superset-ui/legacy-*软件包从经典的中提取并转换为插件。 这些包的提取只需很小的更改（几乎保持原样）。 它们还依靠旧版API（ viz.py ）起作用。 
 
+*@superset-ui/plugin-*软件包通常较新且质量更高。 它们不依赖viz.py （包含可视化特定的python代码）并与/api/v1/query/交互的主要区别在于：新的通用终结点旨在提供所有可视化。 还应该用Typescript编写。
+
+
+
+### 后端依赖 flask_appbuilder
+
+#### AppBuilder
+
+菜单相关的操作 self.menu.xx()
+
+* add_separator  添加菜单分隔符，后面创建的菜单顶在这个menu内
+* add_link 给菜单项点击加链接
+* add_view 给菜单项关联上视图，会调用add_link
+
+菜单无关的操作
+* add_api同 add_view_no_menu  添加非菜单项的视图
 
 
 
@@ -1786,6 +3227,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 * Superset 代码结构分析(前后端如何联动) https://zhuanlan.zhihu.com/p/163495199
 * 从前端角度记录superset二次开发 http://sunjl729.cn/2020/08/07/superset二次开发/
 * Superset安装及汉化 https://www.jianshu.com/p/c751278996f8
+* Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
 
 
 
@@ -1898,4 +3340,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 *  增加自定义数据源 https://zhuanlan.zhihu.com/p/179162221 
 *  利用Flask-AppBuilder 快速构建Web后台管理应用 https://blog.csdn.net/oxuzhenyi/article/details/77586500
 * Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
+* Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
 
