@@ -1,7 +1,7 @@
 | 序号 | 修改时间 | 修改内容                                   | 修改人 | 审稿人 |
 | ---- | -------- | ------------------------------------------ | ------ | ------ |
 | 1    | 2021-6-9 | 创建。从《PYTHON WEB框架分析》迁移相关章节 | Keefe  |        |
-| 2    | 2021-7-6 | 新增 gunicorn源码剖析 章节                 | 同上   |        |
+| 2    | 2021-7-6 | 新增 gunicorn源码剖析 章节，7.18另文       | 同上   |        |
 
 
 
@@ -979,8 +979,7 @@ class View(object):
         
     @classmethod
     def as_view(cls, name, *class_args, **class_kwargs):
-        """Converts the class into an actual view function that can be used
-        with the routing system.  Internally this generates a function on the
+        """ 将类转化成视图函数。Internally this generates a function on the
         fly which will instantiate the :class:`View` on each request and call
         the :meth:`dispatch_request` method on it.
 
@@ -1964,7 +1963,7 @@ class LocalProxy(object):
 
 
 
-### click
+### click 
 
 可组合命令行接口工具包。命令组 Group - >  命令Command
 
@@ -1984,8 +1983,8 @@ Required-by: Flask, Flask-AppBuilder, apache-superset
 
 源文件
 
-* click/core.py: 实现核心，定义了Group及其父类， Argument, Option
-* click/decorator.py 常用装饰器
+* click/core.py: 实现核心，定义了Group及其父类，Argument, Option
+* click/decorator.py 常用装饰器。如group, command, argument, option
 
 
 
@@ -2148,6 +2147,116 @@ click高效的装饰器： 以 flask fab命令组为例
 
 
 
+### jinja2
+
+参考 《WEB前端框架》相关章节
+
+
+
+```shell
+$ pip show jinja2
+Name: Jinja2
+Version: 3.0.1
+Summary: A very fast and expressive template engine.
+Home-page: https://palletsprojects.com/p/jinja/
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires: MarkupSafe
+Required-by:
+```
+
+表格 Jinja2源码结构 
+
+| 文件            | 主要类或函数                                                 | 简介       |
+| --------------- | ------------------------------------------------------------ | ---------- |
+| asyncfilters.py |                                                              | 异步过滤器 |
+| asyncsupport.py |                                                              | 异步支持   |
+| bccache.py      |                                                              |            |
+| compiler.py     |                                                              |            |
+| constants.py    |                                                              | 常量       |
+| environment.py  | Environment Template TemplateExpression TemplateModule TemplateStream | 环境变量   |
+| filters.py      |                                                              | 过滤器     |
+| lexer.py        |                                                              |            |
+| loaders.py      |                                                              | 加载器     |
+| meta.py         |                                                              | 元数据     |
+| nativetypes.py  |                                                              | 原生类型   |
+| nodes.py        |                                                              |            |
+| optimizer.py    |                                                              | 优化       |
+| parser.py       |                                                              | 解析器     |
+| runtime.y       |                                                              |            |
+| sandbox.py      |                                                              | 沙盒       |
+| utils.py        |                                                              | 工具       |
+| visitor.py      |                                                              |            |
+
+
+
+/jinja2/environment.py
+
+```python
+class Template(object):
+    environment_class = Environment
+
+    def __new__(,,,)
+    def render(self, *args, **kwargs):
+        """ 模板渲染实现 """
+        vars = dict(*args, **kwargs)
+        try:
+            return concat(self.root_render_func(self.new_context(vars)))
+        except Exception:
+            self.environment.handle_exception()
+
+    def render_async(self, *args, **kwargs):
+        
+        
+class Environment(object):
+    
+	@internalcode
+    def get_or_select_template(self, template_name_or_list, parent=None, globals=None):
+        """Does a typecheck and dispatches to :meth:`select_template`
+        if an iterable of template names is given, otherwise to
+        :meth:`get_template`.
+		模板继承实现
+        .. versionadded:: 2.3
+        """
+        if isinstance(template_name_or_list, (string_types, Undefined)):
+            return self.get_template(template_name_or_list, parent, globals)
+        elif isinstance(template_name_or_list, Template):  # Template类型，直接返回数据
+            return template_name_or_list
+        # 选择父类模板
+        return self.select_template(template_name_or_list, parent, globals)
+    
+
+class TemplateExpression(object):
+    """The :meth:`jinja2.Environment.compile_expression` method returns an
+    instance of this object.  It encapsulates the expression-like access
+    to the template with an expression it wraps.
+    """
+
+    def __init__(self, template, undefined_to_none):
+        self._template = template
+        self._undefined_to_none = undefined_to_none
+
+    def __call__(self, *args, **kwargs):
+        context = self._template.new_context(dict(*args, **kwargs))
+        consume(self._template.root_render_func(context))
+        rv = context.vars["result"]
+        if self._undefined_to_none and isinstance(rv, Undefined):
+            rv = None
+        return rv
+
+
+@implements_to_string
+class TemplateModule(object):
+    
+@implements_iterator
+class TemplateStream(object):
+    ...
+```
+
+
+
 
 ## 扩展模块
 
@@ -2190,35 +2299,37 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 
 | 目录或文件     | 主要类或函数                                                 | 说明                    |
 | -------------- | ------------------------------------------------------------ | ----------------------- |
-| api            |                                                              |                         |
+| api            | 文件：convert.py manager.py schemas.py<br>类：BaseApi BaseModelApi ModelRestApi OpenApi OpenApiManager SwaggerView  BaseModelSchema<br>装饰器：rison safe |                         |
 | babel          | BabelManager LocaleView                                      | 依赖于flask_babel       |
-| charts         |                                                              | 图表                    |
-| models         |                                                              | 模型                    |
-| security       |                                                              | 安全                    |
-| static         | css datapicker fonts img js select2                          | 静态                    |
-| templates      | xx.html                                                      | Jinja2模板              |
+| charts         | dict_to_json views.py widgets.py                             | 图表                    |
+| models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py | 模型                    |
+| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全                    |
+| static         | 目录：css datapicker fonts img js select2                    | 静态文件                |
+| templates      | appbuilder/                                                  | Jinja2模板              |
 | tests          |                                                              | 测试                    |
 | translations   |                                                              | 翻译                    |
-| utils          |                                                              | 工具                    |
+| utils          | get_column_root_relation  get_column_leaf  is_column_dotted lazy_formatter_gettext | 工具                    |
 | `__init__.py`  | BaseApi BaseModelApi ModelRestApi                            |                         |
-| actions.py     |                                                              |                         |
-| base.py        | AppBuilder dynamic_class_import                              |                         |
+| actions.py     | action ActionItem                                            |                         |
+| base.py        | AppBuilder dynamic_class_import                              | app构建类（主类）       |
 | basemanager.py | BaseManager                                                  | 所有管理类的父类        |
-| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView |                         |
-| cli.py         | fab create_admin create_user...                              |                         |
-| console.py     |                                                              |                         |
+| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView | 视图基类                |
+| cli.py         | fab create_admin create_user...                              | 命令行，依赖click模块   |
+| console.py     | cli_app                                                      |                         |
 | const.py       |                                                              | 常量                    |
 | fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块 |
 | filters.py     | app_template_filter TemplateFilters                          |                         |
 | forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf         |
 | hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                |
-| menu.py        | MenuItem Menu MenuApi MenuApiManager                         |                         |
+| menu.py        | MenuItem Menu MenuApi MenuApiManager                         | 菜单管理                |
 | views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                |
 | widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于Flask-WTF         |
 
 
 
 #### fab命令 cli.py
+
+依赖模块click
 
 fab命令：
 
@@ -2320,15 +2431,10 @@ def create_admin(username, firstname, lastname, email, password):
 
 #### app构建 base.py
 
-菜单相关的操作 self.menu.xx()
+视图操作：
 
-* add_separator  添加菜单分隔符，后面创建的菜单顶在这个menu内
-* add_link 给菜单项点击加链接
-* add_view 给菜单项关联上视图，会调用add_link
-
-菜单无关的操作
-
-* add_api同 add_view_no_menu  添加非菜单项的API视图
+* 菜单视图：调用 Menu对象的相关方法，如 add_link, add_view, add_separator  
+* 非菜单视图：添加非菜单项的API视图，如add_api 同add_view_no_menu  
 
 ```python
 from flask import Blueprint, current_app, url_for
@@ -2360,8 +2466,8 @@ class AppBuilder(object):
     # temporary list that hold addon_managers config key
     _addon_managers = None
 
-    menu = None
-    indexview = None
+    menu = None			# 菜单对象
+    indexview = None	# 首页视图
 
     static_folder = None
     static_url_path = None
@@ -2399,13 +2505,34 @@ class AppBuilder(object):
     def init_app(self, app, session):
         """
             Will initialize the Flask app, supporting the app factory pattern.
-
             :param app:
             :param session: The SQLAlchemy session
-
         """
         # 从配置中更新
         ...
+       _index_view = app.config.get("FAB_INDEX_VIEW", None)
+        if _index_view is not None:
+            self.indexview = dynamic_class_import(_index_view)
+        else:
+            self.indexview = self.indexview or IndexView	# 若无值，则为IndexView对象（/根视图）
+        _menu = app.config.get("FAB_MENU", None)
+        if _menu is not None:
+            self.menu = dynamic_class_import(_menu)
+        else:
+            self.menu = self.menu or Menu()	# 若无值，则为Menu对象
+
+        if self.update_perms:  # default is True, if False takes precedence from config
+            self.update_perms = app.config.get("FAB_UPDATE_PERMS", True)
+        _security_manager_class_name = app.config.get(
+            "FAB_SECURITY_MANAGER_CLASS", None
+        )
+        if _security_manager_class_name is not None:
+            self.security_manager_class = dynamic_class_import(
+                _security_manager_class_name
+            )
+        if self.security_manager_class is None:
+            from flask_appbuilder.security.sqla.manager import SecurityManager
+            self.security_manager_class = SecurityManager  # 若无值，为SecurityManager对象          
         
       	self._addon_managers = app.config["ADDON_MANAGERS"]
         self.session = session
@@ -2425,8 +2552,7 @@ class AppBuilder(object):
         else:
             self.post_init()
         self._init_extension(app)        
-        
-        
+                
     def add_view_no_menu(self, baseview, endpoint=None, static_folder=None):
         """
             Add your views without creating a menu.
@@ -2475,9 +2601,26 @@ class AppBuilder(object):
 
 
 
+#### API视图和普通视图
+
+* `/flask_appbuilder/api/__.init__.py `    API基类 BaseApi(object)  -> BaseModelApi -> ModelRestApi 
+
+* /flask_appbuilder/baseview.py  
+  * 路由装饰器函数  expose expose_api
+  * 视图基类  BaseView(object) ->  BaseFormView/BaseModelView  --> BaseCRUDView(BaseModelView)
+* /flask_appbuilder/views.py  视图常见路由实现，如list/add/edit/download/...
+
+```shell
+# 视图的层次体系: 类名带Base的实现一般在baseview.py
+RestAPI:   BaseApi(object)  -> BaseModelApi -> ModelRestApi 
+ModelView: 
+	BaseView(object)  
+		-> BaseModelView -> BaseCRUDView	(baseview.py)
+			-> RestCRUDView -> ModelView    (views.py)
+		-> BaseFormView
+```
 
 
-#### 路由&视图 baseviews.py
 
 1. 路由扩展装饰器：expose expose_api
 
@@ -2522,7 +2665,7 @@ def expose_api(name="", url="", methods=("GET",), description=""):
 
 
 
-2. 视图
+2. 基础视图： 包括CRUD方法的真正实现
 
     flask_appbuilder/baseview.py
 
@@ -2616,7 +2759,612 @@ class BaseView(object):
 
             Initialization of extra args
         """
+        
+        
+   """ CRUD方法的真正实现 """ 
+   def _list(self):
+        """
+            list function logic, override to implement different logic
+            returns list and search widget
+        """
+        # 获取排序参数：排序字段，排序方向 
+        if get_order_args().get(self.__class__.__name__):
+            order_column, order_direction = get_order_args().get(
+                self.__class__.__name__
+            )
+        else:
+            order_column, order_direction = "", ""
+        # 获取分页参数：page pagesize   
+        page = get_page_args().get(self.__class__.__name__)
+        page_size = get_page_size_args().get(self.__class__.__name__)
+        # 获取过滤参数 filter
+        get_filter_args(self._filters)
+        widgets = self._get_list_widget(
+            filters=self._filters,
+            order_column=order_column,
+            order_direction=order_direction,
+            page=page,
+            page_size=page_size,
+        )
+        form = self.search_form.refresh()
+        self.update_redirect()
+        return self._get_search_widget(form=form, widgets=widgets)        
 ```
+
+
+
+3. 路由API实现  /flask_appbuilder/views.py
+
+```python
+from .baseviews import BaseCRUDView, BaseFormView, BaseView, expose, expose_api
+
+class ModelView(RestCRUDView):
+    """ 实现方法: list/add/edit/download/... """
+	@expose("/list/")
+    @has_access
+    def list(self):
+
+        widgets = self._list()	#实现在BaseView._list()
+        return self.render_template(
+            self.list_template, title=self.list_title, widgets=widgets
+        )
+```
+
+
+
+#### 菜单 menu.py
+
+4个对象分别是Menu、MenuItem、MenuApi和MenuApiManager，管理菜单项生成、菜单所对应的视图API和链接。
+
+菜单相关的操作 AppBuilder.menu.xx()
+
+* add_separator  添加菜单终止符
+* add_link 给菜单项点击加链接
+* add_view 给菜单项关联上视图，会调用add_link
+
+```python
+from flask import current_app, url_for
+from flask_babel import gettext as __
+
+from .api import BaseApi, expose
+from .basemanager import BaseManager
+from .security.decorators import permission_name, protect
+
+
+class MenuItem(object):
+    """ 菜单项：should_render, get_url """
+    def __init__(
+        self, name, href="", icon="", label="", childs=None, baseview=None, cond=None
+    ):
+        self.name = name
+        self.href = href
+        self.icon = icon
+        self.label = label
+        self.childs = childs or []  #列表存本级菜单的子项
+        self.baseview = baseview
+        self.cond = cond
+
+    def should_render(self) -> bool:
+        return bool(self.cond()) if self.cond is not None else True
+
+    def get_url(self):
+        if not self.href:
+            if not self.baseview:
+                return ""
+            else:  # flask.url_for 获取当前请求路由的视图函数 
+                return url_for(f"{self.baseview.endpoint}.{self.baseview.default_view}")
+        else:
+            try:
+                return url_for(self.href)
+            except Exception:
+                return self.href
+
+    def __repr__(self):
+        return self.name
+    
+    
+class Menu(object):
+    """ 菜单对象 """
+    def __init__(self, reverse=True, extra_classes=""):
+        self.menu = []	#列表存储MenuItem
+        if reverse:
+            extra_classes = extra_classes + "navbar-inverse"
+        self.extra_classes = extra_classes 
+        
+    def get_list(self):
+        return self.menu
+    
+    def get_data(self, menu=None):
+    def find(self, name, menu=None):
+    def add_category(self, category, icon="", label="", parent_category=""):
+        
+ 	def add_link( self, name, href="", icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None, ):      
+        """ 根据category得到菜单，将name和对应的href添加到菜单下拉项 """
+        label = label or name
+        category_label = category_label or category
+        if category == "":
+            self.menu.append(
+                MenuItem(
+                    name=name,
+                    href=href,
+                    icon=icon,
+                    label=label,
+                    baseview=baseview,
+                    cond=cond,
+                )
+            )
+        else:
+            menu_item = self.find(category)
+            if menu_item:
+                new_menu_item = MenuItem(
+                    name=name,
+                    href=href,
+                    icon=icon,
+                    label=label,
+                    baseview=baseview,
+                    cond=cond,
+                )
+                menu_item.childs.append(new_menu_item)
+            else:
+                self.add_category(
+                    category=category, icon=category_icon, label=category_label
+                )
+                new_menu_item = MenuItem(
+                    name=name,
+                    href=href,
+                    icon=icon,
+                    label=label,
+                    baseview=baseview,
+                    cond=cond,
+                )
+                self.find(category).childs.append(new_menu_item)
+
+    def add_separator(self, category="", cond=None):
+        """ 给category对应的菜单添加结束标识- """
+        menu_item = self.find(category)
+        if menu_item:
+            menu_item.childs.append(MenuItem("-", cond=cond))
+        else:
+            raise Exception(
+                "Menu separator does not have correct category {}".format(category)
+            )
+      
+    
+class MenuApi(BaseApi):
+    resource_name = "menu"
+    openapi_spec_tag = "Menu"
+
+    @expose("/", methods=["GET"])
+    @protect(allow_browser_login=True)
+    @permission_name("get")
+    def get_menu_data(self):    
+        return self.response(200, result=current_app.appbuilder.menu.get_data())
+
+
+class MenuApiManager(BaseManager):
+    def register_views(self):
+        if self.appbuilder.app.config.get("FAB_ADD_MENU_API", True):
+            self.appbuilder.add_api(MenuApi)        
+```
+
+
+
+
+
+#### 模板 /templates/
+
+依赖模块Jinja2。
+
+**首页相关的模板：**（说明：下面模板忽略路径前缀 /flask_appbuilder/templates/）
+
+* appbuilder/index.html  继承自 appbuilder/base.html
+* appbuilder/base.html 继承自 base_template
+* base_template：为AppBuilder的内置变量，在AppBuilder对象构建时参数缺省值为"appbuilder/baselayout.html",
+* appbuilder/baselayout.html   缺省布局页，继承自 appbuilder/init.html
+* appbuilder/init.html  最终的HTML页面，include navbar.html和 footer.html
+* **appbuilder/baselib.html**   定义常用宏，包括menu_item menu_debug menu_block locale_menu navbar_block
+* appbuilder/navbar.html  导航栏，包括navbar_menu.html 和 navbar_right.html
+* appbuilder/footer.html  页尾
+* **appbuilder/navbar_menu.html**  导航栏菜单（多个菜单，可下拉）
+* appbuilder/navbar_right.html    导航栏右侧 （包括语言切换、用户信息）
+
+**首页模板继承关系**： index.html  -> base.html -> baselayout.html -> init.html
+
+
+
+**首页布局**  /flask_appbuilder/templates/appbuilder/index.html
+
+```jinja2
+{% extends "appbuilder/base.html" %}
+
+{% block content %}
+<h2><center>{{_('Welcome')}}<center></h2>
+
+<div class="well">
+
+</div>
+{% endblock %}
+```
+
+
+
+**首页缺省布局  appbuilder/baselayout.html **
+
+重新定义了body块里的 导航栏navbar和页尾footer，通过include导入。
+
+```jinja2
+{% extends 'appbuilder/init.html' %}
+{% import 'appbuilder/baselib.html' as baselib %}
+
+{% block body %}
+        {% include 'appbuilder/general/confirm.html' %}
+        {% include 'appbuilder/general/alert.html' %}
+
+    {% block navbar %}
+        <header class="top" role="header">
+        {% include 'appbuilder/navbar.html' %}
+        </header>
+    {% endblock %}
+
+    <div class="container">
+      <div class="row">
+          {% block messages %}
+            {% include 'appbuilder/flash.html' %}
+          {% endblock %}
+          {% block content %}
+          {% endblock %}
+      </div>
+    </div>
+
+    {% block footer %}
+        <footer>
+        <div class="img-rounded nav-fixed-bottom">
+            <div class="container">
+                {% include 'appbuilder/footer.html' %}
+            </div>
+        </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
+```
+
+
+
+**appbuilder/init.html  此模板才是最终HTML页面**
+
+head实体定义3块，分别是head_meta/head_css/head_js。
+
+body实体定义4块，分别是body, tail_js, add_tail_js, tail。
+
+```jinja2
+{% import 'appbuilder/baselib.html' as baselib with context %}
+
+{% if appbuilder %}
+  {% set app_name = appbuilder.app_name %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block page_title %}{{app_name}}{% endblock %}</title>
+
+    {% block head_meta %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+    {% endblock %}
+
+    {% block head_css %}
+      <link href="{{url_for('appbuilder.static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='css/font-awesome.min.css')}}" rel="stylesheet">
+      {% if appbuilder.app_theme %}
+        <link href="{{url_for('appbuilder.static',filename='css/themes/'+ appbuilder.app_theme )}}" rel="stylesheet">
+      {% endif %}
+      <link href="{{url_for('appbuilder.static',filename='datepicker/bootstrap-datepicker.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='select2/select2.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='css/flags/flags16.css')}}" rel="stylesheet">
+      <link href="{{url_for('appbuilder.static',filename='css/ab.css')}}" rel="stylesheet">
+    {% endblock %}
+
+    {% block head_js %}
+      <script src="{{url_for('appbuilder.static',filename='js/jquery-latest.js')}}"></script>
+      <script src="{{url_for('appbuilder.static',filename='js/ab_filters.js')}}"></script>
+      <script src="{{url_for('appbuilder.static',filename='js/ab_actions.js')}}"></script>
+    {% endblock %}
+  </head>
+  <body >
+    {% block body %}
+    {% endblock %}
+
+    {% block tail_js %}
+      <script src="{{url_for('appbuilder.static',filename='js/bootstrap.min.js')}}"></script>
+      <script src="{{url_for('appbuilder.static',filename='datepicker/bootstrap-datepicker.js')}}"></script>
+      <script src="{{url_for('appbuilder.static',filename='select2/select2.js')}}"></script>
+      <script src="{{url_for('appbuilder.static',filename='js/ab.js')}}"></script>
+    {% endblock %}
+
+    {% block add_tail_js %}
+    {% endblock %}
+
+    {% block tail %}
+    {% endblock %}
+  </body>
+</html>
+```
+
+
+
+appbuilder/baselib.html
+
+定义常用宏，主要是菜单和导航栏相关的代码块。包括menu_item menu_debug menu_block locale_menu navbar_block
+
+```jinja2
+{% macro menu_debug(menu) %}
+    {% for item1 in menu.get_list() %}
+        {{ item1.label }} {{ item1.href }}
+            {% for item2 in item1.childs %}
+		        {{ item2.label }} {{ item2.href }}
+        	{% endfor %}
+	{% endfor %}
+{% endmacro %}
+
+
+{% macro menu_block(menu) %}
+{% for item1 in menu.get_list() %}
+    {% if item1 | is_menu_visible %}
+        {% if item1.childs %}
+            <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+            {% if item1.icon %}
+                <i class="fa {{item1.icon}}"></i>&nbsp;
+            {% endif %}
+				{{_(item1.label)}}<b class="caret"></b></a>
+		        <ul class="dropdown-menu">
+				{% set divider = False %}
+            {% for item2 in item1.childs %}
+                {% if item2.name == '-' %}
+                    {% set divider = True %}
+                {% else %}
+                    {% if item2 | is_menu_visible %}
+                        {% if divider %}
+                            <li class="divider"></li>
+                            {% set divider = False %}
+                        {% endif %}
+					        <li>{{ menu_item(item2) }}</li>
+                    {% endif %}
+					{% endif %}
+				{% endfor %}
+				</ul></li>
+			{% else %}
+				<li>
+                {{ menu_item(item1) }}
+				</li>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+
+{% endmacro %}
+
+{% macro locale_menu(languages) %}
+{% set locale = session['locale'] %}
+{% if not locale %}
+	{% set locale = 'en' %}
+{% endif %}
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+	   <div class="f16"><i class="flag {{languages[locale].get('flag')}}"></i><b class="caret"></b>
+       </div>
+	</a>
+    {% if languages.keys()|length > 1 %}
+	<ul class="dropdown-menu">
+	<li class="dropdown">
+		{% for lang in languages %}
+			{% if lang != locale %}
+        		<a tabindex="-1" href="{{appbuilder.get_url_for_locale(lang)}}">
+        		  <div class="f16"><i class="flag {{languages[lang].get('flag')}}"></i> - {{languages[lang].get('name')}}
+        		</div></a>
+        		{% endif %}
+        	{% endfor %}
+        </li>
+        </ul>
+    {% endif %}
+</li>
+{% endmacro %}
+
+{% macro navbar_block(menu, languages) %}
+
+<div class="navbar {{menu.extra_classes}}" role="navigation">
+   <div class="container">
+        <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% if appbuilder.app_icon %}
+                	<a class="navbar-brand" href="{{appbuilder.get_url_for_index}}">
+                	<img src="{{appbuilder.app_icon}}" >
+                	</a>
+                {% else %}
+                	<span class="navbar-brand">
+                	<a href="{{appbuilder.get_url_for_index}}">
+                	{{ appbuilder.app_name }}
+                	</a>
+                	</span>
+                {% endif %}
+        </div>
+        <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                        {{ menu_block(menu)}}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                {{ locale_menu(languages) }}
+                {% if not current_user.is_anonymous %}
+                <li class="dropdown">
+	               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	               <span class="fa fa-user"></span> {{g.user.get_full_name()}}<b class="caret"></b>
+                   </a>
+                    <ul class="dropdown-menu">
+			<li><a href="{{appbuilder.get_url_for_userinfo}}"><span class="fa fa-fw fa-user"></span>{{_("Profile")}}</a></li>
+			<li><a href="{{appbuilder.get_url_for_logout}}"><span class="fa fa-fw fa-sign-out"></span>{{_("Logout")}}</a></li>
+                    </ul>
+        		
+                </li>
+                {% else %}
+                    <li><a href="{{appbuilder.get_url_for_login}}">
+                    <i class="fa fa-fw fa-sign-in"></i>{{_("Login")}}</a></li>
+                {% endif %}
+                </ul>
+        </div>
+   </div>
+</div>
+{% endmacro %}
+```
+
+
+
+appbuilder/nav_bar.html
+
+导航栏，定义了navbar-header（如有图片，则包含navbar-brand），navbar-collapse（分别导入2个模板navbar_menu 和 navbar_right）。
+
+```jinja2
+{% set menu = appbuilder.menu %}
+{% set languages = appbuilder.languages %}
+
+<div class="navbar {{menu.extra_classes}}" role="navigation">
+   <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% if appbuilder.app_icon %}
+                <a class="navbar-brand" href="{{appbuilder.get_url_for_index}}">
+                <img src="{{appbuilder.app_icon}}" height="100%" width="auto">
+                </a>
+            {% else %}
+                <span class="navbar-brand">
+                <a href="{{appbuilder.get_url_for_index}}">
+                {{ appbuilder.app_name }}
+                </a>
+                </span>
+            {% endif %}                
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {% include 'appbuilder/navbar_menu.html' %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% include 'appbuilder/navbar_right.html' %}
+            </ul>
+        </div>
+   </div>
+</div>
+```
+
+
+
+**appbuilder/navbar_menu.html**
+
+导航栏菜单。从Appbuilder.menu获取菜单列表，宏menu_item获取单个菜单下拉项的icon/url/label。
+
+```jinja2
+{% macro menu_item(item) %}
+    <a tabindex="-1" href="{{item.get_url()}}">
+       {% if item.icon %}
+        <i class="fa fa-fw {{item.icon}}"></i>&nbsp;
+    {% endif %}
+    {{_(item.label)}}</a>
+{% endmacro %}
+
+
+{% for item1 in menu.get_list() %}
+    {% if item1 | is_menu_visible %}
+        {% if item1.childs %}
+            <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+            {% if item1.icon %}
+                <i class="fa {{item1.icon}}"></i>&nbsp;
+            {% endif %}
+            {{_(item1.label)}}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            {% for item2 in item1.childs %}
+                {% if item2 %}
+                    {% if item2.name == '-' %}   {# 处理菜单分隔符- #}
+                        {% if not loop.last %}
+                          <li class="divider"></li>
+                        {% endif %}
+                    {% elif item2 | is_menu_visible %}
+                        <li>{{ menu_item(item2) }}</li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </ul></li>
+        {% else %}
+            <li>
+                {{ menu_item(item1) }}
+            </li>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+```
+
+
+
+**appbuilder/navbar_right.html**
+
+导航栏右侧。定义了 语言选择栏，用户信息栏。
+
+```jinja2
+
+{% macro locale_menu(languages) %}
+{% set locale = session['locale'] %}
+{% if not locale %}
+    {% set locale = 'en' %}
+{% endif %}
+{% if languages.keys()|length > 1 %}
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+       <div class="f16"><i class="flag {{languages[locale].get('flag')}}"></i><b class="caret"></b>
+       </div>
+    </a>
+    <ul class="dropdown-menu">
+    <li class="dropdown">
+        {% for lang in languages %}
+            {% if lang != locale %}
+                <a tabindex="-1" href="{{appbuilder.get_url_for_locale(lang)}}">
+                  <div class="f16"><i class="flag {{languages[lang].get('flag')}}"></i> - {{languages[lang].get('name')}}
+                </div></a>
+            {% endif %}
+        {% endfor %}
+        </li>
+        </ul>
+</li>
+{% endif %}
+{% endmacro %}
+
+
+
+{{ locale_menu(languages) }}
+{% if not current_user.is_anonymous %}
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+           <span class="fa fa-user"></span> {{g.user.get_full_name()}}<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{appbuilder.get_url_for_userinfo}}"><span class="fa fa-fw fa-user"></span>{{_("Profile")}}</a></li>
+            <li><a href="{{appbuilder.get_url_for_logout}}"><span class="fa fa-fw fa-sign-out"></span>{{_("Logout")}}</a></li>
+        </ul>
+    </li>
+{% else %}
+    <li><a href="{{appbuilder.get_url_for_login}}">
+    <i class="fa fa-fw fa-sign-in"></i>{{_("Login")}}</a></li>
+{% endif %}
+
+```
+
+
 
 
 
@@ -3346,1097 +4094,8 @@ class BaseAsyncIOLoop(IOLoop):
 
 
 
-# 4 gunicorn源码剖析
 
-源码版本： gunicorn-20.1.0
-
-```shell
-$ pip show gunicorn
-Name: gunicorn
-Version: 20.1.0
-Summary: WSGI HTTP Server for UNIX
-Home-page: https://gunicorn.org
-Author: Benoit Chesneau
-Author-email: benoitc@e-engura.com
-License: MIT
-Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
-Requires: setuptools
-Required-by: 
-```
-
-
-
-**gunicorn特点**
-
-* Gunicorn是一个基于Python实现的动态Web服务器，实现了WSGI协议，可以与Django、Flask等Web框架集成。
-
-* 与Apache、Nginx等静态Web服务器相比，Gunicorn动态处理能力强。可以通过HTTP或者Unix Socket来与之通信，以此实现动静分离。
-
-* Gunicorn由于源码调用了fcntl、fork等接口，因此只能跑在类Unix系统上，Windows上跑不了。
-
-* Gunicorn通过pre-worker模型来实现并发，worker的工作模式有sync、gthread、gevent等，即可以通过多线程、或者协程来处理请求。
-
-* Gunicorn是可配置的，可以通过命令行参数或者配置文件的形式，来完成对其配置。
-
-* Gunicorn的日志功能丰富，可以输出到控制台、日志文件或者syslog服务器，另外日志分为http请求访问日志和程序运行时的错误日志，这点借鉴了Apache的思路。
-
-
-
-## 源码结构
-
-表格 gunicorn源码结构
-
-| 目录或文件       | 主要类或函数                               | 说明                                 |
-| ---------------- | ------------------------------------------ | ------------------------------------ |
-| app              |                                            | app应用程序                          |
-| app/base.py      | BaseApplication Application                | app基类                              |
-| app/pasterapp.py | PasterServerApplication                    |                                      |
-| app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口       |
-| http             |                                            | http协议实现                         |
-| http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                        |
-| http/message.py  | Message, Request                           | HTTP请求体                           |
-| http/parser.py   | Parser RequestParser                       | HTTP请求解析器                       |
-| http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                         |
-| http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                           |
-| instrument       | statsd.py                                  | Statsd类，客户端侧协议               |
-| works            | base.py                                    | 工作进程基类，子类需要重载Worker:run |
-|                  | base_async.py                              | 异步模式的基类                       |
-|                  | ggevent.py                                 | gevent模式                           |
-|                  | geventlent.py                              | eventlet模式                         |
-|                  | gtornado.py                                | tornado模式                          |
-|                  | gthread.py                                 | gthread模式 单进程多线程(线程池)     |
-|                  | sync.py                                    | 同步模式 单进程单线程                |
-|                  | workertmp.py                               | tmp文件，master监控worker进程的机制  |
-| **arbiter.py**   | Arbiter                                    | 主进程，维护工作进程存活。           |
-| config.py        | Config Setting                             | 配置相关，字段基类是Setting。        |
-| debug.py         | Spew                                       | 调试类                               |
-| erros.py         | HaltServer ConfigError AppImportError      | 定义了几种异常                       |
-| glogging.py      | SafeAtoms  Logger                          | 全局日志                             |
-| reloader.py      | Reloader InotifyReloader                   | 模块重载实现                         |
-| pidfile.py       | Pidfile                                    | gunicorn主进程ID文件                 |
-| sock.py          | BaseSocket TCPSocket TCP6Socket UnixSocket | socket类，用来与客户端通讯           |
-| systemd.py       | listen_fds sd_notify                       | socket函数封装扩展                   |
-| util.py          |                                            | 工具函数                             |
-
-说明：源码按目录结构可分为app实现、http实现和works实现、
-
-
-
-![img](..\..\media\code\code_gunicorn_001.png)
-
-图 gunicorn代码间关联
-
-
-
-## 主流程
-
-### gunicorn启动 
-
-gunicorn启动方式有二种，一是 自行启动方式；二是命令行启动。
-
-* 自行启动：`python main.py`  要求main.py里面至少要实现一个app handler函数或者app handler类和一个app server类。本启动方式主要用于调试gunicorn
-* 命令行启动：`python -m  gunicorn.app.wsgiapp project.wsgi --chdir /path/to/project-root -c /path/to/project-cfg.py`   
-
-
-
-法1： 自行启动
-
-```python
-# main.py
-import multiprocessing
-import gunicorn.app.base
-
-
-def app_handler(environ, start_response):
-    status = '200 OK'
-    response_headers = [
-        ('Content-Type', 'text/plain'),
-    ]
-    start_response(status, response_headers)
-
-    # response_body = ['Works fine\n']
-    response_body = []
-    for key, value in environ.items():
-      response_body.append(f'{key}: {value}')
-    response_body.append('\nWorks fine\n')
-
-    return response_body.encode('utf-8')
-
-
-class APPHandler(object):
-  def __init__(self, environ, start_response):
-    self.environ = environ
-    self.start_response = start_response
-
-  def __call__(self, environ, start_response):
-    self.environ = environ
-    self.start_response = start_response
-
-  def __iter__(self):
-    data = 'Hello, World!\n'
-
-    status = '200 OK'
-    response_headers = [
-      ('Content-type', 'text/plain'),
-      ('Content-Length', str(len(data))),
-      ('Foo', 'B\u00e5r'),  # Foo: Bår
-    ]
-    self.start_response(status, response_headers)
-
-    yield data.encode("utf-8")
-
-
-class APPServer(gunicorn.app.base.BaseApplication):
-    def __init__(self, app, options=None):
-        self.options = options or {}
-        self.application = app
-        super().__init__()
-
-    def load_config(self):
-        config = {key: value for key, value in self.options.items()
-                  if key in self.cfg.settings and value is not None}
-        for key, value in config.items():
-            self.cfg.set(key.lower(), value)
-
-    def load(self):
-        return self.application
-
-
-if __name__ == '__main__':
-    options = {
-        'bind': ['0.0.0.0:6000', '[::]:6000'],
-        'workers': multiprocessing.cpu_count(),
-    }
-    APPServer(app_handler, options).run()
-    # APPServer(APPHandler, options).run()
-```
-
-
-
-法2： gunicorn脚本
-
-```python
-# -*- coding: utf-8 -*-
-import re
-import sys
-from gunicorn.app.wsgiapp import run
-if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(run())    
-```
-
-
-
-### 主进程 arbiter.py
-
-主要通过信号量来控制查看工作进程状态。
-
-这些信号量的含义是：
-
-    HUP，重启所有的配置和所有的worker进程
-    QUIT，正常关闭，它会等待所有worker进程处理完各自的东西后关闭
-    INT/TERM，立即关闭，强行中止所有的处理
-    TTIN，增加一个worker进程
-    TTOU，减少一个worker进程
-    USR1，重新打开由master和worker所有的日志处理
-    USR2，重新运行master和worker
-    WINCH，正常关闭所有worker进程，保持主控master进程的运行
-下面通过handle_xx 来作相应处理，xx为信号，如hanler_hup。
-
-```python
-class Arbiter(object):
-    """ 用信号来处理各种事件  """
-    WORKER_BOOT_ERROR = 3
-
-    # A flag indicating if an application failed to be loaded
-    APP_LOAD_ERROR = 4
-
-    START_CTX = {}
-
-    LISTENERS = []
-    WORKERS = {}
-    PIPE = []
-
-    # I love dynamic languages
-    SIG_QUEUE = []
-    SIGNALS = [getattr(signal, "SIG%s" % x)
-               for x in "HUP QUIT INT TERM TTIN TTOU USR1 USR2 WINCH".split()]
-    SIG_NAMES = dict(
-        (getattr(signal, name), name[3:].lower()) for name in dir(signal)
-        if name[:3] == "SIG" and name[3] != "_"
-    )
-    
-    def __init__(self, app):
-        os.environ["SERVER_SOFTWARE"] = SERVER_SOFTWARE
-
-        self._num_workers = None
-        self._last_logged_active_worker_count = None
-        self.log = None
-
-        self.setup(app)
-
-        self.pidfile = None
-        self.systemd = False
-        self.worker_age = 0
-        self.reexec_pid = 0
-        self.master_pid = 0
-        self.master_name = "Master"
-
-        cwd = util.getcwd()
-
-        args = sys.argv[:]
-        args.insert(0, sys.executable)
-
-        # init start context
-        self.START_CTX = {
-            "args": args,
-            "cwd": cwd,
-            0: sys.executable
-        }    
-```
-
-
-
-## app应用程序 /app/
-
-### wsgiapp.py 
-
-本文件可以直接跑。`python -m gunicorn.app.wagiapp`
-
-```python
-from gunicorn.errors import ConfigError
-from gunicorn.app.base import Application
-from gunicorn import util
-
-
-class WSGIApplication(Application):
-    def init(self, parser, opts, args):
-        if opts.paste:
-            from .pasterapp import has_logging_config
-
-            config_uri = os.path.abspath(opts.paste)
-            config_file = config_uri.split('#')[0]
-
-            if not os.path.exists(config_file):
-                raise ConfigError("%r not found" % config_file)
-
-            self.cfg.set("default_proc_name", config_file)
-            self.app_uri = config_uri
-
-            if has_logging_config(config_file):
-                self.cfg.set("logconfig", config_file)
-
-            return
-
-        if not args:
-            parser.error("No application module specified.")
-
-        self.cfg.set("default_proc_name", args[0])
-        self.app_uri = args[0]
-
-    def load_wsgiapp(self):
-        return util.import_app(self.app_uri)
-
-    def load_pasteapp(self):
-        from .pasterapp import get_wsgi_app
-        return get_wsgi_app(self.app_uri, defaults=self.cfg.paste_global_conf)
-
-    def load(self):
-        if self.cfg.paste is not None:
-            return self.load_pasteapp()
-        else:
-            return self.load_wsgiapp()
-
-
-def run():
-    """\
-    The ``gunicorn`` command line runner for launching Gunicorn with
-    generic WSGI applications.
-    """
-    from gunicorn.app.wsgiapp import WSGIApplication
-    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
-
-
-if __name__ == '__main__':
-    run()    
-```
-
-
-
-### base.py
-
-BaseApplication::run() 启动了主进程Aribiter.run()。
-
-Application::run()在启动主进程之前加载了配置信息，并作相应处理。
-
-Application::load_config() 加载配置信息，可以解析命令行或者文件里获取配置数据。
-
-```python
-from gunicorn import util
-from gunicorn.arbiter import Arbiter
-from gunicorn.config import Config, get_default_config_file
-from gunicorn import debug
-
-class BaseApplication(object):
-    """
-    An application interface for configuring and loading
-    the various necessities for any given web framework.
-    """
-    def __init__(self, usage=None, prog=None):
-        self.usage = usage
-        self.cfg = None
-        self.callable = None
-        self.prog = prog
-        self.logger = None
-        self.do_load_config()  # 加载配置信息
-        
-    def run(self):
-        try:  # 启动主进程
-            Arbiter(self).run()
-        except RuntimeError as e:
-            print("\nError: %s\n" % e, file=sys.stderr)
-            sys.stderr.flush()
-            sys.exit(1)
-  
-
-class Application(BaseApplication):
-    def load_config(self):
-        """ 从文件或者 命令行里获取 配置信息 """
-        # parse console args
-        parser = self.cfg.parser()
-        args = parser.parse_args()
-
-        # optional settings from apps
-        cfg = self.init(parser, args, args.args)
-
-        # set up import paths and follow symlinks
-        self.chdir()
-
-        # Load up the any app specific configuration
-        if cfg:
-            for k, v in cfg.items():
-                self.cfg.set(k.lower(), v)
-
-        env_args = parser.parse_args(self.cfg.get_cmd_args_from_env())
-
-        if args.config:
-            self.load_config_from_file(args.config)
-        elif env_args.config:
-            self.load_config_from_file(env_args.config)
-        else:
-            default_config = get_default_config_file()
-            if default_config is not None:
-                self.load_config_from_file(default_config)
-
-        # Load up environment configuration
-        for k, v in vars(env_args).items():
-            if v is None:
-                continue
-            if k == "args":
-                continue
-            self.cfg.set(k.lower(), v)
-
-        # Lastly, update the configuration with any command line settings.
-        for k, v in vars(args).items():
-            if v is None:
-                continue
-            if k == "args":
-                continue
-            self.cfg.set(k.lower(), v)
-
-        # current directory might be changed by the config now
-        # set up import paths and follow symlinks
-        self.chdir()
-
-    def run(self):
-        if self.cfg.check_config:
-            try:
-                self.load()
-            except:
-                msg = "\nError while loading the application:\n"
-                print(msg, file=sys.stderr)
-                traceback.print_exc()
-                sys.stderr.flush()
-                sys.exit(1)
-            sys.exit(0)
-
-        if self.cfg.spew:
-            debug.spew()
-
-        if self.cfg.daemon:
-            util.daemonize(self.cfg.enable_stdio_inheritance)
-
-        # set python paths
-        if self.cfg.pythonpath:
-            paths = self.cfg.pythonpath.split(",")
-            for path in paths:
-                pythonpath = os.path.abspath(path)
-                if pythonpath not in sys.path:
-                    sys.path.insert(0, pythonpath)
-
-        super().run()    
-```
-
-
-
-## http协议  /http/
-
-```python
-#/gunicorn/http/__init__.py
-from gunicorn.http.message import Message, Request
-from gunicorn.http.parser import RequestParser
-
-__all__ = ['Message', 'Request', 'RequestParser']
-```
-
-
-
-## works工作模式  /works/
-
-工作进程支持多种工作模式，可分为同步sync 和异步async。
-
-异步又可分为eventlet, gevent, tornado。
-
-* eventlet:  依赖eventlet模块
-
-* gevent :  依赖gevent模块
-
-* tornado  直接导入tornado模块，调用相关方法
-
-* gthread  单进程多线程，使用了标准库的线程池
-
-  
-
-```python
-#/gunicorn/works/__init__.py
-# supported gunicorn workers.
-SUPPORTED_WORKERS = {
-    "sync": "gunicorn.workers.sync.SyncWorker",
-    "eventlet": "gunicorn.workers.geventlet.EventletWorker",
-    "gevent": "gunicorn.workers.ggevent.GeventWorker",
-    "gevent_wsgi": "gunicorn.workers.ggevent.GeventPyWSGIWorker",
-    "gevent_pywsgi": "gunicorn.workers.ggevent.GeventPyWSGIWorker",
-    "tornado": "gunicorn.workers.gtornado.TornadoWorker",
-    "gthread": "gunicorn.workers.gthread.ThreadWorker",
-}
-```
-
-
-
-works/base.py
-
-```python
-from gunicorn.http.wsgi import Response, default_environ
-from gunicorn.reloader import reloader_engines
-from gunicorn.workers.workertmp import WorkerTmp
-
-
-class Worker(object):
-	""" 工作模式基类, 
-	run方法子类需要重载
-	init_process() 进程初始化，在方法最后调用 run()  
-    """
-    SIGNALS = [getattr(signal, "SIG%s" % x)
-            for x in "ABRT HUP QUIT INT TERM USR1 USR2 WINCH CHLD".split()]
-
-    PIPE = []
-
-    def __init__(self, age, ppid, sockets, app, timeout, cfg, log):      
-        """ 初始化变量，创建tmpfile """
-        self.age = age
-        self.pid = "[booting]"
-        self.ppid = ppid
-        self.sockets = sockets
-        self.app = app
-        self.timeout = timeout
-        self.cfg = cfg
-        self.booted = False
-        self.aborted = False
-        self.reloader = None
-
-        self.nr = 0
-
-        if cfg.max_requests > 0:
-            jitter = randint(0, cfg.max_requests_jitter)
-            self.max_requests = cfg.max_requests + jitter
-        else:
-            self.max_requests = sys.maxsize
-
-        self.alive = True
-        self.log = log
-        self.tmp = WorkerTmp(cfg)  # 临时文件机制，父进程通过检测文件时间戳，来确认子进程是否存活。
-        
-    def __str__(self)
-    def notify(self)        
-
-    def run(self):
-        """ 工作进程主循环
-        This is the mainloop of a worker process. 子类必须重载
-        """
-        raise NotImplementedError()     
-
-    def init_process(self):
-        """\
-        If you override this method in a subclass, the last statement
-        in the function should be to call this method with
-        super().init_process() so that the ``run()`` loop is initiated.
-        主要事情：
-        1.设置进程的进程组信息；
-        2.创建单进程管道，Worker是通过管道来存储导致中断的信号，不直接处理，先收集起来，在主循环中处理；
-        3.获取要监听的文件描述符，并将描述符设置为不可被子进程继承；
-        4.设置中断信号处理函数 init_signals();
-        5.设置代码更新时，自动重启的配置 reload_cls
-        6.获取实现了wsgi协议的app对象 load_wsgi()
-        7.进入主循环方法run，如果子类重载了init_process，需要加上此处。        
-        """
-
-        # set environment' variables
-        if self.cfg.env:
-            for k, v in self.cfg.env.items():
-                os.environ[k] = v
-
-        util.set_owner_process(self.cfg.uid, self.cfg.gid,
-                               initgroups=self.cfg.initgroups)
-
-        # Reseed the random number generator
-        util.seed()
-
-        # For waking ourselves up
-        self.PIPE = os.pipe()
-        for p in self.PIPE:
-            util.set_non_blocking(p)
-            util.close_on_exec(p)
-
-        # Prevent fd inheritance
-        for s in self.sockets:
-            util.close_on_exec(s)
-        util.close_on_exec(self.tmp.fileno())
-
-        self.wait_fds = self.sockets + [self.PIPE[0]]
-
-        self.log.close_on_exec()
-
-        self.init_signals()
-
-        self.load_wsgi()
-
-        # start the reloader 启动重载引擎 
-        if self.cfg.reload:
-            def changed(fname):
-                self.log.info("Worker reloading: %s modified", fname)
-                self.alive = False
-                os.write(self.PIPE[1], b"1")
-                self.cfg.worker_int(self)
-                time.sleep(0.1)
-                sys.exit(0)
-
-            reloader_cls = reloader_engines[self.cfg.reload_engine]
-            self.reloader = reloader_cls(extra_files=self.cfg.reload_extra_files,
-                                         callback=changed)
-            self.reloader.start()
-
-        self.cfg.post_worker_init(self)
-
-        # （重要）Enter main run loop  进入主循环
-        self.booted = True
-        self.run()
-        
-    def load_wsgi(self)                  # 获得实现wsgi协议的app，如Flask
-    def init_signals(self)
-    def handle_usr1(self, sig, frame)
-    def handle_exit(self, sig, frame)
-    def handle_quit(self, sig, frame)
-    def handle_abort(self, sig, frame)
-    def handle_error(self, req, client, addr, exc)
-    def handle_winch(self, sig, fname)        
-```
-
-
-
-works/base_async.py 异步模式基类
-
-```python
-import gunicorn.http as http
-import gunicorn.http.wsgi as wsgi
-import gunicorn.util as util
-import gunicorn.workers.base as base
-
-ALREADY_HANDLED = object()
-
-
-class AsyncWorker(base.Worker):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.worker_connections = self.cfg.worker_connections
-        
-    def handle(self, listener, client, addr):
-        
-    def handle_request(self, listener_name, req, sock, addr):        
-```
-
-
-
-### 同步模式 sync.py
-
-同步工作模式:  比较低效的工作模式
-
-* run_for_one()处理单个时调用 accept，
-* run_for_multi()处理多个时调用 wait
-
-```python
-import gunicorn.http as http
-import gunicorn.http.wsgi as wsgi
-import gunicorn.util as util
-import gunicorn.workers.base as base
-
-class SyncWorker(base.Worker):
-	""" 同步工作模式: run_for_one()处理单个时调用accept，处理多个时调用wait """
-    def accept(self, listener):
-        client, addr = listener.accept()
-        client.setblocking(1)
-        util.close_on_exec(client)
-        self.handle(listener, client, addr)
-
-    def wait(self, timeout):
-        """ select模式，通过超时机制实现遍历监听 """
-        try:
-            self.notify()
-            ret = select.select(self.wait_fds, [], [], timeout)
-            if ret[0]:
-                if self.PIPE[0] in ret[0]:
-                    os.read(self.PIPE[0], 1)
-                return ret[0]
-
-        except select.error as e:
-            if e.args[0] == errno.EINTR:
-                return self.sockets
-            if e.args[0] == errno.EBADF:
-                if self.nr < 0:
-                    return self.sockets
-                else:
-                    raise StopWaiting
-            raise
-
-    def run(self):
-        # if no timeout is given the worker will never wait and will
-        # use the CPU for nothing. This minimal timeout prevent it.
-        timeout = self.timeout or 0.5
-
-        # self.socket appears to lose its blocking status after
-        # we fork in the arbiter. Reset it here.
-        for s in self.sockets:    
-            s.setblocking(0)  # 阻塞监听
-
-        if len(self.sockets) > 1:  # 处理多个
-            self.run_for_multiple(timeout)
-        else:	# 处理一个
-            self.run_for_one(timeout)            
-```
-
-
-
-### 线程池模式 gthread.py
-
-大致流程 （换行且tab表示是在函数内部）
-
-ThreadWorker::init_process() ->
-
-​		run() ->
-
-​			accept() -->
-
-​				enqueue_req 请求入队 (finish_request, handle, handle_request )  
-
-```python
-import concurrent.futures as futures  # 标准库并发，本处用了线程池
-import selectors  # 异步IO实现里的选择器
-
-from . import base
-from .. import http
-from .. import util
-from ..http import wsgi
-
-class ThreadWorker(base.Worker):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.worker_connections = self.cfg.worker_connections
-        self.max_keepalived = self.cfg.worker_connections - self.cfg.threads
-        # initialise the pool
-        self.tpool = None
-        self.poller = None
-        self._lock = None
-        self.futures = deque()
-        self._keep = deque()
-        self.nr_conns = 0
-        
-    def init_process(self):
-        """ 重载，获取一个线程池，设置poll选择器，设置读锁 """
-        self.tpool = self.get_thread_pool()
-        self.poller = selectors.DefaultSelector()
-        self._lock = RLock()
-        super().init_process()    
-        
-    def run(self):
-        """ select模式 实现listen和异步IO, 主要流程如下：        
-        更新tmpfile时间戳self.notify()
-        获取就绪的请求连接self.accept()；
-        如果并发数允许，分配一个线程处理请求；
-        判断父进程是否已经停止工作，有的话准备退出主循环；
-        杀死已经允许最大连接事件的keep-alive连接。
-        """
-        # init listeners, add them to the event loop
-        for sock in self.sockets:
-            sock.setblocking(False)
-            # a race condition during graceful shutdown may make the listener
-            # name unavailable in the request handler so capture it once here
-            server = sock.getsockname()
-            acceptor = partial(self.accept, server)  # 获取accept连接
-            self.poller.register(sock, selectors.EVENT_READ, acceptor)
-
-        while self.alive:
-            # notify the arbiter we are alive
-            self.notify()
-
-            # can we accept more connections?
-            if self.nr_conns < self.worker_connections:
-                # wait for an event
-                events = self.poller.select(1.0)
-                for key, _ in events:
-                    callback = key.data
-                    callback(key.fileobj)
-
-                # check (but do not wait) for finished requests
-                result = futures.wait(self.futures, timeout=0,
-                        return_when=futures.FIRST_COMPLETED)
-            else:
-                # wait for a request to finish
-                result = futures.wait(self.futures, timeout=1.0,
-                        return_when=futures.FIRST_COMPLETED)
-
-            # clean up finished requests
-            for fut in result.done:
-                self.futures.remove(fut)
-
-            if not self.is_parent_alive():
-                break
-
-            # handle keepalive timeouts
-            self.murder_keepalived()
-
-        self.tpool.shutdown(False)
-        self.poller.close()
-
-        for s in self.sockets:
-            s.close()
-
-        futures.wait(self.futures, timeout=self.cfg.graceful_timeout)   
-        
-    def enqueue_req(self, conn):
-        """ 请求入队，从线程池里分配线程 """
-        conn.init()
-        # submit the connection to a worker
-        fs = self.tpool.submit(self.handle, conn)
-        self._wrap_future(fs, conn)
-        
-```
-
-
-
-### gevent模式  ggevent.py
-
-依赖模块 gevent
-
-```python
-try:
-    import gevent
-except ImportError:
-    raise RuntimeError("gevent worker requires gevent 1.4 or higher")
-else:
-    from pkg_resources import parse_version
-    if parse_version(gevent.__version__) < parse_version('1.4'):
-        raise RuntimeError("gevent worker requires gevent 1.4 or higher")
-
-from gevent.pool import Pool
-from gevent.server import StreamServer
-from gevent import hub, monkey, socket, pywsgi
-
-import gunicorn
-from gunicorn.http.wsgi import base_environ
-from gunicorn.workers.base_async import AsyncWorker
-
-class GeventWorker(AsyncWorker):
-
-    server_class = None
-    wsgi_handler = None
-    
-    def run(self):
-        servers = []
-        ssl_args = {}
-
-        if self.cfg.is_ssl:
-            ssl_args = dict(server_side=True, **self.cfg.ssl_options)
-
-        for s in self.sockets:
-            s.setblocking(1)
-            pool = Pool(self.worker_connections)
-            if self.server_class is not None:
-                environ = base_environ(self.cfg)
-                environ.update({
-                    "wsgi.multithread": True,
-                    "SERVER_SOFTWARE": VERSION,
-                })
-                server = self.server_class(
-                    s, application=self.wsgi, spawn=pool, log=self.log,
-                    handler_class=self.wsgi_handler, environ=environ,
-                    **ssl_args)
-            else:
-                hfun = partial(self.handle, s)
-                server = StreamServer(s, handle=hfun, spawn=pool, **ssl_args)
-
-            server.start()
-            servers.append(server)
-
-        while self.alive:
-            self.notify()
-            gevent.sleep(1.0)
-
-        try:
-            # Stop accepting requests
-            for server in servers:
-                if hasattr(server, 'close'):  # gevent 1.0
-                    server.close()
-                if hasattr(server, 'kill'):  # gevent < 1.0
-                    server.kill()
-
-            # Handle current requests until graceful_timeout
-            ts = time.time()
-            while time.time() - ts <= self.cfg.graceful_timeout:
-                accepting = 0
-                for server in servers:
-                    if server.pool.free_count() != server.pool.size:
-                        accepting += 1
-
-                # if no server is accepting a connection, we can exit
-                if not accepting:
-                    return
-
-                self.notify()
-                gevent.sleep(1.0)
-
-            # Force kill all active the handlers
-            self.log.warning("Worker graceful timeout (pid:%s)" % self.pid)
-            for server in servers:
-                server.stop(timeout=1)
-        except:
-            pass
-        
-    def init_process(self):
-        self.patch()
-        hub.reinit()
-        super().init_process()
-        
-        
-class PyWSGIServer(pywsgi.WSGIServer):
-    pass
-
-
-class GeventPyWSGIWorker(GeventWorker):
-    "The Gevent StreamServer based workers."
-    server_class = PyWSGIServer
-    wsgi_handler = PyWSGIHandler
-        
-```
-
-
-
-### eventlet模式  geventlet.py
-
-依赖 eventlet模块
-
-```python
-try:
-    import eventlet
-except ImportError:
-    raise RuntimeError("eventlet worker requires eventlet 0.24.1 or higher")
-else:
-    from pkg_resources import parse_version
-    if parse_version(eventlet.__version__) < parse_version('0.24.1'):
-        raise RuntimeError("eventlet worker requires eventlet 0.24.1 or higher")
-
-from eventlet import hubs, greenthread
-from eventlet.greenio import GreenSocket
-from eventlet.hubs import trampoline
-from eventlet.wsgi import ALREADY_HANDLED as EVENTLET_ALREADY_HANDLED
-import greenlet
-
-from gunicorn.workers.base_async import AsyncWorker
-
-class EventletWorker(AsyncWorker):
-    
-    def init_process(self):
-        self.patch()
-        super().init_process()
-        
-    def run(self):
-        acceptors = []
-        for sock in self.sockets:
-            gsock = GreenSocket(sock)
-            gsock.setblocking(1)
-            hfun = partial(self.handle, gsock)
-            acceptor = eventlet.spawn(_eventlet_serve, gsock, hfun,
-                                      self.worker_connections)
-
-            acceptors.append(acceptor)
-            eventlet.sleep(0.0)
-
-        while self.alive:
-            self.notify()
-            eventlet.sleep(1.0)
-
-        self.notify()
-        try:
-            with eventlet.Timeout(self.cfg.graceful_timeout) as t:
-                for a in acceptors:
-                    a.kill(eventlet.StopServe())
-                for a in acceptors:
-                    a.wait()
-        except eventlet.Timeout as te:
-            if te != t:
-                raise
-            for a in acceptors:
-                a.kill()
-
-                
-    def patch(self):  
-        # 植入 eventlet的监听
-        hubs.use_hub()
-        eventlet.monkey_patch()
-        patch_sendfile()    
-```
-
-
-
-### tornado模式 gtornado.py
-
-```python
-try:
-    import tornado
-except ImportError:
-    raise RuntimeError("You need tornado installed to use this worker.")
-import tornado.web
-import tornado.httpserver
-from tornado.ioloop import IOLoop, PeriodicCallback
-from tornado.wsgi import WSGIContainer
-from gunicorn.workers.base import Worker
-from gunicorn import __version__ as gversion
-
-
-class TornadoWorker(Worker):
-    
-    def init_process(self):
-        # IOLoop cannot survive a fork or be shared across processes
-        # in any way. When multiple processes are being used, each process
-        # should create its own IOLoop. We should clear current IOLoop
-        # if exists before os.fork.
-        IOLoop.clear_current()
-        super().init_process()
-
-    def run(self):
-        self.ioloop = IOLoop.instance()
-        self.alive = True
-        self.server_alive = False
-
-        if TORNADO5:
-            self.callbacks = []
-            self.callbacks.append(PeriodicCallback(self.watchdog, 1000))
-            self.callbacks.append(PeriodicCallback(self.heartbeat, 1000))
-            for callback in self.callbacks:
-                callback.start()
-        else:
-            PeriodicCallback(self.watchdog, 1000, io_loop=self.ioloop).start()
-            PeriodicCallback(self.heartbeat, 1000, io_loop=self.ioloop).start()
-
-        # Assume the app is a WSGI callable if its not an
-        # instance of tornado.web.Application or is an
-        # instance of tornado.wsgi.WSGIApplication
-        app = self.wsgi
-
-        if tornado.version_info[0] < 6:
-            if not isinstance(app, tornado.web.Application) or \
-            isinstance(app, tornado.wsgi.WSGIApplication):
-                app = WSGIContainer(app)
-
-        # Monkey-patching HTTPConnection.finish to count the
-        # number of requests being handled by Tornado. This
-        # will help gunicorn shutdown the worker if max_requests
-        # is exceeded.
-        httpserver = sys.modules["tornado.httpserver"]
-        if hasattr(httpserver, 'HTTPConnection'):
-            old_connection_finish = httpserver.HTTPConnection.finish
-
-            def finish(other):
-                self.handle_request()
-                old_connection_finish(other)
-            httpserver.HTTPConnection.finish = finish
-            sys.modules["tornado.httpserver"] = httpserver
-
-            server_class = tornado.httpserver.HTTPServer
-        else:
-
-            class _HTTPServer(tornado.httpserver.HTTPServer):
-
-                def on_close(instance, server_conn):
-                    self.handle_request()
-                    super(_HTTPServer, instance).on_close(server_conn)
-
-            server_class = _HTTPServer
-
-        if self.cfg.is_ssl:
-            _ssl_opt = copy.deepcopy(self.cfg.ssl_options)
-            # tornado refuses initialization if ssl_options contains following
-            # options
-            del _ssl_opt["do_handshake_on_connect"]
-            del _ssl_opt["suppress_ragged_eofs"]
-            if TORNADO5:
-                server = server_class(app, ssl_options=_ssl_opt)
-            else:
-                server = server_class(app, io_loop=self.ioloop,
-                                      ssl_options=_ssl_opt)
-        else:
-            if TORNADO5:
-                server = server_class(app)
-            else:
-                server = server_class(app, io_loop=self.ioloop)
-
-        self.server = server
-        self.server_alive = True
-
-        for s in self.sockets:
-            s.setblocking(0)
-            if hasattr(server, "add_socket"):  # tornado > 2.0
-                server.add_socket(s)
-            elif hasattr(server, "_sockets"):  # tornado 2.0
-                server._sockets[s.fileno()] = s
-
-        server.no_keep_alive = self.cfg.keepalive <= 0
-        server.start(num_processes=1)
-
-        self.ioloop.start()
-    
-```
-
-
-
-## 本章参考
-
-* 知乎专栏--Gunicorn源码分析 https://www.zhihu.com/column/c_1111933629604880384
-* Gunicorn源码分析（二）Worker进程 https://www.jianshu.com/p/ef50cc1706d5
-
-
-
-# 5 celery源码剖析
+# celery源码剖析
 
 
 

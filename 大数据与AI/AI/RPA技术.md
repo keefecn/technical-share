@@ -100,7 +100,10 @@ RPA和LCDP都是希望通过低代码技术降低开发门槛，让过去必须�
 
 ### 参考链接
 
-[1]. 知乎-RPA是什么  https://www.zhihu.com/question/324352017
+* 知乎-RPA是什么  https://www.zhihu.com/question/324352017
 
-[2]. 百度百科-RPA 
+* 百度百科-RPA 
+* 分享10款2021年国外顶尖的lowcode开发平台 https://zhuanlan.zhihu.com/p/375252561
+
+
 
