@@ -176,11 +176,14 @@ Required-by:
 * 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
 * 前端生成的包 在superset/static目录，打包配置文件是webpack.config.js： `npm run build`
 
-前后端分离不能彻底的原因
+**前后端分离不能彻底的原因**
 
-1. 后端用了Jinja2模板，Jinja2模板只负责渲染HTML。页面的布局主要是React模板生成的。
-2. 前端的jsx模板文件，需要被Python后端引用。前端jsx -> webpack.config.js (name:jsx) -> mainfest.json(​name: js/css) ->  后端模板渲染 (通过js_bundle/css_bundle(name)定位到react js/css文件)
-3. 前端生成包还不能单独部署到WEB服务器。
+superset使用了服务器端渲染HTML + 客户端渲染组件的组合方案。每个服务首页依赖于服务端渲染，superset大概有10个服务页。因此，前后端不能实现完全的分离。
+
+* 服务端渲染HTML：服务首页只包括了基础数据、导航菜单和HTML框架。服务端导入JS/CSS文件通过js_bundle/css_bundle(name)定位到具体的react js/css文件。
+* 客户端渲染：具体的组件渲染和交互由前端React来完成。
+
+联调：前端调试时仍需superset支持，可本地安装部署superset。如果本地安装不便，可以直接使用测试环境，将前端构建生成目录覆盖superset/static下相应文件即可。
 
 
 
@@ -1433,8 +1436,8 @@ ReactDOM.render(<App />, document.getElementById("app"));
   * SliceModelView.list()   /superset/views/chart/views.py
   * ModelView.list()   /flask_appbuilder/views.py 实际调用BaseView._list() 实现list方法
 * 图表ChartRestApi  /superset/charts/api.py ChartRestApi(BaseSupersetModelRestApi)  13个API
-  * /  单个图表 方法有POST-新建图表
-  * /<pk>/   单个图表   方法有PUT/DELETE
+  * /  图表列表 方法有GET
+  * /<pk>/   单个图表   方法有GET/PUT/DELETE， POST-新建图表
   * import  export   导入导出 
   * data favorite_status
 * 图表父类BaseSupersetModelRestApi方法：  /superset/views/base_api.py  BaseSupersetModelRestApi
@@ -1461,9 +1464,11 @@ ReactDOM.render(<App />, document.getElementById("app"));
 客户端渲染：路由/chart/list/  ->  组件ChartList (/superset-end/src/views/chart/ChartList.tsx)
 
 
+
 #### 列表页交互
 
-
+* 排序Order、过滤Filter、分页Pagination：GET方法时用到
+* 搜索：GET方法的filter参数的opr指向的过滤类
 
 
 
@@ -2252,7 +2257,7 @@ class SliceModelView(
 * api.py RestAPI接口
 * dao.py 更复杂的SQL语句实现，如bulk_delete
 * filters.py  过滤条件
-* schemas.py  定义了元数据对象属性，如表字段
+* schemas.py  定义了元数据对象属性，如表字段。可用来作字段类型和值检验
 
 
 
@@ -2313,6 +2318,37 @@ class CreateChartCommand(BaseCommand):
 
 说明：RestApi类有一个关键属性resource_name。本处路由前缀是`{route_base}` or  `/api/{version}/{resource_name}/`
 
+charts API列表
+
+| route                            | method | 实现模块                             | 实现过程                                                     |
+| -------------------------------- | ------ | ------------------------------------ | ------------------------------------------------------------ |
+| /chart/                          | GET    | flask_appbuilder py:BaseApi:get_list | 查询参数q -> rison转化,  <br>依次处理filter, order, pagination, query, <br>-> response |
+|                                  | POST   |                                      |                                                              |
+|                                  | DELETE |                                      |                                                              |
+| /chart/_info                     | GET    |                                      |                                                              |
+| /chart/data                      | POST   |                                      |                                                              |
+| /chart/data/{cache_key}          | GET    | flask_appbuilder                     |                                                              |
+| /chart/export/                   | GET    |                                      |                                                              |
+| /chart/favorite_status/          | GET    |                                      |                                                              |
+| /chart/import/                   | POST   |                                      |                                                              |
+| /chart/related/{column_name}     | GET    | flask_appbuilder                     |                                                              |
+| /chart/{pk}                      | GET    |                                      |                                                              |
+|                                  | POST   |                                      |                                                              |
+|                                  | DELETE |                                      |                                                              |
+| /chart/{pk}/cache_screenshot/    | GET    |                                      |                                                              |
+| /chart/{pk}/screenshot/{digest}/ | GET    |                                      |                                                              |
+| /chart/{pk}/thumbnail/{digest}/  | GET    |                                      |                                                              |
+
+说明：上面共16个API，其中3个是调用是调用基类方法(`flask_appbuilder/api/__init__.py:BaseApi`，都是GET方法)实现的。
+
+示例：图表列表页搜索
+
+/api/v1/chart/?q=(filters:!((col:slice_name,opr:chart_all_text,value:test)),order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25)
+
+* filters 过滤参数: col过滤字段，opr映射到过滤类，value查询值
+* order_column: 排序字段， order_direction：排序方向
+* page页号，page_size一页大小
+
 ```python
 from flask import g, make_response, redirect, request, Response, send_file, url_for
 from flask_appbuilder.api import expose, protect, rison, safe
@@ -2320,10 +2356,79 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 
 
 class ChartRestApi(BaseSupersetModelRestApi):
+    """ 成员变量详细定义了路由、权限和字段的使用场景
+    1.路由
+    2.权限：类名、方法名
+    3.字段：单面和列表页时的显示、排序、搜索字段名。排序，refer字段的缺省规则。
+    """
     datamodel = SQLAInterface(Slice)
 
     resource_name = "chart"
     allow_browser_login = True
+    include_route_methods = RouteMethod.REST_MODEL_VIEW_CRUD_SET | {
+        RouteMethod.EXPORT,
+        RouteMethod.IMPORT,
+        RouteMethod.RELATED,
+        "bulk_delete",  # not using RouteMethod since locally defined
+        "data",
+        "data_from_cache",
+        "viz_types",
+        "favorite_status",
+    }
+    class_permission_name = "Chart"	# 类权限名
+    method_permission_name = MODEL_API_RW_METHOD_PERMISSION_MAP	#方法权限名，定义在constants.py
+    show_columns = [...]	#图表页时的展示字段
+    show_select_columns = show_columns + ["table.id"]
+    list_columns = [...]   #图表列表页时的展示字段
+    list_select_columns = list_columns + ["changed_by_fk", "changed_on"]    
+    order_columns = [...]  #排序字段    
+    search_columns = [...] #搜索字段
+    base_order = ("changed_on", "desc")
+    base_filters = [["id", ChartFilter, lambda: []]]
+    search_filters = {
+        "id": [ChartFavoriteFilter],
+        "slice_name": [ChartAllTextFilter],
+    }
+    edit_columns = ["slice_name"]
+    add_columns = edit_columns
+
+    add_model_schema = ChartPostSchema()
+    edit_model_schema = ChartPutSchema()
+
+    openapi_spec_tag = "Charts"
+    """ Override the name set for this collection of endpoints """
+    openapi_spec_component_schemas = CHART_SCHEMAS
+
+    apispec_parameter_schemas = {
+        "screenshot_query_schema": screenshot_query_schema,
+        "get_delete_ids_schema": get_delete_ids_schema,
+        "get_export_ids_schema": get_export_ids_schema,
+        "get_fav_star_ids_schema": get_fav_star_ids_schema,
+    }
+    """ Add extra schemas to the OpenAPI components schema section """
+    openapi_spec_methods = openapi_spec_methods_override
+    """ Overrides GET methods OpenApi descriptions """
+
+    order_rel_fields = {	# 排序字段的缺省规则 
+        "slices": ("slice_name", "asc"),
+        "owners": ("first_name", "asc"),
+    }
+
+    related_field_filters = {	# 相关项字段的缺省过滤规则 
+        "owners": RelatedFieldFilter("first_name", FilterRelatedOwners),
+        "created_by": RelatedFieldFilter("first_name", FilterRelatedOwners),
+    }
+
+    allowed_rel_fields = {"owners", "created_by"}
+    
+    def __init__(self) -> None:
+        if is_feature_enabled("THUMBNAILS"):
+            self.include_route_methods = self.include_route_methods | {
+                "thumbnail",
+                "screenshot",
+                "cache_screenshot",
+            }
+        super().__init__()    
     
     @expose("/export/", methods=["GET"])
     @protect()
@@ -2361,6 +2466,10 @@ class ChartDAO(BaseDAO):
 
 #### **过滤逻辑 filters.py**
 
+示例：filters:!((col:slice_name,opr:chart_all_text,value:test)
+
+filters 过滤参数:  col过滤字段，opr映射到过滤类(arg_name -> class_name)，value查询值(部分匹配查询2张表的4个字段)
+
 ```python
 from typing import Any
 
@@ -2376,6 +2485,7 @@ from superset.views.base_api import BaseFavoriteFilter
 
 
 class ChartAllTextFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    """ 在4个字符串字段里查找 部分匹配内容 """
     name = _("All Text")
     arg_name = "chart_all_text"
 
@@ -2383,6 +2493,7 @@ class ChartAllTextFilter(BaseFilter):  # pylint: disable=too-few-public-methods
         if not value:
             return query
         ilike_value = f"%{value}%"
+        # 部分匹配：图表名、描述、可视化类型、表名
         return query.filter(
             or_(
                 Slice.slice_name.ilike(ilike_value),
@@ -3434,6 +3545,56 @@ const groupByControl = {
 ### 后端依赖 Jinja2
 
 参见  《python web框架源码分析》jinja2章节
+
+
+
+### 后端依赖 sqlalchemy
+
+eingine组成 (RFC1738)： name://user:pwd@host:port/database
+
+user:pwd加密存储，解密方式_rfc_1738_unquote (/sqlalchemy/engine/url.py)
+
+```python
+# /sqlalchemy/engine/url.py
+def _rfc_1738_quote(text):
+    return re.sub(r"[:@/]", lambda m: "%%%X" % ord(m.group(0)), text)
+
+def _rfc_1738_unquote(text):
+    return util.unquote(text)
+
+
+# _rfc_1738_unquote 实际实现 /urllib/parse.py
+def unquote(string, encoding='utf-8', errors='replace'):
+    """Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'.
+    """
+    if isinstance(string, bytes):
+        raise TypeError('Expected str, got bytes')
+    if '%' not in string:
+        string.split
+        return string
+    if encoding is None:
+        encoding = 'utf-8'
+    if errors is None:
+        errors = 'replace'
+    bits = _asciire.split(string)
+    res = [bits[0]]
+    append = res.append
+    for i in range(1, len(bits), 2):
+        append(unquote_to_bytes(bits[i]).decode(encoding, errors))
+        append(bits[i + 1])
+    return ''.join(res)
+```
+
+
+
+
 
 
 

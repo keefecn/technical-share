@@ -352,6 +352,24 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 
 
 
+## 1.5 python编译安装
+
+命令
+
+```shell
+# 安装依赖包 centos:
+$yum install -y gcc make build-essential libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
+$yum install libssl-dev zlib1g-dev libbz2-dev
+
+# 编译命令：--with-ssl 需要 bz2 ssl开发库
+$cd $PYTHON_PATH
+$./configure --prefix=/usr/local/Python3.8 --with-ssl --enable-optimizations
+$make
+$make install
+```
+
+
+
 # 2  Python语言教程
 
 ## 2.1   python对象
@@ -971,11 +989,14 @@ traceback ---- 包含调用栈信息的对象。
 [1]. http://www.jb51.net/article/64040.htm
 [2]. 如何理解Python装饰器？ https://www.zhihu.com/question/26930016
 [3]. Python LEGB规则 http://www.jianshu.com/p/3b72ba5a209c
-[4]. Python-__builtin__与__builtins__的区别与关系 http://blog.sina.com.cn/s/blog_8a18c33d01019yek.html 
+[4]. `Python-__builtin__与__builtins__的区别与关系` http://blog.sina.com.cn/s/blog_8a18c33d01019yek.html 
 [5]. python 多继承详解http://www.pythontab.com/html/2013/pythonhexinbiancheng_0828/550.html
 [6]. 浅谈 Python 的 with 语句https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/ 
 
+
+
 # 3  Python开发环境
+
 ## 3.1  模块module
 Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Python 对象定义和Python语句。
 *  模块让你能够有逻辑地组织你的 Python 代码段。
@@ -1272,11 +1293,14 @@ $MV mypkpath.pth $dstdir
 错误描述：到达了包的最顶层，而最顶层不是一个包。
  解决方法：在main.py同级添加一个目录mod，包含components和utilities，并在mod中添加一个**init**.py，即可解决
 
-错误2：no module named ***
+错误2：**no module named ***
 错误描述：在指定路径下没有找到该模块。
 另外：在main.py执行的时候，没有指定路径的文件默认与main.py是同一路径。
 
+
+
 #### 3.1.3.4 包的导入`__init__.py`
+
 假如子目录中也有 __init__.py 那么它就是这个包的子包了。当你将一个包作为模块导入（比如从 xml 导入 dom ）的时候，实际上导入了它的 __init__.py 文件。
 __init__.py 文件定义了包的属性和方法。其实它可以什么也不定义；可以只是一个空文件，但是必须存在。如果 __init__.py 不存在，这个目录就仅仅是一个目录，而不是一个包，它就不能被导入或者包含其它的模块和嵌套包。
 
@@ -1327,12 +1351,18 @@ python模块导入有个搜索路径顺序，分别是python安装程序和安�
 
 
 
-### 3.1.5  项目结构和模块分发包
+### 3.1.5  项目结构和模块打包
 
 **代码配置：setup.py/setup.cfg/setuptools/pip**
+
+* setup.py  打包文件配置，配置了依赖模块和模块的基本信息。必需。
+* setup.cfg 打包文件配置扩展， 可选。
+* setuptools/pip:  模块在线安装工具
+
 源码的入口是setup.py文件中插件式开发入口点entry_points。
 
-#### 3.1.5.1 项目结构
+1)  **项目结构**
+
 项目内含多个文件时的结构示例
 ```sh
 /home/work/projectname
@@ -1344,7 +1374,8 @@ python模块导入有个搜索路径顺序，分别是python安装程序和安�
   -- setup.py  # 必选，设置程序包的基本信息
   -- requirements.txt # 可选，管理依赖包。
 ```
-#### 3.1.5.2 setup.py
+2. **setup.py**
+
 ```shell
 $ python setup.py --help
 Common commands: (see '--help-commands' for more)
@@ -1486,7 +1517,7 @@ $ pip install -r requirements.txt
 
 
 
-#### 3.1.5.3 setup.cfg
+3. **setup.cfg**
 
 setup.cfg提供一种方式，可以让包的开发者提供命令的默认选项，同时为用户提供修改的机会。对setup.cfg的解析，是在setup.py之后，在命令行执行前。
 setup.cfg文件的形式类似于
@@ -1495,11 +1526,17 @@ option=value
 ...
 其中，command是Distutils的命令参数，option是参数选项，可以通过python setup.py --help build_ext方式获取。
 
-#### 3.1.5.4 Setuptools
+
+
+4. **Setuptools**
+
 上面的setup.py和setup.cfg都是遵循python标准库中的Distutils，而setuptools工具针对Python官方 的distutils做了很多针对性的功能增强，比如依赖检查，动态扩展等。很多高级功能我就不详述了，自己也没有用过，等用的时候再作补充。详情可参见[这里](https://pythonhosted.org/setuptools/setuptools.html)。
 
-#### 3.1.5.5 上传到pypi
-\# github首先更新工具，不更新无法识别long_description
+
+
+5. **上传到pypi**
+
+github首先更新工具，不更新无法识别long_description
 ```sh
 $ python3 -m pip install --user --upgrade setuptools wheel twine
 ```
@@ -1994,7 +2031,9 @@ if __name__ == "__main__":
    
 ```
 
-### 3.3.5  测试工具 unittest/pytest/nose
+### 3.3.5  测试工具
+
+表格 python常用测试工具列表
 
 | 工具       | 简介    | 导入           | 使用            |
 | ---------- | ---------------------------------------------------------- | --------------------------- | ------------------------------------------------------ |
@@ -2008,7 +2047,9 @@ if __name__ == "__main__":
 | tox        | 管理配置多个测试环境。           |   | 配合virtualenv   |
 备注：pycharm支持 unittest/nosetests/pytest。-v
 
-表格 22 unittest/pytest/nose测试工具比较
+
+
+表格  unittest/pytest/nose测试工具比较
 
 |   | unittest  | pytest    | nose  |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
@@ -2033,7 +2074,10 @@ if __name__ == "__main__":
 2.安装测试模块
 `$ pip install pytest nose toxs`
 
+
+
 #### 3.3.5.1 unittest
+
    unittest提供了test cases、test suites、test fixtures、test runner相关的类,让测试更加明确、方便、可控。使用unittest编写用例,必须遵守以下规则:
 * 测试文件必须先import unittest
 * 测试类必须继承unittest.TestCase
@@ -2687,7 +2731,9 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 [8].  Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/ 
 
 
+
 # 4  Python高级开发
+
 ## 4.1  python多版本并存
 
 **使用**：直接调用全路径python，区分CPU位数（32/64位）、操作系统（linux/windows/mac），区分python2.7和python 3.x。
@@ -3661,6 +3707,7 @@ except Exception as error:
 详见 《Python源码剖析》内存分配章节
 
 
+
 ## 4.5  图形端开发
 
 * Tkinter/tikinter: python gui标准库
@@ -3793,15 +3840,57 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 
 可用help(module/method)获取到代码的文档化串。
 
-## 6.1  常见问题
 **indent** 缩进，python对格式要求非常来历。建议要求tab = 4 space，且extand tab(tab instead by space)，编辑器要求能够显示tab符号。
 
 
 
-### 6.1.1  Segment Error(core store)
+## 6.1 Python编译安装问题  
+
+**Q1: centos python 3 ModuleNotFoundError: No module named '_bz2'**
+
+报错信息：
+
+```shell
+  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/formats/format.py", line 99, in <module>
+    from pandas.io.common import stringify_path
+  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/common.py", line 4, in <module>
+    import bz2
+  File "/usr/local/python3.8/lib/python3.8/bz2.py", line 19, in <module>
+    from _bz2 import BZ2Compressor, BZ2Decompressor
+ModuleNotFoundError: No module named '_bz2'
+```
+
+原因：缺少Python3.6+的bz2模块需要的so文件
+
+解决方法：重新编译安装 或 下载所缺少的SO拷到 /usr/lib/python38/
+
+
+
+
+
+## 6.2 Python调试问题
+
+**Q1: Segment Error(core store)**
+
 LINUX下可用dmesg查看错误信息。
 
-### 6.1.2  pyquey & beautifulSoup
+
+
+**Q2: pip升级后报错 no module pip**
+
+解决方法：执行下列命令后即修复。
+
+```shell
+pip -m ensurepip
+python -m pip install --upgrade pip
+```
+
+
+
+## 6.3 Python模块问题
+
+### pyquey & beautifulSoup
+
 **错误1：AttributeError: 'XPathExpr' object has no attribute 'add_post_condition'**
 解决方案：版本问题。重新安装pyquery
 
@@ -3815,13 +3904,9 @@ pip install git+git://github.com/gawel/pyquery.git
 **错误2：定位标签的类型错误**
 解决方案：beautifulsoup使用unicode标签，pyquery使用str标签。
 
-错误3：编码转化错误
-encoding error : input conversion failed due to input error,
- I/O error : encoder error
 
 
-
-### 6.1.3  mysql操作失败
+### mysql操作失败
 
 mysql语句操作失败一方面是编码问题，字段值含有非ascii字符，将字符编码转化为UTF-8基本可解决； 另一方面主要是字符转义问题，字段值中有特殊字符需要转义（如,引号）。
 **特别注意：SET NAMES UTF8;**
@@ -3847,23 +3932,12 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 
 
 
-### 6.1.4  celery broker使用redis集群
+### celery broker使用redis集群
 
 环境：py3.7，celery4.3.0（依赖redis>=3.0），redis-py-cluster1.3.6（依赖redis==2.10.6)。
 问题：问py3.7如何同时用redis集群和celery？ celery borken如何配置多节点Redis集群。
 
 答：要用celery最新版本，并且redis-py-cluster版本也要升级。
-
-
-
-### 6.1.6 pip升级后报错 no module pip
-
-解决方法：执行下列命令后即修复。
-
-```shell
-pip -m ensurepip
-python -m pip install --upgrade pip
-```
 
 
 

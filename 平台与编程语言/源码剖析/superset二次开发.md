@@ -139,6 +139,8 @@ Installation
 - Linux Fedore/RHL: ` yum install gcc gcc-c++ libffi-devel python-devel python-pip python-wheel openssl-devel cyrus-sasl-devel openldap-devel`
 - windows: `python-geohash pillow mysqlclient cryptograph`
 
+* python3.7+源码安装： `./configure --prefix=/usr/local/python38 --enable-optimizations  & make & make install`
+
 
 
 ### 本地部署
@@ -789,25 +791,26 @@ BABEL_DEFAULT_LOCALE = 'zh'
 
 中文化修改细则: 
 
-| 页面     | 类别                        | 字符串                                                       | 字符串位置 示例                                              | 修改tag | 修改方法                                      | 效果   |
-| -------- | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | --------------------------------------------- | ------ |
-| ALL      | 普通修改                    |                                                              | .py .html .tsx .js .jsx                                      | __或t   | 修改message.json相应项                        | OK     |
-| 导航菜单 | 服务端 py                   | Data Datasets Databases Charts Dashboard "SQL Lab" "Saved Query"  Settings | app.py add_link/add_view里的label=__("Datasets"),            | __      | 修改flask_appbulder下的po文件，再转成mo文件。 | OK     |
-|          | 服务端 html                 | "SQL Query"                                                  | /templates/appbuuilder/nav_right.html                        | __      | 修改 message.json                             | OK     |
-|          | flask_appbulder             | Security "User info"                                         | flask_appbuilder/security/views.py:141 lazy_gettext("User info") | t       | 修改flask_appbulder下的po文件，再转成mo文件。 | OK     |
-|          | ?                           | Version                                                      | ？                                                           |         |                                               | 不生效 |
-|          | 客户端 tsx                  | About                                                        | /src/component/menu/Menu.tsx                                 | t       |                                               | OK     |
-| 首页     | 首页右侧按钮                | "VIEW ALL" "SQL QUERY" DASHBOARD                             | /src/views/CRUD/welcome/xx.tsx<br>                           | 缺      | 需改造 代码，加t                              |        |
-| 列表页   | 列表页右侧按钮              | "BULK SELECT"                                                | /src/views/xx.tsx<br>name: t('Bulk select'),                 | t       |                                               | OK     |
-|          | 列表页过滤字段              | All Any                                                      | ChartList.tsx DashboardList.tsx                              | 缺      | 需改造 代码，加t                              |        |
-|          | 列表页过滤/排序字段(带空格) | "Created By" "Modified By"                                   | ChartList.tsx DashboardList.tsx <BR>代码字段名是：<br/>`Header: t('Created by'),` | t       | Created By->Created by                        | OK     |
-|          | 列表页过滤/排序字段(无空格) | Modified Search Actions Favorite Dataset                     | Header: t('Favorite'),                                       | t       |                                               | OK     |
-|          | 列表页过滤字段下拉框值      | 图表类型的下拉框值                                           | 格式如 "Event Flow" "MapBox"                                 | t       | 修改message.json相应项                        | OK     |
-| 图表     | 时间下拉框                  | "Adaptative formating"                                       | 前端                                                         | 缺      | 需改造 代码，加t                              |        |
-|          | 时间格式                    |                                                              | control.jsx DataFilterControl.jsx                            | t       |                                               | OK     |
-|          | 时间序列图                  | "Weekly seasonality"                                         | @superset-ui包                                               |         | 需改造 代码，加t                              |        |
-| 看板     | 排序下拉框                  | Sort by Recent                                               | SliceAdder.jsx  Sort by {label}                              |         | 需改造 代码，加t                              |        |
-|          | 图表类型                    | pie table word_cloud ...                                     | AddSliceCard.jsx <br>`<span>{visType}</span>`                | 缺      | 需改造 代码，加t                              |        |
+| 页面     | 类别                        | 字符串                                                       | 字符串位置 示例                                              | 修改tag | 修改方法                                      | 效果 |
+| -------- | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | --------------------------------------------- | ---- |
+| ALL      | 普通修改                    |                                                              | .py .html .tsx .js .jsx                                      | __或t   | 修改message.json相应项                        | OK   |
+| 导航菜单 | 服务端 py                   | Data Datasets Databases Charts Dashboard "SQL Lab" "Saved Query"  Settings | app.py add_link/add_view里的label=__("Datasets"),            | __      | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
+|          | 服务端 html                 | "SQL Query"                                                  | /templates/appbuuilder/nav_right.html                        | __      | 修改 message.json                             | OK   |
+|          | flask_appbulder             | Security "User info"                                         | flask_appbuilder/security/views.py:141 lazy_gettext("User info") | t       | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
+|          | ?                           | Version                                                      | ？                                                           |         |                                               | ?    |
+|          | 客户端 tsx                  | About                                                        | /src/component/menu/Menu.tsx                                 | t       |                                               | OK   |
+| 首页     | 首页右侧按钮                | "VIEW ALL" "SQL QUERY" DASHBOARD                             | /src/views/CRUD/welcome/xx.tsx<br>                           | 缺      | 需改造 代码，加t                              |      |
+| 列表页   | 列表页右侧按钮              | "BULK SELECT"                                                | /src/views/xx.tsx<br>name: t('Bulk select'),                 | t       |                                               | OK   |
+|          | 列表页过滤字段              | All Any                                                      | ChartList.tsx DashboardList.tsx                              | 缺      | 需改造 代码，加t                              |      |
+|          | 列表页过滤/排序字段(带空格) | "Created By" "Modified By"                                   | ChartList.tsx DashboardList.tsx <BR>代码字段名是：<br/>`Header: t('Created by'),` | t       | Created By->Created by                        | OK   |
+|          | 列表页过滤/排序字段(无空格) | Modified Search Actions Favorite Dataset                     | Header: t('Favorite'),                                       | t       |                                               | OK   |
+|          | 列表页过滤字段下拉框值      | 图表类型的下拉框值                                           | 格式如 "Event Flow" "MapBox"                                 | t       | 修改message.json相应项                        | OK   |
+|          | 数据源列表字段              | name type connection schema creator                          | src/datasource/ChangeDatasourceModel.tsx                     | 缺      | 需改造 代码，加t                              |      |
+| 图表     | 时间下拉框                  | "Adaptative formating"                                       | 前端                                                         | 缺      | 需改造 代码，加t                              |      |
+|          | 时间格式                    |                                                              | control.jsx DataFilterControl.jsx                            | t       |                                               | OK   |
+|          | 时间序列图                  | "Weekly seasonality"                                         | @superset-ui包                                               |         | 需改造 代码，加t                              |      |
+| 看板     | 排序下拉框                  | Sort by Recent                                               | SliceAdder.jsx  Sort by {label}                              |         | 需改造 代码，加t                              |      |
+|          | 图表类型                    | pie table word_cloud ...                                     | AddSliceCard.jsx <br>`<span>{visType}</span>`                | 缺      | 需改造 代码，加t                              |      |
 
 说明：可以用工具从指定目录或文件中生成po文件。如果只想添加少量字段，可以手工附加字段值到现有messages.json。
 
@@ -947,7 +950,7 @@ msgstr "注解层"
 * 一般情况下字符串要完全匹配，严格区分大小写和符号。 但对于按纽或表单类，经常有作大小写转化，要区别对待。
   * 通常可以用页面显示的英文串作为KEY；如果不生效，再在代码中搜索，用代码中的英文串作KEY。
   
-  * 表单类示例：显示"Edit Time Range", 代码"Edit time range"，翻译要用显示Edit Time Range
+  * 表单类示例：显示"Create By", 代码"Create by"，翻译要用代码Create by
   
   * 按钮类示例：显示"BULK SELECT"，代码中"Bulk select"，翻译要用代码Bulk select。显示全大写的字符串，试用首字母大写，其它全小写 或者 每个单词首字母大写。
   
@@ -957,7 +960,7 @@ msgstr "注解层"
   
 * 尚未用 __或t 圈起来的字符串，需在代码中添加国际化修改操作符。
 
-* 导航菜单的标题字符串，需要在flask_appbuilder模块的translations增加。
+* 导航菜单的字符串标签，需要在flask_appbuilder模块的translations增加。
 
 
 
@@ -1530,7 +1533,7 @@ ERROR: Failed building wheel for python-geohash
 
 解决方法1：直接下载相应的wml包安装，https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-geohash
 
-解决方法2： windows下安装vc++14.0+，linux下安装 python3-devel
+解决方法2： windows下安装vc++14.0+，linux下安装 python3-devel 或者 gcc-c++
 
 
 
@@ -1544,6 +1547,49 @@ ERROR: Failed building wheel for python-geohash
 
 ```shell
 yum install gcc libffi-devel python3-devel openssl-devel -y
+```
+
+
+
+**Q3: centos python 3 ModuleNotFoundError: No module named '_bz2'**
+
+报错信息：
+
+```shell
+  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/formats/format.py", line 99, in <module>
+    from pandas.io.common import stringify_path
+  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/common.py", line 4, in <module>
+    import bz2
+  File "/usr/local/python3.8/lib/python3.8/bz2.py", line 19, in <module>
+    from _bz2 import BZ2Compressor, BZ2Decompressor
+ModuleNotFoundError: No module named '_bz2'
+```
+
+原因：缺少Python3.6+的bz2模块需要的so文件
+
+解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/ 
+
+
+
+**Q4: centos import pandas时报错**
+
+报错信息：
+
+```shell
+# import pandas时报错如下：
+/usr/local/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module.
+Your installed Python is incomplete. Attempting to use lzma compression will result in
+ a RuntimeError.
+  warnings.warn(msg)
+```
+
+原因：要严格按照模块依赖的版本安装。"pandas>=1.1.2, <1.2",
+
+解决方法：
+
+```shell
+$ su yum install xz-devel
+$ pip install backports.lzma	#若未安装xz-devel，将会报缺少lzma.h文件
 ```
 
 
