@@ -984,13 +984,13 @@ TPC- H 测试模型为数据库服务器连续7×24 小时工作，可能只有1
 
   
 
-​         ![image-20191211215558677](E:\project\technical-share\media\bigdata\bi_050.png)                      
+​         ![image-20191211215558677](..\..\media\bigdata\bi_050.png)                      
 
 图 14  TPC-H的数据表关联图
 
  
 
- ![image-20191211215654806](E:\project\technical-share\media\bigdata\bi_051.png)
+ ![image-20191211215654806](..\media\bigdata\bi_051.png)
 
 图 15 TPC-H的数据库模型
 
