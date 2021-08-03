@@ -50,7 +50,7 @@
 
  
 
- <img src="E:/project/technical-share/media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
+ <img src="../../media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
 
 
 
@@ -103,7 +103,7 @@ Borg是谷歌内部的大规模集群管理系统，负责对谷歌内部很多�
 
 Borg主要由BorgMaster、Borglet、borgcfg和Scheduler组成，如下图所示
 
-   ![1574519402884](E:/project/technical-share/media/sf_reuse/framework/frame_cncf_001.png)
+   ![1574519402884](../../media/sf_reuse/framework/frame_cncf_001.png)
 
 图 5 google_Borg架构
 
@@ -119,13 +119,13 @@ Borg主要由BorgMaster、Borglet、borgcfg和Scheduler组成，如下图所示
 
 Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod单IP等。Kubernetes的整体架构跟Borg非常像，如下图所示
 
-   ![1574519428231](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_003.png)
+   ![1574519428231](../../media/sf_reuse/framework/frame_k8s_003.png)
 
 图  Kubernetes架构
 
 
 
-![1574519488689](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_004.png)
+![1574519488689](../../media/sf_reuse/framework/frame_k8s_004.png)
 
 图 K8s master
 
@@ -141,7 +141,7 @@ Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod�
 
   
 
-  ![1574519522443](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_005.png)
+  ![1574519522443](../../media/sf_reuse/framework/frame_k8s_005.png)
 
 图 K8s Node
 
@@ -168,7 +168,7 @@ Kubernetes主要由以下几个核心组件组成： K8s Master的4个和K8s Nod
 
 Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，如下图所示
 
-   ![1574519541207](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_002.png)
+   ![1574519541207](../../media/sf_reuse/framework/frame_k8s_002.png)
 
 图 7 K8s分层架构
 
@@ -199,7 +199,7 @@ Kubernetes 和它所推崇的声明式[容器编排与管理体系](https://yq.a
 
 Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用来构建“平台”的“平台”。 相比于 Mesos 和 Swarm 等容器管理平台，Kubernetes 项目最大的优势和关注点，在于它始终专注于如何帮助用户基于 Kubernetes 的声明式 API ，快速、便捷的构建健壮的分布式应用，并且按照统一的模型（容器设计模式和控制器机制）来驱动应用的实际状态向期望状态逼近和收敛。
 
-   ![1574519565059](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_007.png)
+   ![1574519565059](../../media/sf_reuse/framework/frame_k8s_007.png)
 
 图 8 多集群 K8s 隧道架构
 
@@ -299,7 +299,7 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
 
 说明: 本地docker方案需要linux环境。
 
-   ![1574519587996](E:/project/technical-share/media/sf_reuse/framework/frame_k8s_008.png)
+   ![1574519587996](../../media/sf_reuse/framework/frame_k8s_008.png)
 
 图 9 K8s集群~本地Docker方案
 

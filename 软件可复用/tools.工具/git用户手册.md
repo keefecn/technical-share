@@ -611,7 +611,7 @@ Your branch is ahead of 'origin/master' by 2 commits.
 
 说明：一般git status上面提示的commit要大于等于2，-i指向的commit是不需要修改的，可以是最后一次push的commit，或者还未提交commit中的某个，合并只会影响到-i指向的commit之后的提交。-i指向的commit不能超过最后一次push之前的commit，否则会产生很多重复的commit log，而且仓库混乱（另外，合并项列单的第一个commit不能squash，会提示不是一个single reversion）。
 
- ![image-20191208223043376](E:\project\technical-share\media\sf_reuse\tools\tools_git_001.png)
+ ![image-20191208223043376](..\..\media\sf_reuse\tools\tools_git_001.png)
 ```sh
 git-rebase - Reapply commits on top of another base tip
 git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>]
@@ -753,7 +753,7 @@ linux     :~/.ssh
 
 备注：命令参数如-d/-D大小写不敏感。
 
- ![image-20191208223108973](E:\project\technical-share\media\sf_reuse\tools\tools_git_002.png)
+ ![image-20191208223108973](..\..\media\sf_reuse\tools\tools_git_002.png)
 
 图 2 git客户端里的revision graph
 
