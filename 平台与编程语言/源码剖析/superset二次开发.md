@@ -4,6 +4,7 @@
 | 2    | 2021-6-11 | 调整部分内容，全文迁移到源码剖析目录。 | 同上   |        |
 | 3    | 2021-6-21 | 更新superset-1.0的相关内容。           | 同上   |        |
 | 4    | 2021-7-18 | 源码剖析章节另文                       | 同上   |        |
+|      |           |                                        |        |        |
 
 
 
@@ -72,22 +73,22 @@ Apache Superset是流行的数据探索和可视化平台。
 
 Find out more about how the roadmap is managed in [SIP (Superset Improvement Proposal, Superset改进建议) 53](https://github.com/apache/superset/issues/10894)
 
-| 版本  | 发布时间   | 功能特性                                                |
-| ----- | ---------- | ------------------------------------------------------- |
-| 1.2   | 2021-7-    |                                                         |
-| 1.1   | 2021-4-14  |                                                         |
-| 1.0   | 2021-1-21  | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。 |
-| 0.38  | 2020-10-17 |                                                         |
-| 0.37  | 2020-8-14  |                                                         |
-| 0.36  | 2020-04-02 |                                                         |
-| 0.35  | 2019-10-31 |                                                         |
-| 0.34  | 2019-08-09 |                                                         |
-| ...   |            |                                                         |
-| 0.28  | 2018-10-17 | incubator-superset仓库的最终版本tag。                   |
-| 0.24  | 2018-3-27  |                                                         |
-| ...   |            |                                                         |
-| 0.4   | 2015-9-27  |                                                         |
-| 0.2.0 | 2015-9-5   | 第一个正式发布版本。                                    |
+| 版本  | 发布时间   | 功能特性                                                     |
+| ----- | ---------- | ------------------------------------------------------------ |
+| 1.2   | 2021-7-    |                                                              |
+| 1.1   | 2021-4-14  |                                                              |
+| 1.0   | 2021-1-21  | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。<br>1.0.1引入了Apache ECharts 5.0 |
+| 0.38  | 2020-10-17 |                                                              |
+| 0.37  | 2020-8-14  |                                                              |
+| 0.36  | 2020-04-02 |                                                              |
+| 0.35  | 2019-10-31 |                                                              |
+| 0.34  | 2019-08-09 |                                                              |
+| ...   |            |                                                              |
+| 0.28  | 2018-10-17 | incubator-superset仓库的最终版本tag。                        |
+| 0.24  | 2018-3-27  |                                                              |
+| ...   |            |                                                              |
+| 0.4   | 2015-9-27  |                                                              |
+| 0.2.0 | 2015-9-5   | 第一个正式发布版本。                                         |
 
 > 版本号a.b.0一般简写为a.b.
 >
@@ -252,7 +253,15 @@ yarn & yarn run build
 
 
 
-## 2.2 支持数据源
+### 容器部署
+
+
+
+
+
+
+
+## 2.2 支持数据源类型
 
 **Database dependencies** (superset 1.0)
 
@@ -300,59 +309,59 @@ yarn & yarn run build
 
 
 
-## 2.3 支持图表
+## 2.3 支持图表类型
 
-38+张图表
+38+张图表类型
 
-| 图表类别 | 图表英文名         | 图表中文名         | 用途 | 支持情况 |
-| -------- | ------------------ | ------------------ | ---- | -------- |
-| 常用图表 | line               | 线图               |      | √        |
-|          | histogram          | 直方图             |      | √        |
-|          | table              | 表                 |      | √        |
-|          | filter_box         | 筛选盒             |      | √        |
-|          | dist_bar           | 柱状图             |      | √        |
-|          | area               | 面积图             |      | √        |
-|          | pie                | 饼图               |      | √        |
-|          | pivot_table        | 透视表             |      | √        |
-|          | country_map        | 国家地图           |      | √        |
-|          | world_map          | 世界地图           |      | √        |
-| 时间序列 | bar                | 时间序列柱状图     |      | √        |
-|          | time_table         | 时间序列表         |      | √        |
-|          | time_pivot         | 时间序列周期轴     |      | √        |
-|          | echarts_timeseries | 时间序列           |      | √        |
-|          | compare            | 时间序列百分比变化 |      | √        |
-|          | cal_heatmap        | 时间热力图         |      | √        |
-|          | big_number_total   | 数字               |      | √        |
-| 趋势类   | big_number         | 数字和趋势线       |      | √        |
-|          | heatmap            | 热力图             |      | √        |
-|          | dual_line          | 双线图             |      | √        |
-|          | line_multi         | 多线图             |      | √        |
-|          |                    |                    |      | √        |
-| 复杂图   | rose               | 夜莺玫瑰图         |      | √        |
-|          | bubble             | 气泡图             |      | √        |
-|          | treemap            | 树状图             |      | √        |
-|          | box_plot           | 箱线图             |      | √        |
-|          | sunburst           | 旭日图             |      | √        |
-|          | sankey             | 桑基图             |      | √        |
-|          | word_cloud         | 词汇云             |      | √        |
-|          | mapbox             | 地图盒             |      | √        |
-|          | partition          | 分区图             |      | √        |
-|          | event_flow         | 事件流             |      | √        |
-|          | deck_path          | 平面路径图         |      | √        |
-|          | directed_force     | 力导向图           |      | √        |
-|          | bullet             | 子弹图             |      | √        |
-|          | paired_ttest       | paired_ttest       |      | √        |
-|          | para               | 平行坐标           |      | √        |
-|          | chord              | 弦图               |      | √        |
-|          | horizon            | 范围图             |      | √        |
-| deck图   | deck_polygon       | 多边形装饰         |      |          |
-|          | deck_arc           | 3D路径图           |      |          |
-|          | deck_screengrid    | deck_screengrid    |      |          |
-|          | deck_scatter       | 散射图             |      |          |
-|          | deck_hex           | deck_hex           |      |          |
-|          | deck_multi         | deck_multi         |      |          |
-|          | deck_grid          | deck_grid          |      |          |
-|          | deck_geojson       | deck_geojson       |      |          |
+| 图表类别 | 图表英文名           | 图表中文名         | 用途 | 支持情况 |
+| -------- | -------------------- | ------------------ | ---- | -------- |
+| 常用图表 | line                 | 线图               |      | √        |
+|          | histogram            | 直方图             |      | √        |
+|          | table                | 表                 |      | √        |
+|          | filter_box           | 筛选盒             |      | √        |
+|          | dist_bar             | 柱状图             |      | √        |
+|          | area                 | 面积图             |      | √        |
+|          | pie                  | 饼图               |      | √        |
+|          | pivot_table          | 透视表             |      | √        |
+|          | country_map          | 国家地图           |      | √        |
+|          | world_map            | 世界地图           |      | √        |
+| 时间序列 | bar                  | 时间序列柱状图     |      | √        |
+|          | time_table           | 时间序列表         |      | √        |
+|          | time_pivot           | 时间序列周期轴     |      | √        |
+|          | echarts_timeseries   | 时间序列           |      | √        |
+|          | compare              | 时间序列百分比变化 |      | √        |
+|          | cal_heatmap          | 时间热力图         |      | √        |
+|          | big_number_total     | 数字               |      | √        |
+| 趋势类   | big_number           | 数字和趋势线       |      | √        |
+|          | heatmap              | 热力图             |      | √        |
+|          | dual_line            | 双线图             |      | √        |
+|          | line_multi           | 多线图             |      | √        |
+|          |                      |                    |      | √        |
+| 复杂图   | rose                 | 夜莺玫瑰图         |      | √        |
+|          | bubble               | 气泡图             |      | √        |
+|          | treemap              | 树状图             |      | √        |
+|          | box_plot             | 箱线图             |      | √        |
+|          | sunburst             | 旭日图             |      | √        |
+|          | sankey               | 桑基图             |      | √        |
+|          | word_cloud           | 词汇云             |      | √        |
+|          | mapbox               | 地图盒             |      | √        |
+|          | partition            | 分区图             |      | √        |
+|          | event_flow           | 事件流             |      | √        |
+|          | deck_path            | 平面路径图         |      | √        |
+|          | directed_force       | 力导向图           |      | √        |
+|          | bullet               | 子弹图             |      | √        |
+|          | paired_ttest         | paired_ttest       |      | √        |
+|          | para                 | 平行坐标           |      | √        |
+|          | chord                | 弦图               |      | √        |
+|          | horizon              | 范围图             |      | √        |
+| deck图   | deck_polygon         | 多边形装饰         |      |          |
+|          | deck_arc             | 3D路径图           |      |          |
+|          | deck_screengrid      | deck_screengrid    |      |          |
+|          | deck_scatter         | 散射图             |      |          |
+|          | deck_hex             | 六边形             |      |          |
+|          | deck_Multiple Layers | 多层图             |      |          |
+|          | deck_grid            | 网格图             |      |          |
+|          | deck_geojson         | deck_geojson       |      |          |
 
 
 
@@ -418,11 +427,22 @@ JSON串
 
 
 
-
-
 ## 2.4 基本功能
 
 数据流向： 数据源 - 数据表 -- 切片/图表 -- 看板
+
+功能
+
+* 数据流向：从数据源、数据集到图表、看板的完整流程。
+* 支持主流数据源
+* 支持图表类型40+
+* 支持图表注解和告警
+* 支持看板刷新
+* 支持图表/看板分享
+* 异步查询 
+* 基于RBAC的访问控制 
+
+
 
 ### 时间字段
 
@@ -446,9 +466,11 @@ JSON串
 
 ### D3字段格式
 
-数值格式：D3.format('d') https://github.com/d3/d3-format/blob/master/README.md#format 
+数值格式：D3.format('d')  https://github.com/d3/d3-format/blob/master/README.md#format 
 
- 
+时间格式： 
+
+
 
 ### 邮件告警
 
@@ -481,7 +503,7 @@ FLASK_ENV:  development
 **法2：(推荐) Pycharm社区版，选择 python**
 
 ```ini
-Module name: superset.run 或者 flask/suerset
+Module name: superset.run 或者 flask/superset
 Parameters: 
 Environment variables: PYTHONUNBUFFERED=1;SUPERSET_CONFIG_PATH=;
 Working directory: 当前superset目录父级
@@ -765,12 +787,11 @@ API实现： superset API实现在各个目录下的api.py
 
 表格 简易定制化的修改项
 
-| 修改项                 | 前端修改react  /superset-frondend/                       | 后端修改python  /superset/             | 备注            |
-| ---------------------- | -------------------------------------------------------- | -------------------------------------- | --------------- |
-| 字符符国际化           | tsx,jsx文件里需要国际化的字符串加 t()                    | py,html文件里需要国际化的字符串加 __() | 详见 国际化章节 |
-| 列表页修改默认排序字段 | 传参时修改页面呈现字段：ChartList.tsx  DashboardList.tsx | 不传参修改缺省字段                     |                 |
-|                        |                                                          |                                        |                 |
-|                        |                                                          |                                        |                 |
+| 修改项                          | 前端修改react  /superset-frondend/                       | 后端修改python  /superset/             | 备注            |
+| ------------------------------- | -------------------------------------------------------- | -------------------------------------- | --------------- |
+| 字符符国际化                    | tsx,jsx文件里需要国际化的字符串加 t()                    | py,html文件里需要国际化的字符串加 __() | 详见 国际化章节 |
+| 图表/看板列表页修改默认排序字段 | 传参时修改页面呈现字段：ChartList.tsx  DashboardList.tsx | 不传参修改缺省字段                     |                 |
+|                                 |                                                          |                                        |                 |
 
 说明：上面表格中出现的xx表示要修改的内容。
 
@@ -780,10 +801,14 @@ API实现： superset API实现在各个目录下的api.py
 
 实现原理：flask_babel --> babel
 
+说明：babel翻译能自动对货币、日期格式按照语言环境进行切换。
+
+
+
 配置文件 config.py
 
  ```python
-# Setup default language 缺省语种，flask_babel模块所需变量
+# Setup default language 缺省本地化，flask_babel模块所需变量
 BABEL_DEFAULT_LOCALE = 'zh'
  ```
 
@@ -811,6 +836,8 @@ BABEL_DEFAULT_LOCALE = 'zh'
 |          | 时间序列图                  | "Weekly seasonality"                                         | @superset-ui包                                               |         | 需改造 代码，加t                              |      |
 | 看板     | 排序下拉框                  | Sort by Recent                                               | SliceAdder.jsx  Sort by {label}                              |         | 需改造 代码，加t                              |      |
 |          | 图表类型                    | pie table word_cloud ...                                     | AddSliceCard.jsx <br>`<span>{visType}</span>`                | 缺      | 需改造 代码，加t                              |      |
+| 数据集   | 编辑                        | "Enable Filter Select"                                       | 这个页面比较奇怪，代码中也是"Enable Filter Select"。<br>但所有label字符串都不起作用。 | ？      | 使用了flask_appbuilder组件，需要此模块加串    | ？   |
+|          | 搜索框                      |                                                              |                                                              |         |                                               |      |
 
 说明：可以用工具从指定目录或文件中生成po文件。如果只想添加少量字段，可以手工附加字段值到现有messages.json。
 
@@ -829,7 +856,7 @@ BABEL_DEFAULT_LOCALE = 'zh'
   {{_('需要汉化的按钮字符')}}
   ```
 
-  * @superset-ui:  xx.jsx 使用 t，t支持格式化字符串
+  * @superset-ui:  xx.jsx 使用 t，t 支持格式化字符串
 
   ```jsx
   import {t, validateNonEmpty} from '@superset-ui/core';
@@ -864,10 +891,12 @@ $ pip install babel
 # step1: 生成pot/po格式 （pot和po格式类似）
 # 从babel.cfg配置的文件里提取 message.pot (-k参数可忽略,默认识别标鉴_ __ t）, 要在superset父目录执行命令才能提取到babel.cfg里配置的文件
 # NOTE: pybabel不能保证完全提取 -k参数中的内容，若有遗漏需要自行添加到PO文件里
+# 安全起见，避免覆盖 可先创建目录translation2，将生成的pot/po/json都先放到这个目录，等一切ok再替换superset/translations/zh下相关文件
 $ cd $SUPERSET_HOME
-$ pybabel extract -F superset/translations/babel.cfg -k _ -k __ -k t -k tn -k tct -o superset/translations/messages.pot .
-# 将 .pot转化成 .po格式， -d指向生成目录，-l指向语种，下例中生成文件在 translations/zh/message.po
-$ pybabel init -i messages.pot -d translations -l zh
+$ mkdir translations2
+$ pybabel extract -F superset/translations/babel.cfg -k _ -k __ -k t -k tn -k tct -o translations2/msg.pot .
+# 将 .pot转化成 .po格式， -d指向生成目录，-l指向语种，下例中生成文件在 translations2/zh/message.po, 
+$ pybabel init -i translations2/msg.pot -d translations2 -l zh
 
 # step2: 人工翻译 messages.po
 
@@ -875,7 +904,7 @@ $ pybabel init -i messages.pot -d translations -l zh
 # step3: po需要转化成 mo 或 json才能被使用
 # 编译 .po -> .mo 
 # (OK)法1：pybable -d 编译目标目录，-l 语种。要求指定目录的里层结构是$locale/LC_MESSAGES/xx.po
-$ pybabel compile -d translations -l zh
+$ pybabel compile -d translations2 -l zh
 #  法2：linux工具msgfmt
 $ msgfmt ./messages.po -o ./messages.mo
 
@@ -895,17 +924,20 @@ $ python -X utf8 -m po2json.main translations2 translations messages
 babel.cfg 示例
 
 ```ini
-[ignore: superset-frontend/node_modules/**]
+#[ignore: superset-frontend/node_modules/**]
 [python: superset/**.py]
 [jinja2: superset/**/templates/**.html]
 [javascript: superset-frontend/src/**.js]
 [javascript: superset-frontend/src/**.jsx]
 [javascript: superset-frontend/src/**.tsx]
+[javascript: superset-frontend/node_modules/@superset-ui/**.js]
+[javascript: superset-frontend/node_modules/@superset-ui/**.jsx]
+[javascript: superset-frontend/node_modules/@superset-ui/**.tsx]
 
 encoding = utf-8
 ```
 
-说明：上面配置放弃了superset-frontend/node_module/，实际@superset-ui模块有好多显示字符串。下面三个目录合计返回约2307次。
+说明：上面配置放弃了superset-frontend/node_module/，实际@superset-ui模块有好多显示字符串。下面三个目录合计返回约2341次。
 
 * superset/目录下，搜索 ` _("` 返回匹配次数774次。
 * superset-frontend/src/目录下，搜索` t(`  返回匹配次数645次。
@@ -960,7 +992,10 @@ msgstr "注解层"
   
 * 尚未用 __或t 圈起来的字符串，需在代码中添加国际化修改操作符。
 
-* 导航菜单的字符串标签，需要在flask_appbuilder模块的translations增加。
+* 使用了flask_appbuilder模块的组件或模板，国际化需要在flask_appbuilder模块的translations添加。这个一般直接返回HTML，客户端不再转化语言。
+
+  * 导航菜单的字符串标签，使用了flask_appbuilder模块导航菜单组件
+  * 表格编辑/tablemodelview/edit/<pk> 使用了flask_appbuilder模块原生模板
 
 
 
@@ -1099,11 +1134,44 @@ superset路由涉及主要分二部分：
 
 # 4 运维篇
 
-## 4.1  权限和安全管理
+## 4.1  安全管理
+
+### RABC机制
+
+superset的权限管理是通过flask_appbuilder模块的权限管理实现的，是RABC机制(Role-Based Access Control, 基于角色的访问控制)。
+
+用户通过角色关联到 若干权限，权限为视图项权限（每个权限可以由二部分组成：视图项，视图项的某个权限如can_read）。
+
+* 权限表 permission：规定若干基本权限如读/写/列表/删除/...,  
+* 视图项 view：页面上每一个要控制权限的项都可以作为一个视图项如数据源页，看板页，图表页甚至数据源某列等等。
+
+
+
+表格 权限管理的数据表
+
+| 表名                    | 权限说明           | 字段                                | 权限详述                                                     |
+| ----------------------- | ------------------ | ----------------------------------- | ------------------------------------------------------------ |
+| ab_role                 | 角色               | id, name(uni)                       | 一个角色映射到访问权限，一个用户可以是多个角色，一个角色也可以有多个用户。6个预创建角色分别是Admin, Alpha, Gramma, granter, Public, sql_lab。 |
+| ab_premission           | 权限               | id, name(uni)                       | 如can list/can del, menu_access等。共85个                    |
+| ab_view_menu            | 被管对象           | id, name(uni)                       | 菜单、视图、数据源，数据集，看板，图板等等.<br>示例数据集：[database_name].[schema] ，[database_name].[schema](id:xx) |
+| ab_permission_view      | 权限视图关联       | id, permission_id, view_menu_id     | 建议permission表和view_menu表的关联，多对多关系。            |
+| ab_permission_view_role |                    | id, permission_view_id, <br>role_id | 角色对应的视图权限。permission_view_id和role_id二个外键分别对应到ab_permission_view表和ab_role表的主键。 |
+| ab_user_role            | user和role关联     | id, user_id, role_id                | 建立user表和role表的关联，多对多关系                         |
+| ab_user                 |                    | id, ...                             | 包括用户基本信息，包括用户名/密码等。                        |
+| ab_register             | 用户注册时基本信息 | id, ...                             | 如果不允许用户自注册，此表则不用。                           |
+
+备注：权限和被管对象通过表`ab_permission_view`关联起来。
+
+* Schema: 是一个逻辑概念。
+  * MySQL：等同于表。
+  * Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema. 默认schema和用户名同名。
+  * PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
+
+
 
 ### 权限管理
 
-权限管理：权限项有287项，可分为两大类分别是基本权限和视图列表的操作权限。
+权限管理：权限项有287项，可分为两大类分别是基本权限 和 视图列表的操作权限。
 
 表格 5 权限管理的角色说明（角色类似用户组的概念）
 
@@ -1120,22 +1188,11 @@ superset路由涉及主要分二部分：
 1. 数据表的读权限
 *  数据源（表）的属主缺省可以完全操作（读+写+删）此数据源的图表和视图。
 *  Alpha角色可以读取所有数据源和dashboard，但不能修改。
-*  Gamma只能看到数据库，数据表和dashboard都是缺省为空。
+*  Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
 2. dashboard的写权限：要能修改dashboard，要在此看板设置所有者加入用户名。
+3. 行级别权限：
 
- 
 
-表格 6 权限管理的数据表
-
-| 表名          | 权限说明 | 权限详述                       |
-| ------------- | -------- | ------------------------------ |
-| ab_role       | 角色     |                                |
-| ab_premission | 权限     | 如can list/can del等保存在此表 |
-| ab_view_menu  | 被管对象 | 菜单、视图、数据源等等。       |
-
-备注：权限和被管对象通过表`ab_permission_view`关联起来。
-
- 
 
 ### 安全认证
 
@@ -1176,7 +1233,7 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 
 ## 4.2  配置文件
 
-**配置文件的优先级**:  xx/superset_config.py >  superset/config.py (即superset.config)  （详见下文源码分析 相关章节）
+**配置文件的优先级**:  xx/superset_config.py >  superset/config.py (即superset.config)  
 
 **环境变量**： 
 
@@ -1551,7 +1608,7 @@ yum install gcc libffi-devel python3-devel openssl-devel -y
 
 
 
-**Q3: centos python 3 ModuleNotFoundError: No module named '_bz2'**
+**Q3: centos python3 ModuleNotFoundError: No module named '_bz2'**
 
 报错信息：
 
@@ -1588,13 +1645,22 @@ Your installed Python is incomplete. Attempting to use lzma compression will res
 解决方法：
 
 ```shell
-$ su yum install xz-devel
+$ sudo yum install xz-devel
 $ pip install backports.lzma	#若未安装xz-devel，将会报缺少lzma.h文件
 ```
 
 
 
 ## 开发常见问题
+
+表格  superset一般问题列表
+
+| 问题                                                         | 解决方法                                                     | 备注           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
+| superset元数据的日志时间缺省为UTC，需更改为本地时间~东八区UTC8 | 修改 core/model/core.py  dttm=Column(DateTime,  default=datetime.now) | 将ucnow改为now |
+|                                                              |                                                              |                |
+
+
 
 **Q1： ImportError: cannot import name 'Any' from 'typing' **
 
@@ -1612,7 +1678,7 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 **解决方法1**（推荐superset后续版本）：将superset/typing.py 改名 superset/superset_typing.py ，并修改相关多处导入 
 
-` from superset.typing 处改为 from superset.superset_typing
+` from superset.typing` 处改为 `from superset.superset_typing`
 
 重命名superset目录下的typing.py文件为superset_typing.py：该文件与python3自带的模块typing重名，不修改会导致项目运行报错。注意使用Shitf + F6选项来更新文件名，pycharm 会自动更新被引用位置的名字。
 
@@ -1620,14 +1686,13 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 
 
-表格  superset一般问题列表
+**Q1: git bash在windows 10下启动很慢，达到分钟级。**
 
-| 问题                                                         | 解决方法                                                     | 备注           |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
-| superset元数据的日志时间缺省为UTC，需更改为本地时间~东八区UTC8 | 修改 core/model/core.py  dttm=Column(DateTime,  default=datetime.now) | 将ucnow改为now |
-|                                                              |                                                              |                |
+原因：有非常多的原因导致git bash启动很慢。比如双显卡工作的原因需移除AMD驱动；不是管理员权限启动；windows自带的病毒防范；windows cmd新样式等。
 
- 
+解决方法：1）恢复cmd旧样式方法：win+R 打开cmd 在标题栏上右键， 属性-- 选项--- 打勾---使用旧控制台样式。
+
+
 
 ## 中文内容乱码问题
 
@@ -1644,7 +1709,7 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 Q1：连接MySQL中文乱码
 
 A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于py27） 
- `mysql://superset_nbdata_r:XXXXXXXXXX@10.64.1.248:3338/spider?charset=utf8`S
+ `mysql://superset_nbdata_r:XXXXXXXXXX@10.64.1.248:3338/spider?charset=utf8`
 
 
 
@@ -1670,4 +1735,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 * Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
 * 如何将Superset嵌入后台系统之实践 https://www.yisu.com/zixun/58300.html
 * superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
+* 教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
 

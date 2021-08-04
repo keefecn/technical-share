@@ -15,6 +15,10 @@
 
 
 
+
+
+
+
 ---
 
 # 目录
@@ -343,12 +347,12 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 | 名称 | 简介         | 生成方式            |
 | ---- | -------------------------------------- | ---------------------------------------------------------- |
 | py   | python源文件  |        |
-| pyc  | python编译后的字节码      | python -m py_compile *.py        |
+| pyc  | python编译后的字节码      | `python -m py_compile *.py` 或者 `python -m compileall *.py` |
 | pyo  | python编译优化后的字节码。   -O 或 -OO | python -O -m py_compile *.py   或 -OO 去除注释，文件更小。 |
 | pyd  | python动态库。            |        |
 
-备注：1. 字节码bytecode是二进制文件，pyo和pyc文件都是字节码。
-2. **py_compile**模块可编译生成各种文件格式。
+备注：1. 字节码bytecode是二进制文件，pyo和pyc文件都是字节码(python3.5后优化后的文件也是以pyc文件存储)。字节码文件只是加快了加载速度, 并不能加快运行速度.
+2. **py_compile** 模块可编译生成各种文件格式。
 
 
 
@@ -3909,13 +3913,14 @@ pip install git+git://github.com/gawel/pyquery.git
 ### mysql操作失败
 
 mysql语句操作失败一方面是编码问题，字段值含有非ascii字符，将字符编码转化为UTF-8基本可解决； 另一方面主要是字符转义问题，字段值中有特殊字符需要转义（如,引号）。
-**特别注意：SET NAMES UTF8;**
+**特别注意**：`SET NAMES UTF8;`
 
 **字符转义问题**
 pthon MySQLdb cursor.execute(query, args)使用两个参数时，会自动进行转义; 其中第二个参数args是一个列表类型。
-args可以是duple,list，不需将字段值加双引号””，程序中会自动转码。
+args可以是duple, list，不需将字段值加双引号””，程序中会自动转码。
 **示例1：带参数**
 name是字符串，id是数值，sql语句一律使用%s,因为paras里类型是string。
+
 ```python
 sql = ‘update table set name=%s where id=%s’
 paras=[]
@@ -3951,18 +3956,31 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 
 # 参考资料
 
+**网站**
+
+* python官网[Python.org](http://www.python.org/)  https://www.python.org/doc/
+* [python.cn](http://python.cn/) 
+* python官方扩展库package index  https://pypi.python.org 
+* python非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
+* wxpython https://www.wxpython.org 
+* Tkinter教程 https://tkdocs.com/tutorial/index.html
+* [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
+
+
+
 ## 参考链接
-[1]. python官网[Python.org](http://www.python.org/)  https://www.python.org/doc/
-[2]. [python.cn](http://python.cn/) 
-[3]. pythoon官方扩展库package index  https://pypi.python.org 
-[4]. pythoon非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
-[5]. python教程 http://www.runoob.com/python
-[6]. python在命令行下使用google翻译(带语音) http://www.jb51.net/article/45789.htm 
-[7]. python实现中文分词FMM算法实例 [www.jb51.net/article/69315.htm](http://www.jb51.net/article/69315.htm) 
-[8]. [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
-[9]. wxpython https://www.wxpython.org 
-[10]. Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/ 
-[11]. Tkinter教程 https://tkdocs.com/tutorial/index.html
+
+* python教程 http://www.runoob.com/python
+
+* Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/ 
+
+* python代码加密——编译与反编译方法总结 https://blog.csdn.net/submarineas/article/details/93723421?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control
+* 如何防止你的代码被窃取？Python代码加密方案汇总（带实例验证） https://blog.csdn.net/weixin_43207777/article/details/108351862
+* Python源码寻宝记——地图篇 https://www.lightxue.com/python-internals-locate-source-code
+
+* python在命令行下使用google翻译(带语音) http://www.jb51.net/article/45789.htm 
+
+* python实现中文分词FMM算法实例 [www.jb51.net/article/69315.htm](http://www.jb51.net/article/69315.htm) 
 
 
 
@@ -3977,9 +3995,8 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 [7]. 深入 Python :Dive Into Python http://cn.diveintopython.org/  很多小项目实例
 [8]. python参考手册（第4版） 说明：内容有一定深度。
 [9]. [Python源码剖析 : 深度探索动态语言核心技术](https://book.douban.com/subject/3117898/) 陈儒 / 电子工业出版社 / 2008-6
-[10].    [Python灰帽子 : 黑客与逆向工程师的Python编程之道 ](https://book.douban.com/subject/6025284/)[美] Justin Seitz / 丁赟卿 译、崔孝晨 审校 / 电子工业出版社 / 2011-3
-[11].    [*Learning to Program*](http://www.freenetpages.co.uk/hp/alan.gauld/) 
-[12].    [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/) 
-[13].    [*Thinking in Python*](http://www.mindview.net/Books/TIPython)
-[14].    周伟,宗杰 《Python开发技术详解》 http://www.linuxidc.com/Linux/2013-11/92693.htm
-
+[10].  [Python灰帽子 : 黑客与逆向工程师的Python编程之道 ](https://book.douban.com/subject/6025284/)[美] Justin Seitz / 丁赟卿 译、崔孝晨 审校 / 电子工业出版社 / 2011-3
+[11].  [*Learning to Program*](http://www.freenetpages.co.uk/hp/alan.gauld/) 
+[12].  [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/) 
+[13].  Thinking in Python*](http://www.mindview.net/Books/TIPython)
+[14].  周伟,宗杰 《Python开发技术详解》 http://www.linuxidc.com/Linux/2013-11/92693.htm

@@ -2263,6 +2263,8 @@ class SliceModelView(
 
 #### 元数据CRUD命令 /commands/
 
+**示例1：图表创建命令**
+
 /superset/charts/commands/create.py
 
 ```python
@@ -2385,7 +2387,7 @@ class ChartRestApi(BaseSupersetModelRestApi):
     search_columns = [...] #搜索字段
     base_order = ("changed_on", "desc")
     base_filters = [["id", ChartFilter, lambda: []]]
-    search_filters = {
+    search_filters = {	# 搜索过滤器，此处注册了才会加载，否则只会跳转到flask_appbuilder的13个过滤器里
         "id": [ChartFavoriteFilter],
         "slice_name": [ChartAllTextFilter],
     }
@@ -2515,20 +2517,74 @@ class ChartFavoriteFilter(BaseFavoriteFilter):  # pylint: disable=too-few-public
 
 
 class ChartFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    """ 图表API过滤器，检查有无权限 """
     def apply(self, query: Query, value: Any) -> Query:
         if security_manager.can_access_all_datasources():
             return query
         perms = security_manager.user_view_menu_names("datasource_access")
         schema_perms = security_manager.user_view_menu_names("schema_access")
-        return query.filter(
+        return query.filter(  # 检查model或schema有没相应权限
             or_(self.model.perm.in_(perms), self.model.schema_perm.in_(schema_perms))
         )
 
+    
+    
+# /flask_appbuilder/models/filter.py
+from typing import Any, Dict, List, Optional, Tuple, Type
+
+map_args_filter = {}	# 全局数据
+
+class BaseFilter(object):
+    """ 所有过滤器的基类 """
+    column_name = ""
+    datamodel = None
+    model = None
+    name = ""
+    is_related_view = False    
+    arg_name = None
+    
+    def __init__(self, column_name, datamodel, is_related_view=False):
+        self.column_name = column_name
+        self.datamodel = datamodel
+        self.model = datamodel.obj  #模型对象
+        self.is_related_view = is_related_view
+        if self.arg_name:	# 填充map_args_filter
+            map_args_filter[self.arg_name] = self.__class__       
+            
+    def apply(self, query, value):   
+        raise NotImplementedError
+
+    def __repr__(self):
+        return self.name        
+```
+
+说明： map_args_filter={arg_name: class_name}，在初始化时构建。flask_appbuilder里缺省有13个过滤器会装载到map_args_filter。
+
+superset过滤类需要在api.py里注册 search_filter填入相应过滤器才会注册，示例如下：
+
+```python
+# /sueprset/charts/api.py
+class ChartRestApi(BaseSupersetModelRestApi):
+    base_filters = [["id", ChartFilter, lambda: []]]
+    search_filters = {	# 搜索过滤器，此处注册了才会加载，否则只会跳转到flask_appbuilder的13个过滤器里
+        "id": [ChartFavoriteFilter],
+        "slice_name": [ChartAllTextFilter],
+    }
 ```
 
 
 
-### 原始数据查询 
+
+
+### 数据操作
+
+#### 元数据查询 
+
+RestAPI逻辑里涉及到的元数据库操作，主要在 /xxx/dao.py
+
+
+
+#### 原始数据查询 
 
 数据的查询和展示是superset的核心功能，前端用D3.js来渲染各种图标，后端用pandas来处理各种数据。
 
@@ -2773,6 +2829,20 @@ def get_viz(
 
 
 
+#### 异步查询 
+
+celery使用
+
+
+
+#### 缓存
+
+强制刷新字段 force=true|false
+
+缓存：flask_caching
+
+
+
 
 
 ### 安全权限管理
@@ -2788,9 +2858,13 @@ def get_viz(
 * 资源权限：单个数据库管理， /superset/migrations/  
 * API访问权限：superset某个API访问实现  /superset/xxx/api.py   
 
+
+
 #### **基本权限**
 
 /superset/security/manager.py
+
+每个页面对应一个视图View。
 
 ```python
 from flask import current_app, g
@@ -2827,7 +2901,7 @@ class SupersetSecurityManager(SecurityManager):
 
 
 
-#### **菜单权限**
+#### **菜单视图权限**
 
 使用flask_appbuilder模块的AppBuilder 来处理菜单权限。
 
@@ -2893,10 +2967,306 @@ class ChartRestApi(BaseSupersetModelRestApi):
 
 
 
+#### 示例：新增数据源
+
+新增数据源，需要在元数据表中操作的数据和权限
+
+* dbs: 数据库表，添加1条记录，包括数据源连接参数等信息
+* ab_permission_view  权限视图表，添加1+N条（取决于此数据库有多少schema）记录
+  * 添加 此数据源的database_access权限 
+  * 添加 数据源所有schema的 schema_access权限 
+
+* ab_role_permission_view 正常情况下，数据源创建者所在的角色应该有此数据源的database_access权限（**superset似乎并未默认实现？或者是说有database_access_all权限的用户才能创建数据源？**）
+
+```python
+# /superset/databases/commands/create.py
+from flask_appbuilder.models.sqla import Model
+from flask_appbuilder.security.sqla.models import User
+from marshmallow import ValidationError
+
+from superset.commands.base import BaseCommand
+
+
+class CreateDatabaseCommand(BaseCommand):
+    def __init__(self, user: User, data: Dict[str, Any]):
+        self._actor = user
+        self._properties = data.copy()
+
+    def run(self) -> Model:
+        self.validate()
+        try:  # 操作 dbs表
+            database = DatabaseDAO.create(self._properties, commit=False)
+            database.set_sqlalchemy_uri(database.sqlalchemy_uri)
+
+            try:
+                TestConnectionDatabaseCommand(self._actor, self._properties).run()
+            except Exception:
+                db.session.rollback()
+                raise DatabaseConnectionFailedError()
+
+            # 操作 ab_permisson_view表， 增加1+N条记录
+            # adding a new database we always want to force refresh schema list
+            schemas = database.get_all_schema_names(cache=False)
+            for schema in schemas:
+                security_manager.add_permission_view_menu(
+                    "schema_access", security_manager.get_schema_perm(database, schema)
+                )
+            security_manager.add_permission_view_menu("database_access", database.perm)
+            db.session.commit()
+        except DAOCreateFailedError as ex:
+            logger.exception(ex.exception)
+            raise DatabaseCreateFailedError()
+        return database
+```
+
+
+
+#### 加密保存
+
+* 数据源密码和加密字段：AES加密保存，依赖cryptography库  /superset/models/core.py -> sqlalchemy_utils模块
+* 用户密码：密码HASH值保存，检验时按照相同规则生成HASH值和数据库中的比对  /flask_appbuilder/security/sqla/manager.py -> werkzeug模块
+
+
+
+/superset/models/core.py
+
+EncryptedType用于数据库表字段加密保存，实现依赖cryptography库，缺省AES加密。
+
+```python
+from flask_appbuilder import Model
+from sqlalchemy_utils import EncryptedType
+
+
+class Database(Model, AuditMixinNullable, ImportExportMixin):  
+
+    __tablename__ = "dbs"
+    type = "table"
+    __table_args__ = (UniqueConstraint("database_name"),)
+
+    id = Column(Integer, primary_key=True)
+    verbose_name = Column(String(250), unique=True)
+    # short unique name, used in permissions
+    database_name = Column(String(250), unique=True, nullable=False)
+    sqlalchemy_uri = Column(String(1024), nullable=False)
+    password = Column(EncryptedType(String(1024), config["SECRET_KEY"]))  #密码加密保存
+	...
+    encrypted_extra = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)	# 加密保存字段
+    impersonate_user = Column(Boolean, default=False)
+    server_cert = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)
+    export_fields = [
+        "database_name",
+        "sqlalchemy_uri",
+        "cache_timeout",
+        "expose_in_sqllab",
+        "allow_run_async",
+        "allow_ctas",
+        "allow_cvas",
+        "allow_csv_upload",
+        "extra",
+    ]
+    extra_import_fields = ["password"]
+    export_children = ["tables"]
+```
+
+
+
+/sqlalchemy_utils/type/encrypted/encrypted_type.py  
+
+AES加密保存，依赖模块 cryptography, sqlalchemy_utils模块
+
+```python
+import six
+from sqlalchemy.types import LargeBinary, String, TypeDecorator
+
+from sqlalchemy_utils.exceptions import ImproperlyConfigured
+from sqlalchemy_utils.types.encrypted.padding import PADDING_MECHANISM
+from sqlalchemy_utils.types.json import JSONType
+from sqlalchemy_utils.types.scalar_coercible import ScalarCoercible
+
+cryptography = None
+try:
+    import cryptography
+    from cryptography.hazmat.backends import default_backend
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.ciphers import (
+        Cipher, algorithms, modes
+    )
+    from cryptography.fernet import Fernet
+    from cryptography.exceptions import InvalidTag
+except ImportError:
+    pass
+
+
+class AesEngine(EncryptionDecryptionBaseEngine):
+    BLOCK_SIZE = 16
+    def _initialize_engine(self, parent_class_key):
+        self.secret_key = parent_class_key
+        self.iv = self.secret_key[:16]
+        self.cipher = Cipher(
+            algorithms.AES(self.secret_key),
+            modes.CBC(self.iv),
+            backend=default_backend()
+        )
+
+    def _set_padding_mechanism(self, padding_mechanism=None):
+        """Set the padding mechanism. 补位机制 """
+        if isinstance(padding_mechanism, six.string_types):
+            if padding_mechanism not in PADDING_MECHANISM.keys():
+                raise ImproperlyConfigured(
+                    "There is not padding mechanism with name {}".format(
+                        padding_mechanism
+                    )
+                )
+
+        if padding_mechanism is None:
+            padding_mechanism = 'naive'
+
+        padding_class = PADDING_MECHANISM[padding_mechanism]
+        self.padding_engine = padding_class(self.BLOCK_SIZE)
+        
+   def encrypt(self, value):
+    	""" 加密 """
+        if not isinstance(value, six.string_types):
+            value = repr(value)
+        if isinstance(value, six.text_type):
+            value = str(value)
+        value = value.encode()
+        value = self.padding_engine.pad(value)
+        encryptor = self.cipher.encryptor()
+        encrypted = encryptor.update(value) + encryptor.finalize()
+        encrypted = base64.b64encode(encrypted)
+        return encrypted.decode('utf-8')
+
+    def decrypt(self, value):
+        """ 解密 """
+        if isinstance(value, six.text_type):
+            value = str(value)
+        decryptor = self.cipher.decryptor()
+        decrypted = base64.b64decode(value)
+        decrypted = decryptor.update(decrypted) + decryptor.finalize()
+        decrypted = self.padding_engine.unpad(decrypted)
+        if not isinstance(decrypted, six.string_types):
+            try:
+                decrypted = decrypted.decode('utf-8')
+            except UnicodeDecodeError:
+                raise ValueError('Invalid decryption key')
+        return decrypted
+    
+    
+class StringEncryptedType(TypeDecorator, ScalarCoercible):
+    """ EncryptedType needs Cryptography_ library in order to work. 
+    _Cryptography: https://cryptography.io/en/latest/
+    """
+    impl = String	#缺省实现是字符串
+
+    def __init__(self, type_in=None, key=None,
+                 engine=None, padding=None, **kwargs):
+        """Initialization."""
+        if not cryptography:
+            raise ImproperlyConfigured(
+                "'cryptography' is required to use EncryptedType"
+            )
+        super(StringEncryptedType, self).__init__(**kwargs)
+        # set the underlying type
+        if type_in is None:
+            type_in = String()
+        elif isinstance(type_in, type):
+            type_in = type_in()
+        self.underlying_type = type_in
+        self._key = key
+        if not engine:	# 缺省AES引擎
+            engine = AesEngine
+        self.engine = engine()
+        if isinstance(self.engine, AesEngine):
+            self.engine._set_padding_mechanism(padding)
+            
+            
+class EncryptedType(StringEncryptedType):
+    impl = LargeBinary
+    def __init__(self, *args, **kwargs):
+        warnings.warn(
+            "The 'EncryptedType' class will change implementation from "
+            "'LargeBinary' to 'String' in a future version. Use "
+            "'StringEncryptedType' to use the 'String' implementation.",
+            DeprecationWarning)
+        super().__init__(*args, **kwargs)    
+```
+
+
+
+ /flask_appbuilder/security/sqla/manager.py
+
+用户密码，HASH值保存，依赖模块werkzeug
+
+```python
+from werkzeug.security import generate_password_hash
+
+from ..manager import BaseSecurityManager
+
+
+class SecurityManager(BaseSecurityManager):    
+    """ 成员函数：添加用户 """
+	def add_user(
+        self,
+        username,
+        first_name,
+        last_name,
+        email,
+        role,
+        password="",
+        hashed_password="",
+    ):
+        """
+            Generic function to create user
+        """
+        try:
+            user = self.user_model()
+            user.first_name = first_name
+            user.last_name = last_name
+            user.username = username
+            user.email = email
+            user.active = True
+            user.roles = role if isinstance(role, list) else [role]
+            if hashed_password:
+                user.password = hashed_password
+            else:
+                user.password = generate_password_hash(password)
+            self.get_session.add(user)
+            self.get_session.commit()
+            log.info(c.LOGMSG_INF_SEC_ADD_USER.format(username))
+            return user
+        except Exception as e:
+            log.error(c.LOGMSG_ERR_SEC_ADD_USER.format(str(e)))
+            self.get_session.rollback()
+            return False
+        
+        
+# /werkzeug/security.py
+def generate_password_hash(password, method="pbkdf2:sha256", salt_length=8):
+    """ 用给的salt值长度 和 method 获取hash值 """
+    salt = gen_salt(salt_length) if method != "plain" else ""
+    h, actual_method = _hash_internal(method, salt, password)
+    return "%s$%s$%s" % (actual_method, salt, h)    
+
+def check_password_hash(pwhash, password):
+    """
+    pbkdf2:method:iterations 比如
+	    pbkdf2:sha256:80000$salt$hash
+       	pbkdf2:sha256$salt$hash  
+    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad        
+    """
+    if pwhash.count("$") < 2:
+        return False
+    method, salt, hashval = pwhash.split("$", 2)
+    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)    
+```
+
+
+
 ### 模板 /templates/
 
 * 模板渲染 /flask_appbuilder/baseviews.py:render_template
-* 网页渲染 render
+* 组件渲染 render
 
 /superset/templates/superset/basic.html
 
@@ -2908,7 +3278,7 @@ DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志
 
 几种logger
 
-* STATS_LOGGER   实时统计的日志，方法有incr, decr, timing计时, gauge
+* STATS_LOGGER   实时统计的日志，方法有incr, decr, timing计时, gauge。会记录入到元数据log表
 * EVENT_LOGGER  操作DB的日志
 * QUERY_LOGGER  查询日志
 
@@ -3550,49 +3920,7 @@ const groupByControl = {
 
 ### 后端依赖 sqlalchemy
 
-eingine组成 (RFC1738)： name://user:pwd@host:port/database
-
-user:pwd加密存储，解密方式_rfc_1738_unquote (/sqlalchemy/engine/url.py)
-
-```python
-# /sqlalchemy/engine/url.py
-def _rfc_1738_quote(text):
-    return re.sub(r"[:@/]", lambda m: "%%%X" % ord(m.group(0)), text)
-
-def _rfc_1738_unquote(text):
-    return util.unquote(text)
-
-
-# _rfc_1738_unquote 实际实现 /urllib/parse.py
-def unquote(string, encoding='utf-8', errors='replace'):
-    """Replace %xx escapes by their single-character equivalent. The optional
-    encoding and errors parameters specify how to decode percent-encoded
-    sequences into Unicode characters, as accepted by the bytes.decode()
-    method.
-    By default, percent-encoded sequences are decoded with UTF-8, and invalid
-    sequences are replaced by a placeholder character.
-
-    unquote('abc%20def') -> 'abc def'.
-    """
-    if isinstance(string, bytes):
-        raise TypeError('Expected str, got bytes')
-    if '%' not in string:
-        string.split
-        return string
-    if encoding is None:
-        encoding = 'utf-8'
-    if errors is None:
-        errors = 'replace'
-    bits = _asciire.split(string)
-    res = [bits[0]]
-    append = res.append
-    for i in range(1, len(bits), 2):
-        append(unquote_to_bytes(bits[i]).decode(encoding, errors))
-        append(bits[i + 1])
-    return ''.join(res)
-```
-
-
+* /sqlalchemy/engine/url.py  eingine组成 (RFC1738)： name://user:pwd@host:port/database
 
 
 
@@ -3609,6 +3937,10 @@ def unquote(string, encoding='utf-8', errors='replace'):
 
 
 ### 前端依赖 React
+
+参见   React学习笔记--程序调试 https://www.cnblogs.com/tom-lau/p/8032323.html
+
+
 
 React体系：React + react-dom ＋ react-redux + 
 
@@ -3724,16 +4056,6 @@ ReactDOM.render(
 ```
 
 
-
-#### deck.gl 
-
-github: https://github.com/uber/deck.gl
-
-官网: https://deck.gl/
-
-demo: https://deck.gl/#/examples/
-
-deck.gl，是由 Uber 开源的基于 WebGL 的可视化图层。用于React 的 WebGL 遮罩套件，提供了一组高性能的数据可视化叠加层。为数据可视化用例提供测试、高性能的图层，如 2 维和 3维的散点图、choropleths 等。
 
 
 

@@ -320,7 +320,7 @@ tf.compat.v1.disable_eager_execution()  # 兼容V1：禁止动态图
 
 TensorBoard是一个可视化工具，它可以用来展示网络图、张量的指标变化、张量的分布情况等。特别是在训练网络的时候，我们可以设置不同的参数（比如：权重W、偏置B、卷积层数、全连接层数等），使用TensorBoader可以很直观的帮我们进行参数的选择。
 
-```
+```python
 # Load the TensorBoard notebook extension
 %load_ext tensorboard
 
@@ -332,7 +332,7 @@ TensorBoard是一个可视化工具，它可以用来展示网络图、张量的
 
 下面是训练时，传入回调函数callbacks
 
-```PYTHON
+```python
 log_dir="/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 print(log_dir)
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
@@ -382,7 +382,7 @@ Keras是一个开源的python库，可以让您轻松构建神经网络。 该�
 
 TensorFlow 的高阶 API 基于 Keras API 标准，用于定义和训练神经网络。Keras 通过用户友好的 API 实现快速原型设计、先进技术研究和生产。
 
-```
+```python
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -490,7 +490,7 @@ PyTorch由4个主要的包组成：
 
 **示例：ResNet18神经网络 **
 
-```
+```python
 # 在CPU版本自动下载模型参数
 class SurfaceDefectResNet(torch.nn.Module):
     def __init__(self):
@@ -534,7 +534,7 @@ Paddle即Parallel Distributed Deep Learning(并行分布式深度学习)。
 
 示例:  mnist手写数字数据集分类
 
-```
+```python
 import paddle
 print(paddle.__version__)
 
@@ -584,7 +584,7 @@ class LeNet(paddle.nn.Layer):
 
 法1：基于高层API，完成模型的训练与预测 Model.fit/evaluate
 
-```
+```python
 # 3.模块训练 model.fit
 from paddle.metric import Accuracy
 model = paddle.Model(LeNet())   # 用Model封装模型
@@ -613,7 +613,7 @@ model.evaluate(test_dataset, batch_size=64, verbose=1)
 
 组网后，开始对模型进行训练，先构建`train_loader`，加载训练数据，然后定义`train`函数，设置好损失函数后，按batch加载数据，完成模型的训练。
 
-```
+```python
 import paddle.nn.functional as F
 train_loader = paddle.io.DataLoader(train_dataset, batch_size=64, shuffle=True)
 # 加载训练集 batch_size 设为 64
@@ -743,19 +743,21 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 
 模块导入示例  ：`from sklearn import preprocessing`
 
-    __all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
-               'datasets', 'decomposition', 'dummy', 'ensemble', 'exceptions',
-               'experimental', 'externals', 'feature_extraction',
-               'feature_selection', 'gaussian_process', 'inspection',
-               'isotonic', 'kernel_approximation', 'kernel_ridge',
-               'linear_model', 'manifold', 'metrics', 'mixture',
-               'model_selection', 'multiclass', 'multioutput',
-               'naive_bayes', 'neighbors', 'neural_network', 'pipeline',
-               'preprocessing', 'random_projection', 'semi_supervised',
-               'svm', 'tree', 'discriminant_analysis', 'impute', 'compose',
-               # Non-modules:
-               'clone', 'get_config', 'set_config', 'config_context',
-               'show_versions']
+```python
+__all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
+           'datasets', 'decomposition', 'dummy', 'ensemble', 'exceptions',
+           'experimental', 'externals', 'feature_extraction',
+           'feature_selection', 'gaussian_process', 'inspection',
+           'isotonic', 'kernel_approximation', 'kernel_ridge',
+           'linear_model', 'manifold', 'metrics', 'mixture',
+           'model_selection', 'multiclass', 'multioutput',
+           'naive_bayes', 'neighbors', 'neural_network', 'pipeline',
+           'preprocessing', 'random_projection', 'semi_supervised',
+           'svm', 'tree', 'discriminant_analysis', 'impute', 'compose',
+           # Non-modules:
+           'clone', 'get_config', 'set_config', 'config_context',
+           'show_versions']
+```
 
 
 
@@ -849,7 +851,7 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 
 step1: 加载数据集 load_iris，数据集拆分train_test_split
 
-```
+```python
 from sklearn.datasets import load_iris
 dataset = load_iris()
 data = dataset['data'] # 数据
@@ -928,14 +930,15 @@ step1: 加载数据集 fetch_20newsgroups为例
 from sklearn.datasets import fetch_20newsgroups
 # 指定分类categories，如果值为None，则会得到示例数据集的所有20个分类
 categories = ['alt.atheism', 'talk.religion.misc', 'comp.graphics', 'sci.space']
-newsgroups_train = fetch_20newsgroups(subset='train', categories=categories)             newsgroups_test = fetch_20newsgroups(subset='test', categories=categories)              
+newsgroups_train = fetch_20newsgroups(subset='train', categories=categories)             
+newsgroups_test = fetch_20newsgroups(subset='test', categories=categories)              
 ```
 
 
 
 step2: **（重点）文本向量化**，转化成数值类型，常用方法有TF-IDF、CountVectorizer、Word2Vec
 
-```
+```python
 #文本向量化：数据转换
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer()  

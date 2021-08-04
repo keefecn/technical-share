@@ -236,16 +236,19 @@ step 1: 启动 Docker守护进程 ( dockerd:  Docker Daemon，服务端)
 ```shell
 # ubuntu/linux下服务启动
 $ sudo service docker start
+
 # 或者 centos
 $ sudo systemctl restart docker
+
 # 或者 linux环境直接二进制程序启动
 $ dockerd -d
+
 # 或者 windows
 $ docker-machine
 ```
 
 
-step2: docker客户端运行hello-world镜像 （docker：Docker客户端）
+step 2: docker客户端运行hello-world镜像 （docker：Docker客户端）
 ```shell
 $ docker run hello-world
 $ docker run -it ubuntu bash
@@ -266,9 +269,19 @@ Docker Engine V1.12 之后版本，用户可以自行创建 daemon.json 文件�
 修改配置文件之后需要重启 docker守护进程生效
 
 ```shell
-systemctl restart docker.service
+# 重启服务
+$ systemctl restart docker.service
 # 或者
-killall dockerd | xargs dockerd -d
+$ killall dockerd | xargs dockerd -d
+
+# 查看是否开机启动：
+systemctl list-units|grep enable
+
+# 设置docker开机启动
+systemctl enable docker.service
+
+# 设置自动启动容器：
+docker run xxx --restart=always
 ```
 
 
@@ -276,7 +289,8 @@ killall dockerd | xargs dockerd -d
 daemon.json 示例配置文件
 
 ```json
-
+# 注意: 下面不是规范JSON串,带#注释在实际环境中需要删除
+{
 	"registry-mirrors": ["http://hub-mirror.c.163.com"], # 镜像加载仓库，可用docker info查看
     "insecure-registries": [], #配置docker的私库地址
     "authorization-plugins": [],
@@ -297,20 +311,19 @@ daemon.json 示例配置文件
      #docker主机的标签，很实用的功能,例如定义：–label nodeName=host-121
     "live-restore": true,
     "debug": true, 
-     #启用debug的模式，启用后，可以看到很多的启动信息。默认false
     "hosts": [],
-    #设置容器hosts
     "log-level": "",
-    "tls": true,  
-     #默认 false, 启动TLS认证开关
-
+    "tls": true,  #默认 false, 启动TLS认证开关     
 }
 ```
 
 
 
+docker服务器信息：包括容器/镜像、存储引擎、执行驱动/日志驱动、硬件情况（OS/CPU/MEM）
+
 ```shell
-$ docker info
+# windows
+$ docker info  
 Containers: 10
 Images: 19
 Storage Driver: aufs
@@ -331,6 +344,52 @@ Registry: https://index.docker.io/v1/
 Labels:
  provider=virtualbox
 
+# linux
+[keefe@iZ2zebj7eoe7terrup37y4Z repos]$ sudo docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 1.13.1
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: false
+Logging Driver: journald
+Cgroup Driver: systemd
+Plugins: 
+ Volume: local
+ Network: bridge host macvlan null overlay
+Swarm: inactive
+Runtimes: runc docker-runc
+Default Runtime: docker-runc
+Init Binary: /usr/libexec/docker/docker-init-current
+containerd version:  (expected: aa8187dbd3b7ad67d8e5e3a15115d3eef43a7ed1)
+runc version: e45dd70447fb72ee4e1f6989173aa6c5dd492d87 (expected: 9df8b306d01f59d3a8029be411de015b7304dd8f)
+init version: fec3683b971d9c3ef73f284f176672c44b448662 (expected: 949e6facb77383876aeff8a6944dde66b3089574)
+Security Options:
+ seccomp
+  WARNING: You're not using the default seccomp profile
+  Profile: /etc/docker/seccomp.json
+Kernel Version: 4.19.91-23.al7.x86_64
+Operating System: Alibaba Cloud Linux (Aliyun Linux) 2.1903 LTS (Hunting Beagle)
+OSType: linux
+Architecture: x86_64
+Number of Docker Hooks: 3
+CPUs: 1
+Total Memory: 1.915 GiB
+Name: iZ2zebj7eoe7terrup37y4Z
+ID: ZWKR:MR6J:AH3S:DMOA:ZKRN:NGBK:VOVB:2VWX:ISWC:4V67:MGQX:TYCR
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+Registries: docker.io (secure)
 ```
 
 
@@ -360,6 +419,17 @@ Labels:
 #### 非root用户启动dockerd
 
 建立docker组，将目标用户加入到 docker组。
+
+```shell
+$ sudo groupadd docker
+$ sudo gpasswd -a [user] docker
+$ sudo systemctl restart docker
+
+# 切换到 目标用户，查看现在是否有docker响应信息
+$ docker ps
+```
+
+
 
 
 
