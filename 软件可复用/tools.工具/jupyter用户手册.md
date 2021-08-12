@@ -1,6 +1,11 @@
 | 序号 | 修改时间  | 修改内容 | 修改人 | 审稿人 |
 | ---- | --------- | -------- | ------ | ------ |
 | 1    | 2021-4-23 | 创建     | Keefe  |        |
+|      |           |          |        |        |
+
+
+
+
 
 
 
@@ -20,7 +25,7 @@ Ipython是一个加强版的python解释器。
 - 使用%paste和%cpaste魔术函数粘贴代码
 - Ipython终端快捷键
 
-```
+```shell
 Ctrl+p 或 向上箭头              以当前输入内容开始，向后搜索历史命令
 Ctrl+N 或 向下箭头              以当前输入内容开始，向前搜索历史命令
 Ctrl+R                         按行读取的反向历史搜索(部分匹配)
@@ -37,7 +42,7 @@ Ctrl+l                         清楚本屏内容
 
 - 魔术命令: Ipython的特殊命令称为魔术命令。
 
-```
+```shell
 %quickref     显示魔术命令快速参照
 %magic        显示所有可用魔术命令的详细文档
 %pwd          输出当前路径
@@ -58,7 +63,7 @@ Ctrl+l                         清楚本屏内容
 - matplotlib继承
    %matplotlib魔术函数可以设置matplotlib与Ipython命令行或Jupyter notebook的集成
 
-```cpp
+```python
 %matplotlib            在Ipython中输入
 %matplotlib inline     在Jupyter notebook中输入
 ```
@@ -84,10 +89,10 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
 
 ```shell
 # 安装
-pip3 install jupyter
+$ pip3 install jupyter
 
 # 启动
-jupyter notebook
+$ jupyter notebook
 ```
 
 **网络访问：缺省端口8888**
@@ -124,10 +129,10 @@ JupyterLab有以下特点：
 
 ```shell
 # 安装
-pip3 install jupyterlab
+$ pip3 install jupyterlab
 
 # 启动: jupyter lab 或者 jupyter-lab
-jupyter lab
+$ jupyter lab
 ```
 
 网络访问：缺省端口8888。如果端口被占用，则端口数量渐增。
@@ -136,23 +141,23 @@ jupyter lab
 
 # 入门篇
 
-调用shell命令： 可以在notebook里 !符号 调用 shell命令，如
-`!pip install rpy2`
+调用shell命令： 可以在notebook里 !符号 调用 shell命令，如 `!pip install rpy2`
 
 
 
 ## 密码管理和远程访问
 
-查询密码
+**查询密码**
 
 ```sh
 $ jupyter notebook list
-```
-
 Currently running servers:
 http://localhost:8888/?token=7c9064bfb5139e72eb8774248df75d0564f450b09a13d57a :: E:\dev\python\bin\python36\Scripts
+```
 
-设置密码：
+
+
+**设置密码**
 
 法1：在jupyter notebook正常开的文件 或 ipython里输入 
 
@@ -166,8 +171,8 @@ Out[2]: ‘sha1:f704b702aea2:01e2bd991f9c7208ba177b46f4d10b6907810927‘
 
 法2: 直接命令行设置：
 
-```
-jupyter notebook password
+```shell
+$ jupyter notebook password
 Enter password: 
 Verify password: 
 ```
@@ -176,21 +181,13 @@ Verify password:
 
 
 
-产生jupyterlab配置文件：
+**jupyterlab配置文件**
 
-```
-jupyter lab --generate-config
-```
+产生配置文件：`$ jupyter lab --generate-config`
 
-修改配置文件：
+修改配置文件：~/.jupyter/jupyter_notebook_config.py
 
-```
-vi ~/.jupyter/jupyter_notebook_config.py
-```
-
-更改内容如下：
-
-```
+```ini
 # 允许修改代码，缺省为False
 c.NotebookApp.allow_password_change=False 
 # 将ip设置为*，意味允许任何IP访问
@@ -207,8 +204,8 @@ c.NotebookApp.allow_remote_access = True
 
 如果以root身份启动需要加入--allow-root
 
-```
-jupyter notebook --ip=127.0.0.1 --port 8000 --allow-root
+```shell
+$ jupyter notebook --ip=127.0.0.1 --port 8000 --allow-root
 ```
 
 
@@ -234,16 +231,16 @@ Jupyter Notebook 与 IPython终端 共享同一个内核。
 
 需在python2/3的各自安装目录下再分别安装ipykernel
 
-```
-pip install ipykernel
-python -m ipykernel install --user 
+```shell
+$ pip install ipykernel
+$ python -m ipykernel install --user 
 ```
 
 
 
 内核配置查看
 
-```
+```shell
 $ jupyter kernelspec list
 Available kernels:
   python2    C:\Users\keefe\AppData\Roaming\jupyter\kernels\python2
@@ -299,8 +296,8 @@ IRkernel::installspec() # to register the kernel in the current R installation
 
 ### 同一个notebook里使用Python和R
 
-```
-pip install rpy2
+```shell
+$ pip install rpy2
 ```
 
 
@@ -313,7 +310,7 @@ pip install rpy2
 
 ipython调试示例：
 
-```
+```python
 import pdb
 pdb.set_trace()
 def f1():
@@ -322,6 +319,8 @@ def f1():
 s=f1()
 print(s)
 ```
+
+
 
 表格 pdb命令
 
@@ -368,7 +367,7 @@ print(s)
 
 这是因为jupyter的默认路径和python默认路径不一致的问题，可用下面命令查看
 
-```
+```python
 import sys
 print(sys.path)
 print(sys.executable)
@@ -407,6 +406,6 @@ https://jupyter-notebook.readthedocs.io/en/stable/notebook.html
 安装插件
 
 ```shell
-jupyter labextension install @jupyterlab/
+$ jupyter labextension install @jupyterlab/
 ```
 

@@ -218,6 +218,20 @@ import pandas as pd
 
 依赖模块：protobuf, tensorflow, tensorflow_cpu  
 
+```shell
+$ pip show tensorflow-gpu
+Name: tensorflow-gpu
+Version: 2.5.0
+Summary: TensorFlow is an open source machine learning framework for everyone.
+Home-page: https://www.tensorflow.org/
+Author: Google Inc.
+Author-email: packages@tensorflow.org
+License: Apache 2.0
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires: gast, astunparse, keras-preprocessing, google-pasta, tensorflow-estimator, six, termcolor, keras-nightly, numpy, tensorboard, protobuf, opt-einsum, typing-extensions, grpcio, wrapt, wheel, flatbuffers, h5py, absl-py
+Required-by:
+```
+
 ​	TensorFlow是[谷歌](https://baike.baidu.com/item/谷歌)基于DistBelief进行研发的第二代[人工智能](https://baike.baidu.com/item/人工智能/9180)[学习系统](https://baike.baidu.com/item/学习系统)，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。
 ​    TensorFlow可被用于[语音识别](https://baike.baidu.com/item/语音识别)或[图像识别](https://baike.baidu.com/item/图像识别)等多项机器深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用。
 ​    TensorFlow由谷歌[人工智能](https://baike.baidu.com/item/人工智能/9180)团队[谷歌大脑](https://baike.baidu.com/item/谷歌大脑/4649855)（Google Brain）开发和维护，拥有包括TensorFlow Hub、TensorFlow Lite、TensorFlow Research Cloud在内的多个项目以及各类[应用程序接口](https://baike.baidu.com/item/应用程序接口/10418844)API。自2015年11月9日起，TensorFlow依据[阿帕奇授权协议](https://baike.baidu.com/item/阿帕奇授权协议/1642155)（Apache 2.0 open source license）开放源代码。
@@ -279,6 +293,27 @@ Tensorflow2针对不同等级的AI开发者提供了不同等级的接口，为�
 Tensorflow2使用了Eager execution机制，与python运行时集成度更高，动态图机制可以实时获取结果，开发效率更高。新的装饰器的加入，可将python对象转换为图结构，实现张量的跟踪。
 
 总而言之，Tensorflow2的发布，标志者AI新纪元的开启，解放了AI开发者，加速了AI的发展。
+
+
+
+#### 切换设备
+
+```python
+# 查看设备类型
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+[name: "/device:CPU:0"
+device_type: "CPU"
+memory_limit: 268435456
+locality {}
+incarnation: 1361540258329500804
+]
+
+# 或者
+import tensorflow as tf
+tf.config.list_physical_devices()
+[PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+```
 
 
 

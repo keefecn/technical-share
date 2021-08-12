@@ -638,7 +638,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 
 
-### AI芯片
+### **AI芯片**
 
 AI芯片说明如下：
 
@@ -648,15 +648,253 @@ AI芯片说明如下：
 
 
 
+## 1.5 AI平台
+
+
+
+表格 5 中国业界AI平台比较
+
+| 平台       | 链接                                          | 简介                                                         |
+| ---------- | --------------------------------------------- | ------------------------------------------------------------ |
+| 百度AI平台 | https://ai.baidu.com/                         | 研究领域和应用场景都非常齐全。                               |
+| 阿里AI     | https://ai.aliyun.com/                        | 属于阿里云提供的一个解决方案，没像百度那样重点突出AI，但内容也很全。 |
+| 腾讯AI Lab | https://ai.tencent.com/                       | 实验室性质，不是企业战略方向。 		研究领域：计息机视觉、语音识别、自然语言处理、机器学习 		<br>应用领域：社交AI、游戏AI、内容AI、平台AI |
+| 华为 AILA  | https://ai.huawei.com/ 		（仅华为内网） | 2018.5，华为BPIT成立AI使能部，分七大基础能力和六大领域解决方案。 |
+
+
+
+### 百度AI平台
+
+https://ai.baidu.com/
+
+表格 6 百度AI技术能力
+
+| 能力<BR>项     | 分项             | 子项                                                         | 应用<br>场景 |
+| -------------- | ---------------- | ------------------------------------------------------------ | ------------ |
+| 语音技术       | 语音识别         | 长、短(60s内）语音识别、远程语音识别                         |              |
+|                |                  | 语音合成：在线合成、离线语音合成                             |              |
+|                | 语音唤醒         | 实时语音识别、音频文件转写                                   |              |
+|                | 图像审核         | 色情、政治、暴力、图文、广告、敏感信息、图像质量、公众人物识别 |              |
+|                | 车辆分析         | 车型识别、车流统计、车辆损伤识别、车辆检测、车辆属性识别、车辆分隔 | 交通         |
+|                | 图像识别         | 通用物体和场景识别、植物、动物、菜品、货币、门脸、地标、红酒、图像主体检测 |              |
+|                | 图像搜索         | 相同图片搜索、相似图片搜索、商品图片搜索、绘本图片搜索       |              |
+|                | 图像效果增强     | 图像去雾、图像无损放大、拉伸图像恢复、黑白图像上色、图像风格转换、图像清晰度增强、图像色彩增强 |              |
+| 文字识别       | 通用文字识别     |                                                              |              |
+| 文字识别       | 卡证文字识别     | 身份证、营业执照、护照、出生医学证明、银行卡、名片、户口本、 |              |
+| 文字识别       | 票据文字识别     | 混贴票据、增值税发票、通用机打发票、出租车票、通用票据、银行回单、银行汇票、银行支票、银行火车票、彩票、 |              |
+| 文字识别       | 教育场景文字识别 | 手写文字识别、公式识别                                       |              |
+| 文字识别       | 汽车场景文字识别 | 行驶证、车辆识别、                                           |              |
+| 文字识别       | 其它景文字识别   | 网络图片文字、表格文字、数字识别、印章检测、仪器仪表盘读数识别、二维码、文档版面分析与识别 |              |
+| 人脸与人体识别 | 人脸识别         | 人脸检测、人脸搜索、人像对比、活体检测                       |              |
+| 人脸与人体识别 | 人像特效         | 人脸融合                                                     |              |
+| 人脸与人体识别 | 人体分析         | 人体关键点识别、人体检测与属性                               |              |
+| 人脸与人体识别 | 行为分析         | 驾驶行为分析、危险形为分析、手势识别、指尖识别               |              |
+| 人脸与人体识别 | 场景方案         | [人脸实名认证 ](https://ai.baidu.com/solution/faceprint) 	满足各种场景下实名认证的灵活需求 		<br>[人脸闸机 ](https://ai.baidu.com/solution/facegate) 软硬一体的人脸识别闸机解决方案，提升人员系统化管理的安全性与便捷性 		<br>[人脸考勤 ](https://ai.baidu.com/solution/faceattendance) 利用高精度的人脸识别、对比能力，搭建高效考勤系统，提高防作弊能力 		<br>[人脸会员识别 ](https://ai.baidu.com/solution/faceidentify) |              |
+| 视频技术       |                  | 视频内容分析、 		视频封面选取、 		视频对比检索 		视频内容审核 |              |
+| AR与VR         | 增强现实         | AR核心技术 		3D肢体关键点                              |              |
+| AR与VR         | 虚拟现实         |                                                              |              |
+| 自然语言处理   | NLP基础技术      | [词法分析 ](https://ai.baidu.com/tech/nlp_basic/lexical) 提供分词、词性标注、命名实体识别 		[词向量表示 ](https://ai.baidu.com/tech/nlp_basic/word_embedding) 帮助完成语义挖掘、相似度计算<br>[词义相似度 ](https://ai.baidu.com/tech/nlp_basic/word_emb_sim) 通过词语向量化来计算两个词之间的相似度 		[依存句法分析 ](https://ai.baidu.com/tech/nlp_basic/dependency_parsing) 自动分析文本中的依存句法结构信息 		<br/>[DNN](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn)[语言模型 ](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn) 判断一句话是否符合语言表达习惯 		[短文本相似度 ](https://ai.baidu.com/tech/nlp_basic/simnet) 计算两个短文本之间的语义相似度，实现推荐、排序 |              |
+|                | NLP应用技术      | [文本纠错 ](https://ai.baidu.com/tech/nlp_apply/text_corrector) 识别文本中的错别字，给出提示以及正确的建议文本内容 		[情感倾向分析 ](https://ai.baidu.com/tech/nlp_apply/sentiment_classify) 对包含主观信息的文本进行情感倾向性判断 <br/>[评论观点抽取 ](https://ai.baidu.com/tech/nlp_apply/comment_tag) 分析评论关注点和观点，输出标签及观点极性 		[对话情绪识别 ](https://ai.baidu.com/tech/nlp_apply/emotion_detection) 识别会话者所表现出的情绪类别及置信度 <br/>[文本标签 ](https://ai.baidu.com/tech/nlp_apply/doctagger) 输出能够反映文章关键信息的多维度标签 		[文章分类 ](https://ai.baidu.com/tech/nlp_apply/topictagger) 输出文章的主题分类及对应的置信度 		<br/>[新闻摘要 ](https://ai.baidu.com/tech/nlp_apply/news_summary) 抽取关键信息并生成指定长度的新闻摘要 		[地址识别 ](https://ai.baidu.com/tech/nlp_apply/address) 精准提取快递填单文本中的姓名、电话、地址信息 |              |
+|                | 文本审核         |                                                              |              |
+|                | 机器翻译         | 通用翻译 语音翻译 		定制化翻译 拍照翻译 垂直领域 AI同传 		语种识别 |              |
+| **数据智能**   | 大数据处理       | 大数据传输 数据治理 		数据工厂                         |              |
+| **数据智能**   | 大数据分析       | 数据仓库 数据科学平台 		搜索分析ES 		大数据可视化 |              |
+| **数据智能**   | 统计与推荐       | 网站统计 智能推荐 		移动统计                           |              |
+| **数据智能**   | 舆情分析         | 舆情平台                                                     |              |
+| **数据智能**   | 大数据风控       | 保险风险定价 保险反欺诈 		智能个人风控 智能企业风控    |              |
+| **数据智能**   | 大数据营销       | 智客 汇客 觅客 炫客 		客情 商情                        |              |
+| **数据智能**   | 知识生产与理解   |                                                              |              |
+| 知识图谱       | 知识理解         | [实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 		[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索[实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 		[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索 |              |
+| 知识图谱       | 知识图谱schema   |                                                              |              |
+| 知识图谱       | 图数据库         |                                                              |              |
+
+
+
+### 阿里AI
+
+- ​	阿里云人工智能平台 https://ai.aliyun.com/
+- ​	阿里语音AI平台AliGenie https://www.aligenie.com/
+- ​	阿里机器学习PAI https://data.aliyun.com/product/learn?spm=5176.cnaicrowd.1280361.109.559e4962agp6yU  
+
+
+
+ 阿里机器学习PAI包含3个子产品分别是： 
+
+1. ​	可视化开发工具PAI-STUDIO，
+2. ​	交互式代码开发工具PAI-DSW，
+3. ​	模型在线服务PAI-EAS
+
+三个产品为传统机器学习和深度学习提供了从数据处理、模型训练、服务部署到预测的一站式服务。
+
+
+
+https://ai.aliyun.com/
+
+阿里巴巴的AI布局主要在六个产业：新零售、新金融、天猫精灵、AliOS、ET城市大脑、ET工业大脑。
+
+ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向立体布局。
+
+
+
+![img](..\..\media\ai\ai_aliyun_003.png)
+
+
+
+
+
+### 腾讯AI
+
+https://ai.tencent.com/ 跳转到 https://ai.tencent.com/ailab/
+
+腾讯AI Lab是腾讯企业级人工智能实验室，于2016年4月在深圳成立，目前在中国和美国有70位世界级研究科学家及300余位经验丰富的应用工程师，致力于不断提升AI的理解、决策与创造力，向“Make AI Everywhere”的愿景迈进。
+
+
+
+腾讯AI主要先体现在游戏人工智能。
+
+腾讯AI布局相对较晚，腾讯提出以“基础研究—场景共建—AI开放”为三层架构的整体AI战略，从技术、场景与平台三个层面实现“AI in All”，AI被提到战略级高度。腾讯的AI版图围绕技术、场景与平台持续扩大，AI以产品的形式落地应用，从内部场景应用不断向外部产业化场景落地延伸。具体的AI应用场景为：在内部应用场景中，AI与腾讯游戏、社交、内容等业务场景深度融合；在外部场景中，医疗是腾讯AI切入最早、应用成熟度最高的场景之一。
+
+
+
+### 华为AI
+
+https://ai.huawei.com/ (只能华为内网访问，AI使能部属于华为BPIT二级部门，负责给华为内部业务AI赋能)
+
+https://www.huaweicloud.com/
+
+华为云下提供了AI和大数据服务。
+
+
+
+2017年9月，华为发布了面向企业、政府的人工智能服务平台华为云EI。
+
+2018年4月，华为发布了面向智能终端的人工智能引擎HiAI。
+
+2018年12月，华为发布了全栈全场景AI解决方案。
+
+2020.9.24，华为云与计算BG总裁侯金龙在华为全联接2020现场发布了政企智能升级的参考架构“智能体”。
+
+
+
+**全栈全场景AI解决方案（2018.12）**
+
+![img](..\..\media\ai\ai_hw_001.png)
+
+图 1 华为的全栈全场景AI解决方案（2018.12）
+
+全场景，是指包括公有云、私有云、各种边缘计算、物联网行业终端以及消费类终端等部署环境。
+
+全栈是技术功能视角，是指包括芯片、芯片使能、训练和推理框架和应用使能在内的全堆栈方案。
+
+
+
+**华为的全栈方案具体包括：**
+
+- ​	**Ascend**：基于统一、可扩展架构的系列化AI IP和芯片，包括Max、Mini、Lite、Tiny和Nano五个系列。包括我们发布的华为昇腾910（Ascend 910），还有Ascend 310。
+- ​	**CANN**：芯片算子库和高度自动化算子开发工具。
+- ​	**MindSpore**：支持端、边、云独立的和协同的统一训练和推理框架。
+- ​	**应用使能**：提供全流程服务（ModelArts），分层API和预集成方案。
+
+
+
+**华为智能体（2020.09）**
+
+![img](..\..\media\ai\ai_hw_002.png)
+
+图 2 华为智能体
+
+说明：华为智能体获第七届世界互联网大会领先科技成果奖（2020）。
+
+
+
+2020.9.24，华为云与计算BG总裁侯金龙在华为全联接2020现场发布了政企智能升级的参考架构“智能体”。
+
+智能体以云为基础，以AI为核心，通过云网边端协同，构建开放、立体感知、全域协同、精确判断和持续进化的智能系统，为城市治理、企业生产、居民生活带来全场景智慧体验。智能体是一个开放的生态系统，客户和伙伴可以基于智能体打造自己的智能方案，使能千行百业智能升级，共建全场景智慧。
+
+
+
+智能体由智能交互、智能联接、智能中枢、智慧应用四层组成，有机构成云网边端协同的一体化智能系统：
+
+- ​	智能交互：云边端协同，加速数据和AI的自由流动
+- ​	智能联接：万物智联，万智互联
+- ​	智能中枢-混合云：构筑智能升级的理想底座
+- ​	智慧应用：协同创新共创行业新价值
+
+
+
+三个使能平台也非常关键，分别是应用使能ROMA、数据使能DAYU和AI使能ModelArts。
+
+第一，应用使能，让应用开发更简单！每个企业都有大量新应用要开发，华为云ROMA提供低代码、零代码开发能力，支持全云化在线开发，云上云下一键部署，可不断沉淀行业资产，实现软件资产重用，乐高式开发。同时，每个企业都有很多老应用和老数据库，华为云ROMA提供平台化、服务化的方式，让新老应用和数据可以互通，让企业IT立而不破，实现企业应用与技术架构的平滑演进。以华为自身为例，有了ROMA之后，应用开发时间从10个月缩短到1周。
+
+
+
+第二，数据使能，让数据应用更简单。很多客户数据分布在不同的部门，但是数据只有全域共享才能发挥更大价值。华为云DAYU提供独创的逻辑数据湖方案，让数据物理上分布在不同部门，逻辑上可集中管理和分析，实现数据全域共享。
+
+
+
+第三，AI使能是智能体的核心。ModelArts让AI全生命周期的开发管理简单和自动化，让小白也能够开发AI应用，会写代码就会AI；让专家更专，聚焦算法和模型的研究。ModelArts将专家的行业知识，沉淀在套件和行业工作流中，让行业老专家的经验模板化，帮助合作伙伴和开发者，快速开发出智慧应用。以中国石油为例，沉淀行业能力后，借助华为云知识图谱套件，快速构建石油测井领域的专业化模型，实现了油气水层的智能识别，评价时间缩短70%以上，准确率达到了专家水平。
+
+
+
+### Amazon
+
+亚马逊将人工智能平台和服务整合进入了其云服务AWS中，此类服务提供云原生的机器学习和深度学习技术来应对不同用例和需求。其中在人工智能层面主要提供：AI 服务、AI 平台以及AI 基础设施。
+
+
+
+### 其它
+
+国内
+
+- ​	百度AI平台  http://ai.baidu.com/  
+- ​	阿里AI平台  http://ai.alibaba.com/  
+- ​	腾讯AI平台  http://ai.tencent.com/  
+- ​	科大讯飞开放平台 [点击进入](https://www.xfyun.cn/)
+- ​	Face++旷视 	 [点击进入](https://www.faceplusplus.com.cn/)
+- ​	360人工智能研究院 [点击进入](http://ai.360.cn/)
+- ​	网易人工智能 [点击进入](https://ai.163.com/)
+- ​	京东AI开放平台 [点击进入](http://neuhub.jd.com/)
+- ​	小米AI开放平台 [点击进入](https://dev.mi.com/console/cloud/)
+- ​	海康威视  [点击进入](https://open.hikvision.com/)
+- ​	OLAMI 欧拉密 AI 	 [点击进入](https://cn.olami.ai/)
+- ​	云知声开放平台 [点击进入](http://dev.hivoice.cn/)
+- ​	搜狗AI开放平台 - 知音 [点击进入](https://zhiyin.sogou.com/)
+- ​	滴滴AI开放平台 [点击进入](http://ai.didiglobal.com/)
+- ​	学而思教育AI开放平台 [点击进入](https://ai.xueersi.com/)
+
+
+
+国外
+
+- ​	Amazon AI  https://aws.amazon.com/cn/events/amazon-ai/  
+- ​	IBM人工智能-IBM Cloud Pak for Data  [点击进入](https://www.ibm.com/cn-zh/products/cloud-pak-for-data)
+- ​	微软AI开放平台 [点击进入](https://azure.microsoft.com/zh-cn/free/ai/)
+- ​	英特尔 AI Academy [点击进入](https://software.intel.com/zh-cn/ai)
+
+
+
+**旷视**
+
+Face++人工智能开放平台的核心技术包括人脸识别、人体识别、证件识别、图像识别。其技术能力主要在人体识别，包括人体检测、人体属性、人体抠像，手势识别四种，应用于人群监控、人流量统计、人体追踪；相片抠像美化处理市场调查、广告精准投放；在线教育等领域。
+
+
+
 ## 本章参考
 
-[1].一文纵览人工智能的23个分支 http://www.chaoqi.net/xinchao/2018/0102/107317.html 
+- 一文纵览人工智能的23个分支 http://www.chaoqi.net/xinchao/2018/0102/107317.html 
 
-[2].朱松纯教授浅谈人工智能：现状、任务、构架与统一 https://www.sohu.com/a/227854954_297710 
+- 朱松纯教授浅谈人工智能：现状、任务、构架与统一 https://www.sohu.com/a/227854954_297710 
 
-[3].   模式识别 [https://baike.baidu.com/item/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB](https://baike.baidu.com/item/模式识别)
+- 模式识别 [https://baike.baidu.com/item/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB](https://baike.baidu.com/item/模式识别)
 
-[4].  逐个看看全球 18 件 AI 大事记 www.elecfans.com/rengongzhineng/892836.html 
+- 逐个看看全球 18 件 AI 大事记 www.elecfans.com/rengongzhineng/892836.html 
+
+- 阿里首次全面公开展示AI布局（附布局图/成绩单/六产业详解） http://www.cbdio.com/BigData/2017-12/21/content_5651895.htm
+- 500家国内AI企业大数据分析：产业布局与融投风云 http://ai.51cto.com/art/201709/552696.htm
+- 《2017年中美人工智能创投现状与趋势研究报告》
+- https://github.com/dformoso/machine-learning-mindmap
+- ModelArts https://support.huaweicloud.com/modelarts/index.html  
+- 各大AI开放平台汇总分析 https://blog.csdn.net/benna/article/details/104848422  
 
  
 
