@@ -75,20 +75,21 @@ Find out more about how the roadmap is managed in [SIP (Superset Improvement Pro
 
 | 版本  | 发布时间   | 功能特性                                                     |
 | ----- | ---------- | ------------------------------------------------------------ |
-| 1.2   | 2021-7-    |                                                              |
-| 1.1   | 2021-4-14  |                                                              |
-| 1.0   | 2021-1-21  | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。<br>1.0.1引入了Apache ECharts 5.0 |
+| 1.3   | 2021-08-13 |                                                              |
+| 1.2   | 2021-06-04 |                                                              |
+| 1.1   | 2021-02-24 |                                                              |
+| 1.0   | 2021-01-15 | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。<br>1.0.1(20210202)引入Apache ECharts 5.0。 |
 | 0.38  | 2020-10-17 |                                                              |
-| 0.37  | 2020-8-14  |                                                              |
+| 0.37  | 2020-08-14 |                                                              |
 | 0.36  | 2020-04-02 |                                                              |
 | 0.35  | 2019-10-31 |                                                              |
-| 0.34  | 2019-08-09 |                                                              |
+| 0.34  | 2019-08-09 | 从 0.34.0 开始，Superset 已转移到 apache-superset。          |
 | ...   |            |                                                              |
 | 0.28  | 2018-10-17 | incubator-superset仓库的最终版本tag。                        |
-| 0.24  | 2018-3-27  |                                                              |
+| 0.24  | 2018-03-27 |                                                              |
 | ...   |            |                                                              |
-| 0.4   | 2015-9-27  |                                                              |
-| 0.2.0 | 2015-9-5   | 第一个正式发布版本。                                         |
+| 0.4   | 2015-09-27 |                                                              |
+| 0.2.0 | 2015-09-05 | 第一个正式发布版本。                                         |
 
 > 版本号a.b.0一般简写为a.b.
 >
@@ -113,7 +114,72 @@ Find out more about how the roadmap is managed in [SIP (Superset Improvement Pro
 
 **其它术语**
 
-* 注解层
+* ananotation 注解
+* report schedule 报告调度
+* alert 警报
+
+
+
+## 参与开源
+
+私有版本和官方版本的合并 [Superset：合并私有版本和Airbnb官方版本（一）](http://zhuanlan.zhihu.com/p/27207957)
+
+项目开源社区：https://github.com/apache/superset
+
+提交issue:  https://github.com/apache/superset/issues
+
+Want to contribute to apache/superset?
+
+If you have a bug or an idea, read the [contributing guidelines](https://github.com/apache/superset/blob/afb8bd5fe68066cfe2f3d384d659215dc4790d9d/CONTRIBUTING.md) before opening an issue.
+
+If you're ready to tackle some open issues, [we've collected some good first issues for you](https://github.com/apache/superset/contribute).
+
+SIP - Superset Improvement Proposa
+
+
+
+截止2021.8.18，ISSUES共有6920个（其中open 927个，closed 5993个），PRS共有9002个（其中open 116个，closed 8886个）。每个小版本发布都会有上百个BUG修复或feature新增。
+
+Every issue/PR must have one hash label (except spam entry). Labels that begin with `#` defines issue/PR type:
+
+| Label           | for Issue                                                    | for PR                                                       |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `#bug`          | Bug report                                                   | Bug fix                                                      |
+| `#code-quality` | Describe problem with code, architecture or productivity     | Refactor, tests, tooling                                     |
+| `#feature`      | New feature request                                          | New feature implementation                                   |
+| `#refine`       | Propose improvement that does not provide new features and is also not a bug fix nor refactor, such as adjust padding, refine UI style. | Implementation of improvement that does not provide new features and is also not a bug fix nor refactor, such as adjust padding, refine UI style. |
+| `#doc`          | Documentation                                                | Documentation                                                |
+| `#question`     | Troubleshooting: Installation, Running locally, Ask how to do something. Can be changed to `#bug` later. | N/A                                                          |
+| `#SIP`          | Superset Improvement Proposal                                | N/A                                                          |
+| `#ASF`          | Tasks related to Apache Software Foundation policy           | Tasks related to Apache Software Foundation policy           |
+
+
+
+贡献类型 Types of Contributions：
+
+* Report Bug:  需要列出OS、版本和如何重现步骤
+* Submit Ideas or Feature Requests
+* Fix Bugs：打标签 #bug
+* Implement Features:   #feature
+* Implement Document:  
+* Add Translations:  更改`superset/translations/<language_code>/LC_MESSAGES/messages.po` 或新语种
+* Ask Questions:  建议在[StackOverflow](https://stackoverflow.com/)提问并 打上标签 #apache-superset。
+
+
+
+贡献注意事项
+
+* 翻译：需要提交messages.po，而不是messages.json (@superset-ui的翻译内容暂不包括在内)
+
+  
+
+对于新贡献者new contributor 的Pull Request流程
+
+1. 贡献哲学：Before creating a PR, create an issue.  一般应先在issue区增加一个issue，描述问题和讨论解决方法。
+2. PR通过所有CI测试。
+3. CI检视者开始审视代码，提出审视意见。贡献者回答所有意见。
+4. PR得到代码检视者批准，并且已合并了最新代码，然后再合并到master。
+5. PR合并后，项目维护者可能会联系PR贡献者（PR里引入新问题） 或者 回退修改（PR发现关键问题比如破坏主分支CI）。
 
 
 
@@ -425,8 +491,6 @@ JSON串
 
 
 
-
-
 ## 2.4 基本功能
 
 数据流向： 数据源 - 数据表 -- 切片/图表 -- 看板
@@ -472,7 +536,7 @@ JSON串
 
 
 
-### 邮件告警
+### 警报 alert
 
 
 
@@ -481,10 +545,6 @@ JSON串
 # 3 开发篇
 
 ## 3.1 开发者必知
-
-* 私有版本和官方版本的合并 [Superset：合并私有版本和Airbnb官方版本（一）](http://zhuanlan.zhihu.com/p/27207957)
-
- 
 
 ### **本地调试（pycharm）**
 
@@ -564,7 +624,14 @@ API实现： superset API实现在各个目录下的api.py
 
 
 
-**Rison**:  查询参数格式示例
+**Rison**:  查询参数格式。示例如下，
+
+```shell
+# 示例：分页查询 
+?q=(order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25)
+# 示例：搜索过滤
+?q=(filters:!((col:slice_name,opr:chart_all_text,value:%E6%97%B6%E9%97%B4)),)
+```
 
 
 
@@ -725,7 +792,6 @@ API实现： superset API实现在各个目录下的api.py
 | /api/v1/dataset/_info   | 权限信息     |      | ?q=(keys:!(permissions))                                     |                               |                                                              |
 | /api/v1/chart/data      | 查看图表数据 | POST | ?form_data=%7B%22slice_id%22%3A437%7D                        | result_type: results或samples |                                                              |
 | /superset/explore_json/ | 数据查询结果 |      | /?form_data=%7B%22slice_id%22%3A464%7D&result=true           | form_data, result是否展示     |                                                              |
-|                         |              |      |                                                              |                               |                                                              |
 
 说明：
 
@@ -799,6 +865,10 @@ API实现： superset API实现在各个目录下的api.py
 
 ### 国际化
 
+国际化有几个常用模块：locale babel humanize
+
+#### babel 语言翻译
+
 实现原理：flask_babel --> babel
 
 说明：babel翻译能自动对货币、日期格式按照语言环境进行切换。
@@ -808,8 +878,9 @@ API实现： superset API实现在各个目录下的api.py
 配置文件 config.py
 
  ```python
-# Setup default language 缺省本地化，flask_babel模块所需变量
+# 本地化: BABEL_DEFAULT_LOCALE - flask_babel模块所需变量; LANGUAGES - for humanize
 BABEL_DEFAULT_LOCALE = 'zh'
+LANGUAGES = {"zh": {"flag": "cn", "name": "Chinese"}}
  ```
 
 
@@ -867,6 +938,8 @@ BABEL_DEFAULT_LOCALE = 'zh'
   	description: t('The color scheme for rendering chart'),
       label_t : t('Calculated column [%s] requires an expression', col.column_name),  //支持t 带格式化符     
   }
+      
+  // @superset-ui/core/    
   ```
 
 * **修改方法**：
@@ -885,12 +958,6 @@ BABEL_DEFAULT_LOCALE = 'zh'
 pot/po/mo/json格式转化流程如下：
 
 ```shell
-# 安装pybabel
-$ pip install babel
-
-# step1: 生成pot/po格式 （pot和po格式类似）
-# 从babel.cfg配置的文件里提取 message.pot (-k参数可忽略,默认识别标鉴_ __ t）, 要在superset父目录执行命令才能提取到babel.cfg里配置的文件
-# NOTE: pybabel不能保证完全提取 -k参数中的内容，若有遗漏需要自行添加到PO文件里
 # 安全起见，避免覆盖 可先创建目录translation2，将生成的pot/po/json都先放到这个目录，等一切ok再替换superset/translations/zh下相关文件
 $ cd $SUPERSET_HOME
 $ mkdir translations2
@@ -900,23 +967,13 @@ $ pybabel init -i translations2/msg.pot -d translations2 -l zh
 
 # step2: 人工翻译 messages.po
 
-
-# step3: po需要转化成 mo 或 json才能被使用
-# 编译 .po -> .mo 
+# step3: 编译 .po -> .mo 
 # (OK)法1：pybable -d 编译目标目录，-l 语种。要求指定目录的里层结构是$locale/LC_MESSAGES/xx.po
 $ pybabel compile -d translations2 -l zh
-#  法2：linux工具msgfmt
-$ msgfmt ./messages.po -o ./messages.mo
 
-# 编辑 .po -> .json
+# step4: .po -> .json
 # (OK推荐)js实现的po2json：npm install po2json -g, 参数-d domain, -f format -p pretty
 $ po2json -d superset -f jed1.x -p ./messages.po ./messages.json
-
-# python实现的po2json: pip install po2json
-# (OK)linux终端下执行成功：po2json [locale_path] [output_path] [domain]， output_path目录要求有语种对应的js如zh.js
-$ po2json translate2 translate messages
-# windows下执行没报错，也没生成文件: -X 指定编码，windows终端缺省编码是gbk会报编码错误。将po2json目录下__init__.py复制为main.py
-$ python -X utf8 -m po2json.main translations2 translations messages
 ```
 
 
@@ -945,50 +1002,11 @@ encoding = utf-8
 
 
 
-**messages.po示例**
-
-纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）
-
-```ini
-# Chinese translations for Apache Superset.
-msgid ""
-msgstr ""
-"Project-Id-Version: Apache Superset 0.22.1\n"
-"Report-Msgid-Bugs-To: zhouyao94@qq.com\n"
-"POT-Creation-Date: 2021-01-22 15:56-0300\n"
-"PO-Revision-Date: 2019-01-04 22:19+0800\n"
-"Last-Translator: \n"
-"Language-Team: zh <benedictjin2016@gmail.com>\n"
-"Language: zh\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"Generated-By: Babel 2.8.0\n"
-
-# 说明：纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。示例如下：
-#: superset/app.py:225
-msgid "Home"
-msgstr ""
-
-#: superset/app.py:230 superset/views/annotations.py:119
-msgid "Annotation Layers"
-msgstr "注解层"
-```
-
-
-
 2. **特殊修改**
-* 一般情况下字符串要完全匹配，严格区分大小写和符号。 但对于按纽或表单类，经常有作大小写转化，要区别对待。
-  * 通常可以用页面显示的英文串作为KEY；如果不生效，再在代码中搜索，用代码中的英文串作KEY。
+* 一般情况下字符串要完全匹配，严格区分大小写和符号。 但对于按纽或表单类，经常有作大小写转化（有命名规范：区分专有名词和普通名词），要区别对待。
+  * 通常可以用页面显示的英文串作为KEY；如果不生效，再在代码中搜索，用代码中的英文串作KEY。示例：显示`Create By` 用  `Create by`, 显示`BULK SELECT`用 `Bulk select`.
   
-  * 表单类示例：显示"Create By", 代码"Create by"，翻译要用代码Create by
-  
-  * 按钮类示例：显示"BULK SELECT"，代码中"Bulk select"，翻译要用代码Bulk select。显示全大写的字符串，试用首字母大写，其它全小写 或者 每个单词首字母大写。
-  
-  * KEY值尾部带空格：用PO生成的KEY尾部带空格有24个，要注意判断。如
-  
-    	"Edit Dataset ": ["编辑数据集"],
+  * KEY值尾部带空格：用PO生成的KEY尾部带空格有24个，要注意判断。如 `"Edit Dataset ": ["编辑数据集"],`
   
 * 尚未用 __或t 圈起来的字符串，需在代码中添加国际化修改操作符。
 
@@ -996,6 +1014,18 @@ msgstr "注解层"
 
   * 导航菜单的字符串标签，使用了flask_appbuilder模块导航菜单组件
   * 表格编辑/tablemodelview/edit/<pk> 使用了flask_appbuilder模块原生模板
+
+* 换行符处理：messages.json一般是unix格式，因此里面的\r\n要换成\n。
+
+
+
+#### humanize 人性化
+
+详见 《superset源码剖析》humanize 章节
+
+superset人性化主要是时间日期，服务端返回的字段changed_on_humanized已经是中文时间格式了。
+
+客户端使用moment.js，可以从bootstra_data里获取moment_locale 进行初始化（尚未发现真正使用的地方）。
 
 
 
@@ -1047,6 +1077,12 @@ form_data={"datasource":"3__table","viz_type":"line","slice_id":63,"granularity_
 
 
 **存在问题**：嵌入页面缺少鉴权，存在数据泄露问题。
+
+
+
+### CSRF
+
+
 
 
 
@@ -1164,14 +1200,14 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 * Schema: 是一个逻辑概念。
   * MySQL：等同于表。
-  * Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema. 默认schema和用户名同名。
+  * Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema。默认schema和用户名同名。
   * PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
 
 
 
 ### 权限管理
 
-权限管理：权限项有287项，可分为两大类分别是基本权限 和 视图列表的操作权限。
+权限管理：权限项有287+项，可分为两大类分别是基本权限 和 视图列表的操作权限。
 
 表格 5 权限管理的角色说明（角色类似用户组的概念）
 
@@ -1190,7 +1226,7 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 *  Alpha角色可以读取所有数据源和dashboard，但不能修改。
 *  Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
 2. dashboard的写权限：要能修改dashboard，要在此看板设置所有者加入用户名。
-3. 行级别权限：
+3. 行级别权限 Row Level：
 
 
 
@@ -1314,6 +1350,10 @@ CONFIG_PATH_ENV_VAR = "SUPERSET_CONFIG_PATH"
 # AUTH_LDAP : Is for LDAP
 # AUTH_REMOTE_USER : Is for using REMOTE_USER from web server
 AUTH_TYPE = AUTH_DB
+
+# 特性标识开关字典：用来服务端 开发新特性需要
+# 可调用is_feature_enabled，如is_feature_enabled('KV_STORE')，会加载DEFAULT_FEATURE_FLAGS，FEATURE_FLAGS
+DEFAULT_FEATURE_FLAGS: Dict[str, bool] = { }
 ```
 
 
@@ -1630,10 +1670,9 @@ ModuleNotFoundError: No module named '_bz2'
 
 **Q4: centos import pandas时报错**
 
-报错信息：
+报错信息：import pandas时报错如下：
 
 ```shell
-# import pandas时报错如下：
 /usr/local/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module.
 Your installed Python is incomplete. Attempting to use lzma compression will result in
  a RuntimeError.
@@ -1694,6 +1733,22 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 
 
+**Q2： 解决linux下nodejs中watch文件最大数异常**
+
+描述：
+
+```shell
+ENOSPC: System limit for number of file watchers reached
+```
+
+解决方法：
+
+```shell
+$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+
+
 ## 中文内容乱码问题
 
 表格  superset中文乱码问题解决
@@ -1710,6 +1765,19 @@ Q1：连接MySQL中文乱码
 
 A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于py27） 
  `mysql://superset_nbdata_r:XXXXXXXXXX@10.64.1.248:3338/spider?charset=utf8`
+
+
+
+**小技巧**
+
+json内容不显示为ascii，比如保存为json文件，保存到数据库时中文能正常阅读。
+
+```python
+import json
+
+dic = {}
+json.dumps(dic, ensure_ascii=False)
+```
 
 
 
@@ -1731,9 +1799,10 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 *  superset的缓存配置 https://blog.csdn.net/qq_33440665/article/details/65628551
 *  增加自定义数据源 https://zhuanlan.zhihu.com/p/179162221 
 *  利用Flask-AppBuilder 快速构建Web后台管理应用 https://blog.csdn.net/oxuzhenyi/article/details/77586500
-* Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
-* Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
-* 如何将Superset嵌入后台系统之实践 https://www.yisu.com/zixun/58300.html
-* superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
-* 教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
+*  Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
+*  Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
+*  如何将Superset嵌入后台系统之实践 https://www.yisu.com/zixun/58300.html
+*  superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
+*  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
+*  python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
 

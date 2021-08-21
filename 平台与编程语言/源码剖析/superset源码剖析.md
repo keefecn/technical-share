@@ -1,6 +1,6 @@
 | 序号 | 修改时间 | 修改内容                                   | 修改人 | 审稿人 |
 | ---- | -------- | ------------------------------------------ | ------ | ------ |
-| 1   | 2021-6-11 | 创建。新增源码剖析篇章节。 | Keefe |   Keefe     |
+| 1   | 2021-6-1ms | 创建。新增源码剖析篇章节。 | Keefe |   Keefe     |
 | 2 | 2021-7-18 | 单独成文。 | Keefe |  |
 
 
@@ -17,6 +17,18 @@
 源码分析版本： superset-1.0
 
 ```shell
+$ pip show apache-superset
+Name: apache-superset
+Version: 1.0.0
+Summary: A modern, enterprise-ready business intelligence web application
+Home-page: https://superset.apache.org/
+Author: Apache Software Foundation
+Author-email: dev@superset.apache.org
+License: Apache License, Version 2.0
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: backoff, bleach, cachelib, celery, click, colorama, contextlib2, croniter, cron-descriptor, cryptography, flask, flask-appbuilder, flask-caching, flask-compress, flask-talisman, flask-migrate, flask-wtf, geopy, gunicorn, humanize, isodate, markdown, msgpack, pandas, parsedatetime, pathlib2, pgsanity, polyline, python-dateutil, python-dotenv, python-geohash, pyarrow, pyyaml, redis, retry, selenium, simplejson, slackclient, sqlalchemy, sqlalchemy-utils, sqlparse, wtforms-json, pyparsing, holidays
+Required-by:
+
 $ pip show superset
 Name: superset
 Version: 0.30.1
@@ -98,25 +110,26 @@ Required-by:
 
 表格  前端目录superset-frontend源码结构
 
-| 目录或文件        | 二级目录或文件 | 简介                                                         |
-| ----------------- | -------------- | ------------------------------------------------------------ |
-| .eslintrc.js      |                | eslint配置文件                                               |
-| babel.config.js   |                | babel配置文件。可将jsx文件编译成js。                         |
-| package.json      |                | 前端模块依赖，用npm/yarn管理                                 |
-| webpack.config.js |                | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
-| src               |                | 源码                                                         |
-|                   | components     | 各个最小组件的详细布局和数据                                 |
-|                   | chart          | 根据图表属性渲染具体图表页面，里面调用了**SuperChart**组件。<br>而此组件属于superset-ui前端库，会根据后台传入的属性，最终渲染出对应的图表组件。 |
-|                   | explore        | 生成某个图表详情的页面，如表单项。<br>controls.jsx 表单项列表 |
-|                   | filters        | 过滤器                                                       |
-|                   | visualizations | 可视化图表类型实现                                           |
-|                   | views          | 路由映射视图，各个页面的详细布局在此，如/welcome/是首页      |
-|                   | ...            |                                                              |
-| branding          |                | 存放项目logo                                                 |
-| cypress-base      | cypress        | UI自动化测试框架                                             |
-| images            |                | 图片                                                         |
-| spec              |                |                                                              |
-| stylesheets       |                |                                                              |
+| 目录或文件        | 二级目录或文件                           | 简介                                                         |
+| ----------------- | ---------------------------------------- | ------------------------------------------------------------ |
+| .eslintrc.js      |                                          | eslint配置文件                                               |
+| babel.config.js   |                                          | babel配置文件。可将jsx文件编译成js。                         |
+| package.json      |                                          | 前端模块依赖，用npm/yarn管理                                 |
+| webpack.config.js |                                          | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
+| src               |                                          | 源码                                                         |
+|                   | components                               | 各个最小组件的详细布局和数据                                 |
+|                   | chart                                    | 根据图表属性渲染具体图表页面，里面调用了**SuperChart**组件。<br>而此组件属于superset-ui前端库，会根据后台传入的属性，最终渲染出对应的图表组件。 |
+|                   | explore                                  | 生成某个图表详情的页面，如表单项。<br>controls.jsx 表单项列表 |
+|                   | filters                                  | 过滤器                                                       |
+|                   | visualizations                           | 可视化图表类型实现                                           |
+|                   | views                                    | 路由映射视图，各个页面的详细布局在此，如/welcome/是首页      |
+|                   | constants.ts, preamble.ts, reduxUtils.ts | 常量、常用函数。定义了页面引导数据bootstrapData等            |
+|                   | ...                                      |                                                              |
+| branding          |                                          | 存放项目logo                                                 |
+| cypress-base      | cypress                                  | UI自动化测试框架                                             |
+| images            |                                          | 图片                                                         |
+| spec              |                                          |                                                              |
+| stylesheets       |                                          |                                                              |
 
 > superset前端用到的组件主要有：React, D3
 
@@ -175,6 +188,8 @@ Required-by:
 
 * 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
 * 前端生成的包 在superset/static目录，打包配置文件是webpack.config.js： `npm run build`
+
+
 
 **前后端分离不能彻底的原因**
 
@@ -401,6 +416,8 @@ talisman = Talisman()
 
 说明:  maninfest.json里文件是最终生成js/css文件，源文件可以根据key值 如proflie到 webpack.config.js找到原始文件的入口。
 
+因此，如果一个变量影响到多个文件，重新build生成的js文件名称可能不一样了，这时也需要 *重启服务端* 才能得到正确的文件映射。
+
 
 
 #### 模板渲染
@@ -604,6 +621,134 @@ SSR + SPA = Universal App
       ),
     );
   }
+```
+
+
+
+#### 页面引导数据 data-bootstrap示例
+
+```json
+{
+	"user": {
+		"username": "isoftstone1",
+		"firstName": "isoftstone1",
+		"lastName": "数据探索",
+		"userId": 4,
+		"isActive": true,
+		"createdOn": "2021-07-28T06:51:23",
+		"email": "835bd30f09304c9f9bf9b18de25c29b1|isoftstone1"
+	},
+	"common": {
+		"flash_messages": [],
+		"conf": {
+			"SUPERSET_WEBSERVER_TIMEOUT": 60,
+			"SUPERSET_DASHBOARD_POSITION_DATA_LIMIT": 65535,
+			"SUPERSET_DASHBOARD_PERIODICAL_REFRESH_LIMIT": 0,
+			"SUPERSET_DASHBOARD_PERIODICAL_REFRESH_WARNING_MESSAGE": null,
+			"DISABLE_DATASET_SOURCE_EDIT": null,
+			"ENABLE_JAVASCRIPT_CONTROLS": false,
+			"DEFAULT_SQLLAB_LIMIT": 1000,
+			"SQL_MAX_ROW": 100000,
+			"SUPERSET_WEBSERVER_DOMAINS": null,
+			"SQLLAB_SAVE_WARNING_MESSAGE": null,
+			"DISPLAY_MAX_ROW": 10000,
+			"GLOBAL_ASYNC_QUERIES_TRANSPORT": "polling",
+			"GLOBAL_ASYNC_QUERIES_POLLING_DELAY": 500
+		},
+		"locale": "zh",
+		"language_pack": {
+			"domain": "superset",
+			"locale_data": {
+				"superset": {
+					"": {
+						"domain": "superset",
+						"plural_forms": "nplurals=1; plural=0;",
+						"lang": "zh"
+					},
+					"Home": ["首页"],
+					"Edit chart metadata": ["编辑图表元数据"],                    
+		},
+		"feature_flags": {
+			"ALLOW_DASHBOARD_DOMAIN_SHARDING": true,
+			"CLIENT_CACHE": false,
+			"DISABLE_DATASET_SOURCE_EDIT": false,
+			"DYNAMIC_PLUGINS": false,
+			"ENABLE_EXPLORE_JSON_CSRF_PROTECTION": false,
+			"ENABLE_TEMPLATE_PROCESSING": false,
+			"KV_STORE": false,
+			"PRESTO_EXPAND_DATA": false,
+			"THUMBNAILS": false,
+			"DASHBOARD_CACHE": false,
+			"REMOVE_SLICE_LEVEL_LABEL_COLORS": false,
+			"SHARE_QUERIES_VIA_KV_STORE": false,
+			"SIP_38_VIZ_REARCHITECTURE": false,
+			"TAGGING_SYSTEM": false,
+			"SQLLAB_BACKEND_PERSISTENCE": false,
+			"LISTVIEWS_DEFAULT_CARD_VIEW": false,
+			"ENABLE_REACT_CRUD_VIEWS": true,
+			"DISPLAY_MARKDOWN_HTML": true,
+			"ESCAPE_MARKDOWN_HTML": false,
+			"DASHBOARD_NATIVE_FILTERS": false,
+			"GLOBAL_ASYNC_QUERIES": false,
+			"VERSIONED_EXPORT": false,
+			"ROW_LEVEL_SECURITY": false,
+			"ALERT_REPORTS": false,
+			"OMNIBAR": false,
+			"DASHBOARD_RBAC": false
+		},
+		"extra_sequential_color_schemes": [],
+		"extra_categorical_color_schemes": [],
+		"menu_data": {
+			"menu": [
+				{
+					"name": "Security",
+					"icon": "fa-cogs",
+					"label": "用户权限",
+					"childs": [
+						{"name":"List Users","icon":"fa-user","label":"用户列表","url":"/users/list/"},
+                    	{"name":"List Roles","icon":"fa-group","label":"角色列表","url":"/roles/list/"},"-",
+                        {"name":"Action Log","icon":"fa-list-ol","label":"操作日志","url":"/logmodelview/list/"}
+					]
+				},
+                {
+                    "name":"Data","icon":"fa-database","label":"数据",
+                    "childs":[
+                		{"name":"Databases","icon":"fa-database","label":"数据库","url":"/databaseview/list/"},
+                		{"name":"Datasets","icon":"fa-table","label":"数据集","url":"/tablemodelview/list/?_flt_1_is_sqllab_view=y"},"-",
+                		{"name":"Upload a CSV","icon":"fa-upload","label":"上传CSV文件","url":"/csvtodatabaseview/form"}]
+                },
+				{
+					"name": "Charts",
+					"icon": "fa-bar-chart",
+					"label": "图表",
+					"url": "/chart/list/"
+				}
+			],
+			"brand": {
+				"path": "/",
+				"icon": "/static/assets/images/superset-logo-horiz.png",
+				"alt": "DataLab",
+				"width": 126
+			},
+			"navbar_right": {
+				"bug_report_url": null,
+				"documentation_url": null,
+				"version_string": "1.0.6",
+				"version_sha": "6b55a222",
+				"languages": {
+                    "en":{"flag":"us","name":"English","url":"/lang/en"},
+				},
+				"show_language_picker": false,
+				"user_is_anonymous": false,
+				"user_info_url": "/users/userinfo/",
+				"user_logout_url": "/logout/",
+				"user_login_url": "/login/",
+				"user_profile_url": "/superset/profile/isoftstone1",
+				"locale": "zh"
+			}
+		}
+	}
+}                    
 ```
 
 
@@ -3924,6 +4069,167 @@ const groupByControl = {
 
 
 
+### 后端依赖 humanize 
+
+humanize模块可实现人性化 和 本地化功能。humanize本地化功能依赖于babel模块。
+
+* 整数：  intcomma  intword  apnumber
+* 时间和日期：naturalday  naturaldate   naturaldelta  naturaltime 
+* 文件大小/浮点数：fractional
+*  本地化：humanize.i18n.activate('zh_CN')   humanize.i18n.deactivate()
+
+示例：如2 days ago自动转化成2天之前。
+
+```python
+# python服务端 humanize
+# 激活环境：lang_flag
+import humanize
+
+def localized_naturaltime(time: datetime, locale: str) -> str:
+   # 人性化时间 
+   humanize.i18n.activate(locale)
+   naturalized = humanize.naturaltime(time)
+   humanize.i18n.deactivate(locale)
+   return naturalized
+
+>>> import datetime
+>>> humanize.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
+'an hour ago'
+
+# 本地化激活
+>>> humanize.i18n.activate('zh_CN')
+>>> humanize.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
+'1小时之前'
+```
+
+
+
+**客户端**： 使用 moment.js  (lang-flag)
+`moment.locale('zh-CN');`
+
+
+
+### 后端依赖 bable
+
+babel最主要就是使用其提供的关于语言国际化和本土化命令。实现以下功能：
+
+- extrace_messages
+- init_catalog
+- compile_catalog
+- update_catalog
+
+
+
+命令行提供参数有：
+
+- -i 输入文件
+- -o 输出文件
+- -d 输出目录
+- -D domain名称（可选项）
+- -l locale名称
+
+对应命令行
+
+```shell
+$ pip install babel
+
+# extrace： 抽取生成 pot文件，需要指定抽取配置文件 babel.cfg
+pybabel extract -o project_name/locale/project_name.pot .
+# 示例：-k是提取标签,默认识别标鉴_ __ t
+$ pybabel extract -F superset/translations/babel.cfg -k _ -k __ -k t -k tn -k tct -o translations2/msg.pot .
+
+# init： pot文件 转化成 po文件，pot/po容格式类似, 
+# 生成文件为$locale/LC_MESSAGES/xx.po，如果未指定locale，那么会生成所有的支持语种
+pybabel init -i project_name/locale/project_name.pot -D project_name -d project_name/locale --locale zh_CN
+$ pybabel init -i translations2/msg.pot -d translations2 -l zh
+
+# compile： po文件 转化成 mo文件，如falsk_appbuilder或者humanize真正使用的文件是mo格式
+pybabel compile -D project_name -d project_name/locale/ 
+$ pybabel compile -d project_name -l zh
+
+# update
+pybable update -D project_name -d project_name/locale/
+```
+
+
+
+**扩展 po2json**： 一般程序用mo格式。但有些程序要使用json格式如superset，这里需要用工具如po2json 将po格式转化成 json。
+
+po格式转化成json格式
+
+```shell
+# (OK推荐)js实现的po2json：npm install po2json -g, 参数-d domain, -f format -p pretty
+$ po2json -d superset -f jed1.x -p ./messages.po ./messages.json
+
+# python实现的po2json: pip install po2json
+# (OK)linux终端下执行成功：po2json [locale_path] [output_path] [domain]， output_path目录要求有语种对应的js如zh.js
+$ po2json translate2 translate messages
+# windows下执行没报错，也没生成文件: -X 指定编码，windows终端缺省编码是gbk会报编码错误。将po2json目录下__init__.py复制为main.py
+$ python -X utf8 -m po2json.main translations2 translations messages
+```
+
+**po转化成mo**:  在linux环境，po转化成mo还可以使用msgfmt。
+
+命令示例：`msgfmt ./messages.po -o ./messages.mo`
+
+
+
+babel.cfg 示例
+
+```ini
+#[ignore: superset-frontend/node_modules/**]
+[python: superset/**.py]
+[jinja2: superset/**/templates/**.html]
+[javascript: superset-frontend/src/**.js]
+[javascript: superset-frontend/src/**.jsx]
+[javascript: superset-frontend/src/**.tsx]
+
+encoding = utf-8
+```
+
+说明：ignore是放弃扫描文件。
+
+
+
+**messages.po示例**
+
+纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。
+
+如果不想重新抽取文件，可直接在po文件按格式添加内容，再转化成mo或json格式。
+
+```ini
+# Chinese translations for Apache Superset.
+msgid ""
+msgstr ""
+"Project-Id-Version: Apache Superset 0.22.1\n"
+"Report-Msgid-Bugs-To: zhouyao94@qq.com\n"
+"POT-Creation-Date: 2021-01-22 15:56-0300\n"
+"PO-Revision-Date: 2019-01-04 22:19+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh <benedictjin2016@gmail.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Generated-By: Babel 2.8.0\n"
+
+# 说明：纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。示例如下：
+#: superset/app.py:225
+msgid "Home"
+msgstr ""
+
+#: superset/app.py:230 superset/views/annotations.py:119
+msgid "Annotation Layers"
+msgstr "注解层"
+```
+
+
+
+#### 原理
+
+
+
 
 
 ### 前端依赖 @superset-ui
@@ -4071,6 +4377,8 @@ ReactDOM.render(
 * Flux 架构入门教程 https://www.ruanyifeng.com/blog/2016/01/flux.html
 * React 入门实例教程(删) https://www.ruanyifeng.com/blog/2015/03/react.html
 * [Redux - A predictable state container for JavaScript apps. | Redux](https://redux.js.org/)   https://redux.js.org/
+* python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
+* python humanize https://www.worldlink.com.cn/zh_tw/osdir/python-humanize.html
 
 
 
