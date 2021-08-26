@@ -1,6 +1,6 @@
 | 序号 | 修改时间   | 修改内容            | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------------------- | ------ | ------ |
-| 1    | 2016-5-18  | 创建   | 吴启福 | 吴启福 |
+| 1    | 2016-5-18  | 创建   | Keefe | Keefe |
 | 2    | 2016-6-19  | 更新常用开发库      | 同上   |        |
 | 3    | 2016-8-16  | 更新SQL操作失败分析 | 同上   |        |
 | 4    | 2016-9-8   | 更新python源码阅读  | 同上   |        |
@@ -3866,9 +3866,7 @@ ModuleNotFoundError: No module named '_bz2'
 
 原因：缺少Python3.6+的bz2模块需要的so文件
 
-解决方法：重新编译安装 或 下载所缺少的SO拷到 /usr/lib/python38/
-
-
+解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/ 
 
 
 
@@ -3892,23 +3890,6 @@ python -m pip install --upgrade pip
 
 
 ## 6.3 Python模块问题
-
-### pyquey & beautifulSoup
-
-**错误1：AttributeError: 'XPathExpr' object has no attribute 'add_post_condition'**
-解决方案：版本问题。重新安装pyquery
-
-```sh
-pip uninstall pyquery
-pip install git+git://github.com/gawel/pyquery.git
-```
-
-
-
-**错误2：定位标签的类型错误**
-解决方案：beautifulsoup使用unicode标签，pyquery使用str标签。
-
-
 
 ### mysql操作失败
 
@@ -3943,6 +3924,78 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 问题：问py3.7如何同时用redis集群和celery？ celery borken如何配置多节点Redis集群。
 
 答：要用celery最新版本，并且redis-py-cluster版本也要升级。
+
+
+
+### 其它模块
+
+**Q1: centos import pandas时报错**
+
+报错信息：import pandas时报错如下：
+
+```shell
+/usr/local/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module.
+Your installed Python is incomplete. Attempting to use lzma compression will result in
+ a RuntimeError.
+  warnings.warn(msg)
+```
+
+原因：要严格按照模块依赖的版本安装。"pandas>=1.1.2, <1.2",
+
+解决方法：
+
+```shell
+$ sudo yum install xz-devel
+$ pip install backports.lzma	#若未安装xz-devel，将会报缺少lzma.h文件
+```
+
+
+
+**Q2：cx_oralce版本报错 **
+
+描述： Cannot locate a 64-bit Oracle Client library: "libclntsh.so: cannot open shared object file: No such file or directory".
+
+解决方法：下载instantclient_21_1， 环境变量指定库路径
+
+```shell
+# 下载  
+# 不可用 https://www.oracle.com/cn/database/technology/linuxx86-64soft.html
+# 可用 https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
+# 注意第三方工具如：PL/SQL Developer和Toad的版本，32位的要对应32位的OracleInstant Client，不要因为系统是64位的就下载64位的，这个要注意。
+
+# 示例版本： /opt/oracle/instantclient_12_2
+cd /opt/oracle      
+unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
+
+# 添加链接：一般可能已经有了
+cd /opt/oracle/instantclient_12_2  
+ln -s libclntsh.so.12.1 libclntsh.so
+ln -s libocci.so.12.1 libocci.so
+
+sudo yum install libaio
+
+# 设置库路径
+sudo sh -c "echo /opt/oracle/instantclient_12_2 > \        
+  /etc/ld.so.conf.d/oracle-instantclient.conf"    
+sudo ldconfig
+# 或者 设置库环境变量
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH
+```
+
+
+
+**Q3: pyquery & beautifulSoup**
+
+**错误1：AttributeError: 'XPathExpr' object has no attribute 'add_post_condition'**
+解决方案：版本问题。重新安装pyquery
+
+```sh
+pip uninstall pyquery
+pip install git+git://github.com/gawel/pyquery.git
+```
+
+**错误2：定位标签的类型错误**
+解决方案：beautifulsoup使用unicode标签，pyquery使用str标签。
 
 
 

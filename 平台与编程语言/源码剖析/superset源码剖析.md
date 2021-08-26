@@ -1,6 +1,6 @@
 | 序号 | 修改时间 | 修改内容                                   | 修改人 | 审稿人 |
 | ---- | -------- | ------------------------------------------ | ------ | ------ |
-| 1   | 2021-6-1ms | 创建。新增源码剖析篇章节。 | Keefe |   Keefe     |
+| 1   | 2021-6-1 | 创建。新增源码剖析篇章节。 | Keefe |   Keefe     |
 | 2 | 2021-7-18 | 单独成文。 | Keefe |  |
 
 
@@ -75,15 +75,15 @@ Required-by:
 | (弃) assets       |                                              | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
 | async_events      |                                              | 异步事件                                                     |
 | cachekeys         |                                              | 缓存键K-V                                                    |
-| charts            | api.py dao.py filters.py schemas.py          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
-| commands          | BaseCommand ExportModelsCommand              | 支持的命令                                                   |
-| common            |                                              |                                                              |
+| > charts          | api.py dao.py filters.py schemas.py          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
+| commands          | BaseCommand ExportModelsCommand              | 支持的命令。命令基类/命令异常类                              |
+| common            |                                              | 查询对象和查询上下文                                         |
 | connectors        |                                              | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
 | db_engines        |                                              | DB引擎                                                       |
 | dao               | BaseDAO DAOException                         | 数据访问基类、数据访问异常类                                 |
-| dashboards        |                                              | 看板。结构类似图表。                                         |
-| databases         |                                              | 数据库dbs/数据源。结构类似图表。                             |
-| datasets          |                                              | 数据集。结构类似图表。                                       |
+| > dashboards      |                                              | 看板。结构类似图表。                                         |
+| > databases       |                                              | 数据库dbs/数据源。结构类似图表。                             |
+| > datasets        |                                              | 数据集。结构类似图表。                                       |
 | db_engines        |                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
 | db_engine_spec    |                                              | 同上                                                         |
 | examples          |                                              | 17个示例数据集，用 superset load-examples加载，需从网络下载  |
@@ -91,7 +91,7 @@ Required-by:
 | models            |                                              | 存放项目的model，如果要修改字段，优先到这里寻找。            |
 | quaries           |                                              | 查询SQL相关。结构类似图表。                                  |
 | reports           |                                              | 报表相关。结构类似图表。                                     |
-| security          | SupersetSecurityManager  DBSecurityException | 安全权限管理                                                 |
+| security          | SupersetSecurityManager  DBSecurityException | 安全权限管理。包括用户认证                                   |
 | sql_validators    |                                              | SQL验证                                                      |
 | **static**        | assets                                       | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
 | tasks             |                                              | celery 任务脚本                                              |
@@ -117,8 +117,11 @@ Required-by:
 | package.json      |                                          | 前端模块依赖，用npm/yarn管理                                 |
 | webpack.config.js |                                          | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
 | src               |                                          | 源码                                                         |
-|                   | components                               | 各个最小组件的详细布局和数据                                 |
 |                   | chart                                    | 根据图表属性渲染具体图表页面，里面调用了**SuperChart**组件。<br>而此组件属于superset-ui前端库，会根据后台传入的属性，最终渲染出对应的图表组件。 |
+|                   | components                               | 各个最小组件的详细布局和数据                                 |
+|                   | CRUD                                     | 页面操作CRUD涉及到的组件                                     |
+|                   | dashboard                                | 仪表盘                                                       |
+|                   | datasource                               | 数据集                                                       |
 |                   | explore                                  | 生成某个图表详情的页面，如表单项。<br>controls.jsx 表单项列表 |
 |                   | filters                                  | 过滤器                                                       |
 |                   | visualizations                           | 可视化图表类型实现                                           |
@@ -127,7 +130,7 @@ Required-by:
 |                   | ...                                      |                                                              |
 | branding          |                                          | 存放项目logo                                                 |
 | cypress-base      | cypress                                  | UI自动化测试框架                                             |
-| images            |                                          | 图片                                                         |
+| images            |                                          | 图片，包括favicon.png, loading.git                           |
 | spec              |                                          |                                                              |
 | stylesheets       |                                          |                                                              |
 
@@ -601,6 +604,8 @@ SSR + SPA = Universal App
 
 #### **参数传递：rison格式**
 
+客户端传递，传化成json格式
+
 示例：/api/v1/chart/?q=(order_column:slice_name,order_direction:asc,page:0,page_size:25)
 
 ```tsx
@@ -623,9 +628,71 @@ SSR + SPA = Universal App
   }
 ```
 
+服务端判断 传参rison是否为有效python数据格式
+
+装饰器 rison:  
+
+```python
+# /flask_appbuilder/api/__init__.py
+def rison(schema=None):
+    """ 调用示例：
+            schema = {
+                "type": "object",
+                "properties": {"arg1": {"type": "integer"}}
+            }
+            
+            class ExampleApi(BaseApi):
+                    @expose('/risonjson')
+                    @rison(schema)
+                    def rison_json(self, **kwargs):
+                        return self.response(200, result=kwargs['rison'])    
+    """
+    def _rison(f):
+        def wraps(self, *args, **kwargs):
+            value = request.args.get(API_URI_RIS_KEY, None)
+            kwargs["rison"] = dict()
+            if value:
+                try:
+                    kwargs["rison"] = prison.loads(value)
+                except prison.decoder.ParserException:
+                    if current_app.config.get("FAB_API_ALLOW_JSON_QS", True):
+                        # Rison failed try json encoded content
+                        try:
+                            kwargs["rison"] = json.loads(
+                                urllib.parse.parse_qs(f"{API_URI_RIS_KEY}={value}").get(
+                                    API_URI_RIS_KEY
+                                )[0]
+                            )
+                        except Exception:
+                            return self.response_400(
+                                message="Not a valid rison/json argument"
+                            )
+                    else:
+                        return self.response_400(message="Not a valid rison argument")
+            if schema:
+                try:
+                    jsonschema.validate(instance=kwargs["rison"], schema=schema)
+                except jsonschema.ValidationError as e:
+                    return self.response_400(message=f"Not a valid rison schema {e}")
+            return f(self, *args, **kwargs)
+
+        return functools.update_wrapper(wraps, f)
+
+    return _rison
+```
 
 
-#### 页面引导数据 data-bootstrap示例
+
+#### 页面引导数据 data-bootstrap
+
+数据格式说明：
+
+* user:  用户登陆基本信息
+* common：基本配置项，包括 语言包（数据量最大）、配置项Conf、特征标识feature_flags、菜单menu_data
+  * common.language_pack 语句包
+  * common.menu_data 导航菜单
+
+示例数据如下：
 
 ```json
 {
@@ -2988,15 +3055,14 @@ celery使用
 
 
 
-
-
 ### 安全权限管理
 
 安全权限大致可分为四类：
 
-* 基本权限：依赖于flask_appbuilder的权限管理
-  * /flask_appbuilder/security/   fab的权限管理实现
+* 基本权限：依赖于flask_appbuilder的权限管理，属于用户认证权限。
+  * /flask_appbuilder/security/   fab的权限管理实现 详见《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
   * /superset/security/   superset的权限管理
+  * /superset/app.py  在这里可导入配置文件里配置变量CUSTOM_SECURITY_MANAGER 定义的管理类
 * 菜单权限：依赖于flask_appbuilder的菜单管理
   * /flask_appbuilder/menu.py  fab的菜单对象
   *  /superset/app.py    superset添加菜单视图add_view 和菜单链接add_link
@@ -3005,7 +3071,53 @@ celery使用
 
 
 
-#### **基本权限**
+#### **基本权限**（用户认证）
+
+/superset/app.py
+
+配置文件里可用变量CUSTOM_SECURITY_MANAGER 配置安全管理类
+
+```python
+class SupersetAppInitializer:
+    def init_app_in_ctx(self) -> None:
+        """
+        Runs init logic in the context of the app
+        """
+        self.configure_feature_flags()
+        self.configure_fab()	#配置fab
+        self.configure_url_map_converters()
+        self.configure_data_sources()
+        self.configure_auth_provider()
+        self.configure_async_queries()
+
+        # Hook that provides administrators a handle on the Flask APP
+        # after initialization
+        flask_app_mutator = self.config["FLASK_APP_MUTATOR"]
+        if flask_app_mutator:
+            flask_app_mutator(self.flask_app)
+
+        self.init_views()
+        
+    def configure_fab(self) -> None:
+        """ 配置安全管理类，缺省是SupersetSecurityManager """
+        if self.config["SILENCE_FAB"]:
+            logging.getLogger("flask_appbuilder").setLevel(logging.ERROR)
+
+        custom_sm = self.config["CUSTOM_SECURITY_MANAGER"] or SupersetSecurityManager
+        if not issubclass(custom_sm, SupersetSecurityManager):
+            raise Exception(
+                """Your CUSTOM_SECURITY_MANAGER must now extend SupersetSecurityManager,
+                 not FAB's security manager.
+                 See [4565] in UPDATING.md"""
+            )
+
+        appbuilder.indexview = SupersetIndexView
+        appbuilder.base_template = "superset/base.html"
+        appbuilder.security_manager_class = custom_sm
+        appbuilder.init_app(self.flask_app, db.session)
+```
+
+
 
 /superset/security/manager.py
 
@@ -3032,8 +3144,9 @@ from flask_appbuilder.security.views import (
 
 class SupersetSecurityManager(SecurityManager):
     userstatschartview = None
-    READ_ONLY_MODEL_VIEWS = {"Database", "DruidClusterModelView", "DynamicPlugin"}
-
+    READ_ONLY_MODEL_VIEWS = {"Database", "DruidClusterModelView", "DynamicPlugin"}	# 只读视图
+	
+    # 用户认证视图： DB/LDAP/Oauth/OID/
     USER_MODEL_VIEWS = {
         "UserDBModelView",
         "UserLDAPModelView",
@@ -3042,6 +3155,34 @@ class SupersetSecurityManager(SecurityManager):
         "UserRemoteUserModelView",
     }
     ...
+    
+    def can_access(self, permission_name: str, view_name: str) -> bool:
+        """ 判断当前用户是否能访问视图 """
+        user = g.user
+        if user.is_anonymous:  # 匿名访问，看公开权限的视图里是否有入参视图和相应权限
+            return self.is_item_public(permission_name, view_name)
+        return self._has_view_access(user, permission_name, view_name)  
+    
+    def _has_view_access(
+        self, user: object, permission_name: str, view_name: str
+    ) -> bool:
+        """
+        此函数是父类实现：flask_builder:SecurityManager::_has_view_access()
+        先用用户的内建角色看有无权限；如果无，再用其它角色看是否有数据源角色权限
+        """
+        roles = user.roles
+        db_role_ids = list()
+        # First check against builtin (statically configured) roles
+        # because no database query is needed
+        for role in roles:
+            if role.name in self.builtin_roles:
+                if self._has_access_builtin_roles(role, permission_name, view_name):
+                    return True
+            else:
+                db_role_ids.append(role.id)
+
+        # If it's not a builtin role check against database store roles
+        return self.exist_permission_on_roles(view_name, permission_name, db_role_ids)    
 ```
 
 
@@ -3195,6 +3336,7 @@ class Database(Model, AuditMixinNullable, ImportExportMixin):
     sqlalchemy_uri = Column(String(1024), nullable=False)
     password = Column(EncryptedType(String(1024), config["SECRET_KEY"]))  #密码加密保存
 	...
+    # EncryptedType(type_in, key) 输入类型，key
     encrypted_extra = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)	# 加密保存字段
     impersonate_user = Column(Boolean, default=False)
     server_cert = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)
@@ -3264,7 +3406,7 @@ class AesEngine(EncryptionDecryptionBaseEngine):
                 )
 
         if padding_mechanism is None:
-            padding_mechanism = 'naive'
+            padding_mechanism = 'naive'	# 自然补位
 
         padding_class = PADDING_MECHANISM[padding_mechanism]
         self.padding_engine = padding_class(self.BLOCK_SIZE)
@@ -3335,6 +3477,16 @@ class EncryptedType(StringEncryptedType):
             "'StringEncryptedType' to use the 'String' implementation.",
             DeprecationWarning)
         super().__init__(*args, **kwargs)    
+        
+        
+# /sqlalchemy_utils/type/encrypted/padding.py 
+# 补位机制，缺省 naive
+PADDING_MECHANISM = {
+    'pkcs5': PKCS5Padding,
+    'oneandzeroes': OneAndZeroesPadding,
+    'zeroes': ZeroesPadding,
+    'naive': NaivePadding
+}
 ```
 
 
@@ -3408,6 +3560,91 @@ def check_password_hash(pwhash, password):
 
 
 
+#### CSRF & CORS
+
+**CSRF**:  跨站/域请求中转，依赖模块flask_wtf。需要检查  csrf_token，防止请求造假。
+
+关键配置项：
+
+* WTF_CSRF_ENABLED  缺省false不启用
+* WTF_CSRF_EXEMPT_LIST 类型列表。免于CSRF检验的视图模块列表
+
+```python
+# /superset/extensions.py
+from flask_wtf.csrf import CSRFProtect
+csrf = CSRFProtect()
+
+
+# /superset/app.py
+from superset.extensions import csrf
+class SupersetAppInitializer:
+	def configure_wtf(self) -> None:
+        if self.config["WTF_CSRF_ENABLED"]:
+            csrf.init_app(self.flask_app)
+            csrf_exempt_list = self.config["WTF_CSRF_EXEMPT_LIST"]
+            for ex in csrf_exempt_list:
+                csrf.exempt(ex)
+     
+    
+# /flask_wtf/csrf.py
+def generate_csrf(secret_key=None, token_key=None):
+    """ 产生一个token 放到最近请求的缓存里 """
+    
+def validate_csrf(data, secret_key=None, time_limit=None, token_key=None):
+    """ 验证给的token是否有效 """
+    
+    
+class CSRFProtect(object):
+    def init_app(self, app):
+        @app.before_request
+        def csrf_protect():
+            
+            view = app.view_functions.get(request.endpoint)
+            dest = '{0}.{1}'.format(view.__module__, view.__name__)
+
+            if dest in self._exempt_views:
+                return
+
+            self.protect()            
+```
+
+
+
+**CORS**： 跨域资源共享 Cross Origin Resource sharing
+
+依赖模块 flask_cors
+
+关键配置项：
+
+* ENABLE_CORS  True启用
+* CORS_OPTIONS  类型是Dict[Any, Any]
+* SUPERSET_WEBSERVER_DOMAINS  类型列表。允许的域名列表，chrome允许一个域6个并发连接，超过则需要排队
+
+```python
+# /superset/config.py
+# cors示例值
+ENABLE_CORS = True
+CORS_OPTIONS: Dict[Any, Any] = {"supports_credentials": True}
+SUPERSET_WEBSERVER_DOMAINS= None
+
+
+# /superset/app.py
+class SupersetAppInitializer:
+        def configure_middlewares(self) -> None:
+        if self.config["ENABLE_CORS"]:
+            from flask_cors import CORS
+
+            CORS(self.flask_app, **self.config["CORS_OPTIONS"])
+            
+
+# /flask_cors/extensions.py
+class CORS(object):            
+```
+
+
+
+
+
 ### 模板 /templates/
 
 * 模板渲染 /flask_appbuilder/baseviews.py:render_template
@@ -3421,30 +3658,235 @@ def check_password_hash(pwhash, password):
 
 DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志文件（superset.log）。依赖环境变量SUPERSET_HOME，缺省~/.superset/
 
-几种logger
+* /superset/config.py 定义日志：STATS_LOGGER  EVENT_LOGGER QUERY_LOGGER，日志配置参数有ENABLE_TIME_ROTATE  TIME_ROTATE_LOG_LEVEL  FILENAME  LOG_FORMAT  LOG_LEVEL
+* /superset/utils/logging_configurator.py   DefaultLoggingConfigurator 缺省日志配置，会使用LOG_*配置项
+* /superset/utils/log.py   DBEventLogger -> AbstractEventLogger  -> ABC，DBEventLogger.log实现日志批量保存到DB
+* /superset/stats_logger.py  STATS_LOGGER的实现类
+* /superset/extensions.py   全局日志 event_logger
 
-* STATS_LOGGER   实时统计的日志，方法有incr, decr, timing计时, gauge。会记录入到元数据log表
-* EVENT_LOGGER  操作DB的日志
-* QUERY_LOGGER  查询日志
 
-常用logger的定义如下
+
+**几种logger**
+
+* STATS_LOGGER   实时统计的日志，方法有incr, decr, timing计时, gauge。
+* EVENT_LOGGER  操作DB的日志（会记录入到内部数据库-元数据log表）。通过装饰器调用，会记录每个API操作。内容会出现在操作日志页面（Security > Action Log）。
+* QUERY_LOGGER  查询SQL日志，需要用户自己实现相关接口。可以用来分析SQL
+
+
+
+/superset/config.py 
 
 ```python
-# /superset/config.py
-STATS_LOGGER = DummyStatsLogger()
-EVENT_LOGGER = DBEventLogger()
+from superset.stats_logger import DummyStatsLogger
+from superset.utils.log import DBEventLogger
+from superset.utils.logging_configurator import DefaultLoggingConfigurator
+
+STATS_LOGGER = DummyStatsLogger()	# 统计日志
+EVENT_LOGGER = DBEventLogger()	# 事件日志，会将日志写入到内部数据库
 QUERY_LOGGER = None
 
+# Default configurator will consume the LOG_* settings below 会使用下面LOG_*配置项
+LOGGING_CONFIGURATOR = DefaultLoggingConfigurator()
+
+# Console Log Settings
+LOG_FORMAT = "%(asctime)s:%(levelname)s:%(name)s:%(message)s"
+LOG_LEVEL = "DEBUG"
+
+# ---------------------------------------------------
+# Enable Time Rotate Log Handler: 每天生成一个文件，保存最近30天。
+# 注意：不是进程同步的。多进程要使用gunicron的日志体系。
+# ---------------------------------------------------
+# LOG_LEVEL = DEBUG, INFO, WARNING, ERROR, CRITICAL
+ENABLE_TIME_ROTATE = False
+TIME_ROTATE_LOG_LEVEL = "DEBUG"
+FILENAME = os.path.join(DATA_DIR, "superset.log")
+ROLLOVER = "midnight"
+INTERVAL = 1
+BACKUP_COUNT = 30
+```
+
+
+
+/superset/utils/logging_configurator.py  
+
+DefaultLoggingConfigurator 缺省日志配置，会使用LOG_*配置项
+
+```python
+import abc
+import logging
+from logging.handlers import TimedRotatingFileHandler
+
+import flask.app
+import flask.config
+
+logger = logging.getLogger(__name__)
+
+
+# pylint: disable=too-few-public-methods
+class LoggingConfigurator(abc.ABC):
+    @abc.abstractmethod
+    def configure_logging(self, app_config: flask.config.Config, debug_mode: bool) -> None:
+        pass
+
+
+class DefaultLoggingConfigurator(LoggingConfigurator):
+    """ 设置各种日志器的日志级别、日志格式 """
+    def configure_logging(
+        self, app_config: flask.config.Config, debug_mode: bool
+    ) -> None:
+        if app_config["SILENCE_FAB"]:
+            logging.getLogger("flask_appbuilder").setLevel(logging.ERROR)
+
+        # configure superset app logger： superset_logger应用日志
+        superset_logger = logging.getLogger("superset")
+        if debug_mode:
+            superset_logger.setLevel(logging.DEBUG)
+        else:
+            # In production mode, add log handler to sys.stderr.
+            superset_logger.addHandler(logging.StreamHandler())
+            superset_logger.setLevel(logging.INFO)
+
+        logging.getLogger("pyhive.presto").setLevel(logging.INFO)
+        
+        logging.basicConfig(format=app_config["LOG_FORMAT"])
+        logging.getLogger().setLevel(app_config["LOG_LEVEL"])
+
+        if app_config["ENABLE_TIME_ROTATE"]:  # 时间滚动日志
+            logging.getLogger().setLevel(app_config["TIME_ROTATE_LOG_LEVEL"])
+            handler = TimedRotatingFileHandler(
+                app_config["FILENAME"],
+                when=app_config["ROLLOVER"],
+                interval=app_config["INTERVAL"],
+                backupCount=app_config["BACKUP_COUNT"],
+            )
+            logging.getLogger().addHandler(handler)
+
+        logger.info("logging was configured successfully")
+```
+
+
+
+/superset/utils/log.py
+
+DBEventLogger.log实现日志批量保存到DB
+
+```python
+from abc import ABC, abstractmethod
+
+class AbstractEventLogger(ABC):
+
+class DBEventLogger(AbstractEventLogger):
+    def log(  # pylint: disable=too-many-arguments,too-many-locals
+        self,
+        user_id: Optional[int],
+        action: str,
+        dashboard_id: Optional[int],
+        duration_ms: Optional[int],
+        slice_id: Optional[int],
+        referrer: Optional[str],
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
+        from superset.models.core import Log     # 表名为 logs
+```
+
+
+
+/superset/stats_logger.py
+
+实时统计的日志，方法有incr, decr, timing计时, gauge测量（容器长度）。
+
+* DummyStatsLogger，依赖模块logging，通过缺省日志器输出到终端或文件
+* StatsdStatsLogger  依赖模块 statsd，socket客户端实时发送数据
+
+```python
+import logging
+from typing import Optional
+
+from colorama import Fore, Style  # 颜色，可以在终端根据编号显示相应颜色
+
+logger = logging.getLogger(__name__)
+
+class BaseStatsLogger:
+    """Base class for logging realtime events"""
+
+    def __init__(self, prefix: str = "superset") -> None:
+        self.prefix = prefix
+
+    def key(self, key: str) -> str:
+        if self.prefix:
+            return self.prefix + key
+        return key
+
+    def incr(self, key: str) -> None:
+        """Increment a counter"""
+        raise NotImplementedError()
+
+    def decr(self, key: str) -> None:
+        """Decrement a counter"""
+        raise NotImplementedError()
+
+    def timing(self, key: str, value: float) -> None:
+        raise NotImplementedError()
+
+    def gauge(self, key: str, value: float) -> None:
+        """Setup a gauge"""
+        raise NotImplementedError()
+
+
+class DummyStatsLogger(BaseStatsLogger):
+    """ Fore Style 带颜色的日志 """
+    def incr(self, key: str) -> None:
+        logger.debug(Fore.CYAN + "[stats_logger] (incr) " + key + Style.RESET_ALL)
+
+    def decr(self, key: str) -> None:
+        logger.debug((Fore.CYAN + "[stats_logger] (decr) " + key + Style.RESET_ALL))
+
+    def timing(self, key: str, value: float) -> None:
+        logger.debug(
+            (Fore.CYAN + f"[stats_logger] (timing) {key} | {value} " + Style.RESET_ALL)
+        )
+
+    def gauge(self, key: str, value: float) -> None:
+        logger.debug(
+            (Fore.CYAN + "[stats_logger] (gauge) " + f"{key}" + f"{value}"+ Style.RESET_ALL)
+        )
+```
+
+
+
+日志调用&示例
+
+```python
 # /superset/extensions.py 
-# 其实不是日志，是一个本地代理
+# event_logger其实不是日志，是一个本地代理
 _event_logger: Dict[str, Any] = {}
 event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
 
-# xx.py
+# xx.py 控制台日志
 logger = logging.getLogger(__name__)
 
-# /superset/utils/log.py
-# /superset/stats_logger.py
+# stats_logger调用示例
+stats_logger = config["STATS_LOGGER"]
+stats_logger.incr(f"{self.__class__.__name__}.select_star")
+# 日志打印结果示例
+DEBUG:superset.stats_logger:[stats_logger] (incr) DashboardRestApi.get_list.success
+        
+# event_logger调用示例： 通常用在API，调用装饰器log_this, log_this_with_context
+@event_logger.log_this
+@expose("/available_domains/", methods=["GET"])
+def available_domains(self) -> FlaskResponse:  # pylint: disable=no-self-use
+	return Response(json.dumps(conf.get("SUPERSET_WEBSERVER_DOMAINS")), mimetype="text/json")        
+
+@expose("/favorite_status/", methods=["GET"])
+@statsd_metrics	#统计指标
+@rison(get_fav_star_ids_schema)	#解析并验证参数rison为有效的python数据结构
+@event_logger.log_this_with_context(
+	action=lambda self, *args, **kwargs: f"{self.__class__.__name__}"
+	f".favorite_status",
+	log_to_statsd=False,
+)
+def favorite_status(self, **kwargs: Any) -> Response:
 ```
 
 
@@ -4057,178 +4499,7 @@ const groupByControl = {
 
 ## 5 依赖模块
 
-### 后端依赖 Jinja2
-
-参见  《python web框架源码分析》jinja2章节
-
-
-
-### 后端依赖 sqlalchemy
-
-* /sqlalchemy/engine/url.py  eingine组成 (RFC1738)： name://user:pwd@host:port/database
-
-
-
-### 后端依赖 humanize 
-
-humanize模块可实现人性化 和 本地化功能。humanize本地化功能依赖于babel模块。
-
-* 整数：  intcomma  intword  apnumber
-* 时间和日期：naturalday  naturaldate   naturaldelta  naturaltime 
-* 文件大小/浮点数：fractional
-*  本地化：humanize.i18n.activate('zh_CN')   humanize.i18n.deactivate()
-
-示例：如2 days ago自动转化成2天之前。
-
-```python
-# python服务端 humanize
-# 激活环境：lang_flag
-import humanize
-
-def localized_naturaltime(time: datetime, locale: str) -> str:
-   # 人性化时间 
-   humanize.i18n.activate(locale)
-   naturalized = humanize.naturaltime(time)
-   humanize.i18n.deactivate(locale)
-   return naturalized
-
->>> import datetime
->>> humanize.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
-'an hour ago'
-
-# 本地化激活
->>> humanize.i18n.activate('zh_CN')
->>> humanize.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
-'1小时之前'
-```
-
-
-
-**客户端**： 使用 moment.js  (lang-flag)
-`moment.locale('zh-CN');`
-
-
-
-### 后端依赖 bable
-
-babel最主要就是使用其提供的关于语言国际化和本土化命令。实现以下功能：
-
-- extrace_messages
-- init_catalog
-- compile_catalog
-- update_catalog
-
-
-
-命令行提供参数有：
-
-- -i 输入文件
-- -o 输出文件
-- -d 输出目录
-- -D domain名称（可选项）
-- -l locale名称
-
-对应命令行
-
-```shell
-$ pip install babel
-
-# extrace： 抽取生成 pot文件，需要指定抽取配置文件 babel.cfg
-pybabel extract -o project_name/locale/project_name.pot .
-# 示例：-k是提取标签,默认识别标鉴_ __ t
-$ pybabel extract -F superset/translations/babel.cfg -k _ -k __ -k t -k tn -k tct -o translations2/msg.pot .
-
-# init： pot文件 转化成 po文件，pot/po容格式类似, 
-# 生成文件为$locale/LC_MESSAGES/xx.po，如果未指定locale，那么会生成所有的支持语种
-pybabel init -i project_name/locale/project_name.pot -D project_name -d project_name/locale --locale zh_CN
-$ pybabel init -i translations2/msg.pot -d translations2 -l zh
-
-# compile： po文件 转化成 mo文件，如falsk_appbuilder或者humanize真正使用的文件是mo格式
-pybabel compile -D project_name -d project_name/locale/ 
-$ pybabel compile -d project_name -l zh
-
-# update
-pybable update -D project_name -d project_name/locale/
-```
-
-
-
-**扩展 po2json**： 一般程序用mo格式。但有些程序要使用json格式如superset，这里需要用工具如po2json 将po格式转化成 json。
-
-po格式转化成json格式
-
-```shell
-# (OK推荐)js实现的po2json：npm install po2json -g, 参数-d domain, -f format -p pretty
-$ po2json -d superset -f jed1.x -p ./messages.po ./messages.json
-
-# python实现的po2json: pip install po2json
-# (OK)linux终端下执行成功：po2json [locale_path] [output_path] [domain]， output_path目录要求有语种对应的js如zh.js
-$ po2json translate2 translate messages
-# windows下执行没报错，也没生成文件: -X 指定编码，windows终端缺省编码是gbk会报编码错误。将po2json目录下__init__.py复制为main.py
-$ python -X utf8 -m po2json.main translations2 translations messages
-```
-
-**po转化成mo**:  在linux环境，po转化成mo还可以使用msgfmt。
-
-命令示例：`msgfmt ./messages.po -o ./messages.mo`
-
-
-
-babel.cfg 示例
-
-```ini
-#[ignore: superset-frontend/node_modules/**]
-[python: superset/**.py]
-[jinja2: superset/**/templates/**.html]
-[javascript: superset-frontend/src/**.js]
-[javascript: superset-frontend/src/**.jsx]
-[javascript: superset-frontend/src/**.tsx]
-
-encoding = utf-8
-```
-
-说明：ignore是放弃扫描文件。
-
-
-
-**messages.po示例**
-
-纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。
-
-如果不想重新抽取文件，可直接在po文件按格式添加内容，再转化成mo或json格式。
-
-```ini
-# Chinese translations for Apache Superset.
-msgid ""
-msgstr ""
-"Project-Id-Version: Apache Superset 0.22.1\n"
-"Report-Msgid-Bugs-To: zhouyao94@qq.com\n"
-"POT-Creation-Date: 2021-01-22 15:56-0300\n"
-"PO-Revision-Date: 2019-01-04 22:19+0800\n"
-"Last-Translator: \n"
-"Language-Team: zh <benedictjin2016@gmail.com>\n"
-"Language: zh\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"Generated-By: Babel 2.8.0\n"
-
-# 说明：纯文本格式，三行内容（第一行变量位置，第二行msgid-字符串值，第三行msgstr-翻译串）。示例如下：
-#: superset/app.py:225
-msgid "Home"
-msgstr ""
-
-#: superset/app.py:230 superset/views/annotations.py:119
-msgid "Annotation Layers"
-msgstr "注解层"
-```
-
-
-
-#### 原理
-
-
+服务端依赖模块 flask及flask扩展模块 详见 《[flask源码剖析](flask源码剖析.md)》《[flask_appbuilder源码剖析](flask_appbuilder源码剖析.md)》
 
 
 
@@ -4244,124 +4515,7 @@ msgstr "注解层"
 
 ### 前端依赖 React
 
-参见   React学习笔记--程序调试 https://www.cnblogs.com/tom-lau/p/8032323.html
-
-
-
-React体系：React + react-dom ＋ react-redux + 
-
-**React组件**
-
-React 组件是可复用的小的代码片段，它们返回要在页面中渲染的 React 元素。JS函数和React.Component派生类都是组件。
-
-React 组件从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。
-
-React规范里以小写字母开头的组件视为原生 DOM 标签，如<div />代表 HTML 的 div 标签；大写字母开头的为React组件，如<App />。
-
-React 组件基本由三个部分组成，
-
-1. 属性 props： React 组件的输入。它们是从父组件向下传递给子组件的数据。不可被修改。
-2. 状态 state：当组件中的一些数据在某些时刻发生变化时，这时就需要使用 `state` 来跟踪状态。
-3. 生命周期方法：用于在组件不同阶段执行自定义功能。组件的生命周期阶段包括挂载、更新、卸载和错误处理。参见 [React组件生命周期图谱](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
-   * 挂载时调用顺序： constructor() static getDerivedStateFromProps() render() componentDidMount()
-   * 更新时调用顺序：static getDerivedStateFromProps() shouldComponentUpdate() render() getSnapshotBeforeUpdate() componentDidUpdate()
-   * 卸载：componentWillUnmount()
-   * 错误处理：static getDerivedStateFromError() componentDidCatch()
-
-
-
-tic-tac-toe(三连棋)游戏代码: **[最终成果](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**.
-
-
-
-#### **react-redux**
-
-2014年 Facebook 提出了 [Flux](https://www.ruanyifeng.com/blog/2016/01/flux.html) 架构的概念，引发了很多的实现。2015年，[Redux](https://github.com/reactjs/redux) 出现，将 Flux 与函数式编程结合一起，很短时间内就成为了最热门的前端架构。
-
-Flux将一个应用分成四个部分。
-
-> - **View**： 视图层
-> - **Action**（动作）：视图层发出的消息（比如mouseClick）
-> - **Dispatcher**（派发器）：用来接收Actions、执行回调函数
-> - **Store**（数据层）：用来存放应用的状态，一旦发生变动，就提醒Views要更新页面
-
-![img](https://www.ruanyifeng.com/blogimg/asset/2016/bg2016011503.png)
-
-Flux 的最大特点，就是数据的"单向流动"。任何相邻的部分都不会发生数据的"双向流动"。这保证了流程的清晰。这就是React的单向数据绑定，区别于Vue的双向绑定。数据单向流动流程详细说明如下：
-
-```shell
-1. 用户访问 View
-2. View 发出用户的 Action
-3. Dispatcher 收到 Action，要求 Store 进行相应的更新
-4. Store 更新后，发出一个"change"事件
-5. View 收到"change"事件后，更新页面
-```
-
-Redux思想：WEB应用是一个状态机，视图(View) 与状态(State) 一一对应。所有的状态保存在一个对象（Store）里。reducer是生成新状态。
-
-![img](https://www.ruanyifeng.com/blogimg/asset/2016/bg2016091802.jpg)
-
-Redux数据流向过程：
-1）用户发出Action（进行点击click、输入input等事件，子组件通过callback调用最外层组件的自定义事件。
-
-2）callback中执行Dispatcher（actions creators(data)）。 或者 `store.dispatch(action);`
-
-3）Store监听到action被触发，执行相应的Reducer，State被改变。监听函数listener `store.subscribe(listener);`
-
-4）页面render
-
-React-Redux 将所有组件分成两大类：UI 组件（presentational component）和容器组件（container component）。UI 组件负责 UI 的呈现，容器组件负责管理数据和逻辑。
-
-React-Redux 规定，所有的 UI 组件都由用户提供，容器组件则是由 React-Redux 自动生成。也就是说，用户负责视觉层，状态管理则是全部交给它。
-
-实现方式：
-
-* connect： 用于从 UI 组件生成容器组件。`function connect(mapStateToProps, mapDispatchToProps, mergeProps)`
-* Provider组件：让容器组件拿到`state`。
-
-
-
-**react-router**
-
-`Router`组件本身只是一个容器，真正的路由要通过`Route`组件定义。
-
-```
-import { Router, Route, hashHistory } from 'react-router';
-
-render((
-  <Router history={hashHistory}>
-    <Route path="/" component={App}/>
-  </Router>
-), document.getElementById('app'));
-```
-
-
-
-**react-router-dom**
-
-React Router附带了一些HOOK，可让您访问路由器的状态并从组件内部执行导航。
-
-```tsx
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-ReactDOM.render(
-  <Router>
-    <div>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/news">
-        <NewsFeed />
-      </Route>
-    </div>
-  </Router>,
-  node
-);
-```
-
-
+详见 《[前端框架分析](前端框架分析.md)》
 
 
 
@@ -4373,14 +4527,9 @@ ReactDOM.render(
 * 从前端角度记录superset二次开发 http://sunjl729.cn/2020/08/07/superset二次开发/
 * Superset安装及汉化 https://www.jianshu.com/p/c751278996f8
 * Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
-* [译]揭秘 React 服务端渲染 https://juejin.cn/post/6844903604453654536
-* Flux 架构入门教程 https://www.ruanyifeng.com/blog/2016/01/flux.html
-* React 入门实例教程(删) https://www.ruanyifeng.com/blog/2015/03/react.html
-* [Redux - A predictable state container for JavaScript apps. | Redux](https://redux.js.org/)   https://redux.js.org/
 * python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
-* python humanize https://www.worldlink.com.cn/zh_tw/osdir/python-humanize.html
 
-
+  
 
 
 

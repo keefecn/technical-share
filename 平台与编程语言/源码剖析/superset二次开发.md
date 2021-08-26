@@ -120,6 +120,16 @@ Find out more about how the roadmap is managed in [SIP (Superset Improvement Pro
 
 
 
+**Schema**: 是一个逻辑概念。
+
+* MySQL：等同于表。
+* Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema。默认schema和用户名同名。
+* PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
+
+
+
+
+
 ## 参与开源
 
 私有版本和官方版本的合并 [Superset：合并私有版本和Airbnb官方版本（一）](http://zhuanlan.zhihu.com/p/27207957)
@@ -369,9 +379,22 @@ yarn & yarn run build
 说明：以kylin示例URL：kylin://user: Greenplum pwd@host:port/project?charset=utf-8
 
 1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，其它的数据库插件需要安装才能使用。
+
 2. URI前缀相同的表示使用相同协议，如Postgres/Greenplum/Redshift，Postgres是RDBS；Greenplum是基于Postgres开发的海量（50PB）级别的RDBS；Redshift是AWS的云化数据仓库。
+
 3. 数据源类型分类：RDBS有MySQL/Postgres/Oracle/MSSQL；数据仓库有Presto/Impala/SparkSQL/Athena/ Vertica；预计算有Kylin.
-4. 还不支持的DB：MongoDB
+
+4. 还不支持的DB：[MongoDB](https://www.mongodb.com/zh-cn/products/bi-connector)(有第三方付费插件支持)
+
+   
+
+DB大小写敏感差异：对象名（表名字段名），查询SQL
+
+   1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
+      2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
+
+         * Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
+         * PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
 
 
 
@@ -598,6 +621,8 @@ superset run -h 0.0.0.0 -p 5000
 ## 3.2 API
 
 官方接口文档：  https://superset.apache.org/docs/rest-api   (flask_appbuild模块实现FAB_API_SWAGGER_UI )
+
+本服务接口文档：http://127.0.0.1:5000/swagger/v1
 
 **路由映射方法 **
 
@@ -867,6 +892,20 @@ API实现： superset API实现在各个目录下的api.py
 
 国际化有几个常用模块：locale babel humanize
 
+英文字母大写设计规约： [capitalization-guidelines](https://github.com/apache/superset/blob/afb8bd5fe68066cfe2f3d384d659215dc4790d9d/CONTRIBUTING.md#capitalization-guidelines)
+
+
+
+**humanize 人性化**
+
+详见 《superset源码剖析》humanize 章节
+
+superset人性化主要是时间日期，服务端返回的字段changed_on_humanized已经是中文时间格式了。
+
+客户端使用moment.js，可以从bootstra_data里获取moment_locale 进行初始化（尚未发现真正使用的地方）。
+
+
+
 #### babel 语言翻译
 
 实现原理：flask_babel --> babel
@@ -878,7 +917,7 @@ API实现： superset API实现在各个目录下的api.py
 配置文件 config.py
 
  ```python
-# 本地化: BABEL_DEFAULT_LOCALE - flask_babel模块所需变量; LANGUAGES - for humanize
+# 本地化: BABEL_DEFAULT_LOCALE - flask_babel模块所需变量; LANGUAGES - for humanize和多语种选择
 BABEL_DEFAULT_LOCALE = 'zh'
 LANGUAGES = {"zh": {"flag": "cn", "name": "Chinese"}}
  ```
@@ -887,28 +926,20 @@ LANGUAGES = {"zh": {"flag": "cn", "name": "Chinese"}}
 
 中文化修改细则: 
 
-| 页面     | 类别                        | 字符串                                                       | 字符串位置 示例                                              | 修改tag | 修改方法                                      | 效果 |
-| -------- | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | --------------------------------------------- | ---- |
-| ALL      | 普通修改                    |                                                              | .py .html .tsx .js .jsx                                      | __或t   | 修改message.json相应项                        | OK   |
-| 导航菜单 | 服务端 py                   | Data Datasets Databases Charts Dashboard "SQL Lab" "Saved Query"  Settings | app.py add_link/add_view里的label=__("Datasets"),            | __      | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
-|          | 服务端 html                 | "SQL Query"                                                  | /templates/appbuuilder/nav_right.html                        | __      | 修改 message.json                             | OK   |
-|          | flask_appbulder             | Security "User info"                                         | flask_appbuilder/security/views.py:141 lazy_gettext("User info") | t       | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
-|          | ?                           | Version                                                      | ？                                                           |         |                                               | ?    |
-|          | 客户端 tsx                  | About                                                        | /src/component/menu/Menu.tsx                                 | t       |                                               | OK   |
-| 首页     | 首页右侧按钮                | "VIEW ALL" "SQL QUERY" DASHBOARD                             | /src/views/CRUD/welcome/xx.tsx<br>                           | 缺      | 需改造 代码，加t                              |      |
-| 列表页   | 列表页右侧按钮              | "BULK SELECT"                                                | /src/views/xx.tsx<br>name: t('Bulk select'),                 | t       |                                               | OK   |
-|          | 列表页过滤字段              | All Any                                                      | ChartList.tsx DashboardList.tsx                              | 缺      | 需改造 代码，加t                              |      |
-|          | 列表页过滤/排序字段(带空格) | "Created By" "Modified By"                                   | ChartList.tsx DashboardList.tsx <BR>代码字段名是：<br/>`Header: t('Created by'),` | t       | Created By->Created by                        | OK   |
-|          | 列表页过滤/排序字段(无空格) | Modified Search Actions Favorite Dataset                     | Header: t('Favorite'),                                       | t       |                                               | OK   |
-|          | 列表页过滤字段下拉框值      | 图表类型的下拉框值                                           | 格式如 "Event Flow" "MapBox"                                 | t       | 修改message.json相应项                        | OK   |
-|          | 数据源列表字段              | name type connection schema creator                          | src/datasource/ChangeDatasourceModel.tsx                     | 缺      | 需改造 代码，加t                              |      |
-| 图表     | 时间下拉框                  | "Adaptative formating"                                       | 前端                                                         | 缺      | 需改造 代码，加t                              |      |
-|          | 时间格式                    |                                                              | control.jsx DataFilterControl.jsx                            | t       |                                               | OK   |
-|          | 时间序列图                  | "Weekly seasonality"                                         | @superset-ui包                                               |         | 需改造 代码，加t                              |      |
-| 看板     | 排序下拉框                  | Sort by Recent                                               | SliceAdder.jsx  Sort by {label}                              |         | 需改造 代码，加t                              |      |
-|          | 图表类型                    | pie table word_cloud ...                                     | AddSliceCard.jsx <br>`<span>{visType}</span>`                | 缺      | 需改造 代码，加t                              |      |
-| 数据集   | 编辑                        | "Enable Filter Select"                                       | 这个页面比较奇怪，代码中也是"Enable Filter Select"。<br>但所有label字符串都不起作用。 | ？      | 使用了flask_appbuilder组件，需要此模块加串    | ？   |
-|          | 搜索框                      |                                                              |                                                              |         |                                               |      |
+| 页面     | 类别            | 字符串                                                       | 字符串位置 示例                                              | 修改tag | 修改方法                                      | 效果 |
+| -------- | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | --------------------------------------------- | ---- |
+| ALL      | 普通修改        |                                                              | .py .html .tsx .js .jsx                                      | __或t   | 修改message.json相应项                        | OK   |
+| 导航菜单 | 服务端 py       | Data Datasets Databases Charts Dashboard "SQL Lab" "Saved Query"  Settings | app.py add_link/add_view里的label=__("Datasets"),            | __      | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
+|          | flask_appbulder | Security "User info"                                         | flask_appbuilder/security/views.py:141 lazy_gettext("User info") | t       | 修改flask_appbulder下的po文件，再转成mo文件。 | OK   |
+|          | ?               | Version                                                      | ？                                                           |         |                                               | ?    |
+| 首页     | 首页右侧按钮    | "VIEW ALL" "SQL QUERY" DASHBOARD                             | /src/views/CRUD/welcome/xx.tsx<br>                           | 缺      | 需改造 代码，加t                              |      |
+| 列表页   | 列表页过滤字段  | All Any                                                      | ChartList.tsx DashboardList.tsx                              | 缺      | 需改造 代码，加t                              |      |
+|          | 数据源列表字段  | name type connection schema creator                          | src/datasource/ChangeDatasourceModel.tsx                     | 缺      | 需改造 代码，加t                              |      |
+| 图表     | 时间下拉框      | "Adaptative formating"                                       | 前端                                                         | 缺      | 需改造 代码，加t                              |      |
+|          | 时间序列图      | "Weekly seasonality"                                         | @superset-ui包                                               | 缺      | 需改造 代码，加t                              |      |
+| 看板     | 排序下拉框      | Sort by Recent                                               | SliceAdder.jsx  Sort by {label}                              | 缺      | 需改造 代码，加t                              |      |
+|          | 图表类型        | pie table word_cloud ...                                     | AddSliceCard.jsx <br>`<span>{visType}</span>`                | 缺      | 需改造 代码，加t                              |      |
+| 数据集   | 编辑            | "Enable Filter Select"                                       | 这个页面比较奇怪，代码中也是"Enable Filter Select"。<br>但所有label字符串都不起作用。 | ？      | 使用了flask_appbuilder组件，需要此模块加串    | ？   |
 
 说明：可以用工具从指定目录或文件中生成po文件。如果只想添加少量字段，可以手工附加字段值到现有messages.json。
 
@@ -1019,13 +1050,7 @@ encoding = utf-8
 
 
 
-#### humanize 人性化
 
-详见 《superset源码剖析》humanize 章节
-
-superset人性化主要是时间日期，服务端返回的字段changed_on_humanized已经是中文时间格式了。
-
-客户端使用moment.js，可以从bootstra_data里获取moment_locale 进行初始化（尚未发现真正使用的地方）。
 
 
 
@@ -1077,12 +1102,6 @@ form_data={"datasource":"3__table","viz_type":"line","slice_id":63,"granularity_
 
 
 **存在问题**：嵌入页面缺少鉴权，存在数据泄露问题。
-
-
-
-### CSRF
-
-
 
 
 
@@ -1198,11 +1217,6 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 备注：权限和被管对象通过表`ab_permission_view`关联起来。
 
-* Schema: 是一个逻辑概念。
-  * MySQL：等同于表。
-  * Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema。默认schema和用户名同名。
-  * PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
-
 
 
 ### 权限管理
@@ -1271,7 +1285,7 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 
 **配置文件的优先级**:  xx/superset_config.py >  superset/config.py (即superset.config)  
 
-**环境变量**： 
+**环境变量**： os.environ
 
 * PYTHONPATH  python模块搜索路径，如果部署包不在虚拟环境的site-packages下，那么应该设置此值。用flask run启动会自动搜索当前路径是否有app，如果当前目录内能搜索到，则可避免设置此值。
 * SUPERSET_HOME    元数据文件和日志文件目录，影响到变量DATA_DIR
@@ -1283,6 +1297,32 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 
 
 **/superset/config.py**  （一般不修改这个文件，文件行数约1000多行，去除注释和空格约400行）
+
+**一般会修改的配置项（内部用，不外嵌）**
+
+* APP_NAME  
+* 元数据库连接URI：SQLALCHEMY_DATABASE_URI  
+* 区域/语言：BABEL_DEFAULT_LOCALE  LANGUAGES
+* 日志：ENABLE_TIME_ROTATE  TIME_ROTATE_LOG_LEVEL  FILENAME  LOG_FORMAT  LOG_LEVEL
+* 用户注册：AUTH_USER_REGISTRATION  AUTH_USER_REGISTRATION_ROLE
+* 安全：SECRET_KEY  
+
+**其它配置项：**
+
+* 目录：BASE_DIR  DATA_DIR  
+* 静态文件：VERSION_INFO_FILE  PACKAGE_JSON_FILE  FAVICONS  APP_ICON  
+* WEB服务器配置：SUPERSET_WEBSERVER_TIMEOUT  SUPERSET_WEBSERVER_PORT  SUPERSET_WEBSERVER_PROTOCOL  SUPERSET_WEBSERVER_ADDRESS  
+* 调试参数：DEBUG  FLASK_USE_RELOAD  SHOW_STACKTRACE
+* CSRF配置：WTF_CSRF_ENABLED WTF_CSRF_EXEMPT_LIST  WTF_CSRF_TIME_LIMIT  
+* CORS配置：ENABLE_CORS  CORS_OPTIONS  SUPERSET_WEBSERVER_DOMAINS  HTTP_HEADERS
+* 查询参数：ROW_LIMIT  VIZ_ROW_LIMIT  SAMPLES_ROW_LIMIT  FILTER_SELECT_ROW_LIMIT  QUERY_SEARCH_LIMIT  SQL_MAX_ROW  DISPLAY_MAX_ROW 
+* SQLLAB查询参数：DEFAULT_SQLLAB_LIMIT  MAX_TABLE_NAMES  SQLLAB_TIMEOUT  SQLLAB_VALIDATION_TIMEOUT  SQLLAB_DEFAULT_DBID  SQLLAB_ASYNC_TIME_LIMIT_SEC  SQLLAB_QUERY_COST_ESTIMATE_TIMEOUT   SQLLAB_CTAS_NO_LIMIT
+* DRUID：DRUID_TZ  DRUID_ANALYSIS_TYPES  DRUID_IS_ACTIVE  DRUID_METADATA_LINKS_ENABLED  DRUID_DATA_SOURCE_DENYLIST
+* 认证参数：AUTH_TYPE（支持AUTH_OID、AUTH_DB、AUTH_LDAP、AUTH_REMOTE_USER），AUTH_ROLE_ADMIN  AUTH_ROLE_PUBLIC    ROBOT_PERMISSION_ROLES  
+* 特性标识：DEFAULT_FEATURE_FLAGS  FEATURE_FLAGS  
+* 缓存：CACHE_DEFAULT_TIMEOUT  CACHE_CONFIG  DATA_CACHE_CONFIG   STORE_CACHE_KEYS_IN_METADATA_DB
+* 上传/导入/导出：UPLOAD_FOLDER  IMG_UPLOAD_FOLDER  ALLOWED_EXTENSIONS  CSV_EXPORT   CSV_TO_HIVE_UPLOAD_S3_BUCKET  CSV_TO_HIVE_UPLOAD_DIRECTORY  
+* 其它：CELERY_CONFIG   ENABLE_ALERTS  EMAIL_ASYNC_TIME_LIMIT_SEC  WEBDRIVER_TYPE  
 
 ```python
 from flask import Blueprint
@@ -1328,7 +1368,7 @@ SUPERSET_WEBSERVER_PORT = 8088
 # (gunicorn, nginx, apache, ...) timeout setting to be <= to this setting
 SUPERSET_WEBSERVER_TIMEOUT = 60
 
-# Your App secret key
+# Your App secret key: 用于数据库表字段加密：如DB密码、服务器证书、服务器扩展数据
 SECRET_KEY = "\2\1thisismyscretkey\1\2\\e\\y\\y\\h"
 
 # The SQLAlchemy connection string. 缺省元数据库
@@ -1354,6 +1394,9 @@ AUTH_TYPE = AUTH_DB
 # 特性标识开关字典：用来服务端 开发新特性需要
 # 可调用is_feature_enabled，如is_feature_enabled('KV_STORE')，会加载DEFAULT_FEATURE_FLAGS，FEATURE_FLAGS
 DEFAULT_FEATURE_FLAGS: Dict[str, bool] = { }
+    
+# 自定义安全管理类，可以 用来重载实现 个性化用户认证    
+CUSTOM_SECURITY_MANAGER = None    
 ```
 
 
@@ -1365,17 +1408,19 @@ DEFAULT_FEATURE_FLAGS: Dict[str, bool] = { }
  ```python
 from dateutil import tz
 
-
 APP_NAME = "DataLab"
 
 # The SQLAlchemy connection string.
 SQLALCHEMY_DATABASE_URI = 'mysql://root:xxxxxx@127.0.0.1/superset_1.0'
 
-# [TimeZone List]
-DRUID_TZ = tz.gettz('Asia/Shanghai')
 
 # Setup default language  中文
 BABEL_DEFAULT_LOCALE = "zh"
+LANGUAGES = {"zh": {"flag": "cn", "name": "Chinese"}}
+
+# LOG
+ENABLE_TIME_ROTATE = True
+TIME_ROTATE_LOG_LEVEL = "DEBUG"
 
 # CSRF设置：WTF_CSRF_ENABLED WTF_CSRF_EXEMPT_LIST
 # Flask-WTF flag for CSRF
@@ -1648,48 +1693,6 @@ yum install gcc libffi-devel python3-devel openssl-devel -y
 
 
 
-**Q3: centos python3 ModuleNotFoundError: No module named '_bz2'**
-
-报错信息：
-
-```shell
-  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/formats/format.py", line 99, in <module>
-    from pandas.io.common import stringify_path
-  File "/home/ai/venv/superset-py38-venv/lib/python3.8/site-packages/pandas/io/common.py", line 4, in <module>
-    import bz2
-  File "/usr/local/python3.8/lib/python3.8/bz2.py", line 19, in <module>
-    from _bz2 import BZ2Compressor, BZ2Decompressor
-ModuleNotFoundError: No module named '_bz2'
-```
-
-原因：缺少Python3.6+的bz2模块需要的so文件
-
-解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/ 
-
-
-
-**Q4: centos import pandas时报错**
-
-报错信息：import pandas时报错如下：
-
-```shell
-/usr/local/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module.
-Your installed Python is incomplete. Attempting to use lzma compression will result in
- a RuntimeError.
-  warnings.warn(msg)
-```
-
-原因：要严格按照模块依赖的版本安装。"pandas>=1.1.2, <1.2",
-
-解决方法：
-
-```shell
-$ sudo yum install xz-devel
-$ pip install backports.lzma	#若未安装xz-devel，将会报缺少lzma.h文件
-```
-
-
-
 ## 开发常见问题
 
 表格  superset一般问题列表
@@ -1725,15 +1728,7 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 
 
-**Q1: git bash在windows 10下启动很慢，达到分钟级。**
-
-原因：有非常多的原因导致git bash启动很慢。比如双显卡工作的原因需移除AMD驱动；不是管理员权限启动；windows自带的病毒防范；windows cmd新样式等。
-
-解决方法：1）恢复cmd旧样式方法：win+R 打开cmd 在标题栏上右键， 属性-- 选项--- 打勾---使用旧控制台样式。
-
-
-
-**Q2： 解决linux下nodejs中watch文件最大数异常**
+**Q3： 解决linux下nodejs中watch文件最大数异常**
 
 描述：
 
@@ -1768,16 +1763,40 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 
 
-**小技巧**
+## superset原生BUG
 
-json内容不显示为ascii，比如保存为json文件，保存到数据库时中文能正常阅读。
+1. 数据源/集删除后的垃圾清理
 
-```python
-import json
+    描述：数据源/集删除后，相应的数据源权限 并未在角色中清除，能在角色的权限列表里看到 已经删除的数据源/数据集。
 
-dic = {}
-json.dumps(dic, ensure_ascii=False)
-```
+2. 编辑数据集页面无法获取extra字段，保存时extra字段值丢失。
+
+    描述：数据集删除页面 进入编辑，extra字段显示正常； 但如果是通过编辑数据集页面进入 ，extra字段无法获取。
+
+
+3. 删除图板时并未检验看否有看板使用
+
+   描述：删除数据库、数据集时都有检查依赖项。但删除看板时并未检测是否有看板依赖，可以增加提示信息，不强制不能删除。
+
+
+
+## superset不支持功能
+
+- 鉴权: 不支持租户隔离，RABC的隔离以用户owner为基础。
+
+- 网页适配: 目前PC端和手机端显示页面是一样的。并未适配手机页面。**优化需求**：查看的图表/看板需要根据终端定制显示。
+
+- 下钻图表: 不支持。需要自行实现如中国地图、表格下钻等。
+
+- 不支持的图表：普通拆线图、组合图、同比/环比等。**优化需求**：可以引入echart图表或者其它新图表类型。
+
+- 多表查询：只能在SQLLAB将多表查询保存为视图，再进行关联分析。并且不好用。（datalab另外实现）
+
+- 报表和看板分类：不支持类似powerBI按目录划分。（缓）
+
+- 根路由定制：依赖flask_appbuilder，十几个路由，没有统一的根路由，改起来很麻烦。（弃）
+
+  
 
 
 
