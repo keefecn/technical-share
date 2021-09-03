@@ -1,10 +1,10 @@
-| 序号 | 修改时间  | 修改内容                               | 修改人 | 审稿人 |
-| ---- | --------- | -------------------------------------- | ------ | ------ |
-| 1    | 2018-5-5  | 创建，从《BI专题》迁移至此。           | Keefe  |        |
-| 2    | 2021-6-11 | 调整部分内容，全文迁移到源码剖析目录。 | 同上   |        |
-| 3    | 2021-6-21 | 更新superset-1.0的相关内容。           | 同上   |        |
-| 4    | 2021-7-18 | 源码剖析章节另文                       | 同上   |        |
-|      |           |                                        |        |        |
+| 序号 | 修改时间  | 修改内容                                 | 修改人 | 审稿人 |
+| ---- | --------- | ---------------------------------------- | ------ | ------ |
+| 1    | 2018-5-5  | 创建，从《BI专题》迁移至此。             | Keefe  |        |
+| 2    | 2021-6-11 | 和调整部分内容，全文迁移到源码剖析目录。 | 同上   |        |
+| 3    | 2021-6-21 | 更新superset-1.0的相关内容。             | 同上   |        |
+| 4    | 2021-7-18 | 源码剖析章节另文                         | 同上   |        |
+|      |           |                                          |        |        |
 
 
 
@@ -40,7 +40,7 @@ superset：https://github.com/apache/superset/
 
 官网页面 superset-site：https://github.com/apache/superset-site
 
-孵化代码（仅限于0.28之前）：https://github.com/apache/incubator-superset/
+~~孵化代码（仅限于0.28之前）~~：https://github.com/apache/incubator-superset/
 
 superset-ui https://github.com/apache-superset/superset-ui/
 
@@ -108,7 +108,9 @@ Find out more about how the roadmap is managed in [SIP (Superset Improvement Pro
 *  Dataset 数据集：有时也称数据表table。数据表可以是数据源里的物理单表，也可以是多表关联查询而成的子查询虚拟表，另外也可导入CSV文件作为数据表。
 *  Datasource 数据源：有时也称数据库database。支持11+种数据源和文件CSV格式。
 
- 说明：从数据顺序流来看，先有数据源，再有数据集，再有Slice，然后若干个Slice组合在一起形成看板。
+ 说明：1. 从数据顺序流来看，先有数据源，再有数据集，再有Slice，然后若干个Slice组合在一起形成看板。
+
+2. 关于名称，数据源、数据集有对名称作约束（数据源名称全局唯一，数据集名称同数据源下唯一），图表、看板对名称不作约束。
 
 
 
@@ -239,7 +241,9 @@ pip download -d <dir> apache-superset
 pip install --no-index -f <dir> apache-superset
 
 # 安装法3: 升级安装
-pip install superset --upgrade
+$ pip install superset --upgrade
+# 或者只下载新包
+$ pip download apache-superset==1.3.0 --no-deps
 ```
 
 
@@ -331,11 +335,126 @@ yarn & yarn run build
 
 ### 容器部署
 
+apache官方镜像 [apache/superset - Docker Image | Docker Hub](https://hub.docker.com/r/apache/superset)  https://hub.docker.com/r/apache/superset
+
+多Dockerfile汇总  [superset/Dockerfile at master · apache/superset · GitHub](https://github.com/apache/superset/blob/master/Dockerfile)   
 
 
 
+表格 docker.io二款superset镜像比较
+
+| 比较项                | apache/superset                                           | amancevice/superset                                          |
+| --------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
+| 简介                  | 官方镜像。gunicorn启动1工作进程22线程。                   | 非官方镜像， Debian+Python3 。star最多。gunicorn启动8工作进程。 |
+| 镜像URL               | https://hub.docker.com/r/apache/superset                  | https://hub.docker.com/r/amancevice/superset                 |
+| Dockerfile            | https://github.com/apache/superset/blob/master/Dockerfile | https://github.com/amancevice/docker-superset/blob/main/Dockerfile |
+| 更新频率              | 与源码几乎同步更新                                        | 与源码几乎同步更新                                           |
+| 镜像尺寸（压缩/解压） | 400MB/1.45GB                                              | 800MB/2.25GB                                                 |
+| 容器启动脚本 CMD      | ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]              | CMD ["gunicorn", "superset.app:create_app()"]                |
+| docker run            | docker run -d  --name superset apache/superset            | docker run -d --name superset amancevice/superset            |
+| WEB访问URL            | http://HOST:8080/                                         | http://HOST:8088/                                            |
+|                       |                                                           |                                                              |
+| $SUPERSET_CONFIG_PATH | 无                                                        | 无                                                           |
+| $SUPERSET_HOEM        | /app/superset_home/                                       | /var/lib/superset                                            |
+| $PYTHONPATH           | /app/pythonpath                                           | /etc/superset:/home/superset:$PYTHONPATH                     |
+| $FLASK_ENV            | development                                               |                                                              |
+| 其它环境变量ENV       | SUPERSET_PORT=8080 FLASK_APP="superset.app:create_app()"  | GUNICORN_BIND=0.0.0.0:8088  GUNICORN_WORKERS=10 GUNICORN_CMD_ARGS= |
+| site-packages         |                                                           | /usr/local/lib/python3.8/site-packages/                      |
+
+备注：1. $SUPERSET_HOME是数据卷，默认用来存储sqlite db和日志。$SUPERSET_CONFIG_PATH是配置卷，用来存储自定义配置文件。
+
+2. 上面二个镜像生成的方式不同，amancevice是pip安装superset源码，gunicorn启动；apache指定superset源码路径，flask启动。
+3. 默认容器端口定义在Dockerfile变量里，apache是$SUPERSET_PORT=8080,  amancevice是8088。可以指定宿主机端口：` -p [宿主机端口]:[容器端口]`
+
+```shell
+$ docker images
+REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
+docker.io/apache/superset       1.0.0     			ad145d6f1a5a   		7 months ago   		1.45GB
+docker.io/amancevice/superset   latest              bc910e3fc165        2 months ago        2.25 GB
+docker.io/registry              2                   1fd8e1b0bb7e        4 months ago        26.2 MB
+docker.io/python                3.7.9               65d5b6c539fd        7 months ago        877 MB
+
+$ docker ps
+CONTAINER ID        IMAGE                           COMMAND                  CREATED             STATUS                       PORTS                              NAMES
+e80ac04bd94e        docker.io/amancevice/superset   "gunicorn superset..."   About an hour ago   Up About an hour (healthy)   0.0.0.0:8080->8080/tcp, 8088/tcp   my_superset
+663f90ffcceb  		docker.io/apache/superset:1.0.0              13 hours ago  Up 13 hours ago  0.0.0.0:8080->8080/tcp  my_superset5
+```
 
 
+
+**镜像部署启动过程**
+
+```shell
+# 下载镜像 官网镜像 docker.io/apache/superset:1.0.0
+# star最多镜像 docker.io/amancevice/superset
+$ docker pull apache/superset:1.0.0
+
+# 创建挂载目录
+$ mkdir /opt/superset 
+
+# dockek启动： apache 或 amancevice, 都映射到宿主机端口 9002, 数据卷映射到/opt/superset. -d 后台启动
+$ docker run --name my_superset -p 9002:8080 -v /opt/superset:/app/superset_home apache/superset:1.0.0
+$ docker run -p 9002:8088 --name superset amancevice/superset
+
+# 第一次初始化: superset init命令即可，也可完全执行本地部署时的 `superset db upgrade; superset init; superset fab create-admin;`
+docker exec -it my_superset superset init
+```
+
+
+
+**容器内部执行情况**
+
+1. apache/superset容器
+
+```shell
+# 进入到容器， 用root
+$ docker exec -it -u root my_superset /bin/bash
+
+# 容器内部命令
+$ ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+superset     1     0  0 11:50 ?        00:00:00 /bin/bash /usr/bin/docker-entrypoint.sh
+superset     8     1  0 11:50 ?        00:00:00 /usr/local/bin/python /usr/bin/gunicorn --bind 0.0.0.0:8080 --access-logfile - --error-logfile - --workers 1 --worker-class gthread --threads 20 --timeout 60 --limit-request-line 0 --limit-request-field_size 0 superset.app:create_app()
+root      2505     0  1 11:59 pts/0    00:00:00 /bin/bash
+superset  2565     8 99 12:00 ?        00:00:01 /usr/local/bin/python /usr/bin/gunicorn --bind 0.0.0.0:8080 --access-logfile - --error-logfile - --workers 1 --worker-class gthread --threads 20 --timeout 60 --limit-request-line 0 --limit-request-field_size 0 superset.app:create_app()
+
+root@5dcbeffeb365:/app# cat /usr/bin/docker-entrypoint.sh
+#!/bin/bash
+set -eo pipefail
+
+if [ "${#}" -ne 0 ]; then
+    exec "${@}"
+else
+    gunicorn \
+        --bind  "0.0.0.0:${SUPERSET_PORT}" \
+        --access-logfile '-' \
+        --error-logfile '-' \
+        --workers 1 \
+        --worker-class gthread \
+        --threads 20 \
+        --timeout 60 \
+        --limit-request-line 0 \
+        --limit-request-field_size 0 \
+        "${FLASK_APP}"
+fi
+```
+
+
+
+2. amancevice/superset容器
+
+   ```shell
+   superset@e80ac04bd94e:~$ ps -ef
+   UID        PID  PPID  C STIME TTY          TIME CMD
+   superset     1     0  0 01:02 ?        00:00:01 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   superset     7     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   superset     8     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   superset     9     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   superset    10     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   superset    11     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
+   ```
+
+   
 
 ## 2.2 支持数据源类型
 
@@ -378,7 +497,7 @@ yarn & yarn run build
 
 说明：以kylin示例URL：kylin://user: Greenplum pwd@host:port/project?charset=utf-8
 
-1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，其它的数据库插件需要安装才能使用。
+1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，**其它的数据库插件需要安装才能使用**。
 
 2. URI前缀相同的表示使用相同协议，如Postgres/Greenplum/Redshift，Postgres是RDBS；Greenplum是基于Postgres开发的海量（50PB）级别的RDBS；Redshift是AWS的云化数据仓库。
 
@@ -386,15 +505,26 @@ yarn & yarn run build
 
 4. 还不支持的DB：[MongoDB](https://www.mongodb.com/zh-cn/products/bi-connector)(有第三方付费插件支持)
 
+5. 主流DB插件安装注意事项
+
+   ```shell
+   # 除了上面列的python插件，通常还需要对应的 DB动态库支持. 官方镜像apache/superset已经包括mysql, pg的开发库
+   # mysql: yum install mysql-devel
+   
+   # oracle： 需要独立安装 客户端（约300MB）
+   
+   # pg
+   yum install libpq
+   ```
+
    
 
 DB大小写敏感差异：对象名（表名字段名），查询SQL
 
-   1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
-      2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
-
-         * Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
-         * PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
+    1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
+    2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
+        - Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
+        - PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
 
 
 
@@ -629,16 +759,18 @@ superset run -h 0.0.0.0 -p 5000
 * 主要使用 flask_appbuild 模块提供的装饰器:  expose 和 expose_api
   * expose   路由会在父路由基础上添加，如 expose('expore_json')，实际上指向 /superset/explore_json
   * （没用到）expose_api 用于API，返回JSON。如/api/v1/xxx
-  
 * xxAPP.route:  flask原生路由，仅用于 /healthy
 
-* RestApi的路由前缀：`{route_base}`  或者 `/api/{version}/{resource_name}`  ，如 /api/v1/chart/
+**路由前缀**
 
+* 继承自flask_appbuilder.baseviews.BaseView:  路由前缀为 `/lower(class.__name__)/`，如Superset类下的视图前缀为/superset
+
+* RestApi的路由前缀：`{route_base}`  或者 `/api/{version}/{resource_name}`  ，如 /api/v1/chart/
 * ModelView的路由前缀：/superset/{route_base}，如 /superset/explore_json
 
 
 
-请求响应结果格式，有二种：
+**请求响应结果格式**，有二种：
 
   * JSON格式：页面局部更新。
   * HTML格式：每个页面都是一个单独HTML，页面名称可参见 webpack.config.js里的entry。需用到模板，页面全部更新。
@@ -679,6 +811,8 @@ API实现： superset API实现在各个目录下的api.py
 | Report Schedules   | /report/                    |              |
 | Security           | /security/                  |              |
 
+说明：有不少API并未出现在swagger生成的API列表里，特别是以/superset/为前缀的路由。
+
 
 
 **常用参数**
@@ -688,17 +822,28 @@ API实现： superset API实现在各个目录下的api.py
 
 
 
-### explore系列
+### /superset/前缀路由
 
-/superset/models/xx.py
+以 /superset/开头的路由目前有60+。
 
-这个目录下生成的路由都是以 /superset开头的。
+相关文件：
+
+* /superset/viwes/core.py   Superset视图类，继承自flask_appbuilder.baseviews.BaseView，route_base为类名即路由前缀为/superset/
+* /superset/models/xx.py
+
+| 接口名           | 接口路由 （省略前缀/superset） | 方法     | 参数说明 | 响应结果 |
+| ---------------- | ------------------------------ | -------- | -------- | -------- |
+| 图表页           | /explore/<slice_id>            | GET POST |          | HTML     |
+| SQL查询          | /explore_json/                 | GET POST |          | JSON     |
+| 看板页           | /dashboard/<dashboard_id>      | GET      |          | HTML     |
+| 看板保存（覆盖） | /save_dash/<dashboard_id>      | GET POST |          | JSON     |
+| 看板另存为       | /copy_dash/<dashboard_id>      | GET POST |          | JSON     |
+| 获取token        | /csrf_token/                   | GET      |          | JSON     |
+|                  |                                |          |          |          |
 
 
 
 ### 图表 Chart列表页
-
-此页是为了展示 模型列表。
 
 ![image-20210702145252701](..\..\media\code\code_superset_001.png)
 
@@ -816,9 +961,35 @@ API实现： superset API实现在各个目录下的api.py
 | /api/v1/dataset/        | 数据集列表   |      | ?q=(order_column:changed_on_delta_humanized,order_direction:asc,page:0,page_size:20) |                               |                                                              |
 | /api/v1/dataset/_info   | 权限信息     |      | ?q=(keys:!(permissions))                                     |                               |                                                              |
 | /api/v1/chart/data      | 查看图表数据 | POST | ?form_data=%7B%22slice_id%22%3A437%7D                        | result_type: results或samples |                                                              |
-| /superset/explore_json/ | 数据查询结果 |      | /?form_data=%7B%22slice_id%22%3A464%7D&result=true           | form_data, result是否展示     |                                                              |
+| /superset/explore_json/ | 数据查询结果 | POST | /?form_data=%7B%22slice_id%22%3A464%7D&result=true           | form_data, result是否展示     |                                                              |
 
-说明：
+说明：保存图表接口是`POST /superset/explore/`（覆盖和另存为的区别在于保存数据时是否有传输slice_id，``），修改图表（即编辑图表属性）接口是`PUT /api/v1/chart/`。
+
+1. 修改图表时只传改变的数据，必需参数slice_id/slice_name（会用来检验图表是否存在）。可选参数有datasource_id/datashboard/owners ，若传参datasource_id,会检测数据库ID是否存在（dbs表），datashboard会检查关联看板是否存在(dashboards表），owners会检查关联属主用户是否存在（slice_owner表）。
+
+2. 隐藏校验：会用当前用户检验是否有数据访问权限（如数据源/数据集访问权限，是否图表/看板属主）。
+
+示例：
+
+```json
+# 图表保存覆盖 请求json:  action: overwrite/saveas
+{slice_id: 473, action: "overwrite", slice_name: "blood2", save_to_dashboard_id: null}
+```
+
+
+
+### 看板页
+
+* 看板页（返回HTML）:  `GET /superset/dashboard/<dashboard_id_or_slug>`
+* 保存看板（覆盖）： `@expose("/save_dash/<int:dashboard_id>/", methods=["GET", "POST"])`
+* 保存看板（另存为）： `@expose("/copy_dash/<int:dashboard_id>/", methods=["GET", "POST"])`
+* 编辑看板：`PUT /api/v1/dashboard/<dashboard_id_or_slug>`
+
+说明：看板另存还包括是否复制图表。
+
+
+
+### 数据集 dataset
 
 示例：**数据集查询/api/v1/dataset/ 的响应结果 JSON**
 
@@ -870,10 +1041,6 @@ API实现： superset API实现在各个目录下的api.py
 
 
 
-
-
-
-
 ## 3.3 简易定制化
 
 表格 简易定制化的修改项
@@ -898,9 +1065,7 @@ API实现： superset API实现在各个目录下的api.py
 
 **humanize 人性化**
 
-详见 《superset源码剖析》humanize 章节
-
-superset人性化主要是时间日期，服务端返回的字段changed_on_humanized已经是中文时间格式了。
+依赖模块humanize。superset人性化主要是时间日期，服务端返回的字段changed_on_humanized已经是中文时间格式了。
 
 客户端使用moment.js，可以从bootstra_data里获取moment_locale 进行初始化（尚未发现真正使用的地方）。
 
@@ -1052,8 +1217,6 @@ encoding = utf-8
 
 
 
-
-
 ### 网页嵌入外部系统
 
 * superset本身已支持的共享项：看板、图表，用standalone=true识别，外部系统要能访问需要开通公共用户权限，并且公共角色需要相关数据源/数据集权限。这个外部系统的共享只能用于公开数据。
@@ -1191,9 +1354,9 @@ superset路由涉及主要分二部分：
 
 ## 4.1  安全管理
 
-### RABC机制
+### RBAC机制
 
-superset的权限管理是通过flask_appbuilder模块的权限管理实现的，是RABC机制(Role-Based Access Control, 基于角色的访问控制)。
+superset的权限管理是通过flask_appbuilder模块的权限管理实现的，是RBAC机制(Role-Based Access Control, 基于角色的访问控制)。
 
 用户通过角色关联到 若干权限，权限为视图项权限（每个权限可以由二部分组成：视图项，视图项的某个权限如can_read）。
 
@@ -1202,20 +1365,59 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 
 
-表格 权限管理的数据表
+表格 权限管理的数据表说明
 
 | 表名                    | 权限说明           | 字段                                | 权限详述                                                     |
 | ----------------------- | ------------------ | ----------------------------------- | ------------------------------------------------------------ |
 | ab_role                 | 角色               | id, name(uni)                       | 一个角色映射到访问权限，一个用户可以是多个角色，一个角色也可以有多个用户。6个预创建角色分别是Admin, Alpha, Gramma, granter, Public, sql_lab。 |
 | ab_premission           | 权限               | id, name(uni)                       | 如can list/can del, menu_access等。共85个                    |
-| ab_view_menu            | 被管对象           | id, name(uni)                       | 菜单、视图、数据源，数据集，看板，图板等等.<br>示例数据集：[database_name].[schema] ，[database_name].[schema](id:xx) |
-| ab_permission_view      | 权限视图关联       | id, permission_id, view_menu_id     | 建议permission表和view_menu表的关联，多对多关系。            |
-| ab_permission_view_role |                    | id, permission_view_id, <br>role_id | 角色对应的视图权限。permission_view_id和role_id二个外键分别对应到ab_permission_view表和ab_role表的主键。 |
+| ab_view_menu            | 被管对象           | id, name(uni)                       | 菜单、视图、数据源，数据集，看板，图板等等.<br>示例数据集：[database_name].(id:dbs_id) ，`[database_name].[table_name](id:tables_id)`, [database_name].[schema] ， |
+| ab_permission_view      | 权限-视图关联      | id, permission_id, view_menu_id     | 建议permission表和view_menu表的关联，多对多关系。            |
+| ab_permission_view_role | 角色-权限视图关联  | id, permission_view_id, <br>role_id | 角色对应的视图权限。<br>permission_view_id和role_id二个外键分别对应到ab_permission_view表和ab_role表的主键。 |
 | ab_user_role            | user和role关联     | id, user_id, role_id                | 建立user表和role表的关联，多对多关系                         |
-| ab_user                 |                    | id, ...                             | 包括用户基本信息，包括用户名/密码等。                        |
+| ab_user                 |                    | id, username(uni)...                | 包括用户基本信息，包括用户名/密码等。                        |
 | ab_register             | 用户注册时基本信息 | id, ...                             | 如果不允许用户自注册，此表则不用。                           |
 
-备注：权限和被管对象通过表`ab_permission_view`关联起来。
+备注：权限和被管对象通过表`ab_permission_view`关联起来。表字段id为自增主键，字段名后有(uni)表示是唯一键。
+
+
+
+表格 ab_view_menu表里name字段的组成
+
+| 资源类型          | name字段格式&说明                                            | 示例                                        |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------- |
+| druid数据源       | `[{cluster_name}].(id:{id})`                                 | 略                                          |
+| 数据库            | `[database_name].(id:dbs_id)`                                | [database_test].(id:2)                      |
+| 数据集            | `[database_name].[table_name](id:tables_id)`  同tables表里的perm字段值 | `[examples].[考勤数据汇总](id:13)`          |
+| schema            | [database_name].[schema]   同tables表里的schema_perm字段值   | [examples].[dmap]                           |
+| 菜单&视图&API视图 | 字符串，同页面显示                                           | “List Users”  "MenuApi" "ResetPasswordView" |
+
+说明：看板/图表的读权限由数据集决定，不由ab_view_menu表控制；其修改权限由owner决定，由相应的slice_user, dashboard_user表控制。
+
+> 上面database_name从Database.name获取，Database.name取值逻辑是先从verbose_name取，后从database_name取。
+
+
+
+表格 资源数据库、数据集、图表、看板的名称说明
+
+| 资源   | 表名       | 显示名字段      | 别名字段     | 描述字段    | 说明                                                         |
+| ------ | ---------- | --------------- | ------------ | ----------- | ------------------------------------------------------------ |
+| 数据库 | dbs        | database_name   | verbose_name | description | 二个名称都是全局唯一的。database_name可重命名，verbose_name缺省为空。<br>数据库真实名称包括在字段sqlalchemy_uri。sqlalchemy_url没要求唯一，也就是同一个sqlalchemy_url可以生成多个不一样的数据源名称。 |
+| 数据集 | tables     | table_name      | extra        | description | table_name是真实表名（不可更改）。<br>extra字段类型是json，可保存别名（可更改），示例extra={"table_alias":"xx"}。 |
+| 图表   | slices     | slice_name      | 无           | description | 名称需自行在验证逻辑里加判断，如是否用户内唯一。             |
+| 看板   | dashboards | dashboard_title | 无           | description | 名称需自行在验证逻辑里加判断，如是否用户内唯一。             |
+
+说明：description字段类型为text，用来描述资源，不唯一，一般也不重要。Database.name取值逻辑是先从verbose_name取，后从database_name取。
+
+**数据库/集重命名影响**
+
+1. 如果数据库重命名了，那么此数据库及此库关联表和shema都要重命名视图名（涉及元数据表ab_view_menu的name字段, tables的perm字段），否则find_view_menu(view_menu_name)时找不到相应view_id。但由于重命名操作只增加权限视图，不删旧视图的做法，不会更改旧的权限，只是造成了数据冗余 。
+2. 如果数据集重命名了，因为只是用来显示的别名，因此更改没有影响 。
+
+**数据库/集删除影响**
+
+1. 删除数据库前，需要确保没有关联的数据集（已实现）。
+2. 删除数据集前，需要确保没有关联的图表（已实现提示）。数据集删除，所对应的perm里的id字段为Null。
 
 
 
@@ -1223,24 +1425,27 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 权限管理：权限项有287+项，可分为两大类分别是基本权限 和 视图列表的操作权限。
 
-表格 5 权限管理的角色说明（角色类似用户组的概念）
+表格 5 权限管理的角色说明（）
 
-| 角色    | 权限说明                                                     | 权限项举例 |
-| ------- | ------------------------------------------------------------ | ---------- |
-| admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 |            |
-| Alpha   | Alpha可以访问所有数据源，但无法授予或撤销其他用户的访问权限。 它们也限于改变他们拥有的对象。 Alpha用户可以添加和更改数据源。 |            |
-| Gamma   | 访问有限。他们只能使用他们通过另一个补充角色访问的数据源中的数据。相当于内容消费方。 |            |
-| public  | 用户必须的信息。如个人密码修改                               |            |
-| grant   |                                                              |            |
-| sql_lab | sql lab访问和操作权限。                                      |            |
+| 角色    | 权限说明                                                     | 权限项举例...                                                |
+| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 | `menu access on List Roles`, `menu access on List Users`, `menu access on Security`, `can list on RoleModelView` |
+| Alpha   | Alpha可以访问所有数据源，但无法授予或撤销其他用户的访问权限。 它们也限于改变他们拥有的对象。 Alpha用户可以添加和更改数据源。 | `all database access on all_database_access`                 |
+| Gamma   | 访问有限。他们只能使用他们通过另一个补充角色访问的数据源中的数据。相当于内容消费方。 | `menu access on Charts`, `menu access on Dashboards`, `database access on [mysql2].(id:10)` |
+| public  | 用户必须的信息。如个人密码修改。                             | `can read on Chart`, `can read on Dashboard`                 |
+| grant   | 一般2个权限，分别是覆盖角色权限和推准权限。                  | `Can override role permission on Superset`, `Can approve on Superset` |
+| sql_lab | sql lab访问和操作权限。                                      | `menu access on SQL Lab`, `menu access on SQL Editor`,       |
 
-备注：superset的权限控制是由数据源中的数据表和dashboard来决定的。
-1. 数据表的读权限
-*  数据源（表）的属主缺省可以完全操作（读+写+删）此数据源的图表和视图。
-*  Alpha角色可以读取所有数据源和dashboard，但不能修改。
-*  Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
-2. dashboard的写权限：要能修改dashboard，要在此看板设置所有者加入用户名。
-3. 行级别权限 Row Level：
+备注：superset的权限控制通过用户所拥有的角色的权限合集来控制。
+1. 数据源/表的读权限
+   - 数据源（表）的属主缺省可以完全操作（读+写+删）此数据源的图表和看板。
+   - Alpha角色可以读取所有数据源和dashboard，但不能修改。
+   - Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
+
+2. 图表/看板的读写权限：图表/看板都有一个owner列表。
+   - 读权限：取决于是否有图表所用的数据集访问权限（最近粒度）。即使没有数据集所在数据库访问权限也可以。
+   - 写权根：owner能修改，创建者缺省是owner。
+3. 行级权限 Row Level：目前只针对管理员。
 
 
 
@@ -1322,7 +1527,7 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 * 特性标识：DEFAULT_FEATURE_FLAGS  FEATURE_FLAGS  
 * 缓存：CACHE_DEFAULT_TIMEOUT  CACHE_CONFIG  DATA_CACHE_CONFIG   STORE_CACHE_KEYS_IN_METADATA_DB
 * 上传/导入/导出：UPLOAD_FOLDER  IMG_UPLOAD_FOLDER  ALLOWED_EXTENSIONS  CSV_EXPORT   CSV_TO_HIVE_UPLOAD_S3_BUCKET  CSV_TO_HIVE_UPLOAD_DIRECTORY  
-* 其它：CELERY_CONFIG   ENABLE_ALERTS  EMAIL_ASYNC_TIME_LIMIT_SEC  WEBDRIVER_TYPE  
+* 其它：CELERY_CONFIG   ENABLE_ALERTS  EMAIL_ASYNC_TIME_LIMIT_SEC  WEBDRIVER_TYPE  FAB_API_SWAGGER_UI
 
 ```python
 from flask import Blueprint
@@ -1750,8 +1955,8 @@ $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
 
 | 问题描述                                 | 解决方法                                                     | 备注                                                    |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------- |
-| MySQL字段内容中文乱码                    | create_engine('mysql+mysqlconnector://USER:  PWD@HOST/DB?charset=utf8') | sqlalchemy在mysql里的实现。                             |
-| PostgreSQL字段内容中文乱码               | create_engine('postgresql+psycopg2://USER:  PWD@HOST/DB', echo=True, client_encoding='utf8') | 同上                                                    |
+| MySQL字段内容中文乱码                    | create_engine('mysql+mysqlconnector://USER:PWD@HOST/DB?charset=utf8') | sqlalchemy在mysql里的实现。                             |
+| PostgreSQL字段内容中文乱码               | create_engine('postgresql+psycopg2://USER:PWD@HOST/DB', echo=True, client_encoding='utf8') | 同上                                                    |
 | 图表里的CSV文件导出后在中文OS的excel乱码 | config.py里设置 csv导出编码为gbk。                           | sql lab的csv文件中并没导出编码设置项，缺省编码仍为utf-8 |
 
 备注：superset里的数据存储中文乱码主要是由sqlalchemy的create_engine参数引起的。
@@ -1769,14 +1974,20 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
     描述：数据源/集删除后，相应的数据源权限 并未在角色中清除，能在角色的权限列表里看到 已经删除的数据源/数据集。
 
+    评审：
+
 2. 编辑数据集页面无法获取extra字段，保存时extra字段值丢失。
 
     描述：数据集删除页面 进入编辑，extra字段显示正常； 但如果是通过编辑数据集页面进入 ，extra字段无法获取。
+    
+    评审：
 
 
-3. 删除图板时并未检验看否有看板使用
+3. 删除图表时并未检验看否有看板使用
 
-   描述：删除数据库、数据集时都有检查依赖项。但删除看板时并未检测是否有看板依赖，可以增加提示信息，不强制不能删除。
+   描述：删除数据库、数据集时都有检查依赖项。但删除图表时并未检测是否有看板依赖，可以增加提示信息，不强制不能删除。
+   
+   评审：
 
 
 
@@ -1824,4 +2035,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 *  superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
 *  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
 *  python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
+*  安装Apache Superset--基于Docker的安装配置 https://blog.csdn.net/nikeylee/article/details/115264818
 

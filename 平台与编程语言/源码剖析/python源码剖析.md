@@ -30,7 +30,7 @@
    Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python-3.4.7.tgz)
 
    ![1574530890814](../../media/program_lang/lang_python_003.png)
-图  python总体结构
+   图  python总体结构
 
 说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。 
 
@@ -1541,7 +1541,7 @@ Foo.__init__
 
 
 
-# 5 常见源码
+# 常见源码
 
 ## 命令行启动模块
 
@@ -1657,6 +1657,64 @@ if __name__ == '__main__':
 setup(
 	entry_points={"console_scripts": ["superset=superset.cli:superset"]},
 )
+```
+
+
+
+## six模块 six.py
+
+```shell
+$ pip show six
+pip show six
+Name: six
+Version: 1.15.0
+Summary: Python 2 and 3 compatibility utilities
+Home-page: https://github.com/benjaminp/six
+Author: Benjamin Peterson
+Author-email: benjamin@python.org
+License: MIT
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires:
+Required-by: xdis, virtualenv, tensorflow, tensorflow-gpu, python-dateutil, protobuf, Keras-Preprocessing, jsonschema, grpcio, google-pasta, google-auth, flask-restx, flask-restplus, Flask-RESTful, bleach, astunparse, argon2-cffi, absl-py
+```
+
+
+
+six.py  Python2和3的兼容工具，如果不想要支持Python2，可以不使用此模块。
+
+```python
+from __future__ import absolute_import
+
+import functools
+import itertools
+import operator
+import sys
+import types
+
+__author__ = "Benjamin Peterson <benjamin@python.org>"
+__version__ = "1.16.0"
+
+
+# Useful for very coarse version differentiation.
+PY2 = sys.version_info[0] == 2
+PY3 = sys.version_info[0] == 3
+PY34 = sys.version_info[0:2] >= (3, 4)
+
+if PY3:
+    string_types = str,
+    integer_types = int,
+    class_types = type,
+    text_type = str
+    binary_type = bytes
+
+    MAXSIZE = sys.maxsize
+else:
+    string_types = basestring,
+    integer_types = (int, long)
+    class_types = (type, types.ClassType)
+    text_type = unicode
+    binary_type = str
+...    
 ```
 
 

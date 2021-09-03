@@ -529,7 +529,7 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 公式一：两个变量之间的协方差和标准差的商
 
 $$
-Corr(X,Y) = Cov(X,Y)/(DX*DY)  
+Corr(X,Y) = Cov(X,Y)/(DX*DY)
 $$
 公式二~四：略
 
@@ -794,8 +794,6 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 
 
-
-
 ### 本章参考
 
 [1]. 机器学习算法GBDT https://www.cnblogs.com/bnuvincent/p/9693190.html
@@ -814,8 +812,6 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 
 
-
-
 ## 6 仿生学算法系列
 
 仿生学算法有模仿蚂蚁群体的蚁群算法，模仿达尔文进化论的遗传算法，模仿热力学中固体降温过程的模拟退火算法等。
@@ -830,7 +826,6 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 | 蚁群算法ACO                      | 蚁群算法是模拟了蚂蚁群体智能。                               | 蚂蚁群体是一种社会性昆虫，它们有组织，有分工，还有通讯系统。它们相互协作，能完成从蚁穴到食物源寻找最短路径的复杂任务。 |                                                              |                    |
 | 神经网络                         | 人工神经网络是根据人的认识过程而开发出的一种算法。           |                                                              |                                                              |                    |
 | 免疫算法                         | 模拟免疫系统的学习算法。                                     | 模拟了免疫系统独有的学习、记忆、识别等功能，具有较强模式分类能力，尤其对多模态问题的分析、处理和求解表现出较高的智能性和鲁棒性。 |                                                              | 多模态问题         |
-|                                  |                                                              |                                                              |                                                              |                    |
 
 **备注：**
 
@@ -870,7 +865,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 算法步骤：
 
-1）给定初始温度T0及初始点，计算此点的函数值f(x);
+1. 给定初始温度T0及初始点，计算此点的函数值f(x);
 
 2) 计算函数差值 %f ＝ f1(x)-f(x);
 
@@ -917,14 +912,14 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 表格 NLP常用算法列表
 
-| 算法     | 算法简介                     | 应用           |
-| -------- | ---------------------------- | -------------- |
-| BERT     | 预训练好的深度双向编码转换。 | NLU、Q&A Robot |
-| TF-IDF   |                              |                |
-| Word2Vec |                              |                |
-| TextRank |                              |                |
-| TextCNN  |                              |                |
-| TextRNN  |                              |                |
+| 算法     | 算法简介                                                     | 应用           |
+| -------- | ------------------------------------------------------------ | -------------- |
+| BERT     | 预训练好的深度双向编码转换。                                 | NLU、Q&A Robot |
+| TF-IDF   | 词频-反文档频率。                                            | 搜索引擎       |
+| Word2Vec | 一群用来产生词向量的相关模型。词序不重要，训练完成之后，word2vec模型可用来映射每个词到一个向量，可用来表示词对词之间的关系。 |                |
+| TextRank | 文本评分，仿照PageRank。                                     |                |
+| TextCNN  | 文本CNN。                                                    |                |
+| TextRNN  | 文本RNN。                                                    |                |
 
 
 
@@ -970,11 +965,12 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 **潜在狄利克雷分配(LDA)** ：Latent Dirichlet Allocatio，该算法是主题建模中最流行的算法。 它使用概率图形模型来实现主题建模。 我们需要在 Python 中导入 gensim 包以使用 LDA slgorithm。
 
-**潜在语义分析(LDA)或潜在语义索引(LSI)** 该算法基于线性代数。 基本上它在文档术语矩阵上使用 SVD(奇异值分解)的概念。
+**潜在语义分析(LDA)或潜在语义索引(LSI)**：该算法基于线性代数。 基本上它在文档术语矩阵上使用 SVD(奇异值分解)的概念。
 
 **非负矩阵分解(NMF)**： 它也基于线性代数。
 
 上述所有用于话题建模的算法都将主题数量作为参数，将文档 - 词汇矩阵（词袋模型，行表示文档，列为语料库中某单词在此文档的计数）作为输入，将 WTM(词-主题矩阵)和TDM(主题-文档矩阵)作为输出。
+
 表格 文档-词汇矩阵
 
 |       | 词1  | 词2  | ...  | 词n  |
@@ -1060,13 +1056,11 @@ Apriori算法对于一条规则L->R，有以下度量：
 
  
 
-
-
 # 参考资料
 
 ## 参考链接 
 
-[1].  干货！机器学习平台优质学习资源推荐 https://zhuanlan.zhihu.com/p/55819467
+[1]. 干货！机器学习平台优质学习资源推荐 https://zhuanlan.zhihu.com/p/55819467
 
 [2]. 练手|常见26种深度学习模型的实现 https://zhuanlan.zhihu.com/p/51331280
 
@@ -1074,11 +1068,11 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 [4]. 一文看懂深度学习发展史和常见26个模型 https://zhuanlan.zhihu.com/p/50967380
 
-[5].  一文回顾深度学习发展史上最重要经典模型 https://zhuanlan.zhihu.com/p/269488005
+[5]. 一文回顾深度学习发展史上最重要经典模型 https://zhuanlan.zhihu.com/p/269488005
 
-[6].  深度学习入门指南：25个初学者要知道的概念 https://zhuanlan.zhihu.com/p/27186569
+[6]. 深度学习入门指南：25个初学者要知道的概念 https://zhuanlan.zhihu.com/p/27186569
 
-[7].  干货|机器学习超全综述！ https://zhuanlan.zhihu.com/p/46320419
+[7]. 干货|机器学习超全综述！ https://zhuanlan.zhihu.com/p/46320419
 
 [8]. 推荐算法设计综述 https://zhuanlan.zhihu.com/p/69478126
 

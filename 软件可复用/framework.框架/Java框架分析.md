@@ -4,13 +4,13 @@
 | 2    | 2017-8-20 | 更新若干流行框架 | 同上   |        |
 | 3    | 2018-3-10 | 更新SSH框架      | 同上   |        |
 |      |           |                  |        |        |
+
+
+
+
+
+
 ---
-
-
-
-
-
-
 
 
 # 目录
@@ -73,11 +73,13 @@
 
  
 
+[TOC]
 
 
 
 
- 
+
+---
 
 # 1  Java自身框架
 
@@ -235,11 +237,11 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
  
 
-# 2   Java SSH框架
+# 2  Java SSH框架
 
 **说明：涉及到分布式框架库，一般要使用J2EE。**
 
-## 2.1   SSH框架简介
+## 2.1 SSH框架简介
 
 表格 3 Java SSH框架列表
 
@@ -301,7 +303,7 @@ Struts 2 <-- (ContextLoaderListener) --> Spring <-- (LocalSessionFactoryBean) --
 
 
 
-## 2.2     Strucs
+## 2.2 Strucs
 
 ### 2.2.1   Strucs架构原理篇
 
@@ -431,7 +433,7 @@ step 6: 运行显示视图，启动tomcat，访问http://localhost:8080/web_test
 
  
 
-## 2.3     Spring
+## 2.3 Spring
 
 Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(IOC)框架，以帮助分离项目组件之间的依赖关系。Spring是一个轻量级的IOC和AOP的容器框架。
 
@@ -643,7 +645,7 @@ Spring框架的AOP功能是通过JavaSE动态代理和cglib实现的。
 
  
 
-## 2.4     Hibernate
+## 2.4 Hibernate
 
 Hibernate是典型的ORM模式。
 
@@ -801,7 +803,7 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
-## 2.5     本章参考
+## 本章参考
 
 [1]: struts  https://struts.apache.org/ 
 

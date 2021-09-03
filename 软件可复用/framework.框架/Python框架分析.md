@@ -98,8 +98,6 @@ django3.0之前django的Web服务器网关接口一直用的是WSGI，ASGI的A�
 
 
 
-
-
 ### django开发篇
 
 #### 入门实例
@@ -965,6 +963,21 @@ python manage.py migrate --fake-initial
 
  
 
+表格 flask版本说明 详见[CHANGES.rst](https://github.com/pallets/flask/blob/main/CHANGES.rst)
+
+| 版本号 | 发布时间   | 功能或更新说明                                               |
+| ------ | ---------- | ------------------------------------------------------------ |
+| 0.1    | 2010-04-16 | 第一个公共发布版本。                                         |
+| 0.12.4 | 2018-04-29 | Repackage 0.12.3 to fix package layout issue. [:issue:`2728`](https://github.com/pallets/flask/blob/main/CHANGES.rst#id463) |
+| 0.12.5 | 2020-02-10 | Pin Werkzeug to < 1.0.0. [:issue:`3497`](https://github.com/pallets/flask/blob/main/CHANGES.rst#id461)  0.x系列最后一个版本。 |
+| 1.0    | 2018-04-26 | 大版本。                                                     |
+| 1.1.4  | 2021-05-13 | 1.x系列最后一个版本。1.0.x和1.1.x各发布5个版本。             |
+| 2.0.0  | 2021-05-11 | 大版本。移除python2和3.5支持。                               |
+| 2.0.1  | 2021-05-21 |                                                              |
+| 2.0.2  | Unreleased |                                                              |
+
+
+
 ### flask开发篇
 
 #### 入门实例
@@ -976,7 +989,7 @@ Flask 依赖两个外部库： [Jinja2](http://jinja.pocoo.org/2/) 模板引擎�
 **Werkzeug:** Werkzeug is an HTTP and WSGI utility library for Python. 
 
  ```shell
-$sudo pip install flask flask-login flask-mail flask-sqlalchemy flask-wtf flask-babel flup
+$ sudo pip install flask flask-login flask-mail flask-sqlalchemy flask-wtf flask-babel flup
 $ pip install Flask
 $ python hello.py
 * Running on http://localhost:5000/
@@ -1080,7 +1093,7 @@ app.config.from_pyfile('config.py')
 
 | 扩展组件         | 简介                                                         | 使用示例                                                     |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| flask_restplus   | 构建restful标准的API，包含swagger UI                         |                                                              |
+| flask_restx      | 构建restful标准的API，包含swagger UI                         |                                                              |
 | flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | fabmanager [OPTIONS] COMMAND [ARGS]...                       |
 | flask-login      | 登陆。                                                       |                                                              |
 | flask-migrate    | 数据库迁移、升级。                                           | `$python manage.py db migrate $python manage.py db upgrade`  |
@@ -1241,7 +1254,7 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 | 路由                         | 功能详述           | 代码文件                                   | 代码实现                                                     |
 | ---------------------------- | ------------------ | ------------------------------------------ | ------------------------------------------------------------ |
 | @expose(uri)                 | 在现路由上扩展路径 |                                            |                                                              |
-| Baseview.   create_blueprint |                    | flask_appbuilder/baseview.py               | route_base = None   if self.route_base is None:  self.route_base = '/' + self.__class__.__name__.lower() |
+| Baseview.   create_blueprint | 类名作为路由根前缀 | flask_appbuilder/baseview.py               | route_base = None   if self.route_base is None:  self.route_base = '/' + self.__class__.__name__.lower() |
 | route_base                   | 路由根路径         | flask_appbuilder/views.py                  | route_base = ''                                              |
 |                              |                    | flask_appbuilder/security/registerviews.py | route_base = '/register'                                     |
 |                              |                    | flask_appbuilder/security/views.py         | route_base = '/users'   roles permissions viewmenus permissionviews   resetmypassword resetpassword registeruser |
@@ -1260,32 +1273,6 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 图 4 flask-appbuilder view
 
  
-
-#### flask-login
-
-[flask-login](https://github.com/maxcountryman/flask-login)跟Flask app是一一对应关系，即一个app内只可能存在一个login manager，所以为了运行多个login manager，只能运行多个app.
-
- 
-
-**app dispatch技术**
-
-[Application Dispatching](http://flask.pocoo.org/docs/0.12/patterns/appdispatch/#app-dispatch)是WSGI工具箱[werkzeug](http://werkzeug.pocoo.org/)提供的一种技术，目的是将多个Flask应用按URL前缀组合成一个应用
-
-```python
-class DispatcherMiddleware(__builtin__.object)
- |  Allows one to mount middlewares or applications in a WSGI application.
- |  This is useful if you want to combine multiple WSGI applications::
- |   app = DispatcherMiddleware(app, {
- |  '/app2':   app2,
- |  '/app3':   app3
- |   })
-```
-
-小结：app dispatch技术实现了app的隔离（独立的login manager、secret_key等），同时让每层业务系统都能模块化（只关心自己的URL部分），很有用。
-
- 
-
-
 
 ### 本节参考
 

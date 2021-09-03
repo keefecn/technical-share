@@ -265,7 +265,7 @@
 
 # 2 前端框架
 
-详见 [前端框架分析](前端框架分析.md)
+详见 《[前端框架分析](前端框架分析.md)》
 
 
 
@@ -285,7 +285,7 @@ Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面�
 
  
 
-# 5. ruby-on-rails
+# 4 ruby-on-rails
 
 ## 入门实例
 
@@ -293,15 +293,11 @@ Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面�
 
 必需安装软件
 
-·    [Ruby](https://www.ruby-lang.org/en/downloads) 1.9.3 及以上版本
+* [Ruby](https://www.ruby-lang.org/en/downloads) 1.9.3 及以上版本
+* 包管理工具 [RubyGems](https://rubygems.org/)，随 Ruby 1.9+ 安装。想深入了解 RubyGems，请阅读 [RubyGems 指南](http://guides.rubygems.org/)
+* [SQLite3](https://www.sqlite.org/) 数据库
 
-·    包管理工具 [RubyGems](https://rubygems.org/)，随 Ruby 1.9+ 安装。想深入了解 RubyGems，请阅读 [RubyGems 指南](http://guides.rubygems.org/)
-
-·    [SQLite3](https://www.sqlite.org/) 数据库
-
- 
-
-安装：
+ 安装：
 
 ```shell
 $ sudo apt-get install ruby sqlite
@@ -317,13 +313,13 @@ Rails 提供了多个被称为“生成器”的脚本，可以简化开发，�
 打开终端，进入有写权限的文件夹，执行以下命令生成一个新程序：
 
 ```shell
-// 1.会在文件夹 blog 中新建一个Rails 程序
+# 1.会在文件夹 blog 中新建一个Rails 程序
 $ rails new blog
 
-// 2.安装 Gemfile 中列出的 gem。
+# 2.安装 Gemfile 中列出的 gem。
 $ bundle install 
 
-// 3.生成 blog 程序后，进入该文件夹, 查看新程序生成器的所有命令行选项。
+# 3.生成 blog 程序后，进入该文件夹, 查看新程序生成器的所有命令行选项。
 $ rails new -h 
 ```
 
@@ -391,23 +387,26 @@ $ rails server
 
  
 
-**参考文献**
+**参考站点**
 
-[1].    W3shools http://www.w3school.com.cn/
-
-[2].    菜鸟教程 http://www.runoob.com/ 
-
-[3].    Node.js快速入门 http://www.yiibai.com/nodejs/nodejs-quick-start.html
-
-[4].    Smarty教程http://www.yiibai.com/smarty/ 
-
-[5].    https://github.com/jobbole/awesome-python-cn 
-
-[6].    [Less](http://www.w3cschool.cc/manual/lessguide/) - Less 快速入门
+* TODOMVC框架 https://todomvc.com/
+* WEB框架性能基准 https://www.techempower.com/benchmarks/
+* W3shools http://www.w3school.com.cn/
+*  菜鸟教程 http://www.runoob.com/ 
 
 
 
- 
+**参考链接**
+
+[1].  [Less](http://www.w3cschool.cc/manual/lessguide/) - Less 快速入门
+
+[2]. https://github.com/jobbole/awesome-python-cn 
+
+[3].  Node.js快速入门 http://www.yiibai.com/nodejs/nodejs-quick-start.html
+
+[4].  Smarty教程http://www.yiibai.com/smarty/ 
+
+
 
 # 附录
 

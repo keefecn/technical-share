@@ -2,6 +2,9 @@
 | ---- | -------- | ------------------------------------------ | ------ | ------ |
 | 1   | 2021-6-1 | 创建。新增源码剖析篇章节。 | Keefe |   Keefe     |
 | 2 | 2021-7-18 | 单独成文。 | Keefe |  |
+| 3 |  |  |  | |
+
+
 
 
 
@@ -45,6 +48,8 @@ Required-by:
 
 
 
+> 特别说明： 本文目录结构中标题的源码路径跟标题级别有关，一般下级标题的源码路径前缀就是上级标题。
+
  ## 1 源码结构 
 
 表格  项目顶层目录结构
@@ -59,7 +64,7 @@ Required-by:
 | tests                 |                                | 测试目录                                                     |
 | docs                  |                                | 文档，使用spinx生成                                          |
 | scripts               | pypi_push.sh   python_tests.sh | superset常用的脚本                                           |
-|                       | setup.py setup.cfg             | 部署常用的一些文件。  requirement.txt 组件需求，pip freeze   README.md     CHANGELOG.md |
+|                       | setup.py setup.cfg             | 部署常用的一些文件。requirement.txt 组件需求，README.md CHANGELOG.md |
 | **superset**          |                                | superse后端源码目录                                          |
 | **superset-frontend** |                                | superset前端源码目录                                         |
 | CHANGELOG.md          |                                | 版本更新日志                                                 |
@@ -98,11 +103,11 @@ Required-by:
 | **templates**     | appbuilder, email, slack, superset           | JinJa2模板目录，项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
 | translations      | zh en ...                                    | 翻译文件，只需修改字段对应的名称。                           |
 | utils             |                                              | 工具                                                         |
-| views             | health.py  core.py                           | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
 | app.py            | create_app                                   | WEB实例初始化，也是调试入口                                  |
 | cli.py            |                                              | superset命令                                                 |
-| viz.py            | BaseViz NVD3Viz viz_types                    | 可视化图表类型的基类及派生类。viz_sip38.py是替换版本。       |
 | extensions.py     |                                              | 定义 celery， logger 等中间件                                |
+| viz.py            | BaseViz NVD3Viz viz_types                    | 可视化图表类型的基类及派生类。viz_sip38.py是替换版本。       |
+| views             | health.py  core.py                           | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
 
  >superset后端用到的组件主要有：flask_appbuilder, flask_sqlalchemy, Jinja2, pandas
 
@@ -177,13 +182,13 @@ Required-by:
 
 **整体流程**
 
-1. npm run dev --将每个模块打包成一个单独的js文件bundle（在webpack.config.js中配置）
-2. superset run  --启动http服务
+1. npm run dev --将每个模块打包成一个单独的js文件bundle（在webpack.config.js中配置）。dev是开发模式打包，build或prod是生产模式打包，文件更小。
+2. superset run  --启动服务端http服务
 3. 浏览器登录  --记录cookie
 4. 点击某一菜单
-5. wsgi 将请求重定向到python侧，执行路由视图函数（多定义在 /superset/views/xx.py）
-6. 视图函数用render_template构造html页面（render_templatec参数有jinja2模板和数据参数，数据参数一般包括entry和data-bootstrap）
-7. 浏览器render后端返回的html页面
+5. wsgi 将请求重定向到python侧，执行路由视图函数（多定义在 /superset/views/xx.py）。
+6. 视图函数用render_template构造html页面（返回HTML只是提供HTML大布局和启动数据，并不包括具体组件的渲染。render_templatec参数有jinja2模板和数据参数，数据参数一般包括entry和data-bootstrap）。
+7. 浏览器render后端返回的html页面（通过启动数据和API数据 渲染具体的组件）。
 
 
 
@@ -201,7 +206,10 @@ superset使用了服务器端渲染HTML + 客户端渲染组件的组合方案�
 * 服务端渲染HTML：服务首页只包括了基础数据、导航菜单和HTML框架。服务端导入JS/CSS文件通过js_bundle/css_bundle(name)定位到具体的react js/css文件。
 * 客户端渲染：具体的组件渲染和交互由前端React来完成。
 
-联调：前端调试时仍需superset支持，可本地安装部署superset。如果本地安装不便，可以直接使用测试环境，将前端构建生成目录覆盖superset/static下相应文件即可。
+联调：前端调试时仍需superset支持。
+
+* 前后端一体调试：可本地安装部署superset。如果本地安装不便，可以直接使用测试环境，将前端构建生成目录覆盖superset/static下相应文件即可。
+* 启用web-dev-server本地调试前端：服务器指定代理使用远程，前端使用本地文件。启动命令是`npm run dev-server`。
 
 
 
@@ -209,7 +217,7 @@ superset使用了服务器端渲染HTML + 客户端渲染组件的组合方案�
 
 * /superset/extensions.py  包括ResultsBackendManager和UIManifestProcessor，UIManifestProcessort管理前端脚本文件（用到mainfest.json)。
 * /superset/static/assets/manifest.json   前端脚本文件信息，前端构建成功后自动生成。
-* /superset-frontend/webpack.config.js   前端构建脚本，有打包文件入口定义entry。 详见章节 `前端构建逻辑`
+* /superset-frontend/webpack.config.js   前端构建脚本，有打包文件入口定义entry。 详见章节 `前端打包逻辑`
 
 /superset/extensions.py
 
@@ -573,7 +581,7 @@ class ModelView(object):
 
 2. 前端模板渲染示例 
 
-   见下文 《前端打包入口文件》
+   见下文 《前端打包入口文件》章节  
    
    
 
@@ -689,7 +697,7 @@ def rison(schema=None):
 
 * user:  用户登陆基本信息
 * common：基本配置项，包括 语言包（数据量最大）、配置项Conf、特征标识feature_flags、菜单menu_data
-  * common.language_pack 语句包
+  * common.language_pack 语言包
   * common.menu_data 导航菜单
 
 示例数据如下：
@@ -819,6 +827,116 @@ def rison(schema=None):
 ```
 
 
+
+### 会话管理
+
+服务器和客户端(浏览器)之间的会话管理，包括session, cookie, csrf-token。
+
+服务端
+
+* /superset/config.py  配置session/cookie/csrf/cors
+* /superset/app.py  根据配置信息create_app
+* /superset/views/core.py   /csrf_token/ 接口
+
+客户端
+
+* /superset-frontend/src/utils/parseCookie.tsx   parseCookie方法实现读取cookie字段
+* /superset-frontend/src/setup/setupClients.tsx  从页面提取csrf_token和相关信息，来创建客户端
+
+
+
+cookie示例：主要字段有_xsrf, username-xx, session, csrf_access_token
+
+```shell
+_xsrf=2|032f42b4|e86b7b403d2166b24cd7bd243e6d0cdd|1628748122; username-127-0-0-1-8888="2|1:0|10:1628850843|23:username-127-0-0-1-8888|44:NTJhYzJmYzUyNWY0NDFhZjlhOGRlYjczNmU0MTUzY2U=|8faa84c80f216e6a8019f5559762c2cb9cd50e9fbc511192dc793471ee7d3341"; session=.eJx9kMtqxDAMRf_F61DLlp-B0g8pxdiW3AQCGRLPojP03-u2m26maHXhHF2hu0jt4HMRcz-uPIm0kphF1i6YGrlBsBRVUZoDMMVsLHpnIgLpYlRrVQHFYku1zgVmdMplj9YYJo0eswUsCM5ydW2sjMYWj8ahNyagrhWiL6zBO6TGOjRdgJiUmMS217zxuOW2jHTJ75yW9ez78SHmV7H0fpmlVNo_wRg1WwAlj33jU24Dk8P5j2FauwwPoevJxykz0UtqW0-Qfqznx8Lf5rdJfPu_n7Ti8wt3-WTT.YTGVAA.3AdM1VXeDFIRvDcZC_HrZomSVK8
+```
+
+
+
+#### 服务端会话
+
+session管理 详见 《[flask源码剖析](./flask源码剖析.md)》
+
+csrf&cors 见下文 安全权限管理 章节。
+
+
+
+/superset/config.py
+
+```python
+#
+# Flask session cookie options
+#
+# See https://flask.palletsprojects.com/en/1.1.x/security/#set-cookie-options
+# for details
+#
+SESSION_COOKIE_HTTPONLY = True  # Prevent cookie from being read by frontend JS?
+SESSION_COOKIE_SECURE = False  # Prevent cookie from being transmitted over non-tls?
+SESSION_COOKIE_SAMESITE = "Lax"  # One of [None, 'None', 'Lax', 'Strict']
+
+# CORS Options
+ENABLE_CORS = True
+CORS_OPTIONS: Dict[Any, Any] = {"supports_credentials": True}
+SUPERSET_WEBSERVER_DOMAINS= None
+
+# Flask-WTF flag for CSRF
+WTF_CSRF_ENABLED = True
+# CSRF token timeout, set to None for a token that never expires
+WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 7
+# Add endpoints that need to be exempt from CSRF protection
+WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log", "superset.charts.api.data"]
+```
+
+
+
+#### 客户端会话
+
+/superset-frontend/src/utils/parseCookie.tsx 
+
+```tsx
+// 解析cookie字符串的字段值
+type CookieMap = { [cookieId: string]: string };
+
+export default function parseCookie(cookie = document.cookie): CookieMap {
+  return Object.fromEntries(
+    cookie
+      .split('; ')
+      .filter(x => x)
+      .map(x => x.split('=')),
+  );
+}
+```
+
+
+
+/superset-frontend/src/setup/setupClients.tsx
+
+从网页中提取csrf_token，创建客户端
+
+```tsx
+import { SupersetClient, logging } from '@superset-ui/core';
+import parseCookie from 'src/utils/parseCookie';
+
+export default function setupClient() {
+  const csrfNode = document.querySelector<HTMLInputElement>('#csrf_token');
+  const csrfToken = csrfNode?.value;
+
+  // when using flask-jwt-extended csrf is set in cookies
+  const cookieCSRFToken = parseCookie().csrf_access_token || '';
+
+  SupersetClient.configure({
+    protocol: ['http:', 'https:'].includes(window?.location?.protocol)
+      ? (window?.location?.protocol as 'http:' | 'https:')
+      : undefined,
+    host: (window.location && window.location.host) || '',
+    csrfToken: csrfToken || cookieCSRFToken,
+  })
+    .init()
+    .catch(error => {
+      logging.warn('Error initializing SupersetClient', error);
+    });
+}
+```
 
 
 
@@ -1998,6 +2116,7 @@ thumbnail_cache = LocalProxy(lambda: cache_manager.thumbnail_cache)
 
 ```python
 # superset/config.py
+CONFIG_PATH_ENV_VAR = "SUPERSET_CONFIG_PATH"
 if CONFIG_PATH_ENV_VAR in os.environ:
     # Explicitly import config module that is not necessarily in pythonpath; useful
     # for case where app is being executed via pex.
@@ -2176,6 +2295,64 @@ class LoggingConfigurator(abc.ABC):
 
 
 
+#### 扩展 extensions.py
+
+```python
+import celery
+from cachelib.base import BaseCache
+from flask import Flask
+from flask_appbuilder import AppBuilder, SQLA
+from flask_migrate import Migrate
+from flask_talisman import Talisman
+from flask_wtf.csrf import CSRFProtect
+from werkzeug.local import LocalProxy
+
+from superset.utils.async_query_manager import AsyncQueryManager
+from superset.utils.cache_manager import CacheManager
+from superset.utils.feature_flag_manager import FeatureFlagManager
+from superset.utils.machine_auth import MachineAuthProviderFactory
+
+class ResultsBackendManager:
+    def __init__(self) -> None:
+        self._results_backend = None
+        self._use_msgpack = False
+
+    def init_app(self, app: Flask) -> None:
+        self._results_backend = app.config["RESULTS_BACKEND"]
+        self._use_msgpack = app.config["RESULTS_BACKEND_USE_MSGPACK"]
+
+    @property
+    def results_backend(self) -> Optional[BaseCache]:
+        return self._results_backend
+
+    @property
+    def should_use_msgpack(self) -> bool:
+        return self._use_msgpack
+    
+    
+class UIManifestProcessor:
+    
+    
+APP_DIR = os.path.dirname(__file__)
+appbuilder = AppBuilder(update_perms=False)
+async_query_manager = AsyncQueryManager()
+cache_manager = CacheManager()
+celery_app = celery.Celery()
+csrf = CSRFProtect()
+db = SQLA()
+_event_logger: Dict[str, Any] = {}
+event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
+feature_flag_manager = FeatureFlagManager()
+machine_auth_provider_factory = MachineAuthProviderFactory()
+manifest_processor = UIManifestProcessor(APP_DIR)
+migrate = Migrate()
+results_backend_manager = ResultsBackendManager()
+security_manager = LocalProxy(lambda: appbuilder.sm)
+talisman = Talisman()    
+```
+
+
+
 ### 视图逻辑 /views/
 
 Views可分为二大类
@@ -2326,7 +2503,9 @@ class BaseSupersetModelRestApi(ModelRestApi):
 
 #### 普通视图 core.py
 
-此文件的路由都是 /superset/开头，共有63个API。
+此文件的路由都是 /superset/开头，共有63个API。继承自BaseView的route_base是类名称。
+
+* 类关系:   Superset -> BaseSupersetView  -> BaseView(object)（来自flask_appbuilder）
 
 ```python
 from flask import abort, flash, g, Markup, redirect, render_template, request, Response
@@ -2352,6 +2531,28 @@ class Superset(BaseSupersetView):
     @expose("/datasources/")
     def datasources(self) -> FlaskResponse:
 ```
+
+
+
+依赖类：
+
+```python
+# /superset/views/base.py
+class BaseSupersetView(BaseView):
+
+    
+# /flask_appbuilder/baseview.py
+class BaseView(object):
+    
+    route_base = None
+    
+    def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):    
+        ...
+        if self.route_base is None:	# 继承自BaseView的route_base是/类名称。
+            self.route_base = "/" + self.__class__.__name__.lower()            
+```
+
+
 
 
 
@@ -2790,15 +2991,321 @@ class ChartRestApi(BaseSupersetModelRestApi):
 
 ### 数据操作
 
-#### 元数据查询 
+#### 元数据查询 /dao/和/models/
 
-RestAPI逻辑里涉及到的元数据库操作，主要在 /xxx/dao.py
+依赖sqlalchemy模块。RestAPI逻辑里涉及到的元数据库操作，主要在 /xxx/dao.py
+
+* /superset/dao/base.py   基类BaseDAO
+* /superset/dao/exceptions.py   定义异常类DAOException DAOCreateFailedError DAOUpdateFailedError DAODeleteFailedError DAOConfigError
+* /superset/models/xx.py  数据库模型定义和操作
+
+
+
+/superset/dao/base.py 
+
+  基类BaseDAO。定义了常规的DAO查询类静态方法@classmethod，CRUD。
+
+```python
+from typing import Any, Dict, List, Optional, Type
+
+from flask_appbuilder.models.filters import BaseFilter
+from flask_appbuilder.models.sqla import Model
+from flask_appbuilder.models.sqla.interface import SQLAInterface
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import Session
+
+from superset.dao.exceptions import (
+    DAOConfigError,
+    DAOCreateFailedError,
+    DAODeleteFailedError,
+    DAOUpdateFailedError,
+)
+from superset.extensions import db
+
+
+class BaseDAO:
+    """
+    Base DAO, implement base CRUD sqlalchemy operations
+    """
+
+    model_cls: Optional[Type[Model]] = None
+    base_filter: Optional[BaseFilter] = None   
+        
+    @classmethod
+    def find_by_id(cls, model_id: int, session: Session = None) -> Model:
+        
+    @classmethod
+    def find_by_ids(cls, model_ids: List[int]) -> List[Model]:
+        
+    @classmethod
+    def find_all(cls) -> List[Model]:
+        
+    @classmethod
+    def create(cls, properties: Dict[str, Any], commit: bool = True) -> Model:
+        
+    @classmethod
+    def update(
+        cls, model: Model, properties: Dict[str, Any], commit: bool = True
+    ) -> Model:
+        
+    @classmethod
+    def delete(cls, model: Model, commit: bool = True) -> Model:        
+```
+
+
+
+/sueprset/models/core.py  
+
+```python
+import sqlalchemy as sqla
+import sqlparse
+from flask import g, request
+from flask_appbuilder import Model
+from sqlalchemy import (
+    Boolean,
+    Column,
+    create_engine,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    Text,
+)
+from sqlalchemy.engine import Dialect, Engine, url
+from sqlalchemy.engine.reflection import Inspector
+from sqlalchemy.engine.url import make_url, URL
+from sqlalchemy.exc import ArgumentError
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import relationship
+from sqlalchemy.pool import NullPool
+from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql import expression, Select
+from sqlalchemy_utils import EncryptedType
+
+
+class Database(
+    Model, AuditMixinNullable, ImportExportMixin
+):  # pylint: disable=too-many-public-methods
+    """An ORM object that stores Database related information
+    数据库操作
+    """
+
+    __tablename__ = "dbs"
+    type = "table"
+    __table_args__ = (UniqueConstraint("database_name"),)
+
+    id = Column(Integer, primary_key=True)
+    verbose_name = Column(String(250), unique=True)
+    # short unique name, used in permissions
+    database_name = Column(String(250), unique=True, nullable=False)
+    sqlalchemy_uri = Column(String(1024), nullable=False)
+    password = Column(EncryptedType(String(1024), config["SECRET_KEY"]))
+    cache_timeout = Column(Integer)
+    select_as_create_table_as = Column(Boolean, default=False)
+    expose_in_sqllab = Column(Boolean, default=True)
+    allow_run_async = Column(Boolean, default=False)
+    allow_csv_upload = Column(Boolean, default=False)
+    allow_ctas = Column(Boolean, default=False)
+    allow_cvas = Column(Boolean, default=False)
+    allow_dml = Column(Boolean, default=False)
+    force_ctas_schema = Column(String(250))
+    allow_multi_schema_metadata_fetch = Column(  # pylint: disable=invalid-name
+        Boolean, default=False
+    )
+    extra = Column(
+        Text,
+        default=textwrap.dedent(
+            """\
+    {
+        "metadata_params": {},
+        "engine_params": {},
+        "metadata_cache_timeout": {},
+        "schemas_allowed_for_csv_upload": []
+    }
+    """
+        ),
+    )
+    encrypted_extra = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)
+    impersonate_user = Column(Boolean, default=False)
+    server_cert = Column(EncryptedType(Text, config["SECRET_KEY"]), nullable=True)
+    export_fields = [
+        "database_name",
+        "sqlalchemy_uri",
+        "cache_timeout",
+        "expose_in_sqllab",
+        "allow_run_async",
+        "allow_ctas",
+        "allow_cvas",
+        "allow_csv_upload",
+        "extra",
+    ]
+    extra_import_fields = ["password"]
+    export_children = ["tables"]
+
+    def __repr__(self) -> str:
+        return self.name
+
+    @property
+    def name(self) -> str:
+        """ 获取数据库名称，优先从versose_name。默认verbose_name为空。"""
+        return self.verbose_name if self.verbose_name else self.database_name
+
+    @property
+    def allows_subquery(self) -> bool:
+        return self.db_engine_spec.allows_subqueries
+
+    @property
+    def function_names(self) -> List[str]:
+        try:
+            return self.db_engine_spec.get_function_names(self)
+        except Exception as ex:  # pylint: disable=broad-except
+            # function_names property is used in bulk APIs and should not hard crash
+            # more info in: https://github.com/apache/superset/issues/9678
+            logger.error(
+                "Failed to fetch database function names with error: %s", str(ex)
+            )
+        return []
+
+    @property
+    def allows_cost_estimate(self) -> bool:
+        extra = self.get_extra() or {}
+        cost_estimate_enabled: bool = extra.get("cost_estimate_enabled")  # type: ignore
+
+        return (
+            self.db_engine_spec.get_allow_cost_estimate(extra) and cost_estimate_enabled
+        )
+
+    @property
+    def allows_virtual_table_explore(self) -> bool:
+        extra = self.get_extra()
+
+        return bool(extra.get("allows_virtual_table_explore", True))
+
+    @property
+    def explore_database_id(self) -> int:
+        return self.get_extra().get("explore_database_id", self.id)
+
+    @property
+    def data(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "name": self.database_name,
+            "backend": self.backend,
+            "allow_multi_schema_metadata_fetch": self.allow_multi_schema_metadata_fetch,
+            "allows_subquery": self.allows_subquery,
+            "allows_cost_estimate": self.allows_cost_estimate,
+            "allows_virtual_table_explore": self.allows_virtual_table_explore,
+            "explore_database_id": self.explore_database_id,
+        }
+
+    @property
+    def unique_name(self) -> str:
+        return self.database_name
+
+    @property
+    def url_object(self) -> URL:
+        return make_url(self.sqlalchemy_uri_decrypted)
+
+    @property
+    def backend(self) -> str:
+        sqlalchemy_url = make_url(self.sqlalchemy_uri_decrypted)
+        return sqlalchemy_url.get_backend_name()  # pylint: disable=no-member
+
+    @property
+    def metadata_cache_timeout(self) -> Dict[str, Any]:
+        return self.get_extra().get("metadata_cache_timeout", {})
+
+    @property
+    def schema_cache_enabled(self) -> bool:
+        return "schema_cache_timeout" in self.metadata_cache_timeout
+
+    @property
+    def schema_cache_timeout(self) -> Optional[int]:
+        return self.metadata_cache_timeout.get("schema_cache_timeout")
+
+    @property
+    def table_cache_enabled(self) -> bool:
+        return "table_cache_timeout" in self.metadata_cache_timeout
+
+    @property
+    def table_cache_timeout(self) -> Optional[int]:
+        return self.metadata_cache_timeout.get("table_cache_timeout")
+
+    @property
+    def default_schemas(self) -> List[str]:
+        return self.get_extra().get("default_schemas", [])
+
+    @property
+    def connect_args(self) -> Dict[str, Any]:
+        return self.get_extra().get("engine_params", {}).get("connect_args", {})
+
+    @classmethod
+    def get_password_masked_url_from_uri(  # pylint: disable=invalid-name
+        cls, uri: str
+    ) -> URL:
+        sqlalchemy_url = make_url(uri)
+        return cls.get_password_masked_url(sqlalchemy_url)
+
+    @classmethod
+    def get_password_masked_url(cls, masked_url: URL) -> URL:
+        url_copy = deepcopy(masked_url)
+        if url_copy.password is not None:
+            url_copy.password = PASSWORD_MASK
+        return url_copy
+
+    def set_sqlalchemy_uri(self, uri: str) -> None:
+        conn = sqla.engine.url.make_url(uri.strip())
+        if conn.password != PASSWORD_MASK and not custom_password_store:
+            # do not over-write the password with the password mask
+            self.password = conn.password
+        conn.password = PASSWORD_MASK if conn.password else None
+        self.sqlalchemy_uri = str(conn)  # hides the password
+
+    def get_effective_user(
+        self, object_url: URL, user_name: Optional[str] = None,
+    ) -> Optional[str]:
+        """
+        Get the effective user, especially during impersonation.
+        :param object_url: SQL Alchemy URL object
+        :param user_name: Default username
+        :return: The effective username
+        """
+        effective_username = None
+        if self.impersonate_user:
+            effective_username = object_url.username
+            if user_name:
+                effective_username = user_name
+            elif (
+                hasattr(g, "user")
+                and hasattr(g.user, "username")
+                and g.user.username is not None
+            ):
+                effective_username = g.user.username
+        return effective_username
+
+    @utils.memoized(watch=("impersonate_user", "sqlalchemy_uri_decrypted", "extra"))
+    def get_sqla_engine(
+        self,
+        schema: Optional[str] = None,
+        nullpool: bool = True,
+        user_name: Optional[str] = None,
+        source: Optional[utils.QuerySource] = None,
+    ) -> Engine:
+```
+
+说明：数据库名称优化从verbose_name中获取，因此
 
 
 
 #### 原始数据查询 
 
 数据的查询和展示是superset的核心功能，前端用D3.js来渲染各种图标，后端用pandas来处理各种数据。
+
+* /superset/views/core.py  查询接口  /superset/explore_json/
+
+  
 
 **superset数据查询过程**：
 
@@ -3006,7 +3513,7 @@ viz_types = {
 /supetset/superset_config.py 
 
 ```python
-设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
+# 设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
 VIZ_TYPE_DENYLIST = ['pivot_table', 'treemap']
 ```
 
@@ -3051,7 +3558,7 @@ celery使用
 
 强制刷新字段 force=true|false
 
-缓存：flask_caching
+缓存：依赖模块flask_caching
 
 
 
@@ -3197,12 +3704,137 @@ class SupersetSecurityManager(SecurityManager):
 
 /superset/migrations/
 
-数据库/表权限字段 perm 组成：
+表格 各资源权限字段 perm/schema_perm 组成
 
-* 数据库：`[{database_name}].(id:{database_id}))`
-* 数据表：`[{database_name}].[{table_name}] (id:{table_id})')`
+| 资源（表名） | 元数据表名  | perm                                               | schem_perm                    |
+| ------------ | ----------- | -------------------------------------------------- | ----------------------------- |
+| druid数据源  | datasources | [{cluster_name}].(id:{id})                         | 无                            |
+| 数据库       | dbs         | 无                                                 | 无                            |
+| 数据集       | tables      | [{database_name}].[{table_name}] (id:{table_id})') | [database_name].[schema_name] |
+| 图表         | slices      | [{database_name}].[{table_name}] (id:{table_id})') | [database_name].[schema_name] |
+| 看板         | dashboards  | 无                                                 | 无                            |
 
 权限方法：get_perm,  set_perm
+
+/superset/connectors/sqla/models.py
+
+```python
+class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-attributes
+    Model, BaseDatasource
+):
+
+    """An ORM object for SqlAlchemy table references"""
+    type = "table"				
+    __tablename__ = "tables"	# 元数据表名称
+    __table_args__ = (UniqueConstraint("database_id", "table_name"),)
+
+    table_name = Column(String(250), nullable=False)	#表名字段，不可重命名
+    main_dttm_col = Column(String(250))
+    database_id = Column(Integer, ForeignKey("dbs.id"), nullable=False)	#外键，映射到dbs.id
+    fetch_values_predicate = Column(String(1000))
+    owners = relationship(owner_class, secondary=sqlatable_user, backref="tables")	
+    database = relationship(
+        "Database",
+        backref=backref("tables", cascade="all, delete-orphan"),
+        foreign_keys=[database_id],
+    )	# 数据库对象
+    schema = Column(String(255))
+    sql = Column(Text)
+    is_sqllab_view = Column(Boolean, default=False)
+    template_params = Column(Text)
+    extra = Column(Text)
+    
+    @property
+    def datasource_name(self) -> str:
+        return self.table_name
+
+    @property
+    def datasource_type(self) -> str:
+        return self.type
+
+    @property
+    def connection(self) -> str:
+        return str(self.database)
+    
+    @property
+    def database_name(self) -> str:
+        """ 获取数据库名，调用 database.name """
+        return self.database.name    
+    
+    def get_schema_perm(self) -> Optional[str]:
+        """Returns schema permission if present, database one otherwise."""
+        return security_manager.get_schema_perm(self.database, self.schema)
+
+    def get_perm(self) -> str:
+        """ 获取表权限-关联到数据库 """
+        return f"[{self.database}].[{self.table_name}](id:{self.id})"
+
+    @property
+    def name(self) -> str:
+        if not self.schema:
+            return self.table_name
+        return "{}.{}".format(self.schema, self.table_name)
+
+    @property
+    def full_name(self) -> str:
+        return utils.get_datasource_full_name(
+            self.database, self.table_name, schema=self.schema
+        )    
+```
+
+
+
+
+
+数据库查找/授权示例：
+
+```python
+# /superset/database/commands/create.py
+# adding a new database we always want to force refresh schema list， 
+schemas = database.get_all_schema_names(cache=False)
+for schema in schemas:
+    security_manager.add_permission_view_menu(
+        "schema_access", security_manager.get_schema_perm(database, schema)
+    )
+    security_manager.add_permission_view_menu("database_access", database.perm)
+            
+            
+# 查找获取权限ID, database_access指权限名permission_name, database.perm指视图名view_menu_name
+perm = security_manager.find_permission_view_menu(
+    "database_access", database.perm
+)
+security_manager.add_permission_role(role, perm)   #给角色增加权限ID
+
+
+# 基类：/flask_appbuilder/security/manager.py
+# 实现：/flask_appbuilder/security/sqla/manager.py
+from ..manager import BaseSecurityManager
+
+class SecurityManager(BaseSecurityManager):   
+    def get_schema_perm(  # pylint: disable=no-self-use
+        self, database: Union["Database", str], schema: Optional[str] = None
+    ) -> Optional[str]:
+        """ 如果数据库存在schema,返回`database.schema`; 否则返回为空 """
+        if schema:
+            return f"[{database}].[{schema}]"
+
+        return None
+    
+    def find_permission_view_menu(self, permission_name, view_menu_name):
+        """ 通过权限名、视图名查找 是否有相关权限； 返回非空有权限 """
+        permission = self.find_permission(permission_name)	# ab_permission表通过name找id
+        view_menu = self.find_view_menu(view_menu_name)		# ab_view_menu表通过name找id
+        if permission and view_menu:
+            return (
+                self.get_session.query(self.permissionview_model)	# ab_permission_view表查询过滤permission和view_menu
+                .filter_by(permission=permission, view_menu=view_menu)
+                .one_or_none()
+            )
+        
+    def find_permissions_view_menu(self, view_menu):        
+        """ 通过视图名获取所有权限 """
+               
+```
 
 
 
@@ -3309,14 +3941,14 @@ class CreateDatabaseCommand(BaseCommand):
 
 #### 加密保存
 
-* 数据源密码和加密字段：AES加密保存，依赖cryptography库  /superset/models/core.py -> sqlalchemy_utils模块
-* 用户密码：密码HASH值保存，检验时按照相同规则生成HASH值和数据库中的比对  /flask_appbuilder/security/sqla/manager.py -> werkzeug模块
+* 数据源密码和加密字段：AES加密保存，依赖cryptography库。密钥SECURITY_KEY来自于用户配置文件。 实现：/superset/models/core.py -> sqlalchemy_utils模块
+* 用户密码：密码HASH值保存，检验时按照相同规则生成HASH值和数据库中的比对。实现：/flask_appbuilder/security/sqla/manager.py -> werkzeug模块
 
 
 
 /superset/models/core.py
 
-EncryptedType用于数据库表字段加密保存，实现依赖cryptography库，缺省AES加密。
+EncryptedType用于数据库表字段加密保存，实现依赖cryptography库，缺省AES加密。密钥来自于config["SECRET_KEY"]。
 
 ```python
 from flask_appbuilder import Model
@@ -3324,7 +3956,7 @@ from sqlalchemy_utils import EncryptedType
 
 
 class Database(Model, AuditMixinNullable, ImportExportMixin):  
-
+	
     __tablename__ = "dbs"
     type = "table"
     __table_args__ = (UniqueConstraint("database_name"),)
@@ -3562,7 +4194,7 @@ def check_password_hash(pwhash, password):
 
 #### CSRF & CORS
 
-**CSRF**:  跨站/域请求中转，依赖模块flask_wtf。需要检查  csrf_token，防止请求造假。
+**CSRF**:  跨站/域请求中转，依赖模块flask_wtf。需要检查 csrf_token，防止请求造假。
 
 关键配置项：
 
@@ -3591,21 +4223,14 @@ def generate_csrf(secret_key=None, token_key=None):
     """ 产生一个token 放到最近请求的缓存里 """
     
 def validate_csrf(data, secret_key=None, time_limit=None, token_key=None):
-    """ 验证给的token是否有效 """
-    
+    """ 验证给的token是否有效 """   
     
 class CSRFProtect(object):
     def init_app(self, app):
         @app.before_request
         def csrf_protect():
             
-            view = app.view_functions.get(request.endpoint)
-            dest = '{0}.{1}'.format(view.__module__, view.__name__)
-
-            if dest in self._exempt_views:
-                return
-
-            self.protect()            
+	def exempt():            
 ```
 
 
@@ -3640,8 +4265,6 @@ class SupersetAppInitializer:
 # /flask_cors/extensions.py
 class CORS(object):            
 ```
-
-
 
 
 
@@ -3694,7 +4317,7 @@ LOG_LEVEL = "DEBUG"
 
 # ---------------------------------------------------
 # Enable Time Rotate Log Handler: 每天生成一个文件，保存最近30天。
-# 注意：不是进程同步的。多进程要使用gunicron的日志体系。
+# 注意：不是进程安全的。多进程要使用gunicron的日志体系。
 # ---------------------------------------------------
 # LOG_LEVEL = DEBUG, INFO, WARNING, ERROR, CRITICAL
 ENABLE_TIME_ROTATE = False
@@ -3907,19 +4530,123 @@ def favorite_status(self, **kwargs: Any) -> Response:
   * resolve解析器：比如babel_loader
   * optimization优化项、
   * 打包参数：APP_DIR  BUILD_DIR
-  * 部署参数：mode  devserverPort 
+  * 部署参数：mode(对应到脚本命令里的--mode)  devserverPort 
   * 其它：module模块和plugin插件。
-* manifest.json   webpack打包后生成的模块详细信息，可以通过模块标识符找到对应的模块(xx.js/xx.css)。
+* webpack.proxy-config.js  webpack代理配置。当启用了web-dev-server时使用。
+* manifest.json   webpack打包后生成的模块详细信息，可以通过模块标识符找到对应的模块(xx.js/xx.css)。构建成生成到superset/static/asset/mainfest.json
 * src/{xx}/index.tsx  某个目录下的入口文件，可对照webpack.config.js的entry
+
+
+
+#### package.json
+
+主要配置项：scripts engines dependencies devDependencies stylelint
+
+```json
+{
+  "name": "DataLab",
+  "version": "0.999.0dev",
+  "description": "Superset is a data exploration platform designed to be visual, intuitive, and interactive.",
+  "license": "Apache-2.0",
+  "directories": {
+    "doc": "docs",
+    "test": "spec"
+  },    
+  "scripts": {  #脚本命令，可用npm run xx启动
+    "tdd": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest",
+    "type": "tsc --noEmit",
+    "cover": "NODE_ENV=test jest --coverage",
+    "dev": "webpack --mode=development --colors --debug --watch",
+    "dev-server": "NODE_ENV=development BABEL_ENV=development node --max_old_space_size=4096 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --mode=development",
+    "prod": "npm run build",
+    "build-instrumented": "cross-env NODE_ENV=development BABEL_ENV=instrumented webpack --mode=development --colors",
+    "build": "cross-env NODE_OPTIONS=--max_old_space_size=8192 NODE_ENV=production BABEL_ENV=production webpack --mode=production --colors",
+    "lint": "eslint --ignore-path=.eslintignore --ext .js,.jsx,.ts,.tsx . && npm run type",
+    "prettier-check": "prettier --check '{src,stylesheets}/**/*.{css,less,sass,scss}'",
+    "lint-fix": "eslint --fix --ignore-path=.eslintignore --ext .js,.jsx,.ts,tsx . && npm run clean-css && npm run type",
+    "clean-css": "prettier --write '{src,stylesheets}/**/*.{css,less,sass,scss}'",
+    "format": "prettier --write './{src,spec,stylesheets,cypress-base}/**/*{.js,.jsx,.ts,.tsx,.css,.less,.scss,.sass}'",
+    "prettier": "npm run format",
+    "check-translation": "prettier --check ../superset/translations/**/LC_MESSAGES/*.json",
+    "clean-translation": "prettier --write ../superset/translations/**/LC_MESSAGES/*.json",
+    "storybook": "NODE_ENV=development BABEL_ENV=development start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/superset.git"
+  },
+  "keywords": [ "react","d3","flask"],
+  "author": "Apache",
+  "bugs": {
+    "url": "https://github.com/apache/superset/issues"
+  },
+  "browserslist": [
+    "last 3 chrome versions",
+    "last 3 firefox versions",
+    "last 3 safari versions",
+    "last 3 edge versions"
+  ],
+  "engines": {
+    "node": ">= 12.18.3 < 13",
+    "npm": ">= 6.14.8"
+  },
+  "homepage": "https://superset.apache.org/",
+  "dependencies": {  #运行依赖
+    "@ant-design/icons": "^4.2.2",
+    "@babel/runtime-corejs3": "^7.12.5",
+    "@superset-ui/chart-controls": "^0.16.7",
+    "@superset-ui/core": "^0.16.7",   
+    ...
+  },
+  "devDependencies": {  #开发依赖
+    "@babel/cli": "^7.12.10",    
+    "webpack": "^4.42.0",
+    "webpack-bundle-analyzer": "^3.6.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+	...
+  },
+  "stylelint": {
+    "rules": {
+      "block-opening-brace-space-before": "always",
+      "no-missing-end-of-source-newline": "never",
+      "rule-empty-line-before": [
+        "always",
+        {"except": ["first-nested"], "ignore": ["after-comment"]}
+      ]
+    }
+  }      
+}
+```
 
 
 
 #### webpack.config.js
 
+* mode：模式，有development production 等，对应到package.json脚本命令里的--mode。根据模式不同，打包文件名、使用插件会有所不同。build/prod命令模式为production ，dev/dev-server/build-instrumented命令模式为development。
+* isDevMode：当mode不是production 时为True。True时会启用本地端口、js/css/less等sourceMap，配置devServer； 否则加载 MiniCssExtractPlugin，TerserPlugin。
+* isDevServer：传参有webpack-dev-server 就是启用了本地开发服务器。isDevServer不为true时，会启用清除插件CleanWebpackPlugin。
+
 **/superset-frontend/webpack.config.js  **
 
  ```js
-const packageConfig = require('./package.json');
+const fs = require('fs');
+const path = require('path');
+const webpack = require('webpack');										//webpack工具
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');	//打包插件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');		//清理旧包插件，isDevServer=false时启用
+const CopyPlugin = require('copy-webpack-plugin');					//复制旧包插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');	//CSS优化，isDevMode=true
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //CSS优化，isDevMode=true
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');  //合并加速
+const TerserPlugin = require('terser-webpack-plugin');			//TerserPlugin移除开发时调试信息如debugger、console.log、注释
+const ManifestPlugin = require('webpack-manifest-plugin');		//ManifestPlugin生成mainfest.json
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');  //多进程合并插件
+const parsedArgs = require('yargs').argv;					//解析命令行参数
+const getProxyConfig = require('./webpack.proxy-config');	//本地代理配置，启用了webpack-dev-server时导入
+const packageConfig = require('./package.json');			//读取package.json里dependencies，导入依赖模块源码
 
 // input dir
 const APP_DIR = path.resolve(__dirname, './');
@@ -3935,12 +4662,13 @@ const {
   nameChunks = false,
 } = parsedArgs;
 const isDevMode = mode !== 'production';
-const isDevServer = process.argv[1].includes('webpack-dev-server');
+const isDevServer = process.argv[1].includes('webpack-dev-server');  
 
 const output = {
   path: BUILD_DIR,
   publicPath: '/static/assets/', // necessary for lazy-loaded chunks
 };
+
 
 function addPreamble(entry) {  // 生成入口文件的前缀路径
   return PREAMBLE.concat([path.join(APP_DIR, entry)]);
@@ -3966,7 +4694,7 @@ const babelLoader = {	// babel加载器，负责国际化
   },
 };
 
-const config = {
+const config = {	//配置信息，最终导出的配置项
   node: {
     fs: 'empty',
   },
@@ -3996,9 +4724,54 @@ const config = {
   ]  
 }   
 
+let proxyConfig = getProxyConfig();
+
+if (isDevMode) {  //开发模式 配置项： devServer,导入依赖模块源码
+  config.devtool = 'eval-cheap-module-source-map';
+  config.devServer = {
+    before(app, server, compiler) {
+      // load proxy config when manifest updates
+      const hook = compiler.hooks.webpackManifestPluginAfterEmit;
+      hook.tap('ManifestPlugin', manifest => {
+        proxyConfig = getProxyConfig(manifest);
+      });
+    },
+    historyApiFallback: true,
+    hot: true,
+    injectClient: false,
+    injectHot: true,
+    inline: true,
+    stats: 'minimal',
+    overlay: true,
+    port: devserverPort,
+    // Only serves bundled files from webpack-dev-server
+    // and proxy everything else to Superset backend
+    proxy: [
+      // functions are called for every request
+      () => proxyConfig,
+    ],
+    contentBase: path.join(process.cwd(), '../static/assets'),
+  };
+// find all the symlinked plugins and use their source code for imports
+  let hasSymlink = false;
+  ...
+  if (hasSymlink) {
+    console.log(''); // pure cosmetic new line
+  }
+} else { //移除注释
+  config.optimization.minimizer = [
+    new TerserPlugin({
+      cache: '.terser-plugin-cache/',
+      parallel: true,
+      extractComments: true,
+    }),
+  ];
+}
+
 const smp = new SpeedMeasurePlugin({
   disable: !measure,
 });
+
 // 模块导出目标即部署目标、构建目标
 module.exports = smp.wrap(config);
  ```
@@ -4015,6 +4788,8 @@ superset-frontend用到 `ReactDOM.render() `共8个tsx文件。也可以参照 w
 
 下面4个实现一致:  views, addslice, SqlLab,  profile
 
+/superset-frontend/src/views/index.tsx
+
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -4028,6 +4803,8 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 下面2个实现一致:  dashboard, explorer
+
+/superset-frontend/src/dashboard/index.tsx
 
 ```tsx
 import React from 'react';
@@ -4076,37 +4853,90 @@ ReactDOM.render(<App store={store} />, document.getElementById('app'));
 
 
 
-/superset-frontend/src/views/menu.tsx
+#### mainfest.json
 
-```tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { supersetTheme, ThemeProvider } from '@superset-ui/core';
-import Menu from 'src/components/Menu/Menu';
+前端打包时生成到/superset/static/asset/mainfest.json
 
-const container = document.getElementById('app');
-const bootstrapJson = container?.getAttribute('data-bootstrap') ?? '{}';
-const bootstrap = JSON.parse(bootstrapJson);
-const menu = { ...bootstrap.common.menu_data };
-const app = (
-  <ThemeProvider theme={supersetTheme}>
-    <Menu data={menu} />
-  </ThemeProvider>
-);
-ReactDOM.render(app, document.getElementById('app-menu'));
+```json
+{
+  "app": "superset",
+  "entrypoints": {
+    "theme": {
+      "css": ["/static/assets/theme.c09e69015dec6f34dc60.entry.css"],
+      "js": ["/static/assets/theme.c09e69015dec6f34dc60.entry.js"]
+    },         
+    "preamble": { "css": [], "js": [], },      
+    "addSlice": { "css": [], "js": [], },
+    "explore": { "css": [], "js": [], },      
+    "dashboard": { "css": [], "js": [], },
+    "sqllab": { "css": [], "js": [], },      
+    "menu": { "css": [], "js": [], },
+    "profile": { "css": [], "js": [], },      
+    "showSavedQuery": { "css": [], "js": [], },        
+    "crudViews": {
+      "css": [
+        "/static/assets/crudViews.47f4be1346a1c3abadb1.entry.css"
+      ],
+      "js": [
+        "/static/assets/6cf67bc805d2009a9391.chunk.js",
+        "/static/assets/39f91e8503ddfcb94b8f.chunk.js",
+        "/static/assets/88770ecce227232995f9.chunk.js",
+        "/static/assets/crudViews.47f4be1346a1c3abadb1.entry.js"
+      ]
+    },
+  }
+}
+```
+
+打包文件名生成定义在 webpack-config.js
+
+文件名里带entry表示是入口文件，带chunk是依赖模块文件（可能是多个tsx/js合并生成）。
+
+* 开发模式：使用hash，`npm run dev`， 每次构建hash值都不一样，因此浏览器缓存无效。
+* 生产模式：使用chunkhash，`npm run build/prod`，如果某个文件改变，其对应的chunk文件名称也变化。只影响到改动文件的缓存。
+
+```js
+const output = {  //打包输出路径
+  path: BUILD_DIR,
+  publicPath: '/static/assets/', // necessary for lazy-loaded chunks
+};
+// 打包输出文件命名: chunkhash-模块hash值（只针对本模块更改生成），hash:8-hash值前8位(hash值生成依赖编译对象，即文件更改或重新编译都会重新计算生成整个项目hash)
+// name：指打包模块名，如crudviews, dashboard，
+if (isDevMode) {		// isDevMode=True开发模式使用hash，使浏览器缓存失效
+  output.filename = '[name].[hash:8].entry.js';
+  output.chunkFilename = '[name].[hash:8].chunk.js';
+} else if (nameChunks) {  // nameChunks=True使用 chunkhash
+  output.filename = '[name].[chunkhash].entry.js';
+  output.chunkFilename = '[name].[chunkhash].chunk.js';
+} else { 
+  output.filename = '[name].[chunkhash].entry.js';
+  output.chunkFilename = '[chunkhash].chunk.js';
+}
 ```
 
 
 
+### React组件  /src/components/
+
+此处组件是指最小粒度的React组件。
+
+#### 菜单 Menu/
+
+见上文 《导航栏布局》
 
 
-### React全局路由
+
+### 视图 /src/views/
 
 * /src/views/App.tsx  定义了全局路由，主要依赖于组件 react-router-dom
+* /src/views/index.tsx  视图打包	`crudViews: addPreamble('/src/views/index.tsx'),`
+* /src/views/menu.tsx  菜单打包   `menu: addPreamble('src/views/menu.tsx'),`
 
-* /src/views/CRUD/xx    具体的视图组件
+* /src/views/CRUD/xx    具体的视图组件。如图表chart，看板dashboard
 
-  
+
+
+#### !全局路由和组件 App.tsx
 
 **/src/views/App.tsx**
 
@@ -4226,18 +5056,7 @@ data-bootstrap内容如下
 		"flash_messages": [],
 		"conf": {
 			"SUPERSET_WEBSERVER_TIMEOUT": 60,
-			"SUPERSET_DASHBOARD_POSITION_DATA_LIMIT": 65535,
-			"SUPERSET_DASHBOARD_PERIODICAL_REFRESH_LIMIT": 0,
-			"SUPERSET_DASHBOARD_PERIODICAL_REFRESH_WARNING_MESSAGE": null,
-			"DISABLE_DATASET_SOURCE_EDIT": null,
-			"ENABLE_JAVASCRIPT_CONTROLS": false,
-			"DEFAULT_SQLLAB_LIMIT": 1000,
-			"SQL_MAX_ROW": 100000,
-			"SUPERSET_WEBSERVER_DOMAINS": null,
-			"SQLLAB_SAVE_WARNING_MESSAGE": null,
-			"DISPLAY_MAX_ROW": 10000,
-			"GLOBAL_ASYNC_QUERIES_TRANSPORT": "polling",
-			"GLOBAL_ASYNC_QUERIES_POLLING_DELAY": 500
+			...
 		},
 		"locale": "zh",
 		"language_pack": {
@@ -4247,28 +5066,7 @@ data-bootstrap内容如下
 		"feature_flags": {
 			"ALLOW_DASHBOARD_DOMAIN_SHARDING": true,
 			"CLIENT_CACHE": false,
-			"DISABLE_DATASET_SOURCE_EDIT": false,
-			"DYNAMIC_PLUGINS": false,
-			"ENABLE_EXPLORE_JSON_CSRF_PROTECTION": false,
-			"ENABLE_TEMPLATE_PROCESSING": false,
-			"KV_STORE": false,
-			"PRESTO_EXPAND_DATA": false,
-			"THUMBNAILS": false,
-			"DASHBOARD_CACHE": false,
-			"REMOVE_SLICE_LEVEL_LABEL_COLORS": false,
-			"SHARE_QUERIES_VIA_KV_STORE": false,
-			"SIP_38_VIZ_REARCHITECTURE": false,
-			"TAGGING_SYSTEM": false,
-			"SQLLAB_BACKEND_PERSISTENCE": false,
-			"LISTVIEWS_DEFAULT_CARD_VIEW": false,
-			"ENABLE_REACT_CRUD_VIEWS": true,
-			"DISPLAY_MARKDOWN_HTML": true,
-			"ESCAPE_MARKDOWN_HTML": false,
-			"DASHBOARD_NATIVE_FILTERS": false,
-			"GLOBAL_ASYNC_QUERIES": false,
-			"VERSIONED_EXPORT": false,
-			"ROW_LEVEL_SECURITY": false,
-			"ALERT_REPORTS": false
+			...
 		},
 		"extra_sequential_color_schemes": [],
 		"extra_categorical_color_schemes": [],
@@ -4307,27 +5105,59 @@ data-bootstrap内容如下
 
 
 
-### React组件  /src/components/
+#### !打包视图模块 index.tsx
 
-此处组件是指最小粒度的React组件。
+/superset-frontend/src/views/index.tsx
 
-#### 菜单 Menu/
+依赖组件 App。App定义全局路由和主要的组件如数据源datasource、数据集dataset、图表chart和看板dashboard。
 
-见上文 《导航栏布局》
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-
-
-### 视图布局 /src/views/
-
-#### 图表 chart/
-
-* ChartList.tsx
-* ChartCard.tsx
-* types.ts
+ReactDOM.render(<App />, document.getElementById('app'));
+```
 
 
 
-/superset-frondend/src/views/chart/ChartList.tsx
+#### !打包菜单模块 menu.tsx
+
+/superset-frontend/src/views/menu.tsx
+
+依赖组件 Menu来自于src/components/Menu/Menu。
+
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { supersetTheme, ThemeProvider } from '@superset-ui/core';
+import Menu from 'src/components/Menu/Menu';
+
+const container = document.getElementById('app');
+const bootstrapJson = container?.getAttribute('data-bootstrap') ?? '{}';
+const bootstrap = JSON.parse(bootstrapJson);
+const menu = { ...bootstrap.common.menu_data };
+const app = (
+  <ThemeProvider theme={supersetTheme}>
+    <Menu data={menu} />
+  </ThemeProvider>
+);
+ReactDOM.render(app, document.getElementById('app-menu'));
+```
+
+
+
+#### 图表 CRUD/chart/
+
+目录：/superset-frondend/src/views/CRUD/chart/
+
+* ChartList.tsx   图表列表、
+* ChartCard.tsx  图表卡片
+* types.ts  
+
+
+
+/superset-frondend/src/views/CRUD/chart/ChartList.tsx
 
 ```tsx
 function ChartList(props: ChartListProps) {
@@ -4526,10 +5356,6 @@ const groupByControl = {
 * Superset 代码结构分析(前后端如何联动) https://zhuanlan.zhihu.com/p/163495199
 * 从前端角度记录superset二次开发 http://sunjl729.cn/2020/08/07/superset二次开发/
 * Superset安装及汉化 https://www.jianshu.com/p/c751278996f8
-* Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
-* python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
-
-  
 
 
 
@@ -4555,6 +5381,5 @@ const groupByControl = {
 
 # 附录
 
-## ES６语法
 
-es6之扩展运算符 三个点（…）:   对象中的扩展运算符(...)用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中。
+

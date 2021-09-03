@@ -11,6 +11,8 @@
 
 
 
+
+
 ---
 
 # 1 flask_appbuilder源码剖析
@@ -52,33 +54,33 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 
 表格 flask_appbuilder源码结构
 
-| 目录或文件     | 主要类或函数                                                 | 说明                    |
-| -------------- | ------------------------------------------------------------ | ----------------------- |
-| api            | 文件：convert.py manager.py schemas.py<br>类：BaseApi BaseModelApi ModelRestApi OpenApi OpenApiManager SwaggerView  BaseModelSchema<br>装饰器：rison safe |                         |
-| babel          | BabelManager LocaleView                                      | 依赖于flask_babel       |
-| charts         | dict_to_json views.py widgets.py                             | 图表                    |
-| models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py | 模型                    |
-| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全                    |
-| static         | 目录：css datapicker fonts img js select2                    | 静态文件                |
-| templates      | appbuilder/                                                  | Jinja2模板              |
-| tests          |                                                              | 测试                    |
-| translations   |                                                              | 翻译                    |
-| utils          | get_column_root_relation  get_column_leaf  is_column_dotted lazy_formatter_gettext | 工具                    |
-| `__init__.py`  | BaseApi BaseModelApi ModelRestApi                            |                         |
-| actions.py     | action ActionItem                                            |                         |
-| base.py        | AppBuilder dynamic_class_import                              | app构建类（主类）       |
-| basemanager.py | BaseManager                                                  | 所有管理类的父类        |
-| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView | 视图基类                |
-| cli.py         | fab create_admin create_user...                              | 命令行，依赖click模块   |
-| console.py     | cli_app                                                      |                         |
-| const.py       |                                                              | 常量                    |
-| fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块 |
-| filters.py     | app_template_filter TemplateFilters                          |                         |
-| forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf         |
-| hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                |
-| menu.py        | MenuItem Menu MenuApi MenuApiManager                         | 菜单管理                |
-| views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                |
-| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于Flask-WTF         |
+| 目录或文件     | 主要类或函数                                                 | 说明                          |
+| -------------- | ------------------------------------------------------------ | ----------------------------- |
+| api            | 文件：convert.py manager.py schemas.py<br>类：BaseApi BaseModelApi ModelRestApi OpenApi OpenApiManager SwaggerView  BaseModelSchema<br>装饰器：rison safe expose |                               |
+| babel          | BabelManager LocaleView                                      | 依赖于flask_babel模块         |
+| charts         | dict_to_json views.py widgets.py                             | 图表                          |
+| models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py | 模型                          |
+| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全                          |
+| static         | 目录：css datapicker fonts img js select2                    | 静态文件                      |
+| templates      | appbuilder/                                                  | Jinja2模板                    |
+| tests          |                                                              | 测试                          |
+| translations   |                                                              | 翻译                          |
+| utils          | get_column_root_relation  get_column_leaf  is_column_dotted lazy_formatter_gettext | 工具                          |
+| `__init__.py`  | BaseApi BaseModelApi ModelRestApi                            |                               |
+| actions.py     | action ActionItem                                            |                               |
+| base.py        | AppBuilder dynamic_class_import                              | app构建类（主类）             |
+| basemanager.py | BaseManager                                                  | 管理基类                      |
+| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView | 视图基类                      |
+| cli.py         | fab create_admin create_user...                              | 命令行，依赖click模块         |
+| console.py     | cli_app                                                      | 控制台命令工具，依赖click模块 |
+| const.py       |                                                              | 常量                          |
+| fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块       |
+| filters.py     | app_template_filter TemplateFilters                          | 过滤器                        |
+| forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf模块           |
+| hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                      |
+| menu.py        | MenuItem Menu MenuApi MenuApiManager                         | 菜单管理                      |
+| views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                      |
+| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于flask_wtf模块           |
 
 
 
@@ -262,9 +264,11 @@ class AppBuilder(object):
 
 
 
-### API视图和普通视图
+### 视图
 
-* `/flask_appbuilder/api/__.init__.py `    API基类 BaseApi(object)  -> BaseModelApi -> ModelRestApi 
+视图包括 API视图和普通视图。
+
+* `/flask_appbuilder/api/__.init__.py `    API基类 BaseApi(object)  -> BaseModelApi -> ModelRestApi 。API视图详见下文 API视图章节
 
 * /flask_appbuilder/baseview.py  
   * 路由装饰器函数  expose expose_api
@@ -294,6 +298,7 @@ ModelView:
 代码实现： flask_appbuilder/baseview.py
 
 ```python
+# expose这个装饰器重复定义，在baserview.py有，在 api/__init.py也有。
 def expose(url='/', methods=('GET',)):
     """
    Use this decorator to expose views on your view classes.
@@ -714,14 +719,21 @@ def create_admin(username, firstname, lastname, email, password):
 
 
 
+## 模型 /models/
+
+
+
 
 
 ## 安全 /security/
 
+源文件：（忽略前缀/flask_appbuilder/security/）
+
 * /flask_appbuilder/basemanager.py  管理类基类BaseManager
-* /flask_appbuilder/security/manager.py  类继承关系:   BaseSecurityManager ->  AbstractSecurityManager -> BaseManager
-* /flask_appbuilder/security/sqla/manager.py   SecurityManager ->  BaseSecurityManager
-* /flask_appbuilder/security/views.py  各种认证类如AuthDBView
+* manager.py  类继承关系:   BaseSecurityManager ->  AbstractSecurityManager -> BaseManager
+* sqla/manager.py   SecurityManager ->  BaseSecurityManager
+* views.py  各种认证类如AuthDBView、AuthLDAPView、AuthOAuthView、AuthOIDView等
+* decorators.py 装饰器如has_access, has_access_api, permission_name, protect
 
 
 
@@ -788,8 +800,7 @@ class BaseSecurityManager(AbstractSecurityManager):
         app.config.setdefault("AUTH_USER_REGISTRATION_ROLE_JMESPATH", None)
         # Role Mapping
         app.config.setdefault("AUTH_ROLES_MAPPING", {})
-        app.config.setdefault("AUTH_ROLES_SYNC_AT_LOGIN", False)    
-        
+        app.config.setdefault("AUTH_ROLES_SYNC_AT_LOGIN", False)            
 ```
 
 
@@ -828,8 +839,7 @@ class SecurityManager(BaseSecurityManager):
     permissionview_model = PermissionView
     registeruser_model = RegisterUser
 
-    def __init__(self, appbuilder):
-        
+    def __init__(self, appbuilder):        
 ```
 
 
@@ -886,7 +896,141 @@ class AuthDBView(AuthView):
         return self.render_template(
             self.login_template, title=self.title, form=form, appbuilder=self.appbuilder
         )
+```
 
+
+
+### 安全装饰器 decorator.py
+
+/flask_appbuilder/security/decorators.py
+
+* protect 用户登陆判断，并作相应访问权限判断
+* has_access
+* has_access_api  API方法授权判断 
+* permission_name  重载权限名称
+
+```python
+from flask import current_app, flash, jsonify, make_response, redirect, request, url_for
+from flask_jwt_extended import verify_jwt_in_request
+from flask_login import current_user
+
+
+def protect(allow_browser_login=False):
+    """
+    	浏览器登陆时，如果已经登陆，可以从session中取出相关数据作访问权限判断；若未登陆，需同下方非浏览器登陆。
+    	非浏览器登陆，需JWT验证，然后验证成功后作访问权限判断。
+        Use this decorator to enable granular security permissions
+        to your API methods (BaseApi and child classes).
+        Permissions will be associated to a role, and roles are associated to users.
+
+        allow_browser_login will accept signed cookies obtained from the normal MVC app::
+
+            class MyApi(BaseApi):
+                @expose('/dosonmething', methods=['GET'])
+                @protect(allow_browser_login=True)
+                @safe
+                def do_something(self):
+                    ....
+
+                @expose('/dosonmethingelse', methods=['GET'])
+                @protect()
+                @safe
+                def do_something_else(self):
+                    ....
+
+        By default the permission's name is the methods name.
+    """
+
+    def _protect(f):
+        # permission_str赋值
+        if hasattr(f, "_permission_name"):
+            permission_str = f._permission_name
+        else:
+            permission_str = f.__name__
+
+        def wraps(self, *args, **kwargs):
+            # Apply method permission name override if exists,  permission_str="can_xx"
+            permission_str = "{}{}".format(PERMISSION_PREFIX, f._permission_name)
+            if self.method_permission_name:
+                _permission_name = self.method_permission_name.get(f.__name__)
+                if _permission_name:
+                    permission_str = "{}{}".format(PERMISSION_PREFIX, _permission_name)
+            class_permission_name = self.class_permission_name
+            if permission_str not in self.base_permissions:
+                return self.response_401()
+            if current_app.appbuilder.sm.is_item_public(
+                permission_str, class_permission_name
+            ):
+                return f(self, *args, **kwargs)
+            if not (self.allow_browser_login or allow_browser_login):
+                verify_jwt_in_request()	#非浏览器登陆，验证JWT
+            if current_app.appbuilder.sm.has_access(
+                permission_str, class_permission_name
+            ):
+                return f(self, *args, **kwargs)
+            elif self.allow_browser_login or allow_browser_login:	#浏览器登陆
+                if not current_user.is_authenticated:	#用户未认证，验证JWT
+                    verify_jwt_in_request()
+                if current_app.appbuilder.sm.has_access(
+                    permission_str, class_permission_name
+                ):
+                    return f(self, *args, **kwargs)
+            log.warning(
+                LOGMSG_ERR_SEC_ACCESS_DENIED.format(
+                    permission_str, class_permission_name
+                )
+            )
+            return self.response_401()
+
+        f._permission_name = permission_str
+        return functools.update_wrapper(wraps, f)
+
+    return _protect
+
+
+def has_access(f):
+    """
+        Use this decorator to enable granular security permissions to your methods.
+        Permissions will be associated to a role, and roles are associated to users.
+
+        By default the permission's name is the methods name.
+    """
+    if hasattr(f, "_permission_name"):
+        permission_str = f._permission_name
+    else:
+        permission_str = f.__name__
+
+    def wraps(self, *args, **kwargs):
+        permission_str = "{}{}".format(PERMISSION_PREFIX, f._permission_name)
+        if self.method_permission_name:
+            _permission_name = self.method_permission_name.get(f.__name__)
+            if _permission_name:
+                permission_str = "{}{}".format(PERMISSION_PREFIX, _permission_name)
+        if permission_str in self.base_permissions and self.appbuilder.sm.has_access(
+            permission_str, self.class_permission_name
+        ):
+            return f(self, *args, **kwargs)
+        else:
+            log.warning(
+                LOGMSG_ERR_SEC_ACCESS_DENIED.format(
+                    permission_str, self.__class__.__name__
+                )
+            )
+            flash(as_unicode(FLAMSG_ERR_SEC_ACCESS_DENIED), "danger")
+        return redirect(
+            url_for(
+                self.appbuilder.sm.auth_view.__class__.__name__ + ".login",
+                next=request.url,
+            )
+        )
+
+    f._permission_name = permission_str
+    return functools.update_wrapper(wraps, f)
+
+def has_access_api(f):
+    
+    
+def permission_name(name):
 ```
 
 
@@ -974,9 +1118,9 @@ class AuthDBView(AuthView):
 
 **appbuilder/init.html  此模板才是最终HTML页面**
 
-head实体定义3块，分别是head_meta/head_css/head_js。
+head实体定义3块，分别是head_meta、head_css、head_js。
 
-body实体定义4块，分别是body, tail_js, add_tail_js, tail。
+body实体定义4块，分别是body、tail_js、add_tail_js、tail。
 
 ```jinja2
 {% import 'appbuilder/baselib.html' as baselib with context %}
@@ -1233,7 +1377,7 @@ appbuilder/nav_bar.html
             <ul class="dropdown-menu">
             {% for item2 in item1.childs %}
                 {% if item2 %}
-                    {% if item2.name == '-' %}   {# 处理菜单分隔符- #}
+                    {% if item2.name == '-' %}   {# 名称为-时，添加菜单分隔符- #}
                         {% if not loop.last %}
                           <li class="divider"></li>
                         {% endif %}
@@ -1288,7 +1432,6 @@ appbuilder/nav_bar.html
 {% endmacro %}
 
 
-
 {{ locale_menu(languages) }}
 {% if not current_user.is_anonymous %}
     <li class="dropdown">
@@ -1308,9 +1451,402 @@ appbuilder/nav_bar.html
 
 
 
+## API  /api/
+
+* `/flask_appbuilder/api/__.init__.py `   API视图基类和装饰器
+*  /flask_appbuilder/api/manager.py  API文档
+
+### API视图和权限 
+
+`/flask_appbuilder/api/__.init__.py`   
+
+* API视图基类：BaseApi(object)  -> BaseModelApi -> ModelRestApi 。
+* 装饰器：expose  safe  rison  
+  * expose: API路由扩展
+  * safe: 捕捉异常，返回异常时的JSON
+  * rison: 捕捉入参的Rison参数
+
+```python
+class BaseApi(object):
+
+class BaseModelApi(BaseApi):
+    datamodel = None
+    
+class ModelRestApi(BaseModelApi):
+    
+
+def expose(url="/", methods=("GET",)):
+    """
+        Use this decorator to expose API endpoints on your API classes.
+
+        :param url:
+            Relative URL for the endpoint
+        :param methods:
+            Allowed HTTP methods. By default only GET is allowed.
+    """
+
+    def wrap(f):
+        if not hasattr(f, "_urls"):
+            f._urls = []
+        f._urls.append((url, methods))
+        return f
+
+    return wrap
+
+
+def safe(f):
+    """
+    A decorator that catches uncaught exceptions and
+    return the response in JSON format (inspired on Superset code)
+    """
+
+    def wraps(self, *args, **kwargs):
+        try:
+            return f(self, *args, **kwargs)
+        except BadRequest as e:
+            return self.response_400(message=str(e))
+        except Exception as e:
+            logging.exception(e)
+            return self.response_500(message=get_error_msg())
+
+    return functools.update_wrapper(wraps, f)
+
+
+def rison(schema=None):    
+""" 
+	示例：
+            schema = {
+                "type": "object",
+                "properties": {
+                    "arg1": {
+                        "type": "integer"
+                    }
+                }
+            }
+
+            class ExampleApi(BaseApi):
+                    @expose('/risonjson')
+                    @rison(schema)
+                    def rison_json(self, **kwargs):
+                        return self.response(200, result=kwargs['rison'])
+"""    
+```
+
+
+
+### API文档
+
+ /flask_appbuilder/api/manager.py
+
+openapi和swagger二种格式的API页面
+
+* `/api/<version>`     返回JSON格式，涉及配置项FAB_ADD_SECURITY_VIEWS 和 FAB_API_SWAGGER_UI
+* `/swagger/<version>`    返回HTML格式，涉及配置项FAB_API_SWAGGER_TEMPLATE
+
+```python
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
+from apispec.ext.marshmallow.common import resolve_schema_cls
+from flask import current_app
+from flask_appbuilder.api import BaseApi
+from flask_appbuilder.api import expose, protect, safe
+from flask_appbuilder.basemanager import BaseManager
+from flask_appbuilder.baseviews import BaseView
+from flask_appbuilder.security.decorators import has_access
+
+
+def resolver(schema):
+    schema_cls = resolve_schema_cls(schema)
+    name = schema_cls.__name__
+    if name == "MetaSchema":
+        if hasattr(schema_cls, "Meta"):
+            return (
+                f"{schema_cls.Meta.parent_schema_name}.{schema_cls.Meta.model.__name__}"
+            )
+    if name.endswith("Schema"):
+        return name[:-6] or name
+    return name
+
+class OpenApi(BaseApi):
+    route_base = "/api"
+    allow_browser_login = True
+
+    @expose("/<version>/_openapi")
+    @protect()
+    @safe
+    def get(self, version):
+        """ Endpoint that renders an OpenApi spec for all views that belong
+            to a certain version
+        ---
+        get:
+          description: >-
+            Get the OpenAPI spec for a specific API version
+          parameters:
+          - in: path
+            schema:
+              type: string
+            name: version
+          responses:
+            200:
+              description: The OpenAPI spec
+              content:
+                application/json:
+                  schema:
+                    type: object
+            404:
+              $ref: '#/components/responses/404'
+            500:
+              $ref: '#/components/responses/500'
+        """
+        version_found = False
+        api_spec = self._create_api_spec(version)
+        for base_api in current_app.appbuilder.baseviews:
+            if isinstance(base_api, BaseApi) and base_api.version == version:
+                base_api.add_api_spec(api_spec)
+                version_found = True
+        if version_found:
+            return self.response(200, **api_spec.to_dict())
+        else:
+            return self.response_404()
+
+    @staticmethod
+    def _create_api_spec(version):
+        return APISpec(
+            title=current_app.appbuilder.app_name,
+            version=version,
+            openapi_version="3.0.2",
+            info=dict(description=current_app.appbuilder.app_name),
+            plugins=[MarshmallowPlugin(schema_name_resolver=resolver)],
+            servers=[{"url": "/api/{}".format(version)}],
+        )
+
+
+class SwaggerView(BaseView):
+
+    route_base = "/swagger"
+    default_view = "ui"
+    openapi_uri = "/api/{}/_openapi"
+
+    @expose("/<version>")
+    @has_access
+    def show(self, version):
+        return self.render_template(
+            self.appbuilder.app.config.get(
+                "FAB_API_SWAGGER_TEMPLATE", "appbuilder/swagger/swagger.html"
+            ),
+            openapi_uri=self.openapi_uri.format(version),
+        )
+
+
+class OpenApiManager(BaseManager):
+    def register_views(self):
+        if not self.appbuilder.app.config.get("FAB_ADD_SECURITY_VIEWS", True):
+            return
+        if self.appbuilder.get_app.config.get("FAB_API_SWAGGER_UI", False):
+            self.appbuilder.add_api(OpenApi)	#添加API
+            self.appbuilder.add_view_no_menu(SwaggerView)	#添加视图
+```
+
+
+
+/flask_appbuilder/template/appbuilder/swagger/swagger.html
+
+```html
+{% extends "appbuilder/base.html" %}
+
+{% block head_css %}
+{{ super() }}
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui.css">
+<link rel="shortcut icon" href="https://fastapi.tiangolo.com/img/favicon.png">
+{% endblock %}
+
+{% block content %}
+<div id="swagger-ui">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+<!-- `SwaggerUIBundle` is now available on the page -->
+<script>
+    const ui = SwaggerUIBundle({
+        url: '{{openapi_uri}}',
+        dom_id: '#swagger-ui',
+        presets: [
+        	SwaggerUIBundle.presets.apis,
+        	SwaggerUIBundle.SwaggerUIStandalonePreset
+        ],
+        layout: "BaseLayout"
+    })
+    </script>
+{% endblock %}
+```
+
+
+
+
+
 # 2 flask_appbuild依赖模块
 
-## flask/click模块
+## SQLAlchemy
+
+```shell
+$ pip show SQLalchemy
+Name: SQLAlchemy
+Version: 1.3.24
+Summary: Database Abstraction Library
+Home-page: http://www.sqlalchemy.org
+Author: Mike Bayer
+Author-email: mike_mp@zzzcomputing.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires:
+Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-AppBuilder, apache-superset, alembic
+```
+
+
+
+表格 sqlalchemy源码结构
+
+| 目录或文件    | 主要类或函数                                               | 说明                                           |
+| ------------- | ---------------------------------------------------------- | ---------------------------------------------- |
+| connectors    | Connector MxODBCConnector PyODBCConnector ZxJDBCConnector  | 连接器                                         |
+| databases     | `__all__`                                                  | 数据库。导入dialects目录下各种数据库名字空间。 |
+| dialects      | 目录：firebird mssql mysql oracle postgresql sqlite sybase | 拨号器。各种数据库连接的实现。                 |
+| engine        | create_engine engine_from_config  Engine<br>文件：base.py  | 引擎                                           |
+| event         | api.py attr.py base.py legacy.py registry.py               | 事件处理                                       |
+| ext           |                                                            | 扩展                                           |
+| orm           | 重要                                                       | ORM模型                                        |
+| pool          |                                                            | 池                                             |
+| sql           | 重要                                                       |                                                |
+| testing       |                                                            | 测试目录                                       |
+| util          |                                                            | 工具                                           |
+| events.py     | ConnectionEvents DDLEvents DialectEvents PoolEvents        | 事件。继承自event/base.py:Events               |
+| exc.py        |                                                            | 定义各种异常。                                 |
+| inspection.py | inspect                                                    |                                                |
+| interfaces.py | ConnectionProxy PoolListener                               | 接口                                           |
+| log.py        | InstanceLogger echo_property Identified                    | 日志                                           |
+| processors.py |                                                            | 处理器。定义通用类型转化成函数。               |
+| schema.py     | `__all__`                                                  | 模式。导入sql目录下模式相关各种类。            |
+| types.py      | `__all__`                                                  | 定义可以导出的类/函数符号。                    |
+
+
+
+### 引擎 /engine/
+
+* /sqlalchemy/engine/url.py  eingine组成 (RFC1738)： name://user:pwd@host:port/database
+
+
+
+### 拨号器 /dialects/
+
+
+
+### ORM /orm/
+
+
+
+### SQL /sql/
+
+
+
+## PyJWT
+
+```shell
+$ pip show pyjwt
+Name: PyJWT
+Version: 1.4.2
+Summary: JSON Web Token implementation in Python
+Home-page: http://github.com/jpadilla/pyjwt
+Author: Jos?? Padilla
+Author-email: hello@jpadilla.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires:
+Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
+```
+
+表格 pyjwt源码结构说明
+
+| 目录或文件 | 主要类或函数 | 说明 |
+| ---------- | ------------ | ---- |
+|            |              |      |
+|            |              |      |
+|            |              |      |
+|            |              |      |
+|            |              |      |
+|            |              |      |
+|            |              |      |
+
+
+
+## marshmallow
+
+```shell
+$ pip show marshmallow
+Name: marshmallow
+Version: 3.10.0
+Summary: A lightweight library for converting complex datatypes to and from native Python datatypes.
+Home-page: https://github.com/marshmallow-code/marshmallow
+Author: Steven Loria
+Author-email: sloria1@gmail.com
+License: MIT
+Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
+Requires: 
+Required-by: marshmallow-sqlalchemy, marshmallow-enum, Flask-AppBuilder
+```
+
+表格 marshmallow源码结构说明
+
+| 目录或文件        | 主要类或函数                                  | 说明                               |
+| ----------------- | --------------------------------------------- | ---------------------------------- |
+| base.py           | FieldABC SchemaABC                            | 基类                               |
+| class_registry.py | get_class register                            | 类注册，通过schema字符串找到类     |
+| decorators.py     | validates validates_schema ...                | 装饰器                             |
+| error_store.py    | ErrorStore  merge_errors                      | 错误存储                           |
+| exceptions.py     |                                               | 异常                               |
+| fields.py         | Field AwareDateTime Boolean Constant Date ... | 将各种复杂字段转化成python原生类型 |
+| orderedset.py     | OrderedSet                                    | 排序set                            |
+| py.typed          |                                               |                                    |
+| schema.py         | Schema SchemaMeta SchemaOpts                  | 模式                               |
+| types.py          | StrSequenceOrSet Tag Validator                | 定义3种类型的成员组成              |
+| utils.py          |                                               | 工具                               |
+| validate.py       | Validator And ContainsNoneOf ...              | 验证                               |
+| warnings.py       | RemovedInMarshmallow4Warning                  | 警告。空文件。                     |
+
+
+
+## colorama
+
+```shell
+$ pip show colorama
+Name: colorama
+Version: 0.4.4
+Summary: Cross-platform colored terminal text.
+Home-page: https://github.com/tartley/colorama
+Author: Jonathan Hartley
+Author-email: tartley@tartley.com
+License: BSD
+Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
+Requires: 
+Required-by: Flask-AppBuilder, apache-superset
+```
+
+跨平台的彩色终端文本支持。定义了颜色代码。
+
+表格 colorama源码结构说明
+
+| 目录或文件     | 主要类或函数                                     | 说明                 |
+| -------------- | ------------------------------------------------ | -------------------- |
+| ansi.py        | AnsiCodes AnsiBack AnsiCursor AnsiFore AnsiStyle | 定义name和数值的对照 |
+| ansitowin32.py | StreamWrapper AnsiToWin32                        |                      |
+| initialise.py  | reset_all                                        |                      |
+| win32.py       | CONSOLE_SCREEN_BUFFER_INFO                       |                      |
+| winterm.py     | WinColor WinStyle WinTerm                        | 定义windows终端      |
+| `__init__.py`  | __`version__ = '0.4.4'`                          | 导入模块和版本定义   |
+
+
+
+# 3 flask_appbuild依赖模块-flask系列
+
+## flask | click 模块
 
 详见 《[flask源码剖析.md](./flask源码剖析.md)》
 
@@ -1325,6 +1861,22 @@ appbuilder/nav_bar.html
 ## flask_login
 
 http://www.pythondoc.com/flask-login/index.html
+
+[flask-login](https://github.com/maxcountryman/flask-login)跟Flask app是一一对应关系，即一个app内只可能存在一个login manager，所以为了运行多个login manager，只能运行多个app.
+
+```shell
+$ pip show flask_login
+Name: Flask-Login
+Version: 0.4.1
+Summary: User session management for Flask
+Home-page: https://github.com/maxcountryman/flask-login
+Author: Matthew Frazier
+Author-email: leafstormrush@gmail.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: Flask
+Required-by: Flask-AppBuilder
+```
 
 Flask-Login 为 Flask 提供了用户会话管理。它处理了日常的登入，登出并且长时间记住用户的会话。
 
@@ -1345,10 +1897,77 @@ Flask-Login 为 Flask 提供了用户会话管理。它处理了日常的登入�
 
 
 
+源码
+
+* config.py  配置项如COOKIE_DURATION, COOKIE_SECURE, COOKIE_HTTPONLY等
+* login_manager.py  LoginManager类
+* mixins.py   2类UserMixin和AnonymousUserMixin
+* signals.py  定义了一些信号
+* utils.py  工具类如user_login, user_logout
+
+
+
+/flask_login/login_manager.py
+
+```python
+from datetime import datetime, timedelta
+
+from flask import (_request_ctx_stack, abort, current_app, flash, redirect,
+                   request, session)
+
+from ._compat import text_type
+from .config import (COOKIE_NAME, COOKIE_DURATION, COOKIE_SECURE,
+                     COOKIE_HTTPONLY, LOGIN_MESSAGE, LOGIN_MESSAGE_CATEGORY,
+                     REFRESH_MESSAGE, REFRESH_MESSAGE_CATEGORY, ID_ATTRIBUTE,
+                     AUTH_HEADER_NAME, SESSION_KEYS, USE_SESSION_FOR_NEXT)
+from .mixins import AnonymousUserMixin
+from .signals import (user_loaded_from_cookie, user_loaded_from_header,
+                      user_loaded_from_request, user_unauthorized,
+                      user_needs_refresh, user_accessed, session_protected)
+from .utils import (_get_user, login_url as make_login_url, _create_identifier,
+                    _user_context_processor, encode_cookie, decode_cookie,
+                    make_next_param, expand_login_view)
+
+
+class LoginManager(object):
+    def __init__(self, app=None, add_context_processor=True):
+        
+    def init_app(self, app, add_context_processor=True):
+        '''
+        Configures an application. This registers an `after_request` call, and
+        attaches this `LoginManager` to it as `app.login_manager`.
+
+        :param app: The :class:`flask.Flask` object to configure.
+        :type app: :class:`flask.Flask`
+        :param add_context_processor: Whether to add a context processor to
+            the app that adds a `current_user` variable to the template.
+            Defaults to ``True``.
+        :type add_context_processor: bool
+        '''
+        app.login_manager = self
+        app.after_request(self._update_remember_cookie)
+
+        self._login_disabled = app.config.get('LOGIN_DISABLED', False)
+
+        if add_context_processor:
+            app.context_processor(_user_context_processor)      
+            
+    def unauthorized(self):
+    ...    
+```
+
+
+
 /flask_login/utils.py
 
 ```python
+from flask import (_request_ctx_stack, current_app, request, session, url_for,
+                   has_request_context)
+
 from .signals import user_logged_in, user_logged_out, user_login_confirmed
+
+current_user = LocalProxy(lambda: _get_user())
+
 
 def logout_user():
     '''
@@ -1403,9 +2022,29 @@ def login_user(user, remember=False, duration=None, force=False, fresh=True):
     _request_ctx_stack.top.user = user
     user_logged_in.send(current_app._get_current_object(), user=_get_user())
     return True    
+
+def login_url(login_view, next_url=None, next_field='next'):
+    """ 
+    创建一个重定向到登陆页面login_view的 url。
+    示例：http://domain?next={next_url}
+    :param login_view: str, The name of the login view. (缺省登陆URL指向此页面.)
+    :param next_url: str 如果有，则提供了跳转链接
+    :param next_field: 指向next_url的参数名称，默认为next
+    """
+    base = expand_login_view(login_view)
+
+    if next_url is None:
+        return base
+
+    parsed_result = urlparse(base)
+    md = url_decode(parsed_result.query)
+    md[next_field] = make_next_param(base, next_url)
+    netloc = current_app.config.get('FORCE_HOST_FOR_REDIRECTS') or \
+        parsed_result.netloc
+    parsed_result = parsed_result._replace(netloc=netloc,
+                                           query=url_encode(md, sort=True))
+    return urlunparse(parsed_result)    
 ```
-
-
 
 
 
@@ -1431,13 +2070,64 @@ Requires: Flask, SQLAlchemy
 Required-by: Flask-Migrate, Flask-AppBuilder
 ```
 
+源文件如下 ：
+
+* `__init__.py`  导入兼容类的declarative_base和DeclarativeMeta，兼容协程的线程函数 _ident_func，定义类BaseQuery(orm.Query)
+* _compat.py   py2&py3的兼容
+* model.py    定义3个新类型有NameMetaMixin, BindMetaMixin, DefaultMeta。定义Model基类。
+* utils.py 3个函数分别是parse_version, sqlalchemy_version, engine_config_warning
 
 
-* /sqlalchemy/engine/url.py  eingine组成 (RFC1738)： name://user:pwd@host:port/database
+
+/flask_sqlalchemy/model.py
+
+定义3个新类型有NameMetaMixin, BindMetaMixin, DefaultMeta。定义Model基类。
+
+```python
+import sqlalchemy as sa
+from sqlalchemy import inspect
+from sqlalchemy.ext.declarative import DeclarativeMeta, declared_attr
+from sqlalchemy.schema import _get_table_key
+
+from ._compat import to_str
+
+def should_set_tablename(cls):
+    
+
+def camel_to_snake_case(name):
+    
+    
+class NameMetaMixin(type):
+    """ 名称元数据 """
+    
+class BindMetaMixin(type):
+    def __init__(cls, name, bases, d):
+        bind_key = (
+            d.pop('__bind_key__', None)
+            or getattr(cls, '__bind_key__', None)
+        )
+
+        super(BindMetaMixin, cls).__init__(name, bases, d)
+
+        if bind_key is not None and getattr(cls, '__table__', None) is not None:
+            cls.__table__.info['bind_key'] = bind_key
 
 
+class DefaultMeta(NameMetaMixin, BindMetaMixin, DeclarativeMeta):
+    pass
 
-### SQLAlchemy
+class Model(object):
+    query_class = None    
+    query = None
+
+    def __repr__(self):
+        identity = inspect(self).identity
+        if identity is None:
+            pk = "(transient {0})".format(id(self))
+        else:
+            pk = ', '.join(to_str(value) for value in identity)
+        return '<{0} {1}>'.format(type(self).__name__, pk)    
+```
 
 
 
@@ -1479,9 +2169,52 @@ Required-by: Flask-AppBuilder
 
   
 
+* /flask_wtf/csrf.py  CSRFProtect类，产生和验证token方法
+
+ /flask_wtf/csrf.py
+
+```python
+# /flask_wtf/csrf.py
+def generate_csrf(secret_key=None, token_key=None):
+    """ 产生一个token 放到最近请求的缓存里 """
+    
+def validate_csrf(data, secret_key=None, time_limit=None, token_key=None):
+    """ 验证给的token是否有效 """
+    
+    
+class CSRFProtect(object):
+    def init_app(self, app):
+        @app.before_request
+        def csrf_protect():
+            
+            view = app.view_functions.get(request.endpoint)
+            dest = '{0}.{1}'.format(view.__module__, view.__name__)
+
+            if dest in self._exempt_views:
+                return
+
+            self.protect()      
+```
 
 
-## flask_openid
+
+## flask-openid
+
+```shell
+$ pip show flask-openid
+Name: Flask-OpenID
+Version: 1.2.5
+Summary: OpenID support for Flask
+Home-page: http://github.com/mitsuhiko/flask-openid/
+Author: Armin Ronacher, Patrick Uiterwijk
+Author-email: armin.ronacher@active-4.com, puiterwijk@redhat.com
+License: BSD
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: Flask, python3-openid
+Required-by: Flask-AppBuilder
+```
+
+导入模块
 
 ```python
 if self.auth_type == AUTH_OID:
@@ -1492,9 +2225,26 @@ if self.auth_type == AUTH_OID:
 
 
 
-## Flask-JWT-Extended
+## flask-jwt-extended
+
+```shell
+$ pip show flask_jwt-extended
+Name: Flask-JWT-Extended
+Version: 3.25.1
+Summary: Extended JWT integration with Flask
+Home-page: https://github.com/vimalloc/flask-jwt-extended
+Author: Landon Gilbert-Bland
+Author-email: landogbland@gmail.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: Werkzeug, Flask, PyJWT, six
+Required-by: Flask-AppBuilder
+```
+
+依赖模块 PyJWT
 
 
 
 # 参考资料
 
+* python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html

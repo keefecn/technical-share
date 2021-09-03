@@ -13,11 +13,13 @@
 
 #  1 flask源码剖析
 
+[pallets/flask](https://github.com/pallets/flask)  [Releases on PyPI](https://pypi.python.org/pypi/Flask)  [Documentation](https://flask.palletsprojects.com/)  [Test status](https://dev.azure.com/pallets/flask/_build)
+
 flask是基于Werkzeug的微框架，是可扩展的最佳实践。
 
 源码版本：flask-1.1.2
 
-依赖组件：click, Werkzeug, Jinja2, itsdangerous
+依赖组件：click, Werkzeug, Jinja2, itsdangerous 
 
 * click 命令行接口工具包
 * Werkzeug 功能强大的WSGI应用程序库
@@ -40,8 +42,6 @@ Requires: click, Werkzeug, Jinja2, itsdangerous
 Required-by: Flask-SQLAlchemy, flask-restplus, Flask-RESTful, flasgger
 ```
 
-
-
 **程序demo**
 
 ```python
@@ -59,9 +59,7 @@ app = Flask(__name__)
 def hello():
     return "Hello Flask!"   # return string
 
-
 if __name__ == "__main__":
-    app.run()
     app.run(host='0.0.0.0')
 ```
 
@@ -73,7 +71,7 @@ if __name__ == "__main__":
 
 | 目录或文件    | 主要类或函数                                                 | 说明                              |
 | ------------- | ------------------------------------------------------------ | --------------------------------- |
-| ext           |                                                              | 扩展模块                          |
+| ext/          |                                                              | 扩展模块                          |
 | _compat.ppy   | with_metaclass                                               | python2&3的兼容处理：类型和元类   |
 | app.py        | Flask<br>::run route add_url_rule register_blueprint         | 全局WEB实例                       |
 | blueprints.py | Blueprint<br>::route add_url_rule                            | 蓝图，相当于django中的app，某应用 |
@@ -102,7 +100,7 @@ flask.app该模块近2000行代码，主要完成应用的配置、初始化、�
 
 类：Flask
 
-类方法： run  create_app  register_blueprint  register_db  route/add_url_route
+类方法：run  create_app  register_blueprint  register_db  route/add_url_route
 
 ```python
 from .helpers import _PackageBoundObject
@@ -175,6 +173,7 @@ class Flask(_PackageBoundObject):
     def run(self, host=None, port=None, debug=None, **options):
         """Runs the application on a local development server.
         默认情况下，是单进程单线程模型，即一次只能处理一个请求，其它请求需排队。
+        缺省非调试模式（bool(None)=False）。
         """
         if host is None:
             host = '127.0.0.1'
@@ -211,18 +210,34 @@ class Flask(_PackageBoundObject):
     @setupmethod
     def add_url_rule(
         self,
-        rule,
-        endpoint=None,
-        view_func=None,
+        rule,  #路由路径str
+        endpoint=None,	#名称，一般同路由函数名称str
+        view_func=None,	#路由函数func
         provide_automatic_options=None,
         **options
     ):            
+	"""
+	        Basically this example::
+            @app.route('/')
+            def index():
+                pass
 
+        Is equivalent to the following::
+            def index():
+                pass
+            app.add_url_rule('/', 'index', index)
+            
+        相当于： app.view_functions['index'] = index    
+	"""
         
 if __name__ == '__main__':
     # 实际应用app定义，一般需要弄成全局实例
     app = Flask(__name__)
     with app.app_context():
+        # 缺省非调试模式，一进程一线程（processes=1）模式监听队列。缺省情况下，仅限用于本地单机测试。
+        # 若要本机调试，debug=True
+        # 若是生产环境，则启用进程或线程，分别使用`processes={num}`或者 threaded=True
+        # 生产环境推荐 gunicorn 或者 uwsgi
         app.run(host='0.0.0.0', port=5001)          
 ```
 
@@ -834,7 +849,8 @@ pass_script_info = click.make_pass_decorator(ScriptInfo, ensure=True)
 def run_command(info, host, port, reload, debugger, eager_loading,
                 with_threads):
     """Runs a local development server for the Flask application.
-	flask应用程序启动一个开发服务器，只推荐开发时使用
+	flask应用程序启动一个开发服务器，缺省值只推荐开发时使用，缺省开发模式，启用reload、debugger
+	用flask run启动，缺省不使用线程
     This local server is recommended for development purposes only but it
     can also be used for simple intranet deployments.  By default it will
     not support any sort of concurrency at all to simplify debugging.  This
@@ -940,7 +956,223 @@ class ExtensionImporter(object):
 
 # 2 flask依赖模块
 
+## click 
+
+可组合命令行接口工具包。命令组 Group - >  命令Command
+
+```shell
+$ pip show click
+Name: click
+Version: 7.1.2
+Summary: Composable command line interface toolkit
+Home-page: https://palletsprojects.com/p/click/
+Author: None
+Author-email: None
+License: BSD-3-Clause
+Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
+Requires:
+Required-by: Flask, Flask-AppBuilder, apache-superset
+```
+
+示例DEMO：
+
+```python
+import click
+
+@click.command()
+@click.option("--count", default=1, help="Number of greetings.")
+@click.option("--name", prompt="Your name",
+              help="The person to greet.")
+def hello(count, name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    for _ in range(count):
+        click.echo("Hello, %s!" % name)
+
+if __name__ == '__main__':
+    hello()
+```
+
+以下是命令行    
+
+```shell
+$ python hello.py --count=3
+Your name: Click
+Hello, Click!
+Hello, Click!
+Hello, Click!
+```
+
+
+
+源文件
+
+* click/core.py: 实现核心，定义了Group及其父类，Argument, Option
+* click/decorator.py 常用装饰器。如group, command, argument, option
+
+
+
+click/core.py 
+
+```python
+class BaseCommand(object):
+    """ """
+    
+class Command(BaseCommand):
+    """ """
+    
+class MultiCommand(Command):
+    """ 多个命令类 继承单个命令 """
+    
+class Group(MultiCommand):
+    """命令组可以跟命令绑定
+    :param commands: a dictionary of commands.
+    类方法：command group add_command  get_command list_command
+    """
+   def group(self, *args, **kwargs):
+        """快速绑定命令组到另一个命令组的装饰器.
+        """
+        from .decorators import group
+
+        def decorator(f):
+            cmd = group(*args, **kwargs)(f)
+            self.add_command(cmd)
+            return cmd
+
+        return decorator
+    
+    def command(self, *args, **kwargs):
+        """A shortcut decorator for declaring and attaching a command to
+        the group.  This takes the same arguments as :func:`command` but
+        immediately registers the created command with this instance by
+        calling into :meth:`add_command`.
+        用来作为快速创建命令的装饰器，实质调用 add_command方法
+        """
+        from .decorators import command
+
+        def decorator(f):
+            cmd = command(*args, **kwargs)(f)
+            self.add_command(cmd)
+            return cmd
+
+        return decorator    
+```
+
+
+
+click/decorator.py 
+
+命令处理常用装饰器，包括group, command, argument, option, make_pass_decorator
+
+```python
+from functools import update_wrapper
+
+from ._compat import iteritems
+from ._unicodefun import _check_for_unicode_literals
+from .core import Argument
+from .core import Command
+from .core import Group
+from .core import Option
+
+def group(name=None, **attrs):
+    """Creates a new :class:`Group` with a function as callback.  This
+    works otherwise the same as :func:`command` just that the `cls`
+    parameter is set to :class:`Group`.
+    """
+    attrs.setdefault("cls", Group)
+    return command(name, **attrs)
+
+def command(name=None, cls=None, **attrs):
+    if cls is None:
+        cls = Command
+
+    def decorator(f):
+        cmd = _make_command(f, name, attrs, cls)
+        cmd.__doc__ = f.__doc__
+        return cmd
+
+    return decorator
+
+# 必选参数
+def argument(*param_decls, **attrs):
+    """Attaches an argument to the command.  All positional arguments are
+    passed as parameter declarations to :class:`Argument`; all keyword
+    arguments are forwarded unchanged (except ``cls``).
+    This is equivalent to creating an :class:`Argument` instance manually
+    and attaching it to the :attr:`Command.params` list.
+
+    :param cls: the argument class to instantiate.  This defaults to
+                :class:`Argument`.
+    """
+
+    def decorator(f):
+        ArgumentClass = attrs.pop("cls", Argument)
+        _param_memo(f, ArgumentClass(param_decls, **attrs))
+        return f
+
+    return decorator
+
+# 可选参数
+def option(*param_decls, **attrs):
+    """Attaches an option to the command.  All positional arguments are
+    passed as parameter declarations to :class:`Option`; all keyword
+    arguments are forwarded unchanged (except ``cls``).
+    This is equivalent to creating an :class:`Option` instance manually
+    and attaching it to the :attr:`Command.params` list.
+
+    :param cls: the option class to instantiate.  This defaults to
+                :class:`Option`.
+    """
+
+    def decorator(f):
+        # Issue 926, copy attrs, so pre-defined options can re-use the same cls=
+        option_attrs = attrs.copy()
+
+        if "help" in option_attrs:
+            option_attrs["help"] = inspect.cleandoc(option_attrs["help"])
+        OptionClass = option_attrs.pop("cls", Option)
+        _param_memo(f, OptionClass(param_decls, **option_attrs))
+        return f
+
+    return decorator
+```
+
+
+
+click高效的装饰器： 以 flask fab命令组为例
+
+* @xx.group()   将当前方法名作为一个xx命令组的子命令组，如xx为click，那么fab的上级命令组是app实例
+
+  ```python
+  import click
+  
+  # 示例： flask fab命令组定义
+  @click.group()
+  def fab():
+      """ FAB flask group commands"""
+      pass
+  ```
+
+* @xx.command()， 将当前方法名作为xx命令组里的最终命令，如`flask fab create-admin`
+
+  ```python
+  @fab.command("create-admin")
+  @click.option("--username", default="admin", prompt="Username")
+  @click.option("--firstname", default="admin", prompt="User first name")
+  @click.option("--lastname", default="user", prompt="User last name")
+  @click.option("--email", default="admin@fab.org", prompt="Email")
+  @click.password_option()
+  @with_appcontext
+  def create_admin(username, firstname, lastname, email, password):
+      """
+          Creates an admin user
+      """
+  ```
+
+
+
 ## werkzeug
+
+[pallets/werkzeug](https://github.com/pallets/werkzeug)  [Documentation](https://werkzeug.palletsprojects.com/)  [Changes](https://werkzeug.palletsprojects.com/en/2.0.x/changes/)   [Releases on PyPI](https://pypi.python.org/pypi/Werkzeug)
 
 The comprehensive WSGI web application library. 综合的WSGI WEB应用程序库。
 
@@ -958,8 +1190,63 @@ Requires:
 Required-by: tensorboard, Flask
 ```
 
-* werkzeug/serving.py： 请求处理方式
-* werkzeug/local.py： 本地代理/数据栈
+示例DEMO：
+
+```python
+from werkzeug.wrappers import Request, Response
+
+@Request.application
+def application(request):
+    return Response("Hello, World!")
+
+if __name__ == "__main__":
+    from werkzeug.serving import run_simple
+    run_simple("localhost", 5000, application)
+```
+
+
+
+表格 werkzeug版本说明 详见 [Changes](https://werkzeug.palletsprojects.com/en/2.0.x/changes/)
+
+| 版本号 | 发布时间   | 功能或更新说明                             |
+| ------ | ---------- | ------------------------------------------ |
+| 0.1    | 2010-04-16 | 第一个公共发布版本。                       |
+| 0.16.1 | 2020-01-27 | 0.x系列最后一个版本。                      |
+| 1.0.0  | 2020-02-06 | 大版本。                                   |
+| 1.0.1  | 2020-03-31 | 1.x系列仅发布了2个小版本，即1.0.0和1.0.1。 |
+| 2.0.0  | 2021-05-11 |                                            |
+
+说明：2020.2开始，flask 1.x+版本盯紧werkzeug，二者大/中版本基本保持一致。
+
+
+
+### 源码结构 
+
+表格 werkzeug源码结构
+
+| 目录或文件        | 主要类或函数                                                 | 说明                                     |
+| ----------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| debug/            |                                                              | 扩展模块                                 |
+| middleware/       | 文件：dispatcher.py http_proxy.py lint.py profiler.py proxy_fix.py shared_data.py<br>类：DispatcherMiddleware | 中间件包括代理、共享数据                 |
+| wrappers/         |                                                              | 包括cors, etag, auth, user_agent         |
+| _compat.py        |                                                              | 兼容py2和py3的类型和函数。`flake8: noqa` |
+| _internal.py      |                                                              | 提供内部用的helper和常量                 |
+| _reloader.py      | ReloaderLoop StatReloaderLoop  WatchdogReloaderLoop          | 模块重载实现                             |
+| datastructures.py |                                                              | 用到的数据结构                           |
+| exceptions.py     | BadRequest                                                   | 异常，多继承自HTTPException              |
+| filesystem.py     | get_filesystem_encoding                                      | 文件系统                                 |
+| http.py           | parse_date...                                                | 处理http数据的一组函数                   |
+| local.py          |                                                              | 本地代理/数据栈                          |
+| posixemulation.py | rename                                                       | POSIX模拟器                              |
+| routing.py        | BaseConverter AnyConverter RuleFactory Rule                  | 路由相关的转化器、规则类                 |
+| security.py       | check_password_hash generate_password_hash gen_salt safe_join safe_str_cmp | 安全相关工具，如密码哈希工具             |
+| serving.py        | BaseWSGIServer ForkingMixIn ForkingWSGIServer ThreadedWSGIServer WSGIRequestHandler | 请求处理方式。多进程/多线程/单进程线程。 |
+| test.py           | run_wsgi_app                                                 | WSGI客户端应用测试                       |
+| testapp.py        | test_app                                                     | 测试WSGI服务端                           |
+| urls.py           | 类：_URLTuple BaseURL  BytesURL URL Href  <br>函数：url_parse url_quote | URL解析                                  |
+| useragents.py     | UserAgent UserAgentParser                                    | 用户代理                                 |
+| utils.py          |                                                              | 工具                                     |
+| wsgi.py           | ClosingIterator FileWrapper LimitedStream                    | WSGI服务                                 |
 
 
 
@@ -1337,6 +1624,7 @@ class LocalManager(object):
         else:
             self.ident_func = get_ident    
     
+    
 @implements_bool
 class LocalProxy(object):
     __slots__ = ("__local", "__dict__", "__name__", "__wrapped__")
@@ -1348,192 +1636,62 @@ class LocalProxy(object):
             # "local" is a callable that is not an instance of Local or
             # LocalManager: mark it as a wrapped function.
             object.__setattr__(self, "__wrapped__", local)
- 
 ```
 
 
 
-## click 
+### 中间件 /middleware/
 
-可组合命令行接口工具包。命令组 Group - >  命令Command
+* dispatcher.py  DispatcherMiddleware类实现
 
-```shell
-$ pip show click
-Name: click
-Version: 7.1.2
-Summary: Composable command line interface toolkit
-Home-page: https://palletsprojects.com/p/click/
-Author: None
-Author-email: None
-License: BSD-3-Clause
-Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
-Requires:
-Required-by: Flask, Flask-AppBuilder, apache-superset
-```
+/werkzeug/middleware/dispatcher.py 
 
-源文件
-
-* click/core.py: 实现核心，定义了Group及其父类，Argument, Option
-* click/decorator.py 常用装饰器。如group, command, argument, option
-
-
-
-click/core.py 
+[Application Dispatching](http://flask.pocoo.org/docs/0.12/patterns/appdispatch/#app-dispatch)是WSGI工具箱werkzeug提供的一种技术，目的是将多个Flask应用按URL前缀组合成一个应用。
 
 ```python
-class BaseCommand(object):
-    """ """
-    
-class Command(BaseCommand):
-    """ """
-    
-class MultiCommand(Command):
-    """ 多个命令类 继承单个命令 """
-    
-class Group(MultiCommand):
-    """命令组可以跟命令绑定
-    :param commands: a dictionary of commands.
-    类方法：command group add_command  get_command list_command
+class DispatcherMiddleware(object):
+    """Combine multiple applications as a single WSGI application.
+    Requests are dispatched to an application based on the path it is
+    mounted under.
+
+    :param app: The WSGI application to dispatch to if the request
+        doesn't match a mounted path.
+    :param mounts: Maps path prefixes to applications for dispatching.
+    示例：
+    app = DispatcherMiddleware(serve_frontend, {
+        '/api': api_app,
+        '/admin': admin_app,
+    })  
     """
-   def group(self, *args, **kwargs):
-        """快速绑定命令组到另一个命令组的装饰器.
-        """
-        from .decorators import group
 
-        def decorator(f):
-            cmd = group(*args, **kwargs)(f)
-            self.add_command(cmd)
-            return cmd
+    def __init__(self, app, mounts=None):
+        self.app = app
+        self.mounts = mounts or {}
 
-        return decorator
-    
-    def command(self, *args, **kwargs):
-        """A shortcut decorator for declaring and attaching a command to
-        the group.  This takes the same arguments as :func:`command` but
-        immediately registers the created command with this instance by
-        calling into :meth:`add_command`.
-        用来作为快速创建命令的装饰器，实质调用 add_command方法
-        """
-        from .decorators import command
+    def __call__(self, environ, start_response):
+        script = environ.get("PATH_INFO", "")
+        path_info = ""
 
-        def decorator(f):
-            cmd = command(*args, **kwargs)(f)
-            self.add_command(cmd)
-            return cmd
+        while "/" in script:
+            if script in self.mounts:
+                app = self.mounts[script]
+                break
 
-        return decorator    
+            script, last_item = script.rsplit("/", 1)
+            path_info = "/%s%s" % (last_item, path_info)
+        else:
+            app = self.mounts.get(script, self.app)
+
+        original_script_name = environ.get("SCRIPT_NAME", "")
+        environ["SCRIPT_NAME"] = original_script_name + script
+        environ["PATH_INFO"] = path_info
+        return app(environ, start_response)
+
 ```
 
+说明：app dispatch技术实现了app的隔离（独立的login manager、secret_key等），同时让每层业务系统都能模块化（只关心自己的URL部分），很有用。
 
 
-click/decorator.py 
-
-命令处理常用装饰器，包括group, command, argument, option, make_pass_decorator
-
-```python
-from functools import update_wrapper
-
-from ._compat import iteritems
-from ._unicodefun import _check_for_unicode_literals
-from .core import Argument
-from .core import Command
-from .core import Group
-from .core import Option
-
-def group(name=None, **attrs):
-    """Creates a new :class:`Group` with a function as callback.  This
-    works otherwise the same as :func:`command` just that the `cls`
-    parameter is set to :class:`Group`.
-    """
-    attrs.setdefault("cls", Group)
-    return command(name, **attrs)
-
-def command(name=None, cls=None, **attrs):
-    if cls is None:
-        cls = Command
-
-    def decorator(f):
-        cmd = _make_command(f, name, attrs, cls)
-        cmd.__doc__ = f.__doc__
-        return cmd
-
-    return decorator
-
-# 必选参数
-def argument(*param_decls, **attrs):
-    """Attaches an argument to the command.  All positional arguments are
-    passed as parameter declarations to :class:`Argument`; all keyword
-    arguments are forwarded unchanged (except ``cls``).
-    This is equivalent to creating an :class:`Argument` instance manually
-    and attaching it to the :attr:`Command.params` list.
-
-    :param cls: the argument class to instantiate.  This defaults to
-                :class:`Argument`.
-    """
-
-    def decorator(f):
-        ArgumentClass = attrs.pop("cls", Argument)
-        _param_memo(f, ArgumentClass(param_decls, **attrs))
-        return f
-
-    return decorator
-
-# 可选参数
-def option(*param_decls, **attrs):
-    """Attaches an option to the command.  All positional arguments are
-    passed as parameter declarations to :class:`Option`; all keyword
-    arguments are forwarded unchanged (except ``cls``).
-    This is equivalent to creating an :class:`Option` instance manually
-    and attaching it to the :attr:`Command.params` list.
-
-    :param cls: the option class to instantiate.  This defaults to
-                :class:`Option`.
-    """
-
-    def decorator(f):
-        # Issue 926, copy attrs, so pre-defined options can re-use the same cls=
-        option_attrs = attrs.copy()
-
-        if "help" in option_attrs:
-            option_attrs["help"] = inspect.cleandoc(option_attrs["help"])
-        OptionClass = option_attrs.pop("cls", Option)
-        _param_memo(f, OptionClass(param_decls, **option_attrs))
-        return f
-
-    return decorator
-```
-
-
-
-click高效的装饰器： 以 flask fab命令组为例
-
-* @xx.group()   将当前方法名作为一个xx命令组的子命令组，如xx为click，那么fab的上级命令组是app实例
-
-  ```python
-  import click
-  
-  # 示例： flask fab命令组定义
-  @click.group()
-  def fab():
-      """ FAB flask group commands"""
-      pass
-  ```
-
-* @xx.command()， 将当前方法名作为xx命令组里的最终命令，如`flask fab create-admin`
-
-  ```python
-  @fab.command("create-admin")
-  @click.option("--username", default="admin", prompt="Username")
-  @click.option("--firstname", default="admin", prompt="User first name")
-  @click.option("--lastname", default="user", prompt="User last name")
-  @click.option("--email", default="admin@fab.org", prompt="Email")
-  @click.password_option()
-  @with_appcontext
-  def create_admin(username, firstname, lastname, email, password):
-      """
-          Creates an admin user
-      """
-  ```
 
 
 
@@ -1541,7 +1699,7 @@ click高效的装饰器： 以 flask fab命令组为例
 
 参考 《WEB前端框架》相关章节
 
-
+依赖于模块 MarkupSafe
 
 ```shell
 $ pip show jinja2
@@ -1556,6 +1714,23 @@ Location: d:\dev\langs\python\python37\lib\site-packages
 Requires: MarkupSafe
 Required-by:
 ```
+
+示例DEMO：
+
+```html
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for user in users %}
+    <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+```
+
+
+
+### 源码结构 
 
 表格 Jinja2源码结构 
 
@@ -1581,6 +1756,8 @@ Required-by:
 | visitor.py      |                                                              |            |
 
 
+
+### 环境 environment.py
 
 /jinja2/environment.py
 
@@ -1647,19 +1824,113 @@ class TemplateStream(object):
 
 
 
+## itsdangerous
+
+```shell
+$ pip show itsdangerous
+Name: itsdangerous
+Version: 2.0.1
+Summary: Safely pass data to untrusted environments and back.
+Home-page: https://palletsprojects.com/p/itsdangerous/
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires:
+Required-by: Flask
+```
+
+安全传递数据到不可信任环境和后端。
+
+示例DEMO：
+
+```python
+from itsdangerous import URLSafeSerializer
+auth_s = URLSafeSerializer("secret key", "auth")
+token = auth_s.dumps({"id": 5, "name": "itsdangerous"})
+
+print(token)
+# eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg
+
+data = auth_s.loads(token)
+print(data["name"])
+# itsdangerous
+```
+
+
+
+## markupsafe
+
+安全地使用HTML和XML字符。
+
+```SH
+$ pip show markupsafe
+Name: MarkupSafe
+Version: 2.0.1
+Summary: Safely add untrusted strings to HTML/XML markup.
+Home-page: https://palletsprojects.com/p/markupsafe/
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires:
+Required-by: Jinja2
+```
+
+示例DEMO：
+
+```python
+>>> from markupsafe import Markup, escape
+>>> # escape replaces special characters and wraps in Markup
+>>> escape('<script>alert(document.cookie);</script>')
+Markup(u'&lt;script&gt;alert(document.cookie);&lt;/script&gt;')
+>>> # wrap in Markup to mark text "safe" and prevent escaping
+>>> Markup('<strong>Hello</strong>')
+Markup('<strong>hello</strong>')
+>>> escape(Markup('<strong>Hello</strong>'))
+Markup('<strong>hello</strong>')
+>>> # Markup is a text subclass (str on Python 3, unicode on Python 2)
+>>> # methods and operators escape their arguments
+>>> template = Markup("Hello <em>%s</em>")
+>>> template % '"World"'
+Markup('Hello <em>&#34;World&#34;</em>')
+```
+
+
+
+
+
 # 3 扩展模块
+
+## 推荐模块
+
+| 模块名           | 功能                                                         | 文档                                                         | 源码                                            | 最后版本&更新     |
+| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- | ----------------- |
+| flask_appbuilder | Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID` | https://flask-appbuilder.readthedocs.io/en/latest/ or [flaskappbulder](http://flaskappbuilder.pythonanywhere.com/) | https://github.com/dpgaspar/flask-appbuilder/   | v3.3.3, 2021.9.14 |
+| flask_migrate    | SQLAlchemy database migrations for Flask applications using Alembic.<br>[Change Log](https://github.com/miguelgrinberg/Flask-Migrate/blob/master/CHANGES.md) | http://flask-migrate.readthedocs.io/en/latest/               | http://github.com/miguelgrinberg/flask-migrate/ | 3.0.1, 2021.8     |
+| flask_caching    | Adds caching support to your Flask application               | http://www.pythondoc.com/flask-cache/index.html              | https://github.com/sh4nks/flask-caching         | 1.10.1, 2021.3.18 |
+| flask_cors       | A Flask extension adding a decorator for CORS support. Cross Origin Resource Sharing ( CORS ) support for Flask.<br>[Changelog](https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md) | [flask-cors.corydolphin.com/](https://flask-cors.corydolphin.com/) | https://github.com/corydolphin/flask-cors       | 3.0.10, 2021.1.5  |
+| flask_restx      | 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。<BR>Flask-RESTX is a community driven fork of [Flask-RESTPlus](https://github.com/noirbizarre/flask-restplus)，于2020.1创建。 | [flask-restx.readthedocs.io/en/latest/](https://flask-restx.readthedocs.io/en/latest/) | https://github.com/python-restx/flask-restx     | 0.5.1, 2021.9.4   |
+
+说明：受欢迎的模块会慢慢由一个组织来托管，不再放到个人仓库名下，这样更有利于社区协作。
+
+
+
+## 废弃模块.deprecated
+
+| 模块名             | 功能                                                         | 文档                                                       | 源码仓库                                                     | 最后版本&更新     | 废弃原因                                |
+| ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------ | ----------------- | --------------------------------------- |
+| flask_restful      | 文档老旧，不可用。<br>添加了快速构建 REST APIs 的支持。它当然也是一个能够跟你现有的ORM/库协同工作的轻量级的扩展。Flask-RESTful 鼓励以最小设置的最佳实践。 | http://www.pythondoc.com/Flask-RESTful/index.html          | [flask-restful/flask-restful](https://www.github.com/flask-restful/flask-restful/) | v0.3.9, 2020      | 要求 Python 版本为 2.6, 2.7, 或者 3.3。 |
+| ~~flask_restplus~~ | 增加了对快速构建 REST API 的支持。它提供了一系列连贯的装饰器和工具来描述您的 API 并正确公开其文档（使用 Swagger）。 | https://flask-restplus.readthedocs.io/en/stable/index.html | [noirbizarre/flask-restplus](https://github.com/noirbizarre/flask-restplus) | 0.13.0, 2020.1.13 | 被社区版flask-restx替换                 |
+|                    |                                                              |                                                            |                                                              |                   |                                         |
+
+
 
 ## flask_appbuilder源码剖析
 
 详见 《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
 
 Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
-
-
-
-## flask_restful
-
-http://www.pythondoc.com/Flask-RESTful/index.html
 
 
 
@@ -1678,6 +1949,12 @@ Location: e:\dev\python\venv\superset-py37-env\lib\site-packages
 Requires: Flask-SQLAlchemy, alembic, Flask
 Required-by: apache-superset
 ```
+
+
+
+### 源码结构
+
+* `/flask_migrate/__init__.py`    定义配置类
 
 
 
@@ -1779,6 +2056,21 @@ def upgrade(directory, sql, tag, x_arg, revision):
 
 http://www.pythondoc.com/flask-cache/index.html
 
+```shell
+$ pip show flask_caching
+Name: Flask-Caching
+Version: 1.10.1
+Summary: Adds caching support to your Flask application
+Home-page: https://github.com/sh4nks/flask-caching
+Author: Peter Justin
+Author-email: peter.justin@outlook.com
+License: BSD
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: Flask
+Required-by: apache-superset
+
+```
+
 Flask-Caching支持多个缓存后端（Redis，Memcached，SimpleCache（内存中）或本地文件系统）。
 
 ```python
@@ -1817,12 +2109,6 @@ class Cache(object):
 
 
 
-## flask_csrf
-
-
-
-
-
 ## flask_cors
 
 https://flask-cors.corydolphin.com/en/latest/index.html
@@ -1831,9 +2117,509 @@ CORS，跨域资源共享。
 
 A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible.
 
+```shell
+$ pip show flask_cors
+Name: Flask-Cors
+Version: 3.0.10
+Summary: A Flask extension adding a decorator for CORS support
+Home-page: https://github.com/corydolphin/flask-cors
+Author: Cory Dolphin
+Author-email: corydolphin@gmail.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: Flask, Six
+Required-by:
+```
+
+
+
+源文件
+
+* core.py  用于扩展和装饰器的函数
+* decoratory.py  装饰器1个是cross_origin
+* extension.py
+
+
+
+/flask_cors/core.py
+
+```python
+from six import string_types
+from flask import request, current_app
+from werkzeug.datastructures import Headers, MultiDict
+
+def serialize_options(opts):
+    """
+    options序列化参数： origins allow_headers 
+    	supports_credentials send_wildcard expose_headers methods max_age
+    A helper method to serialize and processes the options dictionary.
+    """
+    options = (opts or {}).copy()
+
+    for key in opts.keys():
+        if key not in DEFAULT_OPTIONS:
+            LOG.warning("Unknown option passed to Flask-CORS: %s", key)
+
+    # Ensure origins is a list of allowed origins with at least one entry.
+    options['origins'] = sanitize_regex_param(options.get('origins'))
+    options['allow_headers'] = sanitize_regex_param(options.get('allow_headers'))
+
+    # This is expressly forbidden by the spec. Raise a value error so people
+    # don't get burned in production.
+    if r'.*' in options['origins'] and options['supports_credentials'] and options['send_wildcard']:
+        raise ValueError("Cannot use supports_credentials in conjunction with"
+                         "an origin string of '*'. See: "
+                         "http://www.w3.org/TR/cors/#resource-requests")
+
+
+
+    serialize_option(options, 'expose_headers')
+    serialize_option(options, 'methods', upper=True)
+
+    if isinstance(options.get('max_age'), timedelta):
+        options['max_age'] = str(int(options['max_age'].total_seconds()))
+
+    return options
+```
+
+
+
+/flask_cors/decoratory.py
+
+```python
+from functools import update_wrapper
+from flask import make_response, request, current_app
+from .core import *
+
+LOG = logging.getLogger(__name__)
+
+def cross_origin(*args, **kwargs):
+    """ 跨域，包装flask路由缺省参数以支持跨域 """
+    _options = kwargs
+
+    def decorator(f):
+        LOG.debug("Enabling %s for cross_origin using options:%s", f, _options)
+
+        # If True, intercept OPTIONS requests by modifying the view function,
+        # replicating Flask's default behavior, and wrapping the response with
+        # CORS headers.
+        #
+        # If f.provide_automatic_options is unset or True, Flask's route
+        # decorator (which is actually wraps the function object we return)
+        # intercepts OPTIONS handling, and requests will not have CORS headers
+        if _options.get('automatic_options', True):
+            f.required_methods = getattr(f, 'required_methods', set())
+            f.required_methods.add('OPTIONS')
+            f.provide_automatic_options = False
+
+        def wrapped_function(*args, **kwargs):
+            # Handle setting of Flask-Cors parameters
+            options = get_cors_options(current_app, _options)
+
+            if options.get('automatic_options') and request.method == 'OPTIONS':
+                resp = current_app.make_default_options_response()
+            else:
+                resp = make_response(f(*args, **kwargs))
+
+            set_cors_headers(resp, options)
+            setattr(resp, FLASK_CORS_EVALUATED, True)
+            return resp
+
+        return update_wrapper(wrapped_function, f)
+    return decorator
+    
+```
+
+
+
+/falsk_cors/extension.py
+
+```python
+from flask import request
+from .core import *
+
+class CORS(object):
+	"""
+    The settings for CORS are determined in the following order
+
+    1. Resource level settings (e.g when passed as a dictionary)
+    2. Keyword argument settings
+    3. App level configuration settings (e.g. CORS_*)
+    4. Default settings
+	"""        
+    def __init__(self, app=None, **kwargs):
+        self._options = kwargs
+        if app is not None:
+            self.init_app(app, **kwargs)
+
+    def init_app(self, app, **kwargs):
+        # The resources and options may be specified in the App Config, the CORS constructor
+        # or the kwargs to the call to init_app.
+        options = get_cors_options(app, self._options, kwargs)
+
+        # Flatten our resources into a list of the form
+        # (pattern_or_regexp, dictionary_of_options)
+        resources = parse_resources(options.get('resources'))
+
+        # Compute the options for each resource by combining the options from
+        # the app's configuration, the constructor, the kwargs to init_app, and
+        # finally the options specified in the resources dictionary.
+        resources = [
+                     (pattern, get_cors_options(app, options, opts))
+                     for (pattern, opts) in resources
+                    ]
+
+        # Create a human readable form of these resources by converting the compiled
+        # regular expressions into strings.
+        resources_human = {get_regexp_pattern(pattern): opts for (pattern,opts) in resources}
+        LOG.debug("Configuring CORS with resources: %s", resources_human)
+
+        cors_after_request = make_after_request_function(resources)
+        app.after_request(cors_after_request)
+
+        # Wrap exception handlers with cross_origin
+        # These error handlers will still respect the behavior of the route
+        if options.get('intercept_exceptions', True):
+            def _after_request_decorator(f):
+                def wrapped_function(*args, **kwargs):
+                    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                return wrapped_function
+
+            if hasattr(app, 'handle_exception'):
+                app.handle_exception = _after_request_decorator(
+                    app.handle_exception)
+                app.handle_user_exception = _after_request_decorator(
+                    app.handle_user_exception)
+
+def make_after_request_function(resources):
+    def cors_after_request(resp):
+        # If CORS headers are set in a view decorator, pass
+        if resp.headers is not None and resp.headers.get(ACL_ORIGIN):
+            LOG.debug('CORS have been already evaluated, skipping')
+            return resp
+        normalized_path = unquote_plus(request.path)
+        for res_regex, res_options in resources:
+            if try_match(normalized_path, res_regex):
+                LOG.debug("Request to '%s' matches CORS resource '%s'. Using options: %s",
+                      request.path, get_regexp_pattern(res_regex), res_options)
+                set_cors_headers(resp, res_options)
+                break
+        else:
+            LOG.debug('No CORS rule matches')
+        return resp
+    return cors_after_request    
+```
+
+
+
+## flask_restx
+
+使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。
+
+```python
+$ pip show flask-restx
+Name: flask-restx
+Version: 0.5.1
+Summary: Fully featured framework for fast, easy and documented API development with Flask
+Home-page: https://github.com/python-restx/flask-restx
+Author: python-restx Authors
+Author-email: None
+License: BSD-3-Clause
+Location: d:\dev\langs\python\python37\lib\site-packages
+Requires: Flask, six, jsonschema, aniso8601, werkzeug, pytz
+Required-by:
+```
+
+说明：依赖于flask-2.0.0，flask-2.0.1则导入werkzeug出错。
+
+
+
+### 源码结构及示例
+
+表格 flask-restx源码结构
+
+| 目录或文件         | 主要类或函数                                                 | 说明                                   |
+| ------------------ | ------------------------------------------------------------ | -------------------------------------- |
+| schemas/           | LazySchema validate                                          |                                        |
+| static/            |                                                              | 静态文件                               |
+| templates/         | swagger-ui.html swagger-ui-css.html  swagger-ui-libs.html    | 模板                                   |
+| api.py             | Api SwaggerView                                              | Api类管理API文档                       |
+| apidoc.py          | Apidoc swagger_static ui_for                                 | API文档蓝图                            |
+| cors.py            | crossdomain                                                  | 跨域                                   |
+| errors.py          | abort RestError ValidationError SpecsError                   | 错误或异常                             |
+| fields.py          | Raw String Url ...                                           | 字段。定义API参数。                    |
+| inputs.py          | boolean date ..                                              | 高级类型解析                           |
+| marshaling.py      | 类：marshal_with marshal_with_field<br>函数：marshal make    | 接口返回结果                           |
+| mask.py            | Mask                                                         |                                        |
+| model.py           | ModelBase RawModel Model OrderedModel SchemaModel            | 模型                                   |
+| namespace.py       | Namespace                                                    | 名字空间                               |
+| postman.py         | Request  Folder PostmanCollectionV1                          | postman工具类                          |
+| representations.py | output_json                                                  | 输出JSON数据                           |
+| reqparse.py        | Argument ParseResult RequestParser                           | 请求解析                               |
+| resource.py        | Resource                                                     | 资源。每个路由是一个资源，有各种方法。 |
+| swagger.py         | Swagger                                                      | Swagger文档                            |
+| utils.py           | merge camel_to_dash default_id not_none not_none_sorted unpack | 工具方法                               |
+
+
+
+示例DEMO:
+
+```python
+from flask import Flask
+from flask_restx import Api, Resource, fields
+
+app = Flask(__name__)
+api = Api(app, version='1.0', title='TodoMVC API',
+    description='A simple TodoMVC API', doc='/'
+)
+"""
+Api类定义了API文档，其路由是参数doc, 路由函数调用缺省模板 apidoc.url_for()
+"""
+
+ns = api.namespace('todos', description='TODO operations')	# 第一个参数'todos'为路由前缀
+
+todo = api.model('Todo', {
+    'id': fields.Integer(readonly=True, description='The task unique identifier'),
+    'task': fields.String(required=True, description='The task details')
+})
+
+
+class TodoDAO(object):
+    def __init__(self):
+        self.counter = 0
+        self.todos = []
+
+    def get(self, id):
+        for todo in self.todos:
+            if todo['id'] == id:
+                return todo
+        api.abort(404, "Todo {} doesn't exist".format(id))
+
+    def create(self, data):
+        todo = data
+        todo['id'] = self.counter = self.counter + 1
+        self.todos.append(todo)
+        return todo
+
+    def update(self, id, data):
+        todo = self.get(id)
+        todo.update(data)
+        return todo
+
+    def delete(self, id):
+        todo = self.get(id)
+        self.todos.remove(todo)
+
+
+DAO = TodoDAO()
+DAO.create({'task': 'Build an API'})
+DAO.create({'task': '?????'})
+DAO.create({'task': 'profit!'})
+
+
+@ns.route('/')
+class TodoList(Resource):
+    '''Shows a list of all todos, and lets you POST to add new tasks'''
+    @ns.doc('list_todos')
+    @ns.marshal_list_with(todo)
+    def get(self):
+        '''List all tasks for keefe'''
+        return DAO.todos
+
+    @ns.doc('create_todo')
+    @ns.expect(todo)
+    @ns.marshal_with(todo, code=201)
+    def post(self):
+        '''Create a new task'''
+        return DAO.create(api.payload), 201
+
+
+@ns.route('/<int:id>')
+@ns.response(404, 'Todo not found')
+@ns.param('id', 'The task identifier')
+class Todo(Resource):
+    '''Show a single todo item and lets you delete them'''
+    @ns.doc('get_todo')
+    @ns.marshal_with(todo)
+    def get(self, id):
+        '''Fetch a given resource'''
+        return DAO.get(id)
+
+    @ns.doc('delete_todo')
+    @ns.response(204, 'Todo deleted')
+    def delete(self, id):
+        '''Delete a task given its identifier'''
+        DAO.delete(id)
+        return '', 204
+
+    @ns.expect(todo)
+    @ns.marshal_with(todo)
+    def put(self, id):
+        '''Update a task given its identifier'''
+        return DAO.update(id, api.payload)
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5002)
+```
+
+说明：Api类管理Api文档。
+
+* 按照REST规范，Resource为资源（每一个路由就是一个资源，每个路由有固定方法如get/post/put/delete/head）。
+* Field定义了参数。
+* Apidoc继承Blueprints，可以更自由地定义文档结构。
+* Namespace可以很好地将资源进行隔离。
+
+
+
+### Api api.py
+
+/flask_restx/api.py
+
+```python
+from . import apidoc
+from .resource import Resource
+from .swagger import Swagger
+
+RE_RULES = re.compile("(<.*>)")
+
+class Api(object):
+    """
+    The main entry point for the application.
+    You need to initialize it with a Flask Application: ::
+
+    >>> app = Flask(__name__)
+    >>> api = Api(app)
+    或者
+    >>> api = Api()
+    >>> api.init_app(app)    
+   """
+
+    def __init__(
+        self,
+        app=None,
+        version="1.0",
+        title=None,
+        description=None,
+        terms_url=None,
+        license=None,
+        license_url=None,
+        contact=None,
+        contact_url=None,
+        contact_email=None,
+        authorizations=None,
+        security=None,
+        doc="/",  #文档路由
+        default_id=default_id,
+        default="default",
+        default_label="Default namespace",
+        validate=None,
+        tags=None,
+        prefix="",	#路由前缀
+        ordered=False,
+        default_mediatype="application/json",
+        decorators=None,
+        catch_all_404s=False,
+        serve_challenge_on_401=False,
+        format_checker=None,
+        url_scheme=None,
+        **kwargs
+    ):
+        self._validate = validate
+        self._doc = doc			#文档路由str
+        self._doc_view = None	#文档视图函数的名称str
+        self._default_error_handler = None        
+		...
+        
+        if app is not None:
+            self.app = app
+            self.init_app(app)  #初始化应用程序flask_app
+            
+    def init_app(self, app, **kwargs):       
+        self._register_specs(self.blueprint or app)
+        self._register_doc(self.blueprint or app)
+        ...
+        
+    def _register_specs(self, app_or_blueprint):
+        """ 注册API文档视图 """
+        if self._add_specs:
+            endpoint = str("specs")
+            self._register_view(
+                app_or_blueprint,
+                SwaggerView,
+                self.default_namespace,
+                "/swagger.json",
+                endpoint=endpoint,
+                resource_class_args=(self,),
+            )
+            self.endpoints.add(endpoint)
+
+    def _register_doc(self, app_or_blueprint):
+        """ 注册文档路由 """
+        if self._add_specs and self._doc:
+            # Register documentation before root if enabled
+            app_or_blueprint.add_url_rule(self._doc, "doc", self.render_doc)
+        app_or_blueprint.add_url_rule(self.prefix or "/", "root", self.render_root)    
+        
+    def render_root(self):
+        """ 根路由没找到的返回内容 """
+        self.abort(HTTPStatus.NOT_FOUND)
+
+    def render_doc(self):
+        """Override this method to customize the documentation page"""
+        if self._doc_view:
+            return self._doc_view()
+        elif not self._doc:
+            self.abort(HTTPStatus.NOT_FOUND)
+        return apidoc.ui_for(self)   # 渲染缺省模板
+```
+
+
+
+### apidoc.py
+
+```python
+from flask import url_for, Blueprint, render_template
+
+class Apidoc(Blueprint):
+    """
+    Allow to know if the blueprint has already been registered
+    until https://github.com/mitsuhiko/flask/pull/1301 is merged
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.registered = False
+        super(Apidoc, self).__init__(*args, **kwargs)
+
+    def register(self, *args, **kwargs):
+        super(Apidoc, self).register(*args, **kwargs)
+        self.registered = True
+
+apidoc = Apidoc(
+    "restx_doc",
+    __name__,
+    template_folder="templates",
+    static_folder="static",
+    static_url_path="/swaggerui",
+)
+
+
+@apidoc.add_app_template_global
+def swagger_static(filename):
+    return url_for("restx_doc.static", filename=filename)
+
+def ui_for(api):
+    """Render a SwaggerUI for a given API, 调用缺省模板 """
+    return render_template("swagger-ui.html", title=api.title, specs_url=api.specs_url)
+```
+
+
+
 
 
 ## flask_script
+
+示例DEMO:
 
 ```python
 # flask_script/__init__.py: Manager
@@ -1863,5 +2649,18 @@ python manage.py print
 
 # 参考资料
 
+**官网**
+
+* [Jinja2 文档](http://jinja.pocoo.org/2/documentation/)
+
+* [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)  http://werkzeug.pocoo.org/documentation/
+
+
+
+
+
+**参考链接**
+
 * FLask之Local、LocalStack和LocalProxy介绍 https://blog.csdn.net/weixin_45950544/article/details/103923191
+* Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
 

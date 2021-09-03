@@ -1,7 +1,8 @@
 | 序号 | 修改时间   | 修改内容 | 修改人 | 审稿人 |
 | ---- | ---------- | -------- | ------ | ------ |
 | 1    | 2018-11-18 | 创建     | Keefe |   |
-|      |       |     |   |   |
+| 2 | 2021-4-10 | 增加章节sklean框架，更新tensorflow框架 | 同上 |   |
+
 
 
 
@@ -10,38 +11,7 @@
 
 ---
 
-# 目录
-```
-[目录... 1](#_Toc2550155)
-[1  AI框架概述... 2](#_Toc2550156)
-[1.1   python常用AI库... 2](#_Toc2550157)
-[1.1.1    科学计算常用库的方法... 2](#_Toc2550158)
-[1.1.2    NLP. 3](#_Toc2550159)
-[1.1.3    vision 计算机视觉... 4](#_Toc2550160)
-[1.2   ML. 4](#_Toc2550161)
-[1.3   本章参考... 5](#_Toc2550162)
-[2  OpenCV. 5](#_Toc2550163)
-[2.1   本章参考... 5](#_Toc2550164)
-[3  Tensorflow.. 5](#_Toc2550165)
-[3.1   简介... 5](#_Toc2550166)
-[3.2   本章参考... 5](#_Toc2550167)
-[4  大数据的机器学习库... 6](#_Toc2550168)
-[4.1   Apache MADlib. 6](#_Toc2550169)
-[4.1.1    MADlib架构... 6](#_Toc2550170)
-[4.1.2    MADlib支持的模型类型... 7](#_Toc2550171)
-[4.2   Apache Mahout. 8](#_Toc2550172)
-[4.3   本章参考... 8](#_Toc2550173)
-[5  DM工具... 8](#_Toc2550174)
-[5.1   DM工具比较... 8](#_Toc2550175)
-[5.2   weka. 10](#_Toc2550176)
-[5.2.1    weka使用... 10](#_Toc2550177)
-[5.2.2    Package Hierarchies. 11](#_Toc2550178)
-[5.2.3    weka development. 12](#_Toc2550179)
-[5.2.4    本节参考... 12](#_Toc2550180)
-[5.3   RapidMiner. 12](#_Toc2550181)
-[5.4   本章参考... 13](#_Toc2550182)
-[参考资料... 13](#_Toc2550183)
-```
+[TOC]
 
 
 
@@ -117,7 +87,7 @@ import pandas as pd
 | gensim   | 用来作文本主题挖掘的库                                     |
 | jieba    | python实现的一个中文分词开源模块。                         |
 | Hanlp    | Java实现的NLP库。                                          |
-| FudanNLP |                                                            |
+| FudanNLP | 复旦大学的NLP平台。                                        |
 
 分词相关库：jieba mmseg
 
@@ -184,8 +154,6 @@ import pandas as pd
 6. Mxnet: Mxnet是由李沐等人领导开发的非常灵活，扩展性很强的框架，被Amazon定为官方框架。特点：Mxnet同时拥有命令式编程和符号式编程的特点。在命令式编程上MXNet提供张量运算，进行模型的迭代训练和更新中的控制逻辑；在声明式编程中MXNet支持符号表达式，用来描述神经网络，并利用系统提供的自动求导来训练模型。Mxnet性能非常高，推荐资源不够的同学使用。
 
    
-
-
 
 **如何学习开源框架**
 
@@ -381,8 +349,6 @@ model.fit(x=x_train,
 
 
 
-
-
 ### 部署篇
 
 
@@ -508,7 +474,7 @@ Torch是为LuaJIT编写的完整的科学计算环境，它是针对Lua语言的
 
 **PyTorch**
 
- PyTorch是Facebook团队于2017年1月发布的一个深度学习框架。基于以前的Torch库，PyTorch是Python优先的机器学习框架，被大量用于深度学习。它支持CUDA技术（来自NVIDIA），可以在训练，分析和验证神经网络模型中充分利用专用GPU的功能。
+PyTorch是Facebook团队于2017年1月发布的一个深度学习框架。基于以前的Torch库，PyTorch是Python优先的机器学习框架，被大量用于深度学习。它支持CUDA技术（来自NVIDIA），可以在训练，分析和验证神经网络模型中充分利用专用GPU的功能。
 
 Torch 的热门应用：在增强学习领域，用卷积神经网络和代理处理图像问题。
 
@@ -558,8 +524,6 @@ Caffe最初由杨庆佳在加州大学伯克利分校读博期间发起，后来
 Paddle即Parallel Distributed Deep Learning(并行分布式深度学习)。
 
 飞桨(PaddlePaddle)以百度多年的深度学习技术研究和业务应用为基础，是中国首个开源开放、技术领先、功能完备的产业级深度学习平台，集深度学习核心训练和推理框架、基础模型库、端到端开发套件和丰富的工具组件于一体。目前，飞桨已凝聚超265万开发者，服务企业10万家，基于飞桨开源深度学习平台产生了34万个模型。可视化框架是visualdl。
-
-
 
 2016年8月，PaddlePaddle发布。
 
@@ -644,7 +608,7 @@ model.evaluate(test_dataset, batch_size=64, verbose=1)
 
 
 
-方式2：基于基础API，完成模型的训练与预测
+法2：基于基础API，完成模型的训练与预测
 
 组网后，开始对模型进行训练，先构建`train_loader`，加载训练数据，然后定义`train`函数，设置好损失函数后，按batch加载数据，完成模型的训练。
 
@@ -880,7 +844,7 @@ __all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
 
 
 
-#### 示例1： iris数据集多分类
+#### 示例1：iris数据集多分类
 
 示例数据集iris是sklearn自带小数据集，样本数150，4个特征，特征值是浮点数。
 
@@ -1062,7 +1026,7 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 
 
 
-## 4.3  本章参考
+## 本章参考
 
 [1].     madlib http://madlib.apache.org/
 [2].     Greenplum上的机器学习——MADlib简介与应用实例 http://blog.sina.com.cn/s/blog_12c856e4c0102yjem.html 
@@ -1231,13 +1195,15 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 
 
 
-## 5.4     本章参考
+## 本章参考
+
+
 
 
 
 # 参考资料
 
-各框架开源地址
+**各框架开源地址**
 
 * Caffe [https://github.com/BVLC/caffe](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2FBVLC%2Fcaffe)
 
@@ -1250,3 +1216,4 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 * Matconvnet [https://github.com/vlfeat/matconvnet](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fvlfeat%2Fmatconvnet)
 * Deeplearning4j [https://github.com/deeplearning4j/deeplearning4j](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fdeeplearning4j%2Fdeeplearning4j)   Java实现
 * Chainer [https://github.com/chainer/chainer](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fchainer%2Fchainer)
+
