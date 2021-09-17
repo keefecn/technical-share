@@ -2,11 +2,11 @@
 | ---- | ---------- | -------- | ------ | ------ |
 | 1    | 2009-12-26 | 创建     | Keefe  | Keefe  |
 
- 
 
 
 
- 
+
+
 
 摘要：本文从linux同步机制引入的机制开始, 讲述了同步机制的变化过程. 并着重分析了原子量,自旋锁spinlock,信号量的实现, 最后将各种同步机制作了整体比较.
 
@@ -14,7 +14,7 @@
 
 Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 
- 
+
 
 
 
@@ -82,7 +82,7 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 
 
 
- 
+
 
 # 一 引言
 
@@ -134,7 +134,7 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 
 因此，如果进程要访问与可屏蔽中断的中断处理程序共享的数据结构，那么它首先应该禁止中断，然后进入临界区，退出临界区之后再重新允许中断。禁止和允许中断的动作就实现了互斥。x86体系结构通过中断指令来禁止和允许中断指令，它们通过标志寄存器EFLAGS的标志位IF设置为0和1来禁止和允许中断。sti允许中断,cli关闭中断.
 
- 
+
 
 **3)** **长期互斥**
 
@@ -143,7 +143,7 @@ Tips: 研究选定的内核版本linux 2.6.30, CPU arch x86, SMP
 ```C
 struct completion{
 	unsigned int done;	//初始化为0,若为0表示未完成,大于0则表示已完成
-	wait-queue head t wait; 
+	wait-queue head t wait;
 };
 ```
 
@@ -179,7 +179,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 (5) 内核正在对每个CPU“私有”的数据结构操作(Per-CPU date structures)。
 
- 
+
 
 为保证Linux内核在以上情况下不会被抢占，使用了一个变量 **preempt_count**，称为内核抢占锁。这一变量被设置在进程的PCB结构task_struct中。每当内核要进入以上几种状态时，变量preempt_count就加１，指示内核不允许抢占。每当内核从以上几种状态退出时，变量preempt_count就减１，同时进行可抢占的判断与调度。如果preempt_count>0，则说明内核现在处于不可抢占状态，不能进行重新调度；如果preempt_count＝0，则说明内核现在是安全的，可以被抢占，能进行重新调度，如果有抢占请求，就进行抢占调度。
 
@@ -206,13 +206,13 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 | arm（Advanced  RISC Machine）                    | 进阶精简指令集机器，是一个32位RISC指令集处理器，广泛使用于嵌入式系统中  。Acorn电脑公司（Acorn Computers Ltd）于1983年开始开发的。 |
 | 其余：                                           | avr32 blackfin cris frv h8300 m32r m68k m68knommu  microblaze mips mn10300 parisc powerpc s390 sh sparc um xtensa |
 
- 
+
 
 ## 同步机制实现需要的基础知识
 
 **1) 指令集ISC**：(Instruction Set Computing CPU)CPU的一种设计模式，用以加快处理器响应速度，传统上分为CISC和RISC。但64位机目前新增了二种指令集，一是Intel IA架构的EPIC（Explicitly Parallel Instruction Computers）精确并行指令计算机；另一个是AMD支持的x86-64，即支持32位x86指令，也增加了新的64位处理指令。支持RISC的有arm，alpha等。
 
- 
+
 
 **2）c/c++的关键字volatile**
 
@@ -246,16 +246,16 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 * 对原子量的 '读出-计算-写入' 操作序列是原子的，在以上动作完成之前，任何其它处理器和线程均无法访问该原子量。
 
-* 原子操作必须保证缓存一致性。即：在 SMP 环境中，原子操作不仅要把计算结果同步到主存，还要以原子的语义将他们同步到当前平台上其他 CPU 的 cache 中。在大部分硬件平台上，cache 同步通常由锁总线指令完成。意即：逻辑上，所有原子操作都显式使用或隐含使用了一个锁总线操作。例如：x86 指令 'cmpxchg' 中就隐含了锁总线操作。 
+* 原子操作必须保证缓存一致性。即：在 SMP 环境中，原子操作不仅要把计算结果同步到主存，还要以原子的语义将他们同步到当前平台上其他 CPU 的 cache 中。在大部分硬件平台上，cache 同步通常由锁总线指令完成。意即：逻辑上，所有原子操作都显式使用或隐含使用了一个锁总线操作。例如：x86 指令 'cmpxchg' 中就隐含了锁总线操作。
 
 **4) 优化屏障**
 
 编译器编译源代码时，会将源代码进行优化，将源代码的指令进行重排序，以适合于CPU的并行执行。然而，内核同步必须避免指令重新排序，优化屏障 （Optimization barrier）避免编译器的重排序优化操作，保证编译程序时在优化屏障之前的指令不会在优化屏障之后执行。
-    Linux用宏barrier实现优化屏障，gcc编译器的优化屏障宏定义列出如下（在include/linux/compiler-gcc.h中） 
+    Linux用宏barrier实现优化屏障，gcc编译器的优化屏障宏定义列出如下（在include/linux/compiler-gcc.h中）
 
 `#define barrier() _asm__volatile_("": : :"memory") `
 
- 
+
 
 **5)** **内存屏障**
 
@@ -273,20 +273,20 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 linux内核提供的屏蔽函数有: mb, rmb, wmb及对应的smp_mb,smp_rmb,smp_wmb. 这些函数的实现是架构相关的。
 
- 
+
 
 **6) likely, unlikely** (from: [include/linux/compiler.h](http://lxr.linux.no/linux+*/include/linux/compiler.h#L107))
 
 这是调用gcc的内嵌函数__builtin_expect,用来比较值。 likely(x)是指x=1时做某事, unlikely(x)指若x=1时不做某做。常用来与某个互斥变量比较。
 
- 
+
 
 **7）嵌入汇编(内嵌汇编）**
 
 嵌入汇编的基本格式
 
 ```asm
-__asm__　__volatile__(“汇编语句“ 
+__asm__　__volatile__(“汇编语句“
 	：输出寄存器output
 	：输入寄存器input
 	：会被修改的寄存器clobber）；
@@ -298,7 +298,7 @@ __asm__　__volatile__(“汇编语句“
 
   Clobber/Modify域存在"memory"，那么GCC会保证在此内联汇编之前，如果某个内存的内容被装入了寄存器，那么在这个内联汇编之后，如果需要使用这个内存处的内容，就会直接到这个内存处重新读取，而不是使用被存放在寄存器中的拷贝。
 
- 
+
 
 ​    在主流的Linux内核中包含了几乎所有现代的操作系统具有的同步机制，下面文章只研究其中几种同步机制的实现。
 
@@ -306,11 +306,11 @@ __asm__　__volatile__(“汇编语句“
 
   Linux 中最简单的同步方法就是原子操作。原子运算符的每个函数都是原子操作。
 
-* 原子量的类型是atomic_t。 
+* 原子量的类型是atomic_t。
 
-* 原子量的函数用来操作整数或位。 
+* 原子量的函数用来操作整数或位。
 
-* 原子量常实现为计数器。 
+* 原子量常实现为计数器。
 
 ### 1)原子量实现的架构相关性
 
@@ -365,9 +365,9 @@ from: [arch/x86/include/asm/alternative.h, line 30](http://localhost/lxr/http/so
 
  LOCK_PREFIX macros used everywhere in the source tree.
 
-  The LOCK prefix invokes a locked (atomic) read-modify-write operation when modifying a memory operand. 
+  The LOCK prefix invokes a locked (atomic) read-modify-write operation when modifying a memory operand.
 
- 
+
 
 ### 2)原子量类型atomic_t定义
 
@@ -375,7 +375,7 @@ from: [arch/x86/include/asm/alternative.h, line 30](http://localhost/lxr/http/so
 
 ```C
 typedef struct {
-	volatile int counter;	
+	volatile int counter;
 } atomic_t;
 
 #ifdef CONFIG_64BIT
@@ -385,7 +385,7 @@ typedef struct {
 #endif
 ```
 
-说明：64位使用的类型是long,32位使用的类型是int. 
+说明：64位使用的类型是long,32位使用的类型是int.
 
 
 
@@ -420,7 +420,7 @@ typedef struct {
 | `#define atomic_set_mask(mask,  addr)  \    asm volatile(LOCK_PREFIX  "orl %0,%1"       \  : : "r" (mask), "m" (*(addr)) :  "memory")  ` | 宏               |
 | ...                                                          |                  |
 
- 
+
 
 ### 4)原子量加法操作函数实现分析
 
@@ -436,7 +436,7 @@ typedef struct {
  */
 //x86架构上32位机的实现
 static inline void atomic_add(int i, atomic_t *v)
-{	
+{
 	asm volatile(LOCK_PREFIX "addl %1,%0"
 		     : "+m" (v->counter)
 		     : "ir" (i));
@@ -454,7 +454,7 @@ static inline void atomic_add(int i, atomic_t *v)
 
 上面原子操作加法的实现略有不同，32机的输出寄存器标识"+m",输入只有一个参数,含义是参数i先从内存中读取到寄存器,+m说明v即是输入操作数也是输出操作数; 而64机的输出寄存器标识"=m",输入用了二个寄存器; 这两种实现比较起来只是64位多使用了一个输入寄存器用来保存v,可能计算会快些,但整体上来说并没多大区别,可以认为两种机器下可以互换.
 
- 
+
 
 ## 2 自旋锁spinlock
 
@@ -513,19 +513,19 @@ typedef struct raw_spinlock {
 
 说明: 提供了四个加锁函数lock, 分别适用于一般情况, 中断请求irq, 中断请求并保存irqsave, 底部下半部buttom half—bh.
 
- 
+
 
 **自旋锁算法实现原理:**
 
 ```c
 do{
-	b=1;		
+	b=1;
 	while(b){
 		lock(bus);	//锁内存总线
 		b = test_and_set(&lock);	//测试变量lock,此句不断执行,直至b可用
 		unlock(bus);	//解锁
 	}
-	临界区处理... 
+	临界区处理...
 }while(1)
 ```
 
@@ -561,7 +561,7 @@ do{
 
   preempt_disable：内核可抢占处理；
 
-  spin_acquire：锁请求。  
+  spin_acquire：锁请求。
 
   [LOCK_CONTENDED：](http://localhost/lxr/http/ident?i=LOCK_CONTENDED)
 
@@ -598,7 +598,7 @@ a) preempt_disable()
   85#define preempt_disable()               do { } while (0)
 ```
 
- 
+
 
 b) [spin_acquire](http://localhost/lxr/http/ident?i=spin_acquire)
 
@@ -618,7 +618,7 @@ form: /include/linux/lockdep.h
  432#endif
 ```
 
- 
+
 
 c) LOCK_CONTENDED
 
@@ -640,13 +640,13 @@ c) LOCK_CONTENDED
  363        lock(_lock)
 ```
 
- 
+
 
 d)真正的加锁函数 (属于原子操作)
 
 实现链:
 
-raw_spin_trylock -->[_raw_spin_trylock -->](http://localhost/lxr/http/ident?i=_raw_spin_trylock)__raw_spin_trylock  
+raw_spin_trylock -->[_raw_spin_trylock -->](http://localhost/lxr/http/ident?i=_raw_spin_trylock)__raw_spin_trylock
 
 raw_spin_lock -->_raw_spin_lock -->__raw_spin_lock
 
@@ -656,7 +656,7 @@ raw_spin_lock -->_raw_spin_lock -->__raw_spin_lock
 lock->slock初始为0,未上锁状态. x86中spinlock用排队自旋锁实现,保存申请顺序来解决不公平问题. slock由next和owner组成, 其中next表示申请序号,owner表示申请已否标记. 当cpu不超过255时,slock(16bit)=高8位 next + 低8位owner; 否则next和owner都是16bit. 当next和owner均为0时,锁无人使用. 内核执行线程申请自旋锁时，原子地将 Next 域加 1，并将原值返回作为自己的票据序号。如果返回的票据序号等于申请时的 Owner 值，说明自旋锁处于未使用状态，则直接获得锁；否则，该线程忙等待检查 Owner 域是否等于自己持有的票据序号，一旦相等，则表明锁轮到自己获取。线程释放锁时，原子地将 Owner 域加 1 即可，下一个线程将会发现这一变化，从忙等待状态中退出。
 
 ```c
-  58#if (NR_CPUS < 256)        
+  58#if (NR_CPUS < 256)
   59#define TICKET_SHIFT 8
   60
    61static __always_inline void __ticket_spin_lock(raw_spinlock_t *lock)
@@ -710,7 +710,7 @@ lock->slock初始为0,未上锁状态. x86中spinlock用排队自旋锁实现,�
 
    如果锁处于使用状态，则不停地将当前的 slock 的 Owner 域复制到 inc 的低字节处(movb 指令)，然后重复1步骤。不过此时 inc 变量的高位和低位字节相等表明轮到自己获取了自旋锁。
 
- 
+
 
 示例2: arm架构下加锁的实现[__raw_spin_lock](http://lxr.linux.no/linux+*/+code=__raw_spin_lock) /arch/arm/include/asm/spinlock.h
 
@@ -778,7 +778,7 @@ typedef struct {
 
 
 
-### 2)读写锁操作函数 
+### 2)读写锁操作函数
 
 | 函数声明function  prototype | 用途description                          |
 | --------------------------- | ---------------------------------------- |
@@ -788,7 +788,7 @@ typedef struct {
 | write_unlock                | unlock                                   |
 | read_unlock                 | unlock                                   |
 
- 
+
 
 ## 4 内核信号量
 
@@ -832,7 +832,7 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
 | `down`                      | `acquire the semaphore, -1` |      |
 | `up`                        | `release the semaphore, +1` |      |
 
- 
+
 
 ### 3)信号量函数实现
 
@@ -865,7 +865,7 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
  237{
  238        __down_common(sem, TASK_UNINTERRUPTIBLE, MAX_SCHEDULE_TIMEOUT);
  239}
- 
+
  204static inline int __sched __down_common(struct semaphore *sem, long state,
  205                                                                long timeout)
  206{
@@ -897,10 +897,10 @@ from: [kernel/semaphore.c](http://lxr.linux.no/linux+*/kernel/semaphore.c)
  232        list_del(&waiter.list);
  233        return -EINTR;
  234}
- 
+
 ```
 
- 
+
 
 **b)** **信号量释放函数up**
 
@@ -928,7 +928,7 @@ up 释放信号量
  189EXPORT_SYMBOL(up);
 ```
 
- 
+
 
 # 四 各种同步机制比较分析
 
@@ -967,21 +967,21 @@ semaphore使用时若发现资源暂不可用，则保存上下文irqsave,睡眠
 
 3）需要关中断的场合需要调用spinlock_irq或者spinlock_irqsave，不明确当前中断状态的地方需要调用spinlock_irqsave，否则调用spinlock_irq。一个资源既在中断上下文中访问，又在用户上下文中访问，那么需要关中断，如果仅仅在用户上下文中被访问，那么无需关中断。
 
- 
 
-## 3 其它 
+
+## 3 其它
 
 **Semaphore与mutex**
 
 这两者的结构体很相似，都有一个spinlock,一个等待队列。获取锁时的实现也类同。
 
- 
+
 
 **Spinlock与rwlock**
 
 这两者的结构定义一样。
 
- 
+
 
 **内核态的同步机制与用户态的同步机制**
 
@@ -991,7 +991,7 @@ semaphore使用时若发现资源暂不可用，则保存上下文irqsave,睡眠
 
 本文通过从同步机制引入原因, 发展变化及典型实现的研究, 进一步加强了对内核的理解,为下一步的深入学习打下了良好基础. 由于时间和能力的限制, 本次没有对锁的粒度, 内存屏蔽（如何实现锁若干字节或某段地址范围的内存区域）进一步扩展, 希望下次能够理解得更充分。
 
- 
+
 
 # 参考文献
 

@@ -362,7 +362,7 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 | encodings     |                                                              | 编码                               |
 | ensurepip     | `__ini__.py`::_run_pip()                                     | 模块用pip安装                      |
 | html          |                                                              |                                    |
-| http          |                                                              |                                    |
+| http          | client.py cookiejar.py cookies.py server.py                  | http服务器                         |
 | idlelib       |                                                              |                                    |
 | importlib     |                                                              |                                    |
 | json          |                                                              |                                    |
@@ -1374,7 +1374,7 @@ finally:
 
 
 
-## 标准模块 functools
+## 标准 functools.py
 
 源文件：functools.py
 
@@ -1383,7 +1383,6 @@ finally:
 实现： 调用  partial() to update_wrapper().
 
 ```python
-# lib/functools.py
 WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__',
                        '__annotations__')
 WRAPPER_UPDATES = ('__dict__',)
@@ -1460,7 +1459,7 @@ def calc_func(func)
 
 
 
-## 标准模块 types
+## 标准 types
 
 ### 元类metaclass
 
@@ -1538,6 +1537,497 @@ Foo.__init__
 ```
 
 说明：Foo类生成一个实例时，将会依次执行 `Mymeta.(__call__  ->  __new__ ->  __init__)  `
+
+
+
+## 标准 sockerserver.py
+
+通用的socker服务器类。定义了5个服务器类，3个请求处理器和1个线程工具类。
+
+```python
+# BaseServer.serve_forever处理流程
+selector.select(poll_interval) -> self._handle_request_noblock (非阻塞处理请求)
+		--> get_request, verify_request, process_request(一般派生类要重载, 调用finish_request),  shutdown_request(异常时)
+-> self.service_actions()
+
+# process_request实现中的finish_request处理流程： BaseRequestHandler.handle()
+```
+
+
+
+lib/sockerserve
+
+```python
+"""
+        +------------+
+        | BaseServer |
+        +------------+
+              |
+              v
+        +-----------+        +------------------+
+        | TCPServer |------->| UnixStreamServer |
+        +-----------+        +------------------+
+              |
+              v
+        +-----------+        +--------------------+
+        | UDPServer |------->| UnixDatagramServer |
+        +-----------+        +--------------------+
+
+5个服务器类： BaseServer -> TCPServer/UDPServer  ->  UnixStreamServer/UnixDatagramServer
+3个请求处理类： BaseRequestHandler -> StreamRequestHandler/DatagramRequestHandler
+1个线程工具类： ThreadingMixIn
+扩展1：支持fork时新增3个服务器["ForkingUDPServer","ForkingTCPServer", "ForkingMixIn"]，
+扩展2：支持unix时新增4个服务器
+"""
+
+import socket
+import selectors
+import os
+import sys
+import threading
+from io import BufferedIOBase
+from time import monotonic as time
+
+__all__ = ["BaseServer", "TCPServer", "UDPServer",
+           "ThreadingUDPServer", "ThreadingTCPServer",
+           "BaseRequestHandler", "StreamRequestHandler",
+           "DatagramRequestHandler", "ThreadingMixIn"]
+if hasattr(os, "fork"):  #支持fork时
+    __all__.extend(["ForkingUDPServer","ForkingTCPServer", "ForkingMixIn"])
+if hasattr(socket, "AF_UNIX"):	# unix套接字
+    __all__.extend(["UnixStreamServer","UnixDatagramServer",
+                    "ThreadingUnixStreamServer",
+                    "ThreadingUnixDatagramServer"])
+    
+# ThreadingUDPServer和ThreadingTCPServer 未真正实现
+class ThreadingUDPServer(ThreadingMixIn, UDPServer): pass  
+class ThreadingTCPServer(ThreadingMixIn, TCPServer): pass
+
+# 这里定义选择器：poll或者select
+if hasattr(selectors, 'PollSelector'):
+    _ServerSelector = selectors.PollSelector
+else:
+    _ServerSelector = selectors.SelectSelector
+
+class TCPServer(BaseServer):
+class UDPServer(TCPServer):    
+    
+class BaseServer:
+   """Base class for server classes.
+
+    Methods for the caller:  调用的方法
+
+    - __init__(server_address, RequestHandlerClass)
+    - serve_forever(poll_interval=0.5)	#进入到后台服务
+    - shutdown()
+    - handle_request()  # if you do not use serve_forever()
+    - fileno() -> int   # for selector
+
+    Methods that may be overridden:  可能重载的方法
+
+    - server_bind()
+    - server_activate()
+    - get_request() -> request, client_address	#获取请求
+    - handle_timeout()
+    - verify_request(request, client_address)
+    - server_close()
+    - process_request(request, client_address)	#处理请求，经常重载
+    - shutdown_request(request)			#关闭请求
+    - close_request(request)
+    - service_actions()
+    - handle_error()
+
+    Methods for derived classes:  
+
+    - finish_request(request, client_address)
+
+    Class variables that may be overridden by derived classes or
+    instances:
+
+    - timeout
+    - address_family
+    - socket_type
+    - allow_reuse_address
+
+    Instance variables:
+
+    - RequestHandlerClass
+    - socket
+
+    """    
+    def serve_forever(self, poll_interval=0.5):
+        """Handle one request at a time until shutdown.
+
+        Polls for shutdown every poll_interval seconds. Ignores
+        self.timeout. If you need to do periodic tasks, do them in
+        another thread.
+        """
+        self.__is_shut_down.clear()
+        try:
+            # 根据_ServerSelector()选择相应的poll或select注册事件，poll性能会更差些
+            with _ServerSelector() as selector:
+                selector.register(self, selectors.EVENT_READ)
+
+                while not self.__shutdown_request:
+                    ready = selector.select(poll_interval)  # 定时监听
+                    # bpo-35017: shutdown() called during select(), exit immediately.
+                    if self.__shutdown_request:
+                        break
+                    if ready:
+                        self._handle_request_noblock()  #处理非阻塞请求
+
+                    self.service_actions()
+        finally:
+            self.__shutdown_request = False
+            self.__is_shut_down.set()
+
+   def _handle_request_noblock(self):
+        """Handle one request, without blocking.
+
+        I assume that selector.select() has returned that the socket is
+        readable before this function was called, so there should be no risk of
+        blocking in get_request().
+        """
+        try:
+            request, client_address = self.get_request()  #获取请求
+        except OSError:
+            return
+        if self.verify_request(request, client_address):	#验证请求
+            try:
+                self.process_request(request, client_address)	#处理请求，一般要重载
+            except Exception:
+                self.handle_error(request, client_address)
+                self.shutdown_request(request)
+            except:
+                self.shutdown_request(request)	#关闭请求
+                raise
+        else:
+            self.shutdown_request(request)   
+            
+    def process_request(self, request, client_address):
+        """Call finish_request.
+        Overridden by ForkingMixIn and ThreadingMixIn.
+        """
+        self.finish_request(request, client_address)
+        self.shutdown_request(request)         
+        
+    def finish_request(self, request, client_address):
+        """Finish one request by instantiating RequestHandlerClass."""
+        self.RequestHandlerClass(request, client_address, self)	#BaseRequestHandler初始化时调用self.handle()
+        
+
+class ThreadingMixIn:	# 线程处理类
+    """Mix-in class to handle each request in a new thread."""
+
+    # Decides how threads will act upon termination of the
+    # main process
+    daemon_threads = False
+    # If true, server_close() waits until all non-daemonic threads terminate.
+    block_on_close = True
+    # Threads object
+    # used by server_close() to wait for all threads completion.
+    _threads = _NoThreads()
+
+    def process_request_thread(self, request, client_address):
+        """Same as in BaseServer but as a thread.
+
+        In addition, exception handling is done here.
+
+        """
+        try:
+            self.finish_request(request, client_address)	#
+        except Exception:
+            self.handle_error(request, client_address)
+        finally:
+            self.shutdown_request(request)
+
+    def process_request(self, request, client_address):
+        """Start a new thread to process the request."""
+        if self.block_on_close:
+            vars(self).setdefault('_threads', _Threads())
+        t = threading.Thread(target = self.process_request_thread,	# 启动一个新线程来处理请求
+                             args = (request, client_address))
+        t.daemon = self.daemon_threads
+        self._threads.append(t)
+        t.start()
+       
+    
+if hasattr(os, "fork"):
+    class ForkingMixIn:      # 进程处理类
+        timeout = 300
+        active_children = None
+        max_children = 40
+        # If true, server_close() waits until all child processes complete.
+        block_on_close = True 
+        def collect_children(self, *, blocking=False):
+            """ 等待子进程退出 """
+            
+        def handle_timeout(self):
+            self.collect_children()
+            
+        def service_actions(self):
+            self.collect_children()
+            
+        def process_request(self, request, client_address):
+            """Fork a new subprocess to process the request."""
+            pid = os.fork()
+            if pid:
+                # Parent process  回收父进程
+                if self.active_children is None:
+                    self.active_children = set()
+                self.active_children.add(pid)
+                self.close_request(request)
+                return
+            else:
+                # Child process.
+                # This must never return, hence os._exit()!
+                status = 1
+                try:
+                    self.finish_request(request, client_address)	# 处理请求
+                    status = 0
+                except Exception:
+                    self.handle_error(request, client_address)
+                finally:
+                    try:
+                        self.shutdown_request(request)
+                    finally:
+                        os._exit(status)        
+
+        def server_close(self):
+            super().server_close()
+            self.collect_children(blocking=self.block_on_close)    
+                                  
+```
+
+
+
+请求处理类： BaseRequestHandler ->  StreamRequestHandler/DatagramRequestHandler (区别主要在于定义不同的读写器rfile, wfile)
+
+```python
+class BaseRequestHandler:    
+    """ 实际处理请求 """
+    def __init__(self, request, client_address, server):
+        self.request = request
+        self.client_address = client_address
+        self.server = server
+        self.setup()
+        try:
+            self.handle()	#请求实际处理函数，实际应用派生类会重载此处
+        finally:
+            self.finish()   
+            
+    def setup(self):
+        pass
+
+    def handle(self):
+        pass
+
+    def finish(self):
+        pass
+    
+    
+class StreamRequestHandler(BaseRequestHandler):
+    """ 流请求处理： """
+    rbufsize = -1
+    wbufsize = 0
+
+    # A timeout to apply to the request socket, if not None.
+    timeout = None    
+    disable_nagle_algorithm = False
+
+    def setup(self):
+        self.connection = self.request
+        if self.timeout is not None:
+            self.connection.settimeout(self.timeout)
+        if self.disable_nagle_algorithm:
+            self.connection.setsockopt(socket.IPPROTO_TCP,
+                                       socket.TCP_NODELAY, True)
+        self.rfile = self.connection.makefile('rb', self.rbufsize)
+        if self.wbufsize == 0:
+            self.wfile = _SocketWriter(self.connection)
+        else:
+            self.wfile = self.connection.makefile('wb', self.wbufsize)
+
+    def finish(self):
+        if not self.wfile.closed:
+            try:
+                self.wfile.flush()
+            except socket.error:
+                # A final socket error may have occurred here, such as
+                # the local error ECONNABORTED.
+                pass
+        self.wfile.close()
+        self.rfile.close()
+        
+
+class DatagramRequestHandler(BaseRequestHandler):
+    """Define self.rfile and self.wfile for datagram sockets."""
+
+    def setup(self):
+        from io import BytesIO
+        self.packet, self.socket = self.request
+        self.rfile = BytesIO(self.packet)	#字节流
+        self.wfile = BytesIO()
+
+    def finish(self):
+        self.socket.sendto(self.wfile.getvalue(), self.client_address)          
+```
+
+
+
+## 标准 http/
+
+依赖于 sockerserver.py
+
+| 目录或文件    | 主要类或函数                                                 | 说明                                 |
+| ------------- | ------------------------------------------------------------ | ------------------------------------ |
+| `__init__.py` | HTTPStatus                                                   |                                      |
+| server.py     | 服务器: HTTPServer ThreadingHTTPServer<br>请求处理器：BaseHTTPRequestHandler CGIHTTPRequestHandler SimpleHTTPRequestHandler | 继承sockerserver的服务器和请求处理器 |
+| client.py     | HTTPConnection HTTPSConnection ...                           | HTTP/1.1 client library              |
+| cookiejar.py  |                                                              |                                      |
+| cookies.py    |                                                              |                                      |
+
+server.py
+
+```python
+import socketserver
+class HTTPServer(socketserver.TCPServer):    
+    
+ 
+class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
+    """ 请求处理器重载 父类方法：handle, handle_one_request """
+    def parse_request(self):
+        """Parse a request (internal).  通过header数据判断请求是否可以解析
+        The request should be stored in self.raw_requestline; the results
+        are in self.command, self.path, self.request_version and
+        self.headers.
+
+        Return True for success, False for failure; on failure, any relevant
+        error response has already been sent back.
+        """
+
+        
+    def handle_one_request(self):
+        """Handle a single HTTP request.
+
+        You normally don't need to override this method; see the class
+        __doc__ string for information on how to handle specific HTTP
+        commands such as GET and POST.
+
+        """
+        try:
+            self.raw_requestline = self.rfile.readline(65537)
+            if len(self.raw_requestline) > 65536:	#包太大
+                self.requestline = ''
+                self.request_version = ''
+                self.command = ''
+                self.send_error(HTTPStatus.REQUEST_URI_TOO_LONG)
+                return
+            if not self.raw_requestline:
+                self.close_connection = True
+                return
+            if not self.parse_request():	#判断请求是否解析
+                # An error code has been sent, just exit
+                return
+            mname = 'do_' + self.command
+            if not hasattr(self, mname):
+                self.send_error(
+                    HTTPStatus.NOT_IMPLEMENTED,
+                    "Unsupported method (%r)" % self.command)
+                return
+            method = getattr(self, mname)
+            method()	#方法
+            self.wfile.flush() #actually send the response if not already done.
+        except socket.timeout as e:
+            #a read or a write timed out.  Discard this connection
+            self.log_error("Request timed out: %r", e)
+            self.close_connection = True
+            return
+
+    def handle(self):
+        """Handle multiple requests if necessary."""
+        self.close_connection = True
+
+        self.handle_one_request()  #处理单个请求，复用连接
+        while not self.close_connection:
+            self.handle_one_request()    
+```
+
+
+
+client.py
+
+```python
+""" http状态转移
+This diagram details these state transitions:
+
+    (null)
+      |
+      | HTTPConnection()
+      v
+    Idle
+      |
+      | putrequest()
+      v
+    Request-started
+      |
+      | ( putheader() )*  endheaders()
+      v
+    Request-sent
+      |\_____________________________
+      |                              | getresponse() raises
+      | response = getresponse()     | ConnectionError
+      v                              v
+    Unread-response                Idle
+    [Response-headers-read]
+      |\____________________
+      |                     |
+      | response.read()     | putrequest()
+      v                     v
+    Idle                  Req-started-unread-response
+                     ______/|
+                   /        |
+   response.read() |        | ( putheader() )*  endheaders()
+                   v        v
+       Request-started    Req-sent-unread-response
+                            |
+                            | response.read()
+                            v
+                          Request-sent
+                          
+Logical State                  __state            __response
+-------------                  -------            ----------
+Idle                           _CS_IDLE           None
+Request-started                _CS_REQ_STARTED    None
+Request-sent                   _CS_REQ_SENT       None
+Unread-response                _CS_IDLE           <response_class>
+Req-started-unread-response    _CS_REQ_STARTED    <response_class>
+Req-sent-unread-response       _CS_REQ_SENT       <response_class>                          
+"""                          
+```
+
+
+
+## 标准 logging
+
+**werkzeug和flask应用的日志为什么会输出到一个日志文件**
+
+当`getlogger()`不传入参数时,会返回一个logging.RootLogger。子对象会将记录共享到父对象,所以`RootLogger`会包含所有子对象的记录并将其记录到文件。
+
+```python
+>>> import logging
+>>> root = logging.getLogger()
+>>> logger = logging.getLogger(__name__)
+>>> logger1 = logging.getLogger(__name__ + ".child")
+>>> print(root.name,type(root),root.parent,id(root))
+>>> print(logger.name, type(logger), id(logger), id((logger.parent)))
+>>> print(logger1.name, type(logger1), id(logger1), id((logger1.parent)))
+root <class 'logging.RootLogger'> None 2221014057936
+__main__ <class 'logging.Logger'> 2221026991120 2221014057936
+__main__.child <class 'logging.Logger'> 2221026990640 2221026991120
+```
+
+
 
 
 

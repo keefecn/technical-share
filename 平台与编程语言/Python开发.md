@@ -2694,7 +2694,7 @@ PSD
 
 #### 3.5.1.1 SQLAlchemy
 
-![image-20210702103104836](..\media\sf_reuse\framework\frame_sqlalchema.png)
+![image-20210702103104836](../media/sf_reuse/framework/frame_sqlalchema.png)
 
 图 2 SQLAlchemy architecture
 

@@ -248,7 +248,7 @@ heritrix以创建一个job开始。jobs创建有四种方式。（详见WEBUI）
 
 示例如下：
 
-![image-20210611171754257](..\..\media\code\code_heritrix_001.png)                               
+![image-20210611171754257](../../media/code/code_heritrix_001.png)                               
 
  
 
@@ -300,7 +300,7 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
  
 
- ![image-20210611171832722](..\..\media\code\code_heritrix_002.png)
+ ![image-20210611171832722](../../media/code/code_heritrix_002.png)
 
 图 运行结构图
 
@@ -334,7 +334,7 @@ Servercache（处理器缓存）：存放服务器的持久信息，能够被爬
 
  
 
-![image-20210611171900398](..\..\media\code\code_heritrix_003.png)
+![image-20210611171900398](../../media/code/code_heritrix_003.png)
 
 图  heritrix组件结构图
 
@@ -352,25 +352,25 @@ order.xml
 
 ### 3.2.3 processor chains
 
- ![image-20210611171942995](..\..\media\code\code_heritrix_004.png)
+ ![image-20210611171942995](../../media/code/code_heritrix_004.png)
 
 图 processor概要图
 
  
 
- ![image-20210611172001237](..\..\media\code\code_heritrix_005.png)
+ ![image-20210611172001237](../../media/code/code_heritrix_005.png)
 
 图 processor详细图
 
 ### 3.2.4 Frontier
 
- ![image-20210611172020358](..\..\media\code\code_heritrix_006.png)
+ ![image-20210611172020358](../../media/code/code_heritrix_006.png)
 
  
 
 ### 3.2.5 extractor
 
- ![image-20210611172058031](..\..\media\code\code_heritrix_007.png)
+ ![image-20210611172058031](../../media/code/code_heritrix_007.png)
 
 
 
@@ -378,7 +378,7 @@ order.xml
 
 
 
- ![image-20210611172115792](..\..\media\code\code_heritrix_008.png)
+ ![image-20210611172115792](../../media/code/code_heritrix_008.png)
 
 
 

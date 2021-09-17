@@ -10,6 +10,12 @@
 
 ---
 
+[TOC]
+
+
+
+---
+
 
 # gunicorn源码剖析
 
@@ -87,7 +93,7 @@ Required-by:
 
 
 
-![img](..\..\media\code\code_gunicorn_001.png)
+![img](../../media/code/code_gunicorn_001.png)
 
 图 gunicorn代码间关联
 

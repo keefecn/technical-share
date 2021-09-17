@@ -133,7 +133,7 @@
 
 ## 3.1  系统架构
 
-​                   ![image-20210611180124772](..\..\media\code\code_tse_001.png)            
+​                   ![image-20210611180124772](../../media/code/code_tse_001.png)            
 
  
 
@@ -143,7 +143,7 @@
 
 包括切词,正排索引,倒排索引,其中排序,排重使用了shell命令sort, uniq
 
- ![image-20210611180149494](..\..\media\code\code_tse_002.png)
+ ![image-20210611180149494](../../media/code/code_tse_002.png)
 
  
 
@@ -155,7 +155,7 @@
 
 **3).cgi**
 
- ![image-20210611180217833](..\..\media\code\code_tse_003.png)
+ ![image-20210611180217833](../../media/code/code_tse_003.png)
 
  
 

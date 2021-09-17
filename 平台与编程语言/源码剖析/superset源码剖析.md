@@ -4375,6 +4375,8 @@ class DefaultLoggingConfigurator(LoggingConfigurator):
         logging.getLogger().setLevel(app_config["LOG_LEVEL"])
 
         if app_config["ENABLE_TIME_ROTATE"]:  # 时间滚动日志
+            # logging.getLogger()不传参时返回根日志RootLogger，这样其它日志器的记录都会打印到RootLogger指向的文件
+            # 如果getLogger('xx') 有传值，那只有这个称呼的日志器才能指向文件
             logging.getLogger().setLevel(app_config["TIME_ROTATE_LOG_LEVEL"])
             handler = TimedRotatingFileHandler(
                 app_config["FILENAME"],

@@ -112,7 +112,7 @@ Mediawiki分析版本v1-26.0
 
 参见：https://www.mediawiki.org/wiki/Manual:Database_layout
 
-​    ![image-20191208232311794](..\..\media\sf_reuse\tools\tools_mediawiki_001.png)                           
+​    ![image-20191208232311794](../../media/sf_reuse/tools\tools_mediawiki_001.png)                           
 
 图 1 按功能划分表格
 

@@ -187,7 +187,7 @@ S：总预测样本个数 = P + N = P‘ + N’
 
 但是当这两个指标发生冲突时，如何权衡？ 于是出现了PR曲线/ROC/AUC曲线。
 
-![PR曲线](..\..\media\ai\ai_algo_006.png)
+![PR曲线](../../media/ai/ai_algo_006.png)
 
 
 
@@ -221,7 +221,7 @@ P-R曲线评价：
 
 TPR 为纵轴，以 FPR 为横轴，画出 ROC 曲线。从 FPR 和 TPR 的定义可以理解，TPR 越高，FPR 越小，我们的模型的性能也就越好。也就是说，ROC 曲线越靠近左上角 (1, 1) 模型越好。
 
-![ROC](..\..\media\ai\ai_algo_005.png)
+![ROC](../../media/ai/ai_algo_005.png)
 
 
 
@@ -298,7 +298,7 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 
 > 注意：Macro F1受样本数量少的类别影响大。
 
-![2](..\..\media\ai\ai_algo_007.png)
+![2](../../media/ai/ai_algo_007.png)
 
 **图  N分类混淆矩阵**
 
@@ -437,7 +437,7 @@ SGD的劣势:
 
 ## 2 特征工程
 
-![特征工程](..\..\media\ai\ai_001.jpg)
+![特征工程](../../media/ai/ai_001.jpg)
 
 图 特征工程
 

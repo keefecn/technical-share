@@ -11,6 +11,12 @@
 
 ---
 
+[TOC]
+
+
+
+---
+
 # 1 简介
 
 Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架，非常出名，非常强悍。
@@ -459,7 +465,7 @@ Scrapy是一个基于Twisted，纯Python实现的爬虫框架，用户只需要�
 
 整体架构大致如下
 
-![Scrapy架构.jpg](..\..\media\code\code_scrapy_001.png)
+![Scrapy架构.jpg](../../media/code/code_scrapy_001.png)
 
 图 1 Scrapy框架
 
@@ -497,7 +503,7 @@ Scrapy的处理逻辑如下：绿线是数据流向。
 - 四个中间件管理器类：`DownloaderMiddlewareManager`、`SpiderMiddlewareManager`、`ItemPipelineMiddlewareManager`、`ExtensionManager`；
 - 其他辅助类：`Request`、`Response`、`Selector`；
 
-![Scrapy架构.jpg](..\..\media\code\code_scrapy_003.jpg)
+![Scrapy架构.jpg](../../media/code/code_scrapy_003.jpg)
 
 
 

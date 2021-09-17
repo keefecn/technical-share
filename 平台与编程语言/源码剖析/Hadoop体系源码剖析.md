@@ -7,7 +7,7 @@
 
  
 
- 
+---
 
 目录
 
@@ -49,9 +49,11 @@
 
 [参考资料... 19](#_Toc521715029)
 
- 
+
 
  
+
+[TOC]
 
 
 
@@ -438,7 +440,7 @@ HBase中的表一般有这样的特点：
 
 HBase以表的形式存储数据。表有行和列组成。列划分为若干个列族(column family)
 
-![HBase table logic-view.png](..\..\media\bigdata\hadoop\hadoop_hbase_001.png)
+![HBase table logic-view.png](../../media/bigdata/hadoop/hadoop_hbase_001.png)
 
 图 1 HBase table logic-view
 
@@ -484,7 +486,7 @@ StoreFile以HFile格式保存在HDFS上。
 
 HFile的格式为：(更多细节，参见[http://www.tbdata.org/arcHives/1551](http://www.tbdata.org/archives/1551) )
 
-![hfile](..\..\media\bigdata\hadoop\hadoop_hbase_002.png)
+![hfile](../../media/bigdata/hadoop/hadoop_hbase_002.png)
 
 图 4 HFile
 
@@ -520,13 +522,13 @@ HLog 文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HL
 
  
 
-![hbase3](..\..\media\bigdata\hadoop\hadoop_hbase_003.png)
+![hbase3](../../media/bigdata/hadoop/hadoop_hbase_003.png)
 
 图 5 HBase物理架构2
 
  
 
-![hbase2](..\..\media\bigdata\hadoop\hadoop_hbase_004.png)
+![hbase2](../../media/bigdata/hadoop/hadoop_hbase_004.png)
 
 图 6 HBase系统架构3
 
@@ -586,7 +588,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
  
 
-![region_find](..\..\media\bigdata\hadoop\hadoop_hbase_005.png)
+![region_find](../../media/bigdata/hadoop/hadoop_hbase_005.png)
 
 图 7 Region find Sequence digram
 
@@ -622,7 +624,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
 **写请求处理过程**
 
-![hbase_read](..\..\media\bigdata\hadoop\hadoop_hbase_006.png)
+![hbase_read](../../media/bigdata/hadoop/hadoop_hbase_006.png)
 
 图 8 HBase写请求序列图
 

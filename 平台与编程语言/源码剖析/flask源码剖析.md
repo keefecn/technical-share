@@ -11,6 +11,12 @@
 
 ---
 
+[TOC]
+
+
+
+---
+
 #  1 flask源码剖析
 
 [pallets/flask](https://github.com/pallets/flask)  [Releases on PyPI](https://pypi.python.org/pypi/Flask)  [Documentation](https://flask.palletsprojects.com/)  [Test status](https://dev.azure.com/pallets/flask/_build)
@@ -300,6 +306,114 @@ late_ctx_processor()>]},
  '_got_first_request': False,
  '_before_request_lock': <unlocked _thread.lock object at 0x000000C940D4FB40>,
  'name': 'demo_app'}
+```
+
+
+
+#### wsgi应用 wsgi_app
+
+```python
+class Flask(_PackageBoundObject):
+    def wsgi_app(self, environ, start_response):
+        """ 真正的wsgi应用程序
+        The actual WSGI application. This is not implemented in
+        :meth:`__call__` so that middlewares can be applied without
+        losing a reference to the app object. Instead of doing this::
+        
+            app = MyMiddleware(app)
+        It's a better idea to do this instead::
+            app.wsgi_app = MyMiddleware(app.wsgi_app)
+		"""       
+        ctx = self.request_context(environ)	#得到请求上下文
+        error = None
+        try:
+            try:
+                ctx.push()
+                response = self.full_dispatch_request()	#分发请求
+            except Exception as e:
+                error = e
+                response = self.handle_exception(e)
+            except:  # noqa: B001
+                error = sys.exc_info()[1]
+                raise
+            return response(environ, start_response)	#返回响应结果 
+        finally:
+            if self.should_ignore_error(error):
+                error = None
+            ctx.auto_pop(error)	
+            
+    def __call__(self, environ, start_response):
+        """The WSGI server calls the Flask application object as the
+        WSGI application. This calls :meth:`wsgi_app` which can be
+        wrapped to applying middleware."""
+        return self.wsgi_app(environ, start_response)  
+    
+    def full_dispatch_request(self):
+        """Dispatches the request and on top of that performs request
+        pre and postprocessing as well as HTTP exception catching and
+        error handling.
+
+        .. versionadded:: 0.7
+        """
+        self.try_trigger_before_first_request_functions()	#触发请求前函数 
+        try:
+            request_started.send(self)
+            rv = self.preprocess_request()	#处理请求
+            if rv is None:
+                rv = self.dispatch_request()	#重新分发请求
+        except Exception as e:
+            rv = self.handle_user_exception(e)
+        return self.finalize_request(rv)    #请求结果打包
+    
+  	def preprocess_request(self):
+        """Called before the request is dispatched. Calls
+        :attr:`url_value_preprocessors` registered with the app and the
+        current blueprint (if any). Then calls :attr:`before_request_funcs`
+        registered with the app and the blueprint.
+
+        If any :meth:`before_request` handler returns a non-None value, the
+        value is handled as if it was the return value from the view, and
+        further request handling is stopped.
+        """
+        bp = _request_ctx_stack.top.request.blueprint
+
+        funcs = self.url_value_preprocessors.get(None, ())	
+        if bp is not None and bp in self.url_value_preprocessors:
+            funcs = chain(funcs, self.url_value_preprocessors[bp])
+        for func in funcs:
+            func(request.endpoint, request.view_args)
+
+        funcs = self.before_request_funcs.get(None, ())	#@before_request
+        if bp is not None and bp in self.before_request_funcs:
+            funcs = chain(funcs, self.before_request_funcs[bp])
+        for func in funcs:
+            rv = func()
+            if rv is not None:
+                return rv
+            
+    @setupmethod
+    def before_request(self, f):
+        """Registers a function to run before each request.
+		注册每个请求处理前函数，可以作装饰器 @xx.before_request
+        """
+        self.before_request_funcs.setdefault(None, []).append(f)
+        return f  
+    
+    @setupmethod
+    def before_first_request(self, f):   
+        self.before_first_request_funcs.append(f)
+        return f        
+    
+    @setupmethod
+    def after_request(self, f):
+        """ 注册每个请求处理后函数 """
+        self.after_request_funcs.setdefault(None, []).append(f)
+        return f
+    
+    @setupmethod
+    def teardown_request(self, f):
+        self.teardown_appcontext_funcs.append(f)
+        return f        
 ```
 
 
@@ -1230,12 +1344,12 @@ if __name__ == "__main__":
 | middleware/       | 文件：dispatcher.py http_proxy.py lint.py profiler.py proxy_fix.py shared_data.py<br>类：DispatcherMiddleware | 中间件包括代理、共享数据                 |
 | wrappers/         |                                                              | 包括cors, etag, auth, user_agent         |
 | _compat.py        |                                                              | 兼容py2和py3的类型和函数。`flake8: noqa` |
-| _internal.py      |                                                              | 提供内部用的helper和常量                 |
+| _internal.py      | _log                                                         | 提供内部用的helper和常量                 |
 | _reloader.py      | ReloaderLoop StatReloaderLoop  WatchdogReloaderLoop          | 模块重载实现                             |
 | datastructures.py |                                                              | 用到的数据结构                           |
 | exceptions.py     | BadRequest                                                   | 异常，多继承自HTTPException              |
 | filesystem.py     | get_filesystem_encoding                                      | 文件系统                                 |
-| http.py           | parse_date...                                                | 处理http数据的一组函数                   |
+| http.py           | parse_date ...                                               | 处理http数据的一组函数                   |
 | local.py          |                                                              | 本地代理/数据栈                          |
 | posixemulation.py | rename                                                       | POSIX模拟器                              |
 | routing.py        | BaseConverter AnyConverter RuleFactory Rule                  | 路由相关的转化器、规则类                 |
@@ -1250,19 +1364,25 @@ if __name__ == "__main__":
 
 
 
-### 请求处理方式 serving.py
+### 服务 serving.py
 
-**说明**：Flask::run (flask/app.py) 调用了 serving.py里的run_simple函数， 最终make_server() 调用了HTTPServer.serve_forever (lib/socketserver.py)
+近一千行。
 
-**处理链**： run_simple ->  inner -> make_server 
+**说明**：Flask::run (flask/app.py) 调用了 serving.py里的run_simple函数，最终make_server() 调用了HTTPServer.serve_forever (lib/socketserver.py)进入到后台处理过程。
 
-**每请求的处理方式**： make_server (根据入参threaded/processes 来启动相应的WSGI服务器)
+**处理链**： run_simple ->  inner -> make_server, serve_forever
 
-* 线程：threaded为True， 调用ThreadedWSGIServer，启动一个后台线程来处理请求
-* 进程：processes>1，调用ForkingWSGIServer，启动一个fork进程来处理请求
-* 总共1进程1线程：调用BaseWSGIServer，监听队列长度120，加入监听队列，等待poll或epoll监听
+#### 服务器创建 make_server
+
+根据入参threaded/processes 来启动相应的WSGI服务器，然后各服务器调用相应的 serve_forever方法。
+
+* ThreadedWSGIServer：threaded为True，启动一个后台线程来处理请求。
+* ForkingWSGIServer：processes>1，启动一个fork进程来处理请求。
+* BaseWSGIServer：缺省服务。总共1进程1线程，监听队列长度120，加入监听队列，等待poll或epoll监听。
 
 
+
+/wrkzeug/serving.py
 
 ```python
 try:
@@ -1290,16 +1410,16 @@ def run_simple(
     ssl_context=None,
 ):
     def inner():  
-        # 实际的启动函数 
+        # 实际的启动函数，无论是否重载都要调用此函数 
         try:
             fd = int(os.environ["WERKZEUG_SERVER_FD"])
         except (LookupError, ValueError):
             fd = None
         srv = make_server( hostname,port,application,threaded,processes,request_handler,
-                          passthrough_errors,ssl_context,fd=fd,)
+                          passthrough_errors,ssl_context,fd=fd,)	
         if fd is None:
-            log_startup(srv.socket)
-        srv.serve_forever()        
+            log_startup(srv.socket)	
+        srv.serve_forever()  # 服务器后台处理      
         
     if use_reloader:
  		#使用重载，要保证端口可用，用socket建立socke联接
@@ -1337,7 +1457,7 @@ def run_simple(
 		# 信号终止旧线程，启动一个后台线程执行 inner函数
         run_with_reloader(inner, extra_files, reloader_interval, reloader_type)
     else:
-        inner()    
+        inner()    # 实际启动函数 
         
 def make_server(
     host=None,
@@ -1380,30 +1500,32 @@ def make_server(
 
 
 
-三种WSGI服务:  
+三种WSGI服务:   都继承了 BaseWSGIServer，初始化方法不一样，但都是通过 `BaseWSGIServer.serve_forever()`进入到实际处理。
 
-* BaseWSGIServer:  最终调用原生模块  lib/socketserver.py:BaseServer
+* ThreadedWSGIServer： 调用 ThreadingMixIn.process_request()
+* ForkingWSGIServer：调用 ForkMixIn.process_request()
+* BaseWSGIServer:  最终调用原生模块 `lib/socketserver.py:BaseServer.serve_forever() `
 
 ```python
 import socketserver
 
-ThreadingMixIn = socketserver.ThreadingMixIn  
+ThreadingMixIn = socketserver.ThreadingMixIn  	# 线程类
 can_fork = hasattr(os, "fork")  # 判断是否支持fork
 if can_fork:  
-    ForkingMixIn = socketserver.ForkingMixIn
+    ForkingMixIn = socketserver.ForkingMixIn	# 进程类
 else:
     class ForkingMixIn(object):
         pass
     
 class ThreadedWSGIServer(ThreadingMixIn, BaseWSGIServer):
-    """A WSGI server that does threading. 调用ThreadingMixIn.process_request() """
+    """A WSGI server that does threading. 调用 ThreadingMixIn.process_request() """
 
     multithread = True
     daemon_threads = True
     
 class ForkingWSGIServer(ForkingMixIn, BaseWSGIServer):
 
-    """A WSGI server that does forking. 调用ForkMixIn.process_request() """
+    """A WSGI server that does forking. 调用 ForkMixIn.process_request() """
 
     multiprocess = True
 
@@ -1427,9 +1549,10 @@ class ForkingWSGIServer(ForkingMixIn, BaseWSGIServer):
     
 
 class BaseWSGIServer(HTTPServer, object):
-
-    """Simple single-threaded, single-process WSGI server."""
-
+    """
+    Simple single-threaded, single-process WSGI server.
+    类继承：BaseWSGIServer -> HTTPServer -> TCPServer -> BaseServer
+    """
     multithread = False
     multiprocess = False
     request_queue_size = LISTEN_QUEUE # HTTPServer默认的请求队列长度是5
@@ -1489,55 +1612,125 @@ class BaseWSGIServer(HTTPServer, object):
             self.ssl_context = None
             
     def serve_forever(self):
+        """ 服务器后台处理函数 """
         self.shutdown_signal = False
         try:
-            HTTPServer.serve_forever(self) #select监听数据
+            HTTPServer.serve_forever(self) #HTTPServer实质调用父类BaseServer.serve_forever
         except KeyboardInterrupt:
             pass
         finally:
             self.server_close()     
 ```
 
-​       
 
-**BaseServer.serve_forever** (lib/socketserver.py):  poll或select方式监听
+
+服务器创建后，调用BaseServer.serve_forever。
+
+BaseServer.serve_forever 参见 《[python源码剖析](python源码剖析.md)》标准模块章节
+
+服务器类体系：HTTPServer (lib/http/server.py)  -> TCPServer(lib/socketserver.py) ->  BaseServer(lib/socketserver.py)
+
+**BaseServer.serve_forever**:  poll或select方式监听，然后非阻塞方式处理请求，如下，
+
+```shell
+# BaseServer.serve_forever处理流程
+selector.select(poll_interval) -> self._handle_request_noblock (非阻塞处理请求)
+		--> get_request, verify_request, process_request(一般派生类要重载,调用finish_request),  shutdown_request(异常时)
+-> self.service_actions()
+
+# process_request实现中的finish_request处理流程： BaseRequestHandler.handle()
+```
+
+​      
+
+#### 请求处理 WSGIRequestHandler
+
+WSGIRequestHandler 重载父类方法 handle和handle_one_request，调用run_wsgi实现自己的写方式。
 
 ```python
-# lib/socketserver.py
+try:
+    import socketserver
+    from http.server import BaseHTTPRequestHandler
+    from http.server import HTTPServer
+except ImportError:
+    import SocketServer as socketserver
+    from BaseHTTPServer import HTTPServer
+    from BaseHTTPServer import BaseHTTPRequestHandler
 
-# 这里定义选择器：poll或者select
-if hasattr(selectors, 'PollSelector'):
-    _ServerSelector = selectors.PollSelector
-else:
-    _ServerSelector = selectors.SelectSelector
     
-class BaseServer:
-    def serve_forever(self, poll_interval=0.5):
-        """Handle one request at a time until shutdown.
+class WSGIRequestHandler(BaseHTTPRequestHandler, object):
+	"""重载父类的handle_one_request，在这方法调用run_wsgi实现自己的写方式"""
+    def run_wsgi(self):
+        if self.headers.get("Expect", "").lower().strip() == "100-continue":
+            self.wfile.write(b"HTTP/1.1 100 Continue\r\n\r\n")
 
-        Polls for shutdown every poll_interval seconds. Ignores
-        self.timeout. If you need to do periodic tasks, do them in
-        another thread.
-        """
-        self.__is_shut_down.clear()
+        self.environ = environ = self.make_environ()
+        headers_set = []
+        headers_sent = []
+
+        def write(data):	# 重新实现写方法
+            assert headers_set, "write() before start_response"
+            if not headers_sent:
+                status, response_headers = headers_sent[:] = headers_set
+                try:
+                    code, msg = status.split(None, 1)
+                except ValueError:
+                    code, msg = status, ""
+                code = int(code)
+                self.send_response(code, msg)	#设置响应头 和 日志
+                header_keys = set()
+                for key, value in response_headers:
+                    self.send_header(key, value)
+                    key = key.lower()
+                    header_keys.add(key)
+                if not (
+                    "content-length" in header_keys
+                    or environ["REQUEST_METHOD"] == "HEAD"
+                    or code < 200
+                    or code in (204, 304)
+                ):
+                    self.close_connection = True
+                    self.send_header("Connection", "close")
+                if "server" not in header_keys:
+                    self.send_header("Server", self.version_string())
+                if "date" not in header_keys:
+                    self.send_header("Date", self.date_time_string())
+                self.end_headers()
+
+            assert isinstance(data, bytes), "applications must write bytes"
+            if data:
+                # Only write data if there is any to avoid Python 3.5 SSL bug
+                self.wfile.write(data)
+            self.wfile.flush()
+    
+    def handle(self):
+        """Handles a request ignoring dropped connections."""
         try:
-            # 根据_ServerSelector()选择相应的poll或select注册事件，poll性能会更差些
-            with _ServerSelector() as selector:
-                selector.register(self, selectors.EVENT_READ)
-
-                while not self.__shutdown_request:
-                    ready = selector.select(poll_interval)  # 定时监听
-                    # bpo-35017: shutdown() called during select(), exit immediately.
-                    if self.__shutdown_request:
-                        break
-                    if ready:
-                        self._handle_request_noblock()
-
-                    self.service_actions()
-        finally:
-            self.__shutdown_request = False
-            self.__is_shut_down.set()
-
+            BaseHTTPRequestHandler.handle(self)	#直接调用父类的handle
+        except (_ConnectionError, socket.timeout) as e:
+            self.connection_dropped(e)
+        except Exception as e:
+            if self.server.ssl_context is None or not is_ssl_error(e):
+                raise
+        if self.server.shutdown_signal:  #处理shutdown信号
+            self.initiate_shutdown()    
+            
+    def handle_one_request(self):
+        """Handle a single HTTP request."""
+        self.raw_requestline = self.rfile.readline()
+        if not self.raw_requestline:
+            self.close_connection = 1
+        elif self.parse_request():	#如果请求可以被解析
+            return self.run_wsgi()      #运行wsgi，实行的请求过程处理      
+        
+    def send_response(self, code, message=None):
+        """Send the response header and log the response code."""
+        self.log_request(code)	#日志处理，打印 请求行基本信息
+        if message is None:
+            message = code in self.responses and self.responses[code][0] or ""
+        if self.request_version != "HTTP/0.9":
+            hdr = "%s %d %s\r\n" % (self.protocol_version, code, message)
+            self.wfile.write(hdr.encode("ascii"))      
 ```
 
 
@@ -1690,6 +1883,60 @@ class DispatcherMiddleware(object):
 ```
 
 说明：app dispatch技术实现了app的隔离（独立的login manager、secret_key等），同时让每层业务系统都能模块化（只关心自己的URL部分），很有用。
+
+
+
+### 日志
+
+打印请求行基本信息
+
+```python
+# /werkzeug/serving.py
+from ._internal import _log
+
+class WSGIRequestHandler(BaseHTTPRequestHandler, object):
+    """ 日志调用函数链：run_wsgi.write -> send_response -> log_request -> log """
+    def log(self, type, message, *args):
+        """
+        示例：
+        INFO:werkzeug:127.0.0.1 - - [17/Sep/2021 12:06:50] "GET /swagger/v1 HTTP/1.1" 200 -
+        """
+        _log(
+            type,
+            "%s - - [%s] %s\n"
+            % (self.address_string(), self.log_date_time_string(), message % args),
+        )          
+```
+
+
+
+/werkzeug/_internal.py
+
+```python
+import logging
+
+_logger = None
+
+def _log(type, message, *args, **kwargs):
+    """Log a message to the 'werkzeug' logger.
+
+    The logger is created the first time it is needed. If there is no
+    level set, it is set to :data:`logging.INFO`. If there is no handler
+    for the logger's effective level, a :class:`logging.StreamHandler`
+    is added.
+    """
+    global _logger
+
+    if _logger is None:	# 如果未设置 _logger，则设置日志流处理StreamHandler
+        _logger = logging.getLogger("werkzeug")
+        if _logger.level == logging.NOTSET:
+            _logger.setLevel(logging.INFO)
+
+        if not _has_level_handler(_logger):
+            _logger.addHandler(logging.StreamHandler())
+
+    getattr(_logger, type)(message.rstrip(), *args, **kwargs)
+```
 
 
 
@@ -2472,7 +2719,7 @@ if __name__ == '__main__':
 
 
 
-### Api api.py
+### Api对象 api.py
 
 /flask_restx/api.py
 

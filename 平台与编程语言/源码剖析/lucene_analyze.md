@@ -219,8 +219,6 @@
 
  
 
- 
-
 **图目录**
 
 [图 1 lucene代码结构... 9](#_Toc16115166)
@@ -246,6 +244,8 @@
 [图 11 Solr 分布式架构... 24](#_Toc16115176)
 
 
+
+---
 
 
 # 1  概述
@@ -366,7 +366,7 @@ export JAVA_HOME=
 
 组件图包括索引引擎index, 查询引擎search, 文本分析引擎（可扩展）。
 
-​                 ![image-20210616103444899](..\..\media\code\code_lucene_001.png)              
+​                 ![image-20210616103444899](../../media/code/code_lucene_001.png)              
 
 图 1 lucene代码结构
 
@@ -442,7 +442,7 @@ Lucene存在四种数据流，即文本流、token流、字节流与查询语句
 
 两种实现方式： FS（实现文件）和RAM（虚拟映射文件）
 
- ![image-20210616103902664](..\..\media\code\code_lucene_002.png)
+ ![image-20210616103902664](../../media/code/code_lucene_002.png)
 
 图 2 classdigram: store
 
@@ -450,7 +450,7 @@ Lucene存在四种数据流，即文本流、token流、字节流与查询语句
 
 #### 2.2.3.1 索引文件概念
 
- ![image-20210616103936759](..\..\media\code\code_lucene_003.png)
+ ![image-20210616103936759](../../media/code/code_lucene_003.png)
 
 图 3 lucene index file concept
 
@@ -502,7 +502,7 @@ Store:  NO, YES, COMPRESS(压缩存储）
 
 Index:  NO, TOKENIZED, UN_TOKENZIED, NO_NORMS
 
- ![image-20210616104005727](..\..\media\code\code_lucene_004.png)
+ ![image-20210616104005727](../../media/code/code_lucene_004.png)
 
 图 4 classdigram: field
 
@@ -576,13 +576,13 @@ Weigh
 
 包括布尔查询, 范围查询, 模糊查询等
 
- ![image-20210616104030151](..\..\media\code\code_lucene_005.png)
+ ![image-20210616104030151](../../media/code/code_lucene_005.png)
 
 图 5 classdigram: query
 
 ##### 2.2.4.1.2    Query,Filter类图
 
- ![image-20210616104055489](..\..\media\code\code_lucene_006.png)
+ ![image-20210616104055489](../../media/code/code_lucene_006.png)
 
 图 6 classdigram: query&filter
 
@@ -624,7 +624,7 @@ Weigh
 
 #### 2.2.5.1 analyzer类图
 
- ![image-20210616104115396](..\..\media\code\code_lucene_007.png)
+ ![image-20210616104115396](../../media/code/code_lucene_007.png)
 
 图 8 classdigram: analyzer
 
@@ -939,7 +939,7 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
  
 
- ![image-20210616105414925](..\..\media\code\code_solr_001.png)
+ ![image-20210616105414925](../../media/code/code_solr_001.png)
 
 图 10 Solr Architecture
 
@@ -947,7 +947,7 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
  
 
-![image-20210616105438502](..\..\media\code\code_solr_002.png)
+![image-20210616105438502](../../media/code/code_solr_002.png)
 
 图 11 Solr 分布式架构
 

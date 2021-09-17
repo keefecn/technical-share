@@ -845,7 +845,7 @@ API实现： superset API实现在各个目录下的api.py
 
 ### 图表 Chart列表页
 
-![image-20210702145252701](..\..\media\code\code_superset_001.png)
+![image-20210702145252701](../../media/code/code_superset_001.png)
 
 * 图表列表页：/chart/list/?pageIndex=0&sortColumn=changed_on_delta_humanized&sortOrder=desc&viewMode=table
 

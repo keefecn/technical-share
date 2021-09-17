@@ -2,17 +2,17 @@
 | ---- | ---------- | ------------------------------------ | ------ | ------ |
 | 1    | 2018-4-5   | 创建。从《大数据开发》拆分出BI内容。 | Keefe |        |
 | 2    | 2019-12-14 | 增加数据湖章节。                     | 同上   |        |
+
+
+
+
+
+
 ---
-
- 
-
- 
-
- 
 
 # 目录
 
- 
+
 
 [目录... 1](#_Toc16721504)
 
@@ -164,13 +164,9 @@
 
 [官方组织... 44](#_Toc16721578)
 
- 
 
 
 
- 
-
- 
 
 **表目录**
 
@@ -200,7 +196,7 @@
 
 [表格 13电商商品指标详述__ 40](#_Toc16721591)
 
- 
+
 
 **图目录**
 
@@ -242,13 +238,13 @@
 
 [图 19 金融业-通过大数据平台建设用户画像进行精准营销__ 39](#_Toc16721610)
 
- 
 
 
 
- 
 
- 
+
+
+---
 
 # 1  BI概述
 
@@ -260,7 +256,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
  ![image-20191201171111403](../media/bigdata/bi_001.png)
 
-​                               
+​
 
 图 1 数据价值链示意图
 
@@ -270,7 +266,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 图 2  Gartner2017年商业智能与分析魔力象限
 
- 
+
 
 表格 1 BI厂商列表
 
@@ -282,7 +278,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 | 数据挖掘DM  | SAS                                                          |          |
 | 数据集市DM2 |                                                              |          |
 
- 
+
 
 表格 2 BI工具列表
 
@@ -301,7 +297,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 | Mathworks                                           | MATLAB                                           | （Matrix Laboratory,矩阵实验室）是美国Mathworks公司开发的应用软件，具备强大的科学及工程计算能力，它不但具有以矩阵计算为基础的强大数学计算能力和分析功能，而且还具有丰富的可视化图形表现功能和方便的程序设计能力。 |
 | Teradata                                            | AsterData                                        | 数据仓库。                                                   |
 
- 
+
 
 ## 1.3   方法论
 
@@ -314,25 +310,25 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 *  正确的（方式）：可视化展示、分析报表展示、格式报表展示、自助查询分析、自助分析报告
 *  支持辅助功能（行为）：数据回写、批量上报、批量导出、自动切换、数据自动刷新、数据推送等
 
- 
+
 
 ## 1.4   本章参考
 
 [1].   《大道至简的数据治理方法论》
 
-[2].   《大道至简的数据体系构建方法论》 https://ask.hellobi.com/blog/yonghongtech/3044 
+[2].   《大道至简的数据体系构建方法论》 https://ask.hellobi.com/blog/yonghongtech/3044
 
 [3].   《大道至简的深度分析方法论》
 
-[4].   30多种常见的数据图表，职场人必备技能啊！ https://zhuanlan.zhihu.com/p/23221414?refer=haizhibdp 
+[4].   30多种常见的数据图表，职场人必备技能啊！ https://zhuanlan.zhihu.com/p/23221414?refer=haizhibdp
 
 [5].   Chart Suggestions: A Thought Starter (Andrew Abela) http://www.infographicsblog.com/chart-suggestions-a-thought-starter-andrew-abela/
 
-[6].   常用的产品数据分析方法之漏斗模型与归因模型 [www.woshipm.com/data-analysis/411316.html](http://www.woshipm.com/data-analysis/411316.html) 
+[6].   常用的产品数据分析方法之漏斗模型与归因模型 [www.woshipm.com/data-analysis/411316.html](http://www.woshipm.com/data-analysis/411316.html)
 
-[7].   什么是数据分析的漏斗模型？ http://bigdata.51cto.com/art/201709/553100.htm 
+[7].   什么是数据分析的漏斗模型？ http://bigdata.51cto.com/art/201709/553100.htm
 
- 
+
 
 # 2  数据治理
 
@@ -353,7 +349,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 备注：相对交易数据，主数据变换缓慢。
 
- 
+
 
 一般而言，企业中这三类数据与其它数据的数据量、质量需求，更新频率、数据生命周期的关系大致如下图：
 
@@ -361,12 +357,12 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 图 4 企业三类数据的关系
 
- 
+
 
 数据的分类
 *  按数据格式：结构化、非结构化
 *  按数据参照程度：主数据、非主数据
-*  按数据采集频道：实时、非实时 
+*  按数据采集频道：实时、非实时
 *  按使用性质：分析性、共享
 
 
@@ -375,7 +371,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 数据模型Data Model的过程：从概念性模型CDM -》 逻辑模型LDM -》 物理模型PDM。
 
-数据主题域由业务信息按照其业务耦合程度聚合而成的高阶数据主题群，一般与业务域有着紧密的对应关系。例如：财务、物资、生产等。 
+数据主题域由业务信息按照其业务耦合程度聚合而成的高阶数据主题群，一般与业务域有着紧密的对应关系。例如：财务、物资、生产等。
 
 数据主题域通过数据主题域视图和数据主题域关系视图来体现。
 
@@ -391,7 +387,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 图 5 Teradata FS-LDM十大主题划分
 
- 
+
 
 **BANK-LDM主题域模型设计采用分类设计的策略:**
  1、重点设计主题（客户、协议、事件、资产、财务）
@@ -407,15 +403,15 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
  　目标：暂不进行唯一地址识别，但要完整保留此类信息。
  　策略：暂作为客户等的属性信息进行设计。
 
- 
+
 
 **逻辑数据模型LDM，以协议主题实例：**
 
- 
+
 
  ![image-20191201171354012](../media/bigdata/bi_006.png)
 
- 
+
 
 #### IBM FSDM
 
@@ -423,9 +419,9 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 图 6 IBM FSDM
 
- 
 
- 
+
+
 
 ### 2.2.2 电信业
 
@@ -433,13 +429,13 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 图 7 电信业的一级主题域
 
- 
+
 
  ![image-20191201171445689](../media/bigdata/bi_009.png)
 
 图 8 电信业的二级主题域关系视图（部分）
 
- 
+
 
 ### 2.2.3 本节参考
 
@@ -449,7 +445,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq72qtuetHJDjGFcXA4Jg4Z39HaWZcPDQ55-lVECdx95tzw8jj1DD7_A58UCO
 
- 
+
 
 ## 2.3   示例：华为的数据治理
 
@@ -460,7 +456,7 @@ http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq
 *  数据分布： 数据地图dmap，可以很方便在业务元数据和技术元数据之间转换。
 *  元数据管理：gData
 
- 
+
 
 **十一大主题域分组**
 
@@ -480,7 +476,7 @@ http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq
 
 备注：这十一大主题域之外，还包括一些跨领域的数据。如渠道销售、零售Retail、管理（包括财经、BT&IT、Business Support、投资）等等。另外华为新业务并还没有完全纳入新的主题域里。
 
- 
+
 
 表格 3 华为的数据资产目录
 
@@ -501,37 +497,37 @@ http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq
 | Procurment  | 供应商、采购合同、采购PO、采购分类                   |          |
 | Manage  HR  | 组织、人员、人与组织关系、组织应用、人员应用、侯选人 |          |
 
-说明： 
+说明：
 
 SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make/deliver/plan/Return。
 
- 
+
 
 ## 2.4   本章参考
 
-[1].   一组图详解元数据、主数据与参考数据 [www.cbdio.com/BigData/2016-02/16/content_4617126.htm](http://www.cbdio.com/BigData/2016-02/16/content_4617126.htm) 
+[1].   一组图详解元数据、主数据与参考数据 [www.cbdio.com/BigData/2016-02/16/content_4617126.htm](http://www.cbdio.com/BigData/2016-02/16/content_4617126.htm)
 
 [2].   北极星与海盗：数据指标体系的倚天与屠龙 https://www.jianshu.com/p/3e9bd65a32ad
 
 [3].   KPI指标体系 [https://baike.baidu.com/item/KPI%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB](https://baike.baidu.com/item/KPI指标体系)
 
-[4].   阿里巴巴全域数据建设 [www.cbdio.com/BigData/2017-10/18/content_5618979.htm](http://www.cbdio.com/BigData/2017-10/18/content_5618979.htm) 
+[4].   阿里巴巴全域数据建设 [www.cbdio.com/BigData/2017-10/18/content_5618979.htm](http://www.cbdio.com/BigData/2017-10/18/content_5618979.htm)
 
-[5].   《2017中国大数据企业排行榜》V3.0发布 [www.cbdio.com/BigData/2017-02/23/content_5455866.htm](http://www.cbdio.com/BigData/2017-02/23/content_5455866.htm) 
+[5].   《2017中国大数据企业排行榜》V3.0发布 [www.cbdio.com/BigData/2017-02/23/content_5455866.htm](http://www.cbdio.com/BigData/2017-02/23/content_5455866.htm)
 
-[6].   W3 http://w3.huawei.com/dmap 
+[6].   W3 http://w3.huawei.com/dmap
 
-[7].   第二届中国数据安全治理高峰论坛：通用数据安全治理框架及完整技术落地方案 [www.aqniu.com/industry/34432.html](http://www.aqniu.com/industry/34432.html) 
+[7].   第二届中国数据安全治理高峰论坛：通用数据安全治理框架及完整技术落地方案 [www.aqniu.com/industry/34432.html](http://www.aqniu.com/industry/34432.html)
 
 
 
 # 3  数据挖掘.DM
 
-数据挖掘是一个过程。数据挖掘能取得多大的成就跟所采用的工具，使用工具的能力和挖掘过程中的方法论密切相关。数据挖掘的方法论有， 
-*  战略上: CRISP_DM(Cross Industry Standard Process for DM); 
-*  战术上：采用美国SAS公司的SEMMA方法(Sample,Explore,Modify,Model, Assess). 
+数据挖掘是一个过程。数据挖掘能取得多大的成就跟所采用的工具，使用工具的能力和挖掘过程中的方法论密切相关。数据挖掘的方法论有，
+*  战略上: CRISP_DM(Cross Industry Standard Process for DM);
+*  战术上：采用美国SAS公司的SEMMA方法(Sample,Explore,Modify,Model, Assess).
 
- 
+
 
 ## 3.1   数据挖掘简介
 
@@ -539,7 +535,7 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 
 （[英语](http://zh.wikipedia.org/zh-cn/英語)：[**Data mining**](http://en.wikipedia.org/wiki/Data_mining)**）**又译为**数据采矿**、**数据挖掘**。它是**数据库知识发现**（英语：[**K**nowledge-**D**iscovery in **D**atabases](http://en.wikipedia.org/wiki/Knowledge-Discovery_in_Databases)，简称：**KDD**)中的一个步骤。数据挖掘一般是指从大量的数据中自动搜索隐藏于其中的有着特殊关系性（属于[Association rule learning](http://en.wikipedia.org/wiki/association_rule_learning)）的信息的过程。
 
- 
+
 
 **发展历程**
 
@@ -547,7 +543,7 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 
 1995年，出现数据挖掘领域的首个国际会议SIGKDD．自此，SIGKDD大会每年召开一次，已经称为数据挖掘领域的顶级会议．
 
- 
+
 
 ### 3.1.1 基本概念
 
@@ -556,7 +552,7 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 *  数据类型：分类，数值．．．
 *  数据处理：标准化，离散化，取样，维度递减．．．
 
- 
+
 
 **数据挖掘任务：**是指用户进行的数据分析形式.
 *  分类/预测模型：利用已知参数，预测未知参数的值．
@@ -564,11 +560,11 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 
 基本方法: 分类，聚类和关联分析．
 
- 
+
 
 **数据挖掘功能(模式发现)**
 
-数据挖掘功能用于指定数据挖掘任务中要找的模式类型. 
+数据挖掘功能用于指定数据挖掘任务中要找的模式类型.
 
 常见的模式
 
@@ -592,7 +588,7 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 
 数据演变分析描述行为随时间变化的对象的规律或趋势.
 
- 
+
 
 **数据挖掘原语**
 
@@ -603,17 +599,17 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 *  模式兴趣度度量, 简洁,实用,确实,新颖
 *  发现模式的可视化, 如表格,图等
 
- 
+
 
 ### 3.1.2 CRISP-DM
 
 CRISP-DM (cross-industry standard process for data mining), 即为"跨行业数据挖掘标准流程"。此KDD[过程模型](https://baike.baidu.com/item/过程模型)于1999年欧盟机构联合起草。通过近几年的发展，CRISP-DM 模型在各种KDD过程模型中占据领先位置，2014年统计表明，采用量达到43%。
 
- 
+
 
 CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了一个完整的过程描述。该模型将一个KDD工程分为6个不同的，但顺序并非完全不变的阶段，分别是商业理解、数据理解、数据准备、建模、评估和部署。
 
- 
+
 
 **商业理解（business understanding）**
 
@@ -621,13 +617,13 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 主要工作包括：确定商业目标，发现影响结果的重要因素，从商业角度描绘客户的首要目标，评估形势，查找所有的资源、局限、设想以及在确定数据分析目标和项目方案时考虑到的各种其他的因素，包括风险和意外、相关术语、成本和收益等等，接下来确定数据挖掘的目标，制定项目计划。
 
- 
+
 
 **数据理解（data understanding）**
 
 数据理解阶段开始于数据的收集工作。接下来就是熟悉数据的工作，具体如：检测数据的量，对数据有初步的理解，探测数据中比较有趣的数据子集，进而形成对潜在信息的假设。收集原始数据，对数据进行装载，描绘数据，并且探索数据特征，进行简单的特征统计，检验数据的质量，包括数据的完整性和正确性，缺失值的填补等。
 
- 
+
 
 **数据准备（data preparation）**
 
@@ -635,25 +631,25 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 根据与挖掘目标的相关性，数据质量以及技术限制，选择作为分析使用的数据，并进一步对数据进行清理转换，构造衍生变量，整合数据，并根据工具的要求，格式化数据。
 
- 
+
 
 **建模（modeling）**
 
 在这一阶段，各种各样的建模方法将被加以选择和使用，通过建造，评估模型将其参数将被校准为最为理想的值。比较典型的是，对于同一个数据挖掘的问题类型，可以有多种方法选择使用。如果有多重技术要使用，那么在这一任务中，对于每一个要使用的技术要分别对待。一些建模方法对数据的形式有具体的要求，因此，在这一阶段，重新回到数据准备阶段执行某些任务有时是非常必要的。
 
- 
+
 
 **评估（evaluation）**
 
 从数据分析的角度考虑，在这一阶段中，已经建立了一个或多个高质量的模型。但在进行最终的模型部署之前，更加彻底的评估模型，回顾在构建模型过程中所执行的每一个步骤，是非常重要的，这样可以确保这些模型是否达到了企业的目标。一个关键的评价指标就是看，是否仍然有一些重要的企业问题还没有被充分地加以注意和考虑。在这一阶段结束之时，有关数据挖掘结果的使用应达成一致的决定。
 
- 
+
 
 **部署（deployment）**
 
 部署，即将其发现的结果以及过程组织成为可读文本形式。模型的创建并不是项目的最终目的。尽管建模是为了增加更多有关于数据的信息，但这些信息仍然需要以一种客户能够使用的方式被组织和呈现。这经常涉及到一个组织在处理某些决策过程中，如在决定有关网页的实时人员或者营销数据库的重复得分时，拥有一个“活”的模型。
 
- 
+
 
 表格 4 数据挖掘处理过程（参考）
 
@@ -669,7 +665,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 事实上，就方法学而言，CRISP-DM并不是什么新观念，本质来看就是在分析应用中提出问题、分析问题和解决问题的过程。而可贵之处在于其提纲挈领的特性，非常适合工程管理，适合大规模定制，以至CRISP-DM如今已经成为事实上的行业标准。
 
- 
+
 
 ### 3.1.3 数据挖掘过程示例：餐饮业
 
@@ -677,7 +673,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 图 9 餐饮行业数据挖掘建模过程示例图
 
- 
+
 
 ## 3.2   数据预处理
 
@@ -687,15 +683,15 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 ### 3.3.1 频繁模式挖掘
 
- 
+
 
 ### 3.3.2 交互挖掘
 
- 
+
 
 ### 3.3.3 增量挖掘
 
- 
+
 
 ## 3.4   相似度发现
 
@@ -717,7 +713,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 [4]: http://www.chinakdd.com/ "CHINA KDD"
 
- 
+
 
 # 4  数据仓库.Data warehouse
 
@@ -731,11 +727,11 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 它是单个数据存储，出于分析性报告和决策支持目的而创建。为需要业务智能的企业，提供指导业务流程改进、监视时间、成本、质量以及控制。
 
- 
+
 
 数据仓库 ，由数据仓库之父比尔·恩门（Bill Inmon）于1990年提出，主要功能仍是将组织透过资讯系统之[联机事务处理](http://baike.baidu.com/view/8028.htm)(OLTP)经年累月所累积的大量资料，透过数据仓库理论所特有的资料储存架构，作一有系统的分析整理，以利各种分析方法如[联机分析处理](http://baike.baidu.com/view/22068.htm)(OLAP)、[数据挖掘](http://baike.baidu.com/view/7893.htm)(Data Mining)之进行，并进而支持如决策支持系统(DSS)、主管资讯系统(EIS)之创建，帮助决策者能快速有效的自大量资料中，分析出有价值的资讯，以利决策拟定及快速回应外在环境变动，帮助建构[商业智能](http://baike.baidu.com/view/21020.htm)(BI)。
 
- 
+
 
 **企业的数据处理大致分为两类：**
 *  一类是操作型处理，也称为联机事务处理OLTP，它是针对具体业务在数据库联机的日常操作，通常对少数记录进行查询、修改。
@@ -745,7 +741,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 图 10 数据仓库价值曲线
 
- 
+
 
 ### 4.1.2 数据仓库组成
 
@@ -757,7 +753,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 *  元数据：包括三类分别是操作型元数据，抽取和转换元数据、最终用户元数据。
 *  管理控制部分：元数据是管理控制模块的数据来源。
 
- 
+
 
 ### 4.1.3 术语
 
@@ -768,7 +764,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 | OLTP | 联线事务处理。针对具体业务在数据库联机的日常操作，通常对少数记录进行查询、修改。 |
 | OLAP | 联线分析处理。一般针对某些主题的历史数据进行分析，支持管理决策。传统数据仓库一般是此类型。 |
 
- 
+
 
 ## 4.2   数据仓库架构
 
@@ -780,7 +776,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 从功能结构划分，数据仓库系统至少应该包含数据获取（Data Acquisition）、[数据存储](http://baike.baidu.com/view/551712.htm)（Data Storage）、数据访问（Data Access）三个关键部分。
 
- 
+
 
 数据仓库的目的是构建面向分析的集成化数据环境，为企业提供决策支持（Decision Support）。其实数据仓库本身并不“生产”任何数据，同时自身也不需要“消费”任何的数据，数据来源于外部，并且开放给外部应用，这也是为什么叫“仓库”，而不叫“工厂”的原因。因此数据仓库的基本架构主要包含的是数据流入流出的过程，可以分为三层——**源数据**、**数据仓库**、**数据应用**：
 
@@ -788,13 +784,13 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 图 11数据仓库基本体系结构1
 
- 
+
 
  ![image-20191201171557550](../media/bigdata/bi_013.png)
 
 图 12数据仓库基本体系结构2
 
- 
+
 
  ![image-20191201171611240](../media/bigdata/bi_014.png)
 
@@ -830,19 +826,19 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 比如一些手工录入的数据，只需要提供一个接口或小程序，即可完成；
 
- 
+
 
 ### 4.2.2 数据集市架构
 
 [数据集市](https://baike.baidu.com/item/数据集市)(Data Mart) ，也叫数据市场，数据集市就是满足特定的部门或者用户的需求，按照多维的方式进行存储，包括定义维度、需要计算的指标、维度的层次等，生成面向决策分析需求的数据立方体。
 
- 
+
 
 ## 4.3   数据仓库建模
 
 DW三种常见模型：E/R关系、维度和Data Vault 模型。
 
- 
+
 
 ### 4.3.1 E/R范式建模
 
@@ -854,7 +850,7 @@ DW三种常见模型：E/R关系、维度和Data Vault 模型。
 
 **评论**：《数据仓库工具箱（第3版）-- 维度建模权威指南》英文初版1996年，二版1998年，三版2015年。kimball是本书作者，也是kimball集团的创始人。第三版共21章其中14章是14个行业的建模案例。
 
- 
+
 
 表格 6 维度建模常用术语
 
@@ -871,7 +867,7 @@ DW三种常见模型：E/R关系、维度和Data Vault 模型。
 | 周期事实表 |                                                              |
 | 累积事实表 |                                                              |
 
- 
+
 
 维度模型常见的有：星型、雪花。
 
@@ -885,7 +881,7 @@ DW三种常见模型：E/R关系、维度和Data Vault 模型。
 
 粒度：
 
- 
+
 
 维度模型的逻辑表示：星型、雪花型。
 
@@ -899,25 +895,25 @@ DW三种常见模型：E/R关系、维度和Data Vault 模型。
 
 4)     确认事实。
 
- 
+
 
 #### 4.3.2.1 维度表技术
 
- 
+
 
 #### 4.3.2.2 事实表技术
 
- 
+
 
 ### 4.3.3 Data Vault模型
 
 此模型有中心表（HUB）、链接表(LINK）、附属表(SATELLITE）三个主要组成部分。中心表记录业务主键，链接表记录业务关系，附属表记录业务描述。
 
- 
+
 
 ### 4.3.4 Anchor模型
 
- 
+
 
 ## 4.4   ETL
 
@@ -928,7 +924,7 @@ ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baid
 *  Transform：单变量自身转换；多变量相互衍生。
 *  Load:
 
- 
+
 
 **数据抽取**
 
@@ -936,7 +932,7 @@ ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baid
 
 抽取手段：timestamp、触发器、备案、日志
 
- 
+
 
 ### 4.4.1 ETL工具
 
@@ -948,11 +944,11 @@ ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baid
 
 事务处理性能委员会（ Transaction ProcessingPerformance Council ），是由数10家会员公司创建的非盈利组织，总部设在美国。该组织对全世界开放，但迄今为止，绝大多数会员都是美、日、西欧的大公司。TPC的成员主要是计算机软硬件厂家，而非计算机用户，它的功能是制定商务应用基准程序（Benchmark）的标准规范、性能和价格度量，并管理测试结果的发布。
 
- 
+
 
 TPC不给出基准程序的代码，而只给出基准程序的标准规范（Standard Specification）。任何厂家或其它测试者都可以根据规范，最优地构造出自己的系统（测试平台和测试程序）。（需要自己写测试工具，测试完之后提交给ＴＰＣ协会）为保证测试结果的客观性，被测试者（通常是厂家）必须提交给TPC一套完整的报告（FullDisclosure Report），包括被测系统的详细配置、分类价格和包含五年维护费用在内的总价格。该报告必须由TPC授权的审核员核实（TPC本身并不做审计），现在全球只有不到十个审核员，全部在美国。
 
- 
+
 
 ### 4.5.1 TPC-H
 
@@ -962,7 +958,7 @@ TPC不给出基准程序的代码，而只给出基准程序的标准规范（St
 
 通俗的讲，TPC-H就是当一家数据库开发商开发了一个新的数据库操作系统，采用TPC-H作为测试基准，来测试衡量数据库操作系统查询决策支持方面的能力．
 
- 
+
 
 **TPC-H的衡量指标**
 
@@ -972,35 +968,35 @@ TPC不给出基准程序的代码，而只给出基准程序的标准规范（St
 
 TPC- H 标准规范由10章正文和5个附录组成。
 
- 
+
 
 **数据库运行的环境条件**
 
 TPC- H 测试模型为数据库服务器连续7×24 小时工作，可能只有1 次/月的维护；多用户并发执行复杂的动态查询，同时有并发执行表修改操作。数据库模型见图1，共有8 张表，除Nation 和Region 表外，其它表与测试的数据量有关，即比例因SF（Scale Factor）
 
- 
+
 
 数据库关系图以及表各个字段定义如下图
 
-  
 
-​         ![image-20191211215558677](..\..\media\bigdata\bi_050.png)                      
+
+​         ![image-20191211215558677](../../media/bigdata/bi_050.png)
 
 图 14  TPC-H的数据表关联图
 
- 
 
- ![image-20191211215654806](..\media\bigdata\bi_051.png)
+
+ ![image-20191211215654806](../media/bigdata/bi_051.png)
 
 图 15 TPC-H的数据库模型
 
- 
+
 
 由于数据量的大小对查询速度有直接的影响，TPC- H 标准对数据库系统中的数据量有严格、明确的规定。用SF 描述数据量，1SF 对应1 GB 单位，SF 由低到高依次是1、10、30、100、300、1 000、3 000、10 000。需要强调，SF 规定的数据量只是8个基本表的数据量，不包括索引和临时表。
 
 从TPC- H 测试全程来看，需要的数据存储空较大，一般包括有基本表、索引、临时表、数据文件和备份文件，基本表的大小为x；索引和临时空间的经验值为3-5 位，取上限5x；DBGEN产生的数据文件的大小为x；备份文件大小为x；总计需要的存储空间为8x。就是说SF=1，需要准备8 倍，即8 GB 存储空间，才能顺利地进行测试
 
- 
+
 
 测试语句：22个查询，2个更新
 
@@ -1038,7 +1034,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 备注：数据时间截止至2018-9-8.
 
- 
+
 
 ## 4.6   DW实例
 
@@ -1049,7 +1045,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 | 银行业 | BDWM(Banking  Data Warehouse Model) | FS-LDM(Financial Services Logical  Data Model) |
 | 电信业 | TDWM(Telecom Data Warehouse Model)  | TS-LDM(Telecom Services Logical Data  Model)   |
 
- 
+
 
 ### 4.6.1 IBM
 
@@ -1057,11 +1053,11 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 图 2 IBM数据仓库解决方案产品组成
 
- 
+
 
 ### 4.6.2 TeraData
 
- 
+
 
  ![image-20191201171710802](../media/bigdata/bi_022.png)
 
@@ -1071,7 +1067,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 图 14 淘宝计算存储平台的发展史
 
- 
+
 
 ## 4.7   本章参考
 
@@ -1085,7 +1081,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 [5].  TPC基准  http://www.tpc.org/tpc_documents_current_versions/current_specifications.asp
 
-[6]: 百亿级实时大数据分析项目，为什么不用Hadoop？ http://www.yonghongtech.com/webShare/webshare_w4.html 
+[6]: 百亿级实时大数据分析项目，为什么不用Hadoop？ http://www.yonghongtech.com/webShare/webshare_w4.html
 
 [7]:   Java BI新生代——百度商业运营实践 http://www.infoq.com/cn/presentations/java-bi-the-new-generation-baidu-business-practice
 
@@ -1093,7 +1089,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 [9]:   淘宝数据仓库架构实践 http://wenku.baidu.com/view/72d5a86658fafab069dc02d6.html
 
- 
+
 
  # 5  数据湖
 
@@ -1159,7 +1155,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 2016年起，BI自助分析流行。移动BI也正在兴起。
 
- 
+
 
 表格 9 主流BI自助分析工具比较
 
@@ -1185,7 +1181,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 2. BI工具基本功能：获取数据（连接多数据源和ETL）、分析数据（建模和分析）和呈现数据（通过桌面、在线网站或移动端）。
 
- 
+
 
 ## 5.2   PowerBI
 
@@ -1202,7 +1198,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 *  Power BI Mobile（移动版）：iphone、Android、Windows手机上随时查看。
 *  Power BI的桌面版– Power BI Desktop：集成了其它组件的主要功能
 
- 
+
 
 Power BI分为三个版本，分别是桌面版、专业和白金版。
 
@@ -1214,19 +1210,19 @@ Power BI分为三个版本，分别是桌面版、专业和白金版。
 | 费用 | free                                                         | $9.99  每用户每月                                            | 容量定价  每节点每月                                         |
 | 功能 | 连接数百个[数据源](https://powerbi.microsoft.com/zh-cn/#connect-wrapper)  使用可视化工具清理和准备数据  使用自定义可视化分析和生成出色的报表  发布到 Power BI 服务  嵌入公共网站 | 构建可全方位实时查看业务的仪表板  自动保持数据最新状态，包括本地源  针对共享数据进行协作  审核和管理数据的访问和使用方式  通过应用将内容打包并分发给用户 | 获取分配、缩放和控制的专用容量  分发和[嵌入内容](https://powerbi.microsoft.com/zh-cn/power-bi-embedded/)，而无需购买每用户许可证  使用 Power BI 报表服务器在本地发布报表  针对 Pro 用户提供更多容量并降低限制 |
 
- 
 
- 
+
+
 
 ## 5.3   Tableau
 
- 
+
 
 ## 5.4   Superset
 
 详见另文《superset二次开发》
 
- 
+
 
 ## 5.5   其它工具
 
@@ -1248,7 +1244,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 * tableau  https://www.tableau.com/zh-cn
 * superset官网 https://superset.incubator.apache.org
 
- 
+
 
 ### 5.6.1 PowerBI 参考资料
 
@@ -1257,7 +1253,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 *  Power BI系列课程地址：[从Excel到Power BI数据分析可视化](https://link.zhihu.com/?target=http%3A//study.163.com/series/1001139001.htm)
 *  [一张图看懂微软Power BI系列组件](https://link.zhihu.com/?target=http%3A//www.agileex.com/powerpivotworks/2016-5-20/636.html)
 
- 
+
 
 1、PowerBI国内学习网站：
 
@@ -1269,17 +1265,17 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 [Power BI - 知乎专栏](https://zhuanlan.zhihu.com/leigongzi)
 
-[Power BI 专栏 - 知乎专栏](https://zhuanlan.zhihu.com/PowerBI) 
+[Power BI 专栏 - 知乎专栏](https://zhuanlan.zhihu.com/PowerBI)
 
 2、PowerBI国外学习网站：
 
 [SQLBI](https://link.zhihu.com/?target=http%3A//www.sqlbi.com/)
 
-[PowerPivotPro - Transforming your Business with Power Pivot and Power BI](https://link.zhihu.com/?target=http%3A//www.powerpivotpro.com/) 
+[PowerPivotPro - Transforming your Business with Power Pivot and Power BI](https://link.zhihu.com/?target=http%3A//www.powerpivotpro.com/)
 
-[Power Query Archives – The BIccountant](https://link.zhihu.com/?target=http%3A//www.thebiccountant.com/category/power-query/) 
+[Power Query Archives – The BIccountant](https://link.zhihu.com/?target=http%3A//www.thebiccountant.com/category/power-query/)
 
-[Chris Webb&#x27;s BI Blog](https://link.zhihu.com/?target=https%3A//blog.crossjoin.co.uk) 
+[Chris Webb&#x27;s BI Blog](https://link.zhihu.com/?target=https%3A//blog.crossjoin.co.uk)
 
 3、PowerBI公众号推荐：
 
@@ -1332,13 +1328,13 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 图 18 金融业-用户画像
 
- 
+
 
  ![image-20191201171855109](../media/bigdata/bi_028.png)
 
 图 19 金融业-通过大数据平台建设用户画像进行精准营销
 
- 
+
 
 ## 6.2   电商
 
@@ -1369,7 +1365,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 3、转化漏斗（从访问、注册、加购、下单、付款做一个漏斗，看到底哪个环节流失客户最多，有bug修bug，有流程不顺要改善）
 
- 
+
 
 **推广数据**
 
@@ -1377,7 +1373,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 2、各渠道费用，点击量，收入，ROI（可以用分组条图或柱线图来展示各渠道的费用与收入，投入高的渠道效果不一定好，通过对比可以筛选性价比最高的推广渠道）
 
- 
+
 
 **2、交易指标**
 
@@ -1406,13 +1402,13 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 5、浏览量商品最高 top N，浏览量品类最高 top N。——看看有啥商品浏览量高却卖不出去的，要调查原因是价格不好还是什么？
 
- 
+
 
 **客户方面**
 *  总访客、新访客、新注册用户、客单价用户地域分布、用户设备来源分布（浏览器或设备）、用户渠道来源分布（访问网站、百度推广、券妈妈之类的……）
 *  活动期间访问趋势（一般是个线图 横轴是时间 纵轴是访问量 多线图还可以加一根销售额）
 
- 
+
 
 **3、商品指标**
 
@@ -1428,11 +1424,11 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 | 商品收藏次数 | 统计时间内，商品被访客收藏的总次数               | 权重次于加购件数，一定程度上代表了人气。 |
 | 异常商品数   | 出现各种异常导致的商品去重数。                   | 对于爆款影响很大，需要监控。             |
 
- 
+
 
 市场数据一般可做：行业分析、产品演变、子类目市场分析、商品属性分析、人群定位及价格定位分析、竞争对手分析、全店诊断分析、新老客户行为分析、买家分析、广告效果分析、库存分析。
 
- 
+
 
 ### 6.2.1 示例：2017.11.11（购物节）
 
@@ -1444,7 +1440,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 ”天猫618掀价格战：大家电比京东贵我就赔！“内容的转发，从媒体源数据对比中可见，此话题在微信的传播速度稍快于微博。
 
- 
+
 
 #### 6.2.2.2 销售数据
 
@@ -1452,7 +1448,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 从华为商城的促销数据来看，618当天的销售额约是平常日的5倍左右，销售日过后恢复平常状态。
 
- 
+
 
 **1.平台热销产品**
 
@@ -1462,9 +1458,9 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 苏宁：持续稳居海尔、美的、海信、西门子、格力等品牌最大渠道。超市、母婴等迎来爆发，雀巢奶粉、泰国金枕头榴莲、雪花啤酒等闯入单品订单排行榜前十名。
 
- 
 
- 
+
+
 
 **2.类品：手机品牌**
 
@@ -1476,7 +1472,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 苏宁：小米、荣耀、魅族、华为、OPPO。
 
- 
+
 
 销售额
 
@@ -1488,7 +1484,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 小米创始人雷军晒出的战绩显示，6月1日至18日，小米手机夺得天猫、京东、苏宁三大平台手机销量第一。
 
- 
+
 
 ### 6.2.3 本节参考
 
@@ -1498,7 +1494,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 [3].   【大数据部落】618电商大数据分析报告  [www.sohu.com/a/151327831_826434](http://www.sohu.com/a/151327831_826434)
 
- 
+
 
 ## 6.3   零售业
 
@@ -1510,7 +1506,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 2）要卖哪些商品，需要进多少货。
 
- 
+
 
 1. 体系化的思路。
 
@@ -1518,7 +1514,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 业绩指标分成零售、金额、数量、交易笔数、客流类、平均单价、折扣率等等
 
- 
+
 
 ## 6.4   制造业
 
@@ -1526,7 +1522,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 库存分析关键指标：库存天数、库销比
 
- 
+
 
 四类八大案例如下:
 
@@ -1548,7 +1544,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 5.市场竞争分析
 *  案例8 海尔零售市场分析
 
- 
+
 
 ## 6.5   本章参考
 
@@ -1584,15 +1580,15 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 [8].   [天善智能](https://book.douban.com/search/天善智能) 《数据实践之美》 机械工业出版社 2017.1
 
- 
+
 
 ## 参考链接
 
-[1].   百度百科-BI https://baike.baidu.com/item/BI/4579902 
+[1].   百度百科-BI https://baike.baidu.com/item/BI/4579902
 
 [2].   永洪科技-商业智能社区 https://ask.hellobi.com/
 
- 
+
 
 # 附录
 
@@ -1600,7 +1596,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 元数据标准组织：元数据联盟、对象管理组
 
- 
+
 
 **OLAP**
 

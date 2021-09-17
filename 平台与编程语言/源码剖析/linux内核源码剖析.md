@@ -5,9 +5,9 @@
 | 3    | 2018-3-30 | 更新内核工具。                                     | 同上   |        |
 | 4    | 2021-6-28 | 将《Linux内核开发系列》改名为《Linux内核源码分析》 | 同上   |        |
 
- 
 
- 
+
+
 
 
 
@@ -75,11 +75,11 @@
 
 
 
- 
 
 
 
- 
+
+
 
 # 1 简介
 
@@ -93,11 +93,11 @@
 
 2）能够胜任更高要求的linux相关开发；
 
- 
+
 
 **Preface** **基础知识**
 
-1 Makefile文件的制作 
+1 Makefile文件的制作
 
 2 diff, patch的使用
 
@@ -105,7 +105,7 @@
 
 4 代码阅读：vim, ctags, sourcenav, lxr
 
- 
+
 
 ## Linux的引导过程
 
@@ -123,11 +123,11 @@
 
 
 
-## 内核源码结构 
+## 内核源码结构
 
 
 
-![GNU/Linux 操作系统的基本体系结构](..\..\media\code\code_linux_000.png)
+![GNU/Linux 操作系统的基本体系结构](../../media/code/code_linux_000.png)
 
 图  GNU/Linux 操作系统的基本体系结构
 
@@ -156,7 +156,7 @@ Linux iZ2zebj7eoe7terrup37y4Z 4.19.91-23.al7.x86_64 #1 SMP Tue Mar 23 18:02:34 C
 [root@iZ2zebj7eoe7terrup37y4Z ~]# lsb_release -a
 LSB Version:    :core-4.1-amd64:core-4.1-noarch
 Distributor ID: AlibabaCloud(AliyunLinux)
-Description:    Alibaba Cloud Linux (Aliyun Linux) release 2.1903 LTS (Hunting Beagle) 
+Description:    Alibaba Cloud Linux (Aliyun Linux) release 2.1903 LTS (Hunting Beagle)
 Release:        2.1903
 Codename:       HuntingBeagle
 ```
@@ -267,22 +267,22 @@ Linux内核使用三种不同的版本编号方式
 
 ```shell
 # step1: clean all generate file include .config
-make mrproper 
+make mrproper
 
 make menuconfig/xconfig/oldconfig
-make 
+make
 make modules
 
 # cp modules to /usr/lib/$version
-make modules_install  
+make modules_install
 # cp vmlinuz, System.map to /boot
-make install  
+make install
 
 # generate the initrd.img
-mkinitramfs -o [dest_dir] [version]  
+mkinitramfs -o [dest_dir] [version]
 ```
 
-说明：以上步骤是为了生成initrd.img, vmlinuz, System.map，然后在grub的menulist修改启动配置. 
+说明：以上步骤是为了生成initrd.img, vmlinuz, System.map，然后在grub的menulist修改启动配置.
 
 vmlinuz内核映象文件，支持虚拟内存vm，引导程序中的bootsector+setup+system+..组合而成,可被压缩。
 
@@ -293,7 +293,7 @@ Initrd.img是initial ramdisk, 一般是来临时引导硬件到实际内核vmlin
 // grub boot sequence
 
 ```shell
-kernel   //use linuz    
+kernel   //use linuz
 initrd    //use initrd.img， 首先被执行
 boot    //start boot
 ```
@@ -331,22 +331,22 @@ boot    //start boot
 
 weak_alias用来弱符号连接。另外有强符号连接. 用来重命名，{name}={__#name}
 
- 
+
 
 **2)**  **likely, unlikely** (from: [include/linux/compiler.h](http://lxr.linux.no/linux+*/include/linux/compiler.h#L107))
 
 这是调用gcc的内嵌函数__builtin_expect,用来比较值. likely(x)是指x=1时做某事, unlikely(x)指若x=1时不做某事。常用来与某个互斥变量比较。
 
- 
+
 
 **3)**  优化屏障barrier
 
 编译器编译源代码时，会将源代码进行优化，将源代码的指令进行重排序，以适合于CPU的并行执行。然而，内核同步必须避免指令重新排序，优化屏障 （Optimization barrier）避免编译器的重排序优化操作，保证编译程序时在优化屏障之前的指令不会在优化屏障之后执行。
-    Linux用宏barrier实现优化屏障，gcc编译器的优化屏障宏定义列出如下（在include/linux/compiler-gcc.h中） 
+    Linux用宏barrier实现优化屏障，gcc编译器的优化屏障宏定义列出如下（在include/linux/compiler-gcc.h中）
 
 `#define barrier() _asm__volatile_("": : :"memory") `
 
- 
+
 
 **4)**   container_of
 
@@ -358,7 +358,7 @@ weak_alias用来弱符号连接。另外有强符号连接. 用来重命名，{n
 
 其主要作用是依据ptr取得type的指针
 
- 
+
 
 **5)**  系统调用宏 [SYSCALL_DEFINE2](http://lxr.linux.no/linux+*/+code=SYSCALL_DEFINE2)
 
@@ -412,7 +412,7 @@ include/linux/init.h
  167#define __define_initcall(level,fn,id) \
  168        static initcall_t __initcall_##fn##id __used \
  169        __attribute__((__section__(".initcall" level ".init"))) = fn
-     
+
  //文件系统初始化
  194#define fs_initcall(fn)              __define_initcall("5",fn,5)
 
@@ -431,20 +431,20 @@ include/linux/init.h
 
 2)module使用相关命令：insmod, rmmod, lsmod, dmesg
 
-3)module_parama, 
+3)module_parama,
 
 符号导出宏:
 
 ```shell
 MODULE_LICENSE(),
-MODULE_DESCRIPTION(), 
-MODULE_AUTHOR(), 
+MODULE_DESCRIPTION(),
+MODULE_AUTHOR(),
 MODULE_SUPPORTED_DEVICE()
 ```
 
 说明：将代码生成模块是为了动态可加载，在linux1.2后引入模块机制。内核函数库如fork, malloc的实现就是这种机制的体现。
 
- 
+
 
 # 3 内核源码
 
@@ -462,13 +462,13 @@ MODULE_SUPPORTED_DEVICE()
 
 * **基于优先数的调度（HPF—Highest Priority First**）
 
-* **时间片轮转调度算 (RR—Round Robin)**  
+* **时间片轮转调度算 (RR—Round Robin)**
 
 * **时间片选择问题：固定时间片,可变时间片**
 
-* **多级队列反馈调度算法** 
+* **多级队列反馈调度算法**
 
- 
+
 
 各操作系统调度实现
 
@@ -526,7 +526,7 @@ LinuxThread:
 
 
 
-查看进程的地址空间： 
+查看进程的地址空间：
 
 1)   `$ cat /proc/{pid}/maps`
 
@@ -560,11 +560,11 @@ linux 通过二级页表来管理物理页面。
 
 **进程与文件的关联数据结构**:
 
-* fs_struct结构，它包含两个指向VFS索引节点的指针，分别指向root(即根目录节点)和pwd(即当前目录节点)； 
+* fs_struct结构，它包含两个指向VFS索引节点的指针，分别指向root(即根目录节点)和pwd(即当前目录节点)；
 
 * files_struct结构，它保存该进程打开文件的有关信息, 如下图所示
 
-  ​         ![Linux文件系统的逻辑结构](..\..\media\code\code_linux_005.png)                      S
+  ​         ![Linux文件系统的逻辑结构](../../media/code/code_linux_005.png)                      S
 
   图 Linux文件系统的逻辑结构
 
@@ -576,9 +576,9 @@ linux 通过二级页表来管理物理页面。
 
 1）proc文件的读写（应用）
 
-2) 
+2)
 
-variable：struct proc_dir_entry 
+variable：struct proc_dir_entry
 
 function: create_proc_entry(), mod_read()...
 
@@ -609,29 +609,29 @@ Linux系统采用设备文件统一管理硬件设备，从而将硬件设备的
 
 所有设备都作为特别文件, 可按照文件的方式来打开open,read,write, ioctl等操作。
 
- 
 
-![linux设备驱动分层结构示意图](..\..\media\code\code_linux_002.png)                               
+
+![linux设备驱动分层结构示意图](../../media/code/code_linux_002.png)
 
 图  linux设备驱动分层结构示意图
 
- 
+
 
 **设备驱动程序的数据结构组成**
 
 device_struct结构由两项构成，一个是指向已登记的设备驱动程序名的指针(name)，另一个是指向file_operations结构的指针(fpos)。而 file_operations结构的成分几乎全是函数指针，分别指向实现文件操作的入口函数。设备的主设备号用来对`chrdevs数组`进行索引，如图7 所示。
 
- ![ linux字符设备驱动程序数据结构示意图](..\..\media\code\code_linux_003.png)
+ ![ linux字符设备驱动程序数据结构示意图](../../media/code/code_linux_003.png)
 
 图 linux字符设备驱动程序数据结构示意图
 
 
 
-![linux块设备驱动程序数据结构示意图](..\..\media\code\code_linux_004.png)                               
+![linux块设备驱动程序数据结构示意图](../../media/code/code_linux_004.png)
 
 图 linux块设备驱动程序数据结构示意图
 
- 
+
 
 **设备驱动程序工作流程**:
 
@@ -672,7 +672,7 @@ step4: 用户空间测试函数, 使用`syscall(__NR__XX)`, 注意，需定义lo
 
 **Tips**：Linux的系统调用通过int 80h实现，用系统调用号来区分入口函数。
 
-操作系统实现系统调用的基本过程是： 
+操作系统实现系统调用的基本过程是：
 
 1. 应用程序调用库函数（API）；
 
@@ -686,7 +686,7 @@ step4: 用户空间测试函数, 使用`syscall(__NR__XX)`, 注意，需定义lo
 
 6. API将EAX返回给应用程序。
 
-应用程序调用系统调用的过程是： 
+应用程序调用系统调用的过程是：
 
 * 把系统调用的编号存入EAX
 
@@ -694,7 +694,7 @@ step4: 用户空间测试函数, 使用`syscall(__NR__XX)`, 注意，需定义lo
 
 * 触发0x80号中断（int 0x80）
 
- 
+
 
 示例：Linux中原系统调用实现(sys_unlink为例）
 
@@ -708,7 +708,7 @@ asmlinkage long sys_unlink(const char __user *pathname);
 
 /arch/x86/kernel/sys_?.c
 
- 
+
 
 3) 注册到sys_call_table:   arch/x86/kernel/syscall_table_32.S#L12
 
@@ -717,7 +717,7 @@ ENTRY(sys_call_table)
 .long sys_unlink        /* 10 */
 ```
 
-4) 声明系统调用号    
+4) 声明系统调用号
 
 from: arch/x86/include/asm/unistd_32.h
 
@@ -745,7 +745,7 @@ __SYSCALL(__NR_unlink, sys_unlink)
 
 **内核空间系统调用实现**：
 
- * unistd.h 定义系统调用号`_NR_XX`； 
+ * unistd.h 定义系统调用号`_NR_XX`；
  * /linux/kernel/sys.c 源文件中写系统调用函数xx；
  * /linux/sys.h 将函数名加放到 sys_call_table[]；
  * 用户空间使用 `syscallx( ＿NR＿XX)`调用。
@@ -754,7 +754,7 @@ __SYSCALL(__NR_unlink, sys_unlink)
 
 ### BSD socket实现
 
-  ![image-20210702110142397](..\..\media\code\code_linux_001.png)                             
+  ![image-20210702110142397](../../media/code/code_linux_001.png)
 
 图  Linux 网络栈结构
 
@@ -762,7 +762,7 @@ __SYSCALL(__NR_unlink, sys_unlink)
 
 **协议无关接口**: socket层, Linux 中的 socket 结构是 `struct sock`，这个结构是在 linux/include/net/sock.h 中定义的。
 
-**网络协议:** 
+**网络协议:**
 
 * linux/net/ipv4/af_inet.c     //定义inet协议,使用inet_inità `proto_register`
 
@@ -791,7 +791,7 @@ __SYSCALL(__NR_unlink, sys_unlink)
 
 ```c
 sys_call_table:  arch/x86/kernel/syscall_table_32.S
-sys_socketcall:  net/socket.c, line 2205 
+sys_socketcall:  net/socket.c, line 2205
 sys_socket: 	kernel/sys_ni.c		//系统调用函数所调用的函数入口Non-implemented
 ```
 
@@ -823,20 +823,20 @@ sys_socket: 	kernel/sys_ni.c		//系统调用函数所调用的函数入口Non-im
 1266 SYSCALL_DEFINE3(socket, int, family, int, type, int, protocol)
 
 //kernel/sys_ni.c
-42 cond_syscall(sys_socket);		
+42 cond_syscall(sys_socket);
 ```
 
 
 
 **4）主要的数据结构**
 
-file system : [include](http://lxr.linux.no/linux+*/include)/[linux](http://lxr.linux.no/linux+*/include/linux)/[fs.h](http://lxr.linux.no/linux+*/include/linux/fs.h)    
+file system : [include](http://lxr.linux.no/linux+*/include)/[linux](http://lxr.linux.no/linux+*/include/linux)/[fs.h](http://lxr.linux.no/linux+*/include/linux/fs.h)
 
 ```c
  899struct file {	};
 713 struct inode {	};
 1484struct file_operations {	};
-1730struct file_system_type {	};	
+1730struct file_system_type {	};
 //示例：socket对应到相应的文件系统类型，操作socket就像操作file
 304 static struct file_system_type sock_fs_type = {
  305     .name =     "sockfs",
@@ -845,7 +845,7 @@ file system : [include](http://lxr.linux.no/linux+*/include)/[linux](http://lxr.
  308 };
 ```
 
- 
+
 
 socket: [include](http://lxr.linux.no/linux+*/include)/[linux](http://lxr.linux.no/linux+*/include/linux)/[net.h](http://lxr.linux.no/linux+*/include/linux/net.h)
 
@@ -890,13 +890,13 @@ socket: [include](http://lxr.linux.no/linux+*/include)/[linux](http://lxr.linux.
 
 kernel_init()-->do_basic_setup()-->do_initcalls()-->do_one_initcall()-->sock_init()
 
- 
+
 
 // 结点分配
 
 __sock_create()-->sock_alloc()-->new_inode()-->alloc_inode()-->sock_alloc_inode()
 
- 
+
 
 // 协议族注册 net/ipv4/af_inet.c
 
@@ -904,7 +904,7 @@ __sock_create()-->sock_alloc()-->new_inode()-->alloc_inode()-->sock_alloc_inode(
 
 调用关系：inet_init()-- >sock_register()
 
- 
+
 
 // 协议检测
 
@@ -922,7 +922,7 @@ poll系统调用：
 
 `int poll(struct pollfd *fds, nfds_t nfds, int timeout);`
 
- 
+
 
 内核2.6.30对应的实现代码为： [fs/select.c -->do_sys_poll]
 
@@ -931,13 +931,13 @@ poll系统调用：
  772                struct timespec *end_time)
 ```
 
- 
+
 
 流程简述：先注册回调函数__poll_wait，再初始化table变量（类型为struct poll_wqueues)，接着拷贝用户传入的struct pollfd（其实主要是fd），然后轮流调用所有fd对应的poll（把current挂到各个fd对应的设备等待队列上）。在设备收到一条消息（网络 设备）或填写完文件数据（磁盘设备）后，会唤醒设备等待队列上的进程，这时current便被唤醒了。current醒来后离开sys_poll的操作相对简单，这里就不逐行分析了。
 
 http://www.pub4.com/?post=36
 
- 
+
 
 **2) epoll**
 
@@ -958,7 +958,7 @@ http://www.pub4.com/?post=36
 
 详见文档 《[linux内核同步机制分析](linux内核同步机制分析.md)》
 
- 
+
 
 ## 本章参考
 
@@ -973,45 +973,45 @@ http://www.pub4.com/?post=36
 
 # FAQ
 
-**1)**   **如何生成全局变量** 
+**1)**   **如何生成全局变量**
 
 头文件声明前＋extern 表示为全局变量。
 
 如果是模块内的全局变量, 还需要用EXPORT_SYMBOL导出符号。
 
- 
+
 
 **2)**    **内核函数库生成**?
 
 内核函数库：直接写函数，可供内核或用户使用的函数，最后链入到lib.a
 
- 
+
 
 **3)**    **shell程序如何实现**
 
 shell: 支持管道可重定向,|,>,<,>> use dup(),pipe()实现
 
- 
+
 
 **4)   Linux防火墙**
 
  只需实现函数，生成内核模块，内核中提供了结构体变量struct nf_hook_ops进行回调。
 
- 
+
 
 **5)**   **Linux性能优化**
 
 内核参数配置：/proc, sysctl
 
- 
+
 
 # 参考资料
 
 * http://lxr.linux.no/
 
-* /proc文件系统全面观 http://blog.csdn.net/wqf363/archive/2006/10/31/1359189.aspx 
+* /proc文件系统全面观 http://blog.csdn.net/wqf363/archive/2006/10/31/1359189.aspx
 
-* 从2.x到4.x，Linux内核这十年经历了哪些重要变革 https://blog.csdn.net/sheji105/article/details/79558522?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base 
+* 从2.x到4.x，Linux内核这十年经历了哪些重要变革 https://blog.csdn.net/sheji105/article/details/79558522?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base
 
 
 
@@ -1029,9 +1029,9 @@ a) ctags -R   //to create tags
 
 b):help TlistToggle //to show tag list windows
 
-switch window: ctrl+ww, 
+switch window: ctrl+ww,
 
-switch content: Enter 
+switch content: Enter
 
 goto variable,function: ctrl+],ctl+g+], ctrl+t
 
@@ -1043,7 +1043,7 @@ c):ts //ts = tselect, show the same tags
 
 其它：lxr, snavigator, source sight.
 
- 
+
 
 ### 2) How to install and use lxr
 
@@ -1057,7 +1057,7 @@ c)install perl and lxr
 
 d)install glimpse   http://webglimpse.net/download.php
 
- 
+
 
 step 2: modify config
 
@@ -1073,7 +1073,7 @@ modify config: /usr/share/lxr/http/lxr.conf
 
  glimpsebin:
 
- 
+
 
 b)apache
 
@@ -1120,7 +1120,7 @@ step 4: last show
 
 ### 3) man kernel api
 
-http://www.kernel.org/doc/man-pages/index.html 
+http://www.kernel.org/doc/man-pages/index.html
 
 ```shell
 $sudo apt-get install xmlto
@@ -1139,10 +1139,10 @@ http://linuxmanpages.com/
 
 [**1. General Commands**](http://linuxmanpages.com/man1/)
  [**2. System Calls**](http://linuxmanpages.com/man2/)
- [**3. Subroutines**](http://linuxmanpages.com/man3/) 
+ [**3. Subroutines**](http://linuxmanpages.com/man3/)
 
 provided by the standard C library (with particular focus on [glibc](http://www.gnu.org/software/libc/), the [GNU](http://www.gnu.org) C library).
- [**4. Special Files**](http://linuxmanpages.com/man4/) 
+ [**4. Special Files**](http://linuxmanpages.com/man4/)
 
 which documents details of various devices, most of which reside in **/dev****.**
 
@@ -1153,7 +1153,7 @@ which describes various file formats, and includes [proc(5)](http://kernel.org/d
  [**7. Macros and Conventions**](http://linuxmanpages.com/man7/)
  [**8. Maintenence Commands**](http://linuxmanpages.com/man8/)
 
- 
+
 
 经典推荐：
 
@@ -1163,17 +1163,17 @@ top(1)   ps(1)
 
 [sleep(3)](http://kernel.org/doc/man-pages/online/pages/man3/sleep.3.html)
 
-[initrd(4)](http://kernel.org/doc/man-pages/online/pages/man4/initrd.4.html) [mem(4)](http://kernel.org/doc/man-pages/online/pages/man4/mem.4.html)  
+[initrd(4)](http://kernel.org/doc/man-pages/online/pages/man4/initrd.4.html) [mem(4)](http://kernel.org/doc/man-pages/online/pages/man4/mem.4.html)
 
 [proc(5)](http://kernel.org/doc/man-pages/online/pages/man5/proc.5.html)  [fs(5)](http://kernel.org/doc/man-pages/online/pages/man5/fs.5.html)
 
-[standards(7)](http://kernel.org/doc/man-pages/online/pages/man7/standards.7.html)  [unicode(7)](http://kernel.org/doc/man-pages/online/pages/man7/unicode.7.html)   [utf-8(7)](http://kernel.org/doc/man-pages/online/pages/man7/utf-8.7.html)  
+[standards(7)](http://kernel.org/doc/man-pages/online/pages/man7/standards.7.html)  [unicode(7)](http://kernel.org/doc/man-pages/online/pages/man7/unicode.7.html)   [utf-8(7)](http://kernel.org/doc/man-pages/online/pages/man7/utf-8.7.html)
 
-[pthreads(7)](http://kernel.org/doc/man-pages/online/pages/man7/pthreads.7.html)   [regex(7)](http://kernel.org/doc/man-pages/online/pages/man7/regex.7.html) [time(7)](http://kernel.org/doc/man-pages/online/pages/man7/time.7.html)  [sem_overview(7)](http://kernel.org/doc/man-pages/online/pages/man7/sem_overview.7.html)  [shm_overview(7)](http://kernel.org/doc/man-pages/online/pages/man7/shm_overview.7.html)  [signal(7)](http://kernel.org/doc/man-pages/online/pages/man7/signal.7.html) 
+[pthreads(7)](http://kernel.org/doc/man-pages/online/pages/man7/pthreads.7.html)   [regex(7)](http://kernel.org/doc/man-pages/online/pages/man7/regex.7.html) [time(7)](http://kernel.org/doc/man-pages/online/pages/man7/time.7.html)  [sem_overview(7)](http://kernel.org/doc/man-pages/online/pages/man7/sem_overview.7.html)  [shm_overview(7)](http://kernel.org/doc/man-pages/online/pages/man7/shm_overview.7.html)  [signal(7)](http://kernel.org/doc/man-pages/online/pages/man7/signal.7.html)
 
 [socket(7)](http://kernel.org/doc/man-pages/online/pages/man7/socket.7.html)    [tcp(7)](http://kernel.org/doc/man-pages/online/pages/man7/tcp.7.html)   [udp(7)](http://kernel.org/doc/man-pages/online/pages/man7/udp.7.html)   [ip(7)](http://kernel.org/doc/man-pages/online/pages/man7/ip.7.html)       [epoll(7)](http://kernel.org/doc/man-pages/online/pages/man7/epoll.7.html)
 
- 
+
 
 ### 4) 查看系统信息
 
@@ -1241,9 +1241,9 @@ Usage: objdump <option(s)> <file(s)>
 
 Display information from object <file(s)>.
 
-readelf - Displays information about ELF files. 
+readelf - Displays information about ELF files.
 
- 
+
 
 **2 hexdump**
 
@@ -1259,7 +1259,7 @@ nm - list symbols from object files
 
 ar - create, modify, and extract from archives 将文件链接到库中。
 
- 
+
 
 **4 printk/dmesg**
 
@@ -1267,7 +1267,7 @@ ar - create, modify, and extract from archives 将文件链接到库中。
 
 * dmesg 显示内核信息
 
- 
+
 
 **5** **调试工具**
 
@@ -1275,7 +1275,7 @@ Solaris: mdb, dtrace
 
 Linux: kdb
 
- 
+
 
 **6** **查看工具**
 
@@ -1289,11 +1289,11 @@ pgrep: 用来查看进程信息
 
 pmap: 查看进程地址空间
 
-gdb: 用户态程序调试工具. 
+gdb: 用户态程序调试工具.
 
 代码查看工具：snavigator, source insight, lxr, vim+ctags
 
- 
+
 
 #### Solaris
 
@@ -1314,7 +1314,7 @@ gdb: 用户态程序调试工具.
 | ptime  | 时间                             |
 | pwdx   | 工作目录                         |
 
- 
+
 
 **进程控制**
 
@@ -1327,7 +1327,7 @@ gdb: 用户态程序调试工具.
 | pwait | 等待进程结束                   |
 | preap | 清理僵尸（zombie）进程         |
 
- 
+
 
 **进程跟踪调试/核心跟踪调试**
 
@@ -1337,7 +1337,7 @@ gdb: 用户态程序调试工具.
 | dtrace | 几乎无所不能的动态跟踪工具 |
 | mdb    | 调试核心或核心core文件     |
 
- 
+
 
 **查看系统状态**
 
@@ -1350,6 +1350,5 @@ gdb: 用户态程序调试工具.
 | netstat | 网络状态统计   |
 | nfsstat | nfs状态        |
 
- 
 
- 
+

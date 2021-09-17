@@ -734,7 +734,7 @@ ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向�
 
 
 
-![img](..\..\media\ai\ai_aliyun_003.png)
+![img](../../media/ai/ai_aliyun_003.png)
 
 
 
@@ -776,7 +776,7 @@ https://www.huaweicloud.com/
 
 **全栈全场景AI解决方案（2018.12）**
 
-![img](..\..\media\ai\ai_hw_001.png)
+![img](../../media/ai/ai_hw_001.png)
 
 图  华为的全栈全场景AI解决方案（2018.12）
 
@@ -797,7 +797,7 @@ https://www.huaweicloud.com/
 
 **华为智能体（2020.09）**
 
-![img](..\..\media\ai\ai_hw_002.png)
+![img](../../media/ai/ai_hw_002.png)
 
 图 华为智能体
 
@@ -1232,13 +1232,13 @@ http://www.support-vector.net/
 
 1982年，Hopfield模型的提出，以及逆向传播算法又推动了神经网络的发展。
 
-![神经网络的发展历程图](..\..\media\ai\ai_dl_003.png)
+![神经网络的发展历程图](..\../media/ai/ai_dl_003.png)
 
 
 
 ### 术语
 
-![神经元](..\..\media\ai\ai_dl_001.png)
+![神经元](../../media/ai/ai_dl_001.png)
 
 图 神经元结构（树突、轴突axon、轴突终端）
 
@@ -1310,7 +1310,7 @@ http://www.support-vector.net/
 
 目前，神经网络已有上百种不同的模型，常见的有BP网络（Back Propagation）、径向基RBF网络、Hopfield网络、随机神经网络（Boltzmann机）、竞争神经网络（Hamming网络，自组织映射网络）等。但是当前的神经网络仍普遍存在收敛速度慢、计算量大、训练时间长和不可解释等缺点。
 
- ![ai_dl_002](..\..\media\ai\ai_dl_002.jpg)
+ ![ai_dl_002](../../media/ai/ai_dl_002.jpg)
 
 图 神经网络常见模型
 
@@ -1493,13 +1493,11 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 信息抽取是一种自动化地从半结构化和无结构数据中抽取实体、关系以及实体属性等结构化信息的技术。涉及的关键技术包括：实体抽取、关系抽取和属性抽取。
 
-**实体抽取(命名实体识别NER) 
-** 监督学习和规则相结合的办法：Lin等人采用字典辅助下的最大熵算法，在基于Medline论文摘要的GENIA数据集上取得了实体抽取准确率和召回率均超过70%的实验结果。
+**实体抽取(命名实体识别NER) **
+ 监督学习和规则相结合的办法：Lin等人采用字典辅助下的最大熵算法，在基于Medline论文摘要的GENIA数据集上取得了实体抽取准确率和召回率均超过70%的实验结果。
 
- 
-
-**关系抽取 
-** 2007年，华盛顿大学图灵中心的Banko等人[1](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:1)提出了面向开放域的信息抽取方法框架(open information extraction, OIE)，并发布了基于自监督(self-supervised)学习方式的开放信息抽取原型系统(TextRunner)。该系统采用少量人工标记数据作为训练集，据此得到一个实体关系分类模型，再依据该模型对开放数据进行分类，依据分类结果训练朴素贝叶斯模型来识别“实体－关系－实体”三元组，经过大规模真实数据测试，取得了显著优于同时期其他方法的结果。
+**关系抽取** 
+ 2007年，华盛顿大学图灵中心的Banko等人[1](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:1)提出了面向开放域的信息抽取方法框架(open information extraction, OIE)，并发布了基于自监督(self-supervised)学习方式的开放信息抽取原型系统(TextRunner)。该系统采用少量人工标记数据作为训练集，据此得到一个实体关系分类模型，再依据该模型对开放数据进行分类，依据分类结果训练朴素贝叶斯模型来识别“实体－关系－实体”三元组，经过大规模真实数据测试，取得了显著优于同时期其他方法的结果。
 
 实体关系的抽取包含隐藏关系抽取和确定关系抽取。使用方法如SVM。
 *  隐藏关系：通过预先定义，包括包含关系、位置关系、雇佣关系等等。
@@ -1519,16 +1517,14 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 从第三方知识库产品或已有结构化数据获取知识输入。
 
- 
+**合并外部知识库**
+ Mendes等人[7](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:7)提出了开放数据集成框架(linked data integration framework, LDIF)，用于对LOD知识库产品进行融合。
 
-**合并外部知识库 
-** Mendes等人[7](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:7)提出了开放数据集成框架(linked data integration framework, LDIF)，用于对LOD知识库产品进行融合。
+**合并关系数据库** 
+ 使用RDB2RDF的开源工具：Triplify、D2RServer、OpenLink Virtuoso、SparqlMap等。
 
-**合并关系数据库 
-** 使用RDB2RDF的开源工具：Triplify、D2RServer、OpenLink Virtuoso、SparqlMap等。
-
-**其他半结构化方式存储(XML、CSV、JSON) 
-** 从XML转化为RDF：XSPARQL 
+**其他半结构化方式存储(XML、CSV、JSON)** 
+ 从XML转化为RDF：XSPARQL 
  从XML和CSV转化为RDF：Datalift 
  转化的知识元素经过实体链接，就可以加入到知识库中，实现知识的合并。
 
@@ -1559,12 +1555,13 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 ## 4.3  知识图谱的应用
 
-**深度问答 
-** 系统首先在知识图谱的帮助下对用户自然语言提出的问题进行语义分析和语法分析，进而将其转化成结构化形式的查询语言，然后在知识图谱中查询答案。对知识图谱的查询通常采用基于图的查询语言(SPARQL)
+**深度问答** 
 
- 
+系统首先在知识图谱的帮助下对用户自然语言提出的问题进行语义分析和语法分析，进而将其转化成结构化形式的查询语言，然后在知识图谱中查询答案。对知识图谱的查询通常采用基于图的查询语言(SPARQL)
 
-**基于知识图谱的问答系统 **
+
+
+**基于知识图谱的问答系统**
 
 * 基于信息检索的问答系统 
    先将问题转变为一个基于知识库的结构化查询，从知识库中抽取与问题中实体相关的信息来生成多个候选答案，然后再从候选答案中识别出正确答案。
@@ -1585,7 +1582,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 * 知识图谱构建技术综述 《计算机研究与发展》, 2016, 53 (3):582-600 https://blog.csdn.net/qq_34435926/article/details/79926633
 
-* https://blog.csdn.net/eastmount/article/details/86714051  [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)
+* [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)  https://blog.csdn.net/eastmount/article/details/86714051  
 
 
 
@@ -1613,7 +1610,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 标签知识图谱化图如下图：
 
-![img](..\..\media\ai\ai_algo_008.png)
+![img](../../media/ai/ai_algo_008.png)
 
 
 
@@ -1664,7 +1661,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 构建用户画像的核心流程如下图：
 
-![img](..\..\media\ai\ai_algo_009.png)
+![img](../../media/ai/ai_algo_009.png)
 
 
 
@@ -1727,7 +1724,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 标签权重的计算公式来源于赵洪田撰写的文章[《用户标签之标签权重算法》](https://mp.weixin.qq.com/s?__biz=MzI0OTQyNzEzMQ==&mid=2247487211&idx=1&sn=848069327f8c778e42427158f20f9b36&chksm=e990eb3fdee7622915479093a8f43f61dc8772cc681498f95dbde6960f11c5ed8f75bde29a8e&scene=21#wechat_redirect)，权重公式的解读如下：
 
-![img](..\..\media\ai\ai_algo_010.png)
+![img](../../media/ai/ai_algo_010.png)
 
 **1、行为类型权重**
 

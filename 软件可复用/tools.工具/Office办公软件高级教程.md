@@ -30,7 +30,7 @@
 
 ## 1.1 常用功能
 
-​        ![image-20210628152059050](..\..\media\sf_reuse\tools\office_word_001.png)                       
+​        ![image-20210628152059050](../../media/sf_reuse/tools/office_word_001.png)                       
 
 工具标题栏：开始、插入、页面布局、引用、邮件、审阅、视图、设计、布局
 
@@ -98,7 +98,7 @@ ctrl+= 下标
 
 * 设置缺省文本对齐方式：选项卡（或者选择一段文字） 段落--对齐方式。如下图所示：  
 
-![image-20210628152227752](..\..\media\sf_reuse\tools\office_word_002.png)
+![image-20210628152227752](../../media/sf_reuse/tools/office_word_002.png)
 
 图 2 WORD设置段路的‘对齐方式’
 
@@ -126,7 +126,7 @@ ctrl+= 下标
 
 ## 2.1 常用功能
 
- ![image-20210628152243744](..\..\media\sf_reuse\tools\office_excel_001.png)
+ ![image-20210628152243744](../../media/sf_reuse/tools/office_excel_001.png)
 
 Excel区别与WORD的工具栏：公式、数据
 
@@ -160,7 +160,7 @@ ctrl + F
 
 可设置查找范围‘工作簿’，那么就会查找excel所有工作表。示例如下：
 
- ![image-20210628152305296](..\..\media\sf_reuse\tools\office_excel_002.png)
+ ![image-20210628152305296](../../media/sf_reuse/tools/office_excel_002.png)
 
  
 
@@ -250,7 +250,7 @@ End Sub
 
 16边框： 长度33.86. 宽度19.05
 
- ![image-20210628152340339](..\..\media\sf_reuse\tools\office_ppt_001.png)
+ ![image-20210628152340339](../../media/sf_reuse/tools/office_ppt_001.png)
 
  
 

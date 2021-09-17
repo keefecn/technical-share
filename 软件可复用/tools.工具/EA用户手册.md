@@ -133,7 +133,7 @@ EA支持包括TOGAF在内的多种架构框架，因此支持很多的视图。
 
 控制面板---管理工具----ODBC数据源（32位）-----添加 用户DSN（注：EA无法访问系统DSN，且只能用MySQL数据源32位）
 
-![image-20210618112609848](..\..\media\sf_reuse\tools\tools_ea_001.png)
+![image-20210618112609848](../../media/sf_reuse/tools/tools_ea_001.png)
 
 3. 右击---源码工程----从ODBC中导入数据库
 4. 导入所有表，达成目标。
