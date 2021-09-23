@@ -5,17 +5,15 @@
 | 3    | 2017-10-29 | 将spark相关章节汇总单独成篇  | 同上   |        |
 | 4    | 2018-8-11  | 整理文档结构，更新架构章节。 | 同上   |        |
 |      |            |                              |        |        |
+
+
+ 
+
+ 
+
 ---
 
- 
-
- 
-
- 
-
 # 目录
-
-目录
 
 [目录... 1](#_Toc2547303)
 
@@ -189,10 +187,6 @@
 
  
 
- 
-
- 
-
 表目录
 
 [表格 1 Hadoop生态的数据工具列表__ 8](#_Toc2547388)
@@ -243,8 +237,6 @@
 
  
 
- 
-
 图目录
 
 [图 1 Hadoop生态图谱1_ 6](#_Toc2547411)
@@ -284,7 +276,11 @@
 
 
 
-# 1    概述
+
+---
+
+
+# 1  概述
 
 ## 1.1  Hadoop简介 
 
@@ -615,8 +611,6 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 目前Hadoop发行版非常多，有华为发行版、Intel发行版、Cloudera发行版（CDH）等，所有这些发行版均是基于Apache Hadoop衍生出来的，之所以有这么多的版本，完全是由Apache Hadoop的开源协议决定的：任何人可以对其进行修改，并作为开源或商业产品发布/销售。
 
- 
-
 **Apache Hadoop不足之处**
 - 版本管理混乱
 - 部署过程繁琐、升级过程复杂
@@ -632,9 +626,9 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 备注：按顺序代表了，在国内的使用率，CDH和HDP虽然是收费版本，但是他们是开源的，只是收取服务费用。
 
+
+
 表格 4 Hadoop产品化的主流厂商列表
-
-
 
 | 厂商名                                        | 商业模式                                                     | 现状           |
 | --------------------------------------------- | ------------------------------------------------------------ | -------------- |
@@ -752,7 +746,7 @@ TDH是国内首个全面支持Spark的Hadoop发行版，也是国内落地案例
 
  
 
-### 1.3.6  本节参考
+### 本节参考
 
 **大数据厂商**
 * CDH http://archive.cloudera.com 
@@ -772,6 +766,7 @@ TDH是国内首个全面支持Spark的Hadoop发行版，也是国内落地案例
 [3].  Transwarp Data Hub 社区版 （TDH-CE） http://www.transwarp.cn/product/tdh_ce 
 
 
+
 ## 1.4  Hadoop生态的内部关系
 
 ### 1.4.1  Hadoop生态内比较
@@ -782,7 +777,6 @@ TDH是国内首个全面支持Spark的Hadoop发行版，也是国内落地案例
 | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Pig VS Hive**        | Pig赋予开发人员在大数据集领域更多的灵活性，并允许开发简洁的脚本用于转换数据流以便嵌入到较大的 应用程序。  相对轻量。 | Hive更适合于数据仓库的任务，Hive主要用于静态的结构以及需要经常分析的工作。  Hive与SQL相似促使 其成为Hadoop与其他BI工具结合的理想交集。 | Hive和Pig都可以与HBase组合使用，Hive和Pig还为HBase提供了高层语言支持，使得在HBase上进行数据统计处理变的非常简单 |
 | **HBase**  **VS Hive** | HBase是为了支持弥补Hadoop对实时操作的缺陷的项目 。           | Hive是建立在Hadoop之上为了减少MapReduce  jobs编写工作的批处理系统。  **不支持实时查询** **。** | 操作RMDB数据库，如果是全表扫描，就用Hive+Hadoop,如果是索引访问，就用HBase+Hadoop  。 |
-|                        |                                                              |                                                              |                                                              |
 
 备注：1. Hive数据分为真实存储的数据和元数据，真实数据存储在HDFS中，元数据存储在MySQL中。
 
@@ -836,11 +830,13 @@ Hive 构建在 Hadoop 之上，
 
 Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认证和安全层)进行安全认证。具体认证方法涉及DIGEST-MD5和Kerberos两种。
 
+
+
 ## 1.6  Hadoop前景
 
 |                  | 目的                                                         | 应用场景                                                     |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| IT优化           | 将已经实现的应用和业务搬迁到Hadoop平台，以获得更多的数据、更好的性能或更低的成本。通过提高产出比、降低生产和维护成本等方式为企业带来好处。 | 历史日志数据在线查询、  ETL任务、  数据仓库offload           |
+| IT<br>优化      | 将已经实现的应用和业务搬迁到Hadoop平台，以获得更多的数据、更好的性能或更低的成本。通过提高产出比、降低生产和维护成本等方式为企业带来好处。 | 历史日志数据在线查询、  ETL任务、  数据仓库offload           |
 | 业务优化     | 在Hadoop上实现原来尚未实现的算法、应用，从原有的生产线中孵化出新的产品和业务，创造新的价值。通过新业务为企业带来新的市场和客户，从而增加企业收入。 | 包括大数据准备评估、路线图、预测操作界面、算法和一些针对特定市场和企业消费分析解决方案等等。如Palantir、营销的大数据分析工具  Qubit、针对CRM领域的人工智能Neokami等等。 |
 | 内存计算     | 随着高级分析和实时应用的增长，对处理能力提出了更高的要求，数据处理重点从IO重新回到CPU。以内存计算为核心的Spark将代替以IO吞吐为核心的MapReduce成为分布式大数据处理的缺省通用引擎。 | OLAP、实时发现                                               |
 | 简化实时应用 |                                                              |                                                              |
@@ -849,27 +845,7 @@ Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认�
 
 
 
-## 1.7  本章参考
-
-**官网**
-* Hadoop  [http://Hadoop.apache.org/docs/stable/](http://hadoop.apache.org/docs/stable/)  
-* [Spark](http://spark.incubator.apache.org/) http://spark.apache.org/
-* [HBase](http://hbase.apache.org/)
-* [ZooKeeper](http://zookeeper.apache.org/)
-* [Apache Drill](http://wiki.apache.org/incubator/DrillProposal)  http://drill.apache.org/ 
-* [Pig](http://pig.apache.org/)
-* [Hive](http://hive.apache.org/)
-* [Ambari](http://incubator.apache.org/ambari/)
-* [Avro](http://avro.apache.org/)
-* [Cassandra](http://cassandra.apache.org/)
-* [Mahou](http://mahout.apache.org/)
-* OpenStack Installation Tutorial for Ubuntu http://docs.openstack.org/newton/install-guide-ubuntu/ 
-
- 
-
- 
-
-**参考链接**
+## 本章参考
 
 [1].  [Hadoop生态圈介绍](http://www.cnblogs.com/zhijianliutang/articles/5195045.html) http://www.cnblogs.com/gridmix/p/5102694.html
 
@@ -1097,13 +1073,13 @@ Spark on yarn-client实现流程：
 说明： 
 
 在yarn-client模式下，Driver部署在Client端，在Client端启动。yarn-client模式下，不兼容老版本的客户端。推荐使用yarn-cluster模式。
-1.    客户端向ResourceManager发送Spark应用提交请求，ResourceManager为其返回应答，该应答中包含多种信息(如ApplicationId、可用资源使用上限和下限等)。Client端将启动ApplicationMaster所需的所有信息打包，提交给ResourceManager上。 
-2.    ResourceManager收到请求后，会为ApplicationMaster寻找合适的节点，并在该节点上启动它。ApplicationMaster是Yarn中的角色，在Spark中进程名字是ExecutorLauncher。 
-3.    根据每个任务的资源需求，ApplicationMaster可向ResourceManager申请一系列用于运行任务的Container。 
-4.    当ApplicationMaster（从ResourceManager端）收到新分配的Container列表后，会向对应的NodeManager发送信息以启动Container。 
+1. 客户端向ResourceManager发送Spark应用提交请求，ResourceManager为其返回应答，该应答中包含多种信息(如ApplicationId、可用资源使用上限和下限等)。Client端将启动ApplicationMaster所需的所有信息打包，提交给ResourceManager上。 
+2. ResourceManager收到请求后，会为ApplicationMaster寻找合适的节点，并在该节点上启动它。ApplicationMaster是Yarn中的角色，在Spark中进程名字是ExecutorLauncher。 
+3. 根据每个任务的资源需求，ApplicationMaster可向ResourceManager申请一系列用于运行任务的Container。 
+4. 当ApplicationMaster（从ResourceManager端）收到新分配的Container列表后，会向对应的NodeManager发送信息以启动Container。 
 
 ResourceManager分配Container给ApplicationMaster，ApplicationMaster和相关的NodeManager通讯，在获得的Container上启动Executor，Executor启动后，开始向Driver注册并申请Task。
-5.    Driver分配Task给Executor执行。Executor执行Task并向Driver汇报运行状况。
+5. Driver分配Task给Executor执行。Executor执行Task并向Driver汇报运行状况。
 
 #### 2.2.2.2     MapReduce和YARN的配合关系
 
@@ -1355,9 +1331,9 @@ HBase数据操作流程如[图5](http://localhost:7890/pages/YZH0518G/01/YZH0518
 **图 HBase数据操作流程**
 
 
-1.    对HBase进行增、删、改、查数据操作时，HBase Client首先连接ZooKeeper获得“hbase:meta”表所在的RegionServer的信息(涉及namespace级别修改的，比如创建表、删除表需要访问HMaster更新meta信息)。 
-2.    HBase Client连接到包含对应的“hbase:meta”表的Region所在的RegionServer，并获得相应的用户表的Region所在的RegionServer位置信息。 
-3.    HBase Client连接到对应的用户表Region所在的RegionServer，并将数据操作命令发送给该RegionServer，RegionServer接收并执行该命令从而完成本次数据操作。
+1. 对HBase进行增、删、改、查数据操作时，HBase Client首先连接ZooKeeper获得“hbase:meta”表所在的RegionServer的信息(涉及namespace级别修改的，比如创建表、删除表需要访问HMaster更新meta信息)。 
+2. HBase Client连接到包含对应的“hbase:meta”表的Region所在的RegionServer，并获得相应的用户表的Region所在的RegionServer位置信息。 
+3. HBase Client连接到对应的用户表Region所在的RegionServer，并将数据操作命令发送给该RegionServer，RegionServer接收并执行该命令从而完成本次数据操作。
 
 为了提升数据操作的效率，HBase Client会在内存中缓存“hbase:meta”和用户表Region的信息，当应用程序发起下一次数据操作时，HBase Client会首先从内存中获取这些信息；当未在内存缓存中找到对应数据信息时，HBase Client会重复上述操作。
 
@@ -1533,9 +1509,6 @@ Oozie工作流提供各种类型的“Action Node”用于支持不同的业务�
 | hbase  | 下载二进制；编辑配置文件：   hbase-env.sh、hbase-site.xml和regionservers | $ bin/start-hbase.sh                       | $ hbase shell                                                |
 | spark  | 下载二进制，解压即可用。                                     | # 自带集群模式启动  $ sbin/start-all.sh    | 3种语言交互环境（bin目录）pyspark/spark-shell/sparkR  1个脚本提交命令：  ./bin/spark-submit  [script] |
 | Hive   | 下载二进制，解压即可用。                                     | ./bin/Hive                                 |                                                              |
-|        |                                                              |                                            |                                                              |
-|        |                                                              |                                            |                                                              |
-|        |                                                              |                                            |                                                              |
 
 备注：Hadoop生态一般依赖于hdfs，所以一般要先启动hadoop。
 
@@ -1772,7 +1745,7 @@ $ sbin/stop-dfs.sh
 | 程序                                          | stable   版本 | 2017stable   版本 | 简介                                                         | 下载                                                         |
 | --------------------------------------------- | ------------- | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | JDK                                           | 8.0_45        | 9.0               | java基础                                                     |                                                              |
-| Hadoop                                        | 2.6.4         | 2.9.0             | Hadoop common 包括MapReduce和HDFS.                           | [http://mirrors.cnnic.cn/apache/Hadoop/common](http://mirrors.cnnic.cn/apache/hadoop/common) |
+| Hadoop                                        | 2.6.4         | 2.9.0             | Hadoop common 包括MapReduce和HDFS.                        | [http://mirrors.cnnic.cn/apache/Hadoop/common](http://mirrors.cnnic.cn/apache/hadoop/common) |
 | [**ZooKeeper**](http://zookeeper.apache.org/) | 3.4.6         |                   | 分布式监控                                                   | http://zookper.apache.org/                                   |
 | [**HBase™**](http://hbase.apache.org/):       | 1.2.4         | 1.3.0             | 分布式、按列存储数据库                                       | http://hbase.apache.org/                                     |
 | [**Hive**](http://hive.apache.org/)           | 1.2.1         |                   | 分布式、按列存储的数据仓库                                   | [http://Hive.apache.org/](http://hive.apache.org/)           |
@@ -1968,7 +1941,7 @@ Connect 'jdbc:derby://Hadoop1:1527/metastore_db;create=true';
 |                     |                                                              |                  |
 | Stage               | 阶段，每个Job都会被分解为多个相互依赖的任务集合。            | Taskset          |
 | Task                | 被发送到某个Executor的一个工作单元。                         |                  |
-| Job                 | 作业，一个Job包含多个RDD及作用于相应RDD上的各种Operation.    |                  |
+| Job                 | 作业，一个Job包含多个RDD及作用于相应RDD上的各种Operation. |                  |
 | RDD                 | 弹性分布式数据集。                                           |                  |
 | Operation           | 作用于RDD的各种操作，分为Transformation和Action              |                  |
 | Paritition          | 数据分区，一个RDD中的数据可以分成多个不同的分区。            |                  |
@@ -2257,7 +2230,7 @@ Usage: hdfs [--config confdir] [--loglevel loglevel] COMMAND
 
  
 
-## 4.4  本章参考
+## 本章参考
 
 [1].  [使用Eclipse编译运行MapReduce程序](http://www.powerxing.com/hadoop-build-project-using-eclipse/)
 
@@ -2268,8 +2241,6 @@ Usage: hdfs [--config confdir] [--loglevel loglevel] COMMAND
 [4].  [Apache Mesos](http://spark.apache.org/docs/latest/running-on-mesos.html)
 
 [5].  [Hadoop YARN](http://spark.apache.org/docs/latest/running-on-yarn.html)
-
-
 
 
 
@@ -2316,6 +2287,25 @@ Usage: hdfs [--config confdir] [--loglevel loglevel] COMMAND
  
 
 # 参考资料
+
+**官网**
+
+* Hadoop  [http://Hadoop.apache.org/docs/stable/](http://hadoop.apache.org/docs/stable/)  
+* [Spark](http://spark.incubator.apache.org/) http://spark.apache.org/
+* [HBase](http://hbase.apache.org/)
+* [ZooKeeper](http://zookeeper.apache.org/)
+* [Apache Drill](http://wiki.apache.org/incubator/DrillProposal)  http://drill.apache.org/ 
+* [Pig](http://pig.apache.org/)
+* [Hive](http://hive.apache.org/)
+* [Ambari](http://incubator.apache.org/ambari/)
+* [Avro](http://avro.apache.org/)
+* [Cassandra](http://cassandra.apache.org/)
+* [Mahou](http://mahout.apache.org/)
+* OpenStack Installation Tutorial for Ubuntu http://docs.openstack.org/newton/install-guide-ubuntu/ 
+
+
+
+**参考链接**
 
 [1].  FusionInsight V100R002C30SPC100 产品描述 01
 

@@ -128,7 +128,7 @@ import pandas as pd
 | 速度          | 快            | 快            | 中等            | 中等               | 快                    |
 | 灵活性        | 一般          | 好            | 好              | 好                 | 好                    |
 | 文档          | 全面          | 全面          | 中等            | 全面               | 全面                  |
-| 适合模型      | CNN           | CNN/RNN       | CNN/RNN         | CNN/RNN/...        | CNN/RNN/...           |
+| 适合模型      | CNN           | CNN/RNN       | CNN/RNN         | CNN/RNN/...     | CNN/RNN/...        |
 | 命令式        | N             | Y             | N               | N                  | Y                     |
 | 声明式        | Y             | N             | Y               | Y                  | Y                     |
 | 接口          | protobuf      | Lua           | Python          | C++/Python         | Python/R/<br>Julia/Go |
@@ -717,8 +717,8 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 
 | 功能                                                         | **Applications**                                             | **Algorithms**                                               |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Classification](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Spam detection, image recognition.                           | [SVM](https://scikit-learn.org/stable/modules/svm.html#svm-classification), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#classification), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
-| [Regression](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Drug response, Stock prices.                                 | [SVR](https://scikit-learn.org/stable/modules/svm.html#svm-regression), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#regression), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
+| [Classification](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Spam detection, image recognition.                        | [SVM](https://scikit-learn.org/stable/modules/svm.html#svm-classification), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#classification), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
+| [Regression](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) | Drug response, Stock prices.                              | [SVR](https://scikit-learn.org/stable/modules/svm.html#svm-regression), [nearest neighbors](https://scikit-learn.org/stable/modules/neighbors.html#regression), [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), and [more...](https://scikit-learn.org/stable/supervised_learning.html#supervised-learning) |
 | [Clustering](https://scikit-learn.org/stable/modules/clustering.html#clustering) | Customer segmentation, Grouping experiment outcomes          | [k-Means](https://scikit-learn.org/stable/modules/clustering.html#k-means), [spectral clustering](https://scikit-learn.org/stable/modules/clustering.html#spectral-clustering), [mean-shift](https://scikit-learn.org/stable/modules/clustering.html#mean-shift), and [more...](https://scikit-learn.org/stable/modules/clustering.html#clustering) |
 | [Dimensionality reduction](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) | Visualization, Increased efficiency                          | [k-Means](https://scikit-learn.org/stable/modules/decomposition.html#pca), [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [non-negative matrix factorization](https://scikit-learn.org/stable/modules/decomposition.html#nmf), and [more...](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) |
 | [Model selection](https://scikit-learn.org/stable/model_selection.html#model-selection) | Improved accuracy via parameter tuning                       | [grid search](https://scikit-learn.org/stable/modules/grid_search.html#grid-search), [cross validation](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation), [metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#model-evaluation), and [more...](https://scikit-learn.org/stable/model_selection.html) |
@@ -1028,10 +1028,10 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 
 ## 本章参考
 
-[1].     madlib http://madlib.apache.org/
-[2].     Greenplum上的机器学习——MADlib简介与应用实例 http://blog.sina.com.cn/s/blog_12c856e4c0102yjem.html 
-[3].     用SQL玩转数据挖掘之MADlib（一）——安装https://www.cnblogs.com/chenergougou/p/7107985.html
-[4].     MADlib——基于SQL的数据挖掘解决方案（2）——MADlib基础 https://blog.csdn.net/wzy0623/article/details/78845020 
+[1].  madlib http://madlib.apache.org/
+[2].  Greenplum上的机器学习——MADlib简介与应用实例 http://blog.sina.com.cn/s/blog_12c856e4c0102yjem.html 
+[3].  用SQL玩转数据挖掘之MADlib（一）——安装https://www.cnblogs.com/chenergougou/p/7107985.html
+[4].  MADlib——基于SQL的数据挖掘解决方案（2）——MADlib基础 https://blog.csdn.net/wzy0623/article/details/78845020 
 
 
 
@@ -1168,10 +1168,10 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 ```
 
 ### 5.2.4  本节参考
-[1].     http://rapid-i.com/content/view/64/74/lang,en/
-[2].     http://www.cs.waikato.ac.nz/~ml/index.html
-[3].     http://forum.wekacn.org/viewtopic.php?f=2&t=9 
-[4].     weka学习总结 http://www.sciencenet.cn/m/user_content.aspx?id=262955
+[1].  http://rapid-i.com/content/view/64/74/lang,en/
+[2].  http://www.cs.waikato.ac.nz/~ml/index.html
+[3].  http://forum.wekacn.org/viewtopic.php?f=2&t=9 
+[4].  weka学习总结 http://www.sciencenet.cn/m/user_content.aspx?id=262955
 
 
 

@@ -534,7 +534,7 @@ Scrapy的处理逻辑如下：绿线是数据流向。
 | crawler.py          | CrawlerProcess CrawlerRunner <br>Crawler | 采集器对象                   |
 | commands.py         | `from scrapy.commands import *`          | 导入命令行目录所有命令文件   |
 | item.py             |                                          | 实体                         |
-| ...                 |                                          |                              |
+| ...              |                                          |                              |
 
 说明：源码最外层目录是scrapy。
 

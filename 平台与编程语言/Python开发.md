@@ -510,7 +510,7 @@ copy.copy( )
 | 字符串     | string        | 字符串操作函数库      |          |
 |            | re            | 正则表达 式           |          |
 | 日期时间   | datetime      |          |          |
-| 文件操作   |  | 包括os.path, stat, filecomp, glob...        |          |
+| 文件操作   |  | 包括os.path, stat, filecomp, glob...     |          |
 | 数据持久化 |  | 包括mysql_python, sqlite3          |          |
 | 文件格式   |  | zip, csv, |          |
 | 模块分发   | distutils     | [Building   and installing Python modules](https://docs.python.org/2/library/distutils.html) |          |
@@ -682,11 +682,11 @@ python三引号常用作文档注释。
 | [string.endswith(obj,   beg=0, end=len(string))](http://www.runoob.com/python/att-string-endswith.html) | 检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False. |
 | [string.expandtabs(tabsize=8)](http://www.runoob.com/python/att-string-expandtabs.html) | 把字符串 string 中的   tab 符号转为空格，tab 符号默认的空格数是 8。 |
 | [string.find(str, beg=0, end=len(string))](http://www.runoob.com/python/att-string-find.html) | 检测 str 是否包含在 string 中，如果 beg 和   end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1 |
-| [string.index(str, beg=0, end=len(string))](http://www.runoob.com/python/att-string-index.html) | 跟find()方法一样，只不过如果str不在 string中会报一个异常.    |
+| [string.index(str, beg=0, end=len(string))](http://www.runoob.com/python/att-string-index.html) | 跟find()方法一样，只不过如果str不在 string中会报一个异常. |
 | [string.isalnum()](http://www.runoob.com/python/att-string-isalnum.html) | 如果 string 至少有一个字符并且所有字符都是字母或数字则返   回 True,否则返回 False |
 | [string.isalpha()](http://www.runoob.com/python/att-string-isalpha.html) | 如果 string 至少有一个字符并且所有字符都是字母则返回 True,   否则返回 False |
 | [string.isdecimal()](http://www.runoob.com/python/att-string-isdecimal.html) | 如果 string 只包含十进制数字则返回 True 否则返回 False.  |
-| [string.isdigit()](http://www.runoob.com/python/att-string-isdigit.html) | 如果 string 只包含数字则返回 True 否则返回 False.        |
+| [string.isdigit()](http://www.runoob.com/python/att-string-isdigit.html) | 如果 string 只包含数字则返回 True 否则返回 False.     |
 | [string.islower()](http://www.runoob.com/python/att-string-islower.html) | 如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回   True，否则返回 False |
 | [string.isnumeric()](http://www.runoob.com/python/att-string-isnumeric.html) | 如果 string 中只包含数字字符，则返回 True，否则返回 False    |
 | [string.isspace()](http://www.runoob.com/python/att-string-isspace.html) | 如果 string 中只包含空格，则返回 True，否则返回 False.   |
@@ -694,15 +694,15 @@ python三引号常用作文档注释。
 | [string.isupper()](http://www.runoob.com/python/att-string-isupper.html) | 如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回   True，否则返回 False |
 | [string.join(seq)](http://www.runoob.com/python/att-string-join.html) | 以 string 作为分隔符，将   seq 中所有的元素(的字符串表示)合并为一个新的字符串 |
 | [string.ljust(width)](http://www.runoob.com/python/att-string-ljust.html) | 返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串 |
-| [string.lower()](http://www.runoob.com/python/att-string-lower.html) | 转换 string 中所有大写字符为小写.           |
+| [string.lower()](http://www.runoob.com/python/att-string-lower.html) | 转换 string 中所有大写字符为小写.        |
 | [string.lstrip()](http://www.runoob.com/python/att-string-lstrip.html) | 截掉 string 左边的空格 |
 | [string.maketrans(intab,   outtab\])](http://www.runoob.com/python/att-string-maketrans.html) | maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。 |
 | [max(str)](http://www.runoob.com/python/att-string-max.html) | 返回字符串 str 中最大的字母。      |
 | [min(str)](http://www.runoob.com/python/att-string-min.html) | 返回字符串 str 中最小的字母。      |
 | [string.partition(str)](http://www.runoob.com/python/att-string-partition.html) | 有点像 find()和   split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组   (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string. |
 | [string.replace(str1,   str2,  num=string.count(str1))](http://www.runoob.com/python/att-string-replace.html) | 把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次. |
-| [string.rfind(str,   beg=0,end=len(string) )](http://www.runoob.com/python/att-string-rfind.html) | 类似于 find()函数，不过是从右边开始查找.    |
-| [string.rindex(   str, beg=0,end=len(string))](http://www.runoob.com/python/att-string-rindex.html) | 类似于 index()，不过是从右边开始.           |
+| [string.rfind(str,   beg=0,end=len(string) )](http://www.runoob.com/python/att-string-rfind.html) | 类似于 find()函数，不过是从右边开始查找. |
+| [string.rindex(   str, beg=0,end=len(string))](http://www.runoob.com/python/att-string-rindex.html) | 类似于 index()，不过是从右边开始.        |
 | [string.rjust(width)](http://www.runoob.com/python/att-string-rjust.html) | 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串 |
 | string.rpartition(str) | 类似于 partition()函数,不过是从右边开始查找. |
 | [string.rstrip()](http://www.runoob.com/python/att-string-rstrip.html) | 删除 string 字符串末尾的空格.  |
@@ -787,7 +787,7 @@ re.findal*  返回一个匹配列表
 | ----------- | ------------------------------------------------------------ |
 | ^           | 匹配字符串的开头      |
 | $           | 匹配字符串的末尾。    |
-| .       | 匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。 |
+| .    | 匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。 |
 | [...]       | 用来表示一组字符,单独列出：[amk]   匹配 'a'，'m'或'k'        |
 | [^...]      | 不在[]中的字符：[^abc] 匹配除了a,b,c之外的字符。 |
 | re*         | 匹配0个或多个的表达式。            |
@@ -809,9 +809,9 @@ re.findal*  返回一个匹配列表
 | (?> re)     | 匹配的独立模式，省去回溯。         |
 | \w          | 匹配字母数字          |
 | \W          | 匹配非字母数字        |
-| \s          | 匹配任意空白字符，等价于 [\t\n\r\f].        |
+| \s          | 匹配任意空白字符，等价于 [\t\n\r\f].     |
 | \S          | 匹配任意非空字符      |
-| \d          | 匹配任意数字，等价于 [0-9].    |
+| \d          | 匹配任意数字，等价于 [0-9]. |
 | \D          | 匹配任意非数字        |
 | \A          | 匹配字符串开始        |
 | \Z          | 匹配字符串结束，如果是存在换行，只匹配到换行前的结束字符串。c |
@@ -846,7 +846,7 @@ re.findal*  返回一个匹配列表
 特殊字符类
 | 实例 | 描述     |
 | ---- | ------------------------------------------------------------ |
-| .    | 匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。 |
+| . | 匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。 |
 | \d   | 匹配一个数字字符。等价于 [0-9]。   |
 | \D   | 匹配一个非数字字符。等价于 [^0-9]。 |
 | \s   | 匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。 |
@@ -1072,7 +1072,7 @@ pip提供了对virtualenv更好的整合。
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------- |
 | 安装pip工具 | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   $ python -m pip install --upgrade pip |
 | pip 路径    | windows: $PYTHON_PATH/script   linux: $PYTHON_PATH/bin       | pypy类似cpython的安装方式。          |
-| pip常用命令 | pip freeze   其它：show search ...          | 查看已安装的模块        |
+| pip常用命令 | pip freeze   其它：show search ...       | 查看已安装的模块        |
 | 离线下载    | $ pip download -d [DST_DIR] [package]           | 可自动下载模块及依赖包。 |
 | 离线安装    | $ pip install --no-index -f [DST_DIR] [package] |            |
 备注：1. pypy下pip的下载路径：https://bootstrap.pypa.io/get-pip.py
@@ -1791,8 +1791,8 @@ except Exception:
 | Pylint         | Python语法静态检测    | 依赖库：logilab-astng-0.24.3, logilab-common,   optik-1.5.3, pylint，需依次安装 |
 | -logilab-astng   ~[Astroid](https://www.astroid.org/) | Python Abstract Syntax Tree New   Generations.   Astroid is the new name for the former   logilab-astng python package, the core of the [pylint](http://www.pylint.org/) code checker. | http://www.logilab.org/856/      [Astroid](https://www.astroid.org/)~Python   AST On steroids. |
 | -logilab-common |          | http://www.logilab.org/848/        |
-| - [optik](http://optik.sourceforge.net/) |          | http://optik.sourceforge.net/      |
-| - [pylint](http://www.pylint.org/)       |          | http://www.logilab.org/project/pylint           |
+| [optik](http://optik.sourceforge.net/) |          | http://optik.sourceforge.net/      |
+| [pylint](http://www.pylint.org/)       |          | http://www.logilab.org/project/pylint           |
 | pyreverse      | 代码转化成模型        | 安装pylint即已安装，但显示dot文件需graphviz支持。            |
 | IDLE           | 缺省GUI   |          |
 | pythonwin      | Python for Window Extensions       | [pypiwin32 219](https://pypi.python.org/pypi/pypiwin32/219)   http://sourceforge.net/projects/pywin32/files/pywin32 |
@@ -1801,9 +1801,9 @@ except Exception:
 
 表格 21 python常用开发工具列表（按功能分类）
 
-| 功能     | 相关工具  | 备注     |
+| 功能<BR> | 相关工具  | 备注     |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| IDE      | IDLE（自带），   pythonwin（简洁版，Win   only），    **Eclipse+Pydev**（开源）；   pycharm（付费 ）   spyder（开源） | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。   spyder用以科学计算。 |
+| IDE      | IDLE（自带）, pythonwin（简洁版，Win only）, **Eclipse+Pydev**（开源）, pycharm（付费 ）   spyder（开源） | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。spyder用以科学计算。 |
 | 静态检测 | pylint/pycheck   coverage~代码覆盖率统计        |          |
 | 反向建模 | pyreverse | 生成的.dot，显示成图片需软件graphviz支持        |
 | 文档化   | pydoc    |          |
@@ -2049,7 +2049,8 @@ if __name__ == "__main__":
 | coverage   | 代码覆盖率工具。    |   | coverage   --source=<src> -m pytest && coverage report |
 | webtest    | 用于web功能测试的库。对WSGI应用执行模拟请求并获取结果。    | from webtest import TestApp |    |
 | tox        | 管理配置多个测试环境。           |   | 配合virtualenv   |
-备注：pycharm支持 unittest/nosetests/pytest。-v
+
+备注：pycharm支持 unittest/nosetests/pytest。
 
 
 
@@ -2074,9 +2075,10 @@ if __name__ == "__main__":
 | 日志           | 无       | pytest xx.py --resultlog=xxx       |      |
 | 插件           |          | 很多。    |      |
 | 并发           |          | pytest-xdist          | 命令行并发        |
-备注：1.setup/teardown是特殊的fixture。
-2.安装测试模块
-`$ pip install pytest nose toxs`
+
+> 备注：1. setup/teardown是特殊的fixture。
+
+2. 安装测试模块 `$ pip install pytest nose toxs`
 
 
 
@@ -2336,7 +2338,9 @@ pyinstaller 打包常见问题
 
 ### 3.3.8  性能优化 cProfile/pstats/timeit
 
-详见 《性能优化》
+详见 《[性能优化](性能优化.md)》
+
+
 
 ### 3.3.9  运维工具：Ansible/Fabric/SaltStack
 
@@ -2449,7 +2453,7 @@ redirect_stderr=true
 | 类别       | 库名     | 介绍     |
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 网络       | urllib    | Open an arbitrary URL. 仅可接受URL。示例: urllib.urlopen   提供urlencode方法用来GET查询字符串的产生，而urllib2没有。 |
-|   | urllib2   | An extensible library for opening URLs   using a variety of protocols. （仅在python2）   urllib2可以接受一个Request类的实例来设置URL请求的headers。示例：urllib2.urlopen()   //   urllib2.Request()  // |
+|   | ~~urllib2~~ | (仅在python2)  An extensible library for opening URLs using a variety of protocols. <br>urllib2可以接受一个Request类的实例来设置URL请求的headers。示例：`urllib2.urlopen(); urllib2.Request()` |
 |   | urllib3   | 仅在python3           |
 |   | httplib   | httplib实现了HTTP和HTTPS的客户端协议，一般不直接使用，在更高层的封装模块中（urllib,urllib2）使用了它的http实现。 |
 |   | requests  | Requests HTTP library，依赖urllib3  |
@@ -2459,7 +2463,8 @@ redirect_stderr=true
 |  | beautiful soup |          |
 |          | feedparse       | feed协议解析器 |
 |   | re       | 标准类库，正则表达式   |
-| 存储       | pysqlite  | 嵌入式数据库SQLite的python接口。   |
+| 存储       | SQLAlchemy | 数据库存储ORM |
+|  | pysqlite | 嵌入式数据库SQLite的python接口。 |
 |   | python_mysql          | mysql   |
 |   | cx_Oracle | oracle   |
 |   | pymongo   | mongo DB  |
@@ -2468,11 +2473,24 @@ redirect_stderr=true
 |   | matplotlib            | 绘图库    |
 | | [seaborn](http://seaborn.pydata.org/) | 基于matplotlib的加强版。可以很方便画各种图。 |
 |   | wordcloud | 词云     |
+| 爬虫框架 |  |  |
+| | grab | 网络爬虫框架（基于pycurl/multicur）。 |
+| | scrapy | 网络爬虫框架（基于twisted），性能很好，扩展性很好的框架，稍作改造就能成为分布式爬虫。 |
+| | pyspider | 一个强大的爬虫系统。 |
+| | cola | 一个分布式爬虫框架。 |
+| | portia | 基于Scrapy的可视化爬虫。 |
+| | restkit | Python的HTTP资源工具包。它可以让你轻松地访问HTTP资源，并围绕它建立的对象。 |
+| | demiurge | 基于PyQuery的爬虫微框架。 |
+| 浏览器与仿真 | selenium | 自动化真正的浏览器（Chrome浏览器，火狐浏览器，Opera浏览器，IE浏览器）。 |
+| | Ghost.py | 对PyQt的webkit的封装（需要PyQT）。 |
+| | Spynner | 对PyQt的webkit的封装（需要PyQT）。 |
+| | Splinter | 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。 |
 | 其它       | config    | 配置文件  |
 |   | logging   | 日志记录  |
-备注：1.urllib2在Python3已拆分更名为urllib.request和urllib.error.
 
+备注：1. urllib2在Python3已拆分更名为urllib.request和urllib.error.
 
+ 
 
 ### 3.4.2  网络编程
 
@@ -2670,52 +2688,6 @@ PSD
 
 
 
-### 3.4.5   网络爬虫框架
-功能齐全的爬虫
-* grab – 网络爬虫框架（基于pycurl/multicur）。
-* scrapy – 网络爬虫框架（基于twisted），不支持Python3。
-* pyspider – 一个强大的爬虫系统。
-* cola – 一个分布式爬虫框架。
-
-其他
-* portia – 基于Scrapy的可视化爬虫。
-* restkit – Python的HTTP资源工具包。它可以让你轻松地访问HTTP资源，并围绕它建立的对象。
-* demiurge – 基于PyQuery的爬虫微框架。
-
-### 3.4.6   浏览器自动化与仿真
-*  selenium – 自动化真正的浏览器（Chrome浏览器，火狐浏览器，Opera浏览器，IE浏览器）。
-*  Ghost.py – 对PyQt的webkit的封装（需要PyQT）。
-*  Spynner – 对PyQt的webkit的封装（需要PyQT）。
-*  Splinter – 通用API浏览器模拟器（selenium web驱动，Django客户端，Zope）。
-
-
-
-## 3.5   其他Python库
-
-#### 3.5.1.1 SQLAlchemy
-
-![image-20210702103104836](../media/sf_reuse/framework/frame_sqlalchema.png)
-
-图 2 SQLAlchemy architecture
-
-**Database Urls**
-dialect+driver://username:password@host:port/database
-
-**MySQL**
-The MySQL dialect uses mysql-python as the default DBAPI. There are many MySQL DBAPIs available, including MySQL-connector-python and OurSQL:
-```python
-# default: pip install mysql-python
-engine = create_engine('mysql://scott:tiger@localhost/foo')
-# mysql-python
-engine = create_engine('mysql+mysqldb://scott:tiger@localhost/foo')
-# MySQL-connector-python
-engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
-# OurSQL
-engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
-```
-
-
-
 ## 本章参考
 
 [1].  关于python中的setup.py  http://python.jobbole.com/82077/
@@ -2873,7 +2845,7 @@ Python 3.6.5
 | 编码       | 默认编码为ASCII。有   ASCII str() 类型，unicode() 是单独的，不是 byte 类型。   转码需先decode再encode。 | 默认编码为Unicode。Unicode   (utf-8) 字符串，以及字节类：byte 和   bytearrays。 |
 | 除法运算   | 当除数是浮点值，相除才是浮点数。如2/4=0, 2.0/4=0.5           | 整数之间的相除，结果也会是浮点数。  |
 | 第三方库   | 仅在python 2：Twisted,   py2exe, PI*            |          |
-| Queue      | Queue    | 重命名为queue.    |
+| Queue      | Queue    | 重命名为queue. |
 | xrange     | 包括     | 合并入range           |
 | long       | 包括     | 合并入int |
 | re         | 标识符re.U            | 去除re.U相关          |
@@ -3696,7 +3668,7 @@ except Exception as error:
 
 ## 4.4  python内存管理
 
-### 4.4.1  内存使用
+### 内存使用
 关于内存的限量使用，在实现时可以为缓存设定一个阀值，缓存满了就先暂停所有的文件扫描和解析进程，等缓存快没了的时候再继续，在Linux上使用 SIGSTOP和SIGCONT信号可以很容易就实现这一功能。相比之下，如何准确的获取缓存对象所占用的内存大小倒是比较困难，折中的办法是统计整个进 程的内存占用或是[间接的方法](http://stackoverflow.com/questions/563840/how-can-i-check-the-memory-usage-of-objects-in-ipython/565382#565382)，或者干脆通过限制缓存对象的数目来做限制（这个比较弱智的感觉）。
 关于内存的节约使用，大家都知道一般的Python对象都会自动创建一个[`__dict__`](https://docs.python.org/2/library/stdtypes.html#object.__dict__)属性来存储其他的属性，然而不太广为人知的是，Python的内置类型dict是一个内存大户，当Python对象少的时候可能很难发现，如果在内存里存储十万或一百万个Python对象时，用Memory Profiler（比如[Heapy](http://guppy-pe.sourceforge.net/#Heapy)）做下profiling你会发现，光是__dict__本身（不包括存在__dict__里的数据）就能吃掉你巨量的内存。
 通过设置类属性[`__slots__`](https://docs.python.org/release/2.5.2/ref/slots.html)可以禁止__dict__属性的自动创建，其中一个成功故事在[这里](http://tech.oyster.com/save-ram-with-python-slots/)，这个哥们通过__slots__节约了9G内存。需要说明的是，__slots__会带来一些[负面作用](http://stackoverflow.com/questions/472000/python-slots)，比较明显的一个是，使用version 0版本的pickle协议序列化定义了__slots__属性的对象会有报错，但使用更高级别的pickle协议则没问题[4](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:4)（一般很少用到cPickle的[protocol version 0](https://docs.python.org/2.7/library/pickle.html#data-stream-format)，因为又慢又占空间)。
@@ -3704,11 +3676,17 @@ except Exception as error:
 
 
 
-### 4.4.2  内存回收机制GC
+### 内存回收机制GC
 
 类似JVM的GC机制，Python内存回收机制主要是引用计数。
 
 详见 《Python源码剖析》内存分配章节
+
+
+
+### 内存共享
+
+
 
 
 
@@ -3771,7 +3749,7 @@ https://github.com/LeoHuang2015/qqloginjs
 
 [9]. gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e 
 
-[10].    深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/) 
+[10]. 深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/) 
 
 [11] Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
 

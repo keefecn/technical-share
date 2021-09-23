@@ -400,13 +400,13 @@ python模块包括标准库（包括内置模块和标准模块）和第三方�
 
 | 函数名     | 示例                                                         | 说明                                                         |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| filter     | >>> def f(x): return x % 2   != 0 and x % 3 != 0     <br>>>> filter(f, range(2, 25))     [5, 7, 11, 13, 17, 19, 23] | 对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。 |
-| map        | >>> def add(x, y): return   x+y     >>> map(add, range(8), range(8))     [0, 2, 4, 6, 8, 10, 12, 14] | 对sequence中的item依次执行function(item)，见执行结果组成一个List返回。map支持多个sequence。 |
-| reduce     | >>> def add(x,y): return x +   y     >>> reduce(add, range(1, 11)) <br>55 | 对sequence中的item顺序迭代调用function。   # （注：1+2+3+4+5+6+7+8+9+10） |
-| lambda     |                                                              |                                                              |
+| filter     | >>> def f(x): return x % 2   != 0 and x % 3 != 0 <br/>>>> filter(f, range(2, 25))      <br/>[5, 7, 11, 13, 17, 19, 23] | 对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。 |
+| map        | >>> def add(x, y): return   x+y <br/>>>> map(add, range(8), range(8)) <br/>[0, 2, 4, 6, 8, 10, 12, 14] | 对sequence中的item依次执行function(item)，见执行结果组成一个List返回。map支持多个sequence。 |
+| reduce     | >>> def add(x,y): return x +   y <br/>>>> reduce(add, range(1, 11)) <br>55 | 对sequence中的item顺序迭代调用function。注：1+2+...+9+10     |
+| lambda     | `g = lambda x: x * 2`                                        | 允许你快速定义单行的最小函数，类似与C语言中的宏              |
 | sorted     |                                                              | 标准库内建函数，缺省字典排序。                               |
 | list.sort  |                                                              | 列表的排序                                                   |
-| round      | round(1.4)=1.0   round(1.5)=2.0   round(1.55, 1)=1.6         | 标准库内建函数，四舍五入。   第二参数是精度。                |
+| round      | round(1.4)=1.0   round(1.5)=2.0   round(1.55, 1)=1.6         | 标准库内建函数，四舍五入。第二参数是精度。                   |
 | math.ceil  | math.ceil(1.55)=2.0                                          | 向上取整                                                     |
 | math.floor | math.floor(1.55)=1.0                                         | 向下取整                                                     |
 
@@ -455,7 +455,6 @@ filter(function, sequence)：对sequence中的item依次执行function(item)，�
 >>> reduce(add, range(1, 11), 20) 
  75 （注：1+2+3+4+5+6+7+8+9+10+20
 ```
-
 
 **lambda**：
 这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，类似与C语言中的宏，这些叫做lambda的函数，是从LISP借用来的，可以用在任何需要函数的地方：
@@ -1325,7 +1324,7 @@ def got_result(future):
     print(future.result())
     loop.stop()
 
-# 返回一个事件循环.    
+# 返回一个事件循环. 
 loop = asyncio.get_event_loop()
 # 创建一个用于放置结果的future对象（第一个future）。注意：非线程安全
 future = asyncio.Future()
@@ -1883,7 +1882,7 @@ class DatagramRequestHandler(BaseRequestHandler):
 | ------------- | ------------------------------------------------------------ | ------------------------------------ |
 | `__init__.py` | HTTPStatus                                                   |                                      |
 | server.py     | 服务器: HTTPServer ThreadingHTTPServer<br>请求处理器：BaseHTTPRequestHandler CGIHTTPRequestHandler SimpleHTTPRequestHandler | 继承sockerserver的服务器和请求处理器 |
-| client.py     | HTTPConnection HTTPSConnection ...                           | HTTP/1.1 client library              |
+| client.py     | HTTPConnection HTTPSConnection ...                        | HTTP/1.1 client library              |
 | cookiejar.py  |                                                              |                                      |
 | cookies.py    |                                                              |                                      |
 
@@ -2204,10 +2203,32 @@ else:
     class_types = (type, types.ClassType)
     text_type = unicode
     binary_type = str
-...    
+... 
 ```
 
 
+
+## pycryptodome 加解密
+
+官网文档：https://www.pycryptodome.org
+
+官网源码：https://github.com/Legrandin/pycryptodome
+
+pycryptodome是一个低级密码学原语的独立 Python 包。PyCryptodome 保持了与 **[PyCrypto](https://github.com/dlitz/pycrypto)** 相当高的兼容性并且处于良好的维护状态，因此便于更换。~~pycrypto~~最后一个版本是2.6.1(2014-06-23)，不建议使用。
+
+```shell
+$ pip show pycryptodome
+Name: pycryptodome
+Version: 3.10.1
+Summary: Cryptographic library for Python
+Home-page: https://www.pycryptodome.org
+Author: Helder Eijs
+Author-email: helderijs@gmail.com
+License: BSD, Public Domain
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires:
+Required-by:
+```
 
 
 

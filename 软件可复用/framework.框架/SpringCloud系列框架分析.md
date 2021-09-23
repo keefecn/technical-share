@@ -393,11 +393,11 @@ services:
 
 ## **官网**
 
-[1].     https://spring.io/ 
+[1].  https://spring.io/ 
 
-[2].     [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/) 
+[2].  [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/) 
 
-[3].     [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/) 
+[3].  [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/) 
 
  
 

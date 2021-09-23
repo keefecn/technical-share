@@ -64,7 +64,7 @@
 
 ---
 
-# 1   概述
+# 1 概述
 ## 1.1  C语言概述
 C 语言是一种通用的、面向过程式的计算机程序设计语言。1972 年，为了移植与开发 UNIX 操作系统，丹尼斯·里奇在贝尔电话实验室设计开发了 C 语言。
 UNIX 操作系统，C编译器，和几乎所有的 UNIX 应用程序都是用 C 语言编写的。由于各种原因，C 语言现在已经成为一种广泛使用的专业语言。
@@ -90,9 +90,12 @@ _Atomic类型修饰符和<stdatomic.h>头文件。
 ## 1.2   C++语言概述
 C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实验室开始设计开发的。C++ 进一步扩充和完善了 C 语言，是一种面向对象的程序设计语言。C++ 可运行于多种平台上，如 Windows、MAC 操作系统以及 UNIX 的各种版本。
 
-## 1.3     本章参考
+## 本章参考
 
-# 2   C语言基础
+
+
+# 2 C语言基础
+
 ## 2.1   C数据类型
 表格 3 C数据类型列表
 
@@ -102,18 +105,24 @@ C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实
 |          | 浮点型           | 包括float,   double, long double                             | type   var-name                                              |
 | 枚举     | enum             | 也是算术类型，被用来定义在程序中只能赋予其一定的离散整数值的变量。 |                                                              |
 | void     | void             | void 表明没有可用的值。如函数返回值、函数参数、指针。        |                                                              |
-| 派生类型 | 指针 *           | 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。访问指针地址使用 &操作符。 | type *var-name;                                              |
-|          | 数组             | 存储一个固定大小的相同类型元素的顺序集合。                   | type arrayName [ arraySize ];                                |
-|          | 结构体    struct | 结构体是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。   结构体语句说明：**structure tag** 是可选的，每个 member definition 是标准的变量定义，结结构变量也是可选的。 | struct [structure tag] {          member definition;          member definition;          ...         member definition;    } [one or more structure variables]; |
+| 派生类型 | 指针 *           | 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。访问指针地址使用 &操作符。 | `type *var-name;`                                            |
+|          | 数组             | 存储一个固定大小的相同类型元素的顺序集合。                   | `type arrayName [ arraySize ];`                              |
+|          | 结构体    struct | 结构体是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。   结构体语句说明：**structure tag** 是可选的，每个 member definition 是标准的变量定义，结结构变量也是可选的。 | struct [structure tag] {  member definition;          member definition;          ...      member definition;    } [one or more structure variables]; |
 |          | 共用体   union   | 共用体是一种特殊的数据类型，允许您在相同的内存位置存储不同的数据类型。您可以定义一个带有多成员的共用体，但是任何时候只能有一个成员带有值。共用体提供了一种使用相同的内存位置的有效方式。 | union [union tag] { member definition;   member definition; ... member definition; } [one or more union variables]; |
 |          | 函数             | 是一组一起执行一个任务的语句。函数还有很多叫法，比如方法、子例程或程序等等。 | return_type function_name( parameter list   )   {        body of the function   } |
-备注：要注意基本数据类型的存储大小和数值范围。
+
+> 备注：要注意基本数据类型的存储大小和数值范围。
+
+
 
 ### 2.1.1  typedef
+
 C 语言提供了 **typedef** 关键字，您可以使用它来为类型取一个新的名字。
 示例1：下面为单字节数字定义了一个术语 **BYTE**：
-typedef unsigned char BYTE;
+`typedef unsigned char BYTE;`
+
 示例2：定义了一个结构体和结构体指针变量
+
 ```c
 typedef struct LinkNode
 {
@@ -128,11 +137,11 @@ typedef struct LinkNode
 
 ### 2.1.2  强制类型转换
 强制类型转换是把变量从一种类型转换为另一种数据类型。例如，如果您想存储一个 long 类型的值到一个简单的整型中，您需要把 long 类型强制转换为 int 类型。您可以使用**强制类型转换运算符**来把值显式地从一种类型转换为另一种类型，如下所示：
-(type_name) expression
+`(type_name) expression`
 
 常用的算术转换不适用于赋值运算符、逻辑运算符 && 和 ||。
 
-## 2.2     C预处理器
+## 2.2  C预处理器
 C 预处理器不是编译器的组成部分，但是它是编译过程中一个单独的步骤。简言之，C 预处理器只不过是一个文本替换工具而已，它们会指示编译器在实际编译之前完成所需的预处理。我们将把 C 预处理器（C Preprocessor）简写为 CPP。
 所有的预处理器命令都是以井号（#）开头。它必须是第一个非空字符，为了增强可读性，预处理器指令应从第一列开始。下面列出了所有重要的预处理器指令：
 表格 4 C预处理器指令列表
@@ -168,6 +177,7 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 宏延续运算符（\）：一个宏通常写在一个单行上。但是如果宏太长，一个单行容纳不下，则使用宏延续运算符（\）。
 字符串常量化运算符（#）
 标记粘贴运算符（##）
+
 表格 6 C预处理器运算符列表
 
 | 预处理器运算符          | 描述                                                         | 示例                                                         |
@@ -177,7 +187,7 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 | 标记粘贴运算符（##）    | 宏定义内的标记粘贴运算符（##）会合并两个参数。它允许在宏定义中两个独立的标记被合并为一个标记。 | #define tokenpaster(n) printf   ("token" #n " = %d", token##n) |
 | 参数化的宏              | 参数列表是括在圆括号内，且必须紧跟在宏名称的后边。宏名称和左圆括号之间不允许有空格。 | #define square(x) ((x) * (x))                                |
 
-## 2.3     变量与变量作用域
+## 2.3  变量与变量作用域
 任何一种编程中，作用域是程序中定义的变量所存在的区域，超过该区域变量就不能被访问。C 语言中有三个地方可以声明变量：
 *  在函数或块内部的局部变量
 *  在所有函数外部的全局变量
@@ -216,7 +226,7 @@ struct
 ```
 说明：sizeof(status)=2，如果没使用位域符则是8byte.
 
-## 2.4     指针、函数指针与回调函数
+## 2.4  指针、函数指针与回调函数
 **Data declarations (about point)** 5. Using the variable a, give definitions for the following: a) An integer 
  b) A pointer to an integer 
  c) A pointer to a pointer to an integer 
@@ -247,14 +257,16 @@ typedef int (*fun_ptr)(int,int); // 声明一个指向同样参数、返回值�
 函数指针变量可以作为某个函数的参数来使用的，回调函数就是一个通过函数指针调用的函数。
 简单讲：回调函数是由别人的函数执行时调用你实现的函数。
 
-## 2.5     本章参考
+## 本章参考
+
+
 
 # 3  C++语言教程
 
 ## 3.1  操作符重载
 可以重定义或重载大部分 C++ 内置的运算符。这样，您就能使用自定义类型的运算符。
 重载的运算符是带有特殊名称的函数，函数名是由关键字 operator 和其后要重载的运算符符号构成的。与其他函数一样，重载运算符有一个返回类型和一个参数列表。
-Box operator+(const Box&);
+`Box operator+(const Box&);`
 
 
 
@@ -315,32 +327,30 @@ try
 
 
 
-## 3.4     本章参考
+## 本章参考
 
 
 
-# 4   C++高级开发
+# 4  C++高级开发
 
-## 4.1   STL函数库
+## STL函数库
 
 详见 [stl学习笔记](../media/软件可复用/library.函数库/stl学习笔记.md)
 
-## 4.2   本章参考
 
 
-
-# 5  参考资料
+# 参考资料
 
 [1]: C语言教程 http://www.runoob.com/cprogramming/c-tutorial.html
 
 [2]: C++语言教程 http://www.runoob.com/cplusplus/cpp-tutorial.html
 
-[3]: [C++ Programming Language Tutorials](http://www.cs.wustl.edu/~schmidt/C++/) − C++ 编程语言教程。
+[3]: [C++ Programming Language Tutorials](http://www.cs.wustl.edu/~schmidt/C++/) − C++ 编程语言教程
 
-[4]: [C++ Programming](http://en.wikibooks.org/wiki/C++_Programming) − 这本书涵盖了 C++ 语言编程、软件交互设计、C++ 语言的现实生活应用。
+[4]: [C++ Programming](http://en.wikibooks.org/wiki/C++_Programming) − 这本书涵盖了 C++ 语言编程、软件交互设计、C++ 语言的现实生活应用
 
 [5]: [C++ FAQ](http://www.parashift.com/c++-faq-lite/index.html#table-of-contents) − C++ 常见问题
 
-[6]: [Free Country](http://www.thefreecountry.com/sourcecode/cpp.shtml) − Free Country 提供了免费的 C++ 源代码和 C++ 库，这些源代码和库涵盖了压缩、存档、游戏编程、标准模板库和 GUI 编程等 C++ 编程领域。
+[6]: [Free Country](http://www.thefreecountry.com/sourcecode/cpp.shtml) − Free Country 提供了免费的 C++ 源代码和 C++ 库，这些源代码和库涵盖了压缩、存档、游戏编程、标准模板库和 GUI 编程等 C++ 编程领域
 
-[7]: [C and C++ Users Group](http://www.hal9k.com/cug/) − C 和 C++ 的用户团体提供了免费的涵盖各种编程领域 C++ 项目的源代码，包括 AI、动画、编译器、数据库、调试、加密、游戏、图形、GUI、语言工具、系统编程等。
+[7]: [C and C++ Users Group](http://www.hal9k.com/cug/) − C 和 C++ 的用户团体提供了免费的涵盖各种编程领域 C++ 项目的源代码，包括 AI、动画、编译器、数据库、调试、加密、游戏、图形、GUI、语言工具、系统编程等

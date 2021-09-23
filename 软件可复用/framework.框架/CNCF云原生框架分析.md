@@ -197,7 +197,7 @@ Prometheus的整体技术架构可以分为几个重要模块：
 
 ## 4.2     本章参考
 
-[1].     时序数据库连载系列：指标届的独角兽Prometheus https://blog.csdn.net/weixin_43970890/article/details/87938347 
+[1].  时序数据库连载系列：指标届的独角兽Prometheus https://blog.csdn.net/weixin_43970890/article/details/87938347 
 
 
 
@@ -262,11 +262,11 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 ## 5.3  本章参考
 
-[1].     gRPC 官方文档中文版 http://doc.oschina.net/grpc  
+[1].  gRPC 官方文档中文版 http://doc.oschina.net/grpc  
 
-[2].     gRPC https://blog.csdn.net/xuduorui/article/details/78278808 
+[2].  gRPC https://blog.csdn.net/xuduorui/article/details/78278808 
 
-[3].     RPC框架性能基本比较测试 [www.useopen.net/blog/2015/rpc-performance.html](http://www.useopen.net/blog/2015/rpc-performance.html) 
+[3].  RPC框架性能基本比较测试 [www.useopen.net/blog/2015/rpc-performance.html](http://www.useopen.net/blog/2015/rpc-performance.html) 
 
  
 
@@ -290,7 +290,7 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 ## 6.1  本章参考
 
-[1].     ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988 
+[1].  ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988 
 
  
 

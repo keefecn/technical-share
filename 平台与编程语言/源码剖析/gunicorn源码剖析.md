@@ -59,18 +59,18 @@ Required-by:
 
 | 目录或文件       | 主要类或函数                               | 说明                                 |
 | ---------------- | ------------------------------------------ | ------------------------------------ |
-| app              |                                            | app应用程序                          |
+| app/             |                                            | app应用程序                          |
 | app/base.py      | BaseApplication Application                | app基类                              |
 | app/pasterapp.py | PasterServerApplication                    |                                      |
 | app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口       |
-| http             |                                            | http协议实现                         |
+| http/            |                                            | http协议实现                         |
 | http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                        |
 | http/message.py  | Message, Request                           | HTTP请求体                           |
 | http/parser.py   | Parser RequestParser                       | HTTP请求解析器                       |
 | http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                         |
 | http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                           |
-| instrument       | statsd.py                                  | Statsd类，客户端侧协议               |
-| works            | base.py                                    | 工作进程基类，子类需要重载Worker:run |
+| instrument/      | statsd.py                                  | Statsd类，客户端侧协议               |
+| works/           | base.py                                    | 工作进程基类，子类需要重载Worker:run |
 |                  | base_async.py                              | 异步模式的基类                       |
 |                  | ggevent.py                                 | gevent模式                           |
 |                  | geventlent.py                              | eventlet模式                         |
@@ -505,7 +505,7 @@ class Application(BaseApplication):
                 if pythonpath not in sys.path:
                     sys.path.insert(0, pythonpath)
 
-        super().run()    
+        super().run()    #调用父类方法启动主进程
 ```
 
 
@@ -523,6 +523,10 @@ __all__ = ['Message', 'Request', 'RequestParser']
 
 
 ## works工作模式  /works/
+
+类体系：基类Worker -> SyncWorker -> AsyncWorker -> GeventWorker/EventletWorker/
+
+​									 -> ThreadWorker/TornadoWorker
 
 工作进程支持多种工作模式，可分为同步sync 和异步async。
 
@@ -553,6 +557,8 @@ SUPPORTED_WORKERS = {
 ```
 
 
+
+### 工作基类 base.py
 
 works/base.py
 
@@ -670,7 +676,7 @@ class Worker(object):
 
         # （重要）Enter main run loop  进入主循环
         self.booted = True
-        self.run()
+        self.run() 	#派生类重载方法
         
     def load_wsgi(self)                  # 获得实现wsgi协议的app，如Flask
     def init_signals(self)
@@ -680,30 +686,6 @@ class Worker(object):
     def handle_abort(self, sig, frame)
     def handle_error(self, req, client, addr, exc)
     def handle_winch(self, sig, fname)        
-```
-
-
-
-works/base_async.py 异步模式基类
-
-```python
-import gunicorn.http as http
-import gunicorn.http.wsgi as wsgi
-import gunicorn.util as util
-import gunicorn.workers.base as base
-
-ALREADY_HANDLED = object()
-
-
-class AsyncWorker(base.Worker):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.worker_connections = self.cfg.worker_connections
-        
-    def handle(self, listener, client, addr):
-        
-    def handle_request(self, listener_name, req, sock, addr):        
 ```
 
 
@@ -767,7 +749,159 @@ class SyncWorker(base.Worker):
 
 
 
+### 异步模式基类 base_async.py 
+
+works/base_async.py 异步模式基类
+
+```python
+from datetime import datetime
+import errno
+import socket
+import ssl
+import sys
+
+import gunicorn.http as http
+import gunicorn.http.wsgi as wsgi
+import gunicorn.util as util
+import gunicorn.workers.base as base
+
+ALREADY_HANDLED = object()
+
+
+class AsyncWorker(base.Worker):
+	""" 继承 Worker"""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.worker_connections = self.cfg.worker_connections
+        
+    def timeout_ctx(self):
+        raise NotImplementedError()
+
+    def is_already_handled(self, respiter):
+        # some workers will need to overload this function to raise a StopIteration
+        return respiter == ALREADY_HANDLED
+    
+    def handle(self, listener, client, addr):
+        req = None
+        try:
+            parser = http.RequestParser(self.cfg, client)
+            try:
+                listener_name = listener.getsockname()
+                if not self.cfg.keepalive:
+                    req = next(parser)
+                    self.handle_request(listener_name, req, client, addr)
+                else:
+                    # keepalive loop
+                    proxy_protocol_info = {}
+                    while True:
+                        req = None
+                        with self.timeout_ctx():
+                            req = next(parser)
+                        if not req:
+                            break
+                        if req.proxy_protocol_info:
+                            proxy_protocol_info = req.proxy_protocol_info
+                        else:
+                            req.proxy_protocol_info = proxy_protocol_info
+                        self.handle_request(listener_name, req, client, addr)
+            except http.errors.NoMoreData as e:
+                self.log.debug("Ignored premature client disconnection. %s", e)
+            except StopIteration as e:
+                self.log.debug("Closing connection. %s", e)
+            except ssl.SSLError:
+                # pass to next try-except level
+                util.reraise(*sys.exc_info())
+            except EnvironmentError:
+                # pass to next try-except level
+                util.reraise(*sys.exc_info())
+            except Exception as e:
+                self.handle_error(req, client, addr, e)
+        except ssl.SSLError as e:
+            if e.args[0] == ssl.SSL_ERROR_EOF:
+                self.log.debug("ssl connection closed")
+                client.close()
+            else:
+                self.log.debug("Error processing SSL request.")
+                self.handle_error(req, client, addr, e)
+        except EnvironmentError as e:
+            if e.errno not in (errno.EPIPE, errno.ECONNRESET):
+                self.log.exception("Socket error processing request.")
+            else:
+                if e.errno == errno.ECONNRESET:
+                    self.log.debug("Ignoring connection reset")
+                else:
+                    self.log.debug("Ignoring EPIPE")
+        except Exception as e:
+            self.handle_error(req, client, addr, e)
+        finally:
+            util.close(client)
+
+    def handle_request(self, listener_name, req, sock, addr):
+        request_start = datetime.now()
+        environ = {}
+        resp = None
+        try:
+            self.cfg.pre_request(self, req)
+            resp, environ = wsgi.create(req, sock, addr,
+                    listener_name, self.cfg)
+            environ["wsgi.multithread"] = True
+            self.nr += 1
+            if self.alive and self.nr >= self.max_requests:
+                self.log.info("Autorestarting worker after current request.")
+                resp.force_close()
+                self.alive = False
+
+            if not self.cfg.keepalive:
+                resp.force_close()
+
+            respiter = self.wsgi(environ, resp.start_response)
+            if self.is_already_handled(respiter):
+                return False
+            try:
+                if isinstance(respiter, environ['wsgi.file_wrapper']):
+                    resp.write_file(respiter)
+                else:
+                    for item in respiter:
+                        resp.write(item)
+                resp.close()
+                request_time = datetime.now() - request_start
+                self.log.access(resp, req, environ, request_time)
+            finally:
+                if hasattr(respiter, "close"):
+                    respiter.close()
+            if resp.should_close():
+                raise StopIteration()
+        except StopIteration:
+            raise
+        except EnvironmentError:
+            # If the original exception was a socket.error we delegate
+            # handling it to the caller (where handle() might ignore it)
+            util.reraise(*sys.exc_info())
+        except Exception:
+            if resp and resp.headers_sent:
+                # If the requests have already been sent, we should close the
+                # connection to indicate the error.
+                self.log.exception("Error handling request")
+                try:
+                    sock.shutdown(socket.SHUT_RDWR)
+                    sock.close()
+                except EnvironmentError:
+                    pass
+                raise StopIteration()
+            raise
+        finally:
+            try:
+                self.cfg.post_request(self, req, environ, resp)
+            except Exception:
+                self.log.exception("Exception in post_request hook")
+        return True        
+```
+
+
+
 ### 线程池模式 gthread.py
+
+依赖标准库模块 并发futures。
 
 大致流程 （换行且tab表示是在函数内部）
 
@@ -1051,6 +1185,8 @@ class EventletWorker(AsyncWorker):
 
 ### tornado模式 gtornado.py
 
+依赖tornado模块。
+
 ```python
 try:
     import tornado
@@ -1154,8 +1290,7 @@ class TornadoWorker(Worker):
         server.no_keep_alive = self.cfg.keepalive <= 0
         server.start(num_processes=1)
 
-        self.ioloop.start()
-    
+        self.ioloop.start()    
 ```
 
 

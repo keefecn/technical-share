@@ -982,10 +982,10 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 | 模型     | model                                                        | 描述特征和目标之间关系的数学对象                             |
 | 监督ML   | supervised                                                   | ML给定样本的输出值是已知的，采用输入和输出的函数进行训练。   |
 | 无监督ML | unsupervised                                                 | 不依赖于已知样本，试图寻找非标记数据的内在结构。             |
-| 分类     | Classification/Categorization                                | Identifying which category an object belongs to.             |
-| 聚类     | Clustering                                                   | Automatic grouping of similar objects into sets.             |
+| 分类     | Classification/Categorization                                | Identifying which category an object belongs to.          |
+| 聚类     | Clustering                                                   | Automatic grouping of similar objects into sets.          |
 | 回归     | Regression                                                   | Predicting a continuous-valued attribute associated with an object. |
-| 维度减少 | [Dimensionality reduction](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) | Reducing the number of random variables to consider.         |
+| 维度减少 | [Dimensionality reduction](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) | Reducing the number of random variables to consider.      |
 
  
 

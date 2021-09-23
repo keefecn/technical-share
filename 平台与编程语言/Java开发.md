@@ -26,7 +26,7 @@
 ```
 [目录... 1](#_Toc516381252)
 
-[1.      Java概述... 4](#_Toc516381253)
+[1.   Java概述... 4](#_Toc516381253)
 [1.1          Java历史... 4](#_Toc516381254)
 [1.1.1         JDK. 5](#_Toc516381255)
 [1.1.2         Java平台... 7](#_Toc516381256)
@@ -227,7 +227,7 @@ The JDK is a superset of the JRE, and contains everything that is in the JRE, pl
 | 缩写  | 全名                                   | 简介                                                         |
 | ----- | -------------------------------------- | ------------------------------------------------------------ |
 | JS    | Java Servlet                           | 运行于服务器上的一个小程序,   提供应用程序接口, 通过它可以简单快速地开发并扩展服务器功能, 将来有可能取代CGI. |
-| JSP   | Java Server Page                       | 提供一种简单快速的方法来创建动态网页. Java Servlets的一种扩展.表现类似PHP/ASP，在html代码中嵌入Java/php/asp代码.    JSP 在运行时被编译成servlet、request、response、session等，jsp内置对象实际是在servlet API定义的。 |
+| JSP   | Java Server Page                       | 提供一种简单快速的方法来创建动态网页. Java Servlets的一种扩展.表现类似PHP/ASP，在html代码中嵌入Java/php/asp代码. JSP 在运行时被编译成servlet、request、response、session等，jsp内置对象实际是在servlet API定义的。 |
 | EJB   | Enterprise Java Bean                   | 定义了一个应用程序接口, 可以使程序员快速开发,发布和管理跨平台的基于组件的企业级应用程序（为中间件, EJB容器）。 |
 | JIT   | Just-In-Time Compiler                  | 即时编译器。                                                 |
 | CLDC  | Connected Limited Device Configuration | 有限连接设备配置，是为运行在资源非常有限的设备（例如[寻呼机](https://baike.baidu.com/item/寻呼机/1440759)或者[手机](https://baike.baidu.com/item/手机/6342)）上的[J2ME](https://baike.baidu.com/item/J2ME/204201)应用程序制订的架构。规范内容包括目标机器的特性、[虚拟机](https://baike.baidu.com/item/虚拟机)规范和基本的API等等。 有1.0和1.1两个版本。 |
@@ -378,7 +378,7 @@ LinkedBlockingQueue也是阻塞的队列，入队和出队都用了加锁，当�
 
 ## 本章参考
 
-[1].     Java教程 http://www.runoob.com/java/
+[1].  Java教程 http://www.runoob.com/java/
 
 
 
@@ -659,10 +659,10 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 
 ## 本章参考
 
-[1].     Javase  http://Java.sun.com/Javase/downloads/ 
-[2].     eclipse  http://www.Eclipse.org/downloads/ 
-[3].     tomcat  http://tomcat.apache.org/ 
-[4].     [Java中的JAR/EAR/WAR包的文件夹结构说明（转）](http://www.cnblogs.com/EasonJim/p/6498804.html)
+[1].  Javase  http://Java.sun.com/Javase/downloads/ 
+[2].  eclipse  http://www.Eclipse.org/downloads/ 
+[3].  tomcat  http://tomcat.apache.org/ 
+[4].  [Java中的JAR/EAR/WAR包的文件夹结构说明（转）](http://www.cnblogs.com/EasonJim/p/6498804.html)
 
 
 
@@ -1062,13 +1062,13 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 ## 本章参考
 
-[1].    JVM [http://www.pusuo.net/2010/jvmresearch/](http://www.pusuo.net/2010/jvmresearch/)
-[2].    深入理解JVM--JVM垃圾回收机制http://jbutton.iteye.com/blog/1569746
-[3].    《深入理解JAVA虚拟机》——学习笔记[http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
-[4].    JVM类加载三步走[https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md](https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md)
-[5].     深入剖析Java类加载机制http://blog.csdn.net/love_Javc_you/article/details/38081683
-[6].     Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html 
-[7].     JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
+[1]. JVM [http://www.pusuo.net/2010/jvmresearch/](http://www.pusuo.net/2010/jvmresearch/)
+[2]. 深入理解JVM--JVM垃圾回收机制http://jbutton.iteye.com/blog/1569746
+[3]. 《深入理解JAVA虚拟机》——学习笔记[http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
+[4]. JVM类加载三步走[https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md](https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md)
+[5].  深入剖析Java类加载机制http://blog.csdn.net/love_Javc_you/article/details/38081683
+[6].  Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html 
+[7].  JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
 
 
 

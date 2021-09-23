@@ -1094,7 +1094,7 @@ app.config.from_pyfile('config.py')
 | 扩展组件         | 简介                                                         | 使用示例                                                     |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | flask_restx      | 构建restful标准的API，包含swagger UI                         |                                                              |
-| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | fabmanager [OPTIONS] COMMAND [ARGS]...                       |
+| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | fabmanager [OPTIONS] COMMAND [ARGS]...                    |
 | flask-login      | 登陆。                                                       |                                                              |
 | flask-migrate    | 数据库迁移、升级。                                           | `$python manage.py db migrate $python manage.py db upgrade`  |
 | flask-cache      | 缓存，支持redis/memcache/filesystem                          |                                                              |
@@ -1211,14 +1211,14 @@ Use config.py to configure the following parameters. By default it will use SQLL
 
 | Key                                                          | Description                                                  | Mandatory |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | --------- |
-| SQLALCHEMY_DATABASE_URI                                      | DB connection string (flask-sqlalchemy)                      | Cond.     |
-| MONGODB_SETTINGS                                             | DB connection string (flask-mongoengine)                     | Cond.     |
+| SQLALCHEMY_DATABASE_URI                                      | DB connection string (flask-sqlalchemy)                      | Cond.  |
+| MONGODB_SETTINGS                                             | DB connection string (flask-mongoengine)                     | Cond.  |
 | AUTH_TYPE   = 0 \| 1 \| 2 \| 3 \| 4   or   AUTH_TYPE   = AUTH_OID, AUTH_DB,   AUTH_LDAP,    AUTH_REMOTE   AUTH_OAUTH | This is the authentication type   0 = Open ID   1 = Database style (user/password)   2 = LDAP, use AUTH_LDAP_SERVER also   3 = uses web server environ var   REMOTE_USER   4 = USE ONE OR MANY OAUTH PROVIDERS | Yes       |
 | AUTH_USER_REGISTRATION   = True\|False                       | Set to True to enable user self registration                 | No        |
-| AUTH_USER_REGISTRATION_ROLE                                  | Set role name, to be assign when a user   registers himself. This role must already exist. Mandatory when using user   registration | Cond.     |
-| AUTH_LDAP_SERVER                                             | define your ldap server when AUTH_TYPE=2   example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)” | Cond.     |
+| AUTH_USER_REGISTRATION_ROLE                                  | Set role name, to be assign when a user   registers himself. This role must already exist. Mandatory when using user   registration | Cond.  |
+| AUTH_LDAP_SERVER                                             | define your ldap server when AUTH_TYPE=2   example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)” | Cond.  |
 | AUTH_LDAP_BIND_USER                                          | Define the DN for the user that will be   used for the initial LDAP BIND. This is necessary for OpenLDAP and can be   used on MSFT AD.   AUTH_LDAP_BIND_USER =   “cn=queryuser,dc=example,dc=com” | No        |
-| AUTH_LDAP_BIND_PASSWORD                                      | Define password for the bind user.                           | No        |
+| AUTH_LDAP_BIND_PASSWORD                                      | Define password for the bind user.                        | No        |
 | AUTH_LDAP_SEARCH                                             | Use search with self user registration or   when using AUTH_LDAP_BIND_USER.   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example” | No        |
 | AUTH_LDAP_UID_FIELD                                          | if doing an indirect bind to ldap, this   is the field that matches the username when searching for the account to bind   to. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_UID_FIELD = “uid” | No        |
 | AUTH_LDAP_FIRSTNAME_FIELD                                    | sets the field in the ldap directory that   stores the user’s first name. This field is used to propagate user’s first   name into the User database. Default is “givenName”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_FIRSTNAME_FIELD = “givenName” | No        |
@@ -1227,18 +1227,18 @@ Use config.py to configure the following parameters. By default it will use SQLL
 | AUTH_LDAP_ALLOW_SELF_SIGNED                                  | Allow LDAP authentication to use self   signed certificates  | No        |
 | AUTH_LDAP_APPEND_DOMAIN                                      | Append a domain to all logins. No need to   use [john@domain.local](mailto:john%40domain.local). Set it like:   AUTH_LDAP_APPEND_DOMAIN = ‘domain.local’   And the user can login using just ‘john’ | No        |
 | AUTH_LDAP_USERNAME_FORMAT                                    | It converts username to specific format   for LDAP authentications. For example,   username = “userexample”   AUTH_LDAP_USERNAME_FORMAT=”format-%s”.   It authenticates with   “format-userexample”. | No        |
-| AUTH_ROLE_ADMIN                                              | Configure the name of the admin role.                        | No        |
+| AUTH_ROLE_ADMIN                                              | Configure the name of the admin role.                     | No        |
 | AUTH_ROLE_PUBLIC                                             | Special Role that holds the public   permissions, no authentication needed. | No        |
-| APP_NAME                                                     | The name of your application.                                | No        |
-| APP_THEME                                                    | Various themes for you to choose from   (bootwatch).         | No        |
+| APP_NAME                                                     | The name of your application.                             | No        |
+| APP_THEME                                                    | Various themes for you to choose from   (bootwatch).      | No        |
 | APP_ICON                                                     | path of your application icons will be   shown on the left side of the menu | No        |
 | ADDON_MANAGERS                                               | A list of addon manager’s classes Take a   look at addon chapter on docs. | No        |
-| UPLOAD_FOLDER                                                | Files upload folder. Mandatory for file   uploads.           | No        |
+| UPLOAD_FOLDER                                                | Files upload folder. Mandatory for file   uploads.        | No        |
 | FILE_ALLOWED_EXTENSIONS                                      | Tuple with allower extensions.   FILE_ALLOWED_EXTENSIONS = (‘txt’,’doc’) | No        |
-| IMG_UPLOAD_FOLDER                                            | Image upload folder. Mandatory for image   uploads.          | No        |
-| IMG_UPLOAD_URL                                               | Image relative URL. Mandatory for image   uploads.           | No        |
+| IMG_UPLOAD_FOLDER                                            | Image upload folder. Mandatory for image   uploads.       | No        |
+| IMG_UPLOAD_URL                                               | Image relative URL. Mandatory for image   uploads.        | No        |
 | IMG_SIZE                                                     | tuple to define default image resize.   (width, height, True\|False). | No        |
-| BABEL_DEFAULT_LOCALE                                         | Babel’s default language.                                    | No        |
+| BABEL_DEFAULT_LOCALE                                         | Babel’s default language.                                 | No        |
 | LANGUAGES                                                    | A dictionary mapping the existing   languages with th        |           |
 
 

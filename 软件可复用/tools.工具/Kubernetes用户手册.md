@@ -717,14 +717,14 @@ kubue-proxy：负责服务发现和负载均衡（轮询）。
 
 ## 参考资料
 
-[1].     Kubernetes中文社区 | 中文文档 http://docs.kubernetes.org.cn/
-[2].     容器十年 ——一部软件交付编年史 https://blog.csdn.net/weixin_43970890/article/details/94569105
-[3].     云原生时代， Kubernetes 多集群架构初探 https://blog.csdn.net/weixin_43970890/article/details/98959354 
-[4].     解锁云原生 AI 技能|在 Kubernetes 上构建机器学习系统 https://blog.csdn.net/weixin_43970890/article/details/97134534 
-[5].     云原生应用 Kubernetes 监控与弹性实践 https://blog.csdn.net/weixin_43970890/article/details/94570862 
-[6].     阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335 
-[7].     10个业界最流行的Kubernetes发行版 https://blog.csdn.net/RancherLabs/article/details/98478755
-[8].     基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5 
+[1].  Kubernetes中文社区 | 中文文档 http://docs.kubernetes.org.cn/
+[2].  容器十年 ——一部软件交付编年史 https://blog.csdn.net/weixin_43970890/article/details/94569105
+[3].  云原生时代， Kubernetes 多集群架构初探 https://blog.csdn.net/weixin_43970890/article/details/98959354 
+[4].  解锁云原生 AI 技能|在 Kubernetes 上构建机器学习系统 https://blog.csdn.net/weixin_43970890/article/details/97134534 
+[5].  云原生应用 Kubernetes 监控与弹性实践 https://blog.csdn.net/weixin_43970890/article/details/94570862 
+[6].  阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335 
+[7].  10个业界最流行的Kubernetes发行版 https://blog.csdn.net/RancherLabs/article/details/98478755
+[8].  基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5 
 
 [9].  Kubernetes之kubectl命令行工具简介、安装配置及常用命令 https://blog.csdn.net/bbwangj/article/details/80814568 
 

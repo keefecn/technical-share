@@ -418,7 +418,7 @@ typedef struct {
 | #define  atomic_dec_return(v) (atomic_sub_return(1,  v))     | 宏               |
 | `#define  atomic_clear_mask(mask, addr)\    asm volatile(LOCK_PREFIX  "andl %0,%1"      \ : :  "r" (~(mask)), "m" (*(addr)) : "memory")  ` | 宏               |
 | `#define atomic_set_mask(mask,  addr)  \    asm volatile(LOCK_PREFIX  "orl %0,%1"       \  : : "r" (mask), "m" (*(addr)) :  "memory")  ` | 宏               |
-| ...                                                          |                  |
+| ...                                                       |                  |
 
 
 

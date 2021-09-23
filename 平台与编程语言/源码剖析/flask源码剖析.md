@@ -90,7 +90,7 @@ if __name__ == "__main__":
 | json.py       | jsonify dump dumps load loads                                | json转化                          |
 | logging.py    |                                                              | 日志                              |
 | sessions.py   | SecureCookieSession  SessionInterface <br>SecureCookieSessionInterface | 会话                              |
-| signals.py    | Namespace::signal                                            | 信号                              |
+| signals.py    | Namespace::signal                                            | 定义若干信号，如消息，request...  |
 | templating.py | DispatchingJinjaLoader Environment                           | 前端用的模板，依赖jinja2          |
 | testing.py    | FlaskClient                                                  | 测试                              |
 | view.py       | View MethodViewType MethodView                               | 视图类                            |
@@ -461,6 +461,8 @@ class Blueprint(_PackageBoundObject):
 
 ### 视图 views.py 
 
+视图View和 类视图函数方法as_view
+
 ```python
 from .globals import request
 from ._compat import with_metaclass
@@ -503,6 +505,106 @@ class View(object):
         view.__module__ = cls.__module__
         view.methods = cls.methods
         return view        
+```
+
+
+
+### 会话 sessions.py
+
+cookie数据生成依赖于itdangerous模块的安全算法。
+
+```python
+from itsdangerous import BadSignature
+from itsdangerous import URLSafeTimedSerializer
+from werkzeug.datastructures import CallbackDict
+
+
+class SessionInterface(object):
+    
+class SecureCookieSessionInterface(SessionInterface):
+    """The default session interface that stores sessions in signed cookies
+    through the :mod:`itsdangerous` module.
+    """
+
+    #: the salt that should be applied on top of the secret key for the
+    #: signing of cookie based sessions.
+    salt = "cookie-session"
+    #: the hash function to use for the signature.  The default is sha1
+    digest_method = staticmethod(hashlib.sha1)
+    #: the name of the itsdangerous supported key derivation.  The default
+    #: is hmac.
+    key_derivation = "hmac"
+    #: A python serializer for the payload.  The default is a compact
+    #: JSON derived serializer with support for some extra Python types
+    #: such as datetime objects or tuples.
+    serializer = session_json_serializer
+    session_class = SecureCookieSession
+
+    def get_signing_serializer(self, app):
+        if not app.secret_key:
+            return None
+        signer_kwargs = dict(
+            key_derivation=self.key_derivation, digest_method=self.digest_method
+        )
+        return URLSafeTimedSerializer(
+            app.secret_key,
+            salt=self.salt,
+            serializer=self.serializer,
+            signer_kwargs=signer_kwargs,
+        )
+
+    def open_session(self, app, request):
+        s = self.get_signing_serializer(app)	#获取签名类
+        if s is None:
+            return None
+        val = request.cookies.get(app.session_cookie_name)
+        if not val:	#获取cookie名为session的值
+            return self.session_class()
+        max_age = total_seconds(app.permanent_session_lifetime)
+        try:
+            data = s.loads(val, max_age=max_age)	#解析cookie值
+            return self.session_class(data)
+        except BadSignature:
+            return self.session_class()
+
+    def save_session(self, app, session, response):
+        domain = self.get_cookie_domain(app)
+        path = self.get_cookie_path(app)
+
+        # If the session is modified to be empty, remove the cookie.
+        # If the session is empty, return without setting the cookie.
+        if not session:
+            if session.modified:
+                response.delete_cookie(
+                    app.session_cookie_name, domain=domain, path=path
+                )
+
+            return
+
+        # Add a "Vary: Cookie" header if the session was accessed at all.
+        if session.accessed:
+            response.vary.add("Cookie")
+
+        if not self.should_set_cookie(app, session):
+            return
+
+        httponly = self.get_cookie_httponly(app)
+        secure = self.get_cookie_secure(app)
+        samesite = self.get_cookie_samesite(app)
+        expires = self.get_expiration_time(app, session)
+        # cookie数据：用URLSafeTimedSerializer序列化(使用hmac算法)
+        val = self.get_signing_serializer(app).dumps(dict(session))	
+        response.set_cookie(
+            app.session_cookie_name,
+            val,
+            expires=expires,
+            httponly=httponly,
+            domain=domain,
+            path=path,
+            secure=secure,
+            samesite=samesite,
+        )
+
 ```
 
 
@@ -572,7 +674,7 @@ from werkzeug.local import LocalStack, LocalProxy
 # LocalStack: 请求上下文、应用上下文
 _request_ctx_stack = LocalStack()
 _app_ctx_stack = LocalStack()
-# LocalProxy: 
+# LocalProxy: current_app request session g
 current_app = LocalProxy(_find_app)
 request = LocalProxy(partial(_lookup_req_object, 'request'))
 session = LocalProxy(partial(_lookup_req_object, 'session'))
@@ -681,6 +783,7 @@ flask命令基于click库实现。
 * flask run:  运行开发服务器
 * flask shell:  启动一个交互python shell
 * flask db:  数据库迁移相关。不能直接使用，需要获取Migrate实例。
+* flask routes  获取路由，v1.1.4新增。
 
 flask支持命令： v1.1.2只支持run/shell，v1.1.4增加了routes，fab是flask_appbuilder模块命令组，db是flask_migrate模块命令组。
 
@@ -1038,6 +1141,84 @@ def shell_command():
 
 
 
+### flask routes命令
+
+可以用flask routes获取到 路由类方法 和 路由的一个对照。
+
+```shell
+$ flask routes
+Endpoint                                Methods    Rule
+--------------------------------------  ---------  -----------------------------------------------------------------------
+AnnotationLayerModelView.action_post    POST       /annotationlayermodelview/action_post
+AnnotationLayerModelView.add            GET, POST  /annotationlayermodelview/add
+AnnotationLayerRestApi.bulk_delete      DELETE     /api/v1/annotation_layer/
+AnnotationLayerRestApi.delete           DELETE     /api/v1/annotation_layer/<int:pk>
+AnnotationLayerRestApi.post             POST       /api/v1/annotation_layer/
+AnnotationLayerRestApi.put              PUT        /api/v1/annotation_layer/<int:pk>
+UserInfoEditView.this_form_post         POST       /userinfoeditview/form
+UtilView.back                           GET        /back
+appbuilder.static                       GET        /static/appbuilder/<path:filename>
+health                                  GET        /health
+healthcheck                             GET        /healthcheck
+ping                                    GET        /ping
+static                                  GET        /static/<path:filename>
+```
+
+
+
+routes命令支持按methods, rule, endpoint等进行排序 
+
+```python
+@click.command("routes", short_help="Show the routes for the app.")
+@click.option(
+    "--sort",
+    "-s",
+    type=click.Choice(("endpoint", "methods", "rule", "match")),
+    default="endpoint",
+    help=(
+        'Method to sort routes by. "match" is the order that Flask will match '
+        "routes when dispatching a request."
+    ),
+)
+@click.option("--all-methods", is_flag=True, help="Show HEAD and OPTIONS methods.")
+@with_appcontext
+def routes_command(sort, all_methods):
+    """Show all registered routes with endpoints and methods."""
+
+    rules = list(current_app.url_map.iter_rules())	# 获取到当前app注册的路由
+    if not rules:
+        click.echo("No routes were registered.")
+        return
+
+    ignored_methods = set(() if all_methods else ("HEAD", "OPTIONS"))
+
+    if sort in ("endpoint", "rule"):	# 排序方式
+        rules = sorted(rules, key=attrgetter(sort))
+    elif sort == "methods":
+        rules = sorted(rules, key=lambda rule: sorted(rule.methods))
+
+    rule_methods = [", ".join(sorted(rule.methods - ignored_methods)) for rule in rules]
+
+    headers = ("Endpoint", "Methods", "Rule")
+    widths = (
+        max(len(rule.endpoint) for rule in rules),
+        max(len(methods) for methods in rule_methods),
+        max(len(rule.rule) for rule in rules),
+    )
+    widths = [max(len(h), w) for h, w in zip(headers, widths)]
+    row = "{{0:<{0}}}  {{1:<{1}}}  {{2:<{2}}}".format(*widths)
+
+    click.echo(row.format(*headers).strip())
+    click.echo(row.format(*("-" * width for width in widths)))
+
+    for rule, methods in zip(rules, rule_methods):
+        click.echo(row.format(rule.endpoint, methods, rule.rule).rstrip())
+```
+
+
+
+
+
 ## 扩展勾子 exthook.py
 
 flask/exthook.py
@@ -1349,7 +1530,7 @@ if __name__ == "__main__":
 | datastructures.py |                                                              | 用到的数据结构                           |
 | exceptions.py     | BadRequest                                                   | 异常，多继承自HTTPException              |
 | filesystem.py     | get_filesystem_encoding                                      | 文件系统                                 |
-| http.py           | parse_date ...                                               | 处理http数据的一组函数                   |
+| http.py           | parse_date ...                                            | 处理http数据的一组函数                   |
 | local.py          |                                                              | 本地代理/数据栈                          |
 | posixemulation.py | rename                                                       | POSIX模拟器                              |
 | routing.py        | BaseConverter AnyConverter RuleFactory Rule                  | 路由相关的转化器、规则类                 |
@@ -2093,15 +2274,188 @@ Required-by: Flask
 
 ```python
 from itsdangerous import URLSafeSerializer
+
+# 此处二个参数secret key和salt要妥善保存，如果泄露，数据将不再安全。
 auth_s = URLSafeSerializer("secret key", "auth")
 token = auth_s.dumps({"id": 5, "name": "itsdangerous"})
 
 print(token)
 # eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg
+# 生成的token经过 zlib压缩+base64编码+签名
 
 data = auth_s.loads(token)
 print(data["name"])
 # itsdangerous
+```
+
+
+
+### 源码结构 
+
+表格 itsdangerous源码结构 
+
+| 文件         | 主要类或函数                                                 | 简介             |
+| ------------ | ------------------------------------------------------------ | ---------------- |
+| url_safe.py  | URLSafeSerializerMixin URLSafeSerializer URLSafeTimedSerializer | url安全序列化器  |
+| serialize.py | Serialize                                                    | 序列化类         |
+| signer.py    | SigningAlgorithm Signer                                      | 签名和签名算法   |
+| encoding.py  | base64_encode base64_decode int_to_bytes bytes_to_int        | 编码             |
+| exc.py       |                                                              | 异常             |
+| jws.py       | JSONWebSignatureSerializer TimedJSONWebSignatureSerializer   | JSON序列化       |
+| timed.py     | TimedSerializer TimestampSigner                              | 时间序列化和签名 |
+| _json.py     | _CompactJSON                                                 | json兼容         |
+
+
+
+/itsdangerous/url_safe.py
+
+```python
+import zlib
+
+from ._json import _CompactJSON
+from .encoding import base64_decode
+from .encoding import base64_encode
+from .exc import BadPayload
+from .serializer import Serializer
+from .timed import TimedSerializer
+
+
+class URLSafeSerializerMixin(object):
+        
+    def dump_payload(self, obj):
+        json = super(URLSafeSerializerMixin, self).dump_payload(obj)
+        is_compressed = False
+        compressed = zlib.compress(json)	#压缩
+        if len(compressed) < (len(json) - 1):
+            json = compressed
+            is_compressed = True
+        base64d = base64_encode(json)		#base64编码
+        if is_compressed:
+            base64d = b"." + base64d
+        return base64d
+    
+    def load_payload(self, payload, *args, **kwargs):
+        decompress = False
+        if payload.startswith(b"."):
+            payload = payload[1:]
+            decompress = True
+        try:
+            json = base64_decode(payload)
+        except Exception as e:
+            raise BadPayload(
+                "Could not base64 decode the payload because of an exception",
+                original_error=e,
+            )
+        if decompress:
+            try:
+                json = zlib.decompress(json)
+            except Exception as e:
+                raise BadPayload(
+                    "Could not zlib decompress the payload before decoding the payload",
+                    original_error=e,
+                )
+        return super(URLSafeSerializerMixin, self).load_payload(json, *args, **kwargs)
+
+    
+class URLSafeSerializer(URLSafeSerializerMixin, Serializer):     
+class URLSafeTimedSerializer(URLSafeSerializerMixin, TimedSerializer):    
+```
+
+
+
+/itsdangerous/serialize.py
+
+```python
+class Serializer(object):
+    """ 加载一个安全KEY 和 一个盐值 """
+    def __init__(
+        self,
+        secret_key,
+        salt=b"itsdangerous",
+        serializer=None,
+        serializer_kwargs=None,
+        signer=None,
+        signer_kwargs=None,
+        fallback_signers=None,
+    ):
+        
+    def dumps(self, obj, salt=None):
+        """Returns a signed string serialized with the internal
+        serializer. The return value can be either a byte or unicode
+        string depending on the format of the internal serializer.
+        """
+        payload = want_bytes(self.dump_payload(obj))	#zlib压缩后base64编码
+        rv = self.make_signer(salt).sign(payload)  		#生成签名
+        if self.is_text_serializer:
+            rv = rv.decode("utf-8")
+        return rv
+    
+	def loads(self, s, salt=None):
+        """Reverse of :meth:`dumps`. Raises :exc:`.BadSignature` if the
+        signature validation fails.
+        """
+        s = want_bytes(s)  #返回bytes类型
+        last_exception = None
+        for signer in self.iter_unsigners(salt):
+            try:
+                return self.load_payload(signer.unsign(s))
+            except BadSignature as err:
+                last_exception = err
+        raise last_exception
+        
+    def make_signer(self, salt=None):
+        """Creates a new instance of the signer to be used. The default
+        implementation uses the :class:`.Signer` base class.
+        """
+        if salt is None:
+            salt = self.salt
+        return self.signer(self.secret_key, salt=salt, **self.signer_kwargs)        
+```
+
+
+
+/itsdangerous/signer.py
+
+```python
+class SigningAlgorithm(object):
+    def get_signature(self, key, value):
+        """Returns the signature for the given key and value."""
+        raise NotImplementedError()
+
+    def verify_signature(self, key, value, sig):
+        """Verifies the given signature matches the expected
+        signature.
+        """
+        return constant_time_compare(sig, self.get_signature(key, value))
+    
+    
+class NoneAlgorithm(SigningAlgorithm):
+    def get_signature(self, key, value):
+        return b""
+    
+class HMACAlgorithm(SigningAlgorithm):
+    """Provides signature generation using HMACs."""
+
+    #: The digest method to use with the MAC algorithm. This defaults to
+    #: SHA1, but can be changed to any other function in the hashlib
+    #: module.
+    default_digest_method = staticmethod(hashlib.sha1)
+
+    def __init__(self, digest_method=None):
+        if digest_method is None:
+            digest_method = self.default_digest_method
+        self.digest_method = digest_method
+
+    def get_signature(self, key, value):
+        mac = hmac.new(key, msg=value, digestmod=self.digest_method)
+        return mac.digest()
+    
+    
+class Signer(object):
+    
+    def sign(self, value):
+        """Signs the given string."""
+        return want_bytes(value) + want_bytes(self.sep) + self.get_signature(value)    
 ```
 
 
@@ -2594,8 +2948,8 @@ Required-by:
 | apidoc.py          | Apidoc swagger_static ui_for                                 | API文档蓝图                            |
 | cors.py            | crossdomain                                                  | 跨域                                   |
 | errors.py          | abort RestError ValidationError SpecsError                   | 错误或异常                             |
-| fields.py          | Raw String Url ...                                           | 字段。定义API参数。                    |
-| inputs.py          | boolean date ..                                              | 高级类型解析                           |
+| fields.py          | Raw String Url ...                                           | 字段。定义API参数                      |
+| inputs.py          | boolean date ...                                             | 高级类型解析                           |
 | marshaling.py      | 类：marshal_with marshal_with_field<br>函数：marshal make    | 接口返回结果                           |
 | mask.py            | Mask                                                         |                                        |
 | model.py           | ModelBase RawModel Model OrderedModel SchemaModel            | 模型                                   |

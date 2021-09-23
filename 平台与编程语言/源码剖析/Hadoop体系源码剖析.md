@@ -94,7 +94,7 @@ Maven main modules:
 hadoop              (Main Hadoop project)
 
 ```
- - hadoop-project      (Parent POM for all Hadoop Maven modules.       )
+ - hadoop-project      (Parent POM for all Hadoop Maven modules.    )
               (All plugins & dependencies versions are defined here.)
 
  - hadoop-project-dist   (Parent POM for modules that generate distributions.)

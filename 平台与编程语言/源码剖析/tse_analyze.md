@@ -120,7 +120,7 @@
 | tse_seed.img         |      | 一开始指定要访问的url,  主向是imgSE(图片搜索) |                                                     |
 | tse_seed.pku         |      | 一开始指定要访问的url（正常的网页搜索）       |                                                     |
 | tse_unreachHost.list |      | unreachable hosts according to PKU IP block   |                                                     |
-| tse_ipblock.         |      |                                               |                                                     |
+| tse_ipblock.      |      |                                               |                                                     |
 | tse.robots           |      | robots协议                                    |                                                     |
 | Clean.sh             |      | 清除中间文件的脚本                            |                                                     |
 | link4History.url     |      |                                               |                                                     |

@@ -12,6 +12,12 @@
 
 
 
+---
+
+[TOC]
+
+
+
 ----
 
 
@@ -845,10 +851,45 @@ def rison(schema=None):
 
 
 
-cookie示例：主要字段有_xsrf, username-xx, session, csrf_access_token
+cookie示例：主要字段有_xsrf, session, csrf_access_token
+
+示例如下：
 
 ```shell
-_xsrf=2|032f42b4|e86b7b403d2166b24cd7bd243e6d0cdd|1628748122; username-127-0-0-1-8888="2|1:0|10:1628850843|23:username-127-0-0-1-8888|44:NTJhYzJmYzUyNWY0NDFhZjlhOGRlYjczNmU0MTUzY2U=|8faa84c80f216e6a8019f5559762c2cb9cd50e9fbc511192dc793471ee7d3341"; session=.eJx9kMtqxDAMRf_F61DLlp-B0g8pxdiW3AQCGRLPojP03-u2m26maHXhHF2hu0jt4HMRcz-uPIm0kphF1i6YGrlBsBRVUZoDMMVsLHpnIgLpYlRrVQHFYku1zgVmdMplj9YYJo0eswUsCM5ydW2sjMYWj8ahNyagrhWiL6zBO6TGOjRdgJiUmMS217zxuOW2jHTJ75yW9ez78SHmV7H0fpmlVNo_wRg1WwAlj33jU24Dk8P5j2FauwwPoevJxykz0UtqW0-Qfqznx8Lf5rdJfPu_n7Ti8wt3-WTT.YTGVAA.3AdM1VXeDFIRvDcZC_HrZomSVK8
+_xsrf=5|032f42b4|e86b7b403d2166b24cd7bd243e6d0cdd|1628748122;remember_token=5|5e16c92420f51b33c4c3b7dc2eccf46ace6963402024dabc35afc3dd54aaeab3ebcdf29de906cfdbd48e8e9390508c86050ddc5ae573945b5c3298a40435caec; session=.eJztlMFqxDAMRH8l6ByKnNiWnV8pS7AtuQmbbJY4C6XL_ntd2k_oMafRXB4zh9ETxryEMkmB4f0JzVEFViklfAi0kCZJ1_HYrnIb5fM-78LNXJq_s20eRfahOaQcCi6v9gScgBPwP4BLW6e5S5lgOPaHVDczDJBt6LxwFPbISBiVUqnXSOysZh0o-tB7pSSTZQrE3gmz80aR06bL3nuy0cXskFxInZDFaJCTxl5nmzuxKSBpRlTWSTIuK6JkOKocnYm1x7KlsEjN8jVVt8sqa5R9LJK2G9c_ohziG7bw0-c3tIHXN6m5fks.YVV-gQ.Dq6CqLfFfqoP4sxkzVai2ovKUD4
+```
+
+* session：flask模块支持，定义在app.py Flask.SESSION_COOKIE_NAME；cookie数据依赖itdangerous模块的哈希签名序列化生成。
+* _xsrf：flask_wtf模块支持，值结构为`{user_id}|{}|{}`
+* remember_token:  flask_login模块支持，当user_login时记录user_id及摘要信息。值结构为`{user_id}|{user_id_digest}`，user_id_digest是用user_id生成hmac摘要供服务端验证，防止数据user_id被修改。
+
+```python
+import hashlib
+from itsdangerous import URLSafeTimedSerializer
+from flask.json.tag import TaggedJSONSerializer
+
+token = ".eJx9kMtqxDAMRf_F61DLlp-B0g8pxdiW3AQCGRLPojP03-u2m26maHXhHF2hu0jt4HMRcz-uPIm0kphF1i6YGrlBsBRVUZoDMMVsLHpnIgLpYlRrVQHFYku1zgVmdMplj9YYJo0eswUsCM5ydW2sjMYWj8ahNyagrhWiL6zBO6TGOjRdgJiUmMS217zxuOW2jHTJ75yW9ez78SHmV7H0fpmlVNo_wRg1WwAlj33jU24Dk8P5j2FauwwPoevJxykz0UtqW0-Qfqznx8Lf5rdJfPu_n7Ti8wt3-WTT.YTGVAA.3AdM1VXeDFIRvDcZC_HrZomSVK8"
+secret_key = b'xxx'
+salt = b'xxx'
+serializer = TaggedJSONSerializer()
+signer_kwargs = {'key_derivation': 'hmac', 'digest_method': hashlib.sha1}
+auth_s = URLSafeTimedSerializer(secret_key, salt=salt, serializer=serializer, signer_kwargs=signer_kwargs)
+data = auth_s.loads(token)
+print(data)
+
+# 结果
+{
+	"_fresh": true,
+	"_id": "a2684c9ef085d91b12e80ed9a453764930d2b41ffc10d9b5bc5668ee3616a73544ed2373a503b3065ec6f684945b73463744832cc097be20763dfe28f2b0ded1",
+	"locale": "zh",
+	"page_history": [
+		"http://127.0.0.1:5001/roles/list/",
+		"http://127.0.0.1:5001/roles/edit/8",
+		"http://127.0.0.1:5001/users/add?_flt_0_roles=8",
+		"http://127.0.0.1:5001/roles/list/"
+	],
+	"user_id": "5"
+}
 ```
 
 
@@ -1760,7 +1801,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 #### 列表页服务端API
 
-详见 3.2章节 中列出的API。
+详见 《[superset二次开发](superset二次开发.md)》API章节 中列出的API。
 
 * 图表列表页  /chart/list/   SliceModelView调用父类ModelView.list() ，最终实现在BaseView._list()
   * SliceModelView.list()   /superset/views/chart/views.py
@@ -1854,7 +1895,7 @@ superset/cli.py
 from flask.cli import FlaskGroup, with_appcontext
 
 # 此处superset函数用了二个装饰器，
-# click.groupu装饰器会生成脚本组，触发函数create_app, 并且将方法名作归一化处理normalize_token
+# click.group装饰器会生成脚本组(组名是函数名即superset)，触发函数create_app, 并且将方法名作归一化处理normalize_token,
 # with_appcontextu装饰器会使用应用上下文
 @click.group(
     cls=FlaskGroup,
@@ -1907,7 +1948,7 @@ Commands:
   set-database-uri          Updates a database connection URI
   shell                     Run a shell in the app context.
   sync-tags                 Rebuilds special tags (owner, type, favorited...
-  update-api-docs           Regenerate the openapi.json file in docs
+  update-api-docs           Regenerate the openapi.json file in docs  #重新生成 openai.json文件
   update-datasources-cache  Refresh sqllab datasources cache
   version                   Prints the current version number
   worker                    Starts a Superset worker for async SQL query...
@@ -1943,9 +1984,11 @@ load_examples 加载测试数据，需要从网络上下载数据。
 
 - 最后执行命令： `superset load-examples`
 
-```python
-# /superset/cli.py
 
+
+/superset/cli.py  superset具体命令定义和实现
+
+```python
 # superset.command()装饰说明是superset这个命令组的次级命令
 @with_appcontext
 @superset.command()
@@ -2666,7 +2709,7 @@ class SliceModelView(
 
 图表charts、看板dashboards、databases和datasets 这4个的代码结构和处理逻辑类似。
 
-* commands/  元数据CRUD操作命令
+* commands/  元数据CRUD操作命令，包括create/update/delete。
 * api.py RestAPI接口
 * dao.py 更复杂的SQL语句实现，如bulk_delete
 * filters.py  过滤条件
@@ -3578,7 +3621,11 @@ celery使用
 
 
 
-#### **基本权限**（用户认证）
+#### 用户认证
+
+##### 用户认证实现fab
+
+用户认证支持主流认证方式，如DB认证，Oauth，LDAP和openAPI等。
 
 /superset/app.py
 
@@ -3694,13 +3741,50 @@ class SupersetSecurityManager(SecurityManager):
 
 
 
-#### **菜单视图权限**
+##### JWT
+
+对于API用户，更适合于用JWT方式进行用户认证。
+
+支持 Bearer Token认证。
+
+接口：/api/v1/security/login/  
+
+```shell
+curl -X 'POST' \
+  'http://127.0.0.1:5000/api/v1/security/login' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "password": "XXXX",
+  "provider": "db",
+  "refresh": true,
+  "username": "test1"
+}'
+
+# show result
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xx.RdOkZywyIslLj_9AfLb_7qn_zRGFIYdkTywE4H0PryY",
+  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xx.ntEKT8a6t1h4qzvvATyktyqPxbmo3Ahl1zv7pNNFJ-A"
+}
+```
+
+
+
+
+
+#### 资源权限
+
+##### **菜单资源 menu**
 
 使用flask_appbuilder模块的AppBuilder 来处理菜单权限。
 
 
 
-#### 资源权限
+##### superset资源 
+
+superset资源主要包括数据源、数据集、图表和看板，此外还包括一些静态资源。
+
+
 
 /superset/migrations/
 
@@ -3784,8 +3868,6 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
 
 
 
-
-
 数据库查找/授权示例：
 
 ```python
@@ -3840,7 +3922,16 @@ class SecurityManager(BaseSecurityManager):
 
 #### **API访问权限**
 
-API示例 /superset/charts/api.py
+API访问权限体现在二个方面，
+
+* 一是用户认证：主要有二种，分别是登陆认证，二是JWT认证。
+* 二是API资源权限：REST模式中，一个API路由就是一个资源。资源可以对应到某个类的方法里。需要对这个方法进行鉴权。这个过程主要是查询数据库，查询 认证用户所拥有的资源权限是否包括了本API资源权限。
+
+
+
+##### 示例1：图表API 
+
+/superset/charts/api.py
 
 ```python
 from flask_appbuilder.api import expose, protect, rison, safe  # 都是在API实现中直接使用的装饰器
@@ -3877,15 +3968,15 @@ class ChartRestApi(BaseSupersetModelRestApi):
         
 ```
 
-* expose: API路由
-* **protect**:  判断API权限
+* expose: API路由扩展
+* **protect**:  判断API权限。
 * rison  捕捉入参的Rison参数
 * safe 捕捉异常，返回异常时的JSON
 * has_access_api  
 
 
 
-#### 示例：新增数据源
+##### 示例2：新增数据源操作
 
 新增数据源，需要在元数据表中操作的数据和权限
 
@@ -4277,6 +4368,104 @@ class CORS(object):
 
 
 
+### 工具 /utils/
+
+ /superset/utils/machine_auth.py
+
+```python
+from flask import current_app, Flask, request, Response, session
+from flask_login import login_user
+from selenium.webdriver.remote.webdriver import WebDriver
+from werkzeug.http import parse_cookie
+
+from superset.utils.urls import headless_url
+
+if TYPE_CHECKING:
+    from flask_appbuilder.security.sqla.models import User
+    
+
+class MachineAuthProvider:
+    def __init__(
+        self, auth_webdriver_func_override: Callable[[WebDriver, "User"], WebDriver]
+    ):
+        self._auth_webdriver_func_override = auth_webdriver_func_override
+
+    def authenticate_webdriver(self, driver: WebDriver, user: "User",) -> WebDriver:
+        """
+            Default AuthDriverFuncType type that sets a session cookie flask-login style
+            :return: The WebDriver passed in (fluent)
+        """
+        # Short-circuit this method if we have an override configured
+        if self._auth_webdriver_func_override:
+            return self._auth_webdriver_func_override(driver, user)
+
+        # Setting cookies requires doing a request first
+        driver.get(headless_url("/login/"))
+
+        if user:  # 获取用户cookie
+            cookies = self.get_auth_cookies(user)
+        elif request.cookies:
+            cookies = request.cookies
+        else:
+            cookies = {}
+
+        for cookie_name, cookie_val in cookies.items():
+            driver.add_cookie(dict(name=cookie_name, value=cookie_val))
+
+        return driver
+
+    @staticmethod
+    def get_auth_cookies(user: "User") -> Dict[str, str]:
+        # Login with the user specified to get the reports，用户登陆成功后保存当前会话
+        with current_app.test_request_context("/login"):
+            login_user(user)  
+            # A mock response object to get the cookie information from
+            response = Response()
+            current_app.session_interface.save_session(current_app, session, response)
+
+        cookies = {}
+
+        # Grab any "set-cookie" headers from the login response
+        for name, value in response.headers:
+            if name.lower() == "set-cookie":
+                # This yields a MultiDict, which is ordered -- something like
+                # MultiDict([('session', 'value-we-want), ('HttpOnly', ''), etc...
+                # Therefore, we just need to grab the first tuple and add it to our
+                # final dict
+                cookie = parse_cookie(value)
+                cookie_tuple = list(cookie.items())[0]
+                cookies[cookie_tuple[0]] = cookie_tuple[1]
+
+        return cookies
+
+
+class MachineAuthProviderFactory:
+    def __init__(self) -> None:
+        self._auth_provider = None
+
+    def init_app(self, app: Flask) -> None:
+        auth_provider_fqclass = app.config["MACHINE_AUTH_PROVIDER_CLASS"]
+        auth_provider_classname = auth_provider_fqclass[
+            auth_provider_fqclass.rfind(".") + 1 :
+        ]
+        auth_provider_module_name = auth_provider_fqclass[
+            0 : auth_provider_fqclass.rfind(".")
+        ]
+        auth_provider_class = getattr(
+            importlib.import_module(auth_provider_module_name), auth_provider_classname
+        )
+
+        self._auth_provider = auth_provider_class(app.config["WEBDRIVER_AUTH_FUNC"])
+
+    @property
+    def instance(self) -> MachineAuthProvider:
+        return self._auth_provider  # type: ignore
+```
+
+
+
+
+
 ### 日志
 
 DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志文件（superset.log）。依赖环境变量SUPERSET_HOME，缺省~/.superset/
@@ -4388,6 +4577,8 @@ class DefaultLoggingConfigurator(LoggingConfigurator):
 
         logger.info("logging was configured successfully")
 ```
+
+>  说明：这里日志格式<u>LOG_FORMAT</u>死活都不起作用。
 
 
 

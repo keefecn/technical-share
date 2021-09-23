@@ -79,8 +79,8 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 | ‘f1_weighted’                        | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | weighted average（加权平均）                   |
 | ‘f1_samples’                         | [`metrics.f1_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) | by multilabel sample                           |
 | ‘neg_log_loss’                       | [`metrics.log_loss`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html#sklearn.metrics.log_loss) | requires `predict_proba` support               |
-| ‘precision’ etc.                     | [`metrics.precision_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
-| ‘recall’ etc.                        | [`metrics.recall_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
+| ‘precision’ etc.                  | [`metrics.precision_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
+| ‘recall’ etc.                     | [`metrics.recall_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score) | suffixes apply as with ‘f1’（后缀适用于 ‘f1’） |
 | ‘roc_auc’                            | [`metrics.roc_auc_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score) |                                                |
 | **Clustering（聚类）**               |                                                              |                                                |
 | ‘adjusted_mutual_info_score’         | [`metrics.adjusted_mutual_info_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score) |                                                |
@@ -976,7 +976,7 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 |       | 词1  | 词2  | ...  | 词n  |
 | ----- | ---- | ---- | ---- | ---- |
 | 文档1 | 20   | 9    | 30   | 34   |
-| 文档2 |      |      |      | .    |
+| 文档2 |      |      |      | . |
 | ...   |      |      |      |      |
 | 文档n |      |      |      |      |
 

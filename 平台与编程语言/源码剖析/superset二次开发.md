@@ -14,8 +14,6 @@
 
 
 
-
-
 ---
 
 [TOC]
@@ -345,7 +343,7 @@ apache官方镜像 [apache/superset - Docker Image | Docker Hub](https://hub.doc
 
 | 比较项                | apache/superset                                           | amancevice/superset                                          |
 | --------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
-| 简介                  | 官方镜像。gunicorn启动1工作进程22线程。                   | 非官方镜像， Debian+Python3 。star最多。gunicorn启动8工作进程。 |
+| 简介                  | 官方镜像。gunicorn启动1工作进程22线程。                   | 非官方镜像， Debian+Python3 。star最多。gunicorn启动10工作进程。 |
 | 镜像URL               | https://hub.docker.com/r/apache/superset                  | https://hub.docker.com/r/amancevice/superset                 |
 | Dockerfile            | https://github.com/apache/superset/blob/master/Dockerfile | https://github.com/amancevice/docker-superset/blob/main/Dockerfile |
 | 更新频率              | 与源码几乎同步更新                                        | 与源码几乎同步更新                                           |
@@ -363,7 +361,7 @@ apache官方镜像 [apache/superset - Docker Image | Docker Hub](https://hub.doc
 
 备注：1. $SUPERSET_HOME是数据卷，默认用来存储sqlite db和日志。$SUPERSET_CONFIG_PATH是配置卷，用来存储自定义配置文件。
 
-2. 上面二个镜像生成的方式不同，amancevice是pip安装superset源码，gunicorn启动；apache指定superset源码路径，flask启动。
+2. 上面二个镜像生成的方式不同，amancevice是pip安装superset源码；apache指定superset源码路径。都是用gunicorn启动。
 3. 默认容器端口定义在Dockerfile变量里，apache是$SUPERSET_PORT=8080,  amancevice是8088。可以指定宿主机端口：` -p [宿主机端口]:[容器端口]`
 
 ```shell
@@ -750,38 +748,87 @@ superset run -h 0.0.0.0 -p 5000
 
 ## 3.2 API
 
-官方接口文档：  https://superset.apache.org/docs/rest-api   (flask_appbuild模块实现FAB_API_SWAGGER_UI )
+官方接口文档：https://superset.apache.org/docs/rest-api   ( )
 
-本服务接口文档：http://127.0.0.1:5000/swagger/v1
+本服务接口文档：http://127.0.0.1:5000/swagger/v1   
+
+API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI来配置。文档schema定义在/docs/src/resources.openapi.json。
+
+可通过 命令`flask routes`获取路由、方法和视图函数列表，superset约有300个API。
 
 **路由映射方法 **
 
 * 主要使用 flask_appbuild 模块提供的装饰器:  expose 和 expose_api
   * expose   路由会在父路由基础上添加，如 expose('expore_json')，实际上指向 /superset/explore_json
   * （没用到）expose_api 用于API，返回JSON。如/api/v1/xxx
-* xxAPP.route:  flask原生路由，仅用于 /healthy
+* xxAPP.route:  flask原生路由，仅用于健康检查API如/healthy
 
-**路由前缀**
+**路由前缀**：  route_base要以/开头，新定义API类xxAPI要通过`app.py appbuilder.add_api(xxAPI)`才能注册路由。
 
-* 继承自flask_appbuilder.baseviews.BaseView:  路由前缀为 `/lower(class.__name__)/`，如Superset类下的视图前缀为/superset
+* 继承自flask_appbuilder.baseviews.BaseView:  路由前缀为 `/lower(class.__name__)/`，如Superset类的路由前缀为/superset
 
-* RestApi的路由前缀：`{route_base}`  或者 `/api/{version}/{resource_name}`  ，如 /api/v1/chart/
+* RestApi的路由前缀：`{route_base} or /api/{version}/{resource_name}`  ，如 /api/v1/chart/
 * ModelView的路由前缀：/superset/{route_base}，如 /superset/explore_json
 
 
 
-**请求响应结果格式**，有二种：
+**请求体格式**：一般是JSON，也有部分API是form传输。
+
+**响应体格式**，有二种：
 
   * JSON格式：页面局部更新。
   * HTML格式：每个页面都是一个单独HTML，页面名称可参见 webpack.config.js里的entry。需用到模板，页面全部更新。
 
-API实现： superset API实现在各个目录下的api.py
-
-备注：下面查询参数里的字符串 xxx表示 某个具体的查询字符串。
 
 
+**API实现**： 详见下方表格 superset API列表
 
-**Rison**:  查询参数格式。示例如下，
+表格 superset API 列表 (swagger api, 前缀是 /api/{version}/)
+
+| API类别 (Swagger)  | API路径                                  | API实现文件        | API说明      |
+| ------------------ | ---------------------------------------- | ------------------ | ------------ |
+| Annotaion Layers   | /annotaion_layers/                       | api.py             | 注解层       |
+| AsyncEventsRestApi | /async_event/                            | api.py             | 异步查询事件 |
+| CacheRestApi       | /cachekey/                               | api.py             | 缓存         |
+| Charts             | /chart/                                  | api.py             | 图表         |
+| CSS Templates      | /css_template/                           | api.py             | CSS          |
+| Dashboards         | /dashboard/                              | api.py             | 看板         |
+| Databases          | /database/                               | api.py             | 数据库       |
+| Datasets           | /dataset/                                | api.py             | 数据集       |
+| Queries            | /query/                                  | api.py             | 查询         |
+| Report Schedules   | /report/                                 | api.py             | 报告调度     |
+| OpenApi            | /openapi/{version}/_openapi              | flask_appbuild/xx/ | openapi      |
+| Menu               | /menu/                                   | flask_appbuild/xx/ | 菜单         |
+| Security           | /security/                               | flask_appbuild/xx/ | 安全         |
+| LogRestApi         | /log/                                    | /views/log/api.py  | 日志         |
+|                    | /query/, /query_from_data/, /time_range/ | /views/api.py      | {version}=v1 |
+
+说明：若未特殊说明，Swagger API实现在路径前缀目录下的api.py。示例路由前缀/chart/，则相应API实现在/chart/api.py。
+
+
+
+表格 superset API列表 (非/api/开头的)
+
+| API类别    | API路径前缀                                                  | API实现文件          | API说明         |
+| ---------- | ------------------------------------------------------------ | -------------------- | --------------- |
+| Superset   | /superset/                                                   | /views/core.py       |                 |
+| datasource | /datasource/                                                 | /views/datasource.py | 路由有save, get |
+| key_value  | /kv/                                                         | /views/key_value.py  | 路由有store     |
+| sql_lab    | /savedqueryview/, /tablestateview/                           | /views/sql_lab.py    |                 |
+| health     | /ping, /healthcheck, /health                                 | /views/health.py     | 健康检查        |
+| tags       | /tags/                                                       | /views/tags.py       |                 |
+| schedule   | /emailscheduleview/,  /sliceemailscheduleview/,<BR>/dashboardemailscheduleview/ | /views/schedule.py   |                 |
+
+**新增API**
+
+* 如果新增API类，继承已有类，如 DatasetRestApi。
+  * 通过`appbuilder.add_api(xxAPI)`才能注册路由；
+
+* 如果在原有API类上增加API，只需保证路由名和路由函数在本类不一样即可。
+
+
+
+**Rison**:  查询参数格式，用()圈起来，里面值可以转化成JSON格式。示例如下（如果是URL传参，则需要将参数值URLENCODE），
 
 ```shell
 # 示例：分页查询 
@@ -790,28 +837,7 @@ API实现： superset API实现在各个目录下的api.py
 ?q=(filters:!((col:slice_name,opr:chart_all_text,value:%E6%97%B6%E9%97%B4)),)
 ```
 
-
-
-表格 superset API列表
-
-| API类别            | API路径                     | API说明      |
-| ------------------ | --------------------------- | ------------ |
-| Annotaion Layers   | /annotaion_layers/          |              |
-| AsyncEventsRestApi | /async_event/               | 异步查询事件 |
-| CacheRestApi       | /cachekey/invalidate        |              |
-| Charts             | /chart/                     |              |
-| CSS Templates      | /css_template/              |              |
-| Dashboards         | /dashboard/                 |              |
-| Databases          | /database/                  |              |
-| Datasets           | /dataset/                   |              |
-| LogRestApi         | /log/                       |              |
-| Menu               | /menu/                      |              |
-| OpenApi            | /openapi/{version}/_openapi |              |
-| Queries            | /query/                     |              |
-| Report Schedules   | /report/                    |              |
-| Security           | /security/                  |              |
-
-说明：有不少API并未出现在swagger生成的API列表里，特别是以/superset/为前缀的路由。
+备注：下面查询参数里的字符串 xxx表示 某个具体的查询字符串。
 
 
 
@@ -839,7 +865,7 @@ API实现： superset API实现在各个目录下的api.py
 | 看板保存（覆盖） | /save_dash/<dashboard_id>      | GET POST |          | JSON     |
 | 看板另存为       | /copy_dash/<dashboard_id>      | GET POST |          | JSON     |
 | 获取token        | /csrf_token/                   | GET      |          | JSON     |
-|                  |                                |          |          |          |
+| ...              |                                |          |          |          |
 
 
 
@@ -990,6 +1016,18 @@ API实现： superset API实现在各个目录下的api.py
 
 
 ### 数据集 dataset
+
+表格 修改数据集的二个API比较
+
+| 路由     | /api/v1/dataset/                                  | /datasource/save/    |
+| -------- | ------------------------------------------------- | -------------------- |
+| 方法     | PUT                                               | POST                 |
+| 数据格式 | JSON                                              | FORM                 |
+| 简介     | 支持只更新参数中的字段，默认override_column=false | 会覆盖表中所有字段。 |
+| 应用场景 | 未用                                              | 数据源编辑时保存     |
+| API实现  | /views/datasets/api.py                            | /views/datasource.py |
+
+
 
 示例：**数据集查询/api/v1/dataset/ 的响应结果 JSON**
 
@@ -1369,10 +1407,10 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 | 表名                    | 权限说明           | 字段                                | 权限详述                                                     |
 | ----------------------- | ------------------ | ----------------------------------- | ------------------------------------------------------------ |
-| ab_role                 | 角色               | id, name(uni)                       | 一个角色映射到访问权限，一个用户可以是多个角色，一个角色也可以有多个用户。6个预创建角色分别是Admin, Alpha, Gramma, granter, Public, sql_lab。 |
+| ab_role                 | 角色               | id, name(uni)                       | 一个角色映射到访问权限，一个用户可以是多个角色，一个角色也可以有多个用户。<br>6个预创建角色分别是Admin, Alpha, Gramma, granter, Public, sql_lab。 |
 | ab_premission           | 权限               | id, name(uni)                       | 如can list/can del, menu_access等。共85个                    |
-| ab_view_menu            | 被管对象           | id, name(uni)                       | 菜单、视图、数据源，数据集，看板，图板等等.<br>示例数据集：[database_name].(id:dbs_id) ，`[database_name].[table_name](id:tables_id)`, [database_name].[schema] ， |
-| ab_permission_view      | 权限-视图关联      | id, permission_id, view_menu_id     | 建议permission表和view_menu表的关联，多对多关系。            |
+| ab_view_menu            | 被管对象           | id, name(uni)                       | 菜单、视图、数据源，数据集，看板，图板等等。<br>示例数据集：[database_name].(id:dbs_id), `[database_name].[table_name](id:tables_id)`, [database_name].[schema], |
+| ab_permission_view      | 权限-视图关联      | id, permission_id, view_menu_id     | 建立permission表和view_menu表的关联，多对多关系。            |
 | ab_permission_view_role | 角色-权限视图关联  | id, permission_view_id, <br>role_id | 角色对应的视图权限。<br>permission_view_id和role_id二个外键分别对应到ab_permission_view表和ab_role表的主键。 |
 | ab_user_role            | user和role关联     | id, user_id, role_id                | 建立user表和role表的关联，多对多关系                         |
 | ab_user                 |                    | id, username(uni)...                | 包括用户基本信息，包括用户名/密码等。                        |
@@ -1791,8 +1829,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
  
 
-
-
 ## 5.3   数据架构（数据模型）
 
 表格 superset元数据的来源模块说明
@@ -2005,7 +2041,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 - 报表和看板分类：不支持类似powerBI按目录划分。（缓）
 
-- 根路由定制：依赖flask_appbuilder，十几个路由，没有统一的根路由，改起来很麻烦。（弃）
+- 根路由定制：约300个API，十几个不同前缀路由。还依赖flask_appbuilder模块，改起来很麻烦。（弃）
 
   
 
@@ -2036,4 +2072,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 *  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
 *  python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
 *  安装Apache Superset--基于Docker的安装配置 https://blog.csdn.net/nikeylee/article/details/115264818
+*  磨人的小妖精Apache Superset之绝对不改版 https://segmentfault.com/a/1190000022060920 
 
