@@ -521,7 +521,7 @@ copy.copy( )
 ## 2.3  表达式
 
 ### 2.3.1  控制流
-注：if/for/while的表达式可以用()圈起来，也可以不用。pass空语句，可用来填充空函数或空表达式。
+if/for/while的表达式可以用()圈起来，也可以不用。pass空语句，可用来填充空函数或空表达式。
 
 * if：if语句组成有if/elif/else. 
      if xx:  #非常强大的判断语句，支持NULL,容器空(无需len函数)的判断
@@ -530,9 +530,8 @@ copy.copy( )
 
 ### 2.3.2  with语句与上下文管理
 with语句支持在上下文管理器对象控制下的上下文中执行一系列语句。已经加入对上下文管理协议支持的还有模块 threading、decimal 等。
-上下文管理**协议**（Context Management Protocol）：包含方法 `__enter__`() 和 `__exit__`()，支持该协议的对象要实现这两个方法。
-上下文**管理器**（Context Manager）：支持上下文管理协议的对象，这种对象实现了 
-__enter__() 和 __exit__() 方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。
+**上下文管理协议**（Context Management Protocol）：包含方法 `__enter__`() 和 `__exit__`()，支持该协议的对象要实现这两个方法。
+**上下文管理器**（Context Manager）：支持上下文管理协议的对象，这种对象实现了 `__enter__()` 和 `__exit__() `方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。
 with 语句的语法格式
 with context_expression [as target(s)]:
    with-body
@@ -547,7 +546,7 @@ with open(r'somefileName') as somefile:
 ```
 
 说明：这里使用了 with 语句，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄。比较起来，使用 with 语句可以减少编码量。
-另外python库中还有一个模块contextlib，使你不用构造含有__enter__, __exit__的类就可以使用with。
+另外python库中还有一个模块contextlib，使你不用构造含有`__enter__, __exit__`的类就可以使用with。
 
 
 
@@ -881,7 +880,10 @@ else:
 raise语法格式如下：
 raise [Exception [, args [, traceback]]]
 
+
+
 ### 2.6.2  跟踪异常
+
 **1）采用traceback(跟踪)模块查看异常**
    发生异常时，Python能“记住”引发的异常以及程序的当前状态。Python还维护着traceback（跟踪）对象，其中含有异常发生时与函数调用 堆栈有关的信息。记住，异常可能在一系列嵌套较深的函数调用中引发。程序调用每个函数时，Python会在“函数调用堆栈”的起始处插入函数名。一旦异常 被引发，Python会搜索一个相应的异常处理程序。如果当前函数中没有异常处理程序，当前函数会终止执行，Python会搜索当前函数的调用函数，并以 此类推，直到发现匹配的异常处理程序，或者Python抵达主程序为止。这一查找合适的异常处理程序的过程就称为“堆栈辗转开解”（Stack Unwinding）。解释器一方面维护着与放置堆栈中的函数有关的信息，另一方面也维护着与已从堆栈中“辗转开解”的函数有关的信息。
 格式:
@@ -973,7 +975,10 @@ traceback ---- 包含调用栈信息的对象。
 | SyntaxWarning | 可疑的语法的警告         |
 | UserWarning  | 用户代码生成的警告       |
 
+
+
 ## 2.7  函数式编程
+
 *  装饰器@：可以把函数作为参数。
 *  yield和生成器。
 *  lamda运算符
@@ -982,13 +987,24 @@ traceback ---- 包含调用栈信息的对象。
 
 ## 2.8  中文编码
 
-详见《中文化专题》python章节。
-
-**mysql字符编码**：表存储，查询/连接/结果(SET NAMES)都要用UTF8，这样才能保证中文正常显示。如果原始网页数据源是GB2312，下载下来后要decode('gb2312')，然后在插入DB时encode('utf8').
+详见《[中文化专题](中文化专题.md)》python章节。
 
 
 
-## 2.9  本章参考
+**py文件编码声明**
+
+Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编码开头重新声明编码类型
+常用的形式有以下几种，放在码文件的第一行或第二行.  下文示例中 <encoding name>为utf-8
+
+```python
+# -*- coding: utf-8 -*-
+# coding=utf-8
+# coding: utf-8
+```
+
+
+
+## 本章参考
 
 [1]. http://www.jb51.net/article/64040.htm
 [2]. 如何理解Python装饰器？ https://www.zhihu.com/question/26930016
@@ -1837,7 +1853,7 @@ except Exception:
 
 
 ### 3.3.1  IDE
-#### 3.3.1.1  Eclipse + Pydev
+#### Eclipse + Pydev
 1、安装Eclipse
 Eclipse可以在它的官方网站[Eclipse.org](http://eclipse.org/)找到并下载，通常我们可以选择适合自己的Eclipse版本，比如Eclipse Classic。下载完成后解压到到你想安装的目录中即可。 
 当然在执行Eclipse之前，你必须确认安装了Java运行环境,即必须安装JRE或JDK，你可以到（http://www.java.com/en/download/manual.jsp）找到JRE下载并安装。
@@ -1845,7 +1861,9 @@ Eclipse可以在它的官方网站[Eclipse.org](http://eclipse.org/)找到并下
 2、安装Pydev
 运行Eclipse之后，选择help-->Install new Software，如下图所示。
 
-#### 3.3.1.2  pycharm
+
+
+#### pycharm
 
 PyCharm是一种Python IDE，带有一整套可以帮助用户在使用Python语言开发时提高其效率的工具，比如调试、语法高亮、Project管理、代码跳转、智能提示、自动完成、单元测试、版本控制。此外，该IDE提供了一些高级功能，以用于支持Django框架下的专业Web开发。
 
@@ -1873,7 +1891,7 @@ File > Settings... > Tools > External Tools，点击 + 号添加，如下图配�
 
 
 
-#### 3.3.1.3  jupyter
+#### jupyter
 
 详见 《[Jupyter用户手册](../tools.工具/Jupyter用户手册.md)》
 
@@ -2191,7 +2209,9 @@ pytest.fixture(scope='function', params=None, autouse=False, ids=None)
     pytest-sugar：测试进度条
 
 
+
 #### 3.3.5.3 tox
+
 tox是命令行工具，它允许测试在多个环境运行。不仅可用tox来测试不同的python环境（如py26,py37)，还可用来测试不同的依赖配置和操作系统配置。
 
 安装tox
@@ -3030,7 +3050,9 @@ def calc_loop_time():
 
 * [cryptography](https://cryptography.io)：也是常用的加密库。
 
-## 4.3     python并发
+
+
+## 4.3  python并发
 
 python并发主要有多进程multiprocessing、多线程thread和协程Coroutine。
 并发机制包括socket、[asynchat](https://docs.python.org/2/library/asynchat.html#module-asynchat)、 [asyncore](https://docs.python.org/2/library/asyncore.html#module-asyncore)(select)。
@@ -3482,8 +3504,13 @@ com back from foo in to bar
 | gevent支持 | -k gevent            | --gevent  |
 | 启动       | gunicorn -w 3 -b 0.0.0.1:5000 xx:app -k gevent | uwsgi  --gevent 500 --gevent-monkey-patch  --http   127.0.0.1:5000  --callable app   --wsgi-file xx.py --http-keepalive --master |
 | 优点       | 专门提供给python。   | 性能会更些。          |
+
 备注：二者都是prefork模式。gunicorn和uWSGI都是工具，需要安装。wsgi和uwsgi是二种不同协议，uwsgi的传输速度更快。
+
+
+
 #### 4.3.4.1 gunicorn
+
 wsgi是服务端和客户端交互的接口规范，wsgi服务器的作用是接受和分析用户的请求，调用应用程序进行处理并返回结果。wsgi服务器或叫做应用服务器，python里面一般用uwsgi和gunicorn，都是广泛应用和比较成熟的。
 
 gunicorn是一个python Wsgi http server，只支持在Unix系统上运行(依赖于linux的fcntl)，来源于Ruby的unicorn项目。Gunicorn使用prefork master-worker模型（在gunicorn中，master被称为arbiter），能够与各种wsgi web框架协作。
@@ -3680,7 +3707,7 @@ except Exception as error:
 
 类似JVM的GC机制，Python内存回收机制主要是引用计数。
 
-详见 《Python源码剖析》内存分配章节
+详见 《[Python源码剖析](Python源码剖析.md)》内存分配章节
 
 
 
@@ -3719,11 +3746,21 @@ import tkinter
 
 在深入学习 SOAP web 服务之前，你需要安装三个库：PyXML、fpconst 和 SOAPpy。
 
+
+
 ## 4.7  项目实例
-### 4.7.1  12306抢票
+
+
+
+### 12306抢票
+
 12306 售票网站新版验证码识别对抗 https://zhuanlan.zhihu.com/p/19979300
 https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2 
-### 4.7.2  QQ模拟登陆
+
+
+
+### QQ模拟登陆
+
 http://www.2cto.com/Article/201603/493457.html 
 https://github.com/LeoHuang2015/qqloginjs
 
@@ -3809,7 +3846,7 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 
 
 
-## 5.5   本章参考
+## 本章参考
 
 [1]. 《Python参考手册（第4版）》相应章节
 [2]. pypy http://pypy.org/ 
@@ -3861,8 +3898,13 @@ LINUX下可用dmesg查看错误信息。
 解决方法：执行下列命令后即修复。
 
 ```shell
+# 法1：简易
 pip -m ensurepip
 python -m pip install --upgrade pip
+
+# 法2：下载后安装
+wget 'https://bootstrap.pypa.io/get-pip.py'
+python get-pip.py
 ```
 
 

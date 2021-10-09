@@ -10,6 +10,8 @@
 
  
 
+---
+
 目录
 
 [1    简介... 2](#_Toc300326788)
@@ -60,9 +62,11 @@
 
  
 
- 
+[TOC]
 
-# 1    简介
+---
+
+# 1  简介
 
 Heritrix工程始于2003年初，IA的目的是开发一个特殊的爬虫，对网上的　资源进行归档，建立网络数字图书馆，在过去的6年里，IA已经建立了400TB的数据。
 
@@ -92,7 +96,7 @@ IA期望他们的crawler包含以下几种：
 
  
 
-## 1.1   关键特性feature
+## 1.1  关键特性feature
 
 Heritrix 包含以下关键特性：
 
@@ -114,7 +118,7 @@ Heritrix 包含以下关键特性：
     f)包含一些可设置的过滤机制，表达方式，URI路径深度选择等等)
 
 
-## 1.2   Heritrix的局限
+## 1.2  Heritrix的局限
 
 * 单实例的爬虫，之间不能进行合作。(非分布式)
 
@@ -280,9 +284,9 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
  
 
-# 3    设计分析
+# 3   设计分析
 
-## 3.1   heritrix架构分析
+## 3.1  heritrix架构分析
 
 [**Developer Manual**](http://localhost:8089/docs/articles/developer_manual/index.html)
 
@@ -461,20 +465,18 @@ img.pconline.com.cn/images/product/
 
 实例站点2： 网易产品库 http://product.tech.163.com/
 
-手机频道主页http://product.tech.163.com/mobile/
+手机频道主页 http://product.tech.163.com/mobile/
 
  
 
 # 参考资料
 
-[1].   Heritrix项目主页 http://crawler.archive.org
+[1].  Heritrix项目主页 http://crawler.archive.org
 
-[2].   heritrix_百度百科 http://baike.baidu.com/view/1571189.htm
+[2].  heritrix_百度百科 http://baike.baidu.com/view/1571189.htm
 
-[3].   面向垂直搜索的聚焦爬虫研究及应用.kdh 吕昊     浙江大学     2008.2
+[3].  面向垂直搜索的聚焦爬虫研究及应用.kdh 吕昊     浙江大学     2008.2（Note: 使用开源HERITRIX和WEB-HARVEST实现）
 
-（Note: 使用开源HERITRIX和WEB-HARVEST实现）
-
-[4].   利用 Heritrix 构建特定站点爬虫http://www.ibm.com/developerworks/cn/opensource/os-cn-heritrix/
+[4].  利用 Heritrix 构建特定站点爬虫http://www.ibm.com/developerworks/cn/opensource/os-cn-heritrix/
 
  

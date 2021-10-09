@@ -132,13 +132,13 @@
 
 
 
-# 1   简介
+# 1  简介
 
 git 分布式版本管理软件。
 
 gitk是git安装包中缺省的图形界面包。可以方便地用来查看历史日志，修改信息等。
 
-# 2   安装配置篇
+# 2  安装配置篇
 
 ## 2.1   安装
 
@@ -350,9 +350,9 @@ usage: git remote add [<options>] <name> <url>
 
 
 
-# 3   入门篇
+# 3  入门篇
 
-## 3.1   常用命令使用说明
+## 3.1  常用命令使用说明
 ```sh
 usage: git [--version] [--exec-path[=GIT_EXEC_PATH]] [-p|--paginate|--no-pager] [--bare] [--git-dir=GIT_DIR] [--work-tree=GIT_WORK_TREE] [--help] COMMAND [ARGS]
  
@@ -697,9 +697,9 @@ git merge --squash dev
 
  
 
-# 4    进阶篇
+# 4  进阶篇
 
-## 4.1   团队协同开发
+## 4.1  团队协同开发
 
 ### 4.1.1 账号权限管理
 
@@ -719,12 +719,10 @@ git merge --squash dev
 
 `ssh-keygen -C "你的email地址" -t rsa `
 该命令将生成一对非对称的公\私密钥，默认它们被存储在： 
- XP/2003用户：c:\Documents and Settings\登陆名\.ssh 
- Vista用户： c:\Users\登陆名\.ssh 
 
-linux     :~/.ssh
-
- 
+* XP/2003用户：c:\Documents and Settings\登陆名\.ssh 
+*  Vista用户： c:\Users\登陆名\.ssh 
+* linux     :~/.ssh
 
 2)    在linux服务器上将公钥加到git用户的authorized_keys文件中。
 
@@ -746,10 +744,10 @@ linux     :~/.ssh
 
 表格 1 branch和tag比较表
 
-|              | 说明                                                         | 主要命令                                                     |
-| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| tag  标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），相当于release-x.x.x | $ git tag  # 查看  $ git tag  -a [xxx]  # 打tag              |
-| branch  分支 | 组成为x.x，其中含义两个固定分支master和devel，如果项目不是太复杂，devel分支将取代所有版本分支。  # 查看远程分支，查看本地不用-a  $ git branch -a  $ git push  origit [xxx]  # 推送分支到远程   $ git push origin :[xxx]  # 删除远程分支 | # 创建/删除分支  `$git checkout --orphan [空分支]`  $ git checkout -b [to] [from]  $ git branch -d [xxx]  # 切换/合并分支  $ git checkout [xxx]  $ git merge [to]  # 重命名分支  $ git branch -m [old] [new] |
+|             | 说明                                                         | 主要命令                                                     |
+| ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x | $ git tag  # 查看  $ git tag  -a [xxx]  # 打tag              |
+| branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用-a  <br/>$ git branch -a  <br/>$ git push origit [xxx]    # 推送分支到远程   <br/>$ git push origin :[xxx]  # 删除远程分支，或者将:改为--delete | # 创建/删除分支  <br/>`$git checkout --orphan [空分支]`  <br/>$ git checkout -b [to] [from]  <br/>$ git branch -d [xxx]  <br/># 切换/合并分支  <br/>$ git checkout [xxx]  <br/>$ git merge [to]  <br/># 重命名分支  <br/>$ git branch -m [old] [new] |
 
 备注：命令参数如-d/-D大小写不敏感。
 
@@ -766,8 +764,8 @@ linux     :~/.ssh
 | 分支名称          | 使用场合                                                     | 注意事项                                                     |
 | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 主分支  master    | 所有提供给用户使用的正式版本，都在这个主分支上发布。用来分布重大版本。 |                                                              |
-| 开发分支  develop | 日常开发。  包括创建分支、切换分支和合并分支。               | $ git checkout -b develop master  $ git checkout master  $ git merge --no-ff develop |
-| 临时性分支        | 用于应对一些特定目的的版本开发。如  * 功能（feature）分支~ feature-*  * 预发布（release）分支~ release-*  * 修补bug（fixbug）分支~ fixbug-* | feature/release从develop分支分出，fixbug从master分支分出。  临时性分支合并到develop分支后可删除。  release和fixbug分支合并到master后可打tag。 |
+| 开发分支  develop | 日常开发。  包括创建分支、切换分支和合并分支。               | $ git checkout -b develop master  <br>$ git checkout master  <br/>$ git merge --no-ff develop |
+| 临时性分支        | 用于应对一些特定目的的版本开发。如  <br/>* 功能（feature）分支~ feature-*  <br/>* 预发布（release）分支~ release-*  <br/>* 修补bug（fixbug）分支~ fixbug-* | feature/release从develop分支分出，fixbug从master分支分出。<br/>临时性分支合并到develop分支后可删除。  <br/>release和fixbug分支合并到master后可打tag。 |
 
 备注：tag需从master打，标识为vx.x.x，如v1.2.0
 
@@ -854,7 +852,7 @@ git submodule
 
  
 
-# 5    原理篇
+# 5  原理篇
 
 * 分布式版本管理。即每个节点即是客户端，也是服务端。也可成为别人的主干树，很适合阶梯式开发管理。
 * Git 是一套内容寻址文件系统。从内部来看，Git 是简单的 key-value 数据存储。它允许插入任意类型的内容，并会返回一个键值，通过该键值可以在任何时候再取出该内容。
@@ -865,34 +863,35 @@ GIT API documentation
 
 $man git
 
-## 5.1   CONFIGURATION MECHANISM配置信息git-config
+## 5.1  CONFIGURATION MECHANISM配置信息git-config
+
+Starting from 0.99.9 (actually mid 0.99.8.GIT), .git/config file is used to hold per-repository configuration options. It
+is a simple text file modeled after .ini format familiar to some people. Here is an example:
+\# A '#' or ';' character indicates a comment.
+
 ```sh
-    Starting from 0.99.9 (actually mid 0.99.8.GIT), .git/config file is used to hold per-repository configuration options. It
-   is a simple text file modeled after .ini format familiar to some people. Here is an example:
-     \# A '#' or ';' character indicates a comment.
-     ; core variables
-     [core]
-         ; Don't trust file modes
-         filemode = false
-     ; user identity
-     [user]
-         name = "Junio C Hamano"
-         email = "junkio@twinsun.com"
-   Various commands read from the configuration file and adjust their operation accordingly.
+; core variables
+[core]
+; Don't trust file modes
+filemode = false
+; user identity
+[user]
+name = "Junio C Hamano"
+email = "junkio@twinsun.com"
+Various commands read from the configuration file and adjust their operation accordingly.
 ```
 
 
-## 5.2   IDENTIFIER TERMINOLOGY存储对象类型
+## 5.2  IDENTIFIER TERMINOLOGY存储对象类型
 ```
-   <object>            Indicates the object name for any type of object.
-   <blob>            Indicates a blob object name.
-   <tree>            Indicates a tree object name.     
-   <commit>            Indicates a commit object name.     
-   <tree-ish>            Indicates a tree, commit or tag object name. A command that takes a argument ultimately wants to operate on a <tree> object but            automatically dereferences <commit> and <tag> objects that point at a <tree>.
-   <commit-ish>            Indicates a commit or tag object name. A command that takes a argument ultimately wants to operate on a <commit> object but            automatically dereferences <tag> objects that point at a <commit>.
-   <type>
-       Indicates that an object type is required. Currently one of: blob, tree, commit, or tag.
-   <file>            Indicates a filename - almost always relative to the root of the tree structure GIT_INDEX_FILE describes. 
+<object>      Indicates the object name for any type of object.
+<blob>        Indicates a blob object name.
+<tree>        Indicates a tree object name.     
+<commit>      Indicates a commit object name.     
+<tree-ish>    Indicates a tree, commit or tag object name. A command that takes a argument ultimately wants to operate 		        on a <tree> object but automatically dereferences <commit> and <tag> objects that point at a <tree>.
+<commit-ish>  Indicates a commit or tag object name. A command that takes a argument ultimately wants to operate on a              <commit> object but automatically dereferences <tag> objects that point at a <commit>.
+<type>		  Indicates that an object type is required. Currently one of: blob, tree, commit, or tag.
+<file>        Indicates a filename - almost always relative to the root of the tree structure GIT_INDEX_FILE describes. 
 ```
 
 
@@ -905,7 +904,7 @@ denny@denny-laptop:~/git/unix-center.net/script$ git cat-file -p master^{tree}
 040000 tree 5f4276de1d60a512d919a828e5835635414608c5   python_gap
 ```
 
-## 5.3   SYMBOLIC IDENTIFIERS符号标签
+## 5.3  SYMBOLIC IDENTIFIERS符号标签
 ```sh
 Any git command accepting any <object> can also use the following symbolic notation:
     HEAD
@@ -928,7 +927,7 @@ Any git command accepting any <object> can also use the following symbolic notat
 
 常见托管仓库：[oschina ](http://git.oschina.net/)[github](http://wwww.github.com) [repo.or.cz](http://repo.or.cz)
 
-## 6.1   仓库托管简介
+## 6.1  仓库托管简介
 
 基本概念
 * public: 公共仓库
@@ -1051,9 +1050,9 @@ gitlab.rb
 
 
 
-# 7    FAQ
+# 7  FAQ
 
-## 7.1   git与svn集成
+## 7.1  git与svn集成
 
 要先装软件git-svn
 
@@ -1163,7 +1162,7 @@ cpan> install XXX:XXX
 ```
 
 
-# 8    gitbook
+# 8 gitbook
 
 项目地址：https://github.com/GitbookIO/gitbook 
 
@@ -1173,7 +1172,7 @@ GitBook 分布式协作写书。
 
 
 
-## 8.1   Getting started
+## 8.1 Getting started
 
 GitBook can be used either on your computer for building local books or on GitBook.com for hosting them. To get started, check out [the installation instructions in the documentation](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md).
 
@@ -1290,8 +1289,6 @@ book.json模板
 [7].   Git配置管理 http://www.uml.org.cn/pzgl/201203084.asp 
 
 [8].   github http://gooss.org/the-use-of-git-and-github-management-development/
-
- 
 
  
 

@@ -65,7 +65,7 @@
 
  
 
-# 2    Hadoop(HDFS + MR)
+# 2  Hadoop(HDFS + MR)
 
 ## 2.1   Hadoop运行过程
 
@@ -719,7 +719,7 @@ master启动进行以下步骤:
 
 
 
-## 3.5   本章参考
+## 本章参考
 
 [1].  Zookeeper工作原理
 

@@ -85,6 +85,8 @@
 
  Linux官网：https://kernel.org/
 
+源码版本：Linux-2.6.0
+
 ## 前言
 
 **学习的目的：**
@@ -132,8 +134,6 @@
 图  GNU/Linux 操作系统的基本体系结构
 
 linux体系结构说明：user mode 进程需要通过`glibc`作一个到kernel mode 的转换。
-
-
 
 
 
@@ -209,12 +209,13 @@ Linux内核使用三种不同的版本编号方式
 | 2.6.32       | 2009.12    | 增添了虚拟化内存 de-duplicacion、重写了 writeback 代码、改进了 Btrfs 文件系统、添加了 ATI R600/R700 3D 和 KMS 支持、CFQ 低传输延迟时间模式、perf timechart 工具、内存控制器支持 soft limits、支持 S+Core 架构、支持 Intel Moorestown 及其新的固件接口、支持运行时电源管理、以及新的驱动。 |
 | 2.6.34       | 2010.5     | 添加了 Ceph 和 LogFS 两个新的文件系统，其中前者为分布式的文件系统，后者是适用于 Flash 设备的文件系统。Linux Kernel 2.6.34 的其他特性包括新的 Vhost net、改进了 Btrfs 文件系统、对 Kprobes jump 进行了优化、新的 perf 功能、RCU lockdep、Generalized TTL Security Mechanism (RFC 5082) 及 private VLAN proxy arp (RFC 3069) 支持、asynchronous 挂起恢复等等。 |
 | 2.6.36       | 2010.10    | Tilera 处理器架构支持、新的文件通知接口 fanotify、Intel 显卡上实现 KMS 和 KDB 的整合、并行管理工作队列、Intel i3/5 平台上内置显卡和 CPU 的智能电源管理、CIFS 文件系统本地缓存、改善虚拟内存的层级结构，提升桌面操作响应速度、改善虚拟内存溢出终结器的算法、整合了 AppArmor 安全模型（注：与 SELinux 基于文件的标注不同， AppArmor 是基于路径的）。 |
-| 2.6.39       | 2011.5.18  | 2.6.x系列最终版本，经历39个版本，跨度7年半。<BR>加入了IPset框架，提高规则匹配速度，更新媒体控制系统等。 |
+| 2.6.39       | 2011.5.18  | 2.6.x系列最终版本，经历39个版本，跨度约7.5年。<BR>加入了IPset框架，提高规则匹配速度，更新媒体控制系统等。 |
 | 3.0          | 2011.7.21  |                                                              |
-| 3.19.0       | 2015.2     | 为多种触控板增加多点触控支持                                 |
+| 3.19.0       | 2015.2     | 3.x系列最终版本，经历19个版本，跨度约4.5年。<BR>为多种触控板增加多点触控支持。 |
 | 4.0          | 2015.4     |                                                              |
-| 4.20         | 12.23      |                                                              |
+| 4.20         | 2018.12.23 | 4.x系列最终版本，经历20个版本，跨度约3.5年。<BR>             |
 | 5.0          | 2019.3.3   |                                                              |
+| 5.10         | 2020.12.13 | 5.x系列最终版本，经历个版本，跨度年。<BR>                    |
 
 > ReleaseLog https://www.kernel.org/category/releases.html
 >
@@ -1205,11 +1206,13 @@ $ gcc -v
 
 5 查看glibc版本
 
+```shell
 $ ls -l /lib/libc.so.*
-
-或$ ldd 某库
-
-或$ apt-cache dkgnames |grep glibc
+# 或者
+$ ldd glibc
+# 或者
+$ apt-cache dkgnames |grep glibc
+```
 
 
 
@@ -1349,6 +1352,4 @@ gdb: 用户态程序调试工具.
 | mpstat  | 处理器状态统计 |
 | netstat | 网络状态统计   |
 | nfsstat | nfs状态        |
-
-
 

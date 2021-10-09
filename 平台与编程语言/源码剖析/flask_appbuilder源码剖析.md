@@ -36,6 +36,8 @@ Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理�
 
 
 
+源码版本：Flask-AppBuilder-3.1.1
+
 ```shell
 $ pip show Flask-AppBuilder
 Name: Flask-AppBuilder
@@ -623,7 +625,7 @@ class MenuApiManager(BaseManager):
 
 依赖模块click
 
-flask_appbuilder-x版本之后 fabmanger脚本不再使用，换成 flask fab.
+flask_appbuilder 2.0版本之后 fabmanger脚本不再使用，换成 flask fab.
 
 fab命令：
 
@@ -1036,9 +1038,9 @@ class AuthDBView(AuthView):
 
 /flask_appbuilder/security/decorators.py
 
-* protect 用户登陆判断，并作相应访问权限判断
-* has_access
-* has_access_api  API方法授权判断 
+* protect 用户登陆判断，并作相应访问权限判断。浏览器登陆时接受cookie验证。
+* has_access  判断方法有没相应权限
+* has_access_api   类似has_access，但应用于API方法。缺省方法名就是权限名称。
 * permission_name  重载权限名称
 
 ```python
@@ -1160,6 +1162,7 @@ def has_access(f):
     f._permission_name = permission_str
     return functools.update_wrapper(wraps, f)
 
+
 def has_access_api(f):
     
     
@@ -1172,15 +1175,30 @@ def permission_name(name):
 
 /flask_appbuilder/security/api.py
 
+API安全登陆实现，JWT方式。JWT实现依赖于flask_jwt_extended模块。
+
+提供接口 
+
+* /security/login  登陆获取2个token分别是access_token 和 refresh_token。access_token用来JWT验证，有时效要求。 
+* /security/refresh  更新token，用refresh_token获取新的access_token 
+
 ```python
 from ..api import BaseApi, safe
 
 
 class SecurityApi(BaseApi):
-
+	
     resource_name = "security"
     version = API_SECURITY_VERSION
     openapi_spec_tag = "Security"
+    
+    def add_apispec_components(self, api_spec):
+        """ 添加API文档scheme """
+        super(SecurityApi, self).add_apispec_components(api_spec)
+        jwt_scheme = {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
+        api_spec.components.security_scheme("jwt", jwt_scheme)
+        api_spec.components.security_scheme("jwt_refresh", jwt_scheme)
+        
     @expose("/login", methods=["POST"])
     @safe
     def login(self):
@@ -2005,40 +2023,76 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 
 
 
-## PyJWT
+## apispec
 
-python的JWT实现。
+插件式API规格书生成器。
 
 ```shell
-$ pip show pyjwt
-Name: PyJWT
-Version: 1.4.2
-Summary: JSON Web Token implementation in Python
-Home-page: http://github.com/jpadilla/pyjwt
-Author: Jos?? Padilla
-Author-email: hello@jpadilla.com
+$ pip show apispec
+Name: apispec
+Version: 3.3.2
+Summary: A pluggable API specification generator. Currently supports the OpenAPI Specification (f.k.a. the Swagger specification).
+Home-page: https://github.com/marshmallow-code/apispec
+Author: Steven Loria
+Author-email: sloria1@gmail.com
 License: MIT
 Location: d:\dev\venv\superset-py38-env\lib\site-packages
 Requires:
-Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
+Required-by: Flask-AppBuilder
 ```
 
 
 
-表格 pyjwt源码结构说明 /jwt/
+## colorama
 
-| 目录或文件    | 主要类或函数 | 说明 |
-| ------------- | ------------ | ---- |
-| contrib/      |              |      |
-| `__init__.py` |              |      |
-| `__main__.py` |              |      |
-| algorithms.py |              | 算法 |
-| api_jws.py    |              |      |
-| api_jwt.py    |              |      |
-| compat.py     |              | 兼容 |
-| exceptions.py |              | 异常 |
-| help.py       |              | 帮助 |
-| utils.py      |              | 工具 |
+跨平台的彩色终端文本支持。定义了颜色代码。
+
+```shell
+$ pip show colorama
+Name: colorama
+Version: 0.4.4
+Summary: Cross-platform colored terminal text.
+Home-page: https://github.com/tartley/colorama
+Author: Jonathan Hartley
+Author-email: tartley@tartley.com
+License: BSD
+Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
+Requires: 
+Required-by: Flask-AppBuilder, apache-superset
+```
+
+
+
+表格 colorama源码结构说明
+
+| 目录或文件     | 主要类或函数                                     | 说明                 |
+| -------------- | ------------------------------------------------ | -------------------- |
+| ansi.py        | AnsiCodes AnsiBack AnsiCursor AnsiFore AnsiStyle | 定义name和数值的对照 |
+| ansitowin32.py | StreamWrapper AnsiToWin32                        |                      |
+| initialise.py  | reset_all                                        |                      |
+| win32.py       | CONSOLE_SCREEN_BUFFER_INFO                       |                      |
+| winterm.py     | WinColor WinStyle WinTerm                        | 定义windows终端      |
+| `__init__.py`  | __`version__ = '0.4.4'`                          | 导入模块和版本定义   |
+
+
+
+## jsonschema
+
+JSON Schema验证器实现。
+
+```shell
+$ pip show jsonschema
+Name: jsonschema
+Version: 3.2.0
+Summary: An implementation of JSON Schema validation for Python
+Home-page: https://github.com/Julian/jsonschema
+Author: Julian Berman
+Author-email: Julian@GrayVines.com
+License: UNKNOWN
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: attrs, pyrsistent, setuptools, six
+Required-by: flask-restx, Flask-AppBuilder
+```
 
 
 
@@ -2060,13 +2114,15 @@ Requires:
 Required-by: marshmallow-sqlalchemy, marshmallow-enum, Flask-AppBuilder
 ```
 
+
+
 表格 marshmallow源码结构说明
 
 | 目录或文件        | 主要类或函数                                  | 说明                               |
 | ----------------- | --------------------------------------------- | ---------------------------------- |
 | base.py           | FieldABC SchemaABC                            | 基类                               |
 | class_registry.py | get_class register                            | 类注册，通过schema字符串找到类     |
-| decorators.py     | validates validates_schema ...             | 装饰器                             |
+| decorators.py     | validates validates_schema ...                | 装饰器                             |
 | error_store.py    | ErrorStore  merge_errors                      | 错误存储                           |
 | exceptions.py     |                                               | 异常                               |
 | fields.py         | Field AwareDateTime Boolean Constant Date ... | 将各种复杂字段转化成python原生类型 |
@@ -2075,7 +2131,7 @@ Required-by: marshmallow-sqlalchemy, marshmallow-enum, Flask-AppBuilder
 | schema.py         | Schema SchemaMeta SchemaOpts                  | 模式                               |
 | types.py          | StrSequenceOrSet Tag Validator                | 定义3种类型的成员组成              |
 | utils.py          |                                               | 工具                               |
-| validate.py       | Validator And ContainsNoneOf ...           | 验证                               |
+| validate.py       | Validator And ContainsNoneOf ...              | 验证                               |
 | warnings.py       | RemovedInMarshmallow4Warning                  | 警告。空文件。                     |
 
 
@@ -2126,38 +2182,62 @@ __all__ = [
 
 
 
+## prison
 
-
-## colorama
-
-跨平台的彩色终端文本支持。定义了颜色代码。
+Rison编解码。
 
 ```shell
-$ pip show colorama
-Name: colorama
-Version: 0.4.4
-Summary: Cross-platform colored terminal text.
-Home-page: https://github.com/tartley/colorama
-Author: Jonathan Hartley
-Author-email: tartley@tartley.com
-License: BSD
-Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
-Requires: 
-Required-by: Flask-AppBuilder, apache-superset
+$pip show prison
+Name: prison
+Version: 0.1.3
+Summary: Rison encoder/decoder
+Home-page: https://github.com/betodealmeida/python-rison
+Author: Beto Dealmeida
+Author-email: beto@dealmeida.net
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires: six
+Required-by: Flask-AppBuilder
 ```
 
 
 
-表格 colorama源码结构说明
+## PyJWT
 
-| 目录或文件     | 主要类或函数                                     | 说明                 |
-| -------------- | ------------------------------------------------ | -------------------- |
-| ansi.py        | AnsiCodes AnsiBack AnsiCursor AnsiFore AnsiStyle | 定义name和数值的对照 |
-| ansitowin32.py | StreamWrapper AnsiToWin32                        |                      |
-| initialise.py  | reset_all                                        |                      |
-| win32.py       | CONSOLE_SCREEN_BUFFER_INFO                       |                      |
-| winterm.py     | WinColor WinStyle WinTerm                        | 定义windows终端      |
-| `__init__.py`  | __`version__ = '0.4.4'`                          | 导入模块和版本定义   |
+python的JWT实现。
+
+```shell
+$ pip show pyjwt
+Name: PyJWT
+Version: 1.4.2
+Summary: JSON Web Token implementation in Python
+Home-page: http://github.com/jpadilla/pyjwt
+Author: Jos?? Padilla
+Author-email: hello@jpadilla.com
+License: MIT
+Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Requires:
+Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
+```
+
+
+
+表格 pyjwt源码结构说明 /jwt/
+
+| 目录或文件    | 主要类或函数 | 说明 |
+| ------------- | ------------ | ---- |
+| contrib/      |              |      |
+| `__init__.py` |              |      |
+| `__main__.py` |              |      |
+| algorithms.py |              | 算法 |
+| api_jws.py    |              |      |
+| api_jwt.py    |              |      |
+| compat.py     |              | 兼容 |
+| exceptions.py |              | 异常 |
+| help.py       |              | 帮助 |
+| utils.py      |              | 工具 |
+
+
 
 
 
@@ -2522,10 +2602,10 @@ def _create_identifier():
     if user_agent is not None:
         user_agent = user_agent.encode('utf-8')
     base = '{0}|{1}'.format(_get_remote_addr(), user_agent)
-    if str is bytes:
+    if str is bytes:  #正常执行是false，不执行下行
         base = text_type(base, 'utf-8', errors='replace')  # pragma: no cover
     h = sha512()
-    h.update(base.encode('utf8'))
+    h.update(base.encode('utf8'))	
     return h.hexdigest()
 ```
 
@@ -2555,8 +2635,10 @@ session生成过程
 # session._id 生成: 调用 _create_identifier， 结果示例如 'f6a29edbed90d070b111c3407d864d4a7b9a3911ef76d7a7d98edd895178452f99976b8bf8078ac2e760b50dc4034f6f2e6ca074d00168ec58f177c5db1fb85b'
 ident = self._session_identifier_generator()
 
-# _create_identifier
-base = 'b\'127.0.0.1\'|b\'PostmanRuntime/7.28.1\''
+
+# /flask_login/utils.py
+# _create_identifier： base是作为哈希的盐值。示例：base = 'b\'127.0.0.1\'|b\'PostmanRuntime/7.28.1\''
+base = '{0}|{1}'.format(_get_remote_addr(), user_agent)  
 
 ```
 

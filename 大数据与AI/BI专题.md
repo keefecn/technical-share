@@ -2,241 +2,7 @@
 | ---- | ---------- | ------------------------------------ | ------ | ------ |
 | 1    | 2018-4-5   | 创建。从《大数据开发》拆分出BI内容。 | Keefe |        |
 | 2    | 2019-12-14 | 增加数据湖章节。                     | 同上   |        |
-
-
-
-
-
-
----
-
-# 目录
-
-
-
-[目录... 1](#_Toc16721504)
-
-[1    BI概述... 5](#_Toc16721505)
-
-[1.1       BI简介... 5](#_Toc16721506)
-
-[1.2       BI市场和主要工具... 7](#_Toc16721507)
-
-[1.3       方法论... 8](#_Toc16721508)
-
-[1.3.1     BI业务分析：五步曲... 9](#_Toc16721509)
-
-[1.4       本章参考... 9](#_Toc16721510)
-
-[2    数据治理... 9](#_Toc16721511)
-
-[2.1       概述... 10](#_Toc16721512)
-
-[2.2       数据模型DM.. 11](#_Toc16721513)
-
-[2.2.1     金融业... 11](#_Toc16721514)
-
-[2.2.2     电信业... 14](#_Toc16721515)
-
-[2.2.3     本节参考... 15](#_Toc16721516)
-
-[2.3       示例：华为的数据治理... 15](#_Toc16721517)
-
-[2.4       本章参考... 16](#_Toc16721518)
-
-[3    数据挖掘DM.. 16](#_Toc16721519)
-
-[3.1       数据挖掘简介... 16](#_Toc16721520)
-
-[3.1.1     基本概念... 17](#_Toc16721521)
-
-[3.1.2     CRISP-DM.. 18](#_Toc16721522)
-
-[3.1.3     数据挖掘过程示例：餐饮业... 20](#_Toc16721523)
-
-[3.2       数据预处理... 20](#_Toc16721524)
-
-[3.3       挖掘模式... 20](#_Toc16721525)
-
-[3.3.1     频繁模式挖掘... 20](#_Toc16721526)
-
-[3.3.2     交互挖掘... 20](#_Toc16721527)
-
-[3.3.3     增量挖掘... 21](#_Toc16721528)
-
-[3.4       相似度发现... 21](#_Toc16721529)
-
-[3.4.1     距离测度... 21](#_Toc16721530)
-
-[3.5       本章参考... 21](#_Toc16721531)
-
-[4    数据仓库Data warehouse. 21](#_Toc16721532)
-
-[4.1       简介... 21](#_Toc16721533)
-
-[4.1.1     定义... 21](#_Toc16721534)
-
-[4.1.2     数据仓库组成... 22](#_Toc16721535)
-
-[4.1.3     术语... 22](#_Toc16721536)
-
-[4.2       数据仓库架构... 23](#_Toc16721537)
-
-[4.2.1     架构组成简介... 23](#_Toc16721538)
-
-[4.2.2     数据集市架构... 26](#_Toc16721539)
-
-[4.3       数据仓库建模... 26](#_Toc16721540)
-
-[4.3.1     E/R范式建模... 26](#_Toc16721541)
-
-[4.3.2     kimball维度模型... 26](#_Toc16721542)
-
-[4.3.3     Data Vault模型... 27](#_Toc16721543)
-
-[4.3.4     Anchor模型... 27](#_Toc16721544)
-
-[4.4       ETL. 27](#_Toc16721545)
-
-[4.4.1     ETL工具... 28](#_Toc16721546)
-
-[4.5       数仓基准~TPC-H.. 28](#_Toc16721547)
-
-[4.5.1     TPC-H.. 28](#_Toc16721548)
-
-[4.5.2     TPC基准列表... 29](#_Toc16721549)
-
-[4.6       DW实例... 30](#_Toc16721550)
-
-[4.6.1     IBM.. 31](#_Toc16721551)
-
-[4.6.2     TeraData. 31](#_Toc16721552)
-
-[4.6.3     淘宝... 32](#_Toc16721553)
-
-[4.7       本章参考... 32](#_Toc16721554)
-
-[5    BI~自助分析... 33](#_Toc16721555)
-
-[5.1       简介... 33](#_Toc16721556)
-
-[5.2       PowerBI 34](#_Toc16721557)
-
-[5.3       Tableau. 35](#_Toc16721558)
-
-[5.4       Superset. 35](#_Toc16721559)
-
-[5.5       其它工具... 35](#_Toc16721560)
-
-[5.5.1     Pentaho BI 35](#_Toc16721561)
-
-[5.6       本章参考... 36](#_Toc16721562)
-
-[5.6.1     PowerBI 参考资料... 36](#_Toc16721563)
-
-[6    BI行业案例... 36](#_Toc16721564)
-
-[6.1       金融业... 37](#_Toc16721565)
-
-[6.2       电商... 39](#_Toc16721566)
-
-[6.2.1     示例：2017.11.11（购物节）... 41](#_Toc16721567)
-
-[6.2.2     示例：2018.6.18（年中销售节）... 41](#_Toc16721568)
-
-[6.2.3     本节参考... 42](#_Toc16721569)
-
-[6.3       零售业... 42](#_Toc16721570)
-
-[6.4       制造业... 42](#_Toc16721571)
-
-[6.5       本章参考... 43](#_Toc16721572)
-
-[7    DM工具... 43](#_Toc16721573)
-
-[参考资料... 43](#_Toc16721574)
-
-[参考书目... 43](#_Toc16721575)
-
-[参考链接... 44](#_Toc16721576)
-
-[附录... 44](#_Toc16721577)
-
-[官方组织... 44](#_Toc16721578)
-
-
-
-
-
-**表目录**
-
-[表格 1 BI厂商列表__ 7](#_Toc16721579)
-
-[表格 2 BI工具列表__ 7](#_Toc16721580)
-
-[表格 3 华为的数据资产目录__ 15](#_Toc16721581)
-
-[表格 4 数据挖掘处理过程（参考）__ 19](#_Toc16721582)
-
-[表格 6 DM常见术语__ 22](#_Toc16721583)
-
-[表格 5 维度建模常用术语__ 26](#_Toc16721584)
-
-[表格 7 TPC Active Benchmarks 30](#_Toc16721585)
-
-[表格 8 IBM与Teradata仓库模型比较__ 30](#_Toc16721586)
-
-[表格 9 主流BI自助分析工具比较__ 33](#_Toc16721587)
-
-[表格 10 Power BI版本定价策略__ 34](#_Toc16721588)
-
-[表格 11 店铺流量指标详述__ 39](#_Toc16721589)
-
-[表格 12 电商交易指标详述__ 40](#_Toc16721590)
-
-[表格 13电商商品指标详述__ 40](#_Toc16721591)
-
-
-
-**图目录**
-
-[图 1 数据价值链示意图__ 6](#_Toc16721592)
-
-[图 2 Gartner2017年商业智能与分析魔力象限__ 7](#_Toc16721593)
-
-[图 3 数据资产管理体系结构__ 10](#_Toc16721594)
-
-[图 4 企业三类数据的关系__ 10](#_Toc16721595)
-
-[图 5 Teradata FS-LDM十大主题划分__ 12](#_Toc16721596)
-
-[图 6 IBM FSDM_ 13](#_Toc16721597)
-
-[图 7 电信业的一级主题域__ 14](#_Toc16721598)
-
-[图 8 电信业的二级主题域关系视图（部分）__ 14](#_Toc16721599)
-
-[图 9 餐饮行业数据挖掘建模过程示例图__ 20](#_Toc16721600)
-
-[图 10 数据仓库价值曲线__ 22](#_Toc16721601)
-
-[图 11数据仓库基本体系结构1_ 23](#_Toc16721602)
-
-[图 12数据仓库基本体系结构2_ 24](#_Toc16721603)
-
-[图 13 DW五层模型架构__ 24](#_Toc16721604)
-
-[图 14 淘宝计算存储平台的发展史__ 32](#_Toc16721605)
-
-[图 15 PowerBI组件图__ 34](#_Toc16721606)
-
-[图 16 金融业业务架构__ 37](#_Toc16721607)
-
-[图 17 金融业-精准营销__ 38](#_Toc16721608)
-
-[图 18 金融业-用户画像__ 38](#_Toc16721609)
-
-[图 19 金融业-通过大数据平台建设用户画像进行精准营销__ 39](#_Toc16721610)
+| 3 | 2021-10-22 | 更新BI自助分析章节 | 同上 | |
 
 
 
@@ -246,9 +12,15 @@
 
 ---
 
-# 1  BI概述
+[TOC]
 
-## 1.1   BI简介
+
+
+---
+
+# 1 BI概述
+
+## 1.1  BI简介
 
 BI（Business Intelligence）即商务智能，它是一套完整的解决方案，用来将企业中现有的数据进行有效的整合，快速准确地提供报表并提出决策依据，帮助企业做出明智的业务经营决策。
 
@@ -256,27 +28,29 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
  ![image-20191201171111403](../media/bigdata/bi_001.png)
 
-​
+
 
 图 1 数据价值链示意图
+
+
 
 ## 1.2   BI市场和主要工具
 
  ![image-20191201171140537](../media/bigdata/bi_002.png)
 
-图 2  Gartner2017年商业智能与分析魔力象限
+图 2  Gartner 2017年商业智能与分析魔力象限
 
 
 
 表格 1 BI厂商列表
 
-|             | 主流厂商                                                     | 侯选厂商 |
-| ----------- | ------------------------------------------------------------ | -------- |
-| 全领域      | IBM公司、[Oracle](https://baike.baidu.com/item/Oracle)、[Microsoft](https://baike.baidu.com/item/Microsoft) |          |
-| 数据集成DI  | [Informatica](https://baike.baidu.com/item/Informatica)      | QlikView |
-| 数据仓库DW  | [Sybase](https://baike.baidu.com/item/Sybase)、[Teradata](https://baike.baidu.com/item/Teradata)、 | SAP      |
-| 数据挖掘DM  | SAS                                                          |          |
-| 数据集市DM2 |                                                              |          |
+|              | 主流厂商                                                     | 侯选厂商 |
+| ------------ | ------------------------------------------------------------ | -------- |
+| 全领域       | IBM公司、[Oracle](https://baike.baidu.com/item/Oracle)、[Microsoft](https://baike.baidu.com/item/Microsoft) |          |
+| 数据集成 DI  | [Informatica](https://baike.baidu.com/item/Informatica)      | QlikView |
+| 数据仓库 DW  | [Sybase](https://baike.baidu.com/item/Sybase)、[Teradata](https://baike.baidu.com/item/Teradata)、 | SAP      |
+| 数据挖掘 DM  | SAS                                                          |          |
+| 数据集市 DM2 |                                                              |          |
 
 
 
@@ -303,7 +77,9 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 方法论还可参见 《运营专题》中的数字化运营5W法。
 
-### 1.3.1 BI业务分析：五步曲
+
+
+### BI业务分析：五步曲
 *  确定正确的人（使用者）：决策层、管理层和执行层。
 *  确定正确的信息（内容）：收集业务分析需求，提炼业务指标，构建业务分析线路
 *  确定场景：如月度经营分析会，半年或全年的战略或计划会，报表上报或对外披露，日常查询、分析和监控，对外形象展示
@@ -312,21 +88,21 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 
 
-## 1.4   本章参考
+## 本章参考
 
-[1].   《大道至简的数据治理方法论》
+[1]. 《大道至简的数据治理方法论》
 
-[2].   《大道至简的数据体系构建方法论》 https://ask.hellobi.com/blog/yonghongtech/3044
+[2]. 《大道至简的数据体系构建方法论》 https://ask.hellobi.com/blog/yonghongtech/3044
 
-[3].   《大道至简的深度分析方法论》
+[3]. 《大道至简的深度分析方法论》
 
-[4].   30多种常见的数据图表，职场人必备技能啊！ https://zhuanlan.zhihu.com/p/23221414?refer=haizhibdp
+[4]. 30多种常见的数据图表，职场人必备技能啊！ https://zhuanlan.zhihu.com/p/23221414?refer=haizhibdp
 
-[5].   Chart Suggestions: A Thought Starter (Andrew Abela) http://www.infographicsblog.com/chart-suggestions-a-thought-starter-andrew-abela/
+[5]. Chart Suggestions: A Thought Starter (Andrew Abela) http://www.infographicsblog.com/chart-suggestions-a-thought-starter-andrew-abela/
 
-[6].   常用的产品数据分析方法之漏斗模型与归因模型 [www.woshipm.com/data-analysis/411316.html](http://www.woshipm.com/data-analysis/411316.html)
+[6]. 常用的产品数据分析方法之漏斗模型与归因模型 [www.woshipm.com/data-analysis/411316.html](http://www.woshipm.com/data-analysis/411316.html)
 
-[7].   什么是数据分析的漏斗模型？ http://bigdata.51cto.com/art/201709/553100.htm
+[7]. 什么是数据分析的漏斗模型？ http://bigdata.51cto.com/art/201709/553100.htm
 
 
 
@@ -336,7 +112,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 在整个IT治理架构中，数据治理较为特殊，有首席数据官直接负责，横跨数据管理和风险管理两个闭环，从数据的生产、使用、挖掘和管理四个角度，为组织决策提供重要信息。
 
-## 2.1   概述
+## 2.1  概述
 
  ![image-20191201171300407](../media/bigdata/bi_003.png)
 
@@ -367,7 +143,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 
 
-## 2.2   数据模型Model
+## 2.2  数据模型Model
 
 数据模型Data Model的过程：从概念性模型CDM -》 逻辑模型LDM -》 物理模型PDM。
 
@@ -437,17 +213,7 @@ BI（Business Intelligence）即商务智能，它是一套完整的解决方案
 
 
 
-### 2.2.3 本节参考
-
-[1].   TeraData金融数据模型 https://www.cnblogs.com/oracle-dba/p/3903442.html
-
-[2].   Teradata在中国银行业的应用简介
-
-http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq72qtuetHJDjGFcXA4Jg4Z39HaWZcPDQ55-lVECdx95tzw8jj1DD7_A58UCO
-
-
-
-## 2.3   示例：华为的数据治理
+## 示例：华为的数据治理
 
 华为的数据架构由四部分组成，分别是数据资产目录（五层）、数据模型（五层）、数据标准和数据分布。
 *  数据资产目录：主题域分组、主题域、业务对象、属性组、属性
@@ -460,19 +226,19 @@ http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq
 
 **十一大主题域分组**
 
-| 主题域分级  | 简介                      | 详述           |
+| 主题域分组  | 简介                      | 详述           |
 | ----------- | ------------------------- | -------------- |
 | IPD         | 集成产品开发。            |                |
 | MTL         | Market  to Lead           | 市场到机会点。 |
 | LTC         | Lead  to Cash             | 机会点到现金   |
-| ITR         |                           |                |
+| ITR         | Issue To Resolution       | 问题到解决方案 |
 | DS          | Develop  Stragety         |                |
 | CRM         | 客户关系管理              |                |
 | SD          | Service  Deliver.服务交付 |                |
-| Supply      |                           |                |
-| Manufacture |                           |                |
-| Procurment  |                           |                |
-| Manage  HR  |                           |                |
+| Supply      | 物流供应                  |                |
+| Manufacture | 制造                      |                |
+| Procurment  | 采购                      |                |
+| Manage  HR  | 管理HR                    |                |
 
 备注：这十一大主题域之外，还包括一些跨领域的数据。如渠道销售、零售Retail、管理（包括财经、BT&IT、Business Support、投资）等等。另外华为新业务并还没有完全纳入新的主题域里。
 
@@ -503,21 +269,27 @@ SCOR：Supply Chain Operation Reference，包括五方面，分别是Source/make
 
 
 
-## 2.4   本章参考
+## 本章参考
 
-[1].   一组图详解元数据、主数据与参考数据 [www.cbdio.com/BigData/2016-02/16/content_4617126.htm](http://www.cbdio.com/BigData/2016-02/16/content_4617126.htm)
+[1]. 一组图详解元数据、主数据与参考数据 [www.cbdio.com/BigData/2016-02/16/content_4617126.htm](http://www.cbdio.com/BigData/2016-02/16/content_4617126.htm)
 
-[2].   北极星与海盗：数据指标体系的倚天与屠龙 https://www.jianshu.com/p/3e9bd65a32ad
+[2]. 北极星与海盗：数据指标体系的倚天与屠龙 https://www.jianshu.com/p/3e9bd65a32ad
 
-[3].   KPI指标体系 [https://baike.baidu.com/item/KPI%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB](https://baike.baidu.com/item/KPI指标体系)
+[3]. KPI指标体系 [https://baike.baidu.com/item/KPI%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB](https://baike.baidu.com/item/KPI指标体系)
 
-[4].   阿里巴巴全域数据建设 [www.cbdio.com/BigData/2017-10/18/content_5618979.htm](http://www.cbdio.com/BigData/2017-10/18/content_5618979.htm)
+[4]. 阿里巴巴全域数据建设 [www.cbdio.com/BigData/2017-10/18/content_5618979.htm](http://www.cbdio.com/BigData/2017-10/18/content_5618979.htm)
 
-[5].   《2017中国大数据企业排行榜》V3.0发布 [www.cbdio.com/BigData/2017-02/23/content_5455866.htm](http://www.cbdio.com/BigData/2017-02/23/content_5455866.htm)
+[5]. 《2017中国大数据企业排行榜》V3.0发布 [www.cbdio.com/BigData/2017-02/23/content_5455866.htm](http://www.cbdio.com/BigData/2017-02/23/content_5455866.htm)
 
-[6].   W3 http://w3.huawei.com/dmap
+[6]. W3 http://w3.huawei.com/dmap
 
-[7].   第二届中国数据安全治理高峰论坛：通用数据安全治理框架及完整技术落地方案 [www.aqniu.com/industry/34432.html](http://www.aqniu.com/industry/34432.html)
+[7]. 第二届中国数据安全治理高峰论坛：通用数据安全治理框架及完整技术落地方案 [www.aqniu.com/industry/34432.html](http://www.aqniu.com/industry/34432.html)
+
+* TeraData金融数据模型 https://www.cnblogs.com/oracle-dba/p/3903442.html
+
+* Teradata在中国银行业的应用简介
+
+http://wenku.baidu.com/link?url=JURfyMr-KFDwPp1vjk7UJUSLJTuW9S5m-YUtRHHcOsxUsoDq72qtuetHJDjGFcXA4Jg4Z39HaWZcPDQ55-lVECdx95tzw8jj1DD7_A58UCO
 
 
 
@@ -703,19 +475,19 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 
 
-## 3.5   本章参考
+## 本章参考
 
-[1].   CRISP-DM https://baike.baidu.com/item/CRISP-DM/7002457?fr=aladdin
+[1]. CRISP-DM https://baike.baidu.com/item/CRISP-DM/7002457?fr=aladdin
 
-[2].   数据挖掘十大经典算法 http://blog.csdn.net/aladdina/archive/2009/05/01/4141177.aspx
+[2]. 数据挖掘十大经典算法 http://blog.csdn.net/aladdina/archive/2009/05/01/4141177.aspx
 
-[3].   皮尔逊相关系数评价算法（集体智慧编程） http://lobert.iteye.com/blog/2024999
+[3]. 皮尔逊相关系数评价算法（集体智慧编程） http://lobert.iteye.com/blog/2024999
 
 [4]: http://www.chinakdd.com/ "CHINA KDD"
 
 
 
-# 4  数据仓库.Data warehouse
+# 4  数据仓库.DW
 
 ## 4.1   简介
 
@@ -938,6 +710,8 @@ ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baid
 
 详见 《大数据开发》
 
+
+
 ## 4.5   数仓基准~TPC-H
 
 **TPC**
@@ -978,9 +752,7 @@ TPC- H 测试模型为数据库服务器连续7×24 小时工作，可能只有1
 
 数据库关系图以及表各个字段定义如下图
 
-
-
-​         ![image-20191211215558677](../../media/bigdata/bi_050.png)
+​         ![image-20191211215558677](../media/bigdata/bi_050.png)
 
 图 14  TPC-H的数据表关联图
 
@@ -1051,7 +823,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
  ![image-20191201171655289](../media/bigdata/bi_021.png)
 
-图 2 IBM数据仓库解决方案产品组成
+图  IBM数据仓库解决方案产品组成
 
 
 
@@ -1061,23 +833,25 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
  ![image-20191201171710802](../media/bigdata/bi_022.png)
 
+
+
 ### 4.6.3 淘宝
 
  ![image-20191201171724523](../media/bigdata/bi_023.png)
 
-图 14 淘宝计算存储平台的发展史
+图  淘宝计算存储平台的发展史
 
 
 
-## 4.7   本章参考
+## 本章参考
 
-[1].   tpch  http://www.tpc.org/tpch/
+[1]. tpch  http://www.tpc.org/tpch/
 
-[2].   TPC-H 使用 https://blog.csdn.net/leixingbang1989/article/details/8766047
+[2]. TPC-H 使用 https://blog.csdn.net/leixingbang1989/article/details/8766047
 
-[3].   大数据环境下互联网行业数据仓库/数据平台的架构之漫谈http://lxw1234.com/archives/2015/08/471.htm
+[3]. 大数据环境下互联网行业数据仓库/数据平台的架构之漫谈http://lxw1234.com/archives/2015/08/471.htm
 
-[4].   数据仓库 [http://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%80%89%E5%84%B2](http://zh.wikipedia.org/wiki/資料倉儲)
+[4]. 数据仓库 [http://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%80%89%E5%84%B2](http://zh.wikipedia.org/wiki/資料倉儲)
 
 [5].  TPC基准  http://www.tpc.org/tpc_documents_current_versions/current_specifications.asp
 
@@ -1085,19 +859,19 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 [7]:   Java BI新生代——百度商业运营实践 http://www.infoq.com/cn/presentations/java-bi-the-new-generation-baidu-business-practice
 
-[8]:   阿里巴巴数据产品经理工作总结篇http://mp.weixin.qq.com/s?__biz=MjM5MDI1ODUyMA==&mid=205181896&idx=3&sn=bb2d98b6d90c86552c260791bdd30faf#rd
+[8]:   阿里巴巴数据产品经理工作总结篇  http://mp.weixin.qq.com/s?__biz=MjM5MDI1ODUyMA==&mid=205181896&idx=3&sn=bb2d98b6d90c86552c260791bdd30faf#rd
 
 [9]:   淘宝数据仓库架构实践 http://wenku.baidu.com/view/72d5a86658fafab069dc02d6.html
 
 
 
- # 5  数据湖
+ # 5  数据湖.DL
 
 ##  数据湖简介
 
 **数据湖定义**
 
-数据湖是一个集中式存储库，允许您以任意规模存储所有结构化和非结构化数据。您可以按原样存储数据（无需先对数据进行结构化处理），并运行不同类型的分析 – 从控制面板和可视化到大数据处理、实时分析和机器学习，以指导做出更好的决策。
+数据湖 (datalake)是一个集中式存储库，允许您以任意规模存储所有结构化和非结构化数据。您可以按原样存储数据（无需先对数据进行结构化处理），并运行不同类型的分析 – 从控制面板和可视化到大数据处理、实时分析和机器学习，以指导做出更好的决策。
 
 **数据湖的价值**
 
@@ -1139,27 +913,43 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 
 
-
-
-
-
 ## 本章参考
 
 [1]: https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc=sn&amp;loc=2	"AWS-  什么是数据湖"
 
 
 
-# 5  BI~自助分析
+# 6 BI~自助分析工具
 
-## 5.1   简介
+## 6.1  简介
+
+说明：BI是数据中台的组成部分，是数据可视化产品。下文BI产品特指2017年以后流行的自助分析工具。
 
 2016年起，BI自助分析流行。移动BI也正在兴起。
+
+自助分析工具的基本功能
+
+* 多数据源连接：传统关系数据库Oracle, MySQL, Postgres等，MPP数据库如Druid，大数据如Hive
+* 丰富图表类型：一般支持流行的图表类型，30+种
+* 交互式分析：通过拖拽式操作，自助生成SQL
+* 仪表盘：大屏支持，自助CSS样式。
+* 可以共享：单个图表和仪表盘可以共享
+* 细粒度的权限管理：用户验证、数据权限细分
+
+自助分析工具的扩展功能：
+
+* 图表钻取：数据的上卷、下钻、旋转、切片等多维分析。
+* 交叉过滤：支持多个图表间关联，点击钻取时可以同步变化关联图表。
+* 多平台支持：PC端、移动端、微信小程序、钉钉
+* 系统集成：支持单点登陆等各种方式集成到第三方系统。用到密码场景需要考虑到密码同步问题。
+  * 单点登陆：一是前端单点登陆，传输用户名和密码，登陆验证成功后保存<u>返回会话token</u>到cookie（支持ajax/iframe）。二是后端登陆，只需有用户名。
+  * SSO登陆：
 
 
 
 表格 9 主流BI自助分析工具比较
 
-|          | 细项         | Power  BI                                           | Tableau                            | superset                                                     |
+|          | 细项         | Power  BI                                           | Tableau                            | Superset                                                     |
 | -------- | ------------ | --------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------ |
 | 简介     | 简介         | 2015年Microsoft推出的商业软件，由MS EXCEL发展而来。 | 2004年成立的Tableau公司。          | 2015年[airbnb](https://link.zhihu.com/?target=https%3A//github.com/airbnb/superset/blob/master/CONTRIBUTING.md%23setting-up-a-python-development-environment)推出的开源软件。python开发，最新版本0.24。 |
 | 功能     | 报表访问     | 桌面、网站、移动端                                  | 桌面、网站、移动端                 | 网站                                                         |
@@ -1177,13 +967,63 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 |          | 缺点         | 价格不菲。                                          |                                    | 易用性                                                       |
 | 适用场景 |              | 大中小型公司的BI全套解决方案                        | 大中小型公司的数据可视化。         | 中小型公司的轻量级数据可视化。                               |
 
-备注：1. 最终更新时间为2018-3。
+备注：1. 本表更新时间为2018-3。桌面指安装在办公电脑里的软件。
 
 2. BI工具基本功能：获取数据（连接多数据源和ETL）、分析数据（建模和分析）和呈现数据（通过桌面、在线网站或移动端）。
 
 
 
-## 5.2   PowerBI
+表格 Superset和中国区自助分析工具的功能比较
+
+|                      | Superset | 帆软BI | **永洪BI** | 阿里Quick BI | 网易有数 |
+| -------------------- | -------- | ------ | ---------- | ------------ | -------- |
+| 多数据源             | √        | √      | √          | √            | √        |
+| 多源融合             |          | √      |            | √            |          |
+| 丰富图表             | √        | √      | √          | √            | √        |
+| 共享 Sharing         | √        | √      | √          | √            | √        |
+| 仪表盘/大屏          | √        | √      | √          | √            | √        |
+| 细粒度权限管理       | √        | √      | √          | √            | √        |
+| 自定义分析           | √        | √      | √          | √            | √        |
+| 数据钻取             |          | √      | √          | √            | √        |
+| 交叉过滤             | √        | √      | √          | √            | √        |
+| 移动端               |          | √      | √          | √            | √        |
+| 第三方系统集成       |          | √      |            | √            |          |
+| 上传CSV/EXCEL文件    | √        | √      | √          | √            | √        |
+| 邮件报告             | √        |        |            | √            |          |
+| 数据填报（扩展）     |          | √      |            |              | √        |
+| 智能推荐图表（扩展） |          |        |            |              | √        |
+
+备注：本表比较时间截止到2021-10-22。
+
+
+
+表格 开源BI工具比较
+
+| 工具      | Superset                                   | Redash                                                       | **Metabase**                                                 | **Davinci**                                                  | DataEase                                              |
+| --------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------- |
+| 简介<br>  | Airbnb 开源的数据探索与可视化平台。        | 可协作数据可视化和仪表板平台，旨在使用更简单的方式（SQL）进行数据可视化。<br>2020.6被Spark母公司Databricks收购。 | metabase更注重非技术人员的使用体验。                         | DVAAS（Data Visualization as a Service）平台解决方案。<br>由中国宜信数据团队开源。 | 国产飞致云开源。<BR>[demo](https://demo.dataease.io/) |
+| 官网      | https://superset.apache.org/               | https://blog.redash.io/                                      | https://www.metabase.com/                                    |                                                              | https://dataease.io/                                  |
+| 源码      | https://github.com/apache/superset         | https://github.com/getredash/redash                          | https://github.com/metabase/metabase                         | https://github.com/edp963/davinci                            | https://github.com/dataease/dataease                  |
+| 文档      | https://superset.apache.org/docs/intro     | [https://redash.io/help/<br>Readme](https://github.com/getredash/redash#readme) | [Readme](https://github.com/metabase/metabase#readme)        | [文档](https://edp963.github.io/davinci/docs/zh/1.1-deployment) | https://dataease.io/docs/                             |
+| Star      | 41k                                        | 19.7k                                                        | 26.3k                                                        | 3.9k                                                         | 3.6k                                                  |
+| Fork      | 8k                                         | 3.4k                                                         | 3.6k                                                         | 1.6k                                                         | 533                                                   |
+| 首版时间  | 2015-09-05                                 | 2014-2-25                                                    | v0.9 2015-1-24                                               | 2018-9-11                                                    | 2021-1-24                                             |
+| 最新版本  | 1.3.0                                      | 10.0.0                                                       | 0.41.1                                                       | 0.3.0                                                        | 1.3.0                                                 |
+| release数 | 49                                         | 97                                                           | 220                                                          | 13                                                           | 14                                                    |
+| License   | Apache-2.0                                 | BSD-2                                                        | [AGPL + 商业协议](https://github.com/metabase/metabase/blob/master/LICENSE.txt) | Apache-2.0                                                   | GPL-2                                                 |
+| 语言框架  | python+flask-appbuilder+react+js           | python+flask+js                                              | Java+Clojure+JS                                              | Java+Ts                                                      | Java SpringBoot+Vue+Echarts                           |
+| 优势      | 功能较全面，社区活跃，更新快               | 社区活跃                                                     |                                                              |                                                              | 功能简洁，有提供体验DEMO                              |
+| 劣势      | 权限控制复杂，权限项太多。可用性还需提升。 |                                                              |                                                              |                                                              |                                                       |
+
+> 备注：本表统计时间截止到2021-10-22。release数指大版本发布数量，这个指标只是作为更新活跃度的一个参考。
+
+
+
+
+
+## 6.2  商业BI
+
+### PowerBI
 
   ![image-20191201171748242](../media/bigdata/bi_024.png)
 
@@ -1214,19 +1054,45 @@ Power BI分为三个版本，分别是桌面版、专业和白金版。
 
 
 
-## 5.3   Tableau
+### Tableau
 
 
 
-## 5.4   Superset
+## 6.3 开源BI  
 
-详见另文《superset二次开发》
+### Superset
+
+详见另文《[superset二次开发](superset二次开发.md)》
 
 
 
-## 5.5   其它工具
+### Redash 
 
-### 5.5.1 Pentaho BI
+
+
+
+
+### Metabase
+
+**安装**
+
+```shell
+# 先下载软件 
+$ wget 'https://downloads.metabase.com/v0.41.1/metabase.jar'
+
+# 运行
+$ java -jar metabase.jar
+```
+
+浏览器访问： http://localhost:3000/
+
+
+
+
+
+## 6.4  其它工具
+
+### Pentaho BI
 
 [Pentaho BI](http://www.pentaho.com/)平台不同于传统的BI 产品，它是一个以流程为中心的，面向解决方案（Solution）的框架。其目的在于将一系列企业级BI产品、开源软件、API等等组件集成起来，方便商务智能应用的开发。它的出现，使得一系列的面向商务智能的独立产品如Jfree、Quartz等等，能够集成在一起，构成一项项复杂的、完整的商务智能解决方案。
 
@@ -1235,66 +1101,52 @@ Pentaho BI 平台，Pentaho Open BI 套件的核心架构和基础，是以流�
 Pentaho SDK共包含五个部分：Pentaho平台、Pentaho示例数据库、可独立运行的Pentaho平台、Pentaho解决方案示例和一个预先配制好的 Pentaho网络服务器。其中Pentaho平台是Pentaho平台最主要的部分，囊括了Pentaho平台源代码的主体；Pentaho数据库为 Pentaho平台的正常运行提供的数据服务，包括配置信息、Solution相关的信息等等，对于Pentaho平台来说它不是必须的，通过配置是可以用其它数据库服务取代的；可独立运行的Pentaho平台是Pentaho平台的独立运行模式的示例，它演示了如何使Pentaho平台在没有应用服务器支持的情况下独立运行；Pentaho解决方案示例是一个Eclipse工程，用来演示如何为Pentaho平台开发相关的商业智能解决方案。
 Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提供了系统的J2EE 服务器，安全，portal，工作流，规则引擎，图表，协作，内容管理，数据集成，分析和建模功能。这些组件的大部分是基于标准的，可使用其他产品替换之。
 
+Pentaho是一个以工作流为核心的、强调面向解决方案而非工具组件的BI套件，整合了多个开源项目，目标是和商业BI相抗衡。它包括：
+（1）工作流引擎：Shark and JaWE
+（2）数据库：Firebird RDBMS
+（3）集成管理和开发环境：Eclipse
+（4）报表工具：Eclipse BIRT
+（5）ETL工具：Enhydra/Kettle
+（6）OLAP Server：Mondrian
+（7）OLAP展示：JPivot
+（8）数据挖掘组件：Weka
+（9） 应用服务器和Portal服务器：JBoss
+（10）单点登陆服务及LDap认证：JOSSO
 
 
-## 5.6   本章参考
 
-**官网**
-* powerbi  https://powerbi.microsoft.com/zh-cn
-* tableau  https://www.tableau.com/zh-cn
+docker部署： `docker run -p 8080:8080 wmarinho/pentaho                                                         ` （镜像2.46GB）
+
+浏览器登陆： http://localhost:8080/      admin/password
+
+
+
+## 本章参考
+
+**BI产品官网**
+
 * superset官网 https://superset.incubator.apache.org
+* Redash  https://blog.redash.io/
+* Metabase  https://www.metabase.com/
+* 帆软BI  https://help.fanruan.com/finebi/
+* 永洪BI  https://www.yonghongtech.com/
+* 阿里Quick BI  [Quick BI官网_BI数据可视化分析工具_智能报表-阿里云 (aliyun.com)](https://www.aliyun.com/product/bigdata/bi)
+* 网易数帆-有数  https://sf.163.com/
+* Tableau  https://www.tableau.com/
+* PowerBI  [数据可视化 | Microsoft Power BI](https://powerbi.microsoft.com/zh-cn)  https://powerbi.microsoft.com/zh-cn
+* Pentaho BI  http://www.pentaho.com/
 
 
-
-### 5.6.1 PowerBI 参考资料
 
 **参考链接**
-*  关于微软的Power BI介绍？ https://www.zhihu.com/question/21588013
-*  Power BI系列课程地址：[从Excel到Power BI数据分析可视化](https://link.zhihu.com/?target=http%3A//study.163.com/series/1001139001.htm)
-*  [一张图看懂微软Power BI系列组件](https://link.zhihu.com/?target=http%3A//www.agileex.com/powerpivotworks/2016-5-20/636.html)
 
-
-
-1、PowerBI国内学习网站：
-
-[Excel120.com](https://link.zhihu.com/?target=http%3A//www.excel120.com/)（宗萌老师个人博客）
-
-[pbihome.net](https://link.zhihu.com/?target=http%3A//www.pbihome.net)（国内唯一PowerBI交流论坛，论坛刚起步，内容较少，但是相关这方面相关大咖均已入驻，大家学习过程中遇到什么问题都可以发帖交流）
-
-[PowerQuery - 简书](https://link.zhihu.com/?target=http%3A//www.jianshu.com/u/234dbfc62e9d)
-
-[Power BI - 知乎专栏](https://zhuanlan.zhihu.com/leigongzi)
-
-[Power BI 专栏 - 知乎专栏](https://zhuanlan.zhihu.com/PowerBI)
-
-2、PowerBI国外学习网站：
-
-[SQLBI](https://link.zhihu.com/?target=http%3A//www.sqlbi.com/)
-
-[PowerPivotPro - Transforming your Business with Power Pivot and Power BI](https://link.zhihu.com/?target=http%3A//www.powerpivotpro.com/)
-
-[Power Query Archives – The BIccountant](https://link.zhihu.com/?target=http%3A//www.thebiccountant.com/category/power-query/)
-
-[Chris Webb&#x27;s BI Blog](https://link.zhihu.com/?target=https%3A//blog.crossjoin.co.uk)
-
-3、PowerBI公众号推荐：
-
-《Powerpivot工坊》
-
-《PowerBI极客》
-
-《PowerBI大师》
-
-《Excel120》
-
-4、PowerBI学习线路图推荐：《[PBI系列学习框架地图 | Excel120](https://link.zhihu.com/?target=http%3A//www.excel120.com/posts/2016/04/1015.html)》
-
-如果你想下载阅读这些电子书可以直达我们PowerBIhome论坛下载《[点击直达电子书下载](https://link.zhihu.com/?target=http%3A//pbihome.net/forum.php%3Fmod%3Dviewthread%26tid%3D43%26extra%3Dpage%3D1)》
+* 2021年五大开源数据可视化BI方案对比 https://cloud.tencent.com/developer/article/1882014
+* 永洪科技-商业智能社区 https://ask.hellobi.com/
 
 
 
 
-# 6  BI行业案例
+# 7 BI行业案例
 
 四大业务场景：
 *  用户画像：服务于产品研发设计人员；针对业务需求；精准营销。
@@ -1302,7 +1154,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 *  物流分析
 *  财务分析
 
-## 6.1   金融业
+## 7.1   金融业
 
  ![image-20191201171808159](../media/bigdata/bi_025.png)
 
@@ -1336,7 +1188,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-## 6.2   电商
+## 7.2   电商
 
 电商的基本流程可归纳为：需求 - 查看宝贝 - 购买 - 售后体验。
 
@@ -1430,11 +1282,11 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-### 6.2.1 示例：2017.11.11（购物节）
+### 示例：2017.11.11（购物节）
 
-### 6.2.2 示例：2018.6.18（年中销售节）
+### 示例：2018.6.18（年中销售节）
 
-#### 6.2.2.1 广告数据
+#### 广告数据
 
 拓端数据显示，5月30日至6月6日期间，消费者讨论最多的关键词、声量第一的是”天猫“，天猫以声量数12275位居618关键词搜索榜首。而在618的网络声量中，天猫的相关讨论均占据了40%以上内容。
 
@@ -1442,7 +1294,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-#### 6.2.2.2 销售数据
+#### 销售数据
 
 据星图统计数字显示，在6.1-6.18日整个促销期内，全网47家电商（包括综合性电商及垂直类电商），实现的总销售额为2844.7亿元。按照销售额排名的话，前五名分别是京东、天猫、拼多多、苏宁和唯品会。
 
@@ -1457,8 +1309,6 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 天猫：
 
 苏宁：持续稳居海尔、美的、海信、西门子、格力等品牌最大渠道。超市、母婴等迎来爆发，雀巢奶粉、泰国金枕头榴莲、雪花啤酒等闯入单品订单排行榜前十名。
-
-
 
 
 
@@ -1486,17 +1336,17 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-### 6.2.3 本节参考
+### 本节参考
 
-[1].   电商运营如何做数据分析？ https://www.zhihu.com/question/47393031/answer/260229398
+[1]. 电商运营如何做数据分析？ https://www.zhihu.com/question/47393031/answer/260229398
 
-[2].   【618数据】全网47家电商总销售额2844.7亿元 京东618排第一 [www.yangqiu.cn/i100ec/4132192.html](http://www.yangqiu.cn/i100ec/4132192.html)
+[2]. 【618数据】全网47家电商总销售额2844.7亿元 京东618排第一 [www.yangqiu.cn/i100ec/4132192.html](http://www.yangqiu.cn/i100ec/4132192.html)
 
-[3].   【大数据部落】618电商大数据分析报告  [www.sohu.com/a/151327831_826434](http://www.sohu.com/a/151327831_826434)
+[3]. 【大数据部落】618电商大数据分析报告  [www.sohu.com/a/151327831_826434](http://www.sohu.com/a/151327831_826434)
 
 
 
-## 6.3   零售业
+## 7.3   零售业
 
 零售业包括了采购--库存--销售的流程。
 
@@ -1516,7 +1366,7 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-## 6.4   制造业
+## 7.4   制造业
 
 **库存分析**
 
@@ -1546,17 +1396,11 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 
 
-## 6.5   本章参考
+## 本章参考
 
-[1].   制造业大数据如何创造高价值生产 ——五大场景八大案例深度解析 https://ask.hellobi.com/blog/yonghongtech/6735
+[1]. 制造业大数据如何创造高价值生产 ——五大场景八大案例深度解析 https://ask.hellobi.com/blog/yonghongtech/6735
 
-[2].   新一代银行大数据运营中心解决方案 https://ask.hellobi.com/blog/yonghongtech/3775
-
-
-
-# 7  DM工具
-
-详见 《AI框架分析》相应章节
+[2]. 新一代银行大数据运营中心解决方案 https://ask.hellobi.com/blog/yonghongtech/3775
 
 
 
@@ -1564,29 +1408,31 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 
 ## 参考书目
 
-[1].   Jiawei Han、Micheline Kamber等著，《数据挖掘：概念与技术》，机械工业出版社，2001  [ISBN 1-55860-489-8](http://zh.wikipedia.org/zh-cn/Special:网络书源/1558604898)
+[1]. Jiawei Han、Micheline Kamber等著，《数据挖掘：概念与技术》，机械工业出版社，2001  [ISBN 1-55860-489-8](http://zh.wikipedia.org/zh-cn/Special:网络书源/1558604898)
 
-[2].   [**Ian H.Witten,Eide Frank** ](http://www.china-pub.com/s/?key1=%a3%a8%d0%c2%ce%f7%c0%bc%a3%a9Ian+H.Witten%2cEide+Frank) [**Data Mining: Practical Learning Tools and Techniques with Java Implementations** ](http://www.amazon.com/exec/obidos/ASIN/1558605525/qid%3D1066016823/sr%3D11-1/ref%3Dsr_11_1/104-7761378-9162309)　 [Elsevier ](http://www.china-pub.com/s/?key1=Elsevier)　2003
+[2]. [**Ian H.Witten,Eide Frank** ](http://www.china-pub.com/s/?key1=%a3%a8%d0%c2%ce%f7%c0%bc%a3%a9Ian+H.Witten%2cEide+Frank) [**Data Mining: Practical Learning Tools and Techniques with Java Implementations** ](http://www.amazon.com/exec/obidos/ASIN/1558605525/qid%3D1066016823/sr%3D11-1/ref%3Dsr_11_1/104-7761378-9162309)　 [Elsevier ](http://www.china-pub.com/s/?key1=Elsevier)　2003
 
-[3].   数据仓库工具箱：维度建模的完全指南，Ralph Kimball著, 电子工业出版社 2003.10
+[3]. 数据仓库工具箱：维度建模的完全指南，Ralph Kimball著, 电子工业出版社 2003.10
 
-[4].   数据仓库生命周期工具箱：设计、开发和部署数据仓库的专家方法，Ralph Kimball著, 电子工业出版社 2009
+[4]. 数据仓库生命周期工具箱：设计、开发和部署数据仓库的专家方法，Ralph Kimball著, 电子工业出版社 2009
 
-[5].   数据仓库， W.H.Inmon著，    机械工业出版社 2003.9
+[5]. 数据仓库， W.H.Inmon著，    机械工业出版社 2003.9
 
-[6].   数据仓库基础，Paulraj Ponniah著，电子工业出版社 2004
+[6]. 数据仓库基础，Paulraj Ponniah著，电子工业出版社 2004
 
-[7].   BernardMarr（伯纳德·马尔） 《智能大数据SMART准则-数据分析方法.案例和行动纲领》 电子工业出版社 2015
+[7]. BernardMarr（伯纳德·马尔） 《智能大数据SMART准则-数据分析方法.案例和行动纲领》 电子工业出版社 2015
 
-[8].   [天善智能](https://book.douban.com/search/天善智能) 《数据实践之美》 机械工业出版社 2017.1
+[8]. [天善智能](https://book.douban.com/search/天善智能) 《数据实践之美》 机械工业出版社 2017.1
 
 
 
 ## 参考链接
 
-[1].   百度百科-BI https://baike.baidu.com/item/BI/4579902
+[1]. 百度百科-BI https://baike.baidu.com/item/BI/4579902
 
-[2].   永洪科技-商业智能社区 https://ask.hellobi.com/
+[2]. 永洪科技-商业智能社区 https://ask.hellobi.com/
+
+
 
 
 
@@ -1603,3 +1449,58 @@ Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提
 OLAP 协会建立于1995 年1 月。它的会员和成员向所有有兴趣的组织开放。到2000 年，
 
 这个协会有16 个一般成员，主要是OLAP 产品的提供商。
+
+
+
+## PowerBI 参考资料
+
+**参考链接**
+
+*  关于微软的Power BI介绍？ https://www.zhihu.com/question/21588013
+*  Power BI系列课程地址：[从Excel到Power BI数据分析可视化](https://link.zhihu.com/?target=http%3A//study.163.com/series/1001139001.htm)
+*  [一张图看懂微软Power BI系列组件](https://link.zhihu.com/?target=http%3A//www.agileex.com/powerpivotworks/2016-5-20/636.html)
+
+
+
+1、PowerBI国内学习网站：
+
+[Excel120.com](https://link.zhihu.com/?target=http%3A//www.excel120.com/)（宗萌老师个人博客）
+
+[pbihome.net](https://link.zhihu.com/?target=http%3A//www.pbihome.net)（国内唯一PowerBI交流论坛，论坛刚起步，内容较少，但是相关这方面相关大咖均已入驻，大家学习过程中遇到什么问题都可以发帖交流）
+
+[PowerQuery - 简书](https://link.zhihu.com/?target=http%3A//www.jianshu.com/u/234dbfc62e9d)
+
+[Power BI - 知乎专栏](https://zhuanlan.zhihu.com/leigongzi)
+
+[Power BI 专栏 - 知乎专栏](https://zhuanlan.zhihu.com/PowerBI)
+
+2、PowerBI国外学习网站：
+
+[SQLBI](https://link.zhihu.com/?target=http%3A//www.sqlbi.com/)
+
+[PowerPivotPro - Transforming your Business with Power Pivot and Power BI](https://link.zhihu.com/?target=http%3A//www.powerpivotpro.com/)
+
+[Power Query Archives – The BIccountant](https://link.zhihu.com/?target=http%3A//www.thebiccountant.com/category/power-query/)
+
+[Chris Webb&#x27;s BI Blog](https://link.zhihu.com/?target=https%3A//blog.crossjoin.co.uk)
+
+3、PowerBI公众号推荐：
+
+《Powerpivot工坊》
+
+《PowerBI极客》
+
+《PowerBI大师》
+
+《Excel120》
+
+4、PowerBI学习线路图推荐：《[PBI系列学习框架地图 | Excel120](https://link.zhihu.com/?target=http%3A//www.excel120.com/posts/2016/04/1015.html)》
+
+如果你想下载阅读这些电子书可以直达我们PowerBIhome论坛下载《[点击直达电子书下载](https://link.zhihu.com/?target=http%3A//pbihome.net/forum.php%3Fmod%3Dviewthread%26tid%3D43%26extra%3Dpage%3D1)》
+
+
+
+## DM工具
+
+详见 《[AI框架分析](AI框架分析.md)》相应章节
+

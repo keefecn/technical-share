@@ -28,6 +28,8 @@
 
 官网： https://superset.apache.org/
 
+用户文档：https://superset.apache.org/docs/intro
+
 API文档： https://superset.apache.org/docs/rest-api
 
 下载： https://dist.apache.org/repos/dist/release/superset/
@@ -71,68 +73,55 @@ Apache Superset是流行的数据探索和可视化平台。
 
 Find out more about how the roadmap is managed in [SIP (Superset Improvement Proposal, Superset改进建议) 53](https://github.com/apache/superset/issues/10894)
 
-| 版本  | 发布时间   | 功能特性                                                     |
-| ----- | ---------- | ------------------------------------------------------------ |
-| 1.3   | 2021-08-13 |                                                              |
-| 1.2   | 2021-06-04 |                                                              |
-| 1.1   | 2021-02-24 |                                                              |
-| 1.0   | 2021-01-15 | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。<br>1.0.1(20210202)引入Apache ECharts 5.0。 |
-| 0.38  | 2020-10-17 |                                                              |
-| 0.37  | 2020-08-14 |                                                              |
-| 0.36  | 2020-04-02 |                                                              |
-| 0.35  | 2019-10-31 |                                                              |
-| 0.34  | 2019-08-09 | 从 0.34.0 开始，Superset 已转移到 apache-superset。          |
-| ...   |            |                                                              |
-| 0.28  | 2018-10-17 | incubator-superset仓库的最终版本tag。                        |
-| 0.24  | 2018-03-27 |                                                              |
-| ...   |            |                                                              |
-| 0.4   | 2015-09-27 |                                                              |
-| 0.2.0 | 2015-09-05 | 第一个正式发布版本。                                         |
+superset roadmap https://github.com/apache-superset/superset-roadmap， 以下是大特性Feature的分路图，
+
+* [Dashboard Advanced interaction X-filtering](https://github.com/apache/superset/projects/27)  目标：TOP5图表增加交叉过滤功能，新的Echarts图表支持交叉过滤功能。
+
+* [Echarts Projects (github.com)](https://github.com/apache/superset/projects/13)   加强特性：下钻drilldown 和交叉过滤x-filtering
+
+* [Native dashboard filters](https://github.com/apache/superset/projects/12)  看板原生过滤器
+
+* Filterbox Migration  过滤盒迁移，将废弃过滤盒，使用看板原生过滤
+
+*  [Single Page App](https://github.com/apache/superset/projects/10)  将前端转化成SPA页面。
+
+
+
+| 版本 | 发布时间   | 功能特性（重大改变+Deprecations+Other）                      | 备注                                                         |
+| ---- | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1.4  | 2021-10-   |                                                              |                                                              |
+| 1.3  | 2021-08-13 | 重大改变：去除表格的唯一性检验（因为各DB处理NULL值方式不一样）。<BR>1.3.2(20211011) | 图表类型新增11种合计59种，并且图表可以通过多种方式区分如分类、tag或推荐。 |
+| 1.2  | 2021-06-04 | 废弃：旧的Report和Alerm及其相关的配置项。<br>特性行级别RLS缺省启用。看板添加了过滤映射。 | 源码新增目录superset-websocket 和RESOURCES。RESOURCES包括产品使用组织和特性进展二份文档。<br>v1.2成熟特性有9个，典型如DASHBOARD_CROSS_FILTERS、ROW_LEVEL_SECURITY、SCHEDULED_QUERIES。 |
+| 1.1  | 2021-02-24 |                                                              | 1.1版本引入特性DASHBOARD_CROSS_FILTERS，在1.2版本成熟。      |
+| 1.0  | 2021-01-15 | 重大改变：数据集更新检查属主。安全权限简化。...<br>1.0.1(20210202)引入Apache ECharts 5.0。 | 里程碑。晋升为 ASF 顶级项目。用户体验和性能有极大提升。开始语义化版本([SIP-57](https://github.com/apache/superset/issues/12566))。<br/>图表类型共48种。 |
+| 0.38 | 2020-10-17 |                                                              | 0.x系列最后版本，共发布了38个版本，历时5年。                 |
+| 0.37 | 2020-08-14 | 重大改变：flask-appbuilder升级到3.x; werkzeug升级到1.0.1。<br>支持邮件报告发送看板或图表。 | 这个版本起，主要贡献者从开源社区转移到创始人创办的商业公司Preset。 |
+| 0.36 | 2020-04-02 |                                                              |                                                              |
+| 0.35 | 2019-10-31 |                                                              |                                                              |
+| 0.34 | 2019-08-09 |                                                              | 从 0.34.0 开始，Superset项目转移到 apache-superset。         |
+| ...  |            |                                                              |                                                              |
+| 0.28 | 2018-10-17 | 重大改变：python2废弃，只支持python3.6+。flask_login升级到0.3+。 | incubator-superset仓库的最终版本tag。                        |
+| ...  |            |                                                              |                                                              |
+| 0.24 | 2018-03-27 |                                                              |                                                              |
+| ...  |            |                                                              |                                                              |
+| 0.4  | 2015-09-27 |                                                              |                                                              |
+| 0.2  | 2015-09-05 |                                                              | 第一个正式发布版本。                                         |
 
 > 版本号a.b.0一般简写为a.b.
 >
 > ChangeLog: https://github.com/apache/superset/blob/master/CHANGELOG.md
 >
-> 版本更新规律：a.b.x小版本在1个月，a.x.c大版本在三个月左右（一个大版本大概包括2-4个小版本）。目前架构升级版本只进行了一次 (0-->1)，用了6年。
+> UPDATING:  https://github.com/apache/superset/blob/master/UPDATING.md
+>
+> 版本更新规律：a.b.x小版本在1个月，a.x.c大版本在三个月左右（一个大版本大概包括2-4个小版本）。目前架构升级版本只进行了一次 (0-->1)，用了5年多。
+>
+> 版本更新规则：大版本升级通常要先进行 `superset db upgrade`以更新DB相关配置。如v1.2增加了2个权限`can share on dashboard, can share on chart`，这二权限默认添加到了三个缺省角色Admin/Alpha/Gamma。启用某特性标识一般也要更新DB，如RLS，会新建一张表。
 
-
-
-## 术语
-
-**关键术语**
-
-*  Dashboard（仪表盘、看板）：由多个Slice组合而成。
-*  Slice（切片）：即Chart。Slice就是配置好数据表的图表。一个Slice指向一个数据表和一种图表类型Chart。
-*  Dataset 数据集：有时也称数据表table。数据表可以是数据源里的物理单表，也可以是多表关联查询而成的子查询虚拟表，另外也可导入CSV文件作为数据表。
-*  Datasource 数据源：有时也称数据库database。支持11+种数据源和文件CSV格式。
-
- 说明：1. 从数据顺序流来看，先有数据源，再有数据集，再有Slice，然后若干个Slice组合在一起形成看板。
-
-2. 关于名称，数据源、数据集有对名称作约束（数据源名称全局唯一，数据集名称同数据源下唯一），图表、看板对名称不作约束。
-
-
-
-**其它术语**
-
-* ananotation 注解
-* report schedule 报告调度
-* alert 警报
-
-
-
-**Schema**: 是一个逻辑概念。
-
-* MySQL：等同于表。
-* Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema。默认schema和用户名同名。
-* PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
-
-
+备注：v1.1-1.3主要作UI美化和用户体验提升，并没有涉及到数据库迁移等较复杂的改动，向后兼容v1.0版本。
 
 
 
 ## 参与开源
-
-私有版本和官方版本的合并 [Superset：合并私有版本和Airbnb官方版本（一）](http://zhuanlan.zhihu.com/p/27207957)
 
 项目开源社区：https://github.com/apache/superset
 
@@ -168,10 +157,10 @@ Every issue/PR must have one hash label (except spam entry). Labels that begin w
 贡献类型 Types of Contributions：
 
 * Report Bug:  需要列出OS、版本和如何重现步骤
-* Submit Ideas or Feature Requests
+* Submit Ideas or Feature Requests  提交创意和特性请求
 * Fix Bugs：打标签 #bug
 * Implement Features:   #feature
-* Implement Document:  
+* Implement Document:  #doc
 * Add Translations:  更改`superset/translations/<language_code>/LC_MESSAGES/messages.po` 或新语种
 * Ask Questions:  建议在[StackOverflow](https://stackoverflow.com/)提问并 打上标签 #apache-superset。
 
@@ -185,11 +174,42 @@ Every issue/PR must have one hash label (except spam entry). Labels that begin w
 
 对于新贡献者new contributor 的Pull Request流程
 
-1. 贡献哲学：Before creating a PR, create an issue.  一般应先在issue区增加一个issue，描述问题和讨论解决方法。
+1. 贡献哲学：Before creating a PR, create an issue.  创建PR前，应先在issue区增加一个issue，描述问题和讨论解决方法。
 2. PR通过所有CI测试。
 3. CI检视者开始审视代码，提出审视意见。贡献者回答所有意见。
 4. PR得到代码检视者批准，并且已合并了最新代码，然后再合并到master。
 5. PR合并后，项目维护者可能会联系PR贡献者（PR里引入新问题） 或者 回退修改（PR发现关键问题比如破坏主分支CI）。
+
+
+
+## 术语
+
+**关键术语**
+
+*  Dashboard（仪表盘、看板）：由多个Slice组合而成。
+*  Slice（切片）：即Chart。Slice就是配置好数据表的图表。一个Slice指向一个数据表和一种图表类型Chart。
+*  Dataset 数据集：有时也称数据表table。数据表可以是数据源里的物理单表，也可以是多表关联查询而成的子查询虚拟表(要求是同数据源)，另外也可导入CSV文件作为数据表。
+*  Datasource 数据源：有时也称数据库database。支持11+种数据源和文件CSV格式。
+
+ 说明：1. 从数据顺序流来看，先有数据源，再有数据集，再有Slice，然后若干个Slice组合在一起形成看板。
+
+2. 关于名称，数据源、数据集有对名称作约束（数据源名称全局唯一，数据集名称同数据源下唯一），图表、看板对名称不作约束。
+
+
+
+**其它术语**
+
+* ananotation 注解
+* report schedule 报告调度
+* alert 警报
+
+
+
+**Schema**: 是一个逻辑概念。
+
+* MySQL：等同于表。
+* Oracle:  被一个用户使用的数据库对象的集合。一个用户对应一个schema。默认schema和用户名同名。
+* PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
 
 
 
@@ -294,7 +314,7 @@ python setup.py sdist
 
 **3. 服务器启动**
 
-后端： 直接 run 或者 用gunicorn/uwsgi启动
+后端： 直接 run 或者 gunicorn/uwsgi启动
 
 ```shell
 # 启动法1：superset run启动 指定端口 -d调试；-p监听端口，缺省8088. 0.x用的runserver,
@@ -304,6 +324,9 @@ superset run -d -h 0.0.0.0 -p 8088 --with-threads --reload
 # 启动法2：flask run启动，命令参数superset. 会导入当前目录下的$FLASK_APP模块，搜索路径优先当前路径
 export FLASK_APP=superset
 flask run 
+
+# 启动法3：gunicorn启动，将日志参数后的- 替换成相应全路径文件名
+gunicorn --bind 0.0.0.0:8088 --access-logfile ~/.superset/g.access.log --error-logfile ~/.superset/g.error.log --workers 2 --worker-class gthread --threads 20 --timeout 60  'superset.app:create_app()'
 ```
 
 
@@ -350,19 +373,19 @@ apache官方镜像 [apache/superset - Docker Image | Docker Hub](https://hub.doc
 | 镜像尺寸（压缩/解压） | 400MB/1.45GB                                              | 800MB/2.25GB                                                 |
 | 容器启动脚本 CMD      | ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]              | CMD ["gunicorn", "superset.app:create_app()"]                |
 | docker run            | docker run -d  --name superset apache/superset            | docker run -d --name superset amancevice/superset            |
-| WEB访问URL            | http://HOST:8080/                                         | http://HOST:8088/                                            |
+| WEB访问URL            | http://HOST:8088/                                         | http://HOST:8088/                                            |
 |                       |                                                           |                                                              |
 | $SUPERSET_CONFIG_PATH | 无                                                        | 无                                                           |
 | $SUPERSET_HOEM        | /app/superset_home/                                       | /var/lib/superset                                            |
 | $PYTHONPATH           | /app/pythonpath                                           | /etc/superset:/home/superset:$PYTHONPATH                     |
 | $FLASK_ENV            | development                                               |                                                              |
-| 其它环境变量ENV       | SUPERSET_PORT=8080 FLASK_APP="superset.app:create_app()"  | GUNICORN_BIND=0.0.0.0:8088  GUNICORN_WORKERS=10 GUNICORN_CMD_ARGS= |
+| 其它环境变量ENV       | SUPERSET_PORT=8088 FLASK_APP="superset.app:create_app()"  | GUNICORN_BIND=0.0.0.0:8088  GUNICORN_WORKERS=10 GUNICORN_CMD_ARGS= |
 | site-packages         |                                                           | /usr/local/lib/python3.8/site-packages/                      |
 
 备注：1. $SUPERSET_HOME是数据卷，默认用来存储sqlite db和日志。$SUPERSET_CONFIG_PATH是配置卷，用来存储自定义配置文件。
 
 2. 上面二个镜像生成的方式不同，amancevice是pip安装superset源码；apache指定superset源码路径。都是用gunicorn启动。
-3. 默认容器端口定义在Dockerfile变量里，apache是$SUPERSET_PORT=8080,  amancevice是8088。可以指定宿主机端口：` -p [宿主机端口]:[容器端口]`
+3. 容器端口定义在Dockerfile变量里，目前二个镜像端口都是8088，apache定义在$SUPERSET_PORT,  amancevice定义在GUNICORN_PORT。可以指定宿主机端口：` -p [宿主机端口]:[容器端口]`
 
 ```shell
 $ docker images
@@ -391,7 +414,7 @@ $ docker pull apache/superset:1.0.0
 $ mkdir /opt/superset 
 
 # dockek启动： apache 或 amancevice, 都映射到宿主机端口 9002, 数据卷映射到/opt/superset. -d 后台启动
-$ docker run --name my_superset -p 9002:8080 -v /opt/superset:/app/superset_home apache/superset:1.0.0
+$ docker run --name my_superset -p 9002:8080 -v /opt/superset:/app/superset_home apache/superset:1.3.0
 $ docker run -p 9002:8088 --name superset amancevice/superset
 
 # 第一次初始化: superset init命令即可，也可完全执行本地部署时的 `superset db upgrade; superset init; superset fab create-admin;`
@@ -442,6 +465,7 @@ fi
 2. amancevice/superset容器
 
    ```shell
+   # 启动10个工作进程
    superset@e80ac04bd94e:~$ ps -ef
    UID        PID  PPID  C STIME TTY          TIME CMD
    superset     1     0  0 01:02 ?        00:00:01 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
@@ -451,7 +475,7 @@ fi
    superset    10     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
    superset    11     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
    ```
-
+   
    
 
 ## 2.2 支持数据源类型
@@ -506,29 +530,30 @@ fi
 5. 主流DB插件安装注意事项
 
    ```shell
+   # 最常用的DB
+   $ pip install mysqlclient cx_Oracle psycopg2
+   
    # 除了上面列的python插件，通常还需要对应的 DB动态库支持. 官方镜像apache/superset已经包括mysql, pg的开发库
    # mysql: yum install mysql-devel
-   
    # oracle： 需要独立安装 客户端（约300MB）
-   
    # pg
    yum install libpq
    ```
-
+   
    
 
 DB大小写敏感差异：对象名（表名字段名），查询SQL
 
-    1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
-    2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
-        - Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
-        - PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
+1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
+2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
+    - Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
+    - PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
 
 
 
 ## 2.3 支持图表类型
 
-38+张图表类型
+46+张图表类型
 
 | 图表类别 | 图表英文名           | 图表中文名         | 用途 | 支持情况 |
 | -------- | -------------------- | ------------------ | ---- | -------- |
@@ -644,13 +669,13 @@ JSON串
 
 ## 2.4 基本功能
 
-数据流向： 数据源 - 数据表 -- 切片/图表 -- 看板
+数据流向： 数据源/数据库database -- 数据集/数据表table -- 切片/图表 -- 看板
 
 功能
 
 * 数据流向：从数据源、数据集到图表、看板的完整流程。
 * 支持主流数据源
-* 支持图表类型40+
+* 支持图表类型50+
 * 支持图表注解和告警
 * 支持看板刷新
 * 支持图表/看板分享
@@ -687,7 +712,203 @@ JSON串
 
 
 
-### 警报 alert
+## 2.5 特性 Feature
+
+详见 superset/resources/[feature_flags.md](https://github.com/apache/superset/blob/master/RESOURCES/FEATURE_FLAGS.md)
+
+superset特性标识是为了满足特定SIP要求，使用的启停开关。特性状态有开发中、测试中、试用中、废弃中等。
+
+config.py里DEFAULT_FEATURE_FLAGS存储了缺省特性标识，可以在super_config.py里用FEATURE_FLAGS覆盖这些特性标识。
+
+启用标识后，最好先执行`superset init`
+
+典型功能如
+
+* 警报&邮件：ALERT_REPORTS
+* 行级别安全： ROW_LEVEL_SECURITY
+* 看板权限管控（当前只确定了看板页的读写权限，并未对涉及的图表作相关管制）：DASHBOARD_RBAC
+
+
+
+表格  v1.0特性的标识及依赖
+
+| Feature                   | Feature Flag                                                 | Dependencies                                                 | Documentation                                                |
+| :------------------------ | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Global Async Queries      | `GLOBAL_ASYNC_QUERIES: True`                                 | Redis 5.0+, celery workers configured and running            | [Extra documentation](https://github.com/apache/superset/blob/master/CONTRIBUTING.md#async-chart-queries) |
+| Dashboard Native Filters  | `DASHBOARD_NATIVE_FILTERS: True`                             |                                                              |                                                              |
+| Alerts & Reporting        | `ALERTS_REPORTS: True`                                       | [Celery workers configured & celery beat process](https://superset.apache.org/docs/installation/async-queries-celery) |                                                              |
+| Homescreen Thumbnails     | `THUMBNAILS: TRUE, THUMBNAIL_CACHE_CONFIG: CacheConfig = { "CACHE_TYPE": "null", "CACHE_NO_NULL_WARNING": True}` | selenium, pillow 7, celery                                   |                                                              |
+| Dynamic Viz Plugin Import | `DYNAMIC_PLUGINS: True`                                      |                                                              |                                                              |
+
+
+
+config.py  
+
+```python
+# ---------------------------------------------------
+# Feature flags
+# ---------------------------------------------------
+# Feature flags that are set by default go here. Their values can be
+# overwritten by those specified under FEATURE_FLAGS in super_config.py
+# For example, DEFAULT_FEATURE_FLAGS = { 'FOO': True, 'BAR': False } here
+# and FEATURE_FLAGS = { 'BAR': True, 'BAZ': True } in superset_config.py
+# will result in combined feature flags of { 'FOO': True, 'BAR': True, 'BAZ': True }
+DEFAULT_FEATURE_FLAGS: Dict[str, bool] = {
+    # allow dashboard to use sub-domains to send chart request
+    # you also need ENABLE_CORS and
+    # SUPERSET_WEBSERVER_DOMAINS for list of domains
+    "ALLOW_DASHBOARD_DOMAIN_SHARDING": True,
+    # Experimental feature introducing a client (browser) cache
+    "CLIENT_CACHE": False,
+    "DISABLE_DATASET_SOURCE_EDIT": False,
+    "DYNAMIC_PLUGINS": False,
+    "ENABLE_EXPLORE_JSON_CSRF_PROTECTION": False,
+    "ENABLE_TEMPLATE_PROCESSING": False,
+    "KV_STORE": False,
+    "PRESTO_EXPAND_DATA": False,
+    # Exposes API endpoint to compute thumbnails
+    "THUMBNAILS": False,
+    "DASHBOARD_CACHE": False,
+    "REMOVE_SLICE_LEVEL_LABEL_COLORS": False,
+    "SHARE_QUERIES_VIA_KV_STORE": False,
+    "SIP_38_VIZ_REARCHITECTURE": False,
+    "TAGGING_SYSTEM": False,
+    "SQLLAB_BACKEND_PERSISTENCE": False,
+    "LISTVIEWS_DEFAULT_CARD_VIEW": False,
+    # Enables the replacement React views for all the FAB views (list, edit, show) with
+    # designs introduced in https://github.com/apache/superset/issues/8976
+    # (SIP-34). This is a work in progress so not all features available in FAB have
+    # been implemented.
+    "ENABLE_REACT_CRUD_VIEWS": True,
+    # When True, this flag allows display of HTML tags in Markdown components
+    "DISPLAY_MARKDOWN_HTML": True,
+    # When True, this escapes HTML (rather than rendering it) in Markdown components
+    "ESCAPE_MARKDOWN_HTML": False,
+    "DASHBOARD_NATIVE_FILTERS": False,
+    "GLOBAL_ASYNC_QUERIES": False,
+    "VERSIONED_EXPORT": False,
+    # Note that: RowLevelSecurityFilter is only given by default to the Admin role
+    # and the Admin Role does have the all_datasources security permission.
+    # But, if users create a specific role with access to RowLevelSecurityFilter MVC
+    # and a custom datasource access, the table dropdown will not be correctly filtered
+    # by that custom datasource access. So we are assuming a default security config,
+    # a custom security config could potentially give access to setting filters on
+    # tables that users do not have access to.
+    "ROW_LEVEL_SECURITY": False,
+    # Enables Alerts and reports new implementation
+    "ALERT_REPORTS": False,
+    # Enable experimental feature to search for other dashboards
+    "OMNIBAR": False,
+    "DASHBOARD_RBAC": False,
+}
+```
+
+
+
+superset_config.py  
+
+```python
+FEATURE_FLAGS = { 'BAR': True, 'BAZ': True } 
+```
+
+
+
+### 警报 alert & report
+
+https://superset.apache.org/docs/installation/alerts-reports
+
+v1.0以上版本支持，默认不开启。
+
+用户可以配置自动警报和报告，以向电子邮件收件人或 Slack 渠道发送仪表板或图表。
+
+* 达到 SQL 条件时发送警报
+* 报告按计划发送
+
+
+
+### 邮件 EMAIL
+
+无特性标识。要ENABLE_SCHEDULED_EMAIL_REPORTS 为True时，然后`superset init`，
+
+才会在 菜单设置- 出现2个菜单项： Dashboard Emails 和  Chart Email Schedules
+
+可以选择发送的看板，crontab表达式，邮箱，是否发送测试邮件，内联还是附件。
+
+也可以选择发送图表：可以选择发送原始数据。
+
+```python
+# Enable / disable scheduled email reports
+ENABLE_SCHEDULED_EMAIL_REPORTS = False
+
+# Enable / disable Alerts, where users can define custom SQL that
+# will send emails with screenshots of charts or dashboards periodically
+# if it meets the criteria
+ENABLE_ALERTS = False
+
+# Used for Alerts/Reports (Feature flask ALERT_REPORTS) to set the size for the
+# sliding cron window size, should be synced with the celery beat config minus 1 second
+ALERT_REPORTS_CRON_WINDOW_SIZE = 59
+
+EMAIL_NOTIFICATIONS = True
+SMTP_HOST = "email-smtp.eu-west-1.amazonaws.com"
+SMTP_STARTTLS = True
+SMTP_SSL = False
+SMTP_USER = "smtp_username"
+SMTP_PORT = 25
+SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
+SMTP_MAIL_FROM = "insights@komoot.com"
+```
+
+
+
+### CELERY
+
+邮件、异步查询 等功能依赖于celery。
+
+```python
+class CeleryConfig(object):
+    BROKER_URL = 'redis://localhost:6379/0'
+    CELERY_IMPORTS = (
+        'superset.sql_lab',
+        'superset.tasks',
+    )
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+    CELERYD_LOG_LEVEL = 'DEBUG'
+    CELERYD_PREFETCH_MULTIPLIER = 10
+    CELERY_ACKS_LATE = True
+    CELERY_ANNOTATIONS = {
+        'sql_lab.get_sql_results': {
+            'rate_limit': '100/s',
+        },
+        'email_reports.send': {
+            'rate_limit': '1/s',
+            'time_limit': 120,
+            'soft_time_limit': 150,
+            'ignore_result': True,
+        },
+    }
+    CELERYBEAT_SCHEDULE = {
+        'email_reports.schedule_hourly': {
+            'task': 'email_reports.schedule_hourly',
+            'schedule': crontab(minute=1, hour='*'),
+        },
+    }
+
+CELERY_CONFIG = CeleryConfig
+```
+
+
+
+启动 celery
+
+```shell
+$ celery worker --app=superset.tasks.celery_app:app --pool=prefork -O fair -c 4
+$ celery beat --app=superset.tasks.celery_app:app
+
+# flower监听celery运行情况，flower只能运行在celery较低版本（接近废弃）
+$ pip install flower
+$ celery flower --app=superset.tasks.celery_app:app
+```
 
 
 
@@ -748,7 +969,7 @@ superset run -h 0.0.0.0 -p 5000
 
 ## 3.2 API
 
-官方接口文档：https://superset.apache.org/docs/rest-api   ( )
+官方接口文档：https://superset.apache.org/docs/rest-api   
 
 本服务接口文档：http://127.0.0.1:5000/swagger/v1   
 
@@ -785,23 +1006,23 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 表格 superset API 列表 (swagger api, 前缀是 /api/{version}/)
 
-| API类别 (Swagger)  | API路径                                  | API实现文件        | API说明      |
-| ------------------ | ---------------------------------------- | ------------------ | ------------ |
-| Annotaion Layers   | /annotaion_layers/                       | api.py             | 注解层       |
-| AsyncEventsRestApi | /async_event/                            | api.py             | 异步查询事件 |
-| CacheRestApi       | /cachekey/                               | api.py             | 缓存         |
-| Charts             | /chart/                                  | api.py             | 图表         |
-| CSS Templates      | /css_template/                           | api.py             | CSS          |
-| Dashboards         | /dashboard/                              | api.py             | 看板         |
-| Databases          | /database/                               | api.py             | 数据库       |
-| Datasets           | /dataset/                                | api.py             | 数据集       |
-| Queries            | /query/                                  | api.py             | 查询         |
-| Report Schedules   | /report/                                 | api.py             | 报告调度     |
-| OpenApi            | /openapi/{version}/_openapi              | flask_appbuild/xx/ | openapi      |
-| Menu               | /menu/                                   | flask_appbuild/xx/ | 菜单         |
-| Security           | /security/                               | flask_appbuild/xx/ | 安全         |
-| LogRestApi         | /log/                                    | /views/log/api.py  | 日志         |
-|                    | /query/, /query_from_data/, /time_range/ | /views/api.py      | {version}=v1 |
+| API类别 (Swagger)  | API路径                                  | API实现文件                    | API说明      |
+| ------------------ | ---------------------------------------- | ------------------------------ | ------------ |
+| Annotaion Layers   | /annotaion_layers/                       | api.py                         | 注解层       |
+| AsyncEventsRestApi | /async_event/                            | api.py                         | 异步查询事件 |
+| CacheRestApi       | /cachekey/                               | api.py                         | 缓存         |
+| Charts             | /chart/                                  | api.py                         | 图表         |
+| CSS Templates      | /css_template/                           | api.py                         | CSS          |
+| Dashboards         | /dashboard/                              | api.py                         | 看板         |
+| Databases          | /database/                               | api.py                         | 数据库       |
+| Datasets           | /dataset/                                | api.py                         | 数据集       |
+| Queries            | /query/                                  | api.py                         | 查询         |
+| Report Schedules   | /report/                                 | api.py                         | 报告调度     |
+| Menu               | /menu/                                   | flask_appbuild/menu.py         | 菜单         |
+| Security           | /security/                               | flask_appbuild/security/api.py | JWT安全登陆  |
+| OpenApi            | /openapi/{version}/_openapi              | ?                              | openapi      |
+| LogRestApi         | /log/                                    | /views/log/api.py              | 日志         |
+|                    | /query/, /query_from_data/, /time_range/ | /views/api.py                  | {version}=v1 |
 
 说明：若未特殊说明，Swagger API实现在路径前缀目录下的api.py。示例路由前缀/chart/，则相应API实现在/chart/api.py。
 
@@ -984,7 +1205,7 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 | ----------------------- | ------------ | ---- | ------------------------------------------------------------ | ----------------------------- | ------------------------------------------------------------ |
 | /api/v1/time_range/     | 时间<br>区域 |      | ?q=%E5%91%A8                                                 | 周/                           | {"result": {"since": "", "until": "2021-07-12T00:00:00", "timeRange": "\u5468"}} |
 | /api/v1/chart/<id>      | 图表配置信息 |      |                                                              |                               |                                                              |
-| /api/v1/dataset/        | 数据集列表   |      | ?q=(order_column:changed_on_delta_humanized,order_direction:asc,page:0,page_size:20) |                               |                                                              |
+| /api/v1/dataset/        | 数据集列表   | GET  | ?q=(order_column:changed_on_delta_humanized,order_direction:asc,page:0,page_size:20) |                               |                                                              |
 | /api/v1/dataset/_info   | 权限信息     |      | ?q=(keys:!(permissions))                                     |                               |                                                              |
 | /api/v1/chart/data      | 查看图表数据 | POST | ?form_data=%7B%22slice_id%22%3A437%7D                        | result_type: results或samples |                                                              |
 | /superset/explore_json/ | 数据查询结果 | POST | /?form_data=%7B%22slice_id%22%3A464%7D&result=true           | form_data, result是否展示     |                                                              |
@@ -1017,15 +1238,22 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 ### 数据集 dataset
 
+* 创建：物理表- `POST /api/v1/dataset/`   ，虚表--`POST /superset/sqllab_viz/`
+* 修改：`POST /datasource/save/`  OR  `PUT /api/v1/dataset/`（实际未用）
+* 删除：`DEL /api/v1/dataset/ `
+
+
+
 表格 修改数据集的二个API比较
 
-| 路由     | /api/v1/dataset/                                  | /datasource/save/    |
-| -------- | ------------------------------------------------- | -------------------- |
-| 方法     | PUT                                               | POST                 |
-| 数据格式 | JSON                                              | FORM                 |
-| 简介     | 支持只更新参数中的字段，默认override_column=false | 会覆盖表中所有字段。 |
-| 应用场景 | 未用                                              | 数据源编辑时保存     |
-| API实现  | /views/datasets/api.py                            | /views/datasource.py |
+| 路由     | /api/v1/dataset/                                  | /datasource/save/                                    |
+| -------- | ------------------------------------------------- | ---------------------------------------------------- |
+| 方法     | PUT                                               | POST                                                 |
+| 数据格式 | JSON                                              | FORM                                                 |
+| 简介     | 支持只更新参数中的字段，默认override_column=false | 会覆盖表中所有字段。                                 |
+| 应用场景 | 未用                                              | 数据源编辑时保存                                     |
+| API实现  | /views/datasets/api.py                            | /views/datasource.py                                 |
+| 权限检验 | @has_access_api                                   | @has_access_api 需要有权限项`can save on datasource` |
 
 
 
@@ -1076,6 +1304,10 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
   ]
 }
 ```
+
+
+
+
 
 
 
@@ -1257,9 +1489,34 @@ encoding = utf-8
 
 ### 网页嵌入外部系统
 
+**应用场景**
+
 * superset本身已支持的共享项：看板、图表，用standalone=true识别，外部系统要能访问需要开通公共用户权限，并且公共角色需要相关数据源/数据集权限。这个外部系统的共享只能用于公开数据。
 * 需要修改布局：看板列表页、图表列表页
 * 权限管控的网页嵌入：？
+
+
+
+#### 共享图表/看板
+
+看板示例URL： http://localhost:5000/superset/dashboard/1/?standalone=true
+
+图表示例URL：http://localhost:5000/superset/explore/?r=5&standalone=true&height=400
+
+表格 嵌入URL
+
+|              | 共享图表                                           | 共享看板                                                     | 共享看板里的图表                                             |
+| ------------ | -------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 简介         | 页面点击生成共享链接                               | 页面点击生成共享链接                                         | 每个图表独自调用一个API explore_json，返回JSON格式           |
+| 请求共享链接 | POST http://$HOST/r/shortner/                      | POST http://$HOST/r/shortner/                                |                                                              |
+| 响应短网址   | /superset/explore/?r=35&standalone=true&height=400 | http://$HOST/r/38                                            | /superset/explore/?                                          |
+| 响应URL      | /superset/explore/?form_data=                      | POST /superset/dashboard/66/?standalone=true                 | POST /superset/explore_json/?form_data={"datasource":"3__table","slice_id":xx}&dashboard_id=xx |
+| 响应结果     | HTML                                               | HTML                                                         | JSON                                                         |
+| 权限验证方法 | has_access                                         | has_access                                                   | check_resource_permissions                                   |
+| 权限验证说明 |                                                    |                                                              | check_datasource_perms只检查图表数据源是否存在， 不检验用户权限 |
+| 处理流程     |                                                    | 查看当前用户拥有的edit/save/csv/explore等权限，渲染相应模板返回HTML。 |                                                              |
+
+说明：共享时得到的URL是类似 r=xx，这个r通过表url 会重新指向一个真正的链接。r接口实现在 `/views/redirects.py`
 
 
 
@@ -1286,23 +1543,13 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
 
 4. 重定向URL：避免原始URL
 
-5. iframe传参
+5. iframe传参： `"datasource":"3__table"`此字段值通过`__`可拆分成datasource_id和datasource_type。
 
    图表表单传参JSON串示例如下：
 
 ```json
 form_data={"datasource":"3__table","viz_type":"line","slice_id":63,"granularity_sqla":"ds","time_grain_sqla":null,"since":"100 years ago","until":"now","metrics":[{"aggregate":"SUM","column":{"column_name":"num_california","expression":"CASE WHEN state = 'CA' THEN num ELSE 0 END"},"expressionType":"SIMPLE","label":"SUM(num_california)"}],"adhoc_filters":[{"expressionType":"SIMPLE","subject":"gender","operator":"==","comparator":"boy","clause":"WHERE","sqlExpression":null,"fromFormData":true,"filterOptionName":"filter_gtzm93u9ocq_9sy5vd5ocfg"},{"expressionType":"SIMPLE","subject":"name","operator":"LIKE","comparator":"Aaron","clause":"WHERE","sqlExpression":null,"fromFormData":true,"filterOptionName":"filter_6cgdixdoh4_5wrgyuorwoa"}],"groupby":["name"],"limit":"10","timeseries_limit_metric":{"aggregate":"SUM","column":{"column_name":"num_california","expression":"CASE WHEN state = 'CA' THEN num ELSE 0 END"},"expressionType":"SIMPLE","label":"SUM(num_california)"},"order_desc":true,"contribution":false,"row_limit":50000,"color_scheme":"bnbColors","show_brush":"auto","show_legend":true,"rich_tooltip":true,"show_markers":false,"line_interpolation":"linear","x_axis_label":"","bottom_margin":"auto","x_ticks_layout":"auto","x_axis_format":"smart_date","x_axis_showminmax":false,"y_axis_label":"","left_margin":"auto","y_axis_showminmax":false,"y_log_scale":false,"y_axis_format":".3s","y_axis_bounds":[null,null],"rolling_type":"None","time_compare":[],"num_period_compare":"","period_ratio_type":"growth","resample_how":null,"resample_rule":null,"resample_fillmethod":null,"annotation_layers":[],"compare_lag":"10","compare_suffix":"o10Y","markup_type":"markdown","metric":"sum__num","where":"","url_params":{}}
 ```
-
-
-
-看板示例URL： http://localhost:5000/superset/dashboard/1/?standalone=true
-
-图板示例URL：http://localhost:5000/superset/explore/?r=5&standalone=true&height=400
-
-
-
-**存在问题**：嵌入页面缺少鉴权，存在数据泄露问题。
 
 
 
@@ -1338,7 +1585,7 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 示例: New viz~treemap https://github.com/apache/incubator-superset/pull/344
 
- 参见  Apache Superset集成Echarts https://blog.csdn.net/tancongcong/article/details/91991051?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.nonecase
+参见  Apache Superset集成Echarts https://blog.csdn.net/tancongcong/article/details/91991051?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.nonecase
 
 
 
@@ -1350,13 +1597,57 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 
 
-### 下钻
+### 数据钻取 drilldown
+
+参见 
+
+* Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
+* Superset 0.28三奏曲——安装、集成ECharts和汉化（包括中国地图下钻） https://blog.csdn.net/qq_33703137/article/details/87874277?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control
+
+* feat: Draft drilldown POC #14688 https://github.com/apache/superset/pull/14688   (版本/组件依赖不确定，并入master遥遥无期) 
+
+
+
+数据钻取实现是要保存钻取的层次关系。
+
+数据钻取常见需求：表格 和 地图。这二类图形可以展现比较明显的层次关系，层次关系如行政区域，组织结构或者时间层次等。此外一些用于表示整体和部分的图形如树图也很适合钻取。
+
+
+
+### 交叉过滤 x-filtering
 
 参见  
 
-* Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
+* fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
 
-* Superset 0.28三奏曲——安装、集成ECharts和汉化（包括中国地图下钻） https://blog.csdn.net/qq_33703137/article/details/87874277?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control
+
+
+v1.1开始引入交叉过滤，1.2版本成熟。
+
+**使用步骤**：
+
+1. superset_config.py 里打开 DASHBOARD_CROSS_FILTERS特性标识。`FEATURE_FLAGS["DASHBOARD_CROSS_FILTERS"]=True`
+2. 打开看板，要包括能触发看板交叉过滤（EMIT DASHBOARD CROSS FILTERS）的图表。目前能触发交叉过滤的图表有饼图、表格、Echarts(bar, line, treeview)等。
+3. 点击图表维度字段，即触发交叉过滤。
+
+
+
+**实现逻辑**
+
+1. 点击看板某支持联动图表时，触发向看板其它图表发送请求，自身图表不触发新的AJAX请求。
+
+   ```shell
+   # 常规图表请求
+   POST /api/v1/chart/data?form_data=
+   
+   # 特殊图表-地图请求
+   POST /superset/explore_json/?form_data=
+   
+   # 请求参数：form_data数据（json格式）和 dashboard_id
+   form_data={"slice_id":89}&dashboard_id=6
+   ```
+
+   
 
 
 
@@ -1467,23 +1758,34 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 | 角色    | 权限说明                                                     | 权限项举例...                                                |
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 | `menu access on List Roles`, `menu access on List Users`, `menu access on Security`, `can list on RoleModelView` |
+| Admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 | `menu access on List Roles`, `menu access on List Users`, `menu access on Security`, `can list on RoleModelView` |
 | Alpha   | Alpha可以访问所有数据源，但无法授予或撤销其他用户的访问权限。 它们也限于改变他们拥有的对象。 Alpha用户可以添加和更改数据源。 | `all database access on all_database_access`                 |
 | Gamma   | 访问有限。他们只能使用他们通过另一个补充角色访问的数据源中的数据。相当于内容消费方。 | `menu access on Charts`, `menu access on Dashboards`, `database access on [mysql2].(id:10)` |
 | public  | 用户必须的信息。如个人密码修改。                             | `can read on Chart`, `can read on Dashboard`                 |
 | grant   | 一般2个权限，分别是覆盖角色权限和推准权限。                  | `Can override role permission on Superset`, `Can approve on Superset` |
 | sql_lab | sql lab访问和操作权限。                                      | `menu access on SQL Lab`, `menu access on SQL Editor`,       |
 
-备注：superset的权限控制通过用户所拥有的角色的权限合集来控制。
+备注：superset的权限控制通过用户所拥有的角色的权限合集来控制。一般不要直接改这三个角色的权限：Admin/Alpha/Gamma，若有需要，可基于这些角色复制出新角色再修改。
 1. 数据源/表的读权限
-   - 数据源（表）的属主缺省可以完全操作（读+写+删）此数据源的图表和看板。
+   - 数据源（表）的属主owners缺省可以完全操作（读+写+删）此数据源的图表和看板。
    - Alpha角色可以读取所有数据源和dashboard，但不能修改。
    - Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
 
 2. 图表/看板的读写权限：图表/看板都有一个owner列表。
    - 读权限：取决于是否有图表所用的数据集访问权限（最近粒度）。即使没有数据集所在数据库访问权限也可以。
    - 写权根：owner能修改，创建者缺省是owner。
-3. 行级权限 Row Level：目前只针对管理员。
+3. 行级权限 Row Level：目前只有管理员才可以操作。
+
+
+
+表格 特殊权限项说明
+
+| 权限项                                             | 应用场景                                        | 说明                                         |
+| -------------------------------------------------- | ----------------------------------------------- | -------------------------------------------- |
+| `can save on datasource`                           | 数据源编辑时需要此权限，同时还需是数据源的owner | 应用到接口 /datasource/save/                 |
+| `all database access on all_database_access`       | 可以访问所有数据库，适用于演示用户              | 给Alpha角色用，可读。                        |
+| `can write on database`, `can write on datasource` | 可以创建数据源/数据源，适用于创建用户级的私有源 | 产生的问题是可以修改其它有权限访问的公有源。 |
+|                                                    |                                                 |                                              |
 
 
 
@@ -1682,8 +1984,8 @@ AUTH_USER_REGISTRATION = True
 AUTH_USER_REGISTRATION_ROLE = "Gamma"
 
 # 页面嵌入配置: PUBLIC_ROLE_LIKE_GAMMA、HTTP_HEADERS
-# 公共用户角色默认是GAMMA, 可读
-PUBLIC_ROLE_LIKE_GAMMA=True
+# 公共用户角色默认是GAMMA, 可读。 v0.38起PUBLIC_ROLE_LIKE替换PUBLIC_ROLE_LIKE_GAMMA
+PUBLIC_ROLE_LIKE=True
 # 避免iframe跨站访问问题
 HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }   
  ```
@@ -1838,7 +2140,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 | Flask  Appbuilder(fab) | `superset fab create-admin`  | 创建角色和管理员用户。1.x用superset fab替换fabmanger。<br>共创建8张表，以ab_开头。  user  -> role -> premission_view-> (permission, view_menu) |
 | superset meta          | `superset db upgrade`        | 数据库初始化（版本更新时也要执行此命令）。<br>共创建24张表。v1.x增加到47张表。 |
 |                        | datasources:  druid/database | 共8张。数据源包括两种组织形式：druid 和 database  <br>druid:  cluster - datasources - columns/metrics  <br>database：dbs - tables -  tablecolumn/sql_metrics |
-|                        | views:    slice/dashboard    | 共7张。<br>slice：slices slice_user  slice_dashboard <br>dashboard:  dashboard dashboard_user |
+|                        | views:  slice/dashboard      | 共7张。<br>slice：slices slice_user  slice_dashboard <br>dashboard:  dashboard dashboard_user |
 |                        | css/template                 | css_templates annotation annotation_layer                    |
 |                        | sql                          | query  saved_query sql_observations sqltable_user            |
 |                        | report/alert                 | report_execute_log report_recipient report_schedule report_schedule_user alert_logs alert_owner alerts |
@@ -1851,10 +2153,9 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 备注：
 
 1. fab通过给role授权数据源(view_menu)和权项限(persionn)访问权限来控制可访问的view，粒度从数据源级别到数据源内的list/add/show/del/edit权限。
-
 2. 通过修改视图的Owner来管理修改权限。
-
 3. superset_meta通过ab_role来关联fab的安全管理功能。
+4. 创建数据集时，不管物理表还是虚表都会将数据集元数据写入到三张表，分别是tables(表元数据）、tablecolumn（表列）、sql_metrics（指针，一般默认有count(* )）。
 
 
 
@@ -1929,7 +2230,7 @@ ERROR: Failed building wheel for python-geohash
 解决方法：
 
 ```shell
-yum install gcc libffi-devel python3-devel openssl-devel -y
+$ yum install gcc libffi-devel python3-devel openssl-devel -y
 ```
 
 
@@ -1941,11 +2242,11 @@ yum install gcc libffi-devel python3-devel openssl-devel -y
 | 问题                                                         | 解决方法                                                     | 备注           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
 | superset元数据的日志时间缺省为UTC，需更改为本地时间~东八区UTC8 | 修改 core/model/core.py  dttm=Column(DateTime,  default=datetime.now) | 将ucnow改为now |
-|                                                              |                                                              |                |
+| ...                                                          |                                                              |                |
 
 
 
-**Q1： ImportError: cannot import name 'Any' from 'typing' **
+**Q1：ImportError: cannot import name 'Any' from 'typing' **
 
 报错信息：
 
@@ -1969,7 +2270,7 @@ ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos
 
 
 
-**Q3： 解决linux下nodejs中watch文件最大数异常**
+**Q2：解决linux下nodejs中watch文件最大数异常**
 
 描述：
 
@@ -1997,9 +2298,9 @@ $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
 
 备注：superset里的数据存储中文乱码主要是由sqlalchemy的create_engine参数引起的。
 
-Q1：连接MySQL中文乱码
+Q1：连接MySQL中文乱码，表名或表列名为中文。
 
-A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于py27） 
+A1：在写数据库连接串时末尾加上编码格式，如下
  `mysql://superset_nbdata_r:XXXXXXXXXX@10.64.1.248:3338/spider?charset=utf8`
 
 
@@ -2016,7 +2317,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
     描述：数据集删除页面 进入编辑，extra字段显示正常； 但如果是通过编辑数据集页面进入 ，extra字段无法获取。
     
-    评审：
+    评审：暂时save接口在保存时，如果extra字段为空，先从DB里获取。这样保证这个字段的值不丢失。
 
 
 3. 删除图表时并未检验看否有看板使用
@@ -2033,7 +2334,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 - 网页适配: 目前PC端和手机端显示页面是一样的。并未适配手机页面。**优化需求**：查看的图表/看板需要根据终端定制显示。
 
-- 下钻图表: 不支持。需要自行实现如中国地图、表格下钻等。
+- 下钻图表drilldown: 不支持。需要自行实现如中国地图、表格下钻等。
 
 - 不支持的图表：普通拆线图、组合图、同比/环比等。**优化需求**：可以引入echart图表或者其它新图表类型。
 
@@ -2059,18 +2360,24 @@ A1：在写数据库连接串时末尾加上编码格式，如下（仅适用于
 
 
 
+**superset相关专栏**
+
+* superset专题 https://www.cnblogs.com/datawalkman/tag/superset/
+
+
+
 **参考链接**
 
 *  中文文档  https://docschina.org/
+*  私有版本和官方版本的合并 [Superset：合并私有版本和Airbnb官方版本（一）](http://zhuanlan.zhihu.com/p/27207957)
 *  superset的缓存配置 https://blog.csdn.net/qq_33440665/article/details/65628551
 *  增加自定义数据源 https://zhuanlan.zhihu.com/p/179162221 
 *  利用Flask-AppBuilder 快速构建Web后台管理应用 https://blog.csdn.net/oxuzhenyi/article/details/77586500
 *  Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
-*  Superset 表格下钻(基于时间维度,地域维度和普通维度) https://blog.csdn.net/tb77506668/article/details/107717258
 *  如何将Superset嵌入后台系统之实践 https://www.yisu.com/zixun/58300.html
 *  superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
 *  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
-*  python之Marshmallow https://www.cnblogs.com/xingxia/p/python_Marshmallow.html
 *  安装Apache Superset--基于Docker的安装配置 https://blog.csdn.net/nikeylee/article/details/115264818
 *  磨人的小妖精Apache Superset之绝对不改版 https://segmentfault.com/a/1190000022060920 
+*  如何将炫酷的报表直接截图发送邮件——在Superset 0.37使用Schedule Email功能 https://cloud.tencent.com/developer/article/1711719
 

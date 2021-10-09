@@ -7,7 +7,7 @@
 | 5    | 2017-1-23  | 增加基于lucene的开源搜索solr和elasticsearch | 同上   |        |
 | 6    | 2017-4-9   | 更新lucene/solr/elasticsearch章节           | 同上   |        |
 | 7    | 2018-6-22  | 将ELK章节迁移到《大数据开发》。             | 同上   |        |
-|      |            |                                             |        |        |
+| 8    | 2021-10-21 | 更新Lucene简介章节里的版本说明。            | 同上   |        |
 
  
 
@@ -252,7 +252,7 @@
 
 ## 1.1   Lucene简介
 
-​     Lucene是apache软件基金会[4] jakarta项目组的一个子项目，是一个开放源代码[5]的全文检索引擎工具包，即它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。
+​     Lucene是apache软件基金会jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，即它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。
 
 ​     Lucene的原作者是Doug Cutting，他是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎[6]的主要开发者，后在Excite[7]担任高级系统架构设计师，目前从事于一些Internet底层架构的研究。早先发布在作者自己的[http://www.lucene.com/](http://www.lucene.com/#_blank)，后来发布在[SourceForge](http://sourceforge.net/projects/lucene/#_blank)[8]，2001年年底成为apache软件基金会jakarta的一个子项目：http://jakarta.apache.org/lucene/。
 
@@ -270,19 +270,28 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 
 （4）设计了独立于语言和文件格式的文本分析接口，索引器通过接受Token流完成索引文件的创立，用户扩展新的语言和文件格式，只需要实现文本分析的接口。
 
-（5）已经默认实现了一套强大的查询引擎，用户无需自己编写代码即使系统可获得强大的查询能力，Lucene的查询实现中默认实现了布尔操作、模糊查询（Fuzzy Search[11]）、分组查询等等。
+（5）已经默认实现了一套强大的查询引擎，用户无需自己编写代码即使系统可获得强大的查询能力，Lucene的查询实现中默认实现了布尔操作、模糊查询（Fuzzy Search）、分组查询等等。
 
  
 
-表格 Lucene版本说明
+表格 [Lucene Core (Java)](https://lucene.apache.org/core/)版本说明
 
-| 版本 | 发布时间 | 新增特性 |
-| ---- | -------- | -------- |
-| 1.0  |          |          |
-| 2.0  |          |          |
-| 3.0  |          |          |
+| 版本 | 发布时间   | 新增特性                          |
+| ---- | ---------- | --------------------------------- |
+| 0.01 | 2000-03-30 | 初版。                            |
+| 1.0  | 2000-10-04 |                                   |
+| 2.0  | 2006-05-26 |                                   |
+| 3.0  | 2009-11-25 | 不兼容2.x。处理数字搜索。         |
+| 4.0  | 2012-10-12 | 4.x最终版本是4.10.4(2015-03-03)。 |
+| 5.0  | 2015-02-20 | 5.x最终版本是5.5.5。              |
+| 6.0  | 2016-04-08 | 6.x最终版本是5.5.5。              |
+| 7.0  | 2017-09-20 | 7.x最终版本是7.7.2。              |
+| 8.0  | 2019-03-14 | 8.x最终版本是8.10.x。             |
+| 9.0  |            |                                   |
 
+详见 http://s.apache.org/luceneversions
 
+相关项目 见下文 参考资料
 
 
 
@@ -292,7 +301,7 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 
 | **框架**                                                     | **简介**                                                     | **优点**                                                     | **缺点**                                                     | **实例** |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
-| [Lucene Core (Java)](http://lucene.apache.org/core/)         | 一个 JAVA 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。当今最先进，最高效的全功能开源搜索引擎框架。  2010年 Apache Lucene 和 Apache Solr 项目合并 | 成熟的解决方案，有很多的成功案例。                           | 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟。 |          |
+| [Lucene Core (Java)](http://lucene.apache.org/core/)         | 一个 JAVA 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。当今最先进，最高效的全功能开源搜索引擎框架。 <br>2010年 Apache Lucene 和 Apache Solr 项目合并。 | 成熟的解决方案，有很多的成功案例。                           | 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟。 |          |
 | Apache [Solr](http://lucene.apache.org/solr/)                | Apache  Lucene项目的开源企业搜索平台。  其主要功能包括全文检索、命中标示、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。  Solr是高度可扩展的。 | 开发者社区更成熟、更稳定。  支持多格式的索引如HTML/PDF/WORD/CSV等等。  不建索引时搜索更快。 | 建立索引时，搜索效率下降，实时索引搜索效率不高。  shard策略需要自己去写、分布式搜索时相关性排序问题需二次开发。  版本更新较慢。 |          |
 | [Elasticsearch](https://www.elastic.co)                      | 分布式，RESTful搜索和分析。2010.2初版。  分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索。  实时分析的分布式搜索引擎。  可扩展到上百台服务器，处理PB级别的结构化或非结构化数据。 | 分布式。  近实时搜索。  备份更简单。  可用性不错（可容纳节点故障）。 | 不够自动。                                                   | 维基百科 |
 | Nutch                                                        | 一个完整的搜索引擎，包含爬虫、索引、搜索。使用了Hadoop，Map/Reduce做海量数据的并行处理、hdfs分布式文件系统存储中间计算结果及索引文件。 | 提供搜索引擎全套方案。                                       |                                                              |          |
@@ -320,33 +329,9 @@ export JAVA_HOME=
 
  
 
-## 1.4   本章参考
+## 本章参考
 
-以下列表为Lucene相关的搜索项目
 
-[1].   lucene项目主页 http://lucene.apache.org/
-
-[2].   [Solr](http://lucene.apache.org/solr/) is a high performance search server built using [Lucene Java](http://lucene.apache.org/java/), with XML/HTTP and JSON/Python/Ruby APIs, hit highlighting, faceted search, caching, replication, and a web admin interface. 
-
-[3].   Elasticsearch https://www.elastic.co/ 
-
-[4].   Nutch (http://www.nutch.org/) is a web search engine that uses Lucene as it's search technology. It adds a scalable crawler, link database, distributed searching, and a web-based search interface. 
-
-[5].   Luke (http://www.getopt.org/luke/), Lucene index browser. 
-
-[6].   [CodeCrawler](http://wiki.apache.org/lucene-java/CodeCrawler) (http://codecrawler.sourceforge.net/), is a smart web-based search engine specifically built for use by developers for searching source code that uses Lucene. 
-
-[7].   [Lucene Java](http://lucene.apache.org/java/), our flagship sub-project, provides Java-based indexing and search technology, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities.
-
-[8].   [RealtimeSearch](http://wiki.apache.org/lucene-java/RealtimeSearch) (http://issues.apache.org/jira/browse/LUCENE-1313) provides realtime search using Lucene. 
-
-[9].   [Open Relevance Project](http://lucene.apache.org/openrelevance/) is a new subproject with the aim of collecting and distributing free materials for relevance testing and performance.
-
-[10]. [Mahout](http://lucene.apache.org/mahout/) is a subproject with the goal of creating a suite of scalable machine learning libraries.
-
-[11]. [Droids](http://incubator.apache.org/droids/) is an intelligent robot crawling framework currently in incubation.
-
- 
 
 # 2  Lucene
 
@@ -855,7 +840,7 @@ l 继承实现org.apache.lucene.document类： 按照被索引的文件格式来
 
  
 
-## 2.4   本章参考
+## 本章参考
 
  
 
@@ -883,21 +868,15 @@ Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的
 
 Solr的特性包括：
 
-l 高级的全文搜索功能
+* 高级的全文搜索功能
+* 专为高通量的网络流量进行的优化
+* 基于开放接口（XML和HTTP）的标准
+* 综合的HTML管理界面
+* 可伸缩性－能够有效地复制到另外一个Solr搜索服务器
+* 使用XML配置达到灵活性和适配性
+* 可扩展的插件体系
 
-l 专为高通量的网络流量进行的优化
 
-l 基于开放接口（XML和HTTP）的标准
-
-l 综合的HTML管理界面
-
-l 可伸缩性－能够有效地复制到另外一个Solr搜索服务器
-
-l 使用XML配置达到灵活性和适配性
-
-l 可扩展的插件体系
-
- 
 
 ### 3.1.1 Solr架构
 
@@ -910,8 +889,6 @@ l 可扩展的插件体系
 　　Solr接受请求，确定要使用的适当SolrRequestHandler，然后处理请求。通过 HTTP 以同样的方式返回响应。
 
 　　默认配置返回Solr的标准 XML 响应，也可以配置Solr的备用响应格式。
-
- 
 
  
 
@@ -935,7 +912,7 @@ l 可扩展的插件体系
 
 http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&rows=10&fl=*%2Cscore&qt=standard&wt=standard
 
-　　注：多核心时为这个地址http://192.168.10.85:18080/solr/core0/select/
+　备注：多核心时为这个地址http://192.168.10.85:18080/solr/core0/select/
 
  
 
@@ -1154,7 +1131,7 @@ SolrServlet类继承HttpServlet类，只有四个方法：
 
  
 
-## 3.5   本章参考
+## 本章参考
 
 [1].   Apache SolrTM 6.5.0 Documentation http://lucene.apache.org/solr/6_5_0/index.html
 
@@ -2064,7 +2041,7 @@ POST /blogs/_refresh <2>
 
  
 
-## 4.6   本章参考
+## 本章参考
 
 [1].   Elastic Stack and Product Documentation https://www.elastic.co/guide/index.html 
 
@@ -2147,3 +2124,37 @@ POST /blogs/_refresh <2>
 [18]. Exploring elasticsearch: http://exploringelasticsearch.com/
 
  
+
+## 相关项目
+
+Apache相关项目
+
+* lucene项目主页 http://lucene.apache.org/
+
+* [PyLucene](https://lucene.apache.org/pylucene/)   python访问lucene core
+* [Apache Solr](https://solr.apache.org/)    is a high performance search server built using [Lucene Java](http://lucene.apache.org/java/), with XML/HTTP and JSON/Python/Ruby APIs, hit highlighting, faceted search, caching, replication, and a web admin interface. 
+* [Apache Hadoop](http://hadoop.apache.org/)
+* [Apache ManifoldCF](http://manifoldcf.apache.org/)
+* [Apache Lucene.Net](http://lucenenet.apache.org/)
+* [Apache Mahout](http://mahout.apache.org/)
+* [Apache Nutch](http://nutch.apache.org/)
+* [Apache OpenNLP](http://opennlp.apache.org/)
+* [Apache Tika](http://tika.apache.org/)
+* [Apache Zookeeper](http://zookeeper.apache.org/)
+
+
+
+其它相关项目
+
+* Elasticsearch https://www.elastic.co/ 
+* Nutch (http://www.nutch.org/) is a web search engine that uses Lucene as it's search technology. It adds a scalable crawler, link database, distributed searching, and a web-based search interface. 
+* Luke (http://www.getopt.org/luke/), Lucene index browser. 
+* [CodeCrawler](http://wiki.apache.org/lucene-java/CodeCrawler) (http://codecrawler.sourceforge.net/), is a smart web-based search engine specifically built for use by developers for searching source code that uses Lucene. 
+* [Lucene Java](http://lucene.apache.org/java/), our flagship sub-project, provides Java-based indexing and search technology, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities.
+* [RealtimeSearch](http://wiki.apache.org/lucene-java/RealtimeSearch) (http://issues.apache.org/jira/browse/LUCENE-1313) provides realtime search using Lucene. 
+* [Open Relevance Project](http://lucene.apache.org/openrelevance/) is a new subproject with the aim of collecting and distributing free materials for relevance testing and performance.
+* [Mahout](http://lucene.apache.org/mahout/) is a subproject with the goal of creating a suite of scalable machine learning libraries.
+* [Droids](http://incubator.apache.org/droids/) is an intelligent robot crawling framework currently in incubation.
+
+ 
+

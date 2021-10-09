@@ -57,37 +57,37 @@ Required-by:
 
 表格 gunicorn源码结构
 
-| 目录或文件       | 主要类或函数                               | 说明                                 |
-| ---------------- | ------------------------------------------ | ------------------------------------ |
-| app/             |                                            | app应用程序                          |
-| app/base.py      | BaseApplication Application                | app基类                              |
-| app/pasterapp.py | PasterServerApplication                    |                                      |
-| app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口       |
-| http/            |                                            | http协议实现                         |
-| http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                        |
-| http/message.py  | Message, Request                           | HTTP请求体                           |
-| http/parser.py   | Parser RequestParser                       | HTTP请求解析器                       |
-| http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                         |
-| http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                           |
-| instrument/      | statsd.py                                  | Statsd类，客户端侧协议               |
-| works/           | base.py                                    | 工作进程基类，子类需要重载Worker:run |
-|                  | base_async.py                              | 异步模式的基类                       |
-|                  | ggevent.py                                 | gevent模式                           |
-|                  | geventlent.py                              | eventlet模式                         |
-|                  | gtornado.py                                | tornado模式                          |
-|                  | gthread.py                                 | gthread模式 单进程多线程(线程池)     |
-|                  | sync.py                                    | 同步模式 单进程单线程                |
-|                  | workertmp.py                               | tmp文件，master监控worker进程的机制  |
-| **arbiter.py**   | Arbiter                                    | 主进程，维护工作进程存活。           |
-| config.py        | Config Setting                             | 配置相关，字段基类是Setting。        |
-| debug.py         | Spew                                       | 调试类                               |
-| erros.py         | HaltServer ConfigError AppImportError      | 定义了几种异常                       |
-| glogging.py      | SafeAtoms  Logger                          | 全局日志                             |
-| reloader.py      | Reloader InotifyReloader                   | 模块重载实现                         |
-| pidfile.py       | Pidfile                                    | gunicorn主进程ID文件                 |
-| sock.py          | BaseSocket TCPSocket TCP6Socket UnixSocket | socket类，用来与客户端通讯           |
-| systemd.py       | listen_fds sd_notify                       | socket函数封装扩展                   |
-| util.py          |                                            | 工具函数                             |
+| 目录或文件       | 主要类或函数                               | 说明                                                      |
+| ---------------- | ------------------------------------------ | --------------------------------------------------------- |
+| app/             |                                            | app应用程序                                               |
+| app/base.py      | BaseApplication Application                | app基类                                                   |
+| app/pasterapp.py | PasterServerApplication                    |                                                           |
+| app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口                            |
+| http/            |                                            | http协议实现                                              |
+| http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                                             |
+| http/message.py  | Message, Request                           | HTTP请求体                                                |
+| http/parser.py   | Parser RequestParser                       | HTTP请求解析器                                            |
+| http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                                              |
+| http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                                                |
+| instrument/      | statsd.py                                  | Statsd类，客户端侧协议                                    |
+| works/           | base.py                                    | 工作进程基类，子类需要重载Worker:run                      |
+|                  | base_async.py                              | 异步模式的基类                                            |
+|                  | ggevent.py                                 | gevent模式                                                |
+|                  | geventlent.py                              | eventlet模式                                              |
+|                  | gtornado.py                                | tornado模式                                               |
+|                  | gthread.py                                 | gthread模式 单进程多线程(线程池)                          |
+|                  | sync.py                                    | 同步模式 单进程单线程                                     |
+|                  | workertmp.py                               | tmp文件，master监控worker进程的机制                       |
+| **arbiter.py**   | Arbiter                                    | 主进程，维护工作进程存活。                                |
+| config.py        | Config Setting                             | 配置相关包括配置文件和命令行参数，配置字段基类是Setting。 |
+| debug.py         | Spew                                       | 调试类                                                    |
+| erros.py         | HaltServer ConfigError AppImportError      | 定义了几种异常                                            |
+| glogging.py      | SafeAtoms  Logger                          | 全局日志                                                  |
+| reloader.py      | Reloader InotifyReloader                   | 模块重载实现                                              |
+| pidfile.py       | Pidfile                                    | gunicorn主进程ID文件                                      |
+| sock.py          | BaseSocket TCPSocket TCP6Socket UnixSocket | socket类，用来与客户端通讯                                |
+| systemd.py       | listen_fds sd_notify                       | socket函数封装扩展                                        |
+| util.py          |                                            | 工具函数                                                  |
 
 说明：源码按目录结构可分为app实现、http实现和works实现、
 
@@ -106,7 +106,7 @@ Required-by:
 gunicorn启动方式有二种，一是 自行启动方式；二是命令行启动。
 
 * 自行启动：`python main.py`  要求main.py里面至少要实现一个app handler函数或者app handler类和一个app server类。本启动方式主要用于调试gunicorn
-* 命令行启动：`python -m  gunicorn.app.wsgiapp project.wsgi --chdir /path/to/project-root -c /path/to/project-cfg.py`   
+* 命令行启动：`python -m gunicorn.app.wsgiapp $project.wsgi --chdir /path/to/$project-root -c /path/to/$project-cfg.py`   
 
 
 
@@ -1295,7 +1295,111 @@ class TornadoWorker(Worker):
 
 
 
+## 配置信息 config.py
+
+config.py 定义了各种配置项，基类是Setting
+
+/gunicorn/config.py
+
+```python
+from gunicorn import __version__, util
+from gunicorn.errors import ConfigError
+from gunicorn.reloader import reloader_engines
+
+KNOWN_SETTINGS = []		# 配置对象列表
+PLATFORM = sys.platform
+
+class Config(object):
+	"""配置类"""
+    def __init__(self, usage=None, prog=None):
+        self.settings = make_settings()	 #构建一个配置名称和配置对象的字典 { str: Setting }
+        self.usage = usage
+        self.prog = prog or os.path.basename(sys.argv[0])
+        self.env_orig = os.environ.copy()
+        
+
+class SettingMeta(type):
+    def __new__(cls, name, bases, attrs):
+        super_new = super().__new__
+        parents = [b for b in bases if isinstance(b, SettingMeta)]
+        if not parents:
+            return super_new(cls, name, bases, attrs)
+
+        attrs["order"] = len(KNOWN_SETTINGS)
+        attrs["validator"] = staticmethod(attrs["validator"])
+
+        new_class = super_new(cls, name, bases, attrs)
+        new_class.fmt_desc(attrs.get("desc", ""))
+        KNOWN_SETTINGS.append(new_class)
+        return new_class
+
+    def fmt_desc(cls, desc):
+        desc = textwrap.dedent(desc).strip()
+        setattr(cls, "desc", desc)
+        setattr(cls, "short", desc.splitlines()[0])
+
+
+class Setting(object):
+    name = None
+    value = None
+    section = None
+    cli = None
+    validator = None
+    type = None
+    meta = None
+    action = None
+    default = None
+    short = None
+    desc = None
+    nargs = None
+    const = None
+
+    def __init__(self):
+        if self.default is not None:
+            self.set(self.default)
+
+    def add_option(self, parser):
+        
+
+class Bind(Setting):
+    name = "bind"
+    action = "append"
+    section = "Server Socket"
+    cli = ["-b", "--bind"]
+    meta = "ADDRESS"
+    validator = validate_list_string
+
+    if 'PORT' in os.environ:
+        default = ['0.0.0.0:{0}'.format(os.environ.get('PORT'))]
+    else:
+        default = ['127.0.0.1:8000']
+
+    desc = """\
+        The socket to bind.
+
+        A string of the form: ``HOST``, ``HOST:PORT``, ``unix:PATH``,
+        ``fd://FD``. An IP is a valid ``HOST``.
+
+        .. versionchanged:: 20.0
+           Support for ``fd://FD`` got added.
+
+        Multiple addresses can be bound. ex.::
+
+            $ gunicorn -b 127.0.0.1:8000 -b [::1]:8000 test:app
+
+        will bind the `test:app` application on localhost both on ipv6
+        and ipv4 interfaces.
+        """        
+```
+
+
+
+
+
+
+
 ## 本章参考
 
 * 知乎专栏--Gunicorn源码分析 https://www.zhihu.com/column/c_1111933629604880384
 * Gunicorn源码分析（二）Worker进程 https://www.jianshu.com/p/ef50cc1706d5
+

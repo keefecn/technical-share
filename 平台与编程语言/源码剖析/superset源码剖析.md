@@ -60,60 +60,62 @@ Required-by:
 
 表格  项目顶层目录结构
 
-| 目录                  | 二级目录或文件                 | 简介                                                         |
-| --------------------- | ------------------------------ | ------------------------------------------------------------ |
-| dist                  | xx.tar.gz                      | 打包时`python setup.py sdist`自动生成                        |
-| docker                |                                | docker相关的脚本                                             |
-| helm                  |                                | helm镜像仓库的配置目录                                       |
-| RELEASING             |                                | 发布日志                                                     |
-| requirements          |                                | 各种安装方式的模块依赖文件                                   |
-| tests                 |                                | 测试目录                                                     |
-| docs                  |                                | 文档，使用spinx生成                                          |
-| scripts               | pypi_push.sh   python_tests.sh | superset常用的脚本                                           |
-|                       | setup.py setup.cfg             | 部署常用的一些文件。requirement.txt 组件需求，README.md CHANGELOG.md |
-| **superset**          |                                | superse后端源码目录                                          |
-| **superset-frontend** |                                | superset前端源码目录                                         |
-| CHANGELOG.md          |                                | 版本更新日志                                                 |
-| setup.py setup.cfg    |                                | 安装脚本，包括了依赖组件                                     |
+| 一级目录或文件         | 二级目录或文件                  | 简介                                                         |
+| ---------------------- | ------------------------------- | ------------------------------------------------------------ |
+| dist/                  | xx.tar.gz                       | 打包时`python setup.py sdist`自动生成                        |
+| docker/                |                                 | docker相关的脚本。里面脚本基础OS环境要换yum源，不然安装软件慢得让人绝望。 |
+| helm/                  |                                 | helm镜像仓库的配置目录                                       |
+| RELEASING/             |                                 | 跟发布相关的脚本等                                           |
+| requirements/          |                                 | 各种安装方式的模块依赖文件，requirement.txt 组件需求         |
+| tests/                 |                                 | 测试目录                                                     |
+| docs/                  |                                 | 文档，使用spinx生成                                          |
+| scripts/               | pypi_push.sh   python_tests.sh  | superset常用的脚本                                           |
+| **superset/**          | static/ charts/ dashboards/ ... | superse后端源码目录                                          |
+| **superset-frontend**/ | src/ imgaes/ branding/ ...      | superset前端源码目录                                         |
+| CHANGELOG.md           |                                 | 版本更新日志                                                 |
+| setup.py setup.cfg     |                                 | 安装脚本，包括了依赖组件                                     |
+| README.md              |                                 | 用户指南                                                     |
+| CHANGELOG.md           |                                 | 细粒度（PR)级的更改                                          |
+| UPDATING.md            |                                 | 更新新版本相关。该文件记录了 Superset 中任何向后不兼容的更改，并在人们迁移到新版本时提供帮助。 |
 
  
 
 表格  源码后端目录superset里的结构
 
-| 目录或文件        | 次模块                                       | 简介                                                         |
-| ----------------- | -------------------------------------------- | ------------------------------------------------------------ |
-| annotation_layers |                                              | 锚点层                                                       |
-| (弃) assets       |                                              | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
-| async_events      |                                              | 异步事件                                                     |
-| cachekeys         |                                              | 缓存键K-V                                                    |
-| > charts          | api.py dao.py filters.py schemas.py          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
-| commands          | BaseCommand ExportModelsCommand              | 支持的命令。命令基类/命令异常类                              |
-| common            |                                              | 查询对象和查询上下文                                         |
-| connectors        |                                              | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
-| db_engines        |                                              | DB引擎                                                       |
-| dao               | BaseDAO DAOException                         | 数据访问基类、数据访问异常类                                 |
-| > dashboards      |                                              | 看板。结构类似图表。                                         |
-| > databases       |                                              | 数据库dbs/数据源。结构类似图表。                             |
-| > datasets        |                                              | 数据集。结构类似图表。                                       |
-| db_engines        |                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
-| db_engine_spec    |                                              | 同上                                                         |
-| examples          |                                              | 17个示例数据集，用 superset load-examples加载，需从网络下载  |
-| migrations        |                                              | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
-| models            |                                              | 存放项目的model，如果要修改字段，优先到这里寻找。            |
-| quaries           |                                              | 查询SQL相关。结构类似图表。                                  |
-| reports           |                                              | 报表相关。结构类似图表。                                     |
-| security          | SupersetSecurityManager  DBSecurityException | 安全权限管理。包括用户认证                                   |
-| sql_validators    |                                              | SQL验证                                                      |
-| **static**        | assets                                       | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
-| tasks             |                                              | celery 任务脚本                                              |
-| **templates**     | appbuilder, email, slack, superset           | JinJa2模板目录，项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
-| translations      | zh en ...                                    | 翻译文件，只需修改字段对应的名称。                           |
-| utils             |                                              | 工具                                                         |
-| app.py            | create_app                                   | WEB实例初始化，也是调试入口                                  |
-| cli.py            |                                              | superset命令                                                 |
-| extensions.py     |                                              | 定义 celery， logger 等中间件                                |
-| viz.py            | BaseViz NVD3Viz viz_types                    | 可视化图表类型的基类及派生类。viz_sip38.py是替换版本。       |
-| views             | health.py  core.py                           | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
+| 目录或文件        | 次模块                                                       | 简介                                                         |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| annotation_layers |                                                              | 锚点层                                                       |
+| (弃~~) assets~~   |                                                              | 前端依赖框架集成，这里存放了npm集成的依赖js框架，当你打开后会看到node_modules文件夹，由npm动态生成，命令是`$ npm run dev-fast`<br>1.x版本已将此目录移到外层，改为superset-frontend |
+| async_events      |                                                              | 异步事件                                                     |
+| cachekeys         |                                                              | 缓存键K-V                                                    |
+| > charts          | api.py dao.py filters.py schemas.py                          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
+| commands          | BaseCommand ExportModelsCommand                              | 支持的命令。命令基类/命令异常类                              |
+| common            |                                                              | 查询对象和查询上下文                                         |
+| connectors        |                                                              | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
+| db_engines        |                                                              | DB引擎                                                       |
+| dao               | BaseDAO DAOException                                         | 数据访问基类、数据访问异常类                                 |
+| > dashboards      |                                                              | 看板。结构类似图表。                                         |
+| > databases       |                                                              | 数据库dbs/数据源。结构类似图表。                             |
+| > datasets        |                                                              | 数据集。结构类似图表。                                       |
+| db_engines        |                                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
+| db_engine_spec    |                                                              | 同上                                                         |
+| examples          |                                                              | 17个示例数据集，用 superset load-examples加载，需从网络下载  |
+| migrations        |                                                              | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
+| models            |                                                              | 存放项目的model，如果要修改字段，优先到这里寻找。            |
+| > quaries         |                                                              | 查询SQL相关。结构类似图表。                                  |
+| > reports         |                                                              | 报表相关。结构类似图表。                                     |
+| security          | SupersetSecurityManager  DBSecurityException                 | 安全权限管理。包括用户认证                                   |
+| sql_validators    |                                                              | SQL验证                                                      |
+| **static**        | assets                                                       | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
+| tasks             |                                                              | celery 任务脚本                                              |
+| **templates**     | appbuilder, email, slack, superset                           | JinJa2模板目录，项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
+| translations      | zh en ...                                                    | 翻译文件，只需修改字段对应的名称。                           |
+| utils             |                                                              | 工具                                                         |
+| views             | /chart /dashboard /database /log base.py core.py health.py api.py... | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
+| app.py            | create_app                                                   | WEB实例初始化，也是调试入口                                  |
+| cli.py            |                                                              | superset命令                                                 |
+| extensions.py     |                                                              | 定义 celery， logger 等中间件                                |
+| viz.py            | BaseViz NVD3Viz viz_types                                    | 可视化图表类型的基类及派生类。viz_sip38.py是替换版本(v1.3已移除）。 |
 
  >superset后端用到的组件主要有：flask_appbuilder, flask_sqlalchemy, Jinja2, pandas
 
@@ -151,7 +153,7 @@ Required-by:
 
 ## 2 前后端联动
 
-前端指superset客户端，使用前端框架react实现。后端指superset服务端，python实现。
+前端指superset客户端，使用前端框架 React+D3+Echart实现。后端指superset服务端，python+flask-appbuilder实现。
 
 ### 组件概述 
 
@@ -433,7 +435,7 @@ talisman = Talisman()
 
 说明:  maninfest.json里文件是最终生成js/css文件，源文件可以根据key值 如proflie到 webpack.config.js找到原始文件的入口。
 
-因此，如果一个变量影响到多个文件，重新build生成的js文件名称可能不一样了，这时也需要 *重启服务端* 才能得到正确的文件映射。
+因此，如果一个变量影响到多个文件，重新build生成的js文件名称可能不一样了（具体规则详见webpack.config.js），这时也需要 *重启服务端* 才能得到正确的文件映射。
 
 
 
@@ -981,7 +983,7 @@ export default function setupClient() {
 
 
 
-### 首页 
+### 首页 Index
 
 首页指登陆后跳转页面 http://HOST:PORT/superset/welcome
 
@@ -1251,11 +1253,7 @@ const App = () => (
 
 /superset-frontend/src/views/CRUD/welcome/Welcome.tsx
 
-```tsx
-
-```
-
-
+略
 
 
 
@@ -1341,7 +1339,7 @@ export default function ActivityTable({
 
 
 
-### 导航栏
+### 导航栏 Navbar
 
 导航栏指 页面顶层的一排导航菜单项，导航栏进入到各个页面都保持不变。
 
@@ -1793,7 +1791,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 
 
-### 图表列表页
+### 列表页&图表列表页
 
 列表页主要有4种，分别是database, dataset, chart 和dashboard。
 
@@ -1840,6 +1838,563 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 * 排序Order、过滤Filter、分页Pagination：GET方法时用到
 * 搜索：GET方法的filter参数的opr指向的过滤类
+
+
+
+### 可视化图表 Viz
+
+#### 服务端
+
+客户端获取图表数据是通过 /superset/explore_json接口，需要从表单数据里获取数据源ID（即数据集ID）和图表类型，根据这二个参数构造相应的图表类型类`get_viz()`。
+
+* /superset/viz.py 定义了可视化基类BaseViz及各个子类，可视化列表viz_types。
+* /superset/viz_sip38.py  类似viz.py，只用在特性SIP_38_VIZ_REARCHITECTURE。
+* /superset/models/slice.py   图表模型
+* /superset/superset_config.py  此处变量VIZ_TYPE_DENYLIST会被 viz_types用到
+* /superset/views/utils.py  get_viz()会根据传参类型返回BaseViz的实际子类。
+
+
+
+##### 图表类型类 viz.py
+
+/superset/viz.py  可视化图表类型的基类BaseViz 和子类，典型图表类型过滤盒FilterBoxViz
+
+```python
+from flask_babel import lazy_gettext as _
+
+
+class BaseViz:
+
+    """All visualizations derive this base class"""
+
+    viz_type: Optional[str] = None
+    verbose_name = "Base Viz"
+    credits = ""
+    is_timeseries = False
+    cache_type = "df"
+    enforce_numerical_metrics = True
+
+    def __init__(
+        self,
+        datasource: "BaseDatasource",
+        form_data: Dict[str, Any],
+        force: bool = False,
+        force_cached: bool = False,
+    ) -> None:
+        if not datasource:
+            raise QueryObjectValidationError(_("Viz is missing a datasource"))
+
+        self.datasource = datasource
+        self.request = request
+        self.viz_type = form_data.get("viz_type")
+        self.form_data = form_data
+
+        self.query = ""
+        self.token = utils.get_form_data_token(form_data)
+
+        self.groupby: List[str] = self.form_data.get("groupby") or []
+        self.time_shift = timedelta()
+
+        self.status: Optional[str] = None
+        self.error_msg = ""
+        self.results: Optional[QueryResult] = None
+        self.errors: List[Dict[str, Any]] = []
+        self.force = force
+        self._force_cached = force_cached
+        self.from_dttm: Optional[datetime] = None
+        self.to_dttm: Optional[datetime] = None
+        self._extra_chart_data: List[Tuple[str, pd.DataFrame]] = []
+
+        self.process_metrics()
+
+        self.applied_filters: List[Dict[str, str]] = []
+        self.rejected_filters: List[Dict[str, str]] = []
+
+   def get_df_payload(
+        self, query_obj: Optional[QueryObjectDict] = None, **kwargs: Any
+    ) -> Dict[str, Any]:
+        """Handles caching around the df payload retrieval 通过查询对象获取查询结果 """
+        if not query_obj:
+            query_obj = self.query_obj()	#获取查询对象，结果为{}. 从请求表单数据获取生成
+        cache_key = self.cache_key(query_obj, **kwargs) if query_obj else None	#将查询对象转化成一个MD5字符串
+        cache_value = None
+        logger.info("Cache key: {}".format(cache_key))
+        is_loaded = False	#用来标识是否有查询结果数据
+        stacktrace = None
+        df = None
+        if cache_key and cache_manager.data_cache and not self.force:	#不强制刷新情况下，从缓存里获取查询结果 
+            cache_value = cache_manager.data_cache.get(cache_key)
+            if cache_value:
+                stats_logger.incr("loading_from_cache")
+                try:
+                    df = cache_value["df"]
+                    self.query = cache_value["query"]	#查询结果
+                    self.status = utils.QueryStatus.SUCCESS
+                    is_loaded = True	
+                    stats_logger.incr("loaded_from_cache")
+                except Exception as ex:
+                    logger.exception(ex)
+                    logger.error(
+                        "Error reading cache: " + utils.error_msg_from_exception(ex)
+                    )
+                logger.info("Serving from cache")
+
+        if query_obj and not is_loaded:
+            if self.force_cached:	# 强制从缓存取时报错
+                logger.warning(
+                    f"force_cached (viz.py): value not found for cache key {cache_key}"
+                )
+                raise CacheLoadError(_("Cached value not found"))
+            try:
+                invalid_columns = [
+                    col
+                    for col in (query_obj.get("columns") or [])
+                    + (query_obj.get("groupby") or [])
+                    + utils.get_column_names_from_metrics(
+                        cast(
+                            List[Union[str, Dict[str, Any]]], query_obj.get("metrics"),
+                        )
+                    )
+                    if col not in self.datasource.column_names
+                ]
+                if invalid_columns:	#存在无效列，抛出异常
+                    raise QueryObjectValidationError(
+                        _(
+                            "Columns missing in datasource: %(invalid_columns)s",
+                            invalid_columns=invalid_columns,
+                        )
+                    )
+                df = self.get_df(query_obj)	#获取查询结果的DF数据格式
+                if self.status != utils.QueryStatus.FAILED:
+                    stats_logger.incr("loaded_from_source")
+                    if not self.force:
+                        stats_logger.incr("loaded_from_source_without_force")
+                    is_loaded = True
+            except QueryObjectValidationError as ex:
+                error = dataclasses.asdict(
+                    SupersetError(
+                        message=str(ex),
+                        level=ErrorLevel.ERROR,
+                        error_type=SupersetErrorType.VIZ_GET_DF_ERROR,
+                    )
+                )
+                self.errors.append(error)
+                self.status = utils.QueryStatus.FAILED
+            except Exception as ex:
+                logger.exception(ex)
+
+                error = dataclasses.asdict(
+                    SupersetError(
+                        message=str(ex),
+                        level=ErrorLevel.ERROR,
+                        error_type=SupersetErrorType.VIZ_GET_DF_ERROR,
+                    )
+                )
+                self.errors.append(error)
+                self.status = utils.QueryStatus.FAILED
+                stacktrace = utils.get_stacktrace()
+
+            if is_loaded and cache_key and self.status != utils.QueryStatus.FAILED:
+                set_and_log_cache(	# 缓存查询结果 
+                    cache_manager.data_cache,
+                    cache_key,
+                    {"df": df, "query": self.query},
+                    self.cache_timeout,
+                    self.datasource.uid,
+                )
+        return {
+            "cache_key": cache_key,
+            "cached_dttm": cache_value["dttm"] if cache_value is not None else None,
+            "cache_timeout": self.cache_timeout,
+            "df": df,	#查询结果的DF格式
+            "errors": self.errors,
+            "form_data": self.form_data,
+            "is_cached": cache_value is not None,
+            "query": self.query,
+            "from_dttm": self.from_dttm,
+            "to_dttm": self.to_dttm,
+            "status": self.status,
+            "stacktrace": stacktrace,
+            "rowcount": len(df.index) if df is not None else 0,
+        }
+        
+    def get_df(self, query_obj: Optional[QueryObjectDict] = None) -> pd.DataFrame:
+       """将查询对象转化成 pd.DataFrame Returns a pandas dataframe based on the query object"""
+        if not query_obj:
+            query_obj = self.query_obj()
+        if not query_obj:	# 无查询对象，直接返回空对象
+            return pd.DataFrame()
+
+        self.error_msg = ""
+
+        timestamp_format = None
+        if self.datasource.type == "table":
+            granularity_col = self.datasource.get_column(query_obj["granularity"])
+            if granularity_col:	# 获取时间粒度列，然后转化时间格式
+                timestamp_format = granularity_col.python_date_format
+
+        # The datasource here can be different backend but the interface is common
+        self.results = self.datasource.query(query_obj)	# 从数据库里查询，获取查询结果
+        self.query = self.results.query
+        self.status = self.results.status
+        self.errors = self.results.errors
+
+        df = self.results.df	#将SQL查询结果转化成DF格式
+        # Transform the timestamp we received from database to pandas supported
+        # datetime format. If no python_date_format is specified, the pattern will
+        # be considered as the default ISO date format
+        # If the datetime format is unix, the parse will use the corresponding
+        # parsing logic.
+        if not df.empty:
+            if DTTM_ALIAS in df.columns:	# 处理时间列
+                if timestamp_format in ("epoch_s", "epoch_ms"):
+                    # Column has already been formatted as a timestamp.
+                    dttm_col = df[DTTM_ALIAS]
+                    one_ts_val = dttm_col[0]
+
+                    # convert time column to pandas Timestamp, but different
+                    # ways to convert depending on string or int types
+                    try:
+                        int(one_ts_val)
+                        is_integral = True
+                    except (ValueError, TypeError):
+                        is_integral = False
+                    if is_integral:
+                        unit = "s" if timestamp_format == "epoch_s" else "ms"
+                        df[DTTM_ALIAS] = pd.to_datetime(
+                            dttm_col, utc=False, unit=unit, origin="unix"
+                        )
+                    else:
+                        df[DTTM_ALIAS] = dttm_col.apply(pd.Timestamp)
+                else:
+                    df[DTTM_ALIAS] = pd.to_datetime(
+                        df[DTTM_ALIAS], utc=False, format=timestamp_format
+                    )
+                if self.datasource.offset:
+                    df[DTTM_ALIAS] += timedelta(hours=self.datasource.offset)
+                df[DTTM_ALIAS] += self.time_shift
+
+            if self.enforce_numerical_metrics:
+                self.df_metrics_to_num(df)
+
+            df.replace([np.inf, -np.inf], np.nan, inplace=True)
+        return df        
+
+    
+class NVD3Viz(BaseViz):
+
+    """Base class for all nvd3 vizs"""
+
+    credits = '<a href="http://nvd3.org/">NVD3.org</a>'
+    viz_type: Optional[str] = None
+    verbose_name = "Base NVD3 Viz"
+    is_timeseries = False
+        
+
+class BubbleViz(NVD3Viz):
+
+    """Based on the NVD3 bubble chart"""
+
+    viz_type = "bubble"
+    verbose_name = _("Bubble Chart")
+    is_timeseries = False
+
+    def query_obj(self) -> QueryObjectDict:
+        
+        
+def get_subclasses(cls: Type[BaseViz]) -> Set[Type[BaseViz]]:
+    return set(cls.__subclasses__()).union(
+        [sc for c in cls.__subclasses__() for sc in get_subclasses(c)]
+    )
+
+
+viz_types = {	# 此处用到了配置参数里的一个约束
+    o.viz_type: o
+    for o in get_subclasses(BaseViz)
+    if o.viz_type not in config["VIZ_TYPE_DENYLIST"]
+}            
+```
+
+
+
+**过滤盒实现 FilterBoxViz**
+
+FilterBoxViz每个过滤条件都会生成一个df格式的查询结果，get_data需要将多个查询结果进行合并后输出最终结果。
+
+```python
+class BaseViz:
+    
+class FilterBoxViz(BaseViz):
+
+    viz_type = "filter_box"
+    verbose_name = _("Filters")
+    is_timeseries = False
+    credits = 'a <a href="https://github.com/airbnb/superset">Superset</a> original'
+    cache_type = "get_data"
+    filter_row_limit = 1000
+
+    def query_obj(self) -> QueryObjectDict:
+        return {}
+
+    def run_extra_queries(self) -> None:
+        """ 扩展查询：过滤条件、行限制。调用了基类方法query_obj, get_df_payload """
+        qry = super().query_obj()	
+        filters = self.form_data.get("filter_configs") or []
+        qry["row_limit"] = self.filter_row_limit
+        self.dataframes = {}
+        for flt in filters:	# 每个过滤条件会产生一条查询结果
+            col = flt.get("column")
+            if not col:
+                raise QueryObjectValidationError(
+                    _("Invalid filter configuration, please select a column")
+                )
+            qry["groupby"] = [col]
+            metric = flt.get("metric")
+            qry["metrics"] = [metric] if metric else []
+            df = self.get_df_payload(query_obj=qry).get("df")  	# 调用基类的获取查询结果 
+            self.dataframes[col] = df
+
+    def get_data(self, df: pd.DataFrame) -> VizData:
+        """ 合并多个查询条件的查询结果 """
+        filters = self.form_data.get("filter_configs") or []
+        d = {}
+        for flt in filters:
+            col = flt.get("column")		#普通列
+            metric = flt.get("metric")	#指标列
+            df = self.dataframes.get(col)
+            if df is not None and not df.empty:
+                if metric:	# 缺省按指标列排序
+                    df = df.sort_values(
+                        utils.get_metric_name(metric), ascending=flt.get("asc")
+                    )
+                    d[col] = [
+                        {"id": row[0], "text": row[0], "metric": row[1]}
+                        for row in df.itertuples(index=False)
+                    ]
+                else:
+                    df = df.sort_values(col, ascending=flt.get("asc"))
+                    d[col] = [
+                        {"id": row[0], "text": row[0]}
+                        for row in df.itertuples(index=False)
+                    ]
+            else:
+                df[col] = []
+        return d    
+```
+
+
+
+##### 切片模型 /models/slice.py
+
+/superset/models/slice.py  二张表定义，分别是slice_user和slices表
+
+```python
+from flask_appbuilder import Model
+from superset.models.helpers import AuditMixinNullable, ImportExportMixin
+
+
+# 根据特征标识，从不同文件加载图表类型类
+if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):   
+    from superset.viz_sip38 import BaseViz, viz_types
+else:
+    from superset.viz import BaseViz, viz_types  # type: ignore
+
+if TYPE_CHECKING:
+    from superset.connectors.base.models import BaseDatasource
+
+metadata = Model.metadata  # pylint: disable=no-member
+slice_user = Table(
+    "slice_user",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("user_id", Integer, ForeignKey("ab_user.id")),
+    Column("slice_id", Integer, ForeignKey("slices.id")),
+)
+logger = logging.getLogger(__name__)
+
+
+class Slice(
+    Model, AuditMixinNullable, ImportExportMixin
+):  # pylint: disable=too-many-public-methods
+    __tablename__ = "slices"
+    # 以下定义表字段
+    id = Column(Integer, primary_key=True)
+    slice_name = Column(String(250))
+    datasource_id = Column(Integer)
+    datasource_type = Column(String(200))
+    datasource_name = Column(String(2000))
+    viz_type = Column(String(250))
+    params = Column(Text)
+    description = Column(Text)
+    cache_timeout = Column(Integer)
+    perm = Column(String(1000))
+    schema_perm = Column(String(1000))
+    owners = relationship(security_manager.user_model, secondary=slice_user)
+    table = relationship(
+        "SqlaTable",
+        foreign_keys=[datasource_id],
+        primaryjoin="and_(Slice.datasource_id == SqlaTable.id, "
+        "Slice.datasource_type == 'table')",
+        remote_side="SqlaTable.id",
+        lazy="subquery",
+    )
+    token = ""
+
+    export_fields = [
+        "slice_name",
+        "datasource_type",
+        "datasource_name",
+        "viz_type",
+        "params",
+        "cache_timeout",
+    ]
+    export_parent = "table"    
+    
+    @property  # type: ignore
+    @utils.memoized
+    def viz(self) -> Optional[BaseViz]:
+        form_data = json.loads(self.params)
+        viz_class = viz_types.get(self.viz_type)
+        if viz_class:
+            return viz_class(datasource=self.datasource, form_data=form_data)
+        return None
+    
+    @property
+    def data(self) -> Dict[str, Any]:    
+```
+
+
+
+/supetset/superset_config.py 
+
+```python
+# 设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
+VIZ_TYPE_DENYLIST = ['pivot_table', 'treemap']
+```
+
+
+
+/superset/views/utils.py 
+
+get_viz()根据传参viz_type返回相应的图表类。
+
+```python
+if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):
+    from superset import viz_sip38 as viz
+else:
+    from superset import viz  # type: ignore
+    
+def get_viz(
+    form_data: FormData,
+    datasource_type: str,
+    datasource_id: int,
+    force: bool = False,
+    force_cached: bool = False,
+) -> BaseViz:
+    viz_type = form_data.get("viz_type", "table")
+    datasource = ConnectorRegistry.get_datasource(
+        datasource_type, datasource_id, db.session
+    )
+    viz_obj = viz.viz_types[viz_type](  # 如果viz_types不存在或配置文件里的限制类型，将返回KeyError
+        datasource, form_data=form_data, force=force, force_cached=force_cached
+    )
+    return viz_obj
+```
+
+
+
+#### 客户端交互 
+
+详见下文 《前端可视化》章节。
+
+/superset-frontend/src/visualizations/
+
+
+
+### 下钻及交叉过滤
+
+#### 下钻 drilldown 
+
+尚未实现
+
+
+
+#### 看板交叉过滤 x-filter
+
+1. 服务端 
+
+   服务端只是打开了过滤标识，并将此标识作为启动数据传给了客户端。客户端触发交叉过滤时，只是在页面上向其它图表发送请求，可以复用原有图表接口请求。
+
+superset_config.py  
+
+打开特性标识开头 DASHBOARD_CROSS_FILTERS
+
+```python
+FEATURE_FLAGS = { 
+    "DASHBOARD_CROSS_FILTERS" : True
+}
+```
+
+
+
+2. UI
+
+支持交叉过滤的图表有一个选项 `▢ EMIT DASHBOARD CROSS FILTERS`,  选中才会在看板里触发交叉过滤。此选项的布尔值保存在 slices表里的params字段JSON值里的emit_filter。params格式示例如下，
+
+```json
+{
+  "adhoc_filters": [],
+  "all_columns": [],
+  "color_pn": true,
+  "conditional_formatting": [],
+  "datasource": "2__table",
+  "emit_filter": true,
+  "extra_form_data": {},
+  "granularity_sqla": "year",
+  "groupby": [
+    "country_name",
+    "region"
+  ],
+  "include_search": false,
+  "metrics": [
+    "sum__SP_POP_TOTL"
+  ],
+  "order_by_cols": [],
+  "order_desc": true,
+  "percent_metrics": [],
+  "query_mode": "aggregate",
+  "row_limit": 50000,
+  "server_page_length": 10,
+  "show_cell_bars": true,
+  "slice_id": 88,
+  "table_timestamp_format": "smart_date",
+  "time_grain_sqla": "P1D",
+  "time_range": "2014-01-01 : 2014-01-02",
+  "time_range_endpoints": [
+    "inclusive",
+    "exclusive"
+  ],
+  "url_params": {},
+  "viz_type": "table"
+}
+```
+
+前端实现 /src/dashboard/components/SliceHeaderControls/index.tsx
+
+```tsx
+// 图表控制数据
+export interface SliceHeaderControlsProps {
+  slice: {
+    description: string;
+    viz_type: string;
+    slice_name: string;
+    slice_id: number;
+    slice_description: string;
+    form_data?: { emit_filter?: boolean };
+  };
+```
+
+
 
 
 
@@ -2147,7 +2702,7 @@ thumbnail_cache = LocalProxy(lambda: cache_manager.thumbnail_cache)
 
 
 
-#### 配置文件
+#### 配置文件 config.py
 
 **配置文件的优先级**:  superset_config.py >  config.py  
 
@@ -2407,8 +2962,8 @@ superset视图可以分为3类，菜单视图，普通视图(不生成菜单的�
 
 前2类视图是flaskappbuilder控制生成的，后一种视图是sqlalchemy控制生成的。
 
-* base.py  2个视图基类
-* core.py  普通视图
+* base.py  2个视图基类SupersetModelView和BaseSupersetView
+* core.py  普通视图，Superset类里实现 /superset开头的路由。
 * /xx/view.py  资源视图
 * base_api.py API基类
 
@@ -2418,10 +2973,10 @@ superset视图可以分为3类，菜单视图，普通视图(不生成菜单的�
 
 /superset/views/base.py
 
-定义了superset视图基类 SupersetModelView和BaseSupersetView，
+定义了superset视图基类 SupersetModelView和BaseSupersetView。
 
 * 2视图的模板指向 superset/crud_views.html, 入口名为crudViews。
-* 2视图的路由前缀不一样：SupersetModelView派生类通常定义了自己的route_base；BaseSupersetView派生类路由前缀一般是/superset。
+* 2视图的路由前缀不一样：SupersetModelView派生类通常定义了自己的route_base；BaseSupersetView派生类路由前缀缺省是类名小写，如/superset。
 * 2视图的派生类实现文件不一样：SupersetModelView派生类集中在/superset/xx/views.py；BaseSupersetView派生类集中在/superset/views/core.py。
 
 ```python
@@ -3046,7 +3601,7 @@ class ChartRestApi(BaseSupersetModelRestApi):
 
 /superset/dao/base.py 
 
-  基类BaseDAO。定义了常规的DAO查询类静态方法@classmethod，CRUD。
+基类BaseDAO。定义了常规的DAO查询类静态方法@classmethod，CRUD。
 
 ```python
 from typing import Any, Dict, List, Optional, Type
@@ -3455,142 +4010,6 @@ class Superset(BaseSupersetView):
 
 
 
-#### 可视化图表
-
-* /superset/viz.py 定义了可视化基类BaseViz及各个子类，可视化列表viz_types
-* /superset/superset_config.py  此处变量VIZ_TYPE_DENYLIST会被 viz_types用到
-* /superset/views/utils.py  get_viz()会根据传参类型返回BaseViz的实际子类。
-
-
-
-/superset/viz.py  可视化图表类型的基类和子类
-
-```python
-from flask_babel import lazy_gettext as _
-
-
-class BaseViz:
-
-    """All visualizations derive this base class"""
-
-    viz_type: Optional[str] = None
-    verbose_name = "Base Viz"
-    credits = ""
-    is_timeseries = False
-    cache_type = "df"
-    enforce_numerical_metrics = True
-
-    def __init__(
-        self,
-        datasource: "BaseDatasource",
-        form_data: Dict[str, Any],
-        force: bool = False,
-        force_cached: bool = False,
-    ) -> None:
-        if not datasource:
-            raise QueryObjectValidationError(_("Viz is missing a datasource"))
-
-        self.datasource = datasource
-        self.request = request
-        self.viz_type = form_data.get("viz_type")
-        self.form_data = form_data
-
-        self.query = ""
-        self.token = utils.get_form_data_token(form_data)
-
-        self.groupby: List[str] = self.form_data.get("groupby") or []
-        self.time_shift = timedelta()
-
-        self.status: Optional[str] = None
-        self.error_msg = ""
-        self.results: Optional[QueryResult] = None
-        self.errors: List[Dict[str, Any]] = []
-        self.force = force
-        self._force_cached = force_cached
-        self.from_dttm: Optional[datetime] = None
-        self.to_dttm: Optional[datetime] = None
-        self._extra_chart_data: List[Tuple[str, pd.DataFrame]] = []
-
-        self.process_metrics()
-
-        self.applied_filters: List[Dict[str, str]] = []
-        self.rejected_filters: List[Dict[str, str]] = []
-
-          
-class NVD3Viz(BaseViz):
-
-    """Base class for all nvd3 vizs"""
-
-    credits = '<a href="http://nvd3.org/">NVD3.org</a>'
-    viz_type: Optional[str] = None
-    verbose_name = "Base NVD3 Viz"
-    is_timeseries = False
-        
-
-class BubbleViz(NVD3Viz):
-
-    """Based on the NVD3 bubble chart"""
-
-    viz_type = "bubble"
-    verbose_name = _("Bubble Chart")
-    is_timeseries = False
-
-    def query_obj(self) -> QueryObjectDict:
-        
-        
-def get_subclasses(cls: Type[BaseViz]) -> Set[Type[BaseViz]]:
-    return set(cls.__subclasses__()).union(
-        [sc for c in cls.__subclasses__() for sc in get_subclasses(c)]
-    )
-
-
-viz_types = {
-    o.viz_type: o
-    for o in get_subclasses(BaseViz)
-    if o.viz_type not in config["VIZ_TYPE_DENYLIST"]
-}            
-```
-
-
-
-/supetset/superset_config.py 
-
-```python
-# 设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
-VIZ_TYPE_DENYLIST = ['pivot_table', 'treemap']
-```
-
-
-
-/superset/views/utils.py 
-
-get_viz()根据传参viz_type返回相应的图表类。
-
-```python
-if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):
-    from superset import viz_sip38 as viz
-else:
-    from superset import viz  # type: ignore
-    
-def get_viz(
-    form_data: FormData,
-    datasource_type: str,
-    datasource_id: int,
-    force: bool = False,
-    force_cached: bool = False,
-) -> BaseViz:
-    viz_type = form_data.get("viz_type", "table")
-    datasource = ConnectorRegistry.get_datasource(
-        datasource_type, datasource_id, db.session
-    )
-    viz_obj = viz.viz_types[viz_type](  # 如果viz_types不存在或配置文件里的限制类型，将返回KeyError
-        datasource, form_data=form_data, force=force, force_cached=force_cached
-    )
-    return viz_obj
-```
-
-
-
 #### 异步查询 
 
 celery使用
@@ -3609,9 +4028,9 @@ celery使用
 
 安全权限大致可分为四类：
 
-* 基本权限：依赖于flask_appbuilder的权限管理，属于用户认证权限。
-  * /flask_appbuilder/security/   fab的权限管理实现 详见《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
-  * /superset/security/   superset的权限管理
+* 基本权限：依赖于flask_appbuilder的安全管理，属于用户认证权限。
+  * /flask_appbuilder/security/   fab安全管理实现，包括用户登陆认证和JWT认证。详见《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
+  * /superset/security/   superset安全管理
   * /superset/app.py  在这里可导入配置文件里配置变量CUSTOM_SECURITY_MANAGER 定义的管理类
 * 菜单权限：依赖于flask_appbuilder的菜单管理
   * /flask_appbuilder/menu.py  fab的菜单对象
@@ -3623,9 +4042,9 @@ celery使用
 
 #### 用户认证
 
-##### 用户认证实现fab
+##### superset安全管理  /superset/security/
 
-用户认证支持主流认证方式，如DB认证，Oauth，LDAP和openAPI等。
+用户认证支持主流认证方式，如DB认证，Oauth，LDAP和openAPI等。fab的用户认证实现 详见《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
 
 /superset/app.py
 
@@ -3743,7 +4162,7 @@ class SupersetSecurityManager(SecurityManager):
 
 ##### JWT
 
-对于API用户，更适合于用JWT方式进行用户认证。
+对于API用户，更适合于用JWT方式进行用户认证。flask_appbuilder模块提供此接口实现，详见《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
 
 支持 Bearer Token认证。
 
@@ -3924,7 +4343,7 @@ class SecurityManager(BaseSecurityManager):
 
 API访问权限体现在二个方面，
 
-* 一是用户认证：主要有二种，分别是登陆认证，二是JWT认证。
+* 一是用户认证：主要有二种，分别是登陆认证和 JWT认证。
 * 二是API资源权限：REST模式中，一个API路由就是一个资源。资源可以对应到某个类的方法里。需要对这个方法进行鉴权。这个过程主要是查询数据库，查询 认证用户所拥有的资源权限是否包括了本API资源权限。
 
 
@@ -4216,7 +4635,11 @@ PADDING_MECHANISM = {
 
  /flask_appbuilder/security/sqla/manager.py
 
-用户密码，HASH值保存，依赖模块werkzeug
+用户密码，HASH值保存，依赖模块werkzeug。HASH生成方法默认pbkdf2:sha256，盐值salt随机生成保存到DB里。
+
+用户注册:  用户提供密码+随机盐值，生成HASH密码。用上面内容用$分割保存成`method$salt$hash_pwd` 写入到DB的密码项。
+
+身份验证：先从DB取出密码项HASH，分别获取到方法、盐值和HASH密码；使用用户传输密码和获取到的盐值生成HASH密码，再比对二者的HASH密码是否一致。
 
 ```python
 from werkzeug.security import generate_password_hash
@@ -4506,7 +4929,7 @@ LOG_LEVEL = "DEBUG"
 
 # ---------------------------------------------------
 # Enable Time Rotate Log Handler: 每天生成一个文件，保存最近30天。
-# 注意：不是进程安全的。多进程要使用gunicron的日志体系。
+# 注意：不是进程安全的。多进程要使用gunicorn的日志体系。
 # ---------------------------------------------------
 # LOG_LEVEL = DEBUG, INFO, WARNING, ERROR, CRITICAL
 ENABLE_TIME_ROTATE = False
@@ -5518,6 +5941,85 @@ const groupByControl = {
 
 
 
+### 可视化 /src/visualizations
+
+* FilterBox/  过滤盒  v1.3疑废弃，换用看板原生过滤器
+* presets/  预设，图表插件导入
+* TimeTable/  时间表格
+* constants.js  只定义一个常量 TIME_CHOICES
+
+
+
+#### 预设 /presets/MainPreset.jsx
+
+/superset-frontend/src/visualizations/presets/MainPreset.jsx
+
+图表插件导入，多是直接从@superset-ui导入。因此若@superset-ui模块增加了新图表类型插件，多数情况下可直接使用到superset里。
+
+```jsx
+import { Preset } from '@superset-ui/core';
+import {
+  BigNumberChartPlugin,
+  BigNumberTotalChartPlugin,
+} from '@superset-ui/legacy-preset-chart-big-number';
+import CalendarChartPlugin from '@superset-ui/legacy-plugin-chart-calendar';
+...
+
+export default class MainPreset extends Preset {
+  constructor() {
+    super({
+      name: 'Legacy charts',
+      presets: [new DeckGLChartPreset()],
+      plugins: [
+        new AreaChartPlugin().configure({ key: 'area' }),
+        new BarChartPlugin().configure({ key: 'bar' }),
+        new BigNumberChartPlugin().configure({ key: 'big_number' }),
+        new BigNumberTotalChartPlugin().configure({ key: 'big_number_total' }),
+        new EchartsBoxPlotChartPlugin().configure({ key: 'box_plot' }),
+        new BubbleChartPlugin().configure({ key: 'bubble' }),
+        new BulletChartPlugin().configure({ key: 'bullet' }),
+        new CalendarChartPlugin().configure({ key: 'cal_heatmap' }),
+        new ChordChartPlugin().configure({ key: 'chord' }),
+        new CompareChartPlugin().configure({ key: 'compare' }),
+        new CountryMapChartPlugin().configure({ key: 'country_map' }),
+        new DistBarChartPlugin().configure({ key: 'dist_bar' }),
+        new DualLineChartPlugin().configure({ key: 'dual_line' }),
+        new EventFlowChartPlugin().configure({ key: 'event_flow' }),
+        new FilterBoxChartPlugin().configure({ key: 'filter_box' }),
+        new ForceDirectedChartPlugin().configure({ key: 'directed_force' }),
+        new HeatmapChartPlugin().configure({ key: 'heatmap' }),
+        new HistogramChartPlugin().configure({ key: 'histogram' }),
+        new HorizonChartPlugin().configure({ key: 'horizon' }),
+        new LineChartPlugin().configure({ key: 'line' }),
+        new LineMultiChartPlugin().configure({ key: 'line_multi' }),
+        new MapBoxChartPlugin().configure({ key: 'mapbox' }),
+        new PairedTTestChartPlugin().configure({ key: 'paired_ttest' }),
+        new ParallelCoordinatesChartPlugin().configure({ key: 'para' }),
+        new PartitionChartPlugin().configure({ key: 'partition' }),
+        new EchartsPieChartPlugin().configure({ key: 'pie' }),
+        new PivotTableChartPlugin().configure({ key: 'pivot_table' }),
+        new RoseChartPlugin().configure({ key: 'rose' }),
+        new SankeyChartPlugin().configure({ key: 'sankey' }),
+        new SunburstChartPlugin().configure({ key: 'sunburst' }),
+        new TableChartPlugin().configure({ key: 'table' }),
+        new TimePivotChartPlugin().configure({ key: 'time_pivot' }),
+        new TimeTableChartPlugin().configure({ key: 'time_table' }),
+        new TreemapChartPlugin().configure({ key: 'treemap' }),
+        new WordCloudChartPlugin().configure({ key: 'word_cloud' }),
+        new WorldMapChartPlugin().configure({ key: 'world_map' }),
+        new EchartsTimeseriesChartPlugin().configure({
+          key: 'echarts_timeseries',
+        }),
+        new AntdSelectFilterPlugin().configure({ key: 'filter_select' }),
+        new AntdRangeFilterPlugin().configure({ key: 'filter_range' }),
+      ],
+    });
+  }
+}
+```
+
+
+
 
 
 ## 5 依赖模块
@@ -5534,11 +6036,17 @@ const groupByControl = {
 
 *@superset-ui/plugin-*软件包通常较新且质量更高。 它们不依赖viz.py （包含可视化特定的python代码）并与/api/v1/query/交互的主要区别在于：新的通用终结点旨在提供所有可视化。 还应该用Typescript编写。
 
+#### 源码结构 
+
+
+
 
 
 ### 前端依赖 React
 
 详见 《[前端框架分析](前端框架分析.md)》
+
+
 
 
 

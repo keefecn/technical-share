@@ -108,6 +108,8 @@ flask.app该模块近2000行代码，主要完成应用的配置、初始化、�
 
 类方法：run  create_app  register_blueprint  register_db  route/add_url_route
 
+flask启动调用 Flask.run，缺省监听参数是127.0.0.1:5000。
+
 ```python
 from .helpers import _PackageBoundObject
 
@@ -179,7 +181,7 @@ class Flask(_PackageBoundObject):
     def run(self, host=None, port=None, debug=None, **options):
         """Runs the application on a local development server.
         默认情况下，是单进程单线程模型，即一次只能处理一个请求，其它请求需排队。
-        缺省非调试模式（bool(None)=False）。
+        缺省值：host=127.0.0.1, port=5000, debug=bool(None)=False 非调试模式
         """
         if host is None:
             host = '127.0.0.1'
@@ -685,6 +687,11 @@ g = LocalProxy(partial(_lookup_app_object, 'g'))
 
 ### 配置文件
 
+* flask/config.py  配置类，读取配置文件
+* flask/app.py  加载配置类
+
+
+
 flask/config.py
 
 ```python
@@ -771,7 +778,7 @@ class Flask(_PackageBoundObject):
 
 
 
-## flask命令
+## flask命令 cli.py
 
 flask命令基于click库实现。
 
@@ -2067,6 +2074,87 @@ class DispatcherMiddleware(object):
 
 
 
+### 安全 security.py
+
+/werkzeug/security.py
+
+包括密码HASH，字符串安全比较、安全拼接。
+
+密码+盐值的HASH值，通常用来存储用户密码。
+
+用户注册:  用户提供密码+随机盐值，生成HASH密码。用上面内容用$分割保存成`method$salt$hash_pwd` 写入到DB的密码项。
+
+身份验证：先从DB取出密码项HASH，分别获取到方法、盐值和HASH密码；使用用户传输密码和获取到的盐值生成HASH密码，再比对二者的HASH密码是否一致。
+
+```python
+import codecs
+import hashlib
+import hmac
+from random import SystemRandom
+
+
+SALT_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+DEFAULT_PBKDF2_ITERATIONS = 150000
+
+
+def generate_password_hash(password, method="pbkdf2:sha256", salt_length=8):
+    """ 用给的salt值长度 和 method 获取hash值 """
+    salt = gen_salt(salt_length) if method != "plain" else ""
+    h, actual_method = _hash_internal(method, salt, password)
+    return "%s$%s$%s" % (actual_method, salt, h)    
+
+def check_password_hash(pwhash, password):
+    """
+    pbkdf2:method:iterations 比如
+	    pbkdf2:sha256:80000$salt$hash
+       	pbkdf2:sha256$salt$hash  
+    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad        
+    """
+    if pwhash.count("$") < 2:
+        return False
+    method, salt, hashval = pwhash.split("$", 2)
+    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)    
+
+def gen_salt(length):
+    """Generate a random string of SALT_CHARS with specified ``length``. 根据长度，获取盐串中随机值 """
+    if length <= 0:
+        raise ValueError("Salt length must be positive")
+    return "".join(_sys_rng.choice(SALT_CHARS) for _ in range_type(length))
+
+def safe_str_cmp(a, b):
+    """ 会将a,b编码统一转化成 unicode """
+    
+
+def safe_join(directory, *pathnames):
+    """Safely join zero or more untrusted path components to a base
+    directory to avoid escaping the base directory.
+
+    :param directory: The trusted base directory.
+    :param pathnames: The untrusted path components relative to the
+        base directory.
+    :return: A safe path, otherwise ``None``.
+    """
+    parts = [directory]
+
+    for filename in pathnames:
+        if filename != "":
+            filename = posixpath.normpath(filename)
+
+        if (
+            any(sep in filename for sep in _os_alt_seps)
+            or os.path.isabs(filename)
+            or filename == ".."
+            or filename.startswith("../")
+        ):
+            return None
+
+        parts.append(filename)
+
+    return posixpath.join(*parts)    
+```
+
+
+
 ### 日志
 
 打印请求行基本信息
@@ -2275,7 +2363,7 @@ Required-by: Flask
 ```python
 from itsdangerous import URLSafeSerializer
 
-# 此处二个参数secret key和salt要妥善保存，如果泄露，数据将不再安全。
+# 此处二个参数secret key和salt 要妥善保存，如果泄露，数据将不再安全
 auth_s = URLSafeSerializer("secret key", "auth")
 token = auth_s.dumps({"id": 5, "name": "itsdangerous"})
 

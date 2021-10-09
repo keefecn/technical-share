@@ -2030,7 +2030,7 @@ __main__.child <class 'logging.Logger'> 2221026990640 2221026991120
 
 
 
-# 常见源码
+# 5 常见源码
 
 ## 命令行启动模块
 
@@ -2152,6 +2152,8 @@ setup(
 
 ## six模块 six.py
 
+python2和python3兼容工具。由于python2不再支持，这个模块基本可废弃了。
+
 ```shell
 $ pip show six
 pip show six
@@ -2169,7 +2171,7 @@ Required-by: xdis, virtualenv, tensorflow, tensorflow-gpu, python-dateutil, prot
 
 
 
-six.py  Python2和3的兼容工具，如果不想要支持Python2，可以不使用此模块。
+源码示例:
 
 ```python
 from __future__ import absolute_import
