@@ -23,6 +23,8 @@
 
  
 
+---
+
 # 目录
 
 [目录... 1](#_Toc4226974)
@@ -131,6 +133,12 @@
 
 
 
+[TOC]
+
+
+
+---
+
 
 # 1  简介
 
@@ -140,13 +148,13 @@ gitk是git安装包中缺省的图形界面包。可以方便地用来查看历�
 
 # 2  安装配置篇
 
-## 2.1   安装
+## 2.1  安装
 
 Linux: 只要用yum，apt-get等安装即可，或是下载之后编译安装。
  Mac OS X: 从[这里](http://code.google.com/p/git-osx-installer/)下载并安装。
  Windows:先安装putty，然后从[这里](http://code.google.com/p/msysgit)下载并安装。
 
-## 2.2   开发者配置
+## 2.2  开发者配置
 
 ### 2.2.1 SSHKEY验证
 
@@ -199,7 +207,7 @@ $ git config --global user.email "schacon@gmail.com"
 ```
 
 
-## 2.3   中文环境配置
+## 2.3  中文环境配置
 
 1) Git Bash窗口ls正常显示中文
 
@@ -241,7 +249,8 @@ quotepath = false
 **特别说明**：如果要上传文件名为中文的文件，最好下载git2.0以上的版本，采用utf-8编码路径，传输到远程也不会乱码，也不用设置.gitconfig文件里的gui/ pathnameencoding/commit的编码。
 
 
-## 2.4   参数配置.git
+
+## 2.4  参数配置.git
 
 **配置文件优先级**：.git/config > .gitconfig > /etc/gitconfig
 
@@ -590,15 +599,15 @@ usage: git reset [--mixed | --soft | --hard | --merge | --keep] [-q] [<commit>]
   -p, --patch      select hunks interactively
   -N, --intent-to-add  record only the fact that removed paths will be added later
  
-//本地仓库撤销, 可以将本地的仓库回滚到上一次提交时的状态，`HEAD^`指的是上一次提交。`HEAD` ^[num]表示可撤销前num次提交。
+# 本地仓库撤销, 可以将本地的仓库回滚到上一次提交时的状态，`HEAD^`指的是上一次提交。`HEAD` ^[num]表示可撤销前num次提交。
 $ git reset --hard HEAD^
 
-// 完成撤销,同时将代码恢复到前一commit_id 对应的版本。
+# 完成撤销,同时将代码恢复到前一commit_id 对应的版本。
 $ git reset --hard commit_id
-// 完成Commit命令的撤销，但是不对代码修改进行撤销，可以直接通过git commit 重新提交对本地代码的修改。
+# 完成Commit命令的撤销，但是不对代码修改进行撤销，可以直接通过git commit 重新提交对本地代码的修改。
 $ git reset commit_id 
  
-//远程仓库跟随本地仓库撤销，保持本地与远程的状态一致，即回滚。
+# 远程仓库跟随本地仓库撤销，保持本地与远程的状态一致，即回滚。
 $ git push origin [branch] -f
 ```
 
@@ -633,7 +642,7 @@ git rebase --continue | --skip | --abort | --edit-todo
 
 合并执行顺序：
 
-1). 设定不需要合并的commit起始值, `-i` 的参数是不需要合并的 commit 的 hash 值
+1). 设定不需要合并的commit起始值, `-i` 的参数是不需要合并的 commit 的 hash 值。如果未设-i后的值，那么默认是从还未提交到远程仓库的commit开始。
 
 git -i [hash_valus]
 
@@ -742,14 +751,14 @@ git merge --squash dev
 
 版本号：x.x.x=主版本号.次版本号.发布序列。主版本号只用在重要架构级或功能大升级。
 
-表格 1 branch和tag比较表
+表格  branch和tag比较表
 
 |             | 说明                                                         | 主要命令                                                     |
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x | $ git tag  # 查看  $ git tag  -a [xxx]  # 打tag              |
-| branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用-a  <br/>$ git branch -a  <br/>$ git push origit [xxx]    # 推送分支到远程   <br/>$ git push origin :[xxx]  # 删除远程分支，或者将:改为--delete | # 创建/删除分支  <br/>`$git checkout --orphan [空分支]`  <br/>$ git checkout -b [to] [from]  <br/>$ git branch -d [xxx]  <br/># 切换/合并分支  <br/>$ git checkout [xxx]  <br/>$ git merge [to]  <br/># 重命名分支  <br/>$ git branch -m [old] [new] |
+| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x<br>$ git push --tags  #推送全部tag<br/>$ git push origin [xxx] #推送单个tag到远程<br/>$ git push origin -d [xxx]  #删除远程指定tag | $ git tag  # 查看  <br>$ git tag  -a [xxx]  # 打tag<br>$ git tag -d [xxx]  #删除本地指定tag |
+| branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用 -a  <br/>$ git branch -a  <br/>$ git push origin [xxx]    # 推送分支到远程   <br/>$ git push origin :[xxx]  # 删除远程分支，或者将:改为--delete | # 创建分支  <br/>`$git checkout --orphan [空分支]`  <br/>$ git checkout -b [to] [from]  <br/>$ git branch -d [xxx]  #删除分支<br/>$ git checkout [xxx]  #切换分支<br/>$ git merge [to]   #合并分支<br/>$ git branch -m [old] [new]   # 重命名分支 |
 
-备注：命令参数如-d/-D大小写不敏感。
+备注：命令参数如-d/-D大小写不敏感。tag和branch推送远程的操作命令类似。
 
  ![image-20191208223108973](../../media/sf_reuse/tools/tools_git_002.png)
 
@@ -1066,22 +1075,16 @@ $ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
 
 或 $ git svn clone file:///tmp/test-svn -s 
 
- 
-
 2)    获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了）
  `$ git svn rebase`
-
- 
 
 3)    转换SVN仓库的svn:ignore属性到Git仓库的.gitignore文件
  `$ git svn create-ignore`
 
- 
-
 4)   转换SVN的标签为Git标签
 ```sh
-   $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
-   $ rm -Rf .git/refs/remotes/tags
+ $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
+ $ rm -Rf .git/refs/remotes/tags
 ```
 
 5)    转换SVN的分支为Git分支
@@ -1126,9 +1129,9 @@ git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
 
  
 
-## 7.2   中文乱码问题
+## 7.2  中文乱码问题
 
-//TODO: 效果不明显
+TODO: 效果不明显
 ```sh
 alias ls=’ls –show-control-chars –color=auto’
 git config core.quotepath false
@@ -1137,7 +1140,7 @@ git config core.quotepath false
 
 ## 7.3   远程git命令找不到
 
-//add to .git/config
+add to .git/config
 ```ini
 [remote "origin"]
      fetch = +refs/heads/*:refs/remotes/origin/*
@@ -1146,7 +1149,7 @@ git config core.quotepath false
      receivepack = ~/app/bin/git-receive-pack
 ```
 
-## 7.4   git svn Can't locate SVN/Core.pm
+## 7.4  git svn Can't locate SVN/Core.pm
 ```sh
 $ cd ${SVN_SRC_PATH}
 $ make swig-pl

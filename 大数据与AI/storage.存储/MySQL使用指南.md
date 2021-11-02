@@ -2224,11 +2224,11 @@ shell >/etc//init.d/mysql restart
 
 **导入导出参数：**
 
--default-character-set=latin1 #原数据库的字符编码
-
---set-charset=gbk #要导出的数据库文件的编码，phpmyadin导出缺省是utf-8.
-
---where  #导出WHERE语句，如导出一万行为'1 limit 10000'
+```
+-default-character-set=latin1  #原数据库的字符编码
+--set-charset=gbk              #要导出的数据库文件的编码，phpmyadin导出缺省是utf-8.
+--where                        #导出WHERE语句，如导出一万行为'1 limit 10000'
+```
 
 
 

@@ -237,9 +237,15 @@
 
 [8.2         参考书目. 111](#_Toc18275057)
 
+
+
+
+
+[TOC]
+
+
+
 ---
-
-
 
 # 1  Python概述
 ## 1.1  Python简介 
@@ -3911,7 +3917,9 @@ python get-pip.py
 
 ## 6.3 Python模块问题
 
-### mysql操作失败
+### DB模块
+
+1. **MySQL: 操作失败**
 
 mysql语句操作失败一方面是编码问题，字段值含有非ascii字符，将字符编码转化为UTF-8基本可解决； 另一方面主要是字符转义问题，字段值中有特殊字符需要转义（如,引号）。
 **特别注意**：`SET NAMES UTF8;`
@@ -3938,6 +3946,52 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 
 
 
+2. **Oracle:  cx_oralce版本报错 **
+
+描述： Cannot locate a 64-bit Oracle Client library: "libclntsh.so: cannot open shared object file: No such file or directory".
+
+解决方法：下载instantclient_21_1， 环境变量指定库路径。
+
+```shell
+# 下载  
+# 不可用 https://www.oracle.com/cn/database/technology/linuxx86-64soft.html
+# 可用 https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
+# 注意第三方工具如：PL/SQL Developer和Toad的版本，32位的要对应32位的OracleInstant Client，不要因为系统是64位的就下载64位的，这个要注意。
+
+# 示例版本： /opt/oracle/instantclient_21_3
+cd /opt/oracle      
+unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
+
+# 添加链接：一般可能已经有了
+cd /opt/oracle/instantclient_21_3 
+ln -s libclntsh.so.12.1 libclntsh.so
+ln -s libocci.so.12.1 libocci.so
+
+sudo yum install libaio
+
+# 设置库路径
+sudo sh -c "echo /opt/oracle/instantclient_21_3 > \        
+  /etc/ld.so.conf.d/oracle-instantclient.conf"    
+sudo ldconfig
+# 或者 设置库环境变量
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
+
+# 测试
+$ python -c 'import cx_Oracle'
+```
+
+
+
+3. **SQLite:  ModuleNotFoundError: No module named '_sqlite3' **
+
+报错信息：ModuleNotFoundError: No module named '_sqlite3
+
+原因：安装python的时候没有找到sqlite3.so的库。
+
+解决方法：`yum install sqlite*`  然后重新编译python或者重新安装python。
+
+
+
 ### celery broker使用redis集群
 
 环境：py3.7，celery4.3.0（依赖redis>=3.0），redis-py-cluster1.3.6（依赖redis==2.10.6)。
@@ -3960,51 +4014,48 @@ Your installed Python is incomplete. Attempting to use lzma compression will res
   warnings.warn(msg)
 ```
 
-原因：要严格按照模块依赖的版本安装。"pandas>=1.1.2, <1.2",
+原因：要严格按照模块依赖的版本安装。"pandas>=1.1.2, <1.2",  并且安装依赖模块backports.lzma（不用标准库，很恶心）。
 
 解决方法：
 
 ```shell
-$ sudo yum install xz-devel
-$ pip install backports.lzma	#若未安装xz-devel，将会报缺少lzma.h文件
+$ sudo yum install xz-devel		#若未安装xz-devel，将会报缺少lzma.h文件. 
+$ pip install backports.lzma	#_lzma是python3.3后加入的标准库，但pandas用了backports.lzma（可以兼容python3.3之前）。为啥pandas不跟标准库对齐，还有谁用这么老的python版本？
+
+# 然后还要修改 python库里lzma.py
+$ find /usr/local/python38/ -iname "lzma.py"
+/usr/local/python38/lib/python3.8/lzma.py
+
+$vi /usr/local/python38/lib/python3.8/lzma.py
+try:
+    from _lzma import *
+    from _lzma import _encode_filter_properties, _decode_filter_properties
+except:  # except里新增
+    from backports.lzma import *
+    from backports.lzma import _encode_filter_properties, _decode_filter_properties
 ```
 
-
-
-**Q2：cx_oralce版本报错 **
-
-描述： Cannot locate a 64-bit Oracle Client library: "libclntsh.so: cannot open shared object file: No such file or directory".
-
-解决方法：下载instantclient_21_1， 环境变量指定库路径
+备注：
 
 ```shell
-# 下载  
-# 不可用 https://www.oracle.com/cn/database/technology/linuxx86-64soft.html
-# 可用 https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
-# 注意第三方工具如：PL/SQL Developer和Toad的版本，32位的要对应32位的OracleInstant Client，不要因为系统是64位的就下载64位的，这个要注意。
-
-# 示例版本： /opt/oracle/instantclient_12_2
-cd /opt/oracle      
-unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
-
-# 添加链接：一般可能已经有了
-cd /opt/oracle/instantclient_12_2  
-ln -s libclntsh.so.12.1 libclntsh.so
-ln -s libocci.so.12.1 libocci.so
-
-sudo yum install libaio
-
-# 设置库路径
-sudo sh -c "echo /opt/oracle/instantclient_12_2 > \        
-  /etc/ld.so.conf.d/oracle-instantclient.conf"    
-sudo ldconfig
-# 或者 设置库环境变量
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH
+$ pip show backports.lzma
+Name: backports.lzma
+Version: 0.0.14
+Summary: Backport of Python 3.3's 'lzma' module for XZ/LZMA compressed files.
+Home-page: https://github.com/peterjc/backports.lzma
+Author: Peter Cock, based on work by Nadeem Vawda and Per Oyvind Karlsen
+Author-email: p.j.a.cock@googlemail.com
+License: 3-clause BSD License
+Location: /home/ai/venv/superset-py38-env/lib/python3.8/site-packages
+Requires: 
+Required-by: 
 ```
 
 
 
-**Q3: pyquery & beautifulSoup**
+
+
+**Q2: pyquery & beautifulSoup**
 
 **错误1：AttributeError: 'XPathExpr' object has no attribute 'add_post_condition'**
 解决方案：版本问题。重新安装pyquery

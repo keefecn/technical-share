@@ -1956,27 +1956,27 @@ Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-A
 
 表格 sqlalchemy源码结构
 
-| 目录或文件    | 主要类或函数                                               | 说明                                           |
-| ------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| connectors    | Connector MxODBCConnector PyODBCConnector ZxJDBCConnector  | 连接器                                         |
-| databases     | `__all__`                                                  | 数据库。导入dialects目录下各种数据库名字空间。 |
-| dialects      | 目录：firebird mssql mysql oracle postgresql sqlite sybase | 拨号器。各种数据库连接的实现。                 |
-| engine        | create_engine engine_from_config  Engine<br>文件：base.py  | 引擎                                           |
-| event         | api.py attr.py base.py legacy.py registry.py               | 事件处理                                       |
-| ext           |                                                            | 扩展                                           |
-| orm           | 重要                                                       | ORM模型                                        |
-| pool          |                                                            | 池                                             |
-| sql           | 重要                                                       |                                                |
-| testing       |                                                            | 测试目录                                       |
-| util          |                                                            | 工具                                           |
-| events.py     | ConnectionEvents DDLEvents DialectEvents PoolEvents        | 事件。继承自event/base.py:Events               |
-| exc.py        |                                                            | 定义各种异常。                                 |
-| inspection.py | inspect                                                    |                                                |
-| interfaces.py | ConnectionProxy PoolListener                               | 接口                                           |
-| log.py        | InstanceLogger echo_property Identified                    | 日志                                           |
-| processors.py |                                                            | 处理器。定义通用类型转化成函数。               |
-| schema.py     | `__all__`                                                  | 模式。导入sql目录下模式相关各种类。            |
-| types.py      | `__all__`                                                  | 定义可以导出的类/函数符号。                    |
+| 目录或文件    | 主要类或函数                                                 | 说明                                                         |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| connectors    | Connector MxODBCConnector PyODBCConnector ZxJDBCConnector    | 连接器                                                       |
+| databases     | `__all__`                                                    | 数据库。导入dialects目录下各种数据库名字空间。               |
+| dialects      | 目录：firebird mssql mysql oracle postgresql sqlite sybase   | 数据库方言，指符合SQL规范的数据库语言实现。<br>比如分页、限流等的关键字和实现方式不同。 |
+| engine        | create_engine engine_from_config  Engine<br>文件：base.py ... | 引擎                                                         |
+| event         | api.py attr.py base.py legacy.py registry.py                 | 事件处理                                                     |
+| ext           |                                                              | 扩展                                                         |
+| orm           | 重要                                                         | ORM模型                                                      |
+| pool          |                                                              | 数据库连接池的实现。                                         |
+| sql           | 重要                                                         |                                                              |
+| testing       |                                                              | 测试目录                                                     |
+| util          |                                                              | 工具                                                         |
+| events.py     | ConnectionEvents DDLEvents DialectEvents PoolEvents          | 事件。继承自event/base.py:Events                             |
+| exc.py        |                                                              | 定义各种异常。                                               |
+| inspection.py | inspect                                                      |                                                              |
+| interfaces.py | ConnectionProxy PoolListener                                 | 接口                                                         |
+| log.py        | InstanceLogger echo_property Identified                      | 日志                                                         |
+| processors.py |                                                              | 处理器。定义通用类型转化成函数。                             |
+| schema.py     | `__all__`                                                    | 模式。导入sql目录下模式相关各种类。                          |
+| types.py      | `__all__`                                                    | 定义可以导出的类/函数符号。                                  |
 
 
 
@@ -1984,10 +1984,12 @@ Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-A
 
 图  SQLAlchemy architecture
 
+说明：ORM框架在上层实现了无差别调用，归一化各种数据库连接参数Connection、查询语句关键字Dialect，屏蔽了数据库底层实现逻辑。
+
 
 
 **Database Urls**
-dialect+driver://username:password@host:port/database
+dialect[+driver]://username:password@host:port/database
 
 示例：**MySQL**
 The MySQL dialect uses mysql-python as the default DBAPI. There are many MySQL DBAPIs available, including MySQL-connector-python and OurSQL:
@@ -2007,11 +2009,282 @@ engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 
 ### 引擎 /engine/
 
-* /sqlalchemy/engine/url.py  eingine组成 (RFC1738)： name://user:pwd@host:port/database
+| 文件           | 主要类或函数                                                 | 说明                                                       |
+| -------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
+| __`init__.py`  | create_engine engine_from_config                             | 定义了2个供外部使用的方法                                  |
+| base.py        | Connection Engine ExceptionContextImpl  Transaction <br/>NestedTransaction RootTransaction OptionEngine  TwoPhaseTransaction | 定义基类：连接、引擎、事务                                 |
+| default.py     |                                                              |                                                            |
+| interface.py   | Connectable CreateEnginePlugin Dialect  <br/>ExceptionContext ExecutionContext | 定义接口类                                                 |
+| reflection.py  |                                                              |                                                            |
+| result.y       |                                                              |                                                            |
+| strategirs.py  | EngineStrategy  DefaultEngineStrategy PlainEngineStrategy ThreadLocalEngineStrategy MockEngineStrategy | 引擎策略。                                                 |
+| threadlocal.py |                                                              | 线程本地数据                                               |
+| url.py         |                                                              | eingine组成 (RFC1738)： name://user:pwd@host:port/database |
+| utils.py       |                                                              | 工具                                                       |
+
+`/sqlalchemy/engine/__init__.py`
+
+```python
+default_strategy = "plain"
+
+
+def create_engine(*args, **kwargs):
+    """ 创建引擎，参数里获取引擎策略，跳转到相应的策略执行器 """
+    strategy = kwargs.pop("strategy", default_strategy)
+    strategy = strategies.strategies[strategy]
+    return strategy.create(*args, **kwargs)    
+    
+    
+def engine_from_config(configuration, prefix="sqlalchemy.", **kwargs):
+    """Create a new Engine instance using a configuration dictionary. """
+    options = dict(
+        (key[len(prefix) :], configuration[key])
+        for key in configuration
+        if key.startswith(prefix)
+    )
+    options["_coerce_config"] = True
+    options.update(kwargs)
+    url = options.pop("url")
+    return create_engine(url, **options)
+
+
+__all__ = ("create_engine", "engine_from_config")    
+```
 
 
 
-### 拨号器 /dialects/
+/sqlalchemy/engine/strategies.py
+
+```python
+strategies = {}
+
+
+class EngineStrategy(object):
+    """子类重载 create方法
+    """
+    def __init__(self):
+        strategies[self.name] = self
+
+    def create(self, *args, **kwargs):
+        raise NotImplementedError()
+        
+        
+
+class DefaultEngineStrategy(EngineStrategy):
+    """Base class for built-in strategies."""
+
+    def create(self, name_or_url, **kwargs):
+        """
+        要从传参中 获取完整的connect_args, pool，plugin
+        然后创建出相应的dialect对象，pool对象，插件
+        最终返回 Engine实例
+        """
+        # create url.URL object
+        u = url.make_url(name_or_url)	#根据uri生成URL对象实例
+
+        plugins = u._instantiate_plugins(kwargs)	#插件初始化
+
+        u.query.pop("plugin", None)
+        kwargs.pop("plugins", None)
+
+        entrypoint = u._get_entrypoint()	#根据传入url中的数据库类型(mysql)和驱动库(pymysql),来注册插件，返回dialect类
+        dialect_cls = entrypoint.get_dialect_cls(u)	#获取 dialect实例
+
+        if kwargs.pop("_coerce_config", False):
+
+            def pop_kwarg(key, default=None):
+                value = kwargs.pop(key, default)
+                if key in dialect_cls.engine_config_types:	
+                    value = dialect_cls.engine_config_types[key](value)
+                return value
+
+        else:
+            pop_kwarg = kwargs.pop
+
+        dialect_args = {}
+        # consume dialect arguments from kwargs  #从传参中获取创建dialect对象所需的完整参数
+        for k in util.get_cls_kwargs(dialect_cls):
+            if k in kwargs:
+                dialect_args[k] = pop_kwarg(k)
+
+        dbapi = kwargs.pop("module", None)
+        if dbapi is None:
+            dbapi_args = {}
+            for k in util.get_func_kwargs(dialect_cls.dbapi):
+                if k in kwargs:
+                    dbapi_args[k] = pop_kwarg(k)
+            dbapi = dialect_cls.dbapi(**dbapi_args)
+
+        dialect_args["dbapi"] = dbapi
+
+        for plugin in plugins:
+            plugin.handle_dialect_kwargs(dialect_cls, dialect_args)
+
+        # create dialect
+        dialect = dialect_cls(**dialect_args)
+
+        # assemble connection arguments  创建连接参数connect_args
+        (cargs, cparams) = dialect.create_connect_args(u)
+        cparams.update(pop_kwarg("connect_args", {}))
+        cargs = list(cargs)  # allow mutability
+
+        # look for existing pool or create  查找或创建连接池 pool
+        pool = pop_kwarg("pool", None)
+        if pool is None:
+
+            def connect(connection_record=None):
+                if dialect._has_events:
+                    for fn in dialect.dispatch.do_connect:
+                        connection = fn(
+                            dialect, connection_record, cargs, cparams
+                        )
+                        if connection is not None:
+                            return connection
+                return dialect.connect(*cargs, **cparams)
+
+            creator = pop_kwarg("creator", connect)
+
+            poolclass = pop_kwarg("poolclass", None)
+            if poolclass is None:
+                poolclass = dialect_cls.get_pool_class(u)
+            pool_args = {"dialect": dialect}
+
+            # consume pool arguments from kwargs, translating a few of
+            # the arguments
+            translate = {
+                "logging_name": "pool_logging_name",
+                "echo": "echo_pool",
+                "timeout": "pool_timeout",
+                "recycle": "pool_recycle",
+                "events": "pool_events",
+                "use_threadlocal": "pool_threadlocal",
+                "reset_on_return": "pool_reset_on_return",
+                "pre_ping": "pool_pre_ping",
+                "use_lifo": "pool_use_lifo",
+            }
+            for k in util.get_cls_kwargs(poolclass):
+                tk = translate.get(k, k)
+                if tk in kwargs:
+                    pool_args[k] = pop_kwarg(tk)
+
+            for plugin in plugins:
+                plugin.handle_pool_kwargs(poolclass, pool_args)
+
+            pool = poolclass(creator, **pool_args)
+        else:
+            if isinstance(pool, poollib.dbapi_proxy._DBProxy):
+                pool = pool.get_pool(*cargs, **cparams)
+            else:
+                pool = pool
+
+            pool._dialect = dialect
+
+        # create engine. 获取引擎参数 engine
+        engineclass = self.engine_cls
+        engine_args = {}
+        for k in util.get_cls_kwargs(engineclass):
+            if k in kwargs:
+                engine_args[k] = pop_kwarg(k)
+
+        _initialize = kwargs.pop("_initialize", True)
+
+        # all kwargs should be consumed
+        if kwargs:
+            raise TypeError(
+                "Invalid argument(s) %s sent to create_engine(), "
+                "using configuration %s/%s/%s.  Please check that the "
+                "keyword arguments are appropriate for this combination "
+                "of components."
+                % (
+                    ",".join("'%s'" % k for k in kwargs),
+                    dialect.__class__.__name__,
+                    pool.__class__.__name__,
+                    engineclass.__name__,
+                )
+            )
+
+        engine = engineclass(pool, dialect, u, **engine_args)
+
+        if _initialize:
+            do_on_connect = dialect.on_connect()
+            if do_on_connect:
+
+                def on_connect(dbapi_connection, connection_record):
+                    conn = getattr(
+                        dbapi_connection, "_sqla_unwrap", dbapi_connection
+                    )
+                    if conn is None:
+                        return
+                    do_on_connect(conn)
+
+                event.listen(pool, "first_connect", on_connect)
+                event.listen(pool, "connect", on_connect)
+
+            def first_connect(dbapi_connection, connection_record):
+                c = base.Connection(
+                    engine, connection=dbapi_connection, _has_events=False
+                )
+                c._execution_options = util.immutabledict()
+                dialect.initialize(c)
+                dialect.do_rollback(c.connection)
+
+            event.listen(
+                pool,
+                "first_connect",
+                first_connect,
+                _once_unless_exception=True,
+            )
+
+        dialect_cls.engine_created(engine)
+        if entrypoint is not dialect_cls:	
+            entrypoint.engine_created(engine)	#创建引擎
+
+        for plugin in plugins:		
+            plugin.engine_created(engine)		#创建插件
+
+        return engine
+
+        
+class PlainEngineStrategy(DefaultEngineStrategy):
+    """Strategy for configuring a regular Engine."""
+
+    name = "plain"
+    engine_cls = base.Engine	#指定引擎类
+
+
+PlainEngineStrategy()      
+
+
+class ThreadLocalEngineStrategy(DefaultEngineStrategy):
+    """Strategy for configuring an Engine with threadlocal behavior."""
+
+    name = "threadlocal"
+    engine_cls = threadlocal.TLEngine
+
+
+ThreadLocalEngineStrategy()
+
+class MockEngineStrategy(EngineStrategy):
+    """Strategy for configuring an Engine-like object with mocked execution.
+    """
+    name = "mock"
+    def create(self, name_or_url, executor, **kwargs):
+        ...
+```
+
+
+
+
+
+/sqlalchemy/engine/url.py
+
+
+
+
+
+### 方言 /dialects/
+
+Dialect就是用来操作不同数据库的行为，对应接口调用dbapi操作。
 
 
 

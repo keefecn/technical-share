@@ -23,7 +23,7 @@
 
 # superset源码剖析
 
-源码分析版本： superset-1.0
+源码分析版本： superset-1.0   superset-1.3 
 
 ```shell
 $ pip show apache-superset
@@ -66,16 +66,17 @@ Required-by:
 | docker/                |                                 | docker相关的脚本。里面脚本基础OS环境要换yum源，不然安装软件慢得让人绝望。 |
 | helm/                  |                                 | helm镜像仓库的配置目录                                       |
 | RELEASING/             |                                 | 跟发布相关的脚本等                                           |
+| RESOURCES/             | FEATURE_FLAGS.md INTHEWILD.md   | v1.2新增目录。放特性标识和产品用户文件。                     |
 | requirements/          |                                 | 各种安装方式的模块依赖文件，requirement.txt 组件需求         |
-| tests/                 |                                 | 测试目录                                                     |
+| tests/                 | integration_tests/ unit_tests/  | 测试目录。v1.2调整了目录结构。                               |
 | docs/                  |                                 | 文档，使用spinx生成                                          |
 | scripts/               | pypi_push.sh   python_tests.sh  | superset常用的脚本                                           |
 | **superset/**          | static/ charts/ dashboards/ ... | superse后端源码目录                                          |
 | **superset-frontend**/ | src/ imgaes/ branding/ ...      | superset前端源码目录                                         |
-| CHANGELOG.md           |                                 | 版本更新日志                                                 |
+| superset-websock/      |                                 | v1.2新增目录。websock实现。                                  |
 | setup.py setup.cfg     |                                 | 安装脚本，包括了依赖组件                                     |
 | README.md              |                                 | 用户指南                                                     |
-| CHANGELOG.md           |                                 | 细粒度（PR)级的更改                                          |
+| CHANGELOG.md           |                                 | 版本更新日志。细粒度（PR)级的更改                            |
 | UPDATING.md            |                                 | 更新新版本相关。该文件记录了 Superset 中任何向后不兼容的更改，并在人们迁移到新版本时提供帮助。 |
 
  
@@ -91,15 +92,14 @@ Required-by:
 | > charts          | api.py dao.py filters.py schemas.py                          | 图表的API，数据库操作、过滤处理、解析查询参数的JSON项        |
 | commands          | BaseCommand ExportModelsCommand                              | 支持的命令。命令基类/命令异常类                              |
 | common            |                                                              | 查询对象和查询上下文                                         |
-| connectors        |                                                              | 数据库连接器，连接数据源有2种类型，通过ConnectorRegistry连接 |
-| db_engines        |                                                              | DB引擎                                                       |
+| connectors        |                                                              | 数据库连接器，数据源连接类型2种分别是物理表和虚表。所有连接器注册到ConnectorRegistry。 |
 | dao               | BaseDAO DAOException                                         | 数据访问基类、数据访问异常类                                 |
 | > dashboards      |                                                              | 看板。结构类似图表。                                         |
 | > databases       |                                                              | 数据库dbs/数据源。结构类似图表。                             |
 | > datasets        |                                                              | 数据集。结构类似图表。                                       |
-| db_engines        |                                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等  |
-| db_engine_spec    |                                                              | 同上                                                         |
-| examples          |                                                              | 17个示例数据集，用 superset load-examples加载，需从网络下载  |
+| db_engines        |                                                              | 0.x时就有的目录。连接其他数据库的engines 比如mysql，pgsql等。等待废弃。 |
+| db_engine_spec    |                                                              | DB引擎实现，各种数据源实现都放到这。数据源可分为普通源和druid源。 |
+| examples          |                                                              | 17+个示例数据集，用 superset load-examples加载，需从网络下载 |
 | migrations        |                                                              | 做数据迁移用的，比如更新数据库，更新ORM(model和表中字段的映射关系)。 |
 | models            |                                                              | 存放项目的model，如果要修改字段，优先到这里寻找。            |
 | > quaries         |                                                              | 查询SQL相关。结构类似图表。                                  |
@@ -109,7 +109,7 @@ Required-by:
 | **static**        | assets                                                       | 存放静态文件的目录，比如我们用到的css、js、图片等静态文件都在这里。superset-frontend前端构建打包后生成的文件放到这。 |
 | tasks             |                                                              | celery 任务脚本                                              |
 | **templates**     | appbuilder, email, slack, superset                           | JinJa2模板目录，项目所有的HTML文件都在这里。<br>superset/basic.html提供web整体的样式风格。<br>appbuilder/navbar_menu.html导航菜单 |
-| translations      | zh en ...                                                    | 翻译文件，只需修改字段对应的名称。                           |
+| translations      | zh en ...                                                    | 翻译文件，babel生成。message.json才是实际加载文件。          |
 | utils             |                                                              | 工具                                                         |
 | views             | /chart /dashboard /database /log base.py core.py health.py api.py... | 视图文件，这里定义了url，来作为前端的入口。  <br>core.py中的函数在渲染页面时，都要指定basic.html模板为基础。 |
 | app.py            | create_app                                                   | WEB实例初始化，也是调试入口                                  |
@@ -1565,7 +1565,9 @@ export function Menu({
   data: { menu, brand, navbar_right: navbarRight, settings },
 }: MenuProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  // ...
+  
+  // 入参为MenuProps, 返回HTML. id为main-menu
   return (
     <StyledHeader className="top" id="main-menu">
       <Navbar inverse fluid staticTop role="navigation">
@@ -1604,6 +1606,22 @@ export default function MenuWrapper({ data }: MenuProps) {
 
 
 
+**前端的菜单数据示例**
+
+下面菜单数据的结构 同服务器传过来的启动数据 data-bootstrap.menu。如果要修改静态菜单，可以参照成员结构修改。
+
+```json
+# 说明： 列表成员包括以下字段：label,name,url,icon,childs,index,isFrontendRoute. 其中label必需，其它可选。
+var selfmenu =
+	[{label: '总览', childs: undefined, url: hostname+'/main/overview', index: undefined, isFrontendRoute: true},
+	{label: '数据源', childs: undefined, url: hostname+'/main/database', index: undefined, isFrontendRoute: true},
+	{label: '数据集', childs: undefined, url: hostname+'/main/datatable', index: undefined, isFrontendRoute: true},
+	{label: '数据探索', childs: undefined, url: hostname+'/main/explore', index: undefined, isFrontendRoute: true},
+	{label: '数据可视化', childs: [{name: 'Chart', icon: 'fa-chart', label: '图表', url: '/chart/list/', isFrontendRoute: true},{name: 'Dashboard', icon: 'fa-dashboard', label: '看板', url: '/dashboard/list/', isFrontendRoute: true}], url: undefined, index: undefined, isFrontendRoute: false},]
+```
+
+
+
 /superset-frontend/src/views/App.tsx
 
 这里有调用组件Menu 和从后端传来的数据menu。
@@ -1626,7 +1644,7 @@ const App = () => (
               ReactRouterRoute={Route}
               stringifyOptions={{ encode: false }}
             >
-              <Menu data={menu} />   //组件Menu和从后端传来的数据menu
+              <Menu data={menu} />   <!-- 组件Menu和从后端传来的数据menu -->
               ...
 
           </DynamicPluginProvider>
@@ -1690,7 +1708,7 @@ class SupersetAppInitializer
             category_label=__("Data"),
             category_icon="fa-table",
         )
-        appbuilder.add_separator("Data")  # 可选，Data菜单结束分隔符
+        appbuilder.add_separator("Data")  # 可选，Data菜单下添加分隔符
 ```
 
 
@@ -1718,7 +1736,7 @@ class DatabaseView(
     @expose("/list/")
     @has_access
     def list(self) -> FlaskResponse:
-        if not is_feature_enabled("ENABLE_REACT_CRUD_VIEWS"):
+        if not is_feature_enabled("ENABLE_REACT_CRUD_VIEWS"): # ENABLE_REACT_CRUD_VIEWS缺省打开特性，在FAB里实现视图。
             return super().list()
 
         return super().render_app_template()    
@@ -1830,7 +1848,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 服务端渲染：/chart/list/  返回HTML。调用 SupersetModelView.render_app_template()，同首页布局模板 superset/crud_views.html
 
-客户端渲染：路由/chart/list/  ->  组件ChartList (/superset-end/src/views/chart/ChartList.tsx)
+客户端渲染：路由/chart/list/  ->  组件ChartList (/superset-frontend/src/views/chart/ChartList.tsx)
 
 
 
@@ -1848,7 +1866,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 客户端获取图表数据是通过 /superset/explore_json接口，需要从表单数据里获取数据源ID（即数据集ID）和图表类型，根据这二个参数构造相应的图表类型类`get_viz()`。
 
 * /superset/viz.py 定义了可视化基类BaseViz及各个子类，可视化列表viz_types。
-* /superset/viz_sip38.py  类似viz.py，只用在特性SIP_38_VIZ_REARCHITECTURE。
+* /superset/viz_sip38.py  类似viz.py，只用在特性SIP_38_VIZ_REARCHITECTURE。v1.3已删，替换了viz.py。
 * /superset/models/slice.py   图表模型
 * /superset/superset_config.py  此处变量VIZ_TYPE_DENYLIST会被 viz_types用到
 * /superset/views/utils.py  get_viz()会根据传参类型返回BaseViz的实际子类。
@@ -2323,7 +2341,7 @@ def get_viz(
 
 1. 服务端 
 
-   服务端只是打开了过滤标识，并将此标识作为启动数据传给了客户端。客户端触发交叉过滤时，只是在页面上向其它图表发送请求，可以复用原有图表接口请求。
+   服务端只是打开了过滤标识DASHBOARD_CROSS_FILTERS，并将此标识作为启动数据传给了客户端。客户端触发交叉过滤时，只是在页面上向其它图表发送请求，可以复用原有图表接口请求。
 
 superset_config.py  
 
@@ -2348,7 +2366,7 @@ FEATURE_FLAGS = {
   "color_pn": true,
   "conditional_formatting": [],
   "datasource": "2__table",
-  "emit_filter": true,
+  "emit_filter": true,   #是否发起交叉过滤
   "extra_form_data": {},
   "granularity_sqla": "year",
   "groupby": [
@@ -2378,6 +2396,8 @@ FEATURE_FLAGS = {
   "viz_type": "table"
 }
 ```
+
+
 
 前端实现 /src/dashboard/components/SliceHeaderControls/index.tsx
 
@@ -3585,11 +3605,402 @@ class ChartRestApi(BaseSupersetModelRestApi):
 
 
 
+### 数据源
+
+#### 连接器 /connectors/
+
+* connector_registry.py  ConnectorRegistry类实现连接器注册，保存到一个字典sources里。
+* /base 普通数据源的基类
+  * /base/models.py  数据源BaseDatasource、列BaseColumn、指标BaseMetric的基类。都有继承二个工具类AuditMixinNullable, ImportExportMixin。
+  * /base/views.py   二个视图类分别是DatasourceModelView和BS3TextFieldROWidget。
+* /druid/   druid数据源实现。目录下二个文件分别是models.py和views.py ，
+* /sqla/  supreset数据源实现，有继承常规数据源基类。目录下3个文件分别是utils.py, models.py和views.py 
 
 
-### 数据操作
 
-#### 元数据查询 /dao/和/models/
+/superset/connectors/connector_registry.py
+
+```python
+from sqlalchemy import or_
+from sqlalchemy.orm import Session, subqueryload
+from sqlalchemy.orm.exc import NoResultFound
+
+if TYPE_CHECKING:
+    from collections import OrderedDict
+
+    from superset.connectors.base.models import BaseDatasource
+    from superset.models.core import Database
+    
+    
+class ConnectorRegistry:
+    """ Central Registry for all available datasource engines"""
+
+    sources: Dict[str, Type["BaseDatasource"]] = {}   # 存储所有数据源
+
+    @classmethod
+    def register_sources(cls, datasource_config: "OrderedDict[str, List[str]]") -> None:
+```
+
+
+
+/superset/connectors/base/models.py
+
+```python
+from flask_appbuilder.security.sqla.models import User
+from sqlalchemy import and_, Boolean, Column, Integer, String, Text
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import foreign, Query, relationship, RelationshipProperty, Session
+
+
+class DatasourceKind(str, Enum):
+    VIRTUAL = "virtual"
+    PHYSICAL = "physical"
+
+
+class BaseDatasource(
+    AuditMixinNullable, ImportExportMixin
+):  # pylint: disable=too-many-public-methods
+    """A common interface to objects that are queryable
+    (tables and datasources)"""
+    __tablename__: Optional[str] = None  # {connector_name}_datasource
+    baselink: Optional[str] = None  # url portion pointing to ModelView endpoint
+
+    @property
+    def column_class(self) -> Type["BaseColumn"]:
+        # link to derivative of BaseColumn
+        raise NotImplementedError()
+
+    @property
+    def metric_class(self) -> Type["BaseMetric"]:
+        # link to derivative of BaseMetric
+        raise NotImplementedError()
+
+    owner_class: Optional[User] = None
+
+    # Used to do code highlighting when displaying the query in the UI
+    query_language: Optional[str] = None
+
+    # Only some datasources support Row Level Security
+    is_rls_supported: bool = False
+
+    @property
+    def name(self) -> str:
+        # can be a Column or a property pointing to one
+        raise NotImplementedError()
+        
+        
+class BaseColumn(AuditMixinNullable, ImportExportMixin):
+    
+    
+class BaseMetric(AuditMixinNullable, ImportExportMixin):    
+```
+
+
+
+/superset/connectors//base/views.py
+
+```python
+from superset.views.base import SupersetModelView
+
+class DatasourceModelView(SupersetModelView):
+    """ 删除之前，先判断是否有图表关联 """
+    def pre_delete(self, item: BaseDatasource) -> None:
+        if item.slices:
+            raise SupersetException(
+                Markup(
+                    "Cannot delete a datasource that has slices attached to it."
+                    "Here's the list of associated charts: "
+                    + "".join([i.slice_name for i in item.slices])
+                )
+            )
+```
+
+#### DB引擎  /db_engine_specs/
+
+/db_engines/  目录只有hive.py 此目录基本不用。
+
+/db_engine_specs包括了各种数据库引擎的实现。新增数据源需要在此目录下添加文件。
+
+* base.py  定义引擎和引擎参数基类
+* exceptions.py  异常
+
+
+
+表格  各种数据库引擎的实现方式列表
+
+| 文件名           | 厂商      | DB引擎名称                                                   | engine     | default_driver | 加入版本及时间     |
+| ---------------- | --------- | ------------------------------------------------------------ | ---------- | -------------- | ------------------ |
+| ascend.py        |           | ascend                                                       |            |                | v1.3.0 2021-08-13  |
+| athena.py        | Amazon    | [Amazon Athena](https://superset.apache.org/docs/databases/athena) |            |                | 0.17               |
+| bigquery.py      | Google    | bigquery                                                     |            |                | 0.19.0 (2018-8-2)  |
+| clickhouse.py    |           | clickhouse                                                   |            |                | 0.18.0             |
+| cockroachdb.py   |           | cockroachdb                                                  |            |                | 0.36.0             |
+| crate.py         |           | crate                                                        |            |                | 1.2.0 (2021-06-04) |
+| databricks.py    |           | databricks                                                   |            |                | 1.2.0 (2021-06-04) |
+| db2.py           | IBM       | db2                                                          |            |                | 0.17.4             |
+| dremio.py        |           | dremio                                                       |            |                | 0.36.0             |
+| drill.py         | Apache    | Apache drill                                                 |            |                | 0.34.0             |
+| druid.py         | Apache    | [Apache Druid](https://superset.apache.org/docs/databases/druid) |            |                | 0.4.0              |
+| elasticsearch.py |           | elasticsearch                                                |            |                | 0.37.0             |
+| exasol.py        |           | exasol                                                       |            |                | 0.35.0             |
+| firebird.py      |           | firebird                                                     |            |                | 1.2.0              |
+| gsheets.py       | Google    | [Google Sheets](https://superset.apache.org/docs/databases/google-sheets) |            |                | 0.29.0             |
+| hana.py          | SAP       | [SAP Hana](https://superset.apache.org/docs/databases/hana)  |            |                | 1.1                |
+| hive.py          | Apache    | Apache hive                                                  |            |                | 0.17.1             |
+| impala.py        | Apache    | Apache impala                                                |            |                | 0.19.1             |
+| kylin.py         | Apache    | Apache kylin                                                 |            |                | 0.23.0             |
+| mssql.py         | Microsoft | Microsoft SQL Server                                         | mssql      |                | 0.11.0             |
+| mysql.py         | Apache    | [Apache MySQL](https://superset.apache.org/docs/databases/mysql) | mysql      | mysqldb        | 0.5.3              |
+| netezza.py       |           | netezza                                                      |            |                | 1.3.1              |
+| oracle.py        | Oracle    | [Oracle](https://superset.apache.org/docs/databases/oracle)  | oracle     |                | 0.13.0             |
+| pinot.py         | Apache    | Apache pinot                                                 |            |                | 0.31               |
+| postgres.py      | Apache    | [PostgreSQL](https://superset.apache.org/docs/databases/postgresql) | postgresql | psycopg2       | 0.8.6              |
+| presto.py        |           | presto                                                       |            |                | 0.32               |
+| redshift.py      | Amazon    | Amazon redshift                                              |            |                | 0.8.6              |
+| rockset.py       |           | rockset                                                      |            |                | 1.2.0              |
+| shillelagh.py    | Apache    | shillelagh                                                   |            |                | 1.3.0              |
+| snowflake.py     |           | snowflake                                                    |            |                | 1.3.1              |
+| solr.py          | Apache    | Apache solr                                                  |            |                | 1.0.0              |
+| sqlite.py        |           | sqlite                                                       |            |                | 缺省               |
+| teradata.py      | Teradata  | teradata                                                     |            |                | 0.28.0             |
+| trino.py         |           | trino                                                        |            |                | 1.1                |
+| vertica.py       |           | vertica                                                      |            |                | 0.9.1              |
+
+备注：v0.24.0在2018-03-27，v1.0.0在2021-01-15，v1.3.0在2021-08-13。
+
+
+
+##### 引擎基类 base.py
+
+/superset/db_engine_specs/base.py
+
+BaseEngineSpec类定义 了DB引擎的元数据，BasicParametersType定义了sqlalchemy_uri连接串的各个连接要素。
+
+BasicParametersMixin工具类定义了sqlalchemy_uri模板及读写的类方法。
+
+```python
+if TYPE_CHECKING:
+    # prevent circular imports
+    from superset.connectors.sqla.models import TableColumn
+    from superset.models.core import Database
+    
+    
+class TimeGrain(NamedTuple):  # pylint: disable=too-few-public-methods
+    """ 时间粒度名称 """
+    name: str  # TODO: redundant field, remove
+    label: str
+    function: str
+    duration: Optional[str]
+        
+      
+class BaseEngineSpec:  # pylint: disable=too-many-public-methods
+    """Abstract class for database engine specific configurations
+
+    Attributes:
+        allows_alias_to_source_column: Whether the engine is able to pick the
+                                       source column for aggregation clauses
+                                       used in ORDER BY when a column in SELECT
+                                       has an alias that is the same as a source
+                                       column.
+        allows_hidden_orderby_agg:     Whether the engine allows ORDER BY to
+                                       directly use aggregation clauses, without
+                                       having to add the same aggregation in SELECT.
+    """
+
+    engine = "base"  # str as defined in sqlalchemy.engine.engine
+    engine_aliases: Set[str] = set()
+    engine_name: Optional[
+        str
+    ] = None  # used for user messages, overridden in child classes
+    _date_trunc_functions: Dict[str, str] = {}
+    _time_grain_expressions: Dict[Optional[str], str] = {}   
+ 	
+    ...
+        
+
+# schema for adding a database by providing parameters instead of the
+# full SQLAlchemy URI
+class BasicParametersSchema(Schema):
+    username = fields.String(required=True, allow_none=True, description=__("Username"))
+    password = fields.String(allow_none=True, description=__("Password"))
+    host = fields.String(required=True, description=__("Hostname or IP address"))
+    port = fields.Integer(
+        required=True,
+        description=__("Database port"),
+        validate=Range(min=0, max=2 ** 16, max_inclusive=False),
+    )
+    database = fields.String(required=True, description=__("Database name"))
+    query = fields.Dict(
+        keys=fields.Str(), values=fields.Raw(), description=__("Additional parameters")
+    )
+    encryption = fields.Boolean(
+        required=False, description=__("Use an encrypted connection to the database")
+    )
+
+
+class BasicParametersType(TypedDict, total=False):
+    """ 类似BasicParametersSchema的结构 """
+    username: Optional[str]
+    password: Optional[str]
+    host: str
+    port: int
+    database: str
+    query: Dict[str, Any]
+    encryption: bool
+
+
+class BasicParametersMixin:
+   """
+    DB参数工具类，负责sqlalchemy_uri的构建，参数解析和验证
+    Mixin for configuring DB engine specs via a dictionary.
+
+    With this mixin the SQLAlchemy engine can be configured through
+    individual parameters, instead of the full SQLAlchemy URI. This
+    mixin is for the most common pattern of URI:
+
+        engine+driver://user:password@host:port/dbname[?key=value&key=value...]
+
+    """
+    # schema describing the parameters used to configure the DB
+    parameters_schema = BasicParametersSchema()
+    # recommended driver name for the DB engine spec
+    default_driver = ""
+
+    # placeholder with the SQLAlchemy URI template 
+    # sqlalchemy_uri模板，?来自自于query参数
+    sqlalchemy_uri_placeholder = (
+        "engine+driver://user:password@host:port/dbname[?key=value&key=value...]"
+    )
+
+    # query parameter to enable encryption in the database connection
+    # for Postgres this would be `{"sslmode": "verify-ca"}`, eg.
+    encryption_parameters: Dict[str, str] = {}    
+        
+    @classmethod
+    def build_sqlalchemy_uri(
+        cls,
+        parameters: BasicParametersType,
+        encryted_extra: Optional[Dict[str, str]] = None,
+    ) -> str:
+        # make a copy so that we don't update the original
+        query = parameters.get("query", {}).copy()
+        if parameters.get("encryption"):
+            if not cls.encryption_parameters:
+                raise Exception("Unable to build a URL with encryption enabled")
+            query.update(cls.encryption_parameters)
+
+        return str(
+            URL(
+                f"{cls.engine}+{cls.default_driver}".rstrip("+"),  # 如果driver无值，则移除尾部符号+
+                username=parameters.get("username"),
+                password=parameters.get("password"),
+                host=parameters["host"],
+                port=parameters["port"],
+                database=parameters["database"],
+                query=query,
+            )
+        )        
+    
+    @classmethod
+    def get_parameters_from_uri(
+        cls, uri: str, encrypted_extra: Optional[Dict[str, Any]] = None
+    ) -> BasicParametersType:
+        
+    @classmethod
+    def validate_parameters(
+        cls, parameters: BasicParametersType
+    ) -> List[SupersetError]:
+        
+    @classmethod
+    def parameters_json_schema(cls) -> Any:
+        
+```
+
+
+
+##### mysql.py
+
+```python
+from sqlalchemy.dialects.mysql import (
+    BIT,
+    DECIMAL,
+    DOUBLE,
+    FLOAT,
+    INTEGER,
+    LONGTEXT,
+    MEDIUMINT,
+    MEDIUMTEXT,
+    TINYINT,
+    TINYTEXT,
+)
+
+
+class MySQLEngineSpec(BaseEngineSpec, BasicParametersMixin):
+    engine = "mysql"
+    engine_name = "MySQL"
+    max_column_name_length = 64
+
+    default_driver = "mysqldb"
+    sqlalchemy_uri_placeholder = (
+        "mysql://user:password@host:port/dbname[?key=value&key=value...]"
+    )
+    encryption_parameters = {"ssl": "1"}
+```
+
+
+
+##### postgres.py
+
+```python
+from sqlalchemy.dialects.postgresql import ARRAY, DOUBLE_PRECISION, ENUM, JSON
+from sqlalchemy.dialects.postgresql.base import PGInspector
+from sqlalchemy.types import String, TypeEngine
+
+from superset.db_engine_specs.base import BaseEngineSpec, BasicParametersMixin
+
+
+class PostgresBaseEngineSpec(BaseEngineSpec):
+    """ Abstract class for Postgres 'like' databases """
+	# 基类
+    engine = ""
+    engine_name = "PostgreSQL"
+
+    _time_grain_expressions = {
+        None: "{col}",
+        "PT1S": "DATE_TRUNC('second', {col})",
+        "PT1M": "DATE_TRUNC('minute', {col})",
+        "PT1H": "DATE_TRUNC('hour', {col})",
+        "P1D": "DATE_TRUNC('day', {col})",
+        "P1W": "DATE_TRUNC('week', {col})",
+        "P1M": "DATE_TRUNC('month', {col})",
+        "P0.25Y": "DATE_TRUNC('quarter', {col})",
+        "P1Y":
+        "DATE_TRUNC('year', {col})",
+    }
+    
+    
+class PostgresEngineSpec(PostgresBaseEngineSpec, BasicParametersMixin):
+    engine = "postgresql"
+    engine_aliases = {"postgres"}
+
+    default_driver = "psycopg2"
+    sqlalchemy_uri_placeholder = (
+        "postgresql://user:password@host:port/dbname[?key=value&key=value...]"
+    )
+    # https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBQ-SSL-CERTIFICATES
+    encryption_parameters = {"sslmode": "require"}
+
+    max_column_name_length = 63
+    try_remove_schema_from_table_name = False    
+```
+
+
+
+
+
+
+
+#### 元数据操作 /dao/和/models/
 
 依赖sqlalchemy模块。RestAPI逻辑里涉及到的元数据库操作，主要在 /xxx/dao.py
 
@@ -3897,6 +4308,8 @@ class Database(
 
 
 
+### 数据查询
+
 #### 原始数据查询 
 
 数据的查询和展示是superset的核心功能，前端用D3.js来渲染各种图标，后端用pandas来处理各种数据。
@@ -4186,8 +4599,6 @@ curl -X 'POST' \
   "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xx.ntEKT8a6t1h4qzvvATyktyqPxbmo3Ahl1zv7pNNFJ-A"
 }
 ```
-
-
 
 
 
@@ -5882,7 +6293,7 @@ export default withToasts(ChartList);
 
 
 
-### explorer /src/explorer/
+### 探索 explorer /src/explorer/
 
 ####  控制按钮 controls.jsx
 
@@ -5942,6 +6353,12 @@ const groupByControl = {
 
 
 ### 可视化 /src/visualizations
+
+客户端的图表类型组件多来自外部模块@superset-ui。superset只是重新组织了图表组件的展示 。
+
+过滤盒的每个选项，会从数据源group by相应选项字段，得到选项下拉菜单的值。
+
+看板过滤盒对看板内图表的影响，是通过点击确认键时，重新向每个图表触发过滤参数改变的新请求。v1.3实现了过滤映射（新增图形界面，以前是配置参数），可以只向指定的若干图表触发请求。
 
 * FilterBox/  过滤盒  v1.3疑废弃，换用看板原生过滤器
 * presets/  预设，图表插件导入

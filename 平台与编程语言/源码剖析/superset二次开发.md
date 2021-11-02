@@ -1,10 +1,10 @@
-| 序号 | 修改时间  | 修改内容                                 | 修改人 | 审稿人 |
-| ---- | --------- | ---------------------------------------- | ------ | ------ |
-| 1    | 2018-5-5  | 创建，从《BI专题》迁移至此。             | Keefe  |        |
-| 2    | 2021-6-11 | 和调整部分内容，全文迁移到源码剖析目录。 | 同上   |        |
-| 3    | 2021-6-21 | 更新superset-1.0的相关内容。             | 同上   |        |
-| 4    | 2021-7-18 | 源码剖析章节另文                         | 同上   |        |
-|      |           |                                          |        |        |
+| 序号 | 修改时间  | 修改内容                               | 修改人 | 审稿人 |
+| ---- | --------- | -------------------------------------- | ------ | ------ |
+| 1    | 2018-5-5  | 创建，从《BI专题》迁移至此。           | Keefe  |        |
+| 2    | 2021-6-11 | 调整部分内容，全文迁移到源码剖析目录。 | 同上   |        |
+| 3    | 2021-6-21 | 更新superset-1.0的相关内容。           | 同上   |        |
+| 4    | 2021-7-18 | 《源码剖析》章节另文                   | 同上   |        |
+|      |           |                                        |        |        |
 
 
 
@@ -271,6 +271,13 @@ $ pip download apache-superset==1.3.0 --no-deps
 ```shell
 # 激活虚拟环境，本地安装
 $ source xx/bin/activate
+
+# 首次特别安装: DB-mysql/oralce/pg, 加密，
+$ sudo yum install mysql-devel postgresql-devel
+$ pip install mysqlclient cx_Oracle psycopg2
+$ pip install pycryptodome flask_cors pillow
+
+# 安装新版本  
 $ pip install xx.tar.gz
 ```
 
@@ -291,7 +298,7 @@ superset fab create-admin
 # initialize the database，若版本更新，run运行前需要先执行此句
 superset db upgrade
 
-# Create default roles and permissions
+# Create default roles and permissions. 有时执行db upgrade后也要执行 init
 superset init
 
 # Load some data to play with. 可选
@@ -301,6 +308,8 @@ superset load-examples
 
 
 **更新版本**
+
+升级涉及到数据库一般执行：`db migrate`(可选，数据库迁移)， `db upgrade`(必选)，`superset init`(可选，会重新覆盖预设角色)
 
 ```shell
 # 更新版本时先执行此命令，再进行服务器启动
@@ -476,9 +485,34 @@ fi
    superset    11     1  0 01:02 ?        00:00:04 /usr/local/bin/python /usr/local/bin/gunicorn superset.app:create_app()
    ```
    
-   
 
-## 2.2 支持数据源类型
+
+
+## 2.2 基本功能
+
+数据流向： 数据源/数据库database -- 数据集/数据表table -- 切片/图表 -- 看板
+
+功能
+
+* 数据流向：从数据源、数据集到图表、看板的完整流程。
+* 支持主流数据源
+* 支持图表类型50+
+* 支持图表注解
+* 支持告警
+* 支持看板刷新
+* 支持图表/看板分享
+* 异步查询 
+* 基于RBAC的访问控制 
+
+
+
+### 支持数据源类型
+
+数据源类型数量 ：
+
+* v1.0共支持30种。
+
+* v1.3共支持38种，v1.0+后新增8个新源（尚未测试），分别是ascend crate databricks firebird netezza rockset shillelagh trino。
 
 **Database dependencies** (superset 1.0)
 
@@ -517,7 +551,25 @@ fi
 | [Teradata](https://superset.apache.org/docs/databases/teradata) | `pip install sqlalchemy-teradata`                            | `teradata://{user}:{password}@{host}`                        |
 | [Vertica](https://superset.apache.org/docs/databases/vertica) | `pip install sqlalchemy-vertica-python`                      | `vertica+vertica_python://<UserName>:<DBPassword>@<Database Host>/<Database Name>` |
 
-说明：以kylin示例URL：kylin://user: Greenplum pwd@host:port/project?charset=utf-8
+参考 [SQLAlchemy docs](https://docs.sqlalchemy.org/en/13/core/engines.html) 有关如何构建 URI 的更多信息。
+
+```python
+# 实现： /superset/db_engine_specs/base.py:BasicParametersMixin
+# placeholder with the SQLAlchemy URI template
+#  其中engine相当于dialect或connector; driver为实现库，若未填充，则取默认驱动
+# sqlalchemy_uri示例： postgresql://scott:tiger@localhost:5432/mydatabase?charset=utf-8
+sqlalchemy_uri_placeholder = (
+    "dialect[+driver]://user:password@host:port/dbname[?key=value&key=value...]"
+)
+
+# 实现示例
+from sqlalchemy import create_engine
+# 下面二种sqlalchemy_uri等同. postgresql的driver为空，则取默认驱动pyscopg2
+engine = create_engine('postgresql://scott:tiger@localhost:5432/mydatabase')    
+engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatabase')   
+```
+
+详细说明：
 
 1. 元数据：默认情况下，superset是把元数据保存到sqlite。sqlite是python标准库，**其它的数据库插件需要安装才能使用**。
 
@@ -531,13 +583,13 @@ fi
 
    ```shell
    # 最常用的DB
+   $ sudo yum install mysql-devel postgresql-devel
    $ pip install mysqlclient cx_Oracle psycopg2
    
    # 除了上面列的python插件，通常还需要对应的 DB动态库支持. 官方镜像apache/superset已经包括mysql, pg的开发库
    # mysql: yum install mysql-devel
    # oracle： 需要独立安装 客户端（约300MB）
-   # pg
-   yum install libpq
+   # pg: postgresql-devel 或者 libpq
    ```
    
    
@@ -551,9 +603,12 @@ DB大小写敏感差异：对象名（表名字段名），查询SQL
 
 
 
-## 2.3 支持图表类型
+### 支持图表类型
 
-46+张图表类型
+图表类型数量 ：
+
+* v1.0.0支持48种。
+* v1.3.0支持59种，新增11种其中10种来自ECharts。v1.3.0支持图表按多种类别进行分类。
 
 | 图表类别 | 图表英文名           | 图表中文名         | 用途 | 支持情况 |
 | -------- | -------------------- | ------------------ | ---- | -------- |
@@ -667,52 +722,19 @@ JSON串
 
 
 
-## 2.4 基本功能
-
-数据流向： 数据源/数据库database -- 数据集/数据表table -- 切片/图表 -- 看板
-
-功能
-
-* 数据流向：从数据源、数据集到图表、看板的完整流程。
-* 支持主流数据源
-* 支持图表类型50+
-* 支持图表注解和告警
-* 支持看板刷新
-* 支持图表/看板分享
-* 异步查询 
-* 基于RBAC的访问控制 
 
 
 
-### 时间字段
 
-时间字段要求是datatime格式，类似YYYY-MM-DD HH:MM:SS。
+## 2.3 扩展功能
 
-如果是数值格式的timestamp，需要转化成datetime格式。
-
-表格 1 各数据库的时间字段使用技巧
-
-| database   | 时间字段格式               | timestamp转化                          | 其它 |
-| ---------- | -------------------------- | -------------------------------------- | ---- |
-| MySQL      | 常规。                     | FROM_*UNIXTIME*(unix_timestamp,format) |      |
-| SQLite     | MM-DD要求是二位数，如10-01 |                                        |      |
-| PostgreSQL |                            |                                        |      |
-| Oracle     |                            |                                        |      |
-| Kylin      |                            |                                        |      |
-
-备注：字段格式使用D3格式。
+### CSS主题
 
 
 
-### D3字段格式
-
-数值格式：D3.format('d')  https://github.com/d3/d3-format/blob/master/README.md#format 
-
-时间格式： 
 
 
-
-## 2.5 特性 Feature
+## 2.4 特性 Feature
 
 详见 superset/resources/[feature_flags.md](https://github.com/apache/superset/blob/master/RESOURCES/FEATURE_FLAGS.md)
 
@@ -813,7 +835,63 @@ FEATURE_FLAGS = { 'BAR': True, 'BAZ': True }
 
 
 
-### 警报 alert & report
+### 行安全 ROW_LEVEL_SECURITY
+
+行过滤级器有二种，分为常规和基本。
+
+* 常规：可以在指定角色的SQL查询语句里自动在 WHER语句里添加 过滤条件。
+* 基本：应用于指定角色之外用户，相当于常规的反例。
+
+过滤语法：示例如``大区`='华南'`， 字段名用``圈 起来，值用单引号圈起来，过滤条件可以得复杂组合。
+
+
+
+### 交叉过滤 DASHBOARD_CROSS_FILTERS
+
+交叉过滤 x-filtering
+
+参见  
+
+* fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
+
+
+
+v1.1开始引入交叉过滤，1.2版本成熟。
+
+**使用步骤**：
+
+1. superset_config.py 里打开 DASHBOARD_CROSS_FILTERS特性标识。`FEATURE_FLAGS["DASHBOARD_CROSS_FILTERS"]=True`
+2. 打开看板，要包括能触发看板交叉过滤（EMIT DASHBOARD CROSS FILTERS）的图表。目前能触发交叉过滤的图表有饼图、表格、Echarts(bar, line, treeview)等。
+3. 点击图表维度字段，即触发交叉过滤。
+
+
+
+**实现逻辑**
+
+1. 点击看板某支持联动图表时，触发向看板其它图表发送请求，自身图表不触发新的AJAX请求。
+
+   ```shell
+   # 常规图表请求
+   POST /api/v1/chart/data?form_data=
+   
+   # 特殊图表-地图请求
+   POST /superset/explore_json/?form_data=
+   
+   # 请求参数：form_data数据（json格式）和 dashboard_id
+   form_data={"slice_id":89}&dashboard_id=6
+   ```
+
+
+
+### 看板权限 DASHBOARD_RBAC
+
+
+
+### 
+
+
+
+### 警报&报告 ALERTS_REPORTS
 
 https://superset.apache.org/docs/installation/alerts-reports
 
@@ -911,6 +989,34 @@ $ celery flower --app=superset.tasks.celery_app:app
 ```
 
 
+
+## 2.5 使用技巧
+
+### 时间字段
+
+时间字段要求是datatime格式，类似YYYY-MM-DD HH:MM:SS。
+
+如果是数值格式的timestamp，需要转化成datetime格式。
+
+表格 1 各数据库的时间字段使用技巧
+
+| database   | 时间字段格式               | timestamp转化                          | 其它 |
+| ---------- | -------------------------- | -------------------------------------- | ---- |
+| MySQL      | 常规。                     | FROM_*UNIXTIME*(unix_timestamp,format) |      |
+| SQLite     | MM-DD要求是二位数，如10-01 |                                        |      |
+| PostgreSQL |                            |                                        |      |
+| Oracle     |                            |                                        |      |
+| Kylin      |                            |                                        |      |
+
+备注：字段格式使用D3格式。
+
+
+
+### D3字段格式
+
+数值格式：D3.format('d')  https://github.com/d3/d3-format/blob/master/README.md#format 
+
+时间格式： 
 
 
 
@@ -1049,16 +1155,36 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 
 
-**Rison**:  查询参数格式，用()圈起来，里面值可以转化成JSON格式。示例如下（如果是URL传参，则需要将参数值URLENCODE），
+**Rison**:  查询参数格式，用()圈起来，里面值可以转化成JSON格式。
+
+* 参数的KEY和VALUE的格式：会作严格检验，不能是数字开头（`-0123456789`），也不能是
+
+  ````
+  \x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !"#$%&\'()*+,:;<=>?@[]^`{|}
+  ````
+
+  这些开头。 因此，KEY和字符串格式的VALUE要求是字母或unicode非符号开头，能用的符号只有`- _ .`。
+
+* prison特殊符号有：`( ) ! : ' `
+
+示例如下（如果是URL传参，则需要将参数值URLENCODE），
 
 ```shell
 # 示例：分页查询 
 ?q=(order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25)
 # 示例：搜索过滤
 ?q=(filters:!((col:slice_name,opr:chart_all_text,value:%E6%97%B6%E9%97%B4)),)
+
+>>> import prison
+>>> q = '(order_column:changed_on_delta_humanized,order_direction:desc,page:0,page_size:25)'
+>>> qd = prison.loads(q)
+>>> qd
+{'order_column': 'changed_on_delta_humanized', 'order_direction': 'desc', 'page': 0, 'page_size': 25}
 ```
 
-备注：下面查询参数里的字符串 xxx表示 某个具体的查询字符串。
+备注：上面查询参数里的字符串 xxx表示 某个具体的查询字符串。
+
+
 
 
 
@@ -1309,8 +1435,6 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 
 
-
-
 ## 3.3 简易定制化
 
 表格 简易定制化的修改项
@@ -1325,7 +1449,7 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 
 
-### 国际化
+### 3.3.1 国际化
 
 国际化有几个常用模块：locale babel humanize
 
@@ -1543,13 +1667,140 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
 
 4. 重定向URL：避免原始URL
 
-5. iframe传参： `"datasource":"3__table"`此字段值通过`__`可拆分成datasource_id和datasource_type。
+   
 
-   图表表单传参JSON串示例如下：
+#### 图表传参
+
+   iframe传参： `"datasource":"3__table"`此字段值通过`__`可拆分成datasource_id和datasource_type。
+
+   图表表单传参JSON串示例如下：  /superset/explore/?form_data={}
 
 ```json
-form_data={"datasource":"3__table","viz_type":"line","slice_id":63,"granularity_sqla":"ds","time_grain_sqla":null,"since":"100 years ago","until":"now","metrics":[{"aggregate":"SUM","column":{"column_name":"num_california","expression":"CASE WHEN state = 'CA' THEN num ELSE 0 END"},"expressionType":"SIMPLE","label":"SUM(num_california)"}],"adhoc_filters":[{"expressionType":"SIMPLE","subject":"gender","operator":"==","comparator":"boy","clause":"WHERE","sqlExpression":null,"fromFormData":true,"filterOptionName":"filter_gtzm93u9ocq_9sy5vd5ocfg"},{"expressionType":"SIMPLE","subject":"name","operator":"LIKE","comparator":"Aaron","clause":"WHERE","sqlExpression":null,"fromFormData":true,"filterOptionName":"filter_6cgdixdoh4_5wrgyuorwoa"}],"groupby":["name"],"limit":"10","timeseries_limit_metric":{"aggregate":"SUM","column":{"column_name":"num_california","expression":"CASE WHEN state = 'CA' THEN num ELSE 0 END"},"expressionType":"SIMPLE","label":"SUM(num_california)"},"order_desc":true,"contribution":false,"row_limit":50000,"color_scheme":"bnbColors","show_brush":"auto","show_legend":true,"rich_tooltip":true,"show_markers":false,"line_interpolation":"linear","x_axis_label":"","bottom_margin":"auto","x_ticks_layout":"auto","x_axis_format":"smart_date","x_axis_showminmax":false,"y_axis_label":"","left_margin":"auto","y_axis_showminmax":false,"y_log_scale":false,"y_axis_format":".3s","y_axis_bounds":[null,null],"rolling_type":"None","time_compare":[],"num_period_compare":"","period_ratio_type":"growth","resample_how":null,"resample_rule":null,"resample_fillmethod":null,"annotation_layers":[],"compare_lag":"10","compare_suffix":"o10Y","markup_type":"markdown","metric":"sum__num","where":"","url_params":{}}
+{
+	"viz_type": "funnel",
+	"datasource": "241__table",
+	"slice_id": 624,
+	"url_params": {},
+	"time_range_endpoints": [
+		"inclusive",
+		"exclusive"
+	],
+	"granularity_sqla": "创建时间",
+	"time_range": "No+filter",
+	"groupby": [
+		"年",
+		"区域",
+		"日期"
+	],
+	"metric": {
+		"aggregate": "SUM",
+		"column": {
+			"column_name": "挑战完成率",
+			"description": null,
+			"expression": "",
+			"filterable": true,
+			"groupby": true,
+			"id": 4909,
+			"is_dttm": false,
+			"python_date_format": null,
+			"type": "INTEGER",
+			"type_generic": 0,
+			"verbose_name": null
+		},
+		"expressionType": "SIMPLE",
+		"hasCustomLabel": false,
+		"isNew": false,
+		"label": "SUM(挑战完成率)",
+		"optionName": "metric_4djeudatc27_uiuijq5vj99",
+		"sqlExpression": null
+	},
+	"adhoc_filters": [
+		{
+			"clause": "WHERE",
+			"comparator": "大区",
+			"expressionType": "SIMPLE",
+			"filterOptionName": "filter_wzqe9z9g4yr_5y28zfiona",
+			"isExtra": false,
+			"isNew": false,
+			"operator": "==",
+			"operatorId": "EQUALS",
+			"sqlExpression": null,
+			"subject": "区域类型"
+		},
+		{
+			"clause": "WHERE",
+			"comparator": "季度",
+			"expressionType": "SIMPLE",
+			"filterOptionName": "filter_xxnn076ej7_mipv2cm64ks",
+			"isExtra": false,
+			"isNew": false,
+			"operator": "==",
+			"operatorId": "EQUALS",
+			"sqlExpression": null,
+			"subject": "日期类型"
+		}
+	],
+	"emit_filter": false,
+	"row_limit": 10,
+	"sort_by_metric": true,
+	"color_scheme": "supersetColors",
+	"legendOrientation": "top",
+	"number_format": "SMART_NUMBER",
+	"show_labels": true,
+	"extra_form_data": {}
+}
 ```
+
+说明： 
+
+* adhoc_filters  保存过滤条件列表，过滤条件之间是逻辑与关系
+* metric 指标
+* groupby 分组
+
+
+
+#### 看板传参
+
+看板元数据
+
+```json
+{
+  "show_native_filters": false,
+  "chart_configuration": {  #图表配置项，设置交叉过滤范围
+    "607": {
+      "id": 607,
+      "crossFilters": {"scope": {"rootPath": ["ROOT_ID"], "excluded": [607]}}
+    },
+    "609": {
+      "id": 609,
+      "crossFilters": {"scope": {"rootPath": ["ROOT_ID"], "excluded": [609]}}
+    },
+  },
+  "timed_refresh_immune_slices": [],
+  "filter_scopes": {	#过滤区域：指图表-过滤盒
+    "627": {"区域类型": {"scope": ["ROOT_ID"], "immune": []}},
+    "628": {"区域": {"scope": ["ROOT_ID"], "immune": []}},
+    "629": {"日期类型": {"scope": ["ROOT_ID"], "immune": []}},
+    "630": {"日期": {"scope": ["ROOT_ID"], "immune": []}},
+  },	
+  "expanded_slices": {},
+  "refresh_frequency": 0,	#看板刷新频率
+  "default_filters": "{}",	#缺省过滤器
+  "color_scheme": null		#颜色主体
+}
+```
+
+说明：
+
+* chart_configuration  图表配置项
+
+
+
+### 图表类型
+
+#### 国家地图
+
+GEO.JSON 地名拼音换成中文。
 
 
 
@@ -1614,40 +1865,9 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 
 
 
-### 交叉过滤 x-filtering
-
-参见  
-
-* fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
 
 
-
-v1.1开始引入交叉过滤，1.2版本成熟。
-
-**使用步骤**：
-
-1. superset_config.py 里打开 DASHBOARD_CROSS_FILTERS特性标识。`FEATURE_FLAGS["DASHBOARD_CROSS_FILTERS"]=True`
-2. 打开看板，要包括能触发看板交叉过滤（EMIT DASHBOARD CROSS FILTERS）的图表。目前能触发交叉过滤的图表有饼图、表格、Echarts(bar, line, treeview)等。
-3. 点击图表维度字段，即触发交叉过滤。
-
-
-
-**实现逻辑**
-
-1. 点击看板某支持联动图表时，触发向看板其它图表发送请求，自身图表不触发新的AJAX请求。
-
-   ```shell
-   # 常规图表请求
-   POST /api/v1/chart/data?form_data=
-   
-   # 特殊图表-地图请求
-   POST /superset/explore_json/?form_data=
-   
-   # 请求参数：form_data数据（json格式）和 dashboard_id
-   form_data={"slice_id":89}&dashboard_id=6
-   ```
-
-   
+### 导航菜单
 
 
 
@@ -1676,6 +1896,28 @@ superset路由涉及主要分二部分：
 /superset/app.py		# 修改首页路由
 /superset/views/xx.py	# 修改各视图类的route_base
 ```
+
+
+
+## 3.5 前后端分离（实验性）
+
+目前前端响应慢的一个原因是每次请求要传输大量相同的启动数据；二是很多模板是模板页生成的HTML，需要重复请求数据。针对上面二种情况，可以如下解决：
+
+1. 前后端数据解耦：重复的数据前端只需服务取一次，后面从缓存中获取（后端可以设置缓存）。或者将数据直接保存在前端。
+2. 相同模板页复用：如果HTML结构用的模板页一样，可以启用本地缓存数据，尽可能用SAP实现。
+
+
+
+**启动数据data-bootstrap**
+
+前后端耦合主要是启动数据data-bootstrap。
+
+服务端生成启动数据data-bootstrap，数据内容包括导航菜单、语言包、用户信息、特征标识、环境和其它数据。
+
+* 导航菜单：导航菜单由flask-appbuilder实现，菜单和菜单视图函数的绑定。菜单数据提供给前端，前端通过菜单数据（后端）+样式（前端）得到导航菜单的完整布局。此处将来可以解耦部分是菜单数据在前端提供，后端只负责实现菜单视图API。
+* 语言包：语言包数据有前端也有后端。但最终展现是在前端。因此语言包完全可以放到前端。可以根据后端传输语言标识来启用相应语言包。
+* 特征标识：这个标识前后端都有用到，可以共同维护一份。用相同标识，维护同样功能涉及到的前后端。
+* 用户信息：其实登陆时就有了用户数据，无需重复获取。
 
 
 
@@ -1754,38 +1996,39 @@ superset的权限管理是通过flask_appbuilder模块的权限管理实现的�
 
 权限管理：权限项有287+项，可分为两大类分别是基本权限 和 视图列表的操作权限。
 
-表格 5 权限管理的角色说明（）
+表格 5 权限管理的角色说明（预设角色）
 
 | 角色    | 权限说明                                                     | 权限项举例...                                                |
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 | `menu access on List Roles`, `menu access on List Users`, `menu access on Security`, `can list on RoleModelView` |
-| Alpha   | Alpha可以访问所有数据源，但无法授予或撤销其他用户的访问权限。 它们也限于改变他们拥有的对象。 Alpha用户可以添加和更改数据源。 | `all database access on all_database_access`                 |
-| Gamma   | 访问有限。他们只能使用他们通过另一个补充角色访问的数据源中的数据。相当于内容消费方。 | `menu access on Charts`, `menu access on Dashboards`, `database access on [mysql2].(id:10)` |
+| Admin   | 管理员拥有所有可能的权利，包括授予或撤销其他用户的权限，以及更改其他人的切片和仪表板。 | `menu access on List Roles`, `menu access on List Users`, `menu access on Security`, `can list on RoleModelView`, <br>`all database access on all_database_access`   ... |
+| Alpha   | Alpha可以访问所有数据源，但无法授予或撤销其他用户的访问权限。 它们也限于改变他们拥有的对象。 Alpha用户可以添加和更改数据源。 | `all database access on all_database_access`  <br>...        |
+| Gamma   | 访问有限。他们只能使用他们通过另一个补充角色访问的数据源中的数据。相当于内容消费方。 | `menu access on Charts`, `menu access on Dashboards`, <br>`database access on [mysql2].(id:10)`，  <br/>` datasource access on [superset_test].[covid-19](id:37)` |
 | public  | 用户必须的信息。如个人密码修改。                             | `can read on Chart`, `can read on Dashboard`                 |
 | grant   | 一般2个权限，分别是覆盖角色权限和推准权限。                  | `Can override role permission on Superset`, `Can approve on Superset` |
-| sql_lab | sql lab访问和操作权限。                                      | `menu access on SQL Lab`, `menu access on SQL Editor`,       |
+| sql_lab | sql lab访问和操作权限。                                      | ` [can list on UserDBModelView, can csv on Superset, can search queries on Superset, can sqllab viz on Superset, can sqllab table viz on Superset, can sqllab on Superset, can sql json on Superset, menu access on SQL Lab, menu access on SQL Editor, menu access on Saved Queries, menu access on Query Search]` |
 
-备注：superset的权限控制通过用户所拥有的角色的权限合集来控制。一般不要直接改这三个角色的权限：Admin/Alpha/Gamma，若有需要，可基于这些角色复制出新角色再修改。
-1. 数据源/表的读权限
-   - 数据源（表）的属主owners缺省可以完全操作（读+写+删）此数据源的图表和看板。
+备注：superset的权限控制通过用户所拥有的角色的权限合集来控制。`superset init`将会初始化权限和角色，会覆盖替换缺省角色的权限。所以不要直接改这三个角色的权限：Admin/Alpha/Gamma，若有需要，可基于这些角色复制出新角色再修改。 
+1. 数据源/库：数据库并无属主字段。但添加数据库需要有权限`can write on database`；修改数据库则要密码正确；删除数据库前会检查是否有数据集绑定，若有则无法删除。
+2. 数据集/表
+   - 读：数据表的读权限可以单独设置，并不需要其上数据库的读权限。读权限类似`dataset access on xx`。
+   - 数据集（表）的属主owners缺省可以完全操作（读+写+删）此数据源的图表和看板。
    - Alpha角色可以读取所有数据源和dashboard，但不能修改。
    - Gamma只能看到数据库，数据表和dashboard都是缺省为空。可以以Gamma作为新角色基础，添加特定数据集的访问权限。来实现数据共享和隔离。
-
-2. 图表/看板的读写权限：图表/看板都有一个owner列表。
+3. 图表/看板的读写权限：图表/看板都有一个owner列表。
    - 读权限：取决于是否有图表所用的数据集访问权限（最近粒度）。即使没有数据集所在数据库访问权限也可以。
    - 写权根：owner能修改，创建者缺省是owner。
-3. 行级权限 Row Level：目前只有管理员才可以操作。
+4. 行级权限 Row Level：只有管理员才可以操作。
 
 
 
 表格 特殊权限项说明
 
-| 权限项                                             | 应用场景                                        | 说明                                         |
-| -------------------------------------------------- | ----------------------------------------------- | -------------------------------------------- |
-| `can save on datasource`                           | 数据源编辑时需要此权限，同时还需是数据源的owner | 应用到接口 /datasource/save/                 |
-| `all database access on all_database_access`       | 可以访问所有数据库，适用于演示用户              | 给Alpha角色用，可读。                        |
-| `can write on database`, `can write on datasource` | 可以创建数据源/数据源，适用于创建用户级的私有源 | 产生的问题是可以修改其它有权限访问的公有源。 |
-|                                                    |                                                 |                                              |
+| 权限项                                                       | 应用场景                                                     | 说明                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------------- |
+| `can save on datasource`                                     | 数据源编辑时需要此权限，同时还需是数据源的owner              | 应用到接口 /datasource/save/                             |
+| `all database access on all_database_access`                 | 可以访问所有数据库，适用于演示用户                           | 给Alpha角色用，可读。                                    |
+| `can write on database`, `can write on datasource`           | 可以创建数据源/数据源，适用于创建用户级的私有源              | 删除数据库需要没有绑定数据集；<br>删改数据集需要owners。 |
+| `database access on [xdDB].(id:10)`，  <br/>` datasource access on [xdDB].[xxTABLE](id:37)` | 用户创建的数据源/数据集默认自己用。<br>若别人要用又没有特权角色，需要将此权限添加到特定角色，给用户分配此角色。 | 具体的数据库、数据集访问权限示例                         |
 
 
 
@@ -1996,7 +2239,7 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
 
 ### 缓存 flask-cache
 
-superset使用Flask-Cache来缓存数据。Flask-Caching supports various caching backends, including Redis, Memcached, SimpleCache (in-memory), or the local filesystem.
+superset使用Flask-Cache来缓存数据。Flask-Caching supports various caching backends, including Redis, Memcached, SimpleCache (in-memory), or the local filesystem.  参见  https://superset.apache.org/docs/installation/cache
 
 - Memcached: we recommend using [pylibmc](https://pypi.org/project/pylibmc/) client library as `python-memcached` does not handle storing binary data correctly.
 - Redis: we recommend the [redis](https://pypi.python.org/pypi/redis) Python package
@@ -2012,11 +2255,17 @@ DATA_CACHE_CONFIG = {
     'CACHE_REDIS_URL': 'redis://localhost:6379/0',
 }
 
+# superset-0.2xx
+CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
+TABLE_NAMES_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
+    
 # 缓存缩略图 Caching Thumbnails
 FEATURE_FLAGS = {
     "THUMBNAILS": True,
     "THUMBNAILS_SQLA_LISTENERS": True,
 }
+
+THUMBNAIL_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple", "CACHE_NO_NULL_WARNING": True}
  ```
 
 
@@ -2029,7 +2278,7 @@ WSGI是Web Server Gateway Interface的缩写。以层的角度来看，WSGI所�
 
 WSGI 没有官方的实现, 因为WSGI更像一个协议. 只要遵照这些协议,WSGI应用(Application)都可以在任何服务器(Server)上运行, 反之亦然。
 
-WSGI标准在 PEP 333 [1] 中定义并被许多框架实现，其中包括现广泛使用的django框架。
+WSGI标准在 PEP 333中定义并被许多框架实现，其中包括现广泛使用的django框架。
 
  
 
@@ -2200,6 +2449,8 @@ fab: flask_appbuild
 
 ## 安装常见问题
 
+备注：安装Oracle/MySQL/SQLite报错，详见 《[Python开发](Python开发.md)》FAQ章节。
+
 **Q1： windows/linux环境安装报错模块 python-geohash   **
 
 报错信息： 
@@ -2307,26 +2558,53 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 ## superset原生BUG
 
-1. 数据源/集删除后的垃圾清理
+1.  (fixed)编辑数据集页面无法获取extra字段，保存时extra字段值丢失。
 
-    描述：数据源/集删除后，相应的数据源权限 并未在角色中清除，能在角色的权限列表里看到 已经删除的数据源/数据集。
-
-    评审：
-
-2. 编辑数据集页面无法获取extra字段，保存时extra字段值丢失。
-
+    ```
     描述：数据集删除页面 进入编辑，extra字段显示正常； 但如果是通过编辑数据集页面进入 ，extra字段无法获取。
-    
     评审：暂时save接口在保存时，如果extra字段为空，先从DB里获取。这样保证这个字段的值不丢失。
+    补充：v1.3已可获取extra字段值。
+    ```
 
 
-3. 删除图表时并未检验看否有看板使用
+2. (fixed)删除图表时并未检验看否有看板使用
 
+   ```
    描述：删除数据库、数据集时都有检查依赖项。但删除图表时并未检测是否有看板依赖，可以增加提示信息，不强制不能删除。
-   
+   评审：v1.3有增加删除提示，需要填写`删除`确认才能删除。
+   ```
+
+3.  数据源/集删除后的垃圾清理
+
+   ```
+   描述：数据源/集删除后，相应的数据源权限 并未在角色中清除，能在角色的权限列表里看到 已经删除的数据源/数据集。
    评审：
+   ```
 
+4.  数据源重命名后的垃圾清理（暂缓）
 
+   ```
+   描述：数据源重命名后，旧的数据源权限仍在 ab_view_menu。如原来数据源名为pg3，改名为pg4。然后数据源 pg3.(id:xx)和pg4.(id:xx)都存在。
+   评审：update命令，需要判断是否是数据源重命名，是则需要特殊处理，增加获取旧数据库名，移除相关权限。另外，重命名虽然造成了冗余，但却不会涉及到数据授权丢失问题。
+   ```
+
+5. (fixed)看板csstemplate权限问题
+
+   ```
+   描述：任意用户都可以读写看板公共csstemplate，会影响到所有用户
+   原因：gamma角色默认有csstempalte读写权限。css模板改删时，没有类似数据集/图表/看板的owner判断，权限过于宽松。
+   评审：可以先从gamma角色移除csstemaplte写权限。为csstempalte设置专门角色，只有特定用户才可编辑删除。
+   ```
+
+6. 漏斗图的配置参数里的 行限制参数保存时固定值
+
+   ```
+   描述：漏斗图的配置参数里的 行限制保存时都是10，下拉选项值不生效。运行按纽时能正确，保存则固定10。
+   原因：
+   评审：
+   ```
+
+   
 
 ## superset不支持功能
 
@@ -2345,8 +2623,6 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 - 根路由定制：约300个API，十几个不同前缀路由。还依赖flask_appbuilder模块，改起来很麻烦。（弃）
 
   
-
-
 
 # 参考资料
 

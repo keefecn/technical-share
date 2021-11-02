@@ -20,6 +20,8 @@
 
 
 
+
+
 ---
 
 # 目录
@@ -118,6 +120,10 @@
 
 
 
+[TOC]
+
+
+
 ---
 
 # 1.   Java概述
@@ -149,7 +155,7 @@ Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的
 | 2017 | 8月，Oracle将Java EE（Java Enterprise Edition，J2EE）移交给开源组织Eclipse基金会接手。9月，Java9发布。 |
 | 2018 | 3月，Java EE更名为Jakarta EE，Java 10发布。                  |
 | 2019 |                                                              |
-|||
+|2020||
 
 备注：JDK版本变迁详见JDK章节。
 
@@ -168,7 +174,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
 
 说明：此命令打印出JDK、JRE、JVM的基本配置信息。
 
-JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK))。JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK))。
+JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK)。JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK)。
 没有JDK的话，无法编译Java程序，如果想只运行Java程序，要确保已安装相应的JRE。
 ​             ![1574525105512](../media/program_lang/java_001.png)                                     
 图 1 JDK结构图
@@ -201,22 +207,24 @@ Java 2平台包括：标准版（J2SE ~ Standard）、企业版（J2EE ~Enterpri
 范围：J2SE包含于J2EE中，J2ME包含了J2SE的核心类，但新添加了一些专有类
 
 
-## 1.2     Java SE Component
+## 1.2  Java SE Component
 The two principal products in the Java SE platform are: Java Development Kit (JDK) and Java SE Runtime Environment (JRE).
 The JDK is a superset of the JRE, and contains everything that is in the JRE, plus tools such as the compilers and debuggers necessary for developing applets and applications. The Java Runtime Environment (JRE) provides the libraries, the Java Virtual Machine, and other components to run applets and applications written in the Java programming language. 
- The following conceptual diagram illustrates all the component technologies in Java SE platform and how they fit together. 
+
+The following conceptual diagram illustrates all the component technologies in Java SE platform and how they fit together. 
+
 表格 3 J2SE component
 
-| component                                                    | detai*                                                       |                                                              |                                                              |
+| component                                                    | detail                                                       |                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [JDK](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#jre-jdk) |                                                              | [Java   Language ](http://download.oracle.com/javase/6/docs/technotes/guides/language/index.html) | [Java     Language ](http://download.oracle.com/javase/6/docs/technotes/guides/language/index.html) |
-| [Tools   &   Tool APIs ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html) | [Java     ](http://download.oracle.com/javase/6/docs/technotes/tools/windows/java.html)               [Javac     ](http://download.oracle.com/javase/6/docs/technotes/guides/javac/index.html)               [Javadoc     ](http://download.oracle.com/javase/6/docs/technotes/guides/javadoc/index.html)               [apt     ](http://download.oracle.com/javase/6/docs/technotes/guides/apt/index.html)               [jar     ](http://download.oracle.com/javase/6/docs/technotes/guides/jar/index.html)               [Javap     ](http://download.oracle.com/javase/6/docs/technotes/tools/windows/javap.html)               [JPDA     ](http://download.oracle.com/javase/6/docs/technotes/guides/jpda/index.html)               [JConsole     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#jconsole)               [Java     VisualVM ](http://download.oracle.com/javase/6/docs/technotes/guides/visualvm/index.html)                       [Security     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#security)               [Intl     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#intl)               [RMI     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#rmi)               [IDL*     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#idl)               [Deploy     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#deployment)               [Monitoring     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#monitor)               [Troubleshoot     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#troubleshoot)               [Scripting     ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#scripting)               [JVM     TI](http://download.oracle.com/javase/6/docs/technotes/guides/jvmti/index.html) |                                                              |                                                              |
-| [JRE](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#jre-jdk) | [RIAs](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/index.html) | [Java     Web Start ](http://download.oracle.com/javase/6/docs/technotes/guides/javaws/index.html)               [Applet     / Java Plug-in ](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/applet/applet_dev_guide.html) |                                                              |
-| [User   Interface   Toolkits ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#userinterface) | [AWT     ](http://download.oracle.com/javase/6/docs/technotes/guides/awt/index.html)               [Swing     ](http://download.oracle.com/javase/6/docs/technotes/guides/swing/index.html)               [Java     2D ](http://download.oracle.com/javase/6/docs/technotes/guides/2d/index.html)                       [Accessibility     ](http://download.oracle.com/javase/6/docs/technotes/guides/access/index.html)               [Drag     n Drop ](http://download.oracle.com/javase/6/docs/technotes/guides/dragndrop/index.html)               [Input     Methods ](http://download.oracle.com/javase/6/docs/technotes/guides/imf/index.html)               [Image     I/O ](http://download.oracle.com/javase/6/docs/technotes/guides/imageio/index.html)               [Print     Service ](http://download.oracle.com/javase/6/docs/technotes/guides/jps/index.html)               [Sound     ](http://download.oracle.com/javase/6/docs/technotes/guides/sound/index.html) |                                                              |                                                              |
-| [Integration   Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#integration) | [ID*     ](http://download.oracle.com/javase/6/docs/technotes/guides/idl/index.html)               [JDBC](http://download.oracle.com/javase/6/docs/technotes/guides/jdbc/index.html)                    [JNDI](http://download.oracle.com/javase/6/docs/technotes/guides/jndi/index.html)               [RMI     ](http://download.oracle.com/javase/6/docs/technotes/guides/rmi/index.html)               [RMI-IIOP     ](http://download.oracle.com/javase/6/docs/technotes/guides/rmi-iiop/index.html)               [Scripting     ](http://download.oracle.com/javase/6/docs/technotes/guides/scripting/index.html) |                                                              |                                                              |
-| [Other   Base   Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#otherbase) | [Beans     ](http://download.oracle.com/javase/6/docs/technotes/guides/beans/index.html)               [Intl Support ](http://download.oracle.com/javase/6/docs/technotes/guides/intl/index.html)               [Input/Output](http://download.oracle.com/javase/6/docs/technotes/guides/io/index.html)               [JMX     ](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html)               [JNI     ](http://download.oracle.com/javase/6/docs/technotes/guides/jni/index.html)               [Math     ](http://download.oracle.com/javase/6/docs/technotes/guides/math/index.html)                       [Networking     ](http://download.oracle.com/javase/6/docs/technotes/guides/net/index.html)               [Override     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/standards/index.html)               [Security     ](http://download.oracle.com/javase/6/docs/technotes/guides/security/index.html)               [Serialization](http://download.oracle.com/javase/6/docs/technotes/guides/serialization/index.html)                    [Extension     Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/extensions/index.html)               [xml     JAXP ](http://download.oracle.com/javase/6/docs/technotes/guides/xml/index.html) |                                                              |                                                              |
-| [lang   and util   Base Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#langutil) | [lang     and util ](http://download.oracle.com/javase/6/docs/technotes/guides/lang/index.html)               [Collections     ](http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html)               [Concurrency     Utilities ](http://download.oracle.com/javase/6/docs/technotes/guides/concurrency/index.html)               [JAR     ](http://download.oracle.com/javase/6/docs/technotes/guides/jar/index.html)               [Logging     ](http://download.oracle.com/javase/6/docs/technotes/guides/logging/index.html)               [Management     ](http://download.oracle.com/javase/6/docs/technotes/guides/management/index.html)                       [Preferences     API](http://download.oracle.com/javase/6/docs/technotes/guides/preferences/index.html)               [Ref     Objects ](http://download.oracle.com/javase/6/docs/api/java/lang/ref/package-summary.html)               [Reflection     ](http://download.oracle.com/javase/6/docs/technotes/guides/reflection/index.html)               [Regular     Expressions ](http://download.oracle.com/javase/6/docs/api/java/util/regex/package-summary.html)               [Versioning     ](http://download.oracle.com/javase/6/docs/technotes/guides/versioning/index.html)               [Zip     ](http://download.oracle.com/javase/6/docs/api/java/util/zip/package-summary.html)               [Instrumentation](http://download.oracle.com/javase/6/docs/technotes/guides/instrumentation/index.html) |                                                              |                                                              |
-| [Java   Virtual   Machine ](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) | [Java     Hotspot Client and Server VM](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) |                                                              |                                                              |
+| [JDK](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#jre-jdk) |                                                              | [Java Language ](http://download.oracle.com/javase/6/docs/technotes/guides/language/index.html) | [Java   Language ](http://download.oracle.com/javase/6/docs/technotes/guides/language/index.html) |
+| [Tools & Tool APIs ](http://download.oracle.com/javase/6/docs/technotes/tools/index.html) | [Java](http://download.oracle.com/javase/6/docs/technotes/tools/windows/java.html)  [Javac](http://download.oracle.com/javase/6/docs/technotes/guides/javac/index.html)  [Javadoc](http://download.oracle.com/javase/6/docs/technotes/guides/javadoc/index.html)  [apt](http://download.oracle.com/javase/6/docs/technotes/guides/apt/index.html)  [jar](http://download.oracle.com/javase/6/docs/technotes/guides/jar/index.html)  [Javap](http://download.oracle.com/javase/6/docs/technotes/tools/windows/javap.html)  [JPDA](http://download.oracle.com/javase/6/docs/technotes/guides/jpda/index.html)  [JConsole](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#jconsole)  [Java VisualVM ](http://download.oracle.com/javase/6/docs/technotes/guides/visualvm/index.html)   [Security](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#security)  [Intl](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#intl)  [RMI](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#rmi)  [IDL](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#idl)  [Deploy](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#deployment)  [Monitoring](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#monitor)  [Troubleshoot](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#troubleshoot)  [Scripting](http://download.oracle.com/javase/6/docs/technotes/tools/index.html#scripting)  [JVM TI](http://download.oracle.com/javase/6/docs/technotes/guides/jvmti/index.html) |                                                              |                                                              |
+| [JRE](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#jre-jdk) | [RIAs](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/index.html) | [Java Web Start ](http://download.oracle.com/javase/6/docs/technotes/guides/javaws/index.html) [Applet / Java Plug-in ](http://download.oracle.com/javase/6/docs/technotes/guides/jweb/applet/applet_dev_guide.html) |                                                              |
+| [User Interface Toolkits ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#userinterface) | [AWT](http://download.oracle.com/javase/6/docs/technotes/guides/awt/index.html)  [Swing](http://download.oracle.com/javase/6/docs/technotes/guides/swing/index.html)  [Java 2D ](http://download.oracle.com/javase/6/docs/technotes/guides/2d/index.html)  [Accessibility](http://download.oracle.com/javase/6/docs/technotes/guides/access/index.html)  [Drag n Drop ](http://download.oracle.com/javase/6/docs/technotes/guides/dragndrop/index.html)  [Input Methods ](http://download.oracle.com/javase/6/docs/technotes/guides/imf/index.html)  [Image I/O ](http://download.oracle.com/javase/6/docs/technotes/guides/imageio/index.html)  [Print Service ](http://download.oracle.com/javase/6/docs/technotes/guides/jps/index.html)  [Sound](http://download.oracle.com/javase/6/docs/technotes/guides/sound/index.html) |                                                              |                                                              |
+| [Integration Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#integration) | [IDL](http://download.oracle.com/javase/6/docs/technotes/guides/idl/index.html)  [JDBC](http://download.oracle.com/javase/6/docs/technotes/guides/jdbc/index.html)  [JNDI](http://download.oracle.com/javase/6/docs/technotes/guides/jndi/index.html) [RMI](http://download.oracle.com/javase/6/docs/technotes/guides/rmi/index.html) [RMI-IIOP](http://download.oracle.com/javase/6/docs/technotes/guides/rmi-iiop/index.html) [Scripting](http://download.oracle.com/javase/6/docs/technotes/guides/scripting/index.html) |                                                              |                                                              |
+| [Other Base Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#otherbase) | [Beans](http://download.oracle.com/javase/6/docs/technotes/guides/beans/index.html) [Intl Support ](http://download.oracle.com/javase/6/docs/technotes/guides/intl/index.html) [Input/Output](http://download.oracle.com/javase/6/docs/technotes/guides/io/index.html) [JMX](http://download.oracle.com/javase/6/docs/technotes/guides/jmx/index.html) [JNI](http://download.oracle.com/javase/6/docs/technotes/guides/jni/index.html) [Math](http://download.oracle.com/javase/6/docs/technotes/guides/math/index.html)   [Networking](http://download.oracle.com/javase/6/docs/technotes/guides/net/index.html) [Override  Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/standards/index.html)  [Security](http://download.oracle.com/javase/6/docs/technotes/guides/security/index.html)  [Serialization](http://download.oracle.com/javase/6/docs/technotes/guides/serialization/index.html)    [Extension  Mechanism ](http://download.oracle.com/javase/6/docs/technotes/guides/extensions/index.html) [xml JAXP ](http://download.oracle.com/javase/6/docs/technotes/guides/xml/index.html) |                                                              |                                                              |
+| [lang and util Base Libraries ](http://download.oracle.com/javase/6/docs/technotes/guides/index.html#langutil) | [lang and util](http://download.oracle.com/javase/6/docs/technotes/guides/lang/index.html) [Collections ](http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html) [Concurrency Utilities ](http://download.oracle.com/javase/6/docs/technotes/guides/concurrency/index.html) [JAR ](http://download.oracle.com/javase/6/docs/technotes/guides/jar/index.html) [Logging](http://download.oracle.com/javase/6/docs/technotes/guides/logging/index.html) [Management](http://download.oracle.com/javase/6/docs/technotes/guides/management/index.html) [Preferences API](http://download.oracle.com/javase/6/docs/technotes/guides/preferences/index.html) [Ref Objects ](http://download.oracle.com/javase/6/docs/api/java/lang/ref/package-summary.html) [Reflection](http://download.oracle.com/javase/6/docs/technotes/guides/reflection/index.html) [Regular Expressions ](http://download.oracle.com/javase/6/docs/api/java/util/regex/package-summary.html) [Versioning](http://download.oracle.com/javase/6/docs/technotes/guides/versioning/index.html) [Zip](http://download.oracle.com/javase/6/docs/api/java/util/zip/package-summary.html) [Instrumentation](http://download.oracle.com/javase/6/docs/technotes/guides/instrumentation/index.html) |                                                              |                                                              |
+| [Java Virtual Machine ](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) | [Java Hotspot Client and Server VM](http://download.oracle.com/javase/6/docs/technotes/guides/vm/index.html) |                                                              |                                                              |
 
 说明：RPC（Remote Procedure Call Protocol）远程过程调用协议，通过网络从远程计算机上请求调用某种服务。
 
@@ -233,27 +241,13 @@ The JDK is a superset of the JRE, and contains everything that is in the JRE, pl
 | CLDC  | Connected Limited Device Configuration | 有限连接设备配置，是为运行在资源非常有限的设备（例如[寻呼机](https://baike.baidu.com/item/寻呼机/1440759)或者[手机](https://baike.baidu.com/item/手机/6342)）上的[J2ME](https://baike.baidu.com/item/J2ME/204201)应用程序制订的架构。规范内容包括目标机器的特性、[虚拟机](https://baike.baidu.com/item/虚拟机)规范和基本的API等等。 有1.0和1.1两个版本。 |
 | JNI   | Java Native Interface                  | Java本机接口，提供了从Java虚拟机（JVM）进入JVM运行所在计算机的本机世界的入口。通过使用这个入口，Java程序员可以使用十分昂贵或者不可能以Java代码重写的旧的本机代码。JNI允许本机代码调用JVM、创建并访问对象、调用对象方法以及访问实例变量。开发人员所付出的代价是，这样做失去了Java平台“编写一次，到处运行”的优势，因为任何被调用的本机代码将受到特殊平台的约束。 |
 | JDBC  | Java Database Connectivity             | 基于SQL标准Java数据库连接，其基本功能和设计与ODBC相似。      |
-| ID*   | Interface   Define Language            | Java接口描述语言，Java和COBRA之间的连接                      |
+| IDL   | Interface   Define Language            | Java接口描述语言，Java和COBRA之间的连接                      |
 | RMI   | Remote Method Invocation               | Java远程方法调用。能够让在客户端Java虚拟机上的对象像调用本地对象一样调用服务端java 虚拟机中的对象上的方法。 |
 | JNDI  | Java Naming and Directory Interface    | Java名字与目录服务                                           |
 | JTS   | Java Transaction Service               | Java事务管理服务                                             |
 | JTA   | Java Transaction API                   | JTA允许应用程序执行分布式事务处理                            |
 | JMAPI | Java Management API                    | Java网络管理API                                              |
 | JMS   | Java Message Service                   | Java消息传递服务                                             |
-
-
-
-## 本章参考
-
-[1].  JDK官网：http://openjdk.java.net/
-
-[2]. JDK 9  http://openjdk.java.net/projects/jdk9/
-
-[3]. JDK 8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-
-[4]. Oracle Java Archive http://www.oracle.com/technetwork/java/archive-139210.html
-
-[5].  Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
 
 
 
@@ -316,7 +310,8 @@ Java工具包提供了强大的数据结构。在Java中的数据结构主要包
 *  属性（Properties）
 *  集合框架(Collection)
 
-1.Hashtable和HashMap
+1. Hashtable和HashMap
+
 ```java
 public class HashMap<K,V> extends AbstractMap<K,V>
     implements Map<K,V>, Cloneable, Serializable {
@@ -369,23 +364,21 @@ java.util.Map [I]
 
 3.并发队列
 Java的并发包提供了三个常用的并发队列实现，分别是：ConcurrentLinkedQueue、LinkedBlockingQueue和ArrayBlockingQueue。
-ArrayBlockingQueue是初始容量固定的阻塞队列，我们可以用来作为数据库模块成功竞拍的队列，比如有10个商品，那么我们就设定一个10大小的数组队列。
-ConcurrentLinkedQueue使用的是CAS原语无锁队列实现，是一个异步队列，入队的速度很快，出队进行了加锁，性能稍慢。
-LinkedBlockingQueue也是阻塞的队列，入队和出队都用了加锁，当队空的时候线程会暂时阻塞。
+
+* ArrayBlockingQueue是初始容量固定的阻塞队列，我们可以用来作为数据库模块成功竞拍的队列，比如有10个商品，那么我们就设定一个10大小的数组队列。
+
+* ConcurrentLinkedQueue使用的是CAS原语无锁队列实现，是一个异步队列，入队的速度很快，出队进行了加锁，性能稍慢。
+
+* LinkedBlockingQueue也是阻塞的队列，入队和出队都用了加锁，当队空的时候线程会暂时阻塞。
+
 应用案例：秒杀系统入队需求要远大于出队需求，一般不会出现队空的情况，所以可以选择ConcurrentLinkedQueue来作为我们的请求队列实现。
-
-
-
-## 本章参考
-
-[1].  Java教程 http://www.runoob.com/java/
 
 
 
 # 3 Java开发环境
 
 ## 3.1  Java开发工具
-参见《多语言开发》
+参见《[多语言开发](多语言开发.md)》
 表格 6 Java常用工具列表
 
 | 工具     | 使用                                                     | 示例           |
@@ -413,7 +406,8 @@ LinkedBlockingQueue也是阻塞的队列，入队和出队都用了加锁，当�
 | WTP                                          | 框架               | http://download.Eclipse.org/webtools/downloads/              | 用来开发web和JavaEE应用。                                    | webtoolpackage/platform |
 | [ant](http://ant.apache.org/)                | 项目构建工具       | http://ant.apache.org/                                       |                                                              |                                 |
 | [maven](http://maven.apache.org/)            | 项目构建工具       | http://maven.apache.org/                                     |                                                              | 类似cmake、make                 |
-备注：1. ubuntu 14.04 apt源只有openjdk 6/7，若需安装JDK 8需加PPA源，openjdk 9要求64位机器。
+
+> 备注：1. ubuntu 14.04 apt源只有openjdk 6/7，若需安装JDK 8需加PPA源，openjdk 9要求64位机器。
 
 ```shell
 $ sudo add-apt-repository ppa:webupd8team/java
@@ -657,15 +651,6 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 
 
 
-## 本章参考
-
-[1].  Javase  http://Java.sun.com/Javase/downloads/ 
-[2].  eclipse  http://www.Eclipse.org/downloads/ 
-[3].  tomcat  http://tomcat.apache.org/ 
-[4].  [Java中的JAR/EAR/WAR包的文件夹结构说明（转）](http://www.cnblogs.com/EasonJim/p/6498804.html)
-
-
-
 # 4  Java高级开发
 
 ## 4.1   并发
@@ -757,10 +742,6 @@ GUI：图形用户界面。
 | Swing | 是一个用于开发Java应用程序用户界面的开发工具包，是基础类库，1998年推出。 |                              |
 | *AWT* | AbstractWindowingToolkit，Sun开发的一个跨平台GUI开发工具包。<br>AWT是Java基础类(JFC)的一部分，为Java程序提供图形用户界面(GUI)的标准API。AWT框架底层使用原生窗口部件(nativewidgets)构建，只能使用各个平台窗口部件的子集。 |                              |
 | *SWT* | StandardWidgetToolkit，标准部件工具包。SWT是一个开源的GUI编程框架，与AWT/Swing有相似的用处。 | IDE-eclipse是用*SWT*开发的。 |
-
-
-
-## 本章参考
 
 
 
@@ -922,8 +903,6 @@ JVM运行时数据区的回收比例
 
 
 
-
-
 ## 6.2  JVM的垃圾回收(GC)
 
 在Java中，通过new关键字来为对象分配内存的，而内存的释放是由垃圾收集器（GC）来回收的。
@@ -963,11 +942,11 @@ HotSpot中新生代被划分为3个区域： Eden区、两个相对小点的区�
 
 回收算法
 
-| 回收算法 | 算法详述                                                 | 优劣                                                     | 应用                  |
+| 回收<br>算法 | 算法详述                                                 | 优劣                                                     | 应用                  |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------- |
-| 标记-清除    | 标记阶段：先通过根节点，标记所有从根节点开始的可达对象。因此，未被标记的对象就是未被引用的垃圾对象；<br>清除阶段：清除所有未被标记的对象 | 标记和清除的过程效率不高（标记和清除都需要从头遍历到尾）。   标记清除后会产生大量不连续的碎片。 |                           |
-| 复制         | 将原有的内存空间分为两块，每次只使用其中一块，在垃圾回收时，将正在使用的内存中的存活对象复制到未使用的内存块中，然后清除正在使用的内存块中的所有对象。 | 优点是效率较高，内存连续。   缺点是空间浪费较多。            | 新生代内存回收（MinorGC） |
-| 标记-整理    | 标记阶段：先通过根节点，标记所有从根节点开始的可达对象。因此，未被标记的对象就是未被引用的垃圾对象。   整理阶段：将将所有的存活对象压缩到内存的一端；之后，清理边界外所有的空间。 | 优点：不会产生内存碎片。缺点：在标记的基础之上还需要进行对象的移动，成本相对较高，效率也不高。 | 老年代内存回收（Full GC） |
+| 标记-清除    | 标记阶段：先通过根节点，标记所有从根节点开始的可达对象。因此，未被标记的对象就是未被引用的垃圾对象；<br>清除阶段：清除所有未被标记的对象 | 标记和清除的过程效率不高（标记和清除都需要从头遍历到尾）。标记清除后会产生大量不连续的碎片。 |                           |
+| 复制         | 将原有的内存空间分为两块，每次只使用其中一块，在垃圾回收时，将正在使用的内存中的存活对象复制到未使用的内存块中，然后清除正在使用的内存块中的所有对象。 | 优点是效率较高，内存连续。<br/>缺点是空间浪费较多。       | 新生代内存回收（MinorGC） |
+| 标记-整理    | 标记阶段：先通过根节点，标记所有从根节点开始的可达对象。因此，未被标记的对象就是未被引用的垃圾对象。<br/>整理阶段：将将所有的存活对象压缩到内存的一端；之后，清理边界外所有的空间。 | 优点：不会产生内存碎片。<br/>缺点：在标记的基础之上还需要进行对象的移动，成本相对较高，效率也不高。 | 老年代内存回收（Full GC） |
 
 备注：JVM为了优化内存的回收，进行了分代回收的方式。
 
@@ -990,13 +969,13 @@ HotSpot中新生代被划分为3个区域： Eden区、两个相对小点的区�
 Minor GC和Full GC
 GC分为两种：Minor GC和Full GC
 1） Minor GC：
-　　Minor GC是发生在新生代中的垃圾收集动作，采用的是复制算法。
+　Minor GC是发生在新生代中的垃圾收集动作，采用的是复制算法。
 对象在Eden和From区出生后，在经过一次Minor GC后，如果对象还存活，并且能够被to区所容纳，那么在使用复制算法时这些存活对象就会被复制到to区域，然后清理掉Eden区和from区，并将这些对象的年龄设置为1，以后对象在Survivor区每熬过一次Minor GC，就将对象的年龄+1，当对象的年龄达到某个值时（默认是15岁，可以通过参数 --XX:MaxTenuringThreshold设置），这些对象就会成为老年代。
-但这也是不一定的，对于一些较大的对象（即需要分配一块较大的连续内存空间）则是直接进入老年代
+但这也是不一定的，对于一些较大的对象（即需要分配一块较大的连续内存空间）则是直接进入老年代。
 2）Full GC：
-　　Full GC是发生在老年代的垃圾收集动作，采用的是标记-清除/整理算法。
+　Full GC是发生在老年代的垃圾收集动作，采用的是标记-清除/整理算法。
 老年代里的对象几乎都是在Survivor区熬过来的，不会那么容易死掉。因此Full GC发生的次数不会有Minor GC那么频繁，并且做一次Full GC要比做一次Minor GC的时间要长。
-另外，如果采用的是标记-清除算法的话会产生许多碎片，此后如果需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次GC。
+	另外，如果采用的是标记-清除算法的话会产生许多碎片，此后如果需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次GC。
 
 
 
@@ -1031,18 +1010,21 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 *  -XX:+PrintComilation：简单的输出一些关于从字节码转成本地代码的编译过程，每当一个方法被编译时 就输出一行-XX:+PrintCompilation，每行都包含顺序号[唯一的编译任务ID]和已编译方法的名称和大小和额外信息。
 *  CITime：用于在JVM关闭时获得各种编译的统计信息。
 
-内存管理参数
-新生代[young generation]: 存储新分配的和较年轻的对象
-老生代[old generation]: 存储着长寿的对象
-永久代[permanent generation]: 存储需要伴随整个JVM生命周期的对象 比如已加载的对象的类定义或者String对象内部Cache
 
-| 参数                                                | 参数详述                                                     | 备注                   |
-| --------------------------------------------------- | ------------------------------------------------------------ | ---------------------- |
-| -Xms 和    -Xmx                                     | -Xms是 -XX:InitialHeapSize的简写 表示的是初始化堆的大小   -Xmx 是 -XX:MaxHeapSize的简写 表示的是设置堆的最大大小 | 一般这两者值设置相同。 |
-| -XX:+HeapDumpOnOutOfMemoryError和-XX:HeapDumpPath   |                                                              |                        |
-| -XX:OnOutOfMemoryError                              |                                                              |                        |
-| XX:PermSize和-XX:MaxPermSize                        | -XX:PermSize:设置永久代的初始大小。-XX:MaxPermSize:设置永久代的最大大小。 |                        |
-| -XX:InitialCodeCacheSize和-XX:ReservedCodeCacheSize |                                                              |                        |
+
+**内存管理参数**
+
+- 新生代[young generation]: 存储新分配的和较年轻的对象
+- 老生代[old generation]: 存储着长寿的对象
+- 永久代[permanent generation]: 存储需要伴随整个JVM生命周期的对象 比如已加载的对象的类定义或者String对象内部Cache
+
+| 参数                                                   | 参数详述                                                     | 备注                   |
+| ------------------------------------------------------ | ------------------------------------------------------------ | ---------------------- |
+| -Xms  <br/>-Xmx                                        | -Xms是 -XX:InitialHeapSize的简写 表示的是初始化堆的大小.<br/>-Xmx 是 -XX:MaxHeapSize的简写 表示的是设置堆的最大大小. | 一般这两者值设置相同。 |
+| -XX:+HeapDumpOnOutOfMemoryError <br/>-XX:HeapDumpPath  |                                                              |                        |
+| -XX:OnOutOfMemoryError                                 |                                                              |                        |
+| XX:PermSize  <br/>-XX:MaxPermSize                      | -XX:PermSize:设置永久代的初始大小。<br>-XX:MaxPermSize:设置永久代的最大大小。 |                        |
+| -XX:InitialCodeCacheSize<br/>-XX:ReservedCodeCacheSize |                                                              |                        |
 
 
 
@@ -1063,10 +1045,10 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 ## 本章参考
 
 [1]. JVM [http://www.pusuo.net/2010/jvmresearch/](http://www.pusuo.net/2010/jvmresearch/)
-[2]. 深入理解JVM--JVM垃圾回收机制http://jbutton.iteye.com/blog/1569746
-[3]. 《深入理解JAVA虚拟机》——学习笔记[http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
-[4]. JVM类加载三步走[https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md](https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md)
-[5].  深入剖析Java类加载机制http://blog.csdn.net/love_Javc_you/article/details/38081683
+[2]. 深入理解JVM--JVM垃圾回收机制 http://jbutton.iteye.com/blog/1569746
+[3]. 《深入理解JAVA虚拟机》——学习笔记 [http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
+[4]. JVM类加载三步走 https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md
+[5].  深入剖析Java类加载机制 http://blog.csdn.net/love_Javc_you/article/details/38081683
 [6].  Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html 
 [7].  JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
 
@@ -1074,24 +1056,38 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 # Reference
 
-官网
-*  JDK 9  http://openjdk.java.net/projects/jdk9/
-*  Oracle Java Archive  http://www.oracle.com/technetwork/java/archive-139210.html
-*  [http://Java.sun.com/blueprints/corej2eepatterns/Patterns/index.html](http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html)
-*  [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
-*  Java SE6 Component [http://download.oracle.com/Javase/6/docs/index.html](http://download.oracle.com/javase/6/docs/index.html)
+**官网**
 
-书籍
+*  JDK官网：http://openjdk.java.net/
+*  JDK 9  http://openjdk.java.net/projects/jdk9/
+*  JDK 8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+*  Oracle Java Archive  http://www.oracle.com/technetwork/java/archive-139210.html
+*   Javase  http://Java.sun.com/Javase/downloads/  
+*  tomcat  http://tomcat.apache.org/ 
+*  Eclipse  http://www.Eclipse.org/downloads/
+
+
+
+**书籍**
+
 *  《深入Java虚拟机(原书第二版)》
 *  《深入理解Java虚拟机：JVM高级特性与最佳实践(第2版)》
 *  《HotSpot实战》 陈涛 人民邮电出版社 2014
 
-参考资料
-[1].  [Java资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-java-cn/)https://github.com/jobbole/awesome-java-cn)
 
-[2].  EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp
 
-[3].  我的java问题排查工具单 https://yq.aliyun.com/articles/69520?spm=5176.100238.goodcont.99.Mm6xRL
+**参考资料**
 
-[4].  Java实例 http://www.runoob.com/java/java-examples.html
+* Java资源大全中文版 https://github.com/jobbole/awesome-java-cn
 
+*  Java教程 http://www.runoob.com/java/
+* Java实例 http://www.runoob.com/java/java-examples.html
+* EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp
+
+* 我的java问题排查工具单 https://yq.aliyun.com/articles/69520?spm=5176.100238.goodcont.99.Mm6xRL
+
+*  [http://Java.sun.com/blueprints/corej2eepatterns/Patterns/index.html](http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html)
+*  [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
+*  Java SE6 Component [http://download.oracle.com/Javase/6/docs/index.html](http://download.oracle.com/javase/6/docs/index.html)
+*  Java中的JAR/EAR/WAR包的文件夹结构说明（转）http://www.cnblogs.com/EasonJim/p/6498804.html
+*   Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html

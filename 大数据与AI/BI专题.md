@@ -429,8 +429,8 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 定义挖掘目标 | 明确本次的挖掘目标是什么？系统完成后要达到什么效果？         |                                                              |
 | 数据取样     | 从业务系统中抽取一个与挖掘目标相关的样本数据子集。           | 抽取数据标准要求相关、可靠和有效。                           |
-| 数据探索     | 分析数据属性之间的相关性                                     | 包括：  Ø 数据质量分析：异常值、缺失值、一致性  Ø 数据特征分析：分布、对比、统计量、相关性、周期性和贡献度。 |
-| 数据预处理   | 当采集数据维度过大时，需要降维、缺失值处理等。               | 包括：  Ø 数据筛选（清洗）：异常值、缺失值  Ø 数据集成：实体识别、冗余属性识别  Ø 数据转换：简单函数变换、数据规范（标准）化、连续属性离散化、属性选择（构造）、小波变换  Ø 数据规约：属性规约（合并、决策树归纳、PCA主成分分析），数值规约（回归、直方图、抽样等）。 |
+| 数据探索     | 分析数据属性之间的相关                                       | Ø 数据质量分析：异常值、缺失值、一致性  <br>Ø 数据特征分析：分布、对比、统计量、相关性、周期性和贡献度。 |
+| 数据预处理   | 当采集数据维度过大时，需要降维、缺失值处理等。               | Ø 数据筛选（清洗）：异常值、缺失值  Ø 数据集成：实体识别、冗余属性识别  <br/>Ø 数据转换：简单函数变换、数据规范（标准）化、连续属性离散化、属性选择（构造）、小波变换  <br/>Ø 数据规约：属性规约（合并、决策树归纳、PCA主成分分析），数值规约（回归、直方图、抽样等）。 |
 | 挖掘建模     | 这是核心环节。                                               | 考虑DM中的哪类问题：  分类、聚类、关联规则、时序模式或智能推荐。 |
 | 模型评价     | 根据分析结果找出一个好的模型，根据业务对模型进行解释和应用。 |                                                              |
 | 模型发布     | 应用模型进行分析和预测。                                     |                                                              |
@@ -687,7 +687,7 @@ DW三种常见模型：E/R关系、维度和Data Vault 模型。
 
 
 
-## 4.4   ETL
+## 4.4  ETL
 
 **ETL**，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。**ETL**一词较常用在[数据仓库](http://baike.baidu.com/view/19711.htm)，但其对象并不限于数据仓库。
 
@@ -702,17 +702,120 @@ ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baid
 
 抽取方式：全量或增量。
 
-抽取手段：timestamp、触发器、备案、日志
+抽取手段：timestamp、触发器、备案/快照、日志
+
+表格  CDC四种方案比较
+
+| 比较项                 | timestamp | 触发器 | 快照 | 日志 |
+| ---------------------- | --------- | ------ | ---- | ---- |
+| 能区分插入/更新        | ×         | √      | √    | √    |
+| 周期内，能检测多次更新 | ×         | √      | ×    | √    |
+| 能检测到删除           | ×         | √      | √    | √    |
+| 不具有侵入性           | ×         | ×      | ×    | √    |
+| 支持实时               | ×         | √      | ×    | √    |
+| 不依赖数据库           | √         | ×      | √    | ×    |
 
 
 
-### 4.4.1 ETL工具
+### ETL工具
 
-详见 《大数据开发》
+* 商业版: Informatica、Datastage、微软DTS、Navicat、OWB、
+* 开源：[Kettle](http://baike.baidu.com/view/2486337.htm)、eclipse的etl插件~cloveretl
 
 
 
-## 4.5   数仓基准~TPC-H
+表格  ETL商业工具列表
+
+| 工具                  | 厂商                                         | 简介                                                         | 特性                                                         |
+| --------------------- | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Datastage             | IBM                                          | 2005年被IBM收购.<br/>IBM公司的商业软件，最专业的ETL工具，价格不菲，适合大规模的ETL应用。 |                                                              |
+| PowerCenter           | [Informatica](http://www.informatica.com.cn) | 入华时间2005年。全球领先的数据管理软件提供商。在如下Gartner魔力象限位于领导者地位：数据集成工具、数据质量工具 、元数据管理解决方案 、主数据管理解决方案 、企业级集成平台即服务（EiPaaS）。 | 专业程度如Datastage旗鼓相当，价格似乎比Datastage便宜。<br>用于访问和集成几乎任何业务系统、任何格式的数据，它可以按任意速度在企业内交付数据，具有高性能、高可扩展性、高可用性的特点。 |
+| Oracle Goldengate-OGG | Oracle                                       | 基于日志的结构化数据复制软件。可实时同步Oracle数据。能够实现大量交易数据的实时捕捉、变换和投递，实现源数据库与目标数据库的数据同步，保持亚秒级的数据延迟。 | 与oracle数据库耦合太深。<br>源端通过抽取进程提取redo log或archive log日志内容，通过pump进程（TCP/IP协议）发送到目标端，最后目标端的rep进程接收日志、解析并应用到目标端，进而完成数据同步。 |
+| DTS                   | 微软                                         |                                                              |                                                              |
+|                       | Data Pipeline                                | 一家为企业用户提供数据基础架构服务的科技公司。               | 整合了数据质量分析、质量校验、质量监控等多方面特性， 以保证数据质量的完整性、一致性、准确性及唯一性，彻底解决数据孤岛和数据定义进化的问题。 |
+
+
+
+表格  ETL开源工具列表
+
+| 工具                              | 源码                             | 简介                                                         | 特性                                                         |
+| --------------------------------- | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Kettle                            | http://kettle.pentaho.org/       | 2006年被Pentaho公司收购，改名为Pentaho Data Integration。<br>有商业版和开源版。。 | Java开发，跨平台运行。,支持**单机、集群**方式部署。          |
+| Apatar                            | http://apatar.com/               | Java 编写，是一个开源的数据抽取、转换、 装载(ETL)项目。      | 提供可视化的 Job 设计器与映射工具，支持所有主流数据源，提供灵活的基于 GUI、服务器和嵌入式的部署选项。 |
+| DataX                             | https://github.com/alibaba/DataX | 阿里巴巴集团内被广泛使用的离线数据同步工具/平台。            | 实现包括 MySQL、Oracle、SqlServer、Postgre、HDFS、Hive、ADS、HBase、TableStore(OTS)、MaxCompute(ODPS)、DRDS 等各种异构数据源之间高效的数据同步功能。 |
+| [Sqoop](http://sqoop.apache.org/) | https://attic.apache.org/        | SQL-to-Hadoop的简称。开始于2009年，最早是作为Hadoop的一个第三方模块存在，后成为Apache独立项目。2021.6，移入Apache attic。 | 主要用于传统数据库与HADOOP之间传输数据。                     |
+| Apache Camel                      | http://camel.apache.org/         | 非常强大的基于规则的路由以及媒介引擎。                       | 可以在 IDE 中用简单的 Java Code 就可以写出一个类型安全并具有一定智能的规则描述文件。 |
+| Heka                              | http://hekad.readthedocs.io      | 来自 Mozilla 的 Heka 是一个用来收集和整理来自多个不同源的数据的工具 | 通过对数据进行收集和整理后发送结果报告到不同的目标用于进一步分析。 |
+| Talend                            | http://www.talend.com/           | Talend (踏蓝) 是第一家针对的数据集成工具市场的 ETL开源软件供应商。 | Talend 以它的技术和商业双重模式为 ETL 服务提供了一个全新的远景。<br>可运行于 Hadoop 集群之间，直接生成 MapReduce 代码供 Hadoop 运行，从而可以降低部署难度和成本，加快分析速度。 |
+| Scriptella                        | http://scriptella.org/           | 开源的 ETL工具和一个脚本执行工具，采用 Java 开发。           | 支持跨数据库的 ETL 脚本，并且可以在单个的 ETL 文件中与多个数据源运行。可以与 Java EE，Spring，JMX，JNDI 和 JavaMail 集成。 |
+
+
+
+表格 ETL工具功能比较
+
+| 工具名称            | 简介                                                         | 软件<br>性质     | 数据同步方式                                                 | 作业调度                                                     |
+| :------------------ | :----------------------------------------------------------- | :--------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Informatica（美国） |  | 商业图形界面     | 支持增量抽取，增量抽取的处理方式，增量加载的处理方式，提供数据更新的时间点或周期 | 工作流调度，可按时间、事件、参数、指示文件等进行触发，从逻辑设计上，满足企业多任务流程设计。 |
+| Beeload/BeeDI       | 2004年发布V1.0 http://www.livbee.com<BR>国产品牌：专注、专业、专一ETL工具产品化的及技术性的原厂商，提供产品使用授权及服务 | 商业图形界面     | 全量同步时间戳增量、触发器增量差异比对、CDC增量 提供图形界面配置 | 内置工作流调度功能，支持相关作业协同、定时及特定条件的执行。 |
+| Data stage          |  | 商业图形界面     | 全量同步时间戳增量差异比对同步                               | 通常使用第三方调度工具                                       |
+| [Kettle](http://kettle.pentaho.org/) |  | 商业开源图形界面 | 全量同步时间戳增量差异比对同步                               | 需要借助第三方调度工具控制作业执行时间                       |
+| [Talend](http://www.talend.com/)（法国 2005年）      | 以 Eclipse 的插件方式提供界面。                              | 开源图形界面 | 全量同步增量同步方式需要Java自定义                           | 没有内置调度，需要写Java自定义逻辑或使用其它调度工具 |
+| [Apatar](http://apatar.com/)                    | Apatar 用 Java 编写，是一个开源的数据抽取、转换、 装载(ETL)项目。 | 开源图形界面                                | 全量同步增量同步方式需要代码自定义                           | 没有内置调度                                         |
+| Alooma                                          |                                                              | 商业图形界面                                | 全量同步时间戳增量CDC增量 依赖于数据库是否有对应CDC接口。需要复杂的配置及维护 | 通过脚本定义作业执行时间                             |
+| [Scriptella](http://scriptella.org/)            | Scriptella 是一个开源的 ETL (抽取-转换-加载)工具和一个脚本执行工具，采用 Java 开发。 | 开源脚本                                    | 完全写脚本处理同步过程                                       | 完全写脚本处理调度                                   |
+| [Heka](http://hekad.readthedocs.io/en/v0.10.0/) |  | 开源脚本                                    | 一个用来收集和整理来自多个不同源的数据的工具，通过对数据进行收集和整理后发送结果报告到不同的目标用于进一步分析。通常用于系统日志分析。需要自定义数据库同步方式。 |                                                      |
+| Automation                                      | 提供了一套ETL框架。它没有将注意力放在如何处理“转换”这个环节上，而是利用Teradata数据库本身的并行处理能力，用SQL语句来做数据转换的工作，其重点是提供对ETL流程的支持，包括前后依赖、执行和监控等其实应该叫做ELT，即装载是在转换之前的。 | 商业脚本                                    | 依附于Teradata数据库本身的并行处理能力，用SQL语句来做数据转换的工作，其重点是提供对ETL流程的支持，包括前后依赖、执行和监控等 | Teradata 调度                                        |
+| symmetricds                                     | 开源按数据量和服务器收费 | 开源                  | 触发器方式有锁表问题                                         |                                                |
+
+
+
+### Kettle
+
+kettle官网 https://community.hitachivantara.com/docs/DOC-1009855
+
+github源码 https://github.com/pentaho/pentaho-kettle
+
+Kettle最早是一个开源的ETL工具，全称为[KDE ](https://baike.baidu.com/item/KDE /5108022)Extraction, Transportation, Transformation and Loading Environment。在2006年，Pentaho公司收购了Kettle项目，原Kettle项目发起人Matt Casters加入了Pentaho团队，成为Pentaho套件数据集成架构师 ；从此，Kettle成为企业级数据集成及[商业智能](https://baike.baidu.com/item/商业智能/406141)套件Pentaho的主要组成部分，Kettle亦重命名为Pentaho Data Integration(缩写为PDI)。Pentaho公司于2015年被[Hitachi ](https://baike.baidu.com/item/Hitachi /1357483)Data Systems（2017年改名为Hitachi Vantara）收购。
+
+Pentaho Data Integration以Java开发，支持跨平台运行，其特性包括：支持100%无编码、拖拽方式开发ETL数据管道；可对接包括传统数据库、文件、大数据平台、接口、流数据等数据源；支持ETL数据管道加入机器学习算法。**用于数据库间的数据迁移** 。可以在Linux、windows、unix 中运行。有图形界面，也有命令脚本还可以二次开发。Kettle 中有两种脚本文件，transformation 和 job，transformation 完成针对数据的基础转换，job 则完成整个工作流的控制。
+
+Pentaho Data Integration分为商业版与开源版。在中国，一般人仍习惯把Pentaho Data Integration的开源版称为Kettle。
+
+企业商用版提供 <u>专业支持服务</u>和 <u>软件维修服务</u>。
+
+表格 Kettle开源版和商业版功能差别
+
+| 软件增强功能。     | 开源社区版 | 企业商用版                                   |
+| ------------------ | ---------- | -------------------------------------------- |
+| Hadoop平台集成     | 有限集成   | 厂家专用插件（CDH, HDP, EMR等）              |
+| Hadoop安全性       | 不支持     | AES加密、Kerberos、Sentry及Ranger支持        |
+| AEL性能提升引擎    | 不支持     | 数据集成任务下压至Spark引擎执行              |
+| 数据库事务性保障   | 不支持     | 作业失败后，数据自动回滚                     |
+| 失败作业处理方式   | 从头执行   | 透过设置Checkpoint使作业在失败前断点重新执行 |
+| 任务计划调度       | 不支持     | Schedule设置任务执行时间和执行配置           |
+| 资源库版本管理     | 不支持     | 支持作业和转换版本管理，方便协同开发         |
+| 机器学习步骤       | 不支持     | 提供20+常用算法，包括Python, R脚本执行支持。 |
+| 作业监控分析       | 不支持     | Operations Mart支持对作业运行数据做BI分析    |
+| 流数据对接         | 有限支持   | 支持JMS, Kafka, AMPQ, Kinesis和MQTT协议      |
+| Pentaho分析仪      | 不支持     | 图形化构建Cube进行多维分析                   |
+| 互交式报表         | 不支持     | 互交式报表支持查询、联动、过滤筛选           |
+| 自助服务仪表盘设计 | 不支持     | 自助式构建个性化仪表盘                       |
+| SDR自助数据集市    | 不支持     | 透过ETL作业自动发布OLAP Cube                 |
+| JDBC驱动分发工具   | 不支持     | 提供分发工具，方便用户安装JDBC驱动           |
+
+
+
+Kettle 中文名称叫水壶，该项目的主程序员MATT 希望把各种数据放到一个壶里，然后以一种指定的格式流出。
+Kettle家族目前包括4个产品：Spoon、Pan、CHEF、Kitchen。
+
+* SPOON（勺子） 允许你通过图形界面来设计ETL转换过程（Transformation）(最经常使用)。
+* PAN（煎锅） 允许你批量运行由Spoon设计的ETL转换 (例如使用一个时间调度器)。Pan是一个后台执行的程序，没有图形界面。
+* CHEF（厨师） 允许你创建任务（Job）。 任务通过允许每个转换，任务，脚本等等，更有利于自动化更新数据仓库的复杂工作。任务通过允许每个转换，任务，脚本等等。任务将会被检查，看看是否正确地运行了。
+* KITCHEN（厨房） 允许你批量使用由Chef设计的任务 (例如使用一个时间调度器)。KITCHEN也是一个后台运行的程序。
+
+
+
+## 4.5  数仓基准~TPC-H
 
 **TPC**
 
@@ -808,7 +911,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 
 
-## 4.6   DW实例
+## 4.6  DW实例
 
 表格 8 IBM与Teradata仓库模型比较
 
@@ -862,6 +965,10 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 [8]:   阿里巴巴数据产品经理工作总结篇  http://mp.weixin.qq.com/s?__biz=MjM5MDI1ODUyMA==&mid=205181896&idx=3&sn=bb2d98b6d90c86552c260791bdd30faf#rd
 
 [9]:   淘宝数据仓库架构实践 http://wenku.baidu.com/view/72d5a86658fafab069dc02d6.html
+
+* 几款开源的ETL工具及ELT初探  https://www.jianshu.com/p/22b1b9e27f64
+* Kettle插件结构: https://zhuanlan.zhihu.com/p/24982421
+* Kettle体系结构: https://blog.csdn.net/romaticjun2011/article/details/40680483
 
 
 
@@ -929,18 +1036,18 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 自助分析工具的基本功能
 
-* 多数据源连接：传统关系数据库Oracle, MySQL, Postgres等，MPP数据库如Druid，大数据如Hive
+* 多数据源连接：传统关系数据库Oracle、MySQL、Postgres等，MPP数据库如Druid，大数据如Hive
 * 丰富图表类型：一般支持流行的图表类型，30+种
 * 交互式分析：通过拖拽式操作，自助生成SQL
 * 仪表盘：大屏支持，自助CSS样式。
-* 可以共享：单个图表和仪表盘可以共享
+* 可以共享：单个图表和仪表盘可以共享读。编辑则只有owner才可操作。
 * 细粒度的权限管理：用户验证、数据权限细分
 
 自助分析工具的扩展功能：
 
 * 图表钻取：数据的上卷、下钻、旋转、切片等多维分析。
 * 交叉过滤：支持多个图表间关联，点击钻取时可以同步变化关联图表。
-* 多平台支持：PC端、移动端、微信小程序、钉钉
+* 多平台支持：桌面软件、移动端、微信小程序、钉钉
 * 系统集成：支持单点登陆等各种方式集成到第三方系统。用到密码场景需要考虑到密码同步问题。
   * 单点登陆：一是前端单点登陆，传输用户名和密码，登陆验证成功后保存<u>返回会话token</u>到cookie（支持ajax/iframe）。二是后端登陆，只需有用户名。
   * SSO登陆：
@@ -951,7 +1058,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 |          | 细项         | Power  BI                                           | Tableau                            | Superset                                                     |
 | -------- | ------------ | --------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------ |
-| 简介     | 简介         | 2015年Microsoft推出的商业软件，由MS EXCEL发展而来。 | 2004年成立的Tableau公司。          | 2015年[airbnb](https://link.zhihu.com/?target=https%3A//github.com/airbnb/superset/blob/master/CONTRIBUTING.md%23setting-up-a-python-development-environment)推出的开源软件。python开发，最新版本0.24。 |
+| 简介     | 简介         | 2015年Microsoft推出的商业软件，由MS EXCEL发展而来。 | Tableau成立于2004年。              | 2015年[airbnb](https://link.zhihu.com/?target=https%3A//github.com/airbnb/superset/blob/master/CONTRIBUTING.md%23setting-up-a-python-development-environment)推出的开源软件。python开发。 |
 | 功能     | 报表访问     | 桌面、网站、移动端                                  | 桌面、网站、移动端                 | 网站                                                         |
 |          | 报表制作     | 桌面                                                | 桌面                               | 网站                                                         |
 |          | 数据源       | 多文件格式+上百种数据源。                           | 多文件格式+多种数据源              | csv文件+近12种数据源                                         |
@@ -963,7 +1070,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 | 成本     | 商业成本     | 分桌面、专业和白金。桌面版免费。                    | 分桌面和服务器。桌面14天免费试用。 | 开源免费                                                     |
 |          | 二次开发     | 支持第三方插件                                      | 不支持                             | 完全支持                                                     |
 |          | 学习成本     | Office用户很容易适应。用户文档齐全。                | 用户文档齐全。                     | 物理表需要手工添加。文档较滞后，社区活跃。                   |
-| 特性     | 优点         | 可交互、可钻取。  数据源巨多。与Excel深度嵌入。     | 出现早，用户众多，文档齐全。       | 开源免费，版本更新非常快。与  Druid深度集成。                |
+| 特性     | 优点         | 可交互、可钻取。  数据源巨多。与Excel深度嵌入。     | 出现早，用户众多，文档齐全。       | 开源免费，版本更新非常快。与Druid深度集成。                  |
 |          | 缺点         | 价格不菲。                                          |                                    | 易用性                                                       |
 | 适用场景 |              | 大中小型公司的BI全套解决方案                        | 大中小型公司的数据可视化。         | 中小型公司的轻量级数据可视化。                               |
 
@@ -986,7 +1093,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 | 自定义分析           | √        | √      | √          | √            | √        |
 | 数据钻取             |          | √      | √          | √            | √        |
 | 交叉过滤             | √        | √      | √          | √            | √        |
-| 移动端               |          | √      | √          | √            | √        |
+| 移动端/小程序        |          | √      | √          | √            | √        |
 | 第三方系统集成       |          | √      |            | √            |          |
 | 上传CSV/EXCEL文件    | √        | √      | √          | √            | √        |
 | 邮件报告             | √        |        |            | √            |          |
@@ -999,9 +1106,9 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 表格 开源BI工具比较
 
-| 工具      | Superset                                   | Redash                                                       | **Metabase**                                                 | **Davinci**                                                  | DataEase                                              |
+| 工具      | Superset                                   | Redash                                                       | **Metabase**                                                 | Davinci.达芬奇                                               | DataEase                                              |
 | --------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------- |
-| 简介<br>  | Airbnb 开源的数据探索与可视化平台。        | 可协作数据可视化和仪表板平台，旨在使用更简单的方式（SQL）进行数据可视化。<br>2020.6被Spark母公司Databricks收购。 | metabase更注重非技术人员的使用体验。                         | DVAAS（Data Visualization as a Service）平台解决方案。<br>由中国宜信数据团队开源。 | 国产飞致云开源。<BR>[demo](https://demo.dataease.io/) |
+| 简介<br>  | Airbnb 开源的数据探索与可视化平台。        | 可协作数据可视化和仪表板平台，旨在使用更简单的方式（SQL）进行数据可视化。<br>2020.6被Spark母公司Databricks收购。 | metabase更注重非技术人员的使用体验。                         | DVAAS平台解决方案。<br>由中国宜信数据团队开源。              | 国产飞致云开源。<BR>[demo](https://demo.dataease.io/) |
 | 官网      | https://superset.apache.org/               | https://blog.redash.io/                                      | https://www.metabase.com/                                    |                                                              | https://dataease.io/                                  |
 | 源码      | https://github.com/apache/superset         | https://github.com/getredash/redash                          | https://github.com/metabase/metabase                         | https://github.com/edp963/davinci                            | https://github.com/dataease/dataease                  |
 | 文档      | https://superset.apache.org/docs/intro     | [https://redash.io/help/<br>Readme](https://github.com/getredash/redash#readme) | [Readme](https://github.com/metabase/metabase#readme)        | [文档](https://edp963.github.io/davinci/docs/zh/1.1-deployment) | https://dataease.io/docs/                             |
@@ -1011,13 +1118,13 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 | 最新版本  | 1.3.0                                      | 10.0.0                                                       | 0.41.1                                                       | 0.3.0                                                        | 1.3.0                                                 |
 | release数 | 49                                         | 97                                                           | 220                                                          | 13                                                           | 14                                                    |
 | License   | Apache-2.0                                 | BSD-2                                                        | [AGPL + 商业协议](https://github.com/metabase/metabase/blob/master/LICENSE.txt) | Apache-2.0                                                   | GPL-2                                                 |
-| 语言框架  | python+flask-appbuilder+react+js           | python+flask+js                                              | Java+Clojure+JS                                              | Java+Ts                                                      | Java SpringBoot+Vue+Echarts                           |
+| 语言框架  | python+flask-appbuilder+react+js           | python+flask+JS                                              | Java+Clojure+JS                                              | Java+Ts                                                      | Java SpringBoot+Vue+Echarts                           |
 | 优势      | 功能较全面，社区活跃，更新快               | 社区活跃                                                     |                                                              |                                                              | 功能简洁，有提供体验DEMO                              |
 | 劣势      | 权限控制复杂，权限项太多。可用性还需提升。 |                                                              |                                                              |                                                              |                                                       |
 
 > 备注：本表统计时间截止到2021-10-22。release数指大版本发布数量，这个指标只是作为更新活跃度的一个参考。
-
-
+>
+> DVAAS：Data Visualization as a Service。
 
 
 
@@ -1044,17 +1151,17 @@ Power BI分为三个版本，分别是桌面版、专业和白金版。
 
 表格 10 Power BI版本定价策略
 
-| 版本 | Power  BI Desktop                                            | Power  BI Pro                                                | Power  BI Premium                                            |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 用途 | 作者                                                         | 共享和协作                                                   | 缩放大型部署                                                 |
-| 费用 | free                                                         | $9.99  每用户每月                                            | 容量定价  每节点每月                                         |
-| 功能 | 连接数百个[数据源](https://powerbi.microsoft.com/zh-cn/#connect-wrapper)  使用可视化工具清理和准备数据  使用自定义可视化分析和生成出色的报表  发布到 Power BI 服务  嵌入公共网站 | 构建可全方位实时查看业务的仪表板  自动保持数据最新状态，包括本地源  针对共享数据进行协作  审核和管理数据的访问和使用方式  通过应用将内容打包并分发给用户 | 获取分配、缩放和控制的专用容量  分发和[嵌入内容](https://powerbi.microsoft.com/zh-cn/power-bi-embedded/)，而无需购买每用户许可证  使用 Power BI 报表服务器在本地发布报表  针对 Pro 用户提供更多容量并降低限制 |
-
-
+| 版本      | Power BI Desktop                                             | Power BI Pro                                                 | Power BI Premium                                             |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 用途      | 作者                                                         | 共享和协作                                                   | 缩放大型部署                                                 |
+| 费用      | free                                                         | $9.99  每用户每月                                            | 容量定价  每节点每月                                         |
+| 功能<br/> | 连接数百个[数据源](https://powerbi.microsoft.com/zh-cn/#connect-wrapper)  <br>使用可视化工具清理和准备数据  <br/>使用自定义可视化分析和生成出色的报表 <br/>发布到 Power BI 服务  <br/>嵌入公共网站 | 构建可全方位实时查看业务的仪表板  <br/>自动保持数据最新状态，包括本地源  <br/>针对共享数据进行协作  <br/>审核和管理数据的访问和使用方式  <br/>通过应用将内容打包并分发给用户 | 获取分配、缩放和控制的专用容量  <br/>分发和[嵌入内容](https://powerbi.microsoft.com/zh-cn/power-bi-embedded/)，而无需购买每用户许可证  <br/>使用 Power BI 报表服务器在本地发布报表  <br/>针对 Pro 用户提供更多容量并降低限制 |
 
 
 
 ### Tableau
+
+
 
 
 
@@ -1088,15 +1195,13 @@ $ java -jar metabase.jar
 
 
 
-
-
 ## 6.4  其它工具
 
 ### Pentaho BI
 
 [Pentaho BI](http://www.pentaho.com/)平台不同于传统的BI 产品，它是一个以流程为中心的，面向解决方案（Solution）的框架。其目的在于将一系列企业级BI产品、开源软件、API等等组件集成起来，方便商务智能应用的开发。它的出现，使得一系列的面向商务智能的独立产品如Jfree、Quartz等等，能够集成在一起，构成一项项复杂的、完整的商务智能解决方案。
 
-Pentaho BI 平台，Pentaho Open BI 套件的核心架构和基础，是以流程为中心的，因为其中枢控制器是一个工作流引擎。工作流引擎使用流程定义来定义在BI 平台上执行的商业智能流程。流程可以很容易的被定制，也可以添加新的流程。BI 平台包含组件和报表，用以分析这些流程的性能。目前，Pentaho的主要组成元素包括报表生成、分析、数据挖掘和工作流管理等等。这些组件通过 J2EE、WebService、SOAP、HTTP、Java、JavaScript、Portals等技术集成到Pentaho平台中来。 Pentaho的发行，主要以Pentaho SDK的形式进行。
+Pentaho BI 平台，Pentaho Open BI 套件的核心架构和基础，是以流程为中心的，因为其中枢控制器是一个工作流引擎。工作流引擎使用流程定义来定义在BI 平台上执行的商业智能流程。流程可以很容易的被定制，也可以添加新的流程。BI 平台包含组件和报表，用以分析这些流程的性能。目前，Pentaho的主要组成元素包括报表生成、分析、数据挖掘和工作流管理等等。这些组件通过 J2EE、WebService、SOAP、HTTP、Java、JavaScript、Portals等技术集成到Pentaho平台中来。Pentaho的发行，主要以Pentaho SDK的形式进行。
 
 Pentaho SDK共包含五个部分：Pentaho平台、Pentaho示例数据库、可独立运行的Pentaho平台、Pentaho解决方案示例和一个预先配制好的 Pentaho网络服务器。其中Pentaho平台是Pentaho平台最主要的部分，囊括了Pentaho平台源代码的主体；Pentaho数据库为 Pentaho平台的正常运行提供的数据服务，包括配置信息、Solution相关的信息等等，对于Pentaho平台来说它不是必须的，通过配置是可以用其它数据库服务取代的；可独立运行的Pentaho平台是Pentaho平台的独立运行模式的示例，它演示了如何使Pentaho平台在没有应用服务器支持的情况下独立运行；Pentaho解决方案示例是一个Eclipse工程，用来演示如何为Pentaho平台开发相关的商业智能解决方案。
 Pentaho BI 平台构建于服务器，引擎和组件的基础之上。这些提供了系统的J2EE 服务器，安全，portal，工作流，规则引擎，图表，协作，内容管理，数据集成，分析和建模功能。这些组件的大部分是基于标准的，可使用其他产品替换之。
@@ -1106,7 +1211,7 @@ Pentaho是一个以工作流为核心的、强调面向解决方案而非工具�
 （2）数据库：Firebird RDBMS
 （3）集成管理和开发环境：Eclipse
 （4）报表工具：Eclipse BIRT
-（5）ETL工具：Enhydra/Kettle
+（5）ETL工具：Enhydra/**Kettle**
 （6）OLAP Server：Mondrian
 （7）OLAP展示：JPivot
 （8）数据挖掘组件：Weka
@@ -1122,23 +1227,6 @@ docker部署： `docker run -p 8080:8080 wmarinho/pentaho                       
 
 
 ## 本章参考
-
-**BI产品官网**
-
-* superset官网 https://superset.incubator.apache.org
-* Redash  https://blog.redash.io/
-* Metabase  https://www.metabase.com/
-* 帆软BI  https://help.fanruan.com/finebi/
-* 永洪BI  https://www.yonghongtech.com/
-* 阿里Quick BI  [Quick BI官网_BI数据可视化分析工具_智能报表-阿里云 (aliyun.com)](https://www.aliyun.com/product/bigdata/bi)
-* 网易数帆-有数  https://sf.163.com/
-* Tableau  https://www.tableau.com/
-* PowerBI  [数据可视化 | Microsoft Power BI](https://powerbi.microsoft.com/zh-cn)  https://powerbi.microsoft.com/zh-cn
-* Pentaho BI  http://www.pentaho.com/
-
-
-
-**参考链接**
 
 * 2021年五大开源数据可视化BI方案对比 https://cloud.tencent.com/developer/article/1882014
 * 永洪科技-商业智能社区 https://ask.hellobi.com/
@@ -1406,6 +1494,29 @@ docker部署： `docker run -p 8080:8080 wmarinho/pentaho                       
 
 # 参考资料
 
+## 参考网站
+
+**BI产品官网**
+
+* superset官网 https://superset.incubator.apache.org
+* Redash  https://blog.redash.io/
+* Metabase  https://www.metabase.com/
+* 帆软BI  https://help.fanruan.com/finebi/
+* 永洪BI  https://www.yonghongtech.com/
+* 阿里Quick BI  [Quick BI官网_BI数据可视化分析工具_智能报表-阿里云 (aliyun.com)](https://www.aliyun.com/product/bigdata/bi)
+* 网易数帆-有数  https://sf.163.com/
+* Tableau  https://www.tableau.com/
+* PowerBI  [数据可视化 | Microsoft Power BI](https://powerbi.microsoft.com/zh-cn)  https://powerbi.microsoft.com/zh-cn
+* Pentaho BI  http://www.pentaho.com/
+
+
+
+其它
+
+* 数仓基准 tpch  http://www.tpc.org/tpch/
+
+
+
 ## 参考书目
 
 [1]. Jiawei Han、Micheline Kamber等著，《数据挖掘：概念与技术》，机械工业出版社，2001  [ISBN 1-55860-489-8](http://zh.wikipedia.org/zh-cn/Special:网络书源/1558604898)
@@ -1428,11 +1539,9 @@ docker部署： `docker run -p 8080:8080 wmarinho/pentaho                       
 
 ## 参考链接
 
-[1]. 百度百科-BI https://baike.baidu.com/item/BI/4579902
-
-[2]. 永洪科技-商业智能社区 https://ask.hellobi.com/
-
-
+* 百度百科-BI https://baike.baidu.com/item/BI/4579902
+* Kettle中文 https://www.kettle.net.cn/
+* 2021年中国ICT技术成熟度曲线报告 https://sq.sf.163.com/blog/article/579099945774272512
 
 
 
