@@ -125,7 +125,7 @@ Required-by:
 
 | 目录或文件        | 二级目录或文件                           | 简介                                                         |
 | ----------------- | ---------------------------------------- | ------------------------------------------------------------ |
-| .eslintrc.js      |                                          | eslint配置文件                                               |
+| .eslintrc.js      |                                          | eslint配置文件。可编辑文件修改自己的规则。                   |
 | babel.config.js   |                                          | babel配置文件。可将jsx文件编译成js。                         |
 | package.json      |                                          | 前端模块依赖，用npm/yarn管理                                 |
 | webpack.config.js |                                          | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
@@ -3162,7 +3162,7 @@ class BaseSupersetView(BaseView):
 # /flask_appbuilder/baseview.py
 class BaseView(object):
     
-    route_base = None
+    route_base = None  
     
     def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):    
         ...
@@ -6295,6 +6295,14 @@ export default withToasts(ChartList);
 
 ### 探索 explorer /src/explorer/
 
+* actions/
+* components/
+* controlPannels/
+* exploreUtils/
+* reducers/
+
+
+
 ####  控制按钮 controls.jsx
 
 /superset-frontend/src/explorer/controls.jsx
@@ -6352,7 +6360,7 @@ const groupByControl = {
 
 
 
-### 可视化 /src/visualizations
+### 可视化 /src/visualizations/
 
 客户端的图表类型组件多来自外部模块@superset-ui。superset只是重新组织了图表组件的展示 。
 
@@ -6441,29 +6449,11 @@ export default class MainPreset extends Preset {
 
 ## 5 依赖模块
 
-服务端依赖模块 flask及flask扩展模块 详见 《[flask源码剖析](flask源码剖析.md)》《[flask_appbuilder源码剖析](flask_appbuilder源码剖析.md)》
+* 服务端依赖模块 flask及flask扩展模块 详见 《[flask源码剖析](flask源码剖析.md)》《[flask_appbuilder源码剖析](flask_appbuilder源码剖析.md)》
 
+* 前端依赖 @superset-ui 详见 《[superset-ui源码剖析](superset-ui源码剖析.md)》
 
-
-### 前端依赖 @superset-ui
-
-前端依赖这个项目 superset-ui。
-
-@superset-ui/legacy-*软件包从经典的中提取并转换为插件。 这些包的提取只需很小的更改（几乎保持原样）。 它们还依靠旧版API（ viz.py ）起作用。 
-
-*@superset-ui/plugin-*软件包通常较新且质量更高。 它们不依赖viz.py （包含可视化特定的python代码）并与/api/v1/query/交互的主要区别在于：新的通用终结点旨在提供所有可视化。 还应该用Typescript编写。
-
-#### 源码结构 
-
-
-
-
-
-### 前端依赖 React
-
-详见 《[前端框架分析](前端框架分析.md)》
-
-
+* 前端依赖 React  详见 《[前端框架分析](前端框架分析.md)》
 
 
 

@@ -60,7 +60,7 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 | BuildKit            | https://github.com/moby/buildkit         | docker build工具                                      |                                |
 | Compose             | https://github.com/docker/compose        | 多容器管理                                            |                                |
 | Docker Distribution | https://github.com/docker/distribution   | docker私有镜像仓库registry2                           |                                |
-|                     |                                          |                                                       |                                |
+| ...                 |                                          |                                                       |                                |
 
 
 
@@ -320,6 +320,8 @@ $ sudo systemctl restart docker
 # 切换到目标用户（需要注销退出再登陆），查看现在是否有docker响应信息
 $ docker ps
 ```
+
+> docker服务的权限组是docker，对于docker组的用户都可以启动停止docker容器实例，非docker组用户无法操作docker。
 
 
 

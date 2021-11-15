@@ -10,6 +10,7 @@
 | 8    | 2018-3-20  | 增加常用算法/数据结构章节        | 同上   |        |
 | 9    | 2018-7-11  | 增加IDE~jupyter章节 | 同上   |        |
 | 10 | 2021-6-11 | 更新python语言版本和更新装饰器内容。<br>迁移python源码剖析章节另文。 | 同上 |        |
+| 11 | 2021-11-19 | 更新python各版本特性 | 同上 | |
 
 
 
@@ -22,224 +23,6 @@
 ---
 
 # 目录
-
-[目录. 1](#_Toc18274951)
-
-[1       Python概述. 4](#_Toc18274952)
-
-[1.1         Python简介. 4](#_Toc18274953)
-
-[1.2         Python语言. 4](#_Toc18274954)
-
-[1.3         Python解释器. 5](#_Toc18274955)
-
-[1.4         py/pyc/pyo/pyd 6](#_Toc18274956)
-
-[2       Python语言教程. 6](#_Toc18274957)
-
-[2.1         python对象. 6](#_Toc18274958)
-
-[2.1.1            对象概述. 6](#_Toc18274959)
-
-[2.1.2            对象引用、深拷贝和浅拷贝. 8](#_Toc18274960)
-
-[2.2         标准库Standard Library 9](#_Toc18274961)
-
-[2.2.1            内建模块__builtin__/builtins/__builtins__ 10](#_Toc18274962)
-
-[2.2.2            内建类型Build-in Types 11](#_Toc18274963)
-
-[2.2.3            内建函数Built-in Functions 12](#_Toc18274964)
-
-[2.2.4            内建私有方法Built-in  Methods 19](#_Toc18274965)
-
-[2.2.5            常用基础算法. 21](#_Toc18274966)
-
-[2.2.6            常用数据结构. 22](#_Toc18274967)
-
-[2.3         表达式. 23](#_Toc18274968)
-
-[2.3.1            控制流. 23](#_Toc18274969)
-
-[2.3.2   with语句与上下文管理. 24](#_Toc18274970)
-
-[2.3.3            三元表达式. 24](#_Toc18274971)
-
-[2.4         字符串与字符串函数. 24](#_Toc18274972)
-
-[2.5         正则表达式. 30](#_Toc18274973)
-
-[2.5.1            正则表达式修饰符与模式. 31](#_Toc18274974)
-
-[2.5.2            正则表达式实例. 33](#_Toc18274975)
-
-[2.6         异常处理. 34](#_Toc18274976)
-
-[2.6.1            异常捕捉、抛出. 34](#_Toc18274977)
-
-[2.6.2            跟踪异常. 35](#_Toc18274978)
-
-[2.6.3            用户自定义异常. 36](#_Toc18274979)
-
-[2.7         函数式编程. 37](#_Toc18274980)
-
-[2.8         中文编码. 37](#_Toc18274981)
-
-[2.9         本章参考. 38](#_Toc18274982)
-
-[3       Python开发环境. 38](#_Toc18274983)
-
-[3.1         模块module 38](#_Toc18274984)
-
-[3.1.1   python的名字空间. 38](#_Toc18274985)
-
-[3.1.2            模块安装. 39](#_Toc18274986)
-
-[3.1.3            模块导入import 43](#_Toc18274987)
-
-[3.1.4            模块的搜索路径. 46](#_Toc18274988)
-
-[3.1.5            项目结构和模块分发包. 47](#_Toc18274989)
-
-[3.2         Python常用模块. 52](#_Toc18274990)
-
-[3.2.1            主模块__main__ 53](#_Toc18274991)
-
-[3.2.2   site模块. 54](#_Toc18274992)
-
-[3.2.3   sys模块. 54](#_Toc18274993)
-
-[3.2.4   traceback模块. 58](#_Toc18274994)
-
-[3.3         Python常用开发工具. 58](#_Toc18274995)
-
-[3.3.1   IDE 60](#_Toc18274996)
-
-[3.3.2            静态检测pylint/pycheck 62](#_Toc18274997)
-
-[3.3.3            反向建模pyreverse 62](#_Toc18274998)
-
-[3.3.4            文档化工具pydoc 64](#_Toc18274999)
-
-[3.3.5            测试工具unittest/pytest 66](#_Toc18275000)
-
-[3.3.6            监控调试trace/cgitb/pdb 70](#_Toc18275001)
-
-[3.3.7   exe打包py2exe/PyInstaller 71](#_Toc18275002)
-
-[3.3.8            性能优化  cProfile/pstats/timeit 71](#_Toc18275003)
-
-[3.3.9   fabric 72](#_Toc18275004)
-
-[3.3.10         supervisor 73](#_Toc18275005)
-
-[3.3.11         其它python工具. 75](#_Toc18275006)
-
-[3.3.12         本节参考. 75](#_Toc18275007)
-
-[3.4         Python常用开发库. 75](#_Toc18275008)
-
-[3.4.1            常用开发库列表. 75](#_Toc18275009)
-
-[3.4.2            网络编程. 77](#_Toc18275010)
-
-[3.4.3   HTML/XML等数据解析和处理. 79](#_Toc18275011)
-
-[3.4.4            多线程和并发. 83](#_Toc18275012)
-
-[3.4.5            网络爬虫框架. 83](#_Toc18275013)
-
-[3.4.6     浏览器自动化与仿真. 84](#_Toc18275014)
-
-[3.5         其他Python库. 84](#_Toc18275015)
-
-[3.6         本章参考. 85](#_Toc18275016)
-
-[4       Python高级开发. 85](#_Toc18275017)
-
-[4.1         python多版本并存. 85](#_Toc18275018)
-
-[4.1.1   virtualenv切换python版本. 86](#_Toc18275019)
-
-[4.1.2   python2和python3的区别. 88](#_Toc18275020)
-
-[4.2         python安全编码. 90](#_Toc18275021)
-
-[4.3         python并发. 91](#_Toc18275022)
-
-[4.3.1            多进程. 92](#_Toc18275023)
-
-[4.3.2            多线程. 92](#_Toc18275024)
-
-[4.3.3            协程. 94](#_Toc18275025)
-
-[4.3.4   wsgi 97](#_Toc18275026)
-
-[4.4         python内存管理. 98](#_Toc18275027)
-
-[4.4.1            内存使用. 98](#_Toc18275028)
-
-[4.4.2            内存回收机制GC 99](#_Toc18275029)
-
-[4.5         SOAP 99](#_Toc18275030)
-
-[4.6         项目实例. 100](#_Toc18275031)
-
-[4.6.1   12306抢票. 100](#_Toc18275032)
-
-[4.6.2   QQ模拟登陆. 100](#_Toc18275033)
-
-[4.7         本章参考. 100](#_Toc18275034)
-
-[5       python扩展与嵌入. 100](#_Toc18275035)
-
-[5.1         直接使用C语言程序. 100](#_Toc18275036)
-
-[5.2         扩展C库. 101](#_Toc18275037)
-
-[5.3         pypy 101](#_Toc18275038)
-
-[5.4         Jython~Java 102](#_Toc18275039)
-
-[5.5         本章参考. 102](#_Toc18275040)
-
-[6       Python FAQ 102](#_Toc18275041)
-
-[6.1         常见问题. 102](#_Toc18275042)
-
-[6.1.1   Segment Error(core store) 102](#_Toc18275043)
-
-[6.1.2   pyquey & beautifulSoup 102](#_Toc18275044)
-
-[6.1.3   mysql操作失败. 103](#_Toc18275045)
-
-[6.2         本章参考. 103](#_Toc18275046)
-
-[7       Python源码分析. 103](#_Toc18275047)
-
-[7.1         源码目录文件结构. 104](#_Toc18275048)
-
-[7.2         Python对象实现. 105](#_Toc18275049)
-
-[7.3         python虚拟机PVM 107](#_Toc18275050)
-
-[7.3.1            虚拟机执行流程. 107](#_Toc18275051)
-
-[7.3.2   pyc文件和code对象. 107](#_Toc18275052)
-
-[7.3.3   python访问PyCodeObject: compile/dis 109](#_Toc18275053)
-
-[7.4         本章参考. 110](#_Toc18275054)
-
-[8       参考资料. 110](#_Toc18275055)
-
-[8.1         参考链接. 110](#_Toc18275056)
-
-[8.2         参考书目. 111](#_Toc18275057)
-
-
-
-
 
 [TOC]
 
@@ -297,16 +80,18 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 
 表格 python版本活跃状态
 
-| version | Maintenance status | First released | End of support | Release schedule                                    | 摘要              |
-| ------- | ------------------ | -------------- | -------------- | --------------------------------------------------- | ----------------- |
-| main    | features           | TBD            | TBD            | TBD                                                 | 主分支            |
-| 3.10    | prerelease         | 2021-10-04     |                | [PEP 619](https://www.python.org/dev/peps/pep-0619) |                   |
-| 3.9     | bugfix             | 2020-10-5      | 2025-10        | [PEP 596](https://www.python.org/dev/peps/pep-0596) |                   |
-| 3.8     | bugfix             | 2019-10-14     | 2024-10        | [PEP 569](https://www.python.org/dev/peps/pep-0569) |                   |
-| 3.7     | security           | 2018-6-27      | 2023-6-27      | [PEP 537](https://www.python.org/dev/peps/pep-0537) |                   |
-| 3.6     | security           | 2016-12-23     | 2021-12-23     | [PEP 494](https://www.python.org/dev/peps/pep-0494) | asyncio成为标准库 |
+| Branch | Schedule                                                | Status   | First release | End-of-life  | Release manager       |
+| ------ | ------------------------------------------------------- | -------- | ------------- | ------------ | --------------------- |
+| main   | [**PEP 664**](https://www.python.org/dev/peps/pep-0664) | features | *2022-10-03*  | *2027-10*    | Pablo Galindo Salgado |
+| 3.10   | [**PEP 619**](https://www.python.org/dev/peps/pep-0619) | bugfix   | 2021-10-04    | *2026-10*    | Pablo Galindo Salgado |
+| 3.9    | [**PEP 596**](https://www.python.org/dev/peps/pep-0596) | bugfix   | 2020-10-05    | *2025-10*    | Łukasz Langa          |
+| 3.8    | [**PEP 569**](https://www.python.org/dev/peps/pep-0569) | security | 2019-10-14    | *2024-10*    | Łukasz Langa          |
+| 3.7    | [**PEP 537**](https://www.python.org/dev/peps/pep-0537) | security | 2018-06-27    | *2023-06-27* | Ned Deily             |
+| 3.6    | [**PEP 494**](https://www.python.org/dev/peps/pep-0494) | security | 2016-12-23    | *2021-12-23* | Ned Deily             |
 
->  备注:  *PEP*, *Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。   
+>  备注:  
+>
+>  *PEP*, *Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。   
 >
 >  TBD: To Be Discussed 待讨论
 
@@ -324,6 +109,21 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 | 3.0    | [**PEP 361**](https://www.python.org/dev/peps/pep-0361) | 2008-12-03    | 2009-06-27  | Barry Warsaw                        |                 |
 | 2.7    | [**PEP 373**](https://www.python.org/dev/peps/pep-0373) | 2010-07-03    | 2020-01-01  | Benjamin Peterson                   | 2.x系列最终版本 |
 | 2.6    | [**PEP 361**](https://www.python.org/dev/peps/pep-0361) | 2008-10-01    | 2013-10-29  | Barry Warsaw                        |                 |
+
+
+
+表格 Python各版本特性详述
+
+| 版本 | 特性 Features                                                | 备注                                                         |
+| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 3.10 | [PEP 604](https://www.python.org/dev/peps/pep-0604), Allow writing union types as `X | Y` <br/>[PEP 612](https://www.python.org/dev/peps/pep-0612), Parameter Specification Variables <br/>[PEP 613](https://www.python.org/dev/peps/pep-0613), Explicit Type Aliases <br/>[PEP 618](https://www.python.org/dev/peps/pep-0618), Add Optional Length-Checking To `zip` <br/>[PEP 626](https://www.python.org/dev/peps/pep-0626), Precise line numbers for debugging and other tools <br/>[PEP 634](https://www.python.org/dev/peps/pep-0634), [PEP 635](https://www.python.org/dev/peps/pep-0635), [PEP 636](https://www.python.org/dev/peps/pep-0636), Structural Pattern Matching <br/>[PEP 644](https://www.python.org/dev/peps/pep-0644), Require OpenSSL 1.1.1 or newer <br/>[PEP 624](https://www.python.org/dev/peps/pep-0624), Remove Py_UNICODE encoder APIs <br/>[PEP 597](https://www.python.org/dev/peps/pep-0597), Add optional EncodingWarning | [Features for 3.10](https://www.python.org/dev/peps/pep-0619/#toc-entry-7) |
+| 3.9  | [PEP 573](https://www.python.org/dev/peps/pep-0573), Module State Access from C Extension Methods  <br/>[PEP 584](https://www.python.org/dev/peps/pep-0584), Add Union Operators To dict <br/>[PEP 585](https://www.python.org/dev/peps/pep-0585), Type Hinting Generics In Standard Collections  <br/>[PEP 593](https://www.python.org/dev/peps/pep-0593), Flexible function and variable annotations <br/>[PEP 614](https://www.python.org/dev/peps/pep-0614), Relaxing Grammar Restrictions On Decorators <br/>[PEP 615](https://www.python.org/dev/peps/pep-0615), Support for the IANA Time Zone Database in the Standard Library <br/>[PEP 616](https://www.python.org/dev/peps/pep-0616), String methods to remove prefixes and suffixes  <br/>[PEP 617](https://www.python.org/dev/peps/pep-0617), New PEG parser for CPython | [Features for 3.9](https://www.python.org/dev/peps/pep-0596/#toc-entry-8) |
+| 3.8  | [PEP 570](https://www.python.org/dev/peps/pep-0570), Positional-only arguments [PEP 572](https://www.python.org/dev/peps/pep-0572), Assignment Expressions [PEP 574](https://www.python.org/dev/peps/pep-0574), Pickle protocol 5 with out-of-band data <br/>[PEP 578](https://www.python.org/dev/peps/pep-0578), Runtime audit hooks [PEP 587](https://www.python.org/dev/peps/pep-0587), Python Initialization Configuration <br/>[PEP 590](https://www.python.org/dev/peps/pep-0590), Vectorcall: a fast calling protocol for CPython <br/>Typing-related: [PEP 591](https://www.python.org/dev/peps/pep-0591) (Final qualifier), [PEP 586](https://www.python.org/dev/peps/pep-0586) (Literal types), and [PEP 589](https://www.python.org/dev/peps/pep-0589) (TypedDict) <br/>Parallel filesystem cache for compiled bytecode. Debug builds share ABI as release builds. f-strings support a handy `=` specifier for debugging. <br/>`continue` is now legal in `finally:` blocks. <br/>on Windows, the default `asyncio` event loop is now `ProactorEventLoop`. <br/>on macOS, the *spawn* start method is now used by default in `multiprocessing`. <br/>`multiprocessing` can now use shared memory segments to avoid pickling costs between processes. <br/>`typed_ast` is merged back to CPython. `LOAD_GLOBAL` is now 40% faster. <br/>`pickle` now uses Protocol 4 by default, improving performance | [Features for 3.8](https://www.python.org/dev/peps/pep-0569/#toc-entry-8) <br>多进程, 事件循环 |
+| 3.7  | [PEP 538](https://www.python.org/dev/peps/pep-0538), Coercing the legacy C locale to a UTF-8 based locale <br/>[PEP 539](https://www.python.org/dev/peps/pep-0539), A New C-API for Thread-Local Storage in CPython <br/>[PEP 540](https://www.python.org/dev/peps/pep-0540), `UTF-8` mode [PEP 552](https://www.python.org/dev/peps/pep-0552), Deterministic `pyc` [PEP 553](https://www.python.org/dev/peps/pep-0553), Built-in breakpoint() <br/>[PEP 557](https://www.python.org/dev/peps/pep-0557), Data Classes [PEP 560](https://www.python.org/dev/peps/pep-0560), Core support for typing module and generic types <br/>[PEP 562](https://www.python.org/dev/peps/pep-0562), Module `__getattr__` and `__dir__` [PEP 563](https://www.python.org/dev/peps/pep-0563), Postponed Evaluation of Annotations <br/>[PEP 564](https://www.python.org/dev/peps/pep-0564), Time functions with nanosecond resolution <br/>[PEP 565](https://www.python.org/dev/peps/pep-0565), Show DeprecationWarning in __main__ [PEP 567](https://www.python.org/dev/peps/pep-0567), Context Variables | [Features for 3.7](https://www.python.org/dev/peps/pep-0537/#toc-entry-19) |
+| 3.6  | [PEP 468](https://www.python.org/dev/peps/pep-0468), Preserving Keyword Argument Order [PEP 487](https://www.python.org/dev/peps/pep-0487), Simpler customization of class creation  <br/>[PEP 495](https://www.python.org/dev/peps/pep-0495), Local Time Disambiguation [PEP 498](https://www.python.org/dev/peps/pep-0498), Literal String Formatting  <br/>[PEP 506](https://www.python.org/dev/peps/pep-0506), Adding A Secrets Module To The Standard Library [PEP 509](https://www.python.org/dev/peps/pep-0509), Add a private version to dict  <br/>[PEP 515](https://www.python.org/dev/peps/pep-0515), Underscores in Numeric Literals [PEP 519](https://www.python.org/dev/peps/pep-0519), Adding a file system path protocol  <br/>[PEP 520](https://www.python.org/dev/peps/pep-0520), Preserving Class Attribute Definition Order [PEP 523](https://www.python.org/dev/peps/pep-0523), Adding a frame evaluation API to CPython  <br/>[PEP 524](https://www.python.org/dev/peps/pep-0524), Make os.urandom() blocking on Linux (during system startup)  <br/>[PEP 525](https://www.python.org/dev/peps/pep-0525), Asynchronous Generators (provisional) [PEP 526](https://www.python.org/dev/peps/pep-0526), Syntax for Variable Annotations (provisional)  <br/>[PEP 528](https://www.python.org/dev/peps/pep-0528), Change Windows console encoding to UTF-8 (provisional)  <br/>[PEP 529](https://www.python.org/dev/peps/pep-0529), Change Windows filesystem encoding to UTF-8 (provisional)  <br/>[PEP 530](https://www.python.org/dev/peps/pep-0530), Asynchronous Comprehensions | [Features for 3.6](https://www.python.org/dev/peps/pep-0494/#toc-entry-22) <br>asyncio成为标准库 |
+| 3.5  |                                                              | [Features for 3.5](https://www.python.org/dev/peps/pep-0478/#toc-entry-4) |
+| ...  |                                                              |                                                              |
+| 2.7  |                                                              |                                                              |
 
 
 
@@ -413,8 +213,8 @@ self 只有对象实例化（即隐式调用`__init__`）才能使用self, publi
 | 跟踪对象 | 异常诊断信息。        | TracebackType       |
 | 帧对象   | python执行栈。        | FrameType           |
 | 省略器   | 用在切片对象中，起记号使用。       | EllipsisType        |
-| 生成器   | 带有yield的函数被称为生成器。类似迭代器，但生成一次，每次迭代返回当前迭代值。调用生成器函数时会创建生成器对象。 | GeneratorType       |
-| 迭代器   | 可以使用 “for··· in ···” 来操作。<BR>迭代器是访问集合元素的一种方式，可以从头访问到尾。 |        |
+| 生成器   | 带有yield的函数被称为生成器。类似迭代器，但生成一次，每次迭代返回当前迭代值。<br>调用生成器函数时会创建生成器对象。生成器类要实现2个内置方法`__iter__`, `__next__` | GeneratorType       |
+| 迭代器   | 可以使用 “for··· in ···” 来操作。<BR>迭代器是访问集合元素的一种方式，可以从头访问到尾。内部实现用next方法访问下个元素。 |        |
 | xrange   | python3.x去除了此类型 | XRangeType          |
 | None     | python的NULL对象      | NoneType          |
 
@@ -531,18 +331,98 @@ if/for/while的表达式可以用()圈起来，也可以不用。pass空语句�
 
 * if：if语句组成有if/elif/else. 
      if xx:  #非常强大的判断语句，支持NULL,容器空(无需len函数)的判断
-* for iterating_var in sequence: 
+* for iterating_var in sequence:  相当于不断调用sequence.next方法
 * while: 支持continue, break.
 
+
+
+**for 循环的本质**
+
+```python
+for x in [1, 2, 3, 4, 5]:
+    pass
+```
+
+相当于：
+
+```python
+# 首先获取可迭代对象
+it = iter([1, 2, 3, 4, 5])
+while True:
+    try:
+        next(it)
+    except StopIteration:
+        # 遇到StopIteration就跳出循环, 且自动频闭StopIteration异常
+        break
+```
+
+
+
 ### 2.3.2  with语句与上下文管理
+
 with语句支持在上下文管理器对象控制下的上下文中执行一系列语句。已经加入对上下文管理协议支持的还有模块 threading、decimal 等。
-**上下文管理协议**（Context Management Protocol）：包含方法 `__enter__`() 和 `__exit__`()，支持该协议的对象要实现这两个方法。
-**上下文管理器**（Context Manager）：支持上下文管理协议的对象，这种对象实现了 `__enter__()` 和 `__exit__() `方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。
+
+* **上下文管理协议**（Context Management Protocol）：包含方法 `__enter__`() 和 `__exit__`()，支持该协议的对象要实现这两个方法。
+* **上下文管理器**（Context Manager）：支持上下文管理协议的对象，这种对象实现了 `__enter__()` 和 `__exit__() `方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。
+
+**应用场景**：用在资源需要管控的情形，如安全用锁，函数计时，DB连接操作，文件操作。
+
+上下文类示例： 上下文管理器实现计时器
+
+```python
+# coding:utf-8
+import time
+
+class TimeTrace:
+    def __init__(self, f):
+        self.f = f
+        print(f.__doc__)	#打印函数文档
+
+    def __now(self):
+        return time.time()
+
+    def __enter__(self):	#进入
+        self.start = self.__now()
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):	#退出 
+        self.end = self.__now()
+        print('cost {}'.format(self.end - self.start))
+
+    def __call__(self, n):	#调用
+        start = self.__now()
+        val = self.f(n)
+        end = self.__now()
+        print('{}, {}, {}, cost: {} seconds'.format(self.f.__name__, n, val,
+                                                    (end - start)))
+        return val
+
+
+def fib(n):
+    """
+    fib 斐波那契递归计算
+    :params n 个数
+    :return 当前斐波那契数值
+    """
+    if n <= 1:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+
+with TimeTrace(fib) as fib:	#上下文调用
+    print(fib(5))
+```
+
+
+
 with 语句的语法格式
+
+```
 with context_expression [as target(s)]:
    with-body
+```
 
-示例：
+with调用示例：
 
 ```python
 with open(r'somefileName') as somefile:
@@ -552,6 +432,7 @@ with open(r'somefileName') as somefile:
 ```
 
 说明：这里使用了 with 语句，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄。比较起来，使用 with 语句可以减少编码量。
+
 另外python库中还有一个模块contextlib，使你不用构造含有`__enter__, __exit__`的类就可以使用with。
 
 
@@ -619,8 +500,11 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | \xyy         | 十六进制数，yy代表的字符，例如：\x0a代表换行 |
 | \other       | 其它的字符以普通格式输出        |
 
+
+
 **Python字符串运算符**
 下表实例变量a值为字符串"Hello"，b变量值为"Python"：
+
 表格 11 Python字符串运算符
 
 | 操作符 | 描述     | 实例   |
@@ -633,6 +517,8 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | not in | 成员运算符 - 如果字符串中不包含给定的字符返回 True           | M not in a 输出结果 1           |
 | r/R    | 原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。   原始字符串除在字符串的第一个引号前加上字母"r"（可以大小写）以外，与普通字符串有着几乎完全相同的语法。 | print r'\n' 输出 \n   和 print R'\n' 输出 \n |
 | %      | 格式字符串            |       |
+
+
 
 表格 12 python字符串格式化符号
 
@@ -652,6 +538,8 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | %G   | %f和%E的简写            |
 | %p   | 用十六进制数格式化变量的地址         |
 
+
+
 表格 13格式化操作符辅助指令
 
 | 符号  | 功能     |
@@ -665,7 +553,10 @@ print type(eval("{'name':'ljq', 'age':24}"))
 | %     | '%%'输出一个单一的'%'  |
 | (var) | 映射变量(字典参数)    |
 | m.n.  | m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)        |
-*注：字符串不能与数值相加，需将数值转化为字符串或用%来格式化。*
+
+> 备注：字符串不能与数值相加，需将数值转化为字符串或用%来格式化。
+
+
 
 **Python三引号（triple quotes）** 
 python中三引号可以将复杂的字符串进行复制:
@@ -721,8 +612,11 @@ python三引号常用作文档注释。
 | [string.upper()](http://www.runoob.com/python/att-string-upper.html) | 转换 string 中的小写字母为大写     |
 | [string.zfill(width)](http://www.runoob.com/python/att-string-zfill.html) | 返回长度为 width 的字符串，原字符串 string 右对齐，前面填充0 |
 | [string.isdecimal()](http://www.runoob.com/python/att-string-isdecimal.html) | isdecimal()方法检查字符串是否只包含十进制字符。这种方法只存在于unicode对象。 |
-备注：
+
+
+
 ## 2.5  正则表达式
+
 **说明**：regex和字符串函数的实现都是C/C++引擎。对于简单情况下，正则表达式一般比字符串函数慢一些。对于一个正则表达式被多次使用的情况下（如提取所有url），可采用预编译re.compile，这会比直接使用re.search/re.findall会快一些。
 
 ```sh
@@ -777,7 +671,10 @@ re.findal*  返回一个匹配列表
 | re.S   | 使 . 匹配包括换行在内的所有字符    |
 | re.U   | 根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.  |
 | re.X   | 该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。 |
-说明：贪婪匹配是(.*)，非贪婪匹配是(.*?)。 实际使用中 如页面寻找链接href，要使用非贪婪匹配。
+
+> 说明：贪婪匹配是(.*)，非贪婪匹配是(.*?)。 实际使用中 如页面寻找链接href，要使用非贪婪匹配。
+
+
 
 **正则表达式模式**
 模式字符串使用特殊的语法来表示一个正则表达式：
@@ -788,6 +685,7 @@ re.findal*  返回一个匹配列表
 由于正则表达式通常都包含反斜杠，所以你最好使用原始字符串来表示它们。模式元素(如 r'/t'，等价于'//t')匹配相应的特殊字符。
 下表列出了正则表达式模式语法中的特殊元素。如果你使用模式的同时提供了可选的标志参数，某些模式元素的含义会改变。
 表格 16正则表达式模式
+
 | 模式        | 描述     |
 | ----------- | ------------------------------------------------------------ |
 | ^           | 匹配字符串的开头      |
@@ -832,13 +730,10 @@ re.findal*  返回一个匹配列表
 
 ### 2.5.2  正则表达式实例 
 
-字符匹配
+表格 字符匹配
 | 实例   | 描述           |
 | ------ | -------------- |
 | python | 匹配 "python". |
-字符类
-| 实例        | 描述    |
-| ----------- | --------------------------------- |
 | [Pp]ython]  | 匹配 "Python" 或 "python"         |
 | rub[ye]     | 匹配 "ruby" 或 "rube" |
 | [aeiou]     | 匹配中括号内的任意一个字母        |
@@ -848,16 +743,21 @@ re.findal*  返回一个匹配列表
 | [a-zA-Z0-9] | 匹配任何字母及数字   |
 | [^aeiou]    | 除了aeiou字母以外的所有字符       |
 | [^0-9]      | 匹配除了数字外的字符 |
-特殊字符类
-| 实例 | 描述     |
+
+
+
+表格 特殊字符类
+
+| 实例 | 描述                                                         |
 | ---- | ------------------------------------------------------------ |
-| . | 匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。 |
-| \d   | 匹配一个数字字符。等价于 [0-9]。   |
-| \D   | 匹配一个非数字字符。等价于 [^0-9]。 |
+| .    | 匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。 |
+| \d   | 匹配一个数字字符。等价于 [0-9]。                             |
+| \D   | 匹配一个非数字字符。等价于 [^0-9]。                          |
 | \s   | 匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。 |
-| \S   | 匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。     |
+| \S   | 匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。                  |
 | \w   | 匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。         |
-| \W   | 匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。    |
+| \W   | 匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。                 |
+
 
 
 ## 2.6   异常处理
@@ -1044,12 +944,12 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
 表格 18 不同OS下的第三方模块的缺省安装路径
 
-| Platform    | Standard installation location          | Default value           | Notes |
-| --------------- | ------------------------------------------- | ---------------------------------------- | --------- |
-| Unix (pure)     | *prefix*/lib/python*X.Y*/site-packages      | /usr/local/lib/python*X.Y*/site-packages | (1)       |
-| Unix (non-pure) | *exec-prefix*/lib/python*X.Y*/site-packages | /usr/local/lib/python*X.Y*/site-packages | (1)       |
-| Windows         | *prefix*\Lib\site-packages     | C:\Python*XY*\Lib\site-packages          | (2)       |
-Notes: 第三方模块放在site-packages，自定义路径寻找*.pth也是放在此路径下，各OS的模块安装路径略有不同。
+| Platform    | Standard installation location          | Default value           |
+| --------------- | ------------------------------------------- | ---------------------------------------- |
+| Unix (pure)     | *prefix*/lib/python*X.Y*/site-packages      | /usr/local/lib/python*X.Y*/site-packages |
+| Unix (non-pure) | *exec-prefix*/lib/python*X.Y*/site-packages | /usr/local/lib/python*X.Y*/site-packages |
+| Windows         | *prefix*\Lib\site-packages     | C:\Python*XY*\Lib\site-packages          |
+> Notes: 第三方模块放在site-packages，自定义路径寻找*.pth也是放在此路径下，各OS的模块安装路径略有不同。
 1. Most Linux distributions include Python as a standard part of the system, so prefix and exec-prefix are usually both /usr on Linux. If you build Python yourself on Linux (or any Unix-like system), the default prefix and exec-prefix are /usr/local.
 2. The default installation directory on Windows was C:\Program Files\Python under Python 1.6a1, 1.5.2, and earlier.
 
@@ -1061,11 +961,11 @@ Notes: 第三方模块放在site-packages，自定义路径寻找*.pth也是放�
 *  非官方编译版本：Unofficial Windows Binaries for Python Extension Packages http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
 
 提供下载的文件有三种形式，
-*  一是压缩源文件，解压后进入目录执行python setup.py install
-*  二是whl文件，用pip install [wml]
-*  三是windows二进制程序，点击安装。
-备注：1. 要注意区分不同平台架构，一般有三种x86、x64(AMD/IA)和arm(手机)。
+* 一是压缩源文件，解压后进入目录执行python setup.py install
+* 二是whl文件，用pip install [wml]
+* 三是windows二进制程序，点击安装。
 
+备注：1. 要注意区分不同平台架构，一般有三种x86、x64(AMD/IA)和arm(手机)。
 2. whl本质上是个压缩压缩包，里面包含了py文件，以及经过编译的pyd文件。使得可以在不具备编译环境的情况下，选择合适自己的python环境进行安装。
 
 
@@ -1077,6 +977,8 @@ Notes: 第三方模块放在site-packages，自定义路径寻找*.pth也是放�
 *  ez_setup安装
 *  pip安装
 *  python setup.py install安**装**
+
+
 
 **setup.py和pip**
 表面上，python setup.py install和pip install都是用来安装python包的，实际上，pip提供了更多的特性，更易于使用。体现在以下几个方面：
@@ -1092,13 +994,14 @@ pip提供了对virtualenv更好的整合。
 
 | | 简介     |            |
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------- |
-| 安装pip工具 | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   $ python -m pip install --upgrade pip |
+| 安装pip工具 | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   <br>$ python -m pip install --upgrade pip |
 | pip 路径    | windows: $PYTHON_PATH/script   linux: $PYTHON_PATH/bin       | pypy类似cpython的安装方式。          |
 | pip常用命令 | pip freeze   其它：show search ...       | 查看已安装的模块        |
 | 离线下载    | $ pip download -d [DST_DIR] [package]           | 可自动下载模块及依赖包。 |
 | 离线安装    | $ pip install --no-index -f [DST_DIR] [package] |            |
 备注：1. pypy下pip的下载路径：https://bootstrap.pypa.io/get-pip.py
-2.  pip command
+
+2. pip command
 
 ```SH
 Usage:
@@ -1209,7 +1112,10 @@ from .core import *
 from .. spidermodult/util/util import .. 
 ```
 
+
+
 #### 3.1.3.1 重新导入reload
+
 **作用：** 对已经加载的模块进行重新加载，一般用于原模块有变化等特殊情况，reload前该模块必须已经import过。
 Eg.:
 
@@ -1229,7 +1135,9 @@ sys.path.insert(0,parentdir)
 ```
 
 
+
 #### 3.1.3.2 动态导入__import__/del
+
 **__import__**
  作用：
  说明：内建 `__import__` 函数与 `import` 语句的既定目标相同，但它是一个真正的函数，并接受一个字符串参数。
@@ -1264,7 +1172,10 @@ pip说明：
 **del  [模块名]**
 可删除模块名，然后使用import**重新**导入。这个适用于正在编写的单元测试模块。
 
+
+
 #### 3.1.3.3 import导入失败
+
 **问题描述：import导入父层同级目录或更高层的模块失败。**
 问题**详述**：sys.path.append()不能起作用。只能导入执行程序的子目录以下的模块。
 影响：测试模块只能移动到main.py(主程序)的主目录下执行，很麻烦，也很乱。对自动化批量测试影响更大。
@@ -1609,9 +1520,10 @@ python -m pytest
 | pyv8        | google v8的python版本。   最新[PyV8 1.0-dev](https://pypi.python.org/pypi/PyV8/1.0-dev)。 | PyV8-1.0-preview-r443.win32-py2.7  | import pyv8         |
 | [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm) | 机器学习库。          | http://www.csie.ntu.edu.tw/~cjlin/libsvm   windows需VC库支持。 |        |
 | pybloomfiltermmap        | 布隆过滤库   [pybloomfiltermmap3 0.4.15](https://pypi.python.org/pypi/pybloomfiltermmap3/0.4.15) | A Bloom filter (bloomfilter) for Python 3   built on mmap.   依赖库cython | from pybloomfilter import BloomFilter         |
-| |          |          |        |
-注：1. 模块名为pip安装时的名称，模块导入名不一定同模块名相同，可能带有目录。有些模块用pip安装易出错，如mysql-python, pyv8，可用官网提供的二进制文件安装或者源码安装。
-2. libsvm: 在libsvm-3.16的python文件夹下主要包括了两个文件svm.py和svmutil.py。svm.py接口主要包括了一些low-level的应用。svm.py主要运用了四个[**数据结构**](http://lib.csdn.net/base/datastructure)svm_node, svm_problem, svm_parameter和svm_model。
+备注：1. 模块名为pip安装时的名称，模块导入名不一定同模块名相同，可能带有目录。有些模块用pip安装易出错，如mysql-python, pyv8，可用官网提供的二进制文件安装或者源码安装。
+
+2. libsvm: 在libsvm-3.16的python文件夹下主要包括了两个文件svm.py和svmutil.py。svm.py接口主要包括了一些low-level的应用。svm.py主要运用了四个**数据结构**: svm_node, svm_problem, svm_parameter和svm_model。
+
 3. *wxPython*是Python语言的一套优秀的GUI图形库。允许Python程序员很方便的创建完整的、功能键全的GUI用户界面。
 
 ### 3.2.1  主模块__main__
@@ -3067,8 +2979,8 @@ python并发主要有多进程multiprocessing、多线程thread和协程Coroutin
 * cpu密集型: line>多进程>多线程；
 * io密集型：多进程>line>多线程
 * http密集型：多线程>多进程>line，推荐多线程。
-  **结论**：1. 在单核情况下，串行有应用场景。在多核情况下，一般不考虑串行。
 
+**结论**：1. 在单核情况下，串行有应用场景。在多核情况下，一般不考虑串行。
 2. 综合场景下，多进程是上述最优选择；但在网络请求场景下（如多线程下载多文件），首选多线程。
 3. 大批量写数据库的同一张表，用串行比多线程或多进程写更高效。因为数据库写表要上锁。
 
@@ -3081,10 +2993,13 @@ python并发主要有多进程multiprocessing、多线程thread和协程Coroutin
 | 实现     | from multiprocessing import Process | from threading import Thread |
 | 同步机制 | 包括锁Lock、RLock、Condition条件变量、<br>Semaphore、BoundedSemaphore边界信号量、Event事件等。 | 同进程。          |
 | 优点     | 综合性能较好。     | 网络IO性能较好，适合http密集型。            |
-| 缺点     |          | GIL存在，实质是串行执行，不能发挥多核优势。 |
-备注：1. 同步机制在进程和线程都同样适用。进程是资源分配的最小单位，线程是操作系统进行运算(CPU)调度的最小单位。线程存活在进程里，共享进程大部分资源。
-2.  精灵进程/线程：加上daemon属性。
-3.  协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
+| 缺点     | 消耗更多的内存。 | GIL存在，实质是串行执行，不能发挥多核优势。 |
+
+> 说明：
+1. 同步机制在进程和线程都同样适用。进程是资源分配的最小单位，线程是操作系统进行运算(CPU)调度的最小单位。线程存活在进程里，共享进程大部分资源。
+2. 精灵进程/线程：加上daemon属性。
+
+3. 协程：对于套接字打开较多（如1000个），可用IO多路复用（epoll/select）来解决。可在任务队列Queue的任务函数体尾加yield，然后在 queue.next()中唤醒。
 
 
 
@@ -3098,18 +3013,18 @@ python并发主要有多进程multiprocessing、多线程thread和协程Coroutin
 备注：concurrent.futures池化实现保持了接口一致，主要方法submit、shutdown；done、result。
 
 ```python
-    from concurrent.futures import ThreadPoolExecutor, wait
-    pool = ThreadPoolExecutor(max_workers=POOL_SIZE)
-    f_list = []
-    for i in range(TASK_SIZE):
-        msg = "hello %d" % (i)
-        future = pool.submit(work, msg, 1)
-        f_list.append(future)
-        print(future.done())  # 线程任务一提交即往下执行,
+from concurrent.futures import ThreadPoolExecutor, wait
+pool = ThreadPoolExecutor(max_workers=POOL_SIZE)
+f_list = []
+for i in range(TASK_SIZE):
+    msg = "hello %d" % (i)
+    future = pool.submit(work, msg, 1)
+    f_list.append(future)
+    print(future.done())  # 线程任务一提交即往下执行,
     wait(f_list)  # 此处缺省会阻塞等待任务都执行完
     for future in f_list:
         print(future.result())
-    pool.shutdown()
+        pool.shutdown()
 ```
 
 
@@ -3123,7 +3038,8 @@ python并发主要有多进程multiprocessing、多线程thread和协程Coroutin
 | gevent   | 协程，epoll | pip install gevent |
 | tornado  | | 装饰器+Future |
 | gthread  | 线程        | glib的线程，--threads只在这种方式下起作用。 |
-备注：python3.4+里concurrent.futures.Future和asyncio.Future这两个类都来表示可能完成或者尚未完成的延迟计算。与Twisted中的Deferred类、Tornado框架中的Future类的功能类似。
+
+> 备注：python3.4+里concurrent.futures.Future和asyncio.Future这两个类都来表示可能完成或者尚未完成的延迟计算。与Twisted中的Deferred类、Tornado框架中的Future类的功能类似。
 
 
 
@@ -3144,7 +3060,7 @@ pool = Pool(3)　　# 池的工作进程数为3个;不传入参数，会创建�
 # testFL:要处理的数据列表，run：处理testFL列表中数据的函数
 pool.map(run, testFL)	# map会使进程阻塞直到结果返回
 pool.close()  # 关闭进程池，不再接受新的进程
-pool.join()  # 主进程阻塞等待子进程的退出
+pool.join()   # 主进程阻塞等待子进程的退出
 ```
 
 
@@ -3173,6 +3089,8 @@ pool.join()  # 主进程阻塞等待子进程的退出
 ['LockType', '__doc__', '__name__', '__package__', '_count', '_local', 'allocate', 'allocate_lock', 'error', 'exit', 'exit_thread', 'get_ident', 'interrupt_main', 'stack_size', 'start_new', 'start_new_thread']
  ```
 
+
+
 **全局解释性锁（Global Interpreter Lock, GIL）**
 Python并不支持真正意义上的多线程。Python中提供了[多线程包](https://docs.python.org/2/library/threading.html)，但是如果你想通过多线程提高代码的速度，使用多线程包并不是个好主意。Python中有一个被称为Global Interpreter Lock（GIL）的东西，它会确保任何时候你的多个线程中，只有一个被执行。线程的执行速度非常之快，会让你误以为线程是并行执行的，但是实际上都是轮流执行。经过GIL这一道关卡处理，会增加执行的开销。这意味着，如果你想提高代码的运行速度，使用threading包并不是一个很好的方法。
 
@@ -3196,6 +3114,8 @@ python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)�
 *  读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
   *  当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
   *  当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
+
+
 
 **多锁的嵌套使用方式**
 正确的实现应该是按照C++中的RAII（resource acquisition is initialization， 资源获取初始化）原则加解锁， 在Python中使用with语法
@@ -3675,6 +3595,8 @@ ASGI是异步的WSGI。
 
 备注：线程的函数超时退出机制实质上并没有真正终止执行函数所在线程的实际运行，只是切换了线程执行，需要显式杀线程才能真正终止执行函数的运行。
 
+
+
 ```python
 from pebble import concurrent
 from concurrent.futures import TimeoutError
@@ -3742,6 +3664,7 @@ Tk8.0 的后续版本可以实现本地窗口风格,并良好地运行在绝大�
 
 python2.x 版本使用的库名为 Tkinter。
 Python3.x 版本使用的库名为 tkinter,即首写字母 T 为小写。
+
 ```python
 import tkinter
 ```
@@ -4035,7 +3958,7 @@ except:  # except里新增
     from backports.lzma import _encode_filter_properties, _decode_filter_properties
 ```
 
-备注：
+补充说明：
 
 ```shell
 $ pip show backports.lzma
@@ -4050,8 +3973,6 @@ Location: /home/ai/venv/superset-py38-env/lib/python3.8/site-packages
 Requires: 
 Required-by: 
 ```
-
-
 
 
 
@@ -4122,5 +4043,6 @@ pip install git+git://github.com/gawel/pyquery.git
 [10].  [Python灰帽子 : 黑客与逆向工程师的Python编程之道 ](https://book.douban.com/subject/6025284/)[美] Justin Seitz / 丁赟卿 译、崔孝晨 审校 / 电子工业出版社 / 2011-3
 [11].  [*Learning to Program*](http://www.freenetpages.co.uk/hp/alan.gauld/) 
 [12].  [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/) 
-[13].  Thinking in Python*](http://www.mindview.net/Books/TIPython)
+[13].  [Thinking in Python](http://www.mindview.net/Books/TIPython)
 [14].  周伟,宗杰 《Python开发技术详解》 http://www.linuxidc.com/Linux/2013-11/92693.htm
+

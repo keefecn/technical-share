@@ -509,7 +509,7 @@ Reading: 0 Writing: 1 Waiting: 0
 
 ## 3.4   Nginx反向代理配置
 
-### 3.4.2 wsgi配置
+### 3.4.1 wsgi配置
 
 **1. 使用uwsgi**
 
@@ -572,7 +572,6 @@ module = runserver
 callable = app
 ```
 
-
 **2. gunicorn**
 
 说明：$开头是nginx的内置变量。
@@ -587,6 +586,7 @@ location /random {
   proxy_http_version 1.1;
 }
 ```
+
 
 
 ### 3.4.2 代理参数配置

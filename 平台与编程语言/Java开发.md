@@ -1,19 +1,19 @@
 | 序号 | 修改时间   | 修改内容                         | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------------------- | ------ | ------ |
 | 1    | 2010-5-19  | 创建                             | Keefe | Keefe |
-| 2    | 2010-6-26  | 增加Java语言历史，tomcat内容     | 同上   | 同上   |
-| 3    | 2010-12-22 | 补充tomcat环境配置部分           | 同上   | 同上   |
-| 4    | 2010-12-24 | 补充Eclipse环境配置部分          | 同上   | 同上   |
-| 5    | 2011-1-11  | 增加J2SE的组件章节               | 同上   | 同上   |
-| 6    | 2011-7-7   | 更新tomcat的配置设置。           | 同上   | 同上   |
-| 7    | 2011-7-21  | 补充JVM原理的内容                | 同上   | 同上   |
-| 8    | 2012-3-6   | 更新JVM的内存管理                | 同上   | 同上   |
-| 9    | 2013-8-5   | 增加tomcat/eclipse的windows部分  | 同上   | 同上   |
-| 10   | 2017-1-20  | 微调章节内容，移出框架内容另文。 | 同上   | 同上   |
-| 11   | 2017-8-20  | 更新JDK版本特性                  | 同上   | 同上   |
+| 2    | 2010-6-26  | 增加Java语言历史，tomcat内容     | 同上   |    |
+| 3    | 2010-12-22 | 补充tomcat环境配置部分           | 同上   |    |
+| 4    | 2010-12-24 | 补充Eclipse环境配置部分          | 同上 |    |
+| 5    | 2011-1-11  | 增加J2SE的组件章节               | 同上 |    |
+| 6    | 2011-7-7   | 更新tomcat的配置设置。           | 同上 |    |
+| 7    | 2011-7-21  | 补充JVM原理的内容                | 同上 |    |
+| 8    | 2012-3-6   | 更新JVM的内存管理                | 同上 |    |
+| 9    | 2013-8-5   | 增加tomcat/eclipse的windows部分  | 同上 |    |
+| 10   | 2017-1-20  | 微调章节内容，移出框架内容另文。 | 同上 |    |
+| 11   | 2017-8-20  | 更新JDK版本特性                  | 同上 |    |
 | 12   | 2018-3-18  | 增加WAR和JAR打包章节             | 同上   |        |
 | 13   | 2018-6-9   | JVM单独成章。                    | 同上   |        |
-|      |            |                                  |        |        |
+| 14 | 2021-11-19 | 更新JDK版本 | 同上 |        |
 
 
 
@@ -25,58 +25,7 @@
 ---
 
 # 目录
-```
-[目录... 1](#_Toc516381252)
-
-[1.   Java概述... 4](#_Toc516381253)
-[1.1          Java历史... 4](#_Toc516381254)
-[1.1.1         JDK. 5](#_Toc516381255)
-[1.1.2         Java平台... 7](#_Toc516381256)
-[1.2          Java SE Component. 8](#_Toc516381257)
-[1.3          本章参考... 10](#_Toc516381258)
-
-[2       Java语言教程... 10](#_Toc516381259)
-[2.1          Java的面向对象OO.. 11](#_Toc516381260)
-[2.2          Java的数据结构... 12](#_Toc516381261)
-[2.3          本章参考... 14](#_Toc516381262)
-[3       Java开发环境... 14](#_Toc516381263)
-[3.1          Java开发工具... 14](#_Toc516381264)
-[3.1.1         Java的环境变量... 15](#_Toc516381265)
-[3.1.2         WAR和JAR打包... 16](#_Toc516381266)
-[3.2          Tomcat使用手册... 17](#_Toc516381267)
-[3.2.1         简介... 17](#_Toc516381268)
-[3.2.2         Tomcat框架... 18](#_Toc516381269)
-[3.2.3         启动与程序环境... 19](#_Toc516381270)
-[3.2.4         应用程序布署... 19](#_Toc516381271)
-[3.2.5         配置文件... 20](#_Toc516381272)
-[3.2.6         Tomcat性能调优... 21](#_Toc516381273)
-[3.3          本章参考... 22](#_Toc516381274)
-
-[4       Java高级开发... 22](#_Toc516381275)
-[4.1          多线程... 22](#_Toc516381276)
-[4.2          Servlet. 22](#_Toc516381277)
-[4.2.1         Servlet的开发... 22](#_Toc516381278)
-[4.3          GUI开发... 24](#_Toc516381279)
-[4.4          本章参考... 24](#_Toc516381280)
-[5       Java FAQ.. 24](#_Toc516381281)
-[5.1          Java新手问题... 24](#_Toc516381282)
-[5.2          Java常见调试问题... 25](#_Toc516381283)
-
-[6       JVM原理... 26](#_Toc516381284)
-[6.1         JVM的体系结构... 28](#_Toc516381285)
-[6.1.1         Java的类加载过程... 29](#_Toc516381286)
-[6.1.2         JVM的运行时数据区... 31](#_Toc516381287)
-[6.1.3         JVM堆内存分布... 32](#_Toc516381288)
-[6.2          JVM的垃圾回收(GC) 32](#_Toc516381289)
-[6.3          JVM性能调优... 35](#_Toc516381290)
-[6.3.1         JVM参数... 35](#_Toc516381291)
-[6.3.2         JVM内存查看工具... 36](#_Toc516381292)
-[6.4          本章参考... 37](#_Toc516381293)
-[7       Java源码分析... 37](#_Toc516381294)
-[Reference. 37](#_Toc516381295)
-```
-
-
+[TOC]
 
 表目录
 
@@ -120,13 +69,9 @@
 
 
 
-[TOC]
-
-
-
 ---
 
-# 1.   Java概述
+# 1.  Java概述
 
 Java: A simple, object-oriented, distributed,  interpreted, robust, secure, architecture-
 neutral, portable, high- performance, multi-threaded, and dynamic language。
@@ -134,7 +79,7 @@ Java具有简单、面向对象、分布式、解释执行、健壮、安全、�
 
 Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。
 Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的系统。
-## 1.1     Java历史
+## 1.1  Java历史
 表格 1 Java history
 
 | 年份 | Java的发展历史                                               |
@@ -142,78 +87,174 @@ Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的
 | 1991 | Green   Project小组成立； Java的前身Oak诞生。                |
 | 1995 | Java语言正式发布，Sun公司推出。                              |
 | 1996 | JDK1.0发布，10大OS提供商宣布支持Java技术。                   |
-| 1997 | JDK1.1发布；4月2日，JavaOne会议召开，参与者逾一万人，创当时全球同 类会议规模之纪录；9月，JavaDeveloperConnection社区成员超过十万   。 |
+| 1997 | JDK1.1发布；<br/>4月2日，JavaOne会议召开，参与者逾一万人，创当时全球同 类会议规模之纪录；<br>9月，JavaDeveloperConnection社区成员超过十万   。 |
 | 1998 | Swing推出；12月8日，JDK1.2(Java2企业平台J2EE)发布。          |
 | 1999 | JSP/Servlet诞生。Java平台划分为J2SE、J2EE、J2ME。            |
 | 2000 | JDK1.3发布，成为JDK的重要里程碑。                            |
 | 2002 | J2SE1.4发布，Java的计算能力有了大幅提升。                    |
-| 2004 | J2SE1.5发布，并更名J2SE5.0                                   |
-| 2005 | Java SE6发布。Sun以OpenJDK开源Java。                         |
-| 2006 | SUN公司发布JRE6.0。                                          |
-| 2010 | 4月，Oracle宣布收购SUN公司，Java转向oracle开发平台。         |
-| 2016 | IBM开源其Java虚拟机J9，贡献给Eclipse基金会管理，命名为OpenJ9。 |
+| 2004 | J2SE1.5发布，并更名 J2SE5.0                                  |
+| 2005 | Java SE6发布。Sun以 **OpenJDK** 开源Java。                   |
+| 2006 | SUN公司发布 JRE6.0。                                         |
+| 2010 | 4月，Oracle宣布收购SUN公司，Java转向Oracle开发平台。         |
+| 2016 | IBM开源其Java虚拟机J9，贡献给Eclipse基金会管理，命名为**OpenJ9**。 |
 | 2017 | 8月，Oracle将Java EE（Java Enterprise Edition，J2EE）移交给开源组织Eclipse基金会接手。9月，Java9发布。 |
 | 2018 | 3月，Java EE更名为Jakarta EE，Java 10发布。                  |
 | 2019 |                                                              |
-|2020||
+| 2020 |                                                              |
 
-备注：JDK版本变迁详见JDK章节。
+备注：JDK版本变迁详见 JDK章节。
 
-### 1.1.1  JDK
 
-JDK官网：http://openjdk.java.net/ 
+
+## 1.2 JDK
+
 * JRE:  Java Runtime Enviroment, Java运行环境。
-* JDK(Java Development Kit)是Sun Microsystems针对Java开发员的产品。JDK 是整个Java的核心，包括了JRE，一堆Java工具和Java基础的类库(rt.jar)。JDK包含的Java工具有javac, jar, javadoc, jdb, appletviewer, javap, Jconsole. 目前提供JDK的有Oracle支持的 openjdk（当前版本7，2017.1）。
-* JVM：Java Virtual Machine, JVM实例对应了一个独立运行的Java程序，而JVM执行引擎实例则对应了属于用户运行程序的线程。
+* JDK(Java Development Kit)是Sun Microsystems针对Java开发员的产品。JDK 是整个Java的核心，包括了JRE，一堆Java工具和Java基础的类库(rt.jar)。JDK包含的Java工具有javac, jar, javadoc, jdb, appletviewer, javap, Jconsole. 目前提供JDK的有Oracle支持的 openjdk。
+* JVM：Java Virtual Machine, JVM实例对应了一个独立运行的Java程序，而 JVM执行引擎实例则对应了属于用户运行程序的线程。
 ```shell
-C:\windows\system32>java -version
+# 此命令打印出 JDK、JRE、JVM的基本配置信息。 
+$ java -version
+# 下面显示是 Oracle JDK的打印信息
 java version "1.8.0_121"
 Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
+
+# 下面显示是 OpenJDK的打印信息
+openjdk version "11-ea" 2018-09-25
+OpenJDK Runtime Environment (build 11-ea+28)
+OpenJDK 64-Bit Server VM (build 11-ea+28, mixed mode, sharing)
 ```
 
-说明：此命令打印出JDK、JRE、JVM的基本配置信息。
-
-JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK)。JDK(Java Development Kit) 是 Java 语言的软件开发工具包([SDK](https://baike.baidu.com/item/SDK)。
+JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。
 没有JDK的话，无法编译Java程序，如果想只运行Java程序，要确保已安装相应的JRE。
+
 ​             ![1574525105512](../media/program_lang/java_001.png)                                     
+
 图 1 JDK结构图
 
 
 
+
+
+### OpenJDK
+
+OpenJDK官网：http://openjdk.java.net/ 
+
+Java最早由SUN公司(Sun Microsystems，发起于美国斯坦福大学，SUN是Stanford University Network的缩写)发明，2006年SUN公司将Java开源，此时的JDK即为OpenJDK。
+
+OpenJDK是Java SE的开源实现，他由SUN和Java社区提供支持，2009年Oracle收购了Sun公司，自此 Java的维护方之一的SUN也变成了Oracle。
+
+大多数JDK都是在OpenJDK的基础上编写实现的，比如IBM J9，Azul Zulu，Azul Zing和Oracle JDK。几乎现有的所有JDK都派生自OpenJDK，他们之间不同的是许可证.
+
+|            | 协议 Licence             | 其它                        |
+| ---------- | ------------------------ | --------------------------- |
+| OpenJDK    | GPL v2                   | 开源社区维护.               |
+| Oracle JDK | Oracle二进制代码许可协议 | Oracle维护, 每半年一个版本. |
+
+**OpenJDK只包含最精简的JDK**：OpenJDK不包含其他的软件包，比如Rhino Java DB JAXP...，并且可以分离的软件包也都是尽量的分离。
+
+OpenJDK不包含Deployment(部署)功能：部署的功能包括：Browser Plugin、Java Web Start、以及Java控制面板。
+
+
+
+### Java版本特性
+
+说明:  [JEP](http://openjdk.java.net/jeps/0)（Java Enhancement Proposals，Java增强提案）,  JDK更新参见  [OpenJDK: JDK Updates Project (java.net)](http://openjdk.java.net/projects/jdk-updates/)
+
 表格 2 JDK版本列表
 
+| 版本                                               | 名称                                | 发行日期   |
+| -------------------------------------------------- | ----------------------------------- | ---------- |
+| JDK 1.0                                            | Oak(橡树)                           | 1996-01-23 |
+| JDK 1.1                                            | none（无）                          | 1997-02-19 |
+| JDK 1.1.4                                          | Sparkler（宝石）                    | 1997-09-12 |
+| JDK 1.1.5                                          | Pumpkin（南瓜）                     | 1997-12-13 |
+| JDK 1.1.6                                          | Abigail（阿比盖尔–女子名）          | 1998-04-24 |
+| JDK 1.1.7                                          | Brutus（布鲁图–古罗马政治家和将军） | 1998-09-28 |
+| JDK 1.1.8                                          | Chelsea（切尔西–城市名）            | 1999-04-08 |
+| J2SE 1.2                                           | Playground（运动场）                | 1998-12-04 |
+| J2SE 1.2.1                                         | none（无）                          | 1999-03-30 |
+| J2SE 1.2.2                                         | Cricket（蟋蟀）                     | 1999-07-08 |
+| J2SE 1.3                                           | Kestrel（美洲红隼）                 | 2000-05-08 |
+| J2SE 1.3.1                                         | Ladybird（瓢虫）                    | 2001-05-17 |
+| J2SE 1.4.0                                         | Merlin（灰背隼）                    | 2002-02-13 |
+| J2SE 1.4.1                                         | grasshopper（蚱蜢）                 | 2002-09-16 |
+| J2SE 1.4.2                                         | Mantis（螳螂）                      | 2003-06-26 |
+| **Java SE 5.0 (1.5.0)**                            | Tiger（老虎）                       | 2004-09-30 |
+| Java SE 6.0 (1.6.0)                                | Mustang（野马）                     | 2006-04    |
+| Java SE 7.0 (1.7.0)                                | Dolphin（海豚）                     | 2011-07-28 |
+| Java SE 8.0 (1.8.0)                                | Spider（蜘蛛）                      | 2014-03-18 |
+| Java SE 9.0                                        | none（无）                          | 2017-09-21 |
+| JDK [10](http://openjdk.java.net/projects/jdk/10/) |                                     | 2018-03-20 |
+| JDK 11                                             |                                     | 2018-09-25 |
+| JDK 12                                             |                                     | 2019-03-19 |
+| JDK 13                                             |                                     | 2019-09-17 |
+| JDK 14                                             |                                     | 2020-03-17 |
+| JDK 15                                             |                                     | 2020-09-25 |
+| JDK [16](http://openjdk.java.net/projects/jdk/16/) |                                     | 2021-03-16 |
+| JDK [17](http://openjdk.java.net/projects/jdk/17/) |                                     | 2021-09-14 |
+| JDK 18                                             |                                     |            |
+
+备注：从上方的 JDK各个版本发布时间和版本名称表 可以看到，Java大体有3大类命名方式：`JDK`、`J2SE`、`Java SE`。
+
+1. 从 JDK 5.0开始，不再叫 J2SE，改名为 Java SE了。OpenJDK是Java SE的开源版本。上面列举的版本从5.0开始,  已经是OpenJDK的版本。
+2. 2017年9月，Java 采用了基于时间发布的策略，每 6 个月一个版本(以前是2年一个版本)。Java 10是采用新的发布策略之后的第一个版本。
 
 
-*备注：1.* *从JDK 5.0开始，不再叫J2SE,改名为*[*Java SE*](https://baike.baidu.com/item/Java SE)*了，因为那个2已经失去了其应该有的意义。*
-*2. 2017年甲骨文宣布，Java* *采用了基于时间发布的策略，每* *6* *个月一个版本。Java 10是采用新的发布策略之后的第一个版本。Java 11将成为Java平台标准版Java SE 11的参考实现。*
+
+表格 Java各版本特性
+
+| 版本                                                         | 特性                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| JDK 1.0                                                      | 初代版本，伟大的一个里程碑，但是是纯解释运行，使用外挂 JIT，性能比较差，运行速度慢。 |
+| ...                                                          |                                                              |
+| Java 5                                                       | 1.引入泛型功能（伪泛型）<br/>2.增强循环，可以使用迭代循环，Iterator<br/>3.支持自动装箱和自动拆箱<br/>4.支持类型安全的枚举<br/>5.支持可变参数<br/>6.支持静态引入<br/>7.支持元数据（注解）功能<br/>8.引入Java Instrumentation |
+| Java 6                                                       | 1.支持脚本语言<br/>2.引入JDBC 4.0 API<br/>3.引入Java Compiler API<br/>4.支持可插拔注解 |
+| Java 7                                                       | switch中添加对String类型的支持<br/>数字字面量的改进 / 数值可加下划<br/>异常处理（捕获多个异常） try-with-resources<br/>增强泛型推断<br/>JSR203 NIO2.0（AIO）新IO的支持<br/>JSR292与InvokeDynamic指令<br/>Path接口、DirectoryStream、Files、WatchService（重要接口更新）<br/>fork/join framework |
+| Java 8                                                       | 1.支持lambda表达式<br/>2.支持集合的Stream流处理<br/>3.支持Functional函数式接口<br/>4.对各个类支持了很多对应的lambda增强方法<br/>5.增强接口，支持了接口的默认和静态的具体方法<br/>6.支持LocalDate等时间包，以改进原有Date<br/>7.支持Optional来改进Null值的处理<br/>8.优化了HashMap和ConcurrentHashMap |
+| Java 9                                                       | 1.支持Java平台级模块系统，既模块化<br/>2.支持了JShell，既类似node.js, python一样的命令行工具，对待简单的东西，可以直接命令测试<br/>3.改进Javadoc, 使得Javadoc可以搜索<br/>4.支持了List.of(), Set.of(), Map.of()的方式初始化不可变集合，省略了大量代码，语法糖<br/>5.改进的Stream API，比如ofNullable(),dropWhile(),takeWhile()等<br/>6.增强接口，支持了私有接口具体方法，补充了Java8默认和静态方法的支持<br/>7.把G1垃圾收集器作为默认的垃圾收集器，并标注CMS为过时收集器<br/>8.引入了响应式流Reactive Streams API, 支持了响应式编程<br/>9.支持了HTTP/2客户端 |
+| Java 10                                                      | 1.支持了局部变量的类型推导，支持了局部变量的var声明<br/>2.优化改进了G1垃圾回收器，采用并行化mark-sweep-compact算法 |
+| Java 11                                                      | 1.简化了启动单个源代码文件的方法，使得小白命令式编译运行Java文件变成更加简单，java Helloworld.java 即可<br/>2.增加支持了一个叫Epsilon的低开销垃圾收集器<br/>3.增加支持了一个叫ZGC(Z Garbage Collector)的可伸缩低延迟垃圾收集器, 相比G1，停顿时间有了很大的改进，稳定在10ms以下<br/>4.重写了HttpClient,提供了新的标准化HttpClient API, 以后不再需要引入apache包的HttpClient或是okhttp就能支持高性能的网络5.编程<br/>6.增加了对TLS 1.3的支持<br/>7.允许了飞行记录器进行商用下的使用<br/>8.更好的支持了动态语言，在JVM层面增加了invokedynamic指令<br/>9.支持了在lambda内部使用var声明局部变量 |
+| Java 12                                                      | 1.引入了一个叫Shenandoah 低停顿的实验性垃圾收集器<br/>2.改进了G1垃圾收集器<br/>3.引入了实验性的预览版Switch语句优化，可以省略break语句，合并多个case<br/>4.引入了JVM的常量API, 有助于一些分析的实现 |
+| Java 13                                                      | 1.增强优化了ZGC垃圾收集器, 归还未使用的堆内存给操作系统<br/>2.将Java12引入的预览版Switch语法提为正式版，使得Switch的使用更加的顺滑和流畅<br/>3.支持了"""字符串块功能 |
+| Java 14                                                      | Java 14的JEP极多,此处只列举几个: <br>改进的switch表达式，第一次出现在Java 12和13中，在Java 14中获得了完全的支持 <br/>instanceof支持模式匹配（语言特性） <br/>NullPointerException（JVM特性） |
+| [Java 15](http://openjdk.java.net/projects/jdk/15/)          | 339:	Edwards-Curve Digital Signature Algorithm (EdDSA)<br/>360:	Sealed Classes (Preview)<br/>371:	Hidden Classes<br/>372:	Remove the Nashorn JavaScript Engine<br/>373:	Reimplement the Legacy DatagramSocket API<br/>374:	Disable and Deprecate Biased Locking<br/>375:	Pattern Matching for instanceof (Second Preview)<br/>377:	ZGC: A Scalable Low-Latency Garbage Collector<br/>378:	Text Blocks<br/>379:	Shenandoah: A Low-Pause-Time Garbage Collector<br/>381:	Remove the Solaris and SPARC Ports<br/>383:	Foreign-Memory Access API (Second Incubator)<br/>384:	Records (Second Preview)<br/>385:	Deprecate RMI Activation for Removal |
+| [Java 16](http://openjdk.java.net/projects/jdk/16/)          | 338:	Vector API (Incubator)<br/>347:	Enable C++14 Language Features<br/>357:	Migrate from Mercurial to Git<br/>369:	Migrate to GitHub<br/>376:	ZGC: Concurrent Thread-Stack Processing<br/>380:	Unix-Domain Socket Channels<br/>386:	Alpine Linux Port<br/>387:	Elastic Metaspace<br/>388:	Windows/AArch64 Port<br/>389:	Foreign Linker API (Incubator)<br/>390:	Warnings for Value-Based Classes<br/>392:	Packaging Tool<br/>393:	Foreign-Memory Access API (Third Incubator)<br/>394:	Pattern Matching for instanceof<br/>395:	Records<br/>396:	Strongly Encapsulate JDK Internals by Default<br/>397:	Sealed Classes (Second Preview) |
+| [JDK 17 ](https://wiki.openjdk.java.net/display/JDKUpdates/JDK+17u) | 306: Restore Always-Strict Floating-Point Semantics<br/>356: Enhanced Pseudo-Random Number Generators<br/>382: New macOS Rendering Pipeline<br/>391: macOS/AArch64 Port<br/>398: Deprecate the Applet API for Removal<br/>403: Strongly Encapsulate JDK Internals<br/>406: Pattern Matching for switch (Preview)<br/>407: Remove RMI Activation<br/>409: Sealed Classes<br/>410: Remove the Experimental AOT and JIT Compiler<br/>411: Deprecate the Security Manager for Removal<br/>412: Foreign Function & Memory API (Incubator)<br/>414: Vector API (Second Incubator)<br/>415: Context-Specific Deserialization Filters |
 
 
 
-### 1.1.2  Java平台
+## 1.3 Java平台
+
 Java是一个可以在不同操作系统（例如windows,unix等）上运行的编程语言，Java平台是指运行在各种终端（如pc、服务器、移动设备、嵌入式设备）的系统软件。PC机上的java程序是用javaSE开发出来的，服务器端的java程序是用javaEE开发出来的，移动设备的java程序是用javaME开发出来的。
 
 Java 2平台包括：标准版（J2SE ~ Standard）、企业版（J2EE ~Enterprise）和微缩版（J2ME  ~ Micro）三个版本。J2SE,J2ME和J2EE,这也就是SunONE(Open NetEnvironment)体系。
 类的组成（API的覆盖范围）
+
 *  J2EE 包含J2SE 中的类，并且还包含用于开发企业级应用的类。比如：[EJB](https://baike.baidu.com/item/EJB)、[servlet](https://baike.baidu.com/item/servlet)、JSP、[XML](https://baike.baidu.com/item/XML)、事务控制。
 *  J2SE 包含那些构成[Java语言](https://baike.baidu.com/item/Java语言)核心的类。比如：数据库连接、接口定义、输入/输出、[网络编程](https://baike.baidu.com/item/网络编程)。
 *  J2ME 包含J2SE中一部分类，再增加一些[CLDC](https://baike.baidu.com/item/CLDC)等方面的特性。 
 
 应用场景
-*  J2EE用于企业应用，支持分布式部署。如电子商务网站和[ERP系统](https://baike.baidu.com/item/ERP系统)。
+
+*  J2EE用于企业应用，支持分布式部署。如电子商务网站和ERP系统。
 *  J2SE用于桌面应用，也是J2EE的基础。
-*  J2ME用于小型设备，多用于消费类电子产品（多嵌入式系统）的软件开发。比如：呼机、智能卡、手机、PDA、[机顶盒](https://baike.baidu.com/item/机顶盒)
+*  J2ME用于小型设备，多用于消费类电子产品（多嵌入式系统）的软件开发。比如：呼机、智能卡、手机、PDA、机顶盒。
+
 开发能力（从大到小）：J2EE > J2SE > J2ME。
-范围：J2SE包含于J2EE中，J2ME包含了J2SE的核心类，但新添加了一些专有类
+
+范围：J2SE包含于J2EE中，J2ME包含了J2SE的核心类，但新添加了一些专有类。
 
 
-## 1.2  Java SE Component
+
+### Java SE Component
+
 The two principal products in the Java SE platform are: Java Development Kit (JDK) and Java SE Runtime Environment (JRE).
 The JDK is a superset of the JRE, and contains everything that is in the JRE, plus tools such as the compilers and debuggers necessary for developing applets and applications. The Java Runtime Environment (JRE) provides the libraries, the Java Virtual Machine, and other components to run applets and applications written in the Java programming language. 
 
 The following conceptual diagram illustrates all the component technologies in Java SE platform and how they fit together. 
 
-表格 3 J2SE component
+表格 3  J2SE component
 
 | component                                                    | detail                                                       |                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -248,6 +289,17 @@ The following conceptual diagram illustrates all the component technologies in J
 | JTA   | Java Transaction API                   | JTA允许应用程序执行分布式事务处理                            |
 | JMAPI | Java Management API                    | Java网络管理API                                              |
 | JMS   | Java Message Service                   | Java消息传递服务                                             |
+
+
+
+## 本章参考
+
+* Java的各个版本和各个版本的历史版本号的关系与解读 https://lijunde.blog.csdn.net/article/details/91351603
+* JDK的版本号解惑 https://blog.csdn.net/bisal/article/details/118947676
+* Java 7～14各个版本新特性详解 https://blog.csdn.net/smallspot/article/details/105540222
+* Java1.0-1.11各个版本的新特性 https://www.cnblogs.com/Ranyuangang/p/9707712.html
+* Java 各个版本的特性一览 https://blog.csdn.net/qq_35387940/article/details/104754505
+* OpenJDK和Oracle JDK有什么区别和联系？ https://cloud.tencent.com/developer/article/1598291
 
 
 
@@ -295,7 +347,7 @@ Java重写(Override)与重载(Overload)
 | 实现       | 需要继承，要用extends                                        | 要用implements                                               |
 | 其它       | 可以有静态代码块和静态方法                                   | 不能含有静态代码块以及静态方法(用static修饰的方法)。         |
 
-## 2.2     Java的数据结构
+## 2.2   Java的数据结构
 数据类型分为两种：
 *  基本类型：基本类型的变量持有原始值。
 *  引用类型：引用类型的变量持有引用值。引用值是指对某个对象的引用，而不是该对象本身。
@@ -653,7 +705,7 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 
 # 4  Java高级开发
 
-## 4.1   并发
+## 4.1  并发
 ### 4.1.1  多线程
 在Java中实现一个线程有两种方法，
 *  第一是实现Runnable接口实现它的run（）方法，
@@ -1062,9 +1114,13 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 *  JDK 9  http://openjdk.java.net/projects/jdk9/
 *  JDK 8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 *  Oracle Java Archive  http://www.oracle.com/technetwork/java/archive-139210.html
-*   Javase  http://Java.sun.com/Javase/downloads/  
+*  Java SE6 Component [http://download.oracle.com/Javase/6/docs/index.html](http://download.oracle.com/javase/6/docs/index.html)
 *  tomcat  http://tomcat.apache.org/ 
 *  Eclipse  http://www.Eclipse.org/downloads/
+
+* ~~Javase~~  http://Java.sun.com/Javase/downloads/  
+* [http://Java.sun.com/blueprints/corej2eepatterns/Patterns/index.html](http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html)
+* [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
 
 
 
@@ -1080,14 +1136,17 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 * Java资源大全中文版 https://github.com/jobbole/awesome-java-cn
 
-*  Java教程 http://www.runoob.com/java/
+* Java教程 http://www.runoob.com/java/
+
 * Java实例 http://www.runoob.com/java/java-examples.html
+
 * EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp
 
 * 我的java问题排查工具单 https://yq.aliyun.com/articles/69520?spm=5176.100238.goodcont.99.Mm6xRL
 
-*  [http://Java.sun.com/blueprints/corej2eepatterns/Patterns/index.html](http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html)
-*  [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
-*  Java SE6 Component [http://download.oracle.com/Javase/6/docs/index.html](http://download.oracle.com/javase/6/docs/index.html)
-*  Java中的JAR/EAR/WAR包的文件夹结构说明（转）http://www.cnblogs.com/EasonJim/p/6498804.html
-*   Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
+* Java中的JAR/EAR/WAR包的文件夹结构说明（转）http://www.cnblogs.com/EasonJim/p/6498804.html
+
+* Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
+
+  
+

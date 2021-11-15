@@ -1,8 +1,9 @@
-| 序号 | 修改时间  | 修改内容                       | 修改人 | 审稿人 |
-| ---- | --------- | ------------------------------ | ------ | ------ |
-| 1    | 2016-4-9  | 创建《办公软件高级教程》。     | Keefe  |        |
-| 2    | 2021-6-28 | 办公软件高级教程章节单独成文。 | 同上   |        |
-| 3    | 2021-8-11 | 增加 OpenOffice章节。          | 同上   |        |
+| 序号 | 修改时间   | 修改内容                                   | 修改人 | 审稿人 |
+| ---- | ---------- | ------------------------------------------ | ------ | ------ |
+| 1    | 2016-4-9   | 创建《办公软件高级教程》。                 | Keefe  |        |
+| 2    | 2021-6-28  | 办公软件高级教程章节单独成文。             | 同上   |        |
+| 3    | 2021-8-11  | 增加 OpenOffice章节。                      | 同上   |        |
+| 4    | 2021-11-18 | 增加 MS Office替代品 和 企业协同办公章节。 | 同上   |        |
 
 
 
@@ -18,9 +19,13 @@
 
 ---
 
-# 1  MS Word
 
-## 1.1 常用功能
+
+# Microsoft Office
+
+## 1  MS Word
+
+### 1.1 常用功能
 
 ​        ![image-20210628152059050](../../media/sf_reuse/tools/office_word_001.png)                       
 
@@ -72,7 +77,7 @@ ctrl+= 下标
 
  
 
-## 1.2 写作
+### 1.2 写作
 
 **1).** **写作注意事项**
 
@@ -106,7 +111,7 @@ ctrl+= 下标
 
  
 
-## 1.3 WORD模板
+### 1.3 WORD模板
 
 要打开.dotx格式的模板，需选择‘文件’选项卡，在左侧选择‘打开’选项，点击‘浏览’按钮，在弹出的‘打开’对话框中单击‘文件名’后面的‘文件类型’下拉框，选择‘WORD模板’选项。
 
@@ -114,9 +119,9 @@ ctrl+= 下标
 
  
 
-# 2  MS Excel
+## 2  MS Excel
 
-## 2.1 常用功能
+### 2.1 常用功能
 
  ![image-20210628152243744](../../media/sf_reuse/tools/office_excel_001.png)
 
@@ -156,7 +161,7 @@ ctrl + F
 
  
 
-## 2.2 数据处理
+### 2.2 数据处理
 
 **1.** **分列**
 
@@ -170,11 +175,11 @@ ctrl + F
 
  
 
-## 2.3 合并多个工作表到一个
+### 2.3 合并多个工作表到一个
 
  
 
-## 2.4 透视表
+### 2.4 透视表
 
 工作簿和工作表sheet：工作簿由多个工作表组成。
 
@@ -188,19 +193,19 @@ l 表内引用：[行列]，可忽略表名。
 
  
 
-## 2.5 分级显示
+### 2.5 分级显示
 
 主要包括合并计算和分类汇总。
 
  
 
-## 2.6 数据模拟分析与预测
+### 2.6 数据模拟分析与预测
 
 略。
 
  
 
-## 2.7 VBA宏
+### 2.7 VBA宏
 
 打开宏：工具 -- 宏
 
@@ -208,23 +213,21 @@ l 表内引用：[行列]，可忽略表名。
 
 执行命令： F5
 
-## 2.7.1 提取超链接
+**示例：提取超链接**
 
+```vbscript
 Sub test()
-
 For Each cell In Range("A1:A21")   # 需要提取的源单元区域
-
 cell.Offset(0, 1) = cell.Hyperlinks(1).Address  # 提取后存放的单元格地址
-
 Next
-
 End Sub
+```
 
- 
 
-# 3 MS PPT
 
-## 3.1 常用功能
+## 3 MS PPT
+
+### 3.1 常用功能
 
 1). 使用对象:声音，视频，图片，超链接与excel，word的关联。
 
@@ -234,7 +237,7 @@ End Sub
 
  
 
-## 3.2 PPT模板
+### 3.2 PPT模板
 
 **模板页面设置**
 
@@ -258,7 +261,7 @@ End Sub
 
 
 
-# 4  PDF
+## 4  PDF
 
 1). 生成pdf文件;
 
@@ -266,9 +269,56 @@ End Sub
 
  
 
-# OpenOffice
+## 本章参考
 
-OpenOffice是完全开源免费、跨平台的办公软件，基本可以替代Microsoft Office的主要功能。
+[1].   怎样把一个ppt替换成另外一个好看ppt的模板？ https://jingyan.baidu.com/article/fedf0737baf37d35ac8977b2.html
+
+[2].   怎样快速更换PPT模板 https://jingyan.baidu.com/article/fd8044fac25edf5031137ad6.html
+
+
+
+# MS Office替代品
+
+1999年，Sun Microsystems收购了StarSuite办公套件。
+
+2000年，Sun开始采用StarSuite软件有机该项目继续在Sun员工和志愿者的帮助下，提供免费的OpenOffice。
+
+2011年，Sun Microsystems被Oracle收购。Oracle甲骨文宣布停止OpenOffice.org的商业支持，导致开发者出走成立了The Document Foundation，创建了分支LibreOffice。
+
+2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。
+
+
+
+InfoWorld[对比了两个办公软件的Windows版本](https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fwww.infoworld.com%2Fprint%2F151716)，寻找它们的差异和优缺点，以及用户是否可以抛弃甲骨文的OpenOffice。
+
+| 产品                                                         | 官网                           | 开源 | 简介                                                         |
+| ------------------------------------------------------------ | ------------------------------ | ---- | ------------------------------------------------------------ |
+| [**StarOffice**](http://en.wikipedia.org/wiki/StarOffice)    |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。曾一度在Google Pack中免费推广。<br/>1999年被Sun收购，仍保留原名称。现在，称为Oracle Open Office。 |
+| [**OpenOffice.org**](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
+| [**Go-oo**](http://en.wikipedia.org/wiki/Go-oo)              |                                | ✔    | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。 |
+| [**IBM Lotus Symphony**](http://symphony.lotus.com/)         |                                |      | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。 |
+| Apache OpenOffice                                            | http://www.openoffice.org/     | ✔    | 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。 |
+| LibreOffice                                                  | https://zh-cn.libreoffice.org/ | ✔    | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。 |
+| WPS Office                                                   | https://www.wps.cn/            |      | 1989年推出WPS1.0。WPS Office是由金山软件股份有限公司自主研发的一款办公软件套装，可以实现办公软件最常用的文字、表格、演示等多种功能。<br/>具有内存占用低、运行速度快、体积小巧、强大插件平台支持、免费提供海量在线存储空间及文档模板、支持阅读和输出PDF 文件、全面兼容微软Office97-2010格式(doc/docx/xls/xlsx/ppt/pptx 等）独特优势，覆盖Windows、 Linux、 Android、 iOS等多个平台。 |
+
+
+
+表格 OpenOffice.org和MS Office主要功能的比较
+
+| 功能     | Microsoft Office | OpenOffice.org |
+| -------- | ---------------- | -------------- |
+| 文字处理 | MS Word          | writer         |
+| 表格     | MS Excel         | calc           |
+| 演示     | MS PPT           | present        |
+| 数据库   | MS Access        | database       |
+
+
+
+## Apache OpenOffice
+
+[Apache OpenOffice - 开放免费的文字处理软件](http://www.openoffice.org/zh-cn/)  http://www.openoffice.org/
+
+Apache OpenOffice是一款先进的**开源** **办公软件套件**，它包含**文本文档**、**电子表格**、**演示文稿**、**绘图**、**数据库**等。 它能够支持**许多语言**并且在所有**普通计算机**上工作。它将你所有的数据以**国际开放标准格式**存储下来，并能够读写从其它常用办公软件包来的文件。它可以被完全**免费**下载并使用于**任何用途**。
 
 
 
@@ -282,10 +332,58 @@ OpenOffice是完全开源免费、跨平台的办公软件，基本可以替代M
 
 
 
- 
+##  Libreoffice
+
+[主页 | LibreOffice 简体中文官方网站 - 自由免费的办公套件](https://zh-cn.libreoffice.org/)  https://zh-cn.libreoffice.org/
+
+LibreOffice 是一款功能强大的办公软件，默认使用开放文档格式 (OpenDocument Format , ODF), 并支持 *.docx, *.xlsx, *.pptx 等其他格式。 它包含了 Writer, Calc, Impress, Draw, Base 以及 Math 等组件，可用于处理文本文档、电子表格、演示文稿、绘图以及公式编辑。<br>它可以运行于 Windows, GNU/Linux 以及 macOS 等操作系统上，并具有一致的用户体验。
+
+LibreOffice 采用对企业和个人用户均免费的 MPL 2.0 授权协议。您可以自由分发该软件，无需支付授权费用（但您仍然可以付费获得经认证的专业支持）。它的源代码完全公开，任何人都可以参与软件的开发和维护。
+
+LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个月发布一个主要的新版本。
+
+
+
+**FAQ:**
+
+粘贴过长的表格，数据常被截断。可以右键 ’选择性粘贴‘，选择 电子表格。
+
+
+
+## WPS Office
+
+**发展历程**
+
+- 1989年，金山创始人求伯君正式推出WPS1.0，并在2001年完成政府采购第一枪；
+- 2005年，WPS Office宣布个人版免费使用；
+- 2011年，金山办公正式发布WPS Office移动端；
+- 2012年，金山WPS通过核高基重大专项验收；
+- 2015年，WPS+一站式云办公发布；
+- 2017年，WPS Office PC端与移动端用户均过亿，5月份正式发布泰文版本；
+- 2018年，召开了主题为“简单.创造.不简单”云AI未来办公大会，发布了金山文档等新产品；
+- 2020年11月11日，金山办公正式发布“使命.愿景.价值观”。
+
+
+
+## 本章参考
+
+*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
+
+* LibreOffice:完全由开源社区主导的OpenOffice分支  https://xbeta.info/libreoffice.htm
+
+  
+
+# 企业协同办公Office
+
+详见  《[企业协同办公生态](企业协同办公生态.md)》
+
+
+
+
+
+* https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
+
+
 
 # 参考资料
 
-[1].   怎样把一个ppt替换成另外一个好看ppt的模板？ https://jingyan.baidu.com/article/fedf0737baf37d35ac8977b2.html
-
-[2].   怎样快速更换PPT模板 https://jingyan.baidu.com/article/fd8044fac25edf5031137ad6.html

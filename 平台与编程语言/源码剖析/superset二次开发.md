@@ -317,6 +317,15 @@ superset db upgrade
 
 # 打包: 后端打包到dist目录
 python setup.py sdist
+
+# 把版本上传到部署服务器，放到 ~/目录下
+
+# 安装版本
+source ~/venv/superset-1.3-env/bin/activate
+pip install xx.tar.gz
+
+# 额外事情：更新中国国家地图文件xx.geojson
+cp xx.geojson ~/project/superset/static/assets/
 ```
 
 
@@ -728,7 +737,12 @@ JSON串
 
 ## 2.3 扩展功能
 
-### CSS主题
+### CSS样式
+
+CSS样式分系统CSS模板和看板自定义CSS样式。
+
+* 系统CSS模板：保存在css_templates表。系统CSS模板是通用性的，只对几个通用DIV标签起作用。
+* 看板自定义CSS样式：保存在dashboards表里的css字段里。编辑某个看板时可选择系统CSS模板，再根据当前看板的实际布局更细节地自定义CSS样式。
 
 
 
@@ -742,7 +756,7 @@ superset特性标识是为了满足特定SIP要求，使用的启停开关。特
 
 config.py里DEFAULT_FEATURE_FLAGS存储了缺省特性标识，可以在super_config.py里用FEATURE_FLAGS覆盖这些特性标识。
 
-启用标识后，最好先执行`superset init`
+启用标识后，有可能需要新建或更新元数据表，最好先执行`superset init`
 
 典型功能如
 
@@ -765,6 +779,8 @@ config.py里DEFAULT_FEATURE_FLAGS存储了缺省特性标识，可以在super_co
 
 
 config.py  
+
+DEFAULT_FEATURE_FLAGS里的特性缺省为false；如果默认是True说明将成为基本功能，一般无需在FEATURE_FLAGS重新定义。。
 
 ```python
 # ---------------------------------------------------
@@ -830,12 +846,26 @@ DEFAULT_FEATURE_FLAGS: Dict[str, bool] = {
 superset_config.py  
 
 ```python
-FEATURE_FLAGS = { 'BAR': True, 'BAZ': True } 
+FEATURE_FLAGS = {
+    #"ROW_LEVEL_SECURITY" : True,
+    "DASHBOARD_CROSS_FILTERS" : True,
+    "THUMBNAILS" : True,
+    "DASHBOARD_RBAC" : False,
+    "ESCAPE_MARKDOWN_HTML" : True,
+    "ENABLE_TEMPLATE_PROCESSING" : True,
+    "LISTVIEWS_DEFAULT_CARD_VIEW" : True, 
+    "ALERTS_REPORTS" : True,
+    "SCHEDULED_QUERIES" : False,    
+    "DASHBOARD_NATIVE_FILTERS": False,
+    "GLOBAL_ASYNC_QUERIES" : False
+}
 ```
 
 
 
 ### 行安全 ROW_LEVEL_SECURITY
+
+路由： /rowlevelsecurityfiltersmodelview/list/
 
 行过滤级器有二种，分为常规和基本。
 
@@ -844,19 +874,13 @@ FEATURE_FLAGS = { 'BAR': True, 'BAZ': True }
 
 过滤语法：示例如``大区`='华南'`， 字段名用``圈 起来，值用单引号圈起来，过滤条件可以得复杂组合。
 
+行级别安全特性在v1.1后成熟。一个查询可以用到多个行过滤器，如果设置相同的groupkey, 那么它们的过滤条件是`或(OR)`关系，否则是`与(AND)`关系。
+
 
 
 ### 交叉过滤 DASHBOARD_CROSS_FILTERS
 
-交叉过滤 x-filtering
-
-参见  
-
-* fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
-
-
-
-v1.1开始引入交叉过滤，1.2版本成熟。
+v1.1开始引入交叉过滤 x-filtering，1.2版本成熟。
 
 **使用步骤**：
 
@@ -885,9 +909,9 @@ v1.1开始引入交叉过滤，1.2版本成熟。
 
 ### 看板权限 DASHBOARD_RBAC
 
+看板访问权限基于角色。
 
 
-### 
 
 
 
@@ -1611,7 +1635,7 @@ encoding = utf-8
 
 
 
-### 网页嵌入外部系统
+### 3.3.2 网页嵌入外部系统
 
 **应用场景**
 
@@ -1671,9 +1695,13 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
 
 #### 图表传参
 
-   iframe传参： `"datasource":"3__table"`此字段值通过`__`可拆分成datasource_id和datasource_type。
+图表链接：/superset/explore/?form_data={}
 
-   图表表单传参JSON串示例如下：  /superset/explore/?form_data={}
+form_data传参： `"datasource":"3__table"`此字段值通过`__`可拆分成datasource_id和datasource_type。
+
+form_data数据也是图表元数据，是JSON格式，将会保存在Slice表的params字段里。
+
+form_data JSON串示例如下：  
 
 ```json
 {
@@ -1753,15 +1781,36 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
 
 说明： 
 
-* adhoc_filters  保存过滤条件列表，过滤条件之间是逻辑与关系
-* metric 指标
-* groupby 分组
+* adhoc_filters  []，保存过滤条件列表，过滤条件之间是逻辑与关系
+* metric 指标  {}， 
+* groupby 分组  [],  支持多个分组字段
+* emit_filter  boolean，true-发出交叉过滤，false-默认不发出交叉过滤
 
 
 
 #### 看板传参
 
-看板元数据
+**看板共享链接**
+
+http://$HOST/superset/dashboard/191/?preselect_filters={"627":{"大区":null},"628":{"区域":null},"629":{"日期类型":["年"]},"630":{"日期":["2021"]}}&native_filters=('607':(extraFormData:(),filterState:(value:!n),id:'607',ownState:()),'680':(extraFormData:(),filterState:(value:!n),id:'680',ownState:()))&standalone=true
+
+链接参数说明
+
+* preselect_filters 预过滤器，指过滤框里过滤字段的预设值
+* native_filters 原生过滤器，指图表的交叉过滤范围。指当前图表改变时，不受影响的图表。
+* standalone 独立模式，true时去除导航菜单。
+
+
+
+**看板数据**
+
+看板数据包括三部分，保存在dashboards表的相应字段。
+
+* postion_json: 看板布局的位置信息，JSON串。这个支持看板拖拽。
+* css:  看板用的CSS主题，css语法。支持用户在系统提供主题基础上修改。如果要修改系统主题，则需要相应权限。
+* json_metadata:  看板本身的元数据，JSON中。
+
+json_metadata示例如下：
 
 ```json
 {
@@ -1777,30 +1826,84 @@ HTTP_HEADERS: Dict[str, Any] = {"X-Frame-Options" : "SAMEORIGON" }
     },
   },
   "timed_refresh_immune_slices": [],
-  "filter_scopes": {	#过滤区域：指图表-过滤盒
+  "filter_scopes": {	#过滤区域：指图表-过滤盒过滤项的范围scope 和 受影响图表immune
     "627": {"区域类型": {"scope": ["ROOT_ID"], "immune": []}},
-    "628": {"区域": {"scope": ["ROOT_ID"], "immune": []}},
+    "628": {"区域": {"scope": ["ROOT_ID"], "immune": [480]}},
     "629": {"日期类型": {"scope": ["ROOT_ID"], "immune": []}},
     "630": {"日期": {"scope": ["ROOT_ID"], "immune": []}},
   },	
   "expanded_slices": {},
   "refresh_frequency": 0,	#看板刷新频率
-  "default_filters": "{}",	#缺省过滤器
+  "default_filters": "{ \"630\": {\"\\u65e5\\u671f\": [\"2021\"]} }",	#过滤器缺省值
   "color_scheme": null		#颜色主体
 }
 ```
 
 说明：
 
-* chart_configuration  图表配置项
+* chart_configuration  图表配置项，设置交叉过滤范围。
+* filter_scopes  过滤映射，指定这滤字段影响到的图表和区域。
+* default_filters 可设置某个过滤器的缺省值。对应到看板共享链接参数preselect_filters 
+* refresh_frequency 看板刷新频率，单位为
 
 
 
-### 图表类型
 
-#### 国家地图
 
-GEO.JSON 地名拼音换成中文。
+### 3.3.3 图表类型
+
+#### 国家地图 Country Map
+
+国家地图是一个国家行政区的地图，可以是中国，也可以是其它国家如法国等。
+
+ISO3316为标准国家及城市代码，如ISO3316-2-cn为中国省份代码。
+
+各个国家地图的文件名为 xx.geojson
+
+中国国家地图文件名： /static/assets/65d35076af8ab2eac6355ea6f4932f54.geojson
+
+中国国家地图文件示例：
+
+```json
+{
+	"type": "FeatureCollection",
+	"crs": {
+		"type": "name",
+		"properties": {
+			"name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+		}
+	},
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"ISO": "CN-65",
+				"NAME_1": "新疆"	# 修改此处
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[77.88313195800004,35.431068420000048],
+                     ...
+                    ]
+                 ]
+             }
+		}
+}            
+```
+
+
+
+#### 世界地图 World Map
+
+Country codes supported are numeric (ccn; internal reference format), **two letter country codes (cca2), and three letter country codes (cca3)**. In addition, incf.countryutils knows the simple English name of each country (cn) as well as the official English name.
+
+国家编码(Country codes, cc)支持以下四种类型，
+
+* ccn:  国家编码数值
+* cca2: 国家编码2个字母
+* cca3: 国家编码3个字母
+* name:  使用英文简称，如cn是中国。
 
 
 
@@ -1862,12 +1965,6 @@ https://github.com/airbnb/superset/issues?q=label%3Aexample+is%3Aclosed
 数据钻取实现是要保存钻取的层次关系。
 
 数据钻取常见需求：表格 和 地图。这二类图形可以展现比较明显的层次关系，层次关系如行政区域，组织结构或者时间层次等。此外一些用于表示整体和部分的图形如树图也很适合钻取。
-
-
-
-
-
-### 导航菜单
 
 
 
@@ -2247,7 +2344,7 @@ superset使用Flask-Cache来缓存数据。Flask-Caching supports various cachin
 修改文件：superset/superset_config.py
 
  ```python
-# 缓存数据源/数据库 
+# 缓存SQL查询结果
 DATA_CACHE_CONFIG = {
     'CACHE_TYPE': 'redis',
     'CACHE_DEFAULT_TIMEOUT': 60 * 60 * 24, # 1 day default (in secs)
@@ -2255,7 +2352,7 @@ DATA_CACHE_CONFIG = {
     'CACHE_REDIS_URL': 'redis://localhost:6379/0',
 }
 
-# superset-0.2xx
+# superset-0.2xx（弃）
 CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
 TABLE_NAMES_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
     
@@ -2497,6 +2594,69 @@ $ yum install gcc libffi-devel python3-devel openssl-devel -y
 
 
 
+**API调试技巧**
+
+示例：要调用 /users/delete
+
+可用 flask routes查看路由及其对应的路由视图。然后就可用 路由视图查找定位API位置。
+
+```shell
+$ flask routes
+SliceModelView.add                                GET, POST  /chart/add
+SliceModelView.api_delete                         DELETE     /chart/api/delete/<pk>
+SliceModelView.api_read                           GET        /chart/api/read
+SqlMetricInlineView.list                          GET, POST  /sqlmetricinlineview/list/
+Superset.add_slices                               POST       /superset/add_slices/<int:dashboard_id>/
+Superset.annotation_json                          GET        /superset/annotation_json/<int:layer_id>
+Superset.approve                                  GET        /superset/approve
+Superset.available_domains                        GET        /superset/available_domains/
+Superset.copy_dash                                GET, POST  /superset/copy_dash/<int:dashboard_id>/
+UserDBModelView.api_read                          GET        /users/api/read
+UserDBModelView.delete                            GET, POST  /users/delete/<pk>
+UserInfoEditView.this_form_post                   POST       /userinfoeditview/form
+UtilView.back                                     GET        /back
+appbuilder.static                                 GET        /static/appbuilder/<path:filename>
+health                                            GET        /health
+healthcheck                                       GET        /healthcheck
+ping                                              GET        /ping
+```
+
+从上面找到 /usr/delete所对应的视图函数 UserDBModelView.delete。已经知道flask-appbuilder负责管理登陆用户相关功能。
+
+于是在 flask-appbuilder模块内查找视图类 UserDBModelView，定位到 类所在的文件/flask_appbuiler/security/views.py
+
+```python
+# /flask_appbuiler/security/views.py
+class UserDBModelView(UserModelView):
+    """ 通过查看父类方法，定位到 delete方法
+    UserDBModelView -> UserModelView -> ModelView
+    """
+    
+class UserModelView(ModelView):
+    route_base = "/users"
+    
+class ModelView(RestCRUDView):
+    @expose("/delete/<pk>", methods=["GET", "POST"])
+    @has_access
+    def delete(self, pk):    
+        
+"""
+/users/delete/xx 用户删除时，要确保user_id没有外键关联，涉及到表slice, dashboard, logs, url, favstar，dbs...
+查询数据关联SQL示例如下：（如果返回有值，则可依次到相应看板/图表删除）
+use xxDB;
+SELECT t1.slice_id, t2.dashboard_id, t0.id, t0.username 
+FROM ab_user t0, slice_user t1, dashboard_user t2 
+where 
+t1.user_id = t0.id and t2.user_id = t0.id and t0.id=1;
+
+delete from logs where user_id in (17,);
+delete from url where changed_by_fk in (17,);
+delete from favstar where user_id in (17,);
+"""        
+```
+
+
+
 **Q1：ImportError: cannot import name 'Any' from 'typing' **
 
 报错信息：
@@ -2588,7 +2748,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下
    评审：update命令，需要判断是否是数据源重命名，是则需要特殊处理，增加获取旧数据库名，移除相关权限。另外，重命名虽然造成了冗余，但却不会涉及到数据授权丢失问题。
    ```
 
-5. (fixed)看板csstemplate权限问题
+5. (fixed)看板csstemplate权限问题  ~2021-11-11
 
    ```
    描述：任意用户都可以读写看板公共csstemplate，会影响到所有用户
@@ -2596,7 +2756,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下
    评审：可以先从gamma角色移除csstemaplte写权限。为csstempalte设置专门角色，只有特定用户才可编辑删除。
    ```
 
-6. 漏斗图的配置参数里的 行限制参数保存时固定值
+6. 漏斗图的配置参数里的 行限制参数保存时固定值  ~2021-11-11
 
    ```
    描述：漏斗图的配置参数里的 行限制保存时都是10，下拉选项值不生效。运行按纽时能正确，保存则固定10。
@@ -2604,6 +2764,14 @@ A1：在写数据库连接串时末尾加上编码格式，如下
    评审：
    ```
 
+7. (fixed)看板过滤映射保存后无效  ~2021-11-15
+   ```
+   描述：看板过滤映射修改保存后，只对当前页面生效。但从看板列表进入或重新刷新打开看板，过滤映射恢复到原始状态。
+   原因：修改保存后，实质没保存到数据库。
+   评审：#17278修复
+   补充：刷新频率也没有保存。
+   ```
+   
    
 
 ## superset不支持功能
@@ -2622,7 +2790,14 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 - 根路由定制：约300个API，十几个不同前缀路由。还依赖flask_appbuilder模块，改起来很麻烦。（弃）
 
-  
+
+
+
+## superset官网PR
+
+* fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
+
+
 
 # 参考资料
 
@@ -2642,6 +2817,8 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 
 
+
+
 **参考链接**
 
 *  中文文档  https://docschina.org/
@@ -2656,4 +2833,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 *  安装Apache Superset--基于Docker的安装配置 https://blog.csdn.net/nikeylee/article/details/115264818
 *  磨人的小妖精Apache Superset之绝对不改版 https://segmentfault.com/a/1190000022060920 
 *  如何将炫酷的报表直接截图发送邮件——在Superset 0.37使用Schedule Email功能 https://cloud.tencent.com/developer/article/1711719
+*  Superset0.38.0新版本如何将中国地图由拼音显示中文 https://blog.csdn.net/zfqsmn1126/article/details/111313207
 

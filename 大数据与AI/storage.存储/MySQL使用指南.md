@@ -218,7 +218,7 @@
 
 | 版本  | 发布时间  | 特性说明                                                     |
 | ----- | --------- | ------------------------------------------------------------ |
-| 8.0   | 2016-9-12 | 最新版本8.0.27(2021-05)。<br/>Data dictionary. Atomic DDL. Upgrade procedure. 安全和账号管理。<br>资源管理。表加密管理。InnoDB提升。优化...<br>数据库的缺省编码将改为 utf8mb4. 要先创建用户再授权。 |
+| 8.0   | 2016-9-12 | 最新版本8.0.27(2021-05)。<br/>Data dictionary. Atomic DDL. Upgrade procedure。安全和账号管理（授权方式变化，root只允许localhost访问）。<br>资源管理。表加密管理。InnoDB提升。优化...<br>数据库的缺省编码将改为 utf8mb4. 要先创建用户再授权。 |
 | 7.1   |           |                                                              |
 | 6.0   |           | MySQL Cluster版本。                                          |
 | 5.7   | 2013-4-23 | 最新版本5.7.36(2021-05)。<br/>查询性能得以大幅提升，比 MySQL 5.6 提升 1 倍降低了建立数据库连接的时间。 |
@@ -2169,6 +2169,8 @@ grant all privileges on *.* to 'root'@'1ocalhost' with grant option
 #改密码&授权超用户，flush privileges 命令本质上的作用是将当前user和privilige表中的用户信息/权限设置从mysql库(MySQL数据库的内置库)中提取到内存里
 flush privileges;
 ```
+
+> 备注：**8.x版本root只能用在localhost里。**
 
 
 

@@ -21,7 +21,7 @@
 
 # 1 flask_appbuilder源码剖析
 
-官网：https://flask-appbuilder.readthedocs.io/en/latest/
+官网文档：https://flask-appbuilder.readthedocs.io/en/latest/
 
 Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
 
@@ -66,7 +66,7 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 | babel          | BabelManager LocaleView                                      | 依赖于flask_babel模块         |
 | charts         | dict_to_json views.py widgets.py                             | 图表                          |
 | models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py | 模型                          |
-| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全                          |
+| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全。                        |
 | static         | 目录：css datapicker fonts img js select2                    | 静态文件                      |
 | templates      | appbuilder/                                                  | Jinja2模板                    |
 | tests          |                                                              | 测试                          |
@@ -77,7 +77,7 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 | base.py        | AppBuilder dynamic_class_import                              | app构建类（主类）             |
 | basemanager.py | BaseManager                                                  | 管理基类                      |
 | baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView | 视图基类                      |
-| cli.py         | fab create_admin create_user...                           | 命令行，依赖click模块         |
+| cli.py         | fab create_admin create_user...                              | 命令行，依赖click模块         |
 | console.py     | cli_app                                                      | 控制台命令工具，依赖click模块 |
 | const.py       |                                                              | 常量                          |
 | fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块       |
@@ -85,8 +85,8 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 | forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf模块           |
 | hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                      |
 | menu.py        | MenuItem Menu MenuApi MenuApiManager                         | 菜单管理                      |
-| views.py       | IndexView UtilView SimpleFormView PublicFormView...       | 各种视图                      |
-| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...     | 依赖于flask_wtf模块           |
+| views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                      |
+| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于flask_wtf模块           |
 
 
 
@@ -293,7 +293,7 @@ ModelView:
 
 
 
-1. 路由扩展装饰器：expose expose_api
+1. **路由扩展装饰器**：expose expose_api
 
 作用：在原有路由基础上增加次级路由
 
@@ -337,9 +337,11 @@ def expose_api(name="", url="", methods=("GET",), description=""):
 
 
 
-2. 基础视图： 包括CRUD方法的真正实现
+2. **基础视图**： 包括CRUD方法的真正实现
 
    flask_appbuilder/baseview.py
+   
+   BaseView类的公有方法有：create_blueprint  render_template  get_redirect  get_default_url  
 
 ```python
 class BaseView(object):
@@ -356,7 +358,7 @@ class BaseView(object):
     blueprint = None
     endpoint = None
 
-    route_base = None
+    route_base = None	# 此处基类根路由为空, 大create_blueprint中将类名作为根路由
     """ Override this if you want to define your own relative url """
 
     template_folder = "templates"
@@ -461,6 +463,54 @@ class BaseView(object):
         form = self.search_form.refresh()
         self.update_redirect()
         return self._get_search_widget(form=form, widgets=widgets)        
+    
+    def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):
+        # Store appbuilder instance
+        self.appbuilder = appbuilder
+
+        # If endpoint name is not provided, get it from the class name
+        self.endpoint = endpoint or self.__class__.__name__
+
+        if self.route_base is None:	# 根路由为空时，用小写类名作为根路由。因此子类继承根路由就是子类的小写类名
+            self.route_base = "/" + self.__class__.__name__.lower()
+
+        self.static_folder = static_folder
+        if not static_folder:  # 区分有无静态目录
+            # Create blueprint and register rules
+            self.blueprint = Blueprint(
+                self.endpoint,
+                __name__,
+                url_prefix=self.route_base,
+                template_folder=self.template_folder,
+            )
+        else:
+            self.blueprint = Blueprint(
+                self.endpoint,
+                __name__,
+                url_prefix=self.route_base,
+                template_folder=self.template_folder,
+                static_folder=static_folder,
+            )
+        self._register_urls()	# 注册urls
+        return self.blueprint        
+    
+    def _register_urls(self):
+        ...        
+        
+    def render_template(self, template, **kwargs):
+        """
+            Use this method on your own endpoints, will pass the extra_args
+            to the templates.  
+			填充2个参数：base_teimplate, appbuilder，然后调用flask模块的render_template函数
+            :param template: The template relative path
+            :param kwargs: arguments to be passed to the template
+        """
+        kwargs["base_template"] = self.appbuilder.base_template
+        kwargs["appbuilder"] = self.appbuilder
+        return render_template(	# 渲染模板 
+            template, **dict(list(kwargs.items()) + list(self.extra_args.items()))
+        )        
+    
 ```
 
 

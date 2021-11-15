@@ -482,7 +482,7 @@ Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现�
 * ViewModel，视图模型，Model层之上，用来在视图里传递和处理数据的模型。
 
 
-  ![1574518389091](..\..\media/sf_reuse/framework/frame_web_003.png)
+  ![1574518389091](../../media/sf_reuse/framework/frame_web_003.png)
 
 图  django运行视图
 
@@ -494,7 +494,7 @@ Django 中间件是修改 Django request 或者 response 对象的钩子，可�
 
 浏览器从请求到响应的过程中，Django 需要通过很多中间件来处理，可以看如下图所示：
 
-![1574518414753](..\..\media/sf_reuse/framework/frame_web_003_02.png)
+![1574518414753](../../media/sf_reuse/framework/frame_web_003_02.png)
 
 备注：核心在于 middleware（中间件），django 所有的请求、返回都由中间件来完成。中间件，就是处理 HTTP 的 request 和 response 的，类似插件，比如有 Request 中间件、view 中间件、response 中间件、exception 中间件等，Middleware 都需要在 “project/settings.py” 中 MIDDLEWARE_CLASSES 的定义。
 
@@ -1270,7 +1270,7 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 3. 类图
 
-   ![1574518633167](..\..\media/sf_reuse/framework/frame_web_flask_002.png)
+   ![1574518633167](../../media/sf_reuse/framework/frame_web_flask_002.png)
 
 图 4 flask-appbuilder view
 

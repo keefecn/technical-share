@@ -726,7 +726,7 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 
 
 
-![ai_sklearn_algo](..\../media/ai/ai_sklearn_algo.png)
+![ai_sklearn_algo](../../media/ai/ai_sklearn_algo.png)
 
 图  sklean的算法学习图
 

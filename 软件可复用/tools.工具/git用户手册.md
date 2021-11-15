@@ -188,7 +188,6 @@ $ cat .ssh/id_rsa.pub | ssh $user@$host -p [port] "cat - >>.ssh/authorized_keys"
 ### 2.2.2 开发用户签名
 ```sh
 $ git config –-list
-qfwu@is13084905-0273:~/git$ git config --list
 denny.wuqifu@3g.net.cn=qfwu
 user.email=wuqifu@3g.net.cn
 user.name=denny
@@ -207,6 +206,7 @@ $ git config --global user.email "schacon@gmail.com"
 ```
 
 
+
 ## 2.3  中文环境配置
 
 1) Git Bash窗口ls正常显示中文
@@ -223,7 +223,7 @@ set output-meta on
 set convert-meta off
 ```
 
-3 ) Git-log正常显示中文
+3. Git-log正常显示中文
 
 在$GitHome\etc\profile文件中添加：
 ```sh
@@ -327,23 +327,26 @@ quotepath = false
 
 本地分支的名字缺省为master.
 
-所以从本地更新到远程使用: $git pull origin master
+所以从本地更新到远程使用: $ git pull origin master
 
 使用git remote add添加远程服务器端。
 
 usage: git remote add [<options>] <name> <url>
 
- denny@denny-ubuntu:~/data/bak-7z$ cat ~/.gitconfig 
+
+
+**git 配置文件示例** ~/.gitconfig  
 
 ```ini
 [user]
-  name = Denny Wu
-  email = wuqifu@gmail.com
-[denny]
-  wu = denny@lenovo.desktop
+  name = Keefe Wu
+  email = keefe@gmail.com
 [core]
   quotepath = false
   excludesfile = ~/.gitignore_global
+  autocrlf = false
+  longpaths = true
+  filemode = false
 [gui]
   encoding = utf-8
 [i18n]
@@ -354,8 +357,12 @@ usage: git remote add [<options>] <name> <url>
   #helper = cache --timeout 3600
   #helper = store
 [push]
-    default = simple
+  default = simple
 ```
+
+> 备注: 可用命令添加如 `git config --add core.filemode false `
+>
+> quotepath 路径是否转义, filemode 是否检测filemode,  longpaths 是否支持长路径
 
 
 

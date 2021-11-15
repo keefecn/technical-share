@@ -53,6 +53,8 @@
 | Python  | 字节码编译器和解释器                                |
 | Tools   | 一些用 Python开发的工具                             |
 
+说明: 解释器和内建模块的代码多是用C来实现的. 标准库Lib则是用python来实现.
+
 
 
 # 2 Python运行环境
@@ -1047,7 +1049,7 @@ def fib(n):
     while i < n:
         yield a  #每调用一次时，执行到这相当于return
         a, b = b, a+b 	#第二次调用开始从这开始，变量保存了上次调用的值
-        i = i +1
+        i = i+1
 #调用
 print(fib(10))
 for j in fib(5): print(j)  
@@ -1248,7 +1250,7 @@ def __init__(self):
 | 对象内存管理     | `__slots__`   | 用来限制该class能添加的属性，对继承的子类是不起作用的。不用`__dict__`来保存属性数据，可以显著减少内存占用。 |                         |
 |                  | `__iter__`    | 返回迭代器本身。                                             |                         |
 | 可调用接口       | `__call__`    | 对象(类)可通过此对象来模拟函数的形为。                       |                         |
-| 对象比较         | 操作符重载    | 详见操作符重载。                                             |                         |
+| 对象比较         | 操作符重载    | 详见 操作符重载。                                            |                         |
 
 
 #### 操作符operator重载
@@ -1281,7 +1283,7 @@ def __init__(self):
 
 
 
-## 标准模块 asyncio
+## 标准模块 asyncio/
 
 python3.4实验引入，python3.5新增关键字async await，python3.6成为标准库。
 
@@ -1458,7 +1460,7 @@ def calc_func(func)
 
 
 
-## 标准 types
+## 标准 types.py
 
 ### 元类metaclass
 
@@ -2007,9 +2009,95 @@ Req-sent-unread-response       _CS_REQ_SENT       <response_class>
 
 
 
-## 标准 logging
+## 标准 logging/
 
-**werkzeug和flask应用的日志为什么会输出到一个日志文件**
+* `__init__.py`   导出符号，定义常用方法，日志流FileHandler StreamHandler 
+* config.py  日志配置对象BaseConfigurator DictConfigurator等
+* handlers.py  日志处理器有BaseRotatingHandler 
+
+
+
+/logging/`__init__.py`
+
+```python
+
+__all__ = ['BASIC_FORMAT', 'BufferingFormatter', 'CRITICAL', 'DEBUG', 'ERROR',
+           'FATAL', 'FileHandler', 'Filter', 'Formatter', 'Handler', 'INFO',
+           'LogRecord', 'Logger', 'LoggerAdapter', 'NOTSET', 'NullHandler',
+           'StreamHandler', 'WARN', 'WARNING', 'addLevelName', 'basicConfig',
+           'captureWarnings', 'critical', 'debug', 'disable', 'error',
+           'exception', 'fatal', 'getLevelName', 'getLogger', 'getLoggerClass',
+           'info', 'log', 'makeLogRecord', 'setLoggerClass', 'shutdown',
+           'warn', 'warning', 'getLogRecordFactory', 'setLogRecordFactory',
+           'lastResort', 'raiseExceptions']
+
+
+class Filterer(object):
+    """ 日志过滤对象 """
+    def __init__(self):
+        """
+        Initialize the list of filters to be an empty list.
+        """
+        self.filters = []    # 过滤对象列表
+    
+    def addFilter(self, filter):
+    def removeFilter(self, filter):
+    def filter(self, record):  # 过滤方法，各子类可以重新实现        
+        
+        
+class Handler(Filterer):
+    """ 日志处理器：包括设置日志级别 加锁等基本操作 """
+    
+class StreamHandler(Handler):
+    """ 流处理器 """
+    
+class FileHandler(StreamHandler):
+    """ 文件流处理器 """    
+```
+
+
+
+/logging/handler.py
+
+各种日志处理器，包括滚动时间文件日志、SOCKET、HTTP、系统日志、缓存流、邮件SMTP等。
+
+```python
+import logging, socket, os, pickle, struct, time, re
+
+class BaseRotatingHandler(logging.FileHandler):
+    
+class RotatingFileHandler(BaseRotatingHandler):
+    
+class TimedRotatingFileHandler(BaseRotatingHandler):
+    
+class WatchedFileHandler(logging.FileHandler):
+    
+class SocketHandler(logging.Handler):
+    
+class DatagramHandler(SocketHandler):    
+    
+class SysLogHandler(logging.Handler):  
+    
+class SMTPHandler(logging.Handler):
+    
+class NTEventLogHandler(logging.Handler):
+    
+class HTTPHandler(logging.Handler):
+    
+class BufferingHandler(logging.Handler):
+    
+class MemoryHandler(BufferingHandler):   
+    
+class QueueHandler(logging.Handler):
+    
+class QueueListener(object):    
+```
+
+
+
+
+
+**应用示例：werkzeug和flask应用的日志为什么会输出到一个日志文件**
 
 当`getlogger()`不传入参数时,会返回一个logging.RootLogger。子对象会将记录共享到父对象,所以`RootLogger`会包含所有子对象的记录并将其记录到文件。
 
