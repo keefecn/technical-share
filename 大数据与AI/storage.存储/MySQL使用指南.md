@@ -8,7 +8,7 @@
 | 6    | 2017-2-6  | 调整目录结构，增加MySQL主从复制和读写分离章节。              | 同上   |        |
 | 7    | 2018-6-30 | 将MySQL底层实现章节迁移到《数据库技术》，本文只针对MySQL用户。 | 同上   |        |
 | 8    | 2021-6-18 | 增加MySQL版本和产品线章节。                                  | 同上   |        |
-| 9    | 2021-7-28 | 应用开发章节移入《mysql源码剖析》                            | 同上   |        |
+| 9    | 2021-7-28 | 应用开发章节移入《MySQL源码剖析》。本文定位面向用户和DB管理员 。 | 同上   |        |
 
 
 
@@ -20,133 +20,7 @@
 
 ---
 
-# 目录
-
-[目录... 1](#_Toc522654077)
-
-[1    MySQL安装... 3](#_Toc522654078)
-
-[2    MySQL基础教程... 3](#_Toc522654079)
-
-[2.1    SQL语法：SELECT/INSERT/UPDATE/DELETE. 3](#_Toc522654080)
-
-[2.1.1     常用SQL语句... 5](#_Toc522654081)
-
-[2.2    MySQL列类型... 8](#_Toc522654082)
-
-[2.3    使用用户变量... 9](#_Toc522654083)
-
-[2.4    MySQL的日期和时间管理... 10](#_Toc522654084)
-
-[2.4.1     日期和时间的列类型... 10](#_Toc522654085)
-
-[2.4.2     日期和时间的函数... 10](#_Toc522654086)
-
-[2.4.3     日期和时间统计... 12](#_Toc522654087)
-
-[2.4.4     定时统计：存储过程和定时器... 14](#_Toc522654088)
-
-[2.5    集合运算... 14](#_Toc522654089)
-
-[2.6    本章参考... 15](#_Toc522654090)
-
-[3    MySQL高级教程... 15](#_Toc522654091)
-
-[3.1    触发器... 15](#_Toc522654092)
-
-[3.2    视图... 18](#_Toc522654093)
-
-[3.3    复制Replication~主从库配置... 19](#_Toc522654094)
-
-[3.3.1     读写分离... 22](#_Toc522654095)
-
-[3.3.2     双主互备... 23](#_Toc522654096)
-
-[3.3.3     常见问题... 23](#_Toc522654097)
-
-[3.4    本章参考... 23](#_Toc522654098)
-
-[4    MySQL优化... 24](#_Toc522654099)
-
-[4.1    优化数据库结构... 24](#_Toc522654100)
-
-[4.2    优化SQL语句... 24](#_Toc522654101)
-
-[4.2.1     SQL语句速度比较... 24](#_Toc522654102)
-
-[4.2.2     优化WHERE. 25](#_Toc522654103)
-
-[4.2.3     优化ORDER BY和GROUP BY.. 26](#_Toc522654104)
-
-[4.3    优化索引... 26](#_Toc522654105)
-
-[4.4    优化数据库服务器mysql_serverd. 27](#_Toc522654106)
-
-[4.5    修改配置文件my.cnf/my.ini 27](#_Toc522654107)
-
-[5    MySQL管理... 29](#_Toc522654108)
-
-[5.1    MySQL管理常用命令... 29](#_Toc522654109)
-
-[5.2    MySQL4.1权限管理... 30](#_Toc522654110)
-
-[5.2.1     登陆访问控制... 31](#_Toc522654111)
-
-[5.2.2     安全访问（ROOT/用户权限）... 32](#_Toc522654112)
-
-[5.3    MySQL备份和恢复... 33](#_Toc522654113)
-
-[5.3.1     MySQL备份... 33](#_Toc522654114)
-
-[5.3.2     MySQL恢复... 34](#_Toc522654115)
-
-[5.4    MySQL数据库安全... 34](#_Toc522654116)
-
-[6    MySQL应用开发：API和库... 36](#_Toc522654117)
-
-[6.1    Connector~C API：MySQL连接对象探讨... 36](#_Toc522654118)
-
-[6.1.1     MySQL结构体st_mysql 36](#_Toc522654119)
-
-[6.1.2     初始化mysqsl_init 40](#_Toc522654120)
-
-[6.1.3     连接mysql_real_connect 41](#_Toc522654121)
-
-[6.1.4     MySQL连接的内存管理... 43](#_Toc522654122)
-
-[6.1.5     结论... 45](#_Toc522654123)
-
-[6.2    MySQL各语言注意事项... 47](#_Toc522654124)
-
-[6.2.1     MySQL PHP API 47](#_Toc522654125)
-
-[6.2.2     MySQL Python API 47](#_Toc522654126)
-
-[6.3    第三方工具: PHPMyAdmin管理MySQL. 47](#_Toc522654127)
-
-[6.3.1     数据字典示例... 48](#_Toc522654128)
-
-[6.3.2     常用修改... 49](#_Toc522654129)
-
-[7    MySQL底层实现... 49](#_Toc522654130)
-
-[8    常见问题... 49](#_Toc522654131)
-
-[8.1    使用的常见问题... 49](#_Toc522654132)
-
-[8.1.1     连接数过多... 49](#_Toc522654133)
-
-[8.2    MySQL字符集乱码... 50](#_Toc522654134)
-
-[8.2.1     数据库字符集... 50](#_Toc522654135)
-
-[8.2.2     数据库表字段内容中文的正常显示... 53](#_Toc522654136)
-
-[8.2.3     中文查找和全文索引... 55](#_Toc522654137)
-
-[8.3    MySQL存储二进制图片... 57](#_Toc522654138)
-
-[参考资料... 58](#_Toc522654139)
+[TOC]
 
  
 
@@ -159,6 +33,8 @@
 * [dev.mysql.com](http://dev.mysql.com/doc/mysql/en)
 
 * http://doc.mysql.cn/
+
+
 
 **下载**
 
@@ -218,7 +94,7 @@
 
 | 版本  | 发布时间  | 特性说明                                                     |
 | ----- | --------- | ------------------------------------------------------------ |
-| 8.0   | 2016-9-12 | 最新版本8.0.27(2021-05)。<br/>Data dictionary. Atomic DDL. Upgrade procedure。安全和账号管理（授权方式变化，root只允许localhost访问）。<br>资源管理。表加密管理。InnoDB提升。优化...<br>数据库的缺省编码将改为 utf8mb4. 要先创建用户再授权。 |
+| 8.0   | 2016-9-12 | 最新版本8.0.27(2021-05)。<br/>Data dictionary. Atomic DDL. Upgrade procedure。安全和账号管理（**授权方式变化，root只允许localhost访问**）。<br>资源管理。表加密管理。InnoDB提升。优化...<br>数据库的缺省编码将改为 utf8mb4. 要先创建用户再授权。 |
 | 7.1   |           |                                                              |
 | 6.0   |           | MySQL Cluster版本。                                          |
 | 5.7   | 2013-4-23 | 最新版本5.7.36(2021-05)。<br/>查询性能得以大幅提升，比 MySQL 5.6 提升 1 倍降低了建立数据库连接的时间。 |
@@ -239,14 +115,14 @@
 
 表格 MySQL产品线说明
 
-| 产品                     | 用途                                                         | 备注 |
-| ------------------------ | ------------------------------------------------------------ | ---- |
-| MySQL Community Server   | 社区版本，免费，但是Mysql不提供官方技术支持。                |      |
-| MySQL Enterprise Edition | 该版本是收费版本，可以试用30天，包含以下组件                 |      |
-| MySQL Cluster            | 免费版本                                                     |      |
-| MySQL Cluster CGE        | 付费版本                                                     |      |
-| MySQL Workbench SE       | MySQL Workbench （GUI Tool）是一款专为MySQL设计的ER/数据库建模工具。它是著名的数据库设计工具DBDesigner4的继任者。<br>你可以用MySQL Workbench设计和创建新的数据库图示，建立数据库文档，以及进行复杂的MySQL 迁移。<br>MySQL Workbench SE是商用版本。 |      |
-| MySQL Workbench OSS      | 社区版                                                       |      |
+| 产品                     | 用途                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| MySQL Community Server   | 社区版本，免费，但是Mysql不提供官方技术支持。                |
+| MySQL Enterprise Edition | 该版本是收费版本，可以试用30天，包含以下组件                 |
+| MySQL Cluster            | 免费版本                                                     |
+| MySQL Cluster CGE        | 付费版本                                                     |
+| MySQL Workbench SE       | MySQL Workbench （GUI Tool）是一款专为MySQL设计的ER/数据库建模工具。它是著名的数据库设计工具DBDesigner4的继任者。<br>你可以用MySQL Workbench设计和创建新的数据库图示，建立数据库文档，以及进行复杂的MySQL 迁移。<br>MySQL Workbench SE是商用版本。 |
+| MySQL Workbench OSS      | 社区版                                                       |
 
 
 
@@ -2744,17 +2620,23 @@ index (filename)
 
 # 参考资料
 
+**官网文档**
+
+* MySQL手册 http://dev.mysql.com/doc/refman/5.1/zh/pluggable-storage.html
+
+* MySQL Glossary https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_schema
+* 存储引擎和表类型 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html
+* charset  http://dev.mysql.com/doc/refman/5.1/zh/charset.html 
+* 全文搜索功能 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-boolean
+
+
+
 **参考链接**
 
 * [MySQL索引背后的数据结构及算法原理 ](http://blog.csdn.net/alaahong/article/details/8744820)http://blog.csdn.net/alaahong/article/details/8744820
 
-* 存储引擎和表类型 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html
-
-* charset  http://dev.mysql.com/doc/refman/5.1/zh/charset.html 
-
 * how-to-store-images-in-mysql http://www.phpfresher.com/php/how-to-store-images-in-mysql/
 
-* 全文搜索功能 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-boolean
 * 使用MySQL数据库的23个注意事项 http://www.3lian.com/edu/2011/08-24/8476.html
 
 * 阿里云服务器安装MYSQL数据库 https://blog.csdn.net/Edward_hjh/article/details/108483309?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&spm=1001.2101.3001.4242
@@ -2763,3 +2645,4 @@ index (filename)
 * https://www.w3cschool.cn/mysql/mysql-vge12oye.html  "MySQL交集和差集的实现方法"
 
  
+

@@ -360,15 +360,21 @@ http://localhost:8088
 ```shell
 # 前端：superset-1.0 要求"node": ">= 12.18.3 < 13", "npm": ">= 6.14.8"
 $cd superset-frontend
+# 安装模块（第一次构建时需要）: install 和 ci的效果是一样, ci命令不改变package.json
+$ npm install  
+# 或者
+$ npm ci
 
-# 法1：npm安装：开发环境依赖包
-$ npm ci & npm run build
+# 法1：npm构建: build-生产环境; dev-开发环境,会检测更改,自动构建; dev-server-远程调试
+$ npm run build
 # 或者 js_build.sh会进行代码检查、单元测试后再build（时间20min+）
 $ bash ./js_build.sh 
 
-# 法2： yarn
-yarn & yarn run build
+# 法2： yarn构建
+$ yarn & yarn run build
 ```
+
+说明: 对于前端构建需要满足node & npm版本要求.  node可以用 n模块进行升级(` n $version`),  npm可以自己升级 `npm install npm@version`. 
 
 
 
@@ -603,9 +609,9 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
    
    
 
-DB大小写敏感差异：对象名（表名字段名），查询SQL
+**DB大小写敏感差异**：对象名（表名字段名），查询SQL
 
-1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加双引号用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
+1. 对象名(如表名字段名）的大小写敏感：可以在服务器端的配置文件里配置对象名是否大小写敏感。Oracle/PG缺省大小写敏感（这二者对象名的大小写缺省定义刚好相反，ORACLE默认对象名大写，PG默认对象名小写；如果不是默认情况，需要加 `双引号` 用以区分），MySQL缺省大小写不敏感。对于大小写敏感的DB对象名，如果没按照缺省规则定义，superset生成的SQL未必正确。
 2. 查询值字符串的大小写敏感，实质是校验规则。二进制检验是区分大小写的。改变了检验规则 ，那么索引最好重建。此外，检验规则也可以是会话级的，临时设定生效的。
     - Oracle的SQL语句默认是转化大写的。对于表名/字段名存在小写，则要用""圈起来才能识别。建议oracle的表名/字段名都用大写。
     - PG的SQL语句默认是转化小写的。对于表名/字段名存在大写，要用引号圈起来才能识别。建议PG的表名/字段名都用小写。
@@ -928,6 +934,12 @@ v1.0以上版本支持，默认不开启。
 
 
 
+### ESCAPE_MARKDOWN_HTML
+
+True- 不处理html文档（即不解析html标签）。
+
+
+
 ### 邮件 EMAIL
 
 无特性标识。要ENABLE_SCHEDULED_EMAIL_REPORTS 为True时，然后`superset init`，
@@ -1011,6 +1023,8 @@ $ celery beat --app=superset.tasks.celery_app:app
 $ pip install flower
 $ celery flower --app=superset.tasks.celery_app:app
 ```
+
+
 
 
 

@@ -73,7 +73,7 @@ Required-by:
 | scripts/               | pypi_push.sh   python_tests.sh  | superset常用的脚本                                           |
 | **superset/**          | static/ charts/ dashboards/ ... | superse后端源码目录                                          |
 | **superset-frontend**/ | src/ imgaes/ branding/ ...      | superset前端源码目录                                         |
-| superset-websock/      |                                 | v1.2新增目录。websock实现。                                  |
+| **superset-websock/**  |                                 | v1.2新增目录。websock实现。                                  |
 | setup.py setup.cfg     |                                 | 安装脚本，包括了依赖组件                                     |
 | README.md              |                                 | 用户指南                                                     |
 | CHANGELOG.md           |                                 | 版本更新日志。细粒度（PR)级的更改                            |
@@ -6445,9 +6445,21 @@ export default class MainPreset extends Preset {
 
 
 
+## 5 /superset-websock/
+
+WebSocket可以让服务器端主动向客户端推送数据。
+
+在WebSocket API中，客户端和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
+
+WebSocket 主要用于刷新 token、用户被踢出、平台消息、内存和 CPU 显示、平台日志处当前系统在线人数、数据连接编辑状态的确定。
 
 
-## 5 依赖模块
+
+
+
+
+
+## 依赖模块
 
 * 服务端依赖模块 flask及flask扩展模块 详见 《[flask源码剖析](flask源码剖析.md)》《[flask_appbuilder源码剖析](flask_appbuilder源码剖析.md)》
 

@@ -83,7 +83,7 @@
 
 # 1 简介
 
- Linux官网：https://kernel.org/
+Linux官网：https://kernel.org/
 
 源码版本：Linux-2.6.0
 
@@ -143,101 +143,7 @@ linux体系结构说明：user mode 进程需要通过`glibc`作一个到kernel 
 
 说明：下面涉及到的Linux内核代码版本是 2.6.0
 
-查看内核版本： `uname -a`
-
-```shell
-[root@iZ2zebj7eoe7terrup37y4Z ~]# cat /proc/version
-Linux version 4.19.91-23.al7.x86_64 (mockbuild@koji.alibaba-inc.com) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC)) #1 SMP Tue Mar 23 18:02:34 CST 2021
-
-[root@iZ2zebj7eoe7terrup37y4Z ~]# uname -a
-Linux iZ2zebj7eoe7terrup37y4Z 4.19.91-23.al7.x86_64 #1 SMP Tue Mar 23 18:02:34 CST 2021 x86_64 x86_64 x86_64 GNU/Linux
-
-# LSB：Linux Standard Base, lsb_release命令用来显示LSB和特定版本的相关信息。
-[root@iZ2zebj7eoe7terrup37y4Z ~]# lsb_release -a
-LSB Version:    :core-4.1-amd64:core-4.1-noarch
-Distributor ID: AlibabaCloud(AliyunLinux)
-Description:    Alibaba Cloud Linux (Aliyun Linux) release 2.1903 LTS (Hunting Beagle)
-Release:        2.1903
-Codename:       HuntingBeagle
-```
-
-Linux内核使用三种不同的版本编号方式
-　第一种方式用于1.0版本之前（包括1.0）。第一个版本是0.01，紧接着是0.02、0.03、0.10、0.11、0.12、0.95、0.96、0.97、0.98、0.99和之后的1.0。
-
-​	第二种方式用于1.0之后到2.6，数字由三部分“A.B.C”，A代表主版本号，B代表次主版本号，C代表较小的末版本号。只有在内核发生很大变化时（历史上只发生过两次，1994年的1.0,1996年的2.0），A才变化。可以通过数字B来判断Linux是否稳定，偶数的B代表稳定版，奇数的B代表开发版。C代表一些bug修复，安全更新，新特性和驱动的次数。
-
-​	第三种方式从2004年2.6.0版本开始，使用一种“time-based”的方式。3.0版本之前，是一种“A.B.C.D”的格式。七年里，前两个数字A.B即“2.6”保持不变，C随着新版本的发布而增加，D代表一些bug修复，安全更新，添加新特性和驱动的次数。3.0版本之后是“A.B.C”格式，B随着新版本的发布而增加，C代表一些bug修复，安全更新，新特性和驱动的次数。
-
-表格 Longterm release kernels
-
-| Version | Maintainer                       | Released   | Projected EOL |
-| ------- | -------------------------------- | ---------- | ------------- |
-| 5.10    | Greg Kroah-Hartman & Sasha Levin | 2020-12-13 | Dec, 2026     |
-| 5.4     | Greg Kroah-Hartman & Sasha Levin | 2019-11-24 | Dec, 2025     |
-| 4.19    | Greg Kroah-Hartman & Sasha Levin | 2018-10-22 | Dec, 2024     |
-| 4.14    | Greg Kroah-Hartman & Sasha Levin | 2017-11-12 | Jan, 2024     |
-| 4.9     | Greg Kroah-Hartman & Sasha Levin | 2016-12-11 | Jan, 2023     |
-| 4.4     | Greg Kroah-Hartman & Sasha Levin | 2016-01-10 | Feb, 2022     |
-
-
-
-表格 内核版本号列表
-
-| 内核版本号   | 时间       | 内核发展史                                                   |
-| ------------ | ---------- | ------------------------------------------------------------ |
-| 0.00         | 1991.2.4   | 两个进程分别显示AAA BBB                                      |
-| 0.01         | 1991.9.17  | 第一个正式向外公布的Linux内核版本                            |
-| 0.02         | 1991.10.5  | Linus Torvalds将当时最初的0.02内核版本发布到了Minix新闻组，很快就得到了反应。Linus Torvalds在这种简单的任务切换机制上进行扩展，并在很多热心支持者的帮助下开发和推出了Linux的第一个稳定的工作版本。 |
-| 0.03         | 1991.10.5  |                                                              |
-| 0.10         | 1991.10    | Linux0.10版本内核发布，0.11版本随后在1991年12月推出，当时它被发布在Internet上，供人们免费使用。 |
-| 0.11         | 1991.12.8  | 基本可以正常运行的内核版本                                   |
-| 0.12         | 1992.1.15  | 主要加入对数学协处理器的软件模拟程序                         |
-| 0.95（0.13） | 1992.3.8   | 开始加入虚拟文件系统思想的内核版本                           |
-| 0.96         | 1992.5.12  | 开始加入网络支持和虚拟文件系统                               |
-| 0.97         | 1992.8.1   |                                                              |
-| 0.98         | 1992.9.29  |                                                              |
-| 0.99         | 1992.12.13 |                                                              |
-| 1.0          | 1994.3.14  | Linux1.0版本内核发布，使用它的用户越来越多，而且Linux系统的核心开发队伍也建起来了。 |
-| 1.2          | 1995.3.7   |                                                              |
-| 2.0          | 1996.2.9   |                                                              |
-| 2.2          | 1999.1.26  |                                                              |
-| 2.4          | 2001.1.4   | Linux2.4.0版本内核发布。                                     |
-| 2.6          | 2003.12.17 | Linux2.6版本内核发布，与2.4内核版本相比，它在很多方面进行了改进，如支持多处理器配置和64位计算，它还支持实现高效率线和处理的本机POSIX线程库(NPTL)。实际上，性能、安全性和驱动程序的改进是整个2.6.x内核的关键。 |
-| 2.6.12       | 2005.6     | 社区开始使用 git 进行管理后的第一个大版本                    |
-| 2.6.15       | 2006       | Linux2.6.15版本内核发布。它对IPv6的支持在这个内核中有了很大的改进。PowerPC用户现在有了一个用于64位和32位PowerPC的泛型树，它使这两种架构上的内核编辑成为可能。 |
-| 2.6.30       | 2009.6     | 改善了文件系统、加入了完整性检验补丁、TOMOYO Linux 安全模块、可靠的数据报套接字（datagram socket)协议支持、对象存储设备支持、FS-Cache 文件系统缓存层、nilfs 文件系统、线程中断处理支持等等。 |
-| 2.6.32       | 2009.12    | 增添了虚拟化内存 de-duplicacion、重写了 writeback 代码、改进了 Btrfs 文件系统、添加了 ATI R600/R700 3D 和 KMS 支持、CFQ 低传输延迟时间模式、perf timechart 工具、内存控制器支持 soft limits、支持 S+Core 架构、支持 Intel Moorestown 及其新的固件接口、支持运行时电源管理、以及新的驱动。 |
-| 2.6.34       | 2010.5     | 添加了 Ceph 和 LogFS 两个新的文件系统，其中前者为分布式的文件系统，后者是适用于 Flash 设备的文件系统。Linux Kernel 2.6.34 的其他特性包括新的 Vhost net、改进了 Btrfs 文件系统、对 Kprobes jump 进行了优化、新的 perf 功能、RCU lockdep、Generalized TTL Security Mechanism (RFC 5082) 及 private VLAN proxy arp (RFC 3069) 支持、asynchronous 挂起恢复等等。 |
-| 2.6.36       | 2010.10    | Tilera 处理器架构支持、新的文件通知接口 fanotify、Intel 显卡上实现 KMS 和 KDB 的整合、并行管理工作队列、Intel i3/5 平台上内置显卡和 CPU 的智能电源管理、CIFS 文件系统本地缓存、改善虚拟内存的层级结构，提升桌面操作响应速度、改善虚拟内存溢出终结器的算法、整合了 AppArmor 安全模型（注：与 SELinux 基于文件的标注不同， AppArmor 是基于路径的）。 |
-| 2.6.39       | 2011.5.18  | 2.6.x系列最终版本，经历39个版本，跨度约7.5年。<BR>加入了IPset框架，提高规则匹配速度，更新媒体控制系统等。 |
-| 3.0          | 2011.7.21  |                                                              |
-| 3.19.0       | 2015.2     | 3.x系列最终版本，经历19个版本，跨度约4.5年。<BR>为多种触控板增加多点触控支持。 |
-| 4.0          | 2015.4     |                                                              |
-| 4.20         | 2018.12.23 | 4.x系列最终版本，经历20个版本，跨度约3.5年。<BR>             |
-| 5.0          | 2019.3.3   |                                                              |
-| 5.10         | 2020.12.13 | 5.x系列最终版本，经历个版本，跨度年。<BR>                    |
-
-> ReleaseLog https://www.kernel.org/category/releases.html
->
-> 版本号：a.b.0一般简写为a.b，如3.0.0可简写为3.0
->
-> 版本更新规律：2.6以后，大概2-3个月一个大版本。
-
-
-
-另外内核版本还有第二种方式（尾巴补充了构建描述信息）：major.minor.patch-build.desc
-
-示例：2.26.35-rc5
-
-1、major：表示主版本号，有结构性变化时才变更。
-
-2、minor：表示次版本号，新增功能时才发生变化；一般奇数表示测试版，偶数表示生产版。
-
-3、patch：表示对次版本的修订次数或补丁包数。
-
-4、build：表示编译（或构建）的次数，每次编译可能对少量程序做优化或修改，但一般没有大的（可控的）功能变化。
-
-5、desc：用来描述当前的版本特殊信息；其信息由编译时指定，具有较大的随意性，但也有一些描述标识是常用的，比如： rc（release candidate侯选版本）、smp（表示支持多处理器）、pp（pre-patch测试版本）、EL(企业发布版)、mm、fc（Fedora Core）
+Linux内核版本详见 《[操作系统实现原理](../platform.平台/操作系统实现原理.md)》内核版本章节。
 
 
 

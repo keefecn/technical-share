@@ -146,10 +146,10 @@ OpenJDK是Java SE的开源实现，他由SUN和Java社区提供支持，2009年O
 
 大多数JDK都是在OpenJDK的基础上编写实现的，比如IBM J9，Azul Zulu，Azul Zing和Oracle JDK。几乎现有的所有JDK都派生自OpenJDK，他们之间不同的是许可证.
 
-|            | 协议 Licence             | 其它                        |
-| ---------- | ------------------------ | --------------------------- |
-| OpenJDK    | GPL v2                   | 开源社区维护.               |
-| Oracle JDK | Oracle二进制代码许可协议 | Oracle维护, 每半年一个版本. |
+|            | 协议 Licence             | 维护者   |
+| ---------- | ------------------------ | -------- |
+| OpenJDK    | GPL v2                   | 开源社区 |
+| Oracle JDK | Oracle二进制代码许可协议 | Oracle   |
 
 **OpenJDK只包含最精简的JDK**：OpenJDK不包含其他的软件包，比如Rhino Java DB JAXP...，并且可以分离的软件包也都是尽量的分离。
 
@@ -474,15 +474,15 @@ $ apt-get install oracle-java8-installer
 Java_HOME=/usr/lib/jvm/Java-6-sun
 CLASSPATH=.:$Java_HOME/lib
 PATH=$Java_HOME/bin:$PATH
-exportJava_HOMECLASSPATHPATH
+export Java_HOME CLASSPATHPATH
 ```
 备注：在classpath未设置好的情况下，编码和运行需指定classpath,示例如下：
-`$ javac-classpath./weka.jar;./MessageClassifier.Java`
+`$ javac -classpath./weka.jar;./MessageClassifier.Java`
 
 //检查java命令和JAVA_HOME环境变量，以下命令在ubuntu14.04下执行。
 ```sh
-$java-version
-javaversion"1.7.0_121"
+$java -version
+java version"1.7.0_121"
 OpenJDK Runtime Environment(IcedTea2.6.8)(7u121-2.6.8-1ubuntu0.14.04.1)
 OpenJDK 64-Bit ServerVM(build24.121-b00, mixedmode)
 $echo $JAVA_HOME
@@ -582,10 +582,11 @@ AJP（Apache JServ Protocol）是定向包协议。因为性能原因，使用[�
 
 ### 3.2.3  启动与程序环境
 
-Windows:只需安装后点击tomcat图标启动.
-Linux:以下说明针对ubuntu下的tomcat启动配置。
-启动脚本:/etc/init.d/tomcat6restart
+Windows: 只需安装后点击tomcat图标启动.
+Linux: 以下说明针对ubuntu下的tomcat启动配置。
+启动脚本: /etc/init.d/tomcat6restart
 真实启动脚本为：$CATALINE_HOME/catalina.sh
+
 ```shell
 denny@denny-laptop:~$ls/usr/share/tomcat6
 bin lib webapps
@@ -634,7 +635,7 @@ Tomcat提供了servlet与JSP规范的实现。
 
 配置示例:
 1)         servlet的配置
- // WEB-INF/web.xml，web-app为根元素。
+            WEB-INF/web.xml，web-app为根元素。
 ```xml
 <?xmlversion="1.0"encoding="UTF-8"?>
 <web-app xmlns=http://Java.sun.com/xml/ns/j2ee xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance xsi:schemaLocation=" http://Java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
@@ -654,7 +655,7 @@ Tomcat提供了servlet与JSP规范的实现。
 此外，listerner类用于特定事件（如产生或删除）发生于整个应用程序或特定的HTTP会话时，系统会通知的程序。
 
 2)         虚拟主机与目录的配置
-// $TOMCAT_HOEM/conf /server.xml
+$TOMCAT_HOEM/conf /server.xml
 ```xml
 <Host name="localhost"  appBase="webapps"  unpackWARs="true"  autoDeploy="true"
 xml Validation="false"  xmlNamespaceAware="false">
@@ -688,13 +689,15 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 2. 加大使用内存
    常见内存错误：java.lang.OutOfMemoryError
    说明：此错误包括两种类型，一是Java heap space;二是PermGenSpace;
-   a)   Java heap space
+   a)   **Java heap space**
    JVM堆的设置是指Java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heapsize的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。而当前机器内存通常都大于4G。即{Xms,Xmx}={62M,1G}
    Java的垃圾回收功能即JVM的内存管理机制称为垃圾回收机制(GC)。
    在JVM中如果98％的时间是用于GC且可用的Heapsize不足2％的时候将抛出此异常信息。
    解决办法：手动设置JVMHeap（堆）的大小。
 
-   b)  PermGenspace
+   
+   
+   b)  **PermGenspace**
    PermGenspace的全称是Permanent Generation space，是指内存的永久保存区域。这块内存主要是被JVM存放Class和Meta信息的，Class在被Load的时候被放入PermGenspace区域，它和存放Instance的Heap区域不同,sun的GC不会在主程序运行期对PermGenspace进行清理，所以如果你的APP会载入很多CLASS的话，就很可能出现PermGenspace溢出。
    解决方法：手动设置MaxPermSize大小
    最终解决方法：
@@ -711,12 +714,15 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 *  第一是实现Runnable接口实现它的run（）方法，
 *  第二种是继承Thread类，覆盖它的run（）方法。
 
-java有三种方法可以使终止线程：
+Java有三种方法可以使终止线程：
 1)    使用退出标志，使线程正常退出，也就是当run方法完成后线程终止。
 2)    使用stop方法强行终止线程（不推荐使用，因为stop和suspend、resume一样，也可能发生不可预料的结果）。
 3)    使用interrupt方法中断线程。 
 
+
+
 ## 4.2  Servlet
+
 ### 4.2.1  Servlet的开发 
 Servlet通常称为服务器端小程序，用于处理和响应客户端的请求。 
 Servlet是个特殊的Java类，这个Java类必须继承HttpServlet。每个Servlet可以响应客户端的请求。 
@@ -848,7 +854,10 @@ export_JAVA_OPTIONS="-Xms512m-Xmx512m"
 解决方法：
 右键项目工程-->>properties->>java bulid path -->>>libraries -->>add library -->>JRE System Library
 
+
+
 ## 5.2  Java常见调试问题
+
 1)    java.lang.NullPointerException
 异常的解释是"程序遇上了空指针"，简单地说就是调用了未经初始化的对象或者是不存在的对象，这个错误经常出现在创建图片，调用数组这些操作中，比如图片未经初始化，或者图片创建时的路径错误等等。
 
