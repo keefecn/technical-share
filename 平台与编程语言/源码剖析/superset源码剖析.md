@@ -123,29 +123,32 @@ Required-by:
 
 表格  前端目录superset-frontend源码结构
 
-| 目录或文件        | 二级目录或文件                           | 简介                                                         |
-| ----------------- | ---------------------------------------- | ------------------------------------------------------------ |
-| .eslintrc.js      |                                          | eslint配置文件。可编辑文件修改自己的规则。                   |
-| babel.config.js   |                                          | babel配置文件。可将jsx文件编译成js。                         |
-| package.json      |                                          | 前端模块依赖，用npm/yarn管理                                 |
-| webpack.config.js |                                          | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
-| src               |                                          | 源码                                                         |
-|                   | chart                                    | 根据图表属性渲染具体图表页面，里面调用了**SuperChart**组件。<br>而此组件属于superset-ui前端库，会根据后台传入的属性，最终渲染出对应的图表组件。 |
-|                   | components                               | 各个最小组件的详细布局和数据                                 |
-|                   | CRUD                                     | 页面操作CRUD涉及到的组件                                     |
-|                   | dashboard                                | 仪表盘                                                       |
-|                   | datasource                               | 数据集                                                       |
-|                   | explore                                  | 生成某个图表详情的页面，如表单项。<br>controls.jsx 表单项列表 |
-|                   | filters                                  | 过滤器                                                       |
-|                   | visualizations                           | 可视化图表类型实现                                           |
-|                   | views                                    | 路由映射视图，各个页面的详细布局在此，如/welcome/是首页      |
-|                   | constants.ts, preamble.ts, reduxUtils.ts | 常量、常用函数。定义了页面引导数据bootstrapData等            |
-|                   | ...                                      |                                                              |
-| branding          |                                          | 存放项目logo                                                 |
-| cypress-base      | cypress                                  | UI自动化测试框架                                             |
-| images            |                                          | 图片，包括favicon.png, loading.git                           |
-| spec              |                                          |                                                              |
-| stylesheets       |                                          |                                                              |
+| 目录或文件              | 二级目录或文件                                            | 简介                                                         |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
+| .eslintrc.js            |                                                           | eslint配置文件。可编辑文件修改自己的规则。                   |
+| babel.config.js         |                                                           | babel配置文件。可将jsx文件编译成js。                         |
+| package.json            |                                                           | 前端模块依赖，用npm/yarn管理                                 |
+| webpack.config.js       |                                                           | webpack构建配置文件。前端入口文件。<br>定义了 以src文件夹去生成打包js文件。 |
+| webpack.proxy-config.js |                                                           | 执行 `npm run dev-server` 远程调试时会启用的配置文件         |
+| src                     |                                                           | 源码                                                         |
+|                         | chart/                                                    | 根据图表属性渲染具体图表页面，里面调用了**SuperChart**组件。<br>而此组件属于superset-ui前端库，会根据后台传入的属性，最终渲染出对应的图表组件。 |
+|                         | components/                                               | 各个最小组件的详细布局和数据                                 |
+|                         | CRUD/                                                     | 页面操作CRUD涉及到的组件                                     |
+|                         | dashboard/                                                | 仪表盘                                                       |
+|                         | datasource/                                               | 数据集                                                       |
+|                         | explore/                                                  | 生成某个图表详情的页面，如表单项。<br>controls.jsx 表单项列表 |
+|                         | filters/                                                  | 过滤器                                                       |
+|                         | visualizations/                                           | 可视化图表类型实现                                           |
+|                         | views/                                                    | 路由映射视图，各个页面的详细布局在此，如/welcome/是首页      |
+|                         | constants.ts, reduxUtils.ts,<br>featureFlags.tx, theme.ts | 常量、常用函数、特性标识、主题。                             |
+|                         | preamble.ts                                               | 导言，定义了页面引导数据bootstrapData，安装客户端            |
+|                         |                                                           |                                                              |
+|                         | ...                                                       |                                                              |
+| branding                |                                                           | 存放项目logo                                                 |
+| cypress-base            | cypress                                                   | UI自动化测试框架                                             |
+| images                  |                                                           | 图片，包括favicon.png, loading.git                           |
+| spec                    |                                                           |                                                              |
+| stylesheets             |                                                           |                                                              |
 
 > superset前端用到的组件主要有：React, D3
 
@@ -713,13 +716,13 @@ def rison(schema=None):
 ```json
 {
 	"user": {
-		"username": "isoftstone1",
-		"firstName": "isoftstone1",
+		"username": "keefe",
+		"firstName": "keefe",
 		"lastName": "数据探索",
 		"userId": 4,
 		"isActive": true,
 		"createdOn": "2021-07-28T06:51:23",
-		"email": "835bd30f09304c9f9bf9b18de25c29b1|isoftstone1"
+		"email": "835bd30f09304c9f9bf9b18de25c29b1|keefe"
 	},
 	"common": {
 		"flash_messages": [],
@@ -826,7 +829,7 @@ def rison(schema=None):
 				"user_info_url": "/users/userinfo/",
 				"user_logout_url": "/logout/",
 				"user_login_url": "/login/",
-				"user_profile_url": "/superset/profile/isoftstone1",
+				"user_profile_url": "/superset/profile/keefe",
 				"locale": "zh"
 			}
 		}
@@ -5559,7 +5562,7 @@ def favorite_status(self, **kwargs: Any) -> Response:
   * 打包参数：APP_DIR  BUILD_DIR
   * 部署参数：mode(对应到脚本命令里的--mode)  devserverPort 
   * 其它：module模块和plugin插件。
-* webpack.proxy-config.js  webpack代理配置。当启用了web-dev-server时使用。
+* webpack.proxy-config.js   webpack代理配置。当启用了web-dev-server时使用。
 * manifest.json   webpack打包后生成的模块详细信息，可以通过模块标识符找到对应的模块(xx.js/xx.css)。构建成生成到superset/static/asset/mainfest.json
 * src/{xx}/index.tsx  某个目录下的入口文件，可对照webpack.config.js的entry
 
@@ -5672,7 +5675,7 @@ const TerserPlugin = require('terser-webpack-plugin');			//TerserPlugin移除开
 const ManifestPlugin = require('webpack-manifest-plugin');		//ManifestPlugin生成mainfest.json
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');  //多进程合并插件
 const parsedArgs = require('yargs').argv;					//解析命令行参数
-const getProxyConfig = require('./webpack.proxy-config');	//本地代理配置，启用了webpack-dev-server时导入
+const getProxyConfig = require('./webpack.proxy-config');	//NOTE: 本地代理配置，启用了webpack-dev-server时导入，会读入文件webpack-proxy.config.js
 const packageConfig = require('./package.json');			//读取package.json里dependencies，导入依赖模块源码
 
 // input dir
@@ -5751,7 +5754,7 @@ const config = {	//配置信息，最终导出的配置项
   ]  
 }   
 
-let proxyConfig = getProxyConfig();
+let proxyConfig = getProxyConfig();		//读入配置文件webpack.proxy-config.js
 
 if (isDevMode) {  //开发模式 配置项： devServer,导入依赖模块源码
   config.devtool = 'eval-cheap-module-source-map';

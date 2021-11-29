@@ -7,9 +7,9 @@
 |      |            |                              |        |        |
 
 
- 
 
- 
+
+
 
 ---
 
@@ -2307,6 +2307,6 @@ Usage: hdfs [--config confdir] [--loglevel loglevel] COMMAND
 
 **参考链接**
 
-[1].  FusionInsight V100R002C30SPC100 产品描述 01
+* FusionInsight V100R002C30SPC100 产品描述 01
 
  

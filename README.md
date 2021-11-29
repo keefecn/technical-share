@@ -8,9 +8,9 @@ Personal Technical Share, 我的个人技术分享
 
 
 
-typora支持的md格式与传统md格式的差别
+**Typora支持的md格式与传统md格式的差别**
 
-1. md格式表格头前要有空行，typora没作要求。
+1. md格式表格头前要有空行，Typora没作要求。
 
 2. 目录和参考链接也要保持显式换行。
 
@@ -18,11 +18,9 @@ typora支持的md格式与传统md格式的差别
 
 **写作技巧**
 
-1. 数字+空格 会变成有序符号且不需额外换行; 仅数字开头仍需换行。
-
-2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
-
-     https://www.zybuluo.com/codeep/note/163962 
+1. 数字+空格 会变成有序符号且不需额外换行；仅数字开头仍需换行。
+2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962) 
+3. 如果单个md文件超过100KB，一般需要拆分内容另文。
 
 
 
@@ -58,6 +56,7 @@ typora支持的md格式与传统md格式的差别
 │  │  开放数据集说明.md
 │  │  数字化转型.md
 │  │  数据可视化.md
+│  │  数据分析及案例.md
 │  │  
 │  ├─AI
 │  │      AI框架分析.md
@@ -70,7 +69,6 @@ typora支持的md格式与传统md格式的差别
 │  │      
 │  ├─bigdata
 │  │      Hadoop体系.md
-│  │      大数据分析及案例.md
 │  │      大数据开发.md
 │  │      大数据计算框架.md
 │  │      
@@ -173,6 +171,8 @@ typora支持的md格式与传统md格式的差别
 │          Rose建模视图指导.md
 │          自动化测试工具.md
 │          项目开发环境工具.md
+│          数据可视化工具.md
+│          前端工程化工具.md
 │          
 ├─软件工程
 │      DevOps指南.md

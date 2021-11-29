@@ -125,7 +125,7 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 
 ## Serveless
 
- 2012 年开始有了 Serverless 的概念。
+2012 年开始有了 Serverless 的概念。
 
 Serverless 的应用场景有很多，比如：为小程序、Web、Mobile 提供基础性的 API 服务，大规模批处理任务处理，Web 站点、DevOps 的工具以及 GraphQLAPI 能力。
 
@@ -257,7 +257,7 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 官网: https://www.huaweicloud.com/devcloud/
 
-华为云DevCloud（华为软件开发云）于2016年12月由[华为公司](https://baike.baidu.com/item/华为公司/8099193)在大连正式发布，是基于华为研发云的成功实践经验，通过云服务的方式提供一站式云端[DevOps](https://baike.baidu.com/item/DevOps/2613029)平台。
+华为云DevCloud（华为软件开发云）于2016年12月由华为公司在大连正式发布，是基于华为研发云的成功实践经验，通过云服务的方式提供一站式云端[DevOps](https://baike.baidu.com/item/DevOps/2613029)平台。
 
 华为基于二十几年的研发实践，并融合DevOps等理念方法，打造了软件开发云服务，希望为企业提供一站式的云上开发工具平台。据了解，[华为软件开发云](https://baike.baidu.com/item/华为软件开发云)提供了项目管理、配置管理、代码检查、编译构建、测试、部署、发布等端到端地覆盖[软件生命周期](https://baike.baidu.com/item/软件生命周期/861455)的相关服务。
 

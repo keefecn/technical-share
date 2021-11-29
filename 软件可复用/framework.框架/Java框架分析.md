@@ -105,13 +105,13 @@ J2EE是SUN公司基于Java的体系结构，是4层结构，包括客户层(客�
 
  
 
-### 1.2.1   Model 1: JSP + Beans（已淘汰）
+### Model1: JSP + Beans（已淘汰）
 
 Model 1体系中，JSP页面充当VIEW+CONTROLLER的角色。控制逻辑和表现逻辑混在一起，代码可用性和维护性差，不利于大型项目开发。
 
 ​         ![1574517098015](../../media/sf_reuse/framework/frame_java_001.png)                                         
 
-### 1.2.2   Model 2: JSP + Servlet + Beans
+### Model2: JSP + Servlet + Beans
 
    ![1574517114652](../../media/sf_reuse/framework/frame_java_002.png)
 
@@ -148,7 +148,7 @@ Servlet 是在[服务器](http://baike.baidu.com/view/899.htm)上运行的小程
 
  
 
-## 1.3     EJB模型
+## 1.3  EJB模型
 
 EJB-（Enterprise [JavaBean](https://baike.baidu.com/item/JavaBean)，企业Bean），是sun的JavaEE服务器端[组件模型](https://baike.baidu.com/item/组件模型)，设计目标与核心应用是部署分布式应用程序。简单来说就是把已经编写好的程序（即类）打包放在服务器上执行。
 
@@ -227,9 +227,9 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
  
 
-## 1.5   本章参考
+## 本章参考
 
-[1]: EJB的体系结构http：//www.uml.org.cn/j2ee/2009112011.asp(http://www.uml.org.cn/j2ee/2009112011.asp)
+[1]: EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp(http://www.uml.org.cn/j2ee/2009112011.asp)
 
 [2]: EJB  https://baike.baidu.com/item/EJB
 
@@ -323,23 +323,23 @@ strucs 2是典型的MVC模式。
 
 ### 2.2.2   Strucs开发篇
 
-#### 2.2.2.1 配置
+#### 配置
 
 **常量的定义**
 
+```shell
 -------------->  常量加载顺序 ------------->
-
 strucs.xml --> strucs.properties --> web.xml
-
 <--------------  常量覆盖顺序 <-------------
-
- 
+```
 
 action的实现方式：实现接口Action，继承ActionSupport，访问ActionContext。
 
 result的处理方式：
 
-#### 2.2.2.2 JSP标签库
+
+
+#### JSP标签库
 
 ONGL：Object-Graph Navigation Language, 对象图导航语言。是一种功能强大的表达式语言，提供了存取对象属性、调用对象方法、遍历对象结构图、对象类型转换的特定语法。
 
@@ -359,21 +359,20 @@ JSP标签库：类似HTML里的标签，能够简化JSP的编写。
 
 标签库的导入：JSP中使用taglib指令引入标签库。
 
-<%@taglib prefix="s" uri="/struts-tags"%>
+`<%@taglib prefix="s" uri="/struts-tags"%>`
 
 标签库的三个符号：#（变量） %（字符串） $（范围）
 
  
 
- 
-
 **模板和主题**
 
-模板：就是代码。在struts 中通常用FreeMarker编写，标签使用这些代码能渲染生成相应的HTML代码。
+* 模板：就是代码。在struts 中通常用FreeMarker编写，标签使用这些代码能渲染生成相应的HTML代码。
+* 主题：就是一系列模板的组合。
 
-主题：就是一系列模板的组合。
 
-### 2.2.3   struts项目实例: web_test
+
+### struts项目实例: web_test
 
    ![1574517277547](../../media/sf_reuse/framework/frame_structs_002.png)
 
@@ -564,7 +563,7 @@ IoC是一个很大的概念,可以用不同的方式实现。其主要形式有�
 
  
 
-** 依赖注入1：Setter设值注入配置文件**
+**依赖注入1：Setter设值注入配置文件**
 
 bean.xml 
 
@@ -805,15 +804,25 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 ## 本章参考
 
-[1]: struts  https://struts.apache.org/ 
+**官网**
 
-[2]: Spring https://spring.io/ 
+* struts  https://struts.apache.org/ 
+* Spring https://spring.io/ 
+* Hibernate http://hibernate.org/ 
+
+
+
+**参考链接**
+
+[1]:  Spring 框架简介  Spring AOP 和 IOC 容器入门  https://www.ibm.com/developerworks/cn/java/wa-spring1/ 
+
+[2]:  Spring之AOP由浅入深 https://www.cnblogs.com/zhaozihan/p/5953063.html
 
 [3]: Spring官方文档 - http://www.springsource.org/documentation
 
 [4]: Spring 教程 [https://www.w3cschool.cn/wkspring/](https://www.w3cschool.cn/wkspring/)
 
-[5]: Hibernate http://hibernate.org/ 
+[5]: Spring 3.0文档 - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/
 
 [6]: Java中SSH框架怎样搭建 http://jingyan.baidu.com/article/066074d6564b39c3c21cb018.html 
 
@@ -823,13 +832,7 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 [9]: Spring Framework (Wiki) - http://en.wikipedia.org/wiki/Spring_Framework
 
-[10]: Spring 3.0文档 - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/
 
-[11]: Spring之AOP由浅入深 https://www.cnblogs.com/zhaozihan/p/5953063.html
-
-[12]: Spring 框架简介  Spring AOP 和 IOC 容器入门https://www.ibm.com/developerworks/cn/java/wa-spring1/ 
-
- 
 
 # 3  Java其它第三方框架
 
@@ -837,7 +840,7 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 | 框架名称  | 简介      | 介绍                                               |
 | ------------- | ------------- | ------------------------------------------------------ |
-| IBATIS    | ORM持久层框架 | 相对于Hibernate, ibatis 则要求开发者编写具体的SQL 语句 |
+| IBATIS    | ORM持久层框架 | 2010.6，ibatis3.x正式更名为Mybatis ，代码于2013年11月迁移到Github。<br>相对于Hibernate, ibatis 则要求开发者编写具体的SQL 语句。 |
 | Quartz    | Job调度       |                                                        |
 | Velocity  | 模板引擎      |                                                        |
 | XPlanner  | 项目管理      |                                                        |
@@ -848,11 +851,21 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
  
 
- 
+##  Mybatis 
+
+MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。
+
+MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。
+
+MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口和Java的POJO（Plain Old Java Objects，普通的Java对象）映射成数据库中的记录。
+
+
 
 ## 本章参考
 
- 
+* Mybatis的前世今生 https://blog.51cto.com/u_14230003/2364982
+
+
 
 # 4  Android框架
 
@@ -870,6 +883,5 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 # 参考资料
 
-[1]: JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
+[1]:  JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
 
----

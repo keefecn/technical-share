@@ -267,13 +267,11 @@ In [14]: app.__dict__
 Out[14]:
 {'import_name': 'demo_app',
  'template_folder': 'templates',
- 'root_path': 'e:\\isoftstone\\project\\repos\\superset\\joshua_code-superset-js
-ohua\\superset',
+ 'root_path': '~\superset',
  '_static_folder': 'static',
  '_static_url_path': None,
  'cli': <AppGroup demo_app>,
- 'instance_path': 'e:\\isoftstone\\project\\repos\\superset\\joshua_code-superse
-t-jsohua\\superset\\instance',
+ 'instance_path': '~\superset\\instance',
  'config': <Config {'ENV': 'production', 'DEBUG': False, 'TESTING': False, 'PROP
 AGATE_EXCEPTIONS': None, 'PRESERVE_CONTEXT_ON_EXCEPTION': None, 'SECRET_KEY': No
 ne, 'PERMANENT_SESSION_LIFETIME': datetime.timedelta(days=31), 'USE_X_SENDFILE':
@@ -665,6 +663,8 @@ json_available = True
 
 
 flask/globals.py
+
+flask框架自带的代理对象LocalStack有四个，分别是request，session，g和current_app。用代理而不是显式的对象的主要目的在于这四个对象使用太过频繁，贯穿整个请求周期，显式传递很容易造成循环导入的问题，需要一个第三方的对象来进行解耦。
 
 依赖于werkzeug的Local对象，详看下面werkzeug章节。
 
@@ -1932,7 +1932,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 
 因此，Werkzeug开发了自己的local对象。
 
-* Local对象：结构类似dict，用dict的常用方法。
+* Local对象：结构类似dict，用dict的常用方法。通过线程ID或协程ID，提供了线程/协程隔离的数据访问方式。
 * LocalStack：是先进先出队列，封装操作: pop/push/top。
 * LocalProxy:  用于代理Local对象和LocalStack对象，而所谓代理就是作为中间的代理人来处理所有针对被代理对象的操作。
 * LocalManager：管理Local对象。
@@ -1966,9 +1966,9 @@ class Local(object):
     __slots__ = ("__storage__", "__ident_func__")
 
     def __init__(self):
-        # 初始化__storage__为空字典，__ident_func__调用get_ident
-        object.__setattr__(self, "__storage__", {})
-        object.__setattr__(self, "__ident_func__", get_ident)
+        # 属性：__storage__初始化为空字典，__ident_func__调用get_ident
+        object.__setattr__(self, "__storage__", {})				#存储实际的数据，字典
+        object.__setattr__(self, "__ident_func__", get_ident)	#获取线程/协程ID方法
 
         
 class LocalStack(object):
@@ -2013,10 +2013,10 @@ class LocalProxy(object):
     def __init__(self, local, name=None):
         object.__setattr__(self, "_LocalProxy__local", local)
         object.__setattr__(self, "__name__", name)
-        if callable(local) and not hasattr(local, "__release_local__"):
+        if callable(local) and not hasattr(local, "__release_local__"):	 # 代理对象local必须是可调用的
             # "local" is a callable that is not an instance of Local or
             # LocalManager: mark it as a wrapped function.
-            object.__setattr__(self, "__wrapped__", local)
+            object.__setattr__(self, "__wrapped__", local)	
 ```
 
 
@@ -2213,7 +2213,7 @@ def _log(type, message, *args, **kwargs):
 
 ## jinja2
 
-参考 《WEB前端框架》相关章节
+参考 《[WEB前端框架](WEB前端框架.md)》相关章节
 
 依赖于模块 MarkupSafe
 
@@ -2611,7 +2611,6 @@ Markup('Hello <em>&#34;World&#34;</em>')
 | ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------ | ----------------- | --------------------------------------- |
 | flask_restful      | 文档老旧，不可用。<br>添加了快速构建 REST APIs 的支持。它当然也是一个能够跟你现有的ORM/库协同工作的轻量级的扩展。Flask-RESTful 鼓励以最小设置的最佳实践。 | http://www.pythondoc.com/Flask-RESTful/index.html          | [flask-restful/flask-restful](https://www.github.com/flask-restful/flask-restful/) | v0.3.9, 2020      | 要求 Python 版本为 2.6, 2.7, 或者 3.3。 |
 | ~~flask_restplus~~ | 增加了对快速构建 REST API 的支持。它提供了一系列连贯的装饰器和工具来描述您的 API 并正确公开其文档（使用 Swagger）。 | https://flask-restplus.readthedocs.io/en/stable/index.html | [noirbizarre/flask-restplus](https://github.com/noirbizarre/flask-restplus) | 0.13.0, 2020.1.13 | 被社区版flask-restx替换                 |
-|                    |                                                              |                                                            |                                                              |                   |                                         |
 
 
 

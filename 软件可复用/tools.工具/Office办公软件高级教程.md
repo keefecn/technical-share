@@ -328,7 +328,7 @@ Apache OpenOffice是一款先进的**开源** **办公软件套件**，它包含
 | --------------- | ------------------ | ------------------------------------------------------------ |
 | WORD 文档结构图 | 导航               | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
 | Excel数据分拆   |                    |                                                              |
-|                 |                    |                                                              |
+| ...             |                    |                                                              |
 
 
 
@@ -367,7 +367,7 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 
 ## 本章参考
 
-*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
+*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
 
 * LibreOffice:完全由开源社区主导的OpenOffice分支  https://xbeta.info/libreoffice.htm
 
@@ -376,12 +376,6 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 # 企业协同办公Office
 
 详见  《[企业协同办公生态](企业协同办公生态.md)》
-
-
-
-
-
-* https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
 
 
 

@@ -202,6 +202,8 @@ Every issue/PR must have one hash label (except spam entry). Labels that begin w
 * ananotation 注解
 * report schedule 报告调度
 * alert 警报
+* 服务端：指superset服务端，python实现，提供REST服务。
+* 客户端：也叫前端，指superset-front前端。js+less实现。在浏览器上运行，是最终用户所看到的页面。
 
 
 
@@ -1062,7 +1064,7 @@ $ celery flower --app=superset.tasks.celery_app:app
 
 ## 3.1 开发者必知
 
-### **本地调试（pycharm）**
+### **服务端本地调试（pycharm）**
 
 **法1： Pycharm专业版：选择FLASK_SERVER**
 
@@ -1071,8 +1073,6 @@ Target:  {SUPERTSET_PATH}\superset\app.py
 Additional option:  -h 0.0.0.0
 FLASK_ENV:  development
 ```
-
-![image-20210625090202608](.\superset_debug_pycharm.png)
 
 
 
@@ -1105,8 +1105,31 @@ if __name__ == '__main__':
 # 需要设置环境变量：PYTHONPATH和FLASK_APP, 环境变量设置windows用set, linux用export
 set PYTHONPATH=`pwd`  #实际项目目录
 set FLASK_APP=superset
+
 # superset或flask启动，这二脚本需要能在系统路径识别，否则脚本全路径启动
 superset run -h 0.0.0.0 -p 5000	  
+```
+
+
+
+### 前端调试
+
+```shell
+# 本地开发调试，js/less文件有改动会实时编译，但服务器端需要重启才能生效。 使用webpack.config.js配置
+npm run dev
+
+# 远程调试，会在webpack里导入webpack.proxy-config.js配置，指定远程服务器地址作为 调试时所连接的后端服务器。
+npm run dev-server
+```
+
+
+
+webpack.proxy-config.js 
+
+```js
+// 下面指定 远程服务器地址和端口 supersetUrl
+const { supersetPort = 8088, superset: supersetUrl = null } = parsedArgs;
+const backend = (supersetUrl || `http://localhost:${supersetPort}`).replace('//+$/','',);   //移除尾部符号/
 ```
 
 
@@ -2358,25 +2381,28 @@ superset使用Flask-Cache来缓存数据。Flask-Caching supports various cachin
 修改文件：superset/superset_config.py
 
  ```python
-# 缓存SQL查询结果
+from superset.typing import CacheConfig
+
+# cache1: 缓存图表SQL查询结果-pandas数组
 DATA_CACHE_CONFIG = {
     'CACHE_TYPE': 'redis',
     'CACHE_DEFAULT_TIMEOUT': 60 * 60 * 24, # 1 day default (in secs)
     'CACHE_KEY_PREFIX': 'superset_results',
     'CACHE_REDIS_URL': 'redis://localhost:6379/0',
 }
-
-# superset-0.2xx（弃）
-CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
-TABLE_NAMES_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
+# cache2: 缓存superset本身元数据, simple-内存; filesystem-本地文件,CACHE_DIR默认为当前目录,CACHE_THRESHOLD过期时间（单位为毫秒）
+CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "filesystem"}
+# cache3:    
+THUMBNAIL_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple", "CACHE_NO_NULL_WARNING": True}    
     
-# 缓存缩略图 Caching Thumbnails
+# superset-0.2x+（弃）
+TABLE_NAMES_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple"}
+
+# 缓存缩略图 Caching Thumbnails, 缩略图用在看板/图表列表显示的缩略图（实际上没什么意义）
 FEATURE_FLAGS = {
     "THUMBNAILS": True,
     "THUMBNAILS_SQLA_LISTENERS": True,
 }
-
-THUMBNAIL_CACHE_CONFIG: CacheConfig = {"CACHE_TYPE": "simple", "CACHE_NO_NULL_WARNING": True}
  ```
 
 
@@ -2469,7 +2495,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
  
 
-## 5.2   UML视图
+## 5.2  UML视图
 
 ### 5.2.1 部署视图
 
@@ -2491,7 +2517,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
  
 
-## 5.3   数据架构（数据模型）
+## 5.3  数据架构（数据模型）
 
 表格 superset元数据的来源模块说明
 
@@ -2676,11 +2702,11 @@ delete from favstar where user_id in (17,);
 报错信息：
 
 ```shell
-  File "E:/isoftstone/project/repos/superset/joshua_code-superset-jsohua/superset/superset/app.py", line 21, in <module>
+  File "/superset/superset/app.py", line 21, in <module>
     from typing import Any, Callable, Dict
-  File "E:\isoftstone\project\repos\superset\joshua_code-superset-jsohua\superset\superset\typing.py", line 17, in <module>
+  File "\superset\superset\typing.py", line 17, in <module>
     from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
-ImportError: cannot import name 'Any' from 'typing' (E:\isoftstone\project\repos\superset\joshua_code-superset-jsohua\superset\superset\typing.py)
+ImportError: cannot import name 'Any' from 'typing' (\superset\superset\typing.py)
 ```
 
 原因：实际上是typing.py和标准库里重名了。
@@ -2730,82 +2756,6 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 
 
-## superset原生BUG
-
-1.  (fixed)编辑数据集页面无法获取extra字段，保存时extra字段值丢失。
-
-    ```
-    描述：数据集删除页面 进入编辑，extra字段显示正常； 但如果是通过编辑数据集页面进入 ，extra字段无法获取。
-    评审：暂时save接口在保存时，如果extra字段为空，先从DB里获取。这样保证这个字段的值不丢失。
-    补充：v1.3已可获取extra字段值。
-    ```
-
-
-2. (fixed)删除图表时并未检验看否有看板使用
-
-   ```
-   描述：删除数据库、数据集时都有检查依赖项。但删除图表时并未检测是否有看板依赖，可以增加提示信息，不强制不能删除。
-   评审：v1.3有增加删除提示，需要填写`删除`确认才能删除。
-   ```
-
-3.  数据源/集删除后的垃圾清理
-
-   ```
-   描述：数据源/集删除后，相应的数据源权限 并未在角色中清除，能在角色的权限列表里看到 已经删除的数据源/数据集。
-   评审：
-   ```
-
-4.  数据源重命名后的垃圾清理（暂缓）
-
-   ```
-   描述：数据源重命名后，旧的数据源权限仍在 ab_view_menu。如原来数据源名为pg3，改名为pg4。然后数据源 pg3.(id:xx)和pg4.(id:xx)都存在。
-   评审：update命令，需要判断是否是数据源重命名，是则需要特殊处理，增加获取旧数据库名，移除相关权限。另外，重命名虽然造成了冗余，但却不会涉及到数据授权丢失问题。
-   ```
-
-5. (fixed)看板csstemplate权限问题  ~2021-11-11
-
-   ```
-   描述：任意用户都可以读写看板公共csstemplate，会影响到所有用户
-   原因：gamma角色默认有csstempalte读写权限。css模板改删时，没有类似数据集/图表/看板的owner判断，权限过于宽松。
-   评审：可以先从gamma角色移除csstemaplte写权限。为csstempalte设置专门角色，只有特定用户才可编辑删除。
-   ```
-
-6. 漏斗图的配置参数里的 行限制参数保存时固定值  ~2021-11-11
-
-   ```
-   描述：漏斗图的配置参数里的 行限制保存时都是10，下拉选项值不生效。运行按纽时能正确，保存则固定10。
-   原因：
-   评审：
-   ```
-
-7. (fixed)看板过滤映射保存后无效  ~2021-11-15
-   ```
-   描述：看板过滤映射修改保存后，只对当前页面生效。但从看板列表进入或重新刷新打开看板，过滤映射恢复到原始状态。
-   原因：修改保存后，实质没保存到数据库。
-   评审：#17278修复
-   补充：刷新频率也没有保存。
-   ```
-   
-   
-
-## superset不支持功能
-
-- 鉴权: 不支持租户隔离，RABC的隔离以用户owner为基础。
-
-- 网页适配: 目前PC端和手机端显示页面是一样的。并未适配手机页面。**优化需求**：查看的图表/看板需要根据终端定制显示。
-
-- 下钻图表drilldown: 不支持。需要自行实现如中国地图、表格下钻等。
-
-- 不支持的图表：普通拆线图、组合图、同比/环比等。**优化需求**：可以引入echart图表或者其它新图表类型。
-
-- 多表查询：只能在SQLLAB将多表查询保存为视图，再进行关联分析。并且不好用。（datalab另外实现）
-
-- 报表和看板分类：不支持类似powerBI按目录划分。（缓）
-
-- 根路由定制：约300个API，十几个不同前缀路由。还依赖flask_appbuilder模块，改起来很麻烦。（弃）
-
-
-
 
 ## superset官网PR
 
@@ -2843,7 +2793,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 *  Superset 1.0 终于发布了 https://cloud.tencent.com/developer/article/1823370
 *  如何将Superset嵌入后台系统之实践 https://www.yisu.com/zixun/58300.html
 *  superset、metabase、redash三个开源BI工具的个人使用心得及分析 https://blog.csdn.net/weixin_42473019/article/details/105419781
-*  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712?utm_medium=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~searchFromBaidu~default-1.pc_relevant_baidujshouduan
+*  教程 —— 如何在自己的应用集成superset https://blog.csdn.net/weixin_38168198/article/details/101147712
 *  安装Apache Superset--基于Docker的安装配置 https://blog.csdn.net/nikeylee/article/details/115264818
 *  磨人的小妖精Apache Superset之绝对不改版 https://segmentfault.com/a/1190000022060920 
 *  如何将炫酷的报表直接截图发送邮件——在Superset 0.37使用Schedule Email功能 https://cloud.tencent.com/developer/article/1711719
