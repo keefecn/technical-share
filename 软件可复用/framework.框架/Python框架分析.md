@@ -33,7 +33,7 @@
 | Celery          | 多任务队列 |          |
 | gunicorn | 多工作进程并发 | |
 
- 
+
 
 ## python web框架列表
 
@@ -52,7 +52,7 @@
 | [CubicWeb](http://docs.cubicweb.org/admin/setup)             | 不仅是一个Web开发框架，而且还是一款语义Web开发框架。CubicWeb使用关系查询语言（RQL Relation Query Language）与数据库之间进行通信。 |                          |                                                              |                    |            |
 | [turbogears](http://www.turbogears.org/)                     | 一个可以扩展为全栈解决方案的微型框架。                       |                          |                                                              |                    |            |
 
- 
+
 
 # 2  python WEB三大框架
 
@@ -80,7 +80,7 @@
 
 ### 简介
 
-Django是一个开放源代码的Web应用框架，遵守BSD版权，由Python写成。 
+Django是一个开放源代码的Web应用框架，遵守BSD版权，由Python写成。
 
 框架本身集成了ORM、模型绑定、模板引擎、缓存、Session等诸多功能。
 
@@ -149,11 +149,11 @@ $ python manage.py startapp cmdb
 cmdb/	# startapp生成的app目录
 ├── admin.py     # 管理页面里需要管理的数据库表 可以注册到这
 ├── apps.py  	 #
-├── __init__.py  # 
+├── __init__.py  #
 ├── migrations	 # migrate命令自动生成的ORM操作文件
 │   └── __init__.py
 ├── models.py   # 模型，负责业务对象和数据对象的ORM映射
-├── tests.py	
+├── tests.py
 └── views.py	# 视图，业务处理逻辑
 
 ```
@@ -242,22 +242,22 @@ $ python3 manage.py migrate xxapp   # 创建xxapp的表结构
 from django.conf.urls import url
 from django.contrib import admin
 from cmdb import views
- 
+
 urlpatterns = [
     url(r'admin/', admin.site.urls),	# FBV，django默认的管理界面,超级用户要通过命令创建
     path(index', Indexview.as_view()),	# CBV基于类的视图
 ]
 ```
 
- 
 
-**5、编写业务处理逻辑 views或者template** 
+
+**5、编写业务处理逻辑 views或者template**
 
 Django原生的视图使用View，请求响应是HttpRequest/HttpResponse
 
 ```python
 from django.views.generic import View
-from django.shortcuts import HttpResponse 
+from django.shortcuts import HttpResponse
 ```
 
 
@@ -290,7 +290,7 @@ def login(request):
         return HttpResponse("GET 方法")
     if request.method == "POST":
         user = request.POST.get("user")
-        pwd = request.POST.get("pwd")  
+        pwd = request.POST.get("pwd")
         if user == "runoob" and pwd == "123456":
             return HttpResponse("POST 方法")
         else:
@@ -588,7 +588,7 @@ https://www.django-rest-framework.org/
 
 * 认证鉴权：
 
-  
+
 
 安装：`pip install djangorestframework`
 
@@ -638,7 +638,7 @@ __all__ = [
 DRF视图使用示例：
 
 ```python
-# DRF视图导入 
+# DRF视图导入
 from rest_framework.views import APIView, ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers  # 序列化
@@ -646,7 +646,7 @@ from rest_framework import serializers  # 序列化
 # 1.APIView实现示例
 # 三步：ORM、序列化、返回响应
 class SnippetList(APIView):
-	
+
     def get(self, request, format=None):
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
@@ -657,8 +657,8 @@ class SnippetList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        
+
+
 # 2.GenericAPIView实现示例: 更简洁，继承3个类
 class SnippetList(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
@@ -673,13 +673,13 @@ class SnippetList(mixins.ListModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(*args, **kwargs)
-    
+
 # 3.ListCreateAPIView更简洁，只用继承一个类，连get/post都不用写了。
 class SnippetList(generics.ListCreateAPIView):
 
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    
+
 # 4.ViewSet示例
 class SnippetViewSet(viewsets.ModelViewSet):
     """
@@ -711,7 +711,7 @@ class OpenSceneView(APIView):
     场景视图，场景列表或单个场景
     """
     pagination_class = StandardResultPagination
-    def get(self, request):   
+    def get(self, request):
         scene = Scene.objects.all().orderby()  # 得到Queryset对象
         page_obj = StandardResultPagination()
         scene = page_obj.paginate_queryset(scene, request, view=self)
@@ -791,7 +791,7 @@ drf-yasg使用示例： `pip install drf-yasg`
 
 ```python
 #step2: settings.py, 添加APP
-INSTALLED_APPS = ['drf_yasg',]  
+INSTALLED_APPS = ['drf_yasg',]
 
 #step3: urls.py, 增加路径映射 get_schema_view
 from rest_framework import permissions
@@ -812,7 +812,7 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'), 
+path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 # 对开发人员更友好
 path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ```
@@ -822,14 +822,14 @@ path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc
 API文档定义： openapi, swagger_auto_schema
 
 ```python
-# 类视图需继承APIView或其子类，函数视图可用 @api_view来转化 
+# 类视图需继承APIView或其子类，函数视图可用 @api_view来转化
 from drf_yasg import openapi	# 可提供自定义参数
 from drf_yasg.utils import swagger_auto_schema	#用装饰器@swagger_auto_schema 来填充文档
 
 class PolygonView(APIView):
     """ apiview return xxx """
     test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)	#自定义参数1
-    user_response = openapi.Response('response description', UserSerializer) #响应结果 
+    user_response = openapi.Response('response description', UserSerializer) #响应结果
 
     # 'method' can be used to customize a single HTTP method of a view
     @swagger_auto_schema(method='get', manual_parameters=[test_param], responses={200: user_response})
@@ -861,11 +861,11 @@ from drf_yasg.openapi import Parameter
 class Parameter(SwaggerDict):
     def __init__(self, name, in_, description=None, required=None, schema=None,
                  type=None, format=None, enum=None, pattern=None, items=None, default=None, **extra):
-     """        
+     """
      name:参数名称
-     in_:参数位置，值有body, path, query, formData, header   
-     type:类型，值有object ,string ,number ,integer ,boolean ,array ,file 
-     format:格式，值有date, date-time, password, binary, bytes, float, double, int32, int64, email, ipv4, ipv6, uri, uuid, slug, decimal等     
+     in_:参数位置，值有body, path, query, formData, header
+     type:类型，值有object ,string ,number ,integer ,boolean ,array ,file
+     format:格式，值有date, date-time, password, binary, bytes, float, double, int32, int64, email, ipv4, ipv6, uri, uuid, slug, decimal等
      description：参数描述
      required：是否必须
      schema：当in_是body时，schema对象
@@ -873,7 +873,7 @@ class Parameter(SwaggerDict):
      pattern：当 format为 string是才填此项
      items：
      default：
-     """   
+     """
 ```
 
 
@@ -899,7 +899,7 @@ class Parameter(SwaggerDict):
 ```
 step1. 首先删除数据库中的相关APP下的数据表
 step2. 然后删除APP下的migration模块中的所有 文件，除了init.py 文件
-step3. 执行下面的命令: 
+step3. 执行下面的命令:
 python manage.py makemigrations
 python manage.py migrate
 ```
@@ -944,7 +944,7 @@ python manage.py migrate --fake-initial
 
 
 
-## 2.2 python-Flask 
+## 2.2 python-Flask
 
 ### 简介
 
@@ -963,7 +963,7 @@ python manage.py migrate --fake-initial
 
 备注： *fabmanager*是flask的权限管理命令。
 
- 
+
 
 表格 flask版本说明 详见[CHANGES.rst](https://github.com/pallets/flask/blob/main/CHANGES.rst)
 
@@ -988,7 +988,7 @@ python manage.py migrate --fake-initial
 
 Flask 依赖两个外部库： [Jinja2](http://jinja.pocoo.org/2/) 模板引擎和 [Werkzeug](http://werkzeug.pocoo.org/) WSGI 工具集。
 
-**Werkzeug:** Werkzeug is an HTTP and WSGI utility library for Python. 
+**Werkzeug:** Werkzeug is an HTTP and WSGI utility library for Python.
 
  ```shell
 $ sudo pip install flask flask-login flask-mail flask-sqlalchemy flask-wtf flask-babel flup
@@ -1023,7 +1023,7 @@ if __name__ == "__main__":
 
 5. 最后我们用 [run()](http://docs.jinkan.org/docs/flask/api.html#flask.Flask.run) 函数来让应用运行在本地服务器上。 其中 if __name__ == '__main__': 确保服务器只会在该脚本被 Python 解释器直接执行的时候才会运行，而不是作为模块导入的时候。
 
- 
+
 
 **项目结构如下**
 
@@ -1031,7 +1031,7 @@ if __name__ == "__main__":
 
 备注：
 
- 
+
 
 #### 路由映射
 
@@ -1104,7 +1104,7 @@ app.config.from_pyfile('config.py')
 | flask-sqlalchemy | DB的ORM模型。                                                | from flask_sqlalchemy   import SQLAlchemy<br>db =   SQLAlchemy(app) |
 | flask-cors       | 跨域资源共享                                                 | CORS(app, resources=r'/*')                                   |
 
- 
+
 
 #### flask-appbuilder
 
@@ -1115,7 +1115,7 @@ Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理�
 *  BootsWatch Themes
 *  Font-Awesome CSS and Fonts
 
- 
+
 
 1. fabmanger
 
@@ -1203,7 +1203,7 @@ $ python3 run.py
 
 如果使用SQLAlchemy可以通过配置SQLALCHEMY_DATABASE_URI的值来指定数据库连接。如果使用Mongdb可以配置MONGODB_SETTINGS的值。默认使用Sqlite数据库，SQLALCHEMY_DATABASE_URI的值为'sqlite:///' + os.path.join(basedir, 'app.db')。
 
- 
+
 
 2). **Base Configuration**
 
@@ -1249,7 +1249,7 @@ Use config.py to configure the following parameters. By default it will use SQLL
 
 Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改变应用的主题风格。下面是config.py文件中可供选择的主题：
 
- 
+
 
 2. 路由定制
 
@@ -1274,7 +1274,7 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 图 4 flask-appbuilder view
 
- 
+
 
 ### 本节参考
 
@@ -1282,9 +1282,9 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 [2]   [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)
 
-[3].  Building beautiful REST APIs using Flask, Swagger UI and Flask-RESTPlus https://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/ 
+[3].  Building beautiful REST APIs using Flask, Swagger UI and Flask-RESTPlus https://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/
 
- 
+
 
 ## 2.3 python-Tornado
 
@@ -1312,15 +1312,15 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 ```python
 import tornado.ioloop
 import tornado.web
-  
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
-  
+
 application = tornado.web.Application([
     (r"/index", MainHandler),
 ])
-  
+
 if __name__ == "__main__":
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
@@ -1366,7 +1366,7 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
   - zlib、bzip2 compression
   - Cryptographic message signing
 
- 
+
 
 Celery可以快速的集成一些常用的Web框架，详细如下：
 
@@ -1413,7 +1413,7 @@ $ pip install celery
 # 启动: -A [project]，下列中项目名为tasks， -P [pool_class]默认perfork， -–pidfile --logfile
 $ celery -A tasks worker --loglevel=info
 # 5.x+ 支持 celery multi
-$ celery multi start|stop|stopwait|restart -A [project] 
+$ celery multi start|stop|stopwait|restart -A [project]
 ```
 
 调试
@@ -1421,7 +1421,7 @@ $ celery multi start|stop|stopwait|restart -A [project]
 ```python
 $ celery shell
 >>> from tasks import add
->>> resut = add.delay(4, 4)		# 执行任务的方法: delay, apply_async, 
+>>> resut = add.delay(4, 4)		# 执行任务的方法: delay, apply_async,
 >>> result.get(timeout=8)		# 获取任务结果的方法：get ready
 ```
 
@@ -1446,7 +1446,7 @@ accept_content = ['json']
 timezone = 'Europe/Oslo'
 enable_utc = True
 
-# 
+#
 CELERYD_MAX_TASKS_PER_CHILD = 10  # work执行任务数
 concurrunt = 4   # 并发数
 
@@ -1473,9 +1473,9 @@ celery常用命令
 
 **task**
 
-task状态state:  PENDING  STARTED  RETRY  SUCCESS 
+task状态state:  PENDING  STARTED  RETRY  SUCCESS
 
-重试二次的状态变迁如下所示： 
+重试二次的状态变迁如下所示：
 
 PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 
@@ -1484,7 +1484,7 @@ PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 **故障自愈**
 
 * worker:  *CELERY*D_MAX_TASKS_*PER_CH*ILD  重启进程
-* task:  软超时soft_time_limit 和 硬超时time_limit 
+* task:  软超时soft_time_limit 和 硬超时time_limit
 
 
 
@@ -1502,9 +1502,9 @@ PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 
 **官网**
 
-django https://www.djangoproject.com/ 
+django https://www.djangoproject.com/
 
-flask 官网 http://flask.pocoo.org/ 
+flask 官网 http://flask.pocoo.org/
 
 
 
@@ -1516,6 +1516,6 @@ flask 官网 http://flask.pocoo.org/
 
 [3].  Flask, Tornado, GEvent组合运行与性能比较 https://blog.csdn.net/lcylln/article/details/33731183
 
-[4].  flask中文文档 http://docs.jinkan.org/docs/flask  
+[4].  flask中文文档 http://docs.jinkan.org/docs/flask
 
-[5].  初识Django框架 https://www.cnblogs.com/phennry/p/5849445.html 
+[5].  初识Django框架 https://www.cnblogs.com/phennry/p/5849445.html

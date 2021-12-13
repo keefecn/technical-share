@@ -111,7 +111,7 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 
 # 2 DevOps方法论
 
-## 敏捷开发 
+## 敏捷开发
 
 详见 《[敏捷开发](敏捷开发.md)》
 
@@ -170,7 +170,7 @@ Serverless 的应用场景有很多，比如：为小程序、Web、Mobile 提�
 
 TFS下载 https://visualstudio.microsoft.com/zh-hans/vso/?rr=https%3A%2F%2Fwww.cnblogs.com%2F
 
- 
+
 
 Visual Studio Online 5 人以下的小团队免费。
 
@@ -187,7 +187,7 @@ Team Foundation Server (TFS)是一个应用软件生命周期管理（ALM）软�
 - 持续测试
 - 持续运营
 
- 
+
 
 TFS的优势在于：
 
@@ -205,7 +205,7 @@ TFS高度集成主流的开发工具和常见的办公工具。
 
 同时，TFS提供方便的API（.NET API, Java API, Rest API）集成，可以与企业现有的系统实现数据共享
 
- 
+
 
 **3) 高度集成研发团队的工作项目**
 
@@ -213,7 +213,7 @@ TFS高度集成主流的开发工具和常见的办公工具。
 
 反过来，可以通过项目管理的数据（需求、任务、Bug等），查询到相应代码的变动。例如，你可以查询到修复Bug所修改的代码行数。
 
- 
+
 
 **4) 支持分布式代码库（Git）**
 
@@ -223,7 +223,7 @@ TFS高度集成主流的开发工具和常见的办公工具。
 
 可以通过TFS将代码保持在服务器上，但是不签入到代码库中，实现将你的变更保存在服务器上一个临时的位置。这样，既备份了自己的代码，有不会影响其他团队成员的代码。
 
- 
+
 
 **6) 代码评审**
 
@@ -288,7 +288,7 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 [1]. 华为软件开发云 https://baike.baidu.com/item/华为软件开发云
 
-[2]. [华为软件开发云如何让DevOps真正落地？ ](https://baike.baidu.com/reference/2613029/fbf2_ZOl0oFTrjtcBw7HavHPIEhfUbKjestZ57dc9Kr77zcT8Mjf-A6W6mnqV_adBru1BjLUMzEm7EsJAHpUzvfE-CoSG3zVreknrHUlwSZMiEY) 
+[2]. [华为软件开发云如何让DevOps真正落地？ ](https://baike.baidu.com/reference/2613029/fbf2_ZOl0oFTrjtcBw7HavHPIEhfUbKjestZ57dc9Kr77zcT8Mjf-A6W6mnqV_adBru1BjLUMzEm7EsJAHpUzvfE-CoSG3zVreknrHUlwSZMiEY)
 
 
 
@@ -296,8 +296,8 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 ## 相关文章
 
-* [运营专题](运营专题.md) 
-* [运维专题](运维专题.md) 
+* [运营专题](运营专题.md)
+* [运维专题](运维专题.md)
 * 《[可信软件过程](可信软件过程.md)》
 
 
@@ -306,4 +306,4 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 [1]. 百度百科Devops https://baike.baidu.com/item/DevOps/2613029?fr=aladdin
 
-[2]. 2020 年大前端技术趋势解读 https://blog.csdn.net/Tencent_TEG/article/details/111602083?utm_medium=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs 
+[2]. 2020 年大前端技术趋势解读 https://blog.csdn.net/Tencent_TEG/article/details/111602083?utm_medium=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs

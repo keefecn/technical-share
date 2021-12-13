@@ -74,7 +74,7 @@
 
 [参考资料... 40](#_Toc25398509)
 
- 
+
 
 [TOC]
 
@@ -89,7 +89,7 @@ CNCF（Cloud Native Computing Foundation）于 2015 年 7 月成立，隶属于 
 
 CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概念：沙箱、孵化和毕业。这些级别分别对应下图中的创新者、早期采用者和早期大众。
 
- 
+
 
 表格 1 CNCF项目列表（按开源时间或加入CNCF时间升序排列）
 
@@ -131,7 +131,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 | 数据库            | Vitness                                              |      |
 | Sandbox项目       | Rook Spife Open_Policy_Agent CloudEvent Telepresence |      |
 
- 
+
 
 # 2 容器Docker
 
@@ -149,7 +149,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
 Prometheus 是一套开源的监控、报警和时间序列数据库的组合，成立于 2012 年，由 SoundCloud 公司开发，此后许多组织接受和采用了 Prometheus，遂将其独立为开源项目。该项目使用 Go 语言开发，社区氛围非常活跃。
 
- 
+
 
 **关键功能包括：**
 
@@ -174,7 +174,7 @@ Prometheus 是一套开源的监控、报警和时间序列数据库的组合，
 *  告警管理：Prometheus 可以配置 rules，然后定时查询数据，当条件触发的时候，会将 alert 推送到配置的 Alertmanager
 *  多种多样的支持工具
 
- 
+
 
    ![1574519657243](../../media/sf_reuse/framework/frame_cncf_003.png)
 
@@ -197,7 +197,7 @@ Prometheus的整体技术架构可以分为几个重要模块：
 
 ## 4.2     本章参考
 
-[1].  时序数据库连载系列：指标届的独角兽Prometheus https://blog.csdn.net/weixin_43970890/article/details/87938347 
+[1].  时序数据库连载系列：指标届的独角兽Prometheus https://blog.csdn.net/weixin_43970890/article/details/87938347
 
 
 
@@ -209,7 +209,7 @@ Prometheus的整体技术架构可以分为几个重要模块：
 
 gRPC 基于 HTTP/2 标准设计，带来诸如双向流、流控、头部压缩、单 TCP 连接上的多复用请求等特。这些特性使得其在移动设备上表现更好，更省电和节省空间占用。
 
- 
+
 
 gRPC 一开始由 google 开发，是一款语言中立、平台中立、开源的远程过程调用(RPC)系统。
 
@@ -219,7 +219,7 @@ gRPC 一开始由 google 开发，是一款语言中立、平台中立、开源�
 
 图 12 gRPC简图
 
- 
+
 
 **特性**
 
@@ -235,7 +235,7 @@ gRPC使用ProtoBuf来定义服务，ProtoBuf是由Google开发的一种数据序
 
 gRPC支持多种语言，并能够基于语言自动生成客户端和服务端功能库。目前已提供了C版本grpc、Java版本grpc-java 和 Go版本grpc-go，其它语言的版本正在积极开发中，其中，grpc支持C、C++、Node.js、Python、Ruby、Objective-C、PHP和C#等语言，grpc-java已经支持Android开发。
 
- 
+
 
 **优点：**
 
@@ -262,13 +262,13 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 ## 5.3  本章参考
 
-[1].  gRPC 官方文档中文版 http://doc.oschina.net/grpc  
+[1].  gRPC 官方文档中文版 http://doc.oschina.net/grpc
 
-[2].  gRPC https://blog.csdn.net/xuduorui/article/details/78278808 
+[2].  gRPC https://blog.csdn.net/xuduorui/article/details/78278808
 
-[3].  RPC框架性能基本比较测试 [www.useopen.net/blog/2015/rpc-performance.html](http://www.useopen.net/blog/2015/rpc-performance.html) 
+[3].  RPC框架性能基本比较测试 [www.useopen.net/blog/2015/rpc-performance.html](http://www.useopen.net/blog/2015/rpc-performance.html)
 
- 
+
 
 # 6  Etcd
 
@@ -284,15 +284,15 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 *  可信：使用Raft算法充分实现了分布式。
 
-   
+
 
  ![1574519708248](../../media/sf_reuse/framework/frame_cncf_005.png)
 
 ## 6.1  本章参考
 
-[1].  ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988 
+[1].  ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988
 
- 
+
 
 
 

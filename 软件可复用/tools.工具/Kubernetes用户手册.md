@@ -21,15 +21,15 @@
 
 ### 1.1  简介
 
-​         **Kubernetes**的名字来自希腊语，意思是“*舵手**”* 或 “*领航员”*。*K8s*是将8个字母“ubernete”替换为“8”的缩写。是一个开源的，用于管理云平台中多个主机上的容器化的应用，Kubernetes的目标是让部署容器化的应用简单并且高效（powerful）,Kubernetes提供了应用部署，规划，更新，维护的一种机制。
+​         **Kubernetes**的名字来自希腊语，意思是“舵手” 或 “领航员”*。*K8s是将8个字母“ubernete”替换为“8”的缩写。是一个开源的，用于管理云平台中多个主机上的容器化的应用，Kubernetes的目标是让部署容器化的应用简单并且高效（powerful）,Kubernetes提供了应用部署，规划，更新，维护的一种机制。
 
-​         Kubernetes是Google 2014年创建管理的，是Google 10多年大规模容器管理技术Borg的开源版本。    
+​         Kubernetes是Google 2014年创建管理的，是Google 10多年大规模容器管理技术Borg的开源版本。
 
 ​         在Kubernetes中，我们可以创建多个容器，每个容器里面运行一个应用实例，然后通过内置的负载均衡策略，实现对这一组应用实例的管理、发现、访问，而这些细节都不需要运维人员去进行复杂的手工配置和处理。
 
 ​         Kubernetes 属于主从的分布式集群架构，包含 Master 和 Node：Master 作为控制节点，调度管理整个系统；Node 是运行节点，运行业务容器。
 
- 
+
 
 **Kubernetes** **特点**
 
@@ -39,7 +39,7 @@
 
 *  自动化: 自动部署，自动重启，自动复制，自动伸缩/扩展
 
- 
+
 
 **容器优势总结：**
 
@@ -52,7 +52,7 @@
 - 资源隔离
 - 资源利用：更高效
 
- 
+
 
  <img src="../../media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
 
@@ -60,7 +60,7 @@
 
 ### 1.2  K8s术语
 
-表格 4 K8s关键术语
+表格  K8s关键术语
 
 
 | 名词                   | 释义                                                         | 设计理念                                                     |
@@ -80,11 +80,10 @@
 | 节点（Node）           | K8s集群中的计算能力由Node提供。 Node可以是物理机也可以是虚拟机。 | K8s集群中的Node也就等同于Mesos集群中的Slave节点，是所有Pod运行所在的工作主机。 |
 | 名字空间（Namespace）  | 名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system | 管理员可以可以创建新的名字空间满足需要。                     |
 | RBAC访问授权           | 基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。 | RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联 |
-|                        |                                                              |                                                              |
 
 备注：其它常用术语还有密钥对象（Secret）、用户帐户（User Account）和服务帐户（Service Account）。从K8s的系统架构、技术概念和设计理念，我们可以看到K8s系统最核心的两个设计理念：一个是容错性，一个是易扩展性。容错性实际是保证K8s系统稳定性和安全性的基础，易扩展性是保证K8s对变更友好，可以快速迭代增加新功能的基础。
 
-1. API对象。每个API对象都有3大类属性：元数据metadata、规范spec和状态status。  
+1. API对象。每个API对象都有3大类属性：元数据metadata、规范spec和状态status。
    1. 元数据是用来标识API对象的，每个对象都至少有3个元数据：namespace，name和uid；除此以外还有各种各样的标签labels用来标识和匹配不同的对象，例如用户可以用标签env来标识区分不同的服务部署环境，分别用env=dev、env=testing、env=production来标识开发、测试、生产的不同服务。
    2. 规范描述了用户期望K8s集群中的分布式系统达到的理想状态（Desired State），例如用户可以通过复制控制器Replication Controller设置期望的Pod副本数为3；
    3. status描述了系统实际当前达到的状态（Status），例如系统当前实际的Pod副本数为2；那么复制控制器当前的程序逻辑就是自动启动新的Pod，争取达到副本数为3。
@@ -93,7 +92,7 @@
 4. 在云计算环境中，服务的作用距离范围从近到远一般可以有：同主机（Host，Node）、跨主机同可用区（Available Zone）、跨可用区同地区（Region）、跨地区同服务商（Cloud Service Provider）、跨云平台。K8s的设计定位是单一集群在同一个地域内，因为同一个地区的网络性能才能满足K8s的调度和计算存储连接要求。而联合集群服务就是为提供跨Region跨服务商K8s集群服务而设计的。
 5. Service的四种type:
    - *ClusterIP*（默认） - 在集群中内部IP上暴露服务。此类型使Service只能从集群中访问。
-   - *NodePort* - 通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 <NodeIP>:<NodePort>，可以从集群的外部访问一个 NodePort 服务。
+   - *NodePort* - 通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 `<NodeIP>:<NodePort>`，可以从集群的外部访问一个 NodePort 服务。
    - *LoadBalancer* - 使用云提供商的负载均衡器（如果支持），可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
    - *ExternalName* - 通过返回 `CNAME` 和它的值，可以将服务映射到 `externalName` 字段的内容，没有任何类型代理被创建。这种类型需要v1.7版本或更高版本`kube-dnsc`才支持。
 
@@ -109,7 +108,7 @@ Borg主要由BorgMaster、Borglet、borgcfg和Scheduler组成，如下图所示
 
    ![1574519402884](../../media/sf_reuse/framework/frame_cncf_001.png)
 
-图 5 google_Borg架构
+图  google_Borg架构
 
 *  BorgMaster是整个集群的大脑，负责维护整个集群的状态，并将数据持久化到Paxos存储中；
 
@@ -143,7 +142,7 @@ Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod�
 
 * etcd 保存了整个集群的状态；
 
-  
+
 
   ![1574519522443](../../media/sf_reuse/framework/frame_k8s_005.png)
 
@@ -174,7 +173,7 @@ Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，�
 
    ![1574519541207](../../media/sf_reuse/framework/frame_k8s_002.png)
 
-图 7 K8s分层架构
+图  K8s分层架构
 
 - 内核层Nucleus：Kubernetes最核心的功能，对外提供API构建高层的应用，对内提供插件式应用执行环境。必选。
 
@@ -184,12 +183,12 @@ Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，�
 
 - 接口层：[kubectl命令行工具](http://docs.kubernetes.org.cn/61.html)、客户端SDK以及集群联邦
 
-- 生态系统：在接口层之上的庞大容器集群管理调度的生态系统，可以划分为两个范畴 
+- 生态系统：在接口层之上的庞大容器集群管理调度的生态系统，可以划分为两个范畴
 
 - - Kubernetes外部：日志、监控、配置管理、CI、CD、Workflow、FaaS、OTS应用、ChatOps等
   - Kubernetes内部：CRI、CNI、CVI、镜像仓库、Cloud Provider、集群自身的配置和管理等
 
- 
+
 
 ### 2.3  多集群架构
 
@@ -197,7 +196,7 @@ Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，�
 
 *  多集群时代的 “ The Platform for Platform”
 
- 
+
 
 Kubernetes 和它所推崇的声明式[容器编排与管理体系](https://yq.aliyun.com/go/articleRenderRedirect?url=https%3A%2F%2Fwww.infoq.cn%2Farticle%2FR1p3H3_29f4TYImExsyw)，让软件交付本身变得越来越标准化和统一化，并且实现了与底层基础设施的完全解耦；而另一方面，云原生技术体系在所有公有云和大量数据中心里的落地，使得软件面向一个统一的 API 实现“一次定义，到处部署”成为了可能。
 
@@ -205,7 +204,7 @@ Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用�
 
    ![1574519565059](../../media/sf_reuse/framework/frame_k8s_007.png)
 
-图 8 多集群 K8s 隧道架构
+图  多集群 K8s 隧道架构
 
 如图所示，其核心分为两层，下层是被托管的集群，在其中会有一个 Agent，Agent 一方面在被托管的集群中运行，可以轻易的在内网访问被托管的集群，另一方面它通过公网与公有云接入层中的节点 (Stub) 构建一个隧道 (tunnel)。在上层，用户通过公有云统一的方式接入审计、鉴权、权限相关功能，通过访问 Stub，再通过隧道由 Agent 向用户自己的 Kubernetes 集群转发命令。
 
@@ -239,7 +238,7 @@ Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的�
 | Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service)) | 突出的特性是与VMware虚拟机堆栈紧密集成                       |                                            |                                                              |
 | [SUSE ](https://www.suse.com/products/caas-platform/)容器服务平台 | SUSE CaaS平台让人想起CoreOS Tectonic，它结合了运行容器的裸机“微型”操作系统、Kubernetes、内置的镜像仓库和集群配置工具。 |                                            |                                                              |
 
- 
+
 
 **下载并解压** **Kubernetes** **二进制文件**
 
@@ -266,10 +265,10 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    ```sh
    # apt-get方式安装，国内镜像：https://mirrors.aliyun.com/kubernetes/apt/
    apt-get update && apt-get install -y apt-transport-https
-   curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+   curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
    cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
    deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
-   EOF  
+   EOF
    apt-get update
    # 安装kubectl kubeadm
    apt-get install -y kubelet kubeadm kubectl
@@ -280,24 +279,24 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    K8S 官方为了开发者能在个人电脑上运行 K8S 而提供的一套工具。实现上是通过 Go 语言编写，通过调用虚拟化管理程序，创建出一个运行在虚拟机内的单节点集群。Minikube CLI可用于启动，停止，删除，获取状态，并在虚拟机上执行其他操作。一旦Minikube虚拟机启动，Kubectl CLI会在Kubernetes集群上执行操作。
 
    ```shell
-   $ curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.7.3/minikube-linux-amd64 
+   $ curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.7.3/minikube-linux-amd64
    $ chmod +x minikube && sudo mv minikube /usr/local/bin
    # 启动方式1：Minikube缺省使用VirtualBox驱动，windows环境下vbox和hyper-v只能选择一个
    $ minikube start --registry-mirror=https://registry.docker-cn.com
    # 启动方式2：安装了docker， none driver
-   $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com 
-   
+   $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com
+
    $ 打开k8s控制台
    minikube dashboard
    ```
 
-   
+
 
 **选择镜像**
 
 使用谷歌容器仓库（GCR）上托管的镜像 gcr.io/
 
- 
+
 
 ### 3.2  本地Docker方案
 
@@ -305,15 +304,15 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
 
    ![1574519587996](../../media/sf_reuse/framework/frame_k8s_008.png)
 
-图 9 K8s集群~本地Docker方案
+图  K8s集群~本地Docker方案
 
- 
+
 
 **第一步：运行Etcd**
 
 `docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd --addr=127.0.0.1:4001 --bind-addr=0.0.0.0:4001 --data-dir=/var/etcd/data`
 
- 
+
 
 **第二步：启动master**
 
@@ -338,7 +337,7 @@ docker run \
 **第三步：运行service proxy**
 
 ```shell
-docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 /hyperkube proxy --master=http://127.0.0.1:8080 
+docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 /hyperkube proxy --master=http://127.0.0.1:8080
 ```
 
 **测试**
@@ -348,6 +347,7 @@ $ kubectl get nodes
 ```
 
 
+
 ### 3.3  vagrant创建单节点集群
 
 \# vagrant启动每个虚拟机约需1G内存。get.k8s.ios可能需翻墙访问。
@@ -355,7 +355,7 @@ $ kubectl get nodes
 **法1：脚本部署**
 
 ```shell
-export KUBERNATES_PROVIDER=vagrant 
+export KUBERNATES_PROVIDER=vagrant
 export NUM_MINIORS=2
 curl -s3 https://get.k8s.io/ |bash
 ```
@@ -377,13 +377,13 @@ $./kubectl get nodes
 
 ## 4  使用篇
 
-### 4.1   配置文件
+### 4.1 配置文件
 
 K8S的配置文件是YAML格式，每个K8S资源对象都可以通过YAML或JSON格式的Manifest文件表示。Manifest文件定义了资源对象的所有属性如kind, metadata, spec。
 
 namespace 就好比是一个大的分组，一个k8s集群内可以创建多个namespace ，在它之下才能创建deployment ，然后在 deployment 之下可以启动多个名字一样的 pod（名字一样，id不同，pod全名是pod名加id组成的） ，在一个pod内可以启动多个 container ，一般情况下，一个pod内只跑一个容器，有些特殊的场景才会在pod内启动多个容器；创建了 service 可以将 pod 对 k8s 集群内进行dns解析，并且提供负载均衡能力，同一个namespace下的service可以直接使用 service名字进行解析，不同namespace执行的 service 需要加上 servicename.namespace 才能解析，并且，要解析service的话，只能在pod的容器内进行，容器之外无法解析。
 
-关系： namespace - deployment  -  pod - container 
+关系： namespace - deployment  -  pod - container
 
 | 文件             | 说明           | 配置关键信息                              | 资源查看命令           |
 | ---------------- | -------------- | ----------------------------------------- | ---------------------- |
@@ -414,7 +414,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
    name: product
-   labels: 
+   labels:
      name: product
 ```
 
@@ -423,83 +423,83 @@ metadata:
 **Pod示例**
 
 ```yaml
-apiVersion: v1             #指定api版本，此值必须在kubectl apiversion中  
-kind: Pod                  #指定创建资源的角色/类型,如Pod、Deployment、Namespace  
-metadata:                  #资源的元数据/属性  
-  name: web04-pod          #资源的名字，在同一个namespace中必须唯一  
+apiVersion: v1             #指定api版本，此值必须在kubectl apiversion中
+kind: Pod                  #指定创建资源的角色/类型,如Pod、Deployment、Namespace
+metadata:                  #资源的元数据/属性
+  name: web04-pod          #资源的名字，在同一个namespace中必须唯一
   labels:                  #设定资源的标签，详情请见http://blog.csdn.net/liyingke112/article/details/77482384
-    k8s-app: apache  
-    version: v1  
-    kubernetes.io/cluster-service: "true"  
-  annotations:             #自定义注解列表  
-    - name: String         #自定义注解名字  
-spec:  #specification of the resource content 指定该资源的内容  
-  restartPolicy: Always    #表明该容器一直运行，默认k8s的策略，在此容器退出后，会立即创建一个相同的容器  
-  nodeSelector:            #节点选择，先给主机打标签kubectl label nodes kube-node1 zone=node1 
-    zone: node1  
-  containers:  
-  - name: web04-pod        #容器的名字  
-    image: web:apache      #容器使用的镜像地址  
+    k8s-app: apache
+    version: v1
+    kubernetes.io/cluster-service: "true"
+  annotations:             #自定义注解列表
+    - name: String         #自定义注解名字
+spec:  #specification of the resource content 指定该资源的内容
+  restartPolicy: Always    #表明该容器一直运行，默认k8s的策略，在此容器退出后，会立即创建一个相同的容器
+  nodeSelector:            #节点选择，先给主机打标签kubectl label nodes kube-node1 zone=node1
+    zone: node1
+  containers:
+  - name: web04-pod        #容器的名字
+    image: web:apache      #容器使用的镜像地址
     imagePullPolicy: Never #三个选择Always、Never、IfNotPresent，每次启动时检查和更新（从registery）images的策略，
                            # Always，每次都检查
                            # Never，每次都不检查（不管本地是否有）
                            # IfNotPresent，如果本地有就不检查，如果没有就拉取
-    command: ['sh']        #启动容器的运行命令，将覆盖容器中的Entrypoint,对应Dockefile中的ENTRYPOINT  
-    args: ["$(str)"]       #启动容器的命令参数，对应Dockerfile中CMD参数  
-    env:                   #指定容器中的环境变量  
-    - name: str            #变量的名字  
-      value: "/etc/run.sh" #变量的值  
+    command: ['sh']        #启动容器的运行命令，将覆盖容器中的Entrypoint,对应Dockefile中的ENTRYPOINT
+    args: ["$(str)"]       #启动容器的命令参数，对应Dockerfile中CMD参数
+    env:                   #指定容器中的环境变量
+    - name: str            #变量的名字
+      value: "/etc/run.sh" #变量的值
     resources:             #资源管理，请求请见http://blog.csdn.net/liyingke112/article/details/77452630
-      requests:            #容器运行时，最低资源需求，也就是说最少需要多少资源容器才能正常运行  
+      requests:            #容器运行时，最低资源需求，也就是说最少需要多少资源容器才能正常运行
         cpu: 0.1           #CPU资源（核数），两种方式，浮点数或者是整数+m，0.1=100m，最少值为0.001核（1m）
-        memory: 32Mi       #内存使用量  
-      limits:              #资源限制  
-        cpu: 0.5  
-        memory: 32Mi  
-    ports:  
+        memory: 32Mi       #内存使用量
+      limits:              #资源限制
+        cpu: 0.5
+        memory: 32Mi
+    ports:
     - containerPort: 80    #容器开发对外的端口
       name: httpd          #名称
-      protocol: TCP  
+      protocol: TCP
     livenessProbe:         #pod内容器健康检查的设置，详情请见http://blog.csdn.net/liyingke112/article/details/77531584
-      httpGet:             #通过httpget检查健康，返回200-399之间，则认为容器正常  
-        path: /            #URI地址  
-        port: 80  
-        #host: 127.0.0.1   #主机地址  
-        scheme: HTTP  
-      initialDelaySeconds: 180 #表明第一次检测在容器启动后多长时间后开始  
-      timeoutSeconds: 5    #检测的超时时间  
-      periodSeconds: 15    #检查间隔时间  
-      #也可以用这种方法  
-      #exec: 执行命令的方法进行监测，如果其退出码不为0，则认为容器正常  
-      #  command:  
-      #    - cat  
-      #    - /tmp/health  
-      #也可以用这种方法  
-      #tcpSocket: //通过tcpSocket检查健康   
-      #  port: number   
-    lifecycle:             #生命周期管理  
-      postStart:           #容器运行之前运行的任务  
-        exec:  
-          command:  
-            - 'sh'  
-            - 'yum upgrade -y'  
-      preStop:             #容器关闭之前运行的任务  
-        exec:  
-          command: ['service httpd stop']  
+      httpGet:             #通过httpget检查健康，返回200-399之间，则认为容器正常
+        path: /            #URI地址
+        port: 80
+        #host: 127.0.0.1   #主机地址
+        scheme: HTTP
+      initialDelaySeconds: 180 #表明第一次检测在容器启动后多长时间后开始
+      timeoutSeconds: 5    #检测的超时时间
+      periodSeconds: 15    #检查间隔时间
+      #也可以用这种方法
+      #exec: 执行命令的方法进行监测，如果其退出码不为0，则认为容器正常
+      #  command:
+      #    - cat
+      #    - /tmp/health
+      #也可以用这种方法
+      #tcpSocket: //通过tcpSocket检查健康
+      #  port: number
+    lifecycle:             #生命周期管理
+      postStart:           #容器运行之前运行的任务
+        exec:
+          command:
+            - 'sh'
+            - 'yum upgrade -y'
+      preStop:             #容器关闭之前运行的任务
+        exec:
+          command: ['service httpd stop']
     volumeMounts:          #详情请见http://blog.csdn.net/liyingke112/article/details/76577520
-    - name: volume         #挂载设备的名字，与volumes[*].name 需要对应    
-      mountPath: /data     #挂载到容器的某个路径下  
-      readOnly: True  
-  volumes:                 #定义一组挂载设备  
-  - name: volume           #定义一个挂载设备的名字  
-    #meptyDir: {}  
-    hostPath:  
-      path: /opt           #挂载设备类型为hostPath，路径为宿主机下的/opt,这里设备类型支持很多种 
+    - name: volume         #挂载设备的名字，与volumes[*].name 需要对应
+      mountPath: /data     #挂载到容器的某个路径下
+      readOnly: True
+  volumes:                 #定义一组挂载设备
+  - name: volume           #定义一个挂载设备的名字
+    #meptyDir: {}
+    hostPath:
+      path: /opt           #挂载设备类型为hostPath，路径为宿主机下的/opt,这里设备类型支持很多种
 ```
 
 
 
-**Deployment示例** 
+**Deployment示例**
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -510,7 +510,7 @@ metadata:
   labels:
     app: aas
 spec:
-  selector:	
+  selector:
     matchLabels:	#定义pod启动在labels为aas的Deployment内
       app: aas
   revisionHistoryLimit: 5
@@ -524,8 +524,8 @@ spec:
   template:	#定义pod模板:如标签、详细启动参数
     metadata:
       labels:
-        app: aas 
-    spec:	# 
+        app: aas
+    spec:	#
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -542,7 +542,7 @@ spec:
       nodeSelector:
         apptype: memnode
       containers:
-      - name: aas 
+      - name: aas
         readinessProbe:
           httpGet:
             path: /aas/
@@ -587,7 +587,7 @@ spec:
         - mountPath: /mnt/mfs
           readOnly: false
           name: mnt
-        
+
       volumes:
       - name: "localtime"
         hostPath:
@@ -653,18 +653,18 @@ Basic Commands (Beginner):
   expose         使用 replication controller, service, deployment 或者 pod 并暴露它作为一个新的Kubernetes Service
   run            在集群中运行一个指定的镜像
   set            为 objects 设置一个指定的特征
- 
+
 Basic Commands (Intermediate):
   explain        查看资源的文档
   get            显示一个或更多 resources
   edit           在服务器上编辑一个资源
   delete         Delete resources by filenames, stdin, resources and names, or by resources and label selector
- 
+
 Deploy Commands:
   rollout        Manage the rollout of a resource
   scale          为 Deployment, ReplicaSet, Replication Controller 或者 Job 设置一个新的副本数量
   autoscale      自动调整一个 Deployment, ReplicaSet, 或者 ReplicationController 的副本数量
- 
+
 Cluster Management Commands:
   certificate    修改 certificate 资源.
   cluster-info   显示集群信息
@@ -673,7 +673,7 @@ Cluster Management Commands:
   uncordon       标记 node 为 schedulable
   drain          Drain node in preparation for maintenance
   taint          更新一个或者多个 node 上的 taints
- 
+
 Troubleshooting and Debugging Commands:
   describe       显示一个指定 resource 或者 group 的 resources 详情
   logs           输出容器在 pod 中的日志
@@ -683,19 +683,19 @@ Troubleshooting and Debugging Commands:
   proxy          运行一个 proxy 到 Kubernetes API server
   cp             复制 files 和 directories 到 containers 和从容器中复制 files 和 directories.
   auth           Inspect authorization
- 
+
 Advanced Commands:
   apply          通过文件名或标准输入流(stdin)对资源进行配置
   patch          使用 strategic merge patch 更新一个资源的 field(s)
   replace        通过 filename 或者 stdin替换一个资源
   wait           Experimental: Wait for one condition on one or many resources
   convert        在不同的 API versions 转换配置文件
- 
+
 Settings Commands:
   label          更新在这个资源上的 labels
   annotate       更新一个资源的注解
   completion     Output shell completion code for the specified shell (bash or zsh)
- 
+
 Other Commands:
   alpha          Commands for features in alpha
   api-resources  Print the supported API resources on the server
@@ -719,16 +719,16 @@ kubue-proxy：负责服务发现和负载均衡（轮询）。
 
 [1].  Kubernetes中文社区 | 中文文档 http://docs.kubernetes.org.cn/
 [2].  容器十年 ——一部软件交付编年史 https://blog.csdn.net/weixin_43970890/article/details/94569105
-[3].  云原生时代， Kubernetes 多集群架构初探 https://blog.csdn.net/weixin_43970890/article/details/98959354 
-[4].  解锁云原生 AI 技能|在 Kubernetes 上构建机器学习系统 https://blog.csdn.net/weixin_43970890/article/details/97134534 
-[5].  云原生应用 Kubernetes 监控与弹性实践 https://blog.csdn.net/weixin_43970890/article/details/94570862 
-[6].  阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335 
+[3].  云原生时代， Kubernetes 多集群架构初探 https://blog.csdn.net/weixin_43970890/article/details/98959354
+[4].  解锁云原生 AI 技能|在 Kubernetes 上构建机器学习系统 https://blog.csdn.net/weixin_43970890/article/details/97134534
+[5].  云原生应用 Kubernetes 监控与弹性实践 https://blog.csdn.net/weixin_43970890/article/details/94570862
+[6].  阿里云 PB 级 Kubernetes 日志平台建设实践 https://blog.csdn.net/weixin_43970890/article/details/89883335
 [7].  10个业界最流行的Kubernetes发行版 https://blog.csdn.net/RancherLabs/article/details/98478755
-[8].  基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5 
+[8].  基于Docker本地运行Kubernetes https://www.kubernetes.org.cn/doc-5
 
-[9].  Kubernetes之kubectl命令行工具简介、安装配置及常用命令 https://blog.csdn.net/bbwangj/article/details/80814568 
+[9].  Kubernetes之kubectl命令行工具简介、安装配置及常用命令 https://blog.csdn.net/bbwangj/article/details/80814568
 
-[10].  "minikube国内安装步骤"  https://www.jianshu.com/p/18441c7434a6   
+[10].  "minikube国内安装步骤"  https://www.jianshu.com/p/18441c7434a6
 
 [11].  "Minikube - Kubernetes本地实验环境" https://yq.aliyun.com/articles/221687
 

@@ -22,7 +22,7 @@
 
 [TOC]
 
- 
+
 
 ---
 
@@ -44,7 +44,7 @@
 
 - [MySQL SUSE Repository](https://dev.mysql.com/downloads/repo/suse/)
 
-  
+
 
 - [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
 
@@ -56,7 +56,7 @@
 
 - [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 
-  
+
 
 - [MySQL Installer for Windows](https://dev.mysql.com/downloads/windows/)
 
@@ -78,7 +78,7 @@
 
 - [MySQL Native Driver for PHP](https://dev.mysql.com/downloads/connector/php-mysqlnd/)
 
-  
+
 
 - [MySQL Benchmark Tool](https://dev.mysql.com/downloads/benchmarks.html)
 
@@ -126,7 +126,7 @@
 
 
 
-### MySQL版本兼容 
+### MySQL版本兼容
 
 **问题1： 在mysql5.6升级到5.7时常出现show_compatibility_56 报错**
 
@@ -165,7 +165,7 @@ $ yum install mysql-server
 
 
 
-启动后台服务器: 
+启动后台服务器:
 
 ```shell
 mysqld --port=3307 --defaults-file=/data/mysql3307/my.cnf  # 常规启动
@@ -184,12 +184,12 @@ mysqld_safe --port=3307 --defaults-file=/data/mysql3307/my.cnf  #安全方式启
 
 ```shell
 # 安装
-$ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
+$ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
 $ yum install mysql-server
 
 # 设置开启服务，并启动服务
 systemctl enable mysqld.service
-systemctl start mysqld.service 
+systemctl start mysqld.service
 
 # 获取临时密码
 grep 'temporary password' /var/log/mysqld.log
@@ -202,7 +202,7 @@ SET PASSWORD = PASSWORD('xxxxxx');
 
 # 授权远程访问
 GRANT ALL PRIVILEGES ON $DB$.* TO root@'%' IDENTIFIED BY '$PASSWD$' WITH GRANT OPTION;
- 
+
 # 立即激活权限
 flush privileges;
 ```
@@ -223,11 +223,11 @@ $ yum list installed | grep mysql
 $ rpm -qa|grep mysql
 
 # 下载包 & 安装 mysql-community-release-el7-5.noarch.rpm 5.7.5 / 5.7.8
-$ wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
-$ rpm -ivh mysql57-community-release-el7-8.noarch.rpm 
+$ wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+$ rpm -ivh mysql57-community-release-el7-8.noarch.rpm
 
-# 或者直接在线安装 
-$ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
+# 或者直接在线安装
+$ rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
 
 # 安装前先禁止默认 mysql
 $ yum module disable mysql
@@ -279,7 +279,7 @@ $ yum install mysql-community-server
 *  SELECT语句的JOIN语法：这些语法用于SELECT语句的*table_references*部分和多表DELETE和UPDATE语句：
 *  SELECT语句的UNION语法
 
- 
+
 
 **INSERT：**
 ```mysql
@@ -303,7 +303,7 @@ INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
   [ ON DUPLICATE KEY UPDATE col_name=expr, ... ]
 ```
 
- 
+
 
 **UPDATE:**
 
@@ -324,7 +324,7 @@ UPDATE [LOW_PRIORITY] [IGNORE] table_references
 ```
 UPDATE语法可以用新值更新原有表行中的各列。
 
- 
+
 
 **DELETE:**
 
@@ -374,11 +374,11 @@ DO用于执行表达式，但是不返回任何结果。DO是SELECT expr的简�
 
 DO主要用于执行有副作用的函数，比如RELEASE_LOCK()。
 
- 
+
 
 ### 2.1.1  常用SQL语句
 
-#### 2.1.1.1     SELECT 
+#### 2.1.1.1     SELECT
 
 **1)**   **查询结果添加序列号**
 
@@ -399,8 +399,8 @@ SELECT @rowno:=@rowno+1 AS rowno, name, room_id FROM anchor LIMIT 1,5;
 
 结果集序列号
 ```mysql
-SELECT name,`room_fans`, 
-(SELECT COUNT(*)+1 FROM anchor WHERE a.`room_fans`<`room_fans`) AS sort 
+SELECT name,`room_fans`,
+(SELECT COUNT(*)+1 FROM anchor WHERE a.`room_fans`<`room_fans`) AS sort
 FROM anchor as a;
 ```
 
@@ -409,7 +409,7 @@ FROM anchor as a;
 
 注意：NAME使用LIKE等于完全未使用索引，另外GROUP BY也要消耗时间。数据十万以上就很慢了，需30秒以上。
 ```mysql
-SELECT name,room_fans, (SELECT COUNT(*)+1 FROM anchor WHERE a.room_fans<room_fans) AS sort FROM anchor as a WHERE name LIKE '%沈%' ORDER BY room_fans LIMIT 10 
+SELECT name,room_fans, (SELECT COUNT(*)+1 FROM anchor WHERE a.room_fans<room_fans) AS sort FROM anchor as a WHERE name LIKE '%沈%' ORDER BY room_fans LIMIT 10
 ```
 
 
@@ -434,16 +434,16 @@ REPLACE INTO table_name(col_name, ...) VALUES (...);
  REPLACE INTO table_name SET col_name='value',
 ```
 
-方案三：ON DUPLICATE KEY UPDATE 
+方案三：ON DUPLICATE KEY UPDATE
 
 `INSERT INTO table (a, b, c) VALUES (1, 2, 3) ON DUPLICATE KEY UPDATE c=c+1; UPDATE table SET c=c+1 WHERE a=1;`
 
- 
+
 
 示例1:
 ```mysql
-INSERT ignore INTO star (name, name_en, realname, sex, nationality, occupation, born, height, weight, bust, waist, hips, blood, star, hometown, hobbies, intro, source_url, head_url, profile_url, groups) 
-    SELECT name, name_en, realname, sex, nationality, occupation, born, height, weight, bust, waist, hips, blood, star, hometown, hobbies, intro, source_url, head_url, profile_url, 
+INSERT ignore INTO star (name, name_en, realname, sex, nationality, occupation, born, height, weight, bust, waist, hips, blood, star, hometown, hobbies, intro, source_url, head_url, profile_url, groups)
+    SELECT name, name_en, realname, sex, nationality, occupation, born, height, weight, bust, waist, hips, blood, star, hometown, hobbies, intro, source_url, head_url, profile_url,
     groups from star2;
 ```
 
@@ -451,26 +451,26 @@ INSERT ignore INTO star (name, name_en, realname, sex, nationality, occupation, 
 示例1.2:
 ```mysql
 INSERT ignore INTO anchor2(name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url)
-    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url 
-    FROM anchor 
+    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url
+    FROM anchor
     WHERE source_url NOT LIKE 'http://www.panda%';
 ```
 
 
 示例2:
 ```mysql
-REPLACE INTO anchor2(name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url) 
-    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url 
-    FROM anchor 
+REPLACE INTO anchor2(name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url)
+    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url
+    FROM anchor
     WHERE source_url NOT LIKE 'http://www.panda%';
 ```
 
 
 示例3:
 ```mysql
-INSERT INTO anchor2(name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url) 
-    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url 
-    FROM anchor 
+INSERT INTO anchor2(name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url)
+    SELECT name,room_id,room_ctime,room_utime,room_title,room_classify,room_classify_b,room_fans,room_popularitys,source_url,head_url
+    FROM anchor
     WHERE source_url NOT LIKE 'http://www.panda%' ON DUPLICATE KEY UPDATE anchor2.name=anchor.name;
 ```
 
@@ -484,7 +484,7 @@ UPDATE cast SET blood=replace(blood,'型','') WHERE blood LIKE '%型'
 UPDATE cast SET blood=replace(blood,'-','') WHERE blood LIKE '----'
 ```
 
-SELECT语句获取值，必需是单值 
+SELECT语句获取值，必需是单值
 ```mysql
 UPDATE cast SET bust=(select bust from cast WHERE bust LIKE '%カップ%')
 ```
@@ -504,7 +504,7 @@ ALTER TABLE star ADD tags VARCHAR (255) DEFAULT NULL;
 
 INSERT INTO tbl_name(field1,field2…) VALUES(value1,value2…)
 
- 
+
 
 **批量更新：**
 *  单次更新：最慢，如update test_tbl set dr='2' where id=1;
@@ -515,36 +515,36 @@ INSERT INTO tbl_name(field1,field2…) VALUES(value1,value2…)
 ```mysql
 create temporary table tmp(id int(4) primary key,dr varchar(50));
  insert into tmp values (0,'gone'), (1,'xx'),...(m,'yy');
- update test_tbl, tmp set test_tbl.dr=tmp.dr where test_tbl.id=tmp.id; 
+ update test_tbl, tmp set test_tbl.dr=tmp.dr where test_tbl.id=tmp.id;
 ```
 注意：这种方法需要用户有temporary 表的create 权限。
 
- 
+
 
 replace into 和insert into on duplicate key update的不同在于：
  - replace into　操作本质是对重复的记录先delete 后insert，如果更新的字段不全会将缺失的字段置为缺省值
  - insert into 则是只update重复记录，不会改变其它字段。
 
- 
+
 
 ## 2.2  MySQL列类型
 
-**bigint** 
- 从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。 
- P.S. bigint已经有长度了，在mysql建表中的length，只是用于显示的位数 
+**bigint**
+ 从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
+ P.S. bigint已经有长度了，在mysql建表中的length，只是用于显示的位数
 
-**int** 
- 从 -2^31 (-2,147,483,648) 到 2^31 – 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。 
+**int**
+ 从 -2^31 (-2,147,483,648) 到 2^31 – 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。
 
 **smallint **
- 从 -2^15 (-32,768) 到 2^15 – 1 (32,767) 的整型数据。存储大小为 2 个字节。 
+ 从 -2^15 (-32,768) 到 2^15 – 1 (32,767) 的整型数据。存储大小为 2 个字节。
 
-**tinyint** 
+**tinyint**
  从 0 到 255 的整型数据。存储大小为 1 字节。
 
 int(M) 在 integer 数据类型中，M 表示最大显示宽度。在 int(M) 中，M 的值跟 int(M) 所占多少存储空间并无任何关系。和数字位数也无关系 int(3)、int(4)、int(8) 在磁盘上都是占用 4 btyes 的存储空间。
 
- 
+
 
 表格 1 数字类型
 
@@ -565,7 +565,7 @@ int(M) 在 integer 数据类型中，M 表示最大显示宽度。在 int(M) 中
 
 备注：辨別Null与Not Null ：Null为允许储存空值(Null)
 
- 
+
 
 表格 2 数值类型
 
@@ -582,13 +582,13 @@ int(M) 在 integer 数据类型中，M 表示最大显示宽度。在 int(M) 中
 
 备注：辨別ZeroFill：当宣告关键字ZeroFill为自动填满0，如 000021
 
- 
+
 
 ## 2.3  使用用户变量
 
 你可以清空MySQL用户变量以记录结果，不必将它们保存到客户端的临时变量中。（参见 [9.3节，“用户变量”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/language-structure.html#variables).）。
 
- 
+
 
 **用户变量**
 
@@ -602,7 +602,7 @@ SET @var_name = expr [, @var_name = expr] ...
 
 对于SET，可以使用=或:=作为分配符。分配给每个变量的expr可以为整数、实数、字符串或者NULL值。
 
- 
+
 
 例如，要找出价格最高或最低的物品的，其方法是：
 ```mysql
@@ -627,7 +627,7 @@ mysql> SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
 
 时间和日期类型有五种：DATE（格式：YY-MM-DD）, TIME（格式：HH:MM:SS）, DATETIME, TIMESTAMP（格式：秒数）, YEAR（格式：YYYY）。
 
- 
+
 
 表格 3 日期时间
 
@@ -639,18 +639,18 @@ mysql> SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
 | TimeStamp | yyyymmddhhmmss                       |      |
 | Year      | 年份yyyy                             |      |
 
- 
+
 
 ### 2.4.2  日期和时间的函数
 
 1） 获取当前日期时间的函数：
-*  NOW：返回DATETIME类型YYYY-MM-DD HH:MM:SS  
+*  NOW：返回DATETIME类型YYYY-MM-DD HH:MM:SS
 *  CURRENT_TIMESTAMP：同NOW
 *  CURDATE: 返回DATE类型YYMM-MM-DD
 *  CURTIME: 返回TIME类型HH:MM:SS
 *  UNNIX_TIMESTAMP：返回1970年至今的秒数
 
- 
+
 
 **2）时间戳函数TIMESTAMP：**
 *  unix_timestamp：返回1970年至今的秒数。
@@ -662,7 +662,7 @@ mysql> select unix_timestamp();
 | unix_timestamp() |
 +------------------+
 |    1490274715 |
- 
+
 mysql> select from_unixtime(1490273328, '%Y-%m-%d %H:%i:%S');
 +------------------------------------------------+
 | from_unixtime(1490273328, '%Y-%m-%d %H:%i:%S') |
@@ -677,37 +677,37 @@ mysql> select from_unixtime(1490273328, '%Y-%m-%d %H:%i:%S');
 
 *月份操作:：PERIOD_ADD，PERIOD_DIFF
 
-PERIOD_ADD(P,N) 
-     增加N个月到阶段P（以格式YYMM或YYYYMM)。以格式YYYYMM返回值。注意阶段参数P不是日期值。 
+PERIOD_ADD(P,N)
+     增加N个月到阶段P（以格式YYMM或YYYYMM)。以格式YYYYMM返回值。注意阶段参数P不是日期值。
      ```mysql
-     mysql> select PERIOD_ADD(9801,2); 
-     -> 199803 
+     mysql> select PERIOD_ADD(9801,2);
+     -> 199803
      ```
 
 *日期操作
 
-DATE_ADD(date, INTERVAL expr type) 
+DATE_ADD(date, INTERVAL expr type)
 
-DATE_SUB(date, INTERVAL expr type) 
+DATE_SUB(date, INTERVAL expr type)
 
-ADDDATE(date, INTERVAL expr type) 
+ADDDATE(date, INTERVAL expr type)
 
-SUBDATE(date, INTERVAL expr type) 
+SUBDATE(date, INTERVAL expr type)
 
 参数说明：
 
 *date* 参数是合法的日期表达式。*expr* 参数是您希望添加的时间间隔。
  type 参数可以是下列值：
 
-MICROSECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, 
+MICROSECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR,
 
-SECOND_MICROSECOND, MINUTE_MICROSECOND, MINUTE_SECOND, 
+SECOND_MICROSECOND, MINUTE_MICROSECOND, MINUTE_SECOND,
 
-HOUR_MICROSECOND, HOUR_SECOND, HOUR_MINUTE, 
+HOUR_MICROSECOND, HOUR_SECOND, HOUR_MINUTE,
 
 DAY_MICROSECOND, DAY_SECOND, DAY_MINUTE, DAY_HOUR, YEAR_MONT
 
- 
+
 
 **示例：**
 ```sql
@@ -739,26 +739,26 @@ mysql> SELECT EXTRACT(YEAR FROM '1999-07-02');
 
 * 按年汇总，统计： `SELECT date_format(ctime, '%Y') AS YEAR, count(*) FROM news GROUP BY YEAR;`
 * 按月汇总，统计：`SELECT date_format(ctime, '%Y-%m') AS MONTH, count(*) FROM news GROUP BY MONTH;`
-* 按季度汇总，统计： 
+* 按季度汇总，统计：
 ```mysql
-SELECT date_format(ctime, '%Y') AS YEAR,FLOOR((date_format(ctime, '%m')+2)/3) AS QUARTER, count(*) 
-    FROM news 
+SELECT date_format(ctime, '%Y') AS YEAR,FLOOR((date_format(ctime, '%m')+2)/3) AS QUARTER, count(*)
+    FROM news
     GROUP BY concat(YEAR,QUARTER);
 ```
 
-**按日汇总，统计：** 
+**按日汇总，统计：**
 
 `SELECT date_format(ctime, '%Y-%m-%d') AS DAY, count(*) FROM news GROUP BY DAY;`
 
-**按时汇总，统计：** 
+**按时汇总，统计：**
 
 `SELECT date_format(ctime, '%Y-%m-%d %H') AS HOUR,count(*) FROM news GROUP BY HOUR;`
 
 **某天按时统计：**
 ```mysql
-SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*) 
-    FROM news 
-    WHERE date_format(ctime, '%Y-%m-%d')='2016-06-20' 
+SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*)
+    FROM news
+    WHERE date_format(ctime, '%Y-%m-%d')='2016-06-20'
     GROUP BY HOUR;
 ```
 
@@ -782,7 +782,7 @@ SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*)
 **本周统计:**
 `SELECT * FROM tbl_name WHERE month(my_time1) = month(curdate()) and week(my_time2) = week(curdate())`
 
- 
+
 
 **2）** **查询指定时间段的数据行**
 
@@ -791,7 +791,7 @@ SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*)
 查询一天：
 ```mysql
   SELECT * FROM tbl_name WHERE to_days(column_time) = to_days(now());
-  SELECT * FROM tbl_name WHERE date(column_time) = curdate(); 
+  SELECT * FROM tbl_name WHERE date(column_time) = curdate();
 ```
 
 查询一周：
@@ -812,11 +812,11 @@ N天内记录:
 
 `SELECT * FROM tbl_name WHERE TO_DAYS(NOW())-TO_DAYS(时间字段)<=N`
 
- 
+
 
 //获取指定时间段的数据行统计数：时间戳秒数
 ```mysql
-select count(*) from xyq7 
+select count(*) from xyq7
 where insert_time<unix_timestamp() and insert_time>unix_timestamp('2016-04-13');
 ```
 
@@ -846,18 +846,18 @@ Select * From user Where DATE_FORMAT(birthday,' %m-%d') >= '06-03' and DATE_FORM
 
 旧方案：用脚本写好程序,用linux的crontab定时执行。
 
- 
+
 
 **第一步：编写存储程序（需了解基本的存储程序的语法）**
 
 **第二步：开启定时器**
 [show](http://localhost/phpMyAdmin/url.php?url=https://dev.mysql.com/doc/refman/5.5/en/show-variables.html) [VARIABLES](http://localhost/phpMyAdmin/url.php?url=https://dev.mysql.com/doc/refman/5.5/en/show-variables.html) LIKE “event”
 | event_scheduler | OFF  |
-```mysql 
+```mysql
 $ show VARIABLES
 | --------------- | ---- |
 |                 |      |
-$set global event_scheduler=1; 
+$set global event_scheduler=1;
 ```
 
 **第三步：创建定时任务**
@@ -865,15 +865,15 @@ $set global event_scheduler=1;
 语法：
 
 CREATE EVENT 的语法如下：
-```mysql 
+```mysql
 CREATE EVENT
 [IF NOT EXISTS] ---------------------------------------------*标注1
 event_name -----------------------------------------------------*标注2
 
-ON SCHEDULE schedule ------------------------------------*标注3 
+ON SCHEDULE schedule ------------------------------------*标注3
 [ON COMPLETION [NOT] PRESERVE] -----------------*标注4
-[ENABLE | DISABLE] ----------------------------------------*标注5 
-[COMMENT 'comment'] --------------------------------------*标注6 
+[ENABLE | DISABLE] ----------------------------------------*标注5
+[COMMENT 'comment'] --------------------------------------*标注6
 DO sql_statement -----------------------------------------------*标注7
 ```
 
@@ -881,7 +881,7 @@ DO sql_statement -----------------------------------------------*标注7
 
 ## 2.5  集合运算
 
-在MySQL中，只支持Union(并集)集合运算，而对于交集Intersect和差集Except并不支持。那么如何才能在MySQL中实现交集和差集呢？ 
+在MySQL中，只支持Union(并集)集合运算，而对于交集Intersect和差集Except并不支持。那么如何才能在MySQL中实现交集和差集呢？
 
  一般在MySQL中，我们可以通过in和not in来间接实现交集和差集，当然也有一定局限性，面对少量数据还可以，但数据量大了效率就会变得很低。
 
@@ -889,33 +889,33 @@ DO sql_statement -----------------------------------------------*标注7
 
 **求差集**：使用not in 求差集，但效率低
 
-```mysql 
-SELECT t1.* FROM t1  
-WHERE 
-name NOT IN 
-(SELECT name FROM t2) 
+```mysql
+SELECT t1.* FROM t1
+WHERE
+name NOT IN
+(SELECT name FROM t2)
 ```
 
 
 
 **求交集**： 表t1/t2中，字段id、name和age都一样
 
-```mysql 
-SELECT id, NAME, age, COUNT(*) 
-  FROM (SELECT id, NAME, age 
-    FROM t1 
-    UNION ALL 
-    SELECT id, NAME, age 
-    FROM t2 
-    ) a 
-  GROUP BY id, NAME, age 
-  HAVING COUNT(*) > 1 
+```mysql
+SELECT id, NAME, age, COUNT(*)
+  FROM (SELECT id, NAME, age
+    FROM t1
+    UNION ALL
+    SELECT id, NAME, age
+    FROM t2
+    ) a
+  GROUP BY id, NAME, age
+  HAVING COUNT(*) > 1
 ```
 结果：
 ```
-  id NAME  age COUNT(*) 
-  1  小王   10 2 
-  4  hello  40 2 
+  id NAME  age COUNT(*)
+  1  小王   10 2
+  4  hello  40 2
 ```
 
 
@@ -925,7 +925,7 @@ SELECT id, NAME, age, COUNT(*)
 ## 3.1  触发器
 
 MySQL 5.1包含对触发程序的支持。触发程序是与表有关的命名数据库对象，当表上出现特定事件时，将激活该对象。例如，下述语句将创建1个表和1个INSERT触发程序。触发程序将插入表中某一列的值加在一起：
-```mysql 
+```mysql
 mysql> CREATE TABLE account (acct_num INT, amount DECIMAL(10,2));
 mysql> CREATE TRIGGER ins_sum BEFORE INSERT ON account
   -> FOR EACH ROW SET @sum = @sum + NEW.amount;
@@ -936,7 +936,7 @@ mysql> CREATE TRIGGER ins_sum BEFORE INSERT ON account
 *  删除触发器：DROP TRIGGER [IF EXISTS] [schema_name.]trigger_name
 *  创建触发器：CREATE TRIGGER trigger_name trigger_time trigger_event ON tbl_name FOR EACH ROW trigger_stmt
 
- 
+
 
 **触发器创建语句
 ** CREATE TRIGGER trigger_name
@@ -960,7 +960,7 @@ INSERT 型触发器：插入某一行时激活触发器，可能通过 INSERT、
  UPDATE 型触发器：更改某一行时激活触发器，可能通过 UPDATE语句触发；
  DELETE 型触发器：删除某一行时激活触发器，可能通过 DELETE、REPLACE语句触发。
 
- 
+
 
 **BEGIN … END** **详解
 ** 在MySQL中，BEGIN … END 语句的语法为：
@@ -969,7 +969,7 @@ BEGIN
  [statement_list]
  END
 
- 
+
 
 **NEW** **与 OLD** **详解**
 
@@ -992,73 +992,73 @@ BEGIN
  ②SQL 执行失败时，AFTER 型触发器不会触发。
  ③AFTER 类型的触发器执行失败，SQL 会回滚。
 
- 
 
-IF表达式: 
+
+IF表达式:
 *  IF(expr1,expr2,expr3) 按顺序返回不为NULL的一个。
 *  IFNULL(expr1,expr2) 默认结果值为两个表达式中更加“通用”的一个(非NULL值)，顺序为STRING、 REAL或 INTEGER
 
- 
+
 
 **流程控制语句：IF/ELSEIF/ELSE**
 
-IF search_condition THEN 
+IF search_condition THEN
 
-  statement_list 
+  statement_list
 
-[ELSEIF search_condition THEN] 
+[ELSEIF search_condition THEN]
 
-  statement_list ... 
+  statement_list ...
 
-[ELSE 
+[ELSE
 
-  statement_list] 
+  statement_list]
 
-END IF 
+END IF
 
 
 ```sql
-示例一:  
-delimiter //   
-create trigger InsertUser  
-before insert on user  
-for each row  
-Begin  
-insert into user_group(uid,gid) values(new.uid,'group4444444444');  
-end;//   
-delimiter ;   
- 
-示例二  
-delimiter //   
-create trigger InsertUser  
-before insert on user  
-for each row  
-Begin  
-IF new.Type=2 then  
-insert into user_group(uid,gid) values(new.uid,'group4444444444');  
-else  
-insert into user_group(uid,gid) values(new.uid,'group55555555555')  
-END IF;   
-end;//   
-delimiter ;   
- 
-示例三：  
-delimiter //   
-create trigger InsertUser  
-before insert on user  
-for each row  
-Begin  
+示例一:
+delimiter //
+create trigger InsertUser
+before insert on user
+for each row
+Begin
+insert into user_group(uid,gid) values(new.uid,'group4444444444');
+end;//
+delimiter ;
+
+示例二
+delimiter //
+create trigger InsertUser
+before insert on user
+for each row
+Begin
+IF new.Type=2 then
+insert into user_group(uid,gid) values(new.uid,'group4444444444');
+else
+insert into user_group(uid,gid) values(new.uid,'group55555555555')
+END IF;
+end;//
+delimiter ;
+
+示例三：
+delimiter //
+create trigger InsertUser
+before insert on user
+for each row
+Begin
 IF new.room_classify_b!=''  THEN
-  -- do nothing -- 
-set @tmp=1; 
-ELSEIF new.type=1 then  
-insert into user_group(uid,gid) values(new.uid,'578d3369633b47bd9c1fe8bf905cbfb1');  
-END IF;   
-IF new.type=2 then  
- insert into user_group(uid,gid) values(new.uid,'387bcd57fc5a4c3c9de83ee210fef661');  
-END IF;   
-end;//   
-delimiter ;  
+  -- do nothing --
+set @tmp=1;
+ELSEIF new.type=1 then
+insert into user_group(uid,gid) values(new.uid,'578d3369633b47bd9c1fe8bf905cbfb1');
+END IF;
+IF new.type=2 then
+ insert into user_group(uid,gid) values(new.uid,'387bcd57fc5a4c3c9de83ee210fef661');
+END IF;
+end;//
+delimiter ;
 ```
 
 
@@ -1068,7 +1068,7 @@ mysql update new row is not allow in after trigger
 
 解释：如果本表INSERT插入一行时，对本表的另一字段值进行修改，需要用到BEFORE而不能用AFTER。UPDATE时对本表的另一字段值进行修改，也只能用BEFORE。
 
- 
+
 
 ## 3.2  视图
 
@@ -1079,7 +1079,7 @@ mysql update new row is not allow in after trigger
 *  使用DROP VIEW销毁视图。
 *  使用SHOW CREATE VIEW显示视图元数据。
 
- 
+
 
 定义:视图是从一个或几个基本表导出的表，它与基本表不同，是一个虚表。
 
@@ -1087,33 +1087,33 @@ mysql update new row is not allow in after trigger
 
  1.简化操作,不用进行多表查询。
 
- 2.当不同种类的用用户共享同一个数据库时,非常灵活,(用户以不同的方式看待同一数据. 
+ 2.当不同种类的用用户共享同一个数据库时,非常灵活,(用户以不同的方式看待同一数据.
 
  3.视图对重构数据库提供了一定程度的逻辑独立性。 数据的逻辑独立性是指:如增加新的关系或对原有的关系增加新的字段,用户的应用程序不受影响.
 
- 
+
 
 比如：一个student表包括了全校所有院系的账户；可以创建院系视图只针对某院系的学生。
 
 **高速查询缓存**
 
-```mysql 
+```mysql
 mysql> SHOW VARIABLES LIKE 'have_query_cache';**
 mysql> SET SESSION query_cache_type = OFF;
 ```
 要控制可以被缓存的具体查询结果的最大值，应设置query_cache_limit变量。 默认值是1MB。
 
- 
+
 
 为了监视查询缓存性能，使用SHOW STATUS查看缓存状态变量：
-```mysql 
+```mysql
 mysql> SHOW STATUS LIKE 'Qcache%';
 ```
 
 
 ## 3.3  复制Replication~主从库配置
 
-  ![image-20191201161848343](../../media/bigdata/db_mysql_001.png)                             
+  ![image-20191201161848343](../../media/bigdata/db_mysql_001.png)
 
 图 1 MySQL主从复制运行图
 
@@ -1121,7 +1121,7 @@ mysql> SHOW STATUS LIKE 'Qcache%';
 *  master：master开启二进制日志，主服务器将更新写入二进制日志文件，并维护文件的一个索引以跟踪日志循环。这些日志可以记录发送到从服务器的更新。
 *  slave：slave的I/O thread读取master的二进制日志，将数据放到复制日志relay log；slave的SQL线程从复制日志读取数据并写入到数据库。当一个从服务器连接主服务器时，它通知主服务器从服务器在日志中读取的最后一次成功更新的位置。从服务器接收从那时起发生的任何更新，然后封锁并等待主服务器通知新的更新。
 
- 
+
 
 MySQL支持单向、异步复制，复制过程中一个服务器充当主服务器，而一个或多个其它服务器充当从服务器。(这与*同步*复制可以进行对比，*同步*复制是MySQL簇的一个特征—参见[第17章：](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/ndbcluster.html)[*MySQL**簇*](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/ndbcluster.html)）。
 
@@ -1133,7 +1133,7 @@ MySQL支持单向、异步复制，复制过程中一个服务器充当主服务
 *  使用复制的另一个好处是可以使用一个从服务器执行备份，而不会干扰主服务器。在备份过程中主服务器可以继续处理更新。参见[5.9.1节，“数据库备份”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/database-administration.html#backup)。
 *  发扬不同表引擎的优点。目前Myisam表的查询速度比innodb略快，而写入并发innodb比myIsam要好。那么，我们可以使用innodb作为master，处理高并发写入，使用master作为slave，接受查询。或在myisam slave中建立全文索引，解决innodb无全文索引的弱点。
 
- 
+
 
 **配置步骤**
 
@@ -1141,7 +1141,7 @@ MySQL支持单向、异步复制，复制过程中一个服务器充当主服务
 2.  在主服务器上为服务器设置一个连接账户。该账户必须授予REPLICATION SLAVE权限。
 
 配置用户复制权限：
-```mysql 
+```mysql
 mysql> create user repl;  //创建新用户
 mysql> GRANT REPLICATION SLAVE ON *.*
   -> TO 'repl'@'%.mydomain.com' IDENTIFIED BY 'slavepass';
@@ -1150,7 +1150,7 @@ mysql> GRANT REPLICATION SLAVE ON *.*
 3. 执行FLUSH TABLES WITH READ LOCK语句清空所有表和块写入语句：
 `mysql> FLUSH TABLES WITH READ LOCK;`
 
-4. 主从服务器的配置my.cn(linux)/my.ini(windows). 
+4. 主从服务器的配置my.cn(linux)/my.ini(windows).
 
 确保主服务器主机上my.cnf文件的[mysqld]部分包括一个log-bin选项。该部分还应有一个server-id=Master_id选项，其中master_id必须为1到232–1之间的一个正整数值。
 
@@ -1163,11 +1163,11 @@ mysql> GRANT REPLICATION SLAVE ON *.*
 server-id=1
 log-bin=master-bin
 log-bin-index=master-bin.index
- 
+
 # 可选配置项
 expire_logs_days=0 //日志永不过期
-binlog-do-db=data //需要同步的二进制数据库名； 
-log-slave-updates //把更新的记录写到二进制文件中； 
+binlog-do-db=data //需要同步的二进制数据库名；
+log-slave-updates //把更新的记录写到二进制文件中；
  slave-skip-errors //跳过错误，继续执行复制；
 # 忽略以下mysql内部表
 replicate-ignore-db = mysql
@@ -1184,11 +1184,11 @@ binlog-ignore-db = information_schema
 server-id=2
 relay-log=slave-relay-bin
 relay-log-index=slave-relay-bin.index
- 
+
 # 可选配置项
-replicate-ignore-db=mysql  //不需要备份的数据库； 
+replicate-ignore-db=mysql  //不需要备份的数据库；
  replicate-do-db=data  //需要备份的数据库
- 
+
 # 注：以下配置导致mysql不能正常启动，改在mysql终端用**change master to**执行
 master-host=192.168.1.220
 master-port=3306
@@ -1202,7 +1202,7 @@ report-host=192.168.1.220
 
 说明：可在主服务器用show master status获取master_log_file的文件名和pos
 ```INI
-change master to master_host='192.168.1.220', 
+change master to master_host='192.168.1.220',
 master_port=3306,
 master_user='repl',
 master_password='12341234',
@@ -1218,7 +1218,7 @@ mysql> START SLAVE；
 
 **管理主从**
 * 主服务器
-```mysql 
+```mysql
 mysql> show master status；
 +-------------------+----------+--------------+------------------+
 | File       | Position | Binlog_Do_DB | Binlog_Ignore_DB |
@@ -1228,8 +1228,8 @@ mysql> show master status；
 ```
 
 * 从服务器
-命令：reset slave; start slave, stop slave, change master to xxx; 
-```mysql 
+命令：reset slave; start slave, stop slave, change master to xxx;
+```mysql
 mysql> show slave status；
 | Slave_IO_State               | Master_Host        | Master_User   | Master_Port           | Connect_Retry    | Master_Log_File   |
 | -------------------------------- | ---------------------- | ----------------- | ------------------------- | -------------------- | --------------------- |
@@ -1279,23 +1279,23 @@ $ /usr/local/mysql-proxy/bin/mysql-proxy --plugins=proxy --plugins=admin --defau
 *  --plugins=admin  #指定admin插件
 *  --defaults-file=mysql-proxy.conf   #指定配置文件
 
- 
+
 
 **启动测试**
  登录管理地址查看当前状态
 
 `$ mysql -uadmin -padmin -h192.168.1.220 -P4041`
 
- 
+
 
 **2) mysqlnd_ms实现mysql读写分离
 ** mysqlnd_ms是mysqlnd的一个插件，该插件实现了连接保存和切换、负载均衡、读写分离的功能。要想使用mysqlnd_ms的读写分离功能必须在安装php时使用–with-mysqlnd。mysqlnd实现的功能是可以不需要在php服务器上安装mysql，在php5.3之前编译安装php需要通过–with-mysql=/path/to/mysql指定mysql的安装路径。
 
 ### 3.3.2  双主互备
 
- 
 
- 
+
+
 
 ### 3.3.3  常见问题
 
@@ -1303,7 +1303,7 @@ $ /usr/local/mysql-proxy/bin/mysql-proxy --plugins=proxy --plugins=admin --defau
 
 选择复制较全的一台从机升级为主机。
 
- 
+
 
 ## 3.4 分区存储
 
@@ -1341,8 +1341,8 @@ CREATE TABLE `test`  (
 增加分区
 
 ```mysql
-alter table test partition by range(id)(    
-  partition p1 values less than (10000),    
+alter table test partition by range(id)(
+  partition p1 values less than (10000),
   partition p2 values less than (20000));
 );
 ```
@@ -1353,17 +1353,17 @@ alter table test partition by range(id)(
 alter table test drop partition p1;
 ```
 
-删除所有分区： 
+删除所有分区：
 
-`Alter table test remove partitioning; `   
+`Alter table test remove partitioning; `
 
- 
+
 
 查看分区信息
 
 ```mysql
-SELECT PARTITION_NAME, TABLE_ROWS 
-FROM INFORMATION_SCHEMA.PARTITIONS 
+SELECT PARTITION_NAME, TABLE_ROWS
+FROM INFORMATION_SCHEMA.PARTITIONS
 WHERE TABLE_NAME = 'test';
 ```
 
@@ -1419,11 +1419,11 @@ PARTITION BY RANGE COLUMNS(hiredate) ) (
 验证
 
 ```mysql
-mysql> insert into range_columns select * from test;                                                                    
+mysql> insert into range_columns select * from test;
 Query OK, 1000000 rows affected (9.20 sec)
 Records: 1000000  Duplicates: 0  Warnings: 0
 
-mysql> explain partitions select * from range_columns where hiredate >= '20151207124503' and hiredate<='20151210111230'; 
+mysql> explain partitions select * from range_columns where hiredate >= '20151207124503' and hiredate<='20151210111230';
 +----+-------------+---------------+--------------+------+---------------+------+---------+------+--------+-------------+
 | id | select_type | table         | partitions   | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
 +----+-------------+---------------+--------------+------+---------------+------+---------+------+--------+-------------+
@@ -1436,12 +1436,12 @@ mysql> explain partitions select * from range_columns where hiredate >= '2015120
 
 mysql重建表分区并保留数据的方法：
 
- 1. 创建与原始表一样结构的新表，新分区。 
+ 1. 创建与原始表一样结构的新表，新分区。
  2.  将原始表中数据复制到新表。  `insert into log2 select * from log;`
 
-3. 删除原始表。 
+3. 删除原始表。
 
-4. 将新表名称改为原始表名称。 
+4. 将新表名称改为原始表名称。
 
 
 
@@ -1451,7 +1451,7 @@ mysql重建表分区并保留数据的方法：
 
 ```mysql
 #1.开启事件调度器（默认关闭）
-SET GLOBAL event_scheduler = ON;  
+SET GLOBAL event_scheduler = ON;
 #2.对已有数据先进行分区
 ALTER TABLE position PARTITION BY RANGE(TO_DAYS(date))
 (
@@ -1461,7 +1461,7 @@ ALTER TABLE position PARTITION BY RANGE(TO_DAYS(date))
 )
 ```
 
-3. 分区脚本 
+3. 分区脚本
 
 ```mysql
 use test;
@@ -1480,13 +1480,13 @@ drop procedure if exists auto_set_partitions ||
 --            如果分区类型为2则表示每个分区的间隔为 gaps年
 create procedure auto_set_partitions (in databasename varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,in tablename varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, in partition_number int, in partitiontype int, in gaps int)
 L_END:
-begin     
+begin
     declare max_partition_description varchar(255) default '';
-    declare p_name varchar(255) default 0;       
-    declare p_description varchar(255) default 0;   
-    declare isexist_partition varchar(255) default 0; 
+    declare p_name varchar(255) default 0;
+    declare p_description varchar(255) default 0;
+    declare isexist_partition varchar(255) default 0;
  declare i int default 1;
-  
+
  -- 查看对应数据库对应表是否已经有手动分区[自动分区前提是必须有手动分区]
     select partition_name into isexist_partition from information_schema.partitions where table_schema = databasename  and table_name = tablename limit 1;
     -- 如果不存在则打印错误并退出存储过程
@@ -1494,37 +1494,37 @@ begin
        select "partition table not is exist" as "ERROR";
        leave L_END;
     end if;
- 
+
     -- 获取最大[降序获取]的分区描述[值]
     select partition_description into max_partition_description  from information_schema.partitions where table_schema = databasename  and table_name = tablename order by partition_description desc limit 1;
-   
+
     -- 如果最大分区没有,说明没有手动分区,则无法创建自动分区
     if max_partition_description <=> "" then
        select "partition table is error" as "ERROR";
        leave L_END;
     end if;
- 
+
     -- 替换前后的单引号[''两个引号表示一个单引号的转义]
     -- set max_partition_description = REPLACE(max_partition_description, '''', '');
      -- 或使用如下语句
      set max_partition_description = REPLACE(max_partition_description-1, '\'', '');
- 
+
    -- 自动创建number个分区
     while (i <= partition_number) do
                  if (partitiontype = 0) then
                      -- 每个分区按天递增,递增gaps天
-                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps day); 
+                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps day);
                  elseif (partitiontype = 1) then
                      -- 每个分区按月递增,递增gaps月
-                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps month); 
-                 else 
+                     set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps month);
+                 else
                      -- 每个分区按年递增,递增gaps年
                      set p_description = DATE_ADD(FROM_DAYS(max_partition_description), interval i*gaps year);
                  end if;
                  -- 删除空格
                  set p_name = REPLACE(p_description, ' ', '');
                  -- 例如10.20的记录实际是less than 10.21
-                 set p_description = DATE_ADD(p_description, interval 1 day); 
+                 set p_description = DATE_ADD(p_description, interval 1 day);
                  -- 如果有横杆替换为空
           set p_name = REPLACE(p_name, '-', '');
                  -- 删除时间冒号
@@ -1542,8 +1542,8 @@ begin
           DEALLOCATE PREPARE stmt;
                  -- 递增变量
           set i = (i + 1) ;
- 
-    end while;          
+
+    end while;
 end ||
 -- 恢复语句中断符
 DELIMITER ;
@@ -1554,7 +1554,7 @@ DELIMITER ;
 ```mysql
 DELIMITER ||
 drop event if exists auto_set_partitions  ||
-create event auto_set_partitions 
+create event auto_set_partitions
 on schedule every 1 day
 starts '2018-10-30 23:59:59'
 do
@@ -1622,7 +1622,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 如果正使用非事务表，不应该使用MySQL来检查列的内容。一般情况，最安全的(通常是最快的)方法径是让应用程序确保只向数据库传递合法值。
 
- 
+
 
 ## 4.1  优化数据库结构
 *  使你的数据尽可能小：合适且较小的数据类型；
@@ -1630,7 +1630,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 *  对于MyISAM表，如果没有任何变长列(VARCHAR、TEXT或BLOB列)，使用固定尺寸的记录格式。这比较快但是不幸地可能会浪费一些空间。
 *  在MySQL/InnoDB中，InnoDB表使用更紧凑的存储格式。
 
- 
+
 
 ## 4.2  优化SQL语句
 
@@ -1647,7 +1647,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 连接+发送SQL+分析SQL+执行SQL插入+返回结果+关闭。连接和发送的时间是相对最长的，所以数据库操作中连接池是个有效优化手段。
 
- 
+
 
 **INSERT语句的速度**
 
@@ -1664,7 +1664,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 表的大小以logN (B树)的速度减慢索引的插入。
 
- 
+
 
 **UPDATE语句的速度**
 
@@ -1674,13 +1674,13 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 请注意对使用动态记录格式的MyISAM表，更新一个较长总长的记录可能会切分记录。如果经常这样该，偶尔使用OPTIMIZE TABLE很重要。参见[13.5.2.5节，“OPTIMIZE TABLE语法”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/sql-syntax.html#optimize-table)。
 
- 
+
 
 **DELETE语句的速度**
 
 删除一个记录的时间与索引数量确切成正比。为了更快速地删除记录，可以增加键高速缓冲的大小
 
- 
+
 
 **SELECT语句**
 
@@ -1688,11 +1688,11 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 总的来说，要想使一个较慢速SELECT ... WHERE更快，应首先检查是否能增加一个索引。不同表之间的引用通常通过索引来完成。你可以使用EXPLAIN语句来确定SELECT语句使用哪些索引。
 
- 
+
 
 ### 4.2.2  优化WHERE
 
- 
+
 
 ### 4.2.3  优化ORDER BY和GROUP BY
 
@@ -1702,7 +1702,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 即使ORDER BY不确切匹配索引，只要WHERE子句中的所有未使用的索引部分和所有额外的ORDER BY 列为常数，就可以使用索引。
 
- 
+
 
 **GROUP BY**
 
@@ -1710,7 +1710,7 @@ MySQL可以使用事务表和非事务表。为了更容易地让非事务表顺
 
 为GROUP BY使用索引的最重要的前提条件是 所有GROUP BY列引用同一索引的属性，并且索引按顺序保存其关键字(例如，这是B-树索引，而不是HASH索引)。是否用索引访问来代替临时表的使用还取决于在查询中使用了哪部分索引、为该部分指定的条件，以及选择的累积函数。
 
- 
+
 
 ## 4.3  优化索引
 
@@ -1738,11 +1738,11 @@ SQL_WHERE的限制条件只对其中一个索引起作用，因为多值限定�
 
  ```sql
  CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name
- 
+
    [USING index_type]
- 
+
    ON *tbl_name* (*index_col_name*,...)
- 
+
  *index_col_name*:
    *col_name* [(*length*)] [ASC | DESC]
  ```
@@ -1771,7 +1771,7 @@ CREATE INDEX part_of_name ON customer (name(10));
 
 一个index_col_name规约可以以ASC或DESC为结尾。这些关键词将来可以扩展，用于指定递增或递减索引值存储。目前，这些关键词被分析，但是被忽略；索引值均以递增顺序存储。
 
- 
+
 
 ## 4.4  优化数据库服务器 mysql_serverd
 
@@ -1787,7 +1787,7 @@ CREATE INDEX part_of_name ON customer (name(10));
 
 [7.5.6. MySQL如何使用DNS](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/optimization.html#dns)
 
- 
+
 
 ## 4.5  修改配置文件 my.cnf/my.ini
 
@@ -1831,7 +1831,7 @@ table_cache = 512
 4. 如果Threads_created太大,就要增加my.cnf中thread_cache_size的值.可以用Threads_created/Connections计算cache命中率
 5. 如果Created_tmp_disk_tables太大,就要增加my.cnf中tmp_table_size的值,用基于内存的临时表代替基于磁盘的
 
- 
+
 
 # 5 MySQL管理
 
@@ -1877,42 +1877,42 @@ use [db_name]; //使用某数据库
 
 强制更新表：`FLUSH TABLE pet`
 
- 
+
 
 **说明**：对数据库的管理常规就是进行预防性的维护，以及修复那些出现问题的内容。主要工作就是检索/分析/修复/优化表。
 
 ​    MySQL非正常关闭或死机时会导致索引错误，需要使用myisamchk修复，而且当访问量大时出现非常频繁。
 
- 
+
 
 ## 5.2  MySQL4.1权限管理
 ```shell
 mysql> use mysql;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
- 
+
 Database changed
 mysql> show tables;
 +---------------------------+
 | Tables_in_mysql      |
 +---------------------------+
-| columns_priv       | 
-| db            | 
-| func           | 
-| help_category       | 
-| help_keyword       | 
-| help_relation       | 
-| help_topic        | 
-| host           | 
-| proc           | 
-| procs_priv        | 
-| tables_priv        | 
-| time_zone         | 
-| time_zone_leap_second   | 
-| time_zone_name      | 
-| time_zone_transition   | 
-| time_zone_transition_type | 
-| user           | 
+| columns_priv       |
+| db            |
+| func           |
+| help_category       |
+| help_keyword       |
+| help_relation       |
+| help_topic        |
+| host           |
+| proc           |
+| procs_priv        |
+| tables_priv        |
+| time_zone         |
+| time_zone_leap_second   |
+| time_zone_name      |
+| time_zone_transition   |
+| time_zone_transition_type |
+| user           |
 +---------------------------+
 17 rows in set (0.00 sec)
 ```
@@ -1924,11 +1924,11 @@ mysql> show tables;
 
 服务器基于你的身份和你是否能通过供应正确的口令验证身份来接受或拒绝连接。
 
-你的身份基于2个信息： 
-*  你从那个主机连接 
+你的身份基于2个信息：
+*  你从那个主机连接
 *  你的MySQL用户名
 
- 
+
 
 阶段2：请求证实
 
@@ -1936,7 +1936,7 @@ mysql> show tables;
 
 服务器在存取控制的两个阶段使用在`mysql`的数据库中的`user`、`db`和`host`表
 
- 
+
 
 **权限列表**
 
@@ -1957,7 +1957,7 @@ mysql> show tables;
 | process    | Process_priv    | 服务器管理           |
 | file       | File_priv       | 在服务器上的文件存取 |
 
- 
+
 
 不同角色所关心的问题(mysql数据库，系统数据库非应用数据库)
 
@@ -1965,7 +1965,7 @@ mysql> show tables;
 
 开发者：除应用者有的外，还包括tables_priv, column_priv
 
- 
+
 
 ### 5.2.2  安全访问（ROOT/用户权限）
 
@@ -2004,10 +2004,10 @@ mysql> SET PASSWORD FOR root=PASSWORD('new_password');
 
 或：［推荐］
 ```mysql
-shell> mysqladmin -u root password new_password 
+shell> mysqladmin -u root password new_password
 ```
 
- 
+
 
 #### 5.2.2.3     向MySQL增加新用户权限~GRANT
 
@@ -2015,9 +2015,9 @@ shell> mysqladmin -u root password new_password
 
 grant 权限 on 数据库.* to 用户名@'登录主机' identified by '密码'
 
- 注1：'登陆主机'：'%'表示所有ip; 'localhost' 表示本机;  '192.168.10.2' 特定IP 
+ 注1：'登陆主机'：'%'表示所有ip; 'localhost' 表示本机;  '192.168.10.2' 特定IP
 
- 注2：登陆主机和密码必须用引号圈起来。若有特殊符号如_等，数据库用``圈起来。 
+ 注2：登陆主机和密码必须用引号圈起来。若有特殊符号如_等，数据库用``圈起来。
 ```mysql
 shell> mysql --user=root mysql
 mysql> GRANT ALL PRIVILEGES ON `game`.* TO test@'%' IDENTIFIED BY '123456';
@@ -2052,32 +2052,32 @@ flush privileges;
 
 #### 5.2.2.4     忘记root密码
 
-1.先停止mysql 
+1.先停止mysql
 
 > shell > `/etc//init.d/mysql stop `
 
-2.以--skip-grant-table 的参数启动mysqld 
+2.以--skip-grant-table 的参数启动mysqld
 
 > shell > `mysqld_safe --skip-grant-table`
 
-3. 更改root 密码 123456 
+3. 更改root 密码 123456
 ```MYSQL
-mysql> UPDATE user SET password=password('123456') WHERE user='root'; 
-mysql> FLUSH PRIVILEGES; 
-mysql> exit 
+mysql> UPDATE user SET password=password('123456') WHERE user='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit
 ```
 
 4. 重启mysql
 
-shell >/etc//init.d/mysql restart 
+shell >/etc//init.d/mysql restart
 
- 
+
 
 ## 5.3  MySQL备份和恢复
 
 ### 5.3.1  MySQL备份
 
-备份一个数据库的另一个方法是使用mysqldump程序： 
+备份一个数据库的另一个方法是使用mysqldump程序：
 
 1. 为你的数据库做一个完整的备份：
 2. `shell> mysqldump --tab=/path/to/some/dir --opt –full`
@@ -2089,7 +2089,7 @@ shell >/etc//init.d/mysql restart
 
 你也可以简单地拷贝所有的表文件(“*.frm”、“*.MYD”和“*.MYI”文件)，只要服务器不在更新任何东西。这两种方法各有优劣，mysqldump与数据库服务协作，安全备份但备份速度较慢．直接copy数据库目录，简单快速但可能备份不完整（对当前数据库操作会遗失数据）．
 
-3. 停止mysqld如果它正在运行，然后以--log-update选项启动它。你将得到一个名为“hostname.n”形式的日志文件， 这里n是随着你每次执行mysqladmin refresh或mysqladmin     flush-logs、FLUSH LOGS语句、或重启服务器而递增的一个数字。这些日志文件向你提供了在你执行mysqldump处后面进行的复制数据库改变的所需信息。 
+3. 停止mysqld如果它正在运行，然后以--log-update选项启动它。你将得到一个名为“hostname.n”形式的日志文件， 这里n是随着你每次执行mysqladmin refresh或mysqladmin     flush-logs、FLUSH LOGS语句、或重启服务器而递增的一个数字。这些日志文件向你提供了在你执行mysqldump处后面进行的复制数据库改变的所需信息。
 此外，要形成备份日志脚本，要系统自动进行常规备份和渐进式备份．
 
 
@@ -2098,11 +2098,11 @@ shell >/etc//init.d/mysql restart
 
 `shell> mysqldump samp_db ｜tar zxvf >/usr/archives/mysql/samp_db.1999-10-02.tar.gz`
 
- 
+
 
 **导入导出参数：**
 
-```
+```mysql
 -default-character-set=latin1  #原数据库的字符编码
 --set-charset=gbk              #要导出的数据库文件的编码，phpmyadin导出缺省是utf-8.
 --where                        #导出WHERE语句，如导出一万行为'1 limit 10000'
@@ -2122,7 +2122,7 @@ shell >/etc//init.d/mysql restart
 shell> mysql --one-database db_name < update.392
 ```
 
-数据库恢复： 
+数据库恢复：
 
 ```shell
 shell> mysql -u[user] -p [dbname] < [xxx.sql]
@@ -2182,7 +2182,7 @@ shell> mysql -u[user] -p [dbname] < [xxx.sql]
 
 23. 碰到Error 1045(28000) Access Denied for user 'root'@'localhost' (Using password:NO)错误时，你需要重新设置密码，具体方法是：先用--skip-grant-tables参数启动mysqld，然后执行 mysql -u root mysql,mysql>update user set password=password('newpassword') where user='root';mysql>Flush privileges;，最后重新启动mysql就可以了。
 
- 
+
 
 
 
@@ -2193,7 +2193,7 @@ shell> mysql -u[user] -p [dbname] < [xxx.sql]
 **常见的小问题：**
 *  表名：数据库的表名不要使用MySQL保留关键字如desc/sql等等，否则插入失败。表名带有-，则表名需用引号圈起来，否则语法错误。
 
- 
+
 
 ### 连接数过多
 
@@ -2205,7 +2205,7 @@ shell> mysql -u[user] -p [dbname] < [xxx.sql]
 
 mysqld实际上允许max_connections+1个客户端进行连接。额外的连接保留给具有SUPER权限的账户。通过为系统管理员而不是普通用户授予SUPER权限（普通用户不应具有该权限），系统管理员能够连接到服务器，并使用SHOW PROCESSLIST来诊断问题，即使已连接的无特权客户端数已达到最大值也同样。请参见[13.5.4.16节，“SHOW PROCESSLIST语法”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/sql-syntax.html#show-processlist)。
 
- 
+
 
 ## MySQL字符集乱码
 
@@ -2219,9 +2219,9 @@ MySQL对于字符集的指定可以到服务器，数据库，表，列，连接
 
 数据库字符集编码的**优先级**（小粒度优先）：表>数据库database>服务器server，因此表的缺省字符集同数据库，数据库的缺省字符器同服务器。
 
- 
 
-**1) 查看支持的字符集和校对** 
+
+**1) 查看支持的字符集和校对**
 
 字符集是一套符号和编码。校对规则是在字符集内用于比较字符的一套规则。
 ```mysql
@@ -2230,7 +2230,7 @@ mysql> SHOW COLLATION;
 ```
 
 
-**2) 查看缺省的字符集和校对字符集** 
+**2) 查看缺省的字符集和校对字符集**
 
 说明：
 * character_set_server 是最先开始的,在编译时缺省设置,而linux缺省也是latin1,所以通常编译后此值缺省为latin1.
@@ -2239,7 +2239,7 @@ mysql> SHOW COLLATION;
 下面命令如果是在刚进入mysql客户端，未调用use database前查看，则显示的是缺省字符集；否则显示的是当前正在使用数据的字符集。其中命令SET NAMES会立即改变client/connect/result的值。
 
 ```shell
-mysql> SHOW VARIABLES LIKE 'character%'; 
+mysql> SHOW VARIABLES LIKE 'character%';
 +--------------------------+------------------------------------+
 | Variable_name      | Value               |
 +--------------------------+------------------------------------+
@@ -2258,17 +2258,17 @@ mysql> SHOW VARIABLES LIKE 'character%';
 1）发送请求
  客户端(character_set_client）=》数据库连接(character_set_connection)=》存储(table,column)
 2）返回请求
- 存储(table,column)=》数据库连接(character_set_connection )=》客户端(character_set_results) 
+ 存储(table,column)=》数据库连接(character_set_connection )=》客户端(character_set_results)
 
 * 数据库物理存储的字符集变量 ：character_set_system
-*  数据库的字符集变量是character_set_database; 
-* 服务器字符集变量是character_set_server; 
-* 客户端发送查询使用的字符集：character_set_client 
-* 服务器接收到查询后，将查询从character_set_client系统变量转换到character_set_connection. 
-* 服务器返回查询结果到客户端使用的字符集: character_set_results 
-* SET NAMES显示客户端发送的SQL语句中使用什么字符集, 影响到连接字符集client/connection/result三个变量。SET character_set则为默认数据库设置连接字符集。 
+*  数据库的字符集变量是character_set_database;
+* 服务器字符集变量是character_set_server;
+* 客户端发送查询使用的字符集：character_set_client
+* 服务器接收到查询后，将查询从character_set_client系统变量转换到character_set_connection.
+* 服务器返回查询结果到客户端使用的字符集: character_set_results
+* SET NAMES显示客户端发送的SQL语句中使用什么字符集, 影响到连接字符集client/connection/result三个变量。SET character_set则为默认数据库设置连接字符集。
 ```sql
-mysql> SHOW VARIABLES LIKE 'collation_%'; 
+mysql> SHOW VARIABLES LIKE 'collation_%';
 +----------------------+-------------------+
 | Variable_name    | Value       |
 +----------------------+-------------------+
@@ -2279,11 +2279,11 @@ mysql> SHOW VARIABLES LIKE 'collation_%';
 ```
 
 
-**3) 查看当前数据库/表/列的字符集** 
+**3) 查看当前数据库/表/列的字符集**
 
 **注：SHOW VARIABLES看到的字符集就是当前正在使用数据库的字符集，非缺省字符集。**
 
-mysql> status; 
+mysql> status;
 
 查看database使用的字符集：show create database [db_name];
 
@@ -2295,7 +2295,7 @@ mysql> status;
 
 如果每一列后未说明字符集，则列的字符集和表一样。
 
- 
+
 
 **4) 修改MySQL字符集**
 
@@ -2336,12 +2336,12 @@ SET NAMES显示客户端发送的SQL语句中使用什么字符集, 影响到连
 c)    查询时代码编码（下例是PHP, utf8最好不要写成utf-8）
 
 ```mysql
-mysql_query("set names ’utf8’ "); 
-mysql_query("set character_set_client=utf8"); 
+mysql_query("set names ’utf8’ ");
+mysql_query("set character_set_client=utf8");
 mysql_query("set character_set_results=utf8");
 ```
 
-**MySQL字符集小结:** 
+**MySQL字符集小结:**
 
 目前的处理方式是字段如果包含中文，使用GBK存储。而内部存储为UTF-8(charset_set_system)，而客户端取数据时，要将字段转化成GBK.要想显示正常，
 
@@ -2351,7 +2351,7 @@ mysql_query("set character_set_results=utf8");
 
 另外为了正确识别中文，只能选择utf8或者gbk，建议utf8因为若phpmyadmin的中文都用utf8来标识。
 
- 
+
 
 **2）平台locale和termianl要与表内容的实际字符集一致。**
 
@@ -2377,7 +2377,7 @@ collation_database latin1_swedish_ci
 
 collation_server latin1_swedish_ci
 
- 
+
 
 **备注：**
 
@@ -2385,7 +2385,7 @@ collation_server latin1_swedish_ci
 
 **utf8_bin_ci：**在字符对比时，unicode和general都不是大小写敏感的；如果要求大小写敏感的话，就使用**utf8_bin_ci.**
 
- 
+
 
 ### 2.数据库表字段内容中文的正常显示
 
@@ -2410,7 +2410,7 @@ alter table game3 change name name varchar(255) character set utf8
 
 注意：alter语句只改变了表或字段的结构，并没有改变已经存储数据的编码。
 
- 
+
 
 基本处理流程：
 
@@ -2445,7 +2445,7 @@ iconv -f gb18030 -c -t UTF-8 data.sql -o data_convert.sql
 
 `mysql -uroot -p12341234 -f test < data2-u.sql`
 
- 
+
 
 **方法2：phpmyadmin导入导出处理（3步）**
 
@@ -2455,7 +2455,7 @@ iconv -f gb18030 -c -t UTF-8 data.sql -o data_convert.sql
 
 这时浏览表内容，如果中文显示正常，则OK。
 
- 
+
 
 #### 字段中文乱码常见情形
 
@@ -2464,7 +2464,7 @@ iconv -f gb18030 -c -t UTF-8 data.sql -o data_convert.sql
 *  情形2：PHPMyadmin
 *  情形3：目标HTML页
 
- 
+
 
 **情形1：MySQL客户端中文显示乱码。**
 
@@ -2472,13 +2472,13 @@ iconv -f gb18030 -c -t UTF-8 data.sql -o data_convert.sql
 
 **解决方案**：这跟不同平台的MySQL客户端设置的缺省连接字符集相关。WINDOWS平台MySQL客户端连接字符集通常是GBK，而Linux平台则常是latin1.（如果连接SQL没有非ANSI字符，那么无需改变连接字符集；但结果集含中文者需要相应处理）。
 
- 
+
 
 SHOW VARIABLES LIKE 'character%'; 可获取到服务端缺省的连接/系统/存储字符集。
 
 (因为表是latin1,后set names latin1，中文显示正常. 后改表为GBK, set除system后变量均为GBK,中文仍乱码）
 
- 
+
 
 **情形2：phpmyadin中文显示乱码**
 
@@ -2488,13 +2488,13 @@ SHOW VARIABLES LIKE 'character%'; 可获取到服务端缺省的连接/系统/�
 
  ![image-20191201161942968](../../media/bigdata/db_mysql_002.png)
 
- 
+
 
 在phpMyAdmin中创建数据库时指定字符集： 选择整理。
 
 **备注**：若phpmyadmin浏览表时字段值不能正常显示页面，则也不能正确导入导出。
 
- 
+
 
 **情形3：HTML页面中文显示乱码**
 
@@ -2504,11 +2504,11 @@ SHOW VARIABLES LIKE 'character%'; 可获取到服务端缺省的连接/系统/�
  2.数据库编码
  3.连接数据库时使用的编码(mysql_query(xxxxxxx)这里)
 
- 
+
 
 ### 3.中文查找和全文索引
 
-参考：全文搜索功能 
+参考：全文搜索功能
 
 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-boolean
 
@@ -2516,57 +2516,57 @@ http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-bo
 
 中文查找有模糊查找和全文索引两种方式，其中模糊查找是正则表达式的字符匹配（未用到索引）；全文索引MySQL只支持英文索引，中文索引需要做一些特殊处理。
 
-模糊查找: 没用到索引， LIKE， 使用%%分隔。 LIKE是用Regular Expression去做查询，所有语言都支持。 
+模糊查找: 没用到索引， LIKE， 使用%%分隔。 LIKE是用Regular Expression去做查询，所有语言都支持。
 
 示例：name LIKE '%%%s%%'
 
- 
+
 
 **全文索引**：MySQL支持全文索引和搜索功能，但只针对空格、逗号和点断句的语言（如拉丁语言系）。MySQL中的全文索引类型FULLTEXT的索引。 FULLTEXT 索引仅可用于 MyISAM 表；他们可以从CHAR、 VARCHAR或TEXT列中作为CREATE TABLE语句的一部分被创建，或是随后使用ALTER TABLE 或 CREATE INDEX被添加。对于较大的数据集，将你的资料输入一个没有FULLTEXT索引的表中，然后创建索引， 其速度比把资料输入现有FULLTEXT索引的速度更为快。
 
- 
 
-全文搜寻的语法： 
- MATCH (col1, col2,...)  AGAINST (expr [search_modifier]) 
 
-三种搜寻方式： 
+全文搜寻的语法：
+ MATCH (col1, col2,...)  AGAINST (expr [search_modifier])
+
+三种搜寻方式：
 *  IN BOOLEAN MODE ：布尔模式~可以使用stopwords，不自动相关性排序。
-*  IN NATURAL LANGUAGE MODE：自然语言模式 
+*  IN NATURAL LANGUAGE MODE：自然语言模式
 *  IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION / WITH QUERY EXPANSION ：查询扩展检索
 
  示例：
 
 ```mysql
-SELECT * 
- FROM article 
- WHERE MATCH(title, body) 
- AGAINST ('xxx' IN NATURAL LANGUAGE MODE); 
+SELECT *
+ FROM article
+ WHERE MATCH(title, body)
+ AGAINST ('xxx' IN NATURAL LANGUAGE MODE);
 ```
 
 
 
  **注意事项**
 
-预设搜寻是不分大小写，若要分大小写，columne的character set要从utf8改成utf8_bin。 
+预设搜寻是不分大小写，若要分大小写，columne的character set要从utf8改成utf8_bin。
 
-预设MATCH...AGAINST是以相关性排序，由高到低。 
+预设MATCH...AGAINST是以相关性排序，由高到低。
 
 MATCH(title, content)里的字段必须和FULLTEXT(title, content)里的字段一模一样。如果只要单查title或content一个字段，那得另外再建一个 FULLTEXT(title) 或 FULLTEXT(content)
 
- 
 
-**MySQL的FULLTEXT怎么断字： 
-** 字母、数字、底线的组合视为一个字，不会把底线断字。 
- 会被断字的字符：空白、逗号（,）与点（.），但不用这些断字的语言，如中文，就得自行手动断字。 
 
-一些词在全文搜索中会被忽略： 
+**MySQL的FULLTEXT怎么断字：
+** 字母、数字、底线的组合视为一个字，不会把底线断字。
+ 会被断字的字符：空白、逗号（,）与点（.），但不用这些断字的语言，如中文，就得自行手动断字。
 
-- 任何过于短的词都会被忽略。     全文搜索所能找到的词的默认最小长度为 4个字符。 
+一些词在全文搜索中会被忽略：
+
+- 任何过于短的词都会被忽略。     全文搜索所能找到的词的默认最小长度为 4个字符。
 - 停止字中的词会被忽略。禁用词就是一个像“the” 或“some” 这样过于平常而被认为是不具语义的词。存在一个内置的停止字，     但它可以通过用户自定义列表被改写。请参见[12.7.5节，“微调MySQL全文搜索”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-fine-tuning)。
 
 默认的停止字在[12.7.3节，“全文停止字”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-stopwords)中被给出。默认的最小单词长度和 停止字可以被改变，如[12.7.5节，“微调MySQL全文搜索”](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-fine-tuning)中所述。
 
- 
+
 
 **中文全文索引**
 
@@ -2576,7 +2576,7 @@ MATCH(title, content)里的字段必须和FULLTEXT(title, content)里的字段�
 ft_min_word_len = 2
 
 # 查询变量值：ft_min_word_len
-$SHOW VARIABLES LIKE 'ft_min_word_len' 
+$SHOW VARIABLES LIKE 'ft_min_word_len'
 ```
 
 **解决方案1**：整句的中文分词，并按urlencode、区位码、base64、拼音等进行编码使之以“字母+数字”的方式存储于数据库中。
@@ -2585,7 +2585,7 @@ $SHOW VARIABLES LIKE 'ft_min_word_len'
 
 详见 《搜索引擎实现方案》章节SPHINX+MySQL
 
- 
+
 
 ## MySQL存储二进制图片
 
@@ -2610,9 +2610,9 @@ index (filename)
 ```
 说明：serial类型是自动递增数值。filename用来检索图片；file_data存储图片数据，类型（tinyblog最大255B，blog最大64KB，mediumblob 最大16MB，longblog最大4G）。
 
- 
 
-将图片数据写入表（python实现）： b是字符串，MySQLdb.Binary(b)转化成二进制数据 
+
+将图片数据写入表（python实现）： b是字符串，MySQLdb.Binary(b)转化成二进制数据
 
 `cursor.execute( "INSERT INTO Dem_Picture (PicData) VALUES (%s)" , (MySQLdb.Binary(b))`
 
@@ -2626,7 +2626,7 @@ index (filename)
 
 * MySQL Glossary https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_schema
 * 存储引擎和表类型 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html
-* charset  http://dev.mysql.com/doc/refman/5.1/zh/charset.html 
+* charset  http://dev.mysql.com/doc/refman/5.1/zh/charset.html
 * 全文搜索功能 http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#fulltext-boolean
 
 
@@ -2644,5 +2644,5 @@ index (filename)
 * http://lobert.iteye.com/blog/1953827  "实战mysql存储程序与定时器"
 * https://www.w3cschool.cn/mysql/mysql-vge12oye.html  "MySQL交集和差集的实现方法"
 
- 
+
 

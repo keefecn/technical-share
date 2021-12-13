@@ -19,7 +19,7 @@
 
 # 目录
 
- 
+
 
 [目录... 1](#_Toc530263898)
 
@@ -147,7 +147,7 @@
 
 [附录... 39](#_Toc530263960)
 
- 
+
 
 [TOC]
 
@@ -184,7 +184,7 @@
 
 **说明**：当前有许多框架可用，敏捷开发中有时并不需自己设计框架，利用已知框架或者在编程过程重构代码中产生框架。这听起来有些荒谬，事实上这正是大多数公司在开发中所采用的模式。
 
- 
+
 
 表格 2 WEB框架详细信息
 
@@ -192,7 +192,7 @@
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------- | --------------------------------------------------------- | ----------------------- |
 | Ruby On Rails | an [open source](http://en.wikipedia.org/wiki/Open_source) [web application framework](http://en.wikipedia.org/wiki/Web_application_framework) | [2.3.8 released May 25,   2010](http://rubyonrails.org/download) | 2005…,   [Rails Core Team](http://www.rubyonrails.com/core) | [MIT](http://www.opensource.org/licenses/mit-license.php) | http://rubyonrails.org/ |
 
- 
+
 
 ### python WEB框架
 
@@ -222,7 +222,7 @@
 
 ## 1.3 WEB框架性能
 
-[Web Framework Benchmarks](https://www.techempower.com/benchmarks/) 
+[Web Framework Benchmarks](https://www.techempower.com/benchmarks/)
 
 表格 性能排名前20的WEB框架（2021.2， https://www.techempower.com/benchmarks/）
 
@@ -259,7 +259,7 @@
 
 [1]. [Web Framework Benchmarks](https://www.techempower.com/benchmarks/#section=data-r17&hw=ph&test=fortune) https://www.techempower.com/benchmarks/
 
-[2]. 6种Web框架测评 http://www.alrond.com/en/2007/jan/25/performance-test-of-6-leading-frameworks/ 
+[2]. 6种Web框架测评 http://www.alrond.com/en/2007/jan/25/performance-test-of-6-leading-frameworks/
 
 
 
@@ -283,7 +283,7 @@ Yii 的很多想法来自其他著名 Web 编程框架和应用程序。下面�
 
 ## 本章参考
 
- 
+
 
 # 4 ruby-on-rails
 
@@ -317,10 +317,10 @@ Rails 提供了多个被称为“生成器”的脚本，可以简化开发，�
 $ rails new blog
 
 # 2.安装 Gemfile 中列出的 gem。
-$ bundle install 
+$ bundle install
 
 # 3.生成 blog 程序后，进入该文件夹, 查看新程序生成器的所有命令行选项。
-$ rails new -h 
+$ rails new -h
 ```
 
 blog 文件夹中有很多自动生成的文件和文件夹，组成一个 Rails 程序。本文大部分时间都花在 app 文件夹上。下面简单介绍默认生成的文件和文件夹的作用：
@@ -342,7 +342,7 @@ blog 文件夹中有很多自动生成的文件和文件夹，组成一个 Rails
 | tmp/   | 临时文件，例如缓存，PID，会话文件。   |
 | vendor/  | 存放第三方代码。经常用来放第三方 gem。   |
 
- 
+
 
 **启动服务器**
 
@@ -352,13 +352,13 @@ $ rails server
 
    ![1574518237085](../../media/sf_reuse/framework/frame_web_002.png)
 
- 
+
 
 ## 本章参考
 
- 
 
- 
+
+
 
 
 
@@ -366,33 +366,33 @@ $ rails server
 
 **官网**
 
-*  [node.js](https://nodejs.org/)官方网站 https://nodejs.org/ 
+*  [node.js](https://nodejs.org/)官方网站 https://nodejs.org/
 *  [Ruby 语言官方网站](https://www.ruby-lang.org/zh_cn/documentation/)
 *  Ruby on Rails 指南 http://guides.ruby-china.org/
 *  [RubyGems 指南](http://guides.rubygems.org/)
-*  django https://www.djangoproject.com/ 
-*  flask 官网 http://flask.pocoo.org/ 
+*  django https://www.djangoproject.com/
+*  flask 官网 http://flask.pocoo.org/
 
 
 **前端框架官网**
 
-*  [Twitter Bootstrap](http://getbootstrap.com/) - Bootstrap 的官方网站 http://getbootstrap.com/ 
-*  JQuery  [http://JQuery.com/](http://jquery.com/)  
-*  jinja  http://jinja.pocoo.org/ 
-*  React https://reactjs.org/ 
-*  Prototypejs  [http://www.Prototypejs.org/](http://www.prototypejs.org/) 
-*  D3 https://d3js.org/ 
+*  [Twitter Bootstrap](http://getbootstrap.com/) - Bootstrap 的官方网站 http://getbootstrap.com/
+*  JQuery  [http://JQuery.com/](http://jquery.com/)
+*  jinja  http://jinja.pocoo.org/
+*  React https://reactjs.org/
+*  Prototypejs  [http://www.Prototypejs.org/](http://www.prototypejs.org/)
+*  D3 https://d3js.org/
 *  nvd3 http://nvd3.org/examples/
-*  echarts  http://echarts.baidu.com/echarts2/doc/doc.html 
+*  echarts  http://echarts.baidu.com/echarts2/doc/doc.html
 
- 
+
 
 **参考站点**
 
 * TODOMVC框架 https://todomvc.com/
 * WEB框架性能基准 https://www.techempower.com/benchmarks/
 * W3shools http://www.w3school.com.cn/
-*  菜鸟教程 http://www.runoob.com/ 
+*  菜鸟教程 http://www.runoob.com/
 
 
 
@@ -400,14 +400,13 @@ $ rails server
 
 [1].  [Less](http://www.w3cschool.cc/manual/lessguide/) - Less 快速入门
 
-[2]. https://github.com/jobbole/awesome-python-cn 
+[2]. https://github.com/jobbole/awesome-python-cn
 
 [3].  Node.js快速入门 http://www.yiibai.com/nodejs/nodejs-quick-start.html
 
-[4].  Smarty教程http://www.yiibai.com/smarty/ 
+[4].  Smarty教程http://www.yiibai.com/smarty/
 
 
 
 # 附录
 
- 

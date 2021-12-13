@@ -27,7 +27,7 @@ Scrapy是一个单机版Spider，但我们可以非常方便地编写插件，�
 
 源码分析版本： scrapy-1.4.0
 
-依赖：w3lib queuelib twisted scrapy  
+依赖：w3lib queuelib twisted scrapy
 
 安装： `pip install scrapy`
 
@@ -132,7 +132,7 @@ spiderproject/scrapy.cfg
 spiderproject/spiderproject
 spiderproject/spiderproject/items.py
 spiderproject/spiderproject/middlewares.py
-spiderproject/spiderproject/pipelines.py	
+spiderproject/spiderproject/pipelines.py
 spiderproject/spiderproject/settings.py		#项目配置
 spiderproject/spiderproject/spiders
 spiderproject/spiderproject/spiders/__init__.py
@@ -151,11 +151,11 @@ spiderproject/spiderproject/__init__.py
 
 
 
-**step2: 创建爬虫应用程序** 
+**step2: 创建爬虫应用程序**
 
 创建爬虫应用程序有二种方式，
 
-* 一种不需要创建爬虫项目:  `scrapy runspider`  
+* 一种不需要创建爬虫项目:  `scrapy runspider`
 
 * 另外一种先要预创建爬虫项目，再执行下面命令:  `scrapy genspider [xxapp] [dns]`
 
@@ -170,7 +170,7 @@ scrapy genspider -t crawl sohu news.sohu.com
 
 **step3:  重写parse方法**，spiders/xxapp.py 修改解析网页项  xxSpider.parse_item()
 
-**step4:  执行爬虫程序(cmd)**： `scrapy crawl 应用名称, -o 数据存储格式` 
+**step4:  执行爬虫程序(cmd)**： `scrapy crawl 应用名称, -o 数据存储格式`
 
 // -o支持xml/json/csv
 
@@ -178,7 +178,7 @@ scrapy genspider -t crawl sohu news.sohu.com
 
 
 
-## 配置项 
+## 配置项
 
 可用的环境变量：
 
@@ -214,7 +214,7 @@ project = spiderproject
 
 
 
-### 自定义 settings.py 
+### 自定义 settings.py
 
 项目设置，如默认是不开启pipeline、遵守robots协议等。
 
@@ -352,7 +352,7 @@ class SpiderprojectSpiderMiddleware:
         # This method is used by Scrapy to create your spiders.
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
-        return s        
+        return s
 ```
 
 
@@ -403,17 +403,17 @@ class SohuSpider(CrawlSpider):
         #item['description'] = response.xpath('//div[@id="description"]').get()
         return item
 
-    #访问起始URL并获取结果后的回调函数，该函数的response参数就是向起始的url发送请求后，获取的响应对象.该函数返回值必须为可迭代对象或者NUll 
+    #访问起始URL并获取结果后的回调函数，该函数的response参数就是向起始的url发送请求后，获取的响应对象.该函数返回值必须为可迭代对象或者NUll
     def parse(self, response):
         print(response.text) #获取字符串类型的响应内容
-        print(response.body) #获取字节类型的相应内容    
+        print(response.body) #获取字节类型的相应内容
 ```
 
 运行:  `scrapy crawl sohu -o mingyan.json`
 
 
 
-2. 无项目爬虫 myspider.py  
+2. 无项目爬虫 myspider.py
 
 ```python
 import scrapy
@@ -449,7 +449,7 @@ class MySpider(scrapy.Spider):
        from scrapy.crawler import CrawlerProcess
        settings = Settings()	# settings.py
        crawler_process = CrawlerProcess(settings)
-       crawler_process.crawl(MySpider)    #, {'-o':'my2.xml'} 
+       crawler_process.crawl(MySpider)    #, {'-o':'my2.xml'}
        crawler_process.start()
    ```
 
@@ -481,7 +481,7 @@ Scrapy是一个基于Twisted，纯Python实现的爬虫框架，用户只需要�
 
 - `Downloader middlewares`：介于引擎和下载器之间，可以在网页在下载前、后进行逻辑处理；
 - `Spider middlewares`：介于引擎和爬虫之间，在向爬虫输入下载结果前，和爬虫输出请求 / 数据后进行逻辑处理；
-- Schedule middlewares: 
+- Schedule middlewares:
 
 Scrapy的处理逻辑如下：绿线是数据流向。
 
@@ -495,7 +495,7 @@ Scrapy的处理逻辑如下：绿线是数据流向。
 8. 引擎把爬虫返回的结果对象交由**结果处理器**处理，把**新的请求**通过引擎再交给**调度器**；
 9. 重复执行1-8，直到**调度器**中没有新的请求处理，任务结束；
 
- 
+
 
 ## 类图概览
 
@@ -637,7 +637,7 @@ commands说明
 
 1. 命令基类
 
-   scrapy/commands/__init.py 
+   scrapy/commands/__init.py
 
 ```python
 class ScrapyCommand(object):
@@ -656,14 +656,14 @@ class ScrapyCommand(object):
         assert not hasattr(self, '_crawler'), "crawler already set"
         self._crawler = crawler
 
-    #公共方法：help syntax short_desc add_options process_options run    
-    
+    #公共方法：help syntax short_desc add_options process_options run
+
     def run(self, args, opts):
         """
         Entry point for running commands  子类必须实现
         """
         raise NotImplementedError
-        
+
 ```
 
 2. 示例命令：crawl
@@ -696,7 +696,7 @@ class Command(ScrapyCommand):
     def process_options(self, args, opts):
         """ 处理可选参数 """
 
-        
+
     def run(self, args, opts):
         """ 实际的命令执行入口 """
         if len(args) < 1:
@@ -722,7 +722,7 @@ class Command(ScrapyCommand):
 
     requires_project = False
     default_settings = {'SPIDER_LOADER_WARN_ONLY': True}
-    
+
     def run(self, args, opts):
         if len(args) != 1:
             raise UsageError()
@@ -740,14 +740,14 @@ class Command(ScrapyCommand):
 
         self.crawler_process.crawl(spidercls, **opts.spargs)  #初始化
         self.crawler_process.start()	#调用reactor
-    
+
 ```
 
 
 
 ### crawler 爬行器对象和爬行器运行态对象
 
-scrapy/crawler.py  
+scrapy/crawler.py
 
 * 爬行器对象Crawler：属性有执行引擎，配置信息、信号、状态等
 * 爬行器运行态对象 CrawlerProcess（多个）  -> CrawlerRunner（单个）：
@@ -783,7 +783,7 @@ class Crawler(object):
         self.settings.freeze()
         self.crawling = False
         self.spider = None	#调用self._create_spider()
-        self.engine = None  #ExecutionEngine，调用self._create_engine() 
+        self.engine = None  #ExecutionEngine，调用self._create_engine()
 
     @defer.inlineCallbacks
     def crawl(self, *args, **kwargs):
@@ -792,10 +792,10 @@ class Crawler(object):
         self.crawling = True
 
         try:
-            self.spider = self._create_spider(*args, **kwargs) 
+            self.spider = self._create_spider(*args, **kwargs)
             self.engine = self._create_engine()  #创建引擎
             # 调用spider的start_requests 获取种子URL
-            start_requests = iter(self.spider.start_requests())  
+            start_requests = iter(self.spider.start_requests())
             # 调用engine的open_spider 交由引擎调度
             yield self.engine.open_spider(self.spider, start_requests)
             yield defer.maybeDeferred(self.engine.start)
@@ -814,14 +814,14 @@ class Crawler(object):
 
             if six.PY2:
                 six.reraise(*exc_info)
-            raise                       
+            raise
 ```
 
-爬取器运行对象 
+爬取器运行对象
 
-* CrawlerProcess: start 
+* CrawlerProcess: start
 
-* CrawlerRunner:  crawl 
+* CrawlerRunner:  crawl
 
 ```python
 class CrawlerRunner(object):
@@ -851,7 +851,7 @@ class CrawlerRunner(object):
         self.spider_loader = _get_spider_loader(settings) # 爬虫加载类，生成{spider_name: spider_cls} 的字典
         self._crawlers = set()	#爬虫名称元组，如(sohu,xx)
         self._active = set()  #活跃的爬虫对象元组
-        
+
     def crawl(self, crawler_or_spidercls, *args, **kwargs):
         """
         Run a crawler with the provided arguments.
@@ -871,7 +871,7 @@ class CrawlerRunner(object):
         self.crawlers.add(crawler)  #添加具体的spider名称到元组
         d = crawler.crawl(*args, **kwargs)	# 生成运行中的爬虫对象
         self._active.add(d)  	#添加为活跃的spider对象
- 
+
 
 class CrawlerProcess(CrawlerRunner):
     """ 同时跑多个spider, 调用twisted模块的react模式实现 """
@@ -880,7 +880,7 @@ class CrawlerProcess(CrawlerRunner):
         install_shutdown_handlers(self._signal_shutdown)
         configure_logging(self.settings)
         log_scrapy_info(self.settings)
-        
+
     def start(self, stop_after_crawl=True):
         """
         独有的方法, 调用twisted的reactor实现线程调度执行
@@ -889,7 +889,7 @@ class CrawlerProcess(CrawlerRunner):
         on :setting:`DNSCACHE_ENABLED` and :setting:`DNSCACHE_SIZE`.
 
         If `stop_after_crawl` is True, the reactor will be stopped after all
-        crawlers have finished, using :meth:`join`. 
+        crawlers have finished, using :meth:`join`.
 
         :param boolean stop_after_crawl: stop or not the reactor when all
             crawlers have finished. True时等待所有线程结束
@@ -934,14 +934,14 @@ class CrawlerProcess(CrawlerRunner):
 
 
 
-### Selector 
+### Selector
 
 提取网页内容项支持下面四种方法，
 
 * css: `response.css('span.text::text').extract_first()`
 * xpath: `response..xpath('span/small/text()').extract_first()`
 * re
-* extract       
+* extract
 
 
 
@@ -999,8 +999,8 @@ class Spider(object_ref):
     """
 
     name = None  #spider名称
-    custom_settings = None  
- 
+    custom_settings = None
+
     def __init__(self, name=None, **kwargs):
         """初始化时，从入参中获取 name和start_urls的值 """
         if name is not None:
@@ -1010,7 +1010,7 @@ class Spider(object_ref):
         self.__dict__.update(kwargs)
         if not hasattr(self, 'start_urls'):
             self.start_urls = []   # 种子URL列表
-            
+
     def parse(self, response):
         """ 子类需重新实现此方法 """
         raise NotImplementedError
@@ -1021,7 +1021,7 @@ class Spider(object_ref):
 
     @classmethod
     def handles_request(cls, request):
-        return url_is_from_spider(request.url, cls)      
+        return url_is_from_spider(request.url, cls)
 
    def start_requests(self):
         """ request处理逻辑，返回处理过的request对象，在CrawlProcess.crawl方法里调用 """
@@ -1065,8 +1065,8 @@ class Rule(object):
             self.follow = False if callback else True
         else:
             self.follow = follow
-               
-        
+
+
 class CrawlSpider(Spider):
 
     rules = ()
@@ -1083,7 +1083,7 @@ class CrawlSpider(Spider):
 
     def process_results(self, response, results): #处理结果，子类重新实现
         return results
-    
+
     def _parse_response(self, response, callback, cb_kwargs, follow=True):
         """ 先后调用callback, process_result """
         if callback:
@@ -1094,12 +1094,12 @@ class CrawlSpider(Spider):
 
         if follow and self._follow_links:
             for request_or_item in self._requests_to_follow(response):
-                yield request_or_item    
+                yield request_or_item
 ```
 
 
 
-### ExecuteEngine.执行引擎 
+### ExecuteEngine.执行引擎
 
 scrapy/core/engine.py Engine对象
 
@@ -1238,7 +1238,7 @@ DOWNLOAD_HANDLERS_BASE = {
 
 
 
-### ItemPipes 实体管道线 
+### ItemPipes 实体管道线
 
 `pipelines.py/__init__.py`
 
@@ -1283,7 +1283,7 @@ class MiddlewareManager(object):
         self.methods = defaultdict(list)
         for mw in middlewares:
             self._add_middleware(mw)
-                      
+
 ```
 
 2. 子类中间件:  下载、spider、pipelines
@@ -1356,8 +1356,8 @@ class Slot(object):
         self.active_size = 0
         self.itemproc_size = 0
         self.closing = None
-        
-        
+
+
 class Scraper(object):
 
     def __init__(self, crawler):
@@ -1373,12 +1373,12 @@ class Scraper(object):
         self.crawler = crawler
         self.signals = crawler.signals
         self.logformatter = crawler.logformatter
-        
+
     @defer.inlineCallbacks
     def open_spider(self, spider):
         """Open the given spider for scraping and allocate resources for it"""
         self.slot = Slot()
-        yield self.itemproc.open_spider(spider)        
+        yield self.itemproc.open_spider(spider)
 ```
 
 
@@ -1404,7 +1404,7 @@ class Scraper(object):
 
 
 
-参考链接 
+参考链接
 
 [1]. scrapy中文网1.5版本：http://www.scrapyd.cn/
 
@@ -1412,6 +1412,5 @@ class Scraper(object):
 
 [3]. scrapy源码剖析 https://www.cnblogs.com/shuimohei/p/13363462.html
 
-[4]. Python网络爬虫二三事 http://python.jobbole.com/87234/ 
+[4]. Python网络爬虫二三事 http://python.jobbole.com/87234/
 
- 

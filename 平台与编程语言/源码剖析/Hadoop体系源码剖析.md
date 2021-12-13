@@ -3,9 +3,9 @@
 | 1    | 2018-8-10 | 创建     | Keefe  | KeefeKeefe |
 |      |           |          |        |             |
 
- 
 
- 
+
+
 
 ---
 
@@ -51,19 +51,19 @@
 
 
 
- 
+
 
 [TOC]
 
 
 
- 
+
 
 ----
 
 # 1  概述
 
- 
+
 
 # 2  Hadoop(HDFS + MR)
 
@@ -83,13 +83,13 @@
 
   TaskTracker 每10秒向JobTracker报告一次运行情况，每完成一个Task10秒后，就会向JobTracker索求下一个Task。
 
- 
+
 
 ## 2.2   Hadoop源码分析
 
 Maven main modules:
 
- 
+
 
 hadoop              (Main Hadoop project)
 
@@ -109,7 +109,7 @@ hadoop              (Main Hadoop project)
 
 备注：2009年7月 ，Hadoop Core项目更名为Hadoop Common; MapReduce 和 Hadoop Distributed File System (HDFS) 成为Hadoop项目的独立子项目。
 
- 
+
 
 表格 1 Hadoop包功能简介
 
@@ -131,13 +131,13 @@ hadoop              (Main Hadoop project)
 | http        | 基于Jetty的HTTP Servlet，用户通过浏览器可以观察文件系统的一些状态信息和日志 |
 | log         | 提供HTTP访问日志的HTTP Servlet                               |
 
- 
+
 
 ## 2.3   HDFS分布式文件系统
 
 Hadoop分布式文件系统(HDFS)被设计成适合运行在通用硬 件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点。但同时，它和其他的分布式文件系统的区别也是很明显的。HDFS是一个高 度容错性的系统，适合部署在廉价的机器上。HDFS能提供高吞吐量的数据访问，非常适合大规模数据集上的应用。HDFS放宽了一部分POSIX约束，来实 现流式读取文件系统数据的目的。HDFS在最开始是作为Apache Nutch搜索引擎项目的基础架构而开发的。HDFS是Apache Hadoop Core项目的一部分。这个项目的地址是[http://Hadoop.apache.org/core/](http://hadoop.apache.org/core/)。
 
- 
+
 
 表格 2 GFS与HDFS比较表
 
@@ -148,7 +148,7 @@ Hadoop分布式文件系统(HDFS)被设计成适合运行在通用硬 件(commod
 | 安全<br>模式         | 不具备。  副本损坏处理：API读取副本失败时，Master负责发起拷贝任务。 | 具备。  获知数据块副本状态，若副本不足，则拷贝副本至安全数目（如3个）。 | HDFS更安全。            |
 | 其它特性             |                                                              | HDFS具备空间回收机制。  文件删除时，仅删除目录结构。实际数据的删除在等待一段时间后实施  优点：便于恢复文件 |                         |
 
- 
+
 
 ### 2.3.1  HDFS架构
 
@@ -158,7 +158,7 @@ Hadoop分布式文件系统(HDFS)被设计成适合运行在通用硬 件(commod
 
 图 1 HDFS Architecture
 
- 
+
 
 说明：HDFS采用master/slave架构。一个HDFS集群是由一个Namenode和一定数目的Datanodes组成。
 
@@ -168,7 +168,7 @@ Datanode： 集群中的Datanode一般是一个节点一个，负责管理它所
 
 HDFS暴露了文件系统的名字空间，用户能够以文件的形式在上面存储数据。从内部看，一个文件其实被分成一个或多个数据块，这些块存储在一组 Datanode上。Namenode执行文件系统的名字空间操作，比如打开、关闭、重命名文件或目录。它也负责确定数据块到具体Datanode节点的 映射。Datanode负责处理文件系统客户端的读写请求。在Namenode的统一调度下进行数据块的创建、删除和复制。
 
- 
+
 
 ### 2.3.2  运行机制—可靠性保障
 
@@ -194,15 +194,15 @@ l 故障检测
 
 镜像文件
 
- 
+
 
 **数据复制**
 
-HDFS被设计成能够在一个大集群中跨机器可靠地存储超大文件。它将每个文件存储成一系列的数据块，除了最后一个，所有的数据块都是同样大小的。为了容 错，文件的所有数据块都会有副本。每个文件的数据块大小和副本系数都是可配置的。应用程序可以指定某个文件的副本数目。副本系数可以在文件创建的时候指 定，也可以在之后改变。HDFS中的文件都是一次性写入的，并且严格要求在任何时候只能有一个写入者。 
+HDFS被设计成能够在一个大集群中跨机器可靠地存储超大文件。它将每个文件存储成一系列的数据块，除了最后一个，所有的数据块都是同样大小的。为了容 错，文件的所有数据块都会有副本。每个文件的数据块大小和副本系数都是可配置的。应用程序可以指定某个文件的副本数目。副本系数可以在文件创建的时候指 定，也可以在之后改变。HDFS中的文件都是一次性写入的，并且严格要求在任何时候只能有一个写入者。
 
-Namenode全权管理数据块的复制，它周期性地从集群中的每个Datanode接收心跳信号和块状态报告(Blockreport)。接收到心跳信号意味着该Datanode节点工作正常。块状态报告包含了一个该Datanode上所有数据块的列表。 
+Namenode全权管理数据块的复制，它周期性地从集群中的每个Datanode接收心跳信号和块状态报告(Blockreport)。接收到心跳信号意味着该Datanode节点工作正常。块状态报告包含了一个该Datanode上所有数据块的列表。
 
- 
+
 
 **Block Replication**
 
@@ -212,7 +212,7 @@ NameNode( Filename, numReplicas, block-ids,..)
 
 图 2 HDFS Block Replication
 
- 
+
 
 ### 2.3.3  运行机制—读文件流程
 
@@ -236,7 +236,7 @@ NameNode( Filename, numReplicas, block-ids,..)
 
 9. 如果FSDataInputStream发现一个损坏的块，则在从其他datanode读取块之前通知namenode
 
- 
+
 
 ### 2.3.4  运行机制—写文件流程
 
@@ -262,7 +262,7 @@ NameNode( Filename, numReplicas, block-ids,..)
 
 10. 如果复本数量不足，则namenode根据datanode分配新的datanode并创建新的复本，该datanode被加入管线继续正常存储
 
- 
+
 
 ## 2.4   MapReduce分布式计算
 
@@ -270,7 +270,7 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
 
 一个Map/Reduce 作业（job） 通常会把输入的数据集切分为若干独立的数据块，由 map任务（task）以完全并行的方式处理它们。框架会对map的输出先进行排序，然后把结果输入给reduce任务。通常作业的输入和输出都会被存储在文件系统中。 整个框架负责任务的调度和监控，以及重新执行已经失败的任务。
 
- 
+
 
 通常，Map/Reduce框架和分布式文件系统是运行在一组相同的节点上的，也就是说，计算节点和存储节点通常在一起。这种配置允许框架在那些已经存好数据的节点上高效地调度任务，这可以使整个集群的网络带宽被非常高效地利用。
 
@@ -278,15 +278,15 @@ Map/Reduce框架由一个单独的master JobTracker 和每个集群节点一个s
 
 应用程序至少应该指明输入/输出的位置（路径），并通过实现合适的接口或抽象类提供map和reduce函数。再加上其他作业的参数，就构成了作业配置（job configuration）。然后，Hadoop的 job client提交作业（jar包/可执行程序等）和配置信息给JobTracker，后者负责分发这些软件和配置信息给slave、调度任务并监控它们的执行，同时提供状态和诊断信息给job-client。
 
- 
+
 
 虽然Hadoop框架是用JavaTM实现的，但Map/Reduce应用程序则不一定要用 Java来写 。
 
-l 是一种运行作业的实用工具，它允许用户创建和运行任何可执行程序 （例如：Shell工具）来做为mapper和reducer。 
+l 是一种运行作业的实用工具，它允许用户创建和运行任何可执行程序 （例如：Shell工具）来做为mapper和reducer。
 
-l 是一个与兼容的C++ API （没有基于JNITM技术），它也可用于实现Map/Reduce应用程序。 
+l 是一个与兼容的C++ API （没有基于JNITM技术），它也可用于实现Map/Reduce应用程序。
 
- 
+
 
 ![map-reduce](file:///C:\Users\keefe\AppData\Local\Temp\msohtmlclip1\01\clip_image005.gif)
 
@@ -304,11 +304,11 @@ taskTracker：作业划分后的任务，负责执行Tasks。
 
 2. 将一个任务task分成多个相互独立的map进行计算后，在reduce组装结果返回。
 
- 
+
 
 MapReduce 是大规模数据（TB 级）计算的利器，Map 和Reduce 是它的主要思想，来源于函数式编程语言，它的原理如下图所示：Map 负责将数据打散，Reduce负责对数据进行聚集，用户只需要实现map 和reduce 两个接口，即可完成TB 级数据的计算，常见的应用包括：日志分析和数据挖掘等数据分析应用。另外，还可用于科学数据计算，如圆周率PI 的计算等。
 
- 
+
 
 **MapReduce数据流**
 
@@ -336,31 +336,31 @@ MapReduce 是大规模数据（TB 级）计算的利器，Map 和Reduce 是它�
 
    是在reduce端。
 
- 
+
 
 ### 程序示例
 
 **Map程序：**
 
 ```java
-public class EarthQuakesPerDateMapper extends Mapper<LongWritable,  
-	Text, Text, IntWritable> { 
-	@Override 
-	protected void map(LongWritable key, Text value, Context context) throws IOException, 
-				InterruptedException { 
-		if (key.get() > 0) { 
-			try { 
-				CSVParser parser = new CSVParser(); 
-				String[] lines = parser.parseLine(value.toString()); 
-				SimpleDateFormat formatter =  
-				new SimpleDateFormat("EEEEE, MMMMM dd, yyyy HH:mm:ss Z"); 
-				Date dt = formatter.parse(lines[3]); 
-				formatter.applyPattern("dd-MM-yyyy"); 
-				String dtstr = formatter.format(dt); 
-				context.write(new Text(dtstr), new IntWritable(1)); 
-			} catch (ParseException e) {} 
-		} 
-	} 
+public class EarthQuakesPerDateMapper extends Mapper<LongWritable,
+	Text, Text, IntWritable> {
+	@Override
+	protected void map(LongWritable key, Text value, Context context) throws IOException,
+				InterruptedException {
+		if (key.get() > 0) {
+			try {
+				CSVParser parser = new CSVParser();
+				String[] lines = parser.parseLine(value.toString());
+				SimpleDateFormat formatter =
+				new SimpleDateFormat("EEEEE, MMMMM dd, yyyy HH:mm:ss Z");
+				Date dt = formatter.parse(lines[3]);
+				formatter.applyPattern("dd-MM-yyyy");
+				String dtstr = formatter.format(dt);
+				context.write(new Text(dtstr), new IntWritable(1));
+			} catch (ParseException e) {}
+		}
+	}
 }
 ```
 
@@ -369,17 +369,17 @@ public class EarthQuakesPerDateMapper extends Mapper<LongWritable,
 **Reduce程序：**
 
 ```java
-public class EarthQuakesPerDateReducer extends Reducer<Text, IntWritable, Text,  
-		IntWritable> { 
-	@Override 
-	protected void reduce(Text key, Iterable<IntWritable> values, Context context) 
-				throws IOException, InterruptedException { 
-		int count = 0; 
-		for (IntWritable value : values) { 
-			count++; 
-		} 
-		context.write(key, new IntWritable(count)); 
-	} 
+public class EarthQuakesPerDateReducer extends Reducer<Text, IntWritable, Text,
+		IntWritable> {
+	@Override
+	protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+				throws IOException, InterruptedException {
+		int count = 0;
+		for (IntWritable value : values) {
+			count++;
+		}
+		context.write(key, new IntWritable(count));
+	}
 }
 ```
 
@@ -388,18 +388,18 @@ public class EarthQuakesPerDateReducer extends Reducer<Text, IntWritable, Text,
 **# JOB主函数**
 
 ```java
-public class EarthQuakesPerDayJob { 
-	public static void main(String[] args) throws Throwable { 
-		Job job = new Job(); 
-		job.setJarByClass(EarthQuakesPerDayJob.class); 
-		FileInputFormat.addInputPath(job, new Path(args[0])); 
-		FileOutputFormat.setOutputPath(job, new Path(args[1])); 
-		job.setMapperClass(EarthQuakesPerDateMapper.class); 
-		job.setReducerClass(EarthQuakesPerDateReducer.class); 
-		job.setOutputKeyClass(Text.class); 
-		job.setOutputValueClass(IntWritable.class); 
-		System.exit(job.waitForCompletion(true) ? 0 : 1); 
-	} 
+public class EarthQuakesPerDayJob {
+	public static void main(String[] args) throws Throwable {
+		Job job = new Job();
+		job.setJarByClass(EarthQuakesPerDayJob.class);
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		job.setMapperClass(EarthQuakesPerDateMapper.class);
+		job.setReducerClass(EarthQuakesPerDateReducer.class);
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(IntWritable.class);
+		System.exit(job.waitForCompletion(true) ? 0 : 1);
+	}
 }
 ```
 
@@ -422,7 +422,7 @@ public class EarthQuakesPerDayJob {
 
 备注：现已作为产品被使用WorldLingo、Streamy.com、OpenPlaces、Yahoo、Adobe。
 
- 
+
 
 HBase是bigtable的开源山寨版本。是建立的hdfs之上，提供高可靠性、高性能、列存储、可伸缩、实时读写的数据库系统。
 
@@ -454,15 +454,15 @@ HBase以表的形式存储数据。表有行和列组成。列划分为若干个
 
 * **Cell****：由 `{row key, column(*=<family> + <label>*), version}* `唯一确定的单元。cell中的数据是没有类型的，全部是字节码形式存贮。
 
- 
 
-在HBase中存在两个重要的系统表，分别为： 
+
+在HBase中存在两个重要的系统表，分别为：
 
 .META.表：记录用户表的Region信息，.META.可以有多个regoin，被master分配给regionserver
 
--ROOT-表：记录.META.表的Region信息，-ROOT-只有一个region，不会被拆分。 
+-ROOT-表：记录.META.表的Region信息，-ROOT-只有一个region，不会被拆分。
 
- 
+
 
 ## 3.2   物理存储
 
@@ -482,7 +482,7 @@ HBase以表的形式存储数据。表有行和列组成。列划分为若干个
 
 StoreFile以HFile格式保存在HDFS上。
 
- 
+
 
 HFile的格式为：(更多细节，参见[http://www.tbdata.org/arcHives/1551](http://www.tbdata.org/archives/1551) )
 
@@ -490,7 +490,7 @@ HFile的格式为：(更多细节，参见[http://www.tbdata.org/arcHives/1551](
 
 图 4 HFile
 
- 
+
 
 **HFile分为六个部分：**
 
@@ -510,7 +510,7 @@ HFile的Data Block，Meta Block通常采用压缩方式存储，压缩之后可�
 
 目标Hfile的压缩支持两种方式：Gzip，Lzo。
 
- 
+
 
 **HLog(WAL log)**
 
@@ -520,13 +520,13 @@ WAL 意为Write ahead log(http://en.wikipedia.org/wiki/Write-ahead_logging)，�
 
 HLog 文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HLogKey对象，HLogKey中记录了写入数据的归属信息，除了table和region名字外，同时还包括 sequence number和timestamp，timestamp是”写入时间”，sequence number的起始值为0，或者是最近一次存入文件系统中sequence number。HLog Sequece File的Value是HBase的KeyValue对象，即对应HFile中的KeyValue，可参见上文描述。
 
- 
+
 
 ![hbase3](../../media/bigdata/hadoop/hadoop_hbase_003.png)
 
 图 5 HBase物理架构2
 
- 
+
 
 ![hbase2](../../media/bigdata/hadoop/hadoop_hbase_004.png)
 
@@ -536,7 +536,7 @@ HLog 文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HL
 
 1 包含访问HBase的接口，client维护着一些cache来加快对HBase的访问，比如region的位置信息。
 
- 
+
 
 **Zookeeper**
 
@@ -548,7 +548,7 @@ HLog 文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HL
 
 4 存储HBase的schema,包括有哪些table，每个table有哪些column family
 
- 
+
 
 **Master**
 
@@ -562,7 +562,7 @@ HLog 文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HL
 
 5 处理schema更新请求
 
- 
+
 
 **Region Server**
 
@@ -586,7 +586,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
 第三层是.META.，它是一个特殊的表，保存了HBase中所有数据表的region 位置信息。
 
- 
+
 
 ![region_find](../../media/bigdata/hadoop/hadoop_hbase_005.png)
 
@@ -608,7 +608,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
 4 client会将查询过的位置信息保存缓存起来，缓存不会主动失效，因此如果client上的缓存全部失效，则需要进行6次网络来回，才能定位到正确的region(其中三次用来发现缓存失效，另外三次用来获取位置信息)。
 
- 
+
 
 **读写过程**
 
@@ -642,7 +642,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
 7 判断Memstore的是否需要flush为Store文件。
 
- 
+
 
 **region分配**
 
@@ -680,42 +680,42 @@ master启动进行以下步骤:
 
 由 于master只维护表和region的元数据，而不参与表数据IO的过程，master下线仅导致所有元数据的修改被冻结(无法创建删除表，无法修改表 的schema，无法进行region的负载均衡，无法处理region上下线，无法进行region的合并，唯一例外的是region的split可以 正常进行，因为只有region server参与)，表的数据读写还可以正常进行。因此master下线短时间内对整个HBase集群没有影响。从上线过程可以看到，master保存的 信息全是可以冗余信息（都可以从系统其它地方收集到或者计算出来），因此，一般HBase集群中总是有一个master在提供服务，还有一个以上 的’master’在等待时机抢占它的位置。
 
-## 3.4   访问接口 
+## 3.4   访问接口
 
-- HBase Shell 
+- HBase Shell
 
-- Java clietn API 
+- Java clietn API
 
-- HBase non-java access 
+- HBase non-java access
 
-- - languages talking to the      JVM 
+- - languages talking to the      JVM
 
-  - -  
-    - Jython interface to       HBase 
-    - Groovy DSL for HBase 
-    - Scala interface to       HBase 
+  - -
+    - Jython interface to       HBase
+    - Groovy DSL for HBase
+    - Scala interface to       HBase
 
-  - languages with a custom      protocol 
+  - languages with a custom      protocol
 
-  - - REST gateway       specification for HBase 
-    - 充分利用HTTP协议：GET POST PUT       DELET 
-    - text/plain 
-    - text/xml 
-    - application/json 
-    - application/x-protobuf 
+  - - REST gateway       specification for HBase
+    - 充分利用HTTP协议：GET POST PUT       DELET
+    - text/plain
+    - text/xml
+    - application/json
+    - application/x-protobuf
 
-  - Thrift gateway      specification for HBase 
+  - Thrift gateway      specification for HBase
 
-  - - java 
-    - cpp 
-    - rb 
-    - py 
-    - perl 
-    - php 
+  - - java
+    - cpp
+    - rb
+    - py
+    - perl
+    - php
 
-- HBase Map Reduce 
+- HBase Map Reduce
 
-- Hive/Pig 
+- Hive/Pig
 
 
 
@@ -723,18 +723,17 @@ master启动进行以下步骤:
 
 [1].  Zookeeper工作原理
 
-[2].  HBASE [http://www.tbdata.org/arcHives/1509](http://www.tbdata.org/archives/1509) 
+[2].  HBASE [http://www.tbdata.org/arcHives/1509](http://www.tbdata.org/archives/1509)
 
- 
 
- 
+
+
 
 # 4  Spark
 
- 
+
 
 
 
 # 参考资料
 
- 

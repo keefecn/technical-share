@@ -102,7 +102,7 @@ $ jupyter notebook
 **网络访问：缺省端口8888**
 
 ```
-http://localhost:8888/?token=c8de56fa... 
+http://localhost:8888/?token=c8de56fa...
 ```
 
 
@@ -129,7 +129,7 @@ JupyterLab有以下特点：
 
 - **云服务：**使用Jupyter Lab连接Google Drive等服务，极大得提升生产力
 
-  
+
 
 ```shell
 # 安装
@@ -163,13 +163,13 @@ http://localhost:8888/?token=7c9064bfb5139e72eb8774248df75d0564f450b09a13d57a ::
 
 **设置密码**
 
-法1：在jupyter notebook正常开的文件 或 ipython里输入 
+法1：在jupyter notebook正常开的文件 或 ipython里输入
 
 ```python
 in[1] from notebook.auth import passwd
 in[2] passwd()
-Enter password: 
-Verify password: 
+Enter password:
+Verify password:
 Out[2]: ‘sha1:f704b702aea2:01e2bd991f9c7208ba177b46f4d10b6907810927‘
 ```
 
@@ -177,8 +177,8 @@ Out[2]: ‘sha1:f704b702aea2:01e2bd991f9c7208ba177b46f4d10b6907810927‘
 
 ```shell
 $ jupyter notebook password
-Enter password: 
-Verify password: 
+Enter password:
+Verify password:
 ```
 
 说明：Ipython把输入的密码转换成sha，并用于认证JupyterLab，如果在Ipython输入密码和确认密码时直接回车，相当于不设密码，因此登录JupyterLab时可以不输入密码直接点击登录。
@@ -193,16 +193,16 @@ Verify password:
 
 ```ini
 # 允许修改代码，缺省为False
-c.NotebookApp.allow_password_change=False 
+c.NotebookApp.allow_password_change=False
 # 将ip设置为*，意味允许任何IP访问
 c.NotebookApp.ip = ‘*‘
 # 这里的密码就是上边我们生成的那一串
-c.NotebookApp.password = ‘sha1:f704b702aea2:01e2bd991f9c7208ba177b46f4d10b6907810927‘ 
-# 服务器上并没有浏览器可以供Jupyter打开 
-c.NotebookApp.open_browser = False 
-# 监听端口设置为8888或其他自己喜欢的端口 
+c.NotebookApp.password = ‘sha1:f704b702aea2:01e2bd991f9c7208ba177b46f4d10b6907810927‘
+# 服务器上并没有浏览器可以供Jupyter打开
+c.NotebookApp.open_browser = False
+# 监听端口设置为8888或其他自己喜欢的端口
 c.NotebookApp.port = 8888
-# 允许远程访问 
+# 允许远程访问
 c.NotebookApp.allow_remote_access = True
 ```
 
@@ -237,7 +237,7 @@ Jupyter Notebook 与 IPython终端 共享同一个内核。
 
 ```shell
 $ pip install ipykernel
-$ python -m ipykernel install --user 
+$ python -m ipykernel install --user
 ```
 
 
@@ -249,7 +249,7 @@ $ jupyter kernelspec list
 Available kernels:
   python2    C:\Users\keefe\AppData\Roaming\jupyter\kernels\python2
   python3    C:\Users\keefe\AppData\Roaming\jupyter\kernels\python3
-  
+
 $ cat ~/AppData/Roaming/jupyter/kernels/python3/kernel.json
 {
  "argv": [
@@ -261,7 +261,7 @@ $ cat ~/AppData/Roaming/jupyter/kernels/python3/kernel.json
  ],
  "display_name": "Python 3",
  "language": "python"
-}  
+}
 ```
 
 如果上面Python编译器的路径不正确，则修改为正确路径。

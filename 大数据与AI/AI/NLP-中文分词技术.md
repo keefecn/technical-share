@@ -83,7 +83,7 @@
 | imdict           | 中文、英文、数字                                             | 隐马尔科夫模型                                               | 仅coredict核心字典、bigramdict词典，不含人名、地名词典。不支持自定义词典 |
 | HanLP            |                                                              |                                                              |                                                              |
 
- 
+
 
 表格 3 常见中文分词开源工具评测表格 4
 
@@ -104,31 +104,31 @@
 | THUAC                    |          |            |            | SP            | 清华大学2016年开源。                                         |        |
 | HanLP                    | Java     |            |            |               |                                                              |        |
 
- 
+
 
 **SCWS**
 
 　　Hightman开发的一套基于词频词典的机械中文分词引擎，它能将一整段的汉字基本正确的切分成词。采用的是采集的词频词典，并辅以一定的专有名称，人名，地名，数字年代等规则识别来达到基本分词，经小范围测试大概准确率在 90% ~ 95% 之间，已能基本满足一些小型搜索引擎、关键字提取等场合运用。45Kb左右的文本切词时间是0.026秒，大概是1.5MB文本/秒，支持PHP4和PHP 5。
 
- 
+
 
 **ICTCLAS**
 
 　　这可是最早的中文开源分词项目之一，ICTCLAS在国内973 专家组组织的评测中活动获得了第一名，在第一届国际中文处理研究机构SigHan组织的评测中都获得了多项第一名。ICTCLAS3.0分词速度单机 996KB/s，分词精度98.45%，API不超过200KB，各种词典数据压缩后不到3M.ICTCLAS全部采用C/C++编写，支持Linux、 FreeBSD及Windows系列操作系统，支持C/C++、C#、Delphi、Java等主流的开发语言。
 
- 
+
 
 **IK**
 
 　　IKAnalyzer 是一个开源的，基于java语言开发的轻量级的中文分词工具包。从2006年12月推出1.0版开始，IKAnalyzer 已经推出了3个大版本。最初，它是以开源项目Luence为应用主体的，结合词典分词和文法分析算法的中文分词组件。新版本的IKAnalyzer3.0则发展为面向Java的公用分词组件，独立于Lucene项目，同时提供了对Lucene的默认优化实现。
 
- 
+
 
 **Paoding**
 
 　　 Paoding （庖丁解牛）基于Java的开源中文分词组件，提供lucene和solr 接口，具有极 高效率 和 高扩展性 。引入隐喻，采用完全的面向对象设计，构思先进。高效率：在PIII 1G内存个人机器上，1秒可准确分词100万汉字。 采用基于不限制个数 的词典文件对文章进行有效切分，使能够将对词汇分类定义。能够对未知的词汇进行合理解析
 
- 
+
 
 **MMSEG4J**
 
@@ -136,7 +136,7 @@
 
 1）、mmseg4j 用 Chih-Hao Tsai 的 MMSeg 算法实现的中文分词器，并实现lucene的analyzer 和solr的TokenizerFactory 以方便在Lucene和Solr中使用。2）、MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。Complex 加了四个规则过虑。官方说：词语的正确识别率达到了98.41%。mmseg4j 已经实现了这两种分词算法。
 
- 
+
 
 # 2  中文分词实现
 
@@ -154,7 +154,7 @@
     char KeyValue[17];
     int nIndex;
    }CodeIndex;
-    
+
    //根据词语字数建立的一级索引结点
    typedef struct WordsIndexNode{
     int nKeyCount;
@@ -163,7 +163,7 @@
     int CodeIndexCount;
     CArray<CodeIndexNode*,CodeIndexNode*>HexIndex;
    }WordsIndex;
-    
+
    //关键字结点
    typedef struct KeyWordNode{
     CString strKeyWord; //关键字
@@ -178,7 +178,7 @@
 | ---- | ---------------------------------------------------------- |
 |      | ![img](../../media/ai/ai_nlp_001.png) |
 
- 
+
 
 
 ### 2.1.2 切分方法
@@ -187,9 +187,9 @@
 
 ![分词步骤.png](../../media/ai/ai_nlp_002.png)
 
- 
 
- 
+
+
 
 1）、读取词库，并读取相应的静态索引，建立词库上的索引；
 
@@ -210,7 +210,7 @@ typedef struct HitNode{
     int   nPos;//位置
     HitNode* pNext;//下一hit指针
 };
-    
+
 //文档列表结点
 typedef struct DocListNode{
     _int64  nDocID;//DOC ID
@@ -219,7 +219,7 @@ typedef struct DocListNode{
     HitNode* pHitHead;//Hit链表头指针
     DocListNode* pNext;
 };
-    
+
 //一级索引结点
 typedef struct LexIconNode{
     int             nKeyWordID;//关键字ID
@@ -248,7 +248,7 @@ typedef struct LexIconNode{
 
 7）、没有新词的识别功能，也就是不通过词典不能识别切分出新的词。
 
- 
+
 
 **2、** **改进的方向**
 
@@ -272,7 +272,7 @@ typedef struct LexIconNode{
 
 ​     新词的识别，可以按词频统计的方法，若某一字串出现的次数高于某一频率时可以认为一个词，将其切分出来。
 
- 
+
 
 ## 2.2   机器学习
 
@@ -290,7 +290,7 @@ typedef struct LexIconNode{
 
 备注：产生式模型可以通过贝叶斯公式转换为判别式模型，反之则不行。
 
- 
+
 
 ### 2.2.2 CRF 条件随机场
 
@@ -304,7 +304,7 @@ typedef struct LexIconNode{
 
 4）分词。
 
- 
+
 
 ## 2.3 Jieba分词（Python）
 
@@ -404,19 +404,19 @@ import jieba
 text = "我来到北京清华大学"
 seg_list = jieba.cut(text, cut_all=True)
 print(u"[全模式]: ", "/ ".join(seg_list))
- 
+
 # 精确模式
 seg_list = jieba.cut(text, cut_all=False)
 print(u"[精确模式]: ", "/ ".join(seg_list))
- 
+
 # 默认是精确模式
 seg_list = jieba.cut(text)
 print(u"[默认模式]: ", "/ ".join(seg_list))
- 
+
 # 搜索引擎模式
 seg_list = jieba.cut_for_search(text)
 print(u"[搜索引擎模式]: ", "/ ".join(seg_list))
- 
+
 ### 运行结果
 Building prefix dict from the default dictionary ...
 Dumping model to file cache C:\Users\keefe\AppData\Local\Temp\jieba.cache
@@ -474,19 +474,19 @@ for w in result:
 
 一个好的中文分词应该是上述指标的平衡。
 
- 
+
 
 ## 3.2   评测方法
 
 使用相同的评测系统。
 
- 
+
 
 ## 3.3   评测示例
 
- 
 
- 
+
+
 
 # 参考资料
 
@@ -497,7 +497,7 @@ for w in result:
 [5].   Lucene 3.0 的几种分词系统 http://hi.baidu.com/wk19/blog/item/e77ffc43dc18121c9213c624.html
 [6].   常见中文分词开源项目http://com1com4.javaeye.com/blog/707853
 
- 
+
 
 ## 评测相关链接
 
@@ -505,19 +505,19 @@ for w in result:
 
 由美国国防部高等研究计划署(DARPA)与美国国家标准和技术局(NIST)共同举办的TREC(文本信息检索会议)就是一直基于此方法组织信息检索评测和技术交流论坛。提供跨语言检索(CLIR)、博客、问答系统等多个track的评测及相关数据。
 
- 
+
 
 [ACL SIGHAN](http://www.sighan.org/) (无法访问)
 
 中文信息处理评测。
 
- 
+
 
 [NTCIR (NACSIS Test Collections for IR)](http://research.nii.ac.jp/ntcir/)
 
 其目的是希望能建立一个日文标准测试集，作为咨询检索与自然语言处理研究的基础预料。NTCIR-5开始，加入繁体中文(Big-5)测试集。
 
- 
+
 
 [中文Web信息检索论坛](http://www.cwirf.org/)
 
@@ -525,11 +525,11 @@ for w in result:
     - Chinese Web Information Retrieval Forum, http://www.cwirf.org/
     - Symposium of Search Engine and WebMining, http://net.pku.edu.cn/~sewm/
 
- 
+
 
 [搜狗实验室 ](http://www.sogou.com/labs/resources.html)
 
 ​     号称打造最权威的中文信息处理数据提供和评测平台。[2007.3—2008]
 
- 
+
 

@@ -23,7 +23,7 @@
 
 # superset源码剖析
 
-源码分析版本： superset-1.0   superset-1.3 
+源码分析版本： superset-1.0   superset-1.3
 
 ```shell
 $ pip show apache-superset
@@ -34,7 +34,7 @@ Home-page: https://superset.apache.org/
 Author: Apache Software Foundation
 Author-email: dev@superset.apache.org
 License: Apache License, Version 2.0
-Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Location: ~\venv\superset-py38-env\lib\site-packages
 Requires: backoff, bleach, cachelib, celery, click, colorama, contextlib2, croniter, cron-descriptor, cryptography, flask, flask-appbuilder, flask-caching, flask-compress, flask-talisman, flask-migrate, flask-wtf, geopy, gunicorn, humanize, isodate, markdown, msgpack, pandas, parsedatetime, pathlib2, pgsanity, polyline, python-dateutil, python-dotenv, python-geohash, pyarrow, pyyaml, redis, retry, selenium, simplejson, slackclient, sqlalchemy, sqlalchemy-utils, sqlparse, wtforms-json, pyparsing, holidays
 Required-by:
 
@@ -46,17 +46,17 @@ Home-page: https://superset.apache.org/
 Author: Apache Software Foundation
 Author-email: dev@superset.incubator.apache.org
 License: Apache License, Version 2.0
-Location: /home/keefe/venv/superset-py36-env/lib/python3.6/site-packages
+Location: ~/venv/superset-py36-env/lib/python3.6/site-packages
 Requires: flask, boto3, gunicorn, python-dateutil, simplejson, future, contextlib2, pandas, pyyaml, bleach, colorama, pydruid, flask-migrate, python-geohash, sq
 lalchemy-utils, thrift, sqlparse, pathlib2, sqlalchemy, unidecode, celery, flask-compress, geopy, humanize, cryptography, parsedatetime, flower, flask-appbuilder, requests, six, unicodecsv, polyline, flask-testing, flask-wtf, markdown, thrift-sasl, pyhive, flask-script, idna, flask-caching
-Required-by: 
+Required-by:
 ```
 
 
 
 > 特别说明： 本文目录结构中标题的源码路径跟标题级别有关，一般下级标题的源码路径前缀就是上级标题。
 
- ## 1 源码结构 
+ ## 1 源码结构
 
 表格  项目顶层目录结构
 
@@ -79,7 +79,7 @@ Required-by:
 | CHANGELOG.md           |                                 | 版本更新日志。细粒度（PR)级的更改                            |
 | UPDATING.md            |                                 | 更新新版本相关。该文件记录了 Superset 中任何向后不兼容的更改，并在人们迁移到新版本时提供帮助。 |
 
- 
+
 
 表格  源码后端目录superset里的结构
 
@@ -158,7 +158,7 @@ Required-by:
 
 前端指superset客户端，使用前端框架 React+D3+Echart实现。后端指superset服务端，python+flask-appbuilder实现。
 
-### 组件概述 
+### 组件概述
 
 **依赖组件**：
 
@@ -203,7 +203,7 @@ Required-by:
 
 
 
-**前后端打包**： 
+**前后端打包**：
 
 * 后端打包setup.py 取的版本号来自  前端superset-frontend/package.json:  `python setup.py sdist`
 * 前端生成的包 在superset/static目录，打包配置文件是webpack.config.js： `npm run build`
@@ -270,7 +270,7 @@ class ResultsBackendManager:
     def should_use_msgpack(self) -> bool:
         return self._use_msgpack
 
-    
+
 class UIManifestProcessor:
     """ UI mainfest文件处理器。
     虽然会将 get_manifest 函数注册到app，但这个函数似乎并未被使用过。那么本类似乎也从来没用过？
@@ -284,12 +284,12 @@ class UIManifestProcessor:
         self.app = app
         # Preload the cache
         self.parse_manifest_json()
-        
+
         @app.context_processor
         def get_manifest() -> Dict[  # pylint: disable=unused-variable
             str, Callable[[str], List[str]]
         ]:  """ 获取mainfest里的静态文件 """
-            
+
    def parse_manifest_json(self) -> None:
         try:	# 读取json文件，取值entrypoints
             with open(self.manifest_file, "r") as f:
@@ -297,18 +297,18 @@ class UIManifestProcessor:
                 self.manifest = full_manifest.get("entrypoints", {})
         except Exception:  # pylint: disable=broad-except
             pass
-        
+
     def get_manifest_files(self, bundle: str, asset_type: str) -> List[str]:
         """ 通过bundle键从manifest.json获取值。如果是deubug模式，则从磁盘实时读取json文件 """
         if self.app and self.app.debug:
             self.parse_manifest_json()
         return self.manifest.get(bundle, {}).get(asset_type, [])
-    
-        
+
+
 APP_DIR = os.path.dirname(__file__)
 appbuilder = AppBuilder(update_perms=False)
 # 异步查询管理、缓存管理
-async_query_manager = AsyncQueryManager()  
+async_query_manager = AsyncQueryManager()
 cache_manager = CacheManager()
 celery_app = celery.Celery()
 csrf = CSRFProtect()
@@ -322,7 +322,7 @@ manifest_processor = UIManifestProcessor(APP_DIR)
 migrate = Migrate()
 results_backend_manager = ResultsBackendManager()
 security_manager = LocalProxy(lambda: appbuilder.sm)
-talisman = Talisman()    
+talisman = Talisman()
 ```
 
 
@@ -444,13 +444,13 @@ talisman = Talisman()
 
 #### 模板渲染
 
-模板渲染是可读简易的模板通过模板引擎生成最终的可被浏览器加载的HTML网页内容。 
+模板渲染是可读简易的模板通过模板引擎生成最终的可被浏览器加载的HTML网页内容。
 
 此处模板包括Python Jinja2模板 和 React jsx模板。
 
 大致流程：python端渲染jinja2模板（页面整体布局）＋数据data-bootstrap；浏览器接收响应结果，判断数据有没更新，有则将数据填充到局部模板（局部模板在js端定义，只刷新本处数据）。
 
-* 后端模板渲染 .html： 
+* 后端模板渲染 .html：
   * flask.templating.render_template(template_path, entry, bootstrap-data,)   templates目录下查找template_path文件，js_bundle(entry)导入静态文件，传输数据 bootstrap-data
 * 前端模板渲染 .tsx：
   * ReactDOM.render(template,  template_pos)  将模板(参数1)转为HTML语言，并插入指定的DOM节点(参数2)。
@@ -464,13 +464,13 @@ talisman = Talisman()
    ```python
    # /superset/views/base.py
    from flask_appbuilder import BaseView, Model, ModelView
-   
+
    def common_bootstrap_payload() -> Dict[str, Any]:
        """Common data always sent to the client """
        messages = get_flashed_messages(with_categories=True)
        # 语种：调用flask_babel模块上下文属性 ctx.babel_locale 或者 app.extensions['babel']
-       locale = str(get_locale())	
-   
+       locale = str(get_locale())
+
        return {
            "flash_messages": messages,
            "conf": {k: conf.get(k) for k in FRONTEND_CONF_KEYS},
@@ -481,13 +481,13 @@ talisman = Talisman()
            "extra_categorical_color_schemes": conf["EXTRA_CATEGORICAL_COLOR_SCHEMES"],
            "menu_data": menu_data(),	#菜单数据，国际化部分从flask_appbuilder取语言包
        }
-   
-   
+
+
    class SupersetModelView(ModelView):
        # ModelView视图：数据库CRUD相关
        page_size = 100
        list_widget = SupersetListWidget
-   
+
        def render_app_template(self) -> FlaskResponse:
            payload = {
                "user": bootstrap_user_data(g.user),
@@ -502,35 +502,35 @@ talisman = Talisman()
                    payload, default=utils.pessimistic_json_iso_dttm_ser
                ),
            )
-       
-       
+
+
    class BaseSupersetView(BaseView):
        """ """
-       
-       
-       
+
+
+
    # /superset/views/core.py
    from superset.views.base import BaseSupersetView
-   class Superset(BaseSupersetView):      
+   class Superset(BaseSupersetView):
        """ BaseView方式的路由视图函数  """
        ...
-       
+
        @has_access
        @event_logger.log_this
        @expose("/request_access/")
-       def request_access(self) -> FlaskResponse:    
-           
-           ...    
+       def request_access(self) -> FlaskResponse:
+
+           ...
            # 最终调用 flask_appbuilder/BaseView.render_template()
            return self.render_template(
                "superset/request_access.html",
                datasources=datasources,
                datasource_names=", ".join([o.name for o in datasources]),
-        )    
+        )
    ```
-   
-   
-   
+
+
+
    **实现逻辑**  /flask/templating.py
 
 ```python
@@ -571,7 +571,7 @@ def render_template(template_name_or_list, **context):
 # /flask_appbuilder/baseview.py
 class BaseView(object):
 	def render_template(self, template, **kwargs):
-        
+
 class ModelView(object):
 	def render_template(self, template, **kwargs):
         """
@@ -590,11 +590,11 @@ class ModelView(object):
 
 
 
-2. 前端模板渲染示例 
+2. 前端模板渲染示例
 
-   见下文 《前端打包入口文件》章节  
-   
-   
+   见下文 《前端打包入口文件》章节
+
+
 
 **ReactDOM.render渲染过程**
 
@@ -649,7 +649,7 @@ SSR + SPA = Universal App
 
 服务端判断 传参rison是否为有效python数据格式
 
-装饰器 rison:  
+装饰器 rison:
 
 ```python
 # /flask_appbuilder/api/__init__.py
@@ -659,12 +659,12 @@ def rison(schema=None):
                 "type": "object",
                 "properties": {"arg1": {"type": "integer"}}
             }
-            
+
             class ExampleApi(BaseApi):
                     @expose('/risonjson')
                     @rison(schema)
                     def rison_json(self, **kwargs):
-                        return self.response(200, result=kwargs['rison'])    
+                        return self.response(200, result=kwargs['rison'])
     """
     def _rison(f):
         def wraps(self, *args, **kwargs):
@@ -722,7 +722,7 @@ def rison(schema=None):
 		"userId": 4,
 		"isActive": true,
 		"createdOn": "2021-07-28T06:51:23",
-		"email": "835bd30f09304c9f9bf9b18de25c29b1|keefe"
+		"email": "keefe@163.com"
 	},
 	"common": {
 		"flash_messages": [],
@@ -752,7 +752,7 @@ def rison(schema=None):
 						"lang": "zh"
 					},
 					"Home": ["首页"],
-					"Edit chart metadata": ["编辑图表元数据"],                    
+					"Edit chart metadata": ["编辑图表元数据"],
 		},
 		"feature_flags": {
 			"ALLOW_DASHBOARD_DOMAIN_SHARDING": true,
@@ -834,7 +834,7 @@ def rison(schema=None):
 			}
 		}
 	}
-}                    
+}
 ```
 
 
@@ -864,7 +864,7 @@ cookie示例：主要字段有_xsrf, session, csrf_access_token
 _xsrf=5|032f42b4|e86b7b403d2166b24cd7bd243e6d0cdd|1628748122;remember_token=5|5e16c92420f51b33c4c3b7dc2eccf46ace6963402024dabc35afc3dd54aaeab3ebcdf29de906cfdbd48e8e9390508c86050ddc5ae573945b5c3298a40435caec; session=.eJztlMFqxDAMRH8l6ByKnNiWnV8pS7AtuQmbbJY4C6XL_ntd2k_oMafRXB4zh9ETxryEMkmB4f0JzVEFViklfAi0kCZJ1_HYrnIb5fM-78LNXJq_s20eRfahOaQcCi6v9gScgBPwP4BLW6e5S5lgOPaHVDczDJBt6LxwFPbISBiVUqnXSOysZh0o-tB7pSSTZQrE3gmz80aR06bL3nuy0cXskFxInZDFaJCTxl5nmzuxKSBpRlTWSTIuK6JkOKocnYm1x7KlsEjN8jVVt8sqa5R9LJK2G9c_ohziG7bw0-c3tIHXN6m5fks.YVV-gQ.Dq6CqLfFfqoP4sxkzVai2ovKUD4
 ```
 
-* session：flask模块支持，定义在app.py Flask.SESSION_COOKIE_NAME；cookie数据依赖itdangerous模块的哈希签名序列化生成。
+* session：flask模块支持，定义在app.py Flask.SESSION_COOKIE_NAME；cookie数据依赖 itdangerous模块的哈希签名序列化生成。
 * _xsrf：flask_wtf模块支持，值结构为`{user_id}|{}|{}`
 * remember_token:  flask_login模块支持，当user_login时记录user_id及摘要信息。值结构为`{user_id}|{user_id_digest}`，user_id_digest是用user_id生成hmac摘要供服务端验证，防止数据user_id被修改。
 
@@ -937,7 +937,7 @@ WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log", "superset.charts.api.data"]
 
 #### 客户端会话
 
-/superset-frontend/src/utils/parseCookie.tsx 
+/superset-frontend/src/utils/parseCookie.tsx
 
 ```tsx
 // 解析cookie字符串的字段值
@@ -992,9 +992,10 @@ export default function setupClient() {
 
 * 首页接口  /superset/views/core.py
 * 首页布局  /superset/templates/
-* 首页交互逻辑  /superset-frontend/
+* 首页React组件   /superset-frontend/src/views/
+* 首页交互逻辑  /superset-frontend/src/views/CRUD/welcome/
 
-#### 首页接口 
+#### 首页接口
 
 * 缺省登陆视图  / ->   /superset/welcome  	/superset/views/core.py
 
@@ -1005,14 +1006,14 @@ export default function setupClient() {
 /superset/views/core.py
 
 ```python
-class Superset(BaseSupersetView): 
+class Superset(BaseSupersetView):
     ...
-    
+
     @event_logger.log_this
     @expose("/welcome")
     def welcome(self) -> FlaskResponse:
         """Personalized welcome page"""
-        if not g.user or not g.user.get_id():              
+        if not g.user or not g.user.get_id():
             if conf.get("PUBLIC_ROLE_LIKE_GAMMA", False) or conf["PUBLIC_ROLE_LIKE"]:
                 # 允许匿名用户的欢迎首页
                 return self.render_template("superset/public_welcome.html")
@@ -1038,7 +1039,7 @@ class Superset(BaseSupersetView):
             bootstrap_data=json.dumps(	#此数据替换模板里的相应内容
                 payload, default=utils.pessimistic_json_iso_dttm_ser
             ),
-        )  
+        )
 ```
 
 
@@ -1049,7 +1050,7 @@ class Superset(BaseSupersetView):
 from ..baseviews import BaseView
 
 class AuthView(BaseView):
-    
+
 class AuthDBView(AuthView):
     login_template = "appbuilder/general/security/login_db.html"
 
@@ -1063,20 +1064,20 @@ class AuthDBView(AuthView):
 
 首页组成五大块： 导航栏navbar  Recent  看板 已保存查询  图表
 
-以下模板文件路径前缀省略 /superset/templates/,  
+以下模板文件路径前缀省略 /superset/templates/,
 
 外部模板文件依赖：/superset/templates/appbuuilder目录下没有的模板文件，会到依赖模块 flask_appbuilder/templates/appbuilder/目录下查找。
 
-* 首页   
-  * 正常登陆后的页面(appbuilder)  appbuilder/baselayout.html  -> appbuilder/init.html  
+* 首页
+  * 正常登陆后的页面(appbuilder)  appbuilder/baselayout.html  -> appbuilder/init.html
   * **正常登陆后的页面(superset)**  superset/crud_views.html ->  superset/basic.html
   * 允许匿名用户的欢迎页面  superset/public_welcome.html  -> appbuilder/base.html
   * 登陆页  appbuilder/general/security/login_db.html  数据库认证方式模板
-  
+
 * 导航栏navbar    appbuilder/navbar.html  包括navbar_right.html  navbar_menu.html
 * Recent
 * 看板
-* 已保存查询 
+* 已保存查询
 * 图表
 
 
@@ -1118,7 +1119,7 @@ superset/basic.html
         {% endif %}
       {% endblock %}
     </title>
-    
+
     {% block head_meta %}{% endblock %}
     {% block head_css %}
       {% for favicon in favicons %}
@@ -1198,7 +1199,7 @@ superset/basic.html
 
 
 
-#### 首页React组件 
+#### 首页React组件
 
 /superset-frontend/src/views/  （以下文件名忽略文件前缀路径 /superset-frontend/src/views/  ）
 
@@ -1249,7 +1250,7 @@ const App = () => (
       </FlashProvider>
     </ThemeProvider>
   </ReduxProvider>
-);                  
+);
 ```
 
 
@@ -1302,8 +1303,8 @@ export default function ActivityTable({
     if (e.item_title) return e.item_title;
     return e.slice_name;
   };
-    
- // 三个tab: Viewed Edited Created   
+
+ // 三个tab: Viewed Edited Created
  const tabs = [
     {
       name: 'Edited',
@@ -1357,7 +1358,7 @@ export default function ActivityTable({
 导航栏菜单nav_menu沿用了flask_appbuilder的布局和实现方式。superset派生模板是navbar 和 navbar_right。
 
 * /superset/templates/appbuilder/navbar.html 导航栏
-* /superset/templates/appbuilder/navbar_right.html  导航右侧，用户非匿名登陆时增加下拉菜单等。 
+* /superset/templates/appbuilder/navbar_right.html  导航右侧，用户非匿名登陆时增加下拉菜单等。
 * /superset-frontend/src/components/menu/Menu.tsx  菜单组件Ｍenu和菜单数据转化函数MenuWrapper
 * /superset-frontend/src/views/App.tsx   这里有使用组件Ｍenu和从后端传来的数据data-bootstrap.menu。
 
@@ -1399,7 +1400,7 @@ export default function ActivityTable({
 
 
 
-/superset/templates/appbuilder/navbar_right.html  
+/superset/templates/appbuilder/navbar_right.html
 
 导航栏右侧。主要有下面修改：
 
@@ -1491,7 +1492,7 @@ export default function ActivityTable({
 </li>
 {% endif %}
 
-{% if not current_user.is_anonymous %}  
+{% if not current_user.is_anonymous %}
     <li class="dropdown">	{# 登陆用户显示块 #}
       <a
         class="dropdown-toggle"
@@ -1525,7 +1526,7 @@ export default function ActivityTable({
 
 
 
-/superset-frontend/src/components/menu/Menu.tsx  
+/superset-frontend/src/components/menu/Menu.tsx
 
 定义２个导出函数／组件：Menu 和MenuWrapper。div id值为main-menu。
 
@@ -1560,8 +1561,8 @@ export interface MenuProps {
 }
 
 // header css定义
-const StyledHeader = styled.header`	 
-...  
+const StyledHeader = styled.header`
+...
 `;
 
 export function Menu({
@@ -1569,7 +1570,7 @@ export function Menu({
 }: MenuProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   // ...
-  
+
   // 入参为MenuProps, 返回HTML. id为main-menu
   return (
     <StyledHeader className="top" id="main-menu">
@@ -1588,13 +1589,13 @@ export function Menu({
           ))}
         </Nav>
         <Nav className="navbar-right">
-        </Nav>    
+        </Nav>
         ...
-          
+
       </Navbar>
     </StyledHeader>
   );
-}       
+}
 
 // 菜单数据转换：data -> newMenuData
 export default function MenuWrapper({ data }: MenuProps) {
@@ -1602,9 +1603,9 @@ export default function MenuWrapper({ data }: MenuProps) {
     ...data,
   };
   // ...
-    
+
   return <Menu data={newMenuData} />;
-}    
+}
 ```
 
 
@@ -1655,7 +1656,7 @@ const App = () => (
       </FlashProvider>
     </ThemeProvider>
   </ReduxProvider>
-);                
+);
 ```
 
 
@@ -1672,7 +1673,7 @@ const App = () => (
 
 
 
-添加一个菜单要做的改动，如添加菜单 NEWMENU 
+添加一个菜单要做的改动，如添加菜单 NEWMENU
 
 1. 后端在app.py 里 add_view/add_link 新菜单项
 2. 后端添加菜单视图函数 一般在/superset/views/core.py
@@ -1690,7 +1691,7 @@ const App = () => (
 class SupersetAppInitializer
 	def init_views():
         ...
-        
+
         # add_link/add_view 类似效果，给category指向菜单添加菜单下拉项
         # Databases、Datasets这二个菜单项的父级菜单是 Data 菜单
         appbuilder.add_view(
@@ -1705,7 +1706,7 @@ class SupersetAppInitializer
         appbuilder.add_link(
             "Datasets",
             label=__("Datasets"),
-            href="/tablemodelview/list/?_flt_1_is_sqllab_view=y",  #add_link有href，可提取视图tablemodelview 
+            href="/tablemodelview/list/?_flt_1_is_sqllab_view=y",  #add_link有href，可提取视图tablemodelview
             icon="fa-table",
             category="Data",
             category_label=__("Data"),
@@ -1735,14 +1736,14 @@ class DatabaseView(
         "sqlalchemy_uri": [sqlalchemy_uri_form_validator],
         "server_cert": [certificate_form_validator],
     }
-    
+
     @expose("/list/")
     @has_access
     def list(self) -> FlaskResponse:
         if not is_feature_enabled("ENABLE_REACT_CRUD_VIEWS"): # ENABLE_REACT_CRUD_VIEWS缺省打开特性，在FAB里实现视图。
             return super().list()
 
-        return super().render_app_template()    
+        return super().render_app_template()
 ```
 
 
@@ -1754,7 +1755,7 @@ class Superset(BaseSupersetView):
     """The base views for Superset!"""
 
     logger = logging.getLogger(__name__)
-    
+
     @has_access_api
     @event_logger.log_this
     @expose("/datasources/")  # 实际指向 /superset/datasources/
@@ -1768,7 +1769,7 @@ class Superset(BaseSupersetView):
                 ],
                 key=lambda datasource: datasource["name"],
             )
-        ) 
+        )
 ```
 
 
@@ -1793,12 +1794,12 @@ const config = {
     profile: addPreamble('/src/profile/index.tsx'),
     showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
   },
-}    
+}
  ```
 
 
 
-/superset-frontend/src/views/index.js  
+/superset-frontend/src/views/index.js
 
 ```js
 import React from "react";
@@ -1828,7 +1829,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 * 图表ChartRestApi  /superset/charts/api.py ChartRestApi(BaseSupersetModelRestApi)  13个API
   * /  图表列表 方法有GET
   * /<pk>/   单个图表   方法有GET/PUT/DELETE， POST-新建图表
-  * import  export   导入导出 
+  * import  export   导入导出
   * data favorite_status
 * 图表父类BaseSupersetModelRestApi方法：  /superset/views/base_api.py  BaseSupersetModelRestApi
   * expose("/related/<column_name>")  获取相关字段的值，比如owners, created_by
@@ -1943,7 +1944,7 @@ class BaseViz:
         is_loaded = False	#用来标识是否有查询结果数据
         stacktrace = None
         df = None
-        if cache_key and cache_manager.data_cache and not self.force:	#不强制刷新情况下，从缓存里获取查询结果 
+        if cache_key and cache_manager.data_cache and not self.force:	#不强制刷新情况下，从缓存里获取查询结果
             cache_value = cache_manager.data_cache.get(cache_key)
             if cache_value:
                 stats_logger.incr("loading_from_cache")
@@ -1951,7 +1952,7 @@ class BaseViz:
                     df = cache_value["df"]
                     self.query = cache_value["query"]	#查询结果
                     self.status = utils.QueryStatus.SUCCESS
-                    is_loaded = True	
+                    is_loaded = True
                     stats_logger.incr("loaded_from_cache")
                 except Exception as ex:
                     logger.exception(ex)
@@ -2016,7 +2017,7 @@ class BaseViz:
                 stacktrace = utils.get_stacktrace()
 
             if is_loaded and cache_key and self.status != utils.QueryStatus.FAILED:
-                set_and_log_cache(	# 缓存查询结果 
+                set_and_log_cache(	# 缓存查询结果
                     cache_manager.data_cache,
                     cache_key,
                     {"df": df, "query": self.query},
@@ -2038,7 +2039,7 @@ class BaseViz:
             "stacktrace": stacktrace,
             "rowcount": len(df.index) if df is not None else 0,
         }
-        
+
     def get_df(self, query_obj: Optional[QueryObjectDict] = None) -> pd.DataFrame:
        """将查询对象转化成 pd.DataFrame Returns a pandas dataframe based on the query object"""
         if not query_obj:
@@ -2099,9 +2100,9 @@ class BaseViz:
                 self.df_metrics_to_num(df)
 
             df.replace([np.inf, -np.inf], np.nan, inplace=True)
-        return df        
+        return df
 
-    
+
 class NVD3Viz(BaseViz):
 
     """Base class for all nvd3 vizs"""
@@ -2110,7 +2111,7 @@ class NVD3Viz(BaseViz):
     viz_type: Optional[str] = None
     verbose_name = "Base NVD3 Viz"
     is_timeseries = False
-        
+
 
 class BubbleViz(NVD3Viz):
 
@@ -2121,8 +2122,8 @@ class BubbleViz(NVD3Viz):
     is_timeseries = False
 
     def query_obj(self) -> QueryObjectDict:
-        
-        
+
+
 def get_subclasses(cls: Type[BaseViz]) -> Set[Type[BaseViz]]:
     return set(cls.__subclasses__()).union(
         [sc for c in cls.__subclasses__() for sc in get_subclasses(c)]
@@ -2133,7 +2134,7 @@ viz_types = {	# 此处用到了配置参数里的一个约束
     o.viz_type: o
     for o in get_subclasses(BaseViz)
     if o.viz_type not in config["VIZ_TYPE_DENYLIST"]
-}            
+}
 ```
 
 
@@ -2144,7 +2145,7 @@ FilterBoxViz每个过滤条件都会生成一个df格式的查询结果，get_da
 
 ```python
 class BaseViz:
-    
+
 class FilterBoxViz(BaseViz):
 
     viz_type = "filter_box"
@@ -2159,7 +2160,7 @@ class FilterBoxViz(BaseViz):
 
     def run_extra_queries(self) -> None:
         """ 扩展查询：过滤条件、行限制。调用了基类方法query_obj, get_df_payload """
-        qry = super().query_obj()	
+        qry = super().query_obj()
         filters = self.form_data.get("filter_configs") or []
         qry["row_limit"] = self.filter_row_limit
         self.dataframes = {}
@@ -2172,7 +2173,7 @@ class FilterBoxViz(BaseViz):
             qry["groupby"] = [col]
             metric = flt.get("metric")
             qry["metrics"] = [metric] if metric else []
-            df = self.get_df_payload(query_obj=qry).get("df")  	# 调用基类的获取查询结果 
+            df = self.get_df_payload(query_obj=qry).get("df")  	# 调用基类的获取查询结果
             self.dataframes[col] = df
 
     def get_data(self, df: pd.DataFrame) -> VizData:
@@ -2200,7 +2201,7 @@ class FilterBoxViz(BaseViz):
                     ]
             else:
                 df[col] = []
-        return d    
+        return d
 ```
 
 
@@ -2215,7 +2216,7 @@ from superset.models.helpers import AuditMixinNullable, ImportExportMixin
 
 
 # 根据特征标识，从不同文件加载图表类型类
-if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):   
+if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):
     from superset.viz_sip38 import BaseViz, viz_types
 else:
     from superset.viz import BaseViz, viz_types  # type: ignore
@@ -2269,8 +2270,8 @@ class Slice(
         "params",
         "cache_timeout",
     ]
-    export_parent = "table"    
-    
+    export_parent = "table"
+
     @property  # type: ignore
     @utils.memoized
     def viz(self) -> Optional[BaseViz]:
@@ -2279,14 +2280,14 @@ class Slice(
         if viz_class:
             return viz_class(datasource=self.datasource, form_data=form_data)
         return None
-    
+
     @property
-    def data(self) -> Dict[str, Any]:    
+    def data(self) -> Dict[str, Any]:
 ```
 
 
 
-/supetset/superset_config.py 
+/supetset/superset_config.py
 
 ```python
 # 设置不处理的图表类型，这里只是后端不处理报错；前端仍然会显示此图表
@@ -2295,7 +2296,7 @@ VIZ_TYPE_DENYLIST = ['pivot_table', 'treemap']
 
 
 
-/superset/views/utils.py 
+/superset/views/utils.py
 
 get_viz()根据传参viz_type返回相应的图表类。
 
@@ -2304,7 +2305,7 @@ if is_feature_enabled("SIP_38_VIZ_REARCHITECTURE"):
     from superset import viz_sip38 as viz
 else:
     from superset import viz  # type: ignore
-    
+
 def get_viz(
     form_data: FormData,
     datasource_type: str,
@@ -2324,9 +2325,9 @@ def get_viz(
 
 
 
-#### 客户端交互 
+#### 客户端交互
 
-详见下文 《前端可视化》章节。
+详见下文 《前端-可视化》章节。
 
 /superset-frontend/src/visualizations/
 
@@ -2334,7 +2335,7 @@ def get_viz(
 
 ### 下钻及交叉过滤
 
-#### 下钻 drilldown 
+#### 下钻 drilldown
 
 尚未实现
 
@@ -2342,16 +2343,16 @@ def get_viz(
 
 #### 看板交叉过滤 x-filter
 
-1. 服务端 
+1. 服务端
 
    服务端只是打开了过滤标识DASHBOARD_CROSS_FILTERS，并将此标识作为启动数据传给了客户端。客户端触发交叉过滤时，只是在页面上向其它图表发送请求，可以复用原有图表接口请求。
 
-superset_config.py  
+superset_config.py
 
 打开特性标识开头 DASHBOARD_CROSS_FILTERS
 
 ```python
-FEATURE_FLAGS = { 
+FEATURE_FLAGS = {
     "DASHBOARD_CROSS_FILTERS" : True
 }
 ```
@@ -2450,13 +2451,13 @@ flask 或者 superset 脚本
 import re
 import sys
 
-# flask脚本  
+# flask脚本
 from flask.cli import main  # flask脚本入口
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(main())
-    
-# 或者 superset脚本    
+
+# 或者 superset脚本
 from superset.cli import superset  # superset脚本入口
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
@@ -2486,7 +2487,7 @@ def superset() -> None:
 
     @app.shell_context_processor
     def make_shell_context() -> Dict[str, Any]:  # pylint: disable=unused-variable
-        return dict(app=app, db=db)    
+        return dict(app=app, db=db)
 ```
 
 
@@ -2582,8 +2583,8 @@ def load_examples(
 ) -> None:
     """Loads a set of Slices and Dashboards and a supporting dataset """
     load_examples_run(load_test_data, only_metadata, force)
-    
-    
+
+
 def load_examples_run(
     load_test_data: bool, only_metadata: bool = False, force: bool = False
 ) -> None:
@@ -2591,22 +2592,22 @@ def load_examples_run(
     if only_metadata:
         print("Loading examples metadata")
     else:
-        examples_db = utils.get_example_database()  #创建或加载数据库examples 
+        examples_db = utils.get_example_database()  #创建或加载数据库examples
         print(f"Loading examples metadata and related data into {examples_db}")
 
     from superset import examples  #导入examples样例
 
     examples.load_css_templates()   #从表css_templates加载数据
-    
+
     print("Loading energy related dataset")
-	#从表energy_usage获取数据，如果没有，则从网络上下载数据    
-    examples.load_energy(only_metadata, force)  
+	#从表energy_usage获取数据，如果没有，则从网络上下载数据
+    examples.load_energy(only_metadata, force)
     ...
 ```
 
 
 
-`/superset/examples/__init__.py`    导入了所有的样例数据加载方法 
+`/superset/examples/__init__.py`    导入了所有的样例数据加载方法
 
 ```python
 from .bart_lines import load_bart_lines
@@ -2664,10 +2665,10 @@ def load_energy(
             method="multi",
         )
      ...
- 
 
-""" 从 BASE_URL下载样例数据 """    
-def get_example_data(    
+
+""" 从 BASE_URL下载样例数据 """
+def get_example_data(
     filepath: str, is_gzip: bool = True, make_bytes: bool = False
 ) -> BytesIO:
     content = request.urlopen(f"{BASE_URL}{filepath}?raw=true").read()
@@ -2675,7 +2676,7 @@ def get_example_data(
         content = zlib.decompress(content, zlib.MAX_WBITS | 16)
     if make_bytes:
         content = BytesIO(content)
-    return content  
+    return content
 ```
 
 
@@ -2703,7 +2704,7 @@ from superset.extensions import (
 )
 from superset.security import SupersetSecurityManager
 
-#  All of the fields located here should be considered legacy(遗留的，传统的).  
+#  All of the fields located here should be considered legacy(遗留的，传统的).
 #  The correct way to declare "global" dependencies is to define it in extensions.py,
 #  then initialize it in app.create_app(). These fields will be removed
 #  in subsequent PRs as things are migrated towards the factory pattern
@@ -2727,7 +2728,7 @@ thumbnail_cache = LocalProxy(lambda: cache_manager.thumbnail_cache)
 
 #### 配置文件 config.py
 
-**配置文件的优先级**:  superset_config.py >  config.py  
+**配置文件的优先级**:  superset_config.py >  config.py
 
 1. superset_config.py 用环境变量SUPERSET_CONFIG_PATH定义，在config.py文件尾会重载这个文件。
 
@@ -2764,10 +2765,10 @@ def create_app() -> Flask:
     app = Flask(__name__)
 
     try:
-        # Allow user to override our config completely 
+        # Allow user to override our config completely
         config_module = os.environ.get("SUPERSET_CONFIG", "superset.config")
         # Config.from_object可以加载一个字符串或者一个对象（py文件也是一个对象）
-        app.config.from_object(config_module)  
+        app.config.from_object(config_module)
 ```
 
 
@@ -2786,7 +2787,7 @@ def create_app() -> Flask:
         config_module = os.environ.get("SUPERSET_CONFIG", "superset.config")
         app.config.from_object(config_module)
 
-        # app初始化类，调用init_app	
+        # app初始化类，调用init_app
         app_initializer = app.config.get("APP_INITIALIZER", SupersetAppInitializer)(app)
         app_initializer.init_app()
 
@@ -2794,15 +2795,15 @@ def create_app() -> Flask:
     # Make sure that bootstrap errors ALWAYS get logged
     except Exception as ex:
         logger.exception("Failed to create app")
-        raise ex    
+        raise ex
 
-        
+
 class SupersetIndexView(IndexView):
     """ 首页视图 / --> /superset/welcome """
     @expose("/")
     def index(self) -> FlaskResponse:
         return redirect("/superset/welcome")
-  
+
 
 class SupersetAppInitializer:
     """ APP初始化类 """
@@ -2813,8 +2814,8 @@ class SupersetAppInitializer:
 
         self.flask_app = app
         self.config = app.config
-        self.manifest: Dict[Any, Any] = {}     
-            
+        self.manifest: Dict[Any, Any] = {}
+
     def init_app(self) -> None:
         """
         Main entry point which will delegate to other methods in
@@ -2830,22 +2831,22 @@ class SupersetAppInitializer:
         self.configure_logging()
         self.configure_middlewares()
         self.configure_cache()
-        
+
         with self.flask_app.app_context():  # type: ignore
             self.init_app_in_ctx()  #更新APP上下文，包括更新视图init_views()
 
-        self.post_init()        
-              
+        self.post_init()
+
     def init_views(self) -> None:
         """ 初始化视图
         添加无菜单API和菜单API视图，
         调用 flask_appbuilder.add_api, add_link, add_view
         """
-        # 给无菜单API添加视图 add_api,实质调用 add_view_no_menu 
+        # 给无菜单API添加视图 add_api,实质调用 add_view_no_menu
         appbuilder.add_api(AnnotationRestApi)
-        appbuilder.add_api(AnnotationLayerRestApi)    
+        appbuilder.add_api(AnnotationLayerRestApi)
         ...
-        
+
         # 给菜单添加视图 add_link,add_view
         if appbuilder.app.config["LOGO_TARGET_PATH"]:
             appbuilder.add_link(
@@ -2894,17 +2895,17 @@ class BaseCommand(ABC):
         Validate is normally called by run to validate data.
         Will raise exception if validation fails
         :raises: CommandException
-        """    
-        
+        """
 
-# /superset/utils/log.py        
-class AbstractEventLogger(ABC): 
-    @abstractmethod 
-    def log( self, user_id: Optional[int], action: str, dashboard_id: Optional[int], duration_ms: Optional[int], slice_id: Optional[int], referrer: Optional[str], *args: Any, **kwargs: Any, ) -> None: pass  
-    
+
+# /superset/utils/log.py
+class AbstractEventLogger(ABC):
+    @abstractmethod
+    def log( self, user_id: Optional[int], action: str, dashboard_id: Optional[int], duration_ms: Optional[int], slice_id: Optional[int], referrer: Optional[str], *args: Any, **kwargs: Any, ) -> None: pass
+
 class DBEventLogger(AbstractEventLogger):
-    def log(,,,,)      
-    
+    def log(,,,,)
+
 # /superset/utils/log_configurator.py
 class LoggingConfigurator(abc.ABC):
     @abc.abstractmethod
@@ -2949,11 +2950,11 @@ class ResultsBackendManager:
     @property
     def should_use_msgpack(self) -> bool:
         return self._use_msgpack
-    
-    
+
+
 class UIManifestProcessor:
-    
-    
+
+
 APP_DIR = os.path.dirname(__file__)
 appbuilder = AppBuilder(update_perms=False)
 async_query_manager = AsyncQueryManager()
@@ -2969,7 +2970,7 @@ manifest_processor = UIManifestProcessor(APP_DIR)
 migrate = Migrate()
 results_backend_manager = ResultsBackendManager()
 security_manager = LocalProxy(lambda: appbuilder.sm)
-talisman = Talisman()    
+talisman = Talisman()
 ```
 
 
@@ -2978,7 +2979,7 @@ talisman = Talisman()
 
 Views可分为二大类
 
-* CBV，类实现视图，通常与数据库CRUD密切相关的 ModelView.  
+* CBV，类实现视图，通常与数据库CRUD密切相关的 ModelView.
 * FBV，函数实现视图，通常不涉及到数据库操作。
 
 superset视图可以分为3类，菜单视图，普通视图(不生成菜单的视图，只添加链接)，资源视图（主要数据库，数据表相关）。
@@ -3030,7 +3031,7 @@ class SupersetModelView(ModelView):
 
     def render_app_template(self) -> FlaskResponse:
         payload = { # 要返回给前端的数据
-            "user": bootstrap_user_data(g.user), 
+            "user": bootstrap_user_data(g.user),
             "common": common_bootstrap_payload(),
         }
         return self.render_template(
@@ -3040,7 +3041,7 @@ class SupersetModelView(ModelView):
                 payload, default=utils.pessimistic_json_iso_dttm_ser
             ),
         )
-    
+
 def common_bootstrap_payload() -> Dict[str, Any]:
     """Common data always sent to the client"""
     messages = get_flashed_messages(with_categories=True)
@@ -3055,8 +3056,8 @@ def common_bootstrap_payload() -> Dict[str, Any]:
         "extra_sequential_color_schemes": conf["EXTRA_SEQUENTIAL_COLOR_SCHEMES"],
         "extra_categorical_color_schemes": conf["EXTRA_CATEGORICAL_COLOR_SCHEMES"],
         "menu_data": menu_data(),
-    }    
-    
+    }
+
 class BaseSupersetView(BaseView):
     """ 二种返回格式：JSON或HTML """
     @staticmethod
@@ -3080,14 +3081,14 @@ class BaseSupersetView(BaseView):
             bootstrap_data=json.dumps(
                 payload, default=utils.pessimistic_json_iso_dttm_ser
             ),
-        )    
+        )
 ```
 
 
 
 #### API基类 base_api.py
 
-见下文  RestAPI逻辑 
+见下文  RestAPI逻辑
 
 /superset/views/base_api.py
 
@@ -3095,7 +3096,7 @@ class BaseSupersetView(BaseView):
 from flask_appbuilder import AppBuilder, Model, ModelRestApi
 
 class BaseSupersetModelRestApi(ModelRestApi):
-    
+
     def __init__(self) -> None:
         # Setup statsd
         self.stats_logger = BaseStatsLogger()
@@ -3110,12 +3111,12 @@ class BaseSupersetModelRestApi(ModelRestApi):
             DistincResponseSchema,
         )
         super().__init__()
-        
+
     def create_blueprint(
         self, appbuilder: AppBuilder, *args: Any, **kwargs: Any
     ) -> Blueprint:  # 创建蓝图
         self.stats_logger = self.appbuilder.get_app.config["STATS_LOGGER"]
-        return super().create_blueprint(appbuilder, *args, **kwargs)        
+        return super().create_blueprint(appbuilder, *args, **kwargs)
 ```
 
 
@@ -3143,7 +3144,7 @@ from jinja2.exceptions import TemplateError
 from jinja2.meta import find_undeclared_variables
 
 
-class Superset(BaseSupersetView): 
+class Superset(BaseSupersetView):
 
     logger = logging.getLogger(__name__)
 
@@ -3161,16 +3162,16 @@ class Superset(BaseSupersetView):
 # /superset/views/base.py
 class BaseSupersetView(BaseView):
 
-    
+
 # /flask_appbuilder/baseview.py
 class BaseView(object):
-    
-    route_base = None  
-    
-    def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):    
+
+    route_base = None
+
+    def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):
         ...
         if self.route_base is None:	# 继承自BaseView的route_base是/类名称。
-            self.route_base = "/" + self.__class__.__name__.lower()            
+            self.route_base = "/" + self.__class__.__name__.lower()
 ```
 
 
@@ -3230,7 +3231,7 @@ class SliceModelView(
     SliceMixin:  Slice的数据成员类，不涉及到方法。 导入在同级目录下的 mixin.py
     DeleteMixin： 定义了删除方法。导入在上级目录的../base.py
     SupersetModelView： 此类实现render_app_template方法
-    """    
+    """
     route_base = "/chart"	# 路由路径前缀
     datamodel = SQLAInterface(Slice)
     include_route_methods = RouteMethod.CRUD_SET | {
@@ -3263,7 +3264,7 @@ class SliceModelView(
             "common": common_bootstrap_payload(),
             "user": bootstrap_user_data(g.user),
         }
-        # render_template方法是在此项目根路径下的 templates目录再取相应模块页面, 
+        # render_template方法是在此项目根路径下的 templates目录再取相应模块页面,
         # 实际调用 /suserset/templates/superset/add_slice.html
         return self.render_template(
             "superset/add_slice.html", bootstrap_data=json.dumps(payload)
@@ -3344,7 +3345,7 @@ class CreateChartCommand(BaseCommand):
 
 **RestApi层次体系**：
 
-*flask_appbuilders模块*：BaseApi(object)  -> BaseModelApi -> ModelRestApi 
+*flask_appbuilders模块*：BaseApi(object)  -> BaseModelApi -> ModelRestApi
 
 *superset模块*：		 			-> BaseSupersetModelRestApi (/superset/views/base_api.py)
 
@@ -3416,8 +3417,8 @@ class ChartRestApi(BaseSupersetModelRestApi):
     show_columns = [...]	#图表页时的展示字段
     show_select_columns = show_columns + ["table.id"]
     list_columns = [...]   #图表列表页时的展示字段
-    list_select_columns = list_columns + ["changed_by_fk", "changed_on"]    
-    order_columns = [...]  #排序字段    
+    list_select_columns = list_columns + ["changed_by_fk", "changed_on"]
+    order_columns = [...]  #排序字段
     search_columns = [...] #搜索字段
     base_order = ("changed_on", "desc")
     base_filters = [["id", ChartFilter, lambda: []]]
@@ -3445,18 +3446,18 @@ class ChartRestApi(BaseSupersetModelRestApi):
     openapi_spec_methods = openapi_spec_methods_override
     """ Overrides GET methods OpenApi descriptions """
 
-    order_rel_fields = {	# 排序字段的缺省规则 
+    order_rel_fields = {	# 排序字段的缺省规则
         "slices": ("slice_name", "asc"),
         "owners": ("first_name", "asc"),
     }
 
-    related_field_filters = {	# 相关项字段的缺省过滤规则 
+    related_field_filters = {	# 相关项字段的缺省过滤规则
         "owners": RelatedFieldFilter("first_name", FilterRelatedOwners),
         "created_by": RelatedFieldFilter("first_name", FilterRelatedOwners),
     }
 
     allowed_rel_fields = {"owners", "created_by"}
-    
+
     def __init__(self) -> None:
         if is_feature_enabled("THUMBNAILS"):
             self.include_route_methods = self.include_route_methods | {
@@ -3464,8 +3465,8 @@ class ChartRestApi(BaseSupersetModelRestApi):
                 "screenshot",
                 "cache_screenshot",
             }
-        super().__init__()    
-    
+        super().__init__()
+
     @expose("/export/", methods=["GET"])
     @protect()
     @safe
@@ -3476,7 +3477,7 @@ class ChartRestApi(BaseSupersetModelRestApi):
         log_to_statsd=False,
     )
     def export(self, **kwargs: Any) -> Response:
-        
+
 ```
 
 
@@ -3561,8 +3562,8 @@ class ChartFilter(BaseFilter):  # pylint: disable=too-few-public-methods
             or_(self.model.perm.in_(perms), self.model.schema_perm.in_(schema_perms))
         )
 
-    
-    
+
+
 # /flask_appbuilder/models/filter.py
 from typing import Any, Dict, List, Optional, Tuple, Type
 
@@ -3574,22 +3575,22 @@ class BaseFilter(object):
     datamodel = None
     model = None
     name = ""
-    is_related_view = False    
+    is_related_view = False
     arg_name = None
-    
+
     def __init__(self, column_name, datamodel, is_related_view=False):
         self.column_name = column_name
         self.datamodel = datamodel
         self.model = datamodel.obj  #模型对象
         self.is_related_view = is_related_view
         if self.arg_name:	# 填充map_args_filter
-            map_args_filter[self.arg_name] = self.__class__       
-            
-    def apply(self, query, value):   
+            map_args_filter[self.arg_name] = self.__class__
+
+    def apply(self, query, value):
         raise NotImplementedError
 
     def __repr__(self):
-        return self.name        
+        return self.name
 ```
 
 说明： map_args_filter={arg_name: class_name}，在初始化时构建。flask_appbuilder里缺省有13个过滤器会装载到map_args_filter。
@@ -3617,7 +3618,7 @@ class ChartRestApi(BaseSupersetModelRestApi):
   * /base/models.py  数据源BaseDatasource、列BaseColumn、指标BaseMetric的基类。都有继承二个工具类AuditMixinNullable, ImportExportMixin。
   * /base/views.py   二个视图类分别是DatasourceModelView和BS3TextFieldROWidget。
 * /druid/   druid数据源实现。目录下二个文件分别是models.py和views.py ，
-* /sqla/  supreset数据源实现，有继承常规数据源基类。目录下3个文件分别是utils.py, models.py和views.py 
+* /sqla/  supreset数据源实现，有继承常规数据源基类。目录下3个文件分别是utils.py, models.py和views.py
 
 
 
@@ -3633,8 +3634,8 @@ if TYPE_CHECKING:
 
     from superset.connectors.base.models import BaseDatasource
     from superset.models.core import Database
-    
-    
+
+
 class ConnectorRegistry:
     """ Central Registry for all available datasource engines"""
 
@@ -3690,12 +3691,12 @@ class BaseDatasource(
     def name(self) -> str:
         # can be a Column or a property pointing to one
         raise NotImplementedError()
-        
-        
+
+
 class BaseColumn(AuditMixinNullable, ImportExportMixin):
-    
-    
-class BaseMetric(AuditMixinNullable, ImportExportMixin):    
+
+
+class BaseMetric(AuditMixinNullable, ImportExportMixin):
 ```
 
 
@@ -3786,16 +3787,16 @@ if TYPE_CHECKING:
     # prevent circular imports
     from superset.connectors.sqla.models import TableColumn
     from superset.models.core import Database
-    
-    
+
+
 class TimeGrain(NamedTuple):  # pylint: disable=too-few-public-methods
     """ 时间粒度名称 """
     name: str  # TODO: redundant field, remove
     label: str
     function: str
     duration: Optional[str]
-        
-      
+
+
 class BaseEngineSpec:  # pylint: disable=too-many-public-methods
     """Abstract class for database engine specific configurations
 
@@ -3816,10 +3817,10 @@ class BaseEngineSpec:  # pylint: disable=too-many-public-methods
         str
     ] = None  # used for user messages, overridden in child classes
     _date_trunc_functions: Dict[str, str] = {}
-    _time_grain_expressions: Dict[Optional[str], str] = {}   
- 	
+    _time_grain_expressions: Dict[Optional[str], str] = {}
+
     ...
-        
+
 
 # schema for adding a database by providing parameters instead of the
 # full SQLAlchemy URI
@@ -3869,7 +3870,7 @@ class BasicParametersMixin:
     # recommended driver name for the DB engine spec
     default_driver = ""
 
-    # placeholder with the SQLAlchemy URI template 
+    # placeholder with the SQLAlchemy URI template
     # sqlalchemy_uri模板，?来自自于query参数
     sqlalchemy_uri_placeholder = (
         "engine+driver://user:password@host:port/dbname[?key=value&key=value...]"
@@ -3877,8 +3878,8 @@ class BasicParametersMixin:
 
     # query parameter to enable encryption in the database connection
     # for Postgres this would be `{"sslmode": "verify-ca"}`, eg.
-    encryption_parameters: Dict[str, str] = {}    
-        
+    encryption_parameters: Dict[str, str] = {}
+
     @classmethod
     def build_sqlalchemy_uri(
         cls,
@@ -3902,21 +3903,21 @@ class BasicParametersMixin:
                 database=parameters["database"],
                 query=query,
             )
-        )        
-    
+        )
+
     @classmethod
     def get_parameters_from_uri(
         cls, uri: str, encrypted_extra: Optional[Dict[str, Any]] = None
     ) -> BasicParametersType:
-        
+
     @classmethod
     def validate_parameters(
         cls, parameters: BasicParametersType
     ) -> List[SupersetError]:
-        
+
     @classmethod
     def parameters_json_schema(cls) -> Any:
-        
+
 ```
 
 
@@ -3980,8 +3981,8 @@ class PostgresBaseEngineSpec(BaseEngineSpec):
         "P1Y":
         "DATE_TRUNC('year', {col})",
     }
-    
-    
+
+
 class PostgresEngineSpec(PostgresBaseEngineSpec, BasicParametersMixin):
     engine = "postgresql"
     engine_aliases = {"postgres"}
@@ -3994,7 +3995,7 @@ class PostgresEngineSpec(PostgresBaseEngineSpec, BasicParametersMixin):
     encryption_parameters = {"sslmode": "require"}
 
     max_column_name_length = 63
-    try_remove_schema_from_table_name = False    
+    try_remove_schema_from_table_name = False
 ```
 
 
@@ -4013,7 +4014,7 @@ class PostgresEngineSpec(PostgresBaseEngineSpec, BasicParametersMixin):
 
 
 
-/superset/dao/base.py 
+/superset/dao/base.py
 
 基类BaseDAO。定义了常规的DAO查询类静态方法@classmethod，CRUD。
 
@@ -4041,32 +4042,32 @@ class BaseDAO:
     """
 
     model_cls: Optional[Type[Model]] = None
-    base_filter: Optional[BaseFilter] = None   
-        
+    base_filter: Optional[BaseFilter] = None
+
     @classmethod
     def find_by_id(cls, model_id: int, session: Session = None) -> Model:
-        
+
     @classmethod
     def find_by_ids(cls, model_ids: List[int]) -> List[Model]:
-        
+
     @classmethod
     def find_all(cls) -> List[Model]:
-        
+
     @classmethod
     def create(cls, properties: Dict[str, Any], commit: bool = True) -> Model:
-        
+
     @classmethod
     def update(
         cls, model: Model, properties: Dict[str, Any], commit: bool = True
     ) -> Model:
-        
+
     @classmethod
-    def delete(cls, model: Model, commit: bool = True) -> Model:        
+    def delete(cls, model: Model, commit: bool = True) -> Model:
 ```
 
 
 
-/sueprset/models/core.py  
+/sueprset/models/core.py
 
 ```python
 import sqlalchemy as sqla
@@ -4313,20 +4314,20 @@ class Database(
 
 ### 数据查询
 
-#### 原始数据查询 
+#### 原始数据查询
 
 数据的查询和展示是superset的核心功能，前端用D3.js来渲染各种图标，后端用pandas来处理各种数据。
 
 * /superset/views/core.py  查询接口  /superset/explore_json/
 
-  
+
 
 **superset数据查询过程**：
 
 1.将前端的配置信息form_data传给explore_json函数  /superset/views/core.py
 2.根据所选的图表类型，找到对应的图表类	/superset/viz.py
 3.根据过滤条件生成sql查询语句	/superset/charts/filters.py
-4.根据数据库的连接条件找到对应的数据库engine，创建engine	
+4.根据数据库的连接条件找到对应的数据库engine，创建engine
 5.使用pandas的read_sql函数获取查询结果，并生成一个dataframe
 
 
@@ -4334,8 +4335,8 @@ class Database(
 /superset/views/core.py
 
 ```python
-class Superset(BaseSupersetView): 
-    
+class Superset(BaseSupersetView):
+
 	@api
     @has_access_api
     @handle_api_exception
@@ -4397,8 +4398,8 @@ class Superset(BaseSupersetView):
 			# 返回数据JSON格式
             return self.generate_json(viz_obj, response_type)
         except SupersetException as ex:
-            return json_error_response(utils.error_msg_from_exception(ex), 400)   
-        
+            return json_error_response(utils.error_msg_from_exception(ex), 400)
+
     def generate_json(
         self, viz_obj: BaseViz, response_type: Optional[str] = None
     ) -> FlaskResponse:
@@ -4421,12 +4422,12 @@ class Superset(BaseSupersetView):
             return self.get_samples(viz_obj)
 
         payload = viz_obj.get_payload()
-        return data_payload_response(*viz_obj.payload_json_and_has_error(payload))        
+        return data_payload_response(*viz_obj.payload_json_and_has_error(payload))
 ```
 
 
 
-#### 异步查询 
+#### 异步查询
 
 celery使用
 
@@ -4451,8 +4452,8 @@ celery使用
 * 菜单权限：依赖于flask_appbuilder的菜单管理
   * /flask_appbuilder/menu.py  fab的菜单对象
   *  /superset/app.py    superset添加菜单视图add_view 和菜单链接add_link
-* 资源权限：单个数据库管理， /superset/migrations/  
-* API访问权限：superset某个API访问实现  /superset/xxx/api.py   
+* 资源权限：单个数据库管理， /superset/migrations/
+* API访问权限：superset某个API访问实现  /superset/xxx/api.py
 
 
 
@@ -4486,7 +4487,7 @@ class SupersetAppInitializer:
             flask_app_mutator(self.flask_app)
 
         self.init_views()
-        
+
     def configure_fab(self) -> None:
         """ 配置安全管理类，缺省是SupersetSecurityManager """
         if self.config["SILENCE_FAB"]:
@@ -4534,7 +4535,7 @@ from flask_appbuilder.security.views import (
 class SupersetSecurityManager(SecurityManager):
     userstatschartview = None
     READ_ONLY_MODEL_VIEWS = {"Database", "DruidClusterModelView", "DynamicPlugin"}	# 只读视图
-	
+
     # 用户认证视图： DB/LDAP/Oauth/OID/
     USER_MODEL_VIEWS = {
         "UserDBModelView",
@@ -4544,14 +4545,14 @@ class SupersetSecurityManager(SecurityManager):
         "UserRemoteUserModelView",
     }
     ...
-    
+
     def can_access(self, permission_name: str, view_name: str) -> bool:
         """ 判断当前用户是否能访问视图 """
         user = g.user
         if user.is_anonymous:  # 匿名访问，看公开权限的视图里是否有入参视图和相应权限
             return self.is_item_public(permission_name, view_name)
-        return self._has_view_access(user, permission_name, view_name)  
-    
+        return self._has_view_access(user, permission_name, view_name)
+
     def _has_view_access(
         self, user: object, permission_name: str, view_name: str
     ) -> bool:
@@ -4571,7 +4572,7 @@ class SupersetSecurityManager(SecurityManager):
                 db_role_ids.append(role.id)
 
         # If it's not a builtin role check against database store roles
-        return self.exist_permission_on_roles(view_name, permission_name, db_role_ids)    
+        return self.exist_permission_on_roles(view_name, permission_name, db_role_ids)
 ```
 
 
@@ -4582,7 +4583,7 @@ class SupersetSecurityManager(SecurityManager):
 
 支持 Bearer Token认证。
 
-接口：/api/v1/security/login/  
+接口：/api/v1/security/login/
 
 ```shell
 curl -X 'POST' \
@@ -4613,7 +4614,7 @@ curl -X 'POST' \
 
 
 
-##### superset资源 
+##### superset资源
 
 superset资源主要包括数据源、数据集、图表和看板，此外还包括一些静态资源。
 
@@ -4641,7 +4642,7 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
 ):
 
     """An ORM object for SqlAlchemy table references"""
-    type = "table"				
+    type = "table"
     __tablename__ = "tables"	# 元数据表名称
     __table_args__ = (UniqueConstraint("database_id", "table_name"),)
 
@@ -4649,7 +4650,7 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
     main_dttm_col = Column(String(250))
     database_id = Column(Integer, ForeignKey("dbs.id"), nullable=False)	#外键，映射到dbs.id
     fetch_values_predicate = Column(String(1000))
-    owners = relationship(owner_class, secondary=sqlatable_user, backref="tables")	
+    owners = relationship(owner_class, secondary=sqlatable_user, backref="tables")
     database = relationship(
         "Database",
         backref=backref("tables", cascade="all, delete-orphan"),
@@ -4660,7 +4661,7 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
     is_sqllab_view = Column(Boolean, default=False)
     template_params = Column(Text)
     extra = Column(Text)
-    
+
     @property
     def datasource_name(self) -> str:
         return self.table_name
@@ -4672,12 +4673,12 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
     @property
     def connection(self) -> str:
         return str(self.database)
-    
+
     @property
     def database_name(self) -> str:
         """ 获取数据库名，调用 database.name """
-        return self.database.name    
-    
+        return self.database.name
+
     def get_schema_perm(self) -> Optional[str]:
         """Returns schema permission if present, database one otherwise."""
         return security_manager.get_schema_perm(self.database, self.schema)
@@ -4696,7 +4697,7 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
     def full_name(self) -> str:
         return utils.get_datasource_full_name(
             self.database, self.table_name, schema=self.schema
-        )    
+        )
 ```
 
 
@@ -4705,15 +4706,15 @@ class SqlaTable(  # pylint: disable=too-many-public-methods,too-many-instance-at
 
 ```python
 # /superset/database/commands/create.py
-# adding a new database we always want to force refresh schema list， 
+# adding a new database we always want to force refresh schema list，
 schemas = database.get_all_schema_names(cache=False)
 for schema in schemas:
     security_manager.add_permission_view_menu(
         "schema_access", security_manager.get_schema_perm(database, schema)
     )
     security_manager.add_permission_view_menu("database_access", database.perm)
-            
-            
+
+
 # 查找获取权限ID, database_access指权限名permission_name, database.perm指视图名view_menu_name
 perm = security_manager.find_permission_view_menu(
     "database_access", database.perm
@@ -4725,7 +4726,7 @@ security_manager.add_permission_role(role, perm)   #给角色增加权限ID
 # 实现：/flask_appbuilder/security/sqla/manager.py
 from ..manager import BaseSecurityManager
 
-class SecurityManager(BaseSecurityManager):   
+class SecurityManager(BaseSecurityManager):
     def get_schema_perm(  # pylint: disable=no-self-use
         self, database: Union["Database", str], schema: Optional[str] = None
     ) -> Optional[str]:
@@ -4734,7 +4735,7 @@ class SecurityManager(BaseSecurityManager):
             return f"[{database}].[{schema}]"
 
         return None
-    
+
     def find_permission_view_menu(self, permission_name, view_menu_name):
         """ 通过权限名、视图名查找 是否有相关权限； 返回非空有权限 """
         permission = self.find_permission(permission_name)	# ab_permission表通过name找id
@@ -4745,10 +4746,10 @@ class SecurityManager(BaseSecurityManager):
                 .filter_by(permission=permission, view_menu=view_menu)
                 .one_or_none()
             )
-        
-    def find_permissions_view_menu(self, view_menu):        
+
+    def find_permissions_view_menu(self, view_menu):
         """ 通过视图名获取所有权限 """
-               
+
 ```
 
 
@@ -4762,7 +4763,7 @@ API访问权限体现在二个方面，
 
 
 
-##### 示例1：图表API 
+##### 示例1：图表API
 
 /superset/charts/api.py
 
@@ -4778,7 +4779,7 @@ from superset.views.base_api import (
 
 class ChartRestApi(BaseSupersetModelRestApi):
     ...
-    
+
     def __init__(self) -> None:
         if is_feature_enabled("THUMBNAILS"):
             self.include_route_methods = self.include_route_methods | {
@@ -4798,14 +4799,14 @@ class ChartRestApi(BaseSupersetModelRestApi):
     )
     def post(self) -> Response:
         """ 以上装饰器分别是路由、权限检查、异常处理、API统计、日志处理 """
-        
+
 ```
 
 * expose: API路由扩展
 * **protect**:  判断API权限。
 * rison  捕捉入参的Rison参数
 * safe 捕捉异常，返回异常时的JSON
-* has_access_api  
+* has_access_api
 
 
 
@@ -4815,8 +4816,8 @@ class ChartRestApi(BaseSupersetModelRestApi):
 
 * dbs: 数据库表，添加1条记录，包括数据源连接参数等信息
 * ab_permission_view  权限视图表，添加1+N条（取决于此数据库有多少schema）记录
-  * 添加 此数据源的database_access权限 
-  * 添加 数据源所有schema的 schema_access权限 
+  * 添加 此数据源的database_access权限
+  * 添加 数据源所有schema的 schema_access权限
 
 * ab_role_permission_view 正常情况下，数据源创建者所在的角色应该有此数据源的database_access权限（**superset似乎并未默认实现？或者是说有database_access_all权限的用户才能创建数据源？**）
 
@@ -4879,8 +4880,8 @@ from flask_appbuilder import Model
 from sqlalchemy_utils import EncryptedType
 
 
-class Database(Model, AuditMixinNullable, ImportExportMixin):  
-	
+class Database(Model, AuditMixinNullable, ImportExportMixin):
+
     __tablename__ = "dbs"
     type = "table"
     __table_args__ = (UniqueConstraint("database_name"),)
@@ -4913,7 +4914,7 @@ class Database(Model, AuditMixinNullable, ImportExportMixin):
 
 
 
-/sqlalchemy_utils/type/encrypted/encrypted_type.py  
+/sqlalchemy_utils/type/encrypted/encrypted_type.py
 
 AES加密保存，依赖模块 cryptography, sqlalchemy_utils模块
 
@@ -4966,7 +4967,7 @@ class AesEngine(EncryptionDecryptionBaseEngine):
 
         padding_class = PADDING_MECHANISM[padding_mechanism]
         self.padding_engine = padding_class(self.BLOCK_SIZE)
-        
+
    def encrypt(self, value):
     	""" 加密 """
         if not isinstance(value, six.string_types):
@@ -4994,10 +4995,10 @@ class AesEngine(EncryptionDecryptionBaseEngine):
             except UnicodeDecodeError:
                 raise ValueError('Invalid decryption key')
         return decrypted
-    
-    
+
+
 class StringEncryptedType(TypeDecorator, ScalarCoercible):
-    """ EncryptedType needs Cryptography_ library in order to work. 
+    """ EncryptedType needs Cryptography_ library in order to work.
     _Cryptography: https://cryptography.io/en/latest/
     """
     impl = String	#缺省实现是字符串
@@ -5022,8 +5023,8 @@ class StringEncryptedType(TypeDecorator, ScalarCoercible):
         self.engine = engine()
         if isinstance(self.engine, AesEngine):
             self.engine._set_padding_mechanism(padding)
-            
-            
+
+
 class EncryptedType(StringEncryptedType):
     impl = LargeBinary
     def __init__(self, *args, **kwargs):
@@ -5032,10 +5033,10 @@ class EncryptedType(StringEncryptedType):
             "'LargeBinary' to 'String' in a future version. Use "
             "'StringEncryptedType' to use the 'String' implementation.",
             DeprecationWarning)
-        super().__init__(*args, **kwargs)    
-        
-        
-# /sqlalchemy_utils/type/encrypted/padding.py 
+        super().__init__(*args, **kwargs)
+
+
+# /sqlalchemy_utils/type/encrypted/padding.py
 # 补位机制，缺省 naive
 PADDING_MECHANISM = {
     'pkcs5': PKCS5Padding,
@@ -5061,7 +5062,7 @@ from werkzeug.security import generate_password_hash
 from ..manager import BaseSecurityManager
 
 
-class SecurityManager(BaseSecurityManager):    
+class SecurityManager(BaseSecurityManager):
     """ 成员函数：添加用户 """
 	def add_user(
         self,
@@ -5096,26 +5097,26 @@ class SecurityManager(BaseSecurityManager):
             log.error(c.LOGMSG_ERR_SEC_ADD_USER.format(str(e)))
             self.get_session.rollback()
             return False
-        
-        
+
+
 # /werkzeug/security.py
 def generate_password_hash(password, method="pbkdf2:sha256", salt_length=8):
     """ 用给的salt值长度 和 method 获取hash值 """
     salt = gen_salt(salt_length) if method != "plain" else ""
     h, actual_method = _hash_internal(method, salt, password)
-    return "%s$%s$%s" % (actual_method, salt, h)    
+    return "%s$%s$%s" % (actual_method, salt, h)
 
 def check_password_hash(pwhash, password):
     """
     pbkdf2:method:iterations 比如
 	    pbkdf2:sha256:80000$salt$hash
-       	pbkdf2:sha256$salt$hash  
-    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad        
+       	pbkdf2:sha256$salt$hash
+    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad
     """
     if pwhash.count("$") < 2:
         return False
     method, salt, hashval = pwhash.split("$", 2)
-    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)    
+    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)
 ```
 
 
@@ -5144,21 +5145,21 @@ class SupersetAppInitializer:
             csrf_exempt_list = self.config["WTF_CSRF_EXEMPT_LIST"]
             for ex in csrf_exempt_list:
                 csrf.exempt(ex)
-     
-    
+
+
 # /flask_wtf/csrf.py
 def generate_csrf(secret_key=None, token_key=None):
     """ 产生一个token 放到最近请求的缓存里 """
-    
+
 def validate_csrf(data, secret_key=None, time_limit=None, token_key=None):
-    """ 验证给的token是否有效 """   
-    
+    """ 验证给的token是否有效 """
+
 class CSRFProtect(object):
     def init_app(self, app):
         @app.before_request
         def csrf_protect():
-            
-	def exempt():            
+
+	def exempt():
 ```
 
 
@@ -5188,10 +5189,10 @@ class SupersetAppInitializer:
             from flask_cors import CORS
 
             CORS(self.flask_app, **self.config["CORS_OPTIONS"])
-            
+
 
 # /flask_cors/extensions.py
-class CORS(object):            
+class CORS(object):
 ```
 
 
@@ -5219,7 +5220,7 @@ from superset.utils.urls import headless_url
 
 if TYPE_CHECKING:
     from flask_appbuilder.security.sqla.models import User
-    
+
 
 class MachineAuthProvider:
     def __init__(
@@ -5255,7 +5256,7 @@ class MachineAuthProvider:
     def get_auth_cookies(user: "User") -> Dict[str, str]:
         # Login with the user specified to get the reports，用户登陆成功后保存当前会话
         with current_app.test_request_context("/login"):
-            login_user(user)  
+            login_user(user)
             # A mock response object to get the cookie information from
             response = Response()
             current_app.session_interface.save_session(current_app, session, response)
@@ -5323,7 +5324,7 @@ DATA_DIR： 用来存放元数据文件（缺省sqlite是superset.db）、日志
 
 
 
-/superset/config.py 
+/superset/config.py
 
 ```python
 from superset.stats_logger import DummyStatsLogger
@@ -5356,7 +5357,7 @@ BACKUP_COUNT = 30
 
 
 
-/superset/utils/logging_configurator.py  
+/superset/utils/logging_configurator.py
 
 DefaultLoggingConfigurator 缺省日志配置，会使用LOG_*配置项
 
@@ -5396,7 +5397,7 @@ class DefaultLoggingConfigurator(LoggingConfigurator):
             superset_logger.setLevel(logging.INFO)
 
         logging.getLogger("pyhive.presto").setLevel(logging.INFO)
-        
+
         logging.basicConfig(format=app_config["LOG_FORMAT"])
         logging.getLogger().setLevel(app_config["LOG_LEVEL"])
 
@@ -5511,7 +5512,7 @@ class DummyStatsLogger(BaseStatsLogger):
 日志调用&示例
 
 ```python
-# /superset/extensions.py 
+# /superset/extensions.py
 # event_logger其实不是日志，是一个本地代理
 _event_logger: Dict[str, Any] = {}
 event_logger = LocalProxy(lambda: _event_logger.get("event_logger"))
@@ -5524,12 +5525,12 @@ stats_logger = config["STATS_LOGGER"]
 stats_logger.incr(f"{self.__class__.__name__}.select_star")
 # 日志打印结果示例
 DEBUG:superset.stats_logger:[stats_logger] (incr) DashboardRestApi.get_list.success
-        
+
 # event_logger调用示例： 通常用在API，调用装饰器log_this, log_this_with_context
 @event_logger.log_this
 @expose("/available_domains/", methods=["GET"])
 def available_domains(self) -> FlaskResponse:  # pylint: disable=no-self-use
-	return Response(json.dumps(conf.get("SUPERSET_WEBSERVER_DOMAINS")), mimetype="text/json")        
+	return Response(json.dumps(conf.get("SUPERSET_WEBSERVER_DOMAINS")), mimetype="text/json")
 
 @expose("/favorite_status/", methods=["GET"])
 @statsd_metrics	#统计指标
@@ -5550,7 +5551,7 @@ def favorite_status(self, **kwargs: Any) -> Response:
 
 
 
-### 前端打包逻辑 
+### 前端打包逻辑
 
 * `package.json`    npm命令脚本和前端依赖模块及模块版本管理，各种前端框架如vue/react/bootstrap都需要这个json文件。
 * `webpack.config.js`  webpack构建配置文件， 可以单页面应用程序SAP也可多页面MAP。主要定义了以下内容，
@@ -5560,7 +5561,7 @@ def favorite_status(self, **kwargs: Any) -> Response:
   * resolve解析器：比如babel_loader
   * optimization优化项、
   * 打包参数：APP_DIR  BUILD_DIR
-  * 部署参数：mode(对应到脚本命令里的--mode)  devserverPort 
+  * 部署参数：mode(对应到脚本命令里的--mode)  devserverPort
   * 其它：module模块和plugin插件。
 * webpack.proxy-config.js   webpack代理配置。当启用了web-dev-server时使用。
 * manifest.json   webpack打包后生成的模块详细信息，可以通过模块标识符找到对应的模块(xx.js/xx.css)。构建成生成到superset/static/asset/mainfest.json
@@ -5581,7 +5582,7 @@ def favorite_status(self, **kwargs: Any) -> Response:
   "directories": {
     "doc": "docs",
     "test": "spec"
-  },    
+  },
   "scripts": {  #脚本命令，可用npm run xx启动
     "tdd": "NODE_ENV=test jest --watch",
     "test": "NODE_ENV=test jest",
@@ -5627,11 +5628,11 @@ def favorite_status(self, **kwargs: Any) -> Response:
     "@ant-design/icons": "^4.2.2",
     "@babel/runtime-corejs3": "^7.12.5",
     "@superset-ui/chart-controls": "^0.16.7",
-    "@superset-ui/core": "^0.16.7",   
+    "@superset-ui/core": "^0.16.7",
     ...
   },
   "devDependencies": {  #开发依赖
-    "@babel/cli": "^7.12.10",    
+    "@babel/cli": "^7.12.10",
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
@@ -5647,7 +5648,7 @@ def favorite_status(self, **kwargs: Any) -> Response:
         {"except": ["first-nested"], "ignore": ["after-comment"]}
       ]
     }
-  }      
+  }
 }
 ```
 
@@ -5692,7 +5693,7 @@ const {
   nameChunks = false,
 } = parsedArgs;
 const isDevMode = mode !== 'production';
-const isDevServer = process.argv[1].includes('webpack-dev-server');  
+const isDevServer = process.argv[1].includes('webpack-dev-server');
 
 const output = {
   path: BUILD_DIR,
@@ -5742,7 +5743,7 @@ const config = {	//配置信息，最终导出的配置项
     showSavedQuery: [path.join(APP_DIR, '/src/showSavedQuery/index.jsx')],
   },
   optimization: {  },
-  resolve: { },    
+  resolve: { },
   context: APP_DIR, // to automatically find tsconfig.json
   module: {  //模块定义文件格式对应的loader
     rules: [
@@ -5751,8 +5752,8 @@ const config = {	//配置信息，最终导出的配置项
   },
   plugins: [  //插件
     new HtmlWebpackPlugin({template: './src/index.html'})
-  ]  
-}   
+  ]
+}
 
 let proxyConfig = getProxyConfig();		//读入配置文件webpack.proxy-config.js
 
@@ -5826,7 +5827,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 // 渲染效果： <div id="app"> 模板App的HTML语言 </div>
-// 模板App在Vue框架里一般称叫组件 
+// 模板App在Vue框架里一般称叫组件
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
@@ -5894,15 +5895,15 @@ ReactDOM.render(<App store={store} />, document.getElementById('app'));
     "theme": {
       "css": ["/static/assets/theme.c09e69015dec6f34dc60.entry.css"],
       "js": ["/static/assets/theme.c09e69015dec6f34dc60.entry.js"]
-    },         
-    "preamble": { "css": [], "js": [], },      
+    },
+    "preamble": { "css": [], "js": [], },
     "addSlice": { "css": [], "js": [], },
-    "explore": { "css": [], "js": [], },      
+    "explore": { "css": [], "js": [], },
     "dashboard": { "css": [], "js": [], },
-    "sqllab": { "css": [], "js": [], },      
+    "sqllab": { "css": [], "js": [], },
     "menu": { "css": [], "js": [], },
-    "profile": { "css": [], "js": [], },      
-    "showSavedQuery": { "css": [], "js": [], },        
+    "profile": { "css": [], "js": [], },
+    "showSavedQuery": { "css": [], "js": [], },
     "crudViews": {
       "css": [
         "/static/assets/crudViews.47f4be1346a1c3abadb1.entry.css"
@@ -5938,7 +5939,7 @@ if (isDevMode) {		// isDevMode=True开发模式使用hash，使浏览器缓存�
 } else if (nameChunks) {  // nameChunks=True使用 chunkhash
   output.filename = '[name].[chunkhash].entry.js';
   output.chunkFilename = '[name].[chunkhash].chunk.js';
-} else { 
+} else {
   output.filename = '[name].[chunkhash].entry.js';
   output.chunkFilename = '[chunkhash].chunk.js';
 }
@@ -6044,7 +6045,7 @@ const App = () => (
                   <ErrorBoundary>
                     <DashboardList user={user} />
                   </ErrorBoundary>
-                </Route>                  
+                </Route>
               </Switch>
               <ToastPresenter />
             </QueryParamProvider>
@@ -6053,9 +6054,9 @@ const App = () => (
       </FlashProvider>
     </ThemeProvider>
   </ReduxProvider>
-);     
+);
 
-// App组件模板热更新 
+// App组件模板热更新
 export default hot(App);
 ```
 
@@ -6183,7 +6184,7 @@ ReactDOM.render(app, document.getElementById('app-menu'));
 
 * ChartList.tsx   图表列表、
 * ChartCard.tsx  图表卡片
-* types.ts  
+* types.ts
 
 
 
@@ -6192,8 +6193,8 @@ ReactDOM.render(app, document.getElementById('app-menu'));
 ```tsx
 function ChartList(props: ChartListProps) {
   const { addDangerToast, addSuccessToast } = props;
-    
-  // ChartCard 图表卡片  
+
+  // ChartCard 图表卡片
   function renderCard(chart: Chart) {
     return (
       <ChartCard
@@ -6288,8 +6289,8 @@ function ChartList(props: ChartListProps) {
     </>
   );
 }
-                
-export default withToasts(ChartList);                
+
+export default withToasts(ChartList);
 ```
 
 
@@ -6448,13 +6449,21 @@ export default class MainPreset extends Preset {
 
 
 
+### 看板 /src/dashboard/
+
+看板布局和交互逻辑
+
+* actions/
+* components/  看板涉及到的各种组件，如CssEditor，menu, filterscope, FilterBadge....
+* containers/
+* fixtures/  只有一个文件emptyDashboardLayout.js
+* reducers/
+* stylesheets/  样式表
+* utils/
+
+
+
 ## 5 /superset-websock/
-
-WebSocket可以让服务器端主动向客户端推送数据。
-
-在WebSocket API中，客户端和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
-
-WebSocket 主要用于刷新 token、用户被踢出、平台消息、内存和 CPU 显示、平台日志处当前系统在线人数、数据连接编辑状态的确定。
 
 
 
@@ -6486,8 +6495,8 @@ WebSocket 主要用于刷新 token、用户被踢出、平台消息、内存和 
 
 官网
 
-* babel中文文档  https://www.babeljs.cn/  
-* Vue JS  https://cli.vuejs.org 
+* babel中文文档  https://www.babeljs.cn/
+* Vue JS  https://cli.vuejs.org
 * react官网中文文档  https://zh-hans.reactjs.org
 * [Flask-AppBuilder官方文档](http://flask-appbuilder.readthedocs.io/en/latest/index.html)  http://flask-appbuilder.readthedocs.io/
 * boostrap中文网  https://www.bootcss.com/

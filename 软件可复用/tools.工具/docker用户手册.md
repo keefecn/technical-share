@@ -24,7 +24,7 @@
 
 # 1 Docker简介
 
-官网： http://www.docker.com 
+官网： http://www.docker.com
 
 Docker 是 [PaaS](http://baike.baidu.com/view/1413359.htm) 提供商 dotCloud 于2013年开源的一个基于 [LXC](http://baike.baidu.com/view/6572152.htm) 的高级容器引擎，源代码托管在 [Github](http://baike.baidu.com/view/3366456.htm) 上, 基于[go语言](http://baike.baidu.com/view/2976233.htm)并遵从Apache2.0协议开源。
 
@@ -49,7 +49,7 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 [Open Source Container Project Collaboration | Docker](https://www.docker.com/community/open-source)
 
-开源项目官网仓库： 
+开源项目官网仓库：
 
 * ~~(**deprecated** )  docker/docker-ce: Docker CE (github.com)~~  https://github.com/docker/docker-ce
 
@@ -163,7 +163,7 @@ To install Docker CE, you need the 64-bit version  要求安装在64位平台。
 
 - [Install Docker Desktop on Mac](https://docs.docker.com/docker-for-mac/install/)
 
-  
+
 
 安装Docker Engine [Install Docker Engine | Docker Documentation](https://docs.docker.com/engine/install/) https://docs.docker.com/install/
 
@@ -204,7 +204,7 @@ OS/Arch (server): linux/386
 # 法1：自动检测平台，下载相应最新版本
 $ wget -qO- https://get.docker.com/ | sh
 
-# 法2：手动替换源仓库URL，并安装 
+# 法2：手动替换源仓库URL，并安装
 sudo yum install docker-ce docker-ce-cli containerd.io
 
 # 安装后，启动docker后台服务
@@ -235,7 +235,7 @@ systemctl status docker    #查看Docker的运行状态
 
 win7、win8 等需要利用 docker toolbox 来安装，国内可以使用阿里云的镜像来下载，下载地址：http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/
 
-docker toolbox 是一个工具集，它主要包含以下一些内容： 
+docker toolbox 是一个工具集，它主要包含以下一些内容：
 
 *  Docker CLI 客户端，用来运行docker引擎创建镜像和容器
 *  Docker Machine. 可以让你在windows的命令行中运行docker引擎命令
@@ -371,7 +371,7 @@ daemon.json 示例配置文件
     "insecure-registries": [], #配置docker的私库地址
     "authorization-plugins": [],
     "data-root": "",  #Docker运行时使用的根路径,根路径下的内容稍后介绍，默认/var/lib/docker
-    "dns": [],  
+    "dns": [],
      #设定容器DNS的地址，在容器的 /etc/resolv.conf文件中可查看
     "dns-opts": [],
      #容器 /etc/resolv.conf 文件，其他设置
@@ -386,10 +386,10 @@ daemon.json 示例配置文件
     "labels": [],
      #docker主机的标签，很实用的功能,例如定义：–label nodeName=host-121
     "live-restore": true,
-    "debug": true, 
+    "debug": true,
     "hosts": [],
     "log-level": "",
-    "tls": true,  #默认 false, 启动TLS认证开关     
+    "tls": true,  #默认 false, 启动TLS认证开关
 }
 ```
 
@@ -490,7 +490,7 @@ Options:
   --api-cors-header=                   Set CORS headers in the remote API
   -b, --bridge=                        Attach containers to a network bridge
   --bip=                               Specify network bridge IP
-  -D, --debug=false                    Enable debug mode 	#调度模式	
+  -D, --debug=false                    Enable debug mode 	#调度模式
   -d, --daemon=false                   Enable daemon mode   #后台模式
   --default-ulimit=[]                  Set default ulimits for containers
   --dns=[]                             DNS server to use
@@ -571,7 +571,7 @@ Run 'docker COMMAND --help' for more information on a command.
 
 
 
-### 4.2.1 常用命令 
+### 4.2.1 常用命令
 
 * docker version  获取docker服务端和客户端版本
 * docker info 获取服务器信息
@@ -585,7 +585,7 @@ Run 'docker COMMAND --help' for more information on a command.
 
 ```shell
 # docker-1.13.1: 2017.2前发布，centos7的yum缺省版本。
-$ docker version  
+$ docker version
 Client:
  Version:         1.13.1
  API version:     1.26
@@ -604,7 +604,7 @@ Server:
  Built:           Fri Jan 31 15:01:11 2020
  OS/Arch:         linux/amd64
  Experimental:    false
- 
+
  # docker-ce-20.10.8：2021发布。docker ce拆分成了4块，分别是ce, contained, docker-init, runc
 docker version
 Client: Docker Engine - Community
@@ -645,7 +645,7 @@ Server: Docker Engine - Community
 
 ```shell
 # windows
-$ docker info  
+$ docker info
 Containers: 10
 Images: 19
 Storage Driver: aufs
@@ -680,7 +680,7 @@ Storage Driver: overlay2
  Native Overlay Diff: false
 Logging Driver: journald
 Cgroup Driver: systemd
-Plugins: 
+Plugins:
  Volume: local
  Network: bridge host macvlan null overlay
 Swarm: inactive
@@ -716,7 +716,7 @@ Registries: docker.io (secure)
 
 
 
-### 4.2.3 容器运行 run  
+### 4.2.3 容器运行 run
 
 **docker run命令**
 
@@ -785,7 +785,7 @@ Run a command in a new container
 * 法2（推荐）：  `docker exec -it <docker_id> /bin/bash`
 
   ```sh
-  # 以root身份登陆docker容器 -u root 
+  # 以root身份登陆docker容器 -u root
   $ docker exec -it -u root [docker_id] /bin/bash
   ```
 
@@ -889,11 +889,11 @@ Docker内置这三个网络，运行容器时，你可以使用该–network标�
 
 ```shell
 # 容器B先启动，是mysql服务，--name mysql
-docker run  --name mysql -p 3306:3306 -v /mysql/database/data:/var/lib/mysql 
+docker run  --name mysql -p 3306:3306 -v /mysql/database/data:/var/lib/mysql
 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
 
 # 容器A后启动，用--link使用容器B服务 --link mysql:aliasmysql
-docker run -d -v /Docker:/usr/java/tomcat/apache-tomcat-8.5.27/webapps -p 8080:8080 
+docker run -d -v /Docker:/usr/java/tomcat/apache-tomcat-8.5.27/webapps -p 8080:8080
 --name MyTomcat --link mysql:aliasmysql javaweb:1.0 /root/run.sh
 
 # 容器A后访问mysql的URI: 将原来的ip-127.0.0.1替换成 aliasmysql
@@ -991,7 +991,7 @@ $ docker push [localhost:5000/new_image:tag]
 
 
 
-### 5.1.3 企业级Harbor 
+### 5.1.3 企业级Harbor
 
 开源项目地址：https://github.com/goharbor/harbor/releases
 
@@ -1013,15 +1013,15 @@ VMware开源的企业级Registry项目Harbor，以Docker公司开源的registry 
 
 - 部署简单 - 提供在线和离线两种安装工具， 也可以安装到 vSphere 平台(OVA 方式)虚拟设备
 
-  
 
-1）下载安装 
+
+1）下载安装
 
 ```shell
 [root@otrs004097 opt]# wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.2.tgz
-[root@otrs004097 opt]# tar xf harbor-offline-installer-v1.8.2.tgz 
-[root@otrs004097 opt]# cd harbor/ 
-[root@otrs004097 harbor]# ls 
+[root@otrs004097 opt]# tar xf harbor-offline-installer-v1.8.2.tgz
+[root@otrs004097 opt]# cd harbor/
+[root@otrs004097 harbor]# ls
 harbor.v1.8.2.tar.gz harbor.yml install.sh LICENSE prepare
 ```
 
@@ -1029,7 +1029,7 @@ harbor.v1.8.2.tar.gz harbor.yml install.sh LICENSE prepare
 
 2）**配置文件 harbor.yml**
 
-可根据实际情况修改hostname, port, harbor_admin_password, database.password, 
+可根据实际情况修改hostname, port, harbor_admin_password, database.password,
 
 **必须参数**
 
@@ -1103,7 +1103,7 @@ data_volume: /data
 #     disabled: false
 
 # Clair configuration
-clair: 
+clair:
   # The interval of clair updaters, the unit is hour, set to 0 to disable the updaters.
   updaters_interval: 12
 
@@ -1114,7 +1114,7 @@ clair:
   no_proxy: 127.0.0.1,localhost,core,registry
 
 jobservice:
-  # Maximum number of job workers in job service  
+  # Maximum number of job workers in job service
   max_job_workers: 10
 
 chart:
@@ -1127,8 +1127,8 @@ log:
   level: info
   # Log files are rotated log_rotate_count times before being removed. If count is 0, old versions are removed rather than rotated.
   rotate_count: 50
-  # Log files are rotated only if they grow bigger than log_rotate_size bytes. If size is followed by k, the size is assumed to be in kilobytes. 
-  # If the M is used, the size is in megabytes, and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G 
+  # Log files are rotated only if they grow bigger than log_rotate_size bytes. If size is followed by k, the size is assumed to be in kilobytes.
+  # If the M is used, the size is in megabytes, and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G
   # are all valid.
   rotate_size: 200M
   # The directory on your host that store log
@@ -1494,7 +1494,7 @@ docker system prune
 ## 6.1  docker常用镜像
 
 *  拉取镜像:  docker pull xxx:xxx
-*  运行镜像：docker run 
+*  运行镜像：docker run
 
 表格 3 常用镜像的实例和启动命令 （镜像来自于官网 docker.io）
 
@@ -1525,9 +1525,9 @@ docker system prune
 # docker run时本地无镜像，则从官网下载；再运行
 [keefe@iZ2zebj7eoe7terrup37y4Z docker]$ docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker
 Unable to find image 'uifd/ui-for-docker:latest' locally
-Trying to pull repository docker.io/uifd/ui-for-docker ... 
+Trying to pull repository docker.io/uifd/ui-for-docker ...
 latest: Pulling from docker.io/uifd/ui-for-docker
-841194d080c8: Pull complete 
+841194d080c8: Pull complete
 Digest: sha256:fe371ff5a69549269b24073a5ab1244dd4c0b834cbadf244870572150b1cb749
 Status: Downloaded newer image for docker.io/uifd/ui-for-docker:latest
 743e47f7ece394774920b35990a72e39622b976042accb69543835e25b08e22c
@@ -1804,7 +1804,7 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
 [1]: [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html) http://www.runoob.com/docker/docker-architecture.html
 
-[2]: Docker教程 https://www.w3cschool.cn/docker/ 
+[2]: Docker教程 https://www.w3cschool.cn/docker/
 
 [3]: Docker从入门到进阶 https://yq.aliyun.com/topic/78?spm=5176.8275330.622780.11.LK3KRG
 

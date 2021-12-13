@@ -22,7 +22,7 @@
 
 [TOC]
 
- 
+
 
 **图目录**
 
@@ -66,7 +66,7 @@
 
 [图 20 小咖秀云服务结构... 36](#_Toc519720748)
 
- 
+
 
 **表目录**
 
@@ -86,9 +86,9 @@
 
 [表格 8 云安全标准列表__ 38](#_Toc519720756)
 
- 
 
- 
+
+
 
 ---
 
@@ -110,7 +110,7 @@
 
 入云中获取需要的资源。
 
- 
+
 
 **The NIST Definition of Cloud Computing：**
 
@@ -122,7 +122,7 @@ management effort or service provider interaction.
 
 云计算是一个模型，该模型使用户能通过随需应变的网络，无处不在地、方便地访问可配置的计算资源（例如：网络、服务器、存储器和服务等）的共享池，而这些资源以最少的管理工作或通过与服务提供者的交互实现快速地供给和释放。
 
- 
+
 
 2009年年初，也就是金融危机最严重的时候，美国Salesforce公司公布了2008财年年度报告，数据显示公司云服务收入超过了10亿美元。从此很多公司开始进入云计算业务。
 
@@ -134,7 +134,7 @@ management effort or service provider interaction.
 
 图 1 云计算的演进图
 
- 
+
 
 ![公有云发展史](../../media/cloud/cloud_009.png)
 
@@ -150,7 +150,7 @@ management effort or service provider interaction.
 *  三种服务模型：SaaS, PaaS, IaaS
 *  三种部署模型：私有云、公有云、混合云
 
- 
+
 
  ![image-20191201164903786](../../media/cloud/cloud_002.png)
 
@@ -194,7 +194,7 @@ management effort or service provider interaction.
 
 图 3 云计算参考体系结构
 
- 
+
 
 表格 1 云计算中的角色
 
@@ -210,19 +210,19 @@ management effort or service provider interaction.
 
 图 4 云计算技术层次
 
- 
+
 
 **物理资源**
 
 主要指能支持计算机正常运行的一些硬件设备及技术，可以是价格低廉的PC，也可以是价格昂贵的服务器及磁盘阵列等设备，可以通过现有网络技术和并行技术、分布式技术将分散的计算机组成一个能提供超强功能的集群用于计算和存储等云计算操作。
 
- 
+
 
 **虚拟化资源**
 
 指一些可以实现一定操作具有一定功能，但其本身是虚拟而不是真实的资源，如：计算池，存储池和网络池、数据库资源等，通过软件技术来实现相关的虚拟化功能包括虚拟环境、虚拟系统、虚拟平台等。
 
- 
+
 
 **服务管理中间件**
 
@@ -235,11 +235,15 @@ management effort or service provider interaction.
 *  安全管理包括身份验证、访问授权、安全审计、综合防护等；
 *  映像管理包括映像创建、部署、管理等。
 
- 
+
 
 # 2  云服务
 
-详见  [云服务商比较](云服务商比较.md)
+参见  《[云服务商比较](云服务商比较.md)》
+
+
+
+## 本章参考
 
 
 
@@ -264,7 +268,7 @@ management effort or service provider interaction.
 
 **分析**：云平台的可用性是云安全问题之一，云平台服务端造成的损失远比非云要大得多。
 
- 
+
 
 **新浪SAE云计算平台**
 
@@ -280,13 +284,13 @@ SAE内容审核平台管理员弱口令漏洞 http://www.wooyun.org/bugs/wooyun-
 
 **分析**：攻击者可通过云计算平台自身的漏洞攻击云平台,获取云平台管理权限，或者直接攻击云平台的用户从而造成大规模的危害.
 
- 
+
 
 #### 3.1.1.2 云平台数据泄漏导致的安全事件
 
 Evernote遭到黑客攻击，5000万用户密码需重 http://digi.tech.qq.com/a/20130304/000111.htm
 
-1200万苹果设备ID泄露，源头并非FBI http://www.ctocio.com/ccnews/8524.html 
+1200万苹果设备ID泄露，源头并非FBI http://www.ctocio.com/ccnews/8524.html
 
 ChinaCache云主机openssl漏洞(控制用户主机系统) http://www.wooyun.org/bugs/wooyun-2010-056291
 
@@ -300,7 +304,7 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 
 分析：云平台数据泄漏影响的用户将是海量的，涉及的经济损失更是无法估算，其中以icloud为例其中大量的通讯录、照片、私人日记等。
 
- 
+
 
 ### 3.1.2  云计算带来的安全挑战
 
@@ -310,13 +314,13 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 | 多租户和跨域共享 | （1）信任关系的建立、管理和维护更加困难  （2）服务授权和访问控制变得更加复杂  （3）反动、黄色、钓鱼欺诈等不良信息的云缓冲  （4）恶意SaaS应用 |
 | 虚拟化           | （1）用户通过租用大量的虚拟服务使得协同攻击更容易，隐蔽性更强；  （2）资源虚拟化支持不同租户的虚拟资源部署在相同的物理资源上,方便了恶意用户借助共享资源实施攻击  （3）虚拟机的动态迁移，使得攻击的面更大，且很难追踪 |
 
- 
+
 
 ### 3.1.3  应用：安全云/云查杀
 
 主要服务商：趋势科技、瑞星、360、QQ管家。
 
- 
+
 
 病毒/木马识别——特征识别
 
@@ -326,7 +330,7 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 
 利用云的计算能力, 扩展云的思想——扩大特征码的搜集效率.
 
- 
+
 
 **云时代的安全威胁**
 *  共享技术漏洞
@@ -337,7 +341,7 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 *  服务的恶意使用
 *  不确定风险预测
 
- 
+
 
 **研究热点**
 *  不可信任的服务上建立整体可信的服务链
@@ -345,7 +349,7 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 *  动态边界的安全控制
 *  虚拟化与安全
 
- 
+
 
 ## 3.2  物联网
 
@@ -355,7 +359,7 @@ http://www.tripwire.com/state-of-security/security-data-protection/apples-develo
 
 From anytime, any placeconnectivity for anyone, we will now have connectivity for anything.
 
- 
+
 
 **物联网**
 
@@ -363,7 +367,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 2、从应用理解物联网是指把世界上所有的物体都联接到一个网络中，形成“物联网”,然后“物联网”又与现有的互联网结合,实现人类社会与物理系统的整合，达到更加精细和动态的方式管理生产和生活。
 
- 
+
 
 具体地说，就是把传感器嵌入和装备到电网、铁路、桥梁、隧道、公路、建筑、供水系统、大坝、油气管道等各种物体中。
 
@@ -371,14 +375,14 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 在这个整合的网络当中，存在能力超级强大的中心计算机群，能够对整合网络内的人员、机器、设备和基础设施实施实时的管理和控制。
 
- 
+
 
 物联网特点
 *  全面感知：利用RFID、传感器、二维码、卫星、微波，及其它各种感知设备随时随地采集各种动态对象，全面感知世界。
 *  可靠的传送：利用以太网、无线网、移动网将感知的信息进行实时传送。
 *  智能控制：对物体实现智能化的控制和管理，真正达到人与物的沟通。
 
- 
+
 
 表格 4 物联网国内外发展现状
 
@@ -390,11 +394,11 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 | 中国 | 2009年8月7日，温总理在无锡调研时，对微纳传感器研发中心予以高度关注，提出了把“感知中国”中心设在无锡、辐射全国的想法。 |
 |      |                                                              |
 
- 
+
 
 ## 3.3  云主机和云终端
 
- 
+
 
 ## 3.4  云存储/云盘
 
@@ -415,7 +419,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 图 13 云存储系统结构模型
 
- 
+
 
 各大知名厂商都在致力于云存储方案的研发：
 *  HP的CloudSystem；
@@ -429,7 +433,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 *  Cassandra；
 *  FastDFS
 
- 
+
 
 表格 5 云盘事件列表
 
@@ -446,7 +450,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 ## 本章参考
 
- 
+
 
 # 4 云计算的核心技术 1
 
@@ -460,7 +464,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 操作系统虚拟内存；Java虚拟机；基于X86体系结构的服务器虚拟化技术。
 
- 
+
 
 **为什么要进行虚拟化**
 
@@ -480,11 +484,11 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 降低能源消耗
 
- 
+
 
  ![image-20191201165320966](../../media/cloud/cloud_015.png)
 
- 
+
 
 表格 6 云计算核心技术列表
 
@@ -505,7 +509,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 | 软件     | Java虚拟机                                            |                                                              |
 | 计算     | CPU虚拟化                                             | 传统方式：通过一系列手段改变序列次序。如  时间片轮转；短进程优先；中断。  •本质是一种指令序列的调度机制 |
 
- 
+
 
 ### 4.1.1  实时迁移技术
 
@@ -515,11 +519,11 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 *  拷贝结束后，目标虚拟机开始运行，虚拟机监视器切换到目标虚拟机上，源虚拟机终止
 *  广泛应用于实时系统的硬件维护
 
- 
+
 
 ### 4.1.2  虚拟化资源管理
 
- 
+
 
 ## 4.2  多租户技术
 
@@ -545,7 +549,7 @@ From anytime, any placeconnectivity for anyone, we will now have connectivity fo
 
 图 14 多租户技术图
 
- 
+
 
 应用实现对“多租户”的支持，需要相应的“多租户架构”（Multi-tenancy architecture）。
 
@@ -560,7 +564,7 @@ Gartner对当前云应用“多租户”架构进行了总结并给出了参考�
 
 图 15 多租户参考架构图
 
- 
+
 
 ## 4.3  Hadoop体系
 
@@ -574,13 +578,13 @@ OpenStack是一个由NASA（[美国国家航空航天局](http://baike.baidu.com
 
 OpenStack是一个开源的云计算管理平台项目，由几个主要的组件组合起来完成具体工作。OpenStack支持几乎所有类型的云环境，项目目标是提供实施简单、可大规模扩展、丰富、标准统一的云计算管理平台。OpenStack通过各种互补的服务提供了基础设施即服务（IaaS）的解决方案，每个服务提供API以进行集成。
 
- 
+
 
 OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建立和提供[云端运算](http://baike.baidu.com/view/2872167.htm)服务。
 
 此外，OpenStack也用作建立[防火墙](http://baike.baidu.com/view/3067.htm)内的“[私有云](http://baike.baidu.com/view/4000912.htm)”（Private Cloud），提供机构或企业内各部门共享资源。
 
- 
+
 
 **技术组成**
 *  以[Python](http://baike.baidu.com/view/21087.htm)编程语言编写
@@ -589,36 +593,36 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 *  遵循Open Virtualization Format、AMQP、SQLAlchemy等标准
 *  虚拟机器软件支持包括：[KVM](http://baike.baidu.com/view/27773.htm)、[Xen](http://baike.baidu.com/view/697213.htm)、[VirtualBox](http://baike.baidu.com/view/1047853.htm)、QEMU、 LXC 等。
 
- 
+
 
 ## 本章参考
 
- 
+
 
 # 5 云架构实例
 
 ## 5.1  云安全架构
 
- 
+
 
  ![image-20191201165418356](../../media/cloud/cloud_018.png)
 
 图 16 云计算系统的体系框架图
 
- 
+
 
  ![image-20191201165433786](../../media/cloud/cloud_019.png)
 
 图 17 云计算安全架构
 
- 
+
 
 **云计算安全的非技术手段**
 *  第三方认证：第三方认证是提升信任关系的一种有效手段，即采用一个中立机构对信任双方进行约束。
 *  企业信誉：企业信誉对于任何一个竞争领域的企业来讲都是至关重要的。一般来讲，越大的企业对于自身信誉越看重，不会因为利益去窃取客户的数据。
 *  合同约束：目前已经有很多云计算服务提供商推出了自己的云计算服务的服务水平协议（SLA)，这些协议从服务质量、技术支持和知识产权等方面对服务进行了规范，对服务提供者与使用者的权利和义务进行了明确。
 
- 
+
 
 ### 5.1.1  IBM的云安全架构
 
@@ -626,7 +630,7 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 图 18 IBM信息安全框架
 
- 
+
 
 ### 5.1.2  华为的云安全架构
 
@@ -634,17 +638,17 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 图 19 华为端管云协同的安全解决方案
 
- 
+
 
 云计算安全的核心控制点在云操作系统，云操作系统需要安全可控。
 1. 从云平台的角度：虚拟机是云计算操作系统的一个应用
 2. 从虚拟机的角度：云计算操作系统就是原来的硬件层
 
- 
+
 
 ## 5.2  阿里云栖社区的云架构应用
 
-阿里云栖社区 https://yq.aliyun.com 
+阿里云栖社区 https://yq.aliyun.com
 
 - 第九期：[《微博：一亿访问量背后的分钟级服务器扩容》](https://yq.aliyun.com/articles/18132?spm=5176.blog8530.yqblogcon1.11.w0IH6I)
 - 第八期：[《有货：六层混合云架构打造中国最潮生态圈》](https://yq.aliyun.com/articles/15260?spm=5176.blog11259.yqblogcon1.11.HgzGsf)
@@ -653,9 +657,9 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 - 第五期：[《千万级用户App小咖秀：服务端架构设计分享》](https://yq.aliyun.com/articles/8530?spm=5176.blog11259.yqblogcon1.12.eLBBDJ)
 - 第四期：[《空格App亿元A轮融资背后：云上多场景技术架构实践与经验》](https://yq.aliyun.com/articles/8306?spm=5176.blog11259.yqblogcon1.13.eLBBDJ)
 - 第二期：[《游族网络：如何运维千台以上游戏云服务器》](https://yq.aliyun.com/articles/7548?spm=5176.blog11259.yqblogcon1.15.eLBBDJ)
-- 第一期：[《淘宝丁奇：如何解决影响MySQL使用的9大问题》](https://yq.aliyun.com/edu/lesson/play/91?spm=5176.blog18132.yqblogcon1.17.14Ux3G) 
+- 第一期：[《淘宝丁奇：如何解决影响MySQL使用的9大问题》](https://yq.aliyun.com/edu/lesson/play/91?spm=5176.blog18132.yqblogcon1.17.14Ux3G)
 
- 
+
 
 ### 小伽秀的云服务架构
 
@@ -665,7 +669,7 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 说明：云服务架构的最前端采用负载均衡，可以通过流量分发扩展应用系统对外的服务能力，通过消除单点故障提升应用系统的可用性。中间是URL分发路由，内部的子系统通过ECS服务器搭建PHP集群。缓存部分分为一级缓存和二级缓存两个部分。一级缓存主要通过云Memcached搭建，二级缓存是在ECS部署的Redis搭建而成。最后端是数据库集群，开始阶段是采用自建的MySQL数据库。后期从自建MySQL迁移到RDS上，迁移中通过DPS热切换，切换时间仅用了几十秒的时间，并且迁移过程中没有停机。
 
- 
+
 
 # 参考资料
 
@@ -682,7 +686,7 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 * 企业云计算网 http://www.ecloud.com.cn/
 
 * 中国云计算联盟百科全书 http://www.chinacloud.org/wiki
-* http://www.aboutyun.com 
+* http://www.aboutyun.com
 
 
 
@@ -708,14 +712,14 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 *  欧洲网络与信息安全管理局（ENISA ）
 *  开放式组织联盟（TheOpenGroup）
 
- 
+
 
 国际上比较具有影响力的云安全组织，有：
 *  云安全联盟（CSA）
 *  分布式管理任务组（DMTF）
 *  结构化信息标准促进组织（OASIS）
 
- 
+
 
 表格 8 云安全标准列表
 
@@ -743,11 +747,11 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 组织成员：目前已有277个研究组织和企业加盟。
 
-相关云安全标准： 
+相关云安全标准：
 *  《移动环境下云计算安全技术研究》 由中国联合网络通信集团有限公司牵头，针对移动环境中云计算中面临的安全关键问题进行详细分析和研究。
 *   《电信业务云安全需求和框架》 由中兴通讯股份有限公司牵头，旨在构建电信业务云环境的安全业务云体系框架。
 
- 
+
 
 **2、全国信息技术标准化技术委员**
 
@@ -761,7 +765,7 @@ GB/T32399-2015《信息技术云计算参考架构》
 
  目前尚未发布与云安全相关标准
 
- 
+
 
 目前可借鉴信息安全领域标准，身份认证与隐私保护
 
@@ -771,7 +775,7 @@ GB/T32399-2015《信息技术云计算参考架构》
 
  《信息安全管理系统》、《风险管理--风险评估技术》等等
 
- 
+
 
 **3、全国信息安全标准化技术委员**
 
@@ -803,7 +807,7 @@ GB/T32399-2015《信息技术云计算参考架构》
 
  信息安全技术云计算服务安全能力要求
 
- 
+
 
 表格 中国三大协会的云标准方案
 
@@ -814,7 +818,7 @@ GB/T32399-2015《信息技术云计算参考架构》
 | 已制定标准   | 《移动环境下云计算安全技术研究》~由中国联合网络通信集团有限公司牵头，针对移动环境中云计算中面临的安全关键问题进行详细分析和研究。   <br/>《电信业务云安全需求和框架》  ~由中兴通讯股份有限公司牵头，旨在构建电信业务云环境的安全业务云体系框架。 | GB/T32400-2015《信息技术云计算概览与词汇》  GB/T32399-2015《信息技术云计算参考架构》 |                                                              |
 | 正在制定标准 |                                                              |                                                              | 信息安全技术云计算安全参考架构  云计算服务安全能力评估方法  桌面云安全技术要求   <br/>信息安全技术政府门户网站云计算服务安全指南  网站安全云防护平台技术要求  云计算服务持续监管框架及技术规范  信息安全技术云计算服务安全指南  信息安全技术云计算服务安全能力要求 |
 
- 
+
 
 ## 信息安全等级保护简介
 
@@ -825,7 +829,7 @@ GB/T32399-2015《信息技术云计算参考架构》
 *  单元测评：包括物理安全、网络安全、主机安全、应用安全、数据安全、安全管理机构、安全管理制度、人员安全管理、系统建设管理和系统运维管理共10个方面，覆盖290个要求项。
 *  整体测评：包括安全控制点间测评、层面间测评、区域间测评和验证测试几个方面。
 
- 
+
 
  ![image-20191201165559830](../../media/cloud/cloud_020.png)
 

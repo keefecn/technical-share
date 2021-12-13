@@ -1,4 +1,4 @@
- 
+
 
 | 序号 | 修改时间   | 修改内容                               | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------------------------- | ------ | ------ |
@@ -18,7 +18,7 @@
 
 [TOC]
 
- 
+
 
 # 目录
 
@@ -148,7 +148,7 @@
 
 [数据集... 33](#_Toc528493332)
 
- 
+
 
 表目录
 
@@ -166,9 +166,9 @@
 
 [表格 8 IR检索系统的评测指标__ 21](#_Toc528493339)
 
- 
 
- 
+
+
 
 图目录
 
@@ -180,7 +180,7 @@
 
 [图 4 AI产业链__ 27](#_Toc528493343)
 
- 
+
 
 
 
@@ -196,11 +196,11 @@
 
 人工智能的定义有以下四种方法： [4]
 *  Action humanly: 图灵测试方法1950年提出
-*  Thinking humanly: 
+*  Thinking humanly:
 *  Thinking Rationally: laws of thought
-*  Action Rationally: 
+*  Action Rationally:
 
- 
+
 
 **智能媒介Intelligent Agents**
 
@@ -208,7 +208,7 @@
 
 强智能和弱智能．强智能认为人是精密的计算机．（评：非常远大的梦想，但不是人类智能所能达到的）．弱智能关注的是提示人类和动物的形为所到达到的程度，智能机器被用作理解智能形为的手段．
 
- 
+
 
 ### 1.1.1 各学科的贡献  （哲学…）
 
@@ -221,12 +221,12 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 * If a machine acts as intelligently as a human being, then it is as intelligent as a human being.* [Alan Turing](http://en.wikipedia.org/wiki/Alan_Turing) theorized that,
 *  The [Dartmouth proposal](http://en.wikipedia.org/wiki/Dartmouth_Conferences)          1956
-*  [Newell and Simon's physical symbol system hypothesis](http://en.wikipedia.org/wiki/Physical_symbol_system) 
+*  [Newell and Simon's physical symbol system hypothesis](http://en.wikipedia.org/wiki/Physical_symbol_system)
 *  [Gödel's incompleteness theorem](http://en.wikipedia.org/wiki/Gödel's_incompleteness_theorem)
 *  [Searle's strong AI hypothesis](http://en.wikipedia.org/wiki/Chinese_room#Strong_AI)
 *  The [artificial brain](http://en.wikipedia.org/wiki/Artificial_brain) argument
 
- 
+
 
 **哲学的贡献：知识论，物质和意识．．．**
 
@@ -236,7 +236,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 知识的产生方式，一是先验知识；二是认为知识完全产生于观察，推理及归纳，如培根的经验主义，休漠的归纳原理．目前的主流是第二种，知识来源于实践．
 
- 
+
 
 **［物质和意识的关系］**
 
@@ -244,7 +244,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 ​     人工智能中，涉及到肉体（物质的大脑）和精神的关系．肉体产生思维，还是思维可以独立于肉体．这涉及到*永生*问题．这也导致了研究人工智能的方向，基于肉体的仿生学和使用符号表示的计算机学．也产生了不同的学派，连结主义和符号主义．
 
- 
+
 
 **数学的贡献：形式表示与证明/算法/可计算性/可操作性/概率性**
 
@@ -254,7 +254,7 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 ​     人工智能中，如何模拟不可计算的? 理论基础, 量子力学中的[不确定性原理](http://zh.wikipedia.org/zh-cn/不確定性原理)．数学中的*可计算性*和*算法复杂性理论*．
 
- 
+
 
 **经济学的贡献：效用，决策和运筹学**
 * 神经科学的贡献：大脑和神经网络，智能活动的物理基础(substrate)
@@ -265,15 +265,15 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 **经济学的贡献：复杂系统中的决策/验证环境**
 
- 
+
 
 以上揭示了计算机模型可用来表示**语言**，记忆和逻辑思维的心理过程．
 
- 
+
 
 ### 1.1.2 发展历程
 
-​                ![image-20191201145553212](../../media/ai/ai_history_001.png)               
+​                ![image-20191201145553212](../../media/ai/ai_history_001.png)
 
 图 1 AI发展历程
 
@@ -320,9 +320,9 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 2. 机器学习是符号主义和连接主义的结合。
 
- 
 
-AI多种学习方式 
+
+AI多种学习方式
 
 * 机器学习：一般是基于概率理论。包括统计学习、贝叶斯学习、SVM等。
 * 深度学习：从感知机发展起来的学习方法，其中神经网络是目前最火的方向。
@@ -355,31 +355,31 @@ AI多种学习方式
 
 他是AI研究的先驱者, 经济组织决策管理大师，于1978年获得诺贝尔经济学奖, 是因为他早年的工作: 基于满意度的模型-制定"足够好"的决策, 而不是艰苦计算获得最优化决策-能更好地描述真实人类行为.　CMU
 
- 
+
 
 [Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell) **(**亚伦.纽厄尔1927~1992**)**
 
 1975年与图灵奖获得者. CMU. 达特茅斯会议中与西蒙一起提出*物理符号系统假说*，为符号主义的经典理论．
 
- 
+
 
 [Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)(马文.明期基1927~)
 
 1969年图灵奖获得者，创建麻省理工学院(MIT)人工智能实验室。1975年他首创框架理论(frame theory).
 
- 
+
 
 **Noam Chomsky(乔姆斯基, 1928~)**
 
 他是[麻省理工学院](http://zh.wikipedia.org/zh-cn/麻省理工学院)[语言学](http://zh.wikipedia.org/zh-cn/语言学)的荣誉退休教授，在语言学，心理学和哲学上有杰出贡献。乔姆斯基的[生成语法](http://zh.wikipedia.org/zh-cn/生成语法)被认为是[20世纪](http://zh.wikipedia.org/zh-cn/20世纪)[理论语言学](http://zh.wikipedia.org/w/index.php?title=理论语言学&action=edit&redlink=1)研究上的重要贡献。他对[伯尔赫斯·弗雷德里克·斯金纳](http://zh.wikipedia.org/zh-cn/伯尔赫斯·弗雷德里克·斯金纳)所著《[口语行为](http://zh.wikipedia.org/w/index.php?title=口語行为&action=edit&redlink=1)》的评论，也有助于发动[心理学](http://zh.wikipedia.org/zh-cn/心理学)的[认知革命](http://zh.wikipedia.org/w/index.php?title=认知革命&action=edit&redlink=1)，挑战[1950年代](http://zh.wikipedia.org/zh-cn/1950年代)研究[人类行为](http://zh.wikipedia.org/zh-cn/人類行為)和[语言](http://zh.wikipedia.org/zh-cn/语言)方式中占主导地位的[行为主义](http://zh.wikipedia.org/zh-cn/行为主义)。他所采用以自然为本来研究语言的方法也大大地影响了语言和心智的[哲学](http://zh.wikipedia.org/zh-cn/哲学)研究。他的另一大成就是建立了[乔姆斯基层级](http://zh.wikipedia.org/zh-cn/乔姆斯基层级)：根据文法[生成力](http://zh.wikipedia.org/w/index.php?title=生成力&action=edit&redlink=1)不同而对[形式语言](http://zh.wikipedia.org/zh-cn/形式语言)做的分类。
 
- 
+
 
 [John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist))(约翰.麦卡锡,1927~ )
 
 1971年图灵奖获得者，斯坦福大学人工智能实验室的主任．1959年，发明了LISP语言. 1956年达特茅斯会议Dartmouth的发起者，号称人工智能之父．
 
- 
+
 
 [Tom Mitchell](http://www.cs.cmu.edu/~tom/)(米切尔)
 
@@ -387,7 +387,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 [Machine Learning](http://www.cs.cmu.edu/~epxing/Class/10701/)一书作者．
 
- 
+
 
 ### 1.1.5 当前研究进展和领域前沿
 
@@ -403,7 +403,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 有人把人工智能分成两大类：一类是符号智能，一类是计算智能。符号智能是以知识为基础，通过推理进行问题求解。也即所谓的传统人工智能。计算智能是以数据为基础，通过训练建立联系，进行问题求解。人工神经网络、遗传算法、模糊系统、进化程序设计、人工生命等都可以包括在计算智能。
 
- 
+
 
 过去十年十大人工智能研究热点
 1. 深度神经网络
@@ -444,13 +444,13 @@ Home: http://www.cs.cmu.edu/~tom/
 
 * ECAI AAAI 各一年一次
 
- 
+
 
 **其它**
 *  图灵测试－洛伯纳奖Loebner Prize website 1990~present
 *  CVPR 计算机视觉领域最著名的会议叫CVPR，这个PR就是模式识别。
 
- 
+
 
 ## 1.2   研究方法
 
@@ -462,19 +462,19 @@ Home: http://www.cs.cmu.edu/~tom/
 
 计算机方法包括数学建模和心理学中的启发式程序。 常规的启发式搜索算法有：回溯和分支限界。
 
- 
+
 
 ### 1.2.1 Problem-solving and Resoning
 
 **强人工智能**观点认为*有可能*制造出*真正*能 [推理](http://zh.wikipedia.org/wiki/推理)（[Reasoning](http://en.wikipedia.org/wiki/Reasoning)）和[解决问题](http://zh.wikipedia.org/wiki/解決問題)（[Problem_solving](http://en.wikipedia.org/wiki/Problem_solving)）的智能机器，并且，这样的机器能将被认为是有知觉的，有自我意识的。
 
- 
+
 
 智能体的功能分解：感知－＞建模－＞规划－＞行动，如20世纪60年代Stanford产生的认识机器人－沙基shakey.
 
 新人工智能的三大原则：实体化，现场性，自底向上设计。如基于行为的机器人．
 
- 
+
 
 ### 1.2.2 问题表示（符号主义—谓词逻辑）
 
@@ -484,7 +484,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 一阶：Horn子句
 
- 
+
 
 ### 1.2.3 问题求解(搜索)
 
@@ -495,7 +495,7 @@ Home: http://www.cs.cmu.edu/~tom/
 *  目标测试goal
 *  路径消耗
 
- 
+
 
 问题空间的搜索策略
 
@@ -507,19 +507,19 @@ Home: http://www.cs.cmu.edu/~tom/
 
 4)     对抗搜索: 博弈
 
- 
+
 
 ### 1.2.4 知识与推理Knowledge and Reasoning
 
 知识可分为确定性知识和不确定性知识.
 
- 
+
 
 **确定性知识**
 
 常规的知识可通过逻辑推理的方式获得.
 
- 
+
 
 **不确定性知识**
 
@@ -528,7 +528,7 @@ Home: http://www.cs.cmu.edu/~tom/
 *  隐马尔可夫模型(Hidden Markow Model, HMM)
 *  卡尔曼滤波器
 
- 
+
 
 ## 1.3   研究领域
 
@@ -542,7 +542,7 @@ Home: http://www.cs.cmu.edu/~tom/
 *  机器人技术，可以操纵和移动物体
 *  此外还包括[智能搜索](http://zh.wikipedia.org/wiki/智能搜索) (Intelligent Search)，模式识别等
 
- 
+
 
 **分类一：**
 
@@ -550,7 +550,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 搜索和推荐可归入自然语言处理领域。
 
- 
+
 
 **分类二：学术界UCLA朱松纯将AI分为六个领域，分别是：**
 
@@ -566,7 +566,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 （6）机器学习（各种统计的建模、分析工具和计算的方法），
 
- 
+
 
 分类三：工业界按应用场景将AI分为
 *  自动驾驶 （车联网）
@@ -593,13 +593,13 @@ Home: http://www.cs.cmu.edu/~tom/
 
 信息处理过程的一个重要形式是生命体对环境及客体的识别。对人类来说，特别重要的是对[光学](https://baike.baidu.com/item/光学)信息（通过[视觉](https://baike.baidu.com/item/视觉)器官来获得）和[声学](https://baike.baidu.com/item/声学)信息（通过听觉器官来获得）的识别。这是模式识别的两个重要方面。市场上可见到的代表性产品有[光学字符识别](https://baike.baidu.com/item/光学字符识别)、[语音识别](https://baike.baidu.com/item/语音识别)系统。
 
- 
+
 
 **研究领域**
 
 模式识别研究主要集中在两方面，一是研究生物体(包括人)是如何感知对象的，属于认识科学的范畴，二是在给定的任务下，如何用计算机实现模式识别的理论和方法。前者是生理学家、心理学家、[生物学](https://baike.baidu.com/item/生物学)家和神经生理学家的研究内容，后者通过数学家、信息学专家和[计算机科学](https://baike.baidu.com/item/计算机科学)工作者近几十年来的努力，已经取得了系统的研究成果。
 
- 
+
 
 **应用**
 
@@ -615,7 +615,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### 1.3.5 机器人学
 
- 
+
 
 ## 1.4 AI业界
 
@@ -648,261 +648,34 @@ AI芯片说明如下：
 
 ## 1.5 AI平台
 
-
-
-表格 5 中国业界AI平台比较
-
-| 平台       | 链接                                  | 简介                                                         |
-| ---------- | ------------------------------------- | ------------------------------------------------------------ |
-| 百度AI平台 | https://ai.baidu.com/                 | 研究领域和应用场景都非常齐全。                               |
-| 阿里AI     | https://ai.aliyun.com/                | 属于阿里云提供的一个解决方案，没像百度那样重点突出AI，但内容也很全。 |
-| 腾讯AI Lab | https://ai.tencent.com/               | 实验室性质，不是企业战略方向。研究领域：计息机视觉、语音识别、自然语言处理、机器学习 <br>应用领域：社交AI、游戏AI、内容AI、平台AI |
-| 华为 AILA  | https://ai.huawei.com/ （仅华为内网） | 2018.5，华为BPIT成立AI使能部，分七大基础能力和六大领域解决方案。 |
-
-
-
-### 百度AI平台
-
-https://ai.baidu.com/
-
-表格 6 百度AI技术能力
-
-| 能力<BR>项     | 分项             | 子项                                                         | 应用<br>场景 |
-| -------------- | ---------------- | ------------------------------------------------------------ | ------------ |
-| 语音技术       | 语音识别         | 长、短(60s内）语音识别、远程语音识别                         |              |
-|                |                  | 语音合成：在线合成、离线语音合成                             |              |
-|                | 语音唤醒         | 实时语音识别、音频文件转写                                   |              |
-|                | 图像审核         | 色情、政治、暴力、图文、广告、敏感信息、图像质量、公众人物识别 |              |
-|                | 车辆分析         | 车型识别、车流统计、车辆损伤识别、车辆检测、车辆属性识别、车辆分隔 | 交通         |
-|                | 图像识别         | 通用物体和场景识别、植物、动物、菜品、货币、门脸、地标、红酒、图像主体检测 |              |
-|                | 图像搜索         | 相同图片搜索、相似图片搜索、商品图片搜索、绘本图片搜索       |              |
-|                | 图像效果增强     | 图像去雾、图像无损放大、拉伸图像恢复、黑白图像上色、图像风格转换、图像清晰度增强、图像色彩增强 |              |
-| 文字识别       | 通用文字识别     |                                                              |              |
-| 文字识别       | 卡证文字识别     | 身份证、营业执照、护照、出生医学证明、银行卡、名片、户口本、 |              |
-| 文字识别       | 票据文字识别     | 混贴票据、增值税发票、通用机打发票、出租车票、通用票据、银行回单、银行汇票、银行支票、银行火车票、彩票、 |              |
-| 文字识别       | 教育场景文字识别 | 手写文字识别、公式识别                                       |              |
-| 文字识别       | 汽车场景文字识别 | 行驶证、车辆识别、                                           |              |
-| 文字识别       | 其它景文字识别   | 网络图片文字、表格文字、数字识别、印章检测、仪器仪表盘读数识别、二维码、文档版面分析与识别 |              |
-| 人脸与人体识别 | 人脸识别         | 人脸检测、人脸搜索、人像对比、活体检测                       |              |
-| 人脸与人体识别 | 人像特效         | 人脸融合                                                     |              |
-| 人脸与人体识别 | 人体分析         | 人体关键点识别、人体检测与属性                               |              |
-| 人脸与人体识别 | 行为分析         | 驾驶行为分析、危险形为分析、手势识别、指尖识别               |              |
-| 人脸与人体识别 | 场景方案         | [人脸实名认证 ](https://ai.baidu.com/solution/faceprint) 	满足各种场景下实名认证的灵活需求 		<br>[人脸闸机 ](https://ai.baidu.com/solution/facegate) 软硬一体的人脸识别闸机解决方案，提升人员系统化管理的安全性与便捷性 		<br>[人脸考勤 ](https://ai.baidu.com/solution/faceattendance) 利用高精度的人脸识别、对比能力，搭建高效考勤系统，提高防作弊能力 		<br>[人脸会员识别 ](https://ai.baidu.com/solution/faceidentify) |              |
-| 视频技术       |                  | 视频内容分析、 		视频封面选取、 		视频对比检索 		视频内容审核 |              |
-| AR与VR         | 增强现实         | AR核心技术 		3D肢体关键点                              |              |
-| AR与VR         | 虚拟现实         |                                                              |              |
-| 自然语言处理   | NLP基础技术      | [词法分析 ](https://ai.baidu.com/tech/nlp_basic/lexical) 提供分词、词性标注、命名实体识别 		[词向量表示 ](https://ai.baidu.com/tech/nlp_basic/word_embedding) 帮助完成语义挖掘、相似度计算<br>[词义相似度 ](https://ai.baidu.com/tech/nlp_basic/word_emb_sim) 通过词语向量化来计算两个词之间的相似度 		[依存句法分析 ](https://ai.baidu.com/tech/nlp_basic/dependency_parsing) 自动分析文本中的依存句法结构信息 		<br/>[DNN](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn)[语言模型 ](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn) 判断一句话是否符合语言表达习惯 		[短文本相似度 ](https://ai.baidu.com/tech/nlp_basic/simnet) 计算两个短文本之间的语义相似度，实现推荐、排序 |              |
-|                | NLP应用技术      | [文本纠错 ](https://ai.baidu.com/tech/nlp_apply/text_corrector) 识别文本中的错别字，给出提示以及正确的建议文本内容 		[情感倾向分析 ](https://ai.baidu.com/tech/nlp_apply/sentiment_classify) 对包含主观信息的文本进行情感倾向性判断 <br/>[评论观点抽取 ](https://ai.baidu.com/tech/nlp_apply/comment_tag) 分析评论关注点和观点，输出标签及观点极性 		[对话情绪识别 ](https://ai.baidu.com/tech/nlp_apply/emotion_detection) 识别会话者所表现出的情绪类别及置信度 <br/>[文本标签 ](https://ai.baidu.com/tech/nlp_apply/doctagger) 输出能够反映文章关键信息的多维度标签 		[文章分类 ](https://ai.baidu.com/tech/nlp_apply/topictagger) 输出文章的主题分类及对应的置信度 		<br/>[新闻摘要 ](https://ai.baidu.com/tech/nlp_apply/news_summary) 抽取关键信息并生成指定长度的新闻摘要 		[地址识别 ](https://ai.baidu.com/tech/nlp_apply/address) 精准提取快递填单文本中的姓名、电话、地址信息 |              |
-|                | 文本审核         |                                                              |              |
-|                | 机器翻译         | 通用翻译 语音翻译 		定制化翻译 拍照翻译 垂直领域 AI同传 		语种识别 |              |
-| **数据智能**   | 大数据处理       | 大数据传输 数据治理 		数据工厂                         |              |
-| **数据智能**   | 大数据分析       | 数据仓库 数据科学平台 		搜索分析ES 		大数据可视化 |              |
-| **数据智能**   | 统计与推荐       | 网站统计 智能推荐 		移动统计                           |              |
-| **数据智能**   | 舆情分析         | 舆情平台                                                     |              |
-| **数据智能**   | 大数据风控       | 保险风险定价 保险反欺诈 		智能个人风控 智能企业风控    |              |
-| **数据智能**   | 大数据营销       | 智客 汇客 觅客 炫客 		客情 商情                        |              |
-| **数据智能**   | 知识生产与理解   |                                                              |              |
-| 知识图谱       | 知识理解         | [实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 		[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索[实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 		[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索 |              |
-| 知识图谱       | 知识图谱schema   |                                                              |              |
-| 知识图谱       | 图数据库         |                                                              |              |
-
-
-
-### 阿里AI
-
-- 阿里云人工智能平台 https://ai.aliyun.com/
-- 阿里语音AI平台AliGenie https://www.aligenie.com/
-- 阿里机器学习PAI https://data.aliyun.com/product/learn?spm=5176.cnaicrowd.1280361.109.559e4962agp6yU  
-
-
-
- 阿里机器学习PAI包含3个子产品分别是： 
-
-1. 可视化开发工具PAI-STUDIO，
-2. 交互式代码开发工具PAI-DSW，
-3. 模型在线服务PAI-EAS
-
-三个产品为传统机器学习和深度学习提供了从数据处理、模型训练、服务部署到预测的一站式服务。
-
-
-
-https://ai.aliyun.com/
-
-阿里巴巴的AI布局主要在六个产业：新零售、新金融、天猫精灵、AliOS、ET城市大脑、ET工业大脑。
-
-ET大脑生态：金融、工业、城市、零售、汽车、家居6大方向立体布局。
-
-
-
-![img](../../media/ai/ai_aliyun_003.png)
-
-
-
-
-
-### 腾讯AI
-
-https://ai.tencent.com/ 跳转到 https://ai.tencent.com/ailab/
-
-腾讯AI Lab是腾讯企业级人工智能实验室，于2016年4月在深圳成立，目前在中国和美国有70位世界级研究科学家及300余位经验丰富的应用工程师，致力于不断提升AI的理解、决策与创造力，向“Make AI Everywhere”的愿景迈进。
-
-
-
-腾讯AI主要先体现在游戏人工智能。
-
-腾讯AI布局相对较晚，腾讯提出以“基础研究—场景共建—AI开放”为三层架构的整体AI战略，从技术、场景与平台三个层面实现“AI in All”，AI被提到战略级高度。腾讯的AI版图围绕技术、场景与平台持续扩大，AI以产品的形式落地应用，从内部场景应用不断向外部产业化场景落地延伸。具体的AI应用场景为：在内部应用场景中，AI与腾讯游戏、社交、内容等业务场景深度融合；在外部场景中，医疗是腾讯AI切入最早、应用成熟度最高的场景之一。
-
-
-
-### 华为AI
-
-https://ai.huawei.com/ (只能华为内网访问，AI使能部属于华为BPIT二级部门，负责给华为内部业务AI赋能)
-
-https://www.huaweicloud.com/
-
-华为云下提供了AI和大数据服务。
-
-
-
-2017年9月，华为发布了面向企业、政府的人工智能服务平台华为云EI。
-
-2018年4月，华为发布了面向智能终端的人工智能引擎HiAI。
-
-2018年12月，华为发布了全栈全场景AI解决方案。
-
-2020.9.24，华为云与计算BG总裁侯金龙在华为全联接2020现场发布了政企智能升级的参考架构“智能体”。
-
-
-
-**全栈全场景AI解决方案（2018.12）**
-
-![img](../../media/ai/ai_hw_001.png)
-
-图  华为的全栈全场景AI解决方案（2018.12）
-
-全场景，是指包括公有云、私有云、各种边缘计算、物联网行业终端以及消费类终端等部署环境。
-
-全栈是技术功能视角，是指包括芯片、芯片使能、训练和推理框架和应用使能在内的全堆栈方案。
-
-
-
-**华为的全栈方案具体包括：**
-
-- ​	**Ascend**：基于统一、可扩展架构的系列化AI IP和芯片，包括Max、Mini、Lite、Tiny和Nano五个系列。包括我们发布的华为昇腾910（Ascend 910），还有Ascend 310。
-- ​	**CANN**：芯片算子库和高度自动化算子开发工具。
-- ​	**MindSpore**：支持端、边、云独立的和协同的统一训练和推理框架。
-- ​	**应用使能**：提供全流程服务（ModelArts），分层API和预集成方案。
-
-
-
-**华为智能体（2020.09）**
-
-![img](../../media/ai/ai_hw_002.png)
-
-图 华为智能体
-
-说明：华为智能体获第七届世界互联网大会领先科技成果奖（2020）。
-
-
-
-2020.9.24，华为云与计算BG总裁侯金龙在华为全联接2020现场发布了政企智能升级的参考架构“智能体”。
-
-智能体以云为基础，以AI为核心，通过云网边端协同，构建开放、立体感知、全域协同、精确判断和持续进化的智能系统，为城市治理、企业生产、居民生活带来全场景智慧体验。智能体是一个开放的生态系统，客户和伙伴可以基于智能体打造自己的智能方案，使能千行百业智能升级，共建全场景智慧。
-
-
-
-智能体由智能交互、智能联接、智能中枢、智慧应用四层组成，有机构成云网边端协同的一体化智能系统：
-
-- ​	智能交互：云边端协同，加速数据和AI的自由流动
-- ​	智能联接：万物智联，万智互联
-- ​	智能中枢-混合云：构筑智能升级的理想底座
-- ​	智慧应用：协同创新共创行业新价值
-
-
-
-三个使能平台也非常关键，分别是应用使能ROMA、数据使能DAYU和AI使能ModelArts。
-
-第一，应用使能，让应用开发更简单！每个企业都有大量新应用要开发，华为云ROMA提供低代码、零代码开发能力，支持全云化在线开发，云上云下一键部署，可不断沉淀行业资产，实现软件资产重用，乐高式开发。同时，每个企业都有很多老应用和老数据库，华为云ROMA提供平台化、服务化的方式，让新老应用和数据可以互通，让企业IT立而不破，实现企业应用与技术架构的平滑演进。以华为自身为例，有了ROMA之后，应用开发时间从10个月缩短到1周。
-
-
-
-第二，数据使能，让数据应用更简单。很多客户数据分布在不同的部门，但是数据只有全域共享才能发挥更大价值。华为云DAYU提供独创的逻辑数据湖方案，让数据物理上分布在不同部门，逻辑上可集中管理和分析，实现数据全域共享。
-
-
-
-第三，AI使能是智能体的核心。ModelArts让AI全生命周期的开发管理简单和自动化，让小白也能够开发AI应用，会写代码就会AI；让专家更专，聚焦算法和模型的研究。ModelArts将专家的行业知识，沉淀在套件和行业工作流中，让行业老专家的经验模板化，帮助合作伙伴和开发者，快速开发出智慧应用。以中国石油为例，沉淀行业能力后，借助华为云知识图谱套件，快速构建石油测井领域的专业化模型，实现了油气水层的智能识别，评价时间缩短70%以上，准确率达到了专家水平。
-
-
-
-### Amazon
-
-亚马逊将人工智能平台和服务整合进入了其云服务AWS中，此类服务提供云原生的机器学习和深度学习技术来应对不同用例和需求。其中在人工智能层面主要提供：AI 服务、AI 平台以及AI 基础设施。
-
-
-
-### 其它
-
-国内
-
-- ​	百度AI平台  http://ai.baidu.com/  
-- ​	阿里AI平台  http://ai.alibaba.com/  
-- ​	腾讯AI平台  http://ai.tencent.com/  
-- ​	科大讯飞开放平台 [点击进入](https://www.xfyun.cn/)
-- ​	Face++旷视 	 [点击进入](https://www.faceplusplus.com.cn/)
-- ​	360人工智能研究院 [点击进入](http://ai.360.cn/)
-- ​	网易人工智能 [点击进入](https://ai.163.com/)
-- ​	京东AI开放平台 [点击进入](http://neuhub.jd.com/)
-- ​	小米AI开放平台 [点击进入](https://dev.mi.com/console/cloud/)
-- ​	海康威视  [点击进入](https://open.hikvision.com/)
-- ​	OLAMI 欧拉密 AI 	 [点击进入](https://cn.olami.ai/)
-- ​	云知声开放平台 [点击进入](http://dev.hivoice.cn/)
-- ​	搜狗AI开放平台 - 知音 [点击进入](https://zhiyin.sogou.com/)
-- ​	滴滴AI开放平台 [点击进入](http://ai.didiglobal.com/)
-- ​	学而思教育AI开放平台 [点击进入](https://ai.xueersi.com/)
-
-
-
-国外
-
-- ​	Amazon AI  https://aws.amazon.com/cn/events/amazon-ai/  
-- ​	IBM人工智能-IBM Cloud Pak for Data  [点击进入](https://www.ibm.com/cn-zh/products/cloud-pak-for-data)
-- ​	微软AI开放平台 [点击进入](https://azure.microsoft.com/zh-cn/free/ai/)
-- ​	英特尔 AI Academy [点击进入](https://software.intel.com/zh-cn/ai)
-
-
-
-**旷视**
-
-Face++人工智能开放平台的核心技术包括人脸识别、人体识别、证件识别、图像识别。其技术能力主要在人体识别，包括人体检测、人体属性、人体抠像，手势识别四种，应用于人群监控、人流量统计、人体追踪；相片抠像美化处理市场调查、广告精准投放；在线教育等领域。
+详见 《[AI中台](AI中台.md)》
 
 
 
 ## 本章参考
 
-- 一文纵览人工智能的23个分支 http://www.chaoqi.net/xinchao/2018/0102/107317.html 
+- 一文纵览人工智能的23个分支 http://www.chaoqi.net/xinchao/2018/0102/107317.html
 
-- 朱松纯教授浅谈人工智能：现状、任务、构架与统一 https://www.sohu.com/a/227854954_297710 
+- 朱松纯教授浅谈人工智能：现状、任务、构架与统一 https://www.sohu.com/a/227854954_297710
 
 - 模式识别 [https://baike.baidu.com/item/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB](https://baike.baidu.com/item/模式识别)
 
-- 逐个看看全球 18 件 AI 大事记 www.elecfans.com/rengongzhineng/892836.html 
+- 逐个看看全球 18 件 AI 大事记 www.elecfans.com/rengongzhineng/892836.html
 
 - 阿里首次全面公开展示AI布局（附布局图/成绩单/六产业详解） http://www.cbdio.com/BigData/2017-12/21/content_5651895.htm
 - 500家国内AI企业大数据分析：产业布局与融投风云 http://ai.51cto.com/art/201709/552696.htm
 - 《2017年中美人工智能创投现状与趋势研究报告》
 - https://github.com/dformoso/machine-learning-mindmap
-- ModelArts https://support.huaweicloud.com/modelarts/index.html  
-- 各大AI开放平台汇总分析 https://blog.csdn.net/benna/article/details/104848422  
 
- 
 
-# 2  机器学习 ML 
+
+# 2  机器学习 ML
 
 程序 = 算法＋数据结构＋领域知识
 
 编程人员  + 知识工程师  + 领域专家expert
 
- 
+
 
 机器学习的任务是通过一定的学习算法来达到改进智能体未来的行动能力。
 
@@ -910,7 +683,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 学习算法可分为二类，一是黑箱法；二是基于知识的方法。AQ－主动覆盖．
 
- 
+
 
 ## 2.1   机器学习简介
 
@@ -932,7 +705,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 这一步骤主要是数据发现，比如找出每列的最大、最小值、平均值、方差、中位数、三分位数、四分位数、某些特定值（比如零值）所占比例或者分布规律等等都要有一个大致的了解。了解这些最好的办法就是可视化，谷歌的开源项目facets可以很方便的实现。另一方面要确定自变量(x1...xn)和因变量y，找出因变量和自变量的相关性，确定相关系数。
 
- 
+
 
 **3.** **特征选择：**
 
@@ -942,7 +715,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 向量化是对特征提取结果的再加工，目的是增强特征的表示能力，防止模型过于复杂和学习困难，比如对连续的特征值进行离散化，label值映射成枚举值，用数字进行标识。这一阶段将产生一个很重要的文件：label和枚举值对应关系，在预测阶段的同样会用到。
 
- 
+
 
 **5.** **拆分数据集：**
 
@@ -958,7 +731,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 完成评估后，如果想进一步改善训练，我们可以通过调整模型的参数来实现，然后重复训练和评估的过程。
 
- 
+
 
 **8.** **文件整理：**
 
@@ -987,7 +760,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 | 回归     | Regression                                                   | Predicting a continuous-valued attribute associated with an object. |
 | 维度减少 | [Dimensionality reduction](https://scikit-learn.org/stable/modules/decomposition.html#decompositions) | Reducing the number of random variables to consider.      |
 
- 
+
 
 ## 2.2   机器学习的类型
 
@@ -1022,7 +795,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 学习概念的过程实质是个搜索的过程．（概念空间，泛化空间）
 
- 
+
 
 **概念学习算法Concept Learning**
 
@@ -1032,7 +805,7 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 3)     决策树Decision Tree. 机器学习中最常用的归纳推理方法．
 
- 
+
 
 ### 2.2.2 贝叶斯学习
 
@@ -1040,17 +813,17 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 [贝叶斯](http://baike.baidu.com/view/77778.htm)Thomas Bayes (1702-1763) , 英国数学家, 1763年提出贝叶斯公式．
 
-**贝叶斯公式**：假定A1,A2,……是某个过程的若干可能的前提，则P(Ai)是人们事先对各前提条件出现可能性大小的估计，称之为先验概率.如果这个过程得到了一个结果B，那么贝叶斯公式提供了我们根据B的出现而对前提条件做出新评价的方法.P(Ai∣B)既是对前提Ai的出现概率的重新认识，称P(Ai∣B)为后验概率.　 
+**贝叶斯公式**：假定A1,A2,……是某个过程的若干可能的前提，则P(Ai)是人们事先对各前提条件出现可能性大小的估计，称之为先验概率.如果这个过程得到了一个结果B，那么贝叶斯公式提供了我们根据B的出现而对前提条件做出新评价的方法.P(Ai∣B)既是对前提Ai的出现概率的重新认识，称P(Ai∣B)为后验概率.
 
  ![image-20191201145733039](../../media/ai/ai_algo_001.png)
 
- 
+
 
 **条件独立假设：**
 
  ![image-20191201145754643](../../media/ai/ai_algo_002.png)
 
- 
+
 
 贝叶斯学习理论中最为实用和广泛使用的一种分类算法，在文本分类、邮件过滤、推荐系统和医疗诊断等应用中经常使用。
 
@@ -1078,15 +851,15 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 * 结构已知但从训练样本中仅能观察到部分变量的值比较困难,如剃度上升算法（类似神经网络），EM 算法
 * 结构未知：最困难
 
- 
+
 
 ### 2.2.3 支持向量机SVM
 
 资源：
 
-http://www.kernel-machines.org/ 
+http://www.kernel-machines.org/
 
-http://www.support-vector.net/ 
+http://www.support-vector.net/
 
 **支持向量机 (SVMs)** 可用于以下监督学习算法: [分类](https://sklearn.apachecn.org/docs/master/5.html#141-分类)SVC, [回归](https://sklearn.apachecn.org/docs/master/5.html#142-回归)SVR 和 [异常检测](https://sklearn.apachecn.org/docs/master/5.html#143-密度估计-异常（novelty）检测).
 
@@ -1156,7 +929,7 @@ http://www.support-vector.net/
 | 朴素贝叶斯 | 基于概率思想的简单有效的分类模型，能够给出容易理解的概率解释。 |
 | 神经网络   | 具有强大的拟合能力，可以用于拟合、分类等。有很多增强版本。   |
 
- 
+
 
 **分类过程**
 
@@ -1186,7 +959,7 @@ http://www.support-vector.net/
 
 **衡量准则**: 支持度（Support）和置信度（Confidence）等
 
- 
+
 
 ## 2.4 模型评估和性能指标
 
@@ -1270,7 +1043,7 @@ http://www.support-vector.net/
 2. 激活函数：sigmoid-值域在0到1之间的光滑函数。ReLU-对于所有大于0的输入，导数是恒定的，这能够加快训练网络的速度。softmax-通常应用在分类问题的输出层上，输出分类概率的总和为1。
 3. 规范化/正则化方法 regularization：主要解决过拟合问题，降低模型复杂度。增加一个额外的项到代价函数上，这个项叫做**规范化项**。以下所列都算是正则化方法，
    * L1：L1范数-绝对值之和，记为∣∣W∣|~1~  **L1正则化**可以产生稀疏值矩阵，即产生一个稀疏模型，可以用于特征选择和解决过拟合。是在未规范化的代价函数上加上一个权重绝对值的和。
-   * L2：L2范数-通常意义上的模（$math.sqrt$(x~i~^2^），记为∣∣W∣∣~2~   
+   * L2：L2范数-通常意义上的模（$math.sqrt$(x~i~^2^），记为∣∣W∣∣~2~
    * dropout：随机或临时的丢掉输入层或隐藏层的一些神经元。是一种将模型进行集成的算法，每一个不完整的网络，都可以看成是一个弱分类器。
    * 激活函数：线性输入经过非线性转换，得到输出。
 
@@ -1344,13 +1117,13 @@ N层神经网络－包含N-1个隐层
 
 无指导学习, 用于聚类。
 
- 
+
 
 神经网络表达能力：布尔函数，连续函数，一般函数．
 
 **应用**：人脸识别
 
- 
+
 
 ### CNN 卷积神经网络
 
@@ -1465,13 +1238,13 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 中国科学院计算机语言信息中心董振东领导的知网(HowNet)项目，其知识库特点是规模相对较小、知识质量高、但领域限定性较强。
 
- 
+
 
 **知识图谱的定义**
 
 知识图谱是结构化的语义知识库，用于以符号形式描述物理世界中的概念及其相互关系。其基本组成单位是“实体－关系－实体”三元组，以及实体及其相关属性－值对，实体间通过关系相互联结，构成网状的知识结构。
 
- 
+
 
 **知识图谱的架构**
 
@@ -1483,7 +1256,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 图 4 知识图谱的架构
 
- 
+
 
 ## 4.2   知识图谱构建技术
 
@@ -1496,14 +1269,14 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 **实体抽取(命名实体识别NER) **
  监督学习和规则相结合的办法：Lin等人采用字典辅助下的最大熵算法，在基于Medline论文摘要的GENIA数据集上取得了实体抽取准确率和召回率均超过70%的实验结果。
 
-**关系抽取** 
+**关系抽取**
  2007年，华盛顿大学图灵中心的Banko等人[1](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:1)提出了面向开放域的信息抽取方法框架(open information extraction, OIE)，并发布了基于自监督(self-supervised)学习方式的开放信息抽取原型系统(TextRunner)。该系统采用少量人工标记数据作为训练集，据此得到一个实体关系分类模型，再依据该模型对开放数据进行分类，依据分类结果训练朴素贝叶斯模型来识别“实体－关系－实体”三元组，经过大规模真实数据测试，取得了显著优于同时期其他方法的结果。
 
 实体关系的抽取包含隐藏关系抽取和确定关系抽取。使用方法如SVM。
 *  隐藏关系：通过预先定义，包括包含关系、位置关系、雇佣关系等等。
 *  确定关系：语句中已经明确实体之间的关系。
 
- 
+
 
 **属性抽取**
 
@@ -1520,15 +1293,15 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 **合并外部知识库**
  Mendes等人[7](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:7)提出了开放数据集成框架(linked data integration framework, LDIF)，用于对LOD知识库产品进行融合。
 
-**合并关系数据库** 
+**合并关系数据库**
  使用RDB2RDF的开源工具：Triplify、D2RServer、OpenLink Virtuoso、SparqlMap等。
 
-**其他半结构化方式存储(XML、CSV、JSON)** 
- 从XML转化为RDF：XSPARQL 
- 从XML和CSV转化为RDF：Datalift 
+**其他半结构化方式存储(XML、CSV、JSON)**
+ 从XML转化为RDF：XSPARQL
+ 从XML和CSV转化为RDF：Datalift
  转化的知识元素经过实体链接，就可以加入到知识库中，实现知识的合并。
 
- 
+
 
 ### 4.2.3 知识加工
 
@@ -1536,15 +1309,15 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 **本体构建**
 
- 
 
-**知识推理 
-** 从知识库中已有的实体关系数据出发，经过计算机推理，建立实体间的新关联，从而拓展和丰富知识网络。 
+
+**知识推理
+** 从知识库中已有的实体关系数据出发，经过计算机推理，建立实体间的新关联，从而拓展和丰富知识网络。
  知识推理的方法分为：基于逻辑的推理和基于图的推理，前者主要包括一阶谓词逻辑、描述逻辑以及基于规则的推理，后者主要基于神经网络模型或Path Ranking算法，比如Socher等人[8](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:8)将知识库的实体表达为词向量的形式，进而采用神经张量网络模型(neural tensor networks)进行关系推理，在WordNet和FreeBase等开放本体库上对未知关系进行推理的准确率分别达到86.2%和90.0%。
 
- 
 
-**质量评估 
+
+**质量评估
 ** 对知识的可信度进行量化，通过舍弃置信度较低的知识，可以保障知识库的质量。
 
 ### 4.2.4 知识更新
@@ -1555,7 +1328,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 ## 4.3  知识图谱的应用
 
-**深度问答** 
+**深度问答**
 
 系统首先在知识图谱的帮助下对用户自然语言提出的问题进行语义分析和语法分析，进而将其转化成结构化形式的查询语言，然后在知识图谱中查询答案。对知识图谱的查询通常采用基于图的查询语言(SPARQL)
 
@@ -1563,12 +1336,12 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 **基于知识图谱的问答系统**
 
-* 基于信息检索的问答系统 
+* 基于信息检索的问答系统
    先将问题转变为一个基于知识库的结构化查询，从知识库中抽取与问题中实体相关的信息来生成多个候选答案，然后再从候选答案中识别出正确答案。
-* 基于语义分析的问答系统 
+* 基于语义分析的问答系统
    先通过语义分析正确理解问题的含义，然后将问题转变为知识库的精确查询，直接找到正确答案。
 
- 
+
 
 **智能搜索**
 
@@ -1576,13 +1349,13 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 通用模式匹配、知识拆解、合并求解三个层次渐进分析。
 
- 
+
 
 ## 本章参考
 
 * 知识图谱构建技术综述 《计算机研究与发展》, 2016, 53 (3):582-600 https://blog.csdn.net/qq_34435926/article/details/79926633
 
-* [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)  https://blog.csdn.net/eastmount/article/details/86714051  
+* [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)  https://blog.csdn.net/eastmount/article/details/86714051
 
 
 
@@ -1736,7 +1509,7 @@ GAN主要包括了两个部分，即生成器generator与判别器discriminator�
 
 时间衰减因子体现了**标签的热度随着时间逐渐冷却的过程**，它来源于**牛顿冷却定律。**
 
-运用于标签的翻译：**当前权重=原始权重 X exp(-冷却系数 X 间隔时间)**   
+运用于标签的翻译：**当前权重=原始权重 X exp(-冷却系数 X 间隔时间)**
 $$
 T(t) = T(t_0)*e^{-k(t_0-t)}
 $$
@@ -1777,9 +1550,9 @@ $$
 | 电影评论情感预测 |                  | 新电影评级；评论评级；评论的定性划分            | 评论的数值化                        | 词袋、TF-IDF  word2vec、随机森林               |                                            |
 | 数据显示广告     |                  | 优化在线广告：预测客户CTR                       |                                     | CTR预测模型  K近邻  随机森林                   |                                            |
 
- 
 
- 
+
+
 
 # 参考资料
 
@@ -1787,7 +1560,7 @@ $$
 
 [1].   Mitchell, T. (1997). *机器学习*, McGraw Hill. [ISBN 0070428077](http://zh.wikipedia.org/zh-cn/Special:网络书源/0070428077)
 
-[2].   Bishop, C. M. (2006). *模式识别与机器学习*，Springer。[ISBN 978-0387-31073-2](http://zh.wikipedia.org/zh-cn/Special:网络书源/9780387310732) 
+[2].   Bishop, C. M. (2006). *模式识别与机器学习*，Springer。[ISBN 978-0387-31073-2](http://zh.wikipedia.org/zh-cn/Special:网络书源/9780387310732)
 
 [3].   Richard O. Duda, Peter E. Hart, David G. Stork (2001) *模式识别*（第2版）, Wiley, New York, [ISBN 0471056693](http://zh.wikipedia.org/zh-cn/Special:网络书源/0471056693).
 
@@ -1795,7 +1568,7 @@ $$
 
 [5].   George F.Luger著，史忠植 张银奎 等译，人工智能：复杂问题求解的结构和策略，机械工业出版社
 
- 
+
 
 ## 参考文献
 
@@ -1811,7 +1584,7 @@ $$
 
 
 
-## **参考链接** 
+## **参考链接**
 
 * http://zh.wikipedia.org/zh-cn/人工智能
 * [http://zh.wikipedia.org/zh-cn/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98](http://zh.wikipedia.org/zh-cn/数据挖掘)
@@ -1819,7 +1592,7 @@ $$
 * AI 算法是如何改变智能风控的 https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/117432876
 * 风控模型算法系列文章目录 https://zhuanlan.zhihu.com/p/85582351
 
- 
+
 
 # 附录
 
@@ -1831,7 +1604,7 @@ $$
 *  [SIGIR](http://www.sigir.org/) [ *Special Interest Group on Information Retrieval* ](http://www.sigir.org/)，IR领域最好的会议
 *  [TREC](http://trec.nist.gov/) Text Retrieval Conference， 文本检索领域人气最旺、最权威的评测会议, 由美国国防部高等研究计划署(DARPA)与美国国家标准和技术局(NIST)共同举办的TREC(文本信息检索会议)就是一直基于此方法组织信息检索评测和技术交流论坛。提供跨语言检索(CLIR)、博客、问答系统等多个track的评测及相关数据。每年一次。
 
- 
+
 
 **科研组织**
 
@@ -1843,7 +1616,7 @@ $$
 
 **人工智能的科普和影视作**
 
-电影　
+电影
 
 《A.I.: Artificial Intelligence人工智能》　[史蒂芬·斯皮尔伯格](http://www.hudong.com/wiki/史蒂芬·斯皮尔伯格) Steven Spielberg导演　2001年
 
@@ -1851,7 +1624,7 @@ $$
 
 《[我，机器人](http://baike.baidu.com/view/65634.htm)》[阿西莫夫](http://baike.baidu.com/view/2494.htm) 格诺姆出版社 1950年　提出了机器人学的三大法则
 
- 
+
 
 ## 数据集
 

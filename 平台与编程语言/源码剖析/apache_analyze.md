@@ -11,11 +11,11 @@
 | 1    | 2010-3-17 | 创建     | Keefe  | 同上   |
 | 2    | 2016-5-10 | 规范文档 | 同上   |        |
 
- 
 
- 
 
- 
+
+
+
 
 ----
 
@@ -37,7 +37,7 @@ windows: 占垄断地位的个人电脑OS，最重要的平台之一。
 
 other: include beos....
 
- 
+
 
 # 2 代码分析
 
@@ -49,7 +49,7 @@ APR_DECLARE     //APACHE 对外调用的API接口声明
 
 _t表示是typedef的结构；
 
- 
+
 
 ## 1）内存管理
 
@@ -63,7 +63,7 @@ _t表示是typedef的结构；
 
 基本结构：apr_pool_t, apr_allocator_t
 
- 
+
 
 apr_pool中主要有3个对象，allocator、pool、block。
 
@@ -75,7 +75,7 @@ pool从allocator申请内存，pool销毁的时候把内存归还 allocator，al
 #include "apr_pools.h"
 #include <stdio.h>
 #include <new>  // new
- 
+
 int main()
   {
      apr_pool_t *root;
@@ -92,7 +92,7 @@ int main()
              apr_pool_create(&grandson,root);
              void *pBuff2=apr_palloc(grandson,sizeof(int));
              int *pInt2=new (pBuff2)  int(15);
-             printf("pInt2=%d\n",*pInt2);    
+             printf("pInt2=%d\n",*pInt2);
              apr_pool_destroy(grandson);
          }
          apr_pool_destroy(child);//释放子池，将内存归还给分配子
@@ -109,13 +109,13 @@ int main()
 
 开源世界最经典的模块加载方式。
 
- 
 
- 
+
+
 
 ## 3）高性能的网络服务器
 
- 
+
 
 
 

@@ -32,7 +32,7 @@ Author-email: benoitc@e-engura.com
 License: MIT
 Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
 Requires: setuptools
-Required-by: 
+Required-by:
 ```
 
 
@@ -101,12 +101,12 @@ Required-by:
 
 ## 主流程
 
-### gunicorn启动 
+### gunicorn启动
 
 gunicorn启动方式有二种，一是 自行启动方式；二是命令行启动。
 
 * 自行启动：`python main.py`  要求main.py里面至少要实现一个app handler函数或者app handler类和一个app server类。本启动方式主要用于调试gunicorn
-* 命令行启动：`python -m gunicorn.app.wsgiapp $project.wsgi --chdir /path/to/$project-root -c /path/to/$project-cfg.py`   
+* 命令行启动：`python -m gunicorn.app.wsgiapp $project.wsgi --chdir /path/to/$project-root -c /path/to/$project-cfg.py`
 
 
 
@@ -193,7 +193,7 @@ import sys
 from gunicorn.app.wsgiapp import run
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(run())    
+    sys.exit(run())
 ```
 
 
@@ -201,7 +201,7 @@ if __name__ == '__main__':
 **gunicorn启动方式（用户级）**
 
 ```shell
-# 配置文件启动: -c gunicorn.conf 
+# 配置文件启动: -c gunicorn.conf
 $ gunicorn -c gunicorn.conf app:app
 
 # 命令行启动：
@@ -210,7 +210,7 @@ $ gunicorn --bind 0.0.0.0:8091 --access-logfile ~/.xx/g.access.log --error-logfi
 
 
 
-**gunicorn.conf** 配置文件示例: 
+**gunicorn.conf** 配置文件示例:
 
 ```ini
 # 并行工作进程数
@@ -262,8 +262,8 @@ from gunicorn import sock, systemd, util
 
 
 class Arbiter(object):
-    """ 管理进程类，用信号来处理各种事件  
-    run(): 启动主进程，在循环内管理工作进程变化    
+    """ 管理进程类，用信号来处理各种事件
+    run(): 启动主进程，在循环内管理工作进程变化
     """
     WORKER_BOOT_ERROR = 3
 
@@ -284,7 +284,7 @@ class Arbiter(object):
         (getattr(signal, name), name[3:].lower()) for name in dir(signal)
         if name[:3] == "SIG" and name[3] != "_"
     )
-    
+
     def __init__(self, app):
         os.environ["SERVER_SOFTWARE"] = SERVER_SOFTWARE
 
@@ -311,23 +311,23 @@ class Arbiter(object):
             "args": args,
             "cwd": cwd,
             0: sys.executable
-        }   
-        
+        }
+
     def run(self):
-        """Main master loop. 
+        """Main master loop.
         主循环，启动主进程并一直存活，管理工作进程manage_workers """
         self.start()	# 启动监听socket，加载配置信息
         util._setproctitle("master [%s]" % self.proc_name)
 
         try:
             # 管理工作进程，用prefork模式启动指定数量工作进程
-            self.manage_workers()  
+            self.manage_workers()
 
             while True:
                 self.maybe_promote_master()
 
                 sig = self.SIG_QUEUE.pop(0) if self.SIG_QUEUE else None
-                if sig is None: 
+                if sig is None:
                     # 有信号时，执行下列操作：睡眠直到无读事件或超时，杀死空闲工作进程，管理工作进程
                     self.sleep()
                     self.murder_workers()
@@ -358,14 +358,14 @@ class Arbiter(object):
             self.stop(False)
             if self.pidfile is not None:
                 self.pidfile.unlink()
-            sys.exit(-1)        
+            sys.exit(-1)
 ```
 
 
 
 ## app应用程序 /app/
 
-### wsgiapp.py 
+### wsgiapp.py
 
 本文件可以直接跑。`python -m gunicorn.app.wagiapp`
 
@@ -424,7 +424,7 @@ def run():
 
 
 if __name__ == '__main__':
-    run()    
+    run()
 ```
 
 
@@ -457,7 +457,7 @@ class BaseApplication(object):
         self.prog = prog
         self.logger = None
         self.do_load_config()  # 加载配置信息
-        
+
     def run(self):
         try:  # 启动主进程
             Arbiter(self).run()
@@ -465,10 +465,10 @@ class BaseApplication(object):
             print("\nError: %s\n" % e, file=sys.stderr)
             sys.stderr.flush()
             sys.exit(1)
-  
+
 
 class Application(BaseApplication):
-    
+
     def load_config(self):
         """ 从文件或者 命令行里获取 配置信息 """
         # parse console args
@@ -578,7 +578,7 @@ __all__ = ['Message', 'Request', 'RequestParser']
 
 * gthread  单进程多线程，使用了标准库的线程池
 
-  
+
 
 ```python
 #/gunicorn/works/__init__.py
@@ -607,16 +607,16 @@ from gunicorn.workers.workertmp import WorkerTmp
 
 
 class Worker(object):
-	""" 工作模式基类, 
+	""" 工作模式基类,
 	run方法子类需要重载
-	init_process() 进程初始化，在方法最后调用 run()  
+	init_process() 进程初始化，在方法最后调用 run()
     """
     SIGNALS = [getattr(signal, "SIG%s" % x)
             for x in "ABRT HUP QUIT INT TERM USR1 USR2 WINCH CHLD".split()]
 
     PIPE = []
 
-    def __init__(self, age, ppid, sockets, app, timeout, cfg, log):      
+    def __init__(self, age, ppid, sockets, app, timeout, cfg, log):
         """ 初始化变量，创建tmpfile """
         self.age = age
         self.pid = "[booting]"
@@ -640,15 +640,15 @@ class Worker(object):
         self.alive = True
         self.log = log
         self.tmp = WorkerTmp(cfg)  # 临时文件机制，父进程通过检测文件时间戳，来确认子进程是否存活。
-        
+
     def __str__(self)
-    def notify(self)        
+    def notify(self)
 
     def run(self):
         """ 工作进程主循环
         This is the mainloop of a worker process. 子类必须重载
         """
-        raise NotImplementedError()     
+        raise NotImplementedError()
 
     def init_process(self):
         """\
@@ -662,7 +662,7 @@ class Worker(object):
         4.设置中断信号处理函数 init_signals();
         5.设置代码更新时，自动重启的配置 reload_cls
         6.获取实现了wsgi协议的app对象 load_wsgi()
-        7.进入主循环方法run，如果子类重载了init_process，需要加上此处。        
+        7.进入主循环方法run，如果子类重载了init_process，需要加上此处。
         """
 
         # set environment' variables
@@ -695,7 +695,7 @@ class Worker(object):
 
         self.load_wsgi()
 
-        # start the reloader 启动重载引擎 
+        # start the reloader 启动重载引擎
         if self.cfg.reload:
             def changed(fname):
                 self.log.info("Worker reloading: %s modified", fname)
@@ -715,7 +715,7 @@ class Worker(object):
         # （重要）Enter main run loop  进入主循环
         self.booted = True
         self.run() 	#派生类重载方法
-        
+
     def load_wsgi(self)                  # 获得实现wsgi协议的app，如Flask
     def init_signals(self)
     def handle_usr1(self, sig, frame)
@@ -723,7 +723,7 @@ class Worker(object):
     def handle_quit(self, sig, frame)
     def handle_abort(self, sig, frame)
     def handle_error(self, req, client, addr, exc)
-    def handle_winch(self, sig, fname)        
+    def handle_winch(self, sig, fname)
 ```
 
 
@@ -776,18 +776,18 @@ class SyncWorker(base.Worker):
 
         # self.socket appears to lose its blocking status after
         # we fork in the arbiter. Reset it here.
-        for s in self.sockets:    
+        for s in self.sockets:
             s.setblocking(0)  # 阻塞监听
 
         if len(self.sockets) > 1:  # 处理多个
             self.run_for_multiple(timeout)
         else:	# 处理一个
-            self.run_for_one(timeout)            
+            self.run_for_one(timeout)
 ```
 
 
 
-### 异步模式基类 base_async.py 
+### 异步模式基类 base_async.py
 
 works/base_async.py 异步模式基类
 
@@ -811,14 +811,14 @@ class AsyncWorker(base.Worker):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.worker_connections = self.cfg.worker_connections
-        
+
     def timeout_ctx(self):
         raise NotImplementedError()
 
     def is_already_handled(self, respiter):
         # some workers will need to overload this function to raise a StopIteration
         return respiter == ALREADY_HANDLED
-    
+
     def handle(self, listener, client, addr):
         req = None
         try:
@@ -932,7 +932,7 @@ class AsyncWorker(base.Worker):
                 self.cfg.post_request(self, req, environ, resp)
             except Exception:
                 self.log.exception("Exception in post_request hook")
-        return True        
+        return True
 ```
 
 
@@ -949,7 +949,7 @@ ThreadWorker::init_process() ->
 
 ​			accept() -->
 
-​				enqueue_req 请求入队 (finish_request, handle, handle_request )  
+​				enqueue_req 请求入队 (finish_request, handle, handle_request )
 
 ```python
 import concurrent.futures as futures  # 标准库并发，本处用了线程池
@@ -973,16 +973,16 @@ class ThreadWorker(base.Worker):
         self.futures = deque()
         self._keep = deque()
         self.nr_conns = 0
-        
+
     def init_process(self):
         """ 重载，获取一个线程池，设置poll选择器，设置读锁 """
         self.tpool = self.get_thread_pool()
         self.poller = selectors.DefaultSelector()
         self._lock = RLock()
-        super().init_process()    
-        
+        super().init_process()
+
     def run(self):
-        """ select模式 实现listen和异步IO, 主要流程如下：        
+        """ select模式 实现listen和异步IO, 主要流程如下：
         更新tmpfile时间戳self.notify()
         获取就绪的请求连接self.accept()；
         如果并发数允许，分配一个线程处理请求；
@@ -1034,15 +1034,15 @@ class ThreadWorker(base.Worker):
         for s in self.sockets:
             s.close()
 
-        futures.wait(self.futures, timeout=self.cfg.graceful_timeout)   
-        
+        futures.wait(self.futures, timeout=self.cfg.graceful_timeout)
+
     def enqueue_req(self, conn):
         """ 请求入队，从线程池里分配线程 """
         conn.init()
         # submit the connection to a worker
         fs = self.tpool.submit(self.handle, conn)
         self._wrap_future(fs, conn)
-        
+
 ```
 
 
@@ -1073,7 +1073,7 @@ class GeventWorker(AsyncWorker):
 
     server_class = None
     wsgi_handler = None
-    
+
     def run(self):
         servers = []
         ssl_args = {}
@@ -1134,13 +1134,13 @@ class GeventWorker(AsyncWorker):
                 server.stop(timeout=1)
         except:
             pass
-        
+
     def init_process(self):
         self.patch()
         hub.reinit()
         super().init_process()
-        
-        
+
+
 class PyWSGIServer(pywsgi.WSGIServer):
     pass
 
@@ -1149,7 +1149,7 @@ class GeventPyWSGIWorker(GeventWorker):
     "The Gevent StreamServer based workers."
     server_class = PyWSGIServer
     wsgi_handler = PyWSGIHandler
-        
+
 ```
 
 
@@ -1177,11 +1177,11 @@ import greenlet
 from gunicorn.workers.base_async import AsyncWorker
 
 class EventletWorker(AsyncWorker):
-    
+
     def init_process(self):
         self.patch()
         super().init_process()
-        
+
     def run(self):
         acceptors = []
         for sock in self.sockets:
@@ -1211,12 +1211,12 @@ class EventletWorker(AsyncWorker):
             for a in acceptors:
                 a.kill()
 
-                
-    def patch(self):  
+
+    def patch(self):
         # 植入 eventlet的监听
         hubs.use_hub()
         eventlet.monkey_patch()
-        patch_sendfile()    
+        patch_sendfile()
 ```
 
 
@@ -1239,7 +1239,7 @@ from gunicorn import __version__ as gversion
 
 
 class TornadoWorker(Worker):
-    
+
     def init_process(self):
         # IOLoop cannot survive a fork or be shared across processes
         # in any way. When multiple processes are being used, each process
@@ -1328,7 +1328,7 @@ class TornadoWorker(Worker):
         server.no_keep_alive = self.cfg.keepalive <= 0
         server.start(num_processes=1)
 
-        self.ioloop.start()    
+        self.ioloop.start()
 ```
 
 
@@ -1354,7 +1354,7 @@ class Config(object):
         self.usage = usage
         self.prog = prog or os.path.basename(sys.argv[0])
         self.env_orig = os.environ.copy()
-        
+
 
 class SettingMeta(type):
     def __new__(cls, name, bases, attrs):
@@ -1397,7 +1397,7 @@ class Setting(object):
             self.set(self.default)
 
     def add_option(self, parser):
-        
+
 
 class Bind(Setting):
     name = "bind"
@@ -1427,7 +1427,7 @@ class Bind(Setting):
 
         will bind the `test:app` application on localhost both on ipv6
         and ipv4 interfaces.
-        """        
+        """
 ```
 
 

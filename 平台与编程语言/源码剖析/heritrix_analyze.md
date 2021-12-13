@@ -4,11 +4,11 @@
 | 2    | 2011-8-5 | 增加heritrix用户手册内容 | 同上   |        |
 |      |          |                          |        |        |
 
- 
 
- 
 
- 
+
+
+
 
 ---
 
@@ -60,7 +60,7 @@
 
 [参考资料... 13](#_Toc300326810)
 
- 
+
 
 [TOC]
 
@@ -70,17 +70,17 @@
 
 Heritrix工程始于2003年初，IA的目的是开发一个特殊的爬虫，对网上的　资源进行归档，建立网络数字图书馆，在过去的6年里，IA已经建立了400TB的数据。
 
-IA期望他们的crawler包含以下几种： 
+IA期望他们的crawler包含以下几种：
 
-* 宽带爬虫：能够以更高的带宽去站点爬。 
+* 宽带爬虫：能够以更高的带宽去站点爬。
 
 * 主题爬虫：集中于被选择的问题。
 
-* 持续爬虫：不仅仅爬更当前的网页还负责爬日后更新的网页。 
+* 持续爬虫：不仅仅爬更当前的网页还负责爬日后更新的网页。
 
 * 实验爬虫：对爬虫技术进行实验，以决定该爬什么，以及对不同协议的爬虫 爬行结果进行分析的。
 
- 
+
 
 **处理流程**
 
@@ -94,7 +94,7 @@ IA期望他们的crawler包含以下几种：
 
 5)  标记已经处理过的URI
 
- 
+
 
 ## 1.1  关键特性feature
 
@@ -146,9 +146,9 @@ l 运行：在bin目录下执行 heritrix.cmd --admin= LOGIN:PASSWORD
 
 l 管理：浏览器上输入 http://localhost:PORT/
 
- 
 
-**环境变量:**  HERITRIX_HOME JAVA_HOME 
+
+**环境变量:**  HERITRIX_HOME JAVA_HOME
 
 ```shell
 % export HERITRIX_HOME=/PATH/TO/BUILT/HERITRIX
@@ -158,7 +158,7 @@ l 管理：浏览器上输入 http://localhost:PORT/
 % $HERITRIX_HOME/bin/heritrix --admin=LOGIN:PASSWORD
 ```
 
- 
+
 
 **配置文件：** heritrix.properties
 
@@ -190,11 +190,11 @@ heritrix.jobsdir = jobs
 
 eclipse调试方式：org.archive.crawler.Heritrix
 
- 
 
-以上各种方式启动后，即可登陆heritrix管理平台即: http://localhost:PORT/ 
 
-​               
+以上各种方式启动后，即可登陆heritrix管理平台即: http://localhost:PORT/
+
+​
 
 ## 2.3   Admin console使用
 
@@ -204,57 +204,57 @@ eclipse调试方式：org.archive.crawler.Heritrix
 
 说明：
 
-* Console用来当前crawler状态，jobs, memory使用状况。 
+* Console用来当前crawler状态，jobs, memory使用状况。
 
-* Jobs: 创建job, 查看job情况，Crawler使用从创建job开始。job常从若干seed开始。 
+* Jobs: 创建job, 查看job情况，Crawler使用从创建job开始。job常从若干seed开始。
 
-* Profiles: job的配置文件，可从以往执行的任务中异出。 
+* Profiles: job的配置文件，可从以往执行的任务中异出。
 
-* Logs: 查看job等执行情况的日志 
+* Logs: 查看job等执行情况的日志
 
-* Reports: 各个组件运行时统计情况 
+* Reports: 各个组件运行时统计情况
 
-* Setup: 管理员设置 
+* Setup: 管理员设置
 
 *  Help: 本Admin console帮助文档
 
- 
+
 
 heritrix以创建一个job开始。jobs创建有四种方式。（详见WEBUI）
 
 创建完，点击start开始。
 
- 
+
 
 **2)**    **配置选项**
 
 **Profile default:** [Modules](javascript:doGoto('/jobs/modules.jsp?job=default')) [Submodules](javascript:doGoto('/jobs/submodules.jsp?job=default')) [Settings](javascript:doGoto('/jobs/configure.jsp?job=default')) [Overrides](javascript:doGoto('/jobs/per/overview.jsp?job=default')) [Refinements](javascript:doGoto('/jobs/refinements/overview.jsp?job=default')) [Finished](javascript:doSubmit())
 
-* Modules: 各个处理模块，这里有七项。 
+* Modules: 各个处理模块，这里有七项。
 
-* Submodules: 用户扩展定制的模块。 
+* Submodules: 用户扩展定制的模块。
 
-* Settings: 下载相关常规参数配置 
+* Settings: 下载相关常规参数配置
 
-* Overrides 
+* Overrides
 
- 
+
 
 **3)**    **示例：下载163.com整个站点**
 
-配置选项profile: 
+配置选项profile:
 
-* Modules:  **Select Writers--** MirrorWriterProcessor 
+* Modules:  **Select Writers--** MirrorWriterProcessor
 
 *  SubModules: 缺省不变。
 
-* Settings: 如果是第一次使用，必需配置**http-headers**中的user-agent 和 from 
+* Settings: 如果是第一次使用，必需配置**http-headers**中的user-agent 和 from
 
 示例如下：
 
-![image-20210611171754257](../../media/code/code_heritrix_001.png)                               
+![image-20210611171754257](../../media/code/code_heritrix_001.png)
 
- 
+
 
 **4）页面保存**
 
@@ -262,13 +262,13 @@ heritrix以创建一个job开始。jobs创建有四种方式。（详见WEBUI）
 
 缺省为层次存储原始页面。
 
- 
+
 
 **5）下载管理**
 
 可通过WEBUI页面来查看任务进行的程度。并根据需要调整线程数，模块选项等。
 
- 
+
 
 ## 2.4  配置开发环境eclipse
 
@@ -282,7 +282,7 @@ src/lib或其它lib作为新项目的lib.
 
 src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
- 
+
 
 # 3   设计分析
 
@@ -300,9 +300,9 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
 [4.4. Processors](http://localhost:8089/docs/articles/developer_manual/ar01s04.html#N10170)
 
- 
 
- 
+
+
 
  ![image-20210611171832722](../../media/code/code_heritrix_002.png)
 
@@ -320,23 +320,23 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
 5)     标记已经处理过的URI
 
- 
+
 
 ## 3.2 heritrix组件结构
 
 Heritrix是一个爬虫框架，可加如入一些可互换的组件。主要组件有：
 
-* Scope范围部件：主要按照规则决定将哪个URI入队。 
+* Scope范围部件：主要按照规则决定将哪个URI入队。
 
-* Frontier边界部件：跟踪哪个预定的URI将被收集，和已经被收集的URI，选择下一个 URI，剔除已经处理过的URI。 
+* Frontier边界部件：跟踪哪个预定的URI将被收集，和已经被收集的URI，选择下一个 URI，剔除已经处理过的URI。
 
-* Processors处理器链：包含若干处理器获取URI，分析结果，将它们传回给边界部件。 
+* Processors处理器链：包含若干处理器获取URI，分析结果，将它们传回给边界部件。
 
 其余组件有：
 
 Servercache（处理器缓存）：存放服务器的持久信息，能够被爬行部件随时查到，包括IP地址，历史记录，机器人策略。
 
- 
+
 
 ![image-20210611171900398](../../media/code/code_heritrix_003.png)
 
@@ -352,7 +352,7 @@ order.xml
 
 ### 3.2.2 CrawlController
 
- 
+
 
 ### 3.2.3 processor chains
 
@@ -360,7 +360,7 @@ order.xml
 
 图 processor概要图
 
- 
+
 
  ![image-20210611172001237](../../media/code/code_heritrix_005.png)
 
@@ -370,7 +370,7 @@ order.xml
 
  ![image-20210611172020358](../../media/code/code_heritrix_006.png)
 
- 
+
 
 ### 3.2.5 extractor
 
@@ -390,15 +390,15 @@ order.xml
 
 ## 4.1  参数配置
 
-**Select URI Frontier** 
+**Select URI Frontier**
 
 Current selection:  org.archive.crawler.frontier.AdaptiveRevisitFrontier
 
 Note: 选择BdbFrontier的要有*BerkeleyDB*数据库支持
 
- 
 
-**Select Post Processors** : Processors that do cleanup and feed the Frontier with new URIs 
+
+**Select Post Processors** : Processors that do cleanup and feed the Frontier with new URIs
 
 | org.archive.crawler.postprocessor.CrawlStateUpdater |                                                              | [Down](javascript:doMoveMapItemDown('Postprocessors','Updater')) | [Remove](javascript:doRemoveMapItem('Postprocessors','Updater')) | [Info](javascript:alert('Crawl state updater'))              |
 | --------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -407,7 +407,7 @@ Note: 选择BdbFrontier的要有*BerkeleyDB*数据库支持
 
 ​    Note: 最后一项为重载**FrontierScheduler**，用来选择需要下载的URL。
 
- 
+
 
 ## 4.2  重载组件
 
@@ -415,7 +415,7 @@ Note: 选择BdbFrontier的要有*BerkeleyDB*数据库支持
 
 将自己重载的类在 modules/*.options 声明。
 
- 
+
 
 ## 4.3  扩展定制
 
@@ -429,7 +429,7 @@ Note: 选择BdbFrontier的要有*BerkeleyDB*数据库支持
 
 4) 去除CrawlScope, robots.txt的限制
 
- 
+
 
 # 5  垂直搜索实例
 
@@ -449,7 +449,7 @@ Note: 选择BdbFrontier的要有*BerkeleyDB*数据库支持
 
 某手机图片 http://img.pconline.com.cn/images/product/3648/364844/sj_nokia_5230_3.jpg
 
- 
+
 
 URL匹配规则：
 
@@ -467,7 +467,7 @@ img.pconline.com.cn/images/product/
 
 手机频道主页 http://product.tech.163.com/mobile/
 
- 
+
 
 # 参考资料
 
@@ -479,4 +479,3 @@ img.pconline.com.cn/images/product/
 
 [4].  利用 Heritrix 构建特定站点爬虫http://www.ibm.com/developerworks/cn/opensource/os-cn-heritrix/
 
- 

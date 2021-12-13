@@ -25,7 +25,7 @@ flask是基于Werkzeug的微框架，是可扩展的最佳实践。
 
 源码版本：flask-1.1.2
 
-依赖组件：click, Werkzeug, Jinja2, itsdangerous 
+依赖组件：click, Werkzeug, Jinja2, itsdangerous
 
 * click 命令行接口工具包
 * Werkzeug 功能强大的WSGI应用程序库
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 
 
-## 源码结构 
+## 源码结构
 
 表格 flask源码结构
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
 
 
-## WEB核心对象 
+## WEB核心对象
 
 ### Flask全局实例 app.py
 
@@ -119,7 +119,7 @@ class Flask(_PackageBoundObject):
 
         from flask import Flask
         app = Flask(__name__)
-	""" 
+	"""
 
     def __init__(self, import_name, static_path=None, static_url_path=None,
                  static_folder='static', template_folder='templates',
@@ -177,7 +177,7 @@ class Flask(_PackageBoundObject):
                               endpoint='static',
                               view_func=self.send_static_file)
         self.cli = cli.AppGroup(self.name)
-        
+
     def run(self, host=None, port=None, debug=None, **options):
         """Runs the application on a local development server.
         默认情况下，是单进程单线程模型，即一次只能处理一个请求，其它请求需排队。
@@ -191,11 +191,11 @@ class Flask(_PackageBoundObject):
                 port = int(server_name.rsplit(':', 1)[1])
             else:
                 port = 5000
-        if debug is not None:  
+        if debug is not None:
             self.debug = bool(debug)  # bool(None)=False,故缺省非调试模式
         options.setdefault('use_reloader', self.debug)
         options.setdefault('use_debugger', self.debug)
-        
+
         from werkzeug.serving import run_simple # 启动方式使用werkzeug模块提供的简单启动
         try: # 简单启动
             run_simple(host, port, self, **options)
@@ -203,10 +203,10 @@ class Flask(_PackageBoundObject):
             # reset the first request information if the development server
             # reset normally.  This makes it possible to restart the server
             # without reloader and that stuff from an interactive shell.
-            self._got_first_request = False     
-            
+            self._got_first_request = False
 
-	def route(self, rule, **options):	
+
+	def route(self, rule, **options):
         """ 路由映射装饰器 route， 实际调用add_url_rule类静态方法 """
         def decorator(f):
             endpoint = options.pop("endpoint", None)
@@ -223,7 +223,7 @@ class Flask(_PackageBoundObject):
         view_func=None,	#路由函数func
         provide_automatic_options=None,
         **options
-    ):            
+    ):
 	"""
 	        Basically this example::
             @app.route('/')
@@ -234,10 +234,10 @@ class Flask(_PackageBoundObject):
             def index():
                 pass
             app.add_url_rule('/', 'index', index)
-            
-        相当于： app.view_functions['index'] = index    
+
+        相当于： app.view_functions['index'] = index
 	"""
-        
+
 if __name__ == '__main__':
     # 实际应用app定义，一般需要弄成全局实例
     app = Flask(__name__)
@@ -246,7 +246,7 @@ if __name__ == '__main__':
         # 若要本机调试，debug=True
         # 若是生产环境，则启用进程或线程，分别使用`processes={num}`或者 threaded=True
         # 生产环境推荐 gunicorn 或者 uwsgi
-        app.run(host='0.0.0.0', port=5001)          
+        app.run(host='0.0.0.0', port=5001)
 ```
 
 
@@ -319,11 +319,11 @@ class Flask(_PackageBoundObject):
         The actual WSGI application. This is not implemented in
         :meth:`__call__` so that middlewares can be applied without
         losing a reference to the app object. Instead of doing this::
-        
+
             app = MyMiddleware(app)
         It's a better idea to do this instead::
             app.wsgi_app = MyMiddleware(app.wsgi_app)
-		"""       
+		"""
         ctx = self.request_context(environ)	#得到请求上下文
         error = None
         try:
@@ -336,18 +336,18 @@ class Flask(_PackageBoundObject):
             except:  # noqa: B001
                 error = sys.exc_info()[1]
                 raise
-            return response(environ, start_response)	#返回响应结果 
+            return response(environ, start_response)	#返回响应结果
         finally:
             if self.should_ignore_error(error):
                 error = None
-            ctx.auto_pop(error)	
-            
+            ctx.auto_pop(error)
+
     def __call__(self, environ, start_response):
         """The WSGI server calls the Flask application object as the
         WSGI application. This calls :meth:`wsgi_app` which can be
         wrapped to applying middleware."""
-        return self.wsgi_app(environ, start_response)  
-    
+        return self.wsgi_app(environ, start_response)
+
     def full_dispatch_request(self):
         """Dispatches the request and on top of that performs request
         pre and postprocessing as well as HTTP exception catching and
@@ -355,7 +355,7 @@ class Flask(_PackageBoundObject):
 
         .. versionadded:: 0.7
         """
-        self.try_trigger_before_first_request_functions()	#触发请求前函数 
+        self.try_trigger_before_first_request_functions()	#触发请求前函数
         try:
             request_started.send(self)
             rv = self.preprocess_request()	#处理请求
@@ -364,7 +364,7 @@ class Flask(_PackageBoundObject):
         except Exception as e:
             rv = self.handle_user_exception(e)
         return self.finalize_request(rv)    #请求结果打包
-    
+
   	def preprocess_request(self):
         """Called before the request is dispatched. Calls
         :attr:`url_value_preprocessors` registered with the app and the
@@ -377,7 +377,7 @@ class Flask(_PackageBoundObject):
         """
         bp = _request_ctx_stack.top.request.blueprint
 
-        funcs = self.url_value_preprocessors.get(None, ())	
+        funcs = self.url_value_preprocessors.get(None, ())
         if bp is not None and bp in self.url_value_preprocessors:
             funcs = chain(funcs, self.url_value_preprocessors[bp])
         for func in funcs:
@@ -390,30 +390,30 @@ class Flask(_PackageBoundObject):
             rv = func()
             if rv is not None:
                 return rv
-            
+
     @setupmethod
     def before_request(self, f):
         """Registers a function to run before each request.
 		注册每个请求处理前函数，可以作装饰器 @xx.before_request
         """
         self.before_request_funcs.setdefault(None, []).append(f)
-        return f  
-    
+        return f
+
     @setupmethod
-    def before_first_request(self, f):   
+    def before_first_request(self, f):
         self.before_first_request_funcs.append(f)
-        return f        
-    
+        return f
+
     @setupmethod
     def after_request(self, f):
         """ 注册每个请求处理后函数 """
         self.after_request_funcs.setdefault(None, []).append(f)
         return f
-    
+
     @setupmethod
     def teardown_request(self, f):
         self.teardown_appcontext_funcs.append(f)
-        return f        
+        return f
 ```
 
 
@@ -459,7 +459,7 @@ class Blueprint(_PackageBoundObject):
 
 
 
-### 视图 views.py 
+### 视图 views.py
 
 视图View和 类视图函数方法as_view
 
@@ -475,10 +475,10 @@ http_method_funcs = frozenset(['get', 'post', 'head', 'options',
 class View(object):
     methods = None    #支持的方法，如['GET']
     decorators = ()    #外部装饰器
-    
+
     def dispatch_request(self):
-		""" 子类需要重载这方法 """    
-        
+		""" 子类需要重载这方法 """
+
     @classmethod
     def as_view(cls, name, *class_args, **class_kwargs):
         """ 将类转化成视图函数。Internally this generates a function on the
@@ -504,7 +504,7 @@ class View(object):
         view.__doc__ = cls.__doc__
         view.__module__ = cls.__module__
         view.methods = cls.methods
-        return view        
+        return view
 ```
 
 
@@ -520,7 +520,7 @@ from werkzeug.datastructures import CallbackDict
 
 
 class SessionInterface(object):
-    
+
 class SecureCookieSessionInterface(SessionInterface):
     """The default session interface that stores sessions in signed cookies
     through the :mod:`itsdangerous` module.
@@ -593,7 +593,7 @@ class SecureCookieSessionInterface(SessionInterface):
         samesite = self.get_cookie_samesite(app)
         expires = self.get_expiration_time(app, session)
         # cookie数据：用URLSafeTimedSerializer序列化(使用hmac算法)
-        val = self.get_signing_serializer(app).dumps(dict(session))	
+        val = self.get_signing_serializer(app).dumps(dict(session))
         response.set_cookie(
             app.session_cookie_name,
             val,
@@ -618,7 +618,7 @@ class SecureCookieSessionInterface(SessionInterface):
 
 
 
-`flask/__init__.py`    
+`flask/__init__.py`
 
 ```python
 __version__ = '0.12.2'
@@ -701,10 +701,10 @@ class Config(dict):
     def __init__(self, root_path, defaults=None):
         dict.__init__(self, defaults or {})
         self.root_path = root_path
-        
+
     def from_envvar(self, variable_name, silent=False)：
     	""" """
-        
+
     def from_pyfile(self, filename, silent=False)：
      	""" 从config.py加载数据 """
         filename = os.path.join(self.root_path, filename)
@@ -720,7 +720,7 @@ class Config(dict):
             raise
         self.from_object(d)
         return True
-    
+
     def from_object(self, obj):
     	""" 加载字符串或者对象，K/V形式保存到字典结构里 """
         if isinstance(obj, string_types):
@@ -728,18 +728,18 @@ class Config(dict):
         for key in dir(obj):
             if key.isupper():
                 self[key] = getattr(obj, key)
-                
-    def from_json(self, filename, silent=False):        
-    	""" """     
-        
+
+    def from_json(self, filename, silent=False):
+    	""" """
+
     def from_mapping(self, *mapping, **kwargs):
-    	""" """      
-        
-    def get_namespace(self, namespace, lowercase=True, trim_namespace=True):        
+    	""" """
+
+    def get_namespace(self, namespace, lowercase=True, trim_namespace=True):
     	""" """
 
     def __repr__(self):
-        return "<%s %s>" % (self.__class__.__name__, dict.__repr__(self))        
+        return "<%s %s>" % (self.__class__.__name__, dict.__repr__(self))
 ```
 
 
@@ -752,12 +752,12 @@ from .config import Config
 from .config import ConfigAttribute
 
 class Flask(_PackageBoundObject):
-    
-    config_class = Config    
+
+    config_class = Config
     def __init__(...):
         ...
 		self.config = self.make_config(instance_relative_config)
-        
+
     def make_config(self, instance_relative=False):
         """Used to create the config attribute by the Flask constructor.
         The `instance_relative` parameter is passed in from the constructor
@@ -773,7 +773,7 @@ class Flask(_PackageBoundObject):
         defaults = dict(self.default_config)
         defaults["ENV"] = get_env()
         defaults["DEBUG"] = get_debug_flag()
-        return self.config_class(root_path, defaults)        
+        return self.config_class(root_path, defaults)
 ```
 
 
@@ -856,7 +856,7 @@ if __name__ == '__main__':
 
 
 
-flask/cli.py 
+flask/cli.py
 
 ```python
 import click
@@ -881,12 +881,12 @@ def main(as_module=False):
         name = None
 
     cli.main(args=args, prog_name=name)
-    
-    
+
+
 class AppGroup(click.Group):
     """ 继承click.Group """
-    
-class FlaskGroup(AppGroup): 
+
+class FlaskGroup(AppGroup):
     def __init__(self, add_default_commands=True, create_app=None,
                  add_version_option=True, **extra):
         """
@@ -896,7 +896,7 @@ class FlaskGroup(AppGroup):
         """
         params = list(extra.pop('params', None) or ())
 
-        if add_version_option:	#缺省添加版本命令 
+        if add_version_option:	#缺省添加版本命令
             params.append(version_option)
 
         AppGroup.__init__(self, params=params, **extra)
@@ -906,9 +906,9 @@ class FlaskGroup(AppGroup):
             self.add_command(run_command)
             self.add_command(shell_command)
             self.add_command(routes_command)
-            
+
         self._loaded_plugin_commands = False	#是否加载插件命令，如fab/db
-        
+
     def _load_plugin_commands(self):
         """ 加载插件命令 """
         if self._loaded_plugin_commands:
@@ -922,7 +922,7 @@ class FlaskGroup(AppGroup):
         for ep in pkg_resources.iter_entry_points("flask.commands"):
             self.add_command(ep.load(), ep.name)
         self._loaded_plugin_commands = True
-        
+
     def main(self, *args, **kwargs):
         obj = kwargs.get('obj')
         if obj is None:
@@ -930,8 +930,8 @@ class FlaskGroup(AppGroup):
         kwargs['obj'] = obj
         kwargs.setdefault('auto_envvar_prefix', 'FLASK')
         return AppGroup.main(self, *args, **kwargs)
-    
-    
+
+
 class ScriptInfo(object):
     """ 脚本帮助，如查找模块路径 """
     def __init__(self, app_import_path=None, create_app=None):
@@ -955,7 +955,7 @@ class ScriptInfo(object):
         #: this script info.
         self.data = {}
         self._loaded_app = None   #用来保存已经导入的APP
-        
+
     def load_app(self):
         """Loads the Flask app (if not yet loaded) and returns it.  Calling
         this multiple times will just result in the already loaded app to
@@ -978,12 +978,12 @@ class ScriptInfo(object):
         if debug is not None:
             rv.debug = debug
         self._loaded_app = rv
-        return rv     
+        return rv
 
-    
+
 def locate_app(app_id):
     """Attempts to locate the application. app导入的搜索路径顺序：
-    1.支持aa.bb:cc，import aa.bb; 
+    1.支持aa.bb:cc，import aa.bb;
     2.find_best_app：查找变量名app/application, module.__dict__是否有值类型是Flask
     """
     __traceback_hide__ = True
@@ -1038,7 +1038,7 @@ def find_best_app(module):
     raise NoAppException('Failed to find application in module "%s".  Are '
                          'you sure it contains a Flask application?  Maybe '
                          'you wrapped it in a WSGI middleware or you are '
-                         'using a factory function.' % module.__name__)    
+                         'using a factory function.' % module.__name__)
 ```
 
 
@@ -1173,7 +1173,7 @@ static                                  GET        /static/<path:filename>
 
 
 
-routes命令支持按methods, rule, endpoint等进行排序 
+routes命令支持按methods, rule, endpoint等进行排序
 
 ```python
 @click.command("routes", short_help="Show the routes for the app.")
@@ -1236,7 +1236,7 @@ class ExtensionImporter(object):
     This makes it possible to transition from the old flaskext.name to the
     newer flask_name without people having a hard time.
     """
-    
+
     def install(self):
         sys.meta_path[:] = [x for x in sys.meta_path if self != x] + [self]
 
@@ -1247,7 +1247,7 @@ class ExtensionImporter(object):
 
     def load_module(self, fullname):
         if fullname in sys.modules:
-            return sys.modules[fullname]    
+            return sys.modules[fullname]
 ```
 
 
@@ -1258,7 +1258,7 @@ class ExtensionImporter(object):
 
 # 2 flask依赖模块
 
-## click 
+## click
 
 可组合命令行接口工具包。命令组 Group - >  命令Command
 
@@ -1294,7 +1294,7 @@ if __name__ == '__main__':
     hello()
 ```
 
-以下是命令行    
+以下是命令行
 
 ```shell
 $ python hello.py --count=3
@@ -1313,18 +1313,18 @@ Hello, Click!
 
 
 
-click/core.py 
+click/core.py
 
 ```python
 class BaseCommand(object):
     """ """
-    
+
 class Command(BaseCommand):
     """ """
-    
+
 class MultiCommand(Command):
     """ 多个命令类 继承单个命令 """
-    
+
 class Group(MultiCommand):
     """命令组可以跟命令绑定
     :param commands: a dictionary of commands.
@@ -1341,7 +1341,7 @@ class Group(MultiCommand):
             return cmd
 
         return decorator
-    
+
     def command(self, *args, **kwargs):
         """A shortcut decorator for declaring and attaching a command to
         the group.  This takes the same arguments as :func:`command` but
@@ -1356,12 +1356,12 @@ class Group(MultiCommand):
             self.add_command(cmd)
             return cmd
 
-        return decorator    
+        return decorator
 ```
 
 
 
-click/decorator.py 
+click/decorator.py
 
 命令处理常用装饰器，包括group, command, argument, option, make_pass_decorator
 
@@ -1446,7 +1446,7 @@ click高效的装饰器： 以 flask fab命令组为例
 
   ```python
   import click
-  
+
   # 示例： flask fab命令组定义
   @click.group()
   def fab():
@@ -1522,7 +1522,7 @@ if __name__ == "__main__":
 
 
 
-### 源码结构 
+### 源码结构
 
 表格 werkzeug源码结构
 
@@ -1581,13 +1581,13 @@ except ImportError:
     import SocketServer as socketserver
     from BaseHTTPServer import HTTPServer
     from BaseHTTPServer import BaseHTTPRequestHandler
-    
+
 LISTEN_QUEUE = 128  # socket监听队列长度
 can_open_by_fd = not WIN and hasattr(socket, "fromfd")
 
 def run_simple(
     hostname,
-    port, 
+    port,
     reloader_interval=1,
     reloader_type="auto",
     threaded=False,
@@ -1597,18 +1597,18 @@ def run_simple(
     passthrough_errors=False,
     ssl_context=None,
 ):
-    def inner():  
-        # 实际的启动函数，无论是否重载都要调用此函数 
+    def inner():
+        # 实际的启动函数，无论是否重载都要调用此函数
         try:
             fd = int(os.environ["WERKZEUG_SERVER_FD"])
         except (LookupError, ValueError):
             fd = None
         srv = make_server( hostname,port,application,threaded,processes,request_handler,
-                          passthrough_errors,ssl_context,fd=fd,)	
+                          passthrough_errors,ssl_context,fd=fd,)
         if fd is None:
-            log_startup(srv.socket)	
-        srv.serve_forever()  # 服务器后台处理      
-        
+            log_startup(srv.socket)
+        srv.serve_forever()  # 服务器后台处理
+
     if use_reloader:
  		#使用重载，要保证端口可用，用socket建立socke联接
         if not is_running_from_reloader():
@@ -1645,8 +1645,8 @@ def run_simple(
 		# 信号终止旧线程，启动一个后台线程执行 inner函数
         run_with_reloader(inner, extra_files, reloader_interval, reloader_type)
     else:
-        inner()    # 实际启动函数 
-        
+        inner()    # 实际启动函数
+
 def make_server(
     host=None,
     port=None,
@@ -1663,12 +1663,12 @@ def make_server(
     """
     if threaded and processes > 1:
         raise ValueError("cannot have a multithreaded and multi process server.")
-    elif threaded:  
+    elif threaded:
         # 单线程每请求，启动WSGI（修改属性multithread和daemon_threads为True）
         return ThreadedWSGIServer(
             host, port, app, request_handler, passthrough_errors, ssl_context, fd=fd
         )
-    elif processes > 1: 
+    elif processes > 1:
         # 单进程每请求，启动WSGI（multiprocess=True, self.max_children = processes）
         return ForkingWSGIServer(
             host,
@@ -1699,18 +1699,18 @@ import socketserver
 
 ThreadingMixIn = socketserver.ThreadingMixIn  	# 线程类
 can_fork = hasattr(os, "fork")  # 判断是否支持fork
-if can_fork:  
+if can_fork:
     ForkingMixIn = socketserver.ForkingMixIn	# 进程类
 else:
     class ForkingMixIn(object):
         pass
-    
+
 class ThreadedWSGIServer(ThreadingMixIn, BaseWSGIServer):
     """A WSGI server that does threading. 调用 ThreadingMixIn.process_request() """
 
     multithread = True
     daemon_threads = True
-    
+
 class ForkingWSGIServer(ForkingMixIn, BaseWSGIServer):
 
     """A WSGI server that does forking. 调用 ForkMixIn.process_request() """
@@ -1734,7 +1734,7 @@ class ForkingWSGIServer(ForkingMixIn, BaseWSGIServer):
             self, host, port, app, handler, passthrough_errors, ssl_context, fd
         )
         self.max_children = processes
-    
+
 
 class BaseWSGIServer(HTTPServer, object):
     """
@@ -1798,7 +1798,7 @@ class BaseWSGIServer(HTTPServer, object):
             self.ssl_context = ssl_context
         else:
             self.ssl_context = None
-            
+
     def serve_forever(self):
         """ 服务器后台处理函数 """
         self.shutdown_signal = False
@@ -1807,7 +1807,7 @@ class BaseWSGIServer(HTTPServer, object):
         except KeyboardInterrupt:
             pass
         finally:
-            self.server_close()     
+            self.server_close()
 ```
 
 
@@ -1829,7 +1829,7 @@ selector.select(poll_interval) -> self._handle_request_noblock (非阻塞处理�
 # process_request实现中的finish_request处理流程： BaseRequestHandler.handle()
 ```
 
-​      
+​
 
 #### 请求处理 WSGIRequestHandler
 
@@ -1845,7 +1845,7 @@ except ImportError:
     from BaseHTTPServer import HTTPServer
     from BaseHTTPServer import BaseHTTPRequestHandler
 
-    
+
 class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 	"""重载父类的handle_one_request，在这方法调用run_wsgi实现自己的写方式"""
     def run_wsgi(self):
@@ -1890,7 +1890,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
                 # Only write data if there is any to avoid Python 3.5 SSL bug
                 self.wfile.write(data)
             self.wfile.flush()
-    
+
     def handle(self):
         """Handles a request ignoring dropped connections."""
         try:
@@ -1901,16 +1901,16 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
             if self.server.ssl_context is None or not is_ssl_error(e):
                 raise
         if self.server.shutdown_signal:  #处理shutdown信号
-            self.initiate_shutdown()    
-            
+            self.initiate_shutdown()
+
     def handle_one_request(self):
         """Handle a single HTTP request."""
         self.raw_requestline = self.rfile.readline()
         if not self.raw_requestline:
             self.close_connection = 1
         elif self.parse_request():	#如果请求可以被解析
-            return self.run_wsgi()      #运行wsgi，实行的请求过程处理      
-        
+            return self.run_wsgi()      #运行wsgi，实行的请求过程处理
+
     def send_response(self, code, message=None):
         """Send the response header and log the response code."""
         self.log_request(code)	#日志处理，打印 请求行基本信息
@@ -1918,12 +1918,12 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
             message = code in self.responses and self.responses[code][0] or ""
         if self.request_version != "HTTP/0.9":
             hdr = "%s %d %s\r\n" % (self.protocol_version, code, message)
-            self.wfile.write(hdr.encode("ascii"))      
+            self.wfile.write(hdr.encode("ascii"))
 ```
 
 
 
-### 本地代理/数据栈 local.py 
+### 本地代理/数据栈 local.py
 
 背景：使用thread local对象（`from threading import local`）虽然可以基于线程存储全局变量，但是在Web应用中可能会存在如下问题：
 
@@ -1961,7 +1961,7 @@ except ImportError:
     except ImportError:
         from _thread import get_ident
 
-           
+
 class Local(object):
     __slots__ = ("__storage__", "__ident_func__")
 
@@ -1970,13 +1970,13 @@ class Local(object):
         object.__setattr__(self, "__storage__", {})				#存储实际的数据，字典
         object.__setattr__(self, "__ident_func__", get_ident)	#获取线程/协程ID方法
 
-        
+
 class LocalStack(object):
     """ 相当于一个本地数据先进先出stack, 使用Local()存储数据, 方法有push/pop/top """
     def __init__(self):
-        self._local = Local()   
-        
-    def push(self, obj):        
+        self._local = Local()
+
+    def push(self, obj):
         """Pushes a new item to the stack"""
         rv = getattr(self._local, "stack", None)
         if rv is None:
@@ -1988,8 +1988,8 @@ class LocalStack(object):
         """Removes the topmost item from the stack, will return the
         old value or `None` if the stack was already empty.
         """
-                
-        
+
+
 class LocalManager(object):
     def __init__(self, locals=None, ident_func=None):
         if locals is None:
@@ -2003,9 +2003,9 @@ class LocalManager(object):
             for local in self.locals:
                 object.__setattr__(local, "__ident_func__", ident_func)
         else:
-            self.ident_func = get_ident    
-    
-    
+            self.ident_func = get_ident
+
+
 @implements_bool
 class LocalProxy(object):
     __slots__ = ("__local", "__dict__", "__name__", "__wrapped__")
@@ -2016,7 +2016,7 @@ class LocalProxy(object):
         if callable(local) and not hasattr(local, "__release_local__"):	 # 代理对象local必须是可调用的
             # "local" is a callable that is not an instance of Local or
             # LocalManager: mark it as a wrapped function.
-            object.__setattr__(self, "__wrapped__", local)	
+            object.__setattr__(self, "__wrapped__", local)
 ```
 
 
@@ -2025,7 +2025,7 @@ class LocalProxy(object):
 
 * dispatcher.py  DispatcherMiddleware类实现
 
-/werkzeug/middleware/dispatcher.py 
+/werkzeug/middleware/dispatcher.py
 
 [Application Dispatching](http://flask.pocoo.org/docs/0.12/patterns/appdispatch/#app-dispatch)是WSGI工具箱werkzeug提供的一种技术，目的是将多个Flask应用按URL前缀组合成一个应用。
 
@@ -2042,7 +2042,7 @@ class DispatcherMiddleware(object):
     app = DispatcherMiddleware(serve_frontend, {
         '/api': api_app,
         '/admin': admin_app,
-    })  
+    })
     """
 
     def __init__(self, app, mounts=None):
@@ -2101,19 +2101,19 @@ def generate_password_hash(password, method="pbkdf2:sha256", salt_length=8):
     """ 用给的salt值长度 和 method 获取hash值 """
     salt = gen_salt(salt_length) if method != "plain" else ""
     h, actual_method = _hash_internal(method, salt, password)
-    return "%s$%s$%s" % (actual_method, salt, h)    
+    return "%s$%s$%s" % (actual_method, salt, h)
 
 def check_password_hash(pwhash, password):
     """
     pbkdf2:method:iterations 比如
 	    pbkdf2:sha256:80000$salt$hash
-       	pbkdf2:sha256$salt$hash  
-    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad        
+       	pbkdf2:sha256$salt$hash
+    示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad
     """
     if pwhash.count("$") < 2:
         return False
     method, salt, hashval = pwhash.split("$", 2)
-    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)    
+    return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)
 
 def gen_salt(length):
     """Generate a random string of SALT_CHARS with specified ``length``. 根据长度，获取盐串中随机值 """
@@ -2123,7 +2123,7 @@ def gen_salt(length):
 
 def safe_str_cmp(a, b):
     """ 会将a,b编码统一转化成 unicode """
-    
+
 
 def safe_join(directory, *pathnames):
     """Safely join zero or more untrusted path components to a base
@@ -2150,7 +2150,7 @@ def safe_join(directory, *pathnames):
 
         parts.append(filename)
 
-    return posixpath.join(*parts)    
+    return posixpath.join(*parts)
 ```
 
 
@@ -2174,7 +2174,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
             type,
             "%s - - [%s] %s\n"
             % (self.address_string(), self.log_date_time_string(), message % args),
-        )          
+        )
 ```
 
 
@@ -2246,9 +2246,9 @@ Required-by:
 
 
 
-### 源码结构 
+### 源码结构
 
-表格 Jinja2源码结构 
+表格 Jinja2源码结构
 
 | 文件            | 主要类或函数                                                 | 简介       |
 | --------------- | ------------------------------------------------------------ | ---------- |
@@ -2291,10 +2291,10 @@ class Template(object):
             self.environment.handle_exception()
 
     def render_async(self, *args, **kwargs):
-        
-        
+
+
 class Environment(object):
-    
+
 	@internalcode
     def get_or_select_template(self, template_name_or_list, parent=None, globals=None):
         """Does a typecheck and dispatches to :meth:`select_template`
@@ -2309,7 +2309,7 @@ class Environment(object):
             return template_name_or_list
         # 选择父类模板
         return self.select_template(template_name_or_list, parent, globals)
-    
+
 
 class TemplateExpression(object):
     """The :meth:`jinja2.Environment.compile_expression` method returns an
@@ -2332,7 +2332,7 @@ class TemplateExpression(object):
 
 @implements_to_string
 class TemplateModule(object):
-    
+
 @implements_iterator
 class TemplateStream(object):
     ...
@@ -2378,9 +2378,9 @@ print(data["name"])
 
 
 
-### 源码结构 
+### 源码结构
 
-表格 itsdangerous源码结构 
+表格 itsdangerous源码结构
 
 | 文件         | 主要类或函数                                                 | 简介             |
 | ------------ | ------------------------------------------------------------ | ---------------- |
@@ -2409,7 +2409,7 @@ from .timed import TimedSerializer
 
 
 class URLSafeSerializerMixin(object):
-        
+
     def dump_payload(self, obj):
         json = super(URLSafeSerializerMixin, self).dump_payload(obj)
         is_compressed = False
@@ -2421,7 +2421,7 @@ class URLSafeSerializerMixin(object):
         if is_compressed:
             base64d = b"." + base64d
         return base64d
-    
+
     def load_payload(self, payload, *args, **kwargs):
         decompress = False
         if payload.startswith(b"."):
@@ -2444,9 +2444,9 @@ class URLSafeSerializerMixin(object):
                 )
         return super(URLSafeSerializerMixin, self).load_payload(json, *args, **kwargs)
 
-    
-class URLSafeSerializer(URLSafeSerializerMixin, Serializer):     
-class URLSafeTimedSerializer(URLSafeSerializerMixin, TimedSerializer):    
+
+class URLSafeSerializer(URLSafeSerializerMixin, Serializer):
+class URLSafeTimedSerializer(URLSafeSerializerMixin, TimedSerializer):
 ```
 
 
@@ -2466,7 +2466,7 @@ class Serializer(object):
         signer_kwargs=None,
         fallback_signers=None,
     ):
-        
+
     def dumps(self, obj, salt=None):
         """Returns a signed string serialized with the internal
         serializer. The return value can be either a byte or unicode
@@ -2477,7 +2477,7 @@ class Serializer(object):
         if self.is_text_serializer:
             rv = rv.decode("utf-8")
         return rv
-    
+
 	def loads(self, s, salt=None):
         """Reverse of :meth:`dumps`. Raises :exc:`.BadSignature` if the
         signature validation fails.
@@ -2490,14 +2490,14 @@ class Serializer(object):
             except BadSignature as err:
                 last_exception = err
         raise last_exception
-        
+
     def make_signer(self, salt=None):
         """Creates a new instance of the signer to be used. The default
         implementation uses the :class:`.Signer` base class.
         """
         if salt is None:
             salt = self.salt
-        return self.signer(self.secret_key, salt=salt, **self.signer_kwargs)        
+        return self.signer(self.secret_key, salt=salt, **self.signer_kwargs)
 ```
 
 
@@ -2515,12 +2515,12 @@ class SigningAlgorithm(object):
         signature.
         """
         return constant_time_compare(sig, self.get_signature(key, value))
-    
-    
+
+
 class NoneAlgorithm(SigningAlgorithm):
     def get_signature(self, key, value):
         return b""
-    
+
 class HMACAlgorithm(SigningAlgorithm):
     """Provides signature generation using HMACs."""
 
@@ -2537,13 +2537,13 @@ class HMACAlgorithm(SigningAlgorithm):
     def get_signature(self, key, value):
         mac = hmac.new(key, msg=value, digestmod=self.digest_method)
         return mac.digest()
-    
-    
+
+
 class Signer(object):
-    
+
     def sign(self, value):
         """Signs the given string."""
-        return want_bytes(value) + want_bytes(self.sep) + self.get_signature(value)    
+        return want_bytes(value) + want_bytes(self.sep) + self.get_signature(value)
 ```
 
 
@@ -2646,9 +2646,9 @@ Required-by: apache-superset
 
 
 
-`/flask_migrate/__init__.py`  
+`/flask_migrate/__init__.py`
 
-全局定义了模板在templates目录，DB迁移文件在 migrations目录 
+全局定义了模板在templates目录，DB迁移文件在 migrations目录
 
 ```python
 from flask import current_app
@@ -2663,8 +2663,8 @@ class _MigrateConfig(object):
     @property
     def metadata(self):
         return self.db.metadata
-        
-        
+
+
 class Config(AlembicConfig):
     def get_template_directory(self):
         """ 获取template模板目录 """
@@ -2682,9 +2682,9 @@ class Migrate(object):
         if app is not None and db is not None:
             self.init_app(app, db, directory)
 
-    def init_app(self, app, db=None, directory=None, **kwargs):    
+    def init_app(self, app, db=None, directory=None, **kwargs):
         """ """
-  
+
 
 def catch_errors(f):
     @wraps(f)
@@ -2701,7 +2701,7 @@ def upgrade(directory=None, revision='head', sql=False, tag=None, x_arg=None):
     """Upgrade to a later version"""
     config = current_app.extensions['migrate'].migrate.get_config(directory,
                                                                   x_arg=x_arg)
-    command.upgrade(config, revision, sql=sql, tag=tag)        
+    command.upgrade(config, revision, sql=sql, tag=tag)
 ```
 
 
@@ -2733,7 +2733,7 @@ def db():  # db命令组
 @with_appcontext
 def upgrade(directory, sql, tag, x_arg, revision):
     """Upgrade to a later version"""
-    _upgrade(directory, revision, sql, tag, x_arg)        
+    _upgrade(directory, revision, sql, tag, x_arg)
 ```
 
 
@@ -2753,7 +2753,7 @@ Home-page: https://github.com/sh4nks/flask-caching
 Author: Peter Justin
 Author-email: peter.justin@outlook.com
 License: BSD
-Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Location: ~\superset-py38-env\lib\site-packages
 Requires: Flask
 Required-by: apache-superset
 
@@ -2792,7 +2792,7 @@ class Cache(object):
        config.setdefault('CACHE_DEFAULT_TIMEOUT', 300)  # 缓存过期时间缺省300秒
        config.setdefault('CACHE_DIR', None)   # 设置缓存路径
        # null改为'filesystem'，如果是redis/memache，则需要相应的服务器支持和安装python客户端模块
-       config.setdefault('CACHE_TYPE', 'null')  
+       config.setdefault('CACHE_TYPE', 'null')
 ```
 
 
@@ -2814,7 +2814,7 @@ Home-page: https://github.com/corydolphin/flask-cors
 Author: Cory Dolphin
 Author-email: corydolphin@gmail.com
 License: MIT
-Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Location: ~\superset-py38-env\lib\site-packages
 Requires: Flask, Six
 Required-by:
 ```
@@ -2838,7 +2838,7 @@ from werkzeug.datastructures import Headers, MultiDict
 
 def serialize_options(opts):
     """
-    options序列化参数： origins allow_headers 
+    options序列化参数： origins allow_headers
     	supports_credentials send_wildcard expose_headers methods max_age
     A helper method to serialize and processes the options dictionary.
     """
@@ -2915,7 +2915,7 @@ def cross_origin(*args, **kwargs):
 
         return update_wrapper(wrapped_function, f)
     return decorator
-    
+
 ```
 
 
@@ -2934,7 +2934,7 @@ class CORS(object):
     2. Keyword argument settings
     3. App level configuration settings (e.g. CORS_*)
     4. Default settings
-	"""        
+	"""
     def __init__(self, app=None, **kwargs):
         self._options = kwargs
         if app is not None:
@@ -2995,7 +2995,7 @@ def make_after_request_function(resources):
         else:
             LOG.debug('No CORS rule matches')
         return resp
-    return cors_after_request    
+    return cors_after_request
 ```
 
 
@@ -3180,7 +3180,7 @@ class Api(object):
     >>> api = Api(app)
     或者
     >>> api = Api()
-    >>> api.init_app(app)    
+    >>> api.init_app(app)
    """
 
     def __init__(
@@ -3216,18 +3216,18 @@ class Api(object):
         self._validate = validate
         self._doc = doc			#文档路由str
         self._doc_view = None	#文档视图函数的名称str
-        self._default_error_handler = None        
+        self._default_error_handler = None
 		...
-        
+
         if app is not None:
             self.app = app
             self.init_app(app)  #初始化应用程序flask_app
-            
-    def init_app(self, app, **kwargs):       
+
+    def init_app(self, app, **kwargs):
         self._register_specs(self.blueprint or app)
         self._register_doc(self.blueprint or app)
         ...
-        
+
     def _register_specs(self, app_or_blueprint):
         """ 注册API文档视图 """
         if self._add_specs:
@@ -3247,8 +3247,8 @@ class Api(object):
         if self._add_specs and self._doc:
             # Register documentation before root if enabled
             app_or_blueprint.add_url_rule(self._doc, "doc", self.render_doc)
-        app_or_blueprint.add_url_rule(self.prefix or "/", "root", self.render_root)    
-        
+        app_or_blueprint.add_url_rule(self.prefix or "/", "root", self.render_root)
+
     def render_root(self):
         """ 根路由没找到的返回内容 """
         self.abort(HTTPStatus.NOT_FOUND)
@@ -3326,7 +3326,7 @@ manager.add_command("print", Print())
 if __name__ == "__main__":
     manager.run()
 
-# ipython运行    
+# ipython运行
 python manage.py print
 > hello
 ```

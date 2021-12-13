@@ -3,10 +3,10 @@
 | 1    | 2006-2007 | 创建     | Keefe | Keefe |
 ---
 
- 
+
 
 ---
-# 简介 
+# 简介
 
 Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform), it is free software available under the [MIT License](http://www.opensource.org/licenses/mit-license.html).
 
@@ -17,7 +17,7 @@ Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usa
 * xmlNodePtr and xmlNode 包含单一结点的结构
 * xmlNodePtr是指向这个结构的指针，它被用于遍历文档树。
 
- 
+
 
 ​       优点：1.   安装、使用比较简单，容易入门；2.   支持的编码格式较多，能很好的解决中文问题(使用一个很简单的编码转换函数)；3.   支持Xpath解析（这点对于任意定位xml文档中的节点还是很有用的哦）；4.支持Well-formed 和valid验证，具体而言支持DTD验证，Schema验证功能正在完善中(目前多数解析器都还不完全支持shema验证功能)；5.   支持目前通用的Dom、Sax方式解析等等。
 
@@ -38,9 +38,9 @@ Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usa
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<files> 
-  <owner>root</owner>  
-  <action>delete</action>  
+<files>
+  <owner>root</owner>
+  <action>delete</action>
   <age units="days">10</age>
 </files>
 ```
@@ -53,7 +53,7 @@ Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usa
 
 XML 解析器可以利用这种父子结构来遍历文档，甚至修改文档的结构或内容。LibXML2 是这样的解析器中的其中一种，并且文中的示例应用程序正是使用这种结构来实现该目的。对于各种不同的环境，有许多不同的解析器和库。LibXML2 是用于 UNIX 环境的解析器和库中最好的一种，并且经过扩展，它提供了对几种脚本语言的支持，如 Perl 和 Python。
 
- 
+
 
 # 示例
 
@@ -66,30 +66,30 @@ XML 解析器可以利用这种父子结构来遍历文档，甚至修改文档�
 ***/
 #include <stdio.h>
 #include <libxml/parser.h>
-#include <libxml/tree.h>                      
+#include <libxml/tree.h>
 int main(int argc, char **argv)
 {
 	xmlDocPtr doc = NULL;       /* document pointer */
-	xmlNodePtr root_node = NULL, node = NULL, node1 = NULL; /* node pointers */                                                       
-	
+	xmlNodePtr root_node = NULL, node = NULL, node1 = NULL; /* node pointers */
+
 	//Creates a new document, a node and set it as a root node
 	doc = xmlNewDoc(BAD_CAST "1.0");
 	root_node = xmlNewNode(NULL, BAD_CAST "root");
-	xmlDocSetRootElement(doc, root_node);     
-	
-	//creates a new node, which is "attached" as child node of root_node node.  
+	xmlDocSetRootElement(doc, root_node);
+
+	//creates a new node, which is "attached" as child node of root_node node.
 	xmlNewChild(root_node, NULL, BAD_CAST "node1",BAD_CAST "content of node1");
 
 	// xmlNewProp() creates attributes, which is "attached" to an node.
 	node=xmlNewChild(root_node, NULL, BAD_CAST "node3", BAD_CAST"node has attributes");
-	xmlNewProp(node, BAD_CAST "attribute", BAD_CAST "yes");   
-//Here goes another way to create nodes. 
+	xmlNewProp(node, BAD_CAST "attribute", BAD_CAST "yes");
+//Here goes another way to create nodes.
 	node = xmlNewNode(NULL, BAD_CAST "node4");
 	node1 = xmlNewText(BAD_CAST"other way to create content");
 	xmlAddChild(node, node1);
-	xmlAddChild(root_node, node);                             
+	xmlAddChild(root_node, node);
 //Dumping document to stdio or file
-	xmlSaveFormatFileEnc(argc > 1 ? argv[1] : "-", doc, "UTF-8", 1);   
+	xmlSaveFormatFileEnc(argc > 1 ? argv[1] : "-", doc, "UTF-8", 1);
 /*free the document */
 	xmlFreeDoc(doc);
 	xmlCleanupParser();
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 生成的xml:
 ```shell
 [denny@localhost xml]$ gcc -I/usr/include/libxml2/ -lxml2 tree1.c
-[denny@localhost xml]$ ./a.out 
+[denny@localhost xml]$ ./a.out
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <node1>content of node1</node1>
@@ -156,8 +156,8 @@ print_element_names(xmlNode * a_node)
 }
 
 /**
- * Simple example to parse a file called "file.xml", 
- * walk down the DOM, and print the name of the 
+ * Simple example to parse a file called "file.xml",
+ * walk down the DOM, and print the name of the
  * xml elements nodes.
  */
 int
@@ -209,7 +209,7 @@ int main(void) {
     - 结点值：xmlNodePtr->name,
     - 结点内遍历：xmlNodePtr->next
 
-5. 释放内存：xmlFreeDoc，xmlFree 
+5. 释放内存：xmlFreeDoc，xmlFree
 
 
 
@@ -219,7 +219,7 @@ int main(void) {
 
 (writer )使用不同的API来写xml文件：(下面4个函数接口使用了writer的四种途径)
 ```c++
-void testXmlwriterFilename(const char *uri);  
+void testXmlwriterFilename(const char *uri);
 void testXmlwriterMemory(const char *file);
 void testXmlwriterDoc(const char *file);
 void testXmlwriterTree(const char *file);
@@ -239,18 +239,18 @@ void testXmlwriterTree(const char *file);
 
 ```c++
 // parse an XML file from the filesystem or the network.
-xmlDocPtr	xmlReadFile(const char * filename, 
-					 const char * encoding, 
+xmlDocPtr	xmlReadFile(const char * filename,
+					 const char * encoding,
 					 int options)
 
 // parse an XML document from I/O functions and source and build a tree
-xmlDocPtr	xmlReadIO(xmlInputReadCallback ioread, 
-					 xmlInputCloseCallback ioclose, 
-					 void * ioctx, 
-					 const char * URL, 
-					 const char * encoding, 
+xmlDocPtr	xmlReadIO(xmlInputReadCallback ioread,
+					 xmlInputCloseCallback ioclose,
+					 void * ioctx,
+					 const char * URL,
+					 const char * encoding,
 					 int options)
-// parse an XML file and build a tree. Automatic support for ZLIB/Compress compressed document is provided by default if found at compile-time. In the case the document is not Well Formed, a tree is built anyway 
+// parse an XML file and build a tree. Automatic support for ZLIB/Compress compressed document is provided by default if found at compile-time. In the case the document is not Well Formed, a tree is built anyway
 xmlDocPtr	xmlRecoverFile(const char * filename)
 ```
 
@@ -258,16 +258,16 @@ xmlDocPtr	xmlRecoverFile(const char * filename)
 
 ```c++
 // parse an XML in-memory document and build a tree.
-xmlDocPtr	xmlReadMemory(const char * buffer, 
-					 int size, 
-					 const char * URL, 
-					 const char * encoding, 
+xmlDocPtr	xmlReadMemory(const char * buffer,
+					 int size,
+					 const char * URL,
+					 const char * encoding,
 					 int options)
-// parse an XML in-memory document and build a tree. In the case the document is not Well Formed, a tree is built anyway 
+// parse an XML in-memory document and build a tree. In the case the document is not Well Formed, a tree is built anyway
 xmlDocPtr	xmlRecoverDoc(xmlChar * cur)
 
 // parse an XML in-memory block and build a tree. In the case the document is not Well Formed, a tree is built anyway
-xmlDocPtr	xmlRecoverMemory(const char * buffer, 
+xmlDocPtr	xmlRecoverMemory(const char * buffer,
 					 int size)
 ```
 
@@ -279,9 +279,9 @@ xmlDocPtr	xmlRecoverMemory(const char * buffer,
 // Creates a new XML document
 xmlDocPtr	xmlNewDoc		(const xmlChar * version)
 //
-xmlNodePtr	xmlNewDocNode		(xmlDocPtr doc, 
-					 xmlNsPtr ns, 
-					 const xmlChar * name, 
+xmlNodePtr	xmlNewDocNode		(xmlDocPtr doc,
+					 xmlNsPtr ns,
+					 const xmlChar * name,
 					 const xmlChar * content)
 // parse an XML file and build a tree. Automatic support for ZLIB/Compress compressed document is provided by default if found at compile-time.
 xmlDocPtr	xmlParseFile		(const char * filename)
@@ -290,33 +290,33 @@ xmlDocPtr	xmlParseFile		(const char * filename)
 ### 5.2 释放，保存文档内容
 ```c++
 // Dump the current DOM tree into memory using the character encoding specified by the caller. Note it is up to the caller of this function to free the allocated memory with xmlFree().
-void	xmlDocDumpMemoryEnc(xmlDocPtr out_doc, 
-					 xmlChar ** doc_txt_ptr, 
-					 int * doc_txt_len, 
+void	xmlDocDumpMemoryEnc(xmlDocPtr out_doc,
+					 xmlChar ** doc_txt_ptr,
+					 int * doc_txt_len,
 					 const char * txt_encoding)
 // Dump an XML document to a file. Will use compression if compiled in and enabled. If @filename is "-" the stdout file is used.
-int	xmlSaveFile		(const char * filename, 
+int	xmlSaveFile		(const char * filename,
 					 xmlDocPtr cur)
 // mp an XML document, converting it to the given encoding
-int	xmlSaveFileEn	(const char * filename, 
-					 xmlDocPtr cur, 
+int	xmlSaveFileEn	(const char * filename,
+					 xmlDocPtr cur,
 					 const char * encoding)
 // Dump an XML document to an I/O buffer. Warning ! This call xmlOutputBufferClose() on buf which is not available after this call.
-int	xmlSaveFileTo	(xmlOutputBufferPtr buf, 
-					 xmlDocPtr cur, 
+int	xmlSaveFileTo	(xmlOutputBufferPtr buf,
+					 xmlDocPtr cur,
 					 const char * encoding)
 //
-int	xmlSaveFormatFile		(const char * filename, 
-					 xmlDocPtr cur, 
+int	xmlSaveFormatFile		(const char * filename,
+					 xmlDocPtr cur,
 					 int format)
 // Dump an XML document to a file or an URL.
-int	xmlSaveFormatFileEnc		(const char * filename, 
-					 xmlDocPtr cur, 
-					 const char * encoding, 
+int	xmlSaveFormatFileEnc		(const char * filename,
+					 xmlDocPtr cur,
+					 const char * encoding,
 					 int format)
-int	xmlSaveFormatFileTo		(xmlOutputBufferPtr buf, 
-					 xmlDocPtr cur, 
-					 const char * encoding, 
+int	xmlSaveFormatFileTo		(xmlOutputBufferPtr buf,
+					 xmlDocPtr cur,
+					 const char * encoding,
 					 int format)
 
 ```
@@ -337,15 +337,15 @@ xmlNodePtr	xmlGetLastChild		(xmlNodePtr parent)
 // Build a structure based Path for the given node
 xmlChar *	xmlGetNodePath		(xmlNodePtr node)
 //
-xmlNodePtr	xmlNewChild		(xmlNodePtr parent, 
-					 xmlNsPtr ns, 
-					 const xmlChar * name, 
+xmlNodePtr	xmlNewChild		(xmlNodePtr parent,
+					 xmlNsPtr ns,
+					 const xmlChar * name,
 					 const xmlChar * content)
 // Creation of a new node element. @ns is optional (NULL).
-xmlNodePtr	xmlNewNode		(xmlNsPtr ns, 
+xmlNodePtr	xmlNewNode		(xmlNsPtr ns,
 					 const xmlChar * name)
 //Set (or reset) the name of a node.
-void	xmlNodeSetName			(xmlNodePtr cur, 
+void	xmlNodeSetName			(xmlNodePtr cur,
 					 const xmlChar * name)
 //Unlink a node from it's current context, the node is not freed
 void	xmlUnlinkNode			(xmlNodePtr cur)
@@ -355,13 +355,13 @@ ns:	a namespace if any
 name:	the name of the child
 content:	the XML content of the child if any.
 Returns:	a pointer to the new node object
-xmlNodePtr	xmlNewChild		(xmlNodePtr parent, 
-					 xmlNsPtr ns, 
-					 const xmlChar * name, 
+xmlNodePtr	xmlNewChild		(xmlNodePtr parent,
+					 xmlNsPtr ns,
+					 const xmlChar * name,
 					 const xmlChar * content)
 
 //Unlink the old node from its current context, prune the new one at the same place. If @cur was already inserted in a document it is first unlinked from its existing context
-xmlNodePtr	xmlReplaceNode		(xmlNodePtr old, 
+xmlNodePtr	xmlReplaceNode		(xmlNodePtr old,
 					 xmlNodePtr cur)
                                 [xmlNodePtr](file:///D:\STUDY\libxml2-devel-2.6.19\html\libxml-tree.html#xmlNodePtr) cur)
 
@@ -370,18 +370,18 @@ xmlNodePtr	xmlReplaceNode		(xmlNodePtr old,
 ### 5.5 结点属性操作
 ```c++
 //Create a new property carried by a node.
-xmlAttrPtr	xmlNewProp		(xmlNodePtr node, 
-					 const xmlChar * name, 
+xmlAttrPtr	xmlNewProp		(xmlNodePtr node,
+					 const xmlChar * name,
 					 const xmlChar * value)
 //Unlink and free one attribute, all the content is freed too Note this doesn't work for namespace definition attributes
 int	xmlRemoveProp			(xmlAttrPtr cur)
 //Set (or reset) an attribute carried by a node.
-xmlAttrPtr	xmlSetProp		(xmlNodePtr node, 
-					 const xmlChar * name, 
+xmlAttrPtr	xmlSetProp		(xmlNodePtr node,
+					 const xmlChar * name,
 					 const xmlChar * value)
 
 // Search and get the value of an attribute associated to a node This does the entity substitution. This function looks in DTD attribute declaration for #FIXED or default declaration values unless DTD use has been turned off. NOTE: this function acts independently of namespaces associated to the attribute. Use xmlGetNsProp() or xmlGetNoNsProp() for namespace aware processing.
-xmlChar *	xmlGetProp		(xmlNodePtr node, 
+xmlChar *	xmlGetProp		(xmlNodePtr node,
 					 const xmlChar * name)
 // Search and get the value of an attribute associated to a node This does the entity substitution. This function looks in DTD attribute declaration for #FIXED or default declaration values unless DTD use has been turned off. NOTE: this function acts independently of namespaces associated to the attribute. Use xmlGetNsProp() or xmlGetNoNsProp() for namespace aware processing.
 node:	the node
@@ -453,7 +453,7 @@ char * Convert( char *encFrom, char *encTo, const char * in)
 	sin    = (char *)in;
 	sout   = bufout;
 	ret = iconv(c_pt, &sin, (size_t *)&lenin, &sout, (size_t *)&lenout);
-			
+
 	if (ret == -1)
 	{
 		return NULL;
@@ -473,7 +473,7 @@ int main(void)
 }
 ```
 
- 
+
 
 2)  xmlFindCharEncodingHandler
 
@@ -483,7 +483,7 @@ int main(void)
  * compile: gcc -I/usr/include/libxml2/ -lxml2 convert.c
  * usage:  convert utf-8 string or null
  * input: ./convert 测试
- * output: 
+ * output:
 [wuqifu@localhost test]$ ./convert 测试
 ISO-8859-1:虏芒脢脭
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -492,7 +492,7 @@ ISO-8859-1:虏芒脢脭
 #include <libxml/encoding.h>
 /**
  * function name: ConvertInput
- * input: 
+ * input:
     @in: string in a given encoding
     @encoding: the encoding used
 * description: Converts @in into UTF-8 for processing with libxml2 APIs
@@ -552,7 +552,7 @@ int	main(int argc, char **argv)
 	unsigned char *content, *out;
 	xmlDocPtr doc;
 	xmlNodePtr rootnode;
-	char *encoding = "ISO-8859-1";	 //utf-8, ISO-8859-1 
+	char *encoding = "ISO-8859-1";	 //utf-8, ISO-8859-1
 	if (argc <= 1) {
 		printf("Usage: %s content\n", argv[0]);
 		return(0);
@@ -569,7 +569,7 @@ int	main(int argc, char **argv)
 }
 ```
 
- 
+
 
 ## 参考资料
 
@@ -581,5 +581,5 @@ int	main(int argc, char **argv)
 
 http://blog.csdn.net/force_eagle/archive/2005/03/03/309644.aspx
 
- 
+
 

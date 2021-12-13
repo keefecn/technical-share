@@ -3,7 +3,7 @@
 | 1    | 2006-2007 | 创建     | Keefe | Keefe |
 ---
 
- 
+
 
  目录
 
@@ -37,7 +37,7 @@
 
 [3 STL常用算法... 7](#_Toc27944857)
 
- 
+
 
 [TOC]
 
@@ -88,7 +88,7 @@ STL的一个重要特点是数据结构和算法的分离。尽管这是个简�
 | allocators | 配置器     | 用来分配内存空间     | 这一特性很多编译器不是很支持，建议使用默认值 |
 | adapters  | 适配器     | 用来修饰其它组件     | 可参考设计模式中的adapter   |
 
- 
+
 
 ## 2.1 组件一：迭代器描述
 
@@ -129,11 +129,11 @@ input iterators  output iterators
 
 和指针一样，你可以给一个迭代器赋值。
 
- 
+
 
 ## 2.2 组件二：容器
 
-你可以生成STL容器，用来存放对象或者指向对象的指针。 
+你可以生成STL容器，用来存放对象或者指向对象的指针。
 
 ```c
 class TMyClass;
@@ -159,7 +159,7 @@ typedef list<TMyClass*> TMyClassPtrList; // 用于存放对象指针的list容�
 
 下图清晰的表明了不同类型的迭代器之间的转换关系：
 
-   
+
 
 ## 2.3 组件三：函数对象(重点)
 
@@ -189,30 +189,30 @@ for_each(v.begin(), v.end(), object);
 #include <vector> // Need vector
 #include <functional>  // Need ptr_fun()
 #include <iterator>
- 
+
 using namespace std;
- 
+
 // Data to randomize
 int iarray[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 vector<int> v(iarray, iarray + 10);
- 
+
 // Function prototypes
 void Display(vector<int>& vr, const char *s);
 unsigned int RandInt(const unsigned int n);
- 
+
 int main()
 {
   srandom( time(NULL) );  // Seed random generator
   Display(v, "Before shuffle:");
- 
+
   pointer_to_unary_function<unsigned int, unsigned int>
 ​    ptr_RandInt = ptr_fun(RandInt);  // Pointer to RandInt()//注意这行
   random_shuffle(v.begin(), v.end(), ptr_RandInt);
- 
+
   Display(v, "After shuffle:");
   return 0;
 }
- 
+
 // Display contents of vector vr
 void Display(vector<int>& vr, const char *s)
 {
@@ -220,7 +220,7 @@ void Display(vector<int>& vr, const char *s)
   copy(vr.begin(), vr.end(), ostream_iterator<int>(cout, " ")); //space
   cout << endl;
 }
- 
+
 // Return next random value in sequence modulo n
 unsigned int RandInt(const unsigned int n)
 {
@@ -238,7 +238,7 @@ bind1st() 创建一个函数对象，该函数对象将值V作为第一个参数
 
 bind2nd()创建一个函数对象，该函数对象将值V作为第二个参数B。
 
- 
+
 
 # 3 STL常用算法
 
@@ -256,7 +256,7 @@ STL的算法可以分为不改变容器值的算法，改变容器值的与及�
 
 max, min
 
- 
+
 
 **会改变容器值的算法有：**
 

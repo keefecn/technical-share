@@ -21,18 +21,18 @@
 
 源码下载
 
-*  [Python 2.7.14rc1 - 2017-08-27](https://www.python.org/downloads/release/python-2714rc1/) 
+*  [Python 2.7.14rc1 - 2017-08-27](https://www.python.org/downloads/release/python-2714rc1/)
    Download [XZ compressed source tarball](https://www.python.org/ftp/python/2.7.14/Python-2.7.14rc1.tar.xz)
    Download [Gzipped source tarball](https://www.python.org/ftp/python/2.7.14/Python-2.7.14rc1.tgz)
-   
-*  [Python 3.4.7 - 2017-08-09](https://www.python.org/downloads/release/python-347/) 
+
+*  [Python 3.4.7 - 2017-08-09](https://www.python.org/downloads/release/python-347/)
    Download [XZ compressed source tarball](https://www.python.org/ftp/python/3.4.7/Python-3.4.7.tar.xz)
    Download [Gzipped source tarball](https://www.python.org/ftp/python/3.4.7/Python-3.4.7.tgz)
 
    ![1574530890814](../../media/program_lang/lang_python_003.png)
    图  python总体结构
 
-说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。 
+说明：python解释器由四个部分组成，分别是Scanner（行扫描及句法分析）、Parser（语法分析，构建AST）、Compiler（编译生成PYC文件)和Code Evaluator（代码执行器）。
 
 
 
@@ -110,30 +110,30 @@ typedef struct _object {
    int ob_refcnt; // 用于内存管理的引用计数
    struct _typeobject *ob_type; // 类型对象，包含类型信息
 } PyObject;
- 
+
 // 变长对象
 typedef struct {
    int ob_refcnt; // 用于内存管理的引用计数
    struct _typeobject *ob_type; // 类型对象，包含类型信息
    Py_ssize_t ob_size; // 变长对象（容器类: list等）容纳元素的个数
 } PyVarObject;
- 
-#define PyObject_HEAD_INIT(typePtr) 
+
+#define PyObject_HEAD_INIT(typePtr)
    0,typePtr
 // 函数指针
 typedef void (*PrintFun)(PyObject*object);
 typedef PyObject* (*AddFun)(PyObject* left,PyObject*right);
 typedef long (*HashFun)(PyObject* object);
- 
+
 #define PyObject_HEAD            \
    int refCount; \   //对象的引用计数
-   struct tagPyTypeObject *type    //对象类型指针　
- 
+   struct tagPyTypeObject *type    //对象类型指针
+
 typedef struct tagPyObject
 {
    PyObject_HEAD;
 }PyObject;
- 
+
 typedef struct tagPyTypeObject
 {
    PyObject_HEAD;
@@ -192,7 +192,7 @@ python中内存机制呈现出金字塔形状，-1、-2层主要由操作系统�
 
 python源码安装时，可带上编译优化开关:  `./configure --enable-optimizations`
 
-该标志启用轮廓引导优化(PGO)和链接时间优化(LTO).  
+该标志启用轮廓引导优化(PGO)和链接时间优化(LTO).
 
 * [LTO implementation in gcc](https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html)
 * [PGO](https://en.wikipedia.org/wiki/Profile-guided_optimization)  https://en.wikipedia.org/wiki/Profile-guided_optimization
@@ -204,7 +204,7 @@ python源码安装时，可带上编译优化开关:  `./configure --enable-opti
 
 
 
-# 3  Python虚拟机PVM 
+# 3  Python虚拟机PVM
 
 ## 3.1  虚拟机执行流程
 
@@ -285,10 +285,10 @@ typedef struct {
 ```shell
 In [6]: help(compile)
 Help on built-in function compile in module builtins:
- 
+
 compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
    Compile source into a code object that can be executed by exec() or eval().
- 
+
    The source code may represent a Python module, statement or expression.
    The filename will be used for run-time error messages.
    The mode must be 'exec' to compile a module, 'single' to compile a
@@ -299,7 +299,7 @@ compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
    the effects of any future statements in effect in the code calling
    compile; if absent or false these statements do influence the compilation,
    in addition to any features explicitly specified.
- 
+
 示例：
 In [1]: file1='debug_demo.py'
 In [2]: source=open(file1).read()
@@ -310,20 +310,20 @@ In [9]: import dis
 In [10]: dis.dis(co)
   8           0 LOAD_CONST  0 ('\n@filename debug_demo.py\n@author: keefe\n@created: 2017/8/30\n@see:\n')
  2 STORE_NAME  0 (__doc__)
- 
+
  10           4 LOAD_CONST  1 (True)
  6 STORE_NAME  1 (_DEBUG)
- 
+
  13           8 LOAD_CONST  2 (<code object debug_demo at 0x0000002910865E40, file "debug_demo.py", line 13>)
             10 LOAD_CONST  3 ('debug_demo')
             12 MAKE_FUNCTION            0
             14 STORE_NAME  2 (debug_demo)
- 
+
  32          16 LOAD_NAME   3 (__name__)
             18 LOAD_CONST  4 ('__main__')
             20 COMPARE_OP  2 (==)
             22 POP_JUMP_IF_FALSE       32
- 
+
  33          24 LOAD_NAME   2 (debug_demo)
             26 LOAD_CONST  5 (4500)
             28 CALL_FUNCTION            1
@@ -340,14 +340,14 @@ In [10]: dis.dis(co)
 
 python标准库在python安装路径的lib目录下，除了site-packages下的其它文件或目录。标准库在python安装时同时安装。
 
-python模块包括标准库（包括内置模块和标准模块）和第三方模块： 
+python模块包括标准库（包括内置模块和标准模块）和第三方模块：
 
 * 内置模块module：无需导入import 即可使用。 `help(__builtin__)`
   * 内置类型types： `import types; dir(types)`
-  * 内置函数functions: 
+  * 内置函数functions:
   * 内置方法methods:
 
-* 标准模块：使用时需要import 
+* 标准模块：使用时需要import
 * 第三方模块：site-packages目录下，需要安装。使用时需要import 。
 
 
@@ -427,11 +427,11 @@ Return those items of sequence for which function(item) is true.  If
 filter(function, sequence)：对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回：
 
 >>> def f(x): return x % 2 !=
-0 and x % 3 != 0 
->>> filter(f, range(2, 25)) 
+0 and x % 3 != 0
+>>> filter(f, range(2, 25))
 [5, 7, 11, 13, 17, 19, 23]
->>> def f(x): return x != 'a' 
->>> filter(f, "abcdef") 
+>>> def f(x): return x != 'a'
+>>> filter(f, "abcdef")
 'bcdef'
 ```
 
@@ -441,8 +441,8 @@ filter(function, sequence)：对sequence中的item依次执行function(item)，�
 对sequence中的item依次执行function(item)，见执行结果组成一个List返回。另外map也支持多个sequence，这就要求function也支持相应数量的参数输入：
 
 ```python
->>> def add(x, y): return x+y 
->>> map(add, range(8), range(8)) 
+>>> def add(x, y): return x+y
+>>> map(add, range(8), range(8))
  [0, 2, 4, 6, 8, 10, 12, 14]
 ```
 
@@ -451,10 +451,10 @@ filter(function, sequence)：对sequence中的item依次执行function(item)，�
 对sequence中的item顺序迭代调用function，如果有starting_value，还可以作为初始值调用，例如可以用来对List求和：
 
 ```python
->>> def add(x,y): return x + y 
->>> reduce(add, range(1, 11)) 
+>>> def add(x,y): return x + y
+>>> reduce(add, range(1, 11))
  55 （注：1+2+3+4+5+6+7+8+9+10）
->>> reduce(add, range(1, 11), 20) 
+>>> reduce(add, range(1, 11), 20)
  75 （注：1+2+3+4+5+6+7+8+9+10+20
 ```
 
@@ -466,10 +466,10 @@ lambda [arg1[,arg2,arg3....argN]]:expression
 ```
 
 ```python
->>> g = lambda x: x * 2 
->>> g(3) 
- 6 
->>> (lambda x: x * 2)(3) 
+>>> g = lambda x: x * 2
+>>> g(3)
+ 6
+>>> (lambda x: x * 2)(3)
  6
 ```
 
@@ -477,9 +477,9 @@ lambda [arg1[,arg2,arg3....argN]]:expression
  例如：
 
 ```python
-kmpathes = filter(lambda kmpath: kmpath,     
+kmpathes = filter(lambda kmpath: kmpath,
 map(lambda kmpath: string.strip(kmpath),
-string.split(l, ':'))) 
+string.split(l, ':')))
 ```
 
 功能解说：对 l 中的所有元素以':'做分割，得出一个列表。对这个列表的每一个元素做字符串strip，形成一个列表。对这个列表的每一个元素做直接返回操作(这个地方 可以加上过滤条件限制)，最终获得一个字符串被':'分割的列表，列表中的每一个字符串都做了strip，并可以对特殊字符串过滤。
@@ -515,7 +515,7 @@ dict= sorted(dic.iteritems(), key=lambda d:d[1], reverse = True)
 输出的结果：
  [('aa', 74), ('a', 31), ('bc', 5), ('asd', 4), ('c', 3), ('d', 0)]
 
-**3）先按value排序再按key排序** 
+**3）先按value排序再按key排序**
 
 ```python
 dict= sorted(dic.iteritems(), key=lambda d:(d[1],D[0]))
@@ -615,7 +615,7 @@ __builtin__ - Built-in functions, exceptions, and other objects.
        tuple
        type
        xrange
-    
+
   class ArithmeticError(Exception)
   ...
 ```
@@ -664,12 +664,12 @@ __builtin__ - Built-in functions, exceptions, and other objects.
 Return true if the object argument is an instance of the classinfo argument, or of a (direct, indirect or [virtual](https://docs.python.org/2/glossary.html#term-abstract-base-class)) subclass thereof.
 
 **issubclass(class, classinfo)**
-Return true if class is a subclass (direct, indirect or [virtual](https://docs.python.org/2/glossary.html#term-abstract-base-class)) of classinfo. 
+Return true if class is a subclass (direct, indirect or [virtual](https://docs.python.org/2/glossary.html#term-abstract-base-class)) of classinfo.
 示例：
 
 ```PYTHON
 >>> import types
->>> isinstance(range, types.BuiltinFunctionType)  
+>>> isinstance(range, types.BuiltinFunctionType)
 True
 >>> isinstance(False,types.BooleanType)
 True
@@ -698,7 +698,7 @@ A0 = dict(list1)
 
 ```sh
 list1 = [('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5)]
-A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}  
+A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}
 ```
 
 
@@ -752,7 +752,7 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}
 可变参数
 
 * `*args`:  tuple类型，存储无名参数，如 args = (arg1, arg2, arg3)
-* `**kwargs`:  dict类型，存储键值对参数，如 kwargs =  {'a': 1, 'c': 3, 'b': 2} 
+* `**kwargs`:  dict类型，存储键值对参数，如 kwargs =  {'a': 1, 'c': 3, 'b': 2}
 
 @wraps 装饰器作用：不改变使用装饰器原有函数的结构 (如`__name__, __doc__`)
 
@@ -762,28 +762,28 @@ A0 = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}
 
 ```python
 # no args
-def use_logging(func): 
-   def wrapper(*args, **kwargs): 
-       # logging.warn("%s is running" % func.__name__) 
+def use_logging(func):
+   def wrapper(*args, **kwargs):
+       # logging.warn("%s is running" % func.__name__)
        print("%s is running" % func.__name__)
-       return func(*args, **kwargs) 
+       return func(*args, **kwargs)
    return wrapper
- 
+
 # with args
-def use_logging2(level): 
+def use_logging2(level):
    def decorator(func):
-       def wrapper(*args, **kwargs): 
+       def wrapper(*args, **kwargs):
            print("%s is running: %s" % (func.__name__, level))
            return func(*args)
        return wrapper
    return decorator
- 
+
 @use_logging
-def log_bar(): 
+def log_bar():
    print("i am log_bar")
-     
-@use_logging2(level="warn")    
-def log_bar2(): 
+
+@use_logging2(level="warn")
+def log_bar2():
    print("i am log_bar2")
 
 #调用
@@ -819,7 +819,7 @@ i am log_bar2
 就是说可以直接用类名调用，而不需要实例化类，相当于把一个类的方法不需要实例化也能直接像函数一样调用，类名此时相当于模块名。即可以用类名或者类实例调用，如 class.xx 或者 class().xx 。
 
 **classmethod(function)**
-Return a class method for function.  
+Return a class method for function.
 A class method receives the class as implicit first argument, just like an instance method receives the instance. To declare a class method, use this idiom:
 
 ```python
@@ -848,7 +848,7 @@ class classmethod(object):
 
     __func__ = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     __isabstractmethod__ = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-    __dict__ = None # 
+    __dict__ = None #
 ```
 
 
@@ -860,19 +860,19 @@ A static method does not receive an implicit first argument. To declare a static
 
 ```python
 class Rabbit(object):
-    
+
    def __init__(self, name):
        self._name = name
        print '__init__ %s' %name
-    
+
    @staticmethod
    def newRabbit(name):
        return Rabbit(name)
-    
+
    @classmethod
    def newRabbit2(cls):
        return Rabbit('')
-    
+
    # @property
    def name(self):
        return self._name
@@ -948,7 +948,7 @@ def calc_func(func)
 >>> test_list = [1,2,3,4]
 >>> iter_list = test_list.__iter__()   ##通过这种方法把iter_list变为迭代器
 >>> print(type(iter_list))
-<class 'list_iterator'>        
+<class 'list_iterator'>
 >>> print(iter_list.__next__())     ##用__next__()方法实现
 1
 >>> next(iter_list)           ##用next()方法实现
@@ -1032,8 +1032,8 @@ yield的作用就是把一个函数变成一个 generator，带有yield 的函�
 利用 isgeneratorfunction 判断一个函数是否是一个特殊的 generator 函数：
 
 ```python
->>> from inspect import isgeneratorfunction 
->>> isgeneratorfunction(fab) 
+>>> from inspect import isgeneratorfunction
+>>> isgeneratorfunction(fab)
 True
 ```
 
@@ -1052,13 +1052,13 @@ def fib(n):
         i = i+1
 #调用
 print(fib(10))
-for j in fib(5): print(j)  
+for j in fib(5): print(j)
 ```
 
 输出：
 
 ```sh
-<generator object fib at 0x0000000AA3B32CA8> 
+<generator object fib at 0x0000000AA3B32CA8>
 1	#while内执行了1次
 1	#while内执行了2次
 2	#while内执行了3次
@@ -1079,8 +1079,8 @@ def follow(thefile):
             time.sleep(1)
             continue
         yield line
- 
-#调用 
+
+#调用
 with open('test.txt', 'r') as logfile:
     for line in follw(logfile):
         print line
@@ -1111,7 +1111,7 @@ def grep(pattern):
     except GeneratorExit:
         print 'now the exit the coroutine'
 
-#调用        
+#调用
 g = grep('python')
 g.close()
 g.send('nice')
@@ -1132,7 +1132,7 @@ g.send('nice')
   multiples = [squared(i) for i in range(30) if i % 3 is 0]
   print multiples
   #  Output: [0, 9, 36, 81, 144, 225, 324, 441, 576, 729]
-  
+
   # () 生成器generator
   multiples = (i for i in range(30) if i % 3 is 0)
   print(type(multiples))
@@ -1156,7 +1156,7 @@ g.send('nice')
   # Output: set([1, 4])
   ```
 
-  
+
 
 #### range/slice
 
@@ -1167,10 +1167,10 @@ xrange：返回一个 iterable 对象（python3 中取消了 range 函数，而�
 class range(object)
  |  range(stop) -> xrange object
  |  range(start, stop[, step]) -> xrange object
- |  
+ |
  |  Like range(), but instead of returning a list, returns an object that
  |  generates the numbers in the range on demand.
- 
+
 >>> type(range(9))
 <type 'range'>
 >>> type(xrange(9))
@@ -1197,7 +1197,7 @@ class slice(object)
 In [25]: range(10)[slice(2,8,2)]
 Out[25]: range(2, 8, 2)
 In [26]: range(10)[2:8:2]
-Out[26]: range(2, 8, 2)    
+Out[26]: range(2, 8, 2)
 ```
 
 
@@ -1205,7 +1205,7 @@ Out[26]: range(2, 8, 2)
 #### super
 
 **super(type[, object-or-type])**
-Return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class. 
+Return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class.
 Note：[super()](https://docs.python.org/2/library/functions.html#super) only works for [new-style class](https://docs.python.org/2/glossary.html#term-new-style-class)es.
 
 **关于super类**
@@ -1234,8 +1234,8 @@ def __init__(self):
 
 ### 3）内建私有方法Built-in Methods
 
-`__xx__`: 内置私有方法，用__开头和结尾。 
-表格 7 常见内建私有方法列表 
+`__xx__`: 内置私有方法，用__开头和结尾。
+表格 7 常见内建私有方法列表
 
 | 类别             | 方法名        | 用途                                                         | 示例                    |
 | ---------------- | ------------- | ------------------------------------------------------------ | ----------------------- |
@@ -1326,7 +1326,7 @@ def got_result(future):
     print(future.result())
     loop.stop()
 
-# 返回一个事件循环. 
+# 返回一个事件循环.
 loop = asyncio.get_event_loop()
 # 创建一个用于放置结果的future对象（第一个future）。注意：非线程安全
 future = asyncio.Future()
@@ -1431,7 +1431,7 @@ class partial:
         self.args = args
         self.keywords = keywords
         return self
-    
+
 def wraps(wrapped,
           assigned = WRAPPER_ASSIGNMENTS,
           updated = WRAPPER_UPDATES):
@@ -1487,19 +1487,19 @@ class Mymeta(type):
         print(self.__name__)
         print(dic)
         print(self.yaml_tag)
- 
+
      def __new__(cls, *args, **kwargs):
         print('===>Mymeta.__new__')
         print(cls.__name__)
         return type.__new__(cls, *args, **kwargs)
- 
+
      def __call__(cls, *args, **kwargs):
         print('===>Mymeta.__call__')
         obj = cls.__new__(cls)
         cls.__init__(cls, *args, **kwargs)
         return obj
 
-    
+
 class Foo(metaclass=Mymeta):
     """ 使用元类参数名：metaclass """
     yaml_tag = '!Foo'
@@ -1511,8 +1511,8 @@ class Foo(metaclass=Mymeta):
     def __new__(cls, *args, **kwargs):
      print('Foo.__new__')
      return object.__new__(cls)
-     
-# 此时自动输出 
+
+# 此时自动输出
 """
 ===>Mymeta.__new__
 Mymeta
@@ -1599,9 +1599,9 @@ if hasattr(socket, "AF_UNIX"):	# unix套接字
     __all__.extend(["UnixStreamServer","UnixDatagramServer",
                     "ThreadingUnixStreamServer",
                     "ThreadingUnixDatagramServer"])
-    
+
 # ThreadingUDPServer和ThreadingTCPServer 未真正实现
-class ThreadingUDPServer(ThreadingMixIn, UDPServer): pass  
+class ThreadingUDPServer(ThreadingMixIn, UDPServer): pass
 class ThreadingTCPServer(ThreadingMixIn, TCPServer): pass
 
 # 这里定义选择器：poll或者select
@@ -1611,8 +1611,8 @@ else:
     _ServerSelector = selectors.SelectSelector
 
 class TCPServer(BaseServer):
-class UDPServer(TCPServer):    
-    
+class UDPServer(TCPServer):
+
 class BaseServer:
    """Base class for server classes.
 
@@ -1638,7 +1638,7 @@ class BaseServer:
     - service_actions()
     - handle_error()
 
-    Methods for derived classes:  
+    Methods for derived classes:
 
     - finish_request(request, client_address)
 
@@ -1655,7 +1655,7 @@ class BaseServer:
     - RequestHandlerClass
     - socket
 
-    """    
+    """
     def serve_forever(self, poll_interval=0.5):
         """Handle one request at a time until shutdown.
 
@@ -1703,19 +1703,19 @@ class BaseServer:
                 self.shutdown_request(request)	#关闭请求
                 raise
         else:
-            self.shutdown_request(request)   
-            
+            self.shutdown_request(request)
+
     def process_request(self, request, client_address):
         """Call finish_request.
         Overridden by ForkingMixIn and ThreadingMixIn.
         """
         self.finish_request(request, client_address)
-        self.shutdown_request(request)         
-        
+        self.shutdown_request(request)
+
     def finish_request(self, request, client_address):
         """Finish one request by instantiating RequestHandlerClass."""
         self.RequestHandlerClass(request, client_address, self)	#BaseRequestHandler初始化时调用self.handle()
-        
+
 
 class ThreadingMixIn:	# 线程处理类
     """Mix-in class to handle each request in a new thread."""
@@ -1751,24 +1751,24 @@ class ThreadingMixIn:	# 线程处理类
         t.daemon = self.daemon_threads
         self._threads.append(t)
         t.start()
-       
-    
+
+
 if hasattr(os, "fork"):
     class ForkingMixIn:      # 进程处理类
         timeout = 300
         active_children = None
         max_children = 40
         # If true, server_close() waits until all child processes complete.
-        block_on_close = True 
+        block_on_close = True
         def collect_children(self, *, blocking=False):
             """ 等待子进程退出 """
-            
+
         def handle_timeout(self):
             self.collect_children()
-            
+
         def service_actions(self):
             self.collect_children()
-            
+
         def process_request(self, request, client_address):
             """Fork a new subprocess to process the request."""
             pid = os.fork()
@@ -1792,12 +1792,12 @@ if hasattr(os, "fork"):
                     try:
                         self.shutdown_request(request)
                     finally:
-                        os._exit(status)        
+                        os._exit(status)
 
         def server_close(self):
             super().server_close()
-            self.collect_children(blocking=self.block_on_close)    
-                                  
+            self.collect_children(blocking=self.block_on_close)
+
 ```
 
 
@@ -1805,7 +1805,7 @@ if hasattr(os, "fork"):
 请求处理类： BaseRequestHandler ->  StreamRequestHandler/DatagramRequestHandler (区别主要在于定义不同的读写器rfile, wfile)
 
 ```python
-class BaseRequestHandler:    
+class BaseRequestHandler:
     """ 实际处理请求 """
     def __init__(self, request, client_address, server):
         self.request = request
@@ -1815,8 +1815,8 @@ class BaseRequestHandler:
         try:
             self.handle()	#请求实际处理函数，实际应用派生类会重载此处
         finally:
-            self.finish()   
-            
+            self.finish()
+
     def setup(self):
         pass
 
@@ -1825,15 +1825,15 @@ class BaseRequestHandler:
 
     def finish(self):
         pass
-    
-    
+
+
 class StreamRequestHandler(BaseRequestHandler):
     """ 流请求处理： """
     rbufsize = -1
     wbufsize = 0
 
     # A timeout to apply to the request socket, if not None.
-    timeout = None    
+    timeout = None
     disable_nagle_algorithm = False
 
     def setup(self):
@@ -1859,7 +1859,7 @@ class StreamRequestHandler(BaseRequestHandler):
                 pass
         self.wfile.close()
         self.rfile.close()
-        
+
 
 class DatagramRequestHandler(BaseRequestHandler):
     """Define self.rfile and self.wfile for datagram sockets."""
@@ -1871,7 +1871,7 @@ class DatagramRequestHandler(BaseRequestHandler):
         self.wfile = BytesIO()
 
     def finish(self):
-        self.socket.sendto(self.wfile.getvalue(), self.client_address)          
+        self.socket.sendto(self.wfile.getvalue(), self.client_address)
 ```
 
 
@@ -1892,9 +1892,9 @@ server.py
 
 ```python
 import socketserver
-class HTTPServer(socketserver.TCPServer):    
-    
- 
+class HTTPServer(socketserver.TCPServer):
+
+
 class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
     """ 请求处理器重载 父类方法：handle, handle_one_request """
     def parse_request(self):
@@ -1907,7 +1907,7 @@ class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
         error response has already been sent back.
         """
 
-        
+
     def handle_one_request(self):
         """Handle a single HTTP request.
 
@@ -1951,7 +1951,7 @@ class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
 
         self.handle_one_request()  #处理单个请求，复用连接
         while not self.close_connection:
-            self.handle_one_request()    
+            self.handle_one_request()
 ```
 
 
@@ -1995,7 +1995,7 @@ This diagram details these state transitions:
                             | response.read()
                             v
                           Request-sent
-                          
+
 Logical State                  __state            __response
 -------------                  -------            ----------
 Idle                           _CS_IDLE           None
@@ -2003,17 +2003,17 @@ Request-started                _CS_REQ_STARTED    None
 Request-sent                   _CS_REQ_SENT       None
 Unread-response                _CS_IDLE           <response_class>
 Req-started-unread-response    _CS_REQ_STARTED    <response_class>
-Req-sent-unread-response       _CS_REQ_SENT       <response_class>                          
-"""                          
+Req-sent-unread-response       _CS_REQ_SENT       <response_class>
+"""
 ```
 
 
 
 ## 标准 logging/
 
-* `__init__.py`   导出符号，定义常用方法，日志流FileHandler StreamHandler 
+* `__init__.py`   导出符号，定义常用方法，日志流FileHandler StreamHandler
 * config.py  日志配置对象BaseConfigurator DictConfigurator等
-* handlers.py  日志处理器有BaseRotatingHandler 
+* handlers.py  日志处理器有BaseRotatingHandler
 
 
 
@@ -2039,20 +2039,20 @@ class Filterer(object):
         Initialize the list of filters to be an empty list.
         """
         self.filters = []    # 过滤对象列表
-    
+
     def addFilter(self, filter):
     def removeFilter(self, filter):
-    def filter(self, record):  # 过滤方法，各子类可以重新实现        
-        
-        
+    def filter(self, record):  # 过滤方法，各子类可以重新实现
+
+
 class Handler(Filterer):
     """ 日志处理器：包括设置日志级别 加锁等基本操作 """
-    
+
 class StreamHandler(Handler):
     """ 流处理器 """
-    
+
 class FileHandler(StreamHandler):
-    """ 文件流处理器 """    
+    """ 文件流处理器 """
 ```
 
 
@@ -2065,32 +2065,32 @@ class FileHandler(StreamHandler):
 import logging, socket, os, pickle, struct, time, re
 
 class BaseRotatingHandler(logging.FileHandler):
-    
+
 class RotatingFileHandler(BaseRotatingHandler):
-    
+
 class TimedRotatingFileHandler(BaseRotatingHandler):
-    
+
 class WatchedFileHandler(logging.FileHandler):
-    
+
 class SocketHandler(logging.Handler):
-    
-class DatagramHandler(SocketHandler):    
-    
-class SysLogHandler(logging.Handler):  
-    
+
+class DatagramHandler(SocketHandler):
+
+class SysLogHandler(logging.Handler):
+
 class SMTPHandler(logging.Handler):
-    
+
 class NTEventLogHandler(logging.Handler):
-    
+
 class HTTPHandler(logging.Handler):
-    
+
 class BufferingHandler(logging.Handler):
-    
-class MemoryHandler(BufferingHandler):   
-    
+
+class MemoryHandler(BufferingHandler):
+
 class QueueHandler(logging.Handler):
-    
-class QueueListener(object):    
+
+class QueueListener(object):
 ```
 
 
@@ -2131,9 +2131,9 @@ ipython
 ```python
 import re
 import sys
- 
+
 from IPython import start_ipython
- 
+
 if __name__ == '__main__':
     #移除-script.pyw或者.exe结尾的部分，如test-script.pyw或test.exe处理后是test
     sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
@@ -2152,7 +2152,7 @@ from pip._internal.cli.main import main
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(main())
-    
+
 # windows环境 pip3.exe
 from pkg_resources import load_entry_point
 if __name__ == '__main__':
@@ -2167,7 +2167,7 @@ if __name__ == '__main__':
 virtualenv
 
 ```python
-[root@ecs-ce1a bin]# cat /usr/bin/virtualenv 
+[root@ecs-ce1a bin]# cat /usr/bin/virtualenv
 #!/usr/local/bin/python3/bin/python3.8
 # -*- coding: utf-8 -*-
 import re
@@ -2193,25 +2193,25 @@ from flask.cli import main
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(main())
-    
-    
-[root@ecs-ce1a bin]# cat celery 
+
+
+[root@ecs-ce1a bin]# cat celery
 # -*- coding: utf-8 -*-
 import re
 import sys
 from celery.__main__ import main
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(main())    
-    
-[root@ecs-ce1a bin]# cat gunicorn    
+    sys.exit(main())
+
+[root@ecs-ce1a bin]# cat gunicorn
 # -*- coding: utf-8 -*-
 import re
 import sys
 from gunicorn.app.wsgiapp import run
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(run())    
+    sys.exit(run())
 ```
 
 
@@ -2252,7 +2252,7 @@ Home-page: https://github.com/benjaminp/six
 Author: Benjamin Peterson
 Author-email: benjamin@python.org
 License: MIT
-Location: d:\dev\langs\python\python37\lib\site-packages
+Location: ~\dev\langs\python\python37\lib\site-packages
 Requires:
 Required-by: xdis, virtualenv, tensorflow, tensorflow-gpu, python-dateutil, protobuf, Keras-Preprocessing, jsonschema, grpcio, google-pasta, google-auth, flask-restx, flask-restplus, Flask-RESTful, bleach, astunparse, argon2-cffi, absl-py
 ```
@@ -2293,7 +2293,7 @@ else:
     class_types = (type, types.ClassType)
     text_type = unicode
     binary_type = str
-... 
+...
 ```
 
 
@@ -2315,7 +2315,7 @@ Home-page: https://www.pycryptodome.org
 Author: Helder Eijs
 Author-email: helderijs@gmail.com
 License: BSD, Public Domain
-Location: d:\dev\venv\superset-py38-env\lib\site-packages
+Location: ~\dev\venv\superset-py38-env\lib\site-packages
 Requires:
 Required-by:
 ```
@@ -2335,7 +2335,7 @@ Required-by:
 [1]. 《python源码剖析》 2008
 [2]. 《python源码剖析》之实现small python https://blog.csdn.net/wangyuquanliuli/article/details/8654478
 [3]. Python2.7.7源码分析  http://www.linuxidc.com/Linux/2015-08/121168.htm
-[4]. Python什么情况下会生成pyc文件？https://www.zhihu.com/question/30296617/answer/112564303 
+[4]. Python什么情况下会生成pyc文件？https://www.zhihu.com/question/30296617/answer/112564303
 [5]. Python源码剖析笔记 http://www.jianshu.com/nb/3703820
-[6]. Python解释器简介 http://blog.jobbole.com/56761/ 
+[6]. Python解释器简介 http://blog.jobbole.com/56761/
 

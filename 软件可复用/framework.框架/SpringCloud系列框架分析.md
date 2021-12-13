@@ -4,7 +4,7 @@
 |      |            |                                  |        |        |
 
 
- 
+
 
 
 
@@ -51,7 +51,7 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 | 版本tag        | 希腊字母（Base/Alpha/Beta/RELEASE） | 英文单词（BUILD、GA、PRE、RC、SR）   |
 | 完整版本号示例 | 2.0.3 RELEASE                       | Greenwich.SR5                        |
 
-备注：1. 用版本tag表示当前版本处于哪个开发阶段。tag详细含义可参见 [开源软件开发指南](../开源软件开发指南.MD)
+备注：1. 用版本tag表示当前版本处于哪个开发阶段。tag详细含义可参见 [开源软件开发指南](../../平台与编程语言/platform.平台/开源软件开发指南.md)
 
 2. SprintCloud版本号这样设计的目的是为了更好的管理每个SpringCloud子项目的清单，避免自己的版本号与子项目的版本号混淆。
 
@@ -122,7 +122,7 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 
 # 2  Spring Boot
 
-SpringBoot是由Pivotal团队在2013年开始研发、2014年4月发布第一个版本的全新开源的轻量级框架。它基于Spring4.0设计，不仅继承了Spring框架原有的优秀特性，而且还通过简化配置来进一步简化了Spring应用的整个搭建和开发过程。另外SpringBoot通过集成大量的框架使得依赖包的版本冲突，以及引用的不稳定性等问题得到了很好的解决。 
+SpringBoot是由Pivotal团队在2013年开始研发、2014年4月发布第一个版本的全新开源的轻量级框架。它基于Spring4.0设计，不仅继承了Spring框架原有的优秀特性，而且还通过简化配置来进一步简化了Spring应用的整个搭建和开发过程。另外SpringBoot通过集成大量的框架使得依赖包的版本冲突，以及引用的不稳定性等问题得到了很好的解决。
 
 Spring Boot 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
@@ -130,7 +130,7 @@ Spring Boot基于Spring platform对Spring框架和第三方库进行处理，提
 
 Spring Boot基于Maven构建。
 
- 
+
 
 **Eclipse集成Spring Intializer**
 
@@ -138,13 +138,13 @@ Spring Boot基于Maven构建。
 
 新建Spring项目：New -> Spring Starter Project
 
- 
+
 
 ![Srping Boot 2.0.png](../../media/sf_reuse/framework/frame_springboot_001.png)
 
 图 1 Sprint Boot 2.0框架
 
- 
+
 
 # 3  Spring Cloud
 
@@ -162,17 +162,17 @@ Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发
 *  断路器。
 *  分布式消息传递。
 
- 
+
 
 ![Spring Cloud.png](../../media/sf_reuse/framework/frame_springcloud_002.png)
 
- 
+
 
 ![Spring Cloud组件架构.jpg](../../media/sf_reuse/framework/frame_springcloud_001.png)
 
 图 2 Spring Cloud组件架构
 
- 
+
 
 各组件的运行流程：
 
@@ -184,7 +184,7 @@ Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发
 *  Turbine 监控服务间的调用和熔断相关指标。
 *  Zipkin 负责请求链接追踪。
 
- 
+
 
 ## 3.2  Spring Cloud 工具框架
 
@@ -229,7 +229,7 @@ Spring Cloud包含两个基本模块，spring cloud context和spring cloud commo
 *  spring cloud Netflix zuul  作为路由、过滤网关
 *  spring cloud consul
 
- 
+
 
 # 4  实例
 
@@ -237,9 +237,9 @@ Spring Cloud包含两个基本模块，spring cloud context和spring cloud commo
 
 ## 4.1  Docker-Compose编排微服务实例
 
-来源： https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml 
+来源： https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml
 
- 
+
 
 表格 1 实例中微服务列表
 
@@ -251,7 +251,7 @@ Spring Cloud包含两个基本模块，spring cloud context和spring cloud commo
 | microservice-gateway-zuul                  | API Gateway        |
 | microservice-hystrix-turbine               | Hystrix聚合工具    |
 
- 
+
 
 ### 4.1.1  执行步骤
 
@@ -272,7 +272,7 @@ docker-compose scale [proj=num]
 
 如 docker-compose scale microservice-provider-user=3
 
-### 4.1.2  pom.xml 
+### 4.1.2  pom.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -291,7 +291,7 @@ docker-compose scale [proj=num]
 	<module>microservice-hystrix-turbine</module>
 	<module>microservice-provider-user</module>
   </modules>
-  
+
   <build>
     <plugins>
       <!-- 添加docker-maven插件 -->
@@ -367,22 +367,22 @@ services:
 
 ## **官网**
 
-[1].  https://spring.io/ 
+[1].  https://spring.io/
 
-[2].  [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/) 
+[2].  [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/)
 
-[3].  [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/) 
+[3].  [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
 
- 
+
 
 ## 参考文献
 
-[1].  《Spring Cloud与Docke微服务架构实战》v2 https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml 
+[1].  《Spring Cloud与Docke微服务架构实战》v2 https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml
 
-[2].   http://docs.docker.com/composq/faq 
+[2].   http://docs.docker.com/composq/faq
 
 [3]:  http://c.biancheng.net/spring_cloud/  "Spring Cloud入门教程：Spring Cloud框架经典学习资料"
 [4]:   https://blog.csdn.net/Strive_Peter/article/details/113887255  "初识SpringCloud 整体架构 "
 
- 
+
 

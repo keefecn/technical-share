@@ -9,11 +9,11 @@
 | 7    | 2018-6-22  | 将ELK章节迁移到《大数据开发》。             | 同上   |        |
 | 8    | 2021-10-21 | 更新Lucene简介章节里的版本说明。            | 同上   |        |
 
- 
 
- 
 
- 
+
+
+
 
 
 
@@ -185,11 +185,11 @@
 
 [5.2    参考书籍__ 47](#_Toc16115258)
 
- 
 
- 
 
- 
+
+
+
 
 **表目录**
 
@@ -217,7 +217,7 @@
 
 [表格 12 elasticsearch的文件目录结构__ 43](#_Toc16115165)
 
- 
+
 
 **图目录**
 
@@ -256,7 +256,7 @@
 
 ​     Lucene的原作者是Doug Cutting，他是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎[6]的主要开发者，后在Excite[7]担任高级系统架构设计师，目前从事于一些Internet底层架构的研究。早先发布在作者自己的[http://www.lucene.com/](http://www.lucene.com/#_blank)，后来发布在[SourceForge](http://sourceforge.net/projects/lucene/#_blank)[8]，2001年年底成为apache软件基金会jakarta的一个子项目：http://jakarta.apache.org/lucene/。
 
- 
+
 
 **优点**
 
@@ -272,7 +272,7 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 
 （5）已经默认实现了一套强大的查询引擎，用户无需自己编写代码即使系统可获得强大的查询能力，Lucene的查询实现中默认实现了布尔操作、模糊查询（Fuzzy Search）、分组查询等等。
 
- 
+
 
 表格 [Lucene Core (Java)](https://lucene.apache.org/core/)版本说明
 
@@ -311,7 +311,7 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 | [Lucandra](https://github.com/tjake/Lucandra)                | 基于 Lucene，索引存在 cassandra 数据库中                     | 参考 cassandra 的优点                                        |                                                              |          |
 | [HBasene](https://github.com/akkumar/hbasene)                | 基于 Lucene，索引存在 HBase 数据库中                         | 参考 HBase 的优点                                            |                                                              |          |
 
- 
+
 
 ## 1.3   环境配置
 
@@ -327,7 +327,7 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 
 export JAVA_HOME=
 
- 
+
 
 ## 本章参考
 
@@ -345,38 +345,38 @@ export JAVA_HOME=
 
 略
 
- 
+
 
 ### 2.1.2 组件视图
 
 组件图包括索引引擎index, 查询引擎search, 文本分析引擎（可扩展）。
 
-​                 ![image-20210616103444899](../../media/code/code_lucene_001.png)              
+​                 ![image-20210616103444899](../../media/code/code_lucene_001.png)
 
 图 1 lucene代码结构
 
 从图中我们清楚的看到，Lucene的系统由基础结构封装、索引核心、对外接口三大部分组成。
 
- 
+
 
 The Lucene API is divided into several packages:
 
-- [org.apache.lucene.analysis](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/package-summary.html)     defines an abstract [Analyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Analyzer.html)     API for converting text from a [java.io.Reader](http://java.sun.com/products/jdk/1.2/docs/api/java/io/Reader.html)     into a [TokenStream](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/TokenStream.html),     an enumeration of token [Attribute](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/Attribute.html)s.   A TokenStream can be composed by applying [TokenFilter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/TokenFilter.html)s     to the output of a [Tokenizer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Tokenizer.html).   Tokenizers and TokenFilters are strung together and applied with an [Analyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Analyzer.html).   A handful of Analyzer implementations are provided, including [StopAnalyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/StopAnalyzer.html)     and the grammar-based [StandardAnalyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/standard/StandardAnalyzer.html).  
-- [org.apache.lucene.document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/package-summary.html)     provides a simple [Document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Document.html)     class. A Document is simply a set of named [Field](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Field.html)s,     whose values may be strings or instances of [java.io.Reader](http://java.sun.com/products/jdk/1.2/docs/api/java/io/Reader.html).  
-- [org.apache.lucene.index](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/package-summary.html)     provides two primary classes: [IndexWriter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html),     which creates and adds documents to indices; and [IndexReader](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexReader.html),     which accesses the data in the index. 
-- [org.apache.lucene.search](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/package-summary.html)     provides data structures to represent queries (ie [TermQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/TermQuery.html)     for individual words, [PhraseQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/PhraseQuery.html)     for phrases, and [BooleanQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/BooleanQuery.html)     for boolean combinations of queries) and the abstract [Searcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/Searcher.html)     which turns queries into [TopDocs](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/TopDocs.html).  [IndexSearcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/IndexSearcher.html)     implements search over a single IndexReader. 
-- [org.apache.lucene.queryParser](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/package-summary.html)     uses [JavaCC](http://javacc.dev.java.net) to implement a [QueryParser](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/QueryParser.html).  
-- [org.apache.lucene.store](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/package-summary.html)     defines an abstract class for storing persistent data, the [Directory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/Directory.html),     which is a collection of named files written by an [IndexOutput](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/IndexOutput.html)     and read by an [IndexInput](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/IndexInput.html).   Multiple implementations are provided, including [FSDirectory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/FSDirectory.html),     which uses a file system directory to store files, and [RAMDirectory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/RAMDirectory.html)     which implements files as memory-resident data structures. 
-- [org.apache.lucene.util](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/package-summary.html)     contains a few handy data structures and util classes, ie [BitVector](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/BitVector.html)     and [PriorityQueue](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/PriorityQueue.html).  
+- [org.apache.lucene.analysis](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/package-summary.html)     defines an abstract [Analyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Analyzer.html)     API for converting text from a [java.io.Reader](http://java.sun.com/products/jdk/1.2/docs/api/java/io/Reader.html)     into a [TokenStream](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/TokenStream.html),     an enumeration of token [Attribute](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/Attribute.html)s.   A TokenStream can be composed by applying [TokenFilter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/TokenFilter.html)s     to the output of a [Tokenizer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Tokenizer.html).   Tokenizers and TokenFilters are strung together and applied with an [Analyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/Analyzer.html).   A handful of Analyzer implementations are provided, including [StopAnalyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/StopAnalyzer.html)     and the grammar-based [StandardAnalyzer](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/analysis/standard/StandardAnalyzer.html).
+- [org.apache.lucene.document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/package-summary.html)     provides a simple [Document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Document.html)     class. A Document is simply a set of named [Field](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Field.html)s,     whose values may be strings or instances of [java.io.Reader](http://java.sun.com/products/jdk/1.2/docs/api/java/io/Reader.html).
+- [org.apache.lucene.index](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/package-summary.html)     provides two primary classes: [IndexWriter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html),     which creates and adds documents to indices; and [IndexReader](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexReader.html),     which accesses the data in the index.
+- [org.apache.lucene.search](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/package-summary.html)     provides data structures to represent queries (ie [TermQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/TermQuery.html)     for individual words, [PhraseQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/PhraseQuery.html)     for phrases, and [BooleanQuery](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/BooleanQuery.html)     for boolean combinations of queries) and the abstract [Searcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/Searcher.html)     which turns queries into [TopDocs](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/TopDocs.html).  [IndexSearcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/IndexSearcher.html)     implements search over a single IndexReader.
+- [org.apache.lucene.queryParser](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/package-summary.html)     uses [JavaCC](http://javacc.dev.java.net) to implement a [QueryParser](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/QueryParser.html).
+- [org.apache.lucene.store](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/package-summary.html)     defines an abstract class for storing persistent data, the [Directory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/Directory.html),     which is a collection of named files written by an [IndexOutput](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/IndexOutput.html)     and read by an [IndexInput](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/IndexInput.html).   Multiple implementations are provided, including [FSDirectory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/FSDirectory.html),     which uses a file system directory to store files, and [RAMDirectory](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/store/RAMDirectory.html)     which implements files as memory-resident data structures.
+- [org.apache.lucene.util](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/package-summary.html)     contains a few handy data structures and util classes, ie [BitVector](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/BitVector.html)     and [PriorityQueue](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/util/PriorityQueue.html).
 
-To use Lucene, an application should: 
+To use Lucene, an application should:
 
-1. Create [Document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Document.html)s     by adding [Field](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Field.html)s;     
-2. Create an [IndexWriter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html)     and add documents to it with [addDocument()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html#addDocument(org.apache.lucene.document.Document));     
-3. Call [QueryParser.parse()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/QueryParser.html#parse(java.lang.String))     to build a query from a string; and 
-4. Create an [IndexSearcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/IndexSearcher.html)     and pass the query to its [search()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/Searcher.html#search(org.apache.lucene.search.Query))     method. 
+1. Create [Document](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Document.html)s     by adding [Field](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/document/Field.html)s;
+2. Create an [IndexWriter](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html)     and add documents to it with [addDocument()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/index/IndexWriter.html#addDocument(org.apache.lucene.document.Document));
+3. Call [QueryParser.parse()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/QueryParser.html#parse(java.lang.String))     to build a query from a string; and
+4. Create an [IndexSearcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/IndexSearcher.html)     and pass the query to its [search()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/Searcher.html#search(org.apache.lucene.search.Query))     method.
 
- 
+
 
 ### 2.1.3 运行视图
 
@@ -392,7 +392,7 @@ Lucene存在四种数据流，即文本流、token流、字节流与查询语句
 
 * 查询语句对象流： 对查询语句抽象。
 
- 
+
 
 ## 2.2   Lucene代码分析篇
 
@@ -417,7 +417,7 @@ Lucene存在四种数据流，即文本流、token流、字节流与查询语句
 | tools                                     |              |                              |        |
 |                                           |              |                              |        |
 
- 
+
 
 ### 2.2.2 存储逻辑store
 
@@ -447,11 +447,11 @@ l 域Field: 关联的元组，由域名和域值组成。如标题｛标题名�
 
 l 文档Document: 提取了某个文件所有信息的结果，可对应到一个物理文件或逻辑文件。
 
-l 段segment: 多个文档组成，称为子索引；可以组合为索引。 
+l 段segment: 多个文档组成，称为子索引；可以组合为索引。
 
 索引： 索引可对应到一个目录（或文件）。
 
- 
+
 
 #### 2.2.3.2 索引文件类型
 
@@ -491,11 +491,11 @@ Index:  NO, TOKENIZED, UN_TOKENZIED, NO_NORMS
 
 图 4 classdigram: field
 
- 
+
 
 ##### 2.2.3.3.2    索引类图
 
- 
+
 
 #### 2.2.3.4 索引各个阶段流程
 
@@ -503,23 +503,23 @@ Index:  NO, TOKENIZED, UN_TOKENZIED, NO_NORMS
 
 IndexWrite
 
- 
+
 
 2)     索引合并
 
 IndexWrite.addIndexes
 
- 
+
 
 3)     索引优化
 
 IndexWrite.optimize()
 
- 
+
 
 4)     索引删除
 
- 
+
 
 5)     索引同步
 
@@ -527,7 +527,7 @@ wrte.lock
 
 commit.lock
 
- 
+
 
 6)     索引读取
 
@@ -537,7 +537,7 @@ Term //查询词
 
 TermDocs //索引查询结果
 
- 
+
 
 ### 2.2.4 查询逻辑search
 
@@ -571,7 +571,7 @@ Weigh
 
 图 6 classdigram: query&filter
 
- 
+
 
 ##### 2.2.4.1.3    权重积分Weight,Score类图
 
@@ -579,7 +579,7 @@ Weigh
 
 权重：Weigh
 
- 
+
 
 图 7 classdigram: weigh&score
 
@@ -587,11 +587,11 @@ Weigh
 
 1)     查询流程IndexSearcher
 
- 
+
 
 2)     结果排序，过滤和分页
 
- 
+
 
 3)     高级搜索
 
@@ -599,11 +599,11 @@ Weigh
 
 多索引索引
 
- 
+
 
 ### 2.2.5 分析器逻辑Analyzer
 
-[Analyzer](http://lucene.apache.org/java/docs/api/all/org/apache/lucene/analysis/Analyzer.html) - Lucene class used for preparing text for indexing. Most applications can use the [StandardAnalyzer](http://lucene.apache.org/java/docs/api/all/org/apache/lucene/analysis/StandardAnalyzer.html) for English and latin based languages. 
+[Analyzer](http://lucene.apache.org/java/docs/api/all/org/apache/lucene/analysis/Analyzer.html) - Lucene class used for preparing text for indexing. Most applications can use the [StandardAnalyzer](http://lucene.apache.org/java/docs/api/all/org/apache/lucene/analysis/StandardAnalyzer.html) for English and latin based languages.
 
 分析器包括分词器和过滤器。
 
@@ -615,7 +615,7 @@ Weigh
 
 说明：分析器Analysis由过滤器Filter和解析器Analyzer组成。
 
- 
+
 
 ### 2.2.6 关键算法
 
@@ -625,7 +625,7 @@ Weigh
 
 文档的得分是在用户进行检索时实时计算出来的。Lucene文档得分算法采用TF-IDF的改进算法。公式如下：
 
- 
+
 
 Lucene得分公式的解释
 
@@ -640,7 +640,7 @@ Lucene得分公式的解释
 | coord(q,  d)                | 协调因子，它的计算是基于文档d中所包含的所有可供查询的词条数量 |                                                   |
 | queryNorm(q)                | 在给出每个查询条目的方差和后，计算某查询的标准化值           |                                                   |
 
- 
+
 
 #### 2.2.6.2 模糊搜索算法
 
@@ -658,7 +658,7 @@ l DNA analysis(DNA分析)
 
 l Plagiarism detection(抄袭检测)
 
- 
+
 
 LD用m*n的矩阵存储距离值。算法大概过程：
 
@@ -670,62 +670,62 @@ LD用m*n的矩阵存储距离值。算法大概过程：
 
 4)     扫描完后，返回矩阵的最后一个值即d[n][m]
 
- 
+
 
 ## 2.3   Lucene开发
 
 ### 2.3.1 demo
 
-Some simple examples of code which does this are: 
+Some simple examples of code which does this are:
 
--  [FileDocument.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/FileDocument.java)     contains code to create a Document for a file. 
--  [IndexFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/IndexFiles.java)     creates an index for all the files contained in a directory. 
--  [DeleteFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/DeleteFiles.java)     deletes some of these files from the index. 
--  [SearchFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/SearchFiles.java)     prompts for queries and searches an index. 
+-  [FileDocument.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/FileDocument.java)     contains code to create a Document for a file.
+-  [IndexFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/IndexFiles.java)     creates an index for all the files contained in a directory.
+-  [DeleteFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/DeleteFiles.java)     deletes some of these files from the index.
+-  [SearchFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/SearchFiles.java)     prompts for queries and searches an index.
 
- 
+
 
 #### 2.3.1.1 示例1：IndexFiles.java
 
  ```java
 package iLucene;
- 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
- 
+
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.demo.FileDocument;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
- 
+
 /**
  * 索引某一目录下的所有文本文件
- * 
+ *
  * @author wujinsong
  */
 public class IndexFiles {
     private IndexFiles() {
     }
-    
+
     static final File INDEX_DIR = new File("c:\\index");
-    
+
     public static void main(String[] args) {
-        
+
         if (INDEX_DIR.exists()) {
             System.out.println("Cannot save index to '" + INDEX_DIR + " ' directory,please delete it first");
             System.exit(1);
         }
-        
+
         final File docDir = new File("C:\\kankan");
         if (!docDir.exists() || !docDir.canRead()) {
             System.out.println("Document directory '" + docDir.getAbsolutePath() + "' does not exist or is not readable, please check the path");
             System.exit(1);
         }
-        
+
         Date start = new Date();
         try {
             IndexWriter writer = new IndexWriter(FSDirectory.open(INDEX_DIR), new StandardAnalyzer(Version.LUCENE_CURRENT), true,
@@ -735,7 +735,7 @@ public class IndexFiles {
             System.out.println("Optimizing...");
             writer.optimize();
             writer.close();
-            
+
             Date end = new Date();
             System.out.println(end.getTime() - start.getTime() + " total milliseconds!");
         }
@@ -743,10 +743,10 @@ public class IndexFiles {
             System.out.println(" caught a " + e.getClass() + "\n with message: " + e.getMessage());
         }
     }
-    
+
     /**
      * 索引文件
-     * 
+     *
      * @param writer
      * @param file
      * @throws CorruptIndexException
@@ -771,7 +771,7 @@ public class IndexFiles {
                 }
                 // 至少在windows系统，一些临时文件会导致“访问拒绝”异常，检查文件是否可以被读取将不起作用。
                 catch (FileNotFoundException exception) {
-                    
+
                 }
             }
         }
@@ -785,7 +785,7 @@ public class IndexFiles {
 
 说明：IndexWrite, Document, Field, FileInputStream
 
- 
+
 
 #### 2.3.1.2 示例2：index+search
 
@@ -804,7 +804,7 @@ public class IndexFiles {
         Field.Index.ANALYZED));
     iwriter.addDocument(doc);
     iwriter.close();
-    
+
     // Now search the index:
     IndexSearcher isearcher = new IndexSearcher(directory, true); // read-only=true
     // Parse a simple query that searches for "text":
@@ -836,13 +836,13 @@ l 实现Lucene在org.apache.lucene.analysis中定义的接口： 按照目标语
 
 l 继承实现org.apache.lucene.document类： 按照被索引的文件格式来提供相应的文本分析逻辑。然后交给org.apache.lucene.index模块来写入索引文件。
 
- 
 
- 
+
+
 
 ## 本章参考
 
- 
+
 
 # 3  Solr开发
 
@@ -852,7 +852,7 @@ l 继承实现org.apache.lucene.document类： 按照被索引的文件格式来
 
 Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的一个独立的全文搜索服务器。 Solr采用了 Lucene Java 搜索库为核心的全文索引和搜索，并具有类似REST的HTTP/XML和JSON的API。Solr强大的外部配置功能使得无需进行Java编码，便可对 其进行调整以适应多种类型的应用程序。Solr有一个插件架构，以支持更多的高级定制。
 
- 
+
 
 2004年CNET开发Solr，为CNET提供站内搜索服务
 
@@ -864,7 +864,7 @@ Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的
 
 如今Solr已经广为人知，并且许多公司都已经使用Solr去构建自己的搜索引擎： AOL、 Disney、 Apple, Inc、阿里巴巴、安居客……
 
- 
+
 
 Solr的特性包括：
 
@@ -890,7 +890,7 @@ Solr的特性包括：
 
 　　默认配置返回Solr的标准 XML 响应，也可以配置Solr的备用响应格式。
 
- 
+
 
 **索引原理**
 
@@ -904,7 +904,7 @@ Solr的特性包括：
 
 　　4) delete 可以通过 id 或查询来指定。按 id 删除将删除具有指定 id 的文档；按查询删除将删除查询返回的所有文档。
 
- 
+
 
 **搜索原理**
 
@@ -914,7 +914,7 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
 　备注：多核心时为这个地址http://192.168.10.85:18080/solr/core0/select/
 
- 
+
 
  ![image-20210616105414925](../../media/code/code_solr_001.png)
 
@@ -922,7 +922,7 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
 说明：
 
- 
+
 
 ![image-20210616105438502](../../media/code/code_solr_002.png)
 
@@ -930,7 +930,7 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
 说明：
 
- 
+
 
 ## 3.2   入门篇
 
@@ -946,7 +946,7 @@ l 运行：/solr-6.2.0:$ bin/solr start -e cloud -noprompt
 
 l 查看：  http://localhost:8983/solr/
 
- 
+
 
 ### 3.2.2 索引
 
@@ -960,7 +960,7 @@ l -c gettingstarted: name of the collection to index into
 
 l docs/: a relative path of the Solr install docs/ directory
 
- 
+
 
 // 示例1：索引多格式文件如html、xml、JSON、CSV
 
@@ -969,7 +969,7 @@ $bin/post -c gettingstarted docs/
 $bin/post -c gettingstarted example/exampledocs/*.xml
 $bin/post -c gettingstarted example/exampledocs/books.json
 $bin/post -c gettingstarted example/exampledocs/books.csv
- 
+
 ```
 
 // 删除数据
@@ -978,7 +978,7 @@ $bin/post -c gettingstarted example/exampledocs/books.csv
 bin/post -c gettingstarted -d "<delete><id>SP2514N</id></delete>"
 ```
 
- 
+
 
 ### 3.2.3 检索
 
@@ -988,7 +988,7 @@ bin/post -c gettingstarted -d "<delete><id>SP2514N</id></delete>"
 
 http://localhost:8983/solr/#/gettingstarted/query.
 
- 
+
 
 curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=\"CAS+latency\""
 
@@ -1024,9 +1024,9 @@ curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=\"C
 
 ### 3.3.1 集群
 
- 
 
- 
+
+
 
 ## 3.4   代码分析篇
 
@@ -1036,9 +1036,9 @@ Apache Lucene/Solr
 
 * solr is a search engine server that uses lucene
 
- 
 
-下载：https://github.com/apache/lucene-solr 
+
+下载：https://github.com/apache/lucene-solr
 
 To compile the sources run 'ant compile'
 
@@ -1048,7 +1048,7 @@ To setup your ide run 'ant idea', 'ant netbeans', or 'ant eclipse'
 
 For Maven info, see dev-tools/maven/README.maven
 
- 
+
 
 ### 3.4.1 代码目录结构
 
@@ -1088,7 +1088,7 @@ eclipse环境中调试solr源代码大体上分为三种方式：
 
 3.run on jetty（需要装run-jetty-run插件）
 
- 
+
 
 说明：lucene-solr源码编译需要ant、支持java命令的终端和ivy。源码中并未包含eclipse项目文件，需使用ant转化后方可在eclipse导入项目。
 
@@ -1103,7 +1103,7 @@ ant compile
 ant eclipse
 
 #若生成exlipse项目失败，可根据提示先下载依赖文件
-cd solr/ 
+cd solr/
 ant dist
 ```
 
@@ -1111,15 +1111,15 @@ ant dist
 
 // 设置调试运行配置参数
 
-go to Run > Debug Configurations > Java Application and set the following: 
+go to Run > Debug Configurations > Java Application and set the following:
 
-* Main Class (“Main” tab): org.eclipse.jetty.start.Main 
+* Main Class (“Main” tab): org.eclipse.jetty.start.Main
 
 * Working Directory (“Arguments” tab): ${workspace_loc:lucene-solr/solr/example}
 
 Then add Solr’s start.jar file to the classpath so that Eclipse can find and run Jetty’s Main class. From the Classpath tab, click Classpath > User Entries > Add JARs > lucene-solr/solr/example/start.jar
 
- 
+
 
 ### 3.4.3 Solr的servlet包
 
@@ -1129,7 +1129,7 @@ SolrServlet类继承HttpServlet类，只有四个方法：
  doGet()
  doPost()
 
- 
+
 
 ## 本章参考
 
@@ -1145,11 +1145,11 @@ SolrServlet类继承HttpServlet类，只有四个方法：
 
 [6].   [Lucene Documentation](http://lucene.apache.org/core/6_5_0/index.html)
 
-[7].   solr中文网 http://www.solrcn.com/ 
+[7].   solr中文网 http://www.solrcn.com/
 
-[8].   跟益达学Solr5之在Eclipse下编译Solr5源码 http://iamyida.iteye.com/blog/2218576 
+[8].   跟益达学Solr5之在Eclipse下编译Solr5源码 http://iamyida.iteye.com/blog/2218576
 
- 
+
 
 # 4  Elasticsearch开发
 
@@ -1157,47 +1157,47 @@ SolrServlet类继承HttpServlet类，只有四个方法：
 
 Shay Banon在2004年创造了Elasticsearch的前身，称为Compass。2010年2月发布了Elasticsearch的第一个版本。Elasticsearch BV成立于2012年，主要围绕Elasticsearch及相关软件提供商业服务和产品。2015年3月，Elasticsearch公司更名为Elastic。2018年10月5日在纽约证券交易所挂牌上市。
 
- 
+
 
 ElasticSearch是一个基于[Lucene](https://baike.baidu.com/item/Lucene/6753302)的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java语言开发的，并作为Apache许可条款下的开放源码发布，是一种流行的企业级搜索引擎。
 
 Elasticsearch主要特性
 
-* Elasticsearch是分布式的。不需要其他组件，分发是实时的，被叫做”Push replication”。 
+* Elasticsearch是分布式的。不需要其他组件，分发是实时的，被叫做”Push replication”。
 
-* Elasticsearch 完全支持 Apache Lucene 的接近实时的搜索。 
+* Elasticsearch 完全支持 Apache Lucene 的接近实时的搜索。
 
-* 处理多租户（[multitenancy](http://en.wikipedia.org/wiki/Multitenancy)）不需要特殊配置，而Solr则需要更多的高级设置。 
+* 处理多租户（[multitenancy](http://en.wikipedia.org/wiki/Multitenancy)）不需要特殊配置，而Solr则需要更多的高级设置。
 
-* Elasticsearch 采用 Gateway 的概念，使得完备份更加简单。 
+* Elasticsearch 采用 Gateway 的概念，使得完备份更加简单。
 
-* 各节点组成对等的网络结构，某些节点出现故障时会自动分配其他节点代替其进行工作。 
+* 各节点组成对等的网络结构，某些节点出现故障时会自动分配其他节点代替其进行工作。
 
 ### 4.1.1 术语
 
-* 文档~Document文档是信息的基本单元，可以被索引的。文档是以JSON格式表现的。 在类型type中，可以根据需求存储多个文档。一个文档在物理上位于一个索引，实际上一个文档必须在一个索引内被索引和分配一个类型。 文档相对于关系型数据库的列。 
+* 文档~Document文档是信息的基本单元，可以被索引的。文档是以JSON格式表现的。 在类型type中，可以根据需求存储多个文档。一个文档在物理上位于一个索引，实际上一个文档必须在一个索引内被索引和分配一个类型。 文档相对于关系型数据库的列。
 
-* **分片~Shard**每一个分片就是一个全功能的独立的索引，可以位于集群中任何节点上。 分片的两个最主要原因： a、水平分割扩展，增大存储量 ；b、分布式并行跨分片操作，提高性能和吞吐量 。一个分片可以是 主 分片或者 副本 分片，索引建立的时候就已经确定了主分片数，副本分片数可以随时修改。 
+* **分片~Shard**每一个分片就是一个全功能的独立的索引，可以位于集群中任何节点上。 分片的两个最主要原因： a、水平分割扩展，增大存储量 ；b、分布式并行跨分片操作，提高性能和吞吐量 。一个分片可以是 主 分片或者 副本 分片，索引建立的时候就已经确定了主分片数，副本分片数可以随时修改。
 
 * **副本~Replia**将索引分片复制一份或多份，称之为分片副本或副本。整本的两个主要原因是高可用性和性能 。
 
- 
+
 
 文档元数据包括：`/_index/_type/_id?`
 
-* _index（索引~文档存储的地方）, 具有一系列相似属性文档的集合，相当于RDBS的库。 
+* _index（索引~文档存储的地方）, 具有一系列相似属性文档的集合，相当于RDBS的库。
 
-* _type（类型~文档代表的对象的类），具有一组共同字段的文档，相当于RDBS的表。 
+* _type（类型~文档代表的对象的类），具有一组共同字段的文档，相当于RDBS的表。
 
-* _id（文档唯一标识 = _index + _type + id） 
+* _id（文档唯一标识 = _index + _type + id）
 
-示例：http://localhost:9200/twierrer/tweet/1 
+示例：http://localhost:9200/twierrer/tweet/1
 
 上面url中_index是twitter， _type是tweet，_id是1。
 
 备注：Segment是Lucene生成的一个倒排索引，为子索引（可以索引多个文档），可以合并成索引。
 
- 
+
 
 ### 4.1.2 常用REST接口
 
@@ -1211,7 +1211,7 @@ Elasticsearch主要特性
 | /gb/user/_search         | 在gb索引的user类型中查找           |
 | /_all/user,tweet/_search | 在所有索引的user和tweet类型中查找  |
 
- 
+
 
 表格 8 集群管理命令
 
@@ -1242,7 +1242,7 @@ Elasticsearch主要特性
 
 *3.RED,* *主分片存在问题。重新路由。*
 
- 
+
 
 ## 4.2   基础入门Getting started
 
@@ -1258,16 +1258,16 @@ l Start more servers …
 
 **说明**：elasticsearch 5.x需在[Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)以上运行，JVM配置文件在config/jvm.options.
 
- 
+
 
 **下载安装HEAD-插件-图形化管理界面**
 
 备注：elasticsearch 5.x的版本不能直接安装HEAD插件（不好用），需先[下载](Git clone git:/github.com/mobz/elasticsearch-head.git)。
 
 ```sh
-$ git clone git://github.com/mobz/elasticsearch-head.git 
-$ cd elasticsearch-head 
-$ npm install 
+$ git clone git://github.com/mobz/elasticsearch-head.git
+$ cd elasticsearch-head
+$ npm install
 $ npm install grunt --save
 
 # 修改监听端口
@@ -1303,7 +1303,7 @@ $ curl http://localhost:9200/
 
 说明：name和cluster_name运行时不能改变。
 
- 
+
 
 ### 4.2.2 Indexing
 
@@ -1313,7 +1313,7 @@ $ curl http://localhost:9200/
 
 action.auto_create_index: false
 
- 
+
 
 三个重要设置项：
 
@@ -1346,7 +1346,7 @@ PUT /my_index
 
 模式映射用于定义索引结构。
 
- 
+
 
 #### 4.2.2.3 索引及索引响应示例
 
@@ -1450,7 +1450,7 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 
 备注：查询需要分析文档相关性，过滤只是减小范围，查询比过滤更消耗时间。
 
- 
+
 
 #### 4.2.3.1 查询语句
 
@@ -1485,7 +1485,7 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 
 备注：1.查询和过滤都有的命令有：bool/range
 
- 
+
 
 #### 4.2.3.2 查询及查询响应示例
 
@@ -1560,7 +1560,7 @@ curl -XGET 'http://localhost:9200/_count?pretty=true' -d '
 
 
 
- 
+
 
 curl -XGET 'http://localhost:9200/twitter/_search?pretty=true' -d '
 
@@ -1624,7 +1624,7 @@ curl -XGET 'http://localhost:9200/twitter/_search?pretty=true' -d '
 
 }'
 
- 
+
 
 当查询语句多重嵌套后，非常复杂，可用下列语句验证语句是否合法。
 
@@ -1644,7 +1644,7 @@ GET /gb/tweet/_validate/query
 
 }
 
- 
+
 
 ## 4.3   深入搜索
 
@@ -1652,11 +1652,11 @@ GET /gb/tweet/_validate/query
 
 #### 4.3.1.1 Restful API
 
-Elasticsearch uses standard RESTful APIs and JSON. We also build and maintain clients in many languages such as [Java, Python, .NET, and Groovy](https://www.elastic.co/guide/en/elasticsearch/client/index.html). 
+Elasticsearch uses standard RESTful APIs and JSON. We also build and maintain clients in many languages such as [Java, Python, .NET, and Groovy](https://www.elastic.co/guide/en/elasticsearch/client/index.html).
 
 Plus, our [community has contributed many more](https://www.elastic.co/guide/en/elasticsearch/client/community/current/index.html). They’re easy to work with, feel natural to use, and, just like Elasticsearch, don't limit what you might want to do with them.
 
- 
+
 
 **Restful API**
 
@@ -1672,13 +1672,13 @@ Plus, our [community has contributed many more](https://www.elastic.co/guide/en/
 
 * PATH: /索引名/类型名/id 如/twitter/usre/kimchy
 
-* QUERY_STRING 
+* QUERY_STRING
 
 *  BODY JSON数据
 
 示例：**典型**Restful API**为** curl -XPUT 'http://localhost:9200/twitter/tweet/1?pretty' -d '
 
- 
+
 
 表格 11 elasticsearch Restful API列表
 
@@ -1694,9 +1694,9 @@ Plus, our [community has contributed many more](https://www.elastic.co/guide/en/
 |        | GET          | _mget   | 检索多个文档                             |                                                              |
 |        |              |         |                                          |                                                              |
 
- 
 
- 
+
+
 
 #### 4.3.1.2 Java API
 
@@ -1706,7 +1706,7 @@ l node client: Perform standard [index](https://www.elastic.co/guide/en/elastics
 
 l [`TransportClient`](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html): Perform administrative tasks on a running cluster.
 
- 
+
 
 示例：
 
@@ -1764,21 +1764,21 @@ body={
 
 节点(node)是你运行的Elasticsearch实例。一个集群(cluster)是一组具有相同cluster.name的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能，当有新的节点加入或者删除节点，集群就会感知到并平衡数据。集群中一个节点会被选举为主节点(master),它用来管理集群中的一些变更，例如新建或删除索引、增加或移除节点等;当然一个节点也可以组成一个集群。
 
- 
+
 
 **节点通信**
 
 我们能够与集群中的任何节点通信，包括主节点。任何一个节点互相知道文档存在于哪个节点上，它们可以转发请求到我们需要数据所在的节点上。我们通信的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch透明的管理。
 
- 
+
 
 **集群生态**
 
-1.同集群中节点之间可以扩容缩容, 
- 2.主分片的数量会在其索引创建完成后修正，但是副本分片的数量会随时变化。 
+1.同集群中节点之间可以扩容缩容,
+ 2.主分片的数量会在其索引创建完成后修正，但是副本分片的数量会随时变化。
  3.相同的分片不会放在同一个节点上.
 
- 
+
 
 **ES****集群的多播与单播**
 
@@ -1789,21 +1789,21 @@ ES集群是采用组播的方式来构建的，组播就是通过在你的网络
 **多播配置** elasticsearch.yml
 
 ```
-network.host: "0.0.0.0" 
+network.host: "0.0.0.0"
 discovery.zen.minimum_master_nodes: 3
 discovery.zen.ping.timeout: 100s
 discovery.zen.fd.ping_timeout: 100s
 discovery.zen.ping.unicast.hosts: ["10.19.0.97","10.19.0.98","10.19.0.99","10.19.0.100"]
 ```
 
- 
+
 
 **单播配置**
 
 \# 本机地址
 
 ```
-network.host: "0.0.0.0"   
+network.host: "0.0.0.0"
 ```
 
 \# 其它节点机地址
@@ -1812,13 +1812,13 @@ network.host: "0.0.0.0"
 discovery.zen.ping.unicast.hosts: ["localhost:9300","localhost:9301"]
 ```
 
- 
+
 
 ### 4.4.2 分片shards
 
 一个分片(shard)是一个最小级别的“工作单元(worker unit)”,它只是保存索引中所有数据的一小片.我们的文档存储和被索引在分片中，但是我们的程序不知道如何直接与它们通信。取而代之的是，他们直接与索引通信.Elasticsearch中的分片分为主分片和副本分片,复制分片只是主分片的一个副本，它用于提供数据的冗余副本，在硬件故障之后提供数据保护，同时服务于像搜索和检索等只读请求，主分片的数量和复制分片的数量都可以通过配置文件配置。但是主切片的数量只能在创建索引时定义且不能修改.相同的分片不会放在同一个节点上。
 
- 
+
 
 分片算法
 
@@ -1828,7 +1828,7 @@ shard = hash(routing) % number_of_primary_shards
 
 ### 4.4.3 分布式存储
 
-参见 分片算法 
+参见 分片算法
 
 1)   文档索引
 
@@ -1840,7 +1840,7 @@ shard = hash(routing) % number_of_primary_shards
 
 ### 4.4.4 分布式检索
 
- 
+
 
 ## 4.5  代码分析
 
@@ -1863,7 +1863,7 @@ shard = hash(routing) % number_of_primary_shards
 | NOTICE.txt     | 注意事项：版权                                               |                                                              |
 | README.textile | 使用说明                                                     |                                                              |
 
- 
+
 
 ### 4.5.2 eclipse源码编译
 
@@ -1877,9 +1877,9 @@ In order to create a distribution, simply run the gradle assemble command in the
 
 Elasticsearch uses "Maven":http://maven.apache.org for its build system.
 
- 
 
-In order to create a distribution, simply run the 
+
+In order to create a distribution, simply run the
 
 @mvn clean package -DskipTests @ command in the cloned directory.
 
@@ -1889,7 +1889,7 @@ See the "TESTING":[TESTING.asciidoc](https://github.com/elastic/elasticsearch/bl
 
 running the Elasticsearch test suite.
 
- 
+
 
 若代码编译成功后 ，
 
@@ -1899,7 +1899,7 @@ src/main/java找到org.elasticsearch.bootstrap的elasticsearch.java  到main函�
 
 l 测试：在浏览器地址栏输入http://localhost:9200，若有结果返回，则运行正常。
 
- 
+
 
 #### 4.5.2.1  maven编译elasticsearch 2.x
 
@@ -1913,7 +1913,7 @@ eclipse右键 build project调用maven compile
 
 若以上编译并无提示错误，则编译成功，项目无红叉，然后直接运行程序。
 
- 
+
 
 3. 编译错误：若出现以下提示错误，解决后，再运行程序。
 
@@ -1924,7 +1924,7 @@ eclipse右键 build project调用maven compile
  设置ProgramArgument 为 start
  设置VMArgument为 -Des.path.home=<你的\core\>
 
- 
+
 
 错误2：若出现pom.xml配置错误，如Plugin execution not covered by lifecycle configuration:
 
@@ -1932,13 +1932,13 @@ eclipse右键 build project调用maven compile
 
 然后点工程，右键 maven->update project，将force勾上，将在maven中央库下载更新jar
 
- 
+
 
 错误3：log路径未找到，config错误
 
 解决方法：到https://www.elastic.co/downloads/past-releases下载相应版本，解压后将config目录放到core目录下。
 
- 
+
 
 #### 4.5.2.2  gradle编译elasticsearch 5.x
 
@@ -1961,11 +1961,11 @@ $ gradle test
 
 2） eclipse
 
- 
+
 
 ### 4.5.3 启动类：org.elasticsearch.bootstrap.Elasticsearch
 
- 
+
 
 ### 4.5.4 准实时索引
 
@@ -1985,7 +1985,7 @@ Lucene把每次生成的倒排索引，叫做一个段(segment)。然后另外�
 
 3）buffer刷到磁盘，生成一个新的segment, commit文件同步跟新。
 
- 
+
 
 2、删除和更新
 
@@ -2001,7 +2001,7 @@ segment是不可变的，所以文档即不能从旧的段中删除，旧的段�
 
 许该文档的不同版本都会匹配一个查询，但是老版本会从结果中删除。
 
- 
+
 
 3、利用磁盘缓存实现的准实时检索
 
@@ -2029,7 +2029,7 @@ POST /blogs/_refresh <2>
 
   <2> 只refresh 索引blogs
 
- 
+
 
 4 .segement merge的影响
 
@@ -2039,23 +2039,23 @@ POST /blogs/_refresh <2>
 
 这个过程是由独立的线程来进行的，并不影响segment的产生。归并过程中，删除之间几个小的segment，改成新的大的segment。等检索请求都从小segement转到大的segement上以后，删除没用的小segement。
 
- 
+
 
 ## 本章参考
 
-[1].   Elastic Stack and Product Documentation https://www.elastic.co/guide/index.html 
+[1].   Elastic Stack and Product Documentation https://www.elastic.co/guide/index.html
 
 [2].   [Elasticsearch-Hadoop (ES-Hadoop)](https://www.elastic.co/products/hadoop)
 
-[3].   Elastic 中文社区 http://elasticsearch.cn  
+[3].   Elastic 中文社区 http://elasticsearch.cn
 
 [4].   Elastic 官方网站：http://elastic.co
 
-[5].   Elastic 用户大会： http://elasticon.com 
+[5].   Elastic 用户大会： http://elasticon.com
 
-[6].   Elastic 源代码：http://github.com/elastic 
+[6].   Elastic 源代码：http://github.com/elastic
 
-[7].   Elastic@Speakdeck: https://speakerdeck.com/elastic 
+[7].   Elastic@Speakdeck: https://speakerdeck.com/elastic
 
 [8].   [ElasticSearch 分布式安装及调优 ](http://blog.csdn.net/u012348345/article/details/51103350)
 
@@ -2063,11 +2063,11 @@ POST /blogs/_refresh <2>
 
 [10]. 搭建ElasticSearch 5.2 Java API开发环境 http://blog.csdn.net/laotoumo/article/details/54885299
 
-[11]. Elasticsearch源码加载到eclipse调试 http://blog.csdn.net/molong1208/article/details/50471323 
+[11]. Elasticsearch源码加载到eclipse调试 http://blog.csdn.net/molong1208/article/details/50471323
 
-[12]. Elasticsearch学习笔记(二)单节点准实时索引的实现http://blog.csdn.net/u010994304/article/details/50427672 
+[12]. Elasticsearch学习笔记(二)单节点准实时索引的实现http://blog.csdn.net/u010994304/article/details/50427672
 
- 
+
 
 # 参考资料
 
@@ -2075,9 +2075,9 @@ POST /blogs/_refresh <2>
 
 [1].   开放源代码的全文检索引擎Lucene 中国人民大学99级本科生毕设课题CLucene
 
-[2].   Elasticsearch与Solr 选型  http://www.cnblogs.com/chowmin/articles/4629220.html 
+[2].   Elasticsearch与Solr 选型  http://www.cnblogs.com/chowmin/articles/4629220.html
 
- 
+
 
 ## 参考书籍
 
@@ -2087,7 +2087,7 @@ POST /blogs/_refresh <2>
 
 [2].   《[lucene in action中文版》 ](https://book.douban.com/subject/1962641/)(美)Otis Gospodnetic;Erik Hatcher / 谭鸿译 / 电子工业 / 2007 978-7-121032172
 
-[3].   《[开发自己的搜索引擎--Lucene 2.0+Heriterx》 ](https://book.douban.com/subject/2041825/) 邱哲、符滔滔 / 人民邮电出版社 / 2007年6月 
+[3].   《[开发自己的搜索引擎--Lucene 2.0+Heriterx》 ](https://book.douban.com/subject/2041825/) 邱哲、符滔滔 / 人民邮电出版社 / 2007年6月
 
 [4].   《lucene分析与应用》 吴众欣等编著 机械工业出版社 2008.9 978-1-11249924
 
@@ -2107,15 +2107,15 @@ POST /blogs/_refresh <2>
 
 [12]. 《[实战Elasticsearch、Logstash、Kibana : 分布式大数据搜索与日志挖掘及可视化解决方案》 ](https://book.douban.com/subject/26589415/) 高凯 / 清华大学出版社2015-6 9787302399841
 
-[13]. 《[深入理解ElasticSearch》  ](https://book.douban.com/subject/26733541/)拉斐尔·酷奇(Rafal Kuc)  张世武译 / 机械工业出版社 / 2016-1 9787111524168 
+[13]. 《[深入理解ElasticSearch》  ](https://book.douban.com/subject/26733541/)拉斐尔·酷奇(Rafal Kuc)  张世武译 / 机械工业出版社 / 2016-1 9787111524168
 
- 
+
 
 **互联网电子书**
 
-[14]. 《Elasticsearch权威指南(Elasticsearch - the definitive guide)》  Zachary Tong等译 http://es-guide-preview.elasticsearch.cn （全书，更新快）https://github.com/elasticsearch-cn/elasticsearch-definitive-guide 
+[14]. 《Elasticsearch权威指南(Elasticsearch - the definitive guide)》  Zachary Tong等译 http://es-guide-preview.elasticsearch.cn （全书，更新快）https://github.com/elasticsearch-cn/elasticsearch-definitive-guide
 
-[15]. 《Elasticsearch权威指南(Elasticsearch - the definitive guide)》 路小磊等译clinton gormley著 http://learnes.net/ （仅第一部分，更新慢） https://github.com/GavinFoo/elasticsearch-definitive-guide https://elasticsearch.cn/book/elasticsearch_definitive_guide_2.x/ 
+[15]. 《Elasticsearch权威指南(Elasticsearch - the definitive guide)》 路小磊等译clinton gormley著 http://learnes.net/ （仅第一部分，更新慢） https://github.com/GavinFoo/elasticsearch-definitive-guide https://elasticsearch.cn/book/elasticsearch_definitive_guide_2.x/
 
 [16]. ELKStack中文指南:  http://kibana.logstash.es/
 
@@ -2123,7 +2123,7 @@ POST /blogs/_refresh <2>
 
 [18]. Exploring elasticsearch: http://exploringelasticsearch.com/
 
- 
+
 
 ## 相关项目
 
@@ -2132,7 +2132,7 @@ Apache相关项目
 * lucene项目主页 http://lucene.apache.org/
 
 * [PyLucene](https://lucene.apache.org/pylucene/)   python访问lucene core
-* [Apache Solr](https://solr.apache.org/)    is a high performance search server built using [Lucene Java](http://lucene.apache.org/java/), with XML/HTTP and JSON/Python/Ruby APIs, hit highlighting, faceted search, caching, replication, and a web admin interface. 
+* [Apache Solr](https://solr.apache.org/)    is a high performance search server built using [Lucene Java](http://lucene.apache.org/java/), with XML/HTTP and JSON/Python/Ruby APIs, hit highlighting, faceted search, caching, replication, and a web admin interface.
 * [Apache Hadoop](http://hadoop.apache.org/)
 * [Apache ManifoldCF](http://manifoldcf.apache.org/)
 * [Apache Lucene.Net](http://lucenenet.apache.org/)
@@ -2146,15 +2146,15 @@ Apache相关项目
 
 其它相关项目
 
-* Elasticsearch https://www.elastic.co/ 
-* Nutch (http://www.nutch.org/) is a web search engine that uses Lucene as it's search technology. It adds a scalable crawler, link database, distributed searching, and a web-based search interface. 
-* Luke (http://www.getopt.org/luke/), Lucene index browser. 
-* [CodeCrawler](http://wiki.apache.org/lucene-java/CodeCrawler) (http://codecrawler.sourceforge.net/), is a smart web-based search engine specifically built for use by developers for searching source code that uses Lucene. 
+* Elasticsearch https://www.elastic.co/
+* Nutch (http://www.nutch.org/) is a web search engine that uses Lucene as it's search technology. It adds a scalable crawler, link database, distributed searching, and a web-based search interface.
+* Luke (http://www.getopt.org/luke/), Lucene index browser.
+* [CodeCrawler](http://wiki.apache.org/lucene-java/CodeCrawler) (http://codecrawler.sourceforge.net/), is a smart web-based search engine specifically built for use by developers for searching source code that uses Lucene.
 * [Lucene Java](http://lucene.apache.org/java/), our flagship sub-project, provides Java-based indexing and search technology, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities.
-* [RealtimeSearch](http://wiki.apache.org/lucene-java/RealtimeSearch) (http://issues.apache.org/jira/browse/LUCENE-1313) provides realtime search using Lucene. 
+* [RealtimeSearch](http://wiki.apache.org/lucene-java/RealtimeSearch) (http://issues.apache.org/jira/browse/LUCENE-1313) provides realtime search using Lucene.
 * [Open Relevance Project](http://lucene.apache.org/openrelevance/) is a new subproject with the aim of collecting and distributing free materials for relevance testing and performance.
 * [Mahout](http://lucene.apache.org/mahout/) is a subproject with the goal of creating a suite of scalable machine learning libraries.
 * [Droids](http://incubator.apache.org/droids/) is an intelligent robot crawling framework currently in incubation.
 
- 
+
 

@@ -17,13 +17,13 @@
 
 ## 1 AI算法简介
 
-Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能的计算机模拟。研究方法主要有仿生学和计算机方法。 
+Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能的计算机模拟。研究方法主要有仿生学和计算机方法。
 
 *  仿生学算法有模仿蚂蚁群体的蚁群算法，模仿达尔文进化论的遗传算法，模仿热力学中固体降温过程的模拟退火算法等。
 
 *  计算机方法包括数学建模和心理学中的启发式程序。 常规的启发式搜索算法有：回溯和分支限界。
 
- 
+
 
 **里程碑**：
 
@@ -33,7 +33,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。
 
- 
+
 
 **实例**： 专家系统，机器人,机器学习，指纹人脸识别等
 
@@ -52,7 +52,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 ### 1.1 AI算法应用场景
 
-表格 AI算法类别及应用场景
+表格  AI算法类别及应用场景
 
 | 类别       |          | 典型业务应用场景                     | 主要算法                                                     | 评价指标                               | 应用示例            |
 | ---------- | -------- | ------------------------------------ | ------------------------------------------------------------ | -------------------------------------- | ------------------- |
@@ -70,7 +70,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 ### 1.2 AI算法评价指标
 
-表格 sklean框架支持的模型选择和评价指标
+表格  sklean框架支持的模型选择和评价指标
 
 | Scoring（得分）                      | Function（函数）                                             | Comment                                        |
 | ------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------- |
@@ -108,7 +108,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
 
 
-#### 混淆矩阵/P/R/F值 
+#### 混淆矩阵/P/R/F值
 
 `信息检索IR` 或者`分类问题 ` 的评价指标可以用 *混淆矩阵*(confusion matrix)来表示。
 
@@ -122,7 +122,7 @@ Artificial Intellignece, Ai是计算机科学的一个分支，是人类智能�
 
   ![1574500598482](../../media/sf_reuse/algo/algo_006.png)
 
- 
+
 
 **定义2**： 混淆矩阵（分类问题定义）
 
@@ -214,8 +214,8 @@ P-R曲线评价：
 2. F~1~ 度量
 
 3. F~β~ 度量
-   	
-   
+
+
 
 #### ROC/AUC
 
@@ -253,7 +253,7 @@ AUC 是一个模型评价指标，用于二分类模型的评价。
 
 由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。
 
- 
+
 
 **PR曲线和ROC曲线比较**
 
@@ -276,7 +276,7 @@ AUC 是一个模型评价指标，用于二分类模型的评价。
 
 * AUC越大，反映出正样本的预测结果更加靠前。（推荐的样本更能符合用户的喜好）
 
-  
+
 
 #### MSE/MAE/MAPE
 
@@ -316,7 +316,7 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 *  PAC: Probably approximately correct
 *  计算复杂性：Polynomial in time/number of examples
 
- 
+
 
 **２）实验分析**
 
@@ -334,7 +334,7 @@ SAMPE:  对称平均绝对百分比误差（Symmetric Mean Absolute Percentage E
 
 训练集用于学习分类器，测试集用于评估分类器性能
 
- 
+
 
 ### 1.4 模型优化
 
@@ -356,7 +356,7 @@ AI模型优化过程包括模型编译compile（调参）、模型训练、模�
 
 * 参数： 模型f(x;Θ)中的Θ称为模型的参数，可以通过优化算法进行自动学习得到。
 * 超参数： 用来定义模型结构或优化策略
-  
+
 
 
 
@@ -399,7 +399,7 @@ penalty补偿函数：
 
 
 
-**随机梯度下降(SGD)** 
+**随机梯度下降(SGD)**
 
 SGD是一种简单但又非常高效的方法，主要用于凸损失函数下线性分类器的判别式学习，例如(线性) [支持向量机](https://en.wikipedia.org/wiki/Support_vector_machine) 和 [Logistic 回归](https://en.wikipedia.org/wiki/Logistic_regression) 。
 
@@ -441,6 +441,8 @@ SGD的劣势:
 
 ## 2 特征工程
 
+
+
 ![特征工程](../../media/ai/ai_001.jpg)
 
 图 特征工程
@@ -459,13 +461,13 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 *  连续词袋模型（CBOW）：
 *  Skip-Gram模型：主要是通过输入句子中特定的单词来预测该单词周边的其他单词。
 
- 
+
 
 **主题建模**
 
 *  TF-IDF、
 
-*  潜在语义索引（Latent Semantic Analysis, LSA）：使用奇异值分解（SVD），将词语-文档矩阵分解成3个矩阵（T~关联术语和概念、S~奇异值、D~关联文档和概念） 
+*  潜在语义索引（Latent Semantic Analysis, LSA）：使用奇异值分解（SVD），将词语-文档矩阵分解成3个矩阵（T~关联术语和概念、S~奇异值、D~关联文档和概念）
 
 
 
@@ -477,7 +479,7 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 
 提取物体和形态：边缘检测、复杂形状提取、降维（使用PCA技术）
 
- 
+
 
 ### 2.3  时间序列特征
 
@@ -491,9 +493,9 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 
 ### 2.4  事件流特征
 
- 
 
-## 3 AI通用算法 
+
+## 3 AI通用算法
 
 ### 3.1  相似度计算
 
@@ -514,13 +516,13 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 
 备注：L2范式为向量到原点的欧氏距离，比如x=[1,2,-1]的L2范式为sqrt(1*1+2*2+(-1)(-1))=sqrt(6)
 
- 
+
 
    ![1574500467125](../../media/sf_reuse/algo/algo_002.png)
 
 图 2 欧氏距离和余弦距离的差别
 
- 
+
 
 **皮克逊相关系数pearson：**
 
@@ -537,11 +539,11 @@ Corr(X,Y) = Cov(X,Y)/(DX*DY)
 $$
 公式二~四：略
 
- 
+
 
 ### 3.2 决策树算法
 
-决策树是用于分类和预测的主要技术之一，决策树学习是以实例为基础的归纳学习算法，它着眼于从一组无次序、无规则的实例中推理出以决策树表示的分类规则。 构造决策树的目的是找出属性和类别间的关系，用它来预测将来未知类别的记录的类别。它采用自顶向下的递归方式，在决策树的内部节点进行属性的比较，并根据不同属性值判断从该节点向下的分支，在决策树的叶节点得到结论。 
+决策树是用于分类和预测的主要技术之一，决策树学习是以实例为基础的归纳学习算法，它着眼于从一组无次序、无规则的实例中推理出以决策树表示的分类规则。 构造决策树的目的是找出属性和类别间的关系，用它来预测将来未知类别的记录的类别。它采用自顶向下的递归方式，在决策树的内部节点进行属性的比较，并根据不同属性值判断从该节点向下的分支，在决策树的叶节点得到结论。
 
 主要的决策树算法有ID3、C4.5（C5.0）、CART、PUBLIC、SLIQ和SPRINT算法等。它们在选择测试属性采用的技术、生成的决策树的结构、剪枝的方法以及时刻，能否处理大数据集等方面都有各自的不同之处。
 
@@ -579,7 +581,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 
 
-### 3.3 时序模式算法 
+### 3.3 时序模式算法
 
 时间序列一般有以下特殊：趋势性、周期性、季节性和随机性。
 
@@ -618,7 +620,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 | 主要算法     | Bagging、Boosting、DTree, Decide Tree、KNN、VSM、CART,  Classification and Regression Trees、后向传播, 前向传播、EM、K近邻 | EM、K平均法、  K-均值聚类算法、K-中心点聚类算法、CLARANS、 BIRCH、CLIQUE、DBSCAN |
 | 应用实例     | 比如按照国图分类法分类图书                                   | 比如多文档文摘、搜索引擎结果后聚类(元搜索)等。               |
 
- 
+
 
 ### 分类.Classification
 
@@ -629,19 +631,19 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 分类器算法列表
 
-*  Bagging 
+*  Bagging
 *  Boosting
 *  DTree, Decide Tree
-*  KNN, 
+*  KNN,
 *  SVM
 *  CART, Classification and Regression Trees
 *  后向传播, 前向传播
 *  EM
 *  K近邻
 
- 
 
-**线性分类器的类型** 
+
+**线性分类器的类型**
 
 有两种类型用来决定线性分类器。分别是**生成模型和判别模型** Generative models vs. discriminative models
 
@@ -652,7 +654,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 * [Linear Discriminant Analysis (or Fisher's linear discriminant)](http://en.wikipedia.org/wiki/Linear_discriminant_analysis) (LDA)—assumes [Gaussian](http://en.wikipedia.org/wiki/Normal_distribution) conditional density models
 * [Naive Bayes classifier](http://en.wikipedia.org/wiki/Naive_Bayes_classifier)—assumes [independent](http://en.wikipedia.org/wiki/Independent_random_variables) [binomial](http://en.wikipedia.org/wiki/Binomial_distribution) conditional density models.
 
- 
+
 
 第二种方式则称为[判别模型](http://zh.wikipedia.org/w/index.php?title=判別模型&action=edit&redlink=1) (discriminative models)，会去最大化一个[训练集](http://zh.wikipedia.org/w/index.php?title=訓練集&action=edit&redlink=1)(training set)输出的质。 在训练的成本函数中有一个额外的项加入，可以容易地表示[正则化](http://zh.wikipedia.org/w/index.php?title=正則化_(數學)&action=edit&redlink=1)。例子包含：
 
@@ -687,7 +689,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 
 
-表格 sklean里的聚类算法 
+表格 sklean里的聚类算法
 
 | Method name（方法名称）                                      | Parameters（参数）                                           | Scalability（可扩展性）                                      | Usecase（使用场景）                                          | Geometry (metric used)（几何图形（公制使用））               |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -726,7 +728,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 *  独立森林
 
- 
+
 
 #### **降维**
 
@@ -734,7 +736,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 
 
-### Ensemble集成学习算法 
+### Ensemble集成学习算法
 
 集成学习算法常用于解决分类、回归和异常点检测问题。
 
@@ -810,13 +812,13 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 [5]. 超全！LightGBM算法框架前世今生！ https://baijiahao.baidu.com/s?id=1671278750268233539&wfr=spider&for=pc
 
-[6]. 机器学习集成学习 Ensemble Learning（常用集成算法汇总） https://blog.csdn.net/weixin_39948381/article/details/106442535?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest 
+[6]. 机器学习集成学习 Ensemble Learning（常用集成算法汇总） https://blog.csdn.net/weixin_39948381/article/details/106442535?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest
 
-[7]. PCA http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html 
+[7]. PCA http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html
 
 
 
-## 6 仿生学算法系列
+## 5 仿生学算法系列
 
 仿生学算法有模仿蚂蚁群体的蚁群算法，模仿达尔文进化论的遗传算法，模仿热力学中固体降温过程的模拟退火算法等。
 
@@ -824,22 +826,22 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 | 算法                             | 原理                                                         | 概念                                                         | 算法步骤                                                     | 应用               |
 | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------ |
-| 遗传算法GA                       | 模拟达尔文的遗传选择和自然淘汰的生物进化过程的计算模型。     | 遗传算法是具有“生存＋检测“迭代过程的搜索算法。 它以一种群体中的所有个体为对象，并利用随机化技术指导一个被编码的参数空间进行高效搜索。 遗传操作有：选择，交叉和变异。 | 1）随机产生一组初始个体构成初始种群，并评价每一个体的适配度（适应度）；  2）判断算法的收敛准则是否满足，若满足则输出搜索结果；否则执行以下步骤；  3）根据适配值大小以一定方式执行***复制\***操作；  4）按交叉概率p(c)执行*交叉*操作；  5）按变异概率p(m)执行*变异*操作；  6）返回步骤（2； | 组合优化，函数优化 |
+| 遗传算法GA                       | 模拟达尔文的遗传选择和自然淘汰的生物进化过程的计算模型。     | 遗传算法是具有“生存＋检测“迭代过程的搜索算法。  <br/>它以一种群体中的所有个体为对象，并利用随机化技术指导一个被编码的参数空间进行高效搜索。 遗传操作有：选择，交叉和变异。 | 1）随机产生一组初始个体构成初始种群，并评价每一个体的适配度（适应度）；  <br>2）判断算法的收敛准则是否满足，若满足则输出搜索结果；否则执行以下步骤；   <br/>3）根据适配值大小以一定方式执行**复制**操作；  4）按交叉概率p(c)执行*交叉*操作；   <br/>5）按变异概率p(m)执行*变异*操作；   <br/>6）返回步骤（2； | 组合优化，函数优化 |
 | 进化算法                         | 包括[遗传算法](http://baike.baidu.com/view/45853.htm#_blank)、进化程序设计、进化规划和进化策略等等。 | 进化算法的基本框架还是简单遗传算法所描述的框架，但在进化的方式上有较大的差异，选择、交叉、变异、种群控制等有很多变化。 |                                                              |                    |
-| 模拟退火SA~  Simulated Annealing | 模拟热力学中经典粒子系统的降温过程，来求解规划问题的极值。   | SA的出发点是基于物理中固体物质的退火过程与一般的组合优化问题之间的相似性。 | 1）给定初始温度T0及初始点，计算此点的函数值f(x);  2) 计算函数差值 %f ＝ f1(x)-f(x);  3) 若%f <=0，则接受新点作为下一次模拟的初始点；  4) 若%f >0, 则计算新接受点概率。 | 组合优化如TSP问题  |
+| 模拟退火SA~  Simulated Annealing | 模拟热力学中经典粒子系统的降温过程，来求解规划问题的极值。   | SA的出发点是基于物理中固体物质的退火过程与一般的组合优化问题之间的相似性。 | 1）给定初始温度T0及初始点，计算此点的函数值f(x);   <br/>2) 计算函数差值 %f ＝ f1(x)-f(x);   <br/>3) 若%f <=0，则接受新点作为下一次模拟的初始点；   <br/>4) 若%f >0, 则计算新接受点概率。 | 组合优化如TSP问题  |
 | 蚁群算法ACO                      | 蚁群算法是模拟了蚂蚁群体智能。                               | 蚂蚁群体是一种社会性昆虫，它们有组织，有分工，还有通讯系统。它们相互协作，能完成从蚁穴到食物源寻找最短路径的复杂任务。 |                                                              |                    |
 | 神经网络                         | 人工神经网络是根据人的认识过程而开发出的一种算法。           |                                                              |                                                              |                    |
 | 免疫算法                         | 模拟免疫系统的学习算法。                                     | 模拟了免疫系统独有的学习、记忆、识别等功能，具有较强模式分类能力，尤其对多模态问题的分析、处理和求解表现出较高的智能性和鲁棒性。 |                                                              | 多模态问题         |
 
 **备注：**
 
- 
+
 
 ### 遗传算法GA
 
 **原理**：遗传算法是模拟达尔文的遗传选择和自然淘汰的生物进化过程的计算模型。
 
-**概论**：遗传算法是具有“生存＋检测“迭代过程的搜索算法。 它以一种群体中的所有个体为对象，并利用随机化技术指导一个被编码的参数空间进行高效搜索。 遗传操作有：选择，交叉和变异。 
+**概论**：遗传算法是具有“生存＋检测“迭代过程的搜索算法。 它以一种群体中的所有个体为对象，并利用随机化技术指导一个被编码的参数空间进行高效搜索。 遗传操作有：选择，交叉和变异。
 
 **应用**：组合优化，函数优化
 
@@ -857,11 +859,11 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 6）返回步骤（2；
 
- 
+
 
 ### 模拟退火算法SA
 
-**原理**：Simulated Annealing, SA的出发点是基于物理中固体物质的退火过程与一般的组合优化问题之间的相似性。 
+**原理**：Simulated Annealing, SA的出发点是基于物理中固体物质的退火过程与一般的组合优化问题之间的相似性。
 
 **概论**：模拟热力学中经典粒子系统的降温过程，来求解规划问题的极值。
 
@@ -877,13 +879,11 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 4) 若%f >0, 则计算新接受点概率。
 
- 
+
 
 ### 神经网络算法
 
 **原理：**人工神经网络是根据人的认识过程而开发出的一种算法。假如我们现在只有一些输入和相应的输出,而对如何由输入得到输出的机理并不清楚,那么我们可以把输入与输出之间的未知过程看成是一个“网络”,通过不断地给这个网络输入和相应的输出来“训练”这个网络,网络根据输入和输出不断地调节自己的各节点之间的权值来满足输入和输出。这样,当训练结束后,我们给定一个输入,网络便会根据自己已调节好的权值计算出一个输出。这就是神经网络的简单原理。
-
-
 
 表格 8 神经网络(Neural Network)算法分类
 
@@ -894,15 +894,15 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 | RNN                 | Roop循环或者Recurrent递归。                                  |                |
 | 长短期记忆网络.LSTM |                                                              |                |
 
- 
+
 
 **卷积**
 
-在[泛函分析](https://baike.baidu.com/item/泛函分析/4151)中，卷积、旋积或摺积(英语：Convolution)是通过两个[函数](https://baike.baidu.com/item/函数/301912)f和g 生成第三个函数的一种[数学](https://baike.baidu.com/item/数学/107037)[算子](https://baike.baidu.com/item/算子/970194)，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
+在[泛函分析](https://baike.baidu.com/item/泛函分析/4151)中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f和g 生成第三个函数的一种[数学](https://baike.baidu.com/item/数学/107037)[算子](https://baike.baidu.com/item/算子/970194)，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
 
 
 
-## 7 NLP常用算法
+## 6 NLP常用算法
 
 2001年，Lafferty 等人提出CRF（Conditional Random Field, 条件随机场），结合了 **最大熵模型** 和 **隐马尔科夫模型** 的特点，能对隐含状态建模，学习状态序列的特点，但它的缺点是需要手动提取序列特征。
 
@@ -991,11 +991,11 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 [1]. 语言模型-BERT：bert算法介绍 www.itcast.cn/news/20200907/13593265501.shtml
 
-[2]. 用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践 https://zhuanlan.zhihu.com/p/25928551 
+[2]. 用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践 https://zhuanlan.zhihu.com/p/25928551
 
 
 
-## 8 推荐引擎算法
+## 7 推荐引擎算法
 
 详见 《推荐系统设计说明书》
 
@@ -1029,7 +1029,7 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 **衡量准则**: 支持度（Support）和置信度（Confidence）等
 
- 
+
 
 表格 6 常用关联规则算法列表
 
@@ -1040,7 +1040,7 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 | Eclat      | 深度优先算法，采用垂直数据表示形式，在概念格理论的基础上利用基于前缀的等价关系将搜索空间划分为较小的子空间。 |
 | 灰色关联法 | 分析和确定各因素之间的影响程度或是若干个子因素（子序列）对主因素（母序列）的贡献主而进行的一种分析方法。 |
 
- 
+
 
 #### Apriori算法
 
@@ -1058,11 +1058,11 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 说明：以上度量中，支持度，置信度和conviction越大越好。当Lift=1, Leverage=0时说明L与R是独立事件。
 
- 
+
 
 # 参考资料
 
-## 参考链接 
+## 参考链接
 
 [1]. 干货！机器学习平台优质学习资源推荐 https://zhuanlan.zhihu.com/p/55819467
 

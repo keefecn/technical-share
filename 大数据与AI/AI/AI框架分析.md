@@ -103,7 +103,7 @@ import pandas as pd
 
 
 
-### 1.1.3  CV.计算机视觉 
+### 1.1.3  CV.计算机视觉
 
 表格 5 计算机视觉常用库
 
@@ -153,7 +153,7 @@ import pandas as pd
 
 6. Mxnet: Mxnet是由李沐等人领导开发的非常灵活，扩展性很强的框架，被Amazon定为官方框架。特点：Mxnet同时拥有命令式编程和符号式编程的特点。在命令式编程上MXNet提供张量运算，进行模型的迭代训练和更新中的控制逻辑；在声明式编程中MXNet支持符号表达式，用来描述神经网络，并利用系统提供的自动求导来训练模型。Mxnet性能非常高，推荐资源不够的同学使用。
 
-   
+
 
 **如何学习开源框架**
 
@@ -184,7 +184,7 @@ import pandas as pd
 
 ## 2.1 Tensorflow
 
-依赖模块：protobuf, tensorflow, tensorflow_cpu  
+依赖模块：protobuf, tensorflow, tensorflow_cpu
 
 ```shell
 $ pip show tensorflow-gpu
@@ -301,7 +301,7 @@ tf.config.list_physical_devices()
 
 `tf_upgrade_v2 --intree yolov3/ --outtree yolov3/ --copyotherfiles False`
 
-注意事项： 
+注意事项：
 
 tf.compat.v1.disable_eager_execution()  # 兼容V1：禁止动态图
 
@@ -340,10 +340,10 @@ log_dir="/logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 print(log_dir)
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
-model.fit(x=x_train, 
-          y=y_train, 
-          epochs=5, 
-          validation_data=(x_test, y_test), 
+model.fit(x=x_train,
+          y=y_train,
+          epochs=5,
+          validation_data=(x_test, y_test),
           callbacks=[tensorboard_callback])
 ```
 
@@ -576,7 +576,7 @@ class LeNet(paddle.nn.Layer):
         x = self.linear2(x)
         x = F.relu(x)
         x = self.linear3(x)
-        return x        
+        return x
 ```
 
 
@@ -601,7 +601,7 @@ model.fit(train_dataset,
         batch_size=64,
         verbose=1
         )
-        
+
 # 4.模型预测 model.evaluate
 model.evaluate(test_dataset, batch_size=64, verbose=1)
 ```
@@ -929,8 +929,8 @@ step1: 加载数据集 fetch_20newsgroups为例
 from sklearn.datasets import fetch_20newsgroups
 # 指定分类categories，如果值为None，则会得到示例数据集的所有20个分类
 categories = ['alt.atheism', 'talk.religion.misc', 'comp.graphics', 'sci.space']
-newsgroups_train = fetch_20newsgroups(subset='train', categories=categories)             
-newsgroups_test = fetch_20newsgroups(subset='test', categories=categories)              
+newsgroups_train = fetch_20newsgroups(subset='train', categories=categories)
+newsgroups_test = fetch_20newsgroups(subset='test', categories=categories)
 ```
 
 
@@ -940,7 +940,7 @@ step2: **（重点）文本向量化**，转化成数值类型，常用方法有
 ```python
 #文本向量化：数据转换
 from sklearn.feature_extraction.text import TfidfVectorizer
-vectorizer = TfidfVectorizer()  
+vectorizer = TfidfVectorizer()
 vectors = vectorizer.fit_transform(newsgroups_train.data) #训练集fit+transform
 vectors_test = vectorizer.transform(newsgroups_test.data)  #测试集只要transform
 ```
@@ -951,7 +951,7 @@ step3: 机器学习任务如分类，模型选择如linear_model, naive_bayes, S
 >>> from sklearn.naive_bayes import MultinomialNB
 >>> from sklearn import metrics
 #训练+预测
-clf = MultinomialNB(alpha=0.1)  
+clf = MultinomialNB(alpha=0.1)
 clf.fit(vectors, newsgroups_train.target)
 pred = clf.predict(vectors_test)
 #指标评估metrics
@@ -963,7 +963,7 @@ metrics.f1_score(newsgroups_test.target, pred, average='macro')
 
 ## 本章参考
 
-[1]. opencv https://baike.baidu.com/item/opencv 
+[1]. opencv https://baike.baidu.com/item/opencv
 
 [2]. scikit-learn https://scikit-learn.org/
 
@@ -1029,9 +1029,9 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 ## 本章参考
 
 [1].  madlib http://madlib.apache.org/
-[2].  Greenplum上的机器学习——MADlib简介与应用实例 http://blog.sina.com.cn/s/blog_12c856e4c0102yjem.html 
+[2].  Greenplum上的机器学习——MADlib简介与应用实例 http://blog.sina.com.cn/s/blog_12c856e4c0102yjem.html
 [3].  用SQL玩转数据挖掘之MADlib（一）——安装https://www.cnblogs.com/chenergougou/p/7107985.html
-[4].  MADlib——基于SQL的数据挖掘解决方案（2）——MADlib基础 https://blog.csdn.net/wzy0623/article/details/78845020 
+[4].  MADlib——基于SQL的数据挖掘解决方案（2）——MADlib基础 https://blog.csdn.net/wzy0623/article/details/78845020
 
 
 
@@ -1061,7 +1061,7 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 
 
 
-## 5.2     weka
+## 5.2  weka
 
 ### 5.2.1  weka使用
 **简介**
@@ -1089,7 +1089,7 @@ WEKA存储数据的格式是ARFF（Attribute-Relation File Format）文件，这
 包括属性离散化Discretize, 过滤filter等。
 
 **2）关联规则（购物篮分析）**Associate
-默认关联规则分析是用Apriori算法. 
+默认关联规则分析是用Apriori算法.
 
 **3）分类与回归 Classification & Regression**
 在WEKA中，待预测的目标（输出）被称作Class属性，这应该是来自分类任务的“类”。一般的，若Class属性是分类型时我们的任务才叫分类，Class属性是数值型时我们的任务叫回归。分类质量指标：P（正确度），R（召回率），F值。
@@ -1101,7 +1101,7 @@ WEKA存储数据的格式是ARFF（Attribute-Relation File Format）文件，这
 **常用算法**：NB…
 **运行结果分析：**
 //说明：正确率，越大越好
-Correctly Classified Instances     25     50      % 
+Correctly Classified Instances     25     50      %
 
 **1)聚类分析cluster**
 有以下度量：
@@ -1110,13 +1110,13 @@ Correctly Classified Instances     25     50      %
 **常用算法**：KNN…
 **运行结果分析：**
 //说明：衡量标准，越小越好
-Within cluster sum of squared errors: 540.7387788014682 
+Within cluster sum of squared errors: 540.7387788014682
 
 **2)命令行工具simple CLT**
 ```sh
 //-p [num]指被预测属性的位置; -l 模型路径; -T 测试集路径; -t 训练集路径 -d 生成模型路径
 //trainset
-java weka.classifiers.trees.J48 -C 0.25 -M 2 -t D:\my_install\Weka-3-6\data-test\bank.arff -d D:\my_install\Weka-3-6\data-test\bank.model 
+java weka.classifiers.trees.J48 -C 0.25 -M 2 -t D:\my_install\Weka-3-6\data-test\bank.arff -d D:\my_install\Weka-3-6\data-test\bank.model
 //testset：
 java weka.classifiers.trees.J48 -p 9 -l D:\my_install\Weka-3-6\data-test\bank.model -T D:\my_install\Weka-3-6\data-test\bank-test.arff
 ```
@@ -1152,11 +1152,11 @@ java weka.classifiers.trees.J48 -p 9 -l D:\my_install\Weka-3-6\data-test\bank.mo
 
 ### 5.2.3  weka development
 在WEKA的安装目录中找到weka-src.jar，用winrar之类的解压缩软件打开，即是一个完好的JAVA Application项目。主类可选择weka.gui.GUIChoosew然后出现二进制程序所显示的界面了。
-开发示例：http://weka.wikispaces.com/MessageClassifier 
+开发示例：http://weka.wikispaces.com/MessageClassifier
 在classpath未设置好的情况下，编码和运行需指定classpath, 如下：
 
 ```shell
-# compile:  
+# compile:
 ## classpath: –classpath ./weka.jar;./
 $java –classpath ./weka.jar;./ MessageClassifier -m email1.txt -c miss -t messageclassifier.model
 
@@ -1170,12 +1170,12 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 ### 5.2.4  本节参考
 [1].  http://rapid-i.com/content/view/64/74/lang,en/
 [2].  http://www.cs.waikato.ac.nz/~ml/index.html
-[3].  http://forum.wekacn.org/viewtopic.php?f=2&t=9 
+[3].  http://forum.wekacn.org/viewtopic.php?f=2&t=9
 [4].  weka学习总结 http://www.sciencenet.cn/m/user_content.aspx?id=262955
 
 
 
-## 5.3  RapidMiner 
+## 5.3  RapidMiner
 
 [RapidMiner](http://rapid-i.com/)是世界领先的数据挖掘解决方案，在一个非常大的程度上有着先进技术。它数据挖掘任务涉及范围广泛，包括各种数据艺术，能简化数据挖掘过程的设计和评价。
 **功能和特点**

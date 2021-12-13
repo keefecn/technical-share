@@ -7,14 +7,17 @@
 | 5    | 2011-2-15  | 因线上环境发现memcache连接过慢，重新考虑php的另外一个memcache扩展:  libmemcached | Keefe |        |
 | 6    | 2011-2-24  | 因线上环境发现memcache可能丢包；加上UDP协议                  | Keefe |        |
 |      |            |                                                              |        |        |
+
+
+
+
+
+
 ---
 
-
-
-
-
-
 # 目录
+
+[TOC]
 
 [目录... 1](#_Toc518254714)
 
@@ -60,19 +63,15 @@
 
 [参考资料... 15](#_Toc518254735)
 
- 
-
- 
 
 
+---
 
- 
+# 1  memcache简介
 
+官网： http://memcached.org/
 
-
-# 1    memcache简介
-
-http://memcached.org/
+libmemcached http://libmemcached.org/
 
 最著名的KEY-VALUE开源数据库，常应用于WEB扩展应用，如twitter, facebook, mixi等。
 
@@ -80,13 +79,13 @@ http://memcached.org/
 
 **特性**：支持文本和二进制协议；基于libevent的事件处理; 完全由客户端程序实现分布式。
 
- 
 
-## 1.1   服务器端程序
+
+## 1.1  服务器端程序
 
 **linux下载:** http://memcached.org/
 
-**windows下载：**[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/) 
+**windows下载：**[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/)
 
 1)    安装
 
@@ -94,7 +93,7 @@ memcache依赖于libevent库。
 
 libevent下载地址http://www.monkey.org/~provos/libevent/
 
- 
+
 
 2)    启动与启动参数说明
 ```shell
@@ -108,9 +107,9 @@ memcached -d -p 5555 -m 256 -n 512 –vv –u httpd
 -U <num>   UDP port number to listen on (default: 11211, 0 is off)
 -t <num>   number of threads to use (default: 4)
 -R      Maximum number of requests per event, limits the number of
-       requests process for a given connection to prevent 
+       requests process for a given connection to prevent
        starvation (default: 20) 多并发时需要增大设置。
--c <num>   max simultaneous connections (default: 1024) 
+-c <num>   max simultaneous connections (default: 1024)
 -n <num>   chunk_size初始设置大小，item所用的最小项
 参数说明：不加任何参数时，memcache缺省启动TCP和UDP监听端口11211；缺省4个线程，20个并发连接；同时监听20个evnet;  启动-U如果不指定值，则会关闭UDP端口。
 ![img](../../media/bigdata/db_memcache_001.png)
@@ -121,7 +120,7 @@ memcached -d -p 5555 -m 256 -n 512 –vv –u httpd
 
 可调用方法：add()、get()、replace() 和 delete()等。
 
- 
+
 
 ## 1.2   客户端支持
 
@@ -133,19 +132,19 @@ http://cn2.php.net/manual/en/book.memcache.php
 
 1)    Introduction
 
-Memcache module provides handy procedural and object oriented interface to memcached, highly effective caching daemon, which was especially designed to decrease database load in dynamic web applications. 
+Memcache module provides handy procedural and object oriented interface to memcached, highly effective caching daemon, which was especially designed to decrease database load in dynamic web applications.
 
 The Memcache module also provides a [session](http://cn2.php.net/manual/en/ref.session.php) handler (*memcache*).
 
-More information about memcached can be found at [» http://www.memcached.org/](http://www.memcached.org/). 
+More information about memcached can be found at [» http://www.memcached.org/](http://www.memcached.org/).
 
 说明：本处的php-memcache扩展是与服务器端同出一源。
 
- 
+
 
 2)    安装
 
-[**http://cn2.php.net/manual/en/memcache.installation.php**](http://cn2.php.net/manual/en/memcache.installation.php) 
+[**http://cn2.php.net/manual/en/memcache.installation.php**](http://cn2.php.net/manual/en/memcache.installation.php)
 
 **windows:** http://downloads.php.net/pierre/
 
@@ -161,29 +160,29 @@ http://cn2.php.net/manual/en/book.memcached.php
 
 1)    Introduction
 
-[memcached](http://www.memcached.org/) is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load. 
+[memcached](http://www.memcached.org/) is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
 
 This extension uses libmemcached library to provide API for communicating with memcached servers. It also provides a [session](http://cn2.php.net/manual/en/ref.session.php) handler (*memcached*).
 
- 
+
 
 Information about libmemcached can be found at http://libmemcached.org/libMemcached.html.
 
 说明：此处扩展是使用libmemcached库提供API。
 
- 
+
 
 2)    install
 
 如果是编译安装，则加上**--with-libmemcached-dir=DIR选项;** **若需要压缩支持，则加上--with-zlib-dir=DIR;** Session handler support is enabled by default. To disable it, use **--disable-memcached-session** switch.
 
- 
+
 
 ## 1.3   Test
 
 1) 可用性测试
 
- 
+
 
 **测试示例1: testmemcached.php (php)**
 ```php
@@ -199,14 +198,14 @@ echo $val;
 
 NULL This is a test
 
- 
+
 
 **测试示例2: testmemcached.pl (perl)**
 ```perl\#!/usr/bin/perl
 use strict;
 use warnings;
 use Cache::Memcached;
- 
+
 my $key = "foo2";
 my $value = "bar2";
 my $expires = 3600; # 1 hour
@@ -214,14 +213,14 @@ my $memcached = Cache::Memcached->new({
   servers => ["127.0.0.1:11211"],
   compress_threshold => 10_000
 });
- 
+
 $memcached->add($key, $value, $expires);
 my $ret = $memcached->get($key);
 print "$ret\n";
 ```
 
 
-**2)**    **性能测试**
+**2)**  **性能测试**
 
 **//测试add**
 ```php
@@ -244,23 +243,23 @@ $mem->delete($i);
 ```
 
 
-结果分析： 
+结果分析：
 
 本机add很快，远程add 1万次约需30sec，在item不太大时，约500次/sec.
 
-get操作远比add快，远程get 1万次约需1.6sec，约5k~6k/sec. 
+get操作远比add快，远程get 1万次约需1.6sec，约5k~6k/sec.
 
 del操作时间与get类似。
 
- 
 
-**3)**    **并发测试**
 
- 
+**3)**  **并发测试**
 
- 
 
-**4)**    **分布式测试**
+
+
+
+**4)**  **分布式测试**
 ```php<?php
 $mem=new Memcache();
 $mem->addServer ("192.168.220.104",11211,false,1,0);
@@ -278,7 +277,7 @@ echo "<br>finish.<br>"
 
 说明：需要加载的数据都分布到两台上，即机器A+机器B=实际数据数。这个分布式是由客户端来实现的。
 
-# 2    memcache优化
+# 2  memcache优化
 
 ## 2.1   参数配置和优化
 
@@ -297,7 +296,7 @@ http://cn2.php.net/manual/en/book.memcache.php
 | session.save_handler                                         | "files"    | PHP_INI_ALL | Available since memcache 2.1.2  |
 | session.save_path                                            | ""         | PHP_INI_ALL | Available since memcache 2.1.2  |
 
- 
+
 
 php.ini
 ```shell
@@ -322,7 +321,7 @@ memcache.default_port = 11211
 
 4） 数据内容不要过大，因为chunk_size是定长，过大会浪费内存。用工具检查内存使用情况，当slab class的page都用完后，将调用LRU算法。数据条数受限制于-m启动时所限制的内存。
 
- 
+
 
 ## 2.2   memcache-tool使用
 
@@ -358,19 +357,19 @@ memcache-tool stats状态说明如下：+K `"y`#t yt0
 | limit_maxbytes        | 分 配给memcache的内存大小（字节）                            |
 | threads               | 当前线程数                                                   |
 
- 
 
- 
+
+
 
 ![img](../../media/bigdata/db_memcache_002.png)
 
- 
+
 
 下图是memcache-tool 显示
 
 ![img](../../media/bigdata/db_memcache_003.png)
 
- 
+
 
 ![img](../../media/bigdata/db_memcache_004.png)
 
@@ -384,9 +383,9 @@ memcache-tool stats状态说明如下：+K `"y`#t yt0
 
 参考: http://sunjun041640.blog.163.com/blog/static/256268322010389554457/
 
- 
 
-# 3    memcache应用
+
+# 3  memcache应用
 
 **应用示例**
 
@@ -396,7 +395,7 @@ memcachd缺省chunk_size大小是8k，可在php.ini重设。或如下面程序�
 
 ini_set('memcache.chunk_size',1024*30); //设置到30K
 
- 
+
 
 2)    Maximum execution time of 30 seconds exceeded
 
@@ -404,11 +403,11 @@ ini_set('memcache.chunk_size',1024*30); //设置到30K
 
 set_time_limit(时间)  //0为无限制
 
- 
+
 
 ## 3.1   PHP中memcache模块操作函数
 
-[**http://cn2.php.net/manual/en/class.memcache.php**](http://cn2.php.net/manual/en/class.memcache.php) 
+[**http://cn2.php.net/manual/en/class.memcache.php**](http://cn2.php.net/manual/en/class.memcache.php)
 
 add
 
@@ -416,9 +415,9 @@ bool **Memcache::add** ( string `$key` , [mixed](http://cn2.php.net/manual/en/la
 
 **Memcache::add()** stores variable `*var*` with `*key*` only if such key doesn't exist at the server yet.
 
-flag : Use **MEMCACHE_COMPRESSED** to store the item compressed (uses zlib). 
+flag : Use **MEMCACHE_COMPRESSED** to store the item compressed (uses zlib).
 
- 
+
 
 get
 
@@ -428,13 +427,13 @@ array **Memcache::get** ( array `$keys` [, array `&$flags` ] )
 
 **Memcache::get()** returns previously stored data if an item with such `*key*` exists on the server at this moment. can get *string* or *array*.
 
- 
+
 
 del
 
 bool **Memcache::delete** ( string `$key` [, int `$timeout` ] )
 
- 
+
 
 replace
 
@@ -442,7 +441,7 @@ bool **Memcache::replace** ( string `$key` , [mixed](http://cn2.php.net/manual/e
 
 **Memcache::replace()** should be used to replace value of existing item with `*key*`. In case if item with such key doesn't exists, **Memcache::replace()** returns `**FALSE**`.
 
- 
+
 
 connect
 
@@ -455,14 +454,14 @@ $mem->addServer ("192.168.220.30",5555,false,1,0); //false: `persistent;0:timeou
 ```
 说明：上述delete, addServer都有带timeout参数即本次操作的超时时间; add
 带有存储项的过期时间，最多30days;
- 
+
 ```
 
 set — Store data at the server
 
 bool **Memcache::set** ( string `$key` , [mixed](http://cn2.php.net/manual/en/language.pseudo-types.php#language.types.mixed) `$var` [, int `$flag` [, int `$expire` ]] )` `
 
- 
+
 
 flush — Flush all existing items at the server
 
@@ -470,9 +469,9 @@ bool **Memcache::flush** ( void )
 
 说明：flush不是马上就看到数据，flush操作只是标记了所有数据是过期数据，但要在有新的get请求时，才相应删除对应项。 （评价：典型的延迟删除策略，好!!!）
 
- 
 
-# 4    memcache字符串协议
+
+# 4  memcache字符串协议
 
 存储命令
 
@@ -485,13 +484,13 @@ bool **Memcache::flush** ( void )
  \- <exptime> 是终止时间。如果为0，该项永不过期(虽然它可能被删除，以便为其他缓存项目腾出位置)。如果非0（Unix时间戳或当前时刻的秒偏移），到达终止时间后，客户端无法再获得这项内容。
  \- <bytes> 是随后的数据区块的字节长度，不包括用于分野的“\r\n”。它可以是0（这时后面跟随一个空的数据区块）。
 
- 
+
 
 **其它如：存回命令get,** **删除命令delete,** 增加减少命令incr/decr，状态stat
 
- 
 
-## 4.1   UDP 协议
+
+## 4.1  UDP 协议
 
 当来自客户端的连接数远大于TCP连接的上限时，可以使用基于UDP的接口。UDP接口不能保证传输到位，所以只有在不要求成功的操作中使用；比如被用于一个“get”请求时，会因不当的缓存处理而发生错误或回应有遗失。
 
@@ -509,21 +508,21 @@ bool **Memcache::flush** ( void )
 
 请求ID有客户端提供。一般它会是一个从随机基数开始的递增值，不过客户端想用什么样的请求ID都可以。服务器的回应会包含一个和请求中的同样的 ID。客户端使用请求ID来区分每一个回应。任何一个没有请求ID的数据包，可能是之前的请求遭到延迟而造成的，应该被丢弃。序号的返回是从0到n- 1，n是该条信息的数据包数量。
 
- 
 
- 
 
-# 5    memcache实现分析
+
+
+# 5  memcache实现分析
 
 参考：memcached深度分析 http://blog.developers.api.sina.com.cn/?p=124
 
- 
+
 
 **memcache客户端**的实现：通过socket网络连接 + memcache字符串协议。
 
 **memcache服务端**的实现：libevent网络通讯 + slab allocation
 
- 
+
 
 **主要的技术实现点：**
 
@@ -555,7 +554,7 @@ conn_parse_commnd: try_read_commadnàprocess_command: process_get_commnd,…
 
 ![protocol](../../media/bigdata/db_memcache_005.png)
 
- 
+
 
 ## 5.2   内存分配slab allocation
 
@@ -565,7 +564,7 @@ conn_parse_commnd: try_read_commadnàprocess_command: process_get_commnd,…
 
 stab class数目由启动参数确定，stab class中的page使用完后，则调用LRU算法。chunk_size预分配若干固定尺寸，用来存储数据项，单个数据项不要超过此值，若超过，性能急降，存储项最大受限于stab class中的page总额。
 
- 
+
 
 page(1M)--> chunk (fixed-size) -à slabclass.
 
@@ -577,20 +576,20 @@ factor:　为影响因子，可变。
 
 ![memcached](../../media/bigdata/db_memcache_006.png)
 
- 
+
 
 ### 5.2.1 缓存查找find
 
 accoc_find函数：
 ```php
-     uint32_t hv = hash(key, nkey, 0);
-     bucket = hv & hashbucket_num //default hashbucket_num = 1<<16 = 2^16 = 65536
+   uint32_t hv = hash(key, nkey, 0);
+   bucket = hv & hashbucket_num //default hashbucket_num = 1<<16 = 2^16 = 65536
 ```
-通过bucket定位到相应的hashtable，然后通过memcmp（key, item）的方式找到value.（此时key值可能不同，有碰撞，可用拉链法解决） 
+通过bucket定位到相应的hashtable，然后通过memcmp（key, item）的方式找到value.（此时key值可能不同，有碰撞，可用拉链法解决）
 
-效率评价：内存分配虽有部分浪费，但可重复使用。  
+效率评价：内存分配虽有部分浪费，但可重复使用。
 
- 
+
 
 ### 5.2.2 缓存更新机制
 
@@ -598,27 +597,27 @@ accoc_find函数：
 
 2） 内存使用完后，将通过expiretime和LRU进行更新。
 
- 
+
 
 **expiretime**
 
 过期时间，是指每个缓存项都有设置一个过期时间如一小时，到了这个过期时间，在get取数据时，此项无效。（特别注意：memcache此时的实现，并没有线程来主动移除过期数据，只是在get操作时判断数据是否过期，如是则移除。如果没有数据来get, *内存将一直不释放，事实上，分配了的内存不会再释放到系统，而是回归到进程内的空闲内存池,* *这是资源管理模式的lease + prealloc**机制*）
 
- 
+
 
 **LRU**
 
 最近最少使用更新。这个策略中，可以考虑到expiretime，可先将expiretime的替换，再把LRU的替换。
 
- 
+
 
 ## 5.3   实现优化
 
 提高空间利用率：如定长优化1)sizeof(item)=sizeof(chunk); 2)…
 
- 
 
- 
+
+
 
 **测试1：HASH数求余**
 ```perl
@@ -627,24 +626,24 @@ accoc_find函数：
 use strict;
 use warnings;
 use String::CRC32;
- 
+
 my @nodes = @ARGV;
 my @keys = ('a'..'z');
 my %nodes;
- 
+
 foreach my $key ( @keys ) {
   my $hash = crc32($key);
   my $mod = $hash % ( $#nodes + 1 );
   my $server = $nodes[ $mod ];
   push @{ $nodes{ $server } }, $key;
 }
- 
+
 foreach my $node ( sort keys %nodes ) {
   printf "%s: %s\n", $node, join ",", @{ $nodes{$node} };
 }
 ```
 
-# 6    FAQ
+# 6 FAQ
 
 1)     存储项长度变化的影响，如初始5k，后更新时15k.
 
@@ -652,7 +651,7 @@ foreach my $node ( sort keys %nodes ) {
 
 ​     如原存储项内容更改，则需使用replace, 此时删除原内容，根据原内容重新插入。replace相当于del + add操作。
 
-​     
+​
 
 2)     存储项大小，存储项的条数和内存的关系
 
@@ -660,13 +659,11 @@ foreach my $node ( sort keys %nodes ) {
 
 slab class所能使用的内存-m用完后，将使用LRU算法来更新item.
 
- 
+
 
 # 参考资料
-[1].   memcache官网[ http://www.memcached.org/]( http:/www.memcached.org/).
-[2].   libmemcached http://libmemcached.org/ 
-[3].   php官方文档http://cn2.php.net/manual/en/book.memcache.php
-[4].   php扩展 http://pecl.php.net 
-[5].   memcache协议中文版
-[6].   memcache机制分析 http://www.byejob.com/space.php?uid=17&do=blog&id=148
+[1].  memcache机制分析 http://www.byejob.com/space.php?uid=17&do=blog&id=148 http:/www.memcached.org/)
+[2].  memcached完全剖析　http://tech.idv2.com/2008/07/10/memcached-001/
+[3].  php官方文档  http://cn2.php.net/manual/en/book.memcache.php
+[4].  php扩展  http://pecl.php.net
 

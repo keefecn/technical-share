@@ -5,13 +5,15 @@
 |      |            |                      |        |        |
 
 
- 
+
 
 
 
 ---
 
 目录
+
+[TOC]
 
 [1    简介... 2](#_Toc470905021)
 
@@ -81,7 +83,7 @@
 
 [5    参考资料... 16](#_Toc470905054)
 
- 
+
 
 ---
 
@@ -95,15 +97,15 @@ Jekyll is a parsing engine bundled as a ruby gem used to build static websites f
 
 为了支持HTML内容，GitHub Pages支持了Jekyll框架。Jekyll能够简单地在各个页面中使用全局的headers和footers。同时Jekyll也能提供一些其他的模版特性。
 
- 
+
 
 [markdown](http://wowubuntu.com/markdown/)是写文章的神器，可以用简单的文本格式代替html标记。markdown几乎支持常用的html标签。
 
 [liquid](https://github.com/shopify/liquid/wiki/liquid-for-designers)是一个模版语言，是jekyll支持的一种，有点类似smarty，只不过是静态的模版语言，只能在编译的过程中进行替换。liquid除了支持变量替换外还支持逻辑语法。
 
- 
 
- 
+
+
 
 # 2 安装搭建jekyll + github
 
@@ -122,7 +124,7 @@ http://127.0.0.1:4000/
 *  jekyll
 *  pygments 代码高亮
 
- 
+
 
 jekyll**常用命令**
 ```sh
@@ -130,7 +132,7 @@ jekyll help # 查看帮助
 jekyll help subcommand  # 查看子命令的帮助信息
 jekyll new site-name  # 创建一个新的
 jekyll build  # 构建，缺省把博客生成到 _site 目录下
- 
+
 jekyll server  # 开启本地服务器查看效果
 jekyll server -P 4001  # 指定端口
 jekyll server -w  s# 文件发生变化时，自动重新编译
@@ -150,9 +152,9 @@ gem sources -l
 
 ## 2.1   Linux/bsd下安装
 
- 
 
- 
+
+
 
 ## 2.2   windows下安装
 
@@ -164,7 +166,7 @@ gem sources -l
 * 安装Python： [猛击我下载](http://portablepython.com/wiki/PortablePython3.2.1.1)
 * 安装Pygments
 
- 
+
 
 以下是详细步骤：
 
@@ -201,7 +203,7 @@ Pygmentize中的Bug：修改如下文件 E:\Ruby192\lib\ruby\gems\1.9.1\gems\alb
 
 然后就可以使用Jekyll了，在生成静态页面的时候 可能还会出现 GBK字符不能编码的问题，但是不影响生成网页了。
 
- 
+
 
 ## 2.3   项目创建
 
@@ -215,7 +217,7 @@ jekyll server
 
 然后打开浏览器的[127.0.0.1:4000](http://127.0.0.1:4000)，即可查看网站效果
 
- 
+
 
 ## 2.4   文章导入
 
@@ -243,7 +245,7 @@ $ ruby -rubygems -e 'require "jekyll-import";
 
 至此，最简单的Blog就算搭建完成了。进一步的完善，请参考Jekyll创始人的[示例库](https://github.com/mojombo/tpw)，以及其他用Jekyll搭建的[blog](https://github.com/mojombo/jekyll/wiki/Sites)。
 
- 
+
 
 ## 2.6   Jekyll站点实例
 
@@ -253,13 +255,13 @@ $ ruby -rubygems -e 'require "jekyll-import";
 
 http://yanhaijing.com --> https://yanhaijing.github.com/ 带分类和存档的个人博客
 
- 
+
 
 https://jeremywei.github.io/  --> http://weizhifeng.net/
 
-http://www.zhanxin.info 
+http://www.zhanxin.info
 
- 
+
 
 # 3 jekyll配置
 
@@ -268,12 +270,12 @@ http://www.zhanxin.info
 Jekyll expects your website directory to be laid out like so:
 ```
 .
-|-- _config.yml 
+|-- _config.yml
 |-- _includes
 |-- _layouts
 |  |-- default.html
 |  |-- post.html
-|-- _posts  
+|-- _posts
 |  |-- 2011-10-25-open-source-is-good.markdown
 |  |-- 2011-04-26-hello-world.markdown
 |-- _site
@@ -300,7 +302,7 @@ Jekyll expects your website directory to be laid out like so:
 
 备注：只要我们把自己需要的文件放到博客目录下，通过jekyll build，该目录就会被复制到_site里面。明白了目录结构之后，我们在通过 git 提交博客到服务器的时候，就可以通过.gitignore来过滤掉_site目录，而在服务器端再执行命令生成。
 
- 
+
 
 ## 3.2   配置文件
 
@@ -338,7 +340,7 @@ Jekyll expects your website directory to be laid out like so:
 | Local Server Hostname   服务器名称         | host: HOSTNAME   --host HOSTNAME |
 | Base URL   基础链接                        | baseurl: URL                     |
 
- 
+
 
 _config.yml 示例
 
@@ -395,7 +397,7 @@ author:
 | content   | 展示文章或者页面的内容。                                     |
 | paginator | 当配置文件中设置了 paginator 的时候，这里可以读取分页的信息。 |
 
- 
+
 
 site站点变量
 
@@ -409,7 +411,7 @@ site站点变量
 | site.tags.TAG             | 某一个标签的文章列表。                        |
 | site.[CONFIGURATION_DATA] | 配置文件中的信息。                            |
 
- 
+
 
 page页面变量
 
@@ -426,7 +428,7 @@ page页面变量
 | page.path       | 页面的路径。             |
 | page.CUSTOM     | 页面的自定义内容。       |
 
- 
+
 
 paginator**分页**
 
@@ -476,7 +478,7 @@ paginate_path: "page:num"
 - [优化 Jekyll      站点的 SEO 技巧](http://www.zhanxin.info/jekyll/2012-12-09-jekyll-seo.html)
 - [Jekyll 菜单高亮](http://www.zhanxin.info/jekyll/2013-07-16-jekyll-highlight-nav.html)
 
- 
+
 
 ### 3.3.1 导航排列
 ```
@@ -487,11 +489,11 @@ paginate_path: "page:num"
 ```
 
 
-## 3.4   插件 Plugin 
+## 3.4   插件 Plugin
 
 ### 3.4.1 语法高亮Pygments
 
-Pygments代码高亮语法使用介绍： [点击这里](https://github.com/mojombo/jekyll/wiki/Liquid-Extensions) 
+Pygments代码高亮语法使用介绍： [点击这里](https://github.com/mojombo/jekyll/wiki/Liquid-Extensions)
 
 具体例子效果如下：
 ```ruby
@@ -550,7 +552,7 @@ _config.yml
  analytics :
   provider : baidu
 // 如果上面provider对应值为空，即site.JB.analytics.provider为空，则不会包含统计代码。
- 
+
 // 选择统计代码 JB/analytics
  {% if site.safe and site.JB.analytics.provider and page.JB.analytics != false %}
 {% case site.JB.analytics.provider %}
@@ -559,13 +561,13 @@ _config.yml
  {% include JB/analytics-providers/getclicky %}
  {% include JB/analytics-providers/mixpanel %}
  {% include JB/analytics-providers/piwik %}
- 
+
  // baidu stat
 var _hmt = _hmt || [];
 (function() {
  var hm = document.createElement("script");
  hm.src = "https://hm.baidu.com/hm.js?64344d27a02ec2495c596aa115ebb540";
- var s = document.getElementsByTagName("script")[0]; 
+ var s = document.getElementsByTagName("script")[0];
  s.parentNode.insertBefore(hm, s);
 })();
 ```
@@ -596,7 +598,7 @@ var _hmt = _hmt || [];
 
 原理：生成所有post带标题和url的search.xml，用ajax技术异步搜索此文件内容。
 
- 
+
 
 ### 3.4.6 内容推荐：ujian
 ```js
@@ -631,7 +633,7 @@ title : 站点地图
 
 
 
-### 3.5.2 订阅：atom /rss 
+### 3.5.2 订阅：atom /rss
 
 **atom.xml**
 ```xml
@@ -688,7 +690,7 @@ title : RSS 订阅
    <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
    <pubDate>{{ site.time | date_to_xmlschema }}</pubDate>
    <ttl>1800</ttl>
- 
+
 {% for post in site.posts %}
    <item>
        <title>{{ post.title }}</title>
@@ -698,26 +700,26 @@ title : RSS 订阅
        <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
    </item>
 {% endfor %}
- 
+
 </channel>
 </rss>
 ```
 
 ### 3.5.3 分享share
 
- 
+
 
 ### 3.5.4 微博/微信公众号
 
 进入微信公众平台，可注册个人公众号。
 
- 
+
 
 ### 3.5.5 捐款：alipay/weixin
 
- 
 
- 
+
+
 
 # 4 jekyll编辑
 
@@ -729,7 +731,7 @@ title : RSS 订阅
 
 [markdownpad 2](http://markdownpad.com/)
 
- 
+
 
 ### 4.1.1图片
 
@@ -750,7 +752,7 @@ Markdown 使用一种和链接很相似的语法来标记图片，同样也允�
 
 接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 'title' 文字。
 
- 
+
 
 参考式的图片语法则长得像这样：
 * ![Alt text][id]  说明：「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：
@@ -758,19 +760,19 @@ Markdown 使用一种和链接很相似的语法来标记图片，同样也允�
 
 到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 <img> 标签。
 
- 
+
 
 ## 4.2   Liquid模板语言
 
 [Liquid模板语言](https://github.com/shopify/liquid/wiki/liquid-for-designers)
 
- 
+
 
 {{ 变量名 }}
 
 示例：
 ```jiajia2
-//文件名 setup，在JB目录下 
+//文件名 setup，在JB目录下
 {% assign BLOG_IMG = "/blog/" %}
 //使用：包含文件名，调用变量
 {% include JB/setup %}
@@ -800,5 +802,5 @@ Markdown 使用一种和链接很相似的语法来标记图片，同样也允�
 
 [9].   gitment https://imsun.net/posts/gitment-introduction/
 
- 
+
 

@@ -41,7 +41,7 @@ Jenkins功能包括：
 
 下载：https://jenkins.io/zh/download
 
- 
+
 
 表格 10 jenkins使用方式
 
@@ -71,7 +71,7 @@ $ sudo apt-get install jenkins
 修改缺省端口8080
 `$vim /etc/default/jenkins`
 
- 
+
 
 **启动**
 
@@ -85,7 +85,7 @@ $ sudo apt-get install jenkins
 
 然后在浏览器中（推荐用火狐）输入localhost:8080，localhost可以是本机的ip，也可以是计算机名。就可以打开jenkins。
 
- 
+
 
 法二：tomcat运行
 
@@ -93,13 +93,13 @@ $ sudo apt-get install jenkins
 
 将jenkins.war文件放入tomcat下的webapps目录下，启动tomcat时，会自动在webapps目录下建立jenkins目录，在地址栏上需要输入localhost:8080/jenkins。
 
- 
+
 
 ## 作业篇
 
-### 项目/作业类型 
+### 项目/作业类型
 
-![项目/作业类型](../../media/sf_reuse/tools/tools_jenkins_001.png)               
+![项目/作业类型](../../media/sf_reuse/tools/tools_jenkins_001.png)
 
 
 
@@ -121,7 +121,7 @@ $ sudo apt-get install jenkins
 
 流水线
 
- 
+
 
 ## 配置篇
 
@@ -133,7 +133,7 @@ $ sudo apt-get install jenkins
 
 图 3 安装时缺省插件
 
- 
+
 
 表格 12 Jenkins插件简介
 
@@ -152,7 +152,7 @@ $ sudo apt-get install jenkins
 | android    |                                                              |                  |
 | .net       |                                                              |                  |
 
- 
+
 
 ###  安全
 
@@ -171,9 +171,9 @@ $ sudo apt-get install jenkins
 
 3) Add build step -> Excecute shell: 填充构建脚本
 
-4) Post Actions -> Publish test result report: 
+4) Post Actions -> Publish test result report:
 
- 
+
 
 ## FAQ
 
@@ -183,7 +183,7 @@ $ sudo apt-get install jenkins
 * 以root身份登陆docker容器：docker exec -it -u root [docker_name] /bin/bash
 * 报告命令： pytest --html=xx --junit-xml=xx
 
- 
+
 
 ## 参考资料
 

@@ -112,7 +112,7 @@ Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的
 * JDK(Java Development Kit)是Sun Microsystems针对Java开发员的产品。JDK 是整个Java的核心，包括了JRE，一堆Java工具和Java基础的类库(rt.jar)。JDK包含的Java工具有javac, jar, javadoc, jdb, appletviewer, javap, Jconsole. 目前提供JDK的有Oracle支持的 openjdk。
 * JVM：Java Virtual Machine, JVM实例对应了一个独立运行的Java程序，而 JVM执行引擎实例则对应了属于用户运行程序的线程。
 ```shell
-# 此命令打印出 JDK、JRE、JVM的基本配置信息。 
+# 此命令打印出 JDK、JRE、JVM的基本配置信息。
 $ java -version
 # 下面显示是 Oracle JDK的打印信息
 java version "1.8.0_121"
@@ -128,7 +128,7 @@ OpenJDK 64-Bit Server VM (build 11-ea+28, mixed mode, sharing)
 JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。
 没有JDK的话，无法编译Java程序，如果想只运行Java程序，要确保已安装相应的JRE。
 
-​             ![1574525105512](../media/program_lang/java_001.png)                                     
+​             ![1574525105512](../media/program_lang/java_001.png)
 
 图 1 JDK结构图
 
@@ -138,7 +138,7 @@ JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。
 
 ### OpenJDK
 
-OpenJDK官网：http://openjdk.java.net/ 
+OpenJDK官网：http://openjdk.java.net/
 
 Java最早由SUN公司(Sun Microsystems，发起于美国斯坦福大学，SUN是Stanford University Network的缩写)发明，2006年SUN公司将Java开源，此时的JDK即为OpenJDK。
 
@@ -233,7 +233,7 @@ Java 2平台包括：标准版（J2SE ~ Standard）、企业版（J2EE ~Enterpri
 
 *  J2EE 包含J2SE 中的类，并且还包含用于开发企业级应用的类。比如：[EJB](https://baike.baidu.com/item/EJB)、[servlet](https://baike.baidu.com/item/servlet)、JSP、[XML](https://baike.baidu.com/item/XML)、事务控制。
 *  J2SE 包含那些构成[Java语言](https://baike.baidu.com/item/Java语言)核心的类。比如：数据库连接、接口定义、输入/输出、[网络编程](https://baike.baidu.com/item/网络编程)。
-*  J2ME 包含J2SE中一部分类，再增加一些[CLDC](https://baike.baidu.com/item/CLDC)等方面的特性。 
+*  J2ME 包含J2SE中一部分类，再增加一些[CLDC](https://baike.baidu.com/item/CLDC)等方面的特性。
 
 应用场景
 
@@ -250,9 +250,9 @@ Java 2平台包括：标准版（J2SE ~ Standard）、企业版（J2EE ~Enterpri
 ### Java SE Component
 
 The two principal products in the Java SE platform are: Java Development Kit (JDK) and Java SE Runtime Environment (JRE).
-The JDK is a superset of the JRE, and contains everything that is in the JRE, plus tools such as the compilers and debuggers necessary for developing applets and applications. The Java Runtime Environment (JRE) provides the libraries, the Java Virtual Machine, and other components to run applets and applications written in the Java programming language. 
+The JDK is a superset of the JRE, and contains everything that is in the JRE, plus tools such as the compilers and debuggers necessary for developing applets and applications. The Java Runtime Environment (JRE) provides the libraries, the Java Virtual Machine, and other components to run applets and applications written in the Java programming language.
 
-The following conceptual diagram illustrates all the component technologies in Java SE platform and how they fit together. 
+The following conceptual diagram illustrates all the component technologies in Java SE platform and how they fit together.
 
 表格 3  J2SE component
 
@@ -316,9 +316,9 @@ Java编译
 // 生成.class文件，
 // Note：windows命令行下执行编译命令，要求.java文件编码需要ANSI（否则文件中的GBK字符无法解析，如‘编码 GBK 的不可映射字符“错误”’），而在eclipse则要与缺省文件编码相同。
 ```shell
-$ javac *.java  
+$ javac *.java
 # 或者加上文件编码参数
-$ javac -encoding utf-8 *.java  
+$ javac -encoding utf-8 *.java
 # 如果路径没找到，则加 -classpath .
 $javac -classpath . *.java
 ```
@@ -353,16 +353,25 @@ Java重写(Override)与重载(Overload)
 *  引用类型：引用类型的变量持有引用值。引用值是指对某个对象的引用，而不是该对象本身。
 
 Java工具包提供了强大的数据结构。在Java中的数据结构主要包括以下几种接口和类：
-*  枚举（Enumeration）
-*  位集合（BitSet）
-*  向量（Vector）
-*  栈（Stack）
-*  字典（Dictionary）
-*  哈希表（Hashtable）
-*  属性（Properties）
-*  集合框架(Collection)
+* 枚举（Enumeration）
 
-1. Hashtable和HashMap
+* 位集合（BitSet）
+
+* 向量（Vector）
+
+* 栈（Stack）
+
+* 字典（Dictionary）
+
+* 哈希表（Hashtable）
+
+* 属性（Properties）
+
+* 集合框架(Collection)
+
+
+
+**1.Hashtable和HashMap**
 
 ```java
 public class HashMap<K,V> extends AbstractMap<K,V>
@@ -384,7 +393,9 @@ public class Hashtable<K,V>
 　　最大的不同是，Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap就必须为之提供外同步。
 　　Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。
 
-2.集合框架(Collection)
+
+
+**2.集合框架(Collection)**
    ![1574525249551](../media/program_lang/java_002.png)
 图2 Java集合框架(Collection)体系图
 说明：上图方框是青色填充为接口如Collection/List/Map，其它方框为具体类。
@@ -414,7 +425,7 @@ java.util.Map [I]
 
 
 
-3.并发队列
+**3.并发队列**
 Java的并发包提供了三个常用的并发队列实现，分别是：ConcurrentLinkedQueue、LinkedBlockingQueue和ArrayBlockingQueue。
 
 * ArrayBlockingQueue是初始容量固定的阻塞队列，我们可以用来作为数据库模块成功竞拍的队列，比如有10个商品，那么我们就设定一个10大小的数组队列。
@@ -501,15 +512,15 @@ WAR包的文件结构：sample_webapp.war
 sample_webapp/	// (Webapp RootFolder)
   |-- index.html	/ /(HTMLDocument)
   |-- index.jsp		// (JSPPages)
-  |— images 
-  |— META-INF 
-  |— WEB-INF 
-          |   web.xml                // WAR包的描述文件 
-          |— classes 
+  |— images
+  |— META-INF
+  |— WEB-INF
+          |   web.xml                // WAR包的描述文件
+          |— classes
           |          action.class       // java类文件，编译后的字节码
-          |— lib 
-                    other.jar         // 依赖的jar包 
-                    share.jar 
+          |— lib
+                    other.jar         // 依赖的jar包
+                    share.jar
 ```
 说明：JSP文件可以安装在WEB应用程序任何位置除了WEB-INF下。通常源码目录src放在WEB-INF目录下，与classes同级。而Eclipse会强制在根目录下放work用来存储临时文件，在WEB-INF内放src.WAR实际上与zip包完全一样，将后缀名改为zip就可解压。
 
@@ -521,13 +532,13 @@ Jar(Java Archive File，Java 归档文件）是与平台无关的文件格式，
 针对企业级项目，实际上EAR包中包含WAR包和几个企业级项目的配置文件而已，一般服务器选择WebSphere等，都会使用EAR包。
 典型的ear包内部结构如下：
 ```sh
-app.ear 
-   |   ejb.jar                // ejb-jar包 
-   |   other.jar              // 普通的jar包 
-   |   webapp.war         　　// war包 
-   | 
-   |—META-INF 
-          application.xml 　 // EAR描述文件 
+app.ear
+   |   ejb.jar                // ejb-jar包
+   |   other.jar              // 普通的jar包
+   |   webapp.war         　　// war包
+   |
+   |—META-INF
+          application.xml 　 // EAR描述文件
 ```
 
 打包工具或命令
@@ -594,7 +605,7 @@ denny@denny-laptop:~$ls/var/lib/tomcat6/
 lrwxrwxrwx1 root  root 122010-05-0919:03 conf->/etc/tomcat6
 lrwxrwxrwx1 root  root 172010-05-0919:03 logs->../../log/tomcat6
 drwxrwxr-x4 root tomcat640962010-05-0921:20 webapps
-lrwxrwxrwx1 root  root 192010-05-0919:03 work->../../cache/tomcat6 
+lrwxrwxrwx1 root  root 192010-05-0919:03 work->../../cache/tomcat6
 ```
 
 | $CATALINA_HOME下目录 | 详细说明                                                 |
@@ -649,7 +660,7 @@ Tomcat提供了servlet与JSP规范的实现。
 </servlet-mapping>
 </web-app>
 ```
-说明: 
+说明:
 <servlet>注册servelet，其中servlet-name为注册名称，可用在url和其它定制中；servlet-class设置servlet的相对路径。
 <servlet-mapping>设置servlet的URL规则，使用url-pattern标签。
 此外，listerner类用于特定事件（如产生或删除）发生于整个应用程序或特定的HTTP会话时，系统会通知的程序。
@@ -695,8 +706,8 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
    在JVM中如果98％的时间是用于GC且可用的Heapsize不足2％的时候将抛出此异常信息。
    解决办法：手动设置JVMHeap（堆）的大小。
 
-   
-   
+
+
    b)  **PermGenspace**
    PermGenspace的全称是Permanent Generation space，是指内存的永久保存区域。这块内存主要是被JVM存放Class和Meta信息的，Class在被Load的时候被放入PermGenspace区域，它和存放Instance的Heap区域不同,sun的GC不会在主程序运行期对PermGenspace进行清理，所以如果你的APP会载入很多CLASS的话，就很可能出现PermGenspace溢出。
    解决方法：手动设置MaxPermSize大小
@@ -717,75 +728,75 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 Java有三种方法可以使终止线程：
 1)    使用退出标志，使线程正常退出，也就是当run方法完成后线程终止。
 2)    使用stop方法强行终止线程（不推荐使用，因为stop和suspend、resume一样，也可能发生不可预料的结果）。
-3)    使用interrupt方法中断线程。 
+3)    使用interrupt方法中断线程。
 
 
 
 ## 4.2  Servlet
 
-### 4.2.1  Servlet的开发 
-Servlet通常称为服务器端小程序，用于处理和响应客户端的请求。 
-Servlet是个特殊的Java类，这个Java类必须继承HttpServlet。每个Servlet可以响应客户端的请求。 
-Servlet提供了不同的方法用于响应客户端请求。 
-* doGet   : 用于响应客户端的get请求 
+### 4.2.1  Servlet的开发
+Servlet通常称为服务器端小程序，用于处理和响应客户端的请求。
+Servlet是个特殊的Java类，这个Java类必须继承HttpServlet。每个Servlet可以响应客户端的请求。
+Servlet提供了不同的方法用于响应客户端请求。
+* doGet   : 用于响应客户端的get请求
 
-* doPost  : 用于响应客户端的post请求 
+* doPost  : 用于响应客户端的post请求
 
-* doPut   : 用于响应客户端的put请求 
+* doPut   : 用于响应客户端的put请求
 
-* doDelete: 用于响应客户端的delete请求 
+* doDelete: 用于响应客户端的delete请求
 
-*  service(HttpServletRequest  request,   [可以响应客户端所有类型的请求] 
-  HttpServletResponse response) 
+*  service(HttpServletRequest  request,   [可以响应客户端所有类型的请求]
+  HttpServletResponse response)
   throws ServletException,java.io.IOException
   其它方法：
-  
-* init(Servletconfig config)  : 创建Servlet实例时，调用的初始化方法。 
 
-* destory()   : 销毁Servlet实例时，自动调用的资源回收方法。 
+* init(Servletconfig config)  : 创建Servlet实例时，调用的初始化方法。
 
-  
-
-JSP Servlet的配置: 编译好的Servlet源文件并不能响应用户请求，还必须将其编译成class文件。将编译后的.class 文件放在WEB-INF/classes路径下，如果Servlet有包，则还应该将class文件放在对应的包路径下。 
-       为了让Servlet能响应用户请求，还必须将Servlet配置在Web应用中。配置Servlet时，需要修改web.xml文件。 
-
-配置Servlet需要配置两个部分：   
-
-* 配置Servlet的名字：对应web.xml中的<servlet/>元素 
-* 配置Servlet的URL ：对应web.xml中的<servlet-mapping/>元素 
+* destory()   : 销毁Servlet实例时，自动调用的资源回收方法。
 
 
 
-Servlet的生命周期 
-Servlet在容器中运行，其实例的创建以及销毁等都不是由程序员决定的，而是由容器进行控制的。 
-Servlet的创建有两个选择： 
+JSP Servlet的配置: 编译好的Servlet源文件并不能响应用户请求，还必须将其编译成class文件。将编译后的.class 文件放在WEB-INF/classes路径下，如果Servlet有包，则还应该将class文件放在对应的包路径下。
+       为了让Servlet能响应用户请求，还必须将Servlet配置在Web应用中。配置Servlet时，需要修改web.xml文件。
 
-- 客户端请求对应的Servlet时，创建Servlet实例：大部分的Servlet都是这种Servlet 
-- Web应用启动时，立刻创建Servlet实例：即load-on-startup Servlet 
+配置Servlet需要配置两个部分：
+
+* 配置Servlet的名字：对应web.xml中的<servlet/>元素
+* 配置Servlet的URL ：对应web.xml中的<servlet-mapping/>元素
+
+
+
+Servlet的生命周期
+Servlet在容器中运行，其实例的创建以及销毁等都不是由程序员决定的，而是由容器进行控制的。
+Servlet的创建有两个选择：
+
+- 客户端请求对应的Servlet时，创建Servlet实例：大部分的Servlet都是这种Servlet
+- Web应用启动时，立刻创建Servlet实例：即load-on-startup Servlet
 
 
 
 **Servlet的生命周期过程: **
 
 ```shell
-Begin 
-  ---> 创建实例完成 
-  ---> 初始化[init] 
-  ---> 响应客户端请求[doGet,doPost,service] 
-  ---> 被销毁[dstroy] --->    
-End 
+Begin
+  ---> 创建实例完成
+  ---> 初始化[init]
+  ---> 响应客户端请求[doGet,doPost,service]
+  ---> 被销毁[dstroy] --->
+End
 ```
 
 
 
-使用Servlet作为控制器 
-使用Servlet作为表现层的工作量太大，所有的HTML标签都需要使用页面输出流生成。 
+使用Servlet作为控制器
+使用Servlet作为表现层的工作量太大，所有的HTML标签都需要使用页面输出流生成。
 
-因此使用Servlet作为表现层有如下三个劣势： 
+因此使用Servlet作为表现层有如下三个劣势：
 
-* 开发效率低，所有的HTML标签都需使用页面输出流完成 
+* 开发效率低，所有的HTML标签都需使用页面输出流完成
 
-* 不利于团队协作，美工人员无法参与Servlet界面的开发 
+* 不利于团队协作，美工人员无法参与Servlet界面的开发
 
 * 程序可维护性差，即使修改一个按钮的标题，读需要重新编辑Java代码，并重新编译
 
@@ -1110,7 +1121,7 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 [3]. 《深入理解JAVA虚拟机》——学习笔记 [http://www.cnblogs.com/gl-developer/p/6502600.html](http://www.cnblogs.com/gl-developer/p/6502600.html)
 [4]. JVM类加载三步走 https://github.com/hadyang/interview/blob/master/java/jvm-class-load-init.md
 [5].  深入剖析Java类加载机制 http://blog.csdn.net/love_Javc_you/article/details/38081683
-[6].  Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html 
+[6].  Java虚拟机详解----JVM常见问题总结 http://www.cnblogs.com/smyhvae/p/4810168.html
 [7].  JVM 参数使用总结 https://blog.csdn.net/Thousa_Ho/article/details/77278656
 
 
@@ -1124,10 +1135,10 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 *  JDK 8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 *  Oracle Java Archive  http://www.oracle.com/technetwork/java/archive-139210.html
 *  Java SE6 Component [http://download.oracle.com/Javase/6/docs/index.html](http://download.oracle.com/javase/6/docs/index.html)
-*  tomcat  http://tomcat.apache.org/ 
+*  tomcat  http://tomcat.apache.org/
 *  Eclipse  http://www.Eclipse.org/downloads/
 
-* ~~Javase~~  http://Java.sun.com/Javase/downloads/  
+* ~~Javase~~  http://Java.sun.com/Javase/downloads/
 * [http://Java.sun.com/blueprints/corej2eepatterns/Patterns/index.html](http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html)
 * [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
 
@@ -1157,5 +1168,5 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 * Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
 
-  
+
 

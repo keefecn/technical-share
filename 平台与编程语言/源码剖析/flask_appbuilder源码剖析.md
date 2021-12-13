@@ -49,7 +49,7 @@ Author-email: danielvazgaspar@gmail.com
 License: BSD
 Location: /home/keefe/venv/superset-py36-env/lib/python3.6/site-packages
 Requires: email-validator, click, marshmallow, marshmallow-enum, PyJWT, Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, apispec, python-dateutil, marshmallow-sqlalchemy, jsonschema, Flask-Babel, Flask-WTF, sqlalchemy-utils, prison, colorama, Flask-OpenID
-Required-by: 
+Required-by:
 ```
 
 Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
@@ -98,8 +98,8 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 
 视图操作：
 
-* 菜单视图：调用 Menu对象的相关方法，如 add_link, add_view, add_separator  
-* 非菜单视图：添加非菜单项的API视图，如add_api 同add_view_no_menu  
+* 菜单视图：调用 Menu对象的相关方法，如 add_link, add_view, add_separator
+* 非菜单视图：添加非菜单项的API视图，如add_api 同add_view_no_menu
 
 ```python
 from flask import Blueprint, current_app, url_for
@@ -152,10 +152,10 @@ class AppBuilder(object):
         security_manager_class=None,
         update_perms=True,
     ):
-    	""" 
+    	"""
     	构建函数传参有app/session/menu/static/...
     	security_manager_class -安全管理类，缺省是SecurityManager。用户可以自定义类。
-    	"""   
+    	"""
         self.baseviews = []
         self._addon_managers = []
         self.addon_managers = {}
@@ -169,8 +169,8 @@ class AppBuilder(object):
         self.update_perms = update_perms
 
         if app is not None:
-            self.init_app(app, session)    
-            
+            self.init_app(app, session)
+
     def init_app(self, app, session):
         """
             Will initialize the Flask app, supporting the app factory pattern.
@@ -201,8 +201,8 @@ class AppBuilder(object):
             )
         if self.security_manager_class is None:
             from flask_appbuilder.security.sqla.manager import SecurityManager
-            self.security_manager_class = SecurityManager  # 若无值，为SecurityManager对象          
-        
+            self.security_manager_class = SecurityManager  # 若无值，为SecurityManager对象
+
       	self._addon_managers = app.config["ADDON_MANAGERS"]
         self.session = session
         self.sm = self.security_manager_class(self)
@@ -220,8 +220,8 @@ class AppBuilder(object):
             self._add_menu_permissions()
         else:
             self.post_init()
-        self._init_extension(app)        
-                
+        self._init_extension(app)
+
     def add_view_no_menu(self, baseview, endpoint=None, static_folder=None):
         """
             Add your views without creating a menu.
@@ -244,11 +244,11 @@ class AppBuilder(object):
         else:
             log.warning(LOGMSG_WAR_FAB_VIEW_EXISTS.format(baseview.__class__.__name__))
         return baseview
-    
+
     def add_api(self, baseview):
         """ 调用 add_view_no_menu """
-        return self.add_view_no_menu(baseview)     
-    
+        return self.add_view_no_menu(baseview)
+
     def add_link(self, name, href, icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None,):
         """ 添加 菜单链接 """
         self.menu.add_link(
@@ -265,7 +265,7 @@ class AppBuilder(object):
         if self.app:
             self._add_permissions_menu(name)
             if category:
-                self._add_permissions_menu(category)        
+                self._add_permissions_menu(category)
 ```
 
 
@@ -276,16 +276,16 @@ class AppBuilder(object):
 
 * `/flask_appbuilder/api/__init__.py `    API基类 BaseApi(object)  -> BaseModelApi -> ModelRestApi 。API视图详见下文 API视图章节
 
-* /flask_appbuilder/baseview.py  
+* /flask_appbuilder/baseview.py
   * 路由装饰器函数  expose expose_api
   * 视图基类  BaseView(object) ->  BaseFormView/BaseModelView  --> BaseCRUDView(BaseModelView)
 * /flask_appbuilder/views.py  视图常见路由实现，如list/add/edit/download/...
 
 ```shell
 # 视图的层次体系: 类名带Base的实现一般在baseview.py
-RestAPI:   BaseApi(object)  -> BaseModelApi -> ModelRestApi 
-ModelView: 
-	BaseView(object)  
+RestAPI:   BaseApi(object)  -> BaseModelApi -> ModelRestApi
+ModelView:
+	BaseView(object)
 		-> BaseModelView -> BaseCRUDView	(baseview.py)
 			-> RestCRUDView -> ModelView    (views.py)
 		-> BaseFormView
@@ -340,8 +340,8 @@ def expose_api(name="", url="", methods=("GET",), description=""):
 2. **基础视图**： 包括CRUD方法的真正实现
 
    flask_appbuilder/baseview.py
-   
-   BaseView类的公有方法有：create_blueprint  render_template  get_redirect  get_default_url  
+
+   BaseView类的公有方法有：create_blueprint  render_template  get_redirect  get_default_url
 
 ```python
 class BaseView(object):
@@ -433,22 +433,22 @@ class BaseView(object):
 
             Initialization of extra args
         """
-        
-        
-   """ CRUD方法的真正实现 """ 
+
+
+   """ CRUD方法的真正实现 """
    def _list(self):
         """
             list function logic, override to implement different logic
             returns list and search widget
         """
-        # 获取排序参数：排序字段，排序方向 
+        # 获取排序参数：排序字段，排序方向
         if get_order_args().get(self.__class__.__name__):
             order_column, order_direction = get_order_args().get(
                 self.__class__.__name__
             )
         else:
             order_column, order_direction = "", ""
-        # 获取分页参数：page pagesize   
+        # 获取分页参数：page pagesize
         page = get_page_args().get(self.__class__.__name__)
         page_size = get_page_size_args().get(self.__class__.__name__)
         # 获取过滤参数 filter
@@ -462,8 +462,8 @@ class BaseView(object):
         )
         form = self.search_form.refresh()
         self.update_redirect()
-        return self._get_search_widget(form=form, widgets=widgets)        
-    
+        return self._get_search_widget(form=form, widgets=widgets)
+
     def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):
         # Store appbuilder instance
         self.appbuilder = appbuilder
@@ -492,25 +492,25 @@ class BaseView(object):
                 static_folder=static_folder,
             )
         self._register_urls()	# 注册urls
-        return self.blueprint        
-    
+        return self.blueprint
+
     def _register_urls(self):
-        ...        
-        
+        ...
+
     def render_template(self, template, **kwargs):
         """
             Use this method on your own endpoints, will pass the extra_args
-            to the templates.  
+            to the templates.
 			填充2个参数：base_teimplate, appbuilder，然后调用flask模块的render_template函数
             :param template: The template relative path
             :param kwargs: arguments to be passed to the template
         """
         kwargs["base_template"] = self.appbuilder.base_template
         kwargs["appbuilder"] = self.appbuilder
-        return render_template(	# 渲染模板 
+        return render_template(	# 渲染模板
             template, **dict(list(kwargs.items()) + list(self.extra_args.items()))
-        )        
-    
+        )
+
 ```
 
 
@@ -573,7 +573,7 @@ class MenuItem(object):
         if not self.href:
             if not self.baseview:
                 return ""
-            else:  # flask.url_for 获取当前请求路由的视图函数 
+            else:  # flask.url_for 获取当前请求路由的视图函数
                 return url_for(f"{self.baseview.endpoint}.{self.baseview.default_view}")
         else:
             try:
@@ -583,24 +583,24 @@ class MenuItem(object):
 
     def __repr__(self):
         return self.name
-    
-    
+
+
 class Menu(object):
     """ 菜单对象 """
     def __init__(self, reverse=True, extra_classes=""):
         self.menu = []	#列表存储MenuItem
         if reverse:
             extra_classes = extra_classes + "navbar-inverse"
-        self.extra_classes = extra_classes 
-        
+        self.extra_classes = extra_classes
+
     def get_list(self):
         return self.menu
-    
+
     def get_data(self, menu=None):
     def find(self, name, menu=None):
     def add_category(self, category, icon="", label="", parent_category=""):
-        
- 	def add_link( self, name, href="", icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None, ):      
+
+ 	def add_link( self, name, href="", icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None, ):
         """ 根据category得到菜单，将name和对应的href添加到菜单下拉项 """
         label = label or name
         category_label = category_label or category
@@ -650,8 +650,8 @@ class Menu(object):
             raise Exception(
                 "Menu separator does not have correct category {}".format(category)
             )
-      
-    
+
+
 class MenuApi(BaseApi):
     resource_name = "menu"
     openapi_spec_tag = "Menu"
@@ -659,14 +659,14 @@ class MenuApi(BaseApi):
     @expose("/", methods=["GET"])
     @protect(allow_browser_login=True)
     @permission_name("get")
-    def get_menu_data(self):    
+    def get_menu_data(self):
         return self.response(200, result=current_app.appbuilder.menu.get_data())
 
 
 class MenuApiManager(BaseManager):
     def register_views(self):
         if self.appbuilder.app.config.get("FAB_ADD_MENU_API", True):
-            self.appbuilder.add_api(MenuApi)        
+            self.appbuilder.add_api(MenuApi)
 ```
 
 
@@ -795,9 +795,9 @@ def create_admin(username, firstname, lastname, email, password):
 
 ### 管理类 xx/manager.py
 
-类体系：(sqla/manager.py)SecurityManager ->  
+类体系：(sqla/manager.py)SecurityManager ->
 
-​			   (manager.py)BaseSecurityManager -> AbstractSecurityManager -> 
+​			   (manager.py)BaseSecurityManager -> AbstractSecurityManager ->
 
 ​			   (/flask_appbuilder/basemanager.py)BaseManager 管理类基类
 
@@ -826,7 +826,7 @@ class BaseManager(object):
 
 
 
-/flask_appbuilder/security/manager.py  
+/flask_appbuilder/security/manager.py
 
 ```python
 from ..basemanager import BaseManager
@@ -834,20 +834,20 @@ from ..basemanager import BaseManager
 
 class AbstractSecurityManager(BaseManager):
     """ 抽象类，子类实现具体方法 """
-    def add_permissions_view(self, base_permissions, view_menu):        
-    def add_permissions_menu(self, view_menu_name):        
-    def register_views(self):        
+    def add_permissions_view(self, base_permissions, view_menu):
+    def add_permissions_menu(self, view_menu_name):
+    def register_views(self):
     def is_item_public(self, permission_name, view_name):
-    def has_access(self, permission_name, view_name):      
-    def security_cleanup(self, baseviews, menus):        
-        raise NotImplementedError        
-        
-        
+    def has_access(self, permission_name, view_name):
+    def security_cleanup(self, baseviews, menus):
+        raise NotImplementedError
+
+
 class BaseSecurityManager(AbstractSecurityManager):
     """
     支持预设角色，
     支持各种认证方式，认证类型变量为AUTH_TYPE，通过认证类型导入认证类，
-    支持用户自注册       
+    支持用户自注册
     """
     ...
     # 各认证的缺省视图，用户可以重载
@@ -861,7 +861,7 @@ class BaseSecurityManager(AbstractSecurityManager):
     """ Override if you want your own Authentication OAuth view """
     authremoteuserview = AuthRemoteUserView
     ...
-    
+
     def __init__(self, appbuilder):
         super(BaseSecurityManager, self).__init__(appbuilder)
         app = self.appbuilder.get_app
@@ -875,8 +875,8 @@ class BaseSecurityManager(AbstractSecurityManager):
         app.config.setdefault("AUTH_USER_REGISTRATION_ROLE_JMESPATH", None)
         # Role Mapping
         app.config.setdefault("AUTH_ROLES_MAPPING", {})
-        app.config.setdefault("AUTH_ROLES_SYNC_AT_LOGIN", False)      
-        
+        app.config.setdefault("AUTH_ROLES_SYNC_AT_LOGIN", False)
+
 
     """
         ----------------------------------------
@@ -938,8 +938,8 @@ class BaseSecurityManager(AbstractSecurityManager):
                 db_role_ids.append(role.id)
 
         # If it's not a builtin role check against database store roles
-        return self.exist_permission_on_roles(view_name, permission_name, db_role_ids)     
-    
+        return self.exist_permission_on_roles(view_name, permission_name, db_role_ids)
+
     def has_access(self, permission_name, view_name):
         """
         Check if current user or public has access to view or menu
@@ -950,12 +950,12 @@ class BaseSecurityManager(AbstractSecurityManager):
         elif current_user_jwt:	# 当前用户是JWT登陆
             return self._has_view_access(current_user_jwt, permission_name, view_name)
         else:	# 公共用户
-            return self.is_item_public(permission_name, view_name)    
+            return self.is_item_public(permission_name, view_name)
 ```
 
 
 
-/flask_appbuilder/security/sqla/manager.py  
+/flask_appbuilder/security/sqla/manager.py
 
 ```python
 from typing import List, Optional
@@ -979,19 +979,19 @@ from .models import (
 from ..manager import BaseSecurityManager
 
 
-class SecurityManager(BaseSecurityManager):  
+class SecurityManager(BaseSecurityManager):
     """ 安全管理类，BRAC基于角色的访问控制，通过用户所拥有的角色集得到相应权限集。
-    主要就是查找DB里的权限相关6张表，判断用户要访问的资源view/menu是否有相应权限(read/write/list/...)    
+    主要就是查找DB里的权限相关6张表，判断用户要访问的资源view/menu是否有相应权限(read/write/list/...)
     """
     user_model = User						# ab_user表
     role_model = Role						# ab_role表
-    permission_model = Permission			# ab_permisson表	
+    permission_model = Permission			# ab_permisson表
     viewmenu_model = ViewMenu				# ab_view_menu表
     permissionview_model = PermissionView	# ab_permission_view表
     registeruser_model = RegisterUser		# ab_regitser_user表
 
-    def __init__(self, appbuilder):        
-        
+    def __init__(self, appbuilder):
+
     def exist_permission_on_roles(
         self, view_name: str, permission_name: str, role_ids: List[int]
     ) -> bool:
@@ -1023,7 +1023,7 @@ class SecurityManager(BaseSecurityManager):
         # Special case for MSSQL/Oracle (works on PG and MySQL > 8)
         if self.appbuilder.get_session.bind.dialect.name in ("mssql", "oracle"):
             return self.appbuilder.get_session.query(literal(True)).filter(q).scalar()
-        return self.appbuilder.get_session.query(q).scalar()        
+        return self.appbuilder.get_session.query(q).scalar()
 ```
 
 
@@ -1053,12 +1053,12 @@ class AuthView(BaseView):
         pass
 
     @expose("/logout/")
-    def logout(self):  
+    def logout(self):
         """ 用户退出一系列操作，重定向到首页 """
         logout_user()
         return redirect(self.appbuilder.get_url_for_index)
-    
-    
+
+
 class AuthDBView(AuthView):
     """ 对外提供'/login/'接口，读取HTTP POST里的用户名/密码，然后调用auth_user_db验证，验证通过调用login_user生成认证信息。"""
     login_template = "appbuilder/general/security/login_db.html"
@@ -1068,7 +1068,7 @@ class AuthDBView(AuthView):
         if g.user is not None and g.user.is_authenticated: #如果当前用户未退出并且已认证，跳转到首页
             return redirect(self.appbuilder.get_url_for_index)
         form = LoginForm_db()
-        if form.validate_on_submit():  
+        if form.validate_on_submit():
             user = self.appbuilder.sm.auth_user_db(   #真正的认证操作：DB验证用户名和密码是否匹配
                 form.username.data, form.password.data
             )
@@ -1133,7 +1133,7 @@ def protect(allow_browser_login=False):
             permission_str = f.__name__
 
         def wraps(self, *args, **kwargs):
-            # Apply method permission name override if exists,  
+            # Apply method permission name override if exists,
             # 赋值permission_str PERMISSION_PREFIX="can_", f._permission_name="read|write|list"
             permission_str = "{}{}".format(PERMISSION_PREFIX, f._permission_name)
             if self.method_permission_name:	# dict={'method':"permisson_name"}
@@ -1214,8 +1214,8 @@ def has_access(f):
 
 
 def has_access_api(f):
-    
-    
+
+
 def permission_name(name):
 ```
 
@@ -1227,28 +1227,28 @@ def permission_name(name):
 
 API安全登陆实现，JWT方式。JWT实现依赖于flask_jwt_extended模块。
 
-提供接口 
+提供接口
 
-* /security/login  登陆获取2个token分别是access_token 和 refresh_token。access_token用来JWT验证，有时效要求。 
-* /security/refresh  更新token，用refresh_token获取新的access_token 
+* /security/login  登陆获取2个token分别是access_token 和 refresh_token。access_token用来JWT验证，有时效要求。
+* /security/refresh  更新token，用refresh_token获取新的access_token
 
 ```python
 from ..api import BaseApi, safe
 
 
 class SecurityApi(BaseApi):
-	
+
     resource_name = "security"
     version = API_SECURITY_VERSION
     openapi_spec_tag = "Security"
-    
+
     def add_apispec_components(self, api_spec):
         """ 添加API文档scheme """
         super(SecurityApi, self).add_apispec_components(api_spec)
         jwt_scheme = {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
         api_spec.components.security_scheme("jwt", jwt_scheme)
         api_spec.components.security_scheme("jwt_refresh", jwt_scheme)
-        
+
     @expose("/login", methods=["POST"])
     @safe
     def login(self):
@@ -1294,7 +1294,7 @@ class SecurityApi(BaseApi):
                 identity=get_jwt_identity(), fresh=False
             )
         }
-        return self.response(200, **resp)        
+        return self.response(200, **resp)
 ```
 
 
@@ -1558,7 +1558,7 @@ appbuilder/baselib.html
 			<li><a href="{{appbuilder.get_url_for_userinfo}}"><span class="fa fa-fw fa-user"></span>{{_("Profile")}}</a></li>
 			<li><a href="{{appbuilder.get_url_for_logout}}"><span class="fa fa-fw fa-sign-out"></span>{{_("Logout")}}</a></li>
                     </ul>
-        		
+
                 </li>
                 {% else %}
                     <li><a href="{{appbuilder.get_url_for_login}}">
@@ -1599,7 +1599,7 @@ appbuilder/nav_bar.html
                 {{ appbuilder.app_name }}
                 </a>
                 </span>
-            {% endif %}                
+            {% endif %}
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -1683,8 +1683,8 @@ appbuilder/nav_bar.html
         {% for lang in languages %}
             {% if lang != locale %}
                 <a tabindex="-1" href="{{appbuilder.get_url_for_locale(lang)}}">
- 
- 
+
+
                   <div class="f16"><i class="flag {{languages[lang].get('flag')}}"></i> - {{languages[lang].get('name')}}
                 </div></a>
             {% endif %}
@@ -1720,12 +1720,12 @@ appbuilder/nav_bar.html
 * `/flask_appbuilder/api/__init__.py `   API视图基类和装饰器
 *  /flask_appbuilder/api/manager.py  API文档
 
-### API视图和权限 
+### API视图和权限
 
-`/flask_appbuilder/api/__init__.py`   
+`/flask_appbuilder/api/__init__.py`
 
 * API视图基类：BaseApi(object)  -> BaseModelApi -> ModelRestApi 。
-* 装饰器：expose  safe  rison  
+* 装饰器：expose  safe  rison
   * expose: API路由扩展
   * safe: 捕捉异常，返回异常时的JSON
   * rison: 捕捉入参的Rison参数
@@ -1738,7 +1738,7 @@ class BaseApi(object):
     version: Optional[str] = "v1"		 # 此处定义了API版本，若有版本升级，继承类可重新赋值，如v2
     route_base: Optional[str] = None	 # 有值，则是路由根前缀
     resource_name: Optional[str] = None  # 若route_base无值，则用来构建路由根前缀。若本变量值为空，则赋值为当前类名小写。
-        
+
     """ 蓝图路径是 self.route_base or /api/vi/{resource_name.lower()} """
     def create_blueprint(self, appbuilder, endpoint=None, static_folder=None):
         # Store appbuilder instance
@@ -1760,13 +1760,13 @@ class BaseApi(object):
 
         self._register_urls()
         return self.blueprint
-    
-    
+
+
 class BaseModelApi(BaseApi):
     datamodel = None
-    
+
 class ModelRestApi(BaseModelApi):
-    
+
 
 def expose(url="/", methods=("GET",)):
     """
@@ -1805,8 +1805,8 @@ def safe(f):
     return functools.update_wrapper(wraps, f)
 
 
-def rison(schema=None):    
-""" 
+def rison(schema=None):
+"""
 	示例：
             schema = {
                 "type": "object",
@@ -1822,7 +1822,7 @@ def rison(schema=None):
                     @rison(schema)
                     def rison_json(self, **kwargs):
                         return self.response(200, result=kwargs['rison'])
-"""    
+"""
 ```
 
 
@@ -2082,9 +2082,9 @@ def create_engine(*args, **kwargs):
     """ 创建引擎，参数里获取引擎策略，跳转到相应的策略执行器 """
     strategy = kwargs.pop("strategy", default_strategy)
     strategy = strategies.strategies[strategy]
-    return strategy.create(*args, **kwargs)    
-    
-    
+    return strategy.create(*args, **kwargs)
+
+
 def engine_from_config(configuration, prefix="sqlalchemy.", **kwargs):
     """Create a new Engine instance using a configuration dictionary. """
     options = dict(
@@ -2098,7 +2098,7 @@ def engine_from_config(configuration, prefix="sqlalchemy.", **kwargs):
     return create_engine(url, **options)
 
 
-__all__ = ("create_engine", "engine_from_config")    
+__all__ = ("create_engine", "engine_from_config")
 ```
 
 
@@ -2117,8 +2117,8 @@ class EngineStrategy(object):
 
     def create(self, *args, **kwargs):
         raise NotImplementedError()
-        
-        
+
+
 
 class DefaultEngineStrategy(EngineStrategy):
     """Base class for built-in strategies."""
@@ -2144,7 +2144,7 @@ class DefaultEngineStrategy(EngineStrategy):
 
             def pop_kwarg(key, default=None):
                 value = kwargs.pop(key, default)
-                if key in dialect_cls.engine_config_types:	
+                if key in dialect_cls.engine_config_types:
                     value = dialect_cls.engine_config_types[key](value)
                 return value
 
@@ -2286,15 +2286,15 @@ class DefaultEngineStrategy(EngineStrategy):
             )
 
         dialect_cls.engine_created(engine)
-        if entrypoint is not dialect_cls:	
+        if entrypoint is not dialect_cls:
             entrypoint.engine_created(engine)	#创建引擎
 
-        for plugin in plugins:		
+        for plugin in plugins:
             plugin.engine_created(engine)		#创建插件
 
         return engine
 
-        
+
 class PlainEngineStrategy(DefaultEngineStrategy):
     """Strategy for configuring a regular Engine."""
 
@@ -2302,7 +2302,7 @@ class PlainEngineStrategy(DefaultEngineStrategy):
     engine_cls = base.Engine	#指定引擎类
 
 
-PlainEngineStrategy()      
+PlainEngineStrategy()
 
 
 class ThreadLocalEngineStrategy(DefaultEngineStrategy):
@@ -2380,7 +2380,7 @@ Author: Jonathan Hartley
 Author-email: tartley@tartley.com
 License: BSD
 Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
-Requires: 
+Requires:
 Required-by: Flask-AppBuilder, apache-superset
 ```
 
@@ -2421,7 +2421,7 @@ Required-by: flask-restx, Flask-AppBuilder
 
 ## marshmallow
 
-用于将复杂数据类型与原生 Python 数据类型相互转换的轻量级库。 
+用于将复杂数据类型与原生 Python 数据类型相互转换的轻量级库。
 
 ```shell
 $ pip show marshmallow
@@ -2433,7 +2433,7 @@ Author: Steven Loria
 Author-email: sloria1@gmail.com
 License: MIT
 Location: /home/keefe/venv/superset-py38-env/lib/python3.8/site-packages
-Requires: 
+Requires:
 Required-by: marshmallow-sqlalchemy, marshmallow-enum, Flask-AppBuilder
 ```
 
@@ -2651,7 +2651,8 @@ from datetime import timedelta
 #: The default name of the "remember me" cookie (``remember_token``)
 COOKIE_NAME = 'remember_token'
 
-#: The default time before the "remember me" cookie expires (365 days). cookie默认保存365天
+#: The default time before the "remember me" cookie expires (365 days).
+# cookie默认保存365天, 在浏览器HTTP响应头部显示 `Cache-Control: public, max-age=31536000`
 COOKIE_DURATION = timedelta(days=365)
 
 #: Whether the "remember me" cookie requires Secure; defaults to ``None``
@@ -2726,7 +2727,7 @@ from .utils import (_get_user, login_url as make_login_url, _create_identifier,
 
 class LoginManager(object):
     def __init__(self, app=None, add_context_processor=True):
-        
+
     def init_app(self, app, add_context_processor=True):
         '''
         Configures an application. This registers an `after_request` call, and
@@ -2741,18 +2742,18 @@ class LoginManager(object):
         '''
         app.login_manager = self
         # Flask 实例的 after_request 钩子上添加了一个用户更新 remember_me cookie 的函数
-        app.after_request(self._update_remember_cookie)	
+        app.after_request(self._update_remember_cookie)
 
         self._login_disabled = app.config.get('LOGIN_DISABLED', False)
 
         if add_context_processor:	# Flask的上下文处理器中添加了一个用户上下文处理器， _user_context_processor为当前用户
-            app.context_processor(_user_context_processor)      
-            
+            app.context_processor(_user_context_processor)
+
     def unauthorized(self):
        """ 未登陆的处理过程 """
        user_unauthorized.send(current_app._get_current_object())
 
-        if self.unauthorized_callback:	# 调用 未登陆回调函数 
+        if self.unauthorized_callback:	# 调用 未登陆回调函数
             return self.unauthorized_callback()
 
         if request.blueprint in self.blueprint_login_views:	# 定义登陆视图
@@ -2779,8 +2780,8 @@ class LoginManager(object):
         else:
             redirect_url = make_login_url(login_view, next_url=request.url)
 
-        return redirect(redirect_url)     
-    
+        return redirect(redirect_url)
+
     def _load_user(self):
        """处理登陆： remember_token(cookie), Authorization(header)"""
        user_accessed.send(current_app._get_current_object())
@@ -2806,7 +2807,7 @@ class LoginManager(object):
 
        return self.reload_user()
 
-    ... 
+    ...
 ```
 
 
@@ -2881,10 +2882,10 @@ def login_user(user, remember=False, duration=None, force=False, fresh=True):
 
     _request_ctx_stack.top.user = user
     user_logged_in.send(current_app._get_current_object(), user=_get_user())
-    return True    
+    return True
 
 def login_url(login_view, next_url=None, next_field='next'):
-    """ 
+    """
     创建一个重定向到登陆页面login_view的 url。
     示例：http://domain?next={next_url}
     :param login_view: str, The name of the login view. (缺省登陆URL指向此页面.)
@@ -2903,7 +2904,7 @@ def login_url(login_view, next_url=None, next_field='next'):
         parsed_result.netloc
     parsed_result = parsed_result._replace(netloc=netloc,
                                            query=url_encode(md, sort=True))
-    return urlunparse(parsed_result)    
+    return urlunparse(parsed_result)
 
 
 def login_required(func):
@@ -2917,7 +2918,7 @@ def login_required(func):
         elif not current_user.is_authenticated:	# 判断当前用户是否已验证，若未验证，跳转到未验证函数
             return current_app.login_manager.unauthorized()
         return func(*args, **kwargs)
-    return decorated_view    
+    return decorated_view
 
 def _create_identifier():
     """ 创建防篡改的cookie ID：根据连接IP和header里的User-Agent生成base作为盐值，生成一个hash值 """
@@ -2928,7 +2929,7 @@ def _create_identifier():
     if str is bytes:  #正常执行是false，不执行下行
         base = text_type(base, 'utf-8', errors='replace')  # pragma: no cover
     h = sha512()
-    h.update(base.encode('utf8'))	
+    h.update(base.encode('utf8'))
     return h.hexdigest()
 ```
 
@@ -2936,7 +2937,7 @@ def _create_identifier():
 
 ### cookie里的session信息破解
 
-浏览器端的header信息 
+浏览器端的header信息
 
 ```shell
 # cookie：主要2个KEY，分别是remember_token 和 session
@@ -2944,7 +2945,7 @@ def _create_identifier():
 # 2.session: cookie名称在flask模块Flask类里定义，cookie值生成依赖itdangerous模块的签名序列化算法。 详见《flask源码剖析》sessions.py章节。
 remember_token=5|5e16c92420f51b33c4c3b7dc2eccf46ace6963402024dabc35afc3dd54aaeab3ebcdf29de906cfdbd48e8e9390508c86050ddc5ae573945b5c3298a40435caec; session=.eJztlM1uhDAMhF8F-YwqB5I44VWqFUpip6CFZUVYqepq373pz2NwGs_l08xh_IQxL6FMUmB4f0JzVIFVSgkfAi2kSdJ1PLar3Eb5vM-7cDOX5v9sm0eRfWgOKYeCy6s9ASfgBPwCLm1d1i5lguHYH1LdzDBAtqHzwlHYIyNhVEqlXiOxs5p1oOhD75WSTJYpEHsnzM4bRU6bLnvvyUYXs0NyIXVCFqNBThp7nW3uxKaApBlRWSfJuKyIkuGocnQm1h7LlsIiNcvXVN0uq6xR9rFI2m5c34ByiG_Ywk-fv9AGXt9POWeT.YVVWXA.t2LDcxYyDTneCl6w5yCNyGd89L4
 
-# User-Agent: 
+# User-Agent:
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.47
 ```
 
@@ -2961,7 +2962,7 @@ ident = self._session_identifier_generator()
 
 # /flask_login/utils.py
 # _create_identifier： base是作为哈希的盐值。示例：base = 'b\'127.0.0.1\'|b\'PostmanRuntime/7.28.1\''
-base = '{0}|{1}'.format(_get_remote_addr(), user_agent)  
+base = '{0}|{1}'.format(_get_remote_addr(), user_agent)
 
 ```
 
@@ -2974,7 +2975,7 @@ cookie的操作
 from .utils import encode_cookie, decode_cookie
 
 class LoginManager(object):
-    
+
     def _load_from_cookie(self, cookie):
         """ 用户登陆过程中，获取 user_id """
         user_id = decode_cookie(cookie)
@@ -3004,7 +3005,7 @@ class LoginManager(object):
                 self._clear_cookie(response)
 
         return response
-    
+
    def _set_cookie(self, response):
         # cookie settings
         config = current_app.config
@@ -3049,8 +3050,8 @@ class LoginManager(object):
         domain = config.get('REMEMBER_COOKIE_DOMAIN')
         path = config.get('REMEMBER_COOKIE_PATH', '/')
         response.delete_cookie(cookie_name, domain=domain, path=path)
-        
-        
+
+
 # /flask_login/utils.py
 import hmac
 from hashlib import sha512
@@ -3148,14 +3149,14 @@ from sqlalchemy.schema import _get_table_key
 from ._compat import to_str
 
 def should_set_tablename(cls):
-    
+
 
 def camel_to_snake_case(name):
-    
-    
+
+
 class NameMetaMixin(type):
     """ 名称元数据 """
-    
+
 class BindMetaMixin(type):
     def __init__(cls, name, bases, d):
         bind_key = (
@@ -3173,7 +3174,7 @@ class DefaultMeta(NameMetaMixin, BindMetaMixin, DeclarativeMeta):
     pass
 
 class Model(object):
-    query_class = None    
+    query_class = None
     query = None
 
     def __repr__(self):
@@ -3182,7 +3183,7 @@ class Model(object):
             pk = "(transient {0})".format(id(self))
         else:
             pk = ', '.join(to_str(value) for value in identity)
-        return '<{0} {1}>'.format(type(self).__name__, pk)    
+        return '<{0} {1}>'.format(type(self).__name__, pk)
 ```
 
 
@@ -3238,23 +3239,23 @@ Required-by: Flask-AppBuilder
 # /flask_wtf/csrf.py
 def generate_csrf(secret_key=None, token_key=None):
     """ 产生一个token 放到最近请求的缓存里 """
-    
+
 def validate_csrf(data, secret_key=None, time_limit=None, token_key=None):
     """ 验证给的token是否有效 """
-    
-    
+
+
 class CSRFProtect(object):
     def init_app(self, app):
         @app.before_request
         def csrf_protect():
-            
+
             view = app.view_functions.get(request.endpoint)
             dest = '{0}.{1}'.format(view.__module__, view.__name__)
 
             if dest in self._exempt_views:
                 return
 
-            self.protect()      
+            self.protect()
 ```
 
 

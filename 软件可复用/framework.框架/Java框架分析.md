@@ -69,9 +69,9 @@
 
 [5       参考资料... 25](#_Toc520839668)
 
- 
 
- 
+
+
 
 [TOC]
 
@@ -91,7 +91,7 @@
 | EJB          | Enterprise JavaBean |          |
 | MVC          |                     |          |
 
- 
+
 
 ## 1.1  JVM
 
@@ -103,13 +103,13 @@ J2EE的分层架构是设计模式MVC（详见 《软件设计系列》MVC模式
 
 J2EE是SUN公司基于Java的体系结构，是4层结构，包括客户层(客户端), WEB层(JSP/Servlets), 业务层(Java Bean), EIS层(DBMS)
 
- 
+
 
 ### Model1: JSP + Beans（已淘汰）
 
 Model 1体系中，JSP页面充当VIEW+CONTROLLER的角色。控制逻辑和表现逻辑混在一起，代码可用性和维护性差，不利于大型项目开发。
 
-​         ![1574517098015](../../media/sf_reuse/framework/frame_java_001.png)                                         
+​         ![1574517098015](../../media/sf_reuse/framework/frame_java_001.png)
 
 ### Model2: JSP + Servlet + Beans
 
@@ -118,7 +118,7 @@ Model 1体系中，JSP页面充当VIEW+CONTROLLER的角色。控制逻辑和表�
 *  Java Servlet：运行于服务器上的一个小程序, 提供应用程序接口, 通过它可以简单快速地开发并扩展服务器功能, 将来有可能取代CGI。Servlet处理业务逻辑。
 *  JSP：Java Server Page, 提供一种简单快速的方法来*创建动态网页*。JSP生成表示层的内容
 
- 
+
 
 Servlet 是在[服务器](http://baike.baidu.com/view/899.htm)上运行的小程序。这个词是在 Java [applet](http://baike.baidu.com/view/150834.htm)的环境中创造的，Java applet 是一种当作单独文件跟网页一起发送的小程序，它通常用于在客户端运行，结果得到为用户进行运算或者根据用户互作用定位图形等服务。
 
@@ -128,25 +128,25 @@ Servlet 是在[服务器](http://baike.baidu.com/view/899.htm)上运行的小程
 3. Servlet 生成响应内容并将其传给服务器。响应内容动态生成，通常取决于客户端的请求；
 4. 服务器将响应返回给客户端。
 
- 
+
 
    ![mvc_05.png](../../media/sf_reuse/mvc_05.png)
 
-图 1 J2EE里的 MVC (JSP + Servlet + Beans) 
+图 1 J2EE里的 MVC (JSP + Servlet + Beans)
 
-说明：J2EE与MVC的关系 
+说明：J2EE与MVC的关系
 
-在实际WEB开发中, J2EE常采用MVC的设计模式. 具体做法是: 
-*  由JSP来充当视图V, 产生显示网页； 
+在实际WEB开发中, J2EE常采用MVC的设计模式. 具体做法是:
+*  由JSP来充当视图V, 产生显示网页；
 *  由Java Bean充当模型M处理请求；
 *  控制器control由Servlets实现。
 
-控制器流程如下: 
-1. 根据用户权限,导航到不同界面; 
-2. 根据用户功能请求, 实例化功能模块Bean； 
+控制器流程如下:
+1. 根据用户权限,导航到不同界面;
+2. 根据用户功能请求, 实例化功能模块Bean；
 3..将Bean处理结果导航给JSP显示给客户端.
 
- 
+
 
 ## 1.3  EJB模型
 
@@ -154,7 +154,7 @@ EJB-（Enterprise [JavaBean](https://baike.baidu.com/item/JavaBean)，企业Bean
 
 EJB是基于Java开发、部署服务器端分布式组件的标准规范。
 
-EJB是J2EE(javaEE)的一部分，定义了一个用于开发基于组件的企业多重应用程序的标准。其特点包括[网络服务](https://baike.baidu.com/item/网络服务)支持和核心开发工具(SDK)。 
+EJB是J2EE(javaEE)的一部分，定义了一个用于开发基于组件的企业多重应用程序的标准。其特点包括[网络服务](https://baike.baidu.com/item/网络服务)支持和核心开发工具(SDK)。
 
 在J2EE里，EJB称为Java 企业Bean，是Java的核心代码，包括三种Bean：
 *  会话Bean（Session Bean），
@@ -163,7 +163,7 @@ EJB是J2EE(javaEE)的一部分，定义了一个用于开发基于组件的企�
 
 在EJB3.0推出以后，实体Bean被单独分了出来，形成了新的规范[JPA](https://baike.baidu.com/item/JPA)。
 
- 
+
 
 表格 2 EJB版本
 
@@ -173,7 +173,7 @@ EJB是J2EE(javaEE)的一部分，定义了一个用于开发基于组件的企�
 | EJB 2.0 | 太过于复杂。 |                    |
 | EJB 3.0 |              | 更加简单和轻量化。 |
 
- 
+
 
 EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组件要解决的标准：
 *  可扩展 (Scalable)
@@ -182,7 +182,7 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 *  [数据存储](https://baike.baidu.com/item/数据存储)(Persistent)
 *  安全性 (Secure)
 
- 
+
 
    ![1574517192248](../../media/sf_reuse/framework/frame_java_003.png)
 
@@ -198,13 +198,13 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 *  **JDBC**：Java的数据库访问接口, 通过它来访问DBMS.
 
- 
+
 
    ![1574517223303](../../media/sf_reuse/framework/frame_java_004.png)
 
 图 3 J2EE体系结构
 
- 
+
 
 ## 1.4   常见开源框架
 
@@ -223,9 +223,9 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 | NetBeans      | IDE                    |                  |                      |           |                                                              |
 | XPlanner      | 项目管理               |                  |                      |           |                                                              |
 
- 
 
- 
+
+
 
 ## 本章参考
 
@@ -235,7 +235,7 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 [3]: J2EE [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
 
- 
+
 
 # 2  Java SSH框架
 
@@ -251,17 +251,17 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 | [  Spring  ](https://spring.io/)         | J2EE/IOC/AOP  | 作为EJB模型的一个替换选择，是IOC和AOP的容器框架。初版2003年发布，最新版本是Spring   3。 |
 | [  Hibernate  ](http://hibernate.org/)   | ORM持久层框架 | 一个开放源代码的对象关系映射ORM框架，它对JDBC进行了非常轻量级的对象封装。 |
 
-*备注：SSH~ Struts + Spring + Hibrnate**，Java**最经典的开发框架组合。* 
+*备注：SSH~ Struts + Spring + Hibrnate**，Java**最经典的开发框架组合。*
 
- 
+
 
 SSH框架是Java平台企业级的最基础的框架之一。
 
-集成步骤总结： 
-1. 获取所有的依赖库(很多)。 
-2. 注册 Spring 的 ContextLoaderListener 来整合 Struts2 和 Spring。 
-3. 使用 Spring 的 LocalSessionFactoryBean 来集成 Spring 和 Hibernate。 
-4. 完成所有连接。 
+集成步骤总结：
+1. 获取所有的依赖库(很多)。
+2. 注册 Spring 的 ContextLoaderListener 来整合 Struts2 和 Spring。
+3. 使用 Spring 的 LocalSessionFactoryBean 来集成 Spring 和 Hibernate。
+4. 完成所有连接。
 
 Struts 2 <-- (ContextLoaderListener) --> Spring <-- (LocalSessionFactoryBean) --> Hibernate
 
@@ -277,13 +277,13 @@ Struts 2 <-- (ContextLoaderListener) --> Spring <-- (LocalSessionFactoryBean) --
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<package name="default" namespace="/" extends="struts-default"> 
-  <!-- 定义一个名为user的Action，实现类为com.qst.chapter02.action.UserAction   -->  
-  <action name="user" class="com.qst.chapter02.action.UserAction"> 
-    <!-- 配置execute()方法返回值与视图资源之间的映射关系 -->  
-    <result name="success">/result.jsp</result>  
-    <result name="error">/error.jsp</result> 
-  </action> 
+<package name="default" namespace="/" extends="struts-default">
+  <!-- 定义一个名为user的Action，实现类为com.qst.chapter02.action.UserAction   -->
+  <action name="user" class="com.qst.chapter02.action.UserAction">
+    <!-- 配置execute()方法返回值与视图资源之间的映射关系 -->
+    <result name="success">/result.jsp</result>
+    <result name="error">/error.jsp</result>
+  </action>
 </package>
 ```
 
@@ -291,13 +291,13 @@ Struts 2 <-- (ContextLoaderListener) --> Spring <-- (LocalSessionFactoryBean) --
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<hibernate-configuration> 
-  <session-factory> 
-    <!-- 配置访问Oracle数据库参数信息 -->  
-    <property name="dialect">org.hibernate.dialect.OracleDialect</property>  
-    <!-- 注册所有ORM映射文件 -->  
-    <mapping resource="com/qst/chapter05/pojos/Student.hbm.xml"/> 
-  </session-factory> 
+<hibernate-configuration>
+  <session-factory>
+    <!-- 配置访问Oracle数据库参数信息 -->
+    <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+    <!-- 注册所有ORM映射文件 -->
+    <mapping resource="com/qst/chapter05/pojos/Student.hbm.xml"/>
+  </session-factory>
 </hibernate-configuration>
 ```
 
@@ -319,7 +319,7 @@ strucs 2是典型的MVC模式。
 
 2. user created颜色部分是指项目中项目需要实现的。如业务控制器类、视图页面和struts.xml里配置业务控制器。
 
- 
+
 
 ### 2.2.2   Strucs开发篇
 
@@ -343,7 +343,7 @@ result的处理方式：
 
 ONGL：Object-Graph Navigation Language, 对象图导航语言。是一种功能强大的表达式语言，提供了存取对象属性、调用对象方法、遍历对象结构图、对象类型转换的特定语法。
 
- 
+
 
 JSP标签库：类似HTML里的标签，能够简化JSP的编写。
 
@@ -355,7 +355,7 @@ JSP标签库：类似HTML里的标签，能够简化JSP的编写。
 
 *  AJAX标签：如
 
- 
+
 
 标签库的导入：JSP中使用taglib指令引入标签库。
 
@@ -363,7 +363,7 @@ JSP标签库：类似HTML里的标签，能够简化JSP的编写。
 
 标签库的三个符号：#（变量） %（字符串） $（范围）
 
- 
+
 
 **模板和主题**
 
@@ -378,7 +378,7 @@ JSP标签库：类似HTML里的标签，能够简化JSP的编写。
 
 项目步骤
 
-step 1: 新建项目 Dynamic web moduel 
+step 1: 新建项目 Dynamic web moduel
 
 *step 2**：*配置struts框架，下载struts 2；复制lib下jar包到WEB-INF/lib。
 
@@ -404,7 +404,7 @@ step 3：配置WEB-CONTENT/WEB-INF/lib下的web.xml里的servlet Filter（核心
 
 
 
-step 4: 创建输入/输出/错误视图：input.jsp result.jsp error.jsp 
+step 4: 创建输入/输出/错误视图：input.jsp result.jsp error.jsp
 
 step 5: 创建业务控制器：src目录下类com.qst.chapter02.action.UserAction
 
@@ -424,13 +424,13 @@ step 5: 创建业务控制器：src目录下类com.qst.chapter02.action.UserActi
 
 step 6: 运行显示视图，启动tomcat，访问http://localhost:8080/web_test/input.jsp
 
- 
+
 
    ![1574517338622](../../media/sf_reuse/framework/frame_structs_003.png)
 
 图 5 web_test项目运行流程图
 
- 
+
 
 ## 2.3 Spring
 
@@ -444,7 +444,7 @@ Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(I
 
 3、Spring不和现有的解决方案竞争，而是致力于将它们融合在一起。
 
- 
+
 
 **Spring的基本组成：**
 
@@ -460,7 +460,7 @@ Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(I
 
 6、灵活的MVC Web应用框架。
 
- 
+
 
 *  控制反转——Spring通过一种称作控制反转（IoC）的技术促进了松耦合。当应用了IoC，一个对象依赖的其它对象会通过被动的方式传递进来，而不是这个对象自己创建或者查找依赖对象。你可以认为IoC与JNDI相反——不是对象从容器中查找依赖，而是容器在对象初始化时不等对象请求就主动将依赖传递给它。
 *  面向切面——Spring提供了[面向切面编程](https://baike.baidu.com/item/面向切面编程)的丰富支持，允许通过分离应用的业务逻辑与系统级服务（例如审计（auditing）和事务（transaction）管理）进行内聚性的开发。应用对象只实现它们应该做的——完成业务逻辑——仅此而已。它们并不负责（甚至是意识）其它的系统级关注点，例如日志或事务支持。
@@ -469,7 +469,7 @@ Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(I
 
  ![1574517360405](../../media/sf_reuse/framework/frame_spring_001.png)
 
- 
+
 
 ### 2.3.1    Spring架构
 
@@ -509,7 +509,7 @@ Web上下文模块建立于应用上下文模块之上，提供了一个适合�
 
 MVC 框架是一个全功能的构建 Web 应用程序的 MVC 实现。通过策略接口，MVC 框架变成为高度可配置的，MVC 容纳了大量视图技术，其中包括 JSP、Velocity、Tiles、iText 和 POI。Spring为构建Web应用提供了一个功能全面的MVC框架。虽然Spring可以很容易地与其它MVC框架集成，例如Struts，但Spring的MVC框架使用IoC对控制逻辑和业务对象提供了完全的分离。
 
- 
+
 
 ### 2.3.2    Spring开发
 
@@ -523,7 +523,7 @@ IOC：控制反转（Inversion of Control，）把创建对象的权利交给框
 
 ​       可以把IoC模式看做是工厂模式的升华，可以把IoC看作是一个大工厂，只不过这个大工厂里要生成的对象都是在XML文件中给出定义的，然后利用Java 的“反射”编程，根据XML中给出的类名生成相应的对象。从实现来看，IoC是把以前在工厂方法里写死的对象生成代码，改变为由XML文件来定义，也就是把工厂和对象生成这两者独立分隔开来，目的就是提高灵活性和可维护性。
 
- 
+
 
 **IoC的缺点**
 
@@ -533,7 +533,7 @@ IOC：控制反转（Inversion of Control，）把创建对象的权利交给框
 
 （3）缺少IDE重构操作的支持，如果在Eclipse要对类改名，那么你还需要去XML文件里手工去改了，这似乎是所有XML方式的缺陷所在。
 
- 
+
 
 现有的框架实际上使用以下三种基本技术的框架执行服务和部件间的绑定：
 
@@ -553,7 +553,7 @@ IoC是一个很大的概念,可以用不同的方式实现。其主要形式有�
 
 *  依赖注入：组件不做定位查询，只提供普通的Java方法让容器去决定依赖关系。容器全权负责的组件的装配，它会把符合依赖关系的对象通过JavaBean属性或者[构造函数](https://baike.baidu.com/item/构造函数)传递给需要的对象。通过JavaBean属性注射依赖关系的做法称为设值方法注入(Setter Injection)；将依赖关系作为构造函数参数传入的做法称为[构造器](https://baike.baidu.com/item/构造器)注入（Constructor Injection）
 
- 
+
 
 实现的关键
 
@@ -561,19 +561,19 @@ IoC是一个很大的概念,可以用不同的方式实现。其主要形式有�
 
 *  ApplicationContext：ApplicationContext是BeanFactory的子接口，也被称为应用上下文。
 
- 
+
 
 **依赖注入1：Setter设值注入配置文件**
 
-bean.xml 
+bean.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
+<beans
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans
   		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 	<bean id="book" class="com.qst.chapter08.Book">
 		<property name="name" value="SSH开发" />
@@ -586,7 +586,7 @@ bean.xml
 
 
 
-**依赖注入2：Constructor构造器注入配置文件** 
+**依赖注入2：Constructor构造器注入配置文件**
 
 ```xml
 <bean id="book" class="com.qst.chapter08.Book">
@@ -615,7 +615,7 @@ public class ApplicationContextExample {
 
 
 
-#### 2.3.2.2  Spring AOP 
+#### 2.3.2.2  Spring AOP
 
 Spring AOP的模块化方面横切关注点。简单地说，就是一个拦截器拦截一些方法。
 
@@ -642,7 +642,7 @@ Spring框架的AOP功能是通过JavaSE动态代理和cglib实现的。
 
 #### 2.3.2.3  Spring MVC
 
- 
+
 
 ## 2.4 Hibernate
 
@@ -658,7 +658,7 @@ POJO：Java普通对象。
 
 说明：Hibernate通过持久化对象（PO）这个媒介来对数据库进行操作，底层数据库对于应用程序来说是透明的。
 
- 
+
 
    ![1574517507136](../../media/sf_reuse/framework/frame_java_hibernate_002.png)
 
@@ -720,11 +720,11 @@ POJO：Java普通对象。
 
  ![1574517566893](../../media/sf_reuse/framework/frame_java_hibernate_004.png)
 
-   
+
 
 图 10 Hibernate对象的三种状态转换
 
- 
+
 
 ### 2.4.2   Hibernate开发篇
 
@@ -740,7 +740,7 @@ POJO：Java普通对象。
 | Log4j (可选)                                 | Hibernate使用Commons Logging API,后者可以使用Log4j作为底层实施log的机制。如果上下文类目录中存在Log4j库，Commons Logging就会使用Log4j和它在上下文类路径中找到的log4j.properties文件。在Hibernate发行包中包含有一个示例的properties文件。所以，如果你想看看幕布之后到底发生了什么，也把log4j.jar拷贝到你的上下文类路径去吧（它位于src/目录中）。 |
 | 其他文件是不是必需的？                       | 请察看Hibernate发行包中的/lib/README.txt文件。这是一个Hibernate发行包中附带的第三方类库的列表，总是保持更新。你可以在那里找到所有必需或者可选的类库的列表。 |
 
- 
+
 
    ![1574517582934](../../media/sf_reuse/framework/frame_java_hibernate_005.png)
 
@@ -760,7 +760,7 @@ POJO：Java普通对象。
 
 7 编写Service类UserService.java 编写valid()函数 调用UserDAO.java的getUser()函数执行函数验证。
 
- 
+
 
 **step 2:** **配置文件**
 
@@ -800,21 +800,21 @@ step 4: 编写辅助类 HibernateSessionFactory.java
 
 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
- 
+
 
 ## 本章参考
 
 **官网**
 
-* struts  https://struts.apache.org/ 
-* Spring https://spring.io/ 
-* Hibernate http://hibernate.org/ 
+* struts  https://struts.apache.org/
+* Spring https://spring.io/
+* Hibernate http://hibernate.org/
 
 
 
 **参考链接**
 
-[1]:  Spring 框架简介  Spring AOP 和 IOC 容器入门  https://www.ibm.com/developerworks/cn/java/wa-spring1/ 
+[1]:  Spring 框架简介  Spring AOP 和 IOC 容器入门  https://www.ibm.com/developerworks/cn/java/wa-spring1/
 
 [2]:  Spring之AOP由浅入深 https://www.cnblogs.com/zhaozihan/p/5953063.html
 
@@ -824,11 +824,11 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 [5]: Spring 3.0文档 - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/
 
-[6]: Java中SSH框架怎样搭建 http://jingyan.baidu.com/article/066074d6564b39c3c21cb018.html 
+[6]: Java中SSH框架怎样搭建 http://jingyan.baidu.com/article/066074d6564b39c3c21cb018.html
 
 [7]: Struts2+Spring+Hibernate集成实例 https://www.yiibai.com/struts_2/struts-2-spring-hibernate-integration-example.html
 
-[8]: struts 2教程  https://www.yiibai.com/struts_2/ 
+[8]: struts 2教程  https://www.yiibai.com/struts_2/
 
 [9]: Spring Framework (Wiki) - http://en.wikipedia.org/wiki/Spring_Framework
 
@@ -849,9 +849,9 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 | AspectJ       | AOP           |                                                        |
 | FastAop       | AOP           | 高性能的AOP框架。                                      |
 
- 
 
-##  Mybatis 
+
+##  Mybatis
 
 MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。
 
@@ -873,15 +873,15 @@ MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口�
 
 图 12 android架构
 
- 
+
 
 ## 本章参考
 
- 
+
 
 
 
 # 参考资料
 
-[1]:  JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html 
+[1]:  JAVA 及 Eclipse 历史简介 http://www.cnblogs.com/COM_ZHJ/archive/2010/04/08/1707328.html
 

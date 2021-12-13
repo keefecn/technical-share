@@ -31,7 +31,7 @@
 ---
 
 # 1  Python概述
-## 1.1  Python简介 
+## 1.1  Python简介
 **发展历史**
 Python 是由 Guido van Rossum 在八十年代末和九十年代初，在荷兰国家数学和计算机科学研究所设计出来的。
 Python 本身也是由诸多其他语言发展而来的,这包括 ABC、Modula-3、C、C++、Algol-68、SmallTalk、Unix shell 和其他的脚本语言等等。
@@ -65,7 +65,7 @@ Python是一种解释型、面向对象、动态数据类型的高级程序设�
 Python由Guido van Rossum于1989年底发明，第一个公开发行版发行于1991年。
 像Perl语言一样, Python 源代码同样遵循 GPL(GNU General Public License)协议。
 
-Python 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。 
+Python 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。
 Python 的设计具有很强的可读性，相比其他语言经常使用英文关键字，其他语言的一些标点符号，它具有比其他语言更有特色语法结构。
 *  Python 是一种解释型语言： 这意味着开发过程中没有了编译这个环节。类似于PHP和Perl语言。
 *  python是编译型语言：python -m *.py可以生成pyc字节码文件，此字节码可以直接在虚拟机中运行。
@@ -89,9 +89,9 @@ Python 的设计具有很强的可读性，相比其他语言经常使用英文�
 | 3.7    | [**PEP 537**](https://www.python.org/dev/peps/pep-0537) | security | 2018-06-27    | *2023-06-27* | Ned Deily             |
 | 3.6    | [**PEP 494**](https://www.python.org/dev/peps/pep-0494) | security | 2016-12-23    | *2021-12-23* | Ned Deily             |
 
->  备注:  
+>  备注:
 >
->  *PEP*, *Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。   
+>  *PEP*, *Python* Enhancement Proposals的缩写。一个*PEP*是一份为*Python*社区提供各种增强功能的技术规格，也是提交新特性，以便让社区指出问题，精确化技术文档的提案。
 >
 >  TBD: To Be Discussed 待讨论
 
@@ -136,7 +136,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 | 解释器实现 | 简介     | 应用场景  |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Anaconda   | 公司推的，带免费版和商业版插件。成熟的科学计算环境，包括了常用的   Numpy,Scipy，matplotlib和networkx 等，以及 beautiful-soup，requests，flask，tornado   等网络相关的扩展。   提供了Python2.7和Python3.4两个版本，使用conda管理python扩展。 | 科学计算领域包括数据挖掘和机器学习。   $ conda list   $ conda install xxx |
-| CPython    | C语言实现，使用最广泛，是缺省的python解释器。有GIL机制。     | 通用。    |
+| **CPython** | C语言实现，使用最广泛，是缺省的python解释器。有GIL机制。     | 通用。    |
 | PyPy       | python语言实现的解释器，拥有的JIT编译、增量垃圾收集等诸多先进特性。pypy3去除了GIL。   编译安装需依赖python模块pycparser，将python代码转换成C代码，再编译成二进制文件。 | 脚本需经常运行，不需要完全支持第三方库。        |
 | Cython     | 将Python代码转换成C语言代码，再进行编译。       | 一般作为C扩展生成动态库，供python模块导入。     |
 | Jython     | Python用于JVM的一个成熟实验。      | 与Java混用。          |
@@ -147,7 +147,7 @@ python是编程语言，而不是运行时环境。python有几个实现，分�
 
 
 
-## 1.4   py/pyc/pyo/pyd
+## 1.4  py/pyc/pyo/pyd
 表格 2 python各种文件格式
 
 | 名称 | 简介         | 生成方式            |
@@ -238,7 +238,7 @@ False
 ```python
 >>> class Foo():
 ... 	pass
-... 
+...
 >>> type(Foo)
 <type 'classobj'>
 >>> f=Foo()
@@ -253,18 +253,18 @@ False
    Get a named attribute from an object; getattr(x, 'y') is equivalent to x.y.
 
 ```PYTHON
->>> getattr({}, "clear")   
+>>> getattr({}, "clear")
 <built-in method clear of dict object at 0x07204660>
->>> getattr([], "pop")   
+>>> getattr([], "pop")
 <built-in method pop of list object at 0x071C2288>
->>> getattr((), "pop")   
+>>> getattr((), "pop")
 Traceback (most recent call last):
   File "<interactive input>", line 1, in <module>
 AttributeError: 'tuple' object has no attribute 'pop'
 ```
 **说明：上述例子中dict有clear 方法，tuple无pop方法，list有pop方法。**
 
-1）对象引用，引用和原对象的修改会同步变化。python中对象的赋值（=）都是进行对象引用（内存地址）传递。 
+1）对象引用，引用和原对象的修改会同步变化。python中对象的赋值（=）都是进行对象引用（内存地址）传递。
 2）深拷贝deepcopy
 
 ```python
@@ -285,10 +285,10 @@ copy.copy( )
 * 使用copy模块中的copy()函数
 
 **小结：**
-* Python中对象的赋值都是进行对象引用（内存地址）传递 
-* 使用copy.copy()，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，依然使用原始的引用. 
+* Python中对象的赋值都是进行对象引用（内存地址）传递
+* 使用copy.copy()，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，依然使用原始的引用.
 * 如果需要复制一个容器对象，以及它里面的所有元素（包含元素的子元素），可以使用copy.deepcopy()进行深拷贝。
-* 对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说 
+* 对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说
 * 如果元祖变量只包含原子类型对象，则不能深拷。
 
 
@@ -329,7 +329,7 @@ copy.copy( )
 ### 2.3.1  控制流
 if/for/while的表达式可以用()圈起来，也可以不用。pass空语句，可用来填充空函数或空表达式。
 
-* if：if语句组成有if/elif/else. 
+* if：if语句组成有if/elif/else.
      if xx:  #非常强大的判断语句，支持NULL,容器空(无需len函数)的判断
 * for iterating_var in sequence:  相当于不断调用sequence.next方法
 * while: 支持continue, break.
@@ -385,7 +385,7 @@ class TimeTrace:
         self.start = self.__now()
         return self
 
-    def __exit__(self, exc_type, exc_val, tb):	#退出 
+    def __exit__(self, exc_type, exc_val, tb):	#退出
         self.end = self.__now()
         print('cost {}'.format(self.end - self.start))
 
@@ -461,7 +461,7 @@ max = (a > b and a or b)
 
 
 
-字符串转化为元组、列表和字典:  
+字符串转化为元组、列表和字典:
 
 ```python
 eval(str)
@@ -558,14 +558,14 @@ print type(eval("{'name':'ljq', 'age':24}"))
 
 
 
-**Python三引号（triple quotes）** 
+**Python三引号（triple quotes）**
 python中三引号可以将复杂的字符串进行复制:
 python三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。三引号的语法是一对连续的单引号或者双引号（通常都是成对的用）。
 python三引号常用作文档注释。
 
 **Python的字符串内建函数**
-字符串方法是从python1.6到2.0慢慢加进来的——它们也被加到了Jython中。 
-这些方法实现了string模块的大部分方法，如下表所示列出了目前字符串内建支持的方法，所有的方法都包含了对Unicode的支持，有一些甚至是专门用于Unicode的。 
+字符串方法是从python1.6到2.0慢慢加进来的——它们也被加到了Jython中。
+这些方法实现了string模块的大部分方法，如下表所示列出了目前字符串内建支持的方法，所有的方法都包含了对Unicode的支持，有一些甚至是专门用于Unicode的。
 表格 14 Python的字符串内建函数
 
 | 方法     | 描述     |
@@ -728,7 +728,7 @@ re.findal*  返回一个匹配列表
 
 
 
-### 2.5.2  正则表达式实例 
+### 2.5.2  正则表达式实例
 
 表格 字符匹配
 | 实例   | 描述           |
@@ -768,10 +768,10 @@ re.findal*  返回一个匹配列表
 ### 2.6.1  异常捕捉、抛出
 **异常捕捉：try语句、try-except、try-finally。**
 ```python
-try：  
-	监控这里的异常  
-except Exception[, reason]：  
-     异常处理代码  
+try：
+	监控这里的异常
+except Exception[, reason]：
+     异常处理代码
 Finally:
    无论正常还是异常都要处理的代码
 else:
@@ -915,9 +915,9 @@ Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编
 [1]. http://www.jb51.net/article/64040.htm
 [2]. 如何理解Python装饰器？ https://www.zhihu.com/question/26930016
 [3]. Python LEGB规则 http://www.jianshu.com/p/3b72ba5a209c
-[4]. `Python-__builtin__与__builtins__的区别与关系` http://blog.sina.com.cn/s/blog_8a18c33d01019yek.html 
+[4]. `Python-__builtin__与__builtins__的区别与关系` http://blog.sina.com.cn/s/blog_8a18c33d01019yek.html
 [5]. python 多继承详解http://www.pythontab.com/html/2013/pythonhexinbiancheng_0828/550.html
-[6]. 浅谈 Python 的 with 语句https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/ 
+[6]. 浅谈 Python 的 with 语句https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/
 
 
 
@@ -938,7 +938,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
  使用函数外部的变量x之前需要使用global关键字。
 
-### 3.1.2  模块安装 
+### 3.1.2  模块安装
 **模块安装工具：**ez_setup或者pip(更佳，支持自动寻找依赖库)
 
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
@@ -957,8 +957,8 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
 第三方模块下载站（提供WINDOWS二进制安装）
 
-*  官方编译版本：pypi https://pypi.python.org 
-*  非官方编译版本：Unofficial Windows Binaries for Python Extension Packages http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
+*  官方编译版本：pypi https://pypi.python.org
+*  非官方编译版本：Unofficial Windows Binaries for Python Extension Packages http://www.lfd.uci.edu/~gohlke/pythonlibs/
 
 提供下载的文件有三种形式，
 * 一是压缩源文件，解压后进入目录执行python setup.py install
@@ -972,7 +972,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
 **模块安装方法**
 单文件模块：直接把文件拷贝到$python_dir/lib
-多文件模块： 
+多文件模块：
 
 *  ez_setup安装
 *  pip安装
@@ -1006,7 +1006,7 @@ pip提供了对virtualenv更好的整合。
 ```SH
 Usage:
   pip <command> [options]
- 
+
 Commands:
   install        Install packages.
   download       Download packages.
@@ -1101,15 +1101,15 @@ toolskey = "VS90.f0COMNTOOLS"
 
 Python 模块导入import
 ```python
-import module_name[,module1,...]  
+import module_name[,module1,...]
 ```
-from module import *|child[,child1,...]  
+from module import *|child[,child1,...]
 说明：
  多次重复使用import语句时，不会重新加载被指定的模块，只是把对该模块的内存地址给引用到本地变量环境。
 导入模块可用相对路径如：.  ..  …
 ```python
 from .core import *
-from .. spidermodult/util/util import .. 
+from .. spidermodult/util/util import ..
 ```
 
 
@@ -1129,9 +1129,9 @@ reload(os)
 
 导入上一级目录
 ```python
-import os,sys 
-parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
-sys.path.insert(0,parentdir) 
+import os,sys
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0,parentdir)
 ```
 
 
@@ -1151,18 +1151,18 @@ sys.path.insert(0,parentdir)
 <module 'sys' (built-in)>
 ```
 
-e.g： 
+e.g：
 
 ```python
 __import__(module_name[, globals[, locals[, fromlist]]]) #可选参数默认为globals(),locals(),[]
-__import__('os')    
+__import__('os')
 __import__('os',globals(),locals(),['path','pip'])  #等价于from os import path
 ```
 
 pip说明：
 通常在动态加载时可以使用到这个函数，比如你希望加载某个文件夹下的所用模块，但是其下的模块名称又会经常变化时，就可以使用这个函数动态加载所有模块了，最常见的场景就是插件功能的支持。
 
-**导入模块列表** 
+**导入模块列表**
 
 ```PYTHON
 >>> moduleNames = ['sys', 'os', 're', 'unittest']
@@ -1194,23 +1194,24 @@ set PYTHONPATH=<YOUR MODULE PATH>
 如：mypkpath.pth d:/project/topicspider/newspider
 linux(ubuntu)：/usr/local/lib/python2.7/dist-packages
 \# windows目录变了dist-packages --> site-packages
-windows: C:\dev\Python27_x86/lib/dist-packages   
+windows: C:\dev\Python27_x86/lib/dist-packages
+
 另外测试程序中使用了logging模块的相对路径，因此要测试程序目录放相应的配置文件。
 
 ```shell
 #!/bin/bash
 #$dir
-if []; then  
+if []; then
   # linux
   dstdir='/usr/local/lib/python2.7/dist-packages'
-else 
+else
   # windows
   dstdir='C:\dev\Python27_x86/lib/dist-packages'
 fi
 echo `pwd` > mypkpath.pth
 PYTHON=`which python`
 MV=`which mv`
- 
+
 def function get_winpath()
 {
   return dirname $PYTHON
@@ -1256,10 +1257,10 @@ from modualA import *
 ```python
 >>> import sys
 >>> sys.path
-['', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages\\scrapy-1.4.0-py2.7.egg', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages\\service_identity-17.0.0-py2.7.egg', 'C:\\windows\\SYSTEM32\\python27.zip', 
+['', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages\\scrapy-1.4.0-py2.7.egg', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages\\service_identity-17.0.0-py2.7.egg', 'C:\\windows\\SYSTEM32\\python27.zip',
 ...
 'D:\\dev\\python\\Python27.12_x86\\DLLs', 'D:\\dev\\python\\Python27.12_x86\\lib', 'D:\\dev\\python\\Python27.12_x86\\lib\\plat-win', 'D:\\dev\\python\\Python27.12_x86', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages', 'D:\\dev\\python\\Python27.12_x86\\lib\\site-packages\\win32\\lib']
- 
+
 ```
 
 **2) linux**
@@ -1268,7 +1269,7 @@ from modualA import *
 >>> import sys
 >>> sys.path
 ['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-i386-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages/PILcompat', '/home/denny/git/oschina/topicspider', '/usr/lib/python2.7/dist-packages/gtk-2.0', '/usr/lib/pymodules/python2.7', '/usr/lib/python2.7/dist-packages/ubuntu-sso-client']
- 
+
 ```
 
 **搜索路径顺序**
@@ -1316,10 +1317,10 @@ python模块导入有个搜索路径顺序，分别是python安装程序和安�
 ```shell
 $ python setup.py --help
 Common commands: (see '--help-commands' for more)
- 
+
   setup.py **build**      will build the package underneath 'build/'
   setup.py **install**    will install the package
- 
+
 Global options:
   --verbose (-v)      run verbosely (default)
   --quiet (-q)        run quietly (turns verbosity off)
@@ -1327,7 +1328,7 @@ Global options:
   --help (-h)         show detailed help message
   --no-user-cfg       ignore pydistutils.cfg in your home directory
   --command-packages  list of packages that provide distutils commands
- 
+
 Information display options (just display information, ignore any commands)
   --help-commands     list all available commands
   --name print package name
@@ -1352,7 +1353,7 @@ Information display options (just display information, ignore any commands)
   --requires          print the list of packages/modules required
   --obsoletes         print the list of packages/modules made obsolete
 更多参数可见：[https://setuptools.readthedocs.io/en/latest/setuptools.html](https://setuptools.readthedocs.io/en/latest/setuptools.html#metadata)
- 
+
 usage: setup.py [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
    or: setup.py --help [cmd1 cmd2 ...]
    or: setup.py --help-commands
@@ -1378,9 +1379,9 @@ setup(name='foo',
 
 **setup.py文件的使用:**
 ```SH
-$ python setup.py build #编译 
-$ python setup.py install    #安装 
- 
+$ python setup.py build #编译
+$ python setup.py install    #安装
+
 # 执行以下不同命令分别生成不同的分发包，在dist目录下。
 $ python setup.py sdist   # 源码包，生成$name.tar.gz或$name.zip
 $ python setup.py bdist   # 二进制包
@@ -1444,7 +1445,7 @@ MANIFEST.in 文件的编写规则可参考：https://docs.python.org/3.6/distuti
 include *.txt
 recursive-include examples *.txt *.py
 prune examples/sample?/build
- 
+
 **用requirements.txt来管理依赖包**
 # 创建requirements.txt
 $ pip freeze > requirements.txt
@@ -1481,18 +1482,18 @@ $ python3 -m pip install --user --upgrade setuptools wheel twine
 pypi配置文件 ~/.pypirc
 ```ini
 [distutils]
-index-servers = localhost 
+index-servers = localhost
           pypi
- 
+
 [localhost]
 repository: http://localhost:8080
 username: keefe
 password: 123456
- 
+
 [pypi]
 repository: https://upload.pypi.org/legacy/
 username: keefe
-password: 
+password:
 ```
 
 第一次会询问pypi账户,之后访问.pypirc文件
@@ -1500,7 +1501,7 @@ password:
 $ python setup.py register
 # 上传源码包
 $ python setup.py sdis bdis_wheel upload -r pypi
- 
+
 # 检查 打包格式是否正确
 $ twine checkout dist/*
 # 本地测试
@@ -1538,7 +1539,7 @@ python -m pytest
 ```python
 def main():
      ...
- 
+
 if __name__ == '__main__':
    main()
 ```
@@ -1566,27 +1567,27 @@ Objects that when printed, print a message like “Type license() to see the ful
     argv -- command line arguments; argv[0] is the script pathname if known
    path -- module search path; path[0] is the script directory, else ''
    modules -- dictionary of loaded modules
-   
+
    displayhook -- called to show results in an interactive session
    excepthook -- called to handle any uncaught exception other than SystemExit
      To customize printing in an interactive session or to install a custom
      top-level exception handler, assign other functions to replace these.
-   
+
    exitfunc -- if sys.exitfunc exists, this routine is called when Python exits
      Assigning to sys.exitfunc is deprecated; use the atexit module instead.
-   
+
    stdin -- standard input file object; used by raw_input() and input()
    stdout -- standard output file object; used by the print statement
    stderr -- standard error object; used for error messages
      By assigning other file objects (or objects that behave like files)
      to these, it is possible to redirect all of the interpreter's I/O.
-   
+
    last_type -- type of last uncaught exception
    last_value -- value of last uncaught exception
    last_traceback -- traceback of last uncaught exception
      These three are only available in an interactive session after a
      traceback has been printed.
-   
+
    exc_type -- type of exception currently being handled
    exc_value -- value of exception currently being handled
    exc_traceback -- traceback of exception currently being handled
@@ -1642,7 +1643,7 @@ Objects that when printed, print a message like “Type license() to see the ful
 示例：
 **DATA**
 
-```​   
+```​
     __stderr__ = <open file '<stderr>', mode 'w'>
    __stdin__ = <open file '<stdin>', mode 'r'>
    __stdout__ = <open file '<stdout>', mode 'w'>
@@ -1694,9 +1695,9 @@ traceback.format_exc()  # 格式化异常，把异常栈以字符串的形式返
 ```
 ```python
 # 备注：以下三种方式的打印结果一样。
-print(traceback.format_exc() 
+print(traceback.format_exc()
 traceback.print_exc()
-traceback.print_exception(sys.exc_info()) 
+traceback.print_exception(sys.exc_info())
 ```
 日志模块logging里也集成了traceback模块
 
@@ -1771,47 +1772,10 @@ except Exception:
 
 
 ### 3.3.1  IDE
-#### Eclipse + Pydev
-1、安装Eclipse
-Eclipse可以在它的官方网站[Eclipse.org](http://eclipse.org/)找到并下载，通常我们可以选择适合自己的Eclipse版本，比如Eclipse Classic。下载完成后解压到到你想安装的目录中即可。 
-当然在执行Eclipse之前，你必须确认安装了Java运行环境,即必须安装JRE或JDK，你可以到（http://www.java.com/en/download/manual.jsp）找到JRE下载并安装。
 
-2、安装Pydev
-运行Eclipse之后，选择help-->Install new Software，如下图所示。
+Eclipse + Pydev, pycharm  详见 《[项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md)》IDE章节
 
-
-
-#### pycharm
-
-PyCharm是一种Python IDE，带有一整套可以帮助用户在使用Python语言开发时提高其效率的工具，比如调试、语法高亮、Project管理、代码跳转、智能提示、自动完成、单元测试、版本控制。此外，该IDE提供了一些高级功能，以用于支持Django框架下的专业Web开发。
-
-**问题1：目录下出现带有test字符串的文件或子目录，结果RUN 只能使用'unittest'方式 。**
-问题原因：PyCharm默认支持Python自带的单元测试包“unittest”，会自动将名称带test字符串的文件或目录识别为单元测试源码，按照单元测试的方式执行。
-**解决方法：**
-1）法1~重命名文件（已验证）：不要创建名字含有*test*（大小写不敏感）的类。
-2）法2~修改Default test runner配置（验证不成功）：将
-`file->settings->Project Settings->python integrated tools `-> Default test runner,将`Unittests`改为`py.test`即可。
-备注：pycham的单元测试unittest：缺省会将所有TestCase类的所有方法加入TestSuite,可不需写unittest.TestSuite().addTest(),若需执行单个方法，可覆盖方法代码直接Run.
-3) 法3~（已验证）：关闭项目，删除.idea，重开项目。
-
-
-
-**问题2： pycharm中添加扩展工具pylint**
-
-File > Settings... > Tools > External Tools，点击 + 号添加，如下图配置，
-
-* Program设置为： 指向 pylint 的实际目录，此处以 Linux 目录为例。
-* Parameters 设置为 (用户可根据自己的情况，选择 pylint 输出信息显示格式和要 disable 的项目)：--output-format=parseable --disable=R --disable=C0102,C0103,C0111,C0301,C0302,C0303,C0304,C0305,W0120,W0123,W0401,W0603,W0612,W0614,W0621,W0622,W0703,E1003,E1101 $FilePath$
-
-注：为了防止 Pylint 打印找不到 配置文件的 warning，可以在当前工程目录下新建一个空的文件，取名为 .pylintrc，再在上述参数中加入选项 --rcfile=path/to/.pylintrc 即可。
-
-* Working Direcroty 设置为：$FileDir$
-
-
-
-#### jupyter
-
-详见 《[Jupyter用户手册](../tools.工具/Jupyter用户手册.md)》
+jupyter  详见 《[Jupyter用户手册](../tools.工具/Jupyter用户手册.md)》
 
 
 
@@ -1839,7 +1803,7 @@ $ pyreverse -A -S [xxx.py] -p xxx
 Usage:
   pyreverse [options] <packages>
   create UML diagrams for classes and modules in <packages>
- 
+
 Options:
   -h, --help            show this help message and exit
   -f <mode>, --filter-mode=<mode>
@@ -1899,14 +1863,14 @@ Options:
 @refer: python快速生成注释文档的方法 http://www.cnblogs.com/cookie1026/p/6093188.html
 
 __all__ = ['Login', 'check', 'Shop', 'upDateIt', 'findIt', 'deleteIt', 'createIt']
- 
- 
+
+
 class Login:
    '''
    测试注释一可以写上此类的作用说明等
    例如此方法用来写登录
    '''
- 
+
    def __init__(self):
        '''
        初始化你要的参数说明
@@ -1915,7 +1879,7 @@ class Login:
        密码password
        '''
        pass
- 
+
    def check(self):
        '''
        协商你要实现的功能说明
@@ -1923,8 +1887,8 @@ class Login:
        判断语句，验证码之类的
        '''
        pass
- 
- 
+
+
 class Shop:
    '''
    商品类所包含的属性及方法
@@ -1933,42 +1897,42 @@ class Shop:
    delete删除
    create添加
    '''
- 
+
    def __init__(self):
        '''
        初始化商品的价格、日期、分类等
        '''
        pass
- 
+
    def upDateIt(self):
        '''
        用来更新商品信息
        '''
        pass
- 
+
    def findIt(self):
        '''
        查找商品信息
        '''
        pass
- 
+
    def deleteIt(self):
        '''
        删除过期下架商品信息
        '''
        pass
- 
+
    def createIt(self):
        '''
        创建新商品及上架信息
        '''
        pass
- 
+
 if __name__ == "__main__":
    # 导入的需要自身的文件名，如本文件python_doc
    import python_doc
    print help(python_doc)
-   
+
 ```
 
 ### 3.3.5  测试工具
@@ -2028,7 +1992,7 @@ if __name__ == "__main__":
 
 #### 3.3.5.2 pytest
 pytest是一个非常成熟的全功能的Python测试框架，主要特点有以下几点：
-1. 简单灵活，容易上手，文档丰富； 
+1. 简单灵活，容易上手，文档丰富；
 2. 支持**参数化**，可以细粒度地控制要测试的测试用例；
 3. 能够支持简单的单元测试和复杂的**功能测试**，还可以用来做selenium/appnium等自动化测试. 接口自动化测试（pytest+requests）;
 4. pytest具有很多**第三方插件**，并且可以自定义扩展，比较好用的如pytest-selenium（集成selenium）. pytest-html（完美html测试报告生成）. pytest-rerunfailures（失败case重复执行）. pytest-xdist（多CPU分发）等；
@@ -2055,10 +2019,10 @@ setup.cfg的配置段已升级为 [tool:pytest]
 ```sh
 $ py.test -h
 usage: py.test [options] [file_or_dir] [file_or_dir] [...]
- 
+
 positional arguments:
   file_or_dir
- 
+
 general:
   -k EXPRESSION         only run tests which match the given substring
           expression. An expression is a python evaluatable
@@ -2082,10 +2046,10 @@ general:
 # 部分参数介绍
    # 运行指定 marker 的测试，如smoke冒烟测试
   pytest -m MARKEXPR
-   
+
   # 运行匹配的测试
   py.test -k stringexpr
-   
+
   # 失败时调用 PDB
   py.test --pdb
 ```
@@ -2142,14 +2106,14 @@ $ tox
 ```ini
 [tox]
 envlist = py27,py36
- 
+
 [testenv]
 deps=pytest
 commands=pytest
- 
+
 [pytest]
 addopts = -rsxX -l --tb=short --strict
-markers = 
+markers =
   smoke: Run the smoke test test functions
   get: Run the test functions that test tasks.get()
 ```
@@ -2187,7 +2151,7 @@ input("waiting")
 
 
 
-**1) py2exe** 
+**1) py2exe**
 版本需求：RuntimeError: This package requires Python 3.3 or later
 
 ```python
@@ -2220,7 +2184,7 @@ setup(console=['main.py'])
    pyinstaller -D xxx  # 生成目录
    ```
 
-   
+
 
 以一个多文件和目录的Python项目为例，项目文件包含：1.Python源代码文件；2.图标资源文件；3.其它资源文件。
 
@@ -2233,7 +2197,7 @@ block_cipher = None
 SETUP_DIR = 'D:\\install_test\\FASTPLOT\\'
 a = Analysis(	# 输入，分析py文件的依赖模块，并生成相应的信息
     		['fastplot.py',
-        	 'D:\\install_test\\FASTPLOT\\lib\\app\\start.py']	
+        	 'D:\\install_test\\FASTPLOT\\lib\\app\\start.py']
              pathex=['D:\\install_test\\DAGUI-0.1\\bin'],
              binaries=[],
              datas=[(SETUP_DIR+'lib\\icon','lib\\icon'),(SETUP_DIR+'data','data')],	# 数据/资源文件，如图标、文档
@@ -2301,12 +2265,12 @@ pip install supervisor
 file=/tmp/supervisor.sock   ;UNIX socket 文件，supervisorctl 会使用
 ;chmod=0700    ;socket文件的mode，默认是0700
 ;chown=nobody:nogroup       ;socket文件的owner，格式：uid:gid
- 
+
 ;[inet_http_server]         ;HTTP服务器，提供web管理界面
 ;port=127.0.0.1:9001        ;Web管理后台运行的IP和端口，如果开放到公网，需要注意安全性
 ;username=user ;登录管理后台的用户名
 ;password=123  ;登录管理后台的密码
- 
+
 [supervisord]
 logfile=/tmp/supervisord.log ;日志文件，默认是 $CWD/supervisord.log
 logfile_maxbytes=50MB        ;日志文件大小，超出会rotate，默认 50MB，如果设成0，表示不限制大小
@@ -2316,11 +2280,11 @@ pidfile=/tmp/supervisord.pid ;pid 文件
 nodaemon=false  ;是否在前台启动，默认是false，即以 daemon 的方式启动
 minfds=1024     ;可以打开的文件描述符的最小值，默认 1024
 minprocs=200    ;可以打开的进程数的最小值，默认 200
- 
+
 [supervisorctl]
 serverurl=unix:///tmp/supervisor.sock ;通过UNIX socket连接supervisord，路径与unix_http_server部分的file一致
 ;serverurl=http://127.0.0.1:9001 ; 通过HTTP的方式连接supervisord
- 
+
 ; [program:xx]是被管理的进程配置参数，xx是进程的名称
 [program:xx]
 command=/opt/apache-tomcat-8.0.35/bin/catalina.sh run  ; 程序启动命令
@@ -2337,11 +2301,11 @@ stdout_logfile_backups = 20   ; stdout 日志文件备份数，默认是10
 stdout_logfile=/opt/apache-tomcat-8.0.35/logs/catalina.out
 stopasgroup=false     ;默认为false,进程被杀死时，是否向这个进程组发送stop信号，包括子进程
 killasgroup=false     ;默认为false，向进程组发送kill信号，包括子进程
- 
+
 ;包含其它配置文件
 [include]
 files = relative/directory/*.ini    ;可以指定一个或多个以.ini结束的配置文件
- 
+
 # supervisord.d目录用来存放用户自定义的进程配置
 [program:es]
 command=/opt/software/elasticsearch/bin/elasticsearch
@@ -2368,8 +2332,8 @@ redirect_stderr=true
 *  python_reference
 *  pythonidae
 
-*  win32com  https://sourceforge.net/projects/pywin32/files/pywin32/ 
-*  Appium Python Client https://github.com/appium/python-client/tree/master 
+*  win32com  https://sourceforge.net/projects/pywin32/files/pywin32/
+*  Appium Python Client https://github.com/appium/python-client/tree/master
 
 
 
@@ -2377,8 +2341,8 @@ redirect_stderr=true
 
 [1]. pytest https://docs.pytest.org/en/latest/mark.html
 [2]. pytest https://docs.pytest.org/en/latest/example/markers.html
-[3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html 
-[4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html 
+[3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html
+[4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html
 
 [5]. Python项目的打包方法  https://blog.csdn.net/weixin_42052836/article/details/82315118
 
@@ -2428,7 +2392,7 @@ redirect_stderr=true
 
 备注：1. urllib2在Python3已拆分更名为urllib.request和urllib.error.
 
- 
+
 
 ### 3.4.2  网络编程
 
@@ -2630,19 +2594,19 @@ PSD
 
 [1].  关于python中的setup.py  http://python.jobbole.com/82077/
 
-[2].  python下import 模块使用相对路径 http://www.dai3.com/python-import.html 
+[2].  python下import 模块使用相对路径 http://www.dai3.com/python-import.html
 
-[3].  10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html 
+[3].  10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html
 
 [4].  Python六大框架对比，Web2py略胜一筹http://www.pythontab.com/html/2014/pythonweb_0106/659.html
 
-[5].  彻底解决 error: Unable to find vcvarsall.bat http://blog.csdn.net/secretx/article/details/17472107 
+[5].  彻底解决 error: Unable to find vcvarsall.bat http://blog.csdn.net/secretx/article/details/17472107
 
-[6].  python常用开发库  http://www.jb51.net/article/78960.htm 
+[6].  python常用开发库  http://www.jb51.net/article/78960.htm
 
-[7].  fabric https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html#making-connections 
+[7].  fabric https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html#making-connections
 
-[8].  Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/ 
+[8].  Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/
 
 
 
@@ -2703,9 +2667,9 @@ $ source bin/activate
 # (WINDOWS环境）
 $ script/activate
 $ script/deactivate
- 
+
 Usage: virtualenv [OPTIONS] DEST_DIR
- 
+
 Options:
   --version show program's version number and exit
   -h, --help            show this help message and exit
@@ -2744,7 +2708,7 @@ Options:
           This option has no effect.
   --distribute          DEPRECATED. Retained only for backward compatibility.
           This option has no effect.
- 
+
 ```
 
 高级篇：virtualenvwrapper
@@ -2815,22 +2779,22 @@ Python 3.6.5
 import keyword
 if 'print' in keyword.kwlist:
    from __future__ import print_function
- 
+
 # method 2
 from distutils.log import warn as printf
 printf('hello')
- 
+
 # method 3
 import sys
 sys.stdout.write('hello!n')
- 
+
 # urlopen
 # urlopen in python 2.x in urllib/urllib2, in python 3.x in urllib.requet
 try:
    from urllib2 import urlopen
 except ImportError:
    from urllib.request import urlopen
- 
+
 #  StringIO
 try:
    from io import ByteIO as StringIO
@@ -2881,14 +2845,14 @@ except ImportError:
 1.time.sleep
 因为time模块的广泛使用，有一定几率IO异常。
 
-2.随机数       
+2.随机数
 Python中的random模块用于生成随机数，虽然提供了多种方法，但都是伪随机数。
 使用/dev/random的随机数。
  ```python
 >>> import random
 >>> dir(random)
 ['BPF', 'LOG4', 'NV_MAGICCONST', 'RECIP_BPF', 'Random', 'SG_MAGICCONST', 'SystemRandom', 'TWOPI', 'WichmannHill', '_BuiltinMethodType', '_MethodType', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_acos', '_ceil', '_cos', '_e', '_exp', '_hashlib', '_hexlify', '_inst', '_log', '_pi', '_random', '_sin', '_sqrt', '_test', '_test_generator', '_urandom', '_warn', 'betavariate', 'choice', 'division', 'expovariate', 'gammavariate', 'gauss', 'getrandbits', 'getstate', 'jumpahead', 'lognormvariate', 'normalvariate', 'paretovariate', 'randint', 'random', 'randrange', 'sample', 'seed', 'setstate', 'shuffle', 'triangular', 'uniform', 'vonmisesvariate', 'weibullvariate']
- 
+
  ```
 
 
@@ -2928,7 +2892,7 @@ o orange {'a': 'apple', 'b': 'banana', 'o': 'orange'}
 遍历性能比较如下：keys性能最好。
 
 ```python
-#!/usr/bin/python 
+#!/usr/bin/python
 from time import clock
 def calc_loop_time():
     l = [(x, x) for x in range(10000)]
@@ -2955,14 +2919,14 @@ def calc_loop_time():
 
 
 
-### 安全库 
+### 安全库
 
 * [PyCrypto](https://pypi.org/project/pycrypto/) （弃）:  最新版本2.6.1（更新于2013.10.18），PyCrypto is written and tested using Python version 2.1 through 3.3.  由于长期不更新且不支持python3.3+，不建议再使用此库，请换用PyCryptodome。
 
 * [PyCryptodome](https://pypi.org/project/pycryptodome/): PyCryptodome是PyCrypto的一个分支。基于PyCrypto2.6.1. 最新版本3.9.1（更新于2020.2.21）。It supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.
 
   ```shell
-  $pip install PyCryptodome 
+  $pip install PyCryptodome
   ```
 
 
@@ -3132,7 +3096,7 @@ with lockA:
 在python的threading模块中，提供了三种锁，如下
 *  基本锁 threading.Lock
 *  读锁 threading.RLock 可读入锁，嵌套锁
-*  threading.BoundedSemaphore 
+*  threading.BoundedSemaphore
 
 
 
@@ -3164,7 +3128,7 @@ class MyThread(threading.Thread):
         print('starting', self.name, 'at:', ctime())
         self.result = self.target(*self.args)
         print(self.name, 'finished at:', ctime())
-        
+
 # 为了限制真实请求时间或函数执行时间的装饰器
 def timeout_limit_by_parent_thread(limit_time):
     """
@@ -3239,7 +3203,7 @@ import ctypes
 def terminate_thread(thread):
    if not thread.isAlive():
        return
- 
+
    exc = ctypes.py_object(SystemExit)
    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(
        ctypes.c_long(thread.ident), exc)
@@ -3248,7 +3212,7 @@ def terminate_thread(thread):
    elif res > 1:
        ctypes.pythonapi.PyThreadState_SetAsyncExc(thread.ident, None)
        raise SystemError("PyThreadState_SetAsyncExc failed")
- 
+
 ```
 
 ### 4.3.3  协程
@@ -3310,7 +3274,7 @@ def consumer():	#消费者
            return
        print('[CONSUMER] Consuming %s...' % n)
        r = '200 OK'
- 
+
 def produce(c):	#生产者，生成数据
    c.send(None)  # 激活生成器，也可调用next(c)?
    n = 0
@@ -3320,7 +3284,7 @@ def produce(c):	#生产者，生成数据
        r = c.send(n) # 调用方发送数据给生成器
        print('[PRODUCER] Consumer return: %s' % r)
    c.close()  # 关闭生成器
- 
+
 c = consumer()
 produce(c)
 ```
@@ -3361,13 +3325,13 @@ def B():
     g1.switch()  #切换至A
     print('b....2')
 
-#调用    
+#调用
 g1 = greenlet.greenlet(A) #启动一个线程
 g2 = greenlet.greenlet(B)
 g1.switch()
 ```
 
-输出 
+输出
 
 ```sh
 a.....
@@ -3398,7 +3362,7 @@ gevent.joinall([      # 创建线程并行执行程序，碰到IO就切换
 ])
 ```
 
-输出 
+输出
 
 ```sh
 running in foo
@@ -3460,7 +3424,7 @@ gunicorn \
 -w [nums] 工作进程数。建议值2-4 x $(NUM_CORES)， 缺省为1。
 -D 后台运行
 -k gevent采用事件模型（缺省是同步模式sync）。worker进程的工作方式，有 sync, eventlet, gevent, tornado, gthread。
--threads [nums]  工作进程中线程的数量。建议值2-4 x $(NUM_CORES)， 缺省值1。此配置只适用于gthread 进程工作方式。 
+-threads [nums]  工作进程中线程的数量。建议值2-4 x $(NUM_CORES)， 缺省值1。此配置只适用于gthread 进程工作方式。
 -b 	监听IP和端口
 --timeout 	连接超时时间
 --preload 	预加载数据，所有进程共用一份数据（共享数据只读，不可写）
@@ -3530,9 +3494,9 @@ master = true         //主进程
 vhost = true          //多站模式
 no-site = true        //多站模式时不设置入口模块和文件
 workers = 2           //子进程数
-reload-mercy = 10     
+reload-mercy = 10
 vacuum = true         //退出、重启时清理文件
-max-requests = 1000   
+max-requests = 1000
 limit-as = 512
 buffer-size = 30000
 pidfile = /var/run/uwsgi9090.pid    //pid文件，用于下面的脚本启动、停止该进程
@@ -3547,8 +3511,8 @@ daemonize = /website/uwsgi9090.log
 server {
         listen       80;
         server_name  localhost;
-        
-        location / {            
+
+        location / {
             include  uwsgi_params;
             uwsgi_pass  127.0.0.1:9090; //必须和uwsgi中的设置一致
             uwsgi_param UWSGI_SCRIPT demosite.wsgi;  //入口文件，即wsgi.py相对于项目根目录的位置，“.”相当于一层目录
@@ -3579,7 +3543,7 @@ ASGI是异步的WSGI。
 
 ### 4.3.6 函数超时的处理方法
 
-函数超时处理的主要场合是长时间任务卡住了，主动放弃；限制某个任务的最长执行时间。 
+函数超时处理的主要场合是长时间任务卡住了，主动放弃；限制某个任务的最长执行时间。
 
 * 进程超时：
 * 线程超时：有三种方法，分别是与父线程一起退出，退出标记法 和 杀线程。
@@ -3684,38 +3648,38 @@ import tkinter
 ### 12306抢票
 
 12306 售票网站新版验证码识别对抗 https://zhuanlan.zhihu.com/p/19979300
-https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2 
+https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2
 
 
 
 ### QQ模拟登陆
 
-http://www.2cto.com/Article/201603/493457.html 
+http://www.2cto.com/Article/201603/493457.html
 https://github.com/LeoHuang2015/qqloginjs
 
 
 
 ## 本章参考
 
-[1]. python2和python3的区别http://www.runoob.com/python/python-2x-3x.html 
+[1]. python2和python3的区别http://www.runoob.com/python/python-2x-3x.html
 
 [2]. Python 安全编码指南 http://python.jobbole.com/82746/
 
-[3]. 使用python实现可重入的公平读写锁 http://blog.csdn.net/vcbin/article/details/51181121 
+[3]. 使用python实现可重入的公平读写锁 http://blog.csdn.net/vcbin/article/details/51181121
 
-[4]. Python多进程通信Queue、Pipe、Value、Array实例 http://www.jb51.net/article/57666.htm 
+[4]. Python多进程通信Queue、Pipe、Value、Array实例 http://www.jb51.net/article/57666.htm
 
 [5]. gunicorn  http://gunicorn.org/
 
-[6]. http://gunicorn.readthedocs.io/en/latest/ 
+[6]. http://gunicorn.readthedocs.io/en/latest/
 
-[7]. Python协程深入理解https://www.cnblogs.com/zhaof/p/7631851.html 
+[7]. Python协程深入理解https://www.cnblogs.com/zhaof/p/7631851.html
 
 [8]. python3之协程 https://www.cnblogs.com/zhangxinqi/p/8337207.html
 
-[9]. gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e 
+[9]. gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e
 
-[10]. 深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/) 
+[10]. 深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/)
 
 [11] Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
 
@@ -3726,11 +3690,11 @@ https://github.com/LeoHuang2015/qqloginjs
 ## 5.1   直接使用C语言程序
 ```python
 # 调用C语言写的动态库so
-from ctypes import cdll 
+from ctypes import cdll
 check_prime_type = cdll.LoadLibrary('./xxx.so').check_prime()
 
 # 调用C标准库
-from ctypes import cdll 
+from ctypes import cdll
 dll =  cdll.LoadLibrary('libc.so.6')  # linux
 dll = msvcrt  # windows
 random_num = (dll.random(100))
@@ -3771,16 +3735,16 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 无需修改python原代码。直接调用pypy。
 `$ pypy xxx.py`
 
-## 5.4   Jython~Java 
+## 5.4   Jython~Java
 
 
 
 ## 本章参考
 
 [1]. 《Python参考手册（第4版）》相应章节
-[2]. pypy http://pypy.org/ 
-[3]. http://pypy.org/download.html#building-from-source 
-[4]. 浅谈 Python 程序和 C 程序的整合https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/ 
+[2]. pypy http://pypy.org/
+[3]. http://pypy.org/download.html#building-from-source
+[4]. 浅谈 Python 程序和 C 程序的整合https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/
 
 
 
@@ -3792,7 +3756,7 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 
 
 
-## 6.1 Python编译安装问题  
+## 6.1 Python编译安装问题
 
 **Q1: centos python 3 ModuleNotFoundError: No module named '_bz2'**
 
@@ -3810,7 +3774,7 @@ ModuleNotFoundError: No module named '_bz2'
 
 原因：缺少Python3.6+的bz2模块需要的so文件
 
-解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/ 
+解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/
 
 
 
@@ -3876,25 +3840,25 @@ name= MySQLdb.escape_string(name)     #此时转义后，type(name)=’str’
 解决方法：下载instantclient_21_1， 环境变量指定库路径。
 
 ```shell
-# 下载  
+# 下载
 # 不可用 https://www.oracle.com/cn/database/technology/linuxx86-64soft.html
 # 可用 https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
 # 注意第三方工具如：PL/SQL Developer和Toad的版本，32位的要对应32位的OracleInstant Client，不要因为系统是64位的就下载64位的，这个要注意。
 
 # 示例版本： /opt/oracle/instantclient_21_3
-cd /opt/oracle      
+cd /opt/oracle
 unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
 
 # 添加链接：一般可能已经有了
-cd /opt/oracle/instantclient_21_3 
+cd /opt/oracle/instantclient_21_3
 ln -s libclntsh.so.12.1 libclntsh.so
 ln -s libocci.so.12.1 libocci.so
 
 sudo yum install libaio
 
 # 设置库路径
-sudo sh -c "echo /opt/oracle/instantclient_21_3 > \        
-  /etc/ld.so.conf.d/oracle-instantclient.conf"    
+sudo sh -c "echo /opt/oracle/instantclient_21_3 > \
+  /etc/ld.so.conf.d/oracle-instantclient.conf"
 sudo ldconfig
 # 或者 设置库环境变量
 export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
@@ -3942,7 +3906,7 @@ Your installed Python is incomplete. Attempting to use lzma compression will res
 解决方法：
 
 ```shell
-$ sudo yum install xz-devel		#若未安装xz-devel，将会报缺少lzma.h文件. 
+$ sudo yum install xz-devel		#若未安装xz-devel，将会报缺少lzma.h文件.
 $ pip install backports.lzma	#_lzma是python3.3后加入的标准库，但pandas用了backports.lzma（可以兼容python3.3之前）。为啥pandas不跟标准库对齐，还有谁用这么老的python版本？
 
 # 然后还要修改 python库里lzma.py
@@ -3970,8 +3934,8 @@ Author: Peter Cock, based on work by Nadeem Vawda and Per Oyvind Karlsen
 Author-email: p.j.a.cock@googlemail.com
 License: 3-clause BSD License
 Location: /home/ai/venv/superset-py38-env/lib/python3.8/site-packages
-Requires: 
-Required-by: 
+Requires:
+Required-by:
 ```
 
 
@@ -4004,10 +3968,10 @@ pip install git+git://github.com/gawel/pyquery.git
 **网站**
 
 * python官网[Python.org](http://www.python.org/)  https://www.python.org/doc/
-* [python.cn](http://python.cn/) 
-* python官方扩展库package index  https://pypi.python.org 
-* python非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
-* wxpython https://www.wxpython.org 
+* [python.cn](http://python.cn/)
+* python官方扩展库package index  https://pypi.python.org
+* python非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/
+* wxpython https://www.wxpython.org
 * Tkinter教程 https://tkdocs.com/tutorial/index.html
 * [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
 
@@ -4016,22 +3980,19 @@ pip install git+git://github.com/gawel/pyquery.git
 ## 参考链接
 
 * python教程 http://www.runoob.com/python
-
-* Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/ 
-
+* Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/
 * python代码加密——编译与反编译方法总结 https://blog.csdn.net/submarineas/article/details/93723421?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control
 * 如何防止你的代码被窃取？Python代码加密方案汇总（带实例验证） https://blog.csdn.net/weixin_43207777/article/details/108351862
 * Python源码寻宝记——地图篇 https://www.lightxue.com/python-internals-locate-source-code
-
-* python在命令行下使用google翻译(带语音) http://www.jb51.net/article/45789.htm 
-
-* python实现中文分词FMM算法实例 [www.jb51.net/article/69315.htm](http://www.jb51.net/article/69315.htm) 
+* python在命令行下使用google翻译(带语音) http://www.jb51.net/article/45789.htm
+* python实现中文分词FMM算法实例 [www.jb51.net/article/69315.htm](http://www.jb51.net/article/69315.htm)
+* Python 中的 HTTP 服务器 https://server.51cto.com/sOS-600979.htm
 
 
 
 ## 参考书目
 
-[1]. Toby Segaran / 莫映、王开福 《集体智慧编程》/ 电子工业出版社 / 2015-3 
+[1]. Toby Segaran / 莫映、王开福 《集体智慧编程》/ 电子工业出版社 / 2015-3
 [2]. Wesley J. Chun 《Python核心编程》（第2版）  人民邮电出版社  2008-6 http://www.linuxidc.com/Linux/2013-06/85425.htm
 [3]. Wesley J. Chun 《Python核心编程》（第3版）  人民邮电出版社  2016-5
 [4]. 《[Python性能分析与优化 ](https://book.douban.com/subject/26819420/)Mastering Python High Performance》Fernando Doglio / 陶俊杰、陈小莉 / 人民邮电出版社 / 2016-6-1
@@ -4041,8 +4002,8 @@ pip install git+git://github.com/gawel/pyquery.git
 [8]. python参考手册（第4版） 说明：内容有一定深度。
 [9]. [Python源码剖析 : 深度探索动态语言核心技术](https://book.douban.com/subject/3117898/) 陈儒 / 电子工业出版社 / 2008-6
 [10].  [Python灰帽子 : 黑客与逆向工程师的Python编程之道 ](https://book.douban.com/subject/6025284/)[美] Justin Seitz / 丁赟卿 译、崔孝晨 审校 / 电子工业出版社 / 2011-3
-[11].  [*Learning to Program*](http://www.freenetpages.co.uk/hp/alan.gauld/) 
-[12].  [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/) 
+[11].  [*Learning to Program*](http://www.freenetpages.co.uk/hp/alan.gauld/)
+[12].  [*How to Think Like a Computer Scientist*](http://www.ibiblio.org/obp/thinkCSpy/)
 [13].  [Thinking in Python](http://www.mindview.net/Books/TIPython)
 [14].  周伟,宗杰 《Python开发技术详解》 http://www.linuxidc.com/Linux/2013-11/92693.htm
 

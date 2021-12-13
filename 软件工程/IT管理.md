@@ -30,7 +30,7 @@
 
 [TOC]
 
- 
+
 
 **表目录**
 
@@ -56,7 +56,7 @@
 
 
 
- 
+
 
 ---
 # 1 概述
@@ -71,19 +71,19 @@ IT管理是企业IT部门的管理职责。对于IT公司，IT管理更是全公
 
 **备注**: 下文中的*软件开发* 概念广义上等同于*软件过程*，狭义上特指软件过程中的开发阶段。
 
-## 1.1   名词术语
+## 1.1  名词术语
 * 软件开发(过程)模型: 瀑布, 原型, 增量, 迭代, 螺旋, 构件, 形式化, CMM, RUP
 * 软件过程方法: 敏捷开发Agile
 * 软件开发方法: 面向对象OO和面向过程OP
 * 敏捷开发Agile: 这是软件过程方法.是指在软件开发过程中选择的一种开发方式.一组开发方式的统称, 包括XP, SCURM, DSDM, FDD等.
 
-**过程**: 过程是为实现一个给定目标而进行的一系列运作*步骤*。过程具有一系列的性质：时间性、并发性、嵌套性和度量性等. 
+**过程**: 过程是为实现一个给定目标而进行的一系列运作*步骤*。过程具有一系列的性质：时间性、并发性、嵌套性和度量性等.
 * DOD：Define of Done，完成的定义。
 * WIP：Work In Progress，正在进行的工作。
 
- 
 
-## 1.2   软件开发模型
+
+## 1.2  软件开发模型
 
 表格 1 软件开发模型列表
 
@@ -104,11 +104,11 @@ IT管理是企业IT部门的管理职责。对于IT公司，IT管理更是全公
 | 测试驱动开发~TDD                                  | 测试先于编写代码。                                           |                                                  |                                                   | 侧重开发。                                |
 | BDD~Behavior Driven Development                   | 形为驱动开发。鼓励开发者、QA和非技术业务的参与。             |                                                  |                                                   | 侧重设计。                                |
 
- 
+
 
 # 3 项目管理 PM
 
-## 3.1   项目管理模型
+## 3.1  项目管理模型
 
 表格 3 常见的项目管理机构
 
@@ -118,7 +118,7 @@ IT管理是企业IT部门的管理职责。对于IT公司，IT管理更是全公
 | 美国项目管理学会         | PMI      | PMBOK    | PMP      |      |
 | 中国项目管理  研究委员会 | PMRC     | C-PMBOK  | C-NCB    |      |
 
- 
+
 
 表格 4 常见项目管理模型列表
 
@@ -131,27 +131,27 @@ IT管理是企业IT部门的管理职责。对于IT公司，IT管理更是全公
 | MSF      | MS公司        | 微软解决方案框架。                                           |
 | UML      | OMG组织       | 统一建模语言,用于领域建模, Rose全面支持。(用图形来描述)      |
 
- 
+
 
 ### 3.1.1 PMBOK 2008~项目管理知识体系
 
 ​     PMBOK是Project Management Body Of Knowledge的缩写， 即项目管理知识体系，是[美国项目管理协会](http://baike.baidu.com/view/3929225.htm)（PMI）对项目管理所需的知识、技能和工具进行的概括性描述。
 
-​    1991年、1996年先后进行了修订，成为现在的项目管理知识体系，简称为PMBoK (Project Management Body of Knowledge )。[国际标准化组织](http://baike.baidu.com/view/42488.htm)以该文件为框架，制订了ISO10006关于项目管理的标准。
+​    1991年、1996年先后进行了修订，成为现在的项目管理知识体系，简称为PMBoK (Project Management Body of Knowledge )。国际标准化组织以该文件为框架，制订了ISO10006关于项目管理的标准。
 
- 
+
 
 项目生命期: 启动-->组织和准备-->执行-->结束
 
 五个过程组: initiating, planning, executing, monitoring and controlling, closing
 
-九大知识域: Integration, Scope, Time, Cost, Quality, HR, Communication, Risk, Procurement 
+九大知识域: Integration, Scope, Time, Cost, Quality, HR, Communication, Risk, Procurement
 
 WBS: WORK BREAKDOWN STRUCTRE ,工作分解结构
 
 其它关键词: 甘特图, 基准（BASELINE）、项目干系人, 关键路径和挣值分析.
 
- 
+
 
 表格 5 五大过程组与九大知识域涉及到的各过程
 
@@ -169,6 +169,8 @@ WBS: WORK BREAKDOWN STRUCTRE ,工作分解结构
 
 备注：PMBOK 2012新增一大过程域~干系人管理。
 
+
+
 ![image-20200101115702278](../media/software_enginer/it_004.png)
 
 **示例:项目范围计划模块**
@@ -177,11 +179,11 @@ WBS: WORK BREAKDOWN STRUCTRE ,工作分解结构
 | ------------------------------------------------------------ | -------------------------------- | ------------------ |
 | 1.事业环境因素  2.组织过程资产 3. 项目章程 <BR>4.项目初步范围说明书  5.项目管理计划 | 1.专家判断<br>2.模版,表格和标准. | 1 项目范围管理计划 |
 
- 
+
 
 ### 3.1.2 CMM系列
 
-CMM，其英文全称为Capability Maturity Model for Software，即“[能力成熟度模型](http://baike.baidu.com/view/2983754.htm)”。 CMM的核心是把软件开发视为一个过程，并根据这一原则对软件开发和维护进行过程监控和研究，以使其更加科学化、[标准化](http://baike.baidu.com/view/8087.htm)、使企业能够更好地实现商业目标。
+CMM，其英文全称为Capability Maturity Model for Software，即“[能力成熟度模型](http://baike.baidu.com/view/2983754.htm)”。 CMM的核心是把软件开发视为一个过程，并根据这一原则对软件开发和维护进行过程监控和研究，以使其更加科学化、标准化、使企业能够更好地实现商业目标。
 
 CMM的主要发布者是卡内基-梅隆大学（Carnegie-Mellon University）下的软件工程研究中心（Software Engineering Institute，SEI），简称SEICM。1994年SEI首次发布CMM。。
 
@@ -214,15 +216,15 @@ CMMI主要关注点就是成本效益、明确重点、过程集中和灵活性�
 
 CMMI的评估过程分为Class A、B 、C三种类型。
 
- 
+
 
 #### SW-CMM~软件能力成熟度改善模型
 
-​     SW-CMM，常简称为CMM，软件能力成熟度模型。它是对于软件组织在定义、实施、[度量](http://baike.baidu.com/view/707359.htm)、控制和改善其[软件过程](http://baike.baidu.com/view/2207.htm)的实践中各个发展阶段的描述。
+​     SW-CMM，常简称为CMM，软件能力成熟度模型。它是对于软件组织在定义、实施、度量、控制和改善其软件过程的实践中各个发展阶段的描述。
 能力成熟度模型集成(CMMI® 强调流程+路径优化+正确的人)
 持续的能力改进模型(CMMI:阶段式/连续式)
 
- 
+
 
 表格 7 SW-CMM的五个等级及关键过程域
 
@@ -236,53 +238,53 @@ CMMI的评估过程分为Class A、B 、C三种类型。
 
 备注：SW-CMM包括5个等级，共计18个[过程域](http://baike.baidu.com/view/998094.htm)，52个目标，300多个关键实践。CMMI-SE/SE也是5个等级，但22个过程域。
 
- 
+
 
 ### 3.1.3 ISO15504~软件过程模型
 
-　[ISO](http://wiki.mbalib.com/wiki/ISO)/IEC 联合信息技术委员会(ISO/IEC JOINT TECHNICAL COMMITTEE FOR INFORMATION TECHNOLOGY )是[国际标准化组织](http://wiki.mbalib.com/wiki/国际标准化组织)（ISO）和国际电工委员会(IEC)联合组建的第一个标准化技术委员会，其编号为JTC1。它在ISO和IEC共同领导下，承担信息技术领域[国际标准](http://wiki.mbalib.com/wiki/国际标准)制定工作，其重要性和影响力非同一般。
+　[ISO](http://wiki.mbalib.com/wiki/ISO)/IEC 联合信息技术委员会(ISO/IEC JOINT TECHNICAL COMMITTEE FOR INFORMATION TECHNOLOGY )是[国际标准化组织](http://wiki.mbalib.com/wiki/国际标准化组织)（ISO）和国际电工委员会(IEC)联合组建的第一个标准化技术委员会，其编号为JTC1。它在ISO和IEC共同领导下，承担信息技术领域国际标准制定工作，其重要性和影响力非同一般。
 
 ​     ISO/IEC 15504 是在ISO/IEC TR 15504 （SPICE）的基础上制订的正式国际标准，这个标准在总结SPICE试验的基础上，继存了ISO/IEC TR 15504 （SPICE）的基本思想和方法的同时，也发生了若干引人注目的变化。
 
-​     ISO/IEC TR 15504 （SPICE）是由9个部分组成. 
+​     ISO/IEC TR 15504 （SPICE）是由9个部分组成.
 
-　正式标准将ISO/IEC TR 15504的9个部分进行了调整、和合并和修改，使标准更加精简。其主要变更如下： 
+　正式标准将ISO/IEC TR 15504的9个部分进行了调整、和合并和修改，使标准更加精简。其主要变更如下：
 
-　　1) ISO/IEC TR 15504-1 和ISO/IEC TR 15504-9合并、修改为ISO/IEC FDIS 15504-1信息技术－过程评估－第一部分：概念和词汇。 
+　　1) ISO/IEC TR 15504-1 和ISO/IEC TR 15504-9合并、修改为ISO/IEC FDIS 15504-1信息技术－过程评估－第一部分：概念和词汇。
 
-　　2） ISO/IEC TR 15504-3修改后命名为ISO/IEC 15504-2:2003 信息技术－过程评估－第二部分：实施评估。 
+　　2） ISO/IEC TR 15504-3修改后命名为ISO/IEC 15504-2:2003 信息技术－过程评估－第二部分：实施评估。
 
-　　3）ISO/IEC TR 15504-4 和ISO/IEC TR 15504-6 合并、修改后命名为ISO/IEC 15504-3:2004 信息技术－过程评估－第三部分：实施评估指南 
+　　3）ISO/IEC TR 15504-4 和ISO/IEC TR 15504-6 合并、修改后命名为ISO/IEC 15504-3:2004 信息技术－过程评估－第三部分：实施评估指南
 
-　　4） ISO/IEC TR 15504-4 和ISO/IEC TR 15504-6合并、修改后命名为ISO/IEC 15504-4:2004 信息技术－过程评估－第四部分：过程改进和过程能力测定应用指南 
+　　4） ISO/IEC TR 15504-4 和ISO/IEC TR 15504-6合并、修改后命名为ISO/IEC 15504-4:2004 信息技术－过程评估－第四部分：过程改进和过程能力测定应用指南
 
-　　5）ISO/IEC TR 15504-2 和ISO/IEC TR 15504-5合并、 修改后命名为ISO/IEC CD 15504-5信息技术－过程评估－第五部分：一个过程评估模型范例 
+　　5）ISO/IEC TR 15504-2 和ISO/IEC TR 15504-5合并、 修改后命名为ISO/IEC CD 15504-5信息技术－过程评估－第五部分：一个过程评估模型范例
 
- 
+
 
  ![image-20200101115724508](../media/software_enginer/it_005.png)
 
 图 3 ISO15504~软件过程模型
 
- 
+
 
 ### 3.1.4 RUP~统一软件过程
 
-RUP（Rational Unified Process），[统一软件开发过程](http://baike.baidu.com/view/2235832.htm)，[统一软件过程](http://baike.baidu.com/view/3324129.htm))是一个[面向对象](http://baike.baidu.com/view/125370.htm)且基于网络的程序开发方法论。RUP是以体系结构为中心，用例驱动的迭代增量式软件开发方法。
+RUP（Rational Unified Process），[统一软件开发过程](http://baike.baidu.com/view/2235832.htm)，统一软件过程)是一个面向对象且基于网络的程序开发方法论。RUP是以体系结构为中心，用例驱动的迭代增量式软件开发方法。
 
 瑞理统一过程（RUP）是Rational软件公司（Rational公司被IBM并购）创造的软件工程方法[1] 。RUP描述了如何有效地利用商业的可靠的方法开发和部署软件，是一种重量级过程（也被称作厚方法学），因此特别适用于大型软件团队开发大型项目。
 
- 
+
 
 **开发过程**
 
 RUP中的[软件生命周期](http://baike.baidu.com/view/47193.htm)在时间上被分解为四个顺序的阶段，分别是：初始阶段（Inception）、细化阶段（Elaboration）、构造阶段（Construction）和交付阶段（Transition）。每个阶段结束于一个主要的里程碑（Major Milestones）；每个阶段本质上是两个里程碑之间的时间跨度。在每个阶段的结尾执行一次评估以确定这个阶段的目标是否已经满足。如果评估结果令人满意的话，可以允许项目进入下一个阶段。
 
- 
+
 
 ### 3.1.5 MSF~Microsoft Solution Framework
 
-MSF是一套大型系统开发指南,它描述了如何用组队模型、过程模型和应用模型来开发[Client/Server](http://baike.baidu.com/view/83263.htm)结构的应用程序，是在微软的工具和技术的基础上建立并开发分布式企业系统应用的参考。
+MSF是一套大型系统开发指南,它描述了如何用组队模型、过程模型和应用模型来开发 Client/Server结构的应用程序，是在微软的工具和技术的基础上建立并开发分布式企业系统应用的参考。
 
 MSF指导如何组织人员和项目规划、构建与部署成功的IT 解决方案.(强调人与过程)
 
@@ -299,7 +301,7 @@ MSF包括：
 
 图 4 MSF的人员与项目周期的过程映射表
 
- 
+
 
 ## 3.2   项目管理工具
 
@@ -307,7 +309,7 @@ MSF包括：
 
 | 类别       | 工具                       | 详述                                                     | 备注                                                     |
 | -------------- | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 项目综合  管理 | 甘特图                     | 项目人员的时间分配、项目进度管理。  dotproject：.dot  Microsoft Visio:  .vsd，较简单，无人员分配，无子项目  Microsoft Project：商业付费。  GanttProject：.gan，较简单  [OpenProj](https://sourceforge.net/projects/openproj/): .pod 有人员分配，有子项目缩进 | 推荐：[OpenProj](https://sourceforge.net/projects/openproj/) |
+| 项目综合  管理 | 甘特图                     | 项目人员的时间分配、项目进度管理。  <br>MS Visio:  .vsd，较简单，无人员分配和子项目  MS Project：商业付费。  <br/>dotproject：.dot     GanttProject：.gan，较简单  <br/>[OpenProj](https://sourceforge.net/projects/openproj/): .pod 有人员分配，有子项目缩进 | 推荐：[OpenProj](https://sourceforge.net/projects/openproj/) |
 | 文档管理       |                                | 关注团队协作、多版本管理。                                   |                                                              |
 |                | wiki                           | 优点：多人协同编辑，有历史版本。  缺点：不能离线看。         |                                                              |
 |                | word                           | 缺点：无历史版本，多人协同困难。                             |                                                              |
@@ -316,12 +318,12 @@ MSF包括：
 | 源码管理       |                                | svn/git/hb                                                   |                                                              |
 |                | git                            | 分布式版本管理，可以先在本地提交，再同步到线上。  适用于开源项目；缺点是权限管理较弱。 | 推荐！                                                       |
 |                | svn                            | 可对目录进行权限管理。                                       |                                                              |
-| 需求管理       |                                |                                                              | 详见 [产品管理](产品管理.MD) |
+| 需求管理       |                                |                                                              | 详见 [产品管理](产品管理.md) |
 | BUG管理        |                                | bugzilla/td                                                  |                                                              |
-| 测试管理       |                                | 性能测试: ab siege  压力测试: LoadRunner  自动化测试:        | 详见 [测试管理](测试管理.MD) |
-| 自动化布署     | docker                         |                                                              | 详见 [docker用户手册](docker用户手册.md) |
-| 项目构建       | maven/ant/  make/cmake/  qmake | 构建工具是将软件项目构建相关的过程自动化的工具。             | 详见 [项目开发环境工具](项目开发环境工具.MD) |
-| 开发工具       | 主要针对开发人员的工具。       | 语言：C++: g++/gcc；java: eclipse；php   IDE：vim/eclipse  建模：rose/visio/umlbrello  原型：rp | 详见 [项目开发环境工具](项目开发环境工具.MD)                    |
+| 测试管理       |                                | 性能测试: ab siege  压力测试: LoadRunner  自动化测试:        | 详见 [测试管理](测试管理.md) |
+| 自动化布署     | docker                         |                                                              | 详见 [docker用户手册](../软件可复用/tools.工具/docker用户手册.md) |
+| 项目构建       | maven/ant/  <br/>make/cmake/qmake | 构建工具是将软件项目构建相关的过程自动化的工具。             | 详见 [项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md) |
+| 开发工具       | 主要针对开发人员的工具。       | 语言：C++: g++/gcc；java: eclipse；php   IDE：vim/eclipse  建模：rose/visio/umlbrello  原型：rp | 同上       |
 
 
 
@@ -353,11 +355,11 @@ MSF包括：
 
 ## 本章参考
 
-[1].   PMBOK http://baike.baidu.com/item/PMBOK
+[1]. PMBOK http://baike.baidu.com/item/PMBOK
 
-[2].   CMM http://baike.baidu.com/item/CMM 
+[2]. CMM http://baike.baidu.com/item/CMM
 
-[3].   RUP http://baike.baidu.com/item/RUP 
+[3]. RUP http://baike.baidu.com/item/RUP
 
 
 
@@ -369,7 +371,7 @@ MSF包括：
 * 改进方式：TOP N, QCC(Quality Control Circle,品管圈)，7S， 改进建议。
 * QC七大工具: 查检表，柏拉图，鱼骨图，直方图，管制图，散布图和层别法。
 
- 
+
 
 **性能基准测试 benchmarks**
 
@@ -383,27 +385,27 @@ MSF包括：
 
 PDCA循环是美国质量管理专家休哈特博士首先提出的，由戴明采纳、宣传，获得普及，所以又称戴明环。全面质量管理的思想基础和方法依据就是PDCA循环。PDCA循环的含义是将质量管理分为四个阶段，即计划（plan）、执行（do）、检查（check）、调整（Action）。
 
- 
+
 
 ## 4.2 TOP N
 
 TOP-N分析法就是通过TOP-N算法从研究对象中得到所需的N个数据，并对这N个数据进行重点分析的方法。
 
- 
+
 
 ## 4.3 QCC
 
 QCC(Quality Control Circle,品管圈)
 
-起始于1950年Deming﹝[戴明](http://wiki.mbalib.com/wiki/戴明)﹞教授的[统计方法](http://wiki.mbalib.com/wiki/统计方法)课程，以及1954年Juran﹝[朱兰](http://wiki.mbalib.com/wiki/朱兰)﹞教授的[质量管理](http://wiki.mbalib.com/wiki/质量管理)课程。
+起始于1950年Deming﹝戴明﹞教授的[统计方法](http://wiki.mbalib.com/wiki/统计方法)课程，以及1954年Juran﹝[朱兰](http://wiki.mbalib.com/wiki/朱兰)﹞教授的质量管理课程。
 
 **品管圈**就是由相同、相近或互补之工作场所的人们自动自发组成数人一圈的小圈团体（又称[QC小组](http://wiki.mbalib.com/wiki/QC小组)，一般6人左右），然后全体合作、集思广益，按照一定的活动程序，活用[品管七大手法](http://wiki.mbalib.com/wiki/Category:品管七大手法)（QC7手法），来解决工作现场、管理、文化等方面所发生的问题及课题。它是一种比较活泼的品管形式。品管圈的特点是参加人员强调领导、技术人员、员工三结合。现代的QCC管理内容和目标突破了原有的质量管理范围，向着更高的技术、工艺、管理方面扩展。
 
- 
+
 
 ## 本章参考
 
- 
+
 
 # 5 需求管理
 
@@ -421,13 +423,13 @@ QCC(Quality Control Circle,品管圈)
 
 配置管理（Configuration Management，CM）是通过技术或行政手段对软件产品及其开发过程和生命周期进行控制、规范的一系列措施。配置管理的目标是记录软件产品的演化过程，确保软件开发者在[软件生命周期](https://baike.baidu.com/item/软件生命周期/861455)中各个阶段都能得到精确的产品配置。
 
- 
+
 
 配置管理的概念源于美国空军，为了规范设备的设计与制造，美国空军1962年制定并发布了第一个配置管理的标准“AFSCM375-1，CM During the Development & Acquisition Phases”。
 
 软件配置管理概念的提出则在20世纪60年代末70年代初。当时加利福尼亚大学圣巴巴拉分校的Leon Presser教授在承担美国海军的航空发动机研制合同期间，撰写了一篇名为“Change and Configuration Control”的论文，提出控制变更和配置的概念，这篇论文同时也是他在管理该项目（这个过程进行过近一千四百万次修改）的一个经验总结。
 
- 
+
 
 软件配置管理可以提炼为三个方面的内容：
 * VersionControl-版本控制：能够简单、明确地重现软件系统的任何一个历史版本。
@@ -450,16 +452,14 @@ QCC(Quality Control Circle,品管圈)
 
 **关键活动**包括：配置项（基本单位)、工作空间管理、版本控制、变更控制、状态报告、配置审计等。
 
- 
 
- 
 
 **配置识别：**
 * 确定需要纳入配置管理的配置项
 * 确定配置项的获取时间和所有者
 * 为识别的配置项分配唯一的标识
 
- 
+
 
 ### 7.1.2 术语和缩略词
 
@@ -471,7 +471,7 @@ QCC(Quality Control Circle,品管圈)
 
 配置是在技术文档中明确说明并最终组成软件产品的功能或物理属性。因此配置包括了即将受控的所有产品特性，其内容及相关文档、软件版本、变更文档、软件运行的支持数据，以及其他一切保证软件一致性的组成要素，相对与硬件类配置，软件产品的配置包括更多的内容并具有易变性。
 
- 
+
 
 **3）配置项（Configuration Item，CI）**
 
@@ -487,7 +487,7 @@ QCC(Quality Control Circle,品管圈)
 
 每个配置项的主要属性有：名称、标识符、文件状态、版本、作者、日期等。所有配置项都被保存在配置库里，确保不会混淆、丢失。配置项及其历史记录反映了软件的演化过程。
 
- 
+
 
 **4）基线（Baseline）**
 
@@ -495,7 +495,7 @@ QCC(Quality Control Circle,品管圈)
 
 ## 7.2   配置管理流程
 
- 
+
 
  ![image-20200101115857877](../media/software_enginer/it_008.png)
 
@@ -511,7 +511,7 @@ QCC(Quality Control Circle,品管圈)
 | 测试人员（Tester）                                  | 根据配置管理计划和相关规定，提交测试配置项和测试基线；       | 负责软件变更的测试验证。                                     |
 | 软件质量保证员（Software Quality Assurance，SQA）   | 负责配置审核并提交报告。                                     | 对配置审核中发现的不符合项，要求相关责任人进行纠正。         |
 
- 
+
 
 ### 7.2.1 基线管理
 
@@ -527,7 +527,7 @@ QCC(Quality Control Circle,品管圈)
 
 3)版本隔离：基线为开发工件提供了一个定点和快照，新项目可以从基线提供的定点之中建立。作为一个单独分支，新项目将与随后对原始项目（在主要分支上）所进行的变更进行隔离。
 
- 
+
 
 针对软件过程的不同阶段，主要有六种基线：
 * 需求基线：在需求分析完成后建立。
@@ -537,7 +537,7 @@ QCC(Quality Control Circle,品管圈)
 * 发布基线：
 * 变更基线：
 
- 
+
 
 ### 7.2.2 三库管理
 
@@ -553,7 +553,7 @@ QCC(Quality Control Circle,品管圈)
 
 例如：http://192.168.1.1:3000/TD_GROUP/gateway_portal.git
 
- 
+
 
 **2）受控库**
 
@@ -571,13 +571,13 @@ QCC(Quality Control Circle,品管圈)
 
 例如：周报、会议纪要、检查单等记录性文件。
 
- 
+
 
 **3）产品库**
 
 保存发布基线的配置项。作为最终产品存放在产品库，等待交付客户使用，出入库要严格办理手续。例如：通过系统测试的程序包。
 
- 
+
 
 ## 7.3   配置管理工具
 
@@ -589,7 +589,7 @@ QCC(Quality Control Circle,品管圈)
 * Microsoft VSS
 * 常用开源：CVS、SVN、GIT
 
- 
+
 
 **配置中心**
 
@@ -601,17 +601,17 @@ QCC(Quality Control Circle,品管圈)
 * 不同的分组和实例中，使用的dubbo服务注册地址和dubbo端口也不同；
 * 业务侧配置参数需要紧急修改参数并实时线上生效；
 
- 
+
 
 ## 本章参考
 
-[1].   百度百科-配置管理 https://baike.baidu.com/item/配置管理/10090499 
+[1]. 百度百科-配置管理 https://baike.baidu.com/item/配置管理/10090499
 
-[2].   配置管理流程 https://www.cnblogs.com/wayne-ivan/articles/525818.html
+[2]. 配置管理流程 https://www.cnblogs.com/wayne-ivan/articles/525818.html
 
-[3].   配置管理之三类配置库 https://blog.csdn.net/zhiaiqingteng/article/details/79347495
+[3]. 配置管理之三类配置库 https://blog.csdn.net/zhiaiqingteng/article/details/79347495
 
-[4].   配置中心——让配置管理更简单 https://cloud.tencent.com/developer/news/199791
+[4]. 配置中心——让配置管理更简单 https://cloud.tencent.com/developer/news/199791
 
 
 
@@ -619,19 +619,19 @@ QCC(Quality Control Circle,品管圈)
 
 团队的四维地图：组织、人员、业务和氛围。
 
-## 8.1   绩效激励
+## 8.1  绩效激励
 
-## 8.2   人员配置范例
+## 8.2  人员配置范例
 
 **139的人员配置：共81人**
-* 公共平台开发：12人 
-* 基础关系平台：16人 
-* 测试组：15人 
-* 短彩开发：12人 
-* 系统架构：6人 
-* 互联网应用开发：20人 
+* 公共平台开发：12人
+* 基础关系平台：16人
+* 测试组：15人
+* 短彩开发：12人
+* 系统架构：6人
+* 互联网应用开发：20人
 
- 
+
 
 **新浪微博的人员配置：共83人**
 * PHP开发：35人，8个开发小组 分别由8个高级开发工程师+24个初级工程师，另外还有3个不参与开发，只对开发需求和开发采用的方案做规划和拍板的开发架构师团队，是8年以上开发经验的开发管理人员组成。
@@ -643,28 +643,28 @@ QCC(Quality Control Circle,品管圈)
 * 产品设计师：6人
 * 产品设计项目管理：5人
 
- 
+
 
 ## 本章参考
 
- 
+
 
 # 参考资料
 
 **参考书目**
 
-* 王立福 麻志毅 张世琨 编著 《软件工程》 / 北京大学出版社 / 2002-3 
+* 王立福 麻志毅 张世琨 编著 《软件工程》 / 北京大学出版社 / 2002-3
 * Tom DeMarco、Timothy Lister / UML China 《人件》/ 清华大学出版社 / 2003-6
-* [美] 弗雷德里克·布鲁克斯 / 汪颖 《人月神话》 / 清华大学出版社 / 2002-11 
+* [美] 弗雷德里克·布鲁克斯 / 汪颖 《人月神话》 / 清华大学出版社 / 2002-11
 * [美]Karl E.Wiegers 《软件需求》第2版 / 清华大学出版社 / 2004-11-1
 * Andrew Hunt、David Thomas / 马维达译 《程序员修炼之道 : 从小工到专家》/ 电子工业出版社 / 2011-1
 * Eric Ris e 《[精益创业](https://baike.baidu.com/item/精益创业/590883)》 2012-8
 
- 
+
 
 **参考文献**
 
- 
+
 
 # 附录
 
@@ -680,7 +680,7 @@ scrum 英 [skrʌm] 美 [skrʌm]  n. 并列争球；扭打，混乱；争夺；v.
 
 lamda 英 [ˈlæmdə] 美 ['læmdə]  n. 希腊字母的第 11个字；
 
- 
+
 
 **SQL**
 
@@ -688,7 +688,7 @@ ascending 英 [ə'sendɪŋ] 美 [əˈsɛndɪŋ]  升序 （在SQL语言中通常
 
 descending 简称DESC
 
- 
+
 
 **OO- Object Oriented**
 

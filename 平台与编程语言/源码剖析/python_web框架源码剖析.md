@@ -65,7 +65,7 @@ Required-by: drf-yasg, djangorestframework
 
 
 
-##  源码结构 
+##  源码结构
 
 表格 django源码结构
 
@@ -134,7 +134,7 @@ django有两种运行方式
 
 
 
-命令：`python manger.py runserver` 
+命令：`python manger.py runserver`
 
 实际执行： `django/core/management/commands/runserver.py:run`
 
@@ -159,7 +159,7 @@ class Command(BaseCommand):
     default_port = '8000'
     protocol = 'http'
     server_cls = WSGIServer  #要启动的服务器类
-    
+
     def run(self, **options):
         """Run the server, using the autoreloader if needed."""
         use_reloader = options['use_reloader']
@@ -167,8 +167,8 @@ class Command(BaseCommand):
         if use_reloader:	#运行时重载支持
             autoreload.run_with_reloader(self.inner_run, **options)
         else:
-            self.inner_run(None, **options) #实际run    
-            
+            self.inner_run(None, **options) #实际run
+
     def inner_run(self, *args, **options):
         ...
         try:
@@ -181,7 +181,7 @@ class Command(BaseCommand):
 
 
 
-django/core/servers/basehttp.py 
+django/core/servers/basehttp.py
 
 在这启动WSGIServer
 
@@ -217,7 +217,7 @@ class WSGIServer(simple_server.WSGIServer):
             self.address_family = socket.AF_INET6
         self.allow_reuse_address = allow_reuse_address
         super().__init__(*args, **kwargs)
-    
+
 ```
 
 
@@ -273,8 +273,8 @@ class WSGIRequest(HttpRequest):
         self._stream = LimitedStream(self.environ['wsgi.input'], content_length)
         self._read_started = False
         self.resolver_match = None
-    
-    
+
+
 class WSGIHandler(base.BaseHandler):
     request_class = WSGIRequest  # HTTPRequest子类
 
@@ -288,7 +288,7 @@ class WSGIHandler(base.BaseHandler):
         signals.request_started.send(sender=self.__class__, environ=environ)
         # 从环境变量中获取请求、响应对象类
         request = self.request_class(environ)
-        # 调用父类方法 get_response获取处理结果 
+        # 调用父类方法 get_response获取处理结果
         response = self.get_response(request)
 
         response._handler_class = self.__class__
@@ -313,7 +313,7 @@ django/core/handlers/base.py
 
 ```python
 # asgiref模块是django软件基金会维护的，属于django的子模块
-from asgiref.sync import async_to_sync, sync_to_async  
+from asgiref.sync import async_to_sync, sync_to_async
 
 class BaseHandler:
     _view_middleware = None
@@ -326,19 +326,19 @@ class BaseHandler:
         Populate middleware lists from settings.MIDDLEWARE.
 		从settings.MIDDLEWARE加载中间件，要求在环境初始化后
         Must be called after the environment is fixed (see __call__ in subclasses).
-        """        
+        """
         get_response = self._get_response_async if is_async else self._get_response
         handler = convert_exception_to_response(get_response)
-        handler_is_async = is_async   
-        
+        handler_is_async = is_async
+
         # 多个中间件时的处理
         for middleware_path in reversed(settings.MIDDLEWARE):
-        	# 略        
-        
+        	# 略
+
         # Adapt the top of the stack, if needed.
         handler = self.adapt_method_mode(is_async, handler, handler_is_async)
         self._middleware_chain = handler
-        
+
     def get_response(self, request):
         """Return an HttpResponse object for the given HttpRequest."""
         # Setup default url resolver for this thread
@@ -358,7 +358,7 @@ class BaseHandler:
     async def get_response_async(self, request):
         """
         Asynchronous version of get_response.
-		异步响应： async + await 
+		异步响应： async + await
         Funneling everything, including WSGI, into a single async
         get_response() is too slow. Avoid the context switch by using
         a separate async response path.
@@ -373,7 +373,7 @@ class BaseHandler:
                 response=response,
                 request=request,
             )
-        return response        
+        return response
 ```
 
 
@@ -409,7 +409,7 @@ from .resolvers import (
 )
 
 def _path(route, view, kwargs=None, name=None, Pattern=None):
-    if isinstance(view, (list, tuple)): 
+    if isinstance(view, (list, tuple)):
         # For include(...) processing. 支持原来的include方法
         pattern = Pattern(route, is_endpoint=False)
         urlconf_module, app_name, namespace = view
@@ -449,7 +449,7 @@ class CheckURLMixin:
         """ 检查模式不要以/开头
         Check that the pattern does not begin with a forward slash.
         """
-        
+
 class RoutePattern(CheckURLMixin):
     regex = LocaleRegexDescriptor('_route')
 
@@ -489,7 +489,7 @@ class MiddlewareMixin:
         self.get_response = get_response
         self._async_check()
         super().__init__()  #？没基类
-        
+
     def __call__(self, request):
         # 如果是异步模式，调用__acall__
         if asyncio.iscoroutinefunction(self.get_response):
@@ -526,7 +526,7 @@ class MiddlewareMixin:
 
 ### djangorestframework-DRF
 
-安装：`pip install djangorestframework ` 
+安装：`pip install djangorestframework `
 
 ```shell
 $ pip show djangorestframework
@@ -546,7 +546,7 @@ Required-by: drf-yasg, django-rest-swagger
 
 1. 序列化
 
-序列化类层次:  
+序列化类层次:
 
 ```sh
 Field(object) -> BaseSerialize -> Serialize -> ModelSerialize
@@ -630,14 +630,14 @@ class Field:
 
 2. 视图
 
-   视图类层次： 
-   
+   视图类层次：
+
    ```sh
    View(object) -> APIView -> GenericAPIView -> ListAPIView/xxAPIView
                            -> ViewSets
    ```
-   
-   
+
+
 
 ## 本章参考
 
@@ -688,15 +688,15 @@ ykernel
 ```python
 import tornado.ioloop
 import tornado.web
-  
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
-  
+
 application = tornado.web.Application([
     (r"/index", MainHandler),
 ])
-  
+
 if __name__ == "__main__":
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
@@ -704,7 +704,7 @@ if __name__ == "__main__":
 
 
 
-## 源码结构 
+## 源码结构
 
 表格 tornado源码结构
 
@@ -750,7 +750,7 @@ if __name__ == "__main__":
 ## WEB核心对象
 
 * web.py web核心对象，包括Application、RequestHandler
-* routing.py 路由对象 
+* routing.py 路由对象
 * tcpserver.py TCP服务器
 
 
@@ -769,7 +769,7 @@ class Application(ReversibleRouter):
         transforms: Optional[List[Type["OutputTransform"]]] = None,
         **settings: Any
     ) -> None:
-        
+
     def listen(self, port: int, address: str = "", **kwargs: Any) -> HTTPServer:
         """Starts an HTTP server for this application on the given port.
 
@@ -791,9 +791,9 @@ class Application(ReversibleRouter):
         """
         server = HTTPServer(self, **kwargs)
         server.listen(port, address)  #此处listen方法实现socket bind + listen + add_socket
-        return server    
-    
-    
+        return server
+
+
 class RequestHandler(object):
     """Base class for HTTP request handlers.
 
@@ -816,12 +816,12 @@ class RequestHandler(object):
     # Will be set in _execute.
     _transforms = None  # type: List[OutputTransform]
     path_args = None  # type: List[str]
-    path_kwargs = None  # type: Dict[str, str]    
+    path_kwargs = None  # type: Dict[str, str]
 ```
 
 
 
-routing.py 路由对象 
+routing.py 路由对象
 
 ```python
 class Router(httputil.HTTPServerConnectionDelegate):
@@ -846,9 +846,9 @@ class Router(httputil.HTTPServerConnectionDelegate):
     ) -> httputil.HTTPMessageDelegate:
         return _RoutingDelegate(self, server_conn, request_conn)
 
-    
+
 class ReversibleRouter(Router):
-    
+
 ```
 
 
@@ -871,7 +871,7 @@ tornado/tcpserver.py
    IOLoop.current().start()
    ```
 
-   
+
 
 定义
 ```python
@@ -890,7 +890,7 @@ class TCPServer(object):
         self._stopped = False
         self.max_buffer_size = max_buffer_size
         self.read_chunk_size = read_chunk_size
-        
+
     def listen(self, port: int, address: str = "") -> None:
         """Starts accepting connections on the given port.
         """
@@ -910,7 +910,7 @@ class TCPServer(object):
             self._sockets[sock.fileno()] = sock
             self._handlers[sock.fileno()] = add_accept_handler(
                 sock, self._handle_connection
-            )        
+            )
 ```
 
 
@@ -923,7 +923,7 @@ tornado.ioloop.IOLoop.instance().start()
 
 说明：*事件循环机制*实现早期是用twisted的epoll实现，6.0+版本换用asyncio实现。
 
-ioloop.py 
+ioloop.py
 
 ```python
 import asyncio
@@ -951,9 +951,9 @@ class IOLoop(Configurable):
     ) -> None:
         # 配置IO循环的实现方式：6.x实现默认用 asyncio
         if asyncio is not None:
-            # 此处导入BaseAsyncIOLoop 
+            # 此处导入BaseAsyncIOLoop
             from tornado.platform.asyncio import BaseAsyncIOLoop
-            
+
             if isinstance(impl, str):
                 impl = import_object(impl)
             if isinstance(impl, type) and not issubclass(impl, BaseAsyncIOLoop):
@@ -961,12 +961,12 @@ class IOLoop(Configurable):
                     "only AsyncIOLoop is allowed when asyncio is available"
                 )
         super(IOLoop, cls).configure(impl, **kwargs)
-        
+
     @staticmethod
     def instance() -> "IOLoop":
         # IO对象实例化，返回当前一个可用的IO实例
-        return IOLoop.current()      
-    
+        return IOLoop.current()
+
     @staticmethod
     def current(instance: bool = True) -> Optional["IOLoop"]:
         try:
@@ -984,7 +984,7 @@ class IOLoop(Configurable):
                 current = AsyncIOMainLoop(make_current=True)  # type: Optional[IOLoop]
             else:
                 current = None
-        return current        
+        return current
 ```
 
 
@@ -1006,8 +1006,8 @@ async def handle_connection(connection, address):
 
 def connection_ready(sock, fd, events):
     while True:
-        try: #阻塞获取到有数据的连接 
-            connection, address = sock.accept()  
+        try: #阻塞获取到有数据的连接
+            connection, address = sock.accept()
         except BlockingIOError:
             return
         connection.setblocking(0)
@@ -1063,7 +1063,7 @@ class BaseAsyncIOLoop(IOLoop):
             # 持续运行EventLoop
             self.asyncio_loop.run_forever()
         finally:
-            asyncio.set_event_loop(old_loop)    
+            asyncio.set_event_loop(old_loop)
 ```
 
 

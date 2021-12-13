@@ -8,9 +8,13 @@
 
 
 
+
+
 ---
 
 # 目录
+
+[TOC]
 
 [目录... 1](#_Toc25402125)
 
@@ -48,14 +52,14 @@
 
 [参考资料... 10](#_Toc25402142)
 
- 
 
- 
 
- 
+
+
+
 
 ---
-# 1    简介
+# 1 简介
 
 官网：http://nginx.org/
 
@@ -106,8 +110,8 @@ nginx重启可以分成几种类型
 
 1. 简单型，先关闭进程，修改你的配置后，重启进程。
 ```sh
-    kill -QUIT `cat /usr/local/nginx/nginx.pid`
-    sudo /usr/local/nginx/nginx
+ kill -QUIT `cat /usr/local/nginx/nginx.pid`
+ sudo /usr/local/nginx/nginx
 ```
 2. [重新加载配置文件，不重启进程，不会停止处理请求](http://www.nginx.cn/nginxchscommandline#reload config)
 3. [平滑更新nginx二进制，不会停止处理请求](http://www.nginx.cn/nginxchscommandline#reload bin)
@@ -122,7 +126,7 @@ nginx重启可以分成几种类型
 
 
 
-# 3    配置篇nginx.conf
+# 3 配置篇nginx.conf
 
 ## 3.1  配置基础
 
@@ -137,28 +141,28 @@ nginx重启可以分成几种类型
 * location块：配置请求的路由，以及各种页面的处理情况。
 * upstream块：反向代理配置，指向后台应用服务器。
 
- 
+
 
 配置文件结构示例如下：
 ```nginx
 
 ...  #全局块
- 
-events {     # events块
+
+events {  # events块
   ...
 } # END EVENT
- 
+
 http   #http块
 {
   ...  #http全局块
   server    #server块
-  { 
+  {
    ... #server全局块
     location [PATTERN]  #location块
     {
      ...
     }
-    location [PATTERN] 
+    location [PATTERN]
     {
      ...
     }
@@ -244,7 +248,7 @@ http   #http块
 
 
 
-###  Nginx配置语法 
+###  Nginx配置语法
 
 #### location和匹配优先级
 
@@ -259,8 +263,8 @@ http   #http块
 * ~* 正则匹配，不区分大小写。
 * * !~ 区分大小写不匹配
 * !~* 不区分大小写不匹配
-* location /uri  不带任何修饰符，表示前缀匹配，在正则匹配之后； 
-* location /  通用匹配，任何未匹配到其他location的请求都会匹配到，相当于default； 
+* location /uri  不带任何修饰符，表示前缀匹配，在正则匹配之后；
+* location /  通用匹配，任何未匹配到其他location的请求都会匹配到，相当于default；
 
 
 
@@ -281,7 +285,7 @@ root与alias主要区别在于nginx如何解释location后面的uri，这会使�
 
 alias是一个目录别名的定义，root则是最上层目录的定义。alias必须以 / 结尾。
 
-示例：客户端请求  /request_path/image/cat.png 
+示例：客户端请求  /request_path/image/cat.png
 
  ```nginx
 location /request_path/image/ {
@@ -292,7 +296,7 @@ location /request_path/image/ {
 
 
 
-#### rwrite语法 
+#### rwrite语法
 
 Rewrite主要的功能就是实现URL的重写，Nginx的Rewrite规则采用Pcre，perl兼容正则表达式的语法规则匹配，如果需要Nginx的Rewrite功能，在编译Nginx之前，需要编译安装PCRE库。
 
@@ -354,19 +358,19 @@ location ^~ /api/example {
 
 ## 3.2 配置示例
 
-```nginx  
+```nginx
 user  nobody;           #全局块
 worker_processes  1;
 
 events {    #events块
-    worker_connections  1024;  
+    worker_connections  1024;
     use epoll;
 }
 
 http {  #http块
     include    mime.types;  #文件扩展名与文件类型映射表
     default_type application/octet-stream;  #默认文件类型，默认为text/plain
-    #access_log off;  #取消服务日志  
+    #access_log off;  #取消服务日志
     log_format myFormat ' $remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for'; #自定义格式
     access_log log/access.log myFormat; #combined为日志格式的默认值
     sendfile on;  #允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。
@@ -397,7 +401,7 @@ http {  #http块
             index  index.html index.htm;
         }
 
-        location /tomcat/ { 
+        location /tomcat/ {
             proxy_pass http://127.0.0.1:8080;
         }
     }
@@ -432,13 +436,13 @@ http {  #http块
    }
    ```
 
-   
+
 
 ### 防盗链
 
 ```nginx
 location ~* \.(gif|jpg|png|swf|flv)$ {
-    root html; #root如果在server{}中有设置可以不需要设定	
+    root html; #root如果在server{}中有设置可以不需要设定
     valid_referers none blocked *.nginxcn.com;
     if ($invalid_referer) {
     rewrite ^/ www.nginx.cn
@@ -507,7 +511,7 @@ Reading: 0 Writing: 1 Waiting: 0
 
 
 
-## 3.4   Nginx反向代理配置
+## 3.4  Nginx反向代理配置
 
 ### 3.4.1 wsgi配置
 
@@ -515,11 +519,11 @@ Reading: 0 Writing: 1 Waiting: 0
 
 `$ sudo apt-get install uwsgi-plugin-python`
 
-**示例：通过域名xx.com访问flask应用abc**
+**示例：通过域名xx.com 访问flask应用abc**
 
 **代码目录**
 
-```sh        
+```sh
 ├── env
 │  ├── bin
 │  ├── include
@@ -539,11 +543,14 @@ Reading: 0 Writing: 1 Waiting: 0
 http {
   ...
   #include /etc/nginx/conf.d/*.conf;
-  include /etc/nginx/sites-enabled/*.conf;
+  include /etc/nginx/sites-enabled/*.conf;   # 指向具体站点配置文件
 }
 ```
 
+
+
 **/etc/nginx/sites-enabled/www.xxx.com.conf**
+
 ```nginx
 server {
   listen 80;
@@ -559,7 +566,9 @@ server {
 ```
 
 
+
 **/etc/uwsgi/apps-enabled/www.xxx.com.ini**
+
 ```ini
 [uwsgi]
 plugins = python
@@ -572,15 +581,40 @@ module = runserver
 callable = app
 ```
 
+
+
+**/etc/nginx/uwsgi_params**
+
+```nginx
+uwsgi_param  QUERY_STRING       $query_string;
+uwsgi_param  REQUEST_METHOD     $request_method;
+uwsgi_param  CONTENT_TYPE       $content_type;
+uwsgi_param  CONTENT_LENGTH     $content_length;
+
+uwsgi_param  REQUEST_URI        $request_uri;
+uwsgi_param  PATH_INFO          $document_uri;
+uwsgi_param  DOCUMENT_ROOT      $document_root;
+uwsgi_param  SERVER_PROTOCOL    $server_protocol;
+uwsgi_param  REQUEST_SCHEME     $scheme;
+uwsgi_param  HTTPS              $https if_not_empty;
+
+uwsgi_param  REMOTE_ADDR        $remote_addr;
+uwsgi_param  REMOTE_PORT        $remote_port;
+uwsgi_param  SERVER_PORT        $server_port;
+uwsgi_param  SERVER_NAME        $server_name;
+```
+
+
+
 **2. gunicorn**
 
 说明：$开头是nginx的内置变量。
 ```nginx
-location /random {
+location /xxx {
   proxy_pass http://127.0.0.1:8080;  # 反向代理
-  proxy_set_header  X-Real-IP      $remote_addr;
-  proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
-  proxy_set_header  Host        $http_host;
+  proxy_set_header  X-Real-IP      		$remote_addr;
+  proxy_set_header  X-Forwarded-For   	$proxy_add_x_forwarded_for;
+  proxy_set_header  Host        		$http_host;
   proxy_set_header  X-NginX-Proxy    true;
   proxy_set_header  Connection      "";
   proxy_http_version 1.1;
@@ -593,40 +627,42 @@ location /random {
 
 upstream后端服务器代理参数设置
 ```nginx
-  proxy_pass http://127.0.0.1:8080;  # 反向代理
-     include proxy_params
+# nginx.conf
+location /xxx {
+	proxy_pass http://127.0.0.1:8080;  # 反向代理
+    include proxy_params
 }
- 
-  # proxy_params 文件
-  proxy_set_header  X-Real-IP      $remote_addr; # 获取请求端真实IP
-  proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
-  proxy_set_header  Host        $http_host;
-  proxy_set_header  Connection      "";
-  proxy_connect_timeout 1;  # nginx服务器与被代理的服务器建立连接的超时时间，默认60秒。
-  proxy_read_timeout 1;  # nginx服务器想被代理服务器组发出read请求后，等待响应的超时间，默认为60秒。
-  proxy_send_timeout 1;  # nginx服务器想被代理服务器组发出write请求后，等待响应的超时间，默认为60秒。
-  proxy_ignore_client_abort on; # 客户端断网时，nginx服务器是否终断对被代理服务器的请求。默认为off。
+
+# proxy_params 文件
+proxy_set_header  X-Real-IP      	$remote_addr; # 获取请求端真实IP
+proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header  Host        		$http_host;
+proxy_set_header  Connection      	"";
+proxy_connect_timeout 1;  	# nginx服务器与被代理的服务器建立连接的超时时间，默认60秒。
+proxy_read_timeout 1;  		# nginx服务器想被代理服务器组发出read请求后，等待响应的超时间，默认为60秒。
+proxy_send_timeout 1;  		# nginx服务器想被代理服务器组发出write请求后，等待响应的超时间，默认为60秒。
+proxy_ignore_client_abort on; # 客户端断网时，nginx服务器是否终断对被代理服务器的请求。默认为off。
 ```
 
 
 
-## 3.5   Nginx负载均衡
+## 3.5  Nginx负载均衡
 
 **Nginx的upstream目前支持3种方式的分配**
 
 * 轮询（默认）： 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
 * weight：指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
 * ip_hash： 每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
-* fair（第三方） ：按后端服务器的响应时间来分配请求，响应时间短的优先分配。 
+* fair（第三方） ：按后端服务器的响应时间来分配请求，响应时间短的优先分配。
 * url_hash（第三方）
 
 **示例1：权重**
 
 ```nginx
-upstream bbs.linuxtone.org {  # 定义负载均衡设备的Ip及设备状态 
+upstream bbs.linuxtone.org {  # 定义负载均衡设备的Ip及设备状态
     server 127.0.0.1:9090 down;  # 表示单前的server暂时不参与负载
     server 127.0.0.1:8080 weight=2;  # 默认为1.weight越大，负载的权重就越大
-    server 127.0.0.1:6060; 
+    server 127.0.0.1:6060;
     server 127.0.0.1:7070 backup;  # 热备
 }
 ```
@@ -639,7 +675,7 @@ upstream bbs.linuxtone.org {  # 定义负载均衡设备的Ip及设备状态
 * fail_timeout: max_fails次失败后，暂停的时间。
 * backup： 其它所有的非backup
 
- 
+
 
 **示例2：ip_hash**
 ```nginx
@@ -652,7 +688,7 @@ upstream backend {
 ```
 
 
-## 3.6   Nginx限流
+## 3.6  Nginx限流
 
 限流算法：令牌桶算法、漏洞算法
 
@@ -662,15 +698,15 @@ Nginx官方版本限制IP的连接和并发分别有两个模块：
 * limit_req_zone 用来限制单位时间内的请求数，即速率限制，采用的漏桶算法 "leaky bucket"。
 * limit_req_conn 用来限制同一时间连接数，即并发限制。
 
- 
+
 
 $binary_remote_addr 每个独立IP
 
 **示例1：限制访问速率**
 ```nginx
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s; #10m区域，2次/秒
-server { 
-  location / { 
+server {
+  location / {
     limit_req zone=mylimit;
   }
 }
@@ -680,8 +716,8 @@ server {
 **实例2： burst缓存处理**
 ```nginx
 limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s;
-server { 
-  location / { 
+server {
+  location / {
     limit_req zone=mylimit burst=4 nodelay; # burst缓存请求4个，不延迟
     limit_req_status 598;   # 自定义错误返回状态码
   }
@@ -734,7 +770,7 @@ server {
       set $group serv_grav;
   }
 
-location / {                       
+location / {
     proxy_pass http://$group;
     proxy_set_header   Host             $host;
     proxy_set_header   X-Real-IP        $remote_addr;
@@ -773,16 +809,16 @@ server {
 
 
 
-# 4  原理篇
+# 4 原理篇
 
- 
 
-# 5  模块开发篇
 
- 
+# 5 模块开发篇
+
+
 
 # 参考资料
 
-[1].   nginx基本配置与参数说明 [www.nginx.cn/76.html](http://www.nginx.cn/76.html) 
+[1].   nginx基本配置与参数说明 [www.nginx.cn/76.html](http://www.nginx.cn/76.html)
 
-[2].   nginx的rewrite开发实例解析 https://www.2cto.com/kf/201711/548951.html 
+[2].   nginx的rewrite开发实例解析 https://www.2cto.com/kf/201711/548951.html

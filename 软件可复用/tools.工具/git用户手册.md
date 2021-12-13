@@ -15,13 +15,13 @@
 | 13   | 2019-3-23  | 增加语义化的版本模式章节                                     | 同上   |        |
 |      |            |                                                              |        |        |
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 ---
 
@@ -163,7 +163,7 @@ git支持使用ssh路径。
 git使用ssh tunnel来提交源码，这个加密通道可以避免源码的封包被拦截而截取。因此要先产生并上传ssh key到github，方便之後与服务器之间的通迅。
 
 
-Mac OS X与Linux，只要输入ssh-keygen -t rsa并根据指示操作即可： 
+Mac OS X与Linux，只要输入ssh-keygen -t rsa并根据指示操作即可：
 ```sh
 [~/.ssh]$ ssh-keygen -t rsa
 ```
@@ -183,7 +183,7 @@ $ cat .ssh/id_rsa.pub | ssh $user@$host -p [port] "cat - >>.ssh/authorized_keys"
 
 **特别说明**：windows环境使用git bash需要.ssh目录权限755。
 
- 
+
 
 ### 2.2.2 开发用户签名
 ```sh
@@ -191,7 +191,7 @@ $ git config –-list
 denny.wuqifu@3g.net.cn=qfwu
 user.email=wuqifu@3g.net.cn
 user.name=denny
- 
+
 //设置用户名与邮箱
 $ git config --global user.name "Scott Chacon"
 $ git config --global user.email "schacon@gmail.com"
@@ -277,7 +277,7 @@ quotepath = false
 │   update.sample
 ├─info
 │   exclude
-│   
+│
 ├─logs
 │ │ HEAD
 │ └─refs
@@ -300,7 +300,7 @@ quotepath = false
 ```
 *说明：上图为.git的目录结构。HEAD文件为当前目录树的分支路径，如果删除HEAD所指向的链接（一般缺省为：refs/heads/master），那么会放弃本次编辑，**git pull**不会导致合并，会全部更新远程服务器的版本。*
 
- 
+
 
 | 文件目录名  | 用途                                                         |
 | ----------- | ------------------------------------------------------------ |
@@ -321,7 +321,7 @@ quotepath = false
 说明：1. 标签是40位长度的SHA-1值。用来唯一定位commit（提交）的序列，也可称为commit对象的KEY值。
 2. FETCH_HEAD与ORIG_HEAD的标签数据不一致，即可说明有修改。
 
- 
+
 
 远程端remote名称缺省为origin，即本地clone的源端。
 
@@ -335,7 +335,7 @@ usage: git remote add [<options>] <name> <url>
 
 
 
-**git 配置文件示例** ~/.gitconfig  
+**git 配置文件示例** ~/.gitconfig
 
 ```ini
 [user]
@@ -371,7 +371,7 @@ usage: git remote add [<options>] <name> <url>
 ## 3.1  常用命令使用说明
 ```sh
 usage: git [--version] [--exec-path[=GIT_EXEC_PATH]] [-p|--paginate|--no-pager] [--bare] [--git-dir=GIT_DIR] [--work-tree=GIT_WORK_TREE] [--help] COMMAND [ARGS]
- 
+
 The most commonly used git commands are:
   add    Add file contents to the index
   bisect   Find the change that introduced a bug by binary search
@@ -423,7 +423,7 @@ git pull git:**//**github.com**/**tom**/**test.git
 ```
 
 
-3)    分支使用 
+3)    分支使用
 
 版本控制系統的branch功能也很有意思，若同时修改bug，又要加入新功能，可以fork出一个branch：一个专门修bug，一个专门加入新功能，等到稳定后再merge合并
 ```sh
@@ -431,7 +431,7 @@ git branch bug_fix  # 建立branch，名为bug_fix
 git checkout bug_fix  # 切换到bug_fix
 git checkout master #切换到主要的repo
 git merge bug_fix  #把bug_fix这个branch和现在的branch合并
- 
+
 # 若有remote的branch，想要查看并checkout
 git branch -r  # 查看远程branch
 git checkout -b bug_fix_local bug_fix_remote  # 把本地端切换为远程的bug_fix_remote branch并命名为bug_fix_local
@@ -503,7 +503,7 @@ $git clone [user@ubuntu.unix-center.net/home/p/d/xxxxx](mailto:user@ubuntu.unix-
 $git clone [user@ubuntu.unix-center.net/~/xxxxx](mailto:user@ubuntu.unix-center.net/~/xxxxx)
 $git clone ssh://qfwu@61.145.124.165:37856/home/qfwu/yyusmodel --upload-pack=~/app/bin/git-upload-pac
 $git clone [git@github.com:dennycn/script.git](mailto:git@github.com:dennycn/script.git)
-$git clone https://github.com/dennycn/script.git 
+$git clone https://github.com/dennycn/script.git
 ```
 
 
@@ -513,7 +513,7 @@ $git clone https://github.com/dennycn/script.git
 
 `$ git-daemon --reuseaddr –port=9418 --base-path=/home/git `
 
- 
+
 
 2)    http协议导出仓库
 
@@ -533,7 +533,7 @@ $ chmod a+x hooks/post-update
 
 $git commit –m “add localhost”
 
- 
+
 
 2)    本地修改后提交到远程
 
@@ -543,7 +543,7 @@ $git commit –m “add localhost”
 
 $git push xxxx@xxxx:
 
- 
+
 
 3)    更新远程仓库
 
@@ -563,7 +563,7 @@ $git pull xxx@xxxx [origin_master]
 
 使用传统的git checkout命令创建的分支是有父节点的，意味着新branch包含了历史提交，所以我们无法直接使用该命令。
 
-\# 查看远程所有分支，-a 
+\# 查看远程所有分支，-a
 
 `git branch -a`
 
@@ -578,13 +578,13 @@ git rm -rf .
 
 **法2：使用 git symbolic-ref**
 ```sh
-git symbolic-ref HEAD refs/heads/newbranch 
-rm .git/index 
-git clean -fdx 
- 
+git symbolic-ref HEAD refs/heads/newbranch
+rm .git/index
+git clean -fdx
+
 # 此时空日志，需要 git add xxx; git commit -m 'xxx'; git push origin [branch]才有第一条commit日志
-<do work> 
-git add your files 
+<do work>
+git add your files
 git commit -m 'Initial commit'
 ```
 
@@ -596,7 +596,7 @@ git-reset - Reset current HEAD to the specified state
 usage: git reset [--mixed | --soft | --hard | --merge | --keep] [-q] [<commit>]
   or: git reset [-q] <tree-ish> [--] <paths>...
   or: git reset --patch [<tree-ish>] [--] [<paths>...]
- 
+
   -q, --quiet      be quiet, only report errors
   --mixed        reset HEAD and index
   --soft        reset only HEAD
@@ -605,15 +605,15 @@ usage: git reset [--mixed | --soft | --hard | --merge | --keep] [-q] [<commit>]
   --keep        reset HEAD but keep local changes
   -p, --patch      select hunks interactively
   -N, --intent-to-add  record only the fact that removed paths will be added later
- 
+
 # 本地仓库撤销, 可以将本地的仓库回滚到上一次提交时的状态，`HEAD^`指的是上一次提交。`HEAD` ^[num]表示可撤销前num次提交。
 $ git reset --hard HEAD^
 
 # 完成撤销,同时将代码恢复到前一commit_id 对应的版本。
 $ git reset --hard commit_id
 # 完成Commit命令的撤销，但是不对代码修改进行撤销，可以直接通过git commit 重新提交对本地代码的修改。
-$ git reset commit_id 
- 
+$ git reset commit_id
+
 # 远程仓库跟随本地仓库撤销，保持本地与远程的状态一致，即回滚。
 $ git push origin [branch] -f
 ```
@@ -645,7 +645,7 @@ git rebase --continue | --skip | --abort | --edit-todo
 
 此外 rebase 还提供三个操作命令，分别是 `--continue`、`--absort` 和 `--skip`，这三个命令的意思分别是“继续”、“退出”和“跳过”。
 
- 
+
 
 合并执行顺序：
 
@@ -662,7 +662,7 @@ git -i [hash_valus]
 * edit：
 * drop: 不提交，放弃本次编辑。
 
-​                               
+​
 
 3). 提交修改
 
@@ -675,7 +675,7 @@ $git push origin [branch] -f
 
 `git rebase --abort`来撤销修改，回到没有开始操作合并之前的状态。
 
- 
+
 
 ### 3.4.3 git merge：合并分支
 
@@ -686,13 +686,13 @@ $git push origin [branch] -f
 首先先到master分支，然后直接合并：
 
 ```sh
-git checkout master　
+git checkout master
 git merge dev
 ```
 
  说明：注意没参数的情况下merge是快进式(Fast-forward)的，即Git将master分支的指针直接移到dev的最前方。
 
- 
+
 
 **2. 压合合并(squashed commits)：**
 
@@ -711,7 +711,7 @@ git merge --squash dev
 
 说明：使用--squash参数，这样提交的commit只有一个parent，即原来的分支。
 
- 
+
 
 # 4  进阶篇
 
@@ -721,23 +721,23 @@ git merge --squash dev
 
 要求：团队里的每个人都对仓库有写权限，又不能给每个人在服务器上建立账户. 那么提供 SSH 连接就是唯一的选择了。
 
-方法1： 是给每个人建立一个账户，直截了当但过于繁琐。反复的运行 adduser 并且给所有人设定临时密码可不是好玩的。  
+方法1： 是给每个人建立一个账户，直截了当但过于繁琐。反复的运行 adduser 并且给所有人设定临时密码可不是好玩的。
 
-方法2: 是在主机上建立一个 git 账户，让每个需要写权限的人发送一个 SSH 公钥，然后将其加入 git 账户的 ~/.ssh /authorized_keys 文件。这样一来，所有人都将通过 git 账户访问主机。这丝毫不会影响提交的数据——访问主机用的身份不会影响 commit的记录。  
+方法2: 是在主机上建立一个 git 账户，让每个需要写权限的人发送一个 SSH 公钥，然后将其加入 git 账户的 ~/.ssh /authorized_keys 文件。这样一来，所有人都将通过 git 账户访问主机。这丝毫不会影响提交的数据——访问主机用的身份不会影响 commit的记录。
 
-方法3: 是让 SSH 服务器通过某个LDAP 服务，或者其他已经设定好的集中授权机制，来进行授权。只要每个人都能获得主机的 shell 访问权，任何可用的 SSH 授权机制都能达到相同效果。 
+方法3: 是让 SSH 服务器通过某个LDAP 服务，或者其他已经设定好的集中授权机制，来进行授权。只要每个人都能获得主机的 shell 访问权，任何可用的 SSH 授权机制都能达到相同效果。
 
- 
+
 
 **方法2的详细步骤**
 
 1)    产生公钥
 
 `ssh-keygen -C "你的email地址" -t rsa `
-该命令将生成一对非对称的公\私密钥，默认它们被存储在： 
+该命令将生成一对非对称的公\私密钥，默认它们被存储在：
 
-* XP/2003用户：c:\Documents and Settings\登陆名\.ssh 
-*  Vista用户： c:\Users\登陆名\.ssh 
+* XP/2003用户：c:\Documents and Settings\登陆名\.ssh
+*  Vista用户： c:\Users\登陆名\.ssh
 * linux     :~/.ssh
 
 2)    在linux服务器上将公钥加到git用户的authorized_keys文件中。
@@ -752,7 +752,7 @@ git merge --squash dev
 
 译者注2: [Gitosis配置(中文)](http://progit.chunzi.me/zh/ch4-7.html)
 
- 
+
 
 ## 4.2   分支branch和tag管理
 
@@ -773,7 +773,7 @@ git merge --squash dev
 
 **说明**：最下面e35a6b9是仓库第一个commit的SHA-1值，黄色字体v1.0.0/v1.1.0是tag，蓝色字体master/develop是远程分支，红色字体distributed是本地当前分支。带有origin前缀的都是远程分支。理论上tag要一直保持在master分支里。
 
- 
+
 
 ### 4.2.1 分支管理策略
 
@@ -785,13 +785,13 @@ git merge --squash dev
 
 备注：tag需从master打，标识为vx.x.x，如v1.2.0
 
- 
+
 
 **1. 主分支Master**
 
 首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
 
- 
+
 
 **2. 开发分支Develop**
 
@@ -799,7 +799,7 @@ git merge --squash dev
 ```sh
 # 创建分支：Git创建Develop分支的命令
 $ git checkout -b develop master
- 
+
 # 切换分支：将Develop分支发布到Master分支的命令
 $ git checkout master
 # 对Develop分支进行合并，缺省合并是快进式合并~即将master直接指向develop
@@ -826,7 +826,7 @@ $ git checkout -b fixbug-x master
 $ git checkout master
 $ git merge --no-ff master
 $ git tag -a v1.2.2
- 
+
 # 合并到devel分支，并删除分支
 $ git checkout devel
 $ git merge --no-ff devel
@@ -858,7 +858,7 @@ b) git pull取其它成员的工作树到本地，如果有修改，将自动合
 
 c) git push将本地master分支更新到远程服务器。
 
- 
+
 
 ## 4.3   子模块
 
@@ -866,7 +866,7 @@ http://gitbook.liuhui998.com/5_10.html
 
 git submodule
 
- 
+
 
 # 5  原理篇
 
@@ -902,12 +902,12 @@ Various commands read from the configuration file and adjust their operation acc
 ```
 <object>      Indicates the object name for any type of object.
 <blob>        Indicates a blob object name.
-<tree>        Indicates a tree object name.     
-<commit>      Indicates a commit object name.     
+<tree>        Indicates a tree object name.
+<commit>      Indicates a commit object name.
 <tree-ish>    Indicates a tree, commit or tag object name. A command that takes a argument ultimately wants to operate 		        on a <tree> object but automatically dereferences <commit> and <tag> objects that point at a <tree>.
 <commit-ish>  Indicates a commit or tag object name. A command that takes a argument ultimately wants to operate on a              <commit> object but automatically dereferences <tag> objects that point at a <commit>.
 <type>		  Indicates that an object type is required. Currently one of: blob, tree, commit, or tag.
-<file>        Indicates a filename - almost always relative to the root of the tree structure GIT_INDEX_FILE describes. 
+<file>        Indicates a filename - almost always relative to the root of the tree structure GIT_INDEX_FILE describes.
 ```
 
 
@@ -937,7 +937,7 @@ Any git command accepting any <object> can also use the following symbolic notat
 
 [1].   http://progit.org/book/zh/ch9-2.html
 
- 
+
 
 # 6  git仓库托管
 
@@ -951,13 +951,13 @@ Any git command accepting any <object> can also use the following symbolic notat
 * fork：克隆别的仓库到自己仓库
 * pull requests: 分支合并请求
 
- 
+
 
 **支持的克隆路径：SSH/https，示例如下，**
 * git clone git@git.oschina.net:dennycn/xxx.git
 * git cone https://git.oschina.net/dennycn/xxx.git
 
- 
+
 
 ### 6.1.1 filter-branch：全局修改分支历史纪录
 
@@ -978,7 +978,7 @@ do_commit_filter()
          git commit-tree "$@";
        fi' HEAD
 }
- 
+
 do_env_filter()
 {
   git filter-branch -f --env-filter '
@@ -994,7 +994,7 @@ do_env_filter()
    export GIT_COMMITTER_EMAIL="wuqifu@gmail.com"
    ;;
    esac
-   ' 
+   '
 }
 ```
 
@@ -1021,7 +1021,7 @@ gitlab.rb
 [root@server1 gitlab]# vim gitlab.rb  #更新本地IP
   13 external_url 'http://172.25.76.1'
 
-[root@server1 gitlab]# gitlab-ctl reconfigure 
+[root@server1 gitlab]# gitlab-ctl reconfigure
 ```
 
 在浏览器输入172.25.76.1，即可修改ROOT密码。
@@ -1037,11 +1037,11 @@ gitlab.rb
 用户权限：管理者、开发者、报告者和观察者
 
 * 管理者：所有权限
-* 开发者：报告者权限 + 代码读写 
+* 开发者：报告者权限 + 代码读写
 * 报告者：观察者权限 + 可提交问题issue
 * 观察者：仅可查看issue.
 
- 
+
 
 ### 开源协同开发
 
@@ -1058,7 +1058,7 @@ gitlab.rb
 
 1~3是初始化操作，执行一次即可。在翻译前必须执行第4步同步我的库（这样避免冲突），然后执行5~7既可。
 
- 
+
 
 ## 本章参考
 
@@ -1076,11 +1076,11 @@ gitlab.rb
 
 http://rongjih.blog.163.com/blog/static/335744612010620105546475/
 
-1)    本地svn先转化到本地git 
+1)    本地svn先转化到本地git
 
 $ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
 
-或 $ git svn clone file:///tmp/test-svn -s 
+或 $ git svn clone file:///tmp/test-svn -s
 
 2)    获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了）
  `$ git svn rebase`
@@ -1113,19 +1113,19 @@ $ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
 
 svn:  http/https, svn(缺省端口9418)
 
-git:  http/https, git(缺省端口9418), ssh, rsync 
+git:  http/https, git(缺省端口9418), ssh, rsync
 
 $man git-clone  //可查看支持的URL格式
 
- 
+
 
 **2)缺省服务启动**
 
 svn: $svnserver –d --listen-port /home/denny/svnrepos
 
-git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git 
+git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
 
- 
+
 
 **3)对比**
 
@@ -1134,7 +1134,7 @@ git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
 * 应用范围：svn公司多项目开发一仓库，git单一开源软件仓库。
 * 签出：svn允许部分签出，Git只能全部签出.
 
- 
+
 
 ## 7.2  中文乱码问题
 
@@ -1174,7 +1174,7 @@ cpan> install XXX:XXX
 
 # 8 gitbook
 
-项目地址：https://github.com/GitbookIO/gitbook 
+项目地址：https://github.com/GitbookIO/gitbook
 
 GitBook is a command line tool (and Node.js library) for building beautiful books using **GitHub**/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
 
@@ -1286,21 +1286,21 @@ book.json模板
 
 [1].   Git中文手册http://gitbook.liuhui998.com/index.html
 
-[2].   中文技术文档的写作规范 https://github.com/ruanyf/document-style-guide 
+[2].   中文技术文档的写作规范 https://github.com/ruanyf/document-style-guide
 
-[3].   知乎--如何使用 GitHub？ https://www.zhihu.com/question/20070065 
+[3].   知乎--如何使用 GitHub？ https://www.zhihu.com/question/20070065
 
-[4].   码云平台帮助文档 V1.2 http://git.mydoc.io/?t=83146 
+[4].   码云平台帮助文档 V1.2 http://git.mydoc.io/?t=83146
 
 [5].   合并多个commit http://www.jianshu.com/p/964de879904a
 
-[6].   Git分支管理策略 http://www.ruanyifeng.com/blog/2012/07/git.html 
+[6].   Git分支管理策略 http://www.ruanyifeng.com/blog/2012/07/git.html
 
-[7].   Git配置管理 http://www.uml.org.cn/pzgl/201203084.asp 
+[7].   Git配置管理 http://www.uml.org.cn/pzgl/201203084.asp
 
 [8].   github http://gooss.org/the-use-of-git-and-github-management-development/
 
- 
+
 
 # 附录
 

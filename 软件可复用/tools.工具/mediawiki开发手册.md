@@ -2,13 +2,19 @@
 | ---- | --------- | -------- | ------ | ------ |
 | 1    | 2016-5-12 | 创建     | Keefe | Keefe |
 |      |           |          |        |        |
- 
 
- 
+
+
+
+
+
+
 
 ---
 
 目录
+
+[TOC]
 
 [1    MediaWiki代码分析... 2](#_Toc469918271)
 
@@ -72,9 +78,9 @@
 
 [5.2    各类wiki收录... 18](#_Toc469918301)
 
- 
 
- 
+
+
 
 ---
 
@@ -104,21 +110,21 @@ Mediawiki分析版本v1-26.0
 | tests       |            |                  |                     |
 | vendor      |            |                  |                     |
 
- 
 
- 
+
+
 
 ## 1.2   数据库结构
 
 参见：https://www.mediawiki.org/wiki/Manual:Database_layout
 
-​    ![image-20191208232311794](../../media/sf_reuse/tools\tools_mediawiki_001.png)                           
+​    ![image-20191208232311794](../../media/sf_reuse/tools\tools_mediawiki_001.png)
 
 图 1 按功能划分表格
 
 注：功能分为users，
 
- 
+
 
 ### 1.2.1 数据库表简述
 
@@ -186,7 +192,7 @@ Mediawiki分析版本v1-26.0
 
 * 存储：导出的SQL是UTF8编码，可以正常显示中文条目名称，但条目内容是用binary存储的。
 
- 
+
 
 表格 3 按功能排序的数据库表
 
@@ -242,33 +248,33 @@ Mediawiki分析版本v1-26.0
 | 49   | Users          | user_newtalk       |                                             |                                | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_newtalk#showusage) |
 | 50   | Users          | user               | 用户                                        |                                | 2                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user#showusage) |
 
- 
+
 
 ### 1.2.2 数据库表的结构组成
 
- 
+
 
 ## 1.3   Main.php分析
 
- 
 
- 
 
- 
+
+
+
 
 # 2  MediaWiki用户指南
 
 ## 2.1   MediaWiki语法
 
- 
 
- 
 
- 
+
+
+
 
 # 3 MediaWiki开发
 
-## 3.1   配置项修改LocalSettings.php 
+## 3.1   配置项修改LocalSettings.php
 
 参考：mediawiki源码分析-DefaultSettings变量说明 http://blog.csdn.net/fjgysai/article/details/2255246
 
@@ -328,14 +334,14 @@ Mediawiki分析版本v1-26.0
 
 注：总共可分为三十九大设置，N多设置字段。
 
- 
+
 
 修改LocalSettings.php，可修改数据库相关配置项、网站路径等等。
 
-- **服务器域名 $wgServer** 
+- **服务器域名 $wgServer**
 
 ```properties
-# $wgServer - The base URL of the server. 
+# $wgServer - The base URL of the server.
 # 缺省值是$wgServer = "localhost"，此项如果本地和远程都安装有mediawiki下，远程的会跳转到本地，所以远程的需要修改为IP或者有效域名
 $wgServer = "http://giprs.org";
 ```
@@ -345,7 +351,7 @@ $wgServer = "http://giprs.org";
 
 ```ini
 #Prevent new user registrations
-$wgWhitelistAccount = array ( "user" => 0, "sysop" => 1, "developer" => 1 ); 
+$wgWhitelistAccount = array ( "user" => 0, "sysop" => 1, "developer" => 1 );
 ```
 
 - **禁止匿名用户编辑**
@@ -354,7 +360,7 @@ $wgWhitelistAccount = array ( "user" => 0, "sysop" => 1, "developer" => 1 );
 #$wgGroupPermissions = array();
 $wgGroupPermissions['*''createaccount']   = false;
 $wgGroupPermissions['*']['read']            = true;
-$wgGroupPermissions['*']['edit']            = false; 
+$wgGroupPermissions['*']['edit']            = false;
 ```
 
 - **用户组访问权限控制**
@@ -381,14 +387,14 @@ $wgLanguageCode = "zh";
 $wgRawHtml = true;
 ```
 
- 
+
 
 ## 3.2   首页修改
 
 ### 3.2.1 左侧导航 [MediaWiki:Sidebar](http://localhost/mediawiki-1.26.0/index.php/MediaWiki:Sidebar)
 
 在搜索框中直接输入：mediawiki:sidebar
- 点击确定，你会看到左侧导航的设置的相关代码。可以用编辑普通条目的方式编辑， 下面是原始页面，二级分类下的每个词都是mediawiki预定义变量，可用mediawiki:xx编辑（xx如heppage)。 
+ 点击确定，你会看到左侧导航的设置的相关代码。可以用编辑普通条目的方式编辑， 下面是原始页面，二级分类下的每个词都是mediawiki预定义变量，可用mediawiki:xx编辑（xx如heppage)。
 
 ```
 * navigation
@@ -404,7 +410,7 @@ $wgRawHtml = true;
 ### 3.2.2 其它常用修改
 
 - 提示信息修改：编辑Special:Allmessages
-- 首页的标题：     MediaWiki:Mainpage 
+- 首页的标题：     MediaWiki:Mainpage
 - 页脚的Privacy     policy： MediaWiki:Privacy ，网站的隐私政策
 - 页脚的Disclaimers： MediaWiki:Disclaimers ，网站的免责声明
 - 浏览器标题栏提示：     MediaWiki:pagetitle
@@ -421,7 +427,7 @@ $wgRawHtml = true;
 
 参考：MediaWiki 设置：多语言文字方案http://www.cnblogs.com/sink_cup/archive/2013/04/11/2057127.html
 
- 对于同一条提示信息应同时修改6个版本： 
+ 对于同一条提示信息应同时修改6个版本：
 
 ```
    mediawiki:xxx
@@ -429,7 +435,7 @@ $wgRawHtml = true;
    mediawiki:xxx/zh-cn
    mediawiki:xxx/zh-tw
    mediawiki:xxx/zh-hk
-   mediawiki:xxx/zh-sg 
+   mediawiki:xxx/zh-sg
 ```
 
 ### 3.4.1 方案1：多个wiki、多个数据库、多语言文字外链导航
@@ -448,7 +454,7 @@ $wgRawHtml = true;
 
 参考：http://www.mediawiki.org/wiki/Manual:Interwiki
 
- 
+
 
 **安装步骤：**
 
@@ -538,11 +544,11 @@ $wgMFAutodetectMobileView = true;
 
 OK，可以用了。
 
- 
 
-## 3.6   多站点共用程序 
 
- 
+## 3.6   多站点共用程序
+
+
 
 ## 3.7   模块扩展
 
@@ -558,7 +564,7 @@ OK，可以用了。
 
   /images/目录：这是所有上传图片的存放目录，还包括自动生成的缩略图。图片路径包含数字。
 
-  AdminSetting.php：Template:? 
+  AdminSetting.php：Template:?
 
 以下部分仅对使用了该特性的用户需要备份。
 
@@ -572,7 +578,7 @@ OK，可以用了。
 
 1. 使用MediaWiki的特殊页面：你的网站域名/Special:Import。
 
-2. 使用MediaWiki自带的php命令：importDump.php。 
+2. 使用MediaWiki自带的php命令：importDump.php。
 
 3. 1. 使用SSH登录服务器。比如常用的SSH软件：PuTTY。
    2. 进入maintenance目录。
@@ -582,7 +588,7 @@ OK，可以用了。
 
 4. 使用MediaWiki自带的php命令：mwdumper。
 
- 
+
 
 **WIKI条目页面的备份：导入导出**
 
@@ -592,7 +598,7 @@ OK，可以用了。
 
 二是链入页面：对部分重要条目，可以利用链接导出文件的XML格式。如[特殊:导出页面/首页](http://localhost/mediawiki-1.26.0/index.php/特殊:导出页面/首页)、[USER:denny](http://localhost/mediawiki-1.26.0/index.php/用户:Denny)
 
- 
+
 
 ## 4.3   数据库的迁移
 
@@ -600,18 +606,18 @@ OK，可以用了。
 
 * 数据库表名修改：可在导出的SQL语句中修改表名。DROP TABLE 旧表名；CREATE TABLE 新表名
 
- 
+
 
 数据库的备份恢复
 * 数据库备份： mysqldump -h [host] -u [user] -p[pwd] [dbname]
 * 数据库恢复： mysql -u[user] -p [dbname] < [xxx.sql]
 
- 
+
 
 **mediawiki数据库的安装配置选项**
 
-详见: http://www.mediawiki.org/wiki/Manual:$wgDBmysql5 
- 缺省参数(首项):　Mysql(InnoDB), BIN 
+详见: http://www.mediawiki.org/wiki/Manual:$wgDBmysql5
+ 缺省参数(首项):　Mysql(InnoDB), BIN
 
 $wgDBTableOptions  = "TYPE=InnoDB";
 
@@ -619,7 +625,7 @@ $wgDBmysql5: Set to true to set MySQL connection into UTF-8 encoding
 
 - 数据库连接编码选项有三:　binary, utf8, 向后兼容mysql4.
 
-如果是true,则是binary/utf8, SET NAMES=utf8;　如果是false, 则是向后兼容mysql4, SET NAMES binary; NOTE: 本wiki考虑到早期在mysql4环境,选择了向后兼容. 所以要此选择为$wgDBmysql5=false. 如果此选择出现问题,则条目标题将会乱码,但条目内容編碼正常. 有修改项:在include/db/DatabaseMysql.php doQuery函数头设置 set NAMES utf8;效果不佳. 
+如果是true,则是binary/utf8, SET NAMES=utf8;　如果是false, 则是向后兼容mysql4, SET NAMES binary; NOTE: 本wiki考虑到早期在mysql4环境,选择了向后兼容. 所以要此选择为$wgDBmysql5=false. 如果此选择出现问题,则条目标题将会乱码,但条目内容編碼正常. 有修改项:在include/db/DatabaseMysql.php doQuery函数头设置 set NAMES utf8;效果不佳.
 
 - 条目乱码问题　(未彻底解决，供参考）
 
@@ -627,7 +633,7 @@ Storage Engine：InnoDB, MyISAM
 
 Database character set：MySQL 4.1/5.0 binary, MySQL 4.1/5.0 UTF-8, MySQL 4.0 backwards-compatible UTF-8
 
-if : 
+if :
 
 InnoDB + MySQL 4.1/5.0 binary
 
@@ -664,7 +670,7 @@ character_set_system  utf8
 其它：latin1
 
 ```
- 
+
 ```
 
 ## 4.4   MediaWiki的升级
@@ -679,28 +685,28 @@ character_set_system  utf8
 
 3） 备份数据库
 
- 
+
 
 ### 4.4.2 升级中
 
 在Linux命令行下操作：
 ```sh
 # ; 修改老目录配置文件，增加$wgReadOnly="Read Only Now"，老网站改为只读方式
-vi oldpath/LocalSettin# gs.php  
+vi oldpath/LocalSettin# gs.php
 # ; 复制生成AdminSetting.php文件供maintenance程序使用
-cp newpath/AdminSettings.sample newpath/AdminSettings.php 
+cp newpath/AdminSettings.sample newpath/AdminSettings.php
 # 设置数据库用户名、密码
-vi newpath/AdminSettings.php 
+vi newpath/AdminSettings.php
 #　进入升级程序所在的维护目录
-cd newpath/maintenance  
+cd newpath/maintenance
 # 运行升级程序（如果遇到DPL扩展报错，也可以Web方式使用重新安装的办法来进行升级）
-php update.php 
+php update.php
 # 删除新目录中的images目录及其下面的所有子目录、文件
-rm -fdr newpath/images 
+rm -fdr newpath/images
 ; 移动老目录中的images目录到新目录
-mv oldpath/images newpath 
+mv oldpath/images newpath
 ; 修改Apache配置文件中站点对应的目录从老目录改为新目录
-vi /usr/local/apache2/conf/httpd.conf 
+vi /usr/local/apache2/conf/httpd.conf
 # 进入Apache运行程序目录, 重启Apache程序，启用新目录中的mediawiki新版本
 cd /usr/local/apache2/bin
 ./httpd -k restart
@@ -720,25 +726,25 @@ cd /usr/local/apache2/bin
 - 注意查看页面源文件的对比，包括是否正确使用文件缓存等
 - 反复修改、检查，直到确认完全升级成功
 
- 
+
 
 # 5 参考资料
 
 ## 5.1   参考链接
 
-[1].   [MediaWike用户指南](http://localhost/mediawiki-1.26.0/index.php/MediaWike用户指南) 
+[1].   [MediaWike用户指南](http://localhost/mediawiki-1.26.0/index.php/MediaWike用户指南)
 
 [2].   [MediaWiki升级步骤](http://localhost/mediawiki-1.26.0/index.php/MediaWiki升级步骤)
 
 [3].   如何快速的为你的Mediawiki增加内容http://www.uedsc.com/how-fast-add-content-to-mediawiki.html
 
- 
+
 
 官网帮助指南：
 
 ·     [Category:帮助文档](http://zh.wikipedia.org/wiki/Category:帮助文档)
 
-·     [Help](https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) [Help:目录](http://zh.wikipedia.org/wiki/Help:目录) 
+·     [Help](https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) [Help:目录](http://zh.wikipedia.org/wiki/Help:目录)
 
 ·     [MediaWiki 配置设置列表](http://www.mediawiki.org/wiki/Manual:Configuration_settings)
 
@@ -748,30 +754,30 @@ cd /usr/local/apache2/bin
 
 ·     https://dumps.wikimedia.org/zhwiki/20160501/
 
- 
+
 
 ## 5.2   各类wiki收录
 
-综合类 
+综合类
 
-- [Denny in wikipedia](http://zh.wikipedia.org/wiki/User:Denny-cn)　维基百科,最大最全的百科. 
-- [网络天书](http://www.cnic.org) http://www.cnic.org     
+- [Denny in wikipedia](http://zh.wikipedia.org/wiki/User:Denny-cn)　维基百科,最大最全的百科.
+- [网络天书](http://www.cnic.org) http://www.cnic.org
 - [维库](http://www.wikilib.com) 口号为“知识与思想的自由文库”，内容比较小资。
 
-IT类 
+IT类
 
 - [啄木鸟Python社区](http://wiki.woodpecker.org.cn)
-- [xoops](http://xoops.org.cn/modules/mediawiki/index.php/首页)     xoops中文站点wiki 
+- [xoops](http://xoops.org.cn/modules/mediawiki/index.php/首页)     xoops中文站点wiki
 - [opencv中文站点](http://www.opencv.org.cn) 中科院自动化所自由软件协会维护。
-- [TransWiki      ](http://zh.transwiki.org)W3CHINA.ORG组织的开放翻译计划，利用wiki协作特性开展W3C及其他重要标准的中文翻译。 
-- [台湾Mozilla知识库](http://wiki.moztw.org) 
+- [TransWiki      ](http://zh.transwiki.org)W3CHINA.ORG组织的开放翻译计划，利用wiki协作特性开展W3C及其他重要标准的中文翻译。
+- [台湾Mozilla知识库](http://wiki.moztw.org)
 - [香港开源维基](http://wiki.linux.org.hk) 由香港的三家Linux网站共同维护的中文Open Source及Linux的知识库。（繁体）
 
-专题类 
+专题类
 
-- [实用查询](http://cn18dao.jamesqi.com/) 
+- [实用查询](http://cn18dao.jamesqi.com/)
 - [背包攻略](http://www.backpackers.com.tw/guide/) 为全球华人旅游爱好者建立的免费网上导引。“背包客栈”志愿者制做。
 - [wikihow](http://www.wikihow.com/)      Ｔhe How to Manual 一个提供做一件事步骤的专题站点，蛮有创意的。
 
- 
+
 

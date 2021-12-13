@@ -14,7 +14,7 @@
 
 [TOC]
 
- 
+
 
 ---
 
@@ -185,23 +185,23 @@ struct
 说明：sizeof(status)=2，如果没使用位域符则是8byte.
 
 ## 2.4  指针、函数指针与回调函数
-**Data declarations (about point)** 5. Using the variable a, give definitions for the following: a) An integer 
- b) A pointer to an integer 
- c) A pointer to a pointer to an integer 
- d) An array of 10 integers 
- e) An array of 10 pointers to integers 
- f) A pointer to an array of 10 integers 
- g) A pointer to a function that takes an integer as an argument and returns an integer 
- h) An array of ten pointers to functions that take an integer argument and return an integer 
-The answers are: 
- a) int a; // An integer 
- b) int *a; // A pointer to an integer 
- c) int **a; // A pointer to a pointer to an integer 
- d) int a[10]; // An array of 10 integers 
- e) int *a[10]; // An array of 10 pointers to integers 
- f) int (*a)[10]; // A pointer to an array of 10 integers 
- g) int (*a)(int); // A pointer to a function a that takes an integer argument and returns an integer 
- h) int (*a[10])(int); // An array of 10 pointers to functions that take an integer argument and return an integer 说明:a为数组名,有10个指向函数的指针.函数带有一个整形参数和整形返回值. 
+**Data declarations (about point)** 5. Using the variable a, give definitions for the following: a) An integer
+ b) A pointer to an integer
+ c) A pointer to a pointer to an integer
+ d) An array of 10 integers
+ e) An array of 10 pointers to integers
+ f) A pointer to an array of 10 integers
+ g) A pointer to a function that takes an integer as an argument and returns an integer
+ h) An array of ten pointers to functions that take an integer argument and return an integer
+The answers are:
+ a) int a; // An integer
+ b) int *a; // A pointer to an integer
+ c) int **a; // A pointer to a pointer to an integer
+ d) int a[10]; // An array of 10 integers
+ e) int *a[10]; // An array of 10 pointers to integers
+ f) int (*a)[10]; // A pointer to an array of 10 integers
+ g) int (*a)(int); // A pointer to a function a that takes an integer argument and returns an integer
+ h) int (*a[10])(int); // An array of 10 pointers to functions that take an integer argument and return an integer 说明:a为数组名,有10个指向函数的指针.函数带有一个整形参数和整形返回值.
 
 **函数指针**
 函数指针是指向函数的指针变量。
@@ -210,7 +210,7 @@ The answers are:
 函数指针变量的声明：
 typedef int (*fun_ptr)(int,int); // 声明一个指向同样参数、返回值的函数指针类型
 
-**回调函数** 
+**回调函数**
 函数指针作为某个函数的参数
 函数指针变量可以作为某个函数的参数来使用的，回调函数就是一个通过函数指针调用的函数。
 简单讲：回调函数是由别人的函数执行时调用你实现的函数。
