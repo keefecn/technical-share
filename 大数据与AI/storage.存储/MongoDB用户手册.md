@@ -229,6 +229,22 @@ db.employees.aggregate( [   {      $graphLookup: {         from: "employees",   
 
 
 
+## MongoDB GridFS
+
+GridFS 用于存储和恢复那些超过16M（BSON文件限制）的文件(如：图片、音频、视频等)。
+
+GridFS 也是文件存储的一种方式，但是它是存储在MonoDB的集合中。
+
+GridFS 可以更好的存储大于16M的文件。
+
+GridFS 会将大文件对象分割成多个小的chunk(文件片段),一般为256k/个,每个chunk将作为MongoDB的一个文档(document)被存储在chunks集合中。
+
+GridFS 用两个集合来存储一个文件：fs.files与fs.chunks。
+
+每个文件的实际内容被存在chunks(二进制数据)中,和文件有关的meta数据(filename,content_type,还有用户自定义的属性)将会被存在files集合中。
+
+
+
 # 实践篇
 
 **适用场景**

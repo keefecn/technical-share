@@ -14,6 +14,10 @@
 
 
 
+
+
+
+
 ---
 
 [TOC]
@@ -636,7 +640,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 
 
-### **AI芯片**
+### AI芯片
 
 AI芯片说明如下：
 
@@ -969,7 +973,7 @@ http://www.support-vector.net/
 
 ## 本章参考
 
-[1].   机器学习流程介绍 https://blog.csdn.net/qq_27567859/article/details/79666969
+[1]. 机器学习流程介绍 https://blog.csdn.net/qq_27567859/article/details/79666969
 
 [2].  SVM [Support vector machines](http://blog.csdn.net/aladdina/archive/2009/04/30/4141094.aspx)
 
@@ -1558,29 +1562,29 @@ $$
 
 ## 参考书目
 
-[1].   Mitchell, T. (1997). *机器学习*, McGraw Hill. [ISBN 0070428077](http://zh.wikipedia.org/zh-cn/Special:网络书源/0070428077)
+[1]. Mitchell, T. (1997). *机器学习*, McGraw Hill. [ISBN 0070428077](http://zh.wikipedia.org/zh-cn/Special:网络书源/0070428077)
 
-[2].   Bishop, C. M. (2006). *模式识别与机器学习*，Springer。[ISBN 978-0387-31073-2](http://zh.wikipedia.org/zh-cn/Special:网络书源/9780387310732)
+[2]. Bishop, C. M. (2006). *模式识别与机器学习*，Springer。[ISBN 978-0387-31073-2](http://zh.wikipedia.org/zh-cn/Special:网络书源/9780387310732)
 
-[3].   Richard O. Duda, Peter E. Hart, David G. Stork (2001) *模式识别*（第2版）, Wiley, New York, [ISBN 0471056693](http://zh.wikipedia.org/zh-cn/Special:网络书源/0471056693).
+[3]. Richard O. Duda, Peter E. Hart, David G. Stork (2001) *模式识别*（第2版）, Wiley, New York, [ISBN 0471056693](http://zh.wikipedia.org/zh-cn/Special:网络书源/0471056693).
 
-[4].   [AIMA03] S. Russell and P. Norvig, Artificial Intelligence: A Modern Approach, Second Edition, Prentice Hall 2003, ISBN: 0-13-790395-2. http://aima.cs.berkeley.edu/
+[4]. [AIMA03] S. Russell and P. Norvig, Artificial Intelligence: A Modern Approach, Second Edition, Prentice Hall 2003, ISBN: 0-13-790395-2. http://aima.cs.berkeley.edu/
 
-[5].   George F.Luger著，史忠植 张银奎 等译，人工智能：复杂问题求解的结构和策略，机械工业出版社
+[5]. George F.Luger著，史忠植 张银奎 等译，人工智能：复杂问题求解的结构和策略，机械工业出版社
 
 
 
 ## 参考文献
 
-[1].   [机器学习论文-CiteSeer](http://citeseer.ist.psu.edu/cis?q=machine+learning)  http://citeseerx.ist.psu.edu/?q=machine+learning
+[1]. [机器学习论文-CiteSeer](http://citeseer.ist.psu.edu/cis?q=machine+learning)  http://citeseerx.ist.psu.edu/?q=machine+learning
 
-[2].   图灵测试－洛伯纳奖[Loebner Prize website](http://www.loebner.net/Prizef/loebner-prize.html)  1990~present
+[2]. 图灵测试－洛伯纳奖[Loebner Prize website](http://www.loebner.net/Prizef/loebner-prize.html)  1990~present
 
 [3].  T. Mitchell, Generative and Discriminative Classifiers: Naive Bayes and Logistic Regression. Draft Version, 2005 [download](http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf)
 
-[4].   中国人工智能网 http://www.chinaai.org/
+[4]. 中国人工智能网 http://www.chinaai.org/
 
-[5].   http://ai-depot.com/
+[5]. http://ai-depot.com/
 
 
 

@@ -32,15 +32,12 @@
 |              | xgboost     | 约100MB。                                                    |
 |              | libsvm      | 机器学习库，SVM                                              |
 | 统计学习     | statsModels | 统计建模和计量经济学                                         |
-| **深度学习** | tensorflow  | [谷歌](https://baike.baidu.com/item/谷歌)基于DistBelief进行研发的第二代[人工智能](https://baike.baidu.com/item/人工智能/9180)[学习系统](https://baike.baidu.com/item/学习系统)，其命名来源于本身的运行原理。 |
+| **深度学习** | tensorflow  | 谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。 |
 |              | caffe       |                                                              |
 | 线性规划     | ortools     | google开源。                                                 |
 | 逻辑编程     | kanren      | 简化业务逻辑编写代码的方式。                                 |
 |              | SymPy       | 轻量级的代数计算库。常用于逻辑编程，解决素数、数独等问题。   |
-| **可视化**   | PIL         | Python Imaging  Library，图像生成和处理库。  pillow          |
-|              | matplotlib  | 绘图库                                                       |
-|              | seaborn     | 在matplotlib基础上，很强大很高效的可视化库。                 |
-|              | wordcloud   | 词云                                                         |
+| **可视化**   |             | pillow, matplotlib, seaborn, wordcloud等，详见 《[数据可视化工具.md](./数据可视化工具.md)》 |
 |              | tensorboard | tensorflow框架的可视化工具包。                               |
 
 > 备注：机器学习的第三方模块中scipy、numpy、matplotlib是基础模块，pandas等库通常要依赖上述库。

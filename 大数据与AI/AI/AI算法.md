@@ -812,7 +812,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 [5]. 超全！LightGBM算法框架前世今生！ https://baijiahao.baidu.com/s?id=1671278750268233539&wfr=spider&for=pc
 
-[6]. 机器学习集成学习 Ensemble Learning（常用集成算法汇总） https://blog.csdn.net/weixin_39948381/article/details/106442535?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.vipsorttest
+[6]. 机器学习集成学习 Ensemble Learning（常用集成算法汇总） https://blog.csdn.net/weixin_39948381/article/details/106442535
 
 [7]. PCA http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html
 

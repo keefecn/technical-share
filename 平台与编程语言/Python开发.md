@@ -1714,8 +1714,7 @@ except Exception:
 
 ## 3.3  Python常用开发工具
 
-参考资料：Python 程序员必知必会的开发者工具http://blog.jobbole.com/58226/
-说明：眼风为为实。经俺测试，get/set attr的运行效率所差无几，没有所谓几十倍的差距，也就是几十分之一的正常差距。
+
 表格 20 python程序列表
 
 | 程序           | 简介     | 备注     |
@@ -1734,48 +1733,63 @@ except Exception:
 
 备注：32机只能装32位的python；64位机能同时装32和64位的python程序，具体使用中通过环境变量或全路径来识别版本。
 
+
+
 表格 21 python常用开发工具列表（按功能分类）
 
-| 功能<BR> | 相关工具  | 备注     |
+| 功能 | 相关工具  | 备注     |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| IDE      | IDLE（自带）, pythonwin（简洁版，Win only）, **Eclipse+Pydev**（开源）, pycharm（付费 ）   spyder（开源） | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。spyder用以科学计算。 |
-| 静态检测 | pylint/pycheck   coverage~代码覆盖率统计        |          |
+| <BR>IDE  | 详见 IDE章节 | pycharm常作为科学计算环境，安装了科学计算所需要的常用包如scipy,numpy和pandas等。spyder用以科学计算。 |
+| 静态检测 | pylint/pycheck   <br>coverage~代码覆盖率统计   |          |
 | 反向建模 | pyreverse | 生成的.dot，显示成图片需软件graphviz支持        |
-| 文档化   | pydoc    |          |
-| 测试工具 | doctest~文档测试   unittest~单元测试            |          |
-| 单元测试 | unittest,   nosettest,    pytest   | **nosetests:**   自动查找当前目录下包含"Test"字符串的目录和文件进行测试。   安装：pip install nose |
+| 文档化   | pydoc |          |
+| 测试工具 | 文档测试：doctest<br>单元测试：unittest,   nosettest,    pytest，tox | nosetests:   自动查找当前目录下包含"Test"字符串的目录和文件进行测试。   安装：`pip install nose` |
 | 监控调试 | trace/cgitb/   pdb~调试            |          |
-| 性能     | profile/   timeit     |          |
+| 性能     | profile pstats   timeit |          |
 | exe打包  | py2exe/pyinstaller    |          |
 | 反编译   | uncompyle2            |          |
+| 运维 | 自动化运维：Ansible/Fabric/SaltStack <br>进程管理：supervisor | 详见 《[运维专题.md](../软件工程/运维专题.md)》 |
 
-备注：
-​
 
-表格 常见python IDE
 
-| IDE                     | 自动补全 | 代码更改检测 | 调试 | 语法 检查 | 开源 | 备注       | 推荐度 |
-| ----------------------- | -------- | ------------ | ---- | --------- | ---- | ---------- | ------ |
-| Eclipse+Pydev           | 有       | 有           | 类VC | 有        | 开源 | 比较费资源 | 高     |
-| Ulipad                  | 有       | 有           | WPDB | 自动      | 开源 |            | 高     |
-| Eric                    | 有       | 有           | 类VC | 自动      | 开源 |            | 高     |
-| PythonWin               | 手动     | 有           | 用库 | 无        | 开源 | win only   | 中     |
-| IDLE                    | 手动     | 有           | 用库 | 无        | 开源 |            | 低     |
-| SPE                     | 无       | 有           | WPDB | 存盘      | 开源 |            | 中     |
-| BoA                     | 手动     | 手动         | 类VC | 无        | 开源 | 中文支持差 | 中     |
-| WingIDE                 | 有       | 有           | 类VC | 手动      | 共享 |            | 中+    |
-| Komodo                  | 无       | 有           | 类VC | 手动      | 共享 |            | 中+    |
-| VIM+插件                | 有       | 无           | 无   | 无        | 开源 |            | 中     |
-| Emacs+插件              | 有       | 无           | 无   | 无        | 开源 |            | 中     |
-| VS.net+<br>VisualPython | 无       | 有           | 类VC | 无        | 共享 | 弃         | 差     |
+**其它python工具**
+
+*  awesome-python
+*  pycrumbs
+*  python-github-projects
+*  python_reference
+*  pythonidae
+
+*  win32com  https://sourceforge.net/projects/pywin32/files/pywin32/
+*  Appium Python Client https://github.com/appium/python-client/tree/master
 
 
 
 ### 3.3.1  IDE
 
-Eclipse + Pydev, pycharm  详见 《[项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md)》IDE章节
+表格 常见python IDE
 
-jupyter  详见 《[Jupyter用户手册](../tools.工具/Jupyter用户手册.md)》
+| IDE                     | 自动补全 | 代码更改检测 | 调试 | 语法检查 | 开源 | 备注                   | 推荐度 |
+| ----------------------- | -------- | ------------ | ---- | -------- | ---- | ---------------------- | ------ |
+| **Eclipse+Pydev**       | 有       | 有           | 类VC | 有       | 开源 | 比较费资源             | 高     |
+| Ulipad                  | 有       | 有           | WPDB | 自动     | 开源 |                        | 中     |
+| Eric                    | 有       | 有           | 类VC | 自动     | 开源 |                        | 中     |
+| PythonWin               | 手动     | 有           | 用库 | 无       | 开源 | 简洁版，Win only       | 中     |
+| IDLE                    | 手动     | 有           | 用库 | 无       | 开源 | 自带                   | 低     |
+| SPE                     | 无       | 有           | WPDB | 存盘     | 开源 |                        | 中     |
+| BoA                     | 手动     | 手动         | 类VC | 无       | 开源 | 中文支持差             | 中     |
+| WingIDE                 | 有       | 有           | 类VC | 手动     | 共享 |                        | 中+    |
+| Komodo                  | 无       | 有           | 类VC | 手动     | 共享 |                        | 中+    |
+| VIM+插件                | 有       | 无           | 无   | 无       | 开源 |                        | 中     |
+| Emacs+插件              | 有       | 无           | 无   | 无       | 开源 |                        | 中     |
+| VS.net+<br>VisualPython | 无       | 有           | 类VC | 无       | 共享 | 弃                     | 差     |
+| **Jupyter**             | 无       | 无           | 有   | 无       | 开源 | 适用于AI开发、远程调试 | 高     |
+| **Pycharm**             | 有       | 有           | 有   | 有       |      | 分社区版和商业版       | 高     |
+| **VSCode**              | 有       | 有           | 有   | 有       | 开源 | 适合全栈开发           | 高     |
+
+Eclipse + Pydev、Pycharm  详见 《[项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md)》IDE章节
+
+Jupyter  详见 《[Jupyter用户手册](../tools.工具/Jupyter用户手册.md)》
 
 
 
@@ -1793,7 +1807,9 @@ Usage:  pylint [options] module_or_package
 ```
 
 
+
 ### 3.3.3  反向建模 pyreverse
+
 * -A包括父类，-S包括关联，-p生成的文件名，以.dot为后缀
 $ pyreverse -A -S [xxx.py] -p xxx
 * dot的查看：需软件graphviz支持。
@@ -1823,7 +1839,7 @@ Options:
   -a <ancestor>, --show-ancestors=<ancestor>
           show <ancestor> generations of ancestor classes not in
           <projects>
-  **-A, --all-ancestors   show all ancestors off all classes in <projects>**
+  -A, --all-ancestors   show all ancestors off all classes in <projects>
   -s <ass_level>, --show-associated=<ass_level>
           show <ass_level> levels of associated classes not in
           <projects>
@@ -2149,8 +2165,6 @@ for x in range(1,10):
 input("waiting")
 ```
 
-
-
 **1) py2exe**
 版本需求：RuntimeError: This package requires Python 3.3 or later
 
@@ -2170,7 +2184,7 @@ setup(console=['main.py'])
 
 
 
-**2)** **PyInstaller**
+**2) PyInstaller**
 步骤如下：(打包后exe在dist/)
 
 1. 输入pip install PyInstaller
@@ -2183,7 +2197,6 @@ setup(console=['main.py'])
    pyinstaller -f xxx.py  # 生成单个二进制文件
    pyinstaller -D xxx  # 生成目录
    ```
-
 
 
 以一个多文件和目录的Python项目为例，项目文件包含：1.Python源代码文件；2.图标资源文件；3.其它资源文件。
@@ -2244,107 +2257,13 @@ pyinstaller 打包常见问题
 
 
 
-### 3.3.9  运维工具：Ansible/Fabric/SaltStack
-
-详见 《[运维专题](../运维专题.md)》
-
-
-
-### 3.3.10  supervisor
-supervisor是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具。可以很方便的监听、启动、停止、重启一个或多个进程。用supervisor管理的进程，当一个进程意外被杀死，supervisor监听到进程死后，会自动将它重启，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
-
-\# 安装，安装好后在/etc/会生成一个supervisord.conf文件及一个supervisord.d文件目录
-pip install supervisor
-或者 脚本命令(echo_supervisord_conf)生成配置文件
-/usr/bin/echo_supervisord_conf
-
-
-```ini
-# 配置文件：supervisord.conf
-[unix_http_server]
-file=/tmp/supervisor.sock   ;UNIX socket 文件，supervisorctl 会使用
-;chmod=0700    ;socket文件的mode，默认是0700
-;chown=nobody:nogroup       ;socket文件的owner，格式：uid:gid
-
-;[inet_http_server]         ;HTTP服务器，提供web管理界面
-;port=127.0.0.1:9001        ;Web管理后台运行的IP和端口，如果开放到公网，需要注意安全性
-;username=user ;登录管理后台的用户名
-;password=123  ;登录管理后台的密码
-
-[supervisord]
-logfile=/tmp/supervisord.log ;日志文件，默认是 $CWD/supervisord.log
-logfile_maxbytes=50MB        ;日志文件大小，超出会rotate，默认 50MB，如果设成0，表示不限制大小
-logfile_backups=10           ;日志文件保留备份数量默认10，设为0表示不备份
-loglevel=info   ;日志级别，默认info，其它: debug,warn,trace
-pidfile=/tmp/supervisord.pid ;pid 文件
-nodaemon=false  ;是否在前台启动，默认是false，即以 daemon 的方式启动
-minfds=1024     ;可以打开的文件描述符的最小值，默认 1024
-minprocs=200    ;可以打开的进程数的最小值，默认 200
-
-[supervisorctl]
-serverurl=unix:///tmp/supervisor.sock ;通过UNIX socket连接supervisord，路径与unix_http_server部分的file一致
-;serverurl=http://127.0.0.1:9001 ; 通过HTTP的方式连接supervisord
-
-; [program:xx]是被管理的进程配置参数，xx是进程的名称
-[program:xx]
-command=/opt/apache-tomcat-8.0.35/bin/catalina.sh run  ; 程序启动命令
-autostart=true       ; 在supervisord启动的时候也自动启动
-startsecs=10         ; 启动10秒后没有异常退出，就表示进程正常启动了，默认为1秒
-autorestart=true     ; 程序退出后自动重启,可选值：[unexpected,true,false]，默认为unexpected，表示进程意外杀死后才重启
-startretries=3       ; 启动失败自动重试次数，默认是3
-user=tomcat          ; 用哪个用户启动进程，默认是root
-priority=999         ; 进程启动优先级，默认999，值小的优先启动
-redirect_stderr=true ; 把stderr重定向到stdout，默认false
-stdout_logfile_maxbytes=20MB  ; stdout 日志文件大小，默认50MB
-stdout_logfile_backups = 20   ; stdout 日志文件备份数，默认是10
-; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）
-stdout_logfile=/opt/apache-tomcat-8.0.35/logs/catalina.out
-stopasgroup=false     ;默认为false,进程被杀死时，是否向这个进程组发送stop信号，包括子进程
-killasgroup=false     ;默认为false，向进程组发送kill信号，包括子进程
-
-;包含其它配置文件
-[include]
-files = relative/directory/*.ini    ;可以指定一个或多个以.ini结束的配置文件
-
-# supervisord.d目录用来存放用户自定义的进程配置
-[program:es]
-command=/opt/software/elasticsearch/bin/elasticsearch
-user=es
-stdout_logfile=/opt/supervisor_test/run.log
-autostart=true
-autorestart=true
-startsecs=60
-stopasgroup=true
-ikillasgroup=true
-startretries=1
-redirect_stderr=true
-```
-
-注意: supervisor不能监控后台进程，command 不能为后台运行命令,如gunicorn -D
-**服务启动**
-`supervisord -c /etc/supervisord.conf`
-
-
-### 3.3.11 其它python工具
-*  awesome-python
-*  pycrumbs
-*  python-github-projects
-*  python_reference
-*  pythonidae
-
-*  win32com  https://sourceforge.net/projects/pywin32/files/pywin32/
-*  Appium Python Client https://github.com/appium/python-client/tree/master
-
-
-
 ### 本节参考
 
-[1]. pytest https://docs.pytest.org/en/latest/mark.html
-[2]. pytest https://docs.pytest.org/en/latest/example/markers.html
+[1]. Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/ 
+[2]. 10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html
 [3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html
 [4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html
 
-[5]. Python项目的打包方法  https://blog.csdn.net/weixin_42052836/article/details/82315118
 
 
 
@@ -2371,9 +2290,9 @@ redirect_stderr=true
 |   | cx_Oracle | oracle   |
 |   | pymongo   | mongo DB  |
 |   | pyredis   | redis    |
-| 可视化     | PIL    | Python Imaging Library，图像生成和处理库。   pillow          |
-|   | matplotlib            | 绘图库    |
-| | [seaborn](http://seaborn.pydata.org/) | 基于matplotlib的加强版。可以很方便画各种图。 |
+| 可视化     | pillow | pillow基于PIL，兼容python3。PIL-Python Imaging Library，python图像库，支持python2。 |
+|   | matplotlib            | 绘图库。依赖于pillow。 |
+| | [seaborn](http://seaborn.pydata.org/) | 统计数据可视化，基于matplotlib的加强版。可以很方便画各种图。 |
 |   | wordcloud | 词云     |
 | 爬虫框架 |  |  |
 | | grab | 网络爬虫框架（基于pycurl/multicur）。 |
@@ -2596,7 +2515,7 @@ PSD
 
 [2].  python下import 模块使用相对路径 http://www.dai3.com/python-import.html
 
-[3].  10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html
+[3].  Python项目的打包方法  https://blog.csdn.net/weixin_42052836/article/details/82315118
 
 [4].  Python六大框架对比，Web2py略胜一筹http://www.pythontab.com/html/2014/pythonweb_0106/659.html
 
@@ -2604,9 +2523,7 @@ PSD
 
 [6].  python常用开发库  http://www.jb51.net/article/78960.htm
 
-[7].  fabric https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html#making-connections
-
-[8].  Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/
+[7].  Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/ 
 
 
 
@@ -3380,7 +3297,34 @@ com back from foo in to bar
    ![1574530834766](../media/program_lang/lang_python_001.png)
 备注：上图nginx主要处理静态文件，动态文件通过wsgi http server转发请求到web server。
 
-**WSGI**: Web Server Gateway Interface（Web服务器网关接口）,是一种通信协议，它不是服务器、python模块、框架、API或者任何软件，只是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）通信的规范。wsgi server 他的意义在于 让我们专心去写web application，而不用专注于网络底层实现。
+**WSGI**: Web服务器网关接口（Python Web Server Gateway Interface，缩写为WSGI）是为[Python](https://baike.baidu.com/item/Python)语言定义的[Web服务器](https://baike.baidu.com/item/Web服务器)和Web应用程序或框架之间的一种简单而通用的接口。自从WSGI被开发出来以后，许多其它语言中也出现了类似接口。
+
+```sh
+2003年：原初的Python版本
+2007年：Rack，Ruby版本
+2008年：LuaWSAPI，Lua版本
+2009年：JSGI，JavaScript版本
+2009年：PSGI，Perl版本
+2010年：Hack，Haskell版本
+```
+
+WSGI是一种通信协议，它不是服务器、python模块、框架、API或者任何软件，只是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）通信的规范。WSGI Server 他的意义在于让我们专心去写web application，而不用专注于网络底层实现。
+
+WSGI 没有官方的实现，因为WSGI更像一个协议。只要遵照这些协议,WSGI应用(Application)都可以在任何服务器(Server)上运行，反之亦然。
+
+WSGI标准在 PEP 333中定义并被许多框架实现，其中包括现广泛使用的Django框架。WSGI是基于现存的[CGI](https://baike.baidu.com/item/CGI)标准而设计的。
+
+WSGI区分为两个部分：一为“服务器”或“网关”，另一为“应用程序”或“应用框架”。在处理一个WSGI请求时，服务器会为应用程序提供环境信息及一个回调函数（Callback Function）。当应用程序完成处理请求后，透过前述的回调函数，将结果回传给服务器。
+
+用Python语言写的一个符合WSGI的“Hello World”应用程序如下所示：
+
+```python
+def app(environ, start_response): 
+    start_response('200 OK', [('Content-Type', 'text/plain')]) 
+    yield "Hello world!\n"
+```
+
+
 
 表格 30 gunicorn和uwsgi比较列表
 
@@ -3399,7 +3343,7 @@ com back from foo in to bar
 
 
 
-#### 4.3.4.1 gunicorn
+#### gunicorn
 
 wsgi是服务端和客户端交互的接口规范，wsgi服务器的作用是接受和分析用户的请求，调用应用程序进行处理并返回结果。wsgi服务器或叫做应用服务器，python里面一般用uwsgi和gunicorn，都是广泛应用和比较成熟的。
 
@@ -3440,7 +3384,7 @@ gunicorn \
 
 
 
-#### 4.3.4.2 uWSGI
+#### uWSGI
 
 *  uWSGI：uWSGI是一个全功能的HTTP服务器，实现了WSGI协议、uwsgi协议、http协议等。它要做的就是把HTTP协议转化成语言支持的网络协议。比如把HTTP协议转化成WSGI协议，让Python可以直接使用。
 *  uwsgi：是uWSGI服务器的独占通信协议（线路协议），用于定义传输信息的类型(type of information)。每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。定义了在uWSGI服务器上与其他网络服务器进行数据的通讯。
@@ -3669,9 +3613,9 @@ https://github.com/LeoHuang2015/qqloginjs
 
 [4]. Python多进程通信Queue、Pipe、Value、Array实例 http://www.jb51.net/article/57666.htm
 
-[5]. gunicorn  http://gunicorn.org/
+[5]. 百度百科-wsgi  https://baike.baidu.com/item/wsgi/3381529
 
-[6]. http://gunicorn.readthedocs.io/en/latest/
+[6]. Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
 
 [7]. Python协程深入理解https://www.cnblogs.com/zhaof/p/7631851.html
 
@@ -3680,8 +3624,6 @@ https://github.com/LeoHuang2015/qqloginjs
 [9]. gunicorn简书 https://www.jianshu.com/p/69e75fc3e08e
 
 [10]. 深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/)
-
-[11] Django Nginx+uwsgi 安装配置 https://www.runoob.com/django/django-nginx-uwsgi.html
 
 
 
@@ -3965,23 +3907,42 @@ pip install git+git://github.com/gawel/pyquery.git
 
 # 参考资料
 
-**网站**
+**官网&官网文档**
 
-* python官网[Python.org](http://www.python.org/)  https://www.python.org/doc/
+* [Python.org](http://www.python.org/) 
+
 * [python.cn](http://python.cn/)
+
 * python官方扩展库package index  https://pypi.python.org
+
 * python非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/
+
 * wxpython https://www.wxpython.org
+
+* pypy http://pypy.org/
+
 * Tkinter教程 https://tkdocs.com/tutorial/index.html
-* [Python 资源大全中文版](http://blog.wuqifu.cn/opensource/2017/01/17/awesome-python-cn/) [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
+
+* pytest文档 https://docs.pytest.org/en/latest/mark.html
+
+* Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/
+
+* WSGI-[pep-0333 ](https://www.python.org/dev/peps/pep-0333/)   https://www.python.org/dev/peps/pep-0333/
+
+* gunicorn  http://gunicorn.org/
+
+* gunicorn官网文档 http://gunicorn.readthedocs.io/en/latest/
+
+  
 
 
 
 ## 参考链接
 
+* Python 资源大全中文版 [awesome-python-cn](https://github.com/jobbole/awesome-python-cn)
 * python教程 http://www.runoob.com/python
 * Python最佳实践指南！ https://pythonguidecn.readthedocs.io/zh/latest/
-* python代码加密——编译与反编译方法总结 https://blog.csdn.net/submarineas/article/details/93723421?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.control
+* python代码加密——编译与反编译方法总结 https://blog.csdn.net/submarineas/article/details/93723421
 * 如何防止你的代码被窃取？Python代码加密方案汇总（带实例验证） https://blog.csdn.net/weixin_43207777/article/details/108351862
 * Python源码寻宝记——地图篇 https://www.lightxue.com/python-internals-locate-source-code
 * python在命令行下使用google翻译(带语音) http://www.jb51.net/article/45789.htm

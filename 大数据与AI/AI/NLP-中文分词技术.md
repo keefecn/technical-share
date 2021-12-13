@@ -13,6 +13,10 @@
 
 
 
+
+
+
+
 ---
 
 
@@ -342,14 +346,14 @@ typedef struct LexIconNode{
 
 | 功能       | 函数                                                         | 参数                                                         | 功能                                                         |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 分词       | cut(self, sentence, cut_all=False, HMM=True)/<br>lcut        | sentence需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型 | 切词。cut=                                                   |
+| <br>分词   | cut(self, sentence, cut_all=False, HMM=True)/<br>lcut        | sentence需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型 | 切词。cut=                                                   |
 |            | cut_for_search/<br>lcut_for_search                           | 二个参数：需要分词的字符串；是否使用 HMM 模型。              | 该方法适合用于搜索引擎构建倒排索引的分词，粒度比较细         |
 |            | Tokenizer(dictionary=DEFAULT_DICT)                           | `jieba.dt` 为默认分词器，所有全局分词相关函数都是该分词器的映射。 | 新建自定义分词器，可用于同时使用不同词典。                   |
 | 自定义词典 | load_userdict(file_name)                                     | file_name 为文件类对象或自定义词典的路径。`file_name` 若为路径或二进制方式打开的文件，则文件必须为 UTF-8 编码。 | 词典格式和 `dict.txt` 一样，一个词占一行；每一行分三部分：词语、词频（可省略）、词性（可省略），用空格隔开，顺序不可颠倒。词频省略时使用自动计算的能保证分出该词的词频。 |
 |            | add_word(word, freq=None, tag=N)                             |                                                              | 添加新词到词典                                               |
 |            | del_word(word)                                               |                                                              | 删除词典的词语                                               |
 |            | suggest_freq(self, segment, tune=False)                      |                                                              | 可调节单个词语的词频，使其能（或不能）被分出来。自动计算的词频在使用 HMM 新词发现功能时可能无效。 |
-| 词性标注   | import jieba.posseg as pseg <br>pseg.cut(sentence, HMM=True) |                                                              | word, flag<br>示例：李小福 / nr , 是 / v， 创新办 / i , 主任 / b , |
+| 词性标注   | `import jieba.posseg as pseg  pseg.cut(sentence, HMM=True)`  |                                                              | word, flag<br>示例：李小福 / nr , 是 / v， 创新办 / i , 主任 / b , |
 | 关键词抽取 | import jieba.analyse<br>jieba.analyse.extract_tags(sentence, topK=20, withWeight=False, allowPOS=()) |                                                              | 基于 TF-IDF 算法的关键词抽取                                 |
 |            | jieba.analyse.textrank(content, topK=topK)                   |                                                              | 基于 TextRank 算法 的关键词抽取                              |
 

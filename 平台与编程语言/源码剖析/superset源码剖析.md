@@ -461,8 +461,9 @@ talisman = Talisman()
 
    **调用示例**   视图BaseView、ModelView 调用的调用方式
 
+   /superset/views/base.py
+
    ```python
-   # /superset/views/base.py
    from flask_appbuilder import BaseView, Model, ModelView
 
    def common_bootstrap_payload() -> Dict[str, Any]:
@@ -481,7 +482,6 @@ talisman = Talisman()
            "extra_categorical_color_schemes": conf["EXTRA_CATEGORICAL_COLOR_SCHEMES"],
            "menu_data": menu_data(),	#菜单数据，国际化部分从flask_appbuilder取语言包
        }
-
 
    class SupersetModelView(ModelView):
        # ModelView视图：数据库CRUD相关
@@ -503,13 +503,14 @@ talisman = Talisman()
                ),
            )
 
-
    class BaseSupersetView(BaseView):
        """ """
 
 
 
-   # /superset/views/core.py
+/superset/views/core.py
+
+```python
    from superset.views.base import BaseSupersetView
    class Superset(BaseSupersetView):
        """ BaseView方式的路由视图函数  """
@@ -527,11 +528,11 @@ talisman = Talisman()
                datasources=datasources,
                datasource_names=", ".join([o.name for o in datasources]),
         )
-   ```
+```
 
 
 
-   **实现逻辑**  /flask/templating.py
+**实现逻辑**  /flask/templating.py
 
 ```python
 # flask_appbuilder.[BaseView|ModelView].render_template 最终都是调用 falsk.templating.render_template()

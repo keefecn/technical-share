@@ -336,7 +336,7 @@ class Flask(_PackageBoundObject):
             except:  # noqa: B001
                 error = sys.exc_info()[1]
                 raise
-            return response(environ, start_response)	#返回响应结果
+            return response(environ, start_response)	# 返回响应结果Response, 此处实现了WSGI协议
         finally:
             if self.should_ignore_error(error):
                 error = None
@@ -347,24 +347,45 @@ class Flask(_PackageBoundObject):
         WSGI application. This calls :meth:`wsgi_app` which can be
         wrapped to applying middleware."""
         return self.wsgi_app(environ, start_response)
+```
 
+
+
+### 请求&响应 wrappers.py
+
+* flask/app.py   Request请求处理&生成响应Response
+* flask/wrappers.py   定义类Request和Response
+
+```python
+# flask/app.py
+from .wrappers import Request
+from .wrappers import Response	
+
+class Flask(_PackageBoundObject):
+    request_class = Request    	# 请求类
+    response_class = Response	# 响应类
+    
+    def dispatch_request(self):
+        """ 分发请求并处理：从请求栈里获取请求，通过请求参数（包括路由）获取到相应的路由视图函数 """
+        req = _request_ctx_stack.top.request
+        if req.routing_exception is not None:
+            self.raise_routing_exception(req)
+        rule = req.url_rule
+        ...
+        return self.view_functions[rule.endpoint](**req.view_args)        
+              
     def full_dispatch_request(self):
-        """Dispatches the request and on top of that performs request
-        pre and postprocessing as well as HTTP exception catching and
-        error handling.
-
-        .. versionadded:: 0.7
-        """
-        self.try_trigger_before_first_request_functions()	#触发请求前函数
+        """ 分发请求完整流程：请求前函数 -> preprocess_request -> dispatch_request -> finalize_request """
+        self.try_trigger_before_first_request_functions()	# before请求
         try:
             request_started.send(self)
-            rv = self.preprocess_request()	#处理请求
+            rv = self.preprocess_request()		# 预处理请求
             if rv is None:
-                rv = self.dispatch_request()	#重新分发请求
+                rv = self.dispatch_request()	# 真正分发请求到处理函数 
         except Exception as e:
             rv = self.handle_user_exception(e)
-        return self.finalize_request(rv)    #请求结果打包
-
+        return self.finalize_request(rv)	# after请求：处理完请求进行加工
+    
   	def preprocess_request(self):
         """Called before the request is dispatched. Calls
         :attr:`url_value_preprocessors` registered with the app and the
@@ -390,7 +411,10 @@ class Flask(_PackageBoundObject):
             rv = func()
             if rv is not None:
                 return rv
-
+            
+	def make_response(self, rv):
+        """ 生成 Response类 """
+        
     @setupmethod
     def before_request(self, f):
         """Registers a function to run before each request.
@@ -413,16 +437,75 @@ class Flask(_PackageBoundObject):
     @setupmethod
     def teardown_request(self, f):
         self.teardown_appcontext_funcs.append(f)
-        return f
+        return f        
 ```
 
 
 
+wrappers.py  请求/响应类包装，依赖于werkzeug模块的相应基类
+
+```python
+from werkzeug.exceptions import BadRequest
+from werkzeug.wrappers import Request as RequestBase
+from werkzeug.wrappers import Response as ResponseBase
+from werkzeug.wrappers.json import JSONMixin as _JSONMixin
+
+from . import json
+from .globals import current_app
+
+class JSONMixin(_JSONMixin):
+    json_module = json
+	""" JSON加载异常返回 """
+    def on_json_loading_failed(self, e):
+        if current_app and current_app.debug:
+            raise BadRequest("Failed to decode JSON object: {0}".format(e))
+
+        raise BadRequest()
+        
+        
+class Request(RequestBase, JSONMixin):     
+    """ 3个函数属性化：max_content_length endpoint blueprint """
+    url_rule = None
+    view_args = None    
+
+    @property
+    def max_content_length(self):
+        """Read-only view of the ``MAX_CONTENT_LENGTH`` config key."""
+        if current_app:
+            return current_app.config["MAX_CONTENT_LENGTH"]
+
+    @property
+    def endpoint(self):
+        """The endpoint that matched the request.  This in combination with
+        :attr:`view_args` can be used to reconstruct the same or a
+        modified URL.  If an exception happened when matching, this will
+        be ``None``.
+        """
+        if self.url_rule is not None:
+            return self.url_rule.endpoint
+
+    @property
+    def blueprint(self):
+        """The name of the current blueprint"""
+        if self.url_rule and "." in self.url_rule.endpoint:
+            return self.url_rule.endpoint.rsplit(".", 1)[0]    
+    
+    
+class Response(ResponseBase, JSONMixin):   
+    default_mimetype = "text/html"
+
+    def _get_data_for_json(self, cache):
+        return self.get_data()
+
+    @property
+    def max_cookie_size(self):    
+```
 
 
-### Blueprint蓝图 blueprints.py
 
-类Flask和Blueprint 都继承自  _PackageBoundObject， Bluepring粒度更小，一个Flask实例内可以有多个蓝图。
+### 蓝图 blueprints.py
+
+类Flask 和Blueprint 都继承自  _PackageBoundObject， Bluepring粒度更小，一个Flask实例内可以有多个蓝图。
 
 ```python
 from .helpers import _PackageBoundObject
@@ -1829,7 +1912,7 @@ selector.select(poll_interval) -> self._handle_request_noblock (非阻塞处理�
 # process_request实现中的finish_request处理流程： BaseRequestHandler.handle()
 ```
 
-​
+
 
 #### 请求处理 WSGIRequestHandler
 

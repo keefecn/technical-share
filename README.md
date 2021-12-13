@@ -1,5 +1,5 @@
 #  technical-share
-Personal Technical Share, 我的个人技术分享
+Personal Technical Share,  个人技术分享
 
 ```
 版权所有，若需要转载文章，请标明出处。
@@ -32,13 +32,12 @@ Personal Technical Share, 我的个人技术分享
 │
 ├─media
 │  ├─ai
-│  │      ai_001.jpg
-│  │      ai_002.png
+│  │    ai_001.jpg
+│  │    ai_002.png
 │  ├─bigdata
-│  │  │  bigdata_001.png
-│  │  │  bigdata_002.png
-│  │  │  bigdata_003.png
-│  │  │  bigdata_004.png
+│  │    bigdata_001.png
+│  │    bigdata_002.png
+│  │    bigdata_003.png
 │  ...
 │
 ├─science
@@ -73,17 +72,24 @@ Personal Technical Share, 我的个人技术分享
 │  │      数据中台.md
 │  │      大数据开发.md
 │  │      大数据计算框架.md
+│  │      大数据集群管理.md
 │  │
 │  ├─cloud
 │  │      云原生平台.md
 │  │      云服务商比较.md
 │  │      云计算专题cloud.md
+│  │      云原生架构.md
+│  │      CNCF云原生框架分析.md
 │  │
 │  └─storage.存储
-│          memcache深度使用指南.md
 │          MySQL使用指南.md
+│          MongoDB用户手册.md
+│          memcache用户手册.md
+│          Redis用户手册.md
+│          postgres用户手册.md
 │          元数据分析.md
 │          数据库技术.md
+│          数据库架构.md
 │
 ├─平台与编程语言
 │  │  C++开发.md
@@ -93,15 +99,17 @@ Personal Technical Share, 我的个人技术分享
 │  │  基准测试.md
 │  │  多语言开发.md
 │  │  性能优化.md
+│  │  前端技术.md
 │  │
 │  ├─platform.平台
-│  │      企业协同办公生态.md
-│  │      小程序开发.md
+│  │      操作系统实现原理.md
 │  │      开放平台.md
 │  │      开源软件开发指南.md
-│  │      搜索引擎开发资源.md
-│  │      移动应用开发.md
 │  │      跨平台开发系列.md
+│  │      企业协同办公生态.md
+│  │      搜索引擎开发资源.md
+│  │      小程序开发.md
+│  │      移动应用开发.md
 │  │
 │  ├─源码剖析
 │  │      apache_analyze.md
@@ -116,6 +124,7 @@ Personal Technical Share, 我的个人技术分享
 │  │      mysql源码分析.md
 │  │      python_web框架源码剖析.md
 │  │      python源码剖析.md
+│  │      redash源码剖析.md
 │  │      scrapy_analyze.md
 │  │      superset二次开发.md
 │  │      superset源码剖析.md
@@ -136,16 +145,13 @@ Personal Technical Share, 我的个人技术分享
 │  │      非数值和工业界领域算法.md
 │  │
 │  ├─architecture.架构
-│  │      云原生架构.md
 │  │      分布式架构.md
 │  │      微服务架构.md
-│  │      数据库架构.md
 │  │      网站架构设计与开发.md
 │  │      软件架构实例.md
 │  │      软件架构设计.md
 │  │
 │  ├─framework.框架
-│  │      CNCF云原生框架分析.md
 │  │      Java框架分析.md
 │  │      Python框架分析.md
 │  │      SpringCloud系列框架分析.md
@@ -173,6 +179,7 @@ Personal Technical Share, 我的个人技术分享
 │          Rose建模视图指导.md
 │          自动化测试工具.md
 │          项目开发环境工具.md
+│          网站优化工具.md
 │          数据可视化工具.md
 │          前端工程化工具.md
 │
@@ -191,6 +198,7 @@ Personal Technical Share, 我的个人技术分享
         IOT物联网技术.md
         区块链技术.md
         安全开发.md
+        浏览器开发.md
         行业业务知识.md
 ```
 

@@ -118,13 +118,35 @@ Borg主要由BorgMaster、Borglet、borgcfg和Scheduler组成，如下图所示
 
 *  borgcfg是Borg的命令行工具，用于跟Borg系统交互，一般通过一个配置文件来提交任务。
 
+
+
 ### 2.2  Kubernetes架构
+
+Kubernetes的实现参考了Google内部的资源调度框架，但并不是Borg的内部容器编排系统的开源，而是借鉴Google从运行Borg获得的经验教训，形成了Kubernetes项目。它使用Label和Pod的概念来将容器划分为逻辑单元。Pods是同地协作（co-located）容器的集合，这些容器被共同部署和调度，形成了一个服务，这是Kubernetes和其他两个框架的主要区别。相比于基于相似度的容器调度方式（就像Swarm和Mesos），这个方法简化了对集群的管理。
 
 Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod单IP等。Kubernetes的整体架构跟Borg非常像，如下图所示
 
    ![1574519428231](../../media/sf_reuse/framework/frame_k8s_003.png)
 
 图  Kubernetes架构
+
+
+
+![img](../../media/sf_reuse/arch/arch_cncf_002.png)
+
+图  K8s结构
+
+Kubernetes基本概念：
+
+*  ControlPlane：暴露应用程序接口（API），调度部署和管理整个集群。
+*  WorkerNodes：物理或者虚拟的服务器，负责运行工作负载。
+*  APIServer：外部与Kubernetes的互动点。
+*  Etcd：默认采用CoreOS 的产品etcd ，提供键值存储、服务发现、服务注册功能。
+*  Kubelet：节点上的代理，负责执行Kubernetes Master分配的任务。
+*  Pods:由同一主机上部署的一个或几个容器组成的计算能力单位，执行相同的任务。
+*  Services：Pods的前端和Load Balancer ,为Pods提供Floating IP。
+*  Replicationcontrollers：负责维护指定数目的 Pods。
+*  Labels：key-value标签以一种非层次化、松散的方式标记、查找Kubernetes中的Pods/Replication Controllers/Services等资源。
 
 
 
@@ -285,7 +307,7 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    $ minikube start --registry-mirror=https://registry.docker-cn.com
    # 启动方式2：安装了docker， none driver
    $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com
-
+   
    $ 打开k8s控制台
    minikube dashboard
    ```

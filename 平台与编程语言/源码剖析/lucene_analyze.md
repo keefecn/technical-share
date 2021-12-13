@@ -779,10 +779,6 @@ public class IndexFiles {
 }
  ```
 
-
-
-
-
 说明：IndexWrite, Document, Field, FileInputStream
 
 

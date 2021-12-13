@@ -59,44 +59,44 @@ https://ai.baidu.com/
 
 表格 6 百度AI技术能力
 
-| 能力<BR>项     | 分项             | 子项                                                         | 应用<br>场景 |
-| -------------- | ---------------- | ------------------------------------------------------------ | ------------ |
-| 语音技术       | 语音识别         | 长、短(60s内）语音识别、远程语音识别                         |              |
-|                |                  | 语音合成：在线合成、离线语音合成                             |              |
-|                | 语音唤醒         | 实时语音识别、音频文件转写                                   |              |
-|                | 图像审核         | 色情、政治、暴力、图文、广告、敏感信息、图像质量、公众人物识别 |              |
-|                | 车辆分析         | 车型识别、车流统计、车辆损伤识别、车辆检测、车辆属性识别、车辆分隔 | 交通         |
-|                | 图像识别         | 通用物体和场景识别、植物、动物、菜品、货币、门脸、地标、红酒、图像主体检测 |              |
-|                | 图像搜索         | 相同图片搜索、相似图片搜索、商品图片搜索、绘本图片搜索       |              |
-|                | 图像效果增强     | 图像去雾、图像无损放大、拉伸图像恢复、黑白图像上色、<br/>图像风格转换、图像清晰度增强、图像色彩增强 |              |
-| 文字识别       | 通用文字识别     |                                                              |              |
-| 文字识别       | 卡证文字识别     | 身份证、营业执照、护照、出生医学证明、银行卡、名片、户口本、 |              |
-| 文字识别       | 票据文字识别     | 混贴票据、增值税发票、通用机打发票、出租车票、<br/>通用票据、银行回单、银行汇票、银行支票、银行火车票、彩票、 |              |
-| 文字识别       | 教育场景文字识别 | 手写文字识别、公式识别                                       |              |
-| 文字识别       | 汽车场景文字识别 | 行驶证、车辆识别、                                           |              |
-| 文字识别       | 其它景文字识别   | 网络图片文字、表格文字、数字识别、印章检测、<br/>仪器仪表盘读数识别、二维码、文档版面分析与识别 |              |
-| 人脸与人体识别 | 人脸识别         | 人脸检测、人脸搜索、人像对比、活体检测                       |              |
-| 人脸与人体识别 | 人像特效         | 人脸融合                                                     |              |
-| 人脸与人体识别 | 人体分析         | 人体关键点识别、人体检测与属性                               |              |
-| 人脸与人体识别 | 行为分析         | 驾驶行为分析、危险形为分析、手势识别、指尖识别               |              |
-| 人脸与人体识别 | 场景方案         | [人脸实名认证 ](https://ai.baidu.com/solution/faceprint) 	满足各种场景下实名认证的灵活需求 		<br>[人脸闸机 ](https://ai.baidu.com/solution/facegate) 软硬一体的人脸识别闸机解决方案，提升人员系统化管理的安全性与便捷性 		<br>[人脸考勤 ](https://ai.baidu.com/solution/faceattendance) 利用高精度的人脸识别、对比能力，搭建高效考勤系统，提高防作弊能力 		<br>[人脸会员识别 ](https://ai.baidu.com/solution/faceidentify) |              |
-| 视频技术       |                  | 视频内容分析、 		视频封面选取、 		视频对比检索 		视频内容审核 |              |
-| AR与VR         | 增强现实         | AR核心技术 		3D肢体关键点                              |              |
-| AR与VR         | 虚拟现实         |                                                              |              |
-| 自然语言处理   | NLP基础技术      | [词法分析 ](https://ai.baidu.com/tech/nlp_basic/lexical) 提供分词、词性标注、命名实体识别 		[词向量表示 ](https://ai.baidu.com/tech/nlp_basic/word_embedding) 帮助完成语义挖掘、相似度计算<br>[词义相似度 ](https://ai.baidu.com/tech/nlp_basic/word_emb_sim) 通过词语向量化来计算两个词之间的相似度 		[依存句法分析 ](https://ai.baidu.com/tech/nlp_basic/dependency_parsing) 自动分析文本中的依存句法结构信息 		<br/>[DNN](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn)[语言模型 ](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn) 判断一句话是否符合语言表达习惯 		[短文本相似度 ](https://ai.baidu.com/tech/nlp_basic/simnet) 计算两个短文本之间的语义相似度，实现推荐、排序 |              |
-|                | NLP应用技术      | [文本纠错 ](https://ai.baidu.com/tech/nlp_apply/text_corrector) 识别文本中的错别字，给出提示以及正确的建议文本内容 		<br/>[情感倾向分析 ](https://ai.baidu.com/tech/nlp_apply/sentiment_classify) 对包含主观信息的文本进行情感倾向性判断 <br/>[评论观点抽取 ](https://ai.baidu.com/tech/nlp_apply/comment_tag) 分析评论关注点和观点，输出标签及观点极性 		<br/>[对话情绪识别 ](https://ai.baidu.com/tech/nlp_apply/emotion_detection) 识别会话者所表现出的情绪类别及置信度 <br/>[文本标签 ](https://ai.baidu.com/tech/nlp_apply/doctagger) 输出能够反映文章关键信息的多维度标签 		<br/>[文章分类 ](https://ai.baidu.com/tech/nlp_apply/topictagger) 输出文章的主题分类及对应的置信度 		<br/>[新闻摘要 ](https://ai.baidu.com/tech/nlp_apply/news_summary) 抽取关键信息并生成指定长度的新闻摘要 		<br/>[地址识别 ](https://ai.baidu.com/tech/nlp_apply/address) 精准提取快递填单文本中的姓名、电话、地址信息 |              |
-|                | 文本审核         |                                                              |              |
-|                | 机器翻译         | 通用翻译 语音翻译  定制化翻译 拍照翻译 <br/>垂直领域 AI同传  语种识别 |              |
-| **数据智能**   | 大数据处理       | 大数据传输 数据治理 	数据工厂                             |              |
-| **数据智能**   | 大数据分析       | 数据仓库 数据科学平台 		搜索分析ES 		大数据可视化 |              |
-| **数据智能**   | 统计与推荐       | 网站统计 智能推荐 		移动统计                           |              |
-| **数据智能**   | 舆情分析         | 舆情平台                                                     |              |
-| **数据智能**   | 大数据风控       | 保险风险定价 保险反欺诈 		智能个人风控 智能企业风控    |              |
-| **数据智能**   | 大数据营销       | 智客 汇客 觅客 炫客 		客情 商情                        |              |
-| **数据智能**   | 知识生产与理解   |                                                              |              |
-| 知识图谱       | 知识理解         | [实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		<br/>[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 	[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索<br/>[实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		<br/>[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 	[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索 |              |
-| 知识图谱       | 知识图谱schema   |                                                              |              |
-| 知识图谱       | 图数据库         |                                                              |              |
+| 能力项         | 分项             | 子项                                                         | 应用场景 |
+| -------------- | ---------------- | ------------------------------------------------------------ | -------- |
+| 语音技术       | 语音识别         | 长、短(60s内）语音识别、远程语音识别                         |          |
+|                |                  | 语音合成：在线合成、离线语音合成                             |          |
+|                | 语音唤醒         | 实时语音识别、音频文件转写                                   |          |
+|                | 图像审核         | 色情、政治、暴力、图文、广告、敏感信息、图像质量、公众人物识别 |          |
+|                | 车辆分析         | 车型识别、车流统计、车辆损伤识别、车辆检测、车辆属性识别、车辆分隔 | 交通     |
+|                | 图像识别         | 通用物体和场景识别、植物、动物、菜品、货币、门脸、地标、红酒、图像主体检测 |          |
+|                | 图像搜索         | 相同图片搜索、相似图片搜索、商品图片搜索、绘本图片搜索       |          |
+|                | 图像效果增强     | 图像去雾、图像无损放大、拉伸图像恢复、黑白图像上色、<br/>图像风格转换、图像清晰度增强、图像色彩增强 |          |
+| 文字识别       | 通用文字识别     |                                                              |          |
+| 文字识别       | 卡证文字识别     | 身份证、营业执照、护照、出生医学证明、银行卡、名片、户口本、 |          |
+| 文字识别       | 票据文字识别     | 混贴票据、增值税发票、通用机打发票、出租车票、<br/>通用票据、银行回单、银行汇票、银行支票、银行火车票、彩票、 |          |
+| 文字识别       | 教育场景文字识别 | 手写文字识别、公式识别                                       |          |
+| 文字识别       | 汽车场景文字识别 | 行驶证、车辆识别、                                           |          |
+| 文字识别       | 其它景文字识别   | 网络图片文字、表格文字、数字识别、印章检测、<br/>仪器仪表盘读数识别、二维码、文档版面分析与识别 |          |
+| 人脸与人体识别 | 人脸识别         | 人脸检测、人脸搜索、人像对比、活体检测                       |          |
+| 人脸与人体识别 | 人像特效         | 人脸融合                                                     |          |
+| 人脸与人体识别 | 人体分析         | 人体关键点识别、人体检测与属性                               |          |
+| 人脸与人体识别 | 行为分析         | 驾驶行为分析、危险形为分析、手势识别、指尖识别               |          |
+| 人脸与人体识别 | 场景方案         | [人脸实名认证 ](https://ai.baidu.com/solution/faceprint) 	满足各种场景下实名认证的灵活需求 		<br>[人脸闸机 ](https://ai.baidu.com/solution/facegate) 软硬一体的人脸识别闸机解决方案，提升人员系统化管理的安全性与便捷性 		<br>[人脸考勤 ](https://ai.baidu.com/solution/faceattendance) 利用高精度的人脸识别、对比能力，搭建高效考勤系统，提高防作弊能力 		<br>[人脸会员识别 ](https://ai.baidu.com/solution/faceidentify) |          |
+| 视频技术       |                  | 视频内容分析、 		视频封面选取、 		视频对比检索 		视频内容审核 |          |
+| AR与VR         | 增强现实         | AR核心技术 		3D肢体关键点                              |          |
+| AR与VR         | 虚拟现实         |                                                              |          |
+| 自然语言处理   | NLP基础技术      | [词法分析 ](https://ai.baidu.com/tech/nlp_basic/lexical) 提供分词、词性标注、命名实体识别 		[词向量表示 ](https://ai.baidu.com/tech/nlp_basic/word_embedding) 帮助完成语义挖掘、相似度计算<br>[词义相似度 ](https://ai.baidu.com/tech/nlp_basic/word_emb_sim) 通过词语向量化来计算两个词之间的相似度 		[依存句法分析 ](https://ai.baidu.com/tech/nlp_basic/dependency_parsing) 自动分析文本中的依存句法结构信息 		<br/>[DNN](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn)[语言模型 ](https://ai.baidu.com/tech/nlp_basic/dnnlm_cn) 判断一句话是否符合语言表达习惯 		[短文本相似度 ](https://ai.baidu.com/tech/nlp_basic/simnet) 计算两个短文本之间的语义相似度，实现推荐、排序 |          |
+|                | NLP应用技术      | [文本纠错 ](https://ai.baidu.com/tech/nlp_apply/text_corrector) 识别文本中的错别字，给出提示以及正确的建议文本内容 		<br/>[情感倾向分析 ](https://ai.baidu.com/tech/nlp_apply/sentiment_classify) 对包含主观信息的文本进行情感倾向性判断 <br/>[评论观点抽取 ](https://ai.baidu.com/tech/nlp_apply/comment_tag) 分析评论关注点和观点，输出标签及观点极性 		<br/>[对话情绪识别 ](https://ai.baidu.com/tech/nlp_apply/emotion_detection) 识别会话者所表现出的情绪类别及置信度 <br/>[文本标签 ](https://ai.baidu.com/tech/nlp_apply/doctagger) 输出能够反映文章关键信息的多维度标签 		<br/>[文章分类 ](https://ai.baidu.com/tech/nlp_apply/topictagger) 输出文章的主题分类及对应的置信度 		<br/>[新闻摘要 ](https://ai.baidu.com/tech/nlp_apply/news_summary) 抽取关键信息并生成指定长度的新闻摘要 		<br/>[地址识别 ](https://ai.baidu.com/tech/nlp_apply/address) 精准提取快递填单文本中的姓名、电话、地址信息 |          |
+|                | 文本审核         |                                                              |          |
+|                | 机器翻译         | 通用翻译 语音翻译  定制化翻译 拍照翻译 <br/>垂直领域 AI同传  语种识别 |          |
+| 数据智能       | 大数据处理       | 大数据传输 数据治理 	数据工厂                             |          |
+| 数据智能       | 大数据分析       | 数据仓库 数据科学平台 		搜索分析ES 		大数据可视化 |          |
+| 数据智能       | 统计与推荐       | 网站统计 智能推荐 		移动统计                           |          |
+| 数据智能       | 舆情分析         | 舆情平台                                                     |          |
+| 数据智能       | 大数据风控       | 保险风险定价 保险反欺诈 		智能个人风控 智能企业风控    |          |
+| 数据智能       | 大数据营销       | 智客 汇客 觅客 炫客 		客情 商情                        |          |
+| 数据智能       | 知识生产与理解   |                                                              |          |
+| 知识图谱       | 知识理解         | [实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		<br/>[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 	[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索<br/>[实体标注 ](https://ai.baidu.com/tech/cognitive/entity_annotation) 结合百科知识库进行文本知识解析 		[汉语检索 ](https://ai.baidu.com/tech/cognitive/hanyu) 汉语领域的知识检索服务 		<br/>[知识问答 ](https://ai.baidu.com/tech/kg/wenda) 提供多领域、细粒度的知识问答服务 	[作文检索 ](https://ai.baidu.com/tech/kg/zuowen) 提供体裁类别与多样化标签标记、内容检索 |          |
+| 知识图谱       | 知识图谱schema   |                                                              |          |
+| 知识图谱       | 图数据库         |                                                              |          |
 
 
 
@@ -104,7 +104,7 @@ https://ai.baidu.com/
 
 - 阿里云人工智能平台 https://ai.aliyun.com/
 - 阿里语音AI平台AliGenie https://www.aligenie.com/
-- 阿里机器学习PAI https://data.aliyun.com/product/learn?spm=5176.cnaicrowd.1280361.109.559e4962agp6yU
+- 阿里机器学习PAI https://data.aliyun.com/product/learn
 
 
 
@@ -117,8 +117,6 @@ https://ai.baidu.com/
 三个产品为传统机器学习和深度学习提供了从数据处理、模型训练、服务部署到预测的一站式服务。
 
 
-
-https://ai.aliyun.com/
 
 阿里巴巴的AI布局主要在六个产业：新零售、新金融、天猫精灵、AliOS、ET城市大脑、ET工业大脑。
 
@@ -320,7 +318,7 @@ https://www.paddlepaddle.org.cn/
 
 * 腾讯AI平台  http://ai.tencent.com/
 
-* 科大讯飞开放平台 [点击进入](https://www.xfyun.cn/)
+* 科大讯飞开放平台 https://www.xfyun.cn/
 
 * Face++旷视  [点击进入](https://www.faceplusplus.com.cn/)
 

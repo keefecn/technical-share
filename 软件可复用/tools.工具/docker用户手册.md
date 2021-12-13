@@ -177,7 +177,7 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 
 官网缺省不支持32位平台，需特殊处理。
 
-1)  32位平台
+1)  ~~32位平台~~
 ```SHELL
 $ sudo apt-get install docker.io
 # 导入32位ubuntu 14.04镜像

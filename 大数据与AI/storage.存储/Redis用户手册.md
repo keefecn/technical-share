@@ -28,6 +28,14 @@ Redis 即 REmote Dictionary Server (远程字典服务)。
 
 Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。
 
+Redis是一个开源的，基于网络的，高性能的key-value数据库，弥补了memcached这类key-value存储的不足，在部分场合可以对关系数据库起到很好的补充作用，满足实时的高并发需求。
+
+Redis跟memcached类似，不过数据可以持久化，而且支持的数据类型很丰富。支持在服务器端计算集合的并、交和补集(difference)等，还支持多种排序功能。
+
+说明： Redis客户端跟服务端间的网络数据传输未加密，建议不要使用Redis存取敏感数据，否则可能存在安全风险。
+
+
+
 **Redis** **与其他 key - value** **缓存产品有以下三个特点：**
 
 *  Redis支持5种存储结构：不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。每种存储结构都有自己独特的命令。
