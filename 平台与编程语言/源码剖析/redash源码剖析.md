@@ -78,7 +78,84 @@ Redash系统参数变更后会重新生成slug伪静态化代码。
 
 # 源码结构 
 
+表格  项目顶层目录结构
 
+| 一级目录或文件     | 二级目录或文件    | 简介           |
+| ------------------ | ----------------- | -------------- |
+| **client**         |                   | 客户端/前端    |
+| redash             |                   | 服务端         |
+| tests              |                   | 测试目录       |
+| bin                |                   | 二进制         |
+| scripts            |                   | 脚本           |
+| viz-lib            | src/ `__tests__/` | 可视化库       |
+| CHANGELOG.md       |                   | 更改日志       |
+| CONTRIBUTING.md    |                   | 贡献指引       |
+| docker-compose.yml |                   |                |
+| Dockerfile         |                   |                |
+| manager.py         |                   | 服务端启动入口 |
+| package.json       |                   |                |
+| setup.cfg          |                   |                |
+| webpack.config.js  |                   | 前端打包配置   |
+| worker.conf        |                   | 工作进程配置   |
+
+
+
+# 服务端 redash/
+
+表格  源码后端目录redash里的组织结构
+
+| 目录或文件       | 次模块 | 简介       |
+| ---------------- | ------ | ---------- |
+| authentication   |        | 认证       |
+| cli              |        | 命令行     |
+| destinations     |        |            |
+| handlers         |        |            |
+| metrics          |        | 指标       |
+| models           |        | 模型       |
+| query_runner     |        | 查询运行器 |
+| serializers      |        | 序列化     |
+| settings         |        | 配置       |
+| tasks            |        | 任务       |
+| templates        |        | 模板       |
+| utils            |        | 工具       |
+| app.py           |        |            |
+| extensions.py    |        | 扩展       |
+| monitor.py       |        | 监控       |
+| permissions.py   |        | 权限       |
+| security.py      |        | 安全       |
+| version_check.py |        |            |
+| worker.py        |        | 工作进程   |
+| wsgi.py          |        |            |
+
+
+
+# 客户端 client/
+
+表格  源码客户端目录client文件组织结构
+
+| 目录或文件 | 次模块      | 简介 |
+| ---------- | ----------- | ---- |
+| app        |             |      |
+|            | assets      |      |
+|            | compoments  |      |
+|            | config      |      |
+|            | extensions  |      |
+|            | lib         |      |
+|            | pages       |      |
+|            | redash-font |      |
+|            | services    |      |
+|            | styles      |      |
+| cypress    |             |      |
+|            | integration |      |
+|            | plugins     |      |
+|            | suppport    |      |
+|            |             |      |
+|            |             |      |
+|            |             |      |
+|            |             |      |
+|            |             |      |
+|            |             |      |
+|            |             |      |
 
 
 

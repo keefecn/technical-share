@@ -121,7 +121,7 @@ Linux官网：https://kernel.org/
 
 * setup: 利用BIOS的中断机制,获取系统信息，移动system模块位置到0地址.
 
-* system: head.s为system的首部,执行初始化IDT，GDT, 初始化内存目录表等，然后跳转到本模块的内核初始化程序main/init.c中继续执行。
+* system: head.s为system的首部，执行初始化IDT、GDT，初始化内存目录表等，然后跳转到本模块的内核初始化程序main/init.c中继续执行。
 
 
 
@@ -932,9 +932,9 @@ shell: 支持管道可重定向,|,>,<,>> use dup(),pipe()实现
 
 vi tags
 
-a) ctags -R   //to create tags
+a): ctags -R   //to create tags
 
-b):help TlistToggle //to show tag list windows
+b): help TlistToggle //to show tag list windows
 
 switch window: ctrl+ww,
 
@@ -944,7 +944,7 @@ goto variable,function: ctrl+],ctl+g+], ctrl+t
 
 tags kind: ctags --list-kinds
 
-c):ts //ts = tselect, show the same tags
+c): ts //ts = tselect, show the same tags
 
  :tags //show tag stack
 

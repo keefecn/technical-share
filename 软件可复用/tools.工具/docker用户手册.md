@@ -1636,7 +1636,7 @@ $docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
 
 ## 6.3  CICD之Jenkis
 
-jenkis进阶使用详见：  [Jenkins用户手册](./Jenkins用户手册.md)
+jenkis进阶使用详见：  [jenkins用户手册](./jenkins用户手册.md)
 
 jenkins官网 https://jenkins.io/
 

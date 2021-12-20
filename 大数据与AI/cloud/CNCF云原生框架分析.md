@@ -81,7 +81,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
 # 3 Kubernetes
 
-详见 [Kubernetes用户手册.md](../tools.工具/Kubernetes用户手册.md)
+详见 [kubernetes用户手册.md](../tools.工具/kubernetes用户手册.md)
 
 
 

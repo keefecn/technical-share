@@ -85,7 +85,7 @@ Personal Technical Share,  个人技术分享
 │          MySQL使用指南.md
 │          MongoDB用户手册.md
 │          memcache用户手册.md
-│          Redis用户手册.md
+│          redis用户手册.md
 │          postgres用户手册.md
 │          元数据分析.md
 │          数据库技术.md
@@ -169,14 +169,14 @@ Personal Technical Share,  个人技术分享
 │          docker用户手册.md
 │          EA用户手册.md
 │          git用户手册.md
-│          Jekyll开发手册.md
-│          Jenkins用户手册.md
+│          jekyll开发手册.md
+│          jenkins用户手册.md
 │          jupyter用户手册.md
-│          Kubernetes用户手册.md
+│          kubernetes用户手册.md
 │          mediawiki开发手册.md
 │          nginx用户手册.md
 │          Office办公软件高级教程.md
-│          Rose建模视图指导.md
+│          rose建模视图指导.md
 │          自动化测试工具.md
 │          项目开发环境工具.md
 │          网站优化工具.md

@@ -1,8 +1,12 @@
 | 序号 | 修改时间   | 修改内容             | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------- | ------ | ------ |
 | 1    | 2016-12-19 | 创建                 | Keefe | Keefe |
-| 2    | 2016-12-28 | 增加jekyll编辑章节。 | 同上   |        |
+| 2    | 2016-12-28 | 增加 jekyll编辑章节。 | 同上   |        |
 |      |            |                      |        |        |
+
+
+
+
 
 
 
@@ -17,7 +21,7 @@
 
 [1    简介... 2](#_Toc470905021)
 
-[2    安装搭建jekyll + github. 2](#_Toc470905022)
+[2    安装搭建Jekyll + github. 2](#_Toc470905022)
 
 [2.1    Linux/bsd下安装... 3](#_Toc470905023)
 
@@ -105,9 +109,7 @@ Jekyll is a parsing engine bundled as a ruby gem used to build static websites f
 
 
 
-
-
-# 2 安装搭建jekyll + github
+# 2 安装搭建 Jekyll + github
 
 构建github个人博客站：https://username.github.io/  （个人博客必须是https开头）
 
@@ -263,7 +265,7 @@ http://www.zhanxin.info
 
 
 
-# 3 jekyll配置
+# 3 Jekyll配置
 
 ## 3.1   网站目录结构
 
@@ -721,9 +723,9 @@ title : RSS 订阅
 
 
 
-# 4 jekyll编辑
+# 4 Jekyll编辑
 
-## 4.1   markdown语法
+## 4.1  markdown语法
 
 [Markdown 语法说明 (简体中文版)](http://wowubuntu.com/markdown/)
 
