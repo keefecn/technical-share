@@ -22,6 +22,11 @@ Personal Technical Share,  个人技术分享
 2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
 3. 如果单个md文件超过100KB，一般需要拆分内容另文。
 
+**Typora常用快捷键**
+
+* 格式：ctrl+b 加粗，ctrk+u 下划线，ctrl+k 超链接，ctrl+\ 清除样式
+* 段落：ctrl+1, +2, +3...
+
 
 
 **目录**
@@ -186,19 +191,25 @@ Personal Technical Share,  个人技术分享
 ├─软件工程
 │      DevOps指南.md
 │      IT管理.md
-│      产品和解决方案.md
-│      产品管理.md
 │      敏捷开发.md
 │      测试管理.md
 │      软件工程可信.md
 │      运维专题.md
 │      运营专题.md
 │
+│  ├─产品岗
+│          产品管理.md
+│          产品管理-B端.md
+│          产品和解决方案.md
+│          互联网经济.md
+│          行业业务知识.md
+│          TMT行业指南.md
+│          竞品分析案例.md
+|
 └─领域开发
         IOT物联网技术.md
         区块链技术.md
         安全开发.md
         浏览器开发.md
-        行业业务知识.md
 ```
 

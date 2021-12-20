@@ -359,12 +359,12 @@ class Flask(_PackageBoundObject):
 ```python
 # flask/app.py
 from .wrappers import Request
-from .wrappers import Response	
+from .wrappers import Response
 
 class Flask(_PackageBoundObject):
     request_class = Request    	# 请求类
     response_class = Response	# 响应类
-    
+
     def dispatch_request(self):
         """ 分发请求并处理：从请求栈里获取请求，通过请求参数（包括路由）获取到相应的路由视图函数 """
         req = _request_ctx_stack.top.request
@@ -372,8 +372,8 @@ class Flask(_PackageBoundObject):
             self.raise_routing_exception(req)
         rule = req.url_rule
         ...
-        return self.view_functions[rule.endpoint](**req.view_args)        
-              
+        return self.view_functions[rule.endpoint](**req.view_args)
+
     def full_dispatch_request(self):
         """ 分发请求完整流程：请求前函数 -> preprocess_request -> dispatch_request -> finalize_request """
         self.try_trigger_before_first_request_functions()	# before请求
@@ -381,11 +381,11 @@ class Flask(_PackageBoundObject):
             request_started.send(self)
             rv = self.preprocess_request()		# 预处理请求
             if rv is None:
-                rv = self.dispatch_request()	# 真正分发请求到处理函数 
+                rv = self.dispatch_request()	# 真正分发请求到处理函数
         except Exception as e:
             rv = self.handle_user_exception(e)
         return self.finalize_request(rv)	# after请求：处理完请求进行加工
-    
+
   	def preprocess_request(self):
         """Called before the request is dispatched. Calls
         :attr:`url_value_preprocessors` registered with the app and the
@@ -411,10 +411,10 @@ class Flask(_PackageBoundObject):
             rv = func()
             if rv is not None:
                 return rv
-            
+
 	def make_response(self, rv):
         """ 生成 Response类 """
-        
+
     @setupmethod
     def before_request(self, f):
         """Registers a function to run before each request.
@@ -437,7 +437,7 @@ class Flask(_PackageBoundObject):
     @setupmethod
     def teardown_request(self, f):
         self.teardown_appcontext_funcs.append(f)
-        return f        
+        return f
 ```
 
 
@@ -461,12 +461,12 @@ class JSONMixin(_JSONMixin):
             raise BadRequest("Failed to decode JSON object: {0}".format(e))
 
         raise BadRequest()
-        
-        
-class Request(RequestBase, JSONMixin):     
+
+
+class Request(RequestBase, JSONMixin):
     """ 3个函数属性化：max_content_length endpoint blueprint """
     url_rule = None
-    view_args = None    
+    view_args = None
 
     @property
     def max_content_length(self):
@@ -488,17 +488,17 @@ class Request(RequestBase, JSONMixin):
     def blueprint(self):
         """The name of the current blueprint"""
         if self.url_rule and "." in self.url_rule.endpoint:
-            return self.url_rule.endpoint.rsplit(".", 1)[0]    
-    
-    
-class Response(ResponseBase, JSONMixin):   
+            return self.url_rule.endpoint.rsplit(".", 1)[0]
+
+
+class Response(ResponseBase, JSONMixin):
     default_mimetype = "text/html"
 
     def _get_data_for_json(self, cache):
         return self.get_data()
 
     @property
-    def max_cookie_size(self):    
+    def max_cookie_size(self):
 ```
 
 

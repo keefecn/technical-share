@@ -1,0 +1,464 @@
+| 序号 | 修改时间   | 修改内容 | 修改人 | 审稿人 |
+| ---- | ---------- | -------- | ------ | ------ |
+| 1    | 2021-12-20 | 创建。   | Keefe  |        |
+
+
+
+
+
+
+
+
+
+----
+
+[TOC]
+
+
+
+----
+
+# 1 简介
+
+参见  《[操作系统实现原理.md](../../平台与编程语言/platform.平台/操作系统实现原理.md)》、《[linux内核源码剖析.md](./linux内核源码剖析.md)》
+
+Windows是主要的办公OS。
+
+CentOS和Ubuntu是主要的开发OS。
+
+
+
+## BIOS配置
+
+**BIOS Boot Mode启动模式**
+
+* Legacy：传统方式，从MBR中加载启动程序。
+
+* UEUI：Unified Extensible Firmware Interface。新的启动技术，只支持64位系统。UEFI BIOS也引入了一些新的技术，例如Fast boot和secure boot。UEFI的引导程序是以后缀名为.efi的文件存放在ESP分区中的，ESP分区采用fat32文件系统。因此只要u盘或移动硬盘上有fat32分区，分区根目录下有个文件夹叫EFI，UEFI就会自动去查找相应的启动文件(.efi)。
+
+
+
+Windows8启动相关分区有三个:
+
+* ESP (EFI系统分区)，
+
+* SR (Microsoft保留分区，通常为128MB)。
+
+* WinRE Tools  恢复分区。
+
+**EFI Boot 介绍**
+
+EFI 的全称是可扩展固件接口 (Extensible Firmware Interface)，它是 Intel 公司为全新类型的固件体系结构、接口和服务提出的建议性标准。该标准有两个主要用途：向操作系统的引导程序和某些在计算机初始化时运行的应用程序提供一套标准的运行环境；为操作系统提供一套与固件通讯的交互协议
+
+
+
+联想g40怎么进入bios设置u盘启动
+
+1.笔记本上插上U盘。
+
+2.开机启动，开机后在显示LENOVO自检画面的时候，反复按Fn+F12键进入bios界面。
+
+3.切换到boot设置项。设置boot mode为legacy support，然后设置Boot priority为legacy first。
+
+4.把开机启动项设置usb优先，也就是把U盘调整到最前面。按FN+F6或者FN+F5调整。
+
+5.切换到EXIT设置项。把OS optimized defaults由win8 64bit改为other OS。
+
+
+
+进入BIOS快捷键
+
+* F12： 联想
+
+
+
+## 跨OS工具
+
+* 办公：参见 《[office办公软件高级教程.md](./office办公软件高级教程.md)》
+* 开发：参见  《[项目开发环境工具.md](./项目开发环境工具.md)》
+
+
+
+## 本章参考
+
+* UEFI与 Legacy BIOS两种启动模式详解  https://www.cnblogs.com/sddai/p/7739567.html
+
+
+
+# 2 Windows
+
+## 全新Windows配置
+
+### 防火墙设置
+
+WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Windows 防火墙”启用或关闭。
+
+一般来讲关闭防火墙就能解决绝大部分问题，但从安全角度来讲，不推荐。
+
+1）局域网无法PING：
+
+修改规则：修改ICMP Echo规则。
+
+具体操作：“控制面板” - “Windows 防火墙” - “高级设置” - “入站规则” - “文件和打印机共享（回显请求 - ICMPv4 - In）”，然后根据你的实际情况选择其中一个，右键点击“启用规则”。
+
+
+
+2）局域网无法访问WEB服务
+
+新建规则：增加TCP80端口。
+
+具体操作：“控制面板” - “Windows 防火墙” - “高级设置” - “入站规则” - “新建规则”- “添加端口”。
+
+
+
+### 其它设置
+
+**1. win8系统桌面添加“我的电脑”图标**
+
+桌面上右击，选择【个性化】； - 【更改桌面图标】，勾选‘计算机’选项。
+
+
+
+# 3 Ubuntu
+
+基于[Debian](https://baike.baidu.com/item/Debian/748667)发行版的Linux都可以参考Ubuntu配置，如[Debian](http://baike.baidu.com/view/40687.htm)、[Google Chrome OS](http://baike.baidu.com/view/2627636.htm)等等。
+
+## 简介
+
+Ubuntu由[马克·舍特尔沃斯](https://baike.baidu.com/item/马克·舍特尔沃斯)亦译为沙特尔沃斯(*Mark Shuttleworth)*创立，其首个版本Ubuntu4.10以Debian为开发蓝本发布于2004年10月20日。Ubuntu的开发目的是为了使个人电脑变得简单易用，同时也提供针对企业应用的服务器版本。
+
+Ubuntu（友帮拓、优般图、乌班图）是一个以桌面应用为主的开源GNU/Linux操作系统。Ubuntu基于[Debian](https://baike.baidu.com/item/Debian/748667)发行版和Gnome桌面环境。
+
+Ubuntu基于debian的Linux发行版，采用DPG的软件管理包(区别于redhat的RPM包)，安装软件常用apt-get命令，管理软件包文本界面aptitude，图形界面synaptic。
+
+
+
+**版本分类**
+
+Ubuntu官方网站提供了丰富的Ubuntu版本及衍生版本，下面按照几个流行的标准来进行分类。
+
+**根据[中央处理器](https://baike.baidu.com/item/中央处理器/284033)架构划分**
+
+根据中央处理器架构划分，Ubuntu 16.04支持[i386](https://baike.baidu.com/item/i386/9048429) 32位系列、amd 64位[X86](https://baike.baidu.com/item/X86/6150538)系列、[ARM](https://baike.baidu.com/item/ARM/7518299)系列及PowerPC系列处理器。由于不同的CPU实现的技术不同，体系架构各异，所以Ubuntu会编译出支持不同中央处理器类型的发行版本。
+
+**根据发布版本用途划分**
+
+根据Ubuntu发行版本的用途来划分，可分为Ubuntu桌面版(Ubuntu Desktop)Ubuntu服务器版(Ubuntu Server)、Ubuntu云操作系统(Ubuntu Cloud)和Ubuntu移动设备系统(Ubuntu Touch)。Ubuntu已经形成一个比较完整的解决方案，涵盖了IT产品的方方面面。
+
+**根据开发项目划分**
+
+除了标准Ubuntu版本之外，Ubuntu官方还有几大主要分支，分别是Edubuntu、Kubuntu、Lubuntu、Mythbuntu、Ubuntu MATE，Ubuntu GNOME、Ubuntu Kylin、Ubuntu Studio和Xubuntu。
+
+
+
+**版本支持**
+
+Ubuntu每六个月便会发布一个新版，以便人们实时地获取和使用新软件。长期支持版本(Long Term Support，LTS)从12.04开始，桌面版3年，服务器版5年。
+
+| 版本号                                                       | 代号              | 发布时间        |
+| ------------------------------------------------------------ | ----------------- | --------------- |
+| 21.10                                                        | Impish Indri      | 2021-10-14      |
+| 21.04                                                        | Hirsute Hippo     | 2021-04-22 [13] |
+| 20.10                                                        | Groovy Gorilla    | 2020-10-22      |
+| 20.04 LTS                                                    | Focal Fossa       | 2020-04-23      |
+| 19.10                                                        | Eoan Ermine       | 2019-10-17      |
+| 19.04                                                        | Disco Dingo       | 2019-4-19       |
+| 18.10                                                        | Cosmic Cuttlefish | 2018-10-18      |
+| 18.04 LTS                                                    | Bionic Beaver     | 2018-04-26      |
+| 17.10（[GNOME](https://baike.baidu.com/item/GNOME/5105879)成为默认桌面环境） | Artful Aardvark   | 2017-10-21      |
+| 17.04                                                        | Zesty Zapus       | 2017-04-13      |
+| 16.10                                                        | Yakkety Yak       | 2016-10-20      |
+| 16.04 LTS                                                    | Xenial Xerus      | 2016-04-21      |
+| 15.10                                                        | Wily Werewolf     | 2015-10-23      |
+| 15.04                                                        | Vivid Vervet      | 2015-04-22      |
+| 14.10                                                        | Utopic Unicorn    | 2014-10-23      |
+| 14.04 LTS                                                    | Trusty Tahr       | 2014-04-18      |
+| 13.10                                                        | Saucy Salamander  | 2013-10-17      |
+| 13.04                                                        | Raring Ringtail   | 2013-04-25      |
+| 12.10                                                        | Quantal Quetzal   | 2012-10-18      |
+| 12.04 LTS                                                    | Precise Pangolin  | 2012-04-26      |
+| 11.10                                                        | Oneiric Ocelot    | 2011-10-13      |
+| 11.04（[Unity](https://baike.baidu.com/item/Unity/5779064)成为默认桌面环境） | Natty Narwhal     | 2011-04-28      |
+| 10.10                                                        | Maverick Meerkat  | 2010-10-10      |
+| 10.04 LTS                                                    | Lucid Lynx        | 2010-04-29      |
+| 9.10                                                         | Karmic Koala      | 2009-10-29      |
+| 9.04                                                         | Jaunty Jackalope  | 2009-04-23      |
+| 8.10                                                         | Intrepid Ibex     | 2008-10-30      |
+| 8.04 LTS                                                     | Hardy Heron       | 2008-04-24      |
+| 7.10                                                         | Gutsy Gibbon      | 2007-10-18      |
+| 7.04                                                         | Feisty Fawn       | 2007-04-19      |
+| 6.10                                                         | Edgy Eft          | 2006-10-26      |
+| 6.06 LTS                                                     | Dapper Drake      | 2006-06-01      |
+| 5.10                                                         | Breezy Badger     | 2005-10-13      |
+| 5.04                                                         | Hoary Hedgehog    | 2005-04-08      |
+| 4.10（初始发布版本）                                         | Warty Warthog     | 2004-10-20      |
+
+备注： 1. 4.10为初始发布版本，11.04始Unity成为默认桌面环境，17.10重新切换成Gnome3桌面环境。从12.04开始，Ubuntu支持在线更新（无需重新安装新LTS）。
+
+2. 版本号：包括版本代号和数字号。版本代号是按照“形容词+动物”的格式命名的，且形容词和动物名称的第一个字母要一致，一开始并不是按照字母顺序，从6.06的Drapper DRAKE才开始如此。而数字号则是表示发布的“年+月”，如12.04是在2012年4月发布。
+
+**升级命令**
+
+```shell
+# Desktop桌面版本升级：先更新系统，再升级系统
+# 先更新系统：updateg更新资源（比如检测apt源仓库是否可用）, upgrade更新软件包
+$ sudo apt-get update
+$ sudo apt-get dist-upgrade
+
+# 重启
+$ reboot
+
+# 升级系统: 检测是否有版本可升级。如果可升级，会弹框提示，确认后升级即可。
+$ update-manager -d
+
+# Server版本升级: 用update-manager配置选择要更新的版本。然后参数Desktop的升级步骤。
+$ sudo apt-get install update-manager-core
+$ sudo vim /etc/update-manager/release-upgrades
+Prompt=normal  #normal-会选择离当前版本最近的；lts-长期支持版本，需要当前版本也是lts；
+```
+
+
+
+## Ubuntu Kylin
+
+优麒麟是Ubuntu的正式子项目，其主旨是创建一份Ubuntu的变体以面向中文用户（使用简体中文写作系统）优化，尽管它也支持其他语言。其缺省桌面为UKUI（优麒麟用户界面），它基于MATE桌面且用Qt工具包开发。UKUI尽其所能地遵守友好易用的设计原则。该发行还提供超过20种内部开发的应用软件，包括麒麟助手、麒麟视频、麒麟截屏、软件中心。
+
+| 特色               | 21.10 impish                                                 | 21.04 hirsute                                                | 20.10 groovy                                                 | 20.04 focal                                                  | 19.10 eoan                                                   | 19.04 disco                                                  | 18.10 cosmic                                                 | 18.04 bionic                                                 | 17.10 artful                                                 | 17.04 zesty                                                  | 16.10 yakkety                                                | 16.04 xenial                                                 | 15.10 wily                                                   | 15.04 vivid                                                  | 14.10 utopic                                                 | 14.04 trusty                                                 | 13.10 saucy                                                  | 13.04 raring                                                 | 特色               |
+| :----------------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------ |
+| 发布日期           | 2021-10-14                                                   | 2021-04-22                                                   | 2020-10-22                                                   | 2020-04-23                                                   | 2019-10-17                                                   | 2019-04-18                                                   | 2018-10-18                                                   | 2018-04-26                                                   | 2017-10-19                                                   | 2017-04-13                                                   | 2016-10-13                                                   | 2016-04-21                                                   | 2015-10-22                                                   | 2015-04-23                                                   | 2014-10-23                                                   | 2014-04-17                                                   | 2013-10-17                                                   | 2013-04-25                                                   | 发布日期           |
+| 生命期末尾         | 2022-07                                                      | 2022-01                                                      | 2021-07                                                      | 2023-04                                                      | 2020-07                                                      | 2020-01                                                      | 2019-07                                                      | 2021-04                                                      | 2018-07                                                      | 2018-01                                                      | 2017-07                                                      | 2019-04                                                      | 2016-07                                                      | 2016-01                                                      | 2015-07                                                      | 2019-04                                                      |                                                              |                                                              | 生命期末尾         |
+| 价格（美圆）       | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | Free                                                         | 价格（美圆）       |
+| 镜像文件大小（MB） | 3600-3700                                                    | 3100-3200                                                    | 2900-3000                                                    | 2100-2200                                                    | 2400-2500                                                    | 1700-1800                                                    | 1700-1800                                                    | 1600-1700                                                    | 1594-1608                                                    | 1638-1662                                                    |                                                              | 1476-1505                                                    |                                                              |                                                              |                                                              |                                                              |                                                              |                                                              | 镜像文件大小（MB） |
+| 免费下载           | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/21.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/21.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/20.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/20.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/19.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/19.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/18.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/18.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/17.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/17.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/16.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/16.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/15.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/15.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/14.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/14.04/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/13.10/) | [ISO](http://cdimage.ubuntu.com/ubuntukylin/releases/13.04/) | 免费下载           |
+| 安装方式           | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | Graphical                                                    | 安装方式           |
+| 缺省桌面           | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | UKUI (MATE)                                                  | Unity                                                        | Unity                                                        | Unity                                                        | Unity                                                        | Unity                                                        | Unity                                                        | Unity                                                        | Unity                                                        | 缺省桌面           |
+| 软件包管理         | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | DEB                                                          | 软件包管理         |
+| 发布模式           | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | Fixed                                                        | 发布模式           |
+| 办公套件           | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | LibreOffice                                                  | 办公套件           |
+| 处理器架构         | aarch64, x86_64                                              | aarch64, x86_64                                              | aarch64, x86_64                                              | aarch64, x86_64                                              | i686, x86_64                                                 | i686, x86_64                                                 | i686, x86_64                                                 | i686, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | i386, x86_64                                                 | 处理器架构         |
+| init软件           | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | systemd                                                      | Upstart                                                      | init软件           |
+| 日志型文件系统     | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | Btrfs, ext3, ext4, JFS, ReiserFS, XFS                        | 日志型文件系统     |
+| 多语言             | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | --                                                           | 多语言             |
+| 亚洲语言支持       | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | zh_CN                                                        | 亚洲语言支持       |
+| 完整的软件包列表   | [21.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=21.10#pkglist) | [21.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=21.04#pkglist) | [20.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=20.10#pkglist) | [20.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=20.04#pkglist) | [19.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=19.10#pkglist) | [19.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=19.04#pkglist) | [18.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=18.10#pkglist) | [18.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=18.04#pkglist) | [17.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=17.10#pkglist) | [17.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=17.04#pkglist) | [16.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=16.10#pkglist) | [16.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=16.04#pkglist) | [15.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=15.10#pkglist) | [15.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=15.04#pkglist) | [14.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=14.10#pkglist) | [14.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=14.04#pkglist) | [13.10](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=13.10#pkglist) | [13.04](https://distrowatch.com/table.php?distribution=ubuntukylin&pkglist=true&version=13.04#pkglist) | 完整的软件包列表   |
+
+
+
+## 全新Ubuntu配置
+
+**常用软件列表**
+
+电影播放 － realplay + w32codecs, totem + gstreamer
+
+音乐播放 － rhythmbox（系统自带）＋gstreamer/xine
+
+IM聊天 － gaim（系统自带）＋OpenQ
+
+语音通讯 － skype
+
+浏览器 － firefox 2/Opera 9.0/IE6.0(wine)
+
+图形编辑 － gIMP（系统自带）
+
+图片管理 － Picasa
+
+网页编辑 － Bluefish
+
+文本编辑　－ vim, emacs
+
+FTP工具 － gFTP, vsftpd
+
+下载工具 － d4x
+
+P2P工具 － bitTorrent/aMule
+
+办公软件 － OpenOffice（系统自带）
+
+刻录软件 － gnomeBaker
+
+WIN模拟 － wine
+
+输入法 － scim（系统自带）,fcitx
+
+字典 － stardict
+
+其它工具 －gnochm, unrar
+
+
+
+开发软件列表：
+
+apt-get build-essential
+
+基础开发: g++, gcc, make, valgrind
+
+高级开发：flex, nasm, bison, sourcenav
+
+LAMP: mysql-server, libmysqlclient15-dev, apache2, php5, php5-mysql
+
+lib: zlib1g-dev, libqt4-dev, libxml2, libexpat1, gsoap
+
+```shell
+# 基础开发包
+$ sudo apt-get build-essential g++ gcc make
+
+# 开发文档
+$ sudo apt-get install binutils-doc glibc-doc libstdc++6-4.0-doc stl-manual manpages manpages-dev php-doc qt4-doc libxml2-doc perl-doc cpp-4.0-doc cpp-doc gcc-4.0-doc gcc-doc
+```
+
+
+
+**开机自动挂载windows分区（ntfs/fat32)**
+
+​	通常linux可通过修改/etc/fstab来达到自动挂载的目的，但ubuntu的内核支持自动挂载，因此更容易些，只需在/mount目录下有window分区的卷名目录即可实现自动挂载。
+
+```shell
+# 查看分区信息
+$ fdisk -l
+$ df -h
+
+# (可选)安装
+$ sudo apt-get install ntfs-3g exfat-utils
+
+# (ubuntu-14之前) mount需要生成卷名目录，注意通常为大写。
+$ mkdir -p /mount/卷名目录
+
+# (ubuntu-14+后) ntfs分区不会自动挂载，无法加载的分区用ntfsfix重新加载
+$ ntfsfix /dev/xx
+
+# usb盘加载, usb盘默认是fat32分区。
+$ lsusb
+```
+
+
+
+**ubuntu的运行级别**
+
+​	通常的linux第一个运行脚本是/etc/inittab，但在ubuntu则默认是/etc/event.d/rc-default，在其中设置缺少运行级别，其运行级别与通常linux的值又不同，缺少是2，表示多用户模式运行（但又支持nfs)，可通过命令runlevel得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。
+
+
+
+## FAQ
+
+1. **Ubuntu开机时出现“waiting for network configuration”**
+
+**问题描述**：开机时启动很慢，在网络配置检查花近二分钟，Waiting up to 60 seconds for network configuration。
+
+**问题原因**：使用 sudo pppoeconf 命令时，会有信息写入/etc/network/interfaces 文件内，直接导致出现了上面的问题。
+**问题解决：**
+
+```shell
+$ sudo vi /etc/network/interfaces
+# 打开文件后，保留下句外其他内容全部删除后，重启系统就可了。
+auto lo iface lo inet loopback
+```
+
+
+
+## 本章参考
+
+
+
+
+
+# 4 CentOS
+
+基于Red Hat发行版的Linux都可以参考CentOS配置，如[RHEL](https://baike.baidu.com/item/RHEL/2767838)、[Fedora](http://baike.baidu.com/view/182182.htm)等等。
+
+## 简介
+
+CentOS是免费的、开源的、可以重新分发的开源操作系统 ，CentOS（Community Enterprise Operating System，中文意思是社区企业操作系统）是[Linux](https://baike.baidu.com/item/Linux/27050)发行版之一。
+
+CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复现的平台，源于[Red Hat Enterprise Linux](https://baike.baidu.com/item/Red Hat Enterprise Linux/10770503)（RHEL）依照开放源代码（大部分是GPL开源协议）规定释出的源码所编译而成。
+
+自2004年3月以来，CentOS Linux一直是社区驱动的开源项目，旨在与[RHEL](https://baike.baidu.com/item/RHEL/2767838)在功能上兼容。2014年，Redhat收购RHL的社区主要力量CentOS（使用RHEL开放源代码编译而成的免费开源版本，号称100%兼容RHEL），CentOS仍保持免费。2020.12，Redhat宣布停止维护CentOS(最新版本CentOS 8)。
+
+
+
+表格 CentOS 系统官方支持时间表
+
+| **发布版本** | 完整更新        | 维护更新        |
+| ------------ | --------------- | --------------- |
+| 3            | 2006-07-20      | 2010-10-31      |
+| 4            | 2009-03-31      | 2012-02-29      |
+| 5            | Q1 2014         | 2017-03-31      |
+| 6            | Q2 2017         | 2020-11-30      |
+| 7            | Q4 2019         | 2024-06-30      |
+| 8            | -               | 2021-12-31      |
+| Stream       | N/A（滚动更新） | N/A（滚动更新） |
+
+
+
+## 全新CentOS配置
+
+
+
+
+
+
+
+# 5 macOS
+
+macOS是一套由苹果开发的运行于[Macintosh](https://baike.baidu.com/item/Macintosh/8310244)系列电脑上的操作系统。macOS是首个在商用领域成功的图形用户界面操作系统。
+
+macOS是基于XNU[混合内核](https://baike.baidu.com/item/混合内核/4239577)的图形化操作系统，一般情况下在普通PC上无法安装的操作系统。
+
+Apple I，Apple 的第一台计算机，实际上并没有操作系统。 它可以将程序保存到盒式磁带中，但 Apple II 拥有可以在软盘上组织、读取和写入的内部磁盘操作系统。
+
+Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统软件或系统 1。
+
+表格  Mac操作系统完整列表
+
+| macOS序号 | macOS名称             | 发布时间 | 最新版本 | 特性                                                         |
+| --------- | :-------------------- | -------- | :------- | ------------------------------------------------------------ |
+| 12        | macOS Monterey        | 2021     | 12.1     | 包含大量新功能，例如 SharePlay 和 Universal Control，并将快捷方式引入 Mac。 |
+| 11        | macOS Big Sur         | 2020     | 11.6.2   | 停止对 32 位应用程序的支持                                   |
+| 10.15     | macOS Catalina        | 2019     | 10.15.7  |                                                              |
+| 10.14     | macOS Mojave          | 2018     | 10.14.6  |                                                              |
+| 10.13     | macOS High Sierra     | 2017     | 10.13.6  |                                                              |
+| 10.12     | macOS Sierra          | 2016     | 10.12.6  | Mac OS X 正式更名为 macOS。                                  |
+| 10.11     | OS X El Capitan       | 2015     | 10.11.6  |                                                              |
+| 10.10     | OS X Yosemite         | 2014     | 10.10.5  |                                                              |
+| 10.9      | OS X Mavericks        | 2013     | 10.9.5   |                                                              |
+| 10.8      | OS X Mountain Lion    | 2012     | 10.8.5   | 添加游戏中心和通知中心以及提醒、便笺和消息应用程序。         |
+| 10.7      | OS X Lion             | 2011     | 10.7.5   | 可以使用更多多点触控手势                                     |
+| 10.6      | Mac OS X Snow Leopard | 2009     | 10.6.8   |                                                              |
+| 10.5      | Mac OS X Leopard      | 2007     | 10.5.8   |                                                              |
+| 10.4      | Mac OS X Tiger        | 2005     | 10.4.11  |                                                              |
+| 10.3      | Mac OS X Panther      | 2003     | 10.3.9   | Panther 添加到 Safari 和 FileVault 中，允许更快的用户切换，并包含 Finder 更新。 |
+| 10.2      | Mac OS X Jaguar       | 2002     | 10.2.8   | 更好的性能和更好的合成图形，允许 iChat 和地址簿在 Mac 上运行。 |
+| 10.1      | Mac OS X Puma         | 2001     | 10.1.5   | 苹果宣布 Mac OS X 将成为其电脑的默认操作系统。               |
+| 10.0      | Mac OS X Cheetah      | 2001     | 10.0.4   | 更名为Mac OS X。                                             |
+| 9         | Mac OS 9              |          |          | 改进了无线网络支持，并引入了远程网络、动态文件加密和早期版本的多用户支持。 |
+| 8         | Mac OS 8              |          |          | 更名为Mac OS。添加了 HFS+ 和至少在后台克隆文件的能力。       |
+| 7         | System 7              | 1991     |          | 具有虚拟内存支持、内置协作多任务处理和添加的别名。<br>它还添加了新的应用程序，并大大改变了用户界面。 |
+| 6         | System 6              | 1988     |          |                                                              |
+| 5         | System 5              | 1987     |          | 允许 Mac 用户一次运行多个应用程序                            |
+| 4         | System 4              | 1987     |          | 允许 Macintosh 计算机与更多外部设备一起工作。                |
+| 3         | System 3              | 1986     |          |                                                              |
+| 2         | System 2              | 1985     |          | 增加了对 AppleTalk 网络协议的支持。                          |
+| 1         | System 1              | 1984     |          | 引入了菜单栏，以及“桌面附件”应用程序，如计算器和闹钟。       |
+
+
+
+## 本章参考
+
+* [确定您的 Mac 使用的是哪个 macOS 版本 - Apple 支持 (中国)](https://support.apple.com/zh-cn/HT201260)
+* 苹果 MacOS 操作系统版本历史汇总  www.dayanzai.me/mac-operating-system-versions.html
+* Mac OS X和macOS版本的完整列表  https://www.imymac.com/zh-CN/mac-tips/mac-os-versions.html
+
+
+
+# 参考资料
+
+参考网站
+
+* [Enterprise Open Source and Linux | Ubuntu](https://ubuntu.com/)
+* Ubuntu Kylin优麒麟   https://www.ubuntukylin.com/
+
+
+
+参考链接
+
+* [2004.pdf (ubuntukylin.com)](https://www.ubuntukylin.com/public/pdf/2004.pdf)
+

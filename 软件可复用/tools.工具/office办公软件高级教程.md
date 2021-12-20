@@ -19,9 +19,27 @@
 
 ---
 
+# 简介
+
+## 开放文档格式 ODF
+
+开放文档格式（OpenDocument Format，简称ODF）是一种规范，基于XML的[文件格式](https://baike.baidu.com/item/文件格式/6156907)，因应[试算表](https://baike.baidu.com/item/试算表/8690020)、[图表](https://baike.baidu.com/item/图表/1252386)、[简报](https://baike.baidu.com/item/简报/4502034)和文书处理文件等电子文件而设置。开放文档格式企图提供一个取代私有专利文件格式的一个方案，使得组织或个人不会因为文件格式而被厂商套牢（Vendor lock-in）。
+
+ODF规格原本由太阳微系统开发，标准则由OASIS Open Document Format for Office Applications（OpenDocument）TC（又称为OASIS ODF TC）所开发，2003年OASIS ODF TC通过第一份草案。
+
+2006年11月以[ISO](https://baike.baidu.com/item/ISO)/[IEC](https://baike.baidu.com/item/IEC)国际标准发布──**ISO/IEC 26300:2006 Open Document Format for Office Applications（OpenDocument）v1.0**。
+
+2012年1月11日，ODF 1.2发布。
+
+2015年6月9日，ODF 1.2成为ISO国际标准。
+
 
 
 # Microsoft Office
+
+Microsoft Office 是由[Microsoft](https://baike.baidu.com/item/Microsoft/125917)(微软)公司开发的一套基于 Windows 操作系统的[办公软件](https://baike.baidu.com/item/办公软件/4703331)套装。常用组件有 [Word](https://baike.baidu.com/item/Word/2970534)、[Excel](https://baike.baidu.com/item/Excel/9564)、[PowerPoint](https://baike.baidu.com/item/PowerPoint/904847)等。
+
+最初的版本于1985年发布。MS Office常年垄断PC桌面办公软件，MS Office文档格式已成为事实上的行业标准，开源Office或其它商业Office一般都兼容MS Office的文档格式。
 
 ## 1  MS Word
 
@@ -31,19 +49,12 @@
 
 工具标题栏：开始、插入、页面布局、引用、邮件、审阅、视图、设计、布局
 
-l 页面布局：可页面设置等等
-
-l 引用：可生成目录、交叉引用等等。写论文必需。
-
-l 邮件：可通过数据关联，批量制作名片。
-
-l 审阅：包括校对、批注、修订、估计也是 、比较、保护。
-
-l 视图：主要用于浏览文档。
-
-l 表格工具~设计、布局：常用于表格内容。如合并行列、斜线表头、重复标题行等等。
-
-
+*  页面布局：可页面设置等等
+*  引用：可生成目录、交叉引用等等。写论文必需。
+*  邮件：可通过数据关联，批量制作名片。
+*  审阅：包括校对、批注、修订、估计也是 、比较、保护。
+*  视图：主要用于浏览文档。
+*  表格工具~设计、布局：常用于表格内容。如合并行列、斜线表头、重复标题行等等。
 
 **快捷键**
 
@@ -72,8 +83,6 @@ ctrl+= 下标
 还有各种箭头， { 符号等。
 
 设置字体上标， 下标等。
-
-
 
 
 
@@ -127,9 +136,9 @@ ctrl+= 下标
 
 Excel区别与WORD的工具栏：公式、数据
 
-l 公式：插入各种函数，名称管理器可提供内容自动填充功能。
+* 公式：插入各种函数，名称管理器可提供内容自动填充功能。
 
-l 数据： 包括获取外部数据、连接、排序和筛选、分级显示
+* 数据： 包括获取外部数据、连接、排序和筛选、分级显示
 
 
 
@@ -185,11 +194,11 @@ ctrl + F
 
 引用：引用符号$，行号或列号前加$
 
-l 绝对引用：$A$B，表示A行B列；$AB，表A行第B列（B会变化）。
+* 绝对引用：$A$B，表示A行B列；$AB，表A行第B列（B会变化）。
 
-l 跨表引用：[表名]![行列]
+* 跨表引用：[表名]![行列]
 
-l 表内引用：[行列]，可忽略表名。
+* 表内引用：[行列]，可忽略表名。
 
 
 
@@ -261,23 +270,17 @@ End Sub
 
 
 
-## 4  PDF
-
-1). 生成pdf文件;
-
-2). 裁剪pdf文件大小;
-
-
-
 ## 本章参考
 
-[1].   怎样把一个ppt替换成另外一个好看ppt的模板？ https://jingyan.baidu.com/article/fedf0737baf37d35ac8977b2.html
+* 怎样把一个ppt替换成另外一个好看ppt的模板？ https://jingyan.baidu.com/article/fedf0737baf37d35ac8977b2.html
 
-[2].   怎样快速更换PPT模板 https://jingyan.baidu.com/article/fd8044fac25edf5031137ad6.html
+* 怎样快速更换PPT模板 https://jingyan.baidu.com/article/fd8044fac25edf5031137ad6.html
 
 
 
 # MS Office替代品
+
+## 基于OpenOffice.org
 
 1999年，Sun Microsystems收购了StarSuite办公套件。
 
@@ -293,19 +296,21 @@ InfoWorld[对比了两个办公软件的Windows版本](https://www.oschina.net/a
 
 | 产品                                                         | 官网                           | 开源 | 简介                                                         |
 | ------------------------------------------------------------ | ------------------------------ | ---- | ------------------------------------------------------------ |
-| [**StarOffice**](http://en.wikipedia.org/wiki/StarOffice)    |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。曾一度在Google Pack中免费推广。<br/>1999年被Sun收购，仍保留原名称。现在，称为Oracle Open Office。 |
-| [**OpenOffice.org**](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
+| [**StarOffice**](http://en.wikipedia.org/wiki/StarOffice)    |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。<br/>1999年被Sun收购，仍保留原名称。现在称为Oracle Open Office。 |
+| [**OpenOffice.org**](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，Sun将StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
 | [**Go-oo**](http://en.wikipedia.org/wiki/Go-oo)              |                                | ✔    | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。 |
 | [**IBM Lotus Symphony**](http://symphony.lotus.com/)         |                                |      | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。 |
 | Apache OpenOffice                                            | http://www.openoffice.org/     | ✔    | 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。 |
-| LibreOffice                                                  | https://zh-cn.libreoffice.org/ | ✔    | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。 |
+| LibreOffice                                                  | https://zh-cn.libreoffice.org/ | ✔    | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。<br>目前大多数Linux发行版换用了此版本。 |
 | WPS Office                                                   | https://www.wps.cn/            |      | 1989年推出WPS1.0。WPS Office是由金山软件股份有限公司自主研发的一款办公软件套装，可以实现办公软件最常用的文字、表格、演示等多种功能。<br/>具有内存占用低、运行速度快、体积小巧、强大插件平台支持、免费提供海量在线存储空间及文档模板、支持阅读和输出PDF 文件、全面兼容微软Office97-2010格式(doc/docx/xls/xlsx/ppt/pptx 等）独特优势，覆盖Windows、 Linux、 Android、 iOS等多个平台。 |
 
 
 
-表格 OpenOffice.org和MS Office主要功能的比较
+### 功能和使用技巧
 
-| 功能     | Microsoft Office | OpenOffice.org |
+表格 OpenOffice.org 和MS Office主要办公套件的比较
+
+| 办公套件 | Microsoft Office | OpenOffice.org |
 | -------- | ---------------- | -------------- |
 | 文字处理 | MS Word          | writer         |
 | 表格     | MS Excel         | calc           |
@@ -314,7 +319,45 @@ InfoWorld[对比了两个办公软件的Windows版本](https://www.oschina.net/a
 
 
 
-## Apache OpenOffice
+表格 OpenOffice.org 和MS Office关键功能对比
+
+| MS Office功能   | OpenOffice对应功能 | 详述                                                         |
+| --------------- | ------------------ | ------------------------------------------------------------ |
+| WORD 文档结构图 | 导航               | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
+| Excel 数据分析  |                    |                                                              |
+| ...             |                    |                                                              |
+
+
+
+**常用快捷键**
+
+```
+F5 	打开导航，即文档结构图
+Alt + F12 打开设置项
+Ctrl + Enter   表格单元格内换行
+```
+
+
+
+**windows环境，libreoffce性能提升**
+
+优化方法：打开选项卡可用快捷键`Alt + F12`。
+
+1. 关闭 OpenCL:    打开选项卡「工具」—「选项」—「OpenCL」，取消勾选「允许使用OpenCL」选项。
+2. 禁用Java运行时： 打开选项卡「工具」—「选项」—「高级」，取消勾选「使用 Java 运行时环境」选项。此项不影响日常功能，但如果要用到某些特殊功能时，需勾选。
+3. 字体固定：打开选项卡「工具」—「选项」—「字体」，“HTML、Basic及SQL源代码的字体设置” 从 “自动” 改为自己平常用的字体。
+
+
+
+**FAQ**
+
+**Q1:   粘贴过长的表格，数据常被截断。**
+
+可以右键 ’选择性粘贴‘，选择 电子表格。
+
+
+
+### Apache OpenOffice
 
 [Apache OpenOffice - 开放免费的文字处理软件](http://www.openoffice.org/zh-cn/)  http://www.openoffice.org/
 
@@ -322,31 +365,15 @@ Apache OpenOffice是一款先进的**开源** **办公软件套件**，它包含
 
 
 
-表格 OpenOffice和MS Office关键功能对比
-
-| MS Office功能   | OpenOffice对应功能 | 详述                                                         |
-| --------------- | ------------------ | ------------------------------------------------------------ |
-| WORD 文档结构图 | 导航               | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
-| Excel数据分拆   |                    |                                                              |
-| ...             |                    |                                                              |
-
-
-
-##  Libreoffice
+###  Libreoffice
 
 [主页 | LibreOffice 简体中文官方网站 - 自由免费的办公套件](https://zh-cn.libreoffice.org/)  https://zh-cn.libreoffice.org/
 
-LibreOffice 是一款功能强大的办公软件，默认使用开放文档格式 (OpenDocument Format , ODF), 并支持 *.docx, *.xlsx, *.pptx 等其他格式。 它包含了 Writer, Calc, Impress, Draw, Base 以及 Math 等组件，可用于处理文本文档、电子表格、演示文稿、绘图以及公式编辑。<br>它可以运行于 Windows, GNU/Linux 以及 macOS 等操作系统上，并具有一致的用户体验。
+LibreOffice 是一款功能强大的办公软件，默认使用开放文档格式 (OpenDocument Format , ODF)，并支持 *.docx, *.xlsx, *.pptx 等其他格式。它包含了 Writer, Calc, Impress, Draw, Base 以及 Math 等组件，可用于处理文本文档、电子表格、演示文稿、绘图以及公式编辑。<br>它可以运行于 Windows, GNU/Linux 以及 macOS 等操作系统上，并具有一致的用户体验。
 
 LibreOffice 采用对企业和个人用户均免费的 MPL 2.0 授权协议。您可以自由分发该软件，无需支付授权费用（但您仍然可以付费获得经认证的专业支持）。它的源代码完全公开，任何人都可以参与软件的开发和维护。
 
 LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个月发布一个主要的新版本。
-
-
-
-**FAQ:**
-
-粘贴过长的表格，数据常被截断。可以右键 ’选择性粘贴‘，选择 电子表格。
 
 
 
@@ -367,15 +394,26 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 
 ## 本章参考
 
-*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)
-
+*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office
 * LibreOffice:完全由开源社区主导的OpenOffice分支  https://xbeta.info/libreoffice.htm
 
 
 
 # 企业协同办公Office
 
-详见  《[企业协同办公生态](企业协同办公生态.md)》
+详见  《[企业协同办公生态.md](./企业协同办公生态.md)》
+
+
+
+# 其它办公套件
+
+## Adobe PDF
+
+MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf格式。
+
+1). 生成pdf文件;
+
+2). 裁剪pdf文件大小;
 
 
 

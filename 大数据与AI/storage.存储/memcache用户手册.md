@@ -401,15 +401,15 @@ bool Memcache::delete ( string $key [, int $timeout ] )
 
 // replace
 bool Memcache::replace ( string $key , mixed $var [, int $flag [, int $expire ]] )
-//Memcache::replace() should be used to replace value of existing item with *key*. In case if item with such key doesn't exists, //Memcache::replace() returns **FALSE**.  
+//Memcache::replace() should be used to replace value of existing item with *key*. In case if item with such key doesn't exists, //Memcache::replace() returns **FALSE**.
 
 // set — Store data at the server
 bool Memcache::set ( string $key , mixed $var [, int $flag [, int $expire ]] )
 
 // connect + addServer
-bool Memcache::connect ( string $host [, int $port [, int $timeout ]] )   
+bool Memcache::connect ( string $host [, int $port [, int $timeout ]] )
 bool Memcache::addServer ( string $host [, int $port = 11211 [, bool $persistent [, int $weight [, int $timeout [, int $retry_interval [, bool $status [, callback $failure_callback [, int $timeoutms ]]]]]]]] )
-    
+
 $mem->addServer ("192.168.220.30",5555,false,1,0); //false: persistent;0:timeout
 //说明：上述delete, addServer都有带timeout参数即本次操作的超时时间; add 带有存储项的过期时间，最多30days;
 
@@ -628,7 +628,7 @@ slab class所能使用的内存-m用完后，将使用LRU算法来更新item.
 
 **参考链接**
 
-* memcache机制分析 http://www.byejob.com/space.php?uid=17&do=blog&id=148 
+* memcache机制分析 http://www.byejob.com/space.php?uid=17&do=blog&id=148
 * memcached完全剖析　http://tech.idv2.com/2008/07/10/memcached-001/
 
 * memcached深度分析 http://blog.developers.api.sina.com.cn/?p=124

@@ -27,31 +27,109 @@
 
 
 
-表格  业界主流AI平台比较
+表格  AI行业巨头的AI全栈技术
 
-| 厂商      | 平台产品                                                     | 提供功能                                                     |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Alibaba   | [PAI](https://cn.aliyun.com/product/bigdata/product/learn)（Dataworks、Studio/DSW/DLC/EAS） | PAI包括4个子产品，支持可视化建模Studio、交互式建模DSW、深度学习训练平台DLC、弹性推理平台EAS。<BR>免费提供DSW作为阿里天池大赛的缺省开发环境，CPU不限制，GPU每年60小时。 |
-| 华为      | ModelArts                                                    | 华为云长期扎根AI基础技术研究，覆盖计算机视觉、语音语义和决策优化三大AI领域，提出了六大基础研究计划，这些计划产生的许多研究成果以即插即用的方式逐步部署于ModelArts。<br>2020年，华为云发布了ModelArts 3.0，融合骨干模型、联邦学习、模型智能评估与诊断、高性能AI计算四大特性，并推出了基于MedelArts打造的业界首个全生命周期知识计算解决方案，加速行业AI落地。 |
-| Amazon    | [SageMaker](https://aws.amazon.com/cn/sagemaker/)            |                                                              |
-| 百度      | [飞桨](https://www.paddlepaddle.org.cn/)                     |                                                              |
-| Google    | Colab                                                        |                                                              |
-| Microsoft | [Azure](https://docs.microsoft.com/en-us/azure/machine-learning/) |                                                              |
+|      | 分类         | GCP        | Azure                  | AWS        | Ali            | HW               |
+| ---- | ------------ | ---------- | ---------------------- | ---------- | -------------- | ---------------- |
+| 生态 | 联盟         |            |                        |            |                | 华为云市场、鲲鹏 |
+|      | 开发者       |            | 收购github             |            |                | 沃土云创计划     |
+| SAAS | 行业应用     | 医疗、ADAS | 医疗、ADAS、零售、金融 | 医疗、ADAS | ET大脑六大行业 | 智能体           |
+|      | AI基础服务   | 11种       | 20+                    | 11+        | 20+            | 15+              |
+| PAAS | AI自动化工具 | AutoML     |                        |            |                |                  |
+|      | AI开发工具   | GME        | MLS                    | Sagemaker  | Dataworks PAI  | ModelArts        |
+|      | AI框架       | Tensorflow | CNTK                   | MXNET      | XD Euler       | Mindspore        |
+| IAAS | 芯片         | TPU        |                        |            |                | D系列            |
+
+> 备注：
+>
+> 术语：GCP - Google Cloud Platform, HW - Huawei,  ADAS-Advanced Driver Assistance System，自动辅助驾驶。
 
 
 
-表格  中国业界AI平台比较
+## AI如何落地？
+
+### 场景AI和通用AI
+
+可分为场景AI和通用AI。
+
+* 场景AI：基于场景提供AI服务，创造数字员工，让企业更智能。
+
+* 通用AI：提供通用AI算法服务，提升算法能力，使能智能与运营。
+
+表格 7 场景AI的业务架构
+
+|            | 类别                 | 详述                                     |
+| ---------- | -------------------- | ---------------------------------------- |
+| 机器人构建 | 智能客服             |                                          |
+|            | 智能助手             |                                          |
+|            | 风控、搜索、企业图谱 |                                          |
+| 机器人市场 |                      |                                          |
+|            | 机器人代替人         | 如热线服务招聘、运维、稽查等             |
+|            | 机器人辅助人         | 如合同、培训、办公、知识、会议和差旅。   |
+|            | 机器人超越人         | 如选址、备件合单、路径规划、代码缺陷识别 |
+
+
+
+**用户期望：**
+
+效果好、门槛低、用户赞，即可用、易用和爱用。
+
+
+
+场景AI的用户痛点
+
+- 场景（无法识别有效高价值需求）、算法、数据
+- 用户不知道怎么用、应用门槛高、应用场景单点的问题
+
+
+
+通用AI的用户痛点
+
+
+
+### 手机AI
+
+手机的三觉：
+
+- ​	视觉：摄像头
+- ​	触觉：传感器
+- ​	听觉：语音识别
+
+手机AI通过二个层面来体现，一是边缘AI，二是云上AI。
+
+题外话：人类获取的80%信息是通过视觉来获取的。
+
+
+
+### AI行业洞察
+
+数字政府：即有公共安全方面的需要，也有国家高新科技发展规划倾向的支持。
+
+安防：最易变现。每年不少死亡人数。
+
+交通：包括自动驾驶，未来空间最大。
+
+工业：工业互联网的需求迫切，需求大。
+
+医疗：影响最广泛。
+
+
+
+# AI平台
+
+表格  业界AI平台比较
 
 | 平台       | 链接                                  | 简介                                                         |
 | ---------- | ------------------------------------- | ------------------------------------------------------------ |
+| Amazon     |                                       |                                                              |
+| Microsoft  |                                       |                                                              |
+| Google     |                                       |                                                              |
 | 百度AI平台 | https://ai.baidu.com/                 | 研究领域和应用场景都非常齐全。                               |
 | 阿里AI     | https://ai.aliyun.com/                | 属于阿里云提供的一个解决方案，没像百度那样重点突出AI，但内容也很全。 |
 | 腾讯AI Lab | https://ai.tencent.com/               | 实验室性质，不是企业战略方向。研究领域：计息机视觉、语音识别、自然语言处理、机器学习 <br>应用领域：社交AI、游戏AI、内容AI、平台AI |
 | 华为 AILA  | https://ai.huawei.com/ （仅华为内网） | 2018.5，华为BPIT成立AI使能部，分七大基础能力和六大领域解决方案。 |
 
 
-
-# AI平台
 
 ## 百度AI平台
 
@@ -238,6 +316,19 @@ Face++人工智能开放平台的核心技术包括人脸识别、人体识别�
 
 # AI中台
 
+表格  业界主流AI平台产品比较
+
+| 厂商      | 平台产品                                                     | 提供功能                                                     |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Amazon    | [SageMaker](https://aws.amazon.com/cn/sagemaker/)            |                                                              |
+| Alibaba   | [PAI](https://cn.aliyun.com/product/bigdata/product/learn)（Dataworks、Studio/DSW/DLC/EAS） | PAI包括4个子产品，支持可视化建模Studio、交互式建模DSW、深度学习训练平台DLC、弹性推理平台EAS。<BR>免费提供DSW作为阿里天池大赛的缺省开发环境，CPU不限制，GPU每年60小时。 |
+| Microsoft | [Azure](https://docs.microsoft.com/en-us/azure/machine-learning/) |                                                              |
+| Google    | Colab                                                        |                                                              |
+| 华为      | ModelArts                                                    | 华为云长期扎根AI基础技术研究，覆盖计算机视觉、语音语义和决策优化三大AI领域，提出了六大基础研究计划，这些计划产生的许多研究成果以即插即用的方式逐步部署于ModelArts。<br>2020年，华为云发布了ModelArts 3.0，融合骨干模型、联邦学习、模型智能评估与诊断、高性能AI计算四大特性，并推出了基于MedelArts打造的业界首个全生命周期知识计算解决方案，加速行业AI落地。 |
+| 百度      | [飞桨](https://www.paddlepaddle.org.cn/)                     |                                                              |
+
+
+
 ## 阿里云人工智能平台PAI
 
 阿里云人工智能平台PAI  https://cn.aliyun.com/product/bigdata/product/learn
@@ -348,11 +439,11 @@ https://www.paddlepaddle.org.cn/
 
 * Amazon AI  https://aws.amazon.com/cn/events/amazon-ai/
 
-* IBM人工智能-IBM Cloud Pak for Data  [点击进入](https://www.ibm.com/cn-zh/products/cloud-pak-for-data)
+* IBM人工智能-IBM Cloud Pak for Data  https://www.ibm.com/cn-zh/products/cloud-pak-for-data
 
-* 微软AI开放平台 [点击进入](https://azure.microsoft.com/zh-cn/free/ai/)
+* 微软AI开放平台  https://azure.microsoft.com/zh-cn/free/ai/
 
-* 英特尔 AI Academy [点击进入](https://software.intel.com/zh-cn/ai)
+* 英特尔 AI Academy  https://software.intel.com/zh-cn/ai
 
 
 
@@ -361,6 +452,8 @@ https://www.paddlepaddle.org.cn/
 * ModelArts https://support.huaweicloud.com/modelarts/index.html
 * 阿里云机器学习PAI  https://cn.aliyun.com/product/bigdata/product/learn
 * 百度飞桨 (PaddlePaddle)  https://www.paddlepaddle.org.cn/
+* 华为[ ModelArts](https://support.huaweicloud.com/modelarts/index.html)
+* 腾讯云智天枢[timatrix](https://cloud.tencent.com/product/timatrix)
 
 
 

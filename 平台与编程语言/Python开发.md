@@ -2259,7 +2259,7 @@ pyinstaller 打包常见问题
 
 ### 本节参考
 
-[1]. Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/ 
+[1]. Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/
 [2]. 10款最好的python IDE http://www.runoob.com/w3cnote/best-python-ide-for-developers.html
 [3]. 用 pytest 测试 python 代码 https://www.cnblogs.com/paisenpython/p/10339453.html
 [4]. Python测试框架对比----unittest, pytest, nose, robot framework对比 https://www.cnblogs.com/bonelee/p/11122758.html
@@ -2523,7 +2523,7 @@ PSD
 
 [6].  python常用开发库  http://www.jb51.net/article/78960.htm
 
-[7].  Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/ 
+[7].  Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/
 
 
 
@@ -3319,8 +3319,8 @@ WSGI区分为两个部分：一为“服务器”或“网关”，另一为“�
 用Python语言写的一个符合WSGI的“Hello World”应用程序如下所示：
 
 ```python
-def app(environ, start_response): 
-    start_response('200 OK', [('Content-Type', 'text/plain')]) 
+def app(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
     yield "Hello world!\n"
 ```
 
@@ -3909,7 +3909,7 @@ pip install git+git://github.com/gawel/pyquery.git
 
 **官网&官网文档**
 
-* [Python.org](http://www.python.org/) 
+* [Python.org](http://www.python.org/)
 
 * [python.cn](http://python.cn/)
 
@@ -3933,7 +3933,7 @@ pip install git+git://github.com/gawel/pyquery.git
 
 * gunicorn官网文档 http://gunicorn.readthedocs.io/en/latest/
 
-  
+
 
 
 

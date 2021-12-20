@@ -99,7 +99,7 @@ PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿�
 | ...                                                     |               |           |                    |                   |
 | Postgres95                                              |               | No        | 1995               |                   |
 
-> 版本说明： https://www.postgresql.org/support/versioning/  
+> 版本说明： https://www.postgresql.org/support/versioning/
 >
 > [附录 E. 版本说明 (postgres.cn)](http://www.postgres.cn/docs/14/release.html)
 >
@@ -109,7 +109,7 @@ PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿�
 
 ```shell
 postgres=# select version();
-                                                   version                                                   
+                                                   version
 -------------------------------------------------------------------------------------------------------------
  PostgreSQL 10.17 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-2), 64-bit
 (1 行记录)
@@ -134,9 +134,9 @@ postgres=# select version();
 | 9.1    | 2011-09-12   | 支持同步数据复制、unlogged tabels、serializable snapshot isolation、FDW 外部表。 |
 | 9.0    | 2010-09-20   | 支持64位Windows系统、异步流数据复制、Hot Standby（相当于Active DataGuard）。 |
 
-> 
+>
 
-## 第三方组件 
+## 第三方组件
 
 表格 12 PG的第三方组件
 
@@ -303,7 +303,7 @@ PostgreSQL内存页面的默认大小是8kB。页面的逻辑结构被定义成�
 
 元组记录空间是存储元组信息的地方，在这里面每个元组记录被称为一个ltem，Item由ltemld和元组数据组成，ltemld内部定义了元组在页面中的偏移量、ltem指针的状态以及元组项的比特位数长度。
 
-特殊空间是为了页面操作所需要的。为了其他模块对页面进行操作，PostgreSQL内部定义了一些页面的操作函数。页面的相关操作包括页面初始化、页面添加、修复和删除。供其他子模块进行调用。这里值得关注的是页面修复与页面批量删除的操作函数。为了实现这两个操作函数，PostgreSQL专门定义了一个数据结构itemldSortData，它为方便在这两个函数中对元组项Item实现降序排序而定义。 
+特殊空间是为了页面操作所需要的。为了其他模块对页面进行操作，PostgreSQL内部定义了一些页面的操作函数。页面的相关操作包括页面初始化、页面添加、修复和删除。供其他子模块进行调用。这里值得关注的是页面修复与页面批量删除的操作函数。为了实现这两个操作函数，PostgreSQL专门定义了一个数据结构itemldSortData，它为方便在这两个函数中对元组项Item实现降序排序而定义。
 
 
 

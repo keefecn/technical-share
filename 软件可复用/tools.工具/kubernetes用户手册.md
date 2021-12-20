@@ -307,7 +307,7 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    $ minikube start --registry-mirror=https://registry.docker-cn.com
    # 启动方式2：安装了docker， none driver
    $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com
-   
+
    $ 打开k8s控制台
    minikube dashboard
    ```

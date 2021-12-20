@@ -8,9 +8,10 @@
 
 
 
+
+
+
 ---
-
-
 
 [TOC]
 
@@ -327,6 +328,8 @@ docker-compose scale [proj=num]
 
 <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>  # 镜像的入口命令
 
+
+
 ### 4.1.3  docker-compose.yml
 
 ```yaml
@@ -353,13 +356,9 @@ services:
     image: itmuch/microservice-gateway-zuul:0.0.1-SNAPSHOT
   microservice-hystrix-turbine:
     image: itmuch/microservice-hystrix-turbine:0.0.1-SNAPSHOT
-
 ```
 
-
-
-说明：
- 双节点的Eureka Server集群。
+说明：双节点的Eureka Server集群。
 
 
 
@@ -367,22 +366,16 @@ services:
 
 ## **官网**
 
-[1].  https://spring.io/
+* https://spring.io/
 
-[2].  [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/)
-
-[3].  [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
+* [Spring Boot Reference Manual](https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/)
+* [Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
 
 
 
 ## 参考文献
 
-[1].  《Spring Cloud与Docke微服务架构实战》v2 https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml
-
-[2].   http://docs.docker.com/composq/faq
-
+[1]: https://github.com/itmuch/spring-cloud-docker-microservice-book-code-docker/blob/Edgware/docker-3-complex/pom.xml   "《Spring Cloud与Docke微服务架构实战》v2 "
+[2]:   http://docs.docker.com/composq/faq	"FAQ"
 [3]:  http://c.biancheng.net/spring_cloud/  "Spring Cloud入门教程：Spring Cloud框架经典学习资料"
 [4]:   https://blog.csdn.net/Strive_Peter/article/details/113887255  "初识SpringCloud 整体架构 "
-
-
-
