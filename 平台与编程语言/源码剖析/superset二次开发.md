@@ -235,10 +235,20 @@ Installation
 
 安装OS依赖：
 
-- Linux Fedore/RHL: ` yum install gcc gcc-c++ libffi-devel python-devel python-pip python-wheel openssl-devel cyrus-sasl-devel openldap-devel`
+- Linux Fedore/RHL:
+
+  ```shell
+  # libffi-加密依赖，bzip2-压缩依赖
+  $ yum install gcc gcc-c++ libffi-devel bzip2-devel openssl-devel cyrus-sasl-devel openldap-devel
+  # 可选，若python版本有更新，则以下包可选
+  $ yum install python-devel python-pip python-wheel
+  ```
+
 - windows: `python-geohash pillow mysqlclient cryptograph`
 
 * python3.7+源码安装： `./configure --prefix=/usr/local/python38 --enable-optimizations  & make & make install`
+
+> 备注：一般OS缺省自带的python版本较老，需要重新安装新版本python。
 
 
 

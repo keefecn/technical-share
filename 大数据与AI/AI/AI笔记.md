@@ -1,7 +1,3 @@
-
-
-
-
 | 序号 | 修改时间   | 修改内容                               | 修改人 | 审稿人 |
 | ---- | ---------- | -------------------------------------- | ------ | ------ |
 | 1    | 2010-9-13  | 创建                                   | Keefe |        |
@@ -645,11 +641,14 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### AI芯片
 
+AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 [GPU](https://baike.baidu.com/item/GPU/105524) 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)。
+
 AI芯片说明如下：
 
-* CPU： 中央处理器
 * GPU：图形处理器，对于图像处理有作优化。
 * TPU：推理处理器。
+* FPGA
+* ASIC
 
 
 
@@ -1133,6 +1132,7 @@ $$
 * http://en.wikipedia.org/wiki/List_of_notable_artificial_intelligence_projects
 * AI 算法是如何改变智能风控的 https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/117432876
 * 风控模型算法系列文章目录 https://zhuanlan.zhihu.com/p/85582351
+* 吴恩达：回顾 2021，这些大事件影响了 AI 这一年  https://mp.weixin.qq.com/s/p73gpLnKFauZsLtk2izf_g
 
 
 

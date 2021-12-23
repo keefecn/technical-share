@@ -30,6 +30,16 @@ CNCF（Cloud Native Computing Foundation）于 2015 年 7 月成立，隶属于 
 
 CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概念：沙箱、孵化和毕业。这些级别分别对应下图中的创新者、早期采用者和早期大众。
 
+截止2021年底，云原生计算基金会（CNCF ）现在拥有 730 多个成员组织和 100 多个开源云原生项目，整个云原生生态逐步趋于完善。
+
+
+
+**明星项目**
+
+*　Docker  详见 《[Docker用户手册.md](../软件可复用/tools.工具/Docker用户手册.md)》
+
+* Kubernetes  详见 《[kubernetes用户手册.md](../../软件可复用/tools.工具/kubernetes用户手册.md)》
+
 
 
 表格 1 CNCF项目列表（按开源时间或加入CNCF时间升序排列）
@@ -74,19 +84,13 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
 
 
-# 2 容器Docker
+## 本章参考
 
-详见 [Docker用户手册.md](../tools.工具/Docker用户手册.md)
-
-
-
-# 3 Kubernetes
-
-详见 [kubernetes用户手册.md](../tools.工具/kubernetes用户手册.md)
+* 解读云原生的2021：抢占技术C位，迎来落地大爆发  https://mp.weixin.qq.com/s/9vaUJp2TzAEAIrHl8jhGvA
 
 
 
-# 4 Prometheus
+# ２ Prometheus
 
 Prometheus 是一套开源的监控、报警和时间序列数据库的组合，成立于 2012 年，由 SoundCloud 公司开发，此后许多组织接受和采用了 Prometheus，遂将其独立为开源项目。该项目使用 Go 语言开发，社区氛围非常活跃。
 
@@ -102,7 +106,7 @@ Prometheus 是一套开源的监控、报警和时间序列数据库的组合，
 *  通过静态配置或服务发现获取监控项
 *  支持图表和dashboard等多种方式
 
-## 4.1  架构
+## 架构
 
    ![1574519635361](../../media/sf_reuse/framework/frame_cncf_002.png)
 
@@ -144,9 +148,9 @@ Prometheus的整体技术架构可以分为几个重要模块：
 
 
 
-# 5 gRPC
+# ３ gRPC
 
-## 5.1  简介
+## 简介
 
 [gRPC](http://www.oschina.net/p/grpc-framework) 是一个高性能、开源和通用的 RPC 框架，面向移动和 HTTP/2 设计。目前提供 C、Java 和 Go 语言版本，分别是：grpc, grpc-java, grpc-go. 其中 C 版本支持 C, C++, Node.js, Python, Ruby, Objective-C, PHP 和 C# 支持.
 
@@ -199,11 +203,11 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 
 
-## 5.2  架构
+## 架构
 
 
 
-## 5.3  本章参考
+## 本章参考
 
 [1].  gRPC 官方文档中文版 http://doc.oschina.net/grpc
 
@@ -213,7 +217,7 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 
 
-# 6  Etcd
+# ４ Etcd
 
 Etcd是CoreOS 基于 Raft 开发的分布式 key-value 存储，可用于服务发现、共享配置以及一致性保障（如数据库选主、分布式锁等）。
 
@@ -231,7 +235,9 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
  ![1574519708248](../../media/sf_reuse/framework/frame_cncf_005.png)
 
-## 6.1  本章参考
+
+
+## 本章参考
 
 [1].  ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988
 
@@ -241,5 +247,5 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 # 参考资料
 
-[1].  华为
+[1].
 

@@ -147,26 +147,9 @@ Linux内核版本详见 《[操作系统实现原理](../platform.平台/操作�
 
 
 
-## 内核变动因素
+## 内核支持硬件架构
 
-1 ) 硬件平台: 硬件架构
-
-表格 1 Linux内核支持的架构列表
-
-| General architecture   dependent options（arch) | 描述                                                         |
-| ----------------------------------------------- | ------------------------------------------------------------ |
-| alpha                                           | DEC公司1992年推出的完全RISC指令集的64位架构。                |
-| i386                                            | 属于x86体系，此目录下只有boot的一个压缩文件(基本合并到x86目录下了）。 |
-| ia64  (ia:Intel Architecture)                   | Intel公司开发出的新一代64位微处理器体系结构，它的设计思想介于传统的RISC  (精简指令集计算机)和并行处理器之间。采用清晰并行指令计算(EPIC)，在此基础上定义了新的64位指令架构(ISA).基于IA-64架构的是Itanium系列处理器。 |
-| x86                                             | Intel cpu的架构，为当前最主流的cpu架构。使用x86指令集，64位处理使用扩展内存方式。多核实现方式：1cpu2计算器。 |
-| arm  (Advanced RISC Machine)                    | 进阶精简指令集机器，是一个32位RISC指令集处理器，广泛使用于嵌入式系统中。Acorn电脑公司（Acorn Computers Ltd）于1983年开始开发的。 |
-| 其余：                                          | avr32 blackfin cris frv h8300 m32r m68k  m68knommu microblaze mips mn10300 parisc powerpc s390 sh sparc um xtensa |
-
-备注：
-
-* 指令集ISC：(Instruction Set Computing cpu)cpu的一种设计模式，用以加快处理器响应速度，传统上分为CISC和RISC。但64位机目前新增了二种指令集，一是Intel IA架构的EPIC（Explicitly Parallel Instruction Computers）精确并行指令计算机；另一个是AMD支持的x86-64，即支持32位x86指令，也增加了新的64位处理指令。支持RISC的有arm，alpha等。
-
-* Asm:  Assembly Language，一种汇编语言。
+参见  《[Linux内核同步机制分析.md](./linux内核同步机制分析.md)》
 
 
 
@@ -197,12 +180,11 @@ System.map内核符号表，用”nm vmlinuz”产生。作用类似/proc/ksyms.
 
 Initrd.img是initial ramdisk, 一般是来临时引导硬件到实际内核vmlinuz能够接管并继续引导的状态。
 
-// grub boot sequence
-
 ```shell
-kernel   //use linuz
-initrd    //use initrd.img， 首先被执行
-boot    //start boot
+# grub boot sequence
+$ kernel   #use linuz
+$ initrd   #use initrd.img， 首先被执行
+$ boot     #start boot
 ```
 
 
@@ -231,8 +213,8 @@ boot    //start boot
 
 ```assembly
 15.	weak_alias (__socket, socket)
-16.	#  define weak_alias(name, aliasname) _weak_alias (name, aliasname)
-17.	#  define _weak_alias(name, aliasname) \
+16.	#define weak_alias(name, aliasname) _weak_alias (name, aliasname)
+17.	#define _weak_alias(name, aliasname) \
 18.	  extern __typeof (name) aliasname __attribute__ ((weak, alias (#name)));
 ```
 
@@ -271,7 +253,7 @@ weak_alias用来弱符号连接。另外有强符号连接. 用来重命名，{n
 
 from: include/linux/syscalls.h
 
-```c
+```assembly
 #define SYSCALL_DEFINE1(name, ...) SYSCALL_DEFINEx(1, _##name, __VA_ARGS__)
 #define SYSCALL_DEFINE2(name, ...) SYSCALL_DEFINEx(2, _##name, __VA_ARGS__)
 #define SYSCALL_DEFINE3(name, ...) SYSCALL_DEFINEx(3, _##name, __VA_ARGS__)
@@ -681,8 +663,8 @@ __SYSCALL(__NR_unlink, sys_unlink)
 //define:  glibc-2.9/socket/socket.c 38L
 {__set_errno (ENOSYS);	}
 11.	weak_alias (__socket, socket)
-12.	#  define weak_alias(name, aliasname) _weak_alias (name, aliasname)
-13.	#  define _weak_alias(name, aliasname) \
+12.	#define weak_alias(name, aliasname) _weak_alias (name, aliasname)
+13.	#define _weak_alias(name, aliasname) \
 14.	  extern __typeof (name) aliasname __attribute__ ((weak, alias (#name)));
 
 //implement:  sysdeps/unix/sysv/linux/sh/socket.S  90L

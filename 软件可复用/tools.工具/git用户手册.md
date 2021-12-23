@@ -662,7 +662,7 @@ git -i [hash_valus]
 * edit：
 * drop: 不提交，放弃本次编辑。
 
-​
+
 
 3). 提交修改
 
@@ -1028,9 +1028,9 @@ gitlab.rb
 
 
 
-## 6.3 git.oschina.net
+## 6.3 gitee
 
-相对于github，oschina支持免费私有仓库。
+相对于github，[gitee](https://www.gitee.com/) 支持免费私有仓库（原git.oschina.net）。
 
 ### 项目用户权限
 

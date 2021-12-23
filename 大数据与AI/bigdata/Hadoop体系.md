@@ -281,8 +281,6 @@
 
 
 
-
-
 ---
 
 
@@ -344,7 +342,7 @@ Other Hadoop-related projects at Apache include: Hlive, hbase, Pig, Spark, Zooke
 
 ### 1.2.1  Hadoop生态简介
 
-[Hadoop](http://baike.baidu.com/view/908354.htm)是一个由Apache基金会所开发的[分布式系统](http://baike.baidu.com/view/991489.htm)基础架构。
+[Hadoop](http://baike.baidu.com/view/908354.htm)是一个由Apache基金会所开发的分布式系统基础架构。
 
 用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。具有可靠、高效、可伸缩的特点。
 
@@ -382,8 +380,6 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 表格 1 Hadoop生态的数据工具列表
 
-
-
 | 功能                         | 工具列表                                        |
 | ---------------------------- | ----------------------------------------------- |
 | 数据抓取系统                 | Nutch                                           |
@@ -401,8 +397,6 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 
 表格 2 开源云计算系统和对应的商用系统简介
-
-
 
 | 开源云计算系统                                               | 对应的商用  云计算系统      | 简介                                                         |
 | ------------------------------------------------------------ | --------------------------- | ------------------------------------------------------------ |
@@ -608,6 +602,8 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 第四梯队：这类公司消费Hadoop，并给规模比第一类和第二类小的公司提供基于Hadoop的服务。
 
+
+
 ## 1.3  Hadoop发行版
 
 目前Hadoop发行版非常多，有华为发行版、Intel发行版、Cloudera发行版（CDH）等，所有这些发行版均是基于Apache Hadoop衍生出来的，之所以有这么多的版本，完全是由Apache Hadoop的开源协议决定的：任何人可以对其进行修改，并作为开源或商业产品发布/销售。
@@ -621,11 +617,13 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 
 国内绝大多数公司发行版是收费的，比如Intel发行版、华为发行版等，尽管这些发行版增加了很多开源版本没有的新feature，但绝大多数公司选择Hadoop版本时会将把是否收费作为重要指标，不收费的Hadoop版本主要有三个（均是国外厂商），分别是：
-* Cloudera版本（Cloudera’s Distribution Including Apache Hadoop，简称“CDH”）、
 * Apache Hadoop、
+* Cloudera版本（Cloudera’s Distribution Including Apache Hadoop，简称“CDH”）、
 * Hortonworks版本（Hortonworks Data Platform，简称“HDP”）
 
 备注：按顺序代表了，在国内的使用率，CDH和HDP虽然是收费版本，但是他们是开源的，只是收取服务费用。
+
+2018年10月，Cloudera与Hortonworks公司宣布以52亿美元的价格合并。
 
 
 
@@ -633,17 +631,19 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 | 厂商名                                        | 商业模式                                                     | 现状           |
 | --------------------------------------------- | ------------------------------------------------------------ | -------------- |
-| Cloudera~  CDH                                | 开源+自有组件。提出了Hybrid  Open Source的架构：核心组件名称叫CDH(Cloudera’s Distribution  including Apache Hadoop)，开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定;数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。 | 开源、付费服务 |
-| Hortonworks  ~HDP                             | 100%完全开源策略。产品名称为HDP(Hortonworks Data  Platform)。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。 | 开源、付费服务 |
+| Cloudera~  CDH                                | 开源+自有组件。提出了Hybrid  Open Source的架构：核心组件名称叫CDH(Cloudera’s Distribution  including Apache Hadoop)，开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；<br>数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。 | 开源、付费服务 |
+| ~~Hortonworks  ~HDP~~                         | 100%完全开源策略。产品名称为HDP(Hortonworks Data  Platform)。<br/>所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。<br/>与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。 | 开源、付费服务 |
 | MapR                                          | 采用了传统软件厂商的模式，使用私有化的实现。用户购买软件许可后才能使用。其OLAP产品主推Drill，又不排斥Impala。 | 闭源、付费     |
-| 华为~FI                                       | 类似Cloudera                                                 | 闭源、付费     |
+| 华为~FI                                       | 类似Cloudera。                                               | 闭源、付费     |
 | [Amazon ~EMR](https://aws.amazon.com/cn/emr/) | 轻松运行和扩展 Apache Hadoop、Spark、HBase、Presto、Hive 以及其他大数据框架 |                |
 
 备注：曾经私有化Hadoop版本的代表Pivotal和Intel都已经放弃，IBM几乎事实上放弃了自有Hadoop。
 
-### 1.3.1  CDH (Cloudera Distribution Hadoop)
 
-Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution Hadoop)。截至目前为止，CDH共有5个版本，其中，前两个已经不再更新，最近的两个，分别是CDH4，在Apache Hadoop 2.0.0版本基础上演化而来的，CDH5，它们每隔一段时间便会更新一次.
+
+### 1.3.1  CDH
+
+CDH:  Cloudera Distribution Hadoop Cloudera公司的发行版。截至目前为止，CDH共有5个版本，其中，前两个已经不再更新，最近的两个，分别是CDH4，在Apache Hadoop 2.0.0版本基础上演化而来的，CDH5，它们每隔一段时间便会更新一次.
 
  ![image-20191205203745106](../../media/bigdata/hadoop/hadoop_005.png)
 
@@ -676,7 +676,10 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
 　　　　 http://www.cloudera.com/downloads/manager/5-4-3.html
 
 
-### 1.3.2  HDP (Hortonworks Data Platform)
+
+### 1.3.2  HDP
+
+HDP：Hortonworks Data Platform
 
 ·     [Data Platform (HDP)](https://hortonworks.com/products/data-platforms/hdp/)
 
@@ -827,7 +830,7 @@ Hive 构建在 Hadoop 之上，
 
 ## 1.5  Hadoop安全机制
 
-参见 另文《安全开发》
+参见 另文《安全技术》
 
 Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认证和安全层)进行安全认证。具体认证方法涉及DIGEST-MD5和Kerberos两种。
 
@@ -848,19 +851,19 @@ Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认�
 
 ## 本章参考
 
-[1].  [Hadoop生态圈介绍](http://www.cnblogs.com/zhijianliutang/articles/5195045.html) http://www.cnblogs.com/gridmix/p/5102694.html
+[1].  Hadoop生态圈介绍 http://www.cnblogs.com/gridmix/p/5102694.html
 
 [2].  Hadoop生态图谱 http://blog.nosqlfan.com/html/3675.html
 
 [3].  Ubuntu 14.04-Kerberos安装和配置 http://www.linuxidc.com/Linux/2016-09/134949.htm
 
-[4].  [ubuntu下安装kerberos](http://blog.csdn.net/zhangt85/article/details/12112135)
+[4].  ubuntu下安装kerberos  http://blog.csdn.net/zhangt85/article/details/12112135
 
-[5].  [使用NTP进行时间同步](https://help.ubuntu.com/14.04/serverguide/NTP.html)
+[5].  使用NTP进行时间同步  https://help.ubuntu.com/14.04/serverguide/NTP.html
 
-[6].  [用Java访问带有Kerberos认证的HBase ](http://blog.csdn.net/mm_bit/article/details/51958344) http://blog.csdn.net/blackice1015/article/details/49422855
+[6].  用Java访问带有Kerberos认证的HBase  http://blog.csdn.net/blackice1015/article/details/49422855
 
-[7].  在Hadoop集群部署HBase并开启kerberoshttp://www.linuxidc.com/Linux/2014-09/106213.htm
+[7].  在Hadoop集群部署HBase并开启kerberos  http://www.linuxidc.com/Linux/2014-09/106213.htm
 
 [8].  资深架构师教你一篇文看懂Hadoop http://www.raincent.com/content-10-7741-1.html
 

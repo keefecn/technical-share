@@ -199,9 +199,9 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 | General architecture   dependent  options（arch) | 描述                                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| alpha                                            | DEC公司1992年推出的完全RISC指令集的64位架构                  |
-| i386                                             | 属于x86体系，此目录下只有boot的一个压缩文件(基本合并到x86目录下了） |
-| ia64(ia:Intel Architecture)                      | Intel公司开发出的新一代64位微处理器体系结构,它的设计思想介于传统的RISC  (精简指令集计算机)和并行处理器之间。<BR>采用清晰并行指令计算(EPIC),在此基础上定义了新的64位指令架构(ISA).基于IA-64架构的是Itanium系列处理器. |
+| alpha                                            | DEC公司1992年推出的完全RISC指令集的64位架构。                |
+| i386                                             | 属于x86体系，此目录下只有boot的一个压缩文件(基本合并到x86目录下了）。 |
+| ia64(ia:Intel Architecture)                      | Intel公司开发出的新一代64位微处理器体系结构,它的设计思想介于传统的RISC  (精简指令集计算机)和并行处理器之间。<BR>采用清晰并行指令计算(EPIC),在此基础上定义了新的64位指令架构(ISA).基于IA-64架构的是Itanium系列处理器。 |
 | x86                                              | Intel  CPU的架构，为当前最主流的CPU架构.使用x86指令集，64位处理使用扩展内存方式。（多核实现方式：1CPU 2计算器）。 |
 | arm（Advanced  RISC Machine）                    | 进阶精简指令集机器，是一个32位RISC指令集处理器，广泛使用于嵌入式系统中  。Acorn电脑公司（Acorn Computers Ltd）于1983年开始开发的。 |
 | 其余：                                           | avr32 blackfin cris frv h8300 m32r m68k m68knommu  microblaze mips mn10300 parisc powerpc s390 sh sparc um xtensa |
@@ -210,7 +210,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 ## 同步机制实现需要的基础知识
 
-**1) 指令集ISC**：(Instruction Set Computing CPU)CPU的一种设计模式，用以加快处理器响应速度，传统上分为CISC和RISC。但64位机目前新增了二种指令集，一是Intel IA架构的EPIC（Explicitly Parallel Instruction Computers）精确并行指令计算机；另一个是AMD支持的x86-64，即支持32位x86指令，也增加了新的64位处理指令。支持RISC的有arm，alpha等。
+**1）指令集ISC**：(Instruction Set Computing CPU)CPU的一种设计模式，用以加快处理器响应速度，传统上分为CISC和RISC。但64位机目前新增了二种指令集，一是Intel IA架构的EPIC（Explicitly Parallel Instruction Computers）精确并行指令计算机；另一个是AMD支持的x86-64，即支持32位x86指令，也增加了新的64位处理指令。支持RISC的有arm，alpha等。
 
 
 
@@ -240,7 +240,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 编译器仅保证自己在优化时不会变更多个 volatile 变量间的操作顺序。 但编译器并不保证代码在处理器执行时的顺序。 即：如果处理器支持乱序发射（out-of-order）执行的话，程序员预期的内存访问顺序仍然会被打乱。这时，程序员需要显式使用内存屏障指令来通知处理器期望的内存访问顺序
 
-**3)原子操作**
+**3）原子操作**
 
 原子操作可以提供下面保证[7]：
 
@@ -248,7 +248,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 * 原子操作必须保证缓存一致性。即：在 SMP 环境中，原子操作不仅要把计算结果同步到主存，还要以原子的语义将他们同步到当前平台上其他 CPU 的 cache 中。在大部分硬件平台上，cache 同步通常由锁总线指令完成。意即：逻辑上，所有原子操作都显式使用或隐含使用了一个锁总线操作。例如：x86 指令 'cmpxchg' 中就隐含了锁总线操作。
 
-**4) 优化屏障**
+**4）优化屏障**
 
 编译器编译源代码时，会将源代码进行优化，将源代码的指令进行重排序，以适合于CPU的并行执行。然而，内核同步必须避免指令重新排序，优化屏障 （Optimization barrier）避免编译器的重排序优化操作，保证编译程序时在优化屏障之前的指令不会在优化屏障之后执行。
     Linux用宏barrier实现优化屏障，gcc编译器的优化屏障宏定义列出如下（在include/linux/compiler-gcc.h中）
@@ -257,7 +257,7 @@ SMP系统中增加更多处理器的难点是系统不得不消耗资源来支�
 
 
 
-**5)** **内存屏障**
+**5）内存屏障**
 
 内在屏障用于消除 CPU 乱序执行优化对内存访问顺序的影响。可分为
 
@@ -275,7 +275,7 @@ linux内核提供的屏蔽函数有: mb, rmb, wmb及对应的smp_mb,smp_rmb,smp_
 
 
 
-**6) likely, unlikely** (from: [include/linux/compiler.h](http://lxr.linux.no/linux+*/include/linux/compiler.h#L107))
+**6）likely, unlikely** (from: [include/linux/compiler.h](http://lxr.linux.no/linux+*/include/linux/compiler.h#L107))
 
 这是调用gcc的内嵌函数__builtin_expect,用来比较值。 likely(x)是指x=1时做某事, unlikely(x)指若x=1时不做某做。常用来与某个互斥变量比较。
 

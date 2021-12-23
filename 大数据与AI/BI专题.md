@@ -146,11 +146,13 @@ BI系统实施步骤（由下至上）： 连接数据 --> 数据处理 --> 数�
 
 # 2 数据集成.DI
 
+离线或实时地从别的数据库或数据来源采集数据。
+
 ## 2.1  ETL
 
-**ETL**，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。**ETL**一词较常用在[数据仓库](http://baike.baidu.com/view/19711.htm)，但其对象并不限于数据仓库。
+**ETL**，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。ETL一词较常用在数据仓库，但其对象并不限于数据仓库。
 
-ETL是构建数据仓库的重要一环，用户从[数据源](http://baike.baidu.com/view/286828.htm)抽取出所需的数据，经过[数据清洗](http://baike.baidu.com/view/1739747.htm),最终按照预先定义好的数据仓库模型，将数据加载到数据仓库中去。
+ETL是构建数据仓库的重要一环，用户从数据源抽取出所需的数据，经过数据清洗,最终按照预先定义好的数据仓库模型，将数据加载到数据仓库中去。
 
 *  Extract：处理缺省值、空值和异常值；数据类型转化；修改不合规字段；编码方式/统计口径不一致。
 *  Transform：单变量自身转换；多变量相互衍生。
@@ -275,13 +277,155 @@ Kettle家族目前包括4个产品：Spoon、Pan、CHEF、Kitchen。
 
 
 
+## 2.2  数据转换
+
+全链路跟踪：SPM法~A.B.C.D.E分别对应于站点.页面ID.页面模块.索引.UUID
+
+### Apache Sqoop
+
+#### Sqoop简介与架构
+
+Sqoop：SQL–to–Hadoop
+
+正如Sqoop的名字所示：Sqoop是一个用来将关系型数据库和Hadoop中的数据进行相互转移的工具，可以将一个关系型数据库(例如mysql、Oracle)中的数据导入到Hadoop.
+
+表格 7 Sqoop1与Sqoop2比较
+
+| 比较 | Sqoop1                                                       | Sqoop2                                                       |
+| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 架构 | 仅仅使用一个Sqoop客户端                                      | 引入了Sqoop server集中化管理connector，以及rest api，web，UI，并引入权限安全机制 |
+| 部署 | 部署简单，安装需要root权限，connector必须符合 JDBC模型       | 架构稍复杂，配置部署更繁琐                                   |
+| 使用 | 命令行方式容易出错，格式紧耦合，无法支持所有数据 类型，安全机制不够完善，例如密码暴漏 | 多种交互方式，命令行，web UI，rest API，conncetor集中化管理，所有的链接安装在Sqoop s erver上，完善权限管理机制，connector规范化，仅仅负责数据的读写 |
+
+备注：sqoop1和sqoop2并不兼容。
+
+ ![image-20191204222258355](../media/bigdata/bigdata_011.png)
+
+
+
+图 19 Sqoop1架构
+
+说明：sqoop1架构主要由三个部分组成：Sqoop client、HDFS/HBase/Hive、Database。用户向 Sqoop 发起一个命令之后，这个命令会转换为一个基于 Map Task 的 MapReduce 作业。Map Task 会访问数据库的元数据信息，通过并行的 Map Task 将数据库的数据读取出来，然后导入Hadoop中。 当然也可以将Hadoop中的数据，导入传统的关系型数据库中。它的核心思想就是通过基于Map Task（只有 map）的MapReduce 作业，实现数据的并发拷贝和传输，这样可以大大提高效率。
+
+
+
+#### Sqoop使用要点
+
+```sh
+# sqoop import导入示例：
+sqoop import \ --connect jdbc:mysql://db.dajiangtai.net:3306/djtdb_hadoop \
+--username sqoop \
+--password sqoop \
+--table user \        # 要读取的数据库表
+--target-dir /junior/sqoop/ \     #可选，不指定目录，数据默认导入到/user下
+--where "sex='female'" \     #可选，过滤从数据库中要导入的数据。
+--as-sequencefile \          #可选，不指定格式，数据格式默认为 Text 文本格式
+--num-mappers 10 \      	#可选，指定 Map 任务的并发度。这个数值不宜太大
+--null-string '\\N' \       #可选
+--null-non-string '\\N'    #可选
+```
+
+
+表格 8 sqoop**常用参数**
+
+| ` `                                       | `参数`                                                       | 含义                                                     |
+| ----------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------- |
+| 增量导入 import                           | `--incremental [append | lastmodified]`                      | 代表只导入增量数据                                       |
+| --check-column [column]                   | 检查的字段作为判断条件，字段不能是字符串类型，一般为时间或数值类型 |                                                          |
+| --last-value [value]                      | 如果是时间：则为此日期之后的才导入；如果是数值，则大于此值的才导入。 |                                                          |
+| sqoop import                              | --compress                                                   | 对导入数据压缩，默认压缩算法是gzip                       |
+| ` `                                       | -m, --num-mappers                                            | `指定 Map 任务的并发度`                                  |
+|                                           | --split-by                                                   | 分隔字段，可用于并行查找（与-m配合使用），一般用于主键。 |
+|                                           | --target-dir                                                 | 指定数据目录，一般配合分区字段使用                       |
+| 覆盖导入                                  | --delete-target-dir                                          | 导入前先删除目录目录                                     |
+| 导出 export                               | --Dsqoop.export.records.per.statement=10                     | 指定每次导入10条数据                                     |
+| ` `                                       | --batch                                                      | 指定是批量导入                                           |
+| --update-key id                           | 更新已有数据                                                 |                                                          |
+| --update-key id --update-mode allowinsert | 数据存在更新；不存在插入                                     |                                                          |
+
+备注：1. 导入时--delete-target-dir和-- incremental参数不能并用。
+
+2. 导入分区表，需要创建有分区的表，分区 有按日期、范围、列表等。示例如下
+
+```sql
+CREATE TABLE `YDDT` (
+ `ID` string,
+ `YDJC_ID` string,
+ `YDDT_DATA_TYPE` string,
+ `YDDT_BUSSINESS_NOW` bigint,
+
+ `YDDT_USER_NOW` bigint,
+ `YDDT_COLLECT_TIME` string,
+ `YDDT_CREATOR` string,
+ `YDDT_DATE` string,
+ `BACK` string
+) PARTITIONED BY (day int) row format delimited fields terminated by '\t';
+```
+
+导入表
+
+```shell
+sqoop import --connect jdbc:mysql://172.20.13.50:3306/TestBigDate --username root --password 123456 --table YDDT_2017_06_01 -m 3 --target-dir /user/hive/warehouse/dxyjpt.db/yddt/day=20170601 --fields-terminated-by '\t'
+```
+
+
+
+```sql
+# 标记表的分区信息
+alter table yddt add partition(day='20170601') location '/user/hive/warehouse/dxyjpt.db/yddt/day=20170601'
+
+# 删除分区数据
+ALTER TABLE yddt DROP IF EXISTS PARTITION(day='20170604')
+```
+
+禁止明文密码：
+
+* -P:sqoop 命令行最后使用 -P，此时提示用户输入密码
+* –password-file：指定一个密码保存文件，读取密码。我们可以将这个文件设置为只有自己可读的文件，防止密码泄露。
+
+空字符串处理：–null-string，–null-non-string：同时使用可以将数据库中的空字段转化为’\N’，因为数据库中字段为 null，会占用很大的空间。
+
+
+
+### OGG
+
+Oracle GoldenGate（OGG） Oracle数据转换。
+
+- OGG 是一种基于日志的结构化数据复制软件，它通过解析源数据库在线日志或归档日志获得数据的增删改变化（数据量只有日志的四分之一左右）。
+- OGG 能够实现大量交易数据的实时捕捉，变换和投递，实现源数据库与目标数据库的数据同步，保持最少10ms的数据延迟。
+
+
+
+**基本架构**
+
+Oracle GoldenGate主要由如下组件组成
+
+| 组件       | 说明                                                         |
+| ---------- | ------------------------------------------------------------ |
+| Manager    | 不管是源端还是目标端必须并且只能有一个Manager进程，可以启动、关闭、监控其他进程的健康状态，报告错误事件、分配数据存储空间，发布阀值报告等，其作用： 1：监控与启动 GoldenGate 的其它进程 2：管理 trail 文件及 Reporting |
+| Extract    | Extract 进程运行在数据库源端上，它是Golden Gate的捕获机制，可以配置Extract 进程来做如下工作： 1：初始数据装载：对于初始数据装载，Extract 进程直接从源对象中提取数据 2：同步变化捕获：保持源数据与其它数据集的同步。初始数据同步完成后，Extract 进程捕获源数据的变化；如DML变化、 DDL变化等 |
+| Replicat   | Replicat 进程是运行在目标端系统的一个进程，负责读取 Extract 进程提取到的数据（变更的事务或 DDL 变化）并应用到目标数据库，就像 Extract 进程一样，也可以配置 Replicat 进程来完成如下工作： 1：初始化数据装载：对于初始化数据装载，Replicat 进程应用数据到目标对象或者路由它们到一个高速的 Bulk-load 工具上； 2：数据同步，将 Extract 进程捕获到的提交了的事务应用到目标数据库中； |
+| Collector  | Collector 是运行在目标端的一个后台进程，接收从 TCP/IP 网络传输过来的数据库变化，并写到 Trail 文件里 |
+| Trails     | 为了持续地提取与复制数据库变化，GoldenGate 将捕获到的数据变化临时存放在磁盘上的一系列文件中，这些文件就叫做 Trail 文件 |
+| Data Pumps | Data Pump 是一个配置在源端的辅助的 Extract 机制，Data Pump 是一个可选组件，如果不配置 Data Pump，那么由 Extract 主进程将数据发送到目标端的 Remote Trail 文件中；如果配置了 Data Pump，会由 Data Pump将Extract 主进程写好的本地 Trail 文件通过网络发送到目标端的 Remote Trail 文件中 |
+
+
+
+## 2.3 数据源同步
+
+DataX 是阿里开源的一个异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、ODPS、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。
+
+### DataX
+
+
+
 ## 本章参考
 
 * 几款开源的ETL工具及ELT初探  https://www.jianshu.com/p/22b1b9e27f64
 * Kettle插件结构: https://zhuanlan.zhihu.com/p/24982421
 * Kettle体系结构: https://blog.csdn.net/romaticjun2011/article/details/40680483
-* TeraData金融数据模型 https://www.cnblogs.com/oracle-dba/p/3903442.html
-* [Teradata在中国银行业的应用简介 - 豆丁网 (docin.com)](https://www.docin.com/p-1029454681.html)
+* Sqoop架构 https://blog.csdn.net/py_123456/article/details/80761446
+* Oracle GoldenGate（OGG）- 超级详细  https://www.cnblogs.com/yaoyangding/p/14918938.html
 
 
 
@@ -653,7 +797,7 @@ TPC推出过许多基准程序，目前11套活跃基准程序，5套不被业�
 
 **数据挖掘定义**
 
-（[英语](http://zh.wikipedia.org/zh-cn/英語)：[**Data mining**](http://en.wikipedia.org/wiki/Data_mining)**）**又译为**数据采矿**、**数据挖掘**。它是**数据库知识发现**（英语：[**K**nowledge-**D**iscovery in **D**atabases](http://en.wikipedia.org/wiki/Knowledge-Discovery_in_Databases)，简称：**KDD**)中的一个步骤。数据挖掘一般是指从大量的数据中自动搜索隐藏于其中的有着特殊关系性（属于[Association rule learning](http://en.wikipedia.org/wiki/association_rule_learning)）的信息的过程。
+（英语：Data mining）又译为数据采矿、数据挖掘。它是数据库知识发现（英语：Knowledge-Discovery in Databases，简称：KDD)中的一个步骤。数据挖掘一般是指从大量的数据中自动搜索隐藏于其中的有着特殊关系性（属于Association rule learning）的信息的过程。
 
 
 
@@ -790,7 +934,7 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 
 
-### 4.1.3 数据挖掘过程示例：餐饮业
+### 数据挖掘过程示例：餐饮业
 
  ![image-20191201171505116](../media/bigdata/bi_010.png)
 
@@ -868,16 +1012,21 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 数据湖有所不同，因为它存储来自业务线应用程序的关系数据，以及来自移动应用程序、IoT  设备和社交媒体的非关系数据。捕获数据时，未定义数据结构或  Schema。这意味着您可以存储所有数据，而不需要精心设计也无需知道将来您可能需要哪些问题的答案。您可以对数据使用不同类型的分析（如 SQL  查询、大数据分析、全文搜索、实时分析和机器学习）来获得见解。
 
-随着使用数据仓库的组织看到数据湖的优势，他们正在改进其仓库以包括数据湖，并启用各种查询功能、数据科学使用案例和用于发现新信息模型的高级功能。Gartner 将此演变称为“分析型数据管理解决方案”或“[DMSA](https://www.gartner.com/doc/3614317/magic-quadrant-data-management-solutions)”。
+随着使用数据仓库的组织看到数据湖的优势，他们正在改进其仓库以包括数据湖，并启用各种查询功能、数据科学使用案例和用于发现新信息模型的高级功能。Gartner 将此演变称为“分析型数据管理解决方案”或“[DMSA](https://www.gartner.com/doc/3614317/magic-quadrant-data-management-solutions)”。[^1]
 
-| 特性          | 数据仓库                                           | 数据湖                                                       |
-| ------------- | -------------------------------------------------- | ------------------------------------------------------------ |
-| **数据**      | 来自事务系统、运营数据库和业务线应用程序的关系数据 | 来自 IoT 设备、网站、移动应用程序、社交媒体和企业应用程序的非关系和关系数据 |
-| **Schema**    | 设计在数据仓库实施之前（写入型 Schema）            | 写入在分析时（读取型 Schema）                                |
-| **性价比**    | 更快查询结果会带来较高存储成本                     | 更快查询结果只需较低存储成本                                 |
-| **数据质量 ** | 可作为重要事实依据的高度监管数据                   | 任何可以或无法进行监管的数据（例如原始数据）                 |
-| **用户**      | 业务分析师                                         | 数据科学家、数据开发人员和业务分析师（使用监管数据）         |
-| **分析**      | 批处理报告、BI 和可视化                            | 机器学习、预测分析、数据发现和分析                           |
+
+
+表格   数据湖和数据仓库的比较
+
+| 特性          | 数据湖                                                       | 数据仓库                                           |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------- |
+| 数据          | 来自 IoT 设备、网站、移动应用程序、社交媒体和企业应用程序的非关系和关系数据 | 来自事务系统、运营数据库和业务线应用程序的关系数据 |
+| 方法论/Schema | 写入在分析时/事后建模（读取型 Schema-on-Read）               | 事前建模（写入型 Schema-on-Write）                 |
+| 存储类型      | 结构/半结构/非结构 （以文件形式存在）                        | 结构/非结构 （以表形式存在）                       |
+| 性价比        | 更快查询结果只需较低存储成本                                 | 更快查询结果会带来较高存储成本                     |
+| 数据质量      | 任何可以或无法进行监管的数据（例如原始数据）                 | 可作为重要事实依据的高度监管数据                   |
+| 用户          | 数据科学家、数据开发人员和业务分析师（使用监管数据）         | 业务分析师                                         |
+| 分析          | 机器学习、预测分析、数据发现和分析                           | 批处理报告、BI 和可视化                            |
 
 
 
@@ -892,9 +1041,19 @@ CRISP-DM 模型为一个[KDD](https://baike.baidu.com/item/KDD)工程提供了�
 
 
 
+## 湖仓一体
+
+湖仓一体有两个流派，第一个流派是以数仓这种方式诞生的，它是一个左右派，左边是一个数据仓库，右边是一个数据湖，中间以高速网络相连形成一个反对式的联动；第二个流派是从数据湖向数仓演进，整体架构是在数据湖上搭建数据仓库。这两个流派的代表分别是 AWS Redshift/ 阿里云 MaxCompute，以及 Databricks，目前这两个流派都还在发展中。
+
+虽然湖仓一体是目前的热点，但它仍然是一个新兴方向，还有非常多未知的问题要解决。
+
+
+
 ## 本章参考
 
-[1]: https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc=sn&amp;loc=2	"AWS-  什么是数据湖"
+[^1]: https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc=sn&amp;loc=2  AWS-  什么是数据湖
+
+*  解读数据架构的2021：大数据1.0体系基本建成，但头上仍有几朵乌云   https://mp.weixin.qq.com/s/jDnYvTFtcmVWLtWbTG7LXQ
 
 
 

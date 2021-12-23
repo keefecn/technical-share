@@ -18,9 +18,10 @@ Personal Technical Share,  个人技术分享
 
 **写作技巧**
 
-1. 数字+空格 会变成有序符号且不需额外换行；仅数字开头仍需换行。
+1. `数字+空格` 会变成有序符号且不需额外换行；仅数字开头仍需换行。
 2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
 3. 如果单个md文件超过100KB，一般需要拆分内容另文。
+4. 脚注使用 `[^xx]`， 会在文末出现参考链接，xx可以是任意名称或数字。
 
 **Typora常用快捷键**
 
@@ -109,7 +110,8 @@ Personal Technical Share,  个人技术分享
 │  ├─platform.平台
 │  │      操作系统实现原理.md
 │  │      开放平台.md
-│  │      开源软件开发指南.md
+│  │      开源生态.md
+│  │      开源软件可复用技术.md
 │  │      跨平台开发系列.md
 │  │      企业协同办公生态.md
 │  │      搜索引擎开发资源.md
@@ -148,6 +150,7 @@ Personal Technical Share,  个人技术分享
 │  │      基础算法与数据结构小结.md
 │  │      算法分析与设计.md
 │  │      非数值和工业界领域算法.md
+│  │      安全算法.md
 │  │
 │  ├─architecture.架构
 │  │      分布式架构.md
@@ -209,7 +212,8 @@ Personal Technical Share,  个人技术分享
 └─领域开发
         IOT物联网技术.md
         区块链技术.md
-        安全开发.md
+        安全技术.md
+        黑客技术.md
         浏览器开发.md
 ```
 

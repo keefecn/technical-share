@@ -20,19 +20,19 @@
 
 # 1 DevOps简介
 
-DevOps（Development和Operations的组合词）是一组过程、方法与系统的统称，用于促进开发（[应用程序](https://baike.baidu.com/item/应用程序/5985445)/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
+DevOps（Development和Operations的组合词）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（QA）部门之间的沟通、协作与整合。
 
 它是一种重视“软件开发人员（Dev）”和“IT运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。
 
-它的出现是由于[软件](https://baike.baidu.com/item/软件/12053)行业日益清晰地认识到：为了按时交付软件产品和服务，开发和运维工作必须紧密合作。
+它的出现是由于软件行业日益清晰地认识到：为了按时交付软件产品和服务，开发和运维工作必须紧密合作。
 
 
 
 ## 诉求和问题
 
-可以把DevOps看作开发（[软件工程](https://baike.baidu.com/item/软件工程/25279)）、技术运营和质量保障（QA）三者的交集。
+可以把DevOps看作开发（软件工程）、技术运营和质量保障（QA）三者的交集。
 
-在开发过程中，系统在开发者的[本地机器](https://baike.baidu.com/item/本地机器)上运行。在运营过程中，系统经常分布在多台服务器上，例如web服务器、[应用服务器](https://baike.baidu.com/item/应用服务器)、[数据库服务器](https://baike.baidu.com/item/数据库服务器)等等。
+在开发过程中，系统在开发者的本地机器上运行。在运营过程中，系统经常分布在多台服务器上，例如web服务器、应用服务器、数据库服务器等等。
 
 * 开发是由功能性需求（通常与业务需求直接相关）驱动的。
 
@@ -66,7 +66,7 @@ DevOps（Development和Operations的组合词）是一组过程、方法与系�
 
 5、有一种观点认为，占主导地位的“传统”美国式管理风格（“[斯隆](https://baike.baidu.com/item/斯隆)模型 vs [丰田](https://baike.baidu.com/item/丰田)模型”）会导致“烟囱式自动化”，从而造成开发与运营之间的鸿沟，因此需要DevOps能力来克服由此引发的问题。
 
-DevOps经常被描述为“开发团队与运营团队之间更具[协作](https://baike.baidu.com/item/协作)性、更高效的关系”。由于团队间协作关系的改善，整个组织的效率因此得到提升，伴随频繁变化而来的生产环境的风险也能得到降低。
+DevOps经常被描述为“开发团队与运营团队之间更具协作性、更高效的关系”。由于团队间协作关系的改善，整个组织的效率因此得到提升，伴随频繁变化而来的生产环境的风险也能得到降低。
 
 
 
@@ -80,7 +80,7 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 
 **（2）加强发布协调**
 
-靠强有力的发布协调人来弥合开发与运营之间的技能鸿沟和沟通鸿沟；采用电子数据表、[电话会议](https://baike.baidu.com/item/电话会议)、[即时消息](https://baike.baidu.com/item/即时消息)、企业门户（wiki、sharepoint）等协作工具来确保所有相关人员理解变更的内容并全力合作。
+靠强有力的发布协调人来弥合开发与运营之间的技能鸿沟和沟通鸿沟；采用电子数据表、电话会议、即时消息、企业门户（wiki、sharepoint）等协作工具来确保所有相关人员理解变更的内容并全力合作。
 
 **（3）自动化**
 
@@ -92,7 +92,23 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 
 ## 度量标准
 
-[Flickr](https://baike.baidu.com/item/Flickr)发展了自己的DevOps能力，使之能够支撑业务部门“每天部署10次”的要求──如果一个组织要生产面向多种用户、具备多样功能的应用程序，其部署周期必然会很短。这种能力也被称为**持续部署**，并且经常与[精益创业](https://baike.baidu.com/item/精益创业)方法联系起来。
+**研发效能度量的目标就是让效能可量化、可分析、可提升，通过数据驱动的方式更加理性地评估和改善效能**。
+
+**度量的难点**
+
+1. 软件研发过程中的可视性差
+
+2. 软件研发过程中工作切分的随意性
+
+3. 敏捷研发过程中工作是并行开展的
+
+
+
+
+
+### Flickr的DevOps效能度量
+
+Flickr发展了自己的DevOps能力，使之能够支撑业务部门“每天部署10次”的要求──如果一个组织要生产面向多种用户、具备多样功能的应用程序，其部署周期必然会很短。这种能力也被称为持续部署，并且经常与精益创业方法联系起来。
 
 全面自动化 —— 部署、 升级、 扩展、 维护、 数据卫生、 测试、 监测、 安全和策略管理。在自动化方面投入巨资，目标是100%的自动化，不考虑低于90%的可能性。
 
@@ -106,6 +122,10 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 - 用户数：显示应用程序对于用户而言的有用程度
 
 
+
+## 本章参考
+
+* 张乐 《研发效能度量核心方法与实践》
 
 
 
@@ -125,15 +145,15 @@ DevOps经常被描述为“开发团队与运营团队之间更具[协作](https
 
 ## Serveless
 
-2012 年开始有了 Serverless 的概念。
+详见 《[云原生架构](../大数据与AI/cloud/云原生架构.md)》Serverless 章节。
 
-Serverless 的应用场景有很多，比如：为小程序、Web、Mobile 提供基础性的 API 服务，大规模批处理任务处理，Web 站点、DevOps 的工具以及 GraphQLAPI 能力。
+
 
 
 
 # 3 DevOps工具
 
-开发工具： 详见 《[项目开发环境工具](../tools.工具/项目开发环境工具.md)》 《自动化测试工具》
+开发工具： 详见 《[项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md)》、《[自动化测试工具.md](../软件可复用/tools.工具/自动化测试工具.md)》
 
 表格 DevOps在软件工程各过程域阶段需要的工具
 
@@ -294,16 +314,25 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 # 参考资料
 
-## 相关文章
+**相关文章**
 
 * [运营专题.md](./运营专题.md)
 * [运维专题.md](./运维专题.md)
-* 《[可信软件过程.md](./可信软件过程.md)》
+* 《[软件过程可信.md](./软件过程可信.md)》
 
 
 
-## 参考链接
+**参考链接**
 
-[1]. 百度百科Devops https://baike.baidu.com/item/DevOps/2613029?fr=aladdin
+* 百度百科Devops https://baike.baidu.com/item/DevOps/2613029?fr=aladdin
+* 这些超好用的DevOps工具，你都知道么？  https://www.sohu.com/a/333315225_711529
+* Microsoft 的 DevOps 历程  https://azure.microsoft.com/zh-cn/solutions/devops/devops-at-microsoft/?cdn=disable
+* 2020 年大前端技术趋势解读 https://blog.csdn.net/Tencent_TEG/article/details/111602083
 
-[2]. 2020 年大前端技术趋势解读 https://blog.csdn.net/Tencent_TEG/article/details/111602083?utm_medium=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~OPENSEARCH~default-6.baidujs
+
+
+# 附录
+
+**组织**
+
+* devopsdays  https://devopsdays.org

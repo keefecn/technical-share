@@ -20,7 +20,7 @@
 
 ## 简介
 
-Jenkins官网 https://jenkins.io/
+Jenkins官网  https://jenkins.io/
 
 
 
@@ -187,9 +187,8 @@ $ sudo apt-get install jenkins
 
 ## 参考资料
 
-[1]: Jenkis https://jenkins.io/
+* Jenkins 教程（安装和解锁） https://blog.csdn.net/jmh1996/article/details/79029696
 
-[2]: Jenkins 教程（安装和解锁） https://blog.csdn.net/jmh1996/article/details/79029696
-
-[3]: 30分钟搞定 Jenkins CI https://www.jianshu.com/p/9806203950d7
+* 30分钟搞定 Jenkins CI https://www.jianshu.com/p/9806203950d7
+* jenkins和docker实现自动化构建部署  https://blog.csdn.net/bingoxubin/article/details/78720976
 

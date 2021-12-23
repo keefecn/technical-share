@@ -934,7 +934,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 *  E-Enclosing(function)；外部嵌套函数的名字空间(例如closure), locals
 *  G-Global(module)；函数定义所在模块（文件）的名字空间
 *  B-Builtin(Python)；Python内置模块的名字空间
-**说明**：Python的命名空间是一个字典__dict__，字典内保存了变量名称与对象之间的映射关系，因此，查找变量名就是在命名空间字典中查找键-值对。LEGB规定了查找一个名称的顺序为：Local function -->Enclosing function-->Global module-->Builtin
+**说明**：Python的命名空间是一个字典`__dict__`，字典内保存了变量名称与对象之间的映射关系，因此，查找变量名就是在命名空间字典中查找键-值对。LEGB规定了查找一个名称的顺序为：Local function -->Enclosing function-->Global module-->Builtin
 
  使用函数外部的变量x之前需要使用global关键字。
 
@@ -1472,41 +1472,7 @@ option=value
 
 
 
-5. **上传到pypi**
-
-github首先更新工具，不更新无法识别long_description
-```sh
-$ python3 -m pip install --user --upgrade setuptools wheel twine
-```
-
-pypi配置文件 ~/.pypirc
-```ini
-[distutils]
-index-servers = localhost
-          pypi
-
-[localhost]
-repository: http://localhost:8080
-username: keefe
-password: 123456
-
-[pypi]
-repository: https://upload.pypi.org/legacy/
-username: keefe
-password:
-```
-
-第一次会询问pypi账户,之后访问.pypirc文件
-```sh
-$ python setup.py register
-# 上传源码包
-$ python setup.py sdis bdis_wheel upload -r pypi
-
-# 检查 打包格式是否正确
-$ twine checkout dist/*
-# 本地测试
-python -m pytest
-```
+5. **上传到pypi**：  详见 《[项目开发环境工具.md](../软件可复用/tools.工具/项目开发环境工具.md)》
 
 
 
@@ -2253,7 +2219,7 @@ pyinstaller 打包常见问题
 
 ### 3.3.8  性能优化 cProfile/pstats/timeit
 
-详见 《[性能优化](性能优化.md)》
+详见 《[性能优化](./性能优化.md)》
 
 
 
@@ -3716,7 +3682,9 @@ ModuleNotFoundError: No module named '_bz2'
 
 原因：缺少Python3.6+的bz2模块需要的so文件
 
-解决方法：重新编译安装 或 下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/
+解决方法：1. 重新编译安装:  `yum install libzip2-devel && ./configure && make && make install`
+
+2. （推荐）下载所缺少的SO(如_bz2.cpython-38-x86_64-linux-gnu.so) 拷到 /usr/local/python38/lib/python3.8/lib-dynload/
 
 
 
@@ -3757,10 +3725,10 @@ mysql语句操作失败一方面是编码问题，字段值含有非ascii字符�
 pthon MySQLdb cursor.execute(query, args)使用两个参数时，会自动进行转义; 其中第二个参数args是一个列表类型。
 args可以是duple, list，不需将字段值加双引号””，程序中会自动转码。
 **示例1：带参数**
-name是字符串，id是数值，sql语句一律使用%s,因为paras里类型是string。
+name是字符串，id是数值，sql语句一律使用%s，因为paras里类型是string。
 
 ```python
-sql = ‘update table set name=%s where id=%s’
+sql = "update table set name=%s where id=%s"
 paras=[]
 paras.append(name.encode(‘utf-8’, ‘ignore’)    #若有非ascii字符需明确指定编码
 paras.append(id)
