@@ -641,7 +641,7 @@ git rebase --continue | --skip | --abort | --edit-todo
 
 `$ git rebase -i [branch|********]`
 
-你可以直接进入某个分支的 rebase 也可以进入某次 commit 的 rebase，如果你是项将某些 commit 合并，那么建议使用 `$ git rebase -i `。
+你可以直接进入某个分支的 rebase 也可以进入某次 commit 的 rebase，如果你是将某些 commit 合并，那么建议使用 `$ git rebase -i `。
 
 此外 rebase 还提供三个操作命令，分别是 `--continue`、`--absort` 和 `--skip`，这三个命令的意思分别是“继续”、“退出”和“跳过”。
 
@@ -649,7 +649,7 @@ git rebase --continue | --skip | --abort | --edit-todo
 
 合并执行顺序：
 
-1). 设定不需要合并的commit起始值, `-i` 的参数是不需要合并的 commit 的 hash 值。如果未设-i后的值，那么默认是从还未提交到远程仓库的commit开始。
+1). 设定需要合并的commit起始值, `-i` 的参数是需要合并的 commit 的 hash 值。如果未设-i后的值，那么默认是从还未提交到远程仓库的commit开始。
 
 git -i [hash_valus]
 
