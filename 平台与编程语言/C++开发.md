@@ -7,7 +7,6 @@
 
 
 
-
 ---
 
 
@@ -51,7 +50,22 @@ C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实
 
 # 2 C语言基础
 
-## 2.1   C数据类型
+**知识点**
+
+1. static, const, define, inline的使用
+
+2. 结构体, 类和对象
+
+3. 函数和参数传递
+
+   * 函数进stack: {若干参数, 函数名, 返回值} 
+
+   * 参数传递: 传值(需要拷贝对象), 传址, 传引用 
+
+
+
+## 2.1  C数据类型
+
 表格 3 C数据类型列表
 
 | 类型     | 细类型           | 类型描述                                                     | 类型声明                                                     |
@@ -151,7 +165,18 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 *  在所有函数外部的全局变量
 *  在形式参数的函数参数定义中
 
+
+
+**变量、指针和引用** 
+
+* 变量: 程序设计语言中对存储单元的抽象.具有以下属性: 变量名name, 地址address, 大小size, 类型type, 值value, 生命期lifetime, 作用哉scope。其中变量名是用于标识变量的符号。
+* 指针: 用于存放对象的存储地址。
+* 引用: 是变量的替代名/别名。
+
+
+
 ### 2.3.1  C 存储类
+
 存储类定义 C 程序中变量/函数的范围（可见性）和生命周期。这些说明符放置在它们所修饰的类型之前。下面列出 C 程序中可用的存储类：
 
 表格 7 C 存储类列表
@@ -184,7 +209,30 @@ struct
 ```
 说明：sizeof(status)=2，如果没使用位域符则是8byte.
 
+
+
 ## 2.4  指针、函数指针与回调函数
+
+**指针运用**
+
+* 数组指针: a point to an array 如`int (*a)[10])`, a为指针名，指向一个数组，元素为整形，大小为10.
+
+* 指针数组: an array to an array 如`int *a[10]`, a为数组名，元素为整形指针，大小为
+
+* *函数指针*: a point to an function 如`int (*a)(int)`, a为指针名指向一个函数，函数带一个int参数，返回值为int
+
+* 指针函数: 返回类型是指针的函数. 如`int a(int)`,  a为函数名，函数返回值为int.
+
+* 常量指针: Type * const p; 如数组`Type array[];`
+
+综合示例: int (*a[10])(int) 
+
+Note: an array of 10 points to a functions that take an integer argument and return an integer.
+
+说明:a是一个大小为10，元素为指针的数组。指针指向一个带有整形参数和整形返回值的函数。
+
+
+
 **Data declarations (about point)** 5. Using the variable a, give definitions for the following: a) An integer
  b) A pointer to an integer
  c) A pointer to a pointer to an integer
@@ -219,7 +267,18 @@ typedef int (*fun_ptr)(int,int); // 声明一个指向同样参数、返回值�
 
 # 3  C++语言教程
 
+**知识点**
+
+1. 构造和析构函数
+
+2. 内联inline和友员friend函数
+
+3. 多态、继承： c++中用虚函数virtual来实现多态。
+
+
+
 ## 3.1  操作符重载
+
 可以重定义或重载大部分 C++ 内置的运算符。这样，您就能使用自定义类型的运算符。
 重载的运算符是带有特殊名称的函数，函数名是由关键字 operator 和其后要重载的运算符符号构成的。与其他函数一样，重载运算符有一个返回类型和一个参数列表。
 `Box operator+(const Box&);`

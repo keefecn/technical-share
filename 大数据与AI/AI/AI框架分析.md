@@ -1212,5 +1212,5 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 * **CNTK** [https://github.com/Microsoft/CNTK](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2FMicrosoft%2FCNTK)
 * Matconvnet [https://github.com/vlfeat/matconvnet](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fvlfeat%2Fmatconvnet)
 * Deeplearning4j [https://github.com/deeplearning4j/deeplearning4j](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fdeeplearning4j%2Fdeeplearning4j)   Java实现
-* Chainer [https://github.com/chainer/chainer](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fchainer%2Fchainer)
+* Chainer https://github.com/chainer/chainer
 

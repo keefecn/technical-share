@@ -55,18 +55,19 @@ OLAP：On Line Analyse Process在线分析处理。
 
 表格 4 OLAP产品基本信息比较
 
-| 产品       | 维护者        | 首版时间 | 开源 | 关键特性    | 备注                                          |
-| ---------- | ------------- | -------- | ---- | ----------- | --------------------------------------------- |
-| IQ         | Sybase        | 1987     | N    | MPP DW 列式 | Sybase成立于1984年。2010年被SAP收购。         |
-| Teradata   | Teradata      | 1996     | N    | MPP DW 列式 | Teradata成立于1979年。                        |
-| Vertica    | Vertica /  HP | 2005     | N    | MPP列式     | 2011年HP收购Vertica。                         |
-| GreenPlum  | Greenplum/EMC | 2006     | Y    | MPP列式     | 2010.7，EMC收购Greenplum。2015年开源。        |
-| HANA       | SAP           | 2010     | N    | MPP 内存    | SAP公司成立于1972年。                         |
-| Druid      |               | 2011     | Y    | 时序 列式   |                                               |
-| Impala     | Cloudara      | 2012     | Y    | MPP列式     |                                               |
-| Presto     | Facebook      | 2013     | Y    | MPP列式     |                                               |
-| Pinot      | LinkedIn      | 2013     | Y    | MPP         |                                               |
-| ClickHouse | Yandex        |          | Y    | 时序 列式   | 2021.9，从Yandex独立成为新公司ClickHouse, Inc |
+| 产品       | 维护者            | 首版时间 | 开源 | 关键特性    | 备注                                          |
+| ---------- | ----------------- | -------- | ---- | ----------- | --------------------------------------------- |
+| IQ         | Sybase/SAP        | 1987     | N    | MPP DW 列式 | Sybase成立于1984年。2010年被SAP收购。         |
+| Teradata   | Teradata          | 1996     | N    | MPP DW 列式 | Teradata成立于1979年。                        |
+| Vertica    | Vertica/HP        | 2005     | N    | MPP列式     | 2011年HP收购Vertica。                         |
+| GreenPlum  | Greenplum/EMC     | 2006     | Y    | MPP列式     | 2010.7，EMC收购Greenplum。2015年开源。        |
+| HANA       | SAP               | 2010     | N    | MPP 内存    | SAP公司成立于1972年。                         |
+| Druid      |                   | 2011     | Y    | 时序 列式   |                                               |
+| Impala     | Cloudara          | 2012     | Y    | MPP列式     |                                               |
+| Presto     | Facebook          | 2013     | Y    | MPP列式     |                                               |
+| Pinot      | LinkedIn          | 2013     | Y    | MPP         |                                               |
+| Kylin      | eBay/Kyligence    | 2014     | Y    | 预计算      |                                               |
+| ClickHouse | Yandex/ClickHouse | 2016     | Y    | 时序 列式   | 2021.9，从Yandex独立成为新公司ClickHouse, Inc |
 
 
 
@@ -326,13 +327,17 @@ Apache Kylin™是一个开源的分布式分析引擎，提供Hadoop/Spark之�
 
 ## 2.6  ClickHouse
 
-ClickHouse是一个开源的面向列式数据的数据库管理系统，能够使用SQL查询并且生成实时数据报告。
+clickhouse官网中文文档  https://clickhouse.com/docs/zh/
+
+2016年6月15日，Yandex开源了一个数据分析的数据库，名字叫做ClickHouse。
 
 2021年9月，ClickHouse 的创建者 Alexey 在 GitHub 宣布他们决定正式从 Yandex 独立，成立一个公司：ClickHouse, Inc。
 
+ClickHouse是一个开源的面向列式数据的数据库管理系统，能够使用SQL查询并且生成实时数据报告。
 
 
-**应用场景：**
+
+**应用场景**
 
 1.绝大多数请求都是用于读访问的
 
@@ -405,6 +410,8 @@ ClickHouse是一个开源的面向列式数据的数据库管理系统，能够�
 [11]. Pinot架构介绍 https://www.jianshu.com/p/67a9156f041a
 
 [12]. clickhouse 基础知识 https://www.jianshu.com/p/a5bf490247ea
+
+* clickhouse官网中文文档  https://clickhouse.com/docs/zh/development/architecture/ 
 
 
 
@@ -638,7 +645,7 @@ Teradata Aster 大数据探索平台（Teradata Aster Discovery Platform），�
 
 ## Vertica (Vertica/HP)
 
-[Vertica](http://www.vertica.com/)(属于HP公司)，是一个基于DBMS架构的数据库系统，适合读密集的分析型数据库应用，比如数据仓库。
+[Vertica](http://www.vertica.com/)(2001年被HP收购)，是一个基于DBMS架构的数据库系统，适合读密集的分析型数据库应用，比如数据仓库。
 
 
 

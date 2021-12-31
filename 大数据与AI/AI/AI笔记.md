@@ -17,7 +17,6 @@
 
 
 
-
 ---
 
 # 目录
@@ -641,14 +640,9 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### AI芯片
 
-AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 [GPU](https://baike.baidu.com/item/GPU/105524) 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)。
+参见  《[运维专题](../../软件工程/运维专题.md)》芯片计算架构章节
 
-AI芯片说明如下：
-
-* GPU：图形处理器，对于图像处理有作优化。
-* TPU：推理处理器。
-* FPGA
-* ASIC
+AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 [GPU](https://baike.baidu.com/item/GPU/105524) 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)、TPU（推理处理器）。
 
 
 
