@@ -9,6 +9,8 @@
 
 
 
+
+
 ---
 
 [TOC]
@@ -2122,7 +2124,7 @@ __main__.child <class 'logging.Logger'> 2221026990640 2221026991120
 
 ## 命令行启动模块
 
-命令行启动的常见系统脚本：ipython, pip, virtuanenv
+命令行启动的常见系统脚本：ipython, pip, virtualenv
 
 命令行启动的常见应用脚本：flask celery gunicorn superset
 
@@ -2304,7 +2306,7 @@ else:
 
 官网源码：https://github.com/Legrandin/pycryptodome
 
-pycryptodome是一个低级密码学原语的独立 Python 包。PyCryptodome 保持了与 **[PyCrypto](https://github.com/dlitz/pycrypto)** 相当高的兼容性并且处于良好的维护状态，因此便于更换。~~pycrypto~~最后一个版本是2.6.1(2014-06-23)，不建议使用。
+pycryptodome是一个低级密码学原语的独立 Python 包。PyCryptodome 保持了与 [PyCrypto](https://github.com/dlitz/pycrypto) 相当高的兼容性并且处于良好的维护状态，因此便于更换。~~pycrypto~~最后一个版本是2.6.1(2014-06-23)，不建议使用。
 
 ```shell
 $ pip show pycryptodome

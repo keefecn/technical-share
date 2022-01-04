@@ -17,7 +17,7 @@
 
 ----
 
-## 1 简述
+# 1 简述
 
 官网： https://apache-superset.github.io/superset-ui/
 
@@ -65,7 +65,7 @@
 
 
 
-### 源码结构
+## 源码结构
 
 表格 模块包说明
 
@@ -119,7 +119,7 @@ $ npm run build
 
 
 
-### 贡献指南 Contributing guidelines
+## 贡献指南 Contributing guidelines
 
 Please read the [contributing guidelines](CONTRIBUTING.md) which include development environment setup and other things you should know about coding in this repo.
 
@@ -131,7 +131,7 @@ Please read the [contributing guidelines](CONTRIBUTING.md) which include develop
 
 
 
-### 二次开发示例
+## 二次开发示例
 
 以饼图pie 为例, 涉及以下文件:
 
@@ -149,15 +149,38 @@ Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
 
 
-## 2 核心模块 /core/
+# 2 核心模块 /core/
+
+表格  core的源码结构 
+
+| 一级目录&文件      | 二级目录或文件 | 主要类&函数 | 说明       |
+| ------------------ | -------------- | ----------- | ---------- |
+| chart/             |                |             | 图表       |
+| chart-composition/ |                |             |            |
+| color/             |                |             | 颜色       |
+| components/        |                |             | 组件       |
+| connection/        |                |             | 连接       |
+| dimension/         |                |             | 尺寸       |
+| dynamic-plugins/   |                |             | 动态插件   |
+| math-expression    |                |             | 数学表达式 |
+| models/            |                |             | 模型       |
+| number-format/     |                |             | 数字格式   |
+| query/             |                |             | 查询       |
+| style/             |                |             | 风格       |
+| time-format/       |                |             | 时间格式   |
+| translation/       |                |             | 翻译       |
+| types/             |                |             |            |
+| utils/             |                |             | 工具库     |
+| validator/         |                |             | 验证器     |
+| index.ts           |                |             | 全局导入   |
 
 
 
 
 
-## 3 遗产模块 /legacy-*
+# 3 遗产模块 /legacy-*
 
-### legacy-plugin-chart-country-map/
+## legacy-plugin-chart-country-map/
 
 国家地图文档 [Legacy Chart Plugins / legacy-plugin-chart-country-map - Basic ⋅ Storybook (superset-ui.vercel.app)](https://superset-ui.vercel.app/?path=/story/legacy-chart-plugins-legacy-plugin-chart-country-map--basic)
 
@@ -197,19 +220,398 @@ new CountryMapChartPlugin().configure({ key: 'country-map' }).register();
 
 
 
-###  legacy-plugin-chart-xx/
+##  legacy-plugin-chart-xx/
 
 
 
 
 
-## 4 优质模块 /plugin-*
+# 4 优质模块 /plugin-*
+
+## 4.1 plugin-chart-echarts/
+
+表格  plugin-chart-echarts的源码结构 
+
+| 一级目录&文件    | 二级目录或文件 | 说明         |
+| ---------------- | -------------- | ------------ |
+| BoxPlot/         |                | 箱图         |
+| components/      | Echarts.tsx    | 公共组件     |
+| Funnel/          |                | 漏斗         |
+| Gauge/           |                | 仪表         |
+| Graph/           |                | 图           |
+| MixedTimeseries/ |                | 混合时间序列 |
+| Pie/             |                | 饼图         |
+| Radar/           |                | 雷达图       |
+| Timeseries/      |                | 时间序列     |
+| Tree/            |                | 树           |
+| Treemap/         |                | 树           |
+| utils/           |                | 工具库       |
+| test/            |                |              |
+| types/           |                |              |
+| package.json     |                |              |
+| tsconfig.json    |                |              |
+
+
+
+### components/Echarts.tsx
+
+```tsx
+import React, { useRef, useEffect, useMemo, forwardRef, useImperativeHandle } from 'react';
+import { styled } from '@superset-ui/core';
+import { ECharts, init } from 'echarts';
+import { EchartsHandler, EchartsProps, EchartsStylesProps } from '../types';
+
+const Styles = styled.div<EchartsStylesProps>`
+  height: ${({ height }) => height};
+  width: ${({ width }) => width};
+`;
+
+function Echart(
+  {
+    width,
+    height,
+    echartOptions,
+    eventHandlers,
+    zrEventHandlers,
+    selectedValues = {},
+  }: EchartsProps,
+  ref: React.Ref<EchartsHandler>,
+) {
+  const divRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<ECharts>();
+  const currentSelection = useMemo(() => Object.keys(selectedValues) || [], [selectedValues]);
+  const previousSelection = useRef<string[]>([]);
+  
+  ...   
+}
+
+export default forwardRef(Echart);      
+```
 
 
 
 
 
-## 5 脚本 /scripts/
+
+
+### Pie/ 饼图
+
+表格  饼图插件的源码结构 
+
+| 目录&文件         | 主要类&函数                                                  | 说明                                       |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
+| images/           | 图片6张                                                      | 示例图                                     |
+| buildQuery.ts     | buildQuery                                                   | 构建查询数据：查询对象、排序指标           |
+| controlPanel.tsx  | config                                                       | 图表控制页板配置的参数（出现在图表详情页） |
+| EchartsPie.tsx    | EchartsPie                                                   | pie数据/事件更改时的处理逻辑               |
+| index.ts          | EchartsPieChartPlugin                                        | 定义Pie插件                                |
+| transformProps.ts | formatPieLabel transformProps                                | 数据转换：格式化饼图标签、全局数据         |
+| types.tx          | EchartsPieFormData EchartsPieLabelType<br>EchartsPieChartProps  DEFAULT_FORM_DATA <br>PieChartTransformedProps | 导出表单数据、标签类型、全局数据           |
+
+
+
+buildQuery.ts
+
+构建查询数据：查询对象、排序指标
+
+```tsx
+import { buildQueryContext, QueryFormData } from '@superset-ui/core';
+
+export default function buildQuery(formData: QueryFormData) {
+  const { metric, sort_by_metric } = formData;
+  return buildQueryContext(formData, baseQueryObject => [
+    {
+      ...baseQueryObject,
+      ...(sort_by_metric && { orderby: [[metric, false]] }),
+    },
+  ]);
+}
+```
+
+
+
+controlPanel.tsx
+
+控制面板的配置数据
+
+```tsx
+import React from 'react';
+import { t, validateNonEmpty } from '@superset-ui/core';
+import {
+  ControlPanelConfig,
+  ControlPanelsContainerProps,
+  D3_FORMAT_DOCS,
+  D3_FORMAT_OPTIONS,
+  D3_TIME_FORMAT_OPTIONS,
+  sections,
+  emitFilterControl,
+} from '@superset-ui/chart-controls';
+import { DEFAULT_FORM_DATA } from './types';
+import { legendSection } from '../controls';
+
+// 表单数据
+const {
+  donut,
+  innerRadius,
+  labelsOutside,
+  labelType,
+  labelLine,
+  outerRadius,
+  numberFormat,
+  showLabels,
+} = DEFAULT_FORM_DATA;  
+
+const config: ControlPanelConfig = {
+  controlPanelSections: [ 
+    sections.legacyRegularTime,
+      // 数据项
+      // 自定义项
+    ],  //控制面板选项
+    
+  controlOverrides: {  // 可重载项
+    series: {
+      validators: [validateNonEmpty],
+      clearable: false,
+    },
+    row_limit: {
+      default: 100,
+    },
+  },
+};
+
+export default config;
+```
+
+
+
+EchartsPie.tsx
+
+```tsx
+import React, { useCallback } from 'react';
+import { PieChartTransformedProps } from './types';
+import Echart from '../components/Echart';
+import { EventHandlers } from '../types';
+
+export default function EchartsPie({
+  height,
+  width,
+  echartOptions,
+  setDataMask,
+  labelMap,
+  groupby,
+  selectedValues,
+  formData,
+}: PieChartTransformedProps) {
+  // 数据更改时的处理回调函数
+  const handleChange = useCallback( 
+        ...
+        );  
+  
+  // 事件处理器      
+  const eventHandlers: EventHandlers = {
+    click: props => {
+      const { name } = props;
+      const values = Object.values(selectedValues);
+      if (values.includes(name)) {
+        handleChange(values.filter(v => v !== name));
+      } else {
+        handleChange([name]);
+      }
+    },
+  };
+
+  return (
+    <Echart
+      height={height}
+      width={width}
+      echartOptions={echartOptions}
+      eventHandlers={eventHandlers}
+      selectedValues={selectedValues}
+    />
+  );
+}        
+```
+
+
+
+index.ts
+
+饼图插件定义
+
+```tsx
+import { Behavior, ChartMetadata, ChartPlugin, t } from '@superset-ui/core';
+import buildQuery from './buildQuery';
+import controlPanel from './controlPanel';
+import transformProps from './transformProps';
+import thumbnail from './images/thumbnail.png';
+import example1 from './images/Pie1.jpg';
+import example2 from './images/Pie2.jpg';
+import example3 from './images/Pie3.jpg';
+import example4 from './images/Pie4.jpg';
+import { EchartsPieChartProps, EchartsPieFormData } from './types';
+
+export default class EchartsPieChartPlugin extends ChartPlugin<
+  EchartsPieFormData,
+  EchartsPieChartProps
+> {
+  constructor() { 
+    super({
+      buildQuery,
+      controlPanel,
+      loadChart: () => import('./EchartsPie'),
+      metadata: new ChartMetadata({
+        behaviors: [Behavior.INTERACTIVE_CHART],
+        category: t('Part of a Whole'),
+        credits: ['https://echarts.apache.org'],
+        description:
+          t(`The classic. Great for showing how much of a company each investor gets, what demographics follow your blog, or what portion of the budget goes to the military industrial complex.
+
+        Pie charts can be difficult to interpret precisely. If clarity of relative proportion is important, consider using a bar or other chart type instead.`),
+        exampleGallery: [
+          { url: example1 },
+          { url: example2 },
+          { url: example3 },
+          { url: example4 },
+        ],
+        name: t('Pie Chart'),
+        tags: [
+          t('Aesthetic'),
+          t('Categorical'),
+          t('Circular'),
+          t('Comparison'),
+          t('Percentages'),
+          t('Popular'),
+          t('Proportional'),
+          t('ECharts'),
+        ],
+        thumbnail,
+      }),
+      transformProps,
+    });
+  }
+}    
+```
+
+
+
+transformProps.ts
+
+数据转化
+
+```tsx
+import {
+  CategoricalColorNamespace,
+  DataRecordValue,
+  getMetricLabel,
+  getNumberFormatter,
+  getTimeFormatter,
+  NumberFormats,
+  NumberFormatter,
+} from '@superset-ui/core';
+import { CallbackDataParams } from 'echarts/types/src/util/types';
+import { EChartsCoreOption, PieSeriesOption } from 'echarts';
+import {
+  DEFAULT_FORM_DATA as DEFAULT_PIE_FORM_DATA,
+  EchartsPieChartProps,
+  EchartsPieFormData,
+  EchartsPieLabelType,
+  PieChartTransformedProps,
+} from './types';
+import { DEFAULT_LEGEND_FORM_DATA } from '../types';
+import {
+  extractGroupbyLabel,
+  getChartPadding,
+  getColtypesMapping,
+  getLegendProps,
+  sanitizeHtml,
+} from '../utils/series';
+import { defaultGrid, defaultTooltip } from '../defaults';
+import { OpacityEnum } from '../constants';
+
+const percentFormatter = getNumberFormatter(NumberFormats.PERCENT_2_POINT);
+
+export function formatPieLabel({  // 格式化饼图标签
+  params,
+  labelType,
+  numberFormatter,
+  sanitizeName = false,
+}: {
+  params: Pick<CallbackDataParams, 'name' | 'value' | 'percent'>;
+  labelType: EchartsPieLabelType;
+  numberFormatter: NumberFormatter;
+  sanitizeName?: boolean;
+}): string {
+  const { name: rawName = '', value, percent } = params;
+  const name = sanitizeName ? sanitizeHtml(rawName) : rawName;
+  const formattedValue = numberFormatter(value as number);
+  const formattedPercent = percentFormatter((percent as number) / 100);
+
+  switch (labelType) {  //根据标签类型返回 相应名称
+    case EchartsPieLabelType.Key:
+      return name;
+    case EchartsPieLabelType.Value:
+      return formattedValue;
+    case EchartsPieLabelType.Percent:
+      return formattedPercent;
+    case EchartsPieLabelType.KeyValue:
+      return `${name}: ${formattedValue}`;
+    case EchartsPieLabelType.KeyValuePercent:
+      return `${name}: ${formattedValue} (${formattedPercent})`;
+    case EchartsPieLabelType.KeyPercent:
+      return `${name}: ${formattedPercent}`;
+    default:
+      return name;
+  }
+}
+
+export default function transformProps(chartProps: EchartsPieChartProps): PieChartTransformedProps {
+  const { formData, height, hooks, filterState, queriesData, width } = chartProps;
+  const { data = [] } = queriesData[0];
+  const coltypeMapping = getColtypesMapping(queriesData[0]);
+  ...
+  
+}
+```
+
+
+
+### Timeseries/ 时间序列图
+
+时间序列图包括多种图表类型：面积图、直方图、线图、平滑线图、离散图等。
+
+表格  时间序列图插件的源码结构 
+
+| 目录&文件             | 主要类&函数                                                  | 说明                                       |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------ |
+| Area/                 | images/ controlPanel.tsx index.tsx                           | 时间序列面积图                             |
+| images/               | 图片2张                                                      | 示例图片                                   |
+| Regular/              | Bar/ Line/ Scatter/  <br>SmoothLine/  controlPanel.tsx       | 常规时间序列图，包括4种                    |
+| Step/                 | images/  controlPanel.tsx index.tsx                          |                                            |
+| buildQuery.ts         | buildQuery                                                   | 构建查询数据：查询对象、排序指标           |
+| controlPanel.tsx      | config                                                       | 图表控制页板配置的参数（出现在图表详情页） |
+| EchartsTimeseries.tsx | EchartsTimeseries                                            | 数据/事件更改时的处理逻辑                  |
+| index.ts              | EchartsTimeseriesChartPlugin                                 | 定义插件                                   |
+| transformers.ts       | transformSeries  transformFormulaAnnotation   <br/>transformIntervalAnnotation  transformEventAnnotation  <br/>transformTimeseriesAnnotation  getPadding getTooltipTimeFormatter  <br/>getXAxisFormatter |                                            |
+| transformProps.ts     | transformProps                                               | 数据转换：格式化标签、全局数据             |
+| types.tx              | EchartsTimeseriesContributionType  EchartsTimeseriesSeriesType<br>EchartsTimeseriesFormData  EchartsTimeseriesFormData <br>EchartsTimeseriesChartProps TimeseriesChartTransformedProps | 导出表单数据、标签类型、全局数据           |
+
+
+
+## 4.2 plugin-chart-table/  
+
+
+
+## 4.3 plugin-chart-pivot-table/  
+
+
+
+## 4.4 plugin-chart-xy/  
+
+
+
+
+
+# 5 脚本 /scripts/
 
 ### build.js
 
@@ -336,9 +738,7 @@ if (shouldRunTyping) {
 
 
 
-
-
-## 参考资料
+# 参考资料
 
 **参考网站**
 
@@ -348,3 +748,4 @@ if (shouldRunTyping) {
 
 **参考链接**
 
+* superset 二次开发之看板渲染为深色大屏 https://juejin.cn/post/7004462914765586445

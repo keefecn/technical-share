@@ -1885,7 +1885,7 @@ use [db_name]; //使用某数据库
 
 
 
-## 5.2  MySQL4.1权限管理
+## 5.2  MySQL权限管理
 ```shell
 mysql> use mysql;
 Reading table information for completion of table and column names

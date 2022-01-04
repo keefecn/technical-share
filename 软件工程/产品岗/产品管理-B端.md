@@ -65,8 +65,8 @@ B端产品会针对某个行业做全领域的解决方案，例如：淘宝是�
 * 亿欧智库《Salesforce系列（一）20年发展史回顾》
 * 亿欧智库《Salesforce系列（二）从财务角度看商业模式》
 * 别了ERP，一个时代的落幕  https://baijiahao.baidu.com/s?id=1714772345795890973
-* B端与C端的区别，并分析B端的SAAS市场  http://www.woshipm.com/it/5175321.html 
-* 2021年中国企业级SaaS服务行业兴起背景及现状  https://k.sina.com.cn/article_1850460740_6e4bca4402000wd7u.html 
+* B端与C端的区别，并分析B端的SAAS市场  http://www.woshipm.com/it/5175321.html
+* 2021年中国企业级SaaS服务行业兴起背景及现状  https://k.sina.com.cn/article_1850460740_6e4bca4402000wd7u.html
 
 
 
@@ -171,7 +171,7 @@ where to paly？how to win？
 
 - 同时对细分领域有足够深的洞察，知道该如何获得竞争优势（how to win）。
 
-  
+
 
 从竞争玩家上看，目前中国企业级SaaS市场有三类玩家，新兴SaaS创业公司、传统软件厂商、2C互联网巨头
 
@@ -272,4 +272,8 @@ where to paly？how to win？
 
 
 ## 参考资料
+
+**参考书目**
+
+* 《决胜 B 端：产品经理升级之路》
 

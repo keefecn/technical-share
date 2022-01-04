@@ -348,28 +348,37 @@ management effort or service provider interaction.
 
 
 
- ![image-20191201165320966](../../media/cloud/cloud_015.png)
+表格   虚拟化技术列表
+
+| 虚拟化技术   | 对应的云计算服务 | 相关的技术和产品                           |
+| ------------ | ---------------- | ------------------------------------------ |
+| 硬件虚拟化   | IaaS             | KVM, VMware, Xen,  OpenStack, CloudStack   |
+| 系统虚拟化   | CaaS             | Docker, LXC, rkt, Kubernetes, Swarm, Mesos |
+| 中间件虚拟化 | PaaS             | CloudFoundry, Heroku, Openshift            |
+
+说明：IaaS-基础设施即服务，CaaS-容器即服务，PaaS-平台即服务。
 
 
 
 表格 6 云计算核心技术列表
 
-| 类别     | 虚拟化例子                                            | 技术原理                                                     |
-| -------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| 基础设施 | VPN                                                   | VPN的隧道协议主要有三种，PPTP、L2TP和IPSec，其中PPTP和L2TP协议工作在OSI模型的第二层，又称为二层隧道协议；IPSec是第三层隧道协议。 |
-|          | VLAN                                                  | 虚拟局域网（VLAN）是一组逻辑上的设备和用户，这些设备和用户并不受物理位置的限制，可以根据功能、部门及应用等因素将它们组织起来，相互之间的通信就好像它们在同一个网段中一样  –VLAN工作在OSI参考模型的第2层和第3层，一个VLAN就是一个广播域，VLAN之间的通信通过第3层的路由器完成。  –VLAN网络可以是有混合的网络类型设备组成，比如：以太网、令牌网、FDDI等。 |
-|          | 设备与IO虚拟化                                        |                                                              |
-| 存储     | 磁盘阵列技术（Redundant Array of Inexpensive  Disks） | RAID0/RAID1等标准。                                          |
-|          | 网络附加存储（Network Attached Storage）              |                                                              |
-|          | 存储区域网（Storage Area Network）                    |                                                              |
-|          | 内存                                                  | 虚拟内存与物理内存的映射  影子页表法  页表写入法             |
-| 系统     | Windows                                               |                                                              |
-|          | LXC~Linux  Container                                  | LXC是一种内核虚拟化技术，提供轻量级的虚拟化  隔离进程和资源。  基于Linux内核的cgroups子系统，cgroups子系统是Linux内核提供的一个基于进程组的资源管理的框架，可以为特定的进程组限定可以使用的资源 |
-|          | Docker                                                | 基于进程容器(Processcontainer)的轻量级VM解决方案             |
-|          | KVM~Kernel-based  Virtual Machine                     | 开源虚拟化模块  集成在Linux的各个主要发行版本中  使用Linux自身的调度器进行管理 |
-|          | XEN                                                   |                                                              |
-| 软件     | Java虚拟机                                            |                                                              |
-| 计算     | CPU虚拟化                                             | 传统方式：通过一系列手段改变序列次序。如  时间片轮转；短进程优先；中断。  •本质是一种指令序列的调度机制 |
+| 类别     | 虚拟化例子     | 技术原理                                                     |
+| -------- | -------------- | ------------------------------------------------------------ |
+| 基础设施 | VPN            | VPN的隧道协议主要有三种，PPTP、L2TP和IPSec。<br>其中PPTP和L2TP协议工作在OSI模型的第二层，又称为二层隧道协议；IPSec是第三层隧道协议。 |
+|          | VLAN           | 虚拟局域网（VLAN）是一组逻辑上的设备和用户，这些设备和用户并不受物理位置的限制，可以根据功能、部门及应用等因素将它们组织起来，相互之间的通信就好像它们在同一个网段中一样  –VLAN工作在OSI参考模型的第2层和第3层，一个VLAN就是一个广播域，VLAN之间的通信通过第3层的路由器完成。  –VLAN网络可以是有混合的网络类型设备组成，比如：以太网、令牌网、FDDI等。 |
+|          | 设备与IO虚拟化 |                                                              |
+|          | SDN            | 软件定义网络（Software Defined Network，SDN）。美国斯坦福大学Clean-Slate课题研究组提出的一种新型网络创新架构，是网络虚拟化的一种实现方式。其核心技术OpenFlow通过将网络设备的控制面与数据面分离开来，从而实现了网络流量的灵活控制，使网络作为管道变得更加智能，为核心网络及应用的创新提供了良好的平台。 |
+| <br>存储 | RAID           | Redundant Array of Inexpensive  Disks，磁盘阵列技术。RAID0/RAID1等标准。 |
+|          | NAS            | Network Attached Storage，网络附加存储。                     |
+|          | SAN            | Storage Area Network，存储区域网。                           |
+|          | 内存           | 虚拟内存与物理内存的映射  影子页表法  页表写入法             |
+| 系统     | Windows        |                                                              |
+|          | LXC            | Linux Container，Linux容器。一种内核虚拟化技术，提供轻量级的虚拟化隔离进程和资源。<br>基于Linux内核的cgroups子系统，cgroups子系统是Linux内核提供的一个基于进程组的资源管理的框架，可以为特定的进程组限定可以使用的资源。 |
+|          | Docker         | 基于进程容器(Processcontainer)的轻量级VM解决方案。           |
+|          | KVM            | KVM~Kernel-based Virtual Machine，内核虚拟机。<br>开源虚拟化模块。集成在Linux的各个主要发行版本中  使用Linux自身的调度器进行管理 |
+|          | Xen            | 一个开放源代码虚拟机监视器，由剑桥大学开发。它打算在单个计算机上运行多达100个满特征的操作系统。 |
+| 软件     | Java虚拟机     |                                                              |
+| 计算     | CPU虚拟化      | 传统方式：通过一系列手段改变序列次序。如  时间片轮转；短进程优先；中断。<br>本质是一种指令序列的调度机制。 |
 
 
 
@@ -459,6 +468,8 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 ## 本章参考
 
+* 百度百科-Xen  https://baike.baidu.com/item/Xen
+
 
 
 # 5 云架构实例
@@ -542,17 +553,14 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 **参考网站**
 
 * 云计算新闻 http://www.cloudcomputing-china.cn/
-
 * 中云网 [http://www.china-cloud.com](http://www.china-cloud.com/)
-
 * 中国云计算网 http://www.cloudcomputing-china.cn/
-
 * 云计算网 http://cloud.saaser.cn/
-
 * 企业云计算网 http://www.ecloud.com.cn/
-
 * 中国云计算联盟百科全书 http://www.chinacloud.org/wiki
 * http://www.aboutyun.com
+* Tungsten Fabric 为多云而生的 SDN  https://tungstenfabric.org.cn
+* Kubernetes中文社区   http://docs.kubernetes.org.cn/
 
 
 
@@ -576,6 +584,5 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 
 
-- 
-  
+-
 

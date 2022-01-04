@@ -6455,7 +6455,7 @@ export default class MainPreset extends Preset {
 看板布局和交互逻辑
 
 * actions/
-* components/  看板涉及到的各种组件，如CssEditor，menu, filterscope, FilterBadge....
+* components/  看板涉及到的各种组件，如CssEditor、menu、filterscope、FilterBadge....
 * containers/
 * fixtures/  只有一个文件emptyDashboardLayout.js
 * reducers/

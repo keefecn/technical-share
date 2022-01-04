@@ -203,7 +203,7 @@ Every issue/PR must have one hash label (except spam entry). Labels that begin w
 * report schedule 报告调度
 * alert 警报
 * 服务端：指superset服务端，python实现，提供REST服务。
-* 客户端：也叫前端，指superset-front前端。js+less实现。在浏览器上运行，是最终用户所看到的页面。
+* 客户端：也叫前端，指superset-frontend前端。js+less实现。在浏览器上运行，是最终用户所看到的页面。
 
 
 
@@ -1949,9 +1949,9 @@ $ jupyter notebook
 
 **替换geojson文件（中国地图为例）**
 
-* 法1：superset-front依赖node_modules插件替换，superset-front打包时会自动更新。 位置在 `@superset-ui/legacy-plugin-chart-country-map/xx/countryies/china.geojson`   xx分别为lib和esm
+* 法1（推荐）：superset-frontend依赖node_modules插件替换，superset-frontend打包时会自动更新。 位置在 `@superset-ui/legacy-plugin-chart-country-map/xx/countryies/china.geojson`   xx分别为lib和esm
 * 法2：插件源码替换，需要打包@superset-ui，然后更新node_modules的输出（可以搞软链接）。位置在` superset-ui.git/plugins/legacy-plugin-chart-country-map/src/countries/china.geojson`
-* 法3：superset-front打包文件替换。位置在 `superset/static/assets/65d35076af8ab2eac6355ea6f4932f54.geojson`
+* 法3：superset-frontend打包文件替换。位置在 `superset/static/assets/65d35076af8ab2eac6355ea6f4932f54.geojson`
 
 说明：不需要修改superset-ui项目源码情况下，推荐法1更换geojson文件。
 
@@ -2671,6 +2671,22 @@ $ yum install gcc libffi-devel python3-devel openssl-devel -y
 
 
 
+**Q3：华为麒麟操作系统上运行报错**
+
+报错信息：[jemalloc] unsupported system page size
+
+原因：可用`getconf PAGESIZE`查看页大小。要在64K环境编译，才能兼容4K和16K的。
+
+解决方法：重新在64位机上编译安装。另外更新报错模块升级到新版，如pyarrow从4.0.1版本升级到最新的6.0.1版本。
+
+```shell
+$ pip install pyarrow==6.0.1
+```
+
+
+
+
+
 ## 开发常见问题
 
 表格  superset一般问题列表
@@ -2846,4 +2862,5 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 *  磨人的小妖精Apache Superset之绝对不改版 https://segmentfault.com/a/1190000022060920
 *  如何将炫酷的报表直接截图发送邮件——在Superset 0.37使用Schedule Email功能 https://cloud.tencent.com/developer/article/1711719
 *  Superset0.38.0新版本如何将中国地图由拼音显示中文 https://blog.csdn.net/zfqsmn1126/article/details/111313207
+*  superset 二次开发之看板渲染为深色大屏 https://juejin.cn/post/7004462914765586445
 

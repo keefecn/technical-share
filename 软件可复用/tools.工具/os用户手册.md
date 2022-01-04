@@ -119,6 +119,34 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 
 
+## FAQ
+
+### WINDOWS命令行
+
+1. 以管理员身份运行命令行 cmd
+
+   ```shell
+   $ runas /user:administrator cmd
+   ```
+
+2. **git bash在windows 10下启动很慢，达到分钟级。**
+
+   原因：有非常多的原因导致git bash启动很慢。比如双显卡工作的原因需移除AMD驱动；不是管理员权限启动；windows自带的病毒防范；windows cmd新样式等。
+
+   git缺省安装路径C:\Program Files\Git\mingw64\
+
+   解决方法：
+
+   1）恢复cmd旧样式方法：win+R 打开cmd 在标题栏上右键， 属性-- 选项--- 打勾---使用旧控制台样式。
+
+   2）(推荐)升级git版本到2.20+（发布于2018.12）版本。
+
+
+
+## 本章参考
+
+
+
 # 3 Ubuntu
 
 基于[Debian](https://baike.baidu.com/item/Debian/748667)发行版的Linux都可以参考Ubuntu配置，如[Debian](http://baike.baidu.com/view/40687.htm)、[Google Chrome OS](http://baike.baidu.com/view/2627636.htm)等等。

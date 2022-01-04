@@ -39,11 +39,11 @@
 
 表格 3 python WEB框架列表
 
-| 框架                                                         | 简介                                                         | 特点                     | 优点                                                         | 缺点               | 推荐       |
+| 框架                                                         | 简介                                                         | 特点                     | 优点                                                         | 缺点               | <br>推荐   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------ | ------------------ | ---------- |
 | [Django](https://www.djangoproject.com/download/)            | 它源自一个在线新闻 Web 站点，于 2005 年开源。<br>一个开源的重量级Web框架，并且采用MVC设计模式。 | 全能型，重量级           | 自带ORM/template/view，全自动全功能的管理后台。              | 容易 臃肿          | 管理态后端 |
 | [flask](http://flask.pocoo.org/)                             | 使用 Python 编写的轻量级 Web 应用框架。其 [WSGI](http://baike.so.com/doc/1142343-1208497.html) 工具箱采用 Werkzeug ，[模板引擎](http://baike.so.com/doc/5846906-6059743.html)则使用 Jinja2 。<br>Flask使用 BSD 授权，2015年开源。 | 轻量级，原生组件几乎没有 | 简单；配置灵活；入门简单；低耦合                             | 不适用大网站，路由 | 微服务     |
-| tornado                                                      | 著名的Friendfeed 网站就是使用它搭建的。<br>在IO密集性和多任务上性能很好。 | 轻量、异步非阻塞         | 异步非阻塞。高可伸缩性（单线程异步）；websocket长连接。自定义模块。 |                    | 微服务     |
+| [tornado](http://www.tornadoweb.org/)                        | 著名的Friendfeed 网站就是使用它搭建的。<br>在IO密集性和多任务上性能很好。 | 轻量、异步非阻塞         | 异步非阻塞。高可伸缩性（单线程异步）；websocket长连接。自定义模块。 |                    | 微服务     |
 | [Zope 2](http://zope2.zope.org/releases)                     | 一款基于Python的Web应用框架，是所有Python Web应用程序、工具的鼻祖，是Python家族一个强有力的分支。<br>Zope 2的“对象发布”系统非常适合面向对象开发方法，并且可以减轻开发者的学习曲线，还可以帮助你发现应用程序里一些不好的功能。 |                          |                                                              |                    |            |
 | [Web2py](http://web2py.com/examples/default/download)        | 一个用Python语言编写的免费的开源Web框架，旨在敏捷快速的开发Web应用，具有快速、可扩展、安全以及可移植的数据库驱动的应用，遵循LGPLv3开源协议。   Web2py提供一站式的解决方案，整个开发过程都可以在浏览器上进行，提供了Web版的在线开发，HTML模版编写，静态文件的上传，数据库的编写的功能。其它的还有日志功能，以及一个自动化的admin接口。 |                          |                                                              |                    |            |
 | [Web.py](http://webpy.org/install)                           | 一个轻量级的开源Python Web框架，小巧灵活、简单并且非常强大，在使用时没有任何限制。目前Web.py被广泛运用在许多大型网站，如西班牙的社交网站Frinki、主页日平均访问量达7000万次的Yandex等。 |                          |                                                              |                    |            |
@@ -57,8 +57,6 @@
 # 2  python WEB三大框架
 
 ## 简述
-
-### 性能比较
 
 表格 4 python WEB框架性能比较
 
@@ -77,6 +75,8 @@
 
 
 ## 2.1 Django
+
+官网  https://www.djangoproject.com/
 
 ### 简介
 
@@ -946,6 +946,8 @@ python manage.py migrate --fake-initial
 
 ## 2.2 python-Flask
 
+官网  http://flask.pocoo.org
+
 ### 简介
 
 **特性**
@@ -965,7 +967,7 @@ python manage.py migrate --fake-initial
 
 
 
-表格 flask版本说明 详见[CHANGES.rst](https://github.com/pallets/flask/blob/main/CHANGES.rst)
+表格 flask版本说明 详见 [CHANGES.rst](https://github.com/pallets/flask/blob/main/CHANGES.rst)
 
 | 版本号 | 发布时间   | 功能或更新说明                                               |
 | ------ | ---------- | ------------------------------------------------------------ |
@@ -976,7 +978,8 @@ python manage.py migrate --fake-initial
 | 1.1.4  | 2021-05-13 | 1.x系列最后一个版本。1.0.x和1.1.x各发布5个版本。             |
 | 2.0.0  | 2021-05-11 | 大版本。移除python2和3.5支持。                               |
 | 2.0.1  | 2021-05-21 |                                                              |
-| 2.0.2  | Unreleased |                                                              |
+| 2.0.3  | Unreleased | 2.0.x发布3个版本。                                           |
+| 2.1.0  | Unreleased |                                                              |
 
 
 
@@ -1121,6 +1124,8 @@ Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理�
 
 Superset中的安全性由Flask AppBuilder（FAB）处理。 FAB是一个“简单快速的应用程序开发框架，构建在Flask之上”。 FAB提供身份验证，用户管理，权限和角色。
 
+flask 2.0+后，可以直接用 `flask fab`  代替 `fabmanager`。
+
 ```shell
 $ fabmanager --help
 Usage: fabmanager [OPTIONS] COMMAND [ARGS]...
@@ -1159,39 +1164,41 @@ Commands:
 **创建app目录结构**
 
 ```shell
-keefe@LENOVO-PC /e/Workspaces/python.ws/flask_project
-$ fabmanager create-app
-Your new app name: test
+# app名称为 hello
+$ cd /e/Workspaces/python.ws/flask_project
+$ flask fab create-app
+Your new app name: hello
 Your engine type, SQLAlchemy or MongoEngine [SQLAlchemy]:
 Downloaded the skeleton app, good coding!
-$ find test
-test
-test/.gitignore
-test/app
-test/app/models.py
-test/app/templates
-test/app/templates/404.html
-test/app/translations
-test/app/translations/pt
-test/app/translations/pt/LC_MESSAGES
-test/app/translations/pt/LC_MESSAGES/messages.mo
-test/app/translations/pt/LC_MESSAGES/messages.po
-test/app/views.py
-test/app/__init__.py
-test/babel
-test/babel/babel.cfg
-test/babel/messages.pot
-test/config.py
-test/README.rst
-test/run.py
+$ find hello
+hello/
+hello/README.rst
+hello/babel
+hello/babel/messages.pot
+hello/babel/babel.cfg
+hello/config.py
+hello/.gitignore
+hello/run.py
+hello/app
+hello/app/models.py
+hello/app/__init__.py
+hello/app/translations
+hello/app/translations/pt
+hello/app/translations/pt/LC_MESSAGES
+hello/app/translations/pt/LC_MESSAGES/messages.mo
+hello/app/translations/pt/LC_MESSAGES/messages.po
+hello/app/templates
+hello/app/templates/404.html
+hello/app/views.py
+
 
 # 创建管理员
-fabmanager create-admin --app superset
+$ flask fab create-admin --app superset
 
 # 运行脚本
-我们可以通过fabmanager来运行生成的脚本 ，目录下缺省名称为run.py
-$ fabmanager run
-也可以通过Python解释器来运行
+# 通过fabmanager或者Python解释器 来运行生成的脚本，目录下缺省名称为run.py
+$ flask fab run
+# 或者
 $ python3 run.py
 ```
 
@@ -1288,20 +1295,22 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 ## 2.3 python-Tornado
 
+官网  http://www.tornadoweb.org/
+
 ### 简介
 
-表格 tornado版本说明
+表格 tornado版本说明  详见 [[release](https://www.tornadoweb.org/en/stable/releases.html)]
 
 | 版本号 | 发布时间  | 功能或更新说明 |
 | ------ | --------- | -------------- |
-| 1.0    | 2010.7.22 |                |
-| 2.0    | 2011.6.21 |                |
-| 3.0    | 2013.3.29 |                |
-| 4.0    | 2014.7.15 |                |
-| 5.0    | 2018.3.5  |                |
-| 6.0    | 2019.3.1  |                |
+| 1.0    | 2010-7-22 |                |
+| 2.0    | 2011-6-21 |                |
+| 3.0    | 2013-3-29 |                |
+| 4.0    | 2014-7-15 |                |
+| 5.0    | 2018-3-5  |                |
+| 6.0    | 2019-3-1  |                |
 
-备注：最新版本 6.1.0，发布于2020.10.30.
+备注：最新版本 6.1.0，发布于2020-10-30.
 
 
 

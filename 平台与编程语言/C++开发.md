@@ -58,9 +58,9 @@ C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实
 
 3. 函数和参数传递
 
-   * 函数进stack: {若干参数, 函数名, 返回值} 
+   * 函数进stack: {若干参数, 函数名, 返回值}
 
-   * 参数传递: 传值(需要拷贝对象), 传址, 传引用 
+   * 参数传递: 传值(需要拷贝对象), 传址, 传引用
 
 
 
@@ -167,7 +167,7 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 
 
 
-**变量、指针和引用** 
+**变量、指针和引用**
 
 * 变量: 程序设计语言中对存储单元的抽象.具有以下属性: 变量名name, 地址address, 大小size, 类型type, 值value, 生命期lifetime, 作用哉scope。其中变量名是用于标识变量的符号。
 * 指针: 用于存放对象的存储地址。
@@ -225,7 +225,7 @@ struct
 
 * 常量指针: Type * const p; 如数组`Type array[];`
 
-综合示例: int (*a[10])(int) 
+综合示例: int (*a[10])(int)
 
 Note: an array of 10 points to a functions that take an integer argument and return an integer.
 

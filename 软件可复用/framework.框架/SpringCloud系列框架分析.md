@@ -19,20 +19,62 @@
 
 ---
 
-
 # 1  Spring框架概述
 
-微服务是一种架构的理念，提出了微服务的设计原则，从理论为具体的技术落地提供了指导思想。
+Spring 框架可以说是 Java 开发人员使用的最流行的应用程序开发框架之一。它目前由大量提供一系列服务的模块组成。包括模块容器，为构建横切关注点提供支持的面向切面编程（AOP），安全框架，数据存取框架，Web 应用框架和用于模块测试提供支持的类。
+
+Spring 框架的所有组件都通过依赖注入粘在一起。依赖注入（也称为控制反转）使设计和测试松散耦合的软件模块变得更容易。
+
+
+
+Spring Boot / Cloud 是微服务实践的最佳落地方案。
 
 *  Spring **Boot** 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
 *  Spring **Cloud** 是一个基于 Spring Boot 实现的服务治理工具包。Spring Boot 专注于快速、方便集成的单个微服务个体。Spring Cloud 关注全局的服务治理框架。
 
-Spring Boot / Cloud 是微服务实践的最佳落地方案。
+
+
+## 版本
+
+### Spring版本
+
+表格 Spring版本详细
+
+| 版本 | 发布时间 | 特性                                                         |
+| ---- | -------- | ------------------------------------------------------------ |
+| 1.0  | 2004-3   |                                                              |
+| 2.0  | 2006-10  | Spring 2.0 具有可扩展的 XML 配置功能，用于简化 XML 配置，支持 Java 5，额外的 IoC 容器扩展点，支持动态语言。 |
+| 2.5  | 2007-12  | Spring 2.5 中的主要新功能包括支持 Java 6 / Java EE 5，支持注释配置，classpath 中的组件自动检测和兼容 OSGi 的 bundle。 |
+| 3.0  | 2009-12  | Spring 3.0 具有许多重要特性，如重组模块系统，支持 Spring 表达式语言，基于 Java 的 bean 配置（JavaConfig），支持嵌入式数据库（如 HSQL，H2 和 Derby），模型验证/ REST 支持和对 Java EE 的支持。 |
+| 4.0  | 2013-12  | 4.x最后一个版本是4.3.8(2017.4)。<br>Spring 4.0 是 Spring 框架的一大进步，它包含了对Java 8 的全面支持，更高的第三方库依赖性（groovy 1.8+，ehcache 2.1+，hibernate 3.6+等），Java EE 7 支持，groovy DSL for bean 定义，对 websockets 的支持以及对泛型类型的支持作为注入 bean 的限定符。 |
+| 5.0  |          |                                                              |
+
+> 2013 年 4月，VMware 和 EMC 通过 GE 投资创建了一家名为 Pivotal 的合资企业。所有的 Spring 应用项目都转移到了 Pivotal。
 
 
 
-## Spring版本号
+### Spring Boot版本
+
+2012 年 10 月，Mike Youngstrom 在 Spring jira 中创建了一个功能请求，要求在 Spring 框架中支持无容器 Web 应用程序体系结构。这一要求促使了 2013 年初开始的 Spring Boot 项目的研发。
+
+Spring Boot 简单性使 java 开发人员能够快速大规模地采用该项目。Spring Boot 可以说是在 Java 中开发基于 REST 的微服务 Web 应用程序的最快方法之一。
+
+表格 Spring Boot版本详细
+
+| 版本 | 发布时间 | 特性                                                         |
+| ---- | -------- | ------------------------------------------------------------ |
+| 1.0  | 2014-4   |                                                              |
+| 1.1  | 2014-6   | 改进的模板支持，gemfire 支持，elasticsearch 和 apache solr 的自动配置。 |
+| 1.2  | 2015-3   | 升级到 servlet 3.1 / tomcat 8 / jetty 9，spring 4.1 升级，支持 banner / jms / SpringBootApplication 注解。 |
+| 1.3  | 2016-12  | Spring 4.2 升级，新的 spring-boot-devtools，用于缓存技术（ehcache，hazelcast，redis 和 infinispan）的自动配置以及完全可执行的 jar 支持。 |
+| 1.4  | 2017-1   | spring 4.3 升级，支持 couchbase / neo4j，分析启动失败和RestTemplateBuilder。 |
+| 1.5  | 2017-2   | 支持 kafka / ldap，第三方库升级，弃用 CRaSH 支持和执行器记录器端点以动态修改应用程序日志级别。 |
+| 1.6  | 2018-3   | 基于 Java 8，支持 Java 9，支持 Quartz ，调度程序大大简化了安全自动配置，支持嵌入式 Netty。 |
+
+
+
+### Spring Cloud版本
 
 Spring Cloud 自 2016 年 1 月发布第一个 Angel.SR5 版本，到目前 2020 年 3 月发布 Hoxton.SR3 版本，已经历经了 4 年时间。这 4 年时间里，Spring Cloud 一共发布了 46 个版本，支持的组件数从 5 个增加到 21 个。
 
@@ -44,13 +86,13 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 
 
 
-表格 Sprint Boot和Sprint Cloud的版本号构成
+表格 Sprint Boot 和Sprint Cloud的版本号构成
 
-|                | Sprint Boot                         | Sprint Cloud                         |
-| -------------- | ----------------------------------- | ------------------------------------ |
-| 版本号         | 数字（主.次.修改）                  | 单词表示，首字母越靠后表示版本号越大 |
-| 版本tag        | 希腊字母（Base/Alpha/Beta/RELEASE） | 英文单词（BUILD、GA、PRE、RC、SR）   |
-| 完整版本号示例 | 2.0.3 RELEASE                       | Greenwich.SR5                        |
+|                | Sprint Boot                         | Sprint Cloud                                                 |
+| -------------- | ----------------------------------- | ------------------------------------------------------------ |
+| 版本号         | 数字（主.次.修改）                  | 单词表示，首字母越靠后表示版本号越大。2020年后用年份记录版本号。 |
+| 版本tag        | 希腊字母（Base/Alpha/Beta/RELEASE） | 英文单词（BUILD、GA、PRE、RC、SR）                           |
+| 完整版本号示例 | 2.0.3 RELEASE                       | Greenwich.SR5                                                |
 
 备注：1. 用版本tag表示当前版本处于哪个开发阶段。tag详细含义可参见 [开源软件开发指南](../../平台与编程语言/platform.平台/开源软件开发指南.md)
 
@@ -89,7 +131,7 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 
 
 
-## Spring Cloud规范实现分支
+## **Spring Cloud规范实现分支**
 
  Spring Cloud 规范目前的实现者也不单单只有 Netflix 这一套。目前有 Spring Cloud Alibaba、Spring Cloud Consul、Spring Cloud Zookeeper、Spring Cloud Kubernetes，甚至 Spring Cloud 官方也有对应的实现组件比如 Spring Cloud Config 集成了 Git、SVN 或 Database 提供配置服务、Spring Cloud Stream RabbitMQ/Kafka 提供消息抽象的实现者。
 
@@ -115,9 +157,10 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 
 ## 本章参考
 
-[1].  4 年 46 个版本，一文读懂 Spring Cloud 发展历史 https://blog.csdn.net/csdnnews/article/details/105304531
+* 深入浅出，了解 Spring 框架和 Spring Boot 的历史  https://mp.weixin.qq.com/s/iqve1_9kjYCGdXzV1nAQqA
+* 4 年 46 个版本，一文读懂 Spring Cloud 发展历史 https://blog.csdn.net/csdnnews/article/details/105304531
 
-[2]. 初识SpringCloud 整体架构 https://blog.csdn.net/Strive_Peter/article/details/113887255
+* 初识SpringCloud 整体架构 https://blog.csdn.net/Strive_Peter/article/details/113887255
 
 
 
@@ -379,3 +422,5 @@ services:
 [2]:   http://docs.docker.com/composq/faq	"FAQ"
 [3]:  http://c.biancheng.net/spring_cloud/  "Spring Cloud入门教程：Spring Cloud框架经典学习资料"
 [4]:   https://blog.csdn.net/Strive_Peter/article/details/113887255  "初识SpringCloud 整体架构 "
+
+*

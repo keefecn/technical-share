@@ -93,6 +93,7 @@ Personal Technical Share,  个人技术分享
 │          memcache用户手册.md
 │          redis用户手册.md
 │          postgres用户手册.md
+│          OLAP分析型数据库.md
 │          元数据分析.md
 │          数据库技术.md
 │          数据库架构.md
