@@ -3878,30 +3878,17 @@ pip install git+git://github.com/gawel/pyquery.git
 **官网&官网文档**
 
 * [Python.org](http://www.python.org/)
-
 * [python.cn](http://python.cn/)
-
 * python官方扩展库package index  https://pypi.python.org
-
 * python非官方扩展库 http://www.lfd.uci.edu/~gohlke/pythonlibs/
-
 * wxpython https://www.wxpython.org
-
 * pypy http://pypy.org/
-
 * Tkinter教程 https://tkdocs.com/tutorial/index.html
-
 * pytest文档 https://docs.pytest.org/en/latest/mark.html
-
 * Making a PyPI-friendly README https://packaging.python.org/guides/making-a-pypi-friendly-readme/
-
 * WSGI-[pep-0333 ](https://www.python.org/dev/peps/pep-0333/)   https://www.python.org/dev/peps/pep-0333/
-
 * gunicorn  http://gunicorn.org/
-
 * gunicorn官网文档 http://gunicorn.readthedocs.io/en/latest/
-
-
 
 
 

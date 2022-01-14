@@ -24,18 +24,18 @@
 
 表格  python三大框架的实现方式比较
 
-|                | Django                                              | Flask                                            | tornado                                                      |
-| -------------- | --------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| 简述           | 全能、重量级框架                                    | 轻量级框架，原生组件少                           | 轻量、异步高性能                                             |
-| 代码行数       | 120K                                                | 42K                                              | 6.5K                                                         |
-| 全局WEB实例    | startproject                                        | `from flask import Flask  g_app=Flask(__name__)` | tornado.web.Application                                      |
-| 应用app实例    | startapp                                            | 蓝图Blureprint                                   |                                                              |
-| restful扩展    | djangorestframework                                 | flask_restplus                                   |                                                              |
-| 类基础视图View | from django.views import View                       | from flask.views import View                     |                                                              |
-| 类视图APIView  | from rest_framework.views import APIView            |                                                  |                                                              |
-| 路由映射       | urlpatterns = [    path('admin/', admin.site.urls), | add_url_rule('/xx', viewfun=xxView.as_view())    | router = RuleRouter([     Rule(PathMatches("/router.*"), CustomRouter()) ]) |
-| ORM            | DRF                                                 | flask_sqlalchemy                                 |                                                              |
-| swagger        | drf-yasg 或 coreapi                                 | flassger 或 restplus                             |                                                              |
+|                | Django                                             | Flask                                            | tornado                                                      |
+| -------------- | -------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| 简述           | 全能、重量级框架                                   | 轻量级框架，原生组件少                           | 轻量、异步高性能                                             |
+| 代码行数       | 120K                                               | 42K                                              | 6.5K                                                         |
+| 全局WEB实例    | startproject                                       | `from flask import Flask  g_app=Flask(__name__)` | tornado.web.Application                                      |
+| 应用app实例    | startapp                                           | 蓝图Blureprint                                   |                                                              |
+| restful扩展    | djangorestframework                                | flask_restplus                                   |                                                              |
+| 类基础视图View | `from django.views import View`                    | `from flask.views import View`                   |                                                              |
+| 类视图APIView  | `from rest_framework.views import APIView`         |                                                  |                                                              |
+| 路由映射       | urlpatterns = [ path('admin/', admin.site.urls), ] | add_url_rule('/xx', viewfun=xxView.as_view())    | router = RuleRouter([     Rule(PathMatches("/router.*"), CustomRouter()) ]) |
+| ORM            | DRF                                                | flask_sqlalchemy                                 |                                                              |
+| swagger        | drf-yasg 或 coreapi                                | flassger 或 restplus                             |                                                              |
 
 
 
@@ -651,7 +651,7 @@ class Field:
 
 #  3 tornado源码剖析
 
-Tornado 由前 google 员工开发，代码非常精练，实现也很轻巧，加上清晰的注释和丰富的 demo，我们可以很容易的阅读分析 tornado. 通过阅读 Tornado 的[源码](http://www.nowamagic.net/academy/tag/源码)，你将学到：
+Tornado 由前 google 员工开发，代码非常精练，实现也很轻巧，加上清晰的注释和丰富的 demo，我们可以很容易的阅读分析 tornado. 通过阅读 Tornado 的源码，你将学到：
 
 - 理解 Tornado 的内部实现，使用 tornado 进行 web 开发将更加得心应手。
 - 如何实现一个高性能，非阻塞的 http 服务器。

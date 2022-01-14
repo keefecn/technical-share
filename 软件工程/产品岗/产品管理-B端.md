@@ -133,6 +133,25 @@ B端产品会针对某个行业做全领域的解决方案，例如：淘宝是�
 
 
 
+#### SaaS分类
+
+SaaS从形式上可以分为很多类，比如：通用工具型、平台型、交易型、垂直型、业务型等。
+
+但从运营模式上，把它们概括为工具类SaaS和业务类SaaS两大类就够了。
+
+* 工具类SaaS：工具类SaaS仍然属于软件，即它们的产品功能属性大于服务属性。
+* 业务类SaaS：其服务属性远大于其产品功能属性。
+
+
+
+#### SaaS商业化
+
+SaaS公司既不是软件公司，也不是互联网公司，而是数字化服务公司。数字化是它的服务方式或手段，其存在的目的是为企业提供服务。
+
+SaaS公司之间的竞争，靠的不是软件产品，而是服务的差异化。
+
+
+
 ### ISV
 
 ISV英文全称是Independent Software Vendors ，意为“独立软件开发商”，特指专门从事软件的开发、生产、销售和服务的企业。如微软（Microsoft）、甲骨文（Oracle）等。
@@ -160,6 +179,7 @@ ISV英文全称是Independent Software Vendors ，意为“独立软件开发商
 * 中国SaaS大爆发：一个行业的黄金时代与价值重估 https://m.gmw.cn/baijia/2021-11/08/35295771.html
 * 新型企业级服务 ISV 正在崛起，工具型ISV操盘分析  http://www.woshipm.com/pd/4286670.html
 * B端业务中ISV的生存困境和用户运营操盘解析   http://www.woshipm.com/operate/4094586.html
+* 影响一家SaaS公司的8个关键认知  www.woshipm.com/it/5268221.html
 
 
 

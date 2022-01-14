@@ -101,8 +101,8 @@ superset-ui/
       test/  # unit tests
       types/ # typescript type declarations
       ...
-      lib/   # commonjs output
-      esm/   # es module output
+      lib/   # commonjs output  公共js输出
+      esm/   # es module output es模块输出
       ...
     ...
 ```
@@ -151,7 +151,7 @@ Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
 # 2 核心模块 /core/
 
-表格  core的源码结构 
+表格  core的源码结构
 
 | 一级目录&文件      | 二级目录或文件 | 主要类&函数 | 说明       |
 | ------------------ | -------------- | ----------- | ---------- |
@@ -230,7 +230,7 @@ new CountryMapChartPlugin().configure({ key: 'country-map' }).register();
 
 ## 4.1 plugin-chart-echarts/
 
-表格  plugin-chart-echarts的源码结构 
+表格  plugin-chart-echarts的源码结构
 
 | 一级目录&文件    | 二级目录或文件 | 说明         |
 | ---------------- | -------------- | ------------ |
@@ -281,11 +281,11 @@ function Echart(
   const chartRef = useRef<ECharts>();
   const currentSelection = useMemo(() => Object.keys(selectedValues) || [], [selectedValues]);
   const previousSelection = useRef<string[]>([]);
-  
-  ...   
+
+  ...
 }
 
-export default forwardRef(Echart);      
+export default forwardRef(Echart);
 ```
 
 
@@ -296,7 +296,7 @@ export default forwardRef(Echart);
 
 ### Pie/ 饼图
 
-表格  饼图插件的源码结构 
+表格  饼图插件的源码结构
 
 | 目录&文件         | 主要类&函数                                                  | 说明                                       |
 | ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
@@ -359,15 +359,15 @@ const {
   outerRadius,
   numberFormat,
   showLabels,
-} = DEFAULT_FORM_DATA;  
+} = DEFAULT_FORM_DATA;
 
 const config: ControlPanelConfig = {
-  controlPanelSections: [ 
+  controlPanelSections: [
     sections.legacyRegularTime,
       // 数据项
       // 自定义项
     ],  //控制面板选项
-    
+
   controlOverrides: {  // 可重载项
     series: {
       validators: [validateNonEmpty],
@@ -403,11 +403,11 @@ export default function EchartsPie({
   formData,
 }: PieChartTransformedProps) {
   // 数据更改时的处理回调函数
-  const handleChange = useCallback( 
+  const handleChange = useCallback(
         ...
-        );  
-  
-  // 事件处理器      
+        );
+
+  // 事件处理器
   const eventHandlers: EventHandlers = {
     click: props => {
       const { name } = props;
@@ -429,7 +429,7 @@ export default function EchartsPie({
       selectedValues={selectedValues}
     />
   );
-}        
+}
 ```
 
 
@@ -454,7 +454,7 @@ export default class EchartsPieChartPlugin extends ChartPlugin<
   EchartsPieFormData,
   EchartsPieChartProps
 > {
-  constructor() { 
+  constructor() {
     super({
       buildQuery,
       controlPanel,
@@ -489,7 +489,7 @@ export default class EchartsPieChartPlugin extends ChartPlugin<
       transformProps,
     });
   }
-}    
+}
 ```
 
 
@@ -569,7 +569,7 @@ export default function transformProps(chartProps: EchartsPieChartProps): PieCha
   const { data = [] } = queriesData[0];
   const coltypeMapping = getColtypesMapping(queriesData[0]);
   ...
-  
+
 }
 ```
 
@@ -579,7 +579,7 @@ export default function transformProps(chartProps: EchartsPieChartProps): PieCha
 
 时间序列图包括多种图表类型：面积图、直方图、线图、平滑线图、离散图等。
 
-表格  时间序列图插件的源码结构 
+表格  时间序列图插件的源码结构
 
 | 目录&文件             | 主要类&函数                                                  | 说明                                       |
 | --------------------- | ------------------------------------------------------------ | ------------------------------------------ |
@@ -597,15 +597,15 @@ export default function transformProps(chartProps: EchartsPieChartProps): PieCha
 
 
 
-## 4.2 plugin-chart-table/  
+## 4.2 plugin-chart-table/
 
 
 
-## 4.3 plugin-chart-pivot-table/  
+## 4.3 plugin-chart-pivot-table/
 
 
 
-## 4.4 plugin-chart-xy/  
+## 4.4 plugin-chart-xy/
 
 
 
@@ -749,3 +749,4 @@ if (shouldRunTyping) {
 **参考链接**
 
 * superset 二次开发之看板渲染为深色大屏 https://juejin.cn/post/7004462914765586445
+
