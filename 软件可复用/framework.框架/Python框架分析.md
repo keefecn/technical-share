@@ -1107,13 +1107,13 @@ app.config.from_pyfile('config.py')
 | 扩展组件         | 简介                                                         | 使用示例                                                     |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | flask_restx      | 构建restful标准的API，包含swagger UI                         |                                                              |
-| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | fabmanager [OPTIONS] COMMAND [ARGS]...                    |
+| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | `flask fab [OPTIONS] COMMAND [ARGS]`                         |
 | flask-login      | 登陆。                                                       |                                                              |
-| flask-migrate    | 数据库迁移、升级。                                           | `$python manage.py db migrate $python manage.py db upgrade`  |
+| flask-migrate    | 数据库迁移migrate、升级upgrade。                             | `$python manage.py db migrate `<br>`$python manage.py db upgrade` |
 | flask-cache      | 缓存，支持redis/memcache/filesystem                          |                                                              |
 | flask-script     | 命令行脚本                                                   | from flask-script import Manager   Manager().run()           |
 | flask-sqlalchemy | DB的ORM模型。                                                | from flask_sqlalchemy   import SQLAlchemy<br>db =   SQLAlchemy(app) |
-| flask-cors       | 跨域资源共享                                                 | CORS(app, resources=r'/*')                                   |
+| flask-cors       | 跨域资源共享                                                 | `CORS(app, resources=r'/*')`                                 |
 
 
 
@@ -1293,11 +1293,12 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 ### 本节参考
 
-[1]   [Jinja2 文档](http://jinja.pocoo.org/2/documentation/)
+*  [Jinja2 文档](http://jinja.pocoo.org/2/documentation/)
 
-[2]   [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)
+* [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)
 
-[3].  Building beautiful REST APIs using Flask, Swagger UI and Flask-RESTPlus https://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/
+* Building beautiful REST APIs using Flask, Swagger UI and Flask-RESTPlus https://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/
+* 使用swagger 生成 Flask RESTful API  https://blog.csdn.net/IAlexanderI/article/details/79613910
 
 
 
