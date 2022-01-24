@@ -99,8 +99,8 @@ Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的
 | 2016 | IBM开源其Java虚拟机J9，贡献给Eclipse基金会管理，命名为**OpenJ9**。 |
 | 2017 | 8月，Oracle将Java EE（Java Enterprise Edition，J2EE）移交给开源组织Eclipse基金会接手。9月，Java9发布。 |
 | 2018 | 3月，Java EE更名为Jakarta EE，Java 10发布。                  |
-| 2019 |                                                              |
-| 2020 |                                                              |
+| ...  |                                                              |
+| 2022 |                                                              |
 
 备注：JDK版本变迁详见 JDK章节。
 
@@ -131,8 +131,6 @@ JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。
 ​             ![1574525105512](../media/program_lang/java_001.png)
 
 图 1 JDK结构图
-
-
 
 
 
@@ -441,7 +439,6 @@ Java的并发包提供了三个常用的并发队列实现，分别是：Concurr
 # 3 Java开发环境
 
 ## 3.1  Java开发工具
-参见《[多语言开发](多语言开发.md)》
 表格 6 Java常用工具列表
 
 | 工具     | 使用                                                     | 示例           |
@@ -490,7 +487,7 @@ export Java_HOME CLASSPATHPATH
 备注：在classpath未设置好的情况下，编码和运行需指定classpath,示例如下：
 `$ javac -classpath./weka.jar;./MessageClassifier.Java`
 
-//检查java命令和JAVA_HOME环境变量，以下命令在ubuntu14.04下执行。
+检查java命令和JAVA_HOME环境变量，以下命令在ubuntu14.04下执行。
 ```sh
 $java -version
 java version"1.7.0_121"
@@ -500,7 +497,10 @@ $echo $JAVA_HOME
 /usr/lib/jvm/java-7-openjdk-i386
 ```
 
+
+
 ### 3.1.2  WAR和JAR打包
+
 Java Servlet规定定义了WAR(Web Application Archive)的文件格式及结构。
 WAR是针对web项目的，同时war包也是为了方便部署。在WEB项目中也能跑JAR包。EAR是J2EE标准的JAR包，只能在支持J2EE的环境下使用EAR包。比如在tomcat中就不能使用ear方式，但是在weblogic中两种都可以。
 JAR和WAR包的本质区别应该在于目录的结构，其打包的命令都是jar去完成的。
@@ -680,9 +680,10 @@ xml Validation="false"  xmlNamespaceAware="false">
 
 ### 3.2.6  Tomcat性能调优
 
-1)       增加连接数
+**1、增加连接数**
 调整server.xml中connector线程池的参数。
 在tomcat配置文件server.xml中的<Connector.../>配置中，和连接数相关的参数有：
+
 *  minProcessors：最小空闲连接线程数，用于提高系统处理性能，默认值为10
 *  maxProcessors：最大连接线程数，即：并发处理的最大请求数，默认值为75
 *  acceptCount：允许的最大连接数，应大于等于maxProcessors，默认值为100
@@ -697,23 +698,24 @@ connectionTimeout="30000" disableUploadTimeout="true"/>
 ```
 说明：此外enableLookups设为false,则停用了DNS查询。DNS查询用以记录在访问日志，关闭此查询可以节省网络，内存开销。
 
-2. 加大使用内存
-   常见内存错误：java.lang.OutOfMemoryError
-   说明：此错误包括两种类型，一是Java heap space;二是PermGenSpace;
-   a)   **Java heap space**
-   JVM堆的设置是指Java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heapsize的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。而当前机器内存通常都大于4G。即{Xms,Xmx}={62M,1G}
-   Java的垃圾回收功能即JVM的内存管理机制称为垃圾回收机制(GC)。
-   在JVM中如果98％的时间是用于GC且可用的Heapsize不足2％的时候将抛出此异常信息。
-   解决办法：手动设置JVMHeap（堆）的大小。
 
 
+**2、加大使用内存**
+常见内存错误：java.lang.OutOfMemoryError
+说明：此错误包括两种类型，一是Java heap space；二是PermGenSpace。
 
-   b)  **PermGenspace**
+a)   **Java heap space**
+JVM堆的设置是指Java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heapsize的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。而当前机器内存通常都大于4G。即{Xms,Xmx}={62M,1G}
+Java的垃圾回收功能即JVM的内存管理机制称为垃圾回收机制(GC)。
+在JVM中如果98％的时间是用于GC且可用的Heapsize不足2％的时候将抛出此异常信息。
+解决办法：手动设置JVMHeap（堆）的大小。
+
+b)  **PermGenspace**
    PermGenspace的全称是Permanent Generation space，是指内存的永久保存区域。这块内存主要是被JVM存放Class和Meta信息的，Class在被Load的时候被放入PermGenspace区域，它和存放Instance的Heap区域不同,sun的GC不会在主程序运行期对PermGenspace进行清理，所以如果你的APP会载入很多CLASS的话，就很可能出现PermGenspace溢出。
    解决方法：手动设置MaxPermSize大小
    最终解决方法：
    在启动脚本catalina.sh中增加下行：
-   Java_OPTS='-server –Xms256m -Xmx1536m -XX:PermSize=128M -XX:MaxPermSize=256M'
+   `Java_OPTS='-server –Xms256m -Xmx1536m -XX:PermSize=128M -XX:MaxPermSize=256M'`
 
 
 
@@ -1152,6 +1154,12 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 
 
 
+相关文档
+
+* 《[多语言开发](./多语言开发.md)》、《[项目开发环境工具.md](../软件可复用/tools.工具/项目开发环境工具.md)》
+
+
+
 **参考资料**
 
 * Java资源大全中文版 https://github.com/jobbole/awesome-java-cn
@@ -1167,6 +1175,3 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 * Java中的JAR/EAR/WAR包的文件夹结构说明（转）http://www.cnblogs.com/EasonJim/p/6498804.html
 
 * Java RMI与RPC的区别 https://www.cnblogs.com/ygj0930/p/6542811.html
-
-
-

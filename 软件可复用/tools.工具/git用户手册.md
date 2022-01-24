@@ -27,6 +27,8 @@
 
 # 目录
 
+[TOC]
+
 [目录... 1](#_Toc4226974)
 
 [1    简介... 3](#_Toc4226975)
@@ -133,8 +135,6 @@
 
 
 
-[TOC]
-
 
 
 ---
@@ -145,6 +145,8 @@
 git 分布式版本管理软件。
 
 gitk是git安装包中缺省的图形界面包。可以方便地用来查看历史日志，修改信息等。
+
+
 
 # 2  安装配置篇
 
@@ -873,11 +875,9 @@ git submodule
 * 分布式版本管理。即每个节点即是客户端，也是服务端。也可成为别人的主干树，很适合阶梯式开发管理。
 * Git 是一套内容寻址文件系统。从内部来看，Git 是简单的 key-value 数据存储。它允许插入任意类型的内容，并会返回一个键值，通过该键值可以在任何时候再取出该内容。
 
-GIT API documentation
+GIT API documentation  [file:///usr/share/doc/git-doc/technical/api-index.html]()
 
-  [file:///usr/share/doc/git-doc/technical/api-index.html]()
-
-$man git
+`$ man git`
 
 ## 5.1  CONFIGURATION MECHANISM配置信息git-config
 
@@ -920,7 +920,10 @@ denny@denny-laptop:~/git/unix-center.net/script$ git cat-file -p master^{tree}
 040000 tree 5f4276de1d60a512d919a828e5835635414608c5   python_gap
 ```
 
+
+
 ## 5.3  SYMBOLIC IDENTIFIERS符号标签
+
 ```sh
 Any git command accepting any <object> can also use the following symbolic notation:
     HEAD
@@ -933,15 +936,10 @@ Any git command accepting any <object> can also use the following symbolic notat
 ```
 
 
-## 5.4   本章参考
-
-[1].   http://progit.org/book/zh/ch9-2.html
-
-
 
 # 6  git仓库托管
 
-常见托管仓库：[oschina ](http://git.oschina.net/)[github](http://wwww.github.com) [repo.or.cz](http://repo.or.cz)
+常见托管仓库：[oschina](http://git.oschina.net/)  [github](http://wwww.github.com)  [repo.or.cz](http://repo.or.cz)
 
 ## 6.1  仓库托管简介
 
@@ -1194,7 +1192,7 @@ GitBook can be used either on your computer for building local books or on GitBo
 
 打包发布：`gitbook build`
 
-格式化书： `gitbook pdf|epub|mobi  ../xx.pdf`    #依赖插件 ebook-convert
+格式化书： `gitbook pdf|epub|mobi  ../xx.pdf`    //依赖插件 ebook-convert
 
 
 
@@ -1284,21 +1282,21 @@ book.json模板
 
 # 参考资料
 
-[1].   Git中文手册http://gitbook.liuhui998.com/index.html
+[1]. Git中文手册  http://gitbook.liuhui998.com/index.html
 
-[2].   中文技术文档的写作规范 https://github.com/ruanyf/document-style-guide
+[2]. 中文技术文档的写作规范 https://github.com/ruanyf/document-style-guide
 
-[3].   知乎--如何使用 GitHub？ https://www.zhihu.com/question/20070065
+[3]. 知乎--如何使用 GitHub？ https://www.zhihu.com/question/20070065
 
-[4].   码云平台帮助文档 V1.2 http://git.mydoc.io/?t=83146
+[4]. 码云平台帮助文档 V1.2 http://git.mydoc.io/?t=83146
 
-[5].   合并多个commit http://www.jianshu.com/p/964de879904a
+[5]. 合并多个commit http://www.jianshu.com/p/964de879904a
 
-[6].   Git分支管理策略 http://www.ruanyifeng.com/blog/2012/07/git.html
+[6]. Git分支管理策略 http://www.ruanyifeng.com/blog/2012/07/git.html
 
-[7].   Git配置管理 http://www.uml.org.cn/pzgl/201203084.asp
+[7]. Git配置管理  http://www.uml.org.cn/pzgl/201203084.asp
 
-[8].   github http://gooss.org/the-use-of-git-and-github-management-development/
+[8]. github http://gooss.org/the-use-of-git-and-github-management-development/
 
 
 

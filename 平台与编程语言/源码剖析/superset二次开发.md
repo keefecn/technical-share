@@ -612,7 +612,7 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
    # 最常用的DB
    $ sudo yum install mysql-devel postgresql-devel
    $ pip install mysqlclient cx_Oracle psycopg2
-
+   
    # 除了上面列的python插件，通常还需要对应的 DB动态库支持. 官方镜像apache/superset已经包括mysql, pg的开发库
    # mysql: yum install mysql-devel
    # oracle： 需要独立安装 客户端（约300MB）
@@ -635,57 +635,78 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
 图表类型数量 ：
 
 * v1.0.0支持48种。
+
 * v1.3.0支持59种，新增11种其中10种来自ECharts。v1.3.0支持图表按多种类别进行分类。
 
-| 图表类别 | 图表英文名           | 图表中文名         | 用途 | 支持情况 |
-| -------- | -------------------- | ------------------ | ---- | -------- |
-| 常用图表 | line                 | 线图               |      | √        |
-|          | histogram            | 直方图             |      | √        |
-|          | table                | 表                 |      | √        |
-|          | filter_box           | 筛选盒             |      | √        |
-|          | dist_bar             | 柱状图             |      | √        |
-|          | area                 | 面积图             |      | √        |
-|          | pie                  | 饼图               |      | √        |
-|          | pivot_table          | 透视表             |      | √        |
-|          | country_map          | 国家地图           |      | √        |
-|          | world_map            | 世界地图           |      | √        |
-| 时间序列 | bar                  | 时间序列柱状图     |      | √        |
-|          | time_table           | 时间序列表         |      | √        |
-|          | time_pivot           | 时间序列周期轴     |      | √        |
-|          | echarts_timeseries   | 时间序列           |      | √        |
-|          | compare              | 时间序列百分比变化 |      | √        |
-|          | cal_heatmap          | 时间热力图         |      | √        |
-|          | big_number_total     | 数字               |      | √        |
-| 趋势类   | big_number           | 数字和趋势线       |      | √        |
-|          | heatmap              | 热力图             |      | √        |
-|          | dual_line            | 双线图             |      | √        |
-|          | line_multi           | 多线图             |      | √        |
-|          |                      |                    |      | √        |
-| 复杂图   | rose                 | 夜莺玫瑰图         |      | √        |
-|          | bubble               | 气泡图             |      | √        |
-|          | treemap              | 树状图             |      | √        |
-|          | box_plot             | 箱线图             |      | √        |
-|          | sunburst             | 旭日图             |      | √        |
-|          | sankey               | 桑基图             |      | √        |
-|          | word_cloud           | 词汇云             |      | √        |
-|          | mapbox               | 地图盒             |      | √        |
-|          | partition            | 分区图             |      | √        |
-|          | event_flow           | 事件流             |      | √        |
-|          | deck_path            | 平面路径图         |      | √        |
-|          | directed_force       | 力导向图           |      | √        |
-|          | bullet               | 子弹图             |      | √        |
-|          | paired_ttest         | paired_ttest       |      | √        |
-|          | para                 | 平行坐标           |      | √        |
-|          | chord                | 弦图               |      | √        |
-|          | horizon              | 范围图             |      | √        |
-| deck图   | deck_polygon         | 多边形装饰         |      |          |
-|          | deck_arc             | 3D路径图           |      |          |
-|          | deck_screengrid      | deck_screengrid    |      |          |
-|          | deck_scatter         | 散射图             |      |          |
-|          | deck_hex             | 六边形             |      |          |
-|          | deck_Multiple Layers | 多层图             |      |          |
-|          | deck_grid            | 网格图             |      |          |
-|          | deck_geojson         | deck_geojson       |      |          |
+  
+
+| 图表类别 | 图表英文名                    | 图表中文名          | 标签 | 支持情况 |
+| -------- | ----------------------------- | ------------------- | ---- | -------- |
+| 常用图表 | line                          | 线图                |      | √        |
+|          | histogram                     | 直方图              |      | √        |
+|          | table                         | 表                  |      | √        |
+|          | filter_box                    | 筛选盒              |      | √        |
+|          | dist_bar                      | 柱状图              |      | √        |
+|          | area                          | 面积图              |      | √        |
+|          | pie                           | 饼图                |      | √        |
+|          | pivot_table                   | 透视表              |      | √        |
+|          | country_map                   | 国家地图            |      | √        |
+|          | world_map                     | 世界地图            |      | √        |
+| 时间序列 | bar                           | 时间序列柱状图      |      | √        |
+|          | time_table                    | 时间序列表          |      | √        |
+|          | time_pivot                    | 时间序列周期轴      |      | √        |
+|          | echarts_timeseries            | 时间序列            |      | √        |
+|          | compare                       | 时间序列百分比变化  |      | √        |
+|          | cal_heatmap                   | 时间热力图          |      | √        |
+|          | big_number_total              | 数字                |      | √        |
+| 趋势类   | big_number                    | 数字和趋势线        |      | √        |
+|          | heatmap                       | 热力图              |      | √        |
+|          | dual_line                     | 双线图              |      | √        |
+|          | line_multi                    | 多线图              |      | √        |
+|          |                               |                     |      | √        |
+| 复杂图   | rose                          | 夜莺玫瑰图          |      | √        |
+|          | bubble                        | 气泡图              |      | √        |
+|          | treemap                       | 树状图              |      | √        |
+|          | box_plot                      | 箱线图              |      | √        |
+|          | sunburst                      | 旭日图              |      | √        |
+|          | sankey                        | 桑基图              |      | √        |
+|          | word_cloud                    | 词汇云              |      | √        |
+|          | mapbox                        | 地图盒              |      | √        |
+|          | partition                     | 分区图              |      | √        |
+|          | event_flow                    | 事件流              |      | √        |
+|          | deck_path                     | 平面路径图          |      | √        |
+|          | directed_force                | 力导向图            |      | √        |
+|          | bullet                        | 子弹图              |      | √        |
+|          | paired_ttest                  | paired_ttest        |      | √        |
+|          | para                          | 平行坐标            |      | √        |
+|          | chord                         | 弦图                |      | √        |
+|          | horizon                       | 范围图              |      | √        |
+| deck图   | deck_arc                      | 弧                  | 3D   |          |
+|          | deck_polygon                  | 多边形装饰          | 3D   |          |
+|          | Deck.gl - 3D Grid / deck_grid | 网格                | 3D   |          |
+|          | Deck.gl - 3D HEX / Hexagon    | 3D六角曲面 / 六边形 | 3D   |          |
+|          | deck_screengrid               | 屏幕网格            |      |          |
+|          | deck_scatter                  | 散射点图            |      |          |
+|          | deck_Multiple Layers          | 多层                |      |          |
+|          | deck.gl Path                  | 平面路径图          |      |          |
+|          | deck_geojson                  | deck_geojson        |      |          |
+
+
+
+表格   Deck图详细说明 （共10图，其中3D有4个）
+
+| 变量                 | 图表英文名                 | 图表中文名          | 用途                                                         | 样例数据表名           | 维度                 | 指标                     | tag  |
+| -------------------- | -------------------------- | ------------------- | ------------------------------------------------------------ | ---------------------- | -------------------- | ------------------------ | ---- |
+| deck_arc             | deck.gl Arc                | 弧                  | 绘制起点和目的地之间的距离（如飞行路径）。                   | fight                  | 经度首/尾、纬度首/尾 |                          | 3D   |
+| deck_polygon         | deck.gl Polygon            | 多边形              | 将数据中的地理区域可视化为 Mapbox 渲染地图上的多边形。可以使用度量为多边形着色。 | sf_population_polygons | contour              | sum(population),<br>密度 | 3D   |
+| deck_grid            | Deck.gl - 3D Grid          | 网格                | 在网格视图中可视化地理空间数据，例如 3D 建筑物、景观或对象。 | long_lat               | 经度、纬度           | 计数                     | 3D   |
+| **deck_hex**         | Deck.gl - 3D HEX / Hexagon | 3D六角曲面 / 六边形 | 在地图上叠加六边形网格，并聚合每个单元格边界内的数据。       | long_lat               | 经度、纬度           |                          | 3D   |
+| deck_screengrid      | Deck.gl Screen Grid        | 屏幕网格            | 聚合网格单元边界内的数据并将聚合值映射到动态色标             | long_lat               | 经度、纬度           | 权重                     |      |
+| deck_scatter         | Deck.gl - Scatter plot     | 散射点图            | 在纬度/经度坐标处采用可变半径渲染圆的地图                    | long_lat               | 经度、纬度           | 计数                     |      |
+| deck_Multiple Layers | Deck.gl - Multiple Layers  | 多层                | 将多个图层组合在一起以形成复杂的视觉效果。                   |                        | 多个Deck图组合       |                          |      |
+| deck_path            | deck.gl Path               | 平面路径图          | 在地图上可视化形成路径的连接点。                             | bart_lines             | 线列、颜色           |                          |      |
+| deck_geojson         | Deck.gl - GeoJson          | deck_geojson        | GeoJsonLayer 接收 GeoJSON 格式的数据并将其呈现为交互式多边形、线和点（圆形、图标和/或文本）。 | ?                      | GEOJSON列            |                          |      |
+| mapbox               | MapBox                     | 地图盒              | 类似散射点图，指标呈现的是盒子状。                           | long_lat               | 经度、纬度、         |                          |      |
 
 
 
@@ -746,8 +767,6 @@ JSON串
       "World Map": ["世界地图"],
 }
 ```
-
-
 
 
 
@@ -924,10 +943,10 @@ v1.1开始引入交叉过滤 x-filtering，1.2版本成熟。
    ```shell
    # 常规图表请求
    POST /api/v1/chart/data?form_data=
-
+   
    # 特殊图表-地图请求
    POST /superset/explore_json/?form_data=
-
+   
    # 请求参数：form_data数据（json格式）和 dashboard_id
    form_data={"slice_id":89}&dashboard_id=6
    ```
@@ -2798,6 +2817,16 @@ ENOSPC: System limit for number of file watchers reached
 ```shell
 $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
+
+
+
+**Q3:  A valid API access token is required to use Mapbox data**
+
+描述：Deck图会出现如下提示  `A valid API access token is required to use Mapbox data`
+
+解决方法：需要去http://account.mapbox.com/申请一个token。然后填充到sueprset配置文件 或 作为环境变量。示例如下，
+
+`MAPBOX_API_KEY="pk.eyJ1Ijoia2VlZmUiLCJhIjoiY2t5d3BqYTlxMDRuazJucXZseTlnaTRhaiJ9.6KdCVh-NJxi1vOysqMJEb1"`
 
 
 
