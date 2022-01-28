@@ -89,7 +89,7 @@ superset roadmap https://github.com/apache-superset/superset-roadmap， 以下�
 
 | 版本 | 发布时间   | 功能特性（重大改变+Deprecations+Other）                      | 备注                                                         |
 | ---- | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1.4  | 2021-10-   |                                                              |                                                              |
+| 1.4  | 2022-1-19  |                                                              | 相比1.3.2，共447个commit<br>`git rev-list d29f66 ^286ba5d37 |wc -l ` |
 | 1.3  | 2021-08-13 | 重大改变：去除表格的唯一性检验（因为各DB处理NULL值方式不一样）。<BR>1.3.2(20211011) | 图表类型新增11种合计59种，并且图表可以通过多种方式区分如分类、tag或推荐。 |
 | 1.2  | 2021-06-04 | 废弃：旧的Report和Alerm及其相关的配置项。<br>特性行级别RLS缺省启用。看板添加了过滤映射。 | 源码新增目录superset-websocket 和RESOURCES。RESOURCES包括产品使用组织和特性进展二份文档。<br>v1.2成熟特性有9个，典型如DASHBOARD_CROSS_FILTERS、ROW_LEVEL_SECURITY、SCHEDULED_QUERIES。 |
 | 1.1  | 2021-02-24 |                                                              | 1.1版本引入特性DASHBOARD_CROSS_FILTERS，在1.2版本成熟。      |
@@ -107,7 +107,7 @@ superset roadmap https://github.com/apache-superset/superset-roadmap， 以下�
 | 0.4  | 2015-09-27 |                                                              |                                                              |
 | 0.2  | 2015-09-05 |                                                              | 第一个正式发布版本。                                         |
 
-> 版本号a.b.0一般简写为a.b.
+> 版本号a.b.0一般简写为a.b.  比较版本只在tag间进行，不要在branch比较。
 >
 > ChangeLog: https://github.com/apache/superset/blob/master/CHANGELOG.md
 >
@@ -288,6 +288,9 @@ $ source xx/bin/activate
 $ sudo yum install mysql-devel postgresql-devel
 $ pip install mysqlclient cx_Oracle psycopg2
 $ pip install pycryptodome flask_cors pillow
+
+# 可选：oracle需要额外下载库，可在oracle官网下载
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
 
 # 安装新版本
 $ pip install xx.tar.gz
@@ -612,7 +615,7 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
    # 最常用的DB
    $ sudo yum install mysql-devel postgresql-devel
    $ pip install mysqlclient cx_Oracle psycopg2
-   
+
    # 除了上面列的python插件，通常还需要对应的 DB动态库支持. 官方镜像apache/superset已经包括mysql, pg的开发库
    # mysql: yum install mysql-devel
    # oracle： 需要独立安装 客户端（约300MB）
@@ -638,58 +641,49 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
 
 * v1.3.0支持59种，新增11种其中10种来自ECharts。v1.3.0支持图表按多种类别进行分类。
 
-  
 
-| 图表类别 | 图表英文名                    | 图表中文名          | 标签 | 支持情况 |
-| -------- | ----------------------------- | ------------------- | ---- | -------- |
-| 常用图表 | line                          | 线图                |      | √        |
-|          | histogram                     | 直方图              |      | √        |
-|          | table                         | 表                  |      | √        |
-|          | filter_box                    | 筛选盒              |      | √        |
-|          | dist_bar                      | 柱状图              |      | √        |
-|          | area                          | 面积图              |      | √        |
-|          | pie                           | 饼图                |      | √        |
-|          | pivot_table                   | 透视表              |      | √        |
-|          | country_map                   | 国家地图            |      | √        |
-|          | world_map                     | 世界地图            |      | √        |
-| 时间序列 | bar                           | 时间序列柱状图      |      | √        |
-|          | time_table                    | 时间序列表          |      | √        |
-|          | time_pivot                    | 时间序列周期轴      |      | √        |
-|          | echarts_timeseries            | 时间序列            |      | √        |
-|          | compare                       | 时间序列百分比变化  |      | √        |
-|          | cal_heatmap                   | 时间热力图          |      | √        |
-|          | big_number_total              | 数字                |      | √        |
-| 趋势类   | big_number                    | 数字和趋势线        |      | √        |
-|          | heatmap                       | 热力图              |      | √        |
-|          | dual_line                     | 双线图              |      | √        |
-|          | line_multi                    | 多线图              |      | √        |
-|          |                               |                     |      | √        |
-| 复杂图   | rose                          | 夜莺玫瑰图          |      | √        |
-|          | bubble                        | 气泡图              |      | √        |
-|          | treemap                       | 树状图              |      | √        |
-|          | box_plot                      | 箱线图              |      | √        |
-|          | sunburst                      | 旭日图              |      | √        |
-|          | sankey                        | 桑基图              |      | √        |
-|          | word_cloud                    | 词汇云              |      | √        |
-|          | mapbox                        | 地图盒              |      | √        |
-|          | partition                     | 分区图              |      | √        |
-|          | event_flow                    | 事件流              |      | √        |
-|          | deck_path                     | 平面路径图          |      | √        |
-|          | directed_force                | 力导向图            |      | √        |
-|          | bullet                        | 子弹图              |      | √        |
-|          | paired_ttest                  | paired_ttest        |      | √        |
-|          | para                          | 平行坐标            |      | √        |
-|          | chord                         | 弦图                |      | √        |
-|          | horizon                       | 范围图              |      | √        |
-| deck图   | deck_arc                      | 弧                  | 3D   |          |
-|          | deck_polygon                  | 多边形装饰          | 3D   |          |
-|          | Deck.gl - 3D Grid / deck_grid | 网格                | 3D   |          |
-|          | Deck.gl - 3D HEX / Hexagon    | 3D六角曲面 / 六边形 | 3D   |          |
-|          | deck_screengrid               | 屏幕网格            |      |          |
-|          | deck_scatter                  | 散射点图            |      |          |
-|          | deck_Multiple Layers          | 多层                |      |          |
-|          | deck.gl Path                  | 平面路径图          |      |          |
-|          | deck_geojson                  | deck_geojson        |      |          |
+
+| 图表类别 | 图表英文名         | 图表中文名         | 必选维度     | 支持情况 |
+| -------- | ------------------ | ------------------ | ------------ | -------- |
+| 常用图表 | line               | 线图               |              | √        |
+|          | histogram          | 直方图             |              | √        |
+|          | table              | 表                 |              | √        |
+|          | filter_box         | 筛选盒             |              | √        |
+|          | dist_bar           | 柱状图             |              | √        |
+|          | area               | 面积图             |              | √        |
+|          | pie                | 饼图               |              | √        |
+|          | pivot_table        | 透视表             |              | √        |
+|          | country_map        | 国家地图           | geojson      | √        |
+|          | world_map          | 世界地图           | country_code | √        |
+| 时间序列 | bar                | 时间序列柱状图     |              | √        |
+|          | time_table         | 时间序列表         |              | √        |
+|          | time_pivot         | 时间序列周期轴     |              | √        |
+|          | echarts_timeseries | 时间序列           |              | √        |
+|          | compare            | 时间序列百分比变化 |              | √        |
+|          | cal_heatmap        | 时间热力图         |              | √        |
+|          | big_number_total   | 数字               |              | √        |
+| 趋势类   | big_number         | 数字和趋势线       |              | √        |
+|          | heatmap            | 热力图             |              | √        |
+|          | dual_line          | 双线图             |              | √        |
+|          | line_multi         | 多线图             |              | √        |
+|          |                    |                    |              | √        |
+| 复杂图   | rose               | 夜莺玫瑰图         |              | √        |
+|          | bubble             | 气泡图             |              | √        |
+|          | treemap            | 树状图             |              | √        |
+|          | box_plot           | 箱线图             |              | √        |
+|          | sunburst           | 旭日图             |              | √        |
+|          | sankey             | 桑基图             |              | √        |
+|          | word_cloud         | 词汇云             |              | √        |
+|          | partition          | 分区图             |              | √        |
+|          | event_flow         | 事件流             |              | √        |
+|          | deck_path          | 平面路径图         |              | √        |
+|          | directed_force     | 力导向图           |              | √        |
+|          | bullet             | 子弹图             |              | √        |
+|          | paired_ttest       | paired_ttest       |              | √        |
+|          | para               | 平行坐标           |              | √        |
+|          | chord              | 弦图               |              | √        |
+|          | horizon            | 范围图             |              | √        |
+| deck图   | 共10图，详见下表   |                    |              |          |
 
 
 
@@ -708,9 +702,11 @@ engine = create_engine('postgresql+psycopg2://scott:tiger@localhost:5432/mydatab
 | deck_geojson         | Deck.gl - GeoJson          | deck_geojson        | GeoJsonLayer 接收 GeoJSON 格式的数据并将其呈现为交互式多边形、线和点（圆形、图标和/或文本）。 | ?                      | GEOJSON列            |                          |      |
 | mapbox               | MapBox                     | 地图盒              | 类似散射点图，指标呈现的是盒子状。                           | long_lat               | 经度、纬度、         |                          |      |
 
+> 维度是指groupby项，指标是指要展现的计数列。
 
 
-JSON串
+
+JSON串 (图表名称在不同版本会略有变化)
 
 ```json
 {
@@ -726,12 +722,12 @@ JSON串
       "Compare": ["高级线图"],
       "Country Map": ["国家地图"],
       "deck.gl 3D Hexagon": ["DECK 3D六边形"],
-      "deck.gl Arc": ["DECK 3D路径图"],
-      "deck.gl Path": ["DECK平面路径图"],
+      "deck.gl Arc": ["DECK弧形"],
+      "deck.gl Path": ["DECK平面路径"],
       "deck.gl Polygon": ["DECK多边形"],
       "deck.gl Scatterplot": ["DECK散射点图"],
-      "deck.gl Grid": ["DECK网格图"],
-      "deck.gl Screen Grid": ["DECK网格图2"],
+      "deck.gl Grid": ["DECK网格"],
+      "deck.gl Screen Grid": ["DECK屏幕网格"],
       "deck.gl Multiple Layers": ["DECK多层"],
       "Directed Force": ["力导向图"],
       "Dist Bar": ["柱状图2"],
@@ -769,6 +765,31 @@ JSON串
 ```
 
 
+
+### 样例数据集说明
+
+数据集下载  [apache-superset/examples-data (github.com)](https://github.com/apache-superset/examples-data)
+
+加载数据集命令： `superset load_examples`
+
+| 原始数据集名                          | 表名                 | 说明                 | 关键字段                                 | 适用图表   |
+| ------------------------------------- | -------------------- | -------------------- | ---------------------------------------- | ---------- |
+| airport.csv.gz                        |                      | 机场                 |                                          |            |
+| bart_lines                            | 同数据集名           | 条形线               | color, path_json                         | 平面路径图 |
+| birth_france_data_for_country_map.csv |                      | 法国各州出生         | dept_id(FR-xx)                           | 国家地图   |
+| birth_names                           |                      | 法国各州出生名字     | state                                    |            |
+| countrys                              | wb_health_population |                      | country_code                             | 全球地图   |
+| energy                                | energy_usage         | 能源用途             |                                          |            |
+| fight_data.csv.gz                     | flights              | 飞行数据             | latitude, longitude, lat_dest, long_dest |            |
+| multiformat_time_series               | 同数据集名           | 多格式时间序列       | ds, ds2, string0, string1, epoch_s       | 时间序列类 |
+| paris_iris                            | paris_isir_mapping   |                      | type, features(geojson列)                |            |
+| random_time_series                    | 同数据集名           | 随机时间序列         | ds                                       | 时间序列类 |
+| san_francisco.csv.gz                  | long_lat             | 圣弗朗西斯科地理数据 | long, lat                                | Deck系列图 |
+| sf_population                         | 同数据集名           | 人口多边形           | contour(列表)                            | Deck多边形 |
+| turorial_flights.csv                  |                      |                      |                                          |            |
+| unicode_utf8_unixn_test.csv           |                      |                      |                                          |            |
+
+说明：若原始数据集名未特殊说明，一般为JSON的压缩文件，后缀名为.json.gz
 
 
 
@@ -943,10 +964,10 @@ v1.1开始引入交叉过滤 x-filtering，1.2版本成熟。
    ```shell
    # 常规图表请求
    POST /api/v1/chart/data?form_data=
-   
+
    # 特殊图表-地图请求
    POST /superset/explore_json/?form_data=
-   
+
    # 请求参数：form_data数据（json格式）和 dashboard_id
    form_data={"slice_id":89}&dashboard_id=6
    ```
@@ -2696,10 +2717,11 @@ $ yum install gcc libffi-devel python3-devel openssl-devel -y
 
 原因：可用`getconf PAGESIZE`查看页大小。要在64K环境编译，才能兼容4K和16K的。
 
-解决方法：重新在64位机上编译安装。另外更新报错模块升级到新版，如pyarrow从4.0.1版本升级到最新的6.0.1版本。
+解决方法：重新在64位机上编译安装。另外更新报错模块要么用低版本（如pyrsistent），要么用最新版本（如pyarrow）
 
 ```shell
-$ pip install pyarrow==6.0.1
+$ pip install pyarrow==6.0.1	  #原依赖要求pyarrow>=4.0.1, <4.1, 但会导致jemalloc错误，实需升级到最新的6.0.1版本。
+$ pip install pyrsistent==0.14.0  #原依赖要求 pyrsistent>=0.14.0，最新版本0.18.0无法安装，指定版本安装
 ```
 
 

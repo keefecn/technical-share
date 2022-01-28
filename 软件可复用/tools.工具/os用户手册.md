@@ -91,12 +91,12 @@ EFI 的全称是可扩展固件接口 (Extensible Firmware Interface)，它是 I
   ```shell
   # 查看磁盘分区情况，获取U盘设备符，示例U盘设备是/dev/sdb是
   $ sudo fdisk -l
-  # 卸载U盘 
+  # 卸载U盘
   $ sudo umount /dev/sdb
-  
+
   # 法1. dd命令制作U盘 (很不友好，没有任何进度提示，约需20分钟)
   $ sudo dd if=/home/lm/ubuntukylin-19.04-enhanced-amd64.iso of=/dev/sdb
-  
+
   # 法2. 启动盘创建器（usb-creator-gtk）
   # usb-creator-gtk是Ubuntu系统自带的U盘系统启动盘制作工具，制作时将覆盖U盘中的所有内容。该工具仅支持制作Debian系的系统镜像。
   ```
@@ -157,7 +157,7 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 ## FAQ
 
-### WINDOWS命令行
+### Windows命令行
 
 1. 以管理员身份运行命令行 cmd
 
@@ -243,7 +243,7 @@ $ sudo dpkg -i google-chrome-stable_current_amd64.deb
    ```SHELL
    # 一键安装脚本
    $ wget www.hostbuf.com/downloads/finalshell_install_linux.sh;chmod +x finalshell_install_linux.sh;./finalshell_install_linux.sh;
-   
+
    * 安装路径 /usr/lib/FinalShell
    * /配置文件路径 /home/$USER/.finalshell/
    * 卸载删除安装目录 rm -rf /usr/lib/FinalShell/
@@ -523,7 +523,6 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 
 * Ubuntu 安装中文输入法  https://blog.csdn.net/Chamico/article/details/89788324
 * ubuntu设置静态ip（WIRED） http://jingyan.baidu.com/article/b7001fe18f85fe0e7282ddaf.html
-*  阿里云ECS服务器Linux环境下配置php服务器 https://blog.csdn.net/l00149133/article/details/50434004
 
 
 
@@ -589,13 +588,13 @@ Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统�
 
 表格 3 AMP及其常用应用列表
 
-| softwareName                                 | Desc                                                | currnet version           | Note                                                         |
-| -------------------------------------------- | --------------------------------------------------- | ------------------------- | ------------------------------------------------------------ |
-| [Apache 	httpd](http://httpd.apache.org/) | web server                                          | 2.4.23 2015               |                                                              |
-| [PHP](http://php.net/)                       | PHP is a popular general-purpose scripting language | v5.6.26 2016 v7.0.11 2016 |                                                              |
-| [MySQL](http://www.mysql.com/)               |                                                     |                           | 已被oracel收购。                                             |
-| [PHPMyadmin](http://www.phpmyadmin.net/)     | 管理mysql                                           | V4.6.4 2016               | 最新版本要求PHP在v5.x以上。 支持导入bzip2压缩。              |
-| mediawiki                                    | wiki                                                |                           | [https://www.mediawiki.org](https://www.mediawiki.org/) 1.15.0以后需mysql5.0以后支持。1 |
+| softwareName                             | Desc                                                | currnet version           | Note                                                         |
+| ---------------------------------------- | --------------------------------------------------- | ------------------------- | ------------------------------------------------------------ |
+| [Apache httpd](http://httpd.apache.org/) | web server                                          | 2.4.23 2015               |                                                              |
+| [PHP](http://php.net/)                   | PHP is a popular general-purpose scripting language | v5.6.26 2016 v7.0.11 2016 |                                                              |
+| [MySQL](http://www.mysql.com/)           |                                                     |                           | 已被oracel收购。                                             |
+| [PHPMyadmin](http://www.phpmyadmin.net/) | 管理mysql                                           | V4.6.4 2016               | 最新版本要求PHP在v5.x以上。 支持导入bzip2压缩。              |
+| mediawiki                                | wiki                                                |                           | [https://www.mediawiki.org](https://www.mediawiki.org/) 1.15.0以后需mysql5.0以后支持。1 |
 
 
 
@@ -680,7 +679,7 @@ default_character_set=utf-8
 
 
 
-#### Linux直接安装 
+#### Linux直接安装
 
 **Ubunut下APT-GET方式安装**
 
@@ -854,40 +853,40 @@ Ubuntu系统的Apache服务器配置结构如下：
 $ cat /etc/apach2/apach2.conf
 # Include the virtual host configurations:IncludeOptional sites-enabled/*.conf
 $ vi /etc/apache2/sites-available/000-default.conf
-<VirtualHost *:80>        
-# The ServerName directive sets the request scheme, hostname and port that        
-# the server uses to identify itself. This is used when creating        
-# redirection URLs. In the context of virtual hosts, the ServerName        
-# specifies what hostname must appear in the request's Host: header to        
-# match this virtual host. For the default virtual host (this file) this        
-# value is not decisive as it is used as a last resort host regardless.        
-# However, you must set it for any further virtual host explicitly.        
-#ServerName www.example.com        
-ServerAdmin webmaster@localhost        
-DocumentRoot /var/www/html        
-# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,        
-# error, crit, alert, emerg.        
-# It is also possible to configure the loglevel for particular        
-# modules, e.g.        
-#LogLevel info ssl:warn        
+<VirtualHost *:80>
+# The ServerName directive sets the request scheme, hostname and port that
+# the server uses to identify itself. This is used when creating
+# redirection URLs. In the context of virtual hosts, the ServerName
+# specifies what hostname must appear in the request's Host: header to
+# match this virtual host. For the default virtual host (this file) this
+# value is not decisive as it is used as a last resort host regardless.
+# However, you must set it for any further virtual host explicitly.
+#ServerName www.example.com
+ServerAdmin webmaster@localhost
+DocumentRoot /var/www/html
+# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+# error, crit, alert, emerg.
+# It is also possible to configure the loglevel for particular
+# modules, e.g.
+#LogLevel info ssl:warn
 
-ErrorLog ${APACHE_LOG_DIR}/error.log        
-CustomLog ${APACHE_LOG_DIR}/access.log combined        
-# For most configuration files from conf-available/, which are        
-# enabled or disabled at a global level, it is possible to        
-# include a line for only one particular virtual host. For example the        
-# following line enables the CGI configuration for this host only        
-# after it has been globally disabled with "a2disconf".        
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+# For most configuration files from conf-available/, which are
+# enabled or disabled at a global level, it is possible to
+# include a line for only one particular virtual host. For example the
+# following line enables the CGI configuration for this host only
+# after it has been globally disabled with "a2disconf".
 #Include conf-available/serve-cgi-bin.conf
 </VirtualHost>
 # 以sozhibo.top为例，在sites-available目录下建立sozhibo.top文件，内容如下：
 
-<VirtualHost 123.56.21.231>   
-ServerName sozhibo.top   
-ServerAdmin Ubuntu@sozhibo.top   
-DocumentRoot "/var/www/www/www_show/getanchor/"   
-ErrorLog "/var/log/apache2/sozhibo_errors.log"   
-CustomLog "/var/log/apache2/sozhibo_accesses.log" 
+<VirtualHost 123.56.21.231>
+ServerName sozhibo.top
+ServerAdmin Ubuntu@sozhibo.top
+DocumentRoot "/var/www/www/www_show/getanchor/"
+ErrorLog "/var/log/apache2/sozhibo_errors.log"
+CustomLog "/var/log/apache2/sozhibo_accesses.log"
 </VirtualHost>
 ```
 
@@ -984,7 +983,7 @@ shell> mysql -u root mysqlmysql> UPDATE user SET Password=PASSWORD('new_password
 
 **PHPMyadmin配置**
 
-PHPMyadmin全局配置文件：config.php 
+PHPMyadmin全局配置文件：config.php
 
 1). PHPMyadmin修改登陆方式
 
@@ -1071,7 +1070,9 @@ denny@denny-ubuntu:~/backup/database.mysql$ crontab -l# min hour  day month week
 
 ## 本章参考
 
-* Apache多域名配制： http://blog.csdn.net/ncxgx/article/details/4098616
+* 阿里云ECS服务器Linux环境下配置php服务器 https://blog.csdn.net/l00149133/article/details/50434004
+
+* Apache多域名配制  http://blog.csdn.net/ncxgx/article/details/4098616
 
 
 
