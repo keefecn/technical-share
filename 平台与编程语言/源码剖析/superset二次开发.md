@@ -1109,7 +1109,7 @@ $ celery flower --app=superset.tasks.celery_app:app
 
 ## 3.1 开发者必知
 
-### **服务端本地调试（pycharm）**
+### 服务端本地调试（pycharm）
 
 **法1： Pycharm专业版：选择FLASK_SERVER**
 

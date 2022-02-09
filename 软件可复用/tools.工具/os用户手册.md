@@ -523,6 +523,7 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 
 * Ubuntu 安装中文输入法  https://blog.csdn.net/Chamico/article/details/89788324
 * ubuntu设置静态ip（WIRED） http://jingyan.baidu.com/article/b7001fe18f85fe0e7282ddaf.html
+* 安装 ubuntu 20.04 之后需要做的几件事  https://www.wenjinyu.me/zh/something-to-do-after-installing-ubuntu-20-04/
 
 
 

@@ -630,8 +630,8 @@ class SecureCookieSessionInterface(SessionInterface):
             key_derivation=self.key_derivation, digest_method=self.digest_method
         )
         return URLSafeTimedSerializer(
-            app.secret_key,
-            salt=self.salt,
+            app.secret_key,	#外部传入的安全密钥
+            salt=self.salt,	#类成员变量有缺省值
             serializer=self.serializer,
             signer_kwargs=signer_kwargs,
         )
@@ -675,7 +675,7 @@ class SecureCookieSessionInterface(SessionInterface):
         secure = self.get_cookie_secure(app)
         samesite = self.get_cookie_samesite(app)
         expires = self.get_expiration_time(app, session)
-        # cookie数据：用URLSafeTimedSerializer序列化(使用hmac算法)
+        # cookie数据：调用URLSafeTimedSerializer类来序列化(使用hmac算法)
         val = self.get_signing_serializer(app).dumps(dict(session))
         response.set_cookie(
             app.session_cookie_name,
@@ -687,7 +687,6 @@ class SecureCookieSessionInterface(SessionInterface):
             secure=secure,
             samesite=samesite,
         )
-
 ```
 
 

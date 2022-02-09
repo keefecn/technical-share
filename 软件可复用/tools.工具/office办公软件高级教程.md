@@ -292,7 +292,7 @@ End Sub
 
 
 
-InfoWorld[对比了两个办公软件的Windows版本](https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fwww.infoworld.com%2Fprint%2F151716)，寻找它们的差异和优缺点，以及用户是否可以抛弃甲骨文的OpenOffice。
+InfoWorld [对比了两个办公软件的Windows版本](https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fwww.infoworld.com%2Fprint%2F151716)，寻找它们的差异和优缺点，以及用户是否可以抛弃甲骨文的OpenOffice。
 
 | 产品                                                         | 官网                           | 开源 | 简介                                                         |
 | ------------------------------------------------------------ | ------------------------------ | ---- | ------------------------------------------------------------ |
@@ -324,6 +324,7 @@ InfoWorld[对比了两个办公软件的Windows版本](https://www.oschina.net/a
 | MS Office功能   | OpenOffice对应功能 | 详述                                                         |
 | --------------- | ------------------ | ------------------------------------------------------------ |
 | WORD 文档结构图 | 导航               | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
+| WORD审阅        | 插入-批注          | 快捷键CTRL + ALT + C                                         |
 | Excel 数据分析  |                    |                                                              |
 | ...             |                    |                                                              |
 

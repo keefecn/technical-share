@@ -402,20 +402,20 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 | ------------------------------------------------------------ | --------------------------- | ------------------------------------------------------------ |
 | Hadoop HDFS~2004                                             | Google  GFS  (200310)       | 分布式文件系统                                               |
 | Hadoop  MapReduce~2005                                       | Google  MapReduce  (200412) | 基于YARN的分布式数据处理模型和执行环境。MAP-REDUCE 映射-规约。 |
-| Hadoop [HBase](http://hbase.apache.org/)~2006            | Google  Bigtable  (200612)  | 分布式、按列存储数据库。2010年成为ATP。                      |
-| Hadoop [Pig](http://pig.apache.org/)~2008                |                             | Yahoo开源，一个高级数据流语言和执行并行计算的框架。2010年成为ATP。 |
-| Hadoop [Hive](http://hive.apache.org/)~2008              |                             | Facebook开源，分布式、按列存储的数据仓库。2010年成为ATP。    |
-| [Mahou](http://mahout.apache.org/)~2008                  |                             | 一个可拓展的机器学习和数据挖掘库。                           |
-| Hadoop [Avro](http://avro.apache.org/)~2009              |                             | A  data serialization system. 一个序列化数据系统。2010年成为ATP。 |
-| [Chukwa](http://incubator.apache.org/chukwa/)~2009       |                             | 一个用于管理大型分布式系统的数据采集系统。                   |
-| Hadoop [ZooKeeper](http://zookeeper.apache.org/)~2010    | Google  Chubby  (200611)    | 分布式、可用性高的协调服务。2011年成为ATP。                  |
+| Hadoop [HBase](http://hbase.apache.org/)~2006                | Google  Bigtable  (200612)  | 分布式、按列存储数据库。2010年成为ATP。                      |
+| Hadoop [Pig](http://pig.apache.org/)~2008                    |                             | Yahoo开源，一个高级数据流语言和执行并行计算的框架。2010年成为ATP。 |
+| Hadoop [Hive](http://hive.apache.org/)~2008                  |                             | Facebook开源，分布式、按列存储的数据仓库。2010年成为ATP。    |
+| [Mahou](http://mahout.apache.org/)~2008                      |                             | 一个可拓展的机器学习和数据挖掘库。                           |
+| Hadoop [Avro](http://avro.apache.org/)~2009                  |                             | A  data serialization system. 一个序列化数据系统。2010年成为ATP。 |
+| [Chukwa](http://incubator.apache.org/chukwa/)~2009           |                             | 一个用于管理大型分布式系统的数据采集系统。                   |
+| Hadoop [ZooKeeper](http://zookeeper.apache.org/)~2010        | Google  Chubby  (200611)    | 分布式、可用性高的协调服务。2011年成为ATP。                  |
 | Apache [Spark](http://spark.incubator.apache.org/)~2010      |                             | 一个快速，通用的Hadoop数据运算引擎。Spark提供一个简单并且富有表现力的编程模型以支持各式各样的应用，包括ETL（数据仓库技术），机器学习，数据流处理和图形运算。 |
 | Apache Storm~2011                                            |                             |                                                              |
-| Hadoop YARN~2012                                     |                             | YARN是下一代MapReduce，即MR V2。  A framework for job scheduling and cluster  resource management. |
+| Hadoop YARN~2012                                             |                             | YARN是下一代MapReduce，即MR V2。  A framework for job scheduling and cluster  resource management. |
 | [Apache Drill](http://wiki.apache.org/incubator/DrillProposal)~2012 | Google's  Dremel            | 加快Hadoop数据查询，帮助支持广泛的数据源、数据格式和查询语言。 |
 | Apache Flink~2014                                            |                             | 2008年是柏林理工大学一个研究性项目。                         |
-| [Ambari](http://incubator.apache.org/ambari/)            |                             |                                                              |
-| [Cassandra](http://cassandra.apache.org/)                |                             | A  scalable multi-master database with no single points of failure. |
+| [Ambari](http://incubator.apache.org/ambari/)                |                             | 一款用于配置、管理和监控 Apache Adoop 集群的工具。2022年初宣布从Apache隐退。 |
+| [Cassandra](http://cassandra.apache.org/)                    |                             | A  scalable multi-master database with no single points of failure. |
 | Sqoop                                                        |                             | SQL-to-Hadoop的简称。主要用于传统数据库与HADOOP之间传输数据。 |
 | [openstack](http://docs.openstack.org/)                      | Amazon  S3  Amazon  EC2     | 由NASA（[美国国家航空航天局](https://baike.baidu.com/item/美国国家航空航天局/1538915)）和Rackspace[合作研发](https://baike.baidu.com/item/合作研发/1415416)并发起的云操作系统。  OpenStack  is a cloud operating system that controls large pools of compute, storage,  and networking resources throughout a datacenter, all managed through a  dashboard that gives administrators control while empowering their users to provision  resources through a web interface. |
 | Eucalyptus                                                   |                             |                                                              |
