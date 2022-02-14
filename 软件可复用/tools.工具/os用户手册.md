@@ -205,6 +205,23 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
    三种输入框架：ibus(缺省自带)、fcitx（推荐，含搜够五笔拼音输入法）和 xim，三种输入法可同时并存。
 
+```shell
+sudo apt update
+# fcitx newest version is fctix5
+sudo apt install fcitx
+
+# 设置fcitx开机自启动在终端执行
+sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+
+# (optional)卸载系统ibus输入法框架在终端执行 
+sudo apt purge ibus
+
+# 安装搜狗输入法: 1.在官网下载搜狗输入法安装包如sogoupinyin_3.4.0.9700_amd64，并安装; # 2.安装输入法依赖
+sudo dpkg -i 安装包名
+sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+sudo apt install libgsettings-qt1
+```
+
 
 
 2. **Typora安装**
@@ -234,6 +251,9 @@ ubuntu环境：可以先下载好deb，然后安装deb。`dpkg -i typora_0.9.92_
 $ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 $ sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+# ubuntu apt-get安装
+$ sudo apt-get -y google-chrome-stable
 ```
 
 
@@ -248,6 +268,17 @@ $ sudo dpkg -i google-chrome-stable_current_amd64.deb
    * /配置文件路径 /home/$USER/.finalshell/
    * 卸载删除安装目录 rm -rf /usr/lib/FinalShell/
    ```
+
+5. 微信安装
+
+   「[electronic-wechat](https://github.com/kooritea/electronic-wechat)」是基于微信网页端开发的客户端，页面和网页一模一样，不过支持网页所不支持的最小化到顶栏和消息通知，同时相比[原版](https://github.com/geeeeeeeeek/electronic-wechat)添加了聊天历史记录功能，虽然 2019 年 2 月最后一个版本更新后就已停止维护，但 ubuntu 20.04 仍可用。
+
+```SHELL
+# 1 wine 一键安装脚本
+
+```
+
+
 
 
 
@@ -378,19 +409,19 @@ Prompt=normal  #normal-会选择离当前版本最近的；lts-长期支持版�
 
 **常用软件列表**
 
-电影播放 － realplay + w32codecs, totem + gstreamer
+电影播放 － realplay + w32codecs, totem（系统自带） + gstreamer
 
-音乐播放 － rhythmbox（系统自带）＋gstreamer/xine
+音乐播放 － rhythmbox（系统自带）+  xine
 
 IM聊天 － gaim（系统自带）＋OpenQ
 
 语音通讯 － skype
 
-浏览器 － firefox 2/Opera 9.0/IE6.0(wine)
+浏览器 － Chrome/firefox/Opera 9.0
 
 图形编辑 － gIMP（系统自带）
 
-图片管理 － Picasa
+图片管理 － ~~Picasa~~
 
 网页编辑 － Bluefish
 
@@ -402,13 +433,13 @@ FTP工具 － gFTP, vsftpd
 
 P2P工具 － bitTorrent/aMule
 
-办公软件 － OpenOffice（系统自带）
+办公软件 － OpenOffice、libreoffice（系统自带）
 
 刻录软件 － gnomeBaker
 
 WIN模拟 － wine
 
-输入法 － scim（系统自带）,fcitx
+输入法 － scim（系统自带）、fcitx
 
 字典 － stardict
 
@@ -466,6 +497,21 @@ $ lsusb
 
 ​	通常的linux第一个运行脚本是/etc/inittab，但在ubuntu则默认是/etc/event.d/rc-default，在其中设置缺省运行级别，其运行级别与通常linux的值又不同，缺少是2，表示多用户模式运行（但又支持nfs)，可通过命令runlevel得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。
 
+  
+
+**重新分区**
+
+使用工具gparted.
+
+设置交换分区
+
+```shell
+# 创建交换分区
+$ mkswap /dev/sda9
+# 立即激活，然后可以用top命令查看是否已激活
+$ swapon /dev/sda9
+```
+
 
 
 **FAQ**
@@ -483,9 +529,11 @@ $ sudo vi /etc/network/interfaces
 auto lo iface lo inet loopback
 ```
 
+2. [404  Not Found [IP 91.189.91.39 80])
 
-
-
+**问题描述**：404  Not Found [IP: 91.189.91.39 80]
+**问题原因**：软件源问题，某些文件URL请求失败，导致出现某些文件无法下载的问题
+**问题解决**：换源，在'software and update'里，将cn.ubuntu.com换成 mirrors.bjtu.edu.cn.
 
 ## 3.3 CentOS
 
@@ -524,6 +572,7 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 * Ubuntu 安装中文输入法  https://blog.csdn.net/Chamico/article/details/89788324
 * ubuntu设置静态ip（WIRED） http://jingyan.baidu.com/article/b7001fe18f85fe0e7282ddaf.html
 * 安装 ubuntu 20.04 之后需要做的几件事  https://www.wenjinyu.me/zh/something-to-do-after-installing-ubuntu-20-04/
+* sogou输入法  https://pinyin.sogou.com/linux/help.php
 
 
 
