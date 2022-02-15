@@ -15,6 +15,7 @@
 
 
 
+<br>
 ---
 
 # 目录
@@ -281,6 +282,7 @@
 
 
 
+<br>
 ---
 
 
@@ -849,6 +851,8 @@ Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认�
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  Hadoop生态圈介绍 http://www.cnblogs.com/gridmix/p/5102694.html
@@ -870,6 +874,8 @@ Hadoop RPC中采用了SASL(Simple Authenticaiton and Security Layer，简单认�
 [9].  Hadoop CDH https://blog.csdn.net/duyuanhai/article/details/54908298
 
 
+
+<br>
 
 # 2  系统架构篇
 
@@ -1222,7 +1228,9 @@ Hue与Hadoop集群的交互关系如[图1](http://localhost:7890/pages/YZH0518G/
 
 
 
-# 3  软件安装篇
+<br>
+
+# 3   软件安装篇
 
 ## 3.1  安装概述
 
@@ -1636,6 +1644,8 @@ Connect 'jdbc:derby://Hadoop1:1527/metastore_db;create=true';
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  [http://Hadoop.apache.org/docs/stable/Hadoop-project-dist/Hadoop-common/SingleCluster.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html)
@@ -1685,6 +1695,8 @@ Connect 'jdbc:derby://Hadoop1:1527/metastore_db;create=true';
 `$ bin/hadoop dfsadmin -safemode leave`
 
 
+
+<br>
 
 # 参考资料
 

@@ -7,6 +7,7 @@
 
 
 
+<br>
 ---
 
 目录
@@ -59,11 +60,14 @@
 
 
 
+<br>
 ----
 
 # 1  概述
 
 
+
+<br>
 
 # 2  Hadoop(HDFS + MR)
 
@@ -405,7 +409,9 @@ public class EarthQuakesPerDayJob {
 
 
 
-# 3  HBase分布式数据库
+<br>
+
+# 3   HBase分布式数据库
 
 ## 3.1   概述
 
@@ -719,6 +725,8 @@ master启动进行以下步骤:
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  Zookeeper工作原理
@@ -729,11 +737,15 @@ master启动进行以下步骤:
 
 
 
-# 4  Spark
+<br>
+
+# 4 Spark
 
 
 
 
+
+<br>
 
 # 参考资料
 

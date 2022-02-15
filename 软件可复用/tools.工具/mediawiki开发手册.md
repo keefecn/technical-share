@@ -12,12 +12,14 @@
 
 
 
+<br>
 ---
 
 目录
 
 [TOC]
 
+<br>
 ---
 
 # 1 MediaWiki代码分析
@@ -198,6 +200,8 @@ Mediawiki分析版本v1-26.0
 
 
 
+<br>
+
 # 2  MediaWiki用户指南
 
 ## 2.1   MediaWiki语法
@@ -208,7 +212,9 @@ Mediawiki分析版本v1-26.0
 
 
 
-# 3 MediaWiki开发
+<br>
+
+# 3  MediaWiki开发
 
 ## 3.1   配置项修改LocalSettings.php
 
@@ -663,6 +669,8 @@ cd /usr/local/apache2/bin
 - 反复修改、检查，直到确认完全升级成功
 
 
+
+<br>
 
 # 参考资料
 

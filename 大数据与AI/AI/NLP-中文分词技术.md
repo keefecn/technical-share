@@ -17,6 +17,7 @@
 
 
 
+<br>
 ---
 
 
@@ -25,6 +26,7 @@
 
 
 
+<br>
 ---
 
 # 1   中文分词简介
@@ -141,6 +143,8 @@
 1）、mmseg4j 用 Chih-Hao Tsai 的 MMSeg 算法实现的中文分词器，并实现lucene的analyzer 和solr的TokenizerFactory 以方便在Lucene和Solr中使用。2）、MMSeg 算法有两种分词方法：Simple和Complex，都是基于正向最大匹配。Complex 加了四个规则过虑。官方说：词语的正确识别率达到了98.41%。mmseg4j 已经实现了这两种分词算法。
 
 
+
+<br>
 
 # 2  中文分词实现
 
@@ -455,6 +459,8 @@ for w in result:
 
 
 
+<br>
+
 ## 本章参考
 
 [1]:  https://blog.csdn.net/qq_22022063/article/details/78987531 "Python jieba分词知识整合"
@@ -463,7 +469,9 @@ for w in result:
 
 
 
-# 3  中文分词评测
+<br>
+
+# 3   中文分词评测
 
 ## 3.1 评测指标
 
@@ -485,6 +493,8 @@ for w in result:
 使用相同的评测系统。
 
 
+
+<br>
 
 # 参考资料
 

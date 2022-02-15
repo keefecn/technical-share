@@ -11,12 +11,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 
@@ -107,9 +109,13 @@ OLAP：On Line Analyse Process在线分析处理。
 
 
 
+<br>
+
 ## 本章参考
 
 
+
+<br>
 
 # 2 OLAP（开源）
 
@@ -397,6 +403,8 @@ ClickHouse是一个开源的面向列式数据的数据库管理系统，能够�
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. Greenplum 数据库架构分析及5.x新功能分享  http://blog.sina.com.cn/s/blog_12c856e4c0102yhek.html
@@ -417,7 +425,9 @@ ClickHouse是一个开源的面向列式数据的数据库管理系统，能够�
 
 
 
-# 3 OLAP（商业付费）
+<br>
+
+# 3  OLAP（商业付费）
 
 Tera~简写为T，10的12次方，这是Teradata的大数据。
 
@@ -653,6 +663,8 @@ Teradata Aster 大数据探索平台（Teradata Aster Discovery Platform），�
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. impala教程 https://www.w3cschool.cn/impala/
@@ -676,6 +688,8 @@ Teradata Aster 大数据探索平台（Teradata Aster Discovery Platform），�
 [10]:  IQ体系结构  http://bbs.chinaunix.net/thread-990918-1-1.html
 
 
+
+<br>
 
 # 参考资料
 

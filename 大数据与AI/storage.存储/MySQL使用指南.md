@@ -18,12 +18,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 MySQL简介
@@ -241,6 +243,8 @@ $ yum install mysql-community-server
 
 
 
+
+<br>
 
 # 2  MySQL基础教程
 
@@ -920,7 +924,9 @@ SELECT id, NAME, age, COUNT(*)
 
 
 
-# 3  MySQL高级教程
+<br>
+
+# 3   MySQL高级教程
 
 ## 3.1  触发器
 
@@ -1592,6 +1598,8 @@ show variables like 'event_scheduler';
 
 
 
+<br>
+
 ## 本章参考
 
 [1].   MySQL触发器使用详解 http://www.jb51.net/article/59552.htm
@@ -1608,7 +1616,9 @@ show variables like 'event_scheduler';
 
 
 
-# 4  MySQL优化
+<br>
+
+# 4 MySQL优化
 
 当使用MyISAM存储引擎时，MySQL使用极快速的表锁定，以便允许多次读或一次写。使用该存储引擎的最大问题出现在同一个表中进行混合稳定数据流更新与慢速选择。如果这只是某些表的问题，你可以使用另一个存储引擎。参见[第15章：](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html)[存储引擎和表类型](http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/storage-engines.html)。
 
@@ -2617,6 +2627,8 @@ index (filename)
 `cursor.execute( "INSERT INTO Dem_Picture (PicData) VALUES (%s)" , (MySQLdb.Binary(b))`
 
 
+
+<br>
 
 # 参考资料
 

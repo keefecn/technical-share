@@ -10,6 +10,7 @@
 
 
 
+<br>
 ---
 
 
@@ -18,6 +19,7 @@
 
 
 
+<br>
 ---
 
 ## 1 简介
@@ -60,7 +62,9 @@ B端产品会针对某个行业做全领域的解决方案，例如：淘宝是�
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 * 亿欧智库《Salesforce系列（一）20年发展史回顾》
 * 亿欧智库《Salesforce系列（二）从财务角度看商业模式》
@@ -172,7 +176,9 @@ ISV英文全称是Independent Software Vendors ，意为“独立软件开发商
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 * 中国 SaaS 的前世今生  https://baijiahao.baidu.com/s?id=1699418855401996566
 * 中国SaaS产业十年洞察研究报告 - 知乎  https://zhuanlan.zhihu.com/p/438621669
@@ -282,7 +288,9 @@ where to paly？how to win？
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 * B端产品该怎么做竞品分析？ https://zhuanlan.zhihu.com/p/115052311   2020-03-21
 * B端产品的竞品分析如何做？ https://www.zhihu.com/question/57411765%3Fsort%3Dcreated

@@ -9,12 +9,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 #  1 flask源码剖析
@@ -1237,6 +1239,7 @@ def shell_command():
 ```shell
 $ flask routes
 Endpoint                                Methods    Rule
+<br>
 --------------------------------------  ---------  -----------------------------------------------------------------------
 AnnotationLayerModelView.action_post    POST       /annotationlayermodelview/action_post
 AnnotationLayerModelView.add            GET, POST  /annotationlayermodelview/add
@@ -1337,6 +1340,8 @@ class ExtensionImporter(object):
 ## 扩展 ext/
 
 
+
+<br>
 
 # 2 flask依赖模块
 
@@ -2671,7 +2676,9 @@ Markup('Hello <em>&#34;World&#34;</em>')
 
 
 
-# 3 扩展模块
+<br>
+
+# 3  扩展模块
 
 ## 推荐模块
 
@@ -3416,6 +3423,8 @@ python manage.py print
 
 
 
+
+<br>
 
 # 参考资料
 

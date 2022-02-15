@@ -21,6 +21,7 @@
 
 
 
+<br>
 ---
 
 
@@ -58,6 +59,7 @@
 
 
 
+<br>
 ---
 # 1 概述
 
@@ -88,11 +90,15 @@ IT部独立集中化，企业更容易合力办大事，实现重大技术创新
 
 
 
+<br>
+
 ## 本章参考
 
 * 大公司该不该砍掉 IT 部？  https://www.leiphone.com/category/digitalindustry/5Zz123KNDhDFb78z.html
 
 
+
+<br>
 
 # 2 软件过程方法
 
@@ -136,7 +142,9 @@ IT部独立集中化，企业更容易合力办大事，实现重大技术创新
 
 
 
-# 3 项目管理 PM
+<br>
+
+# 3  项目管理 PM
 
 ## 3.1  项目管理模型
 
@@ -383,6 +391,8 @@ MSF包括：
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. PMBOK http://baike.baidu.com/item/PMBOK
@@ -432,6 +442,8 @@ QCC(Quality Control Circle,品管圈)
 **品管圈**就是由相同、相近或互补之工作场所的人们自动自发组成数人一圈的小圈团体（又称[QC小组](http://wiki.mbalib.com/wiki/QC小组)，一般6人左右），然后全体合作、集思广益，按照一定的活动程序，活用[品管七大手法](http://wiki.mbalib.com/wiki/Category:品管七大手法)（QC7手法），来解决工作现场、管理、文化等方面所发生的问题及课题。它是一种比较活泼的品管形式。品管圈的特点是参加人员强调领导、技术人员、员工三结合。现代的QCC管理内容和目标突破了原有的质量管理范围，向着更高的技术、工艺、管理方面扩展。
 
 
+
+<br>
 
 ## 本章参考
 
@@ -633,6 +645,8 @@ QCC(Quality Control Circle,品管圈)
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. 百度百科-配置管理 https://baike.baidu.com/item/配置管理/10090499
@@ -677,9 +691,13 @@ QCC(Quality Control Circle,品管圈)
 
 
 
+<br>
+
 ## 本章参考
 
 
+
+<br>
 
 # 参考资料
 
@@ -700,6 +718,8 @@ QCC(Quality Control Circle,品管圈)
 [^PMP]: https://baike.baidu.com/item/PMP/587680  "百度百科-PMP"
 
 
+
+<br>
 
 # 附录
 

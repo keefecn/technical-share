@@ -10,6 +10,7 @@
 
 
 
+<br>
 ---
 
 
@@ -79,6 +80,7 @@
 
 
 
+<br>
 ---
 
 # 1  Java自身框架
@@ -227,6 +229,8 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 
 
+<br>
+
 ## 本章参考
 
 [1]: EJB的体系结构 http://www.uml.org.cn/j2ee/2009112011.asp(http://www.uml.org.cn/j2ee/2009112011.asp)
@@ -236,6 +240,8 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 [3]: J2EE [http://Java.sun.com/developer/technicalArticles/J2EE/despat/](http://java.sun.com/developer/technicalArticles/J2EE/despat/)
 
 
+
+<br>
 
 # 2  Java SSH框架
 
@@ -328,6 +334,7 @@ strucs 2是典型的MVC模式。
 **常量的定义**
 
 ```shell
+<br>
 -------------->  常量加载顺序 ------------->
 strucs.xml --> strucs.properties --> web.xml
 <--------------  常量覆盖顺序 <-------------
@@ -802,6 +809,8 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 
 
+<br>
+
 ## 本章参考
 
 **官网**
@@ -834,7 +843,9 @@ SessionFactory sessionFactory = new Configuration().configure().buildSessionFact
 
 
 
-# 3  Java其它第三方框架
+<br>
+
+# 3   Java其它第三方框架
 
 表格 5 Java第三方框架列表
 
@@ -861,13 +872,17 @@ MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口�
 
 
 
+<br>
+
 ## 本章参考
 
 * Mybatis的前世今生 https://blog.51cto.com/u_14230003/2364982
 
 
 
-# 4  Android框架
+<br>
+
+# 4 Android框架
 
    ![1574517637282](../../media/sf_reuse/framework/frame_android_001.png)
 
@@ -875,11 +890,15 @@ MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口�
 
 
 
+<br>
+
 ## 本章参考
 
 
 
 
+
+<br>
 
 # 参考资料
 

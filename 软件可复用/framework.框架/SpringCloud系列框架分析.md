@@ -11,12 +11,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1  Spring框架概述
@@ -155,6 +157,8 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 
 
 
+<br>
+
 ## 本章参考
 
 * 深入浅出，了解 Spring 框架和 Spring Boot 的历史  https://mp.weixin.qq.com/s/iqve1_9kjYCGdXzV1nAQqA
@@ -163,6 +167,8 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 * 初识SpringCloud 整体架构 https://blog.csdn.net/Strive_Peter/article/details/113887255
 
 
+
+<br>
 
 # 2  Spring Boot
 
@@ -190,7 +196,9 @@ Spring Boot基于Maven构建。
 
 
 
-# 3  Spring Cloud
+<br>
+
+# 3   Spring Cloud
 
 Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 Spring Boot 的开发风格做到一键启动和部署。
 
@@ -275,7 +283,9 @@ Spring Cloud包含两个基本模块，spring cloud context和spring cloud commo
 
 
 
-# 4  实例
+<br>
+
+# 4 实例
 
 
 
@@ -404,6 +414,8 @@ services:
 说明：双节点的Eureka Server集群。
 
 
+
+<br>
 
 # 参考资料
 

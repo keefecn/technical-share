@@ -10,12 +10,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 DevOps简介
@@ -123,11 +125,15 @@ Flickr发展了自己的DevOps能力，使之能够支撑业务部门“每天�
 
 
 
+<br>
+
 ## 本章参考
 
 * 张乐 《研发效能度量核心方法与实践》
 
 
+
+<br>
 
 # 2 DevOps方法论
 
@@ -151,7 +157,9 @@ Flickr发展了自己的DevOps能力，使之能够支撑业务部门“每天�
 
 
 
-# 3 DevOps工具
+<br>
+
+# 3  DevOps工具
 
 开发工具： 详见 《[项目开发环境工具](../软件可复用/tools.工具/项目开发环境工具.md)》、《[自动化测试工具.md](../软件可复用/tools.工具/自动化测试工具.md)》
 
@@ -304,6 +312,8 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. 华为软件开发云 https://baike.baidu.com/item/华为软件开发云
@@ -311,6 +321,8 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 [2]. [华为软件开发云如何让DevOps真正落地？ ](https://baike.baidu.com/reference/2613029/fbf2_ZOl0oFTrjtcBw7HavHPIEhfUbKjestZ57dc9Kr77zcT8Mjf-A6W6mnqV_adBru1BjLUMzEm7EsJAHpUzvfE-CoSG3zVreknrHUlwSZMiEY)
 
 
+
+<br>
 
 # 参考资料
 
@@ -330,6 +342,8 @@ TFS提供非常方便的代码搜索功能，开发人员可以在代码库中�
 * 2020 年大前端技术趋势解读 https://blog.csdn.net/Tencent_TEG/article/details/111602083
 
 
+
+<br>
 
 # 附录
 

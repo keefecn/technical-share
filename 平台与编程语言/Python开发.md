@@ -20,6 +20,7 @@
 
 
 
+<br>
 ---
 
 # 目录
@@ -28,6 +29,7 @@
 
 
 
+<br>
 ---
 
 # 1  Python概述
@@ -179,6 +181,8 @@ $make install
 ```
 
 
+
+<br>
 
 # 2  Python语言教程
 
@@ -910,6 +914,8 @@ Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. http://www.jb51.net/article/64040.htm
@@ -921,7 +927,9 @@ Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编
 
 
 
-# 3  Python开发环境
+<br>
+
+# 3   Python开发环境
 
 ## 3.1  模块module
 Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Python 对象定义和Python语句。
@@ -2475,6 +2483,8 @@ PSD
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  关于python中的setup.py  http://python.jobbole.com/82077/
@@ -2493,7 +2503,9 @@ PSD
 
 
 
-# 4  Python高级开发
+<br>
+
+# 4 Python高级开发
 
 ## 4.1  python多版本并存
 
@@ -3569,6 +3581,8 @@ https://github.com/LeoHuang2015/qqloginjs
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. python2和python3的区别http://www.runoob.com/python/python-2x-3x.html
@@ -3647,6 +3661,8 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. 《Python参考手册（第4版）》相应章节
@@ -3656,7 +3672,9 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 
 
 
-# 6  Python FAQ
+<br>
+
+# 6 Python FAQ
 
 可用help(module/method)获取到代码的文档化串。
 
@@ -3867,11 +3885,15 @@ pip install git+git://github.com/gawel/pyquery.git
 
 
 
+<br>
+
 ## 本章参考
 
 
 
 
+
+<br>
 
 # 参考资料
 

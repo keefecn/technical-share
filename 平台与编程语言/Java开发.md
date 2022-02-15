@@ -22,6 +22,7 @@
 
 
 
+<br>
 ---
 
 # 目录
@@ -69,6 +70,7 @@
 
 
 
+<br>
 ---
 
 # 1.  Java概述
@@ -290,6 +292,8 @@ The following conceptual diagram illustrates all the component technologies in J
 
 
 
+<br>
+
 ## 本章参考
 
 * Java的各个版本和各个版本的历史版本号的关系与解读 https://lijunde.blog.csdn.net/article/details/91351603
@@ -300,6 +304,8 @@ The following conceptual diagram illustrates all the component technologies in J
 * OpenJDK和Oracle JDK有什么区别和联系？ https://cloud.tencent.com/developer/article/1598291
 
 
+
+<br>
 
 # 2  Java语言教程
 
@@ -436,7 +442,9 @@ Java的并发包提供了三个常用的并发队列实现，分别是：Concurr
 
 
 
-# 3 Java开发环境
+<br>
+
+# 3  Java开发环境
 
 ## 3.1  Java开发工具
 表格 6 Java常用工具列表
@@ -719,7 +727,9 @@ b)  **PermGenspace**
 
 
 
-# 4  Java高级开发
+<br>
+
+# 4 Java高级开发
 
 ## 4.1  并发
 ### 4.1.1  多线程
@@ -1115,6 +1125,8 @@ b ) client：客户端虚拟机有较小的默认堆内存 可以缩短JVM启动
 备注：非root或属主用户的进程无法查看。
 
 
+
+<br>
 
 ## 本章参考
 

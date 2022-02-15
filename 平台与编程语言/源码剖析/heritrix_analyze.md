@@ -10,6 +10,7 @@
 
 
 
+<br>
 ---
 
 目录
@@ -64,6 +65,7 @@
 
 [TOC]
 
+<br>
 ---
 
 # 1  简介
@@ -131,6 +133,8 @@ Heritrix 包含以下关键特性：
 * 在硬件和系统失败时，恢复能力很差。
 
 
+
+<br>
 
 # 2  用户手册
 
@@ -284,7 +288,9 @@ src/webapps整个目录作为新项目的webapps目录。（JSP页面）
 
 
 
-# 3   设计分析
+<br>
+
+# 3    设计分析
 
 ## 3.1  heritrix架构分析
 
@@ -386,7 +392,9 @@ order.xml
 
 
 
-# 4  应用开发
+<br>
+
+# 4 应用开发
 
 ## 4.1  参数配置
 
@@ -468,6 +476,8 @@ img.pconline.com.cn/images/product/
 手机频道主页 http://product.tech.163.com/mobile/
 
 
+
+<br>
 
 # 参考资料
 

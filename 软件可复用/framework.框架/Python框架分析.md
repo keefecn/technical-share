@@ -11,6 +11,7 @@
 
 
 
+<br>
 ---
 
 [TOC]
@@ -19,6 +20,7 @@
 
 
 
+<br>
 ---
 
 
@@ -53,6 +55,8 @@
 | [turbogears](http://www.turbogears.org/)                     | 一个可以扩展为全栈解决方案的微型框架。                       |                          |                                                              |                    |            |
 
 
+
+<br>
 
 # 2  python WEB三大框架
 
@@ -935,7 +939,9 @@ python manage.py migrate --fake-initial
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 [1]:  Django官网	"https://docs.djangoproject.com/"
 
@@ -1350,7 +1356,9 @@ if __name__ == "__main__":
 
 
 
-# 3 Celery 异步多任务队列
+<br>
+
+# 3  Celery 异步多任务队列
 
 Celery 通过消息机制进行通信，通常使用中间人（Broker）作为客户端和职程（Worker）调节。启动一个任务，客户端向消息队列发送一条消息，然后中间人（Broker）将消息传递给一个职程（Worker），最后由职程（Worker）进行执行中间人（Broker）分配的任务。
 
@@ -1510,11 +1518,15 @@ PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. https://www.celerycn.io/ celery中文手册
 
 
+
+<br>
 
 # 参考资料
 

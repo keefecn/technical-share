@@ -14,12 +14,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 
@@ -214,6 +216,8 @@ Every issue/PR must have one hash label (except spam entry). Labels that begin w
 * PostgeSQL:  schema默认命名为public，如果不特别指定，PostgeSQL以public模式操纵各类数据库对象。
 
 
+
+<br>
 
 # 2 用户篇
 
@@ -1105,7 +1109,9 @@ $ celery flower --app=superset.tasks.celery_app:app
 
 
 
-# 3 开发篇
+<br>
+
+# 3  开发篇
 
 ## 3.1 开发者必知
 
@@ -2877,6 +2883,8 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 * fix(dashboard): cross filter chart highlight when filters badge icon clicked #16233 https://github.com/apache/superset/pull/16233/files   （已合并到v1.3）
 
 
+
+<br>
 
 # 参考资料
 

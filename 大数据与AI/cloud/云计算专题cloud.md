@@ -17,6 +17,7 @@
 
 
 
+<br>
 ---
 
 # 目录
@@ -91,6 +92,7 @@
 
 
 
+<br>
 ---
 
 # 1 概述
@@ -238,6 +240,8 @@ management effort or service provider interaction.
 
 
 
+<br>
+
 # 2  云服务
 
 详见 《[云服务商比较.md](./云服务商比较.md)》
@@ -245,7 +249,9 @@ management effort or service provider interaction.
 
 
 
-# 3  云应用
+<br>
+
+# 3   云应用
 
 * 云安全  详见 《[安全技术.md](../../领域开发/安全技术.md)》
 
@@ -303,6 +309,8 @@ management effort or service provider interaction.
 备注：2016年以来，国内各大云盘提供商都以响应国家政策营造良好网络环境为借口，陆续关闭云盘服务。2021.12工信局要求网盘提供上下载无差别的速度。
 
 
+
+<br>
 
 ## 本章参考
 
@@ -466,6 +474,8 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 
 
+<br>
+
 ## 本章参考
 
 * 百度百科-Xen  https://baike.baidu.com/item/Xen
@@ -544,9 +554,13 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 
 
 
+<br>
+
 ## 本章参考
 
 
+
+<br>
 
 # 参考资料
 
@@ -571,6 +585,8 @@ OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建�
 * Bigtable: A Distributed Storage System for Structured Data
 
 
+
+<br>
 
 # 附录
 

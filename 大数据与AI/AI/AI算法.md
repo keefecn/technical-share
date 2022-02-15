@@ -11,12 +11,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 ## 1 AI算法简介
@@ -435,7 +437,9 @@ SGD的劣势:
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 [1]. 一文详尽混淆矩阵、准确率、精确率、召回率、F1值、P-R 曲线、ROC 曲线、AUC 值、Micro-F1 和 Macro-F1 https://blog.csdn.net/weixin_37641832/article/details/104434509
 
@@ -600,7 +604,9 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 
 
@@ -804,7 +810,9 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 [1]. 机器学习算法GBDT https://www.cnblogs.com/bnuvincent/p/9693190.html
 
@@ -991,7 +999,9 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 
 
-### 本章参考
+<br>
+
+## 本章参考
 
 [1]. 语言模型-BERT：bert算法介绍 www.itcast.cn/news/20200907/13593265501.shtml
 
@@ -1063,6 +1073,8 @@ Apriori算法对于一条规则L->R，有以下度量：
 说明：以上度量中，支持度，置信度和conviction越大越好。当Lift=1, Leverage=0时说明L与R是独立事件。
 
 
+
+<br>
 
 # 参考资料
 

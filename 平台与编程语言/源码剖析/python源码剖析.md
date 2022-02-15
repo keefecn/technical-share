@@ -11,12 +11,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 源码结构
@@ -58,6 +60,8 @@
 说明: 解释器和内建模块的代码多是用C来实现的. 标准库Lib则是用python来实现.
 
 
+
+<br>
 
 # 2 Python运行环境
 
@@ -206,7 +210,9 @@ python源码安装时，可带上编译优化开关:  `./configure --enable-opti
 
 
 
-# 3  Python虚拟机PVM
+<br>
+
+# 3   Python虚拟机PVM
 
 ## 3.1  虚拟机执行流程
 
@@ -1999,6 +2005,7 @@ This diagram details these state transitions:
                           Request-sent
 
 Logical State                  __state            __response
+<br>
 -------------                  -------            ----------
 Idle                           _CS_IDLE           None
 Request-started                _CS_REQ_STARTED    None
@@ -2323,6 +2330,8 @@ Required-by:
 ```
 
 
+
+<br>
 
 # 参考资料
 

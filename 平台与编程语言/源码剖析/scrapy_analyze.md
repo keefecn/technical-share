@@ -9,12 +9,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 简介
@@ -59,6 +61,8 @@ Scrapy版本说明
 > 详见 https://docs.scrapy.org/en/latest/news.html
 
 
+
+<br>
 
 # 2 用户篇
 
@@ -457,7 +461,9 @@ class MySpider(scrapy.Spider):
 
 
 
-# 3 架构篇
+<br>
+
+# 3  架构篇
 
 Scrapy是一个基于Twisted，纯Python实现的爬虫框架，用户只需要定制开发几个模块就可以轻松的实现一个爬虫，用来抓取网页内容以及各种图片，非常之方便。
 
@@ -1392,6 +1398,8 @@ class Scraper(object):
 
 
 
+
+<br>
 
 # 参考资料
 

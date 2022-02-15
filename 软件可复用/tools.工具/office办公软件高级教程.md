@@ -13,10 +13,12 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
+<br>
 ---
 
 # 简介
@@ -270,6 +272,8 @@ End Sub
 
 
 
+<br>
+
 ## 本章参考
 
 * 怎样把一个ppt替换成另外一个好看ppt的模板？ https://jingyan.baidu.com/article/fedf0737baf37d35ac8977b2.html
@@ -290,16 +294,22 @@ End Sub
 
 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。
 
+```
+StarSuite(1999) ->  OpenOffice.org(2000)  -> Apache OpenOffice(2011)
+                  /         |           \
+  [IBM Lotus Symphony] LibreOffice(2011)  Go-oo
+```
+
 
 
 InfoWorld [对比了两个办公软件的Windows版本](https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fwww.infoworld.com%2Fprint%2F151716)，寻找它们的差异和优缺点，以及用户是否可以抛弃甲骨文的OpenOffice。
 
 | 产品                                                         | 官网                           | 开源 | 简介                                                         |
 | ------------------------------------------------------------ | ------------------------------ | ---- | ------------------------------------------------------------ |
-| [**StarOffice**](http://en.wikipedia.org/wiki/StarOffice)    |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。<br/>1999年被Sun收购，仍保留原名称。现在称为Oracle Open Office。 |
-| [**OpenOffice.org**](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，Sun将StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
-| [**Go-oo**](http://en.wikipedia.org/wiki/Go-oo)              |                                | ✔    | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。 |
-| [**IBM Lotus Symphony**](http://symphony.lotus.com/)         |                                |      | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。 |
+| [StarOffice](http://en.wikipedia.org/wiki/StarOffice)        |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。<br/>1999年被Sun收购，仍保留原名称。现在称为Oracle Open Office。 |
+| [OpenOffice.org](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，Sun将StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
+| [Go-oo](http://en.wikipedia.org/wiki/Go-oo)                  |                                | ✔    | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。 |
+| [IBM Lotus Symphony](http://symphony.lotus.com/)             |                                |      | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。 |
 | Apache OpenOffice                                            | http://www.openoffice.org/     | ✔    | 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。 |
 | LibreOffice                                                  | https://zh-cn.libreoffice.org/ | ✔    | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。<br>目前大多数Linux发行版换用了此版本。 |
 | WPS Office                                                   | https://www.wps.cn/            |      | 1989年推出WPS1.0。WPS Office是由金山软件股份有限公司自主研发的一款办公软件套装，可以实现办公软件最常用的文字、表格、演示等多种功能。<br/>具有内存占用低、运行速度快、体积小巧、强大插件平台支持、免费提供海量在线存储空间及文档模板、支持阅读和输出PDF 文件、全面兼容微软Office97-2010格式(doc/docx/xls/xlsx/ppt/pptx 等）独特优势，覆盖Windows、 Linux、 Android、 iOS等多个平台。 |
@@ -393,6 +403,8 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 
 
 
+<br>
+
 ## 本章参考
 
 *  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office
@@ -417,6 +429,8 @@ MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf�
 2). 裁剪pdf文件大小;
 
 
+
+<br>
 
 # 参考资料
 

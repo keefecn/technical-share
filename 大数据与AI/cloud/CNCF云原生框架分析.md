@@ -11,6 +11,7 @@
 
 
 
+<br>
 ---
 
 
@@ -20,6 +21,7 @@
 
 
 
+<br>
 ---
 
 # 1 CNCF项目列表
@@ -84,6 +86,8 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
 
 
+<br>
+
 ## 本章参考
 
 * 解读云原生的2021：抢占技术C位，迎来落地大爆发  https://mp.weixin.qq.com/s/9vaUJp2TzAEAIrHl8jhGvA
@@ -141,6 +145,8 @@ Prometheus的整体技术架构可以分为几个重要模块：
 *  Web UI and API：内嵌的管控界面，可运行查询表达式解析，结果展示。
 
 
+
+<br>
 
 ## 本章参考
 
@@ -207,6 +213,8 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  gRPC 官方文档中文版 http://doc.oschina.net/grpc
@@ -237,6 +245,8 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 
 
+<br>
+
 ## 本章参考
 
 [1].  ETCD 简介+使用 https://blog.csdn.net/bbwangj/article/details/82584988
@@ -244,6 +254,8 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 
 
+
+<br>
 
 # 参考资料
 

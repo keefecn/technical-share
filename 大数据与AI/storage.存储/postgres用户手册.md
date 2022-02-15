@@ -1,26 +1,14 @@
+| 序号  | 修改时间       | 修改内容                         | 修改人   | 审稿人   |
+| --- | ---------- | ---------------------------- | ----- | ----- |
+| 1   | 2021-12-15 | 创建。从《数据库技术》、《数据库架构》迁移相关章节成文。 | Keefe | Keefe |
+|     |            |                              |       |       |
 
-
-
-
-| 序号 | 修改时间   | 修改内容                                                 | 修改人 | 审稿人 |
-| ---- | ---------- | -------------------------------------------------------- | ------ | ------ |
-| 1    | 2021-12-15 | 创建。从《数据库技术》、《数据库架构》迁移相关章节成文。 | Keefe  | Keefe  |
-|      |            |                                                          |        |        |
-
-
-
-
-
-
-
-
-
+<br>
 ---
 
 [TOC]
 
-
-
+<br>
 ---
 
 # 简介
@@ -33,13 +21,9 @@
 
 [阿里云PostgreSQL](https://www.aliyun.com/product/rds/postgresql)
 
-
-
 PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS)。 用于安全地存储数据; 支持最佳做法，并允许在处理请求时检索它们。
 
 PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿者团队)开发。 它不受任何公司或其他私人实体控制。 它是开源的，其源代码是免费提供的。PostgreSQL最初设想于1986年，当时被叫做Berkley Postgres Project。该项目一直到1994年都处于演进和修改中，直到开发人员Andrew Yu和Jolly Chen在Postgres中添加了一个SQL（Structured Query Language，结构化查询语言）翻译程序，该版本叫做Postgres95，在开放源代码社区发放。
-
-
 
 **PostgreSQL** **的 主要优点如下：**
 
@@ -62,8 +46,6 @@ PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿�
 10）从存储过程上看，PostgreSQL支持存储过程。因为存储过程的存在也避免了在网络上大量原始的SQL语句的传输，这样的优势是显而易见的。
 
 11）用户定义函数的扩展方面，PostgreSQL可以更方便地使用UDF（用户定义函数）进行扩展。
-
-
 
 ## 版本
 
@@ -110,29 +92,29 @@ PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿�
 ```shell
 postgres=# select version();
                                                    version
+<br>
 -------------------------------------------------------------------------------------------------------------
  PostgreSQL 10.17 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-2), 64-bit
 (1 行记录)
 ```
 
-
-
 表格 PG版本特性说明
 
-| 版本   | 首版发布时间 | 特性说明                                                     |
-| ------ | ------------ | ------------------------------------------------------------ |
-| 14     | 2021-09-30   |                                                              |
-| 13     | 2020-09-24   |                                                              |
-| 12     | 2019-10-03   | 支持 SQL/JSON path。支持 Generated Columns。 CTE 支持 Inlined With Queries。 <br>新增 Pluggable Table Storage Interface。 分区表性能大辐提升。 在线重建索引(Reindex Concurrently) |
-| 11     | 2018-10-18   | 分区增强。并行执行。存储过程，支持嵌入事务。即时编译（JIT），支持表达式的快速求值。窗口函数。 |
-| **10** | 2017-10-05   | 内置分区表（ Native Table Partitioning）。逻辑复制（Logical Replication）。<br/>并行功能增强（Enhancement of Parallel Query）。Quorum Commit for Synchronous Replication。<br/>全文检索支持JSON和JSONB数据类型。 |
-| 9.6    | 2016-09-29   | 新功能包括并行查询、同步复制改进、短语搜索、 性能和易用性方面的改进。 |
-| 9.5    | 2016-01-07   | 主要特性包括IMPORT FOREIGN SCHEMA，Row-Level Security Policies，BRIN 索引，JSONB 数据类型操作的增强，以及 UPSERT 和 pg_rewind 等 |
-| 9.4    | 2014-12-18   | JSONB 数据类型（高性能可索引）、可在线刷新物化视图、支持Linux大页操作、支持数据预热 |
-| 9.3    | 2013-09-09   | 数据校对 checksums、丰富 JSON 函数及操作符、并行 pg_dump 备份、物化视图。 |
-| 9.2    | 2012-09-10   | 级联数据复制、index-only scans、JSON 数据类型、空间分区 GiST 索引（SP-GiST）。 |
-| 9.1    | 2011-09-12   | 支持同步数据复制、unlogged tabels、serializable snapshot isolation、FDW 外部表。 |
-| 9.0    | 2010-09-20   | 支持64位Windows系统、异步流数据复制、Hot Standby（相当于Active DataGuard）。 |
+| 版本     | 首版发布时间     | 特性说明                                                                                                                                                                        |
+| ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 15     |            |                                                                                                                                                                             |
+| 14     | 2021-09-30 |                                                                                                                                                                             |
+| 13     | 2020-09-24 |                                                                                                                                                                             |
+| 12     | 2019-10-03 | 支持 SQL/JSON path。支持 Generated Columns。 CTE 支持 Inlined With Queries。 <br>新增 Pluggable Table Storage Interface。 分区表性能大辐提升。 在线重建索引(Reindex Concurrently)                       |
+| 11     | 2018-10-18 | 分区增强。并行执行。存储过程，支持嵌入事务。即时编译（JIT），支持表达式的快速求值。窗口函数。                                                                                                                            |
+| **10** | 2017-10-05 | 内置分区表（ Native Table Partitioning）。逻辑复制（Logical Replication）。<br/>并行功能增强（Enhancement of Parallel Query）。Quorum Commit for Synchronous Replication。<br/>全文检索支持JSON和JSONB数据类型。 |
+| 9.6    | 2016-09-29 | 新功能包括并行查询、同步复制改进、短语搜索、 性能和易用性方面的改进。                                                                                                                                         |
+| 9.5    | 2016-01-07 | 主要特性包括IMPORT FOREIGN SCHEMA，Row-Level Security Policies，BRIN 索引，JSONB 数据类型操作的增强，以及 UPSERT 和 pg_rewind 等                                                                     |
+| 9.4    | 2014-12-18 | JSONB 数据类型（高性能可索引）、可在线刷新物化视图、支持Linux大页操作、支持数据预热                                                                                                                             |
+| 9.3    | 2013-09-09 | 数据校对 checksums、丰富 JSON 函数及操作符、并行 pg_dump 备份、物化视图。                                                                                                                           |
+| 9.2    | 2012-09-10 | 级联数据复制、index-only scans、JSON 数据类型、空间分区 GiST 索引（SP-GiST）。                                                                                                                    |
+| 9.1    | 2011-09-12 | 支持同步数据复制、unlogged tabels、serializable snapshot isolation、FDW 外部表。                                                                                                           |
+| 9.0    | 2010-09-20 | 支持64位Windows系统、异步流数据复制、Hot Standby（相当于Active DataGuard）。                                                                                                                    |
 
 >
 
@@ -140,15 +122,13 @@ postgres=# select version();
 
 表格 12 PG的第三方组件
 
-| 组件        | 作用             | 注意点             |
-| ----------- | ---------------- | ------------------ |
-| PgBouncer   | 轻量级连接池     | 分会话级、事务级。 |
-| Slony-I     | 同步。           | 可作多个master。   |
-| Bucardo     | 同步。           |                    |
-| PL/Proxy    | 水平分布中间件。 |                    |
-| Postgres-XC | 集群。           |                    |
-
-
+| 组件          | 作用       | 注意点         |
+| ----------- | -------- | ----------- |
+| PgBouncer   | 轻量级连接池   | 分会话级、事务级。   |
+| Slony-I     | 同步。      | 可作多个master。 |
+| Bucardo     | 同步。      |             |
+| PL/Proxy    | 水平分布中间件。 |             |
+| Postgres-XC | 集群。      |             |
 
 ## 术语
 
@@ -156,17 +136,20 @@ postgres=# select version();
 
 **角色**：PostgreSQL使用*角色*的概念管理数据库访问权限。一个角色可以被看成是一个数据库用户或者是一个数据库用户组，这取决于角色被怎样设置。角色的概念把“用户”和“组”的概念都包括在内。在PostgreSQL版本 8.1 之前，用户和组是完全不同的两种实体，但是现在只有角色。任意角色都可以扮演用户、组或者两者。
 
-
-
 # 入门篇
 
-**安装**
+### 安装&启动&使用
+
+**1）安装**
+
+linux分发版 yum仓库安装
 
 ```shell
-# 安装: centos7
+# 安装详见 https://www.postgresql.org/download/linux/redhat/
+# centos 7：use yum
 $ sudo yum install postgresql-contrib, postgresql-devel
-# centos 8: 可指定版本 @postgresql:$version，如例子中的版本10
-$ sudo dnf module list postgresql	# 列出可用的pg版本
+# centos 8:　use dnf　可指定版本 @postgresql:$version，如例子中的版本10
+$ sudo dnf module list postgresql    # 列出可用的pg版本
 $ sudo dnf install postgresql-contrib, @postgresql:10
 
 # 初始化数据库，创建三个分别是postgres、template0和template1. 缺省创建了角色postgres-超级管理员，数据库postgres，系统用户postgres
@@ -176,76 +159,126 @@ $ initdb -D [DATA_DIR]
 postgres -D [DATA_DIR]
 ```
 
+centos 7 pg官网仓库安装 pg14
 
+```shell
+# Install the repository RPM:
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+# Install PostgreSQL: bin在/usr/pgsql-14/, 数据目录在/var/lib/pgsql/14/
+sudo yum install -y postgresql14-server
+
+```
+
+**2）首次初始化**
+
+可指定数据目录
+
+法1：默认初始化
+
+```shell
+$ sudo /usr/pgsql-14/bin/postgresql-14-setup initdb
+```
+
+法2：可在环境变量设置PG相关变量，更改数据目录路径。
+
+```shell
+$ vi ~/.bash_profile
+export PG_HOME=/usr/local/pgsql
+export PGDATA=/data/pgsql/data
+export PATH=${PG_HOME}/bin:$PATH
+export PGPORT=5432
+export PGUSER=postgres
+export PGDATABASE=postgres
+
+# 重载环境变量
+$ source ~/.bash_profile
+#用默认地址初始化
+$ {PG_HOME}/bin/initdb -D ${PGDATA} -E utf8
+```
+
+**3）启动**
+
+service启动：/usr/lib/systemd/system/postgresql-14.service
+
+可在 service里修改 数据目录和其它启动参数
+
+```shell
+# 设置服务自动启动
+sudo systemctl enable postgresql-14
+sudo systemctl start postgresql-14
+```
+
+命令行启动：
+
+```shell
+$ {PG_HOME}/bin/postgres -D [DATA_DIR]
+```
+
+windows下启动：缺省自动创建非管理员账号postgres
+`任务管理器 -- 服务 -- postgresql （手动启动）`
 
 **使用**
+
+默认创建一个管理员用户/角色 postgres，默认登录时是不需要密码验证就可以直接登录。
 
 ```shell
 # 进入到 psql命令行窗口
 psql -U [user] [db]
 
-# windows下启动：缺省自动创建非管理员账号postgres
-任务管理器 -- 服务 -- postgresql （手动启动）
+# 默认本地 无密码登陆
+$ su postgres
+$ psql
+# 给缺省角色 postgres 设置密码
+postgres=# alter role postgres with password 'yourpassword';
+ALTER ROLE
+postgres=# select oid,datname from pg_database;
+# 创建数据库、授权
+postgres=# create database dcs_kzcloud owner postgres;
+CREATE DATABASE
+postgres=# grant all on database dcs_kzcloud to postgres;
+GRANT
+postgres=# \q
 ```
-
-
 
 ## 常用命令
 
 表格  PostgreSQL常用命令
 
-| DDL    |            | 命令                                                         |
-| ------ | ---------- | ------------------------------------------------------------ |
-|        | 命令行工具 | createdb/dropdb createuser                                   |
-| 常用   |            | /? /l /d /du /dt                                             |
-| create | 创建数据库 | create database xxx;  createdb xx;    # 命令行工具           |
-| select |            | select * from xxx;                                           |
-| insert |            |                                                              |
-| delete |            | drop database xxx;  dropdb xx   # 命令行                     |
-| 权限   | 创建用户   | create role xxx;    #默认不可登陆  <br/>create user xxx;   #默认可登陆   <br/>createuser xx;      #命令行 |
-|        | 授权       | `grant all on table_xxx to user_xxx;`                        |
+| DDL    |       | 命令                                                                                          |
+| ------ | ----- | ------------------------------------------------------------------------------------------- |
+|        | 命令行工具 | createdb/dropdb createuser                                                                  |
+| 常用     |       | \? \l \d \du \dt                                                                            |
+| create | 创建数据库 | create database xxx;  createdb xx;    # 命令行工具                                               |
+| select |       | select * from xxx;                                                                          |
+| insert |       |                                                                                             |
+| delete |       | drop database xxx;  dropdb xx   # 命令行                                                       |
+| 权限     | 创建用户  | create role xxx;    #默认不可登陆  <br/>create user xxx;   #默认可登陆   <br/>createuser xx;      #命令行 |
+|        | 授权    | `grant all on table_xxx to user_xxx;`                                                       |
 
 > 只有超级用户和具有`CREATEROLE`特权的角色才能创建新角色。
 
-
-
-
-
-# 高级篇
-
-pg元数据详见 《[元数据分析.md](./元数据分析.md)》
-
-
-
-## 服务器管理
-
-
-
-
-
-### 配置文件
+## 配置文件
 
 主要有以下配置文件： 配置文件缺省目录 /var/lib/pgsql/data/
 
-* postgresql.conf    配置服务器基本信息，如监听
-* [pg_hba.conf](http://www.postgres.cn/docs/10/auth-pg-hba-conf.html)   配置数据库访问的认证信息
-* pg_ident.conf   ident认证配置
+- postgresql.conf 配置服务器基本信息，如监听
+- [pg_hba.conf](http://www.postgres.cn/docs/10/auth-pg-hba-conf.html) 配置数据库访问的认证信息
+- pg_ident.conf ident认证配置
 
-
+可在环境变量里设置数据目录
 
 postgresql.conf
 
 ```ini
 # 启用远程访问，默认是本地localhost访问
-listen_addresses = "*"					# (change requires restart)
+listen_addresses = "*"                  # (change requires restart)
 #port = 5432                            # (change requires restart)
 max_connections = 100                   # (change requires restart)
 ...
 ```
 
-
-
-pg_hba.conf
+pg_hba.conf (/var/lib/pgsql/14/data/pg_hba.conf)
 
 ```ini
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
@@ -254,6 +287,7 @@ pg_hba.conf
 local   all             all                                     peer
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            ident
+host    all             all             0.0.0.0/0               md5
 # IPv6 local connections:
 host    all             all             ::1/128                 ident
 # Allow replication connections from localhost, by a user with the
@@ -263,23 +297,41 @@ host    replication     all             127.0.0.1/32            ident
 host    replication     all             ::1/128                 ident
 ```
 
-说明：第一个字段是连接类型，值可以是local, host, hostssl, hostnossl。最后一列是认证方法，值可以是peer, ident, md5, trust等。
+说明：第一个字段是连接类型，值可以是local, host, hostssl, hostnossl。最后一列是认证方法。
 
-应用1：忘记密码，再重取服务，即可无密码登陆。将 md5 改成 trust
+认证方法：通常支持 peer, ident, md5, trust，此外还支持 password, scram-sha-256, gss, sspi, ldmp, pam, radius, cert, reject等等。
 
+- peer 拿到客户端操作系统用户名，对应unix socker连接。
 
+- ident 类似peer，询问获取客户端操作系统用户名。通过ident协议询问(默认是113监听端口)。
+
+- md5 将口令存为一个MD5哈希。
+
+- trust 信任，无密码登陆。
+
+- scram-sha-256 此加密方式在10以前的旧客户端不支持。SCRAM authentication requires libpq version 10 or above
+
+应用1：本地访问需密码，将 local all那行的认证方式改为 md5或其它加密方式。
+
+应用2：设置远程主机访问，新增一行 `host all all 0.0.0.0/0 md5`
+
+应用3：忘记密码，再重取服务，即可无密码登陆。将 md5 改成 trust
+
+<br>
+
+# 高级篇
+
+pg元数据详见 《[元数据分析.md](./元数据分析.md)》
+
+<br>
 
 # 架构原理篇
-
-
 
    ![1574509903288](../../media/sf_reuse/arch/db/arch_db_pg.png)
 
 图  PostgreSQL体系结构图
 
 PostgreSQL由连接管理系统（系统控制器），编译执行系统，存储管理系统，事务系统，系统表五大部分组成。
-
-
 
 ## 存储系统
 
@@ -305,7 +357,9 @@ PostgreSQL内存页面的默认大小是8kB。页面的逻辑结构被定义成�
 
 特殊空间是为了页面操作所需要的。为了其他模块对页面进行操作，PostgreSQL内部定义了一些页面的操作函数。页面的相关操作包括页面初始化、页面添加、修复和删除。供其他子模块进行调用。这里值得关注的是页面修复与页面批量删除的操作函数。为了实现这两个操作函数，PostgreSQL专门定义了一个数据结构itemldSortData，它为方便在这两个函数中对元组项Item实现降序排序而定义。
 
+<br>
 
+<br>
 
 # 参考资料
 
@@ -317,9 +371,8 @@ PostgreSQL内存页面的默认大小是8kB。页面的逻辑结构被定义成�
 * 阿里云PostgreSQL  https://www.aliyun.com/product/rds/postgresql
 * 附录 E. 版本说明 (postgres.cn)   http://www.postgres.cn/docs/14/release.html
 
-
-
 **参考链接**
 
+* 百度百科-PostgreSQL [PostgreSQL_百度百科](https://baike.baidu.com/item/PostgreSQL)
 * 如何在CentOS 8 上安装 PostgreSQL 数据库  https://blog.csdn.net/weixin_39983404/article/details/110571868
-* 百度百科-PostgreSQL  https://baike.baidu.com/item/PostgreSQL
+* 如何在华为鲲鹏云服务器上安装PostgreSQL  https://bbs.huaweicloud.com/blogs/266148

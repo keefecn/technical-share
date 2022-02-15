@@ -13,12 +13,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 简介
@@ -76,6 +78,8 @@ Linux官网：https://kernel.org/
 linux体系结构说明：user mode 进程需要通过`glibc`作一个到kernel mode 的转换。
 
 
+
+<br>
 
 # 2 内核知识
 
@@ -275,7 +279,9 @@ MODULE_SUPPORTED_DEVICE()
 
 
 
-# 3 内核源码
+<br>
+
+# 3  内核源码
 
 ## CPU调度子系统
 
@@ -787,6 +793,8 @@ http://www.pub4.com/?post=36
 
 
 
+<br>
+
 ## 本章参考
 
 * linux线程模型  http://www.ibm.com/developerworks/cn/linux/l-threading.html
@@ -832,6 +840,8 @@ shell: 支持管道可重定向,|,>,<,>> use dup(),pipe()实现
 
 
 
+<br>
+
 # 参考资料
 
 * http://lxr.linux.no/
@@ -841,6 +851,8 @@ shell: 支持管道可重定向,|,>,<,>> use dup(),pipe()实现
 * 从2.x到4.x，Linux内核这十年经历了哪些重要变革 https://blog.csdn.net/sheji105/article/details/79558522?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.base
 
 
+
+<br>
 
 # 附录
 

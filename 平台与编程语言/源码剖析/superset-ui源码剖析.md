@@ -9,12 +9,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ----
 
 # 1 简述
@@ -149,6 +151,8 @@ Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
 
 
+<br>
+
 # 2 核心模块 /core/
 
 表格  core的源码结构
@@ -178,7 +182,9 @@ Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
 
 
-# 3 遗产模块 /legacy-*
+<br>
+
+# 3  遗产模块 /legacy-*
 
 ## legacy-plugin-chart-country-map/
 
@@ -737,6 +743,8 @@ if (shouldRunTyping) {
 
 
 
+
+<br>
 
 # 参考资料
 

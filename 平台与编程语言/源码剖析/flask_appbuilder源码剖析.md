@@ -11,12 +11,14 @@
 
 
 
+<br>
 ---
 
 [TOC]
 
 
 
+<br>
 ---
 
 # 1 flask_appbuilder源码剖析
@@ -1984,6 +1986,8 @@ class OpenApiManager(BaseManager):
 
 
 
+<br>
+
 # 2 flask_appbuild依赖模块
 
 ## SQLAlchemy
@@ -2564,7 +2568,9 @@ Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
 
 
 
-# 3 flask_appbuild依赖模块-flask系列
+<br>
+
+# 3  flask_appbuild依赖模块-flask系列
 
 ## flask | click 模块
 
@@ -3424,6 +3430,8 @@ Required-by: Flask-AppBuilder
 
 
 
+
+<br>
 
 # 参考资料
 

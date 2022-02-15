@@ -1,22 +1,17 @@
-| 序号 | 修改时间   | 修改内容                                    | 修改人 | 审稿人 |
-| ---- | ---------- | ------------------------------------------- | ------ | ------ |
-| 1    | 2010-6-20  | 创建                                        | Keefe  | Keefe  |
-| 2    | 2010-7-3   | 增加Lucene结构分析章节，重点逻辑视图。      | 同上   |        |
-| 3    | 2011-3-7   | 补充类图                                    | 同上   |        |
-| 4    | 2016-12-26 | 规范文章结构。                              | 同上   |        |
-| 5    | 2017-1-23  | 增加基于lucene的开源搜索solr和elasticsearch | 同上   |        |
-| 6    | 2017-4-9   | 更新lucene/solr/elasticsearch章节           | 同上   |        |
-| 7    | 2018-6-22  | 将ELK章节迁移到《大数据开发》。             | 同上   |        |
-| 8    | 2021-10-21 | 更新Lucene简介章节里的版本说明。            | 同上   |        |
+| 序号  | 修改时间       | 修改内容                              | 修改人   | 审稿人   |
+| --- | ---------- | --------------------------------- | ----- | ----- |
+| 1   | 2010-6-20  | 创建                                | Keefe | Keefe |
+| 2   | 2010-7-3   | 增加Lucene结构分析章节，重点逻辑视图。            | 同上    |       |
+| 3   | 2011-3-7   | 补充类图                              | 同上    |       |
+| 4   | 2016-12-26 | 规范文章结构。                           | 同上    |       |
+| 5   | 2017-1-23  | 增加基于lucene的开源搜索solr和elasticsearch | 同上    |       |
+| 6   | 2017-4-9   | 更新lucene/solr/elasticsearch章节     | 同上    |       |
+| 7   | 2018-6-22  | 将ELK章节迁移到《大数据开发》。                 | 同上    |       |
+| 8   | 2021-10-21 | 更新Lucene简介章节里的版本说明。               | 同上    |       |
 
+<br>
 
-
-
-
-
-
-
-
+<br>
 ---
 
 # 目录
@@ -185,12 +180,6 @@
 
 [5.2    参考书籍__ 47](#_Toc16115258)
 
-
-
-
-
-
-
 **表目录**
 
 [表格 1 基于lucene的搜索引擎比较列表__ 5](#_Toc16115154)
@@ -217,8 +206,6 @@
 
 [表格 12 elasticsearch的文件目录结构__ 43](#_Toc16115165)
 
-
-
 **图目录**
 
 [图 1 lucene代码结构... 9](#_Toc16115166)
@@ -243,10 +230,10 @@
 
 [图 11 Solr 分布式架构... 24](#_Toc16115176)
 
+<br>
 
-
+<br>
 ---
-
 
 # 1  概述
 
@@ -254,9 +241,7 @@
 
 ​     Lucene是apache软件基金会jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，即它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。
 
-​     Lucene的原作者是Doug Cutting，他是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎[6]的主要开发者，后在Excite[7]担任高级系统架构设计师，目前从事于一些Internet底层架构的研究。早先发布在作者自己的[http://www.lucene.com/](http://www.lucene.com/#_blank)，后来发布在[SourceForge](http://sourceforge.net/projects/lucene/#_blank)[8]，2001年年底成为apache软件基金会jakarta的一个子项目：http://jakarta.apache.org/lucene/。
-
-
+​     Lucene的原作者是Doug Cutting，他是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎的主要开发者，后在Excite担任高级系统架构设计师，目前从事于一些Internet底层架构的研究。早先发布在作者自己的[http://www.lucene.com/](http://www.lucene.com/#_blank)，后来发布在[SourceForge](http://sourceforge.net/projects/lucene/#_blank)，2001年年底成为apache软件基金会jakarta的一个子项目：http://jakarta.apache.org/lucene/
 
 **优点**
 
@@ -272,66 +257,64 @@ Lucene作为一个全文检索引擎，其具有如下突出的优点：
 
 （5）已经默认实现了一套强大的查询引擎，用户无需自己编写代码即使系统可获得强大的查询能力，Lucene的查询实现中默认实现了布尔操作、模糊查询（Fuzzy Search）、分组查询等等。
 
-
-
 表格 [Lucene Core (Java)](https://lucene.apache.org/core/)版本说明
 
-| 版本 | 发布时间   | 新增特性                          |
-| ---- | ---------- | --------------------------------- |
-| 0.01 | 2000-03-30 | 初版。                            |
-| 1.0  | 2000-10-04 |                                   |
-| 2.0  | 2006-05-26 |                                   |
-| 3.0  | 2009-11-25 | 不兼容2.x。处理数字搜索。         |
+| 版本   | 发布时间       | 新增特性                        |
+| ---- | ---------- | --------------------------- |
+| 0.01 | 2000-03-30 | 初版。                         |
+| 1.0  | 2000-10-04 |                             |
+| 2.0  | 2006-05-26 |                             |
+| 3.0  | 2009-11-25 | 不兼容2.x。处理数字搜索。              |
 | 4.0  | 2012-10-12 | 4.x最终版本是4.10.4(2015-03-03)。 |
 | 5.0  | 2015-02-20 | 5.x最终版本是5.5.5。              |
 | 6.0  | 2016-04-08 | 6.x最终版本是5.5.5。              |
 | 7.0  | 2017-09-20 | 7.x最终版本是7.7.2。              |
 | 8.0  | 2019-03-14 | 8.x最终版本是8.10.x。             |
-| 9.0  |            |                                   |
+| 9.0  |            |                             |
 
 详见 http://s.apache.org/luceneversions
 
-相关项目 见下文 参考资料
+相关项目 见下方 附录
 
-
+<br>
 
 ## 1.2   基于Lucene的搜索引擎比较
 
 表格 1 基于lucene的搜索引擎比较列表
 
-| **框架**                                                     | **简介**                                                     | **优点**                                                     | **缺点**                                                     | **实例** |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
-| [Lucene Core (Java)](http://lucene.apache.org/core/)         | 一个 JAVA 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。当今最先进，最高效的全功能开源搜索引擎框架。 <br>2010年 Apache Lucene 和 Apache Solr 项目合并。 | 成熟的解决方案，有很多的成功案例。                           | 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟。 |          |
-| Apache [Solr](http://lucene.apache.org/solr/)                | Apache  Lucene项目的开源企业搜索平台。  其主要功能包括全文检索、命中标示、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。  Solr是高度可扩展的。 | 开发者社区更成熟、更稳定。  支持多格式的索引如HTML/PDF/WORD/CSV等等。  不建索引时搜索更快。 | 建立索引时，搜索效率下降，实时索引搜索效率不高。  shard策略需要自己去写、分布式搜索时相关性排序问题需二次开发。  版本更新较慢。 |          |
-| [Elasticsearch](https://www.elastic.co)                      | 分布式，RESTful搜索和分析。2010.2初版。  分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索。  实时分析的分布式搜索引擎。  可扩展到上百台服务器，处理PB级别的结构化或非结构化数据。 | 分布式。  近实时搜索。  备份更简单。  可用性不错（可容纳节点故障）。 | 不够自动。                                                   | 维基百科 |
-| Nutch                                                        | 一个完整的搜索引擎，包含爬虫、索引、搜索。使用了Hadoop，Map/Reduce做海量数据的并行处理、hdfs分布式文件系统存储中间计算结果及索引文件。 | 提供搜索引擎全套方案。                                       |                                                              |          |
-| [Katta](http://katta.sourceforge.net/)                       | 基于 Lucene 的，支持分布式，可扩展，具有容错功能，准实时的搜索方案。 | 开箱即用，可以与 Hadoop 配合实现分布式。具备扩展和容错机制。 | 只是搜索方案，建索引部分还是需要自己实现。在搜索功能上，只实现了最基本的需求。成功案例较少，项目的成熟度稍微差一些。 |          |
-| [Hadoop contrib/index](http://svn.apache.org/repos/asf/hadoop/mapreduce/trunk/src/contrib/index/README) | Map/Reduce  模式的，分布式建索引方案，可以跟 Katta  配合使用。 | 分布式建索引，具备可扩展性。                                 | 只是建索引方案，不包括搜索实现。工作在批处理模式，对实时搜索的支持不佳。 |          |
-| [LinkedIn 的开源方案](http://sna-projects.com/)              | 基于 Lucene 的一系列解决方案，包括 准实时搜索 zoie ，facet 搜索实现 bobo ，机器学习算法 decomposer ，摘要存储库 krati ，数据库模式包装 sensei 等等 | 经过验证的解决方案，支持分布式，可扩展，丰富的功能实现       | linkedin 公司的联系太紧密，可定制性比较差                    | linkedin |
-| [Lucandra](https://github.com/tjake/Lucandra)                | 基于 Lucene，索引存在 cassandra 数据库中                     | 参考 cassandra 的优点                                        |                                                              |          |
-| [HBasene](https://github.com/akkumar/hbasene)                | 基于 Lucene，索引存在 HBase 数据库中                         | 参考 HBase 的优点                                            |                                                              |          |
-
-
+| **框架**                                                                                                  | **简介**                                                                                                    | **优点**                                                       | **缺点**                                                               | **实例**   |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------- | -------- |
+| [Lucene Core (Java)](http://lucene.apache.org/core/)                                                    | 一个 JAVA 搜索类库，它本身并不是一个完整的解决方案，需要额外的开发工作。当今最先进，最高效的全功能开源搜索引擎框架。 <br>2010年 Apache Lucene 和 Apache Solr 项目合并。 | 成熟的解决方案，有很多的成功案例。                                            | 需要额外的开发工作。所有的扩展，分布式，可靠性等都需要自己实现；非实时，从建索引到可以搜索中间有一个时间延迟。              |          |
+| Apache [Solr](http://lucene.apache.org/solr/)                                                           | Apache  Lucene项目的开源企业搜索平台。  其主要功能包括全文检索、命中标示、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。  Solr是高度可扩展的。           | 开发者社区更成熟、更稳定。  <br>支持多格式的索引如HTML/PDF/WORD/CSV等等。  不建索引时搜索更快。 | 建立索引时，搜索效率下降，实时索引搜索效率不高。  shard策略需要自己去写、分布式搜索时相关性排序问题需二次开发。  版本更新较慢。 |          |
+| [Elasticsearch](https://www.elastic.co)                                                                 | 分布式，RESTful搜索和分析。2010.2初版。  分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索。  实时分析的分布式搜索引擎。  可扩展到上百台服务器，处理PB级别的结构化或非结构化数据。 | 分布式。  近实时搜索。  备份更简单。 <br> 可用性不错（可容纳节点故障）。                    | 不够自动。                                                                | 维基百科     |
+| Nutch                                                                                                   | 一个完整的搜索引擎，包含爬虫、索引、搜索。使用了Hadoop，Map/Reduce做海量数据的并行处理、hdfs分布式文件系统存储中间计算结果及索引文件。                             | 提供搜索引擎全套方案。                                                  |                                                                      |          |
+| [Katta](http://katta.sourceforge.net/)                                                                  | 基于 Lucene 的，支持分布式，可扩展，具有容错功能，准实时的搜索方案。                                                                    | 开箱即用，可以与 Hadoop 配合实现分布式。具备扩展和容错机制。                           | 只是搜索方案，建索引部分还是需要自己实现。在搜索功能上，只实现了最基本的需求。成功案例较少，项目的成熟度稍微差一些。           |          |
+| [Hadoop contrib/index](http://svn.apache.org/repos/asf/hadoop/mapreduce/trunk/src/contrib/index/README) | Map/Reduce  模式的，分布式建索引方案，可以跟 Katta  配合使用。                                                                 | 分布式建索引，具备可扩展性。                                               | 只是建索引方案，不包括搜索实现。工作在批处理模式，对实时搜索的支持不佳。                                 |          |
+| [LinkedIn 的开源方案](http://sna-projects.com/)                                                              | 基于 Lucene 的一系列解决方案，包括 准实时搜索 zoie ，facet 搜索实现 bobo ，机器学习算法 decomposer ，摘要存储库 krati ，数据库模式包装 sensei 等等      | 经过验证的解决方案，支持分布式，可扩展，丰富的功能实现                                  | linkedin 公司的联系太紧密，可定制性比较差                                            | linkedin |
+| [Lucandra](https://github.com/tjake/Lucandra)                                                           | 基于 Lucene，索引存在 cassandra 数据库中                                                                             | 参考 cassandra 的优点                                             |                                                                      |          |
+| [HBasene](https://github.com/akkumar/hbasene)                                                           | 基于 Lucene，索引存在 HBase 数据库中                                                                                 | 参考 HBase 的优点                                                 |                                                                      |          |
 
 ## 1.3   环境配置
 
 表格 2 lucene相关项目的环境配置列表
 
-| 程序                                             | 当前版本号及日期   | platform  & JVM                                              | 备注                                                         |
-| ------------------------------------------------ | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Lucene   Core ](http://lucene.apache.org/core/) |                    |                                                              | (Java)                                                       |
-| elastic  search                                  | v5.2.0   2017.1.31 | v5.x后版本要求java版本1.8.0_73~[Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html),   Only  Oracle’s Java and the OpenJDK are supported. | 配置文件：`config/jvm.options`  export  ES_JAVA_OPTS="$ES_JAVA_OPTS -Djava.io.tmpdir=/path/to/temp/dir"  ./bin/elasticsearch  https://github.com/elastic/elasticsearch |
-| [Solr](http://lucene.apache.org/solr/)           | 6.5.0  2017.4      | java 8以上, ant,  ivy  tomcat                                | https://github.com/apache/lucene-solr                        |
+| 程序                                               | 当前版本号及日期           | platform  & JVM                                                                                                                                            | 备注                                                                                                                                                                    |
+| ------------------------------------------------ | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Lucene   Core ](http://lucene.apache.org/core/) |                    |                                                                                                                                                            | (Java)                                                                                                                                                                |
+| elastic  search                                  | v5.2.0   2017.1.31 | v5.x后版本要求java版本1.8.0_73~[Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html),   Only  Oracle’s Java and the OpenJDK are supported. | 配置文件：`config/jvm.options`<br>  export  ES_JAVA_OPTS="$ES_JAVA_OPTS -Djava.io.tmpdir=/path/to/temp/dir"  ./bin/elasticsearch  https://github.com/elastic/elasticsearch |
+| [Solr](http://lucene.apache.org/solr/)           | 6.5.0  2017.4      | java 8以上, ant,  ivy  tomcat                                                                                                                                | https://github.com/apache/lucene-solr                                                                                                                                 |
 
 说明：若java -version报错，请安装jdk；若JAVA_HOME无结果，在.bashrc文件加入
 
-export JAVA_HOME=
+`export JAVA_HOME=`
 
-
+<br>
 
 ## 本章参考
 
+<br><br>
 
+<br>
 
 # 2  Lucene
 
@@ -345,8 +328,6 @@ export JAVA_HOME=
 
 略
 
-
-
 ### 2.1.2 组件视图
 
 组件图包括索引引擎index, 查询引擎search, 文本分析引擎（可扩展）。
@@ -356,8 +337,6 @@ export JAVA_HOME=
 图 1 lucene代码结构
 
 从图中我们清楚的看到，Lucene的系统由基础结构封装、索引核心、对外接口三大部分组成。
-
-
 
 The Lucene API is divided into several packages:
 
@@ -376,8 +355,6 @@ To use Lucene, an application should:
 3. Call [QueryParser.parse()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/queryParser/QueryParser.html#parse(java.lang.String))     to build a query from a string; and
 4. Create an [IndexSearcher](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/IndexSearcher.html)     and pass the query to its [search()](http://lucene.apache.org/java/3_0_3/api/demo/org/apache/lucene/search/Searcher.html#search(org.apache.lucene.search.Query))     method.
 
-
-
 ### 2.1.3 运行视图
 
 **数据流**
@@ -392,32 +369,28 @@ Lucene存在四种数据流，即文本流、token流、字节流与查询语句
 
 * 查询语句对象流： 对查询语句抽象。
 
-
-
 ## 2.2   Lucene代码分析篇
 
 ### 2.2.1 代码目录结构
 
 表格 3 lucene的代码目录结构
 
-| 目录或文件                                | 子目录或文件 | 功能概述                     | 备注   |
-| ----------------------------------------- | ------------ | ---------------------------- | ------ |
-| core: <br>core\src\java\org\apache\lucene |              | 此目录下为lucene的核心代码。 | 最重要 |
-|                                           | /analysis    |                              |        |
-|                                           | /codecs      |                              |        |
-|                                           | /document    | 文档域                       |        |
-|                                           | /index       | 索引                         |        |
-|                                           | /search      | 检索                         |        |
-|                                           | /store       | 存储                         |        |
-|                                           | /geo         |                              |        |
-|                                           | /util        |                              |        |
-| demo                                      |              |                              |        |
-| suggest                                   |              |                              |        |
-| site                                      |              |                              |        |
-| tools                                     |              |                              |        |
-|                                           |              |                              |        |
-
-
+| 目录或文件                                     | 子目录或文件    | 功能概述              | 备注  |
+| ----------------------------------------- | --------- | ----------------- | --- |
+| core: <br>core\src\java\org\apache\lucene |           | 此目录下为lucene的核心代码。 | 最重要 |
+|                                           | /analysis |                   |     |
+|                                           | /codecs   |                   |     |
+|                                           | /document | 文档域               |     |
+|                                           | /index    | 索引                |     |
+|                                           | /search   | 检索                |     |
+|                                           | /store    | 存储                |     |
+|                                           | /geo      |                   |     |
+|                                           | /util     |                   |     |
+| demo                                      |           |                   |     |
+| suggest                                   |           |                   |     |
+| site                                      |           |                   |     |
+| tools                                     |           |                   |     |
+|                                           |           |                   |     |
 
 ### 2.2.2 存储逻辑store
 
@@ -451,8 +424,6 @@ l 段segment: 多个文档组成，称为子索引；可以组合为索引。
 
 索引： 索引可对应到一个目录（或文件）。
 
-
-
 #### 2.2.3.2 索引文件类型
 
 索引文件格式中的数据类型： Byte, Uint32, Uint64, Chars, String
@@ -461,21 +432,21 @@ l 段segment: 多个文档组成，称为子索引；可以组合为索引。
 
 表格 4 lucene index file
 
-| 索引文件  | 含义                                                         |      |
-| --------- | ------------------------------------------------------------ | ---- |
-| Segments  | 记录有多少个段，段中的文档数                                 |      |
-| deletable | 等待删除的Document                                           |      |
-| .fdt      | Field Data 域值                                              |      |
-| .fdx      | Field Index 为.fdt的位置索引                                 |      |
-| .fnm      | Field Name 域名                                              |      |
-| .prx      | postion 词的位置文件                                         |      |
-| .frq      | Term frequent 词频文件                                       |      |
-| .tii      | Term Index  Index 为.tis的位置索引 (.tis快表)                |      |
-| .tis      | Term Index  Struct，指向.frq,.prx文件的指针                  |      |
-| .tvd      | 以termVector存储Document,  同时包含一个指针表，指向.tvf中的Field  信息 |      |
-| .tvf      | 以TermVector存储Field                                        |      |
-| .tvx      | TermVector Index, 为.tvd的位置索引                           |      |
-| .cfs      | Compound File Structs 复合索引                               |      |
+| 索引文件      | 含义                                                  |     |
+| --------- | --------------------------------------------------- | --- |
+| Segments  | 记录有多少个段，段中的文档数                                      |     |
+| deletable | 等待删除的Document                                       |     |
+| .fdt      | Field Data 域值                                       |     |
+| .fdx      | Field Index 为.fdt的位置索引                              |     |
+| .fnm      | Field Name 域名                                       |     |
+| .prx      | postion 词的位置文件                                      |     |
+| .frq      | Term frequent 词频文件                                  |     |
+| .tii      | Term Index  Index 为.tis的位置索引 (.tis快表)               |     |
+| .tis      | Term Index  Struct，指向.frq,.prx文件的指针                 |     |
+| .tvd      | 以termVector存储Document,  同时包含一个指针表，指向.tvf中的Field  信息 |     |
+| .tvf      | 以TermVector存储Field                                  |     |
+| .tvx      | TermVector Index, 为.tvd的位置索引                        |     |
+| .cfs      | Compound File Structs 复合索引                          |     |
 
 #### 2.2.3.3 索引逻辑类图
 
@@ -491,53 +462,37 @@ Index:  NO, TOKENIZED, UN_TOKENZIED, NO_NORMS
 
 图 4 classdigram: field
 
-
-
 ##### 2.2.3.3.2    索引类图
-
-
 
 #### 2.2.3.4 索引各个阶段流程
 
-1)     索引创建
+1)  索引创建
 
 IndexWrite
 
-
-
-2)     索引合并
+2)  索引合并
 
 IndexWrite.addIndexes
 
-
-
-3)     索引优化
+3)  索引优化
 
 IndexWrite.optimize()
 
+4)  索引删除
 
-
-4)     索引删除
-
-
-
-5)     索引同步
+5)  索引同步
 
 wrte.lock
 
 commit.lock
 
-
-
-6)     索引读取
+6)  索引读取
 
 IndexReader.termDocs()
 
 Term //查询词
 
 TermDocs //索引查询结果
-
-
 
 ### 2.2.4 查询逻辑search
 
@@ -571,35 +526,25 @@ Weigh
 
 图 6 classdigram: query&filter
 
-
-
 ##### 2.2.4.1.3    权重积分Weight,Score类图
 
 积分：Sort
 
 权重：Weigh
 
-
-
 图 7 classdigram: weigh&score
 
 #### 2.2.4.2 查询各个阶段流程
 
-1)     查询流程IndexSearcher
+1)  查询流程IndexSearcher
 
+2)  结果排序，过滤和分页
 
-
-2)     结果排序，过滤和分页
-
-
-
-3)     高级搜索
+3)  高级搜索
 
 多Field搜索
 
 多索引索引
-
-
 
 ### 2.2.5 分析器逻辑Analyzer
 
@@ -615,8 +560,6 @@ Weigh
 
 说明：分析器Analysis由过滤器Filter和解析器Analyzer组成。
 
-
-
 ### 2.2.6 关键算法
 
 #### 2.2.6.1 文档得分算法
@@ -625,22 +568,18 @@ Weigh
 
 文档的得分是在用户进行检索时实时计算出来的。Lucene文档得分算法采用TF-IDF的改进算法。公式如下：
 
-
-
 Lucene得分公式的解释
 
 表格 5 lucene文档得分算法
 
-| 因  素                      | 在公式中的作用描述                                           | lucene中实现                                      |
-| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------- |
-| tf(t  in d)                 | 词条t在文档d中出现的词频,                                    | =math.sqrt(termFreq)                              |
-| idf( t  )                   | 词条t在文档中的倒排词频                                      | =math.log(numDocs/(docFreq+1))  +1.0              |
-| boost  (t.field  in d)      | 在索引过程中设置的字段参数                                   | 索引时写入，可通过接口更改，如doc.setBoost(0.2f); |
-| lengthNorm  (t.field  in d) | 字段的标准化值，表明在字段中存储了多少词条，这个数值是在索引过程中计算出来的，并且也存储在索引中 | =1/math.sqrt(numTerms)                            |
-| coord(q,  d)                | 协调因子，它的计算是基于文档d中所包含的所有可供查询的词条数量 |                                                   |
-| queryNorm(q)                | 在给出每个查询条目的方差和后，计算某查询的标准化值           |                                                   |
-
-
+| 因  素                        | 在公式中的作用描述                                        | lucene中实现                            |
+| --------------------------- | ------------------------------------------------ | ------------------------------------ |
+| tf(t  in d)                 | 词条t在文档d中出现的词频,                                   | =math.sqrt(termFreq)                 |
+| idf( t  )                   | 词条t在文档中的倒排词频                                     | =math.log(numDocs/(docFreq+1))  +1.0 |
+| boost  (t.field  in d)      | 在索引过程中设置的字段参数                                    | 索引时写入，可通过接口更改，如doc.setBoost(0.2f);   |
+| lengthNorm  (t.field  in d) | 字段的标准化值，表明在字段中存储了多少词条，这个数值是在索引过程中计算出来的，并且也存储在索引中 | =1/math.sqrt(numTerms)               |
+| coord(q,  d)                | 协调因子，它的计算是基于文档d中所包含的所有可供查询的词条数量                  |                                      |
+| queryNorm(q)                | 在给出每个查询条目的方差和后，计算某查询的标准化值                        |                                      |
 
 #### 2.2.6.2 模糊搜索算法
 
@@ -658,19 +597,15 @@ l DNA analysis(DNA分析)
 
 l Plagiarism detection(抄袭检测)
 
-
-
 LD用m*n的矩阵存储距离值。算法大概过程：
 
-1)     str1或str2的长度为0返回另一个字符串的长度。
+1)  str1或str2的长度为0返回另一个字符串的长度。
 
-2)     初始化(n+1)*(m+1)的矩阵d，并让第一行和第一列的值从0开始增长。
+2)  初始化(n+1)*(m+1)的矩阵d，并让第一行和第一列的值从0开始增长。
 
-3)     扫描两字符串（n*m级的），如果：str1[i] == str2[j]，用temp记录它，为0。否则temp记为1。然后在矩阵d[i][j]赋于d[i-1][j]+1 、d[i][j-1]+1、d[i-1][j-1]+temp三者的最小值。
+3)  扫描两字符串（n*m级的），如果：str1[i] == str2[j]，用temp记录它，为0。否则temp记为1。然后在矩阵d[i][j]赋于d[i-1][j]+1 、d[i][j-1]+1、d[i-1][j-1]+temp三者的最小值。
 
-4)     扫描完后，返回矩阵的最后一个值即d[n][m]
-
-
+4)  扫描完后，返回矩阵的最后一个值即d[n][m]
 
 ## 2.3   Lucene开发
 
@@ -678,16 +613,14 @@ LD用m*n的矩阵存储距离值。算法大概过程：
 
 Some simple examples of code which does this are:
 
--  [FileDocument.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/FileDocument.java)     contains code to create a Document for a file.
--  [IndexFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/IndexFiles.java)     creates an index for all the files contained in a directory.
--  [DeleteFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/DeleteFiles.java)     deletes some of these files from the index.
--  [SearchFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/SearchFiles.java)     prompts for queries and searches an index.
-
-
+- [FileDocument.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/FileDocument.java)     contains code to create a Document for a file.
+- [IndexFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/IndexFiles.java)     creates an index for all the files contained in a directory.
+- [DeleteFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/DeleteFiles.java)     deletes some of these files from the index.
+- [SearchFiles.java](http://svn.apache.org/repos/asf/lucene/java/trunk/src/demo/org/apache/lucene/demo/SearchFiles.java)     prompts for queries and searches an index.
 
 #### 2.3.1.1 示例1：IndexFiles.java
 
- ```java
+```java
 package iLucene;
 
 import java.io.File;
@@ -703,85 +636,83 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 /**
- * 索引某一目录下的所有文本文件
- *
- * @author wujinsong
- */
+* 索引某一目录下的所有文本文件
+*
+* @author wujinsong
+*/
 public class IndexFiles {
-    private IndexFiles() {
-    }
+   private IndexFiles() {
+   }
 
-    static final File INDEX_DIR = new File("c:\\index");
+   static final File INDEX_DIR = new File("c:\\index");
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
 
-        if (INDEX_DIR.exists()) {
-            System.out.println("Cannot save index to '" + INDEX_DIR + " ' directory,please delete it first");
-            System.exit(1);
-        }
+       if (INDEX_DIR.exists()) {
+           System.out.println("Cannot save index to '" + INDEX_DIR + " ' directory,please delete it first");
+           System.exit(1);
+       }
 
-        final File docDir = new File("C:\\kankan");
-        if (!docDir.exists() || !docDir.canRead()) {
-            System.out.println("Document directory '" + docDir.getAbsolutePath() + "' does not exist or is not readable, please check the path");
-            System.exit(1);
-        }
+       final File docDir = new File("C:\\kankan");
+       if (!docDir.exists() || !docDir.canRead()) {
+           System.out.println("Document directory '" + docDir.getAbsolutePath() + "' does not exist or is not readable, please check the path");
+           System.exit(1);
+       }
 
-        Date start = new Date();
-        try {
-            IndexWriter writer = new IndexWriter(FSDirectory.open(INDEX_DIR), new StandardAnalyzer(Version.LUCENE_CURRENT), true,
-                    IndexWriter.MaxFieldLength.LIMITED);
-            System.out.println("Indexing to directory '" + INDEX_DIR + "'...");
-            indexDocs(writer, docDir);
-            System.out.println("Optimizing...");
-            writer.optimize();
-            writer.close();
+       Date start = new Date();
+       try {
+           IndexWriter writer = new IndexWriter(FSDirectory.open(INDEX_DIR), new StandardAnalyzer(Version.LUCENE_CURRENT), true,
+                   IndexWriter.MaxFieldLength.LIMITED);
+           System.out.println("Indexing to directory '" + INDEX_DIR + "'...");
+           indexDocs(writer, docDir);
+           System.out.println("Optimizing...");
+           writer.optimize();
+           writer.close();
 
-            Date end = new Date();
-            System.out.println(end.getTime() - start.getTime() + " total milliseconds!");
-        }
-        catch (IOException e) {
-            System.out.println(" caught a " + e.getClass() + "\n with message: " + e.getMessage());
-        }
-    }
+           Date end = new Date();
+           System.out.println(end.getTime() - start.getTime() + " total milliseconds!");
+       }
+       catch (IOException e) {
+           System.out.println(" caught a " + e.getClass() + "\n with message: " + e.getMessage());
+       }
+   }
 
-    /**
-     * 索引文件
-     *
-     * @param writer
-     * @param file
-     * @throws CorruptIndexException
-     * @throws IOException
-     */
-    static void indexDocs(IndexWriter writer, File file) throws CorruptIndexException, IOException {
-        // 不要试图索引不可读的文件
-        if (file.canRead()) {
-            if (file.isDirectory()) {
-                String[] files = file.list();
-                // 一个IO错误可能发生
-                if (files != null) {
-                    for (int i = 0; i < files.length; i++) {
-                        indexDocs(writer, new File(file, files[i]));
-                    }
-                }
-            }
-            else {
-                System.out.println("adding " + file);
-                try {
-                    writer.addDocument(FileDocument.Document(file));
-                }
-                // 至少在windows系统，一些临时文件会导致“访问拒绝”异常，检查文件是否可以被读取将不起作用。
-                catch (FileNotFoundException exception) {
+   /**
+    * 索引文件
+    *
+    * @param writer
+    * @param file
+    * @throws CorruptIndexException
+    * @throws IOException
+    */
+   static void indexDocs(IndexWriter writer, File file) throws CorruptIndexException, IOException {
+       // 不要试图索引不可读的文件
+       if (file.canRead()) {
+           if (file.isDirectory()) {
+               String[] files = file.list();
+               // 一个IO错误可能发生
+               if (files != null) {
+                   for (int i = 0; i < files.length; i++) {
+                       indexDocs(writer, new File(file, files[i]));
+                   }
+               }
+           }
+           else {
+               System.out.println("adding " + file);
+               try {
+                   writer.addDocument(FileDocument.Document(file));
+               }
+               // 至少在windows系统，一些临时文件会导致“访问拒绝”异常，检查文件是否可以被读取将不起作用。
+               catch (FileNotFoundException exception) {
 
-                }
-            }
-        }
-    }
+               }
+           }
+       }
+   }
 }
- ```
+```
 
 说明：IndexWrite, Document, Field, FileInputStream
-
-
 
 #### 2.3.1.2 示例2：index+search
 
@@ -820,11 +751,11 @@ public class IndexFiles {
 
 说明：
 
-1)     索引创建过程，Analyzer 为分析器，Directory 为存储抽象，IndexWriter 根据传入的Analyzer和Directory来创建索引，指定索引的存储方式和处理方式。Document为数据文件，Field为数据组成。
+1)  索引创建过程，Analyzer 为分析器，Directory 为存储抽象，IndexWriter 根据传入的Analyzer和Directory来创建索引，指定索引的存储方式和处理方式。Document为数据文件，Field为数据组成。
 
-2)     查询过程：IndexSearcher通过传入的Directory索引抽象来进行查询。QueryParser 为查询解析器，与索引创建过程使用同样的Analyzer。Query为查询解析器分析后的检索串；ScoreDoc[]为检索后得到的带权重的文档集合, Document 为得到的文档。
+2)  查询过程：IndexSearcher通过传入的Directory索引抽象来进行查询。QueryParser 为查询解析器，与索引创建过程使用同样的Analyzer。Query为查询解析器分析后的检索串；ScoreDoc[]为检索后得到的带权重的文档集合, Document 为得到的文档。
 
-3)     回收过程：索引创建完，需关闭索引创建器IndexWriter ; 查询后，需关闭索引查询器IndexSearcher，关闭抽象索引directory.
+3)  回收过程：索引创建完，需关闭索引创建器IndexWriter ; 查询后，需关闭索引查询器IndexSearcher，关闭抽象索引directory.
 
 ### 2.3.2 扩展定制
 
@@ -832,23 +763,21 @@ l 实现Lucene在org.apache.lucene.analysis中定义的接口： 按照目标语
 
 l 继承实现org.apache.lucene.document类： 按照被索引的文件格式来提供相应的文本分析逻辑。然后交给org.apache.lucene.index模块来写入索引文件。
 
-
-
-
+<br>
 
 ## 本章参考
 
+<br><br>
 
+<br>
 
-# 3  Solr开发
+# 3   Solr开发
 
 ## 3.1   概述
 
 分布式搜索和索引复制。Solr是最流行的企业级搜索引擎，Solr4 还增加了NoSQL支持。
 
 Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的一个独立的全文搜索服务器。 Solr采用了 Lucene Java 搜索库为核心的全文索引和搜索，并具有类似REST的HTTP/XML和JSON的API。Solr强大的外部配置功能使得无需进行Java编码，便可对 其进行调整以适应多种类型的应用程序。Solr有一个插件架构，以支持更多的高级定制。
-
-
 
 2004年CNET开发Solr，为CNET提供站内搜索服务
 
@@ -860,8 +789,6 @@ Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的
 
 如今Solr已经广为人知，并且许多公司都已经使用Solr去构建自己的搜索引擎： AOL、 Disney、 Apple, Inc、阿里巴巴、安居客……
 
-
-
 Solr的特性包括：
 
 * 高级的全文搜索功能
@@ -871,8 +798,6 @@ Solr的特性包括：
 * 可伸缩性－能够有效地复制到另外一个Solr搜索服务器
 * 使用XML配置达到灵活性和适配性
 * 可扩展的插件体系
-
-
 
 ### 3.1.1 Solr架构
 
@@ -886,8 +811,6 @@ Solr的特性包括：
 
 　　默认配置返回Solr的标准 XML 响应，也可以配置Solr的备用响应格式。
 
-
-
 **索引原理**
 
  可以向Solr索引servlet传递四个不同的索引请求：
@@ -900,8 +823,6 @@ Solr的特性包括：
 
 　　4) delete 可以通过 id 或查询来指定。按 id 删除将删除具有指定 id 的文档；按查询删除将删除查询返回的所有文档。
 
-
-
 **搜索原理**
 
  　要实现搜索则只需要调用搜索接口select发送HTTP GET。示例：
@@ -910,23 +831,17 @@ http://192.168.10.85:18080/solr/select?indent=on&version=2.2&q= solr&start=0&row
 
 　备注：多核心时为这个地址http://192.168.10.85:18080/solr/core0/select/
 
-
-
  ![image-20210616105414925](../../media/code/code_solr_001.png)
 
 图 10 Solr Architecture
 
 说明：
 
-
-
 ![image-20210616105438502](../../media/code/code_solr_002.png)
 
 图 11 Solr 分布式架构
 
 说明：
-
-
 
 ## 3.2   入门篇
 
@@ -942,8 +857,6 @@ l 运行：/solr-6.2.0:$ bin/solr start -e cloud -noprompt
 
 l 查看：  http://localhost:8983/solr/
 
-
-
 ### 3.2.2 索引
 
 可索引多格式文档，不能更新数据，可以删除数据。
@@ -955,8 +868,6 @@ $ bin/post -c gettingstarted docs/
 l -c gettingstarted: name of the collection to index into
 
 l docs/: a relative path of the Solr install docs/ directory
-
-
 
 // 示例1：索引多格式文件如html、xml、JSON、CSV
 
@@ -974,8 +885,6 @@ $bin/post -c gettingstarted example/exampledocs/books.csv
 bin/post -c gettingstarted -d "<delete><id>SP2514N</id></delete>"
 ```
 
-
-
 ### 3.2.3 检索
 
 检索可以用各种客户端，如RESTful API、CURL等等。
@@ -983,8 +892,6 @@ bin/post -c gettingstarted -d "<delete><id>SP2514N</id></delete>"
 检索前端页面示例：
 
 http://localhost:8983/solr/#/gettingstarted/query.
-
-
 
 curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=\"CAS+latency\""
 
@@ -1012,17 +919,9 @@ curl "http://localhost:8983/solr/gettingstarted/select?wt=json&indent=true&q=\"C
 }
 ```
 
-
-
-
-
 ## 3.3   进阶篇
 
 ### 3.3.1 集群
-
-
-
-
 
 ## 3.4   代码分析篇
 
@@ -1031,8 +930,6 @@ Apache Lucene/Solr
 * lucene is a search engine library
 
 * solr is a search engine server that uses lucene
-
-
 
 下载：https://github.com/apache/lucene-solr
 
@@ -1044,27 +941,25 @@ To setup your ide run 'ant idea', 'ant netbeans', or 'ant eclipse'
 
 For Maven info, see dev-tools/maven/README.maven
 
-
-
 ### 3.4.1 代码目录结构
 
 安装后文件目录结构如下表：
 
 表格 6 elasticsearch的文件目录结构
 
-| 目录或文件                             | 功能概述                                                     | 备注     |
-| -------------------------------------- | ------------------------------------------------------------ | -------- |
-| dev-tools                              | 开发工具集合，包含eclipse/idea/netbean/maven/ant的等等。     | 单独存在 |
-| bin                                    | 可执行程序存放目录。                                         |          |
-| server                                 |                                                              |          |
-| dist                                   | dist：该目录包含build过程中产生的war和jar文件，以及相关的依赖文件。如生如生成apache-solr-1.4.war部署到Jetty上面去，并重命名为solr.war。 |          |
-| example                                | 这个目录实际上是Jetty的安装目录。其中包含了一些样例数据和一些Solr的配置。<br/>example/etc：该目录包含了Jetty的配置，在这里我们可以将Jetty的默认端口从8983改为80端口。将其中的8983端口换成80端口。注意更改端口后启动Jetty可能会提示你没有权限，你需要使用sudo java -jar start.jar来运行。   　 example/multicore：该目录包含了在Solr的multicore中设置的多个home目录。在之后的文章中我会对其进行介绍 <br/>example/solr：该目录是一个包含了默认配置信息的Solr的home目录。    example/webapps：Jetty的webapps目录，该目录通常用来放置Java的Web应用程序。在Solr中，前面提到的solr.war文件就部署在这里。 |          |
-| site                                   | 该目录仅仅包含了Solr的官网的网页内容，以及一些教程的PDF文档。 |          |
-| src：core/src/java<br>/org/apache/solr | 该目录包含了Solr项目的整个源代码。这里对其各个子目录也做相应的介绍。      /java：该目录存放的是Solr使用Java编写的源代码。     <br/>/scripts：该目录存放的是配置Solr服务器的Unix Bash Shell脚本，在后面介绍多服务器配置中将会有重要的作用。     <br/>/solrj：前面提到过该目录存放的是Solr的Java版本的客户端代码。     <br/>/test：该目录存放的是测试程序的源代码和测试文件。     <br/>/webapp：该目录存放的是管理Solr的Web页面，包括Servlet和JSP文件，其构成了前面提到的WAR文件。管理Solr的JSP页面在web/admin目录下面，如果你有兴趣折腾Solr可以找到相应的JSP的页面对其进行设置. |          |
-| ...                                 |                                                              |          |
-| lib                                    | 该目录包含了所有Solr的API所依赖的库文件。其中包括Lucene，Apache commons utilities和用来处理XML的Stax库。 | 可选     |
-| build                                  | ant build过程中生成的，其中包含了未被打包成jar或是war的class文件以及一些文档文件。 | 已弃     |
-| client                                 | 该目录包含了特定语言的Solr客户端API，使得使用其他语言的用户能通过HTTP用XML与Solr进行通话。现在该目录里面虽然包含javascript、python、ruby三个子目录，但是到目前为止只包含一部分的ruby的代码，其他语言仍是空的。另外，Solr的Java客户端称为SolrJ，其代码位于src/solrj目录下面。在之后的文章中我会详细介绍Solr客户端的使用。 | 已弃     |
+| 目录或文件                                 | 功能概述                                                                                                                                                                                                                                                                                                                                                                                             | 备注   |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---- |
+| dev-tools                             | 开发工具集合，包含eclipse/idea/netbean/maven/ant的等等。                                                                                                                                                                                                                                                                                                                                                      | 单独存在 |
+| bin                                   | 可执行程序存放目录。                                                                                                                                                                                                                                                                                                                                                                                       |      |
+| server                                |                                                                                                                                                                                                                                                                                                                                                                                                  |      |
+| dist                                  | dist：该目录包含build过程中产生的war和jar文件，以及相关的依赖文件。如生如生成apache-solr-1.4.war部署到Jetty上面去，并重命名为solr.war。                                                                                                                                                                                                                                                                                                      |      |
+| example                               | 这个目录实际上是Jetty的安装目录。其中包含了一些样例数据和一些Solr的配置。<br/>example/etc：该目录包含了Jetty的配置，在这里我们可以将Jetty的默认端口从8983改为80端口。将其中的8983端口换成80端口。注意更改端口后启动Jetty可能会提示你没有权限，你需要使用sudo java -jar start.jar来运行。   　 example/multicore：该目录包含了在Solr的multicore中设置的多个home目录。在之后的文章中我会对其进行介绍 <br/>example/solr：该目录是一个包含了默认配置信息的Solr的home目录。    example/webapps：Jetty的webapps目录，该目录通常用来放置Java的Web应用程序。在Solr中，前面提到的solr.war文件就部署在这里。 |      |
+| site                                  | 该目录仅仅包含了Solr的官网的网页内容，以及一些教程的PDF文档。                                                                                                                                                                                                                                                                                                                                                               |      |
+| src：core/src/java<br>/org/apache/solr | 该目录包含了Solr项目的整个源代码。这里对其各个子目录也做相应的介绍。      /java：该目录存放的是Solr使用Java编写的源代码。     <br/>/scripts：该目录存放的是配置Solr服务器的Unix Bash Shell脚本，在后面介绍多服务器配置中将会有重要的作用。     <br/>/solrj：前面提到过该目录存放的是Solr的Java版本的客户端代码。     <br/>/test：该目录存放的是测试程序的源代码和测试文件。     <br/>/webapp：该目录存放的是管理Solr的Web页面，包括Servlet和JSP文件，其构成了前面提到的WAR文件。管理Solr的JSP页面在web/admin目录下面，如果你有兴趣折腾Solr可以找到相应的JSP的页面对其进行设置.                          |      |
+| ...                                   |                                                                                                                                                                                                                                                                                                                                                                                                  |      |
+| lib                                   | 该目录包含了所有Solr的API所依赖的库文件。其中包括Lucene，Apache commons utilities和用来处理XML的Stax库。                                                                                                                                                                                                                                                                                                                       | 可选   |
+| build                                 | ant build过程中生成的，其中包含了未被打包成jar或是war的class文件以及一些文档文件。                                                                                                                                                                                                                                                                                                                                              | 已弃   |
+| client                                | 该目录包含了特定语言的Solr客户端API，使得使用其他语言的用户能通过HTTP用XML与Solr进行通话。现在该目录里面虽然包含javascript、python、ruby三个子目录，但是到目前为止只包含一部分的ruby的代码，其他语言仍是空的。另外，Solr的Java客户端称为SolrJ，其代码位于src/solrj目录下面。在之后的文章中我会详细介绍Solr客户端的使用。                                                                                                                                                                                                   | 已弃   |
 
 *备注：*
 
@@ -1084,8 +979,6 @@ eclipse环境中调试solr源代码大体上分为三种方式：
 
 3.run on jetty（需要装run-jetty-run插件）
 
-
-
 说明：lucene-solr源码编译需要ant、支持java命令的终端和ivy。源码中并未包含eclipse项目文件，需使用ant转化后方可在eclipse导入项目。
 
 ```shell
@@ -1103,8 +996,6 @@ cd solr/
 ant dist
 ```
 
-
-
 // 设置调试运行配置参数
 
 go to Run > Debug Configurations > Java Application and set the following:
@@ -1115,8 +1006,6 @@ go to Run > Debug Configurations > Java Application and set the following:
 
 Then add Solr’s start.jar file to the classpath so that Eclipse can find and run Jetty’s Main class. From the Classpath tab, click Classpath > User Entries > Add JARs > lucene-solr/solr/example/start.jar
 
-
-
 ### 3.4.3 Solr的servlet包
 
 SolrServlet类继承HttpServlet类，只有四个方法：
@@ -1125,7 +1014,7 @@ SolrServlet类继承HttpServlet类，只有四个方法：
  doGet()
  doPost()
 
-
+<br>
 
 ## 本章参考
 
@@ -1145,15 +1034,15 @@ SolrServlet类继承HttpServlet类，只有四个方法：
 
 [8].   跟益达学Solr5之在Eclipse下编译Solr5源码 http://iamyida.iteye.com/blog/2218576
 
+<br><br>
 
+<br>
 
-# 4  Elasticsearch开发
+# 4 Elasticsearch开发
 
 ## 4.1  概述
 
 Shay Banon在2004年创造了Elasticsearch的前身，称为Compass。2010年2月发布了Elasticsearch的第一个版本。Elasticsearch BV成立于2012年，主要围绕Elasticsearch及相关软件提供商业服务和产品。2015年3月，Elasticsearch公司更名为Elastic。2018年10月5日在纽约证券交易所挂牌上市。
-
-
 
 ElasticSearch是一个基于[Lucene](https://baike.baidu.com/item/Lucene/6753302)的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java语言开发的，并作为Apache许可条款下的开放源码发布，是一种流行的企业级搜索引擎。
 
@@ -1177,8 +1066,6 @@ Elasticsearch主要特性
 
 * **副本~Replia**将索引分片复制一份或多份，称之为分片副本或副本。整本的两个主要原因是高可用性和性能 。
 
-
-
 文档元数据包括：`/_index/_type/_id?`
 
 * _index（索引~文档存储的地方）, 具有一系列相似属性文档的集合，相当于RDBS的库。
@@ -1193,38 +1080,34 @@ Elasticsearch主要特性
 
 备注：Segment是Lucene生成的一个倒排索引，为子索引（可以索引多个文档），可以合并成索引。
 
-
-
 ### 4.1.2 常用REST接口
 
 表格 7 多索引indices和多类别types查找列表
 
-| 索引与类型               | 含义                               |
-| ------------------------ | ---------------------------------- |
+| 索引与类型                    | 含义                    |
+| ------------------------ | --------------------- |
 | /_search                 | 在所有索引的所有类型中查找         |
-| /gb/_search              | 在gb索引的所有类型中查找           |
-| /g*,u*/_search           | 在以g或u开头的索引的所有类型中查找 |
-| /gb/user/_search         | 在gb索引的user类型中查找           |
-| /_all/user,tweet/_search | 在所有索引的user和tweet类型中查找  |
-
-
+| /gb/_search              | 在gb索引的所有类型中查找         |
+| /g*,u*/_search           | 在以g或u开头的索引的所有类型中查找    |
+| /gb/user/_search         | 在gb索引的user类型中查找       |
+| /_all/user,tweet/_search | 在所有索引的user和tweet类型中查找 |
 
 表格 8 集群管理命令
 
-| 简写命令                                                     | 详述                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| GET /                                                        | 获取elasticsearch基本信息                                    |
-| GET /_nodes/  GET /_nodes/process                            | 获取集群中节点的信息                                         |
-| GET [/_cluster/health?pretty](http://localhost:9200/_cluster/health?pretty/)  或   GET [/_cat/health?v](http://localhost:9200/_cat/health?v) | 查看集群健康状态（YELLOW/RED/GREEN)  l RED~ 存在不可用的主分片。  l YELLOW~主分片可用，存在不可用的从分片  l GREEN~ OK |
-| GET /_cat/  shards                                           | 查看主分片                                                   |
-| GET /_cat/xxxxx                                              | nodes~节点 indices~健康状态 health~ thread_pool~  count~索引 segments~  recovery~  templates~模板 |
-| GET  /_count                                                 | 查看索引的主分片和副本                                       |
-|                                                              |                                                              |
-| PUT /_settings -d ' {  "number_of_replicas"  : 0 } '         | 设置索引的主分片和副本数量。  详见 索引设置章节。            |
-| POST /_cluster/reroute -d ' { } '                            | 重新路由，常出现在集群RED，存在不可用主分片。                |
-| GET [/_plugin/head](http://localhost:9200/_plugin/head)      | 图形化查看集群状态（需安装插件HEAD）                         |
-| GET [/_cluster/nodes/shutdown](http://localhost:9200/_cluster/nodes/shutdown) | 向集群中所有节点发送一个关闭请求                             |
-|                                                              |                                                              |
+| 简写命令                                                                                                                                        | 详述                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| GET /                                                                                                                                       | 获取elasticsearch基本信息                                                                     |
+| GET /_nodes/  GET /_nodes/process                                                                                                           | 获取集群中节点的信息                                                                              |
+| GET [/_cluster/health?pretty](http://localhost:9200/_cluster/health?pretty/)  或   GET [/_cat/health?v](http://localhost:9200/_cat/health?v) | 查看集群健康状态（YELLOW/RED/GREEN)  l RED~ 存在不可用的主分片。  l YELLOW~主分片可用，存在不可用的从分片  l GREEN~ OK    |
+| GET /_cat/  shards                                                                                                                          | 查看主分片                                                                                   |
+| GET /_cat/xxxxx                                                                                                                             | nodes~节点 indices~健康状态 health~ thread_pool~  count~索引 segments~  recovery~  templates~模板 |
+| GET  /_count                                                                                                                                | 查看索引的主分片和副本                                                                             |
+|                                                                                                                                             |                                                                                         |
+| PUT /_settings -d ' {  "number_of_replicas"  : 0 } '                                                                                        | 设置索引的主分片和副本数量。  详见 索引设置章节。                                                              |
+| POST /_cluster/reroute -d ' { } '                                                                                                           | 重新路由，常出现在集群RED，存在不可用主分片。                                                                |
+| GET [/_plugin/head](http://localhost:9200/_plugin/head)                                                                                     | 图形化查看集群状态（需安装插件HEAD）                                                                    |
+| GET [/_cluster/nodes/shutdown](http://localhost:9200/_cluster/nodes/shutdown)                                                               | 向集群中所有节点发送一个关闭请求                                                                        |
+|                                                                                                                                             |                                                                                         |
 
 *备注：**1.**简写命令，*
 
@@ -1237,8 +1120,6 @@ Elasticsearch主要特性
 *2.**YELLOW**，存在大量*`unassigned_shards`，原因`*相同的分片不能在同一个节点上，即主备机不能在一**台，此问题常出现在空集群，在另一台内网机器布署即可，或者设置*number_of_replicas=0*。*
 
 *3.RED,* *主分片存在问题。重新路由。*
-
-
 
 ## 4.2   基础入门Getting started
 
@@ -1253,8 +1134,6 @@ l Run @curl -X GET http://localhost:9200/@ .
 l Start more servers …
 
 **说明**：elasticsearch 5.x需在[Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)以上运行，JVM配置文件在config/jvm.options.
-
-
 
 **下载安装HEAD-插件-图形化管理界面**
 
@@ -1272,8 +1151,6 @@ $ vi Gruntfile.js
 # 启动服务
 $ elasticsearch-head/node_modules/grunt/bin/grunt server
 ```
-
-
 
 **运行**
 
@@ -1299,8 +1176,6 @@ $ curl http://localhost:9200/
 
 说明：name和cluster_name运行时不能改变。
 
-
-
 ### 4.2.2 Indexing
 
 #### 4.2.2.1 索引设置
@@ -1308,8 +1183,6 @@ $ curl http://localhost:9200/
 在elasticsearch.yml文件中关闭自动创建索引：
 
 action.auto_create_index: false
-
-
 
 三个重要设置项：
 
@@ -1336,13 +1209,9 @@ PUT /my_index
 }
 ```
 
-
-
 #### 4.2.2.2 索引结构映射
 
 模式映射用于定义索引结构。
-
-
 
 #### 4.2.2.3 索引及索引响应示例
 
@@ -1360,8 +1229,6 @@ curl -XPUT 'http://localhost:9200/twitter/tweet/1?pretty' -d '
 }'
 ```
 
-
-
 curl -XPUT 'http://localhost:9200/twitter/tweet/2?pretty' -d '
 
 ```json
@@ -1371,8 +1238,6 @@ curl -XPUT 'http://localhost:9200/twitter/tweet/2?pretty' -d '
     "message": "Another tweet, will it be indexed?"
 }
 ```
-
-
 
 Now, let’s see if the information was added by GETting it:
 
@@ -1395,8 +1260,6 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 }
 ```
 
-
-
 2）找到
 
 ```json
@@ -1414,8 +1277,6 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 }
 ```
 
-
-
 ### 4.2.3 Searching
 
 **查询子句格式（可复合子句）：**
@@ -1431,78 +1292,67 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 }
 ```
 
-
-
-
-
 表格 9 检索列表
 
-| 检索类别   | 简述               | 类别                                                 | 示例 |
-| ---------- | ------------------ | ---------------------------------------------------- | ---- |
-| 全文检索   |                    |                                                      |      |
-| 结构化检索 | 需传递参数 query。 | 结构化查询：match, match_all,   multi_match,  bool   |      |
-|            |                    | 结构化过滤：range,  term/terms,  exist/missing, bool |      |
-|            |                    |                                                      |      |
+| 检索类别  | 简述           | 类别                                             | 示例  |
+| ----- | ------------ | ---------------------------------------------- | --- |
+| 全文检索  |              |                                                |     |
+| 结构化检索 | 需传递参数 query。 | 结构化查询：match, match_all,   multi_match,  bool   |     |
+|       |              | 结构化过滤：range,  term/terms,  exist/missing, bool |     |
+|       |              |                                                |     |
 
 备注：查询需要分析文档相关性，过滤只是减小范围，查询比过滤更消耗时间。
-
-
 
 #### 4.2.3.1 查询语句
 
 表格 10 查询语句列表
 
-| **大类**                 | **关键词**                     | 说明                                                         | JSON示例                                                     |
-| ------------------------ | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **查询**query            | **multi_match**                | 多条查询                                                     |                                                              |
-| match                    | 匹配查询                       | q= user:kimchy 或者      "query" : {      "match"  : { "user": "kimchy" }      } |                                                              |
-| match_all                | 全部查询/空查询                | "query" : {      "match_all"  : {}    }                      |                                                              |
-| range                    | 区域查询                       | "query" : {        "range" : {        "post_date" : {  "from" : "2009-11-15T13:00:00", "to" :  "2009-11-15T14:00:00" }        }      } |                                                              |
-|                          | **布尔查询**  **bool**         | 类似bool过滤                                                 |                                                              |
-|                          | **ids**                        |                                                              |                                                              |
-|                          | **field**                      |                                                              |                                                              |
-|                          | **prefix**                     |                                                              |                                                              |
-|                          | **fuzzy**                      |                                                              |                                                              |
-| **过滤**  filter         | **term**                       | 精确过滤                                                     | "term": {  "folder": "inbox"  }                              |
-| **terms**                | 多条件过滤                     |                                                              |                                                              |
-| **exists/**  **missing** | 存在过滤，判断是否存在某个字段 |                                                              |                                                              |
-| **bool**                 | 操作符有must/must_not/should   | {  "bool":  {    "must": { "term": {  "folder": "inbox" }},    "must_not": { "term":  { "tag": "spam" }},    "should": [    { "term": {  "starred": true }},    { "term": { "unread":  true }}    ]}  } |                                                              |
-|                          | and/or/not                     | 逻辑操作符                                                   |                                                              |
-|                          | limit                          | 限制数量                                                     |                                                              |
-|                          | script                         |                                                              |                                                              |
-|                          | type                           |                                                              |                                                              |
-| ` 查询+过滤`             | filtered                       |                                                              | {      "query": {      "filtered": {      "query": { "match": { "email":  "business opportunity" }},      "filter": { "term": { "folder":  "inbox" }}      }      }  } |
-| **复合查询**             | boosting                       |                                                              |                                                              |
-|                          | constant_score                 |                                                              |                                                              |
-|                          | custom_score                   |                                                              |                                                              |
-| **排序**                 | sort                           | 缺省排序字段：_score~文档相关性评分。  排序规则：_score默认降序；字段值默认升序。  多级排序。 | "sort": [  { "date": { "order":  "desc" }},  { "_score": {  "order": "desc" }}  ] |
-| 分页                     |                                |                                                              | GET /_search?size=5&from=10                                  |
-| 聚合                     | aggs                           | 类似MYSQL的group by，但功能更强大。                          | {  "aggs":  {      "all_interests": {      "terms": { "field": "interests" }      }      }  } |
+| **大类**           | **关键词**                  | 说明                                                                                                                                                                                                      | JSON示例                                                                                                                                                                 |
+| ---------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **查询**query      | multi_match              | 多条查询                                                                                                                                                                                                    |                                                                                                                                                                        |
+| match            | 匹配查询                     | q= user:kimchy 或者      "query" : {      "match"  : { "user": "kimchy" }      }                                                                                                                          |                                                                                                                                                                        |
+| match_all        | 全部查询/空查询                 | "query" : {      "match_all"  : {}    }                                                                                                                                                                 |                                                                                                                                                                        |
+| range            | 区域查询                     | "query" : {        "range" : {        "post_date" : {  "from" : "2009-11-15T13:00:00", "to" :  "2009-11-15T14:00:00" }        }      }                                                                  |                                                                                                                                                                        |
+|                  | **布尔查询**  **bool**       | 类似bool过滤                                                                                                                                                                                                |                                                                                                                                                                        |
+|                  | ids                      |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | field                    |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | prefix                   |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | fuzzy                    |                                                                                                                                                                                                         |                                                                                                                                                                        |
+| 过滤  filter       | term                     | 精确过滤                                                                                                                                                                                                    | "term": {  "folder": "inbox"  }                                                                                                                                        |
+| terms            | 多条件过滤                    |                                                                                                                                                                                                         |                                                                                                                                                                        |
+| exists/  missing | 存在过滤，判断是否存在某个字段          |                                                                                                                                                                                                         |                                                                                                                                                                        |
+| bool             | 操作符有must/must_not/should | {  "bool":  {    "must": { "term": {  "folder": "inbox" }},    "must_not": { "term":  { "tag": "spam" }},    "should": [    { "term": {  "starred": true }},    { "term": { "unread":  true }}    ]}  } |                                                                                                                                                                        |
+|                  | and/or/not               | 逻辑操作符                                                                                                                                                                                                   |                                                                                                                                                                        |
+|                  | limit                    | 限制数量                                                                                                                                                                                                    |                                                                                                                                                                        |
+|                  | script                   |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | type                     |                                                                                                                                                                                                         |                                                                                                                                                                        |
+| 查询+过滤            | filtered                 |                                                                                                                                                                                                         | {      "query": {      "filtered": {      "query": { "match": { "email":  "business opportunity" }},      "filter": { "term": { "folder":  "inbox" }}      }      }  } |
+| 复合查询             | boosting                 |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | constant_score           |                                                                                                                                                                                                         |                                                                                                                                                                        |
+|                  | custom_score             |                                                                                                                                                                                                         |                                                                                                                                                                        |
+| **排序**           | sort                     | 缺省排序字段：_score~文档相关性评分。  排序规则：_score默认降序；字段值默认升序。  多级排序。                                                                                                                                                 | "sort": [  { "date": { "order":  "desc" }},  { "_score": {  "order": "desc" }}  ]                                                                                      |
+| 分页               |                          |                                                                                                                                                                                                         | GET /_search?size=5&from=10                                                                                                                                            |
+| 聚合               | aggs                     | 类似MYSQL的group by，但功能更强大。                                                                                                                                                                                | {  "aggs":  {      "all_interests": {      "terms": { "field": "interests" }      }      }  }                                                                          |
 
 备注：1.查询和过滤都有的命令有：bool/range
 
-
-
 #### 4.2.3.2 查询及查询响应示例
 
-**1）关键词查询** **q
-** Let’s find all the tweets that kimchy posted:
+**1）关键词查询** q
+Let’s find all the tweets that kimchy posted:
 
-curl -XGET 'http://localhost:9200/twitter/tweet/_search?q=user:kimchy&pretty=true'
+`curl -XGET 'http://localhost:9200/twitter/tweet/_search?q=user:kimchy&pretty=true'`
 
 We can also use the JSON query language Elasticsearch provides instead of a query string:
 
+```shell
 curl -XGET 'http://localhost:9200/twitter/tweet/_search?pretty=true' -d '
-
 {
-
-  "query" : {
-
-​    "match" : { "user": "kimchy" }
-
-  }
-
+"query" : {
+​ "match" : { "user": "kimchy" }
+}
 }'
+```
 
 查询响应：
 
@@ -1523,23 +1373,18 @@ curl -XGET 'http://localhost:9200/twitter/tweet/_search?pretty=true' -d '
 }
 ```
 
-
-
 **2）获取所有文档**
 
 Just for kicks, let’s get all the documents stored (we should see the user as well):
 
+```shell
 curl -XGET 'http://localhost:9200/_count?pretty=true' -d '
-
 {
-
-  "query" : {
-
-​    "match_all" : {}
-
-  }
-
+"query" : {
+​ "match_all" : {}
+}
 }'
+```
 
 查询响应：
 
@@ -1554,21 +1399,16 @@ curl -XGET 'http://localhost:9200/_count?pretty=true' -d '
 }
 ```
 
+请求：
 
-
-
-
+```shell
 curl -XGET 'http://localhost:9200/twitter/_search?pretty=true' -d '
-
 {
-
-  "query" : {
-
-​    "match_all" : {}
-
-  }
-
+"query" : {
+​ "match_all" : {}
+}
 }'
+```
 
 查询响应：
 
@@ -1596,51 +1436,33 @@ curl -XGET 'http://localhost:9200/twitter/_search?pretty=true' -d '
 }
 ```
 
-
-
-
-
 **3）区域查询range search**
 
 We can also do range search (the postDate was automatically identified as date)
 
+```shell
 curl -XGET 'http://localhost:9200/twitter/_search?pretty=true' -d '
-
 {
-
-  "query" : {
-
-​    "range" : {
-
-​      "post_date" : { "from" : "2009-11-15T13:00:00", "to" : "2009-11-15T14:00:00" }
-
-​    }
-
-  }
-
+"query" : {
+​ "range" : {
+​ "post_date" : { "from" : "2009-11-15T13:00:00", "to" : "2009-11-15T14:00:00" }
+​ }
+}
 }'
-
-
+```
 
 当查询语句多重嵌套后，非常复杂，可用下列语句验证语句是否合法。
 
+```shell
 GET /gb/tweet/_validate/query
-
 {
-
 "query": {
-
 "tweet" : {
-
 "match" : "really powerful"
-
 }
-
 }
-
 }
-
-
+```
 
 ## 4.3   深入搜索
 
@@ -1651,8 +1473,6 @@ GET /gb/tweet/_validate/query
 Elasticsearch uses standard RESTful APIs and JSON. We also build and maintain clients in many languages such as [Java, Python, .NET, and Groovy](https://www.elastic.co/guide/en/elasticsearch/client/index.html).
 
 Plus, our [community has contributed many more](https://www.elastic.co/guide/en/elasticsearch/client/community/current/index.html). They’re easy to work with, feel natural to use, and, just like Elasticsearch, don't limit what you might want to do with them.
-
-
 
 **Restful API**
 
@@ -1670,29 +1490,23 @@ Plus, our [community has contributed many more](https://www.elastic.co/guide/en/
 
 * QUERY_STRING
 
-*  BODY JSON数据
+* BODY JSON数据
 
 示例：**典型**Restful API**为** curl -XPUT 'http://localhost:9200/twitter/tweet/1?pretty' -d '
 
-
-
 表格 11 elasticsearch Restful API列表
 
-| 过程   | Restful  API | 详述    | 示例:  curl  -X[METHOD]简写成METHOD      |                                                              |
-| ------ | ------------ | ------- | ---------------------------------------- | ------------------------------------------------------------ |
-| METHOD | PATH  命令   |         |                                          |                                                              |
-| Index  | PUT          |         | 创建文档、索引。                         | curl  -XPUT 'http://localhost:9200/twitter/user/kimchy?pretty' -d '{  "name" : "Shay Banon" }' |
-|        | POST         | _update | 更新文档、索引                           |                                                              |
-|        | POST         | _bulk   | 批量操作文档。  delete没有操作体。       | POST /_bulk  { "delete": {  "_index": "website", "_type": "blog",  "_id": "123" }}   { "create": {  "_index": "website", "_type": "blog",  "_id": "123" }}  { "title": "My first blog  post" }  { "index": {  "_index": "website", "_type": "blog"  }}  { "title": "My second blog  post" }  { "update": {  "_index": "website", "_type": "blog",  "_id": "123", "_retry_on_conflict" : 3} }  { "doc" : {"title" :  "My updated blog post"} } |
-|        | DELETE       |         | 删除文档、索引                           |                                                              |
-|        | HEAD         |         | 查看索引                                 |                                                              |
-| search | GET          | _search | 全文检索、结构化检索，并包括排序、过滤。 |                                                              |
-|        | GET          | _mget   | 检索多个文档                             |                                                              |
-|        |              |         |                                          |                                                              |
-
-
-
-
+| 过程     | Restful  API | 详述      | 示例:  curl  -X[METHOD]简写成METHOD |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------ | ------------ | ------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| METHOD | PATH  命令     |         |                                |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Index  | PUT          |         | 创建文档、索引。                       | curl  -XPUT 'http://localhost:9200/twitter/user/kimchy?pretty' -d '{  "name" : "Shay Banon" }'                                                                                                                                                                                                                                                                                                                                                |
+|        | POST         | _update | 更新文档、索引                        |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|        | POST         | _bulk   | 批量操作文档。  delete没有操作体。          | POST /_bulk  { "delete": {  "_index": "website", "_type": "blog",  "_id": "123" }}   { "create": {  "_index": "website", "_type": "blog",  "_id": "123" }}  { "title": "My first blog  post" }  { "index": {  "_index": "website", "_type": "blog"  }}  { "title": "My second blog  post" }  { "update": {  "_index": "website", "_type": "blog",  "_id": "123", "_retry_on_conflict" : 3} }  { "doc" : {"title" :  "My updated blog post"} } |
+|        | DELETE       |         | 删除文档、索引                        |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|        | HEAD         |         | 查看索引                           |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| search | GET          | _search | 全文检索、结构化检索，并包括排序、过滤。           |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|        | GET          | _mget   | 检索多个文档                         |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|        |              |         |                                |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 #### 4.3.1.2 Java API
 
@@ -1701,8 +1515,6 @@ You can use the Java client in multiple ways:
 l node client: Perform standard [index](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-index.html), [get](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-get.html), [delete](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-delete.html) and [search](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html) operations on an existing cluster
 
 l [`TransportClient`](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html): Perform administrative tasks on a running cluster.
-
-
 
 示例：
 
@@ -1716,10 +1528,6 @@ SearchResponse sr = client.prepareSearch()
  .execute().actionGet();
 client.close();
 ```
-
-
-
-
 
 #### 4.3.1.3 Python API
 
@@ -1750,8 +1558,6 @@ body={
 )
 ```
 
-
-
 ## 4.4   分布式集群
 
 ### 4.4.1 集群管理
@@ -1760,21 +1566,15 @@ body={
 
 节点(node)是你运行的Elasticsearch实例。一个集群(cluster)是一组具有相同cluster.name的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能，当有新的节点加入或者删除节点，集群就会感知到并平衡数据。集群中一个节点会被选举为主节点(master),它用来管理集群中的一些变更，例如新建或删除索引、增加或移除节点等;当然一个节点也可以组成一个集群。
 
-
-
 **节点通信**
 
 我们能够与集群中的任何节点通信，包括主节点。任何一个节点互相知道文档存在于哪个节点上，它们可以转发请求到我们需要数据所在的节点上。我们通信的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切都由Elasticsearch透明的管理。
-
-
 
 **集群生态**
 
 1.同集群中节点之间可以扩容缩容,
  2.主分片的数量会在其索引创建完成后修正，但是副本分片的数量会随时变化。
  3.相同的分片不会放在同一个节点上.
-
-
 
 **ES****集群的多播与单播**
 
@@ -1792,19 +1592,13 @@ discovery.zen.fd.ping_timeout: 100s
 discovery.zen.ping.unicast.hosts: ["10.19.0.97","10.19.0.98","10.19.0.99","10.19.0.100"]
 ```
 
-
-
 **单播配置**
 
-\# 本机地址
-
-```
+```yaml
+# 本机地址
 network.host: "0.0.0.0"
-```
 
-\# 其它节点机地址
-
-```
+# 其它节点机地址
 discovery.zen.ping.unicast.hosts: ["localhost:9300","localhost:9301"]
 ```
 
@@ -1813,8 +1607,6 @@ discovery.zen.ping.unicast.hosts: ["localhost:9300","localhost:9301"]
 ### 4.4.2 分片shards
 
 一个分片(shard)是一个最小级别的“工作单元(worker unit)”,它只是保存索引中所有数据的一小片.我们的文档存储和被索引在分片中，但是我们的程序不知道如何直接与它们通信。取而代之的是，他们直接与索引通信.Elasticsearch中的分片分为主分片和副本分片,复制分片只是主分片的一个副本，它用于提供数据的冗余副本，在硬件故障之后提供数据保护，同时服务于像搜索和检索等只读请求，主分片的数量和复制分片的数量都可以通过配置文件配置。但是主切片的数量只能在创建索引时定义且不能修改.相同的分片不会放在同一个节点上。
-
-
 
 分片算法
 
@@ -1826,17 +1618,15 @@ shard = hash(routing) % number_of_primary_shards
 
 参见 分片算法
 
-1)   文档索引
+1) 文档索引
 
-2)   文档更新
+2) 文档更新
 
-3)   文档读取
-
-
+3) 文档读取
 
 ### 4.4.4 分布式检索
 
-
+<br>
 
 ## 4.5  代码分析
 
@@ -1846,20 +1636,18 @@ shard = hash(routing) % number_of_primary_shards
 
 表格 12 elasticsearch的文件目录结构
 
-| 目录或文件     | 功能概述                                                     | 备注                                                         |
-| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| bin/           | 二进制，各种启动脚本。  elasticsearch/ elasticsearch-service | [管理插件](https://www.elastic.co/guide/en/elasticsearch/plugins/current/plugin-management.html)：elasticsearch-plugin |
-| config/        | elasticsearch.yml 集群配置  jvm.options JVM配置  log4j2.properties 日志格式配置 | elasticsearch.yml分布式配置：  cluster.name: 集群名字，要相同  node.name: 节点名字，要不同  network.host: 192.168.0.5  discovery.zen.ping.unicast.hosts: ["192.168.0.4",  "192.168.0.6"] |
-| data/          |                                                              |                                                              |
-| lib/           | 使用的库                                                     |                                                              |
-| modules/       | 使用的模块                                                   |                                                              |
-| plugins/       | 插件加强elasticsearch核心函数功能。  Plugins are a way to enhance the core  Elasticsearch functionality in a custom manner. |                                                              |
-| logs/          |                                                              |                                                              |
-| LICENSE.txt    | 开源协议                                                     |                                                              |
-| NOTICE.txt     | 注意事项：版权                                               |                                                              |
-| README.textile | 使用说明                                                     |                                                              |
-
-
+| 目录或文件          | 功能概述                                                                                                             | 备注                                                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| bin/           | 二进制，各种启动脚本。  elasticsearch/ elasticsearch-service                                                                | [管理插件](https://www.elastic.co/guide/en/elasticsearch/plugins/current/plugin-management.html)：elasticsearch-plugin                                                  |
+| config/        | elasticsearch.yml 集群配置  jvm.options JVM配置  log4j2.properties 日志格式配置                                              | elasticsearch.yml分布式配置：  cluster.name: 集群名字，要相同  node.name: 节点名字，要不同  network.host: 192.168.0.5  discovery.zen.ping.unicast.hosts: ["192.168.0.4",  "192.168.0.6"] |
+| data/          |                                                                                                                  |                                                                                                                                                                    |
+| lib/           | 使用的库                                                                                                             |                                                                                                                                                                    |
+| modules/       | 使用的模块                                                                                                            |                                                                                                                                                                    |
+| plugins/       | 插件加强elasticsearch核心函数功能。  Plugins are a way to enhance the core  Elasticsearch functionality in a custom manner. |                                                                                                                                                                    |
+| logs/          |                                                                                                                  |                                                                                                                                                                    |
+| LICENSE.txt    | 开源协议                                                                                                             |                                                                                                                                                                    |
+| NOTICE.txt     | 注意事项：版权                                                                                                          |                                                                                                                                                                    |
+| README.textile | 使用说明                                                                                                             |                                                                                                                                                                    |
 
 ### 4.5.2 eclipse源码编译
 
@@ -1873,8 +1661,6 @@ In order to create a distribution, simply run the gradle assemble command in the
 
 Elasticsearch uses "Maven":http://maven.apache.org for its build system.
 
-
-
 In order to create a distribution, simply run the
 
 @mvn clean package -DskipTests @ command in the cloned directory.
@@ -1885,17 +1671,13 @@ See the "TESTING":[TESTING.asciidoc](https://github.com/elastic/elasticsearch/bl
 
 running the Elasticsearch test suite.
 
-
-
 若代码编译成功后 ，
 
 l 运行程序：
 
-src/main/java找到org.elasticsearch.bootstrap的elasticsearch.java  到main函数 run as java application。或者直接run在跳出的main函数中找org.elasticsearch.bootstrap. elasticsearch.java
+src/main/java 找到org.elasticsearch.bootstrap的elasticsearch.java  到main函数 run as java application。或者直接run在跳出的main函数中找org.elasticsearch.bootstrap. elasticsearch.java
 
 l 测试：在浏览器地址栏输入http://localhost:9200，若有结果返回，则运行正常。
-
-
 
 #### 4.5.2.1  maven编译elasticsearch 2.x
 
@@ -1909,8 +1691,6 @@ eclipse右键 build project调用maven compile
 
 若以上编译并无提示错误，则编译成功，项目无红叉，然后直接运行程序。
 
-
-
 3. 编译错误：若出现以下提示错误，解决后，再运行程序。
 
 **错误1**：找不到core目录
@@ -1920,28 +1700,21 @@ eclipse右键 build project调用maven compile
  设置ProgramArgument 为 start
  设置VMArgument为 -Des.path.home=<你的\core\>
 
-
-
 错误2：若出现pom.xml配置错误，如Plugin execution not covered by lifecycle configuration:
 
 解决方法： 这种直接点ignore，直接点ok，之后会出现overriding以及id冲突之类的，直接remove。
 
 然后点工程，右键 maven->update project，将force勾上，将在maven中央库下载更新jar
 
-
-
 错误3：log路径未找到，config错误
 
 解决方法：到https://www.elastic.co/downloads/past-releases下载相应版本，解压后将config目录放到core目录下。
-
-
 
 #### 4.5.2.2  gradle编译elasticsearch 5.x
 
 1. 安装gradle-2.13和jdk8
 
 2. 编译
-
 1) 命令行执行编码、运行
 
 ```shell
@@ -1953,15 +1726,9 @@ $ gradle run
 $ gradle test
 ```
 
-
-
 2） eclipse
 
-
-
 ### 4.5.3 启动类：org.elasticsearch.bootstrap.Elasticsearch
-
-
 
 ### 4.5.4 准实时索引
 
@@ -1981,8 +1748,6 @@ Lucene把每次生成的倒排索引，叫做一个段(segment)。然后另外�
 
 3）buffer刷到磁盘，生成一个新的segment, commit文件同步跟新。
 
-
-
 2、删除和更新
 
 segment是不可变的，所以文档即不能从旧的段中删除，旧的段也不能更新以反映文档最新的文本。相反，每
@@ -1996,8 +1761,6 @@ segment是不可变的，所以文档即不能从旧的段中删除，旧的段�
 文档的跟新操作是类似的：当一个文档被更新，旧版本的文档被标记为删除，新版本的文档在新的段中索引。也
 
 许该文档的不同版本都会匹配一个查询，但是老版本会从结果中删除。
-
-
 
 3、利用磁盘缓存实现的准实时检索
 
@@ -2025,8 +1788,6 @@ POST /blogs/_refresh <2>
 
   <2> 只refresh 索引blogs
 
-
-
 4 .segement merge的影响
 
 上面提到Lucene思想：新收到的数据写入到新的索引文件里面，每一个索引文件都是不可变的，开新文件就会给服务器带来负载压力因为默认每1秒钟就会有一个新文件产生，每个文件都需要文件句柄、内存、cpu等各种资源，给服务器带来很大的开销
@@ -2035,7 +1796,7 @@ POST /blogs/_refresh <2>
 
 这个过程是由独立的线程来进行的，并不影响segment的产生。归并过程中，删除之间几个小的segment，改成新的大的segment。等检索请求都从小segement转到大的segement上以后，删除没用的小segement。
 
-
+<br>
 
 ## 本章参考
 
@@ -2063,7 +1824,9 @@ POST /blogs/_refresh <2>
 
 [12]. Elasticsearch学习笔记(二)单节点准实时索引的实现http://blog.csdn.net/u010994304/article/details/50427672
 
+<br><br>
 
+<br>
 
 # 参考资料
 
@@ -2072,8 +1835,6 @@ POST /blogs/_refresh <2>
 [1].   开放源代码的全文检索引擎Lucene 中国人民大学99级本科生毕设课题CLucene
 
 [2].   Elasticsearch与Solr 选型  http://www.cnblogs.com/chowmin/articles/4629220.html
-
-
 
 ## 参考书籍
 
@@ -2105,8 +1866,6 @@ POST /blogs/_refresh <2>
 
 [13]. 《[深入理解ElasticSearch》  ](https://book.douban.com/subject/26733541/)拉斐尔·酷奇(Rafal Kuc)  张世武译 / 机械工业出版社 / 2016-1 9787111524168
 
-
-
 **互联网电子书**
 
 [14]. 《Elasticsearch权威指南(Elasticsearch - the definitive guide)》  Zachary Tong等译 http://es-guide-preview.elasticsearch.cn （全书，更新快）https://github.com/elasticsearch-cn/elasticsearch-definitive-guide
@@ -2119,8 +1878,6 @@ POST /blogs/_refresh <2>
 
 [18]. Exploring elasticsearch: http://exploringelasticsearch.com/
 
-
-
 ## 相关项目
 
 Apache相关项目
@@ -2128,17 +1885,24 @@ Apache相关项目
 * lucene项目主页 http://lucene.apache.org/
 
 * [PyLucene](https://lucene.apache.org/pylucene/)   python访问lucene core
+
 * [Apache Solr](https://solr.apache.org/)    is a high performance search server built using [Lucene Java](http://lucene.apache.org/java/), with XML/HTTP and JSON/Python/Ruby APIs, hit highlighting, faceted search, caching, replication, and a web admin interface.
+
 * [Apache Hadoop](http://hadoop.apache.org/)
+
 * [Apache ManifoldCF](http://manifoldcf.apache.org/)
+
 * [Apache Lucene.Net](http://lucenenet.apache.org/)
+
 * [Apache Mahout](http://mahout.apache.org/)
+
 * [Apache Nutch](http://nutch.apache.org/)
+
 * [Apache OpenNLP](http://opennlp.apache.org/)
+
 * [Apache Tika](http://tika.apache.org/)
+
 * [Apache Zookeeper](http://zookeeper.apache.org/)
-
-
 
 其它相关项目
 
@@ -2151,6 +1915,4 @@ Apache相关项目
 * [Open Relevance Project](http://lucene.apache.org/openrelevance/) is a new subproject with the aim of collecting and distributing free materials for relevance testing and performance.
 * [Mahout](http://lucene.apache.org/mahout/) is a subproject with the goal of creating a suite of scalable machine learning libraries.
 * [Droids](http://incubator.apache.org/droids/) is an intelligent robot crawling framework currently in incubation.
-
-
 

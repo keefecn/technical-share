@@ -24,7 +24,7 @@ do
 	find $DIR -iname "*.md" | xargs grep $word
 done
 
-# remove line end space, 去除行尾空格
+# remove line end space, 去除行尾空格, CRLF -> LF
 echo -e '\n###Doing format...'
 find $DIR -iname "*.md" |xargs sed -i 's/\s\+$//g'
 

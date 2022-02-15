@@ -17,6 +17,7 @@
 
 
 
+<br>
 ---
 
 # 目录
@@ -25,6 +26,7 @@
 
 
 
+<br>
 ---
 
 # 1  简介
@@ -253,6 +255,8 @@ echo "<br>finish.<br>"
 
 
 
+<br>
+
 # 2  运维篇
 
 ## 2.1   参数配置和优化
@@ -357,7 +361,9 @@ memcache-tool stats状态说明如下：+K `"y`#t yt0
 
 
 
-# 3  开发篇
+<br>
+
+# 3   开发篇
 
 **应用示例**
 
@@ -425,7 +431,9 @@ bool Memcache::flush ( void )
 
 
 
-# 4  架构原理篇
+<br>
+
+# 4 架构原理篇
 
 ## memcache字符串协议
 
@@ -612,6 +620,8 @@ foreach my $node ( sort keys %nodes ) {
 slab class所能使用的内存-m用完后，将使用LRU算法来更新item.
 
 
+
+<br>
 
 # 参考资料
 

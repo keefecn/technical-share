@@ -1,4 +1,5 @@
-#  technical-share
+# technical-share
+
 Personal Technical Share,  个人技术分享
 
 ```
@@ -6,29 +7,48 @@ Personal Technical Share,  个人技术分享
 来源：https://github.com/keefecn/technical-share
 ```
 
+**通用写作技巧**
 
+1. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
+2. 如果单个md文件超过100KB，一般需要拆分内容另文。
+3. `数字+空格` 会变成有序符号且不需额外换行；仅数字开头仍需换行。
+4. 路径符号要用unix或url符号/，不能用\，否则图片链接在github上不能正确显示。
+5. 空行：markdown语法中空行要用`<br> 或者 <br/>`来表示，二个换行符的空行模式不是所有markdown编辑器都支持。比如Typora支持二换行符空行，Marktext就不支持。
+
+**通用快捷键**
+
+* 格式：ctrl+b 加粗，ctrl+u 下划线，ctrl+i 斜线, ctrl+D 删除线
+* 段落：ctrl+1, +2, +3...
+
+表格  Typora和Marktext的常用快捷键比较
+
+|       | Typora       | Marktext     | markdown符号          |
+| ----- | ------------ | ------------ | ------------------- |
+| 源代码模式 | ctrl+/       | ctrl+alt+s   |                     |
+| 超链接   | ctrl+k       | ctrl+L       | [title](link)       |
+| 清除格式  | ctrl+\       | ctrl+shift+r |                     |
+| 代码块   | ctrl+shift+k | ctrl+`       | ``` 代码块 ```         |
+| 删除线   | alt+shift+5  | ctrl+d       | ~~删除线~~             |
+| 高亮    |              | ctrl+shfit+h | <mark>高亮</mark>     |
+| 复制    | ctrl+c       | ctrl+shift+c | 复制为markdown格式，即原有格式 |
+| 粘贴    | ctrl+v       | ctrl+shift+v | 粘贴为文本格式             |
+
+备注：1. 快捷键大小写不敏感。
+
+2. 2021-11-23起 Typora付费才能使用，换成开源替代marktext。
+
+3. Marktext 可设置移除代码块首尾空行。可在 File - Perferences... - Editor 关闭 `Remove leading and traling empty lines in code blacks`
+
+4. Marktext 可设置新行符的处置方式(v0.16.3版本有BUG，此项配置无效，默认去除尾部空行)。可在 File - Perferences... - Editor - `Handling of trailing newline characters`
+
+<br>
 
 **Typora支持的md格式与传统md格式的差别**
 
 1. md格式表格头前要有空行，Typora没作要求。
+2. 脚注使用 `[^xx]`， 会在文末出现参考链接，xx可以是任意名称或数字。
 
-2. 目录和参考链接也要保持显式换行。
-
-3. 路径符号要用unix或url符号/，不能用\，否则图片链接在github上不能正确显示。
-
-**写作技巧**
-
-1. `数字+空格` 会变成有序符号且不需额外换行；仅数字开头仍需换行。
-2. [Markdown 公式指导手册](https://www.zybuluo.com/codeep/note/163962)
-3. 如果单个md文件超过100KB，一般需要拆分内容另文。
-4. 脚注使用 `[^xx]`， 会在文末出现参考链接，xx可以是任意名称或数字。
-
-**Typora常用快捷键**
-
-* 格式：ctrl+b 加粗，ctrk+u 下划线，ctrl+k 超链接，ctrl+\ 清除样式
-* 段落：ctrl+1, +2, +3...
-
-
+<br/>
 
 **目录**
 
@@ -217,4 +237,3 @@ Personal Technical Share,  个人技术分享
         黑客技术.md
         浏览器开发.md
 ```
-

@@ -9,6 +9,7 @@
 
 
 
+<br>
 ---
 
 [TOC]
@@ -169,6 +170,8 @@ import pandas as pd
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. Pandas中文教程  https://www.w3cschool.cn/hyspo/
@@ -176,6 +179,8 @@ import pandas as pd
 [2]. 12大深度学习开源框架(caffe,tf,pytorch,mxnet等)快速入门项目 https://www.jianshu.com/p/16f69668ce25
 
 
+
+<br>
 
 # 2  AI深度学习框架
 
@@ -664,6 +669,8 @@ CNTK允许用户非常轻松地实现和组合流行的模型，包括前馈DNN�
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. Keras官网  https://keras.io/datasets/
@@ -672,7 +679,9 @@ CNTK允许用户非常轻松地实现和组合流行的模型，包括前馈DNN�
 
 
 
-# 3  AI其它框架
+<br>
+
+# 3   AI其它框架
 
 ## OpenCV
 
@@ -958,6 +967,8 @@ metrics.f1_score(newsgroups_test.target, pred, average='macro')
 
 
 
+<br>
+
 ## 本章参考
 
 [1]. opencv https://baike.baidu.com/item/opencv
@@ -973,7 +984,9 @@ metrics.f1_score(newsgroups_test.target, pred, average='macro')
 
 
 
-# 4  大数据的机器学习库
+<br>
+
+# 4 大数据的机器学习库
 
 表格 7 大数据的机器学习库
 
@@ -1022,6 +1035,8 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 ## 4.2  Apache Mahout
 
 
+
+<br>
 
 ## 本章参考
 
@@ -1192,11 +1207,15 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 
 
 
+<br>
+
 ## 本章参考
 
 
 
 
+
+<br>
 
 # 参考资料
 

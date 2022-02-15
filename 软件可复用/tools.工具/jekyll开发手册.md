@@ -13,6 +13,7 @@
 
 
 
+<br>
 ---
 
 目录
@@ -89,6 +90,7 @@
 
 
 
+<br>
 ---
 
 # 1 简介
@@ -108,6 +110,8 @@ Jekyll is a parsing engine bundled as a ruby gem used to build static websites f
 [liquid](https://github.com/shopify/liquid/wiki/liquid-for-designers)是一个模版语言，是jekyll支持的一种，有点类似smarty，只不过是静态的模版语言，只能在编译的过程中进行替换。liquid除了支持变量替换外还支持逻辑语法。
 
 
+
+<br>
 
 # 2 安装搭建 Jekyll + github
 
@@ -265,7 +269,9 @@ http://www.zhanxin.info
 
 
 
-# 3 Jekyll配置
+<br>
+
+# 3  Jekyll配置
 
 ## 3.1   网站目录结构
 
@@ -639,9 +645,11 @@ title : 站点地图
 
 **atom.xml**
 ```xml
+<br>
 ---
 layout: default
 comment: true
+<br>
 ---
 
 <div class="article article-post">
@@ -677,9 +685,11 @@ comment: true
 **rss.xml**
 
 ```xml
+<br>
 ---
 layout: null
 title : RSS 订阅
+<br>
 ---
 
 <?xml version="1.0" encoding="UTF-8" ?>

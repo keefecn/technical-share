@@ -1,28 +1,23 @@
-| 序号 | 修改时间   | 修改内容                                                     | 修改人 | 审稿人 |
-| ---- | ---------- | ------------------------------------------------------------ | ------ | ------ |
-| 1    | 2011-01-17 | 创建                                                         | Keefe | Keefe |
-| 2    | 2011-1-18  | 更新协同开发章节                                             | 同上   |        |
-| 3    | 2011-01-21 | 增加其它章节~各种场景碰到的问题                              | 同上   |        |
-| 4    | 2011-1-26  | 增加git原理章节                                              | 同上   |        |
-| 5    | 2011-2-14  | 增加git日常使用中的恢复操作                                  | 同上   |        |
-| 6    | 2011-3-4   | 调整文章结构                                                 | 同上   |        |
-| 7    | 2012-4-23  | 更新中文乱码问题                                             | 同上   |        |
-| 8    | 2016-10-14 | 增加git仓库托管章节                                          | 同上   |        |
-| 9    | 2017-2-12  | 更新补充git分支管理章节。按照[《中文技术文档的写作规范》](https://github.com/ruanyf/document-style-guide)重新组织文章结构。 | 同上   |        |
-| 10   | 2017-7-9   | 增加合并分支章节                                             | 同上   |        |
-| 11   | 2017-9-3   | 增加gitbook章节                                              | 同上   |        |
-| 12   | 2018-10-22 | 增加克隆指定分支、创建空分支                                 | 同上   |        |
-| 13   | 2019-3-23  | 增加语义化的版本模式章节                                     | 同上   |        |
-|      |            |                                                              |        |        |
+| 序号  | 修改时间       | 修改内容                                                                                     | 修改人   | 审稿人   |
+| --- | ---------- | ---------------------------------------------------------------------------------------- | ----- | ----- |
+| 1   | 2011-01-17 | 创建                                                                                       | Keefe | Keefe |
+| 2   | 2011-1-18  | 更新协同开发章节                                                                                 | 同上    |       |
+| 3   | 2011-01-21 | 增加其它章节~各种场景碰到的问题                                                                         | 同上    |       |
+| 4   | 2011-1-26  | 增加git原理章节                                                                                | 同上    |       |
+| 5   | 2011-2-14  | 增加git日常使用中的恢复操作                                                                          | 同上    |       |
+| 6   | 2011-3-4   | 调整文章结构                                                                                   | 同上    |       |
+| 7   | 2012-4-23  | 更新中文乱码问题                                                                                 | 同上    |       |
+| 8   | 2016-10-14 | 增加git仓库托管章节                                                                              | 同上    |       |
+| 9   | 2017-2-12  | 更新补充git分支管理章节。按照[《中文技术文档的写作规范》](https://github.com/ruanyf/document-style-guide)重新组织文章结构。 | 同上    |       |
+| 10  | 2017-7-9   | 增加合并分支章节                                                                                 | 同上    |       |
+| 11  | 2017-9-3   | 增加gitbook章节                                                                              | 同上    |       |
+| 12  | 2018-10-22 | 增加克隆指定分支、创建空分支                                                                           | 同上    |       |
+| 13  | 2019-3-23  | 增加语义化的版本模式章节                                                                             | 同上    |       |
+|     |            |                                                                                          |       |       |
 
+<br>
 
-
-
-
-
-
-
-
+<br>
 ---
 
 # 目录
@@ -133,12 +128,10 @@
 
 [语义化的版本模式... 24](#_Toc4227025)
 
+<br>
 
-
-
-
+<br>
 ---
-
 
 # 1  简介
 
@@ -146,15 +139,17 @@ git 分布式版本管理软件。
 
 gitk是git安装包中缺省的图形界面包。可以方便地用来查看历史日志，修改信息等。
 
+<br>
 
+<br>
 
 # 2  安装配置篇
 
 ## 2.1  安装
 
 Linux: 只要用yum，apt-get等安装即可，或是下载之后编译安装。
- Mac OS X: 从[这里](http://code.google.com/p/git-osx-installer/)下载并安装。
- Windows:先安装putty，然后从[这里](http://code.google.com/p/msysgit)下载并安装。
+Mac OS X: 从[这里](http://code.google.com/p/git-osx-installer/)下载并安装。
+Windows:先安装putty，然后从[这里](http://code.google.com/p/msysgit)下载并安装。
 
 ## 2.2  开发者配置
 
@@ -164,50 +159,49 @@ git支持使用ssh路径。
 
 git使用ssh tunnel来提交源码，这个加密通道可以避免源码的封包被拦截而截取。因此要先产生并上传ssh key到github，方便之後与服务器之间的通迅。
 
-
 Mac OS X与Linux，只要输入ssh-keygen -t rsa并根据指示操作即可：
+
 ```sh
 [~/.ssh]$ ssh-keygen -t rsa
 ```
+
 一路按缺省键盘，即可得到以下文件。其中id_rsa.pub是公钥，而id_rsa则是私钥，请妥善保存以免遺失，它们都存放于~/.ssh目录中。将公钥粘贴到你github帐号中的SSH Public Keys的位置。注意小心不要复制到空格。
 
 Windows，执行git-bash并输入：
+
 ```sh
 ssh-keygen -C “username@email.com” -t rsa
 ```
 
-// 参考脚本
+参考脚本
+
 ```sh
 $ ssh-keygen -t rsa
 $ cat .ssh/id_rsa.pub | ssh $user@$host -p [port] "cat - >>.ssh/authorized_keys"
 ```
 
-
 **特别说明**：windows环境使用git bash需要.ssh目录权限755。
 
-
-
 ### 2.2.2 开发用户签名
+
 ```sh
 $ git config –-list
 denny.wuqifu@3g.net.cn=qfwu
 user.email=wuqifu@3g.net.cn
 user.name=denny
 
-//设置用户名与邮箱
+# 设置用户名与邮箱
 $ git config --global user.name "Scott Chacon"
 $ git config --global user.email "schacon@gmail.com"
 ```
 
-
 执行了上面的命令后,会在你的主目录(home directory)建立一个叫 *~/.gitconfig* 的文件. 内容一般像下面这样:
+
 ```ini
 [user]
     name = Scott Chacon
     email = schacon@gmail.com
 ```
-
-
 
 ## 2.3  中文环境配置
 
@@ -216,10 +210,10 @@ $ git config --global user.email "schacon@gmail.com"
 在$GitHome\etc\git-completion.bash文件中添加：
 `alias ls='ls --show-control-chars --color=auto'`
 
-
 2) Git Bash窗口正常输入中文
 
 修改在$GitHome\etc\inputrc文件中的两项配置：
+
 ```sh
 set output-meta on
 set convert-meta off
@@ -227,15 +221,16 @@ set convert-meta off
 
 3. Git-log正常显示中文
 
-在$GitHome\etc\profile文件中添加：
+在 $GitHome\etc\profile文件中添加：
+
 ```sh
 export LESSCHARSET=utf-8
 ```
 
-
 4) Git-gui正常显示中文
 
 在$GitHome \etc\gitconfig文件中修改或添加如下配置：
+
 ```ini
 [gui]
 encoding = utf-8
@@ -245,19 +240,16 @@ commitencoding = GB2312
 [core]
 quotepath = false
 ```
+
 作用：没有这一条，$git status输出中文会显示为UNICODE编码。
 
-
 **特别说明**：如果要上传文件名为中文的文件，最好下载git2.0以上的版本，采用utf-8编码路径，传输到远程也不会乱码，也不用设置.gitconfig文件里的gui/ pathnameencoding/commit的编码。
-
-
 
 ## 2.4  参数配置.git
 
 **配置文件优先级**：.git/config > .gitconfig > /etc/gitconfig
 
 **忽略文件的优先级**：.git/info/exclude > .git/.gitignore > 全局~/.gitignore
-
 
 ```shE:\SOURCE\GIT\165\YYUSMODEL\.GIT
 │ COMMIT_EDITMSG
@@ -300,30 +292,27 @@ quotepath = false
   │     HEAD
   └─tags
 ```
+
 *说明：上图为.git的目录结构。HEAD文件为当前目录树的分支路径，如果删除HEAD所指向的链接（一般缺省为：refs/heads/master），那么会放弃本次编辑，**git pull**不会导致合并，会全部更新远程服务器的版本。*
 
-
-
-| 文件目录名  | 用途                                                         |
-| ----------- | ------------------------------------------------------------ |
-| branches/   | 不同平台不一定存在。功能类似objects。                        |
-| hooks/      | 自定义的git命令触发的勾子函数                                |
-| info/       | 包含文件info/exclude~本仓库需要忽略的文件，优先级最高。      |
-| logs/       | 文件refs/HEAD,存储本地git操作日志                            |
-| objects/    | 按标签名的二级地址存放本次标签更改过的数据。                 |
+| 文件目录名       | 用途                                                                    |
+| ----------- | --------------------------------------------------------------------- |
+| branches/   | 不同平台不一定存在。功能类似objects。                                                |
+| hooks/      | 自定义的git命令触发的勾子函数                                                      |
+| info/       | 包含文件info/exclude~本仓库需要忽略的文件，优先级最高。                                    |
+| logs/       | 文件refs/HEAD,存储本地git操作日志                                               |
+| objects/    | 按标签名的二级地址存放本次标签更改过的数据。                                                |
 | refs/       | 包括三个子目录heads、remotes和tags。heads路径下存储branch文件。一个branch一个文件，文件内容存储标签数据。 |
-| config      | 配置信息，如远程仓库地址、分支信息。git clone时会自动配置，也可手动修改。 |
-| description | 描述信息，暂没用。                                           |
-| FETCH_HEAD  | 当前获取到的远程仓库标签                                     |
-| ORIG_HEAD   | 本地仓库标签。                                               |
-| index       | 二进制索引数据。                                             |
-| HEAD        | 当前的标签路径                                               |
-| packed-refs | 所有tags/branch的标签信息。                                  |
+| config      | 配置信息，如远程仓库地址、分支信息。git clone时会自动配置，也可手动修改。                             |
+| description | 描述信息，暂没用。                                                             |
+| FETCH_HEAD  | 当前获取到的远程仓库标签                                                          |
+| ORIG_HEAD   | 本地仓库标签。                                                               |
+| index       | 二进制索引数据。                                                              |
+| HEAD        | 当前的标签路径                                                               |
+| packed-refs | 所有tags/branch的标签信息。                                                   |
 
 说明：1. 标签是40位长度的SHA-1值。用来唯一定位commit（提交）的序列，也可称为commit对象的KEY值。
 2. FETCH_HEAD与ORIG_HEAD的标签数据不一致，即可说明有修改。
-
-
 
 远程端remote名称缺省为origin，即本地clone的源端。
 
@@ -333,9 +322,7 @@ quotepath = false
 
 使用git remote add添加远程服务器端。
 
-usage: git remote add [<options>] <name> <url>
-
-
+usage:  `git remote add [<options>] <name> <url>`
 
 **git 配置文件示例** ~/.gitconfig
 
@@ -344,11 +331,12 @@ usage: git remote add [<options>] <name> <url>
   name = Keefe Wu
   email = keefe@gmail.com
 [core]
-  quotepath = false
+  autocrlf = true
   excludesfile = ~/.gitignore_global
-  autocrlf = false
-  longpaths = true
   filemode = false
+  quotepath = false
+  longpaths = true
+
 [gui]
   encoding = utf-8
 [i18n]
@@ -364,13 +352,16 @@ usage: git remote add [<options>] <name> <url>
 
 > 备注: 可用命令添加如 `git config --add core.filemode false `
 >
-> quotepath 路径是否转义, filemode 是否检测filemode,  longpaths 是否支持长路径
+> autocrlf 换行符处理，excludesfile忽略文件，filemode 是否检测filemode，quotepath 路径是否转义，longpaths 是否支持长路径,
 
+<br><br>
 
+<br>
 
-# 3  入门篇
+# 3   入门篇
 
 ## 3.1  常用命令使用说明
+
 ```sh
 usage: git [--version] [--exec-path[=GIT_EXEC_PATH]] [-p|--paginate|--no-pager] [--bare] [--git-dir=GIT_DIR] [--work-tree=GIT_WORK_TREE] [--help] COMMAND [ARGS]
 
@@ -398,7 +389,7 @@ The most commonly used git commands are:
   tag    Create, list, delete or verify a tag object signed with GPG
 ```
 
- 1)    撤消操作
+1) 撤消操作
 
 ```sh
 # 撤消当前所有操作，恢复上次状态
@@ -411,23 +402,24 @@ $git checkout hello.rb
 $git revert HEAD
 ```
 
+2) 与远程同步
 
-2)    与远程同步
-```sh
-# 将本地的git档案与github(远程)上的同步
-git push
+   ```sh
+   # 将本地的git档案与github(远程)上的同步
+   git push
 
-# 将github(远程)的git档案与本地的同步(即更新本地端的repo)
-git pull
+   # 将github(远程)的git档案与本地的同步(即更新本地端的repo)
+   git pull
 
-# 例如,pull指令其实包含了fetch(將变更复制回來)以及merge(合并)操作
-git pull git:**//**github.com**/**tom**/**test.git
-```
+   # 例如,pull指令其实包含了fetch(將变更复制回來)以及merge(合并)操作
 
+   git pull git:**//**github.com**/**tom**/**test.git
+   ```
 
-3)    分支使用
+3) 分支使用
 
 版本控制系統的branch功能也很有意思，若同时修改bug，又要加入新功能，可以fork出一个branch：一个专门修bug，一个专门加入新功能，等到稳定后再merge合并
+
 ```sh
 git branch bug_fix  # 建立branch，名为bug_fix
 git checkout bug_fix  # 切换到bug_fix
@@ -443,17 +435,17 @@ git checkout -b bug_fix_local bug_fix_remote  # 把本地端切换为远程的bu
 
 常用命令：git  init/diff/add/rm/status/show/log/commit
 
-1)  创建一个版本库
-`git init`
+1) 创建一个版本库
+   `git init`
 
-2)  增加/删除文件
+2) 增加/删除文件
 
 ```sh
 git add <modified files>
 git rm <modified files>
 ```
 
-3)  提交
+3) 提交
 
 ```sh
 # 使用commit将快照/索引中的内容提交到版本库中
@@ -462,7 +454,7 @@ git commit -m "msg"
 git commit -a -m "msg"
 ```
 
-4)   状态查看
+4) 状态查看
 
 ```sh
 git log  #可以查看每次commit的改变
@@ -472,8 +464,6 @@ git show  #可以看某次的变更
 git status
 ```
 
-
-
 ## 3.3   [分布式的工作流程 ](http://gitbook.liuhui998.com/3_6.html)
 
 ### 3.3.1 创建公共仓库/主干树
@@ -481,14 +471,15 @@ git status
 创建一个空仓库，裸放的，不作开发，可为原始主干库，公共仓库
 `$git --bare init --shared`
 
-1)    创建一个开发仓库，文件信息放入.git目录，如示例仓库名proj.
-```sh
-$ cd {proj}
-$ git init
-```
+1) 创建一个开发仓库，文件信息放入.git目录，如示例仓库名proj.
 
+   ```sh
+   $ cd {proj}
+   $ git init
+   ```
 
 2）使用克隆方式建立一个公共的裸仓库dst_proj
+
 ```sh
 $ git clone --bare [src_proj] [dst_proj]
 $ touch proj.git/git-daemon-export-ok //非必需，告诉系统这是个裸仓库
@@ -500,6 +491,7 @@ $ scp [dst_pro] user@host://xxx
 可以使用SSH, HTTPS, GIT等各种网络协议连接到远程仓库。
 
 仓库地址：[Protocol:]$user@$IP$workpath //若无协议头，则缺省SSH:
+
 ```sh
 $git clone [user@ubuntu.unix-center.net/home/p/d/xxxxx](mailto:user@ubuntu.unix-center.net/home/p/d/xxxxx)
 $git clone [user@ubuntu.unix-center.net/~/xxxxx](mailto:user@ubuntu.unix-center.net/~/xxxxx)
@@ -508,18 +500,16 @@ $git clone [git@github.com:dennycn/script.git](mailto:git@github.com:dennycn/scr
 $git clone https://github.com/dennycn/script.git
 ```
 
-
-1)    git协议导出仓库
+1) git协议导出仓库
 
 需启动git-daemon. 命令如下：
 
 `$ git-daemon --reuseaddr –port=9418 --base-path=/home/git `
 
-
-
-2)    http协议导出仓库
+2) http协议导出仓库
 
 你需要把新建的"裸仓库"放到Web服务器的可访问目录里, 同时做一些调整,以便让web客户端获得它们所需的额外信息.
+
 ```sh
 $ mv proj.git /home/you/public_html/proj.git
 $ cd proj.git
@@ -529,15 +519,13 @@ $ chmod a+x hooks/post-update
 
 ### 3.3.3 本地同步远程仓库流程
 
-1)    本地修改并提交到本地
+1) 本地修改并提交到本地
 
 // git add增加文件，git status查看是否更改
 
 $git commit –m “add localhost”
 
-
-
-2)    本地修改后提交到远程
+2) 本地修改后提交到远程
 
 //origin 为源端名name，master为本地分支名branch
 
@@ -545,9 +533,7 @@ $git commit –m “add localhost”
 
 $git push xxxx@xxxx:
 
-
-
-3)    更新远程仓库
+3) 更新远程仓库
 
 $git pull
 
@@ -572,13 +558,14 @@ $git pull xxx@xxxx [origin_master]
 \# 创建一个名为docs的分支，并且该分支下有前一个分支下的所有文件。但无历史纪录
 
 **法1：使用git checkout--orphan**
+
 ```sh
 git checkout --orphan docs
 git rm -rf .
 ```
 
-
 **法2：使用 git symbolic-ref**
+
 ```sh
 git symbolic-ref HEAD refs/heads/newbranch
 rm .git/index
@@ -593,6 +580,7 @@ git commit -m 'Initial commit'
 ## 3.4   commit修改与合并
 
 ### 3.4.1 git reset：撤销commit修改
+
 ```sh
 git-reset - Reset current HEAD to the specified state
 usage: git reset [--mixed | --soft | --hard | --merge | --keep] [-q] [<commit>]
@@ -620,7 +608,6 @@ $ git reset commit_id
 $ git push origin [branch] -f
 ```
 
-
 ### 3.4.2 git rebase: 合并多个commit
 
 **注意事项**：需要合并的commit只能是本地仓库的，不能已经push到服务器。
@@ -630,6 +617,7 @@ Your branch is ahead of 'origin/master' by 2 commits.
 说明：一般git status上面提示的commit要大于等于2，-i指向的commit是不需要修改的，可以是最后一次push的commit，或者还未提交commit中的某个，合并只会影响到-i指向的commit之后的提交。-i指向的commit不能超过最后一次push之前的commit，否则会产生很多重复的commit log，而且仓库混乱（另外，合并项列单的第一个commit不能squash，会提示不是一个single reversion）。
 
  ![image-20191208223043376](../../media/sf_reuse/tools/tools_git_001.png)
+
 ```sh
 git-rebase - Reapply commits on top of another base tip
 git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>]
@@ -647,8 +635,6 @@ git rebase --continue | --skip | --abort | --edit-todo
 
 此外 rebase 还提供三个操作命令，分别是 `--continue`、`--absort` 和 `--skip`，这三个命令的意思分别是“继续”、“退出”和“跳过”。
 
-
-
 合并执行顺序：
 
 1). 设定需要合并的commit起始值, `-i` 的参数是需要合并的 commit 的 hash 值。如果未设-i后的值，那么默认是从还未提交到远程仓库的commit开始。
@@ -658,13 +644,12 @@ git -i [hash_valus]
 2). 得到一个指令文件，指令cmd可用全名，也可只用首字母。
 
 [cmd] [hash] [commitlog]
+
 * pick 的意思是要会保留这个 commit，缺省值，若无修改，最终会列出所有合并的commit作为新的commit
 * squash 的意思是这个 commit 会被合并到前一个commit, 这说明保证至少有两个以上的commit（不包括-i指向的commit）才能进行这操作，否则会出现合并错误，可通过rebase --absort放弃本次合并操作。
 * fixup 提交，类似squash，但放弃commit log.
 * edit：
 * drop: 不提交，放弃本次编辑。
-
-
 
 3). 提交修改
 
@@ -676,8 +661,6 @@ $git push origin [branch] -f
 4). 撤销修改 git rebase
 
 `git rebase --abort`来撤销修改，回到没有开始操作合并之前的状态。
-
-
 
 ### 3.4.3 git merge：合并分支
 
@@ -693,8 +676,6 @@ git merge dev
 ```
 
  说明：注意没参数的情况下merge是快进式(Fast-forward)的，即Git将master分支的指针直接移到dev的最前方。
-
-
 
 **2. 压合合并(squashed commits)：**
 
@@ -713,9 +694,11 @@ git merge --squash dev
 
 说明：使用--squash参数，这样提交的commit只有一个parent，即原来的分支。
 
+<br>
 
+<br>
 
-# 4  进阶篇
+# 4 进阶篇
 
 ## 4.1  团队协同开发
 
@@ -729,20 +712,19 @@ git merge --squash dev
 
 方法3: 是让 SSH 服务器通过某个LDAP 服务，或者其他已经设定好的集中授权机制，来进行授权。只要每个人都能获得主机的 shell 访问权，任何可用的 SSH 授权机制都能达到相同效果。
 
-
-
 **方法2的详细步骤**
 
-1)    产生公钥
+1) 产生公钥
 
 `ssh-keygen -C "你的email地址" -t rsa `
 该命令将生成一对非对称的公\私密钥，默认它们被存储在：
 
 * XP/2003用户：c:\Documents and Settings\登陆名\.ssh
-*  Vista用户： c:\Users\登陆名\.ssh
-* linux     :~/.ssh
 
-2)    在linux服务器上将公钥加到git用户的authorized_keys文件中。
+* Vista用户： c:\Users\登陆名\.ssh
+
+* linux     :~/.ssh
+2) 在linux服务器上将公钥加到git用户的authorized_keys文件中。
 
 **类似工具：**使用Gitosis的多用户访问
 
@@ -754,17 +736,15 @@ git merge --squash dev
 
 译者注2: [Gitosis配置(中文)](http://progit.chunzi.me/zh/ch4-7.html)
 
-
-
 ## 4.2   分支branch和tag管理
 
 版本号：x.x.x=主版本号.次版本号.发布序列。主版本号只用在重要架构级或功能大升级。
 
 表格  branch和tag比较表
 
-|             | 说明                                                         | 主要命令                                                     |
-| ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x<br>$ git push --tags  #推送全部tag<br/>$ git push origin [xxx] #推送单个tag到远程<br/>$ git push origin -d [xxx]  #删除远程指定tag | $ git tag  # 查看  <br>$ git tag  -a [xxx]  # 打tag<br>$ git tag -d [xxx]  #删除本地指定tag |
+|           | 说明                                                                                                                                                                                                                | 主要命令                                                                                                                                                                                                                      |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x<br>$ git push --tags  #推送全部tag<br/>$ git push origin [xxx] #推送单个tag到远程<br/>$ git push origin -d [xxx]  #删除远程指定tag                                    | $ git tag  # 查看  <br>$ git tag  -a [xxx]  # 打tag<br>$ git tag -d [xxx]  #删除本地指定tag                                                                                                                                        |
 | branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用 -a  <br/>$ git branch -a  <br/>$ git push origin [xxx]    # 推送分支到远程   <br/>$ git push origin :[xxx]  # 删除远程分支，或者将:改为--delete | # 创建分支  <br/>`$git checkout --orphan [空分支]`  <br/>$ git checkout -b [to] [from]  <br/>$ git branch -d [xxx]  #删除分支<br/>$ git checkout [xxx]  #切换分支<br/>$ git merge [to]   #合并分支<br/>$ git branch -m [old] [new]   # 重命名分支 |
 
 备注：命令参数如-d/-D大小写不敏感。tag和branch推送远程的操作命令类似。
@@ -775,29 +755,24 @@ git merge --squash dev
 
 **说明**：最下面e35a6b9是仓库第一个commit的SHA-1值，黄色字体v1.0.0/v1.1.0是tag，蓝色字体master/develop是远程分支，红色字体distributed是本地当前分支。带有origin前缀的都是远程分支。理论上tag要一直保持在master分支里。
 
-
-
 ### 4.2.1 分支管理策略
 
-| 分支名称          | 使用场合                                                     | 注意事项                                                     |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 主分支  master    | 所有提供给用户使用的正式版本，都在这个主分支上发布。用来分布重大版本。 |                                                              |
-| 开发分支  develop | 日常开发。  包括创建分支、切换分支和合并分支。               | $ git checkout -b develop master  <br>$ git checkout master  <br/>$ git merge --no-ff develop |
-| 临时性分支        | 用于应对一些特定目的的版本开发。如  <br/>* 功能（feature）分支~ feature-*  <br/>* 预发布（release）分支~ release-*  <br/>* 修补bug（fixbug）分支~ fixbug-* | feature/release从develop分支分出，fixbug从master分支分出。<br/>临时性分支合并到develop分支后可删除。  <br/>release和fixbug分支合并到master后可打tag。 |
+| 分支名称          | 使用场合                                                                                                                   | 注意事项                                                                                                             |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 主分支  master   | 所有提供给用户使用的正式版本，都在这个主分支上发布。用来分布重大版本。                                                                                    |                                                                                                                  |
+| 开发分支  develop | 日常开发。  包括创建分支、切换分支和合并分支。                                                                                               | $ git checkout -b develop master  <br>$ git checkout master  <br/>$ git merge --no-ff develop                    |
+| 临时性分支         | 用于应对一些特定目的的版本开发。如  <br/>* 功能（feature）分支~ feature-*  <br/>* 预发布（release）分支~ release-*  <br/>* 修补bug（fixbug）分支~ fixbug-* | feature/release从develop分支分出，fixbug从master分支分出。<br/>临时性分支合并到develop分支后可删除。  <br/>release和fixbug分支合并到master后可打tag。 |
 
 备注：tag需从master打，标识为vx.x.x，如v1.2.0
-
-
 
 **1. 主分支Master**
 
 首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
 
-
-
 **2. 开发分支Develop**
 
 主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行"合并"（merge）。（备注：被master合并分布后，也可以反向合并master或从其它分支获取修改，进行下一步的修改）
+
 ```sh
 # 创建分支：Git创建Develop分支的命令
 $ git checkout -b develop master
@@ -821,6 +796,7 @@ $ git merge --no-ff develop
 　　* 修补bug（fixbug）分支，从Master分支上面分出来的。relaese/fixub分支开发完需合并进Master和Develop分支，合并到master后可以打tag。
 
 示例1：修补bug分支fixbug-x流程（从master创建，合并到maste打tag，再合并到devel删除分支）。
+
 ```sh
 # 创建分支fixbug-x
 $ git checkout -b fixbug-x master
@@ -834,8 +810,6 @@ $ git checkout devel
 $ git merge --no-ff devel
 $ git branch -d bugfix-x
 ```
-
-
 
 ### 4.2.2 分支管理实例
 
@@ -860,15 +834,13 @@ b) git pull取其它成员的工作树到本地，如果有修改，将自动合
 
 c) git push将本地master分支更新到远程服务器。
 
-
-
 ## 4.3   子模块
 
 http://gitbook.liuhui998.com/5_10.html
 
 git submodule
 
-
+<br>
 
 # 5  原理篇
 
@@ -897,21 +869,21 @@ email = "junkio@twinsun.com"
 Various commands read from the configuration file and adjust their operation accordingly.
 ```
 
-
 ## 5.2  IDENTIFIER TERMINOLOGY存储对象类型
+
 ```
 <object>      Indicates the object name for any type of object.
 <blob>        Indicates a blob object name.
 <tree>        Indicates a tree object name.
 <commit>      Indicates a commit object name.
-<tree-ish>    Indicates a tree, commit or tag object name. A command that takes a argument ultimately wants to operate 		        on a <tree> object but automatically dereferences <commit> and <tag> objects that point at a <tree>.
+<tree-ish>    Indicates a tree, commit or tag object name. A command that takes a argument ultimately wants to operate                 on a <tree> object but automatically dereferences <commit> and <tag> objects that point at a <tree>.
 <commit-ish>  Indicates a commit or tag object name. A command that takes a argument ultimately wants to operate on a              <commit> object but automatically dereferences <tag> objects that point at a <commit>.
-<type>		  Indicates that an object type is required. Currently one of: blob, tree, commit, or tag.
+<type>          Indicates that an object type is required. Currently one of: blob, tree, commit, or tag.
 <file>        Indicates a filename - almost always relative to the root of the tree structure GIT_INDEX_FILE describes.
 ```
 
-
 查看命令
+
 ```sh
 denny@denny-laptop:~/git/unix-center.net/script$ git cat-file -p master^{tree}
 040000 tree 39d1ef43324965901826ef8c9e8c0b098487938b    dos
@@ -919,8 +891,6 @@ denny@denny-laptop:~/git/unix-center.net/script$ git cat-file -p master^{tree}
 040000 tree c97f5c664245b841396e49256769f01039fd3ebe    php
 040000 tree 5f4276de1d60a512d919a828e5835635414608c5   python_gap
 ```
-
-
 
 ## 5.3  SYMBOLIC IDENTIFIERS符号标签
 
@@ -935,27 +905,27 @@ Any git command accepting any <object> can also use the following symbolic notat
     For a more complete list of ways to spell object names, see "SPECIFYING REVISIONS" section in git-rev-parse(1).
 ```
 
+<br><br>
 
+<br>
 
-# 6  git仓库托管
+# 6 git仓库托管
 
 常见托管仓库：[oschina](http://git.oschina.net/)  [github](http://wwww.github.com)  [repo.or.cz](http://repo.or.cz)
 
 ## 6.1  仓库托管简介
 
 基本概念
+
 * public: 公共仓库
 * private: 私有仓库，github付费使用，oschina暂时提供免费1000个仓库。
 * fork：克隆别的仓库到自己仓库
 * pull requests: 分支合并请求
 
-
-
 **支持的克隆路径：SSH/https，示例如下，**
+
 * git clone git@git.oschina.net:dennycn/xxx.git
 * git cone https://git.oschina.net/dennycn/xxx.git
-
-
 
 ### 6.1.1 filter-branch：全局修改分支历史纪录
 
@@ -996,15 +966,12 @@ do_env_filter()
 }
 ```
 
-
 **2）删除历史纪录中某个文件**
 
 ```sh
 # remove unnecessay file or directory， 如passwords.txt
 git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 ```
-
-
 
 ## 6.2 gitlab本地搭建
 
@@ -1024,8 +991,6 @@ gitlab.rb
 
 在浏览器输入172.25.76.1，即可修改ROOT密码。
 
-
-
 ## 6.3 gitee
 
 相对于github，[gitee](https://www.gitee.com/) 支持免费私有仓库（原git.oschina.net）。
@@ -1039,30 +1004,29 @@ gitlab.rb
 * 报告者：观察者权限 + 可提交问题issue
 * 观察者：仅可查看issue.
 
-
-
 ### 开源协同开发
 
 示例：git@github.com:looly/elasticsearch-definitive-guide-cn.git
 
 开始我对Pull Request流程不熟悉，后来参考了[@numbbbbb](https://github.com/numbbbbb)的《The Swift Programming Language》协作流程，在此感谢。
-1.  首先fork我的项目
-2.  把fork过去的项目也就是你的项目clone到你的本地
-3.  运行 git remote add looly git@github.com:looly/elasticsearch-definitive-guide-cn.git 把我的库添加为远端库
-4.  运行 git pull looly master 拉取并合并到本地
-5.  翻译内容
-6.  commit后push到自己的库（git push origin master）
-7.  登录Github在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
+
+1. 首先fork我的项目
+2. 把fork过去的项目也就是你的项目clone到你的本地
+3. 运行 git remote add looly git@github.com:looly/elasticsearch-definitive-guide-cn.git 把我的库添加为远端库
+4. 运行 git pull looly master 拉取并合并到本地
+5. 翻译内容
+6. commit后push到自己的库（git push origin master）
+7. 登录Github在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
 
 1~3是初始化操作，执行一次即可。在翻译前必须执行第4步同步我的库（这样避免冲突），然后执行5~7既可。
 
-
+<br>
 
 ## 本章参考
 
-[1]: https://blog.csdn.net/zcx1203/article/details/90734055 "gitlab本地仓库搭建|Jenkins关联gitlab"
+* https://blog.csdn.net/zcx1203/article/details/90734055 "gitlab本地仓库搭建|Jenkins关联gitlab"
 
-
+<br>
 
 # 7  FAQ
 
@@ -1074,36 +1038,38 @@ gitlab.rb
 
 http://rongjih.blog.163.com/blog/static/335744612010620105546475/
 
-1)    本地svn先转化到本地git
+1) 本地svn先转化到本地git
 
 $ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
 
 或 $ git svn clone file:///tmp/test-svn -s
 
-2)    获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了）
- `$ git svn rebase`
+2) 获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了）
+   `$ git svn rebase`
 
-3)    转换SVN仓库的svn:ignore属性到Git仓库的.gitignore文件
- `$ git svn create-ignore`
+3) 转换SVN仓库的svn:ignore属性到Git仓库的.gitignore文件
+   `$ git svn create-ignore`
 
-4)   转换SVN的标签为Git标签
-```sh
- $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
- $ rm -Rf .git/refs/remotes/tags
-```
+4) 转换SVN的标签为Git标签
 
-5)    转换SVN的分支为Git分支
-```sh
- $ cp -Rf .git/refs/remotes/* .git/refs/heads/
- $ rm -Rf .git/refs/remotes
-```
+   ```sh
+   $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
+   $ rm -Rf .git/refs/remotes/tags
+   ```
 
-6)   最后把转换后的本地Git仓库推到公共的Git服务器
-```sh
- $ git remote add origin [远程Git服务器地址]
- $ git push origin master --tags
-```
+5) 转换SVN的分支为Git分支
 
+   ```sh
+   $ cp -Rf .git/refs/remotes/* .git/refs/heads/
+   $ rm -Rf .git/refs/remotes
+   ```
+
+6) 最后把转换后的本地Git仓库推到公共的Git服务器
+
+   ```sh
+   $ git remote add origin [远程Git服务器地址]
+   $ git push origin master --tags
+   ```
 
 ### 7.1.2 git VS svn
 
@@ -1115,15 +1081,11 @@ git:  http/https, git(缺省端口9418), ssh, rsync
 
 $man git-clone  //可查看支持的URL格式
 
-
-
 **2)缺省服务启动**
 
 svn: $svnserver –d --listen-port /home/denny/svnrepos
 
 git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
-
-
 
 **3)对比**
 
@@ -1132,20 +1094,19 @@ git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
 * 应用范围：svn公司多项目开发一仓库，git单一开源软件仓库。
 * 签出：svn允许部分签出，Git只能全部签出.
 
-
-
 ## 7.2  中文乱码问题
 
 TODO: 效果不明显
+
 ```sh
 alias ls=’ls –show-control-chars –color=auto’
 git config core.quotepath false
 ```
 
-
 ## 7.3   远程git命令找不到
 
 add to .git/config
+
 ```ini
 [remote "origin"]
      fetch = +refs/heads/*:refs/remotes/origin/*
@@ -1155,6 +1116,7 @@ add to .git/config
 ```
 
 ## 7.4  git svn Can't locate SVN/Core.pm
+
 ```sh
 $ cd ${SVN_SRC_PATH}
 $ make swig-pl
@@ -1162,13 +1124,14 @@ $ make check-swig-pl
 $ sudo make install-swig-pl
 ```
 
-
 用PERL安装所需模块：
+
 ```perl
 $ perl -MCPAN -e shell
 cpan> install XXX:XXX
 ```
 
+<br>
 
 # 8 gitbook
 
@@ -1177,8 +1140,6 @@ cpan> install XXX:XXX
 GitBook is a command line tool (and Node.js library) for building beautiful books using **GitHub**/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
 
 GitBook 分布式协作写书。
-
-
 
 ## 8.1 Getting started
 
@@ -1193,8 +1154,6 @@ GitBook can be used either on your computer for building local books or on GitBo
 打包发布：`gitbook build`
 
 格式化书： `gitbook pdf|epub|mobi  ../xx.pdf`    //依赖插件 ebook-convert
-
-
 
 ## 8.2 插件
 
@@ -1270,7 +1229,7 @@ book.json模板
       }
     },
     "tbfed-pagefooter": {
-      "copyright": "&copy;北京信息技术有限责任公司",
+      "copyright": "©北京信息技术有限责任公司",
       "modify_label": "文档更新时间：",
       "modify_format": "YYYY-MM-DD HH:mm:ss"
     }
@@ -1278,7 +1237,9 @@ book.json模板
 }
 ```
 
+<br><br>
 
+<br>
 
 # 参考资料
 
@@ -1298,13 +1259,13 @@ book.json模板
 
 [8]. github http://gooss.org/the-use-of-git-and-github-management-development/
 
-
+<br>
 
 # 附录
 
 ## 语义化的版本模式
 
-可将工程分为项目project 和 产品 product。
+语义化版本详见 《[开源生态.md](../../平台与编程语言/platform.平台/开源生态.md)》。可将工程分为项目project 和 产品 product。
+
 * 项目级版本号：日期，如$project-2019.11.12
 * 产品级版本号：major-minjor-patchlevel，其中偶数minjor表示稳定版本，奇数minjor表示不稳定分支。如$product-0.2.1
-

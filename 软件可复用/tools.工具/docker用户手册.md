@@ -12,6 +12,7 @@
 
 
 
+<br>
 ---
 
 目录
@@ -20,6 +21,7 @@
 
 
 
+<br>
 ---
 
 # 1 Docker简介
@@ -115,6 +117,8 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 
 
+<br>
+
 # 2 技术原理篇
 
 ​         ![1574518833495](../../media/sf_reuse/framework/frame_docker_001.png)
@@ -153,7 +157,9 @@ Docker 容器通过 Docker 镜像来创建。
 
 
 
-# 3 安装篇
+<br>
+
+# 3  安装篇
 
 Docker Desktop includes [Docker Engine](https://docs.docker.com/engine/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/), [Docker Content Trust](https://docs.docker.com/engine/security/trust.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
@@ -278,7 +284,9 @@ Docker for Windows is a desktop application based on [Docker Community Edition (
 
 
 
-# 4  用户篇
+<br>
+
+# 4 用户篇
 
 安装成功后，验证docker
 
@@ -902,6 +910,8 @@ SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@aliasmysql:3306/superset_1.0'
 
 
 
+<br>
+
 ## 本章参考
 
 * Docker配置文件daemon.json解析 https://www.jianshu.com/p/c7c7dc24b9e3
@@ -1483,6 +1493,8 @@ docker system prune
 
 
 
+<br>
+
 ## 本章参考
 
 
@@ -1676,6 +1688,8 @@ services:
 
 
 
+<br>
+
 ## 本章参考
 
 
@@ -1753,6 +1767,8 @@ Please provide a source image with `from` prior to commit
 解决方法：升级版本至CE-17.05之后。
 
 
+
+<br>
 
 # 参考资料
 
