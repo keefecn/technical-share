@@ -15,6 +15,7 @@
 
 
 <br>
+
 ---
 
 [TOC]
@@ -22,6 +23,7 @@
 
 
 <br>
+
 ---
 
 
@@ -289,7 +291,7 @@ $ pip download apache-superset==1.3.0 --no-deps
 $ source xx/bin/activate
 
 # 首次特别安装: DB-mysql/oralce/pg, 加密，
-$ sudo yum install mysql-devel postgresql-devel
+$ sudo yum install mysql-devel postgresql-devel # centos7环境
 $ pip install mysqlclient cx_Oracle psycopg2
 $ pip install pycryptodome flask_cors pillow
 

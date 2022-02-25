@@ -4,11 +4,13 @@
 |     |            |                              |       |       |
 
 <br>
+
 ---
 
 [TOC]
 
 <br>
+
 ---
 
 # 简介
@@ -93,6 +95,7 @@ PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿�
 postgres=# select version();
                                                    version
 <br>
+
 -------------------------------------------------------------------------------------------------------------
  PostgreSQL 10.17 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-2), 64-bit
 (1 行记录)

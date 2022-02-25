@@ -10,6 +10,7 @@
 
 
 <br>
+
 ---
 
 [TOC]
@@ -17,6 +18,7 @@
 
 
 <br>
+
 ---
 
 #  1 flask源码剖析
@@ -1240,6 +1242,7 @@ def shell_command():
 $ flask routes
 Endpoint                                Methods    Rule
 <br>
+
 --------------------------------------  ---------  -----------------------------------------------------------------------
 AnnotationLayerModelView.action_post    POST       /annotationlayermodelview/action_post
 AnnotationLayerModelView.add            GET, POST  /annotationlayermodelview/add

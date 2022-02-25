@@ -12,6 +12,7 @@
 
 
 <br>
+
 ---
 
 [TOC]
@@ -19,6 +20,7 @@
 
 
 <br>
+
 ---
 
 # 1 源码结构
@@ -2006,6 +2008,7 @@ This diagram details these state transitions:
 
 Logical State                  __state            __response
 <br>
+
 -------------                  -------            ----------
 Idle                           _CS_IDLE           None
 Request-started                _CS_REQ_STARTED    None

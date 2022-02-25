@@ -12,6 +12,7 @@
 
 
 <br>
+
 ---
 
 [TOC]
@@ -19,6 +20,7 @@
 
 
 <br>
+
 ---
 
 #  0 MySQL架构篇
@@ -320,6 +322,7 @@ $8 = {
  charset = 0x9646c0,
  fields = 0x0,
 <br>
+
 ---Type <return> to continue, or q <return> to quit---
  field_alloc = {
   free = 0x0,
@@ -368,6 +371,7 @@ $8 = {
   ssl_cipher = 0x0,
   shared_memory_base_name = 0x0,
 <br>
+
 ---Type <return> to continue, or q <return> to quit---
   max_allowed_packet = 0,
   use_ssl = 0 '\0',
