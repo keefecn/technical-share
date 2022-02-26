@@ -208,6 +208,10 @@ Windows8启动相关分区有三个:
 
 ### 五笔输入法
 
+推荐：**搜狗输入法**
+
+搜狗输入法是由北京搜狗信息服务有限公司2006年6月推出的一款汉字输入法工具。业界首次利用先进的搜索引擎技术开发的输入法，被誉为“互联网输入法”。 搜狗输入法目前有windows, linux和mac版。
+
 Linux三种输入框架：ibus(缺省自带)、fcitx（推荐，含搜狗五笔拼音输入法）和 xim，三种输入法可同时并存。
 
 ```shell
@@ -226,6 +230,64 @@ sudo dpkg -i 安装包名
 sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
 sudo apt install libgsettings-qt1
 ```
+
+### 字体.Font
+
+windows的字体库比较丰富，能够很好地显示各种语言。
+
+linux下字体库较少，要正常显示非西欧字符，有时需要手动安装缺失字体。
+
+linux缺省安装中文字体是 <u>文泉驿字体</u>。
+
+```sh
+# 文泉驿字体, libreoffice的缺省中文字体
+yum -y install wqy-bitmap-fonts
+```
+
+
+
+表格  字体工具列表
+
+| 工具名称 | 简述                   | 示例                  |
+| -------- | ---------------------- | --------------------- |
+| fc-list  | 查看系统安装的字体列表 | fc-list \| grep 'CJK' |
+| fc-cache | 构建字体缓存文件       |                       |
+| fc-match | 查看字体详细信息       | fc-match -v '文泉'    |
+
+> 其它字体工具还有：fc-scan fc-cat  fc-cache fc-pattern  fc-query
+
+
+
+表格 字体类型列表
+
+| 字体类型   | 简介                                                         | 应用场景       | 示例字体 |
+| ---------- | ------------------------------------------------------------ | -------------- | -------- |
+| TrueType   | 采用几何学中二次B样条曲线及直线来描述字体的外形轮廓。<br>分辨率无关，输出时总是按照打印机的分辨率输出。<br>字符光滑，无锯齿；质量略差点。 | 打印、屏幕显示 | <br>     |
+| PostScript | 又名Type 1。按PostScript 页面描述语言 (PDL) 规则定义的字体，并且只能在 PostScript 兼容的打印机上打印。 | 打印           |          |
+| OpenType   | 又名Type 2。Microsoft和Adobe公司开发的字体格式。也是轮廓字体，但比TrueType强大。是Type 1和TrueType的超集。 | 打印、屏显     |          |
+| X11        | 位图显示的视窗系统，几乎所有的操作系统都支持。               | 屏显           |          |
+| cmap       | Adobe公司专为autocad软件打造的一款字体文件。                 | 设计           |          |
+| cMap       | 字体中负责字符编码映射的表, 它可以含有多个子表，这些子表的功能与格式定义各不相同。 |                |          |
+
+备注：OpenType标准定义了OpenType文件名称的后缀名。
+
+* 包含TureType字体的OpenType文件后缀名为 ttf；可下载的字体包文件格式为 ttf。
+* 包含PostScript字体的文件后缀名为 OTF；
+* 如果是包含一系列TrueType字体的字体包文件，那么后缀名为TTC。
+
+
+
+表格  常用字体说明 
+
+| 字体中文名 | 英文名 | 字体文件         |
+| ---------- | ------ | ---------------- |
+| 仿宋       |        |                  |
+| 宋体       |        |                  |
+| 文泉驿字体 |        | wqy-bitmap-fonts |
+
+字体存储路径：linux环境一般是/usr/share/fonts/目录下。
+
+<br>
 
 ### 微信
 
@@ -365,7 +427,7 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 特殊安装软件包括软件官网无法下载、安装步骤较复杂等情形。
 
-包括五笔输入法l和微信。
+比如五笔输入法和微信。
 
 ## 3.2 Ubuntu
 
@@ -659,7 +721,6 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 * ubuntu设置静态ip（WIRED） http://jingyan.baidu.com/article/b7001fe18f85fe0e7282ddaf.html
 * 安装 ubuntu 20.04 之后需要做的几件事  https://www.wenjinyu.me/zh/something-to-do-after-installing-ubuntu-20-04/
 * 解决Ubuntu 20.04挂载NTFS分区不能写入（只读权限）的问题  https://blog.csdn.net/wwlswj/article/details/106479600
-* 再见 Typora！这款 Markdown 神器绝了！ https://blog.csdn.net/sinat_33224091/article/details/122150807
 * kunpeng yum仓库  https://repo.huaweicloud.com/kunpeng/yum/el/8/aarch64/Packages/database/
 
 <br>
@@ -1217,9 +1278,7 @@ $ crontab -l
 
 * Apache多域名配制  http://blog.csdn.net/ncxgx/article/details/4098616
 
-<br>
-
-<br>
+<br><br>
 
 # 参考资料
 
