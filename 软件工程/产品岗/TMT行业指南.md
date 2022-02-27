@@ -3,9 +3,7 @@
 | 1   | 2021-12-21 | 创建。从《行业业务知识》拆分TMT章节成文。 | Keefe |     |
 |     |            |                        |       |     |
 
-<br>
-
-<br>
+<br><br><br>
 
 [TOC]
 
@@ -559,9 +557,7 @@
 * 今日头条：新互联网巨头的崛起之路  https://www.36kr.com/p/1722806321153
 * 盛大十五年：梦碎“网络迪斯尼” http://www.huxiu.com/article/103102/1.html
 
-<br>
-
-<br>
+<br><br>
 
 # 3  TMT细分行业
 
@@ -751,7 +747,7 @@
 | 晶圆   | 晶圆要经过金属溅镀、涂布光阻、蚀刻技术、光阻去除等过程将微型电路覆盖到表面上，这样一块晶圆上就会形成很多的集成电路芯片。 |
 | 硅片   | 半导体芯片制造最重要的基础原材料，在晶圆制造材料成本中占比近30%，是份额最大的材料。                  |
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_001.png)
+![img](../../media/domain/tmt_001.png)
 
 中国企业
 
@@ -766,23 +762,23 @@
 
 电子制造产业包括：原材料砂子-硅片制造-晶圆制造-封装测试-基板互联-仪器设备组装。集成电路产业链主要为设计、制造、封测以及上游的材料和设备。
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_002.png)
+![img](../../media/domain/tmt_002.png)
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_003.png)
+![img](../../media/domain/tmt_003.png)
 
 集成电路产业主要有以下特征：制造工序多、产品种类多、技术换代快、投资大风险高。
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_004.png)
+![img](../../media/domain/tmt_004.png)
 
 ### 通信
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_005.png)
+![img](../../media/domain/tmt_005.png)
 
 图  通信行业巨头演变史（2006-2016）
 
 备注：2006年北电破产，4家合并成2家。2012年谷歌收购摩托罗拉移动。2015年，诺基亚收购阿尔卡特朗讯。
 
-![img](D:\mydocs\repos\technical-share\media\domain\tmt_006.png)
+![img](../../media/domain/tmt_006.png)
 
 图   全球电信设备商市场份额（2013-2018）
 
@@ -817,9 +813,7 @@
 | 高峰  | 2017年，比特币从年初的年初6949元（约1千美元）涨到12月13日的峰值130581元，涨了13倍。                                                           |
 | 衰退  | <br>                                                                                                           |
 
-<br>
-
-<br>
+<br><br>
 
 ## 本章参考
 

@@ -13,15 +13,7 @@
 | 11   | 2019-5-26  | 更新CMM系列章节；新增配置管理章节。                        | 同上   |        |
 |   12     | 2020-1-1 | 测试管理章节迁移另文。 | 同上 |        |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -55,8 +47,6 @@
 [表格 9 项目管理工具总列表__ 22](#_Toc9764730)
 
 [表格 10 各种测试手段比较__ 25](#_Toc9764731)
-
-
 
 
 
@@ -282,7 +272,7 @@ CMMI的评估过程分为Class A、B 、C三种类型。
 
 ### 3.1.3 ISO15504~软件过程模型
 
-　[ISO](http://wiki.mbalib.com/wiki/ISO)/IEC 联合信息技术委员会(ISO/IEC JOINT TECHNICAL COMMITTEE FOR INFORMATION TECHNOLOGY )是[国际标准化组织](http://wiki.mbalib.com/wiki/国际标准化组织)（ISO）和国际电工委员会(IEC)联合组建的第一个标准化技术委员会，其编号为JTC1。它在ISO和IEC共同领导下，承担信息技术领域国际标准制定工作，其重要性和影响力非同一般。
+　ISO/IEC 联合信息技术委员会(ISO/IEC JOINT TECHNICAL COMMITTEE FOR INFORMATION TECHNOLOGY )是国际标准化组织（ISO）和国际电工委员会(IEC)联合组建的第一个标准化技术委员会，其编号为JTC1。它在ISO和IEC共同领导下，承担信息技术领域国际标准制定工作，其重要性和影响力非同一般。
 
 ​     ISO/IEC 15504 是在ISO/IEC TR 15504 （SPICE）的基础上制订的正式国际标准，这个标准在总结SPICE试验的基础上，继存了ISO/IEC TR 15504 （SPICE）的基本思想和方法的同时，也发生了若干引人注目的变化。
 
@@ -667,7 +657,7 @@ QCC(Quality Control Circle,品管圈)
 
 ## 8.1  绩效激励
 
-
+<br>
 
 ## 8.2  人员配置范例
 

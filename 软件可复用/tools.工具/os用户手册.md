@@ -429,6 +429,8 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 比如五笔输入法和微信。
 
+<br>
+
 ## 3.2 Ubuntu
 
 基于[Debian](https://baike.baidu.com/item/Debian/748667)发行版的Linux都可以参考Ubuntu配置，如[Debian](http://baike.baidu.com/view/40687.htm)、[Google Chrome OS](http://baike.baidu.com/view/2627636.htm)等等。
@@ -547,6 +549,8 @@ Prompt=normal  #normal-会选择离当前版本最近的；lts-长期支持版�
 
 ### 全新Ubuntu配置
 
+ubuntu $HOME/snap目录存放的从软件商场安装软件的配置信息，如pycharm, postman等。<br>
+
 **常用软件列表**
 
 电影播放 － vlc, totem (系统自带)  + gstreamer, ~~realplay~~ + w32codecs,
@@ -664,6 +668,8 @@ auto lo iface lo inet loopback
 **问题描述**：404  Not Found [IP: 91.189.91.39 80]
 **问题原因**：软件源问题，某些文件URL请求失败，导致出现某些文件无法下载的问题
 **问题解决**：换源，在'software and update'里，将cn.ubuntu.com换成国内其它稳定源如 mirrors.bjtu.edu.cn.
+
+<br>
 
 ## 3.3 CentOS
 
