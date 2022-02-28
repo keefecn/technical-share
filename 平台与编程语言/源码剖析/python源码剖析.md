@@ -873,7 +873,7 @@ class Rabbit(object):
 
    def __init__(self, name):
        self._name = name
-       print '__init__ %s' %name
+       print('__init__ %s' %name)
 
    @staticmethod
    def newRabbit(name):

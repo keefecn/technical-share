@@ -237,24 +237,43 @@ windows的字体库比较丰富，能够很好地显示各种语言。
 
 linux下字体库较少，要正常显示非西欧字符，有时需要手动安装缺失字体。
 
-linux缺省安装中文字体是 <u>文泉驿字体</u>。
+表格 不同OS环境的字体环境
 
+|              | windows          | linux             | wine & deepinwine                                   |
+| ------------ | ---------------- | ----------------- | --------------------------------------------------- |
+| 字体文件目录 | C:\Windows\Fonts | /usr/share/fonts/ | ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts ` |
+| 缺省字体     | 微软雅黑         | 文泉驿            | SimSun仿宋 或者 Tahoma宋体                          |
+linux环境安装字体
 ```sh
+# 安装字体工具: fontconfig 
+$ sudo apt-get -y install fontconfig xfonts-utils
+
 # 文泉驿字体, libreoffice的缺省中文字体
-yum -y install wqy-bitmap-fonts
+$ sudo apt-get -y install wqy-bitmap-fonts
 ```
 
 
 
 表格  字体工具列表
 
-| 工具名称 | 简述                   | 示例                  |
-| -------- | ---------------------- | --------------------- |
-| fc-list  | 查看系统安装的字体列表 | fc-list \| grep 'CJK' |
-| fc-cache | 构建字体缓存文件       |                       |
-| fc-match | 查看字体详细信息       | fc-match -v '文泉'    |
+| 工具名称 | 简述                   | 示例                                       |
+| -------- | ---------------------- | ------------------------------------------ |
+| fc-list  | 查看系统安装的字体列表 | fc-list \| grep 'CJK' <br>fc-list :lang=zh |
+| fc-cache | 构建字体缓存文件       |                                            |
+| fc-match | 查看字体详细信息       | fc-match -v '文泉'                         |
 
 > 其它字体工具还有：fc-scan fc-cat  fc-cache fc-pattern  fc-query
+
+~~字体缓存更新~~
+
+```sh
+# ubuntu20.04实测未能更新字体，表现为fc-list命令仍未找到新安装字体
+$ cd /usr/share/fonts/
+$ mkfontscale
+$ mkfontdir
+$ fc-cache
+$ fc-list :lang=zh
+```
 
 
 
@@ -279,11 +298,12 @@ yum -y install wqy-bitmap-fonts
 
 表格  常用字体说明 
 
-| 字体中文名 | 英文名 | 字体文件         |
-| ---------- | ------ | ---------------- |
-| 仿宋       |        |                  |
-| 宋体       |        |                  |
-| 文泉驿字体 |        | wqy-bitmap-fonts |
+| 字体中文名     | 英文名                 | 字体文件                                                     |
+| -------------- | ---------------------- | ------------------------------------------------------------ |
+| 仿宋           | SimSun                 |                                                              |
+| 宋体           | Tahoma                 |                                                              |
+| 文泉驿等宽正黑 | WenQuanYi Zen Hei Mono | usr/share/fonts/truetype/wqy/wqy-zenhei.ttc                  |
+| 微软雅黑       | msyh                   | [msyh.ttf](https://github.com/chenqing/ng-mini/blob/master/font/msyh.ttf) |
 
 字体存储路径：linux环境一般是/usr/share/fonts/目录下。
 
@@ -292,6 +312,8 @@ yum -y install wqy-bitmap-fonts
 ### 微信
 
 「[electronic-wechat](https://github.com/kooritea/electronic-wechat)」是基于微信网页端开发的客户端，页面和网页一模一样，不过支持网页所不支持的最小化到顶栏和消息通知，同时相比[原版](https://github.com/geeeeeeeeek/electronic-wechat)添加了聊天历史记录功能，虽然 2019 年 2 月最后一个版本更新后就已停止维护。2021年底开始，微信网页端已经不可用。
+
+**linux环境微信客户端安装**
 
 ```SHELL
 # 法1.安装wine及相关依赖
@@ -305,8 +327,11 @@ $ wine WeChatSetup.exe
 
 
 # 法2: deep wine
-# 下载安装
+# 下载脚本安装
 $ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
+# 或者源码安装
+$ git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
+$ cd deepin-wine && ./install.sh                 
 
 # 安装微信
 $ sudo apt-get install deepin.com.wechat
@@ -318,29 +343,59 @@ sudo ./run.sh
 
 <br>
 
-<br>
+**解决微信聊天框字体为方块的问题**
+
+1. 下载微软雅黑字体 msyh.ttc
+
+2. 添加字体 `cp msyh.ttc ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts `
+
+3. 修改系统注册表
+
+   ```shell
+   $ vi ~/.deepinwine/Deepin-WeChat/system.reg
+   # 将system.reg里面二行换成
+   #"MS Shell Dlg"="SimSun"
+   #"MS Shell Dlg 2"="Tahoma"
+   "MS Shell Dlg"="msyh"
+   "MS Shell Dlg 2"="msyh"
+   ```
+
+4. 字体注册
+
+   ```shell
+   $ vi msyh_font.reg
+   REGEDIT4
+   [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
+   "Lucida Sans Unicode"="msyh.ttc"
+   "Microsoft Sans Serif"="msyh.ttc"
+   "MS Sans Serif"="msyh.ttc"
+   "Tahoma"="msyh.ttc"
+   "Tahoma Bold"="msyhbd.ttc"
+   "msyh"="msyh.ttc"
+   "Arial"="msyh.ttc"
+   "Arial Black"="msyh.ttc"
+   
+   # 脚本命令 deepin-wine 有时为 deepin-wine-stable
+   $ WINEPREFIX=~/.deepinwine/Deepin-WeChat deepin-wine regedit msyh_config.reg
+   ```
+
+5. 重启微信：先关掉wine，再退出微信。再重新开启微信。
+
+<br><br>
 
 ## 本章参考
 
 * UEFI与 Legacy BIOS两种启动模式详解  https://www.cnblogs.com/sddai/p/7739567.html
-
 * Linux中制作U盘启动盘的三种方法，使用启动盘创建器/dd命令和Etcher  https://ywnz.com/linuxjc/5620.html
-
 * 如何在win8中制作一个Ubuntu系统的U盘 https://jingyan.baidu.com/article/f3ad7d0f2dc64b09c3345bb0.html
-
 * 用UltraISO制作Ubuntu16|18|20.04 U盘启动盘 https://www.cnblogs.com/silentdoer/p/13044305.html
-
 * 3分钟告诉你GPT和MBR的区别  https://www.disktool.cn/content-center/difference-between-mbr-and-gpt-1016.html
-
 * linux磁盘分区详解 https://blog.csdn.net/sunpeng1117/article/details/89307613
-
 * 搜狗输入法 for linux 安装指南 (sogou.com) [搜狗输入法 for linux 安装指南](https://pinyin.sogou.com/linux/help.php)
-
 * [Ubuntu 20.04上通过Wine 安装微信 - RandalBryant - 博客园](https://www.cnblogs.com/sbrk/p/wine.html)
+* 解决linux mint wine微信字体显示问题  https://www.jianshu.com/p/b396f9aa4b8d
 
-<br>
-
-<br>
+<br><br>
 
 # 2 Windows
 
@@ -419,9 +474,20 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 ### 开发环境初始化
 
-增加用户useradd（缺省建立home目录，可登陆）:  `$ useradd -s /bin/bash -g www -m denny`
+* 增加用户useradd（缺省建立home目录，可登陆）:  `$ useradd -s /bin/bash -g www -m denny`
 
-更新配置：将git仓库script_langs/toolkit/etc/里的配置信息如`.vimrc, .gitconfig`等更新到HOME目录。
+* 更新配置：将git仓库script_langs/toolkit/etc/里的配置信息如`.vimrc, .gitconfig`等更新到HOME目录。
+
+* 安装gnome-shell扩展：system-monitor可监控CPU/内存。gnome-shell的内存回收机制有点问题，运行一段时间后有可能内存占用过大。可重启gdm服务来释放内存。
+
+```sh
+# 重启gdm服务
+$ systemctl restart gdm.service
+# 安装gnome-shell扩展
+$ sudo apt-get install gnome-shell-extension-system-monitor
+```
+
+<br>
 
 ### 特殊安装软件
 

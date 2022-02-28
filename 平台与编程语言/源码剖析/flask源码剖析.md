@@ -55,7 +55,7 @@ Required-by: Flask-SQLAlchemy, flask-restplus, Flask-RESTful, flasgger
 **程序demo**
 
 ```python
-#!coding=utf8
+#coding=utf8
 """
 这是一个极简的 flask api示例
 install:  pip install flask

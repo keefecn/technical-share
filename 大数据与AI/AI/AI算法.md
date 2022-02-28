@@ -3,21 +3,11 @@
 | 1    | 2021-5-10 | 创建          | Keefe |  |
 |      |           |          |        |   |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
 [TOC]
-
-
 
 <br>
 
@@ -441,13 +431,13 @@ SGD的劣势:
 
 <br>
 
-## 本章参考
+### 本章参考
 
 [1]. 一文详尽混淆矩阵、准确率、精确率、召回率、F1值、P-R 曲线、ROC 曲线、AUC 值、Micro-F1 和 Macro-F1 https://blog.csdn.net/weixin_37641832/article/details/104434509
 
 [2]. ROC曲线 [https://baike.baidu.com/item/ROC%E6%9B%B2%E7%BA%BF](https://baike.baidu.com/item/ROC曲线)
 
-
+<br>
 
 ## 2 特征工程
 
@@ -503,7 +493,7 @@ Word2Vec{词，词频}：最初由google开发，由深度神经网络构成，�
 
 ### 2.4  事件流特征
 
-
+<br>
 
 ## 3 AI通用算法
 
@@ -608,11 +598,11 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 <br>
 
-## 本章参考
+### 本章参考
 
 
 
-
+<br>
 
 ## 4 ML机器学习算法
 
@@ -814,7 +804,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 <br>
 
-## 本章参考
+### 本章参考
 
 [1]. 机器学习算法GBDT https://www.cnblogs.com/bnuvincent/p/9693190.html
 
@@ -830,7 +820,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 [7]. PCA http://hi.baidu.com/l1x2y/blog/item/fc6f10fd93c7643d5d6008e9.html
 
-
+<br>
 
 ## 5 仿生学算法系列
 
@@ -914,7 +904,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 在[泛函分析](https://baike.baidu.com/item/泛函分析/4151)中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f和g 生成第三个函数的一种[数学](https://baike.baidu.com/item/数学/107037)[算子](https://baike.baidu.com/item/算子/970194)，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
 
-
+<br>
 
 ## 6 NLP常用算法
 
@@ -943,7 +933,16 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 ### 文本向量化
 
-文本向量化的方法主要有：词频、TF-IDF、Word2Vec
+* 离散表示：one-hot、BOW、TF-IDF、N-gram（一元/二元/三元/...）、co-currency 矩阵的行（列）向量
+* 分布式连续表示：Word2Vec、Skip-gram
+
+表格 常见文本转向量方法比较
+
+| 方法     | 优点                     | 缺点                                       |
+| -------- | ------------------------ | ------------------------------------------ |
+| 词频     | 简单                     | 不考虑词序，也不考虑词在文档中的重要程度。 |
+| TF-IDF   | 在词频基础上加入命中文档 | 不考虑词序                                 |
+| Word2Vec |                          | 不考虑词序                                 |
 
 **Word2Vec**
 
@@ -1003,13 +1002,13 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 <br>
 
-## 本章参考
+### 本章参考
 
 [1]. 语言模型-BERT：bert算法介绍 www.itcast.cn/news/20200907/13593265501.shtml
 
 [2]. 用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践 https://zhuanlan.zhihu.com/p/25928551
 
-
+<br>
 
 ## 7 推荐引擎算法
 
@@ -1074,9 +1073,7 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 说明：以上度量中，支持度，置信度和conviction越大越好。当Lift=1, Leverage=0时说明L与R是独立事件。
 
-
-
-<br>
+<br><br>
 
 # 参考资料
 

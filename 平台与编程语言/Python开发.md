@@ -909,9 +909,9 @@ Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编
 常用的形式有以下几种，放在码文件的第一行或第二行.  下文示例中 <encoding name>为utf-8
 
 ```python
-# -*- coding: utf-8 -*-
-# coding=utf-8
-# coding: utf-8
+#-*- coding:utf-8 -*-
+#coding=utf-8
+#coding:utf-8
 ```
 
 
@@ -3517,7 +3517,7 @@ except Exception as error:
 通过设置类属性[`__slots__`](https://docs.python.org/release/2.5.2/ref/slots.html)可以禁止__dict__属性的自动创建，其中一个成功故事在[这里](http://tech.oyster.com/save-ram-with-python-slots/)，这个哥们通过__slots__节约了9G内存。需要说明的是，__slots__会带来一些[负面作用](http://stackoverflow.com/questions/472000/python-slots)，比较明显的一个是，使用version 0版本的pickle协议序列化定义了__slots__属性的对象会有报错，但使用更高级别的pickle协议则没问题[4](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:4)（一般很少用到cPickle的[protocol version 0](https://docs.python.org/2.7/library/pickle.html#data-stream-format)，因为又慢又占空间)。
 另外缓存所使用的数据结构也比较重要，直接用Python的内置类型list肯定不行，因为缓存应该是一个FIFO的队列，而del(list[0])操作是O(n)的复杂度[5](http://blog.atime.me/note/sphinx-coreseek-summary.html#fn:5)，用collections.deque比较合适。
 
-
+<br>
 
 ### 内存回收机制GC
 
@@ -3729,6 +3729,22 @@ python -m pip install --upgrade pip
 wget 'https://bootstrap.pypa.io/get-pip.py'
 python get-pip.py
 ```
+
+
+
+Q3:  python3.8.10下命令行执行 ipython 报错
+
+问题描述：  
+
+```shell
+File "/home/keefe/venv/ai-env/lib/python3.8/site-packages/IPython/core/interactiveshell.py", line 788, in init_virtualenv
+    new_path = p.readlink()
+AttributeError: 'PosixPath' object has no attribute 'readlink'
+If you suspect this is an IPython 8.1.0 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+```
+
+解决方法：此ipython 8.1.0回退到8.0，然后命令行执行 ipython正常执行。
 
 
 

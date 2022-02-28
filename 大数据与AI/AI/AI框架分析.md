@@ -3,19 +3,13 @@
 | 1    | 2018-11-18 | 创建     | Keefe |   |
 | 2 | 2021-4-10 | 增加章节sklean框架，更新tensorflow框架 | 同上 |   |
 
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
 [TOC]
 
-
+---
 
 
 # 1  AI框架概述
@@ -74,7 +68,6 @@ import pandas as pd
 | ----------- | ------------ | ----- |
 | interpolate | 数据插值     | scipy |
 | random      | 生成随机矩阵 | numpy |
-|             |              |       |
 
 
 ### 1.1.2  NLP.自然语言处理
@@ -682,7 +675,7 @@ CNTK允许用户非常轻松地实现和组合流行的模型，包括前馈DNN�
 
 <br>
 
-# 3   AI其它框架
+# 3  AI其它框架
 
 ## OpenCV
 
@@ -714,7 +707,7 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 - Matplotlib: 全面的 2D/3D 测绘
 - IPython: 改进的交互控制器
 - Sympy: 符号数学
-- Pandas:数据结构和分析
+- Pandas: 数据结构和分析
 
 **命名的由来：**SciPy 的扩展和模块在传统上被命名为 SciKits。而提供学习算法的模组就被命名为 scikit-learn。
 
@@ -739,7 +732,11 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 
 从上图可以看出，sklearn主要包括四类算法，分别是分类、聚类、回归和降维。
 
+样本数大于50，是否预测分类，
 
+* 是：若有标签数据，考虑<u>分类</u>；否则考虑<u>聚类</u>。
+
+* 否：样本小于10万，<u>回归</u>分析；否则降维。
 
 ### sklearn模块介绍
 
@@ -1214,23 +1211,21 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 
 
 
-
-
 <br>
 
 # 参考资料
 
 **各框架开源地址**
 
-* Caffe [https://github.com/BVLC/caffe](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2FBVLC%2Fcaffe)
+* Caffe https://github.com/BVLC/caffe
 
-* **Tensorflow** [https://github.com/tensorflow/tensorflow](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Ftensorflow%2Ftensorflow)
-* **Pytorch** [https://github.com/pytorch/pytorch](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fpytorch%2Fpytorch)
-* **Mxnet** [https://github.com/apache/incubator-mxnet](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fapache%2Fincubator-mxnet)
-* **Keras** [https://github.com/keras-team/keras](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fkeras-team%2Fkeras)
-* **Paddlepaddle** [https://github.com/PaddlePaddle/Paddle](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2FPaddlePaddle%2FPaddle)
-* **CNTK** [https://github.com/Microsoft/CNTK](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2FMicrosoft%2FCNTK)
-* Matconvnet [https://github.com/vlfeat/matconvnet](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fvlfeat%2Fmatconvnet)
-* Deeplearning4j [https://github.com/deeplearning4j/deeplearning4j](https://links.jianshu.com/go?to=http%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fgithub.com%2Fdeeplearning4j%2Fdeeplearning4j)   Java实现
+* Tensorflow https://github.com/tensorflow/tensorflow
+* Pytorch https://github.com/pytorch/pytorch
+* Mxnet https://github.com/apache/incubator-mxnet
+* Keras https://github.com/keras-team/keras
+* Paddlepaddle https://github.com/PaddlePaddle/Paddle
+* CNTK https://github.com/Microsoft/CNTK
+* Matconvnet https://github.com/vlfeat/matconvnet
+* Deeplearning4j https://github.com/deeplearning4j/deeplearning4j   Java实现
 * Chainer https://github.com/chainer/chainer
 

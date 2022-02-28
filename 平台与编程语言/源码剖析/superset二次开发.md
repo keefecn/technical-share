@@ -6,15 +6,7 @@
 | 4    | 2021-7-18 | 《源码剖析》章节另文                   | 同上   |        |
 |      |           |                                        |        |        |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -1138,6 +1130,8 @@ Environment variables: PYTHONUNBUFFERED=1;SUPERSET_CONFIG_PATH=;
 Working directory: 当前superset目录父级
 ```
 
+备注：SUPERSET_CONFIG_PATH为自定义配置文件路径，可选项。
+
 增加 superset/run.py（即superset.run，可选）
 
 ```python
@@ -2149,7 +2143,7 @@ WebSocket 主要用于刷新 token、用户被踢出、平台消息、内存和 
 
 ![img](../../media/ai/dv_superset_007.png)
 
-
+<br><br>
 
 # 4 运维篇
 
@@ -2573,9 +2567,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 *  删除数据库会同时删除表，删除表不会影响到数据库。数据源删除后，看板和图板所关联的数据源将指向为None.
 *  删除图表会影响到看板，删除看板不会影响到图表。
 
-
-
-
+<br><br>
 
 # 5 架构篇
 
@@ -2675,7 +2667,7 @@ fab: flask_appbuild
 
 
 
-
+<br>
 
 
 # FAQ 常见问题
@@ -2732,9 +2724,7 @@ $ pip install pyarrow==6.0.1	  #原依赖要求pyarrow>=4.0.1, <4.1, 但会导�
 $ pip install pyrsistent==0.14.0  #原依赖要求 pyrsistent>=0.14.0，最新版本0.18.0无法安装，指定版本安装
 ```
 
-
-
-
+<br>
 
 ## 开发常见问题
 
@@ -2830,7 +2820,7 @@ ImportError: cannot import name 'Any' from 'typing' (\superset\superset\typing.p
 
 重命名superset目录下的typing.py文件为superset_typing.py：该文件与python3自带的模块typing重名，不修改会导致项目运行报错。注意使用Shitf + F6选项来更新文件名，pycharm 会自动更新被引用位置的名字。
 
-**解决方法2**：在pycarm terminal定义`PYTHONPATH`为当前脚本路径，则在pycharm termianl启动没问题。但在pycahrm run/debug方式启动仍然报错（估计是 PYTHONPATH路径未在整个pycharm生效）。
+**解决方法2**：在pycharm terminal定义`PYTHONPATH`为当前脚本路径，则在pycharm termianl启动没问题。但在pycharm run/debug方式启动仍然报错（估计是 PYTHONPATH路径未在整个pycharm生效）。
 
 
 
@@ -2886,7 +2876,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 
 
-<br>
+<br><br>
 
 # 参考资料
 
@@ -2904,9 +2894,7 @@ A1：在写数据库连接串时末尾加上编码格式，如下
 
 * superset专题 https://www.cnblogs.com/datawalkman/tag/superset/
 
-
-
-
+<br>
 
 **参考链接**
 
