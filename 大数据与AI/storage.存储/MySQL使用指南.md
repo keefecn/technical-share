@@ -10,15 +10,7 @@
 | 8    | 2021-6-18 | 增加MySQL版本和产品线章节。                                  | 同上   |        |
 | 9    | 2021-7-28 | 应用开发章节移入《MySQL源码剖析》。本文定位面向用户和DB管理员 。 | 同上   |        |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -248,7 +240,7 @@ $ yum install mysql-community-server
 
 <br>
 
-# 2  MySQL基础教程
+# 2 MySQL基础教程
 
 ## 2.1  SQL语法：SELECT/INSERT/UPDATE/DELETE
 
@@ -928,7 +920,7 @@ SELECT id, NAME, age, COUNT(*)
 
 <br>
 
-# 3   MySQL高级教程
+# 3 MySQL高级教程
 
 ## 3.1  触发器
 

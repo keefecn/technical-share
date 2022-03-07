@@ -21,7 +21,7 @@
 
 ---
 
-# 1   中文分词简介
+# 1 中文分词简介
 
 中文分词实现方法有**词典，规则和统计方法，**或者多种方法相互结合。
 
@@ -138,9 +138,9 @@
 
 <br>
 
-# 2  中文分词实现
+# 2 中文分词实现
 
-## 2.1   基于词库
+## 2.1  基于词库
 
 ### 2.1.1 词库组织
 
@@ -459,11 +459,11 @@ for w in result:
 [2]: http://www.cnblogs.com/baiboy/p/jieba1.html "《结巴中文分词官方文档分析》"
 [3]:   http://www.cnblogs.com/baiboy/p/jieba2.html  " 《结巴中文分词源码分析》"
 
-
+* python jieba分词(结巴分词)、提取词，加载词，修改词频，定义词库  https://cloud.tencent.com/developer/article/1065715
 
 <br>
 
-# 3   中文分词评测
+# 3 中文分词评测
 
 ## 3.1 评测指标
 
@@ -484,9 +484,7 @@ for w in result:
 
 使用相同的评测系统。
 
-
-
-<br>
+<br><br>
 
 # 参考资料
 

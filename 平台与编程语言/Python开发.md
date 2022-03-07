@@ -2758,8 +2758,11 @@ Python中的random模块用于生成随机数，虽然提供了多种方法，�
 
 python的dict和list不是线程安全的。可用list(dict.keys())获取副本进行遍历。
 
+安全删除字典
+
 ```python
-def save_del():
+def save_del_dict():
+    """ 安全删除字典 """
     dict1 = {"a": "apple", "b": "banana", "c": "0", "d": "0", "o": "orange"}
     # for k in list(dict1):  # get copy of keys for traversal，list->list(xx.keys())
     for k in [k for k in dict1]:
@@ -2767,6 +2770,8 @@ def save_del():
         if dict1[k] == '0':
             dict1.pop(k)
         print(k, dict1.get(k), dict1)
+
+save_del_dict()
 ```
 
 输出：
@@ -2782,6 +2787,25 @@ d 0
 d None {'a': 'apple', 'b': 'banana', 'o': 'orange'}
 o orange
 o orange {'a': 'apple', 'b': 'banana', 'o': 'orange'}
+```
+
+
+
+安全删除列表：法1，列表长度要变化pop；法2，逆序遍历+remove
+
+```python
+def save_del_list():
+    """ 安全删除列表：计数 """
+    list1 = [{"apple", "banana"}, {"c": "0"}, {"d": "0"}, {"o": "orange"}]
+    for index, k in enumerate(list1[:]):
+        print(index, k)
+        if list1[index] == {"apple", "banana"}:
+            list1.remove(k)
+            print(k, list1)
+
+    print(list1)
+    
+save_del_list()    
 ```
 
 

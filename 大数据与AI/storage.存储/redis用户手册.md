@@ -16,7 +16,7 @@
 
 
 
-# 简介
+# 1 简介
 
 官网： http://redis.io/    [Redis中文官方网站](http://www.redis.cn/)
 
@@ -46,23 +46,23 @@ Redis跟memcached类似，不过数据可以持久化，而且支持的数据类
 
 *  丰富的数据类型 – Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作。
 *  原子 – Redis的所有操作都是原子性的，意思就是要么成功执行要么失败完全不执行。单个操作是原子性的。多个操作也支持事务，即原子性，通过MULTI和EXEC指令包起来。
-*  丰富的特性 – Redis还支持 publish/subscribe, 通知, key 过期等等特性。
+*  丰富的特性 – Redis还支持 publish/subscribe、通知、key 过期等特性。
 
 <br>
 
-# 入门篇
+# 2 入门篇
 
 **1** **安装使用**
 
 ```shell
-$sudo apt-get update
-$sudo apt-get install redis-server
+$ sudo apt-get update
+$ sudo apt-get install redis-server
 
 # 启动服务
-$/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.conf
+$ /usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.conf
 
 # 客户端访问
-$redis-cli
+$ redis-cli
 ```
 
 
@@ -86,7 +86,7 @@ $redis-cli
 | Connection   | ping auth exit echo select  client list/setname/getname/kill | 连接      |                                                              |
 | Geo          |                                                              |           |                                                              |
 | HyperLogLog  | pfadd  pfcount pfmerge                                       | 基数统计. | Redis 在 2.8.9 版本添加了 HyperLogLog 结构。每个  HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数。 |
-| Keys         | keys * scan                                                  |           |                                                              |
+| Keys         | keys * scan                                                  | 扫描      | 效率比较低的扫描方式。                                       |
 | Pub/Sub      | pubsub psubscribe punsubscribe   subscribe unsubscribe publish | 发布订阅  |                                                              |
 | Scripting    | eval                                                         | 脚本      |                                                              |
 | Transactions | multi exec   discard watch unwatch                           | 事务      |                                                              |
@@ -95,14 +95,14 @@ $redis-cli
 
 表格 22 Redis的结构类型及操作命令
 
-| **结构类型**    | **结构存储的值**                                 | **操作命令**                                      |
-| --------------- | ------------------------------------------------ | ------------------------------------------------- |
-| string          | sting/int/float                                  | get set del   incr decr incrby decrby incrbyfloat |
-| list            | list[string...]                                  | rpush lrange lindex lpop                          |
-| set             | set(string...)，set内的值唯一不重                | sadd smembers sismember srem                      |
-| hash            | 包含键值对的无序散列表                           | hset hget hgetall hdel                            |
-| zset  有序集合  | 有序键值对 {member:score}，排序由score大小决定。 | zadd zrange zrangebyscore zrem                    |
-| bitstring  位串 | 位串的二进制位0或1                               | SETBIT GETBIT BITCOUNT BITOP                      |
+| **结构类型**   | **结构存储的值**                                 | **操作命令**                                      |
+| -------------- | ------------------------------------------------ | ------------------------------------------------- |
+| string         | sting/int/float                                  | get set del   incr decr incrby decrby incrbyfloat |
+| list           | list[string...]                                  | rpush lrange lindex lpop                          |
+| set            | set(string...)，set内的值唯一不重                | sadd smembers sismember srem                      |
+| hash           | 包含键值对的无序散列表                           | hset hget hgetall hdel                            |
+| zset 有序集合  | 有序键值对 {member:score}，排序由score大小决定。 | zadd zrange zrangebyscore zrem                    |
+| bitstring 位串 | 位串的二进制位0或1                               | SETBIT GETBIT BITCOUNT BITOP                      |
 
 备注：string/list/set/hash/zset是Redis五种基本数据结构。某些场景下可以合用内存高效的数据结构~位串。
 
@@ -130,7 +130,7 @@ redis 127.0.0.1:6379> `EVAL script numkeys key [key ...] arg [arg ...]`
 
 <br>
 
-# 高级篇
+# 3 高级篇
 
 **1.** **数据备份和恢复**
 
@@ -188,21 +188,51 @@ redis每个命令都是原子操作，如果是2个命令要原子操作，那�
 原理：SET命令本身已经从版本 2.6.12 开始包含了设置过期时间的功能。这个命令已经是原子操作了。
 
 ```shell
-$redis->set($key, $value, array('nx', 'ex' => $ttl));  //ex表示秒
+$redis->set($key, $value, array('nx', 'ex' => $ttl));  #ex表示秒
 ```
 
 <br>
 
-# 实践篇
+# 4 实践篇
 
-说明：Redis使用中要注意缓存穿透、缓存击穿和缓存雪崩的情形。
+## 内存使用策略
+
+Redis使用中要注意缓存穿透、缓存击穿和缓存雪崩的情形。
+
+Redis内存满了，怎么办？
+
+1. 增加内存
+2. 使用内存淘汰策略
+3. Redis集群
+
+Redis默认设置了最大内存maxmemory。如果超过最大内存，会触发内存淘汰策略maxmemory-policy。如果系统内存不够，也会触发Redis删除部分数据以释放内存。
+
+* LRU：least RecentlyUsed 表示最近最少使用；
+*  LFU：least FreqUsed 表示最不常用的。
+
+表格  maxmemory-policy内存淘汰策略 详细说明
+
+| 规则名称        | 规则说明                                        |
+| --------------- | ----------------------------------------------- |
+| volatile-lru    | 使用LRU算法删除一个键（只对设置了生存时间的键） |
+| allkeys-lru     | 使用LRU算法删除一个键                           |
+| volatile-lfu    | 使用LFU算法删除一个键（只对设置了生存时间的键） |
+| allkeys-lfu     | 使用LFU算法删除一个键                           |
+| volatile-random | 随机删除一个键（只对设置了生存时间的键）        |
+| allkeys-random  | 随机删除一个键                                  |
+| volatile-ttl    | 删除生存时间最近的一个键                        |
+| noeviction      | 拒绝策略（默认策略）。不删除键，只返回错误      |
+
+
+
+## 数据类型场景
 
 表格 23 Redis各个数据类型应用场景
 
 | 类型                  | 简介                                                   | 特性                                                         | 场景                                                         |
 | --------------------- | ------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | String (字符串)       | 二进制安全                                             | 可以包含任何数据,比如jpg图片或者序列化的对象,一个键最大能存储512M | ---                                                          |
-| Hash (字典)           | 键值对集合,即编程语言中的Map类型                       | 适合存储对象,并且可以像数据库中update一个属性一样只修改某一项属性值(Memcached中需要取出整个字符串反序列化成对象修改完再序列化存回去) | 存储、读取、修改用户属性                                     |
+| Hash (字典)           | 键值对集合，即编程语言中的Map类型                      | 适合存储对象,并且可以像数据库中update一个属性一样只修改某一项属性值(Memcached中需要取出整个字符串反序列化成对象修改完再序列化存回去) | 存储、读取、修改用户属性                                     |
 | List (列表)           | 链表(双向链表)                                         | 增删快,提供了操作某一段元素的API                             | 1.最新消息排行等功能(比如朋友圈的时间线)   2.消息队列        |
 | Set (集合)            | 哈希表实现，元素不重复                                 | 1.添加、删除,查找的复杂度都是O(1)<br>2.为集合提供了求交集、并集、差集等操作 | 1、共同好友   2、利用唯一性,统计访问网站的所有独立ip   3、好友推荐时,根据tag求交集,大于某个阈值就可以推荐 |
 | Sorted Set (有序集合) | 将Set中的元素增加一个权重参数score,元素按score有序排列 | 数据插入集合时，已经进行天然排序                             | 1、排行榜，TOP N<br>2、带权重的消息队列                      |
@@ -267,7 +297,7 @@ $redis->set($key, $value, array('nx', 'ex' => $ttl));  //ex表示秒
 
 <br>
 
-# 原理篇
+# 5 原理篇
 
 ## RESP协议
 
@@ -302,9 +332,10 @@ Redis提供了RDB与AOF等多种不同级别的持久化方式。
 
 |              | RDB (Redis DataBase)                                         | AOF (Append Only File)                                       |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 原理         | 可以在指定的时间间隔内生成数据集的时间点快照（point-in-time snapshot）。二种方式：   <br>1. 手动执行持久化数据命令来让redis进行一次数据快照。命令：save/bgsave  <br/>save：save操作在Redis主线程中工作，因此会阻塞其他请求操作，应该避免使用。bgsave：调用Fork,产生子进程，父进程继续处理请求。<br>2. 根据你所配置的配置文件 的 策略，达到策略的某些条件时来自动持久化数据。 | 记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集。<br/>AOF文件（**appendonly.aof**）中的命令全部以Redis协议的格式来保存，新命令会被追加到文件的末尾。  <br/>Redis还可以在后台对AOF文件进行重写，使得AOF文件的体积不会超出保存数据集状态所需的实际大小。 |
-| 存储文件     | 持久化到**dump.rdb**文件，并且在redis重启后，自动读取其中文件. |                                                              |
-| 缺省配置策略 | save   900   # 每900秒变化1+键值做快照   save   300 3  # 每300秒变化3+键值   save   60 10000 # 每50秒变化1万+键值 | # 三个选择：everysync~每秒，no~, always~<br>appendonly   yes   appendsync   everysync |
+| 原理         | 可以在指定的时间间隔内生成数据集的时间点快照（point-in-time snapshot）。二种方式：   <br>1. 手动执行持久化数据命令来让redis进行一次数据快照。命令：save/bgsave  <br/>save：save操作在Redis主线程中工作，因此会阻塞其他请求操作，应该避免使用。bgsave：调用Fork,产生子进程，父进程继续处理请求。<br>2. 根据你所配置的配置文件 的 策略，达到策略的某些条件时来自动持久化数据。 | 记录服务器执行的所有写操作命令。<br/>AOF文件（**appendonly.aof**）中的命令全部以Redis协议的格式来保存，新命令会被追加到文件的末尾。  <br/>Redis还可以在后台对AOF文件进行重写，使得AOF文件的体积不会超出保存数据集状态所需的实际大小。 |
+| 存储文件     | dump.rdb                                                     | appendonly.aof                                               |
+| 重启读取     | redis重启后，自动读取dump.rdb文件。                          | 服务器启动时，通过重新执行appendonly.aof文件中写命令来还原数据集。 |
+| 缺省配置策略 | save   900   # 每900秒变化1+键值做快照<br>save   300 3  # 每300秒变化3+键值  <br/>save   60 10000 # 每50秒变化1万+键值 | # 三个选择：everysync~每秒, no~, always~<br>appendonly   yes   appendsync   everysync |
 | 缺省         | 通常情况下一千万的字符串类型键，1GB的快照文件，同步到内存中的 时间是20-30秒）。 |                                                              |
 | 优点         | RDB恢复数据时更快，可以最大化redis性能，子进程对父进程无任何性能影响。 | AOF有序的记录了redis的命令操作。意外情况下数据丢失甚少。     |
 | 缺点         | 数据丢失比AOF严重                                            |                                                              |
@@ -323,7 +354,7 @@ Redis 集群并没有使用一致性hash，而是引入了哈希槽的概念。R
 
 <br>
 
-# 架构篇
+# 6 架构篇
 
 ## 逻辑架构
 
@@ -346,7 +377,7 @@ Reids逻辑架构包含Redis Server与Redis-WS，如图1所示。
 |          | **单实例模式**                         | **集群模式**                                                 |
 | -------- | -------------------------------------- | ------------------------------------------------------------ |
 | 部署方式 | 一主多从，一从多从                     | 多主。多个Redis实例组合为一个Redis集群，共16384个槽位均分到各主实例上。 |
-| 可用性   | 主实例宕机，服务终止。从实例默认只读。 | Redis   Sentinel，监控主从节点的实例。主实例故障，由集群中剩余的主实例选举出一个从实例升主，需要半数以上主实例OK才能选举。 |
+| 可用性   | 主实例宕机，服务终止。从实例默认只读。 | Redis Sentinel，监控主从节点的实例。主实例故障，由集群中剩余的主实例选举出一个从实例升主，需要半数以上主实例OK才能选举。 |
 | 可伸缩性 |                                        | Redis集群可以进行扩容、减容（新实例加入集群或Redis实例退出集群），并进行槽位迁移。 |
 | 性能     |                                        |                                                              |
 
@@ -378,6 +409,26 @@ Redis实例可以部署在一个或多个节点上，且一个节点上也可以
 
 
 ## 可伸缩性：Redis集群
+
+Redis集群实现有三种方式：客户端分片、代理分片、RedisCluster
+
+| 方式 | 客户端分片                                             | 代理分片                                                     | RedisCluster                                                 |
+| ---- | ------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 简介 | 通过业务代码自己实现路由。分区逻辑包含在客户端代码中。 | 连接到中间件，同中间件来分发请求。<br>代理程序接收到来自业务程序的数据请求，根据路由规则，将这些请求分发给正确的Redis实例并返回给业务程序。使用类似Twemproxy、Codis等中间件实现。 | 查询路由，官方集群解决方案。<br>任一客户端查询集群中的随机节点将被路由到包含键的正确节点上。 |
+| 优点 | 可以自己控制分片算法、性能比代理的好                   | 运维方便、程序不用关心如何链接Redis实例                      | 无中心节点，和客户端直连，性能较好                           |
+| 缺点 | 维护成本高、扩容/缩容等运维操作都需要自己研发          | 会带来性能消耗（大概20%）、无法平滑扩容/缩容，需要执行脚本迁移数据，不方便(Codis在Twemproxy基础上优化并实现了预分片来达到Auto Rebalance)。 | 方案太重、无法平滑扩容/缩容，需要执行相应的脚本，不方便、太新，没有相应成熟的解决案例 |
+
+查询路由：Redis集群当前的实现方式，典型实现有Twitter开源的Twemproxy。常见方法有范围分区、列表分区等等。
+
+* 范围分区：根据传入键落入特定范围，并将该键划分给此范围所对应的实例。
+
+* 列表分区：为分区指定一个列表值。如果传入键在某分区列表中，则命中此分区。如全国电话号码分布（将前若干位数字作为分区号）。
+
+* 哈希分区：对键进行哈希，结果取模操作（%）。
+
+* 复合分区：范围/列表/哈希组合分区的方式，使用一致性哈希（哈希槽16384，理论上集群节点数最多16384个）。
+
+  
 
 **集群模式**
 
@@ -438,20 +489,6 @@ redis-cli.exe -p 6380
 
 备注：linux配置一主多从会更简单点，去除服务注册，直接用redis-server [conf]启动。
 
-
-
-数据分区三种方法：
-
-* 客户端分区：分区逻辑包含在客户端代码中。
-* 辅助代理分区：连接到中间件，同中间件来分发请求。
-* 查询路由：Redis集群当前的实现方式，典型实现有Twitter开源的Twemproxy。任一客户端查询集群中的随机节点将被路由到包含键的正确节点上。常见方法有范围分区、列表分区等等。
-* 范围分区：根据传入键落入特定范围，并将该键划分给此范围所对应的实例。
-* 列表分区：为分区指定一个列表值。如果传入键在某分区列表中，则命中此分区。如全国电话号码分布（将前若干位数字作为分区号）。
-* 哈希分区：对键进行哈希，结果取模操作（%）。
-* 复合分区：范围/列表/哈希组合分区的方式，使用一致性哈希（哈希槽16384，理论上集群节点数最多16384个）。
-
-
-
 <br>
 
 # 参考资料
@@ -461,4 +498,6 @@ redis-cli.exe -p 6380
 * Redis两种持久化方式(RDB&AOF)  https://www.cnblogs.com/tdws/p/5754706.html
 * Redis协议规范(RESP) https://www.cnblogs.com/tommy-huang/p/6051577.html
 * why redis-cluster use 16384 slots? https://github.com/antirez/redis/issues/2576
+* Redis内存满了的几种解决方法  https://blog.csdn.net/u014590757/article/details/79788076
+* Redis源码解析：缓存淘汰策略 https://blog.csdn.net/zzti_erlie/article/details/112132160
 

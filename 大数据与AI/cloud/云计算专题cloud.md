@@ -9,15 +9,7 @@
 | 7    | 2019-12-14           | 更新头部云服务提供商相关内容                               |   同上     |        |
 | 8 | 2021-10-30 | 将云服务、云安全、物联网章节迁移另文。 | 同上 | |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -244,7 +236,7 @@ management effort or service provider interaction.
 
 <br>
 
-# 2  云服务
+# 2 云服务
 
 详见 《[云服务商比较.md](./云服务商比较.md)》
 
@@ -253,7 +245,7 @@ management effort or service provider interaction.
 
 <br>
 
-# 3   云应用
+# 3 云应用
 
 * 云安全  详见 《[安全技术.md](../../领域开发/安全技术.md)》
 

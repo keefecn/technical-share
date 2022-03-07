@@ -2,13 +2,7 @@
 | ---- | --------- | -------------------------------------------------- | ------ | ------ |
 | 1    | 2021-12-9 | 创建。从《数据库技术》、《数据库架构》迁移相关章节 | Keefe  | Keefe  |
 
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -100,7 +94,7 @@ ObjectId 是一个12字节 BSON 类型数据，有以下格式：
 
 　　MongoDB中document以BSON形式存放
 
-
+<br>
 
 # 入门篇
 
@@ -181,7 +175,7 @@ $ /bin/mongo
 
  条件操作符： `$gt $lt $gte $lte $in $nin $exists $regex`
 
-
+<br>
 
 # 高级篇
 
@@ -247,7 +241,7 @@ GridFS 用两个集合来存储一个文件：fs.files与fs.chunks。
 
 每个文件的实际内容被存在chunks(二进制数据)中,和文件有关的meta数据(filename,content_type,还有用户自定义的属性)将会被存在files集合中。
 
-
+<br>
 
 # 实践篇
 
@@ -307,7 +301,7 @@ MongoDB缺省数据库，有3个分别是Admin、local和config。
 
 或者 YAML格式。
 
-
+<br>
 
 # 架构原理篇
 
@@ -399,11 +393,7 @@ MongoDB的逻辑结构是一种层次结构，主要由：文档(Document)、集
 *  Config Server: mongod实例，存储了整个 ClusterMetadata，其中包括 chunk信息。
 *  Query Routers: 前端路由，客户端由此接入，且让整个集群看上去像单一数据库，前端应用可以透明使用。
 
-
-
-
-
-<br>
+<br><br>
 
 # 参考资料
 

@@ -4,14 +4,7 @@
 |   2   |   2019-12-28       | Docker章节迁移另文。                           |  同上      |        |
 | 3 | 2020-4-17 | Kubernetes章节迁移另文。 | 同上 | |
 
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -94,7 +87,7 @@ CNCF 还帮助项目建立了治理结构。CNCF 提出了成熟度级别的概�
 
 * 解读云原生的2021：抢占技术C位，迎来落地大爆发  https://mp.weixin.qq.com/s/9vaUJp2TzAEAIrHl8jhGvA
 
-
+<br>
 
 # ２ Prometheus
 
@@ -154,7 +147,7 @@ Prometheus的整体技术架构可以分为几个重要模块：
 
 [1].  时序数据库连载系列：指标届的独角兽Prometheus https://blog.csdn.net/weixin_43970890/article/details/87938347
 
-
+<br>
 
 # ３ gRPC
 
@@ -225,7 +218,7 @@ gRPC支持多种语言，并能够基于语言自动生成客户端和服务端�
 
 [3].  RPC框架性能基本比较测试 [www.useopen.net/blog/2015/rpc-performance.html](http://www.useopen.net/blog/2015/rpc-performance.html)
 
-
+<br>
 
 # ４ Etcd
 

@@ -12,7 +12,7 @@
 ---
 
 
-# 1  AI框架概述
+# 1 AI框架概述
 ## 1.1  AI库（python)
 
 表格 1 python常用AI库列表
@@ -172,8 +172,6 @@ import pandas as pd
 
 [2]. 12大深度学习开源框架(caffe,tf,pytorch,mxnet等)快速入门项目 https://www.jianshu.com/p/16f69668ce25
 
-
-
 <br>
 
 # 2  AI深度学习框架
@@ -196,9 +194,9 @@ Requires: gast, astunparse, keras-preprocessing, google-pasta, tensorflow-estima
 Required-by:
 ```
 
-​	TensorFlow是[谷歌](https://baike.baidu.com/item/谷歌)基于DistBelief进行研发的第二代[人工智能](https://baike.baidu.com/item/人工智能/9180)[学习系统](https://baike.baidu.com/item/学习系统)，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。
-​    TensorFlow可被用于[语音识别](https://baike.baidu.com/item/语音识别)或[图像识别](https://baike.baidu.com/item/图像识别)等多项机器深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用。
-​    TensorFlow由谷歌[人工智能](https://baike.baidu.com/item/人工智能/9180)团队[谷歌大脑](https://baike.baidu.com/item/谷歌大脑/4649855)（Google Brain）开发和维护，拥有包括TensorFlow Hub、TensorFlow Lite、TensorFlow Research Cloud在内的多个项目以及各类[应用程序接口](https://baike.baidu.com/item/应用程序接口/10418844)API。自2015年11月9日起，TensorFlow依据[阿帕奇授权协议](https://baike.baidu.com/item/阿帕奇授权协议/1642155)（Apache 2.0 open source license）开放源代码。
+​	TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。
+​    TensorFlow可被用于语音识别或图像识别等多项机器深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用。
+​    TensorFlow由谷歌人工智能团队谷歌大脑（Google Brain）开发和维护，拥有包括TensorFlow Hub、TensorFlow Lite、TensorFlow Research Cloud在内的多个项目以及各类应用程序接口API。自2015年11月9日起，TensorFlow依据阿帕奇授权协议（Apache 2.0 open source license）开放源代码。
 
 **什么是张量(tensor)**
 对于张量这个概念的理解很不容易。我看介绍TensorFlow的说明上说张量就是N维数组，百度百科上说它是一个可用来表示在一些矢量、标量和其他张量之间的线性关系的多线性函数。在不同的领域，张量有不同的理解。我认为这句话讲得比较好：张量是不随坐标系而改变的物理系统内在的量。在机器视觉领域，我个人理解为在不同坐标系/参考系下变的CV特征。
@@ -980,9 +978,7 @@ metrics.f1_score(newsgroups_test.target, pred, average='macro')
 
 [6]. 使用python和sklearn的中文文本多分类实战开发 https://blog.csdn.net/weixin_42608414/article/details/88046380
 
-
-
-<br>
+<br><br>
 
 # 4 大数据的机器学习库
 
@@ -1043,9 +1039,9 @@ MADlib系统架构自上至下由以下四个主要组件构成：
 [3].  用SQL玩转数据挖掘之MADlib（一）——安装https://www.cnblogs.com/chenergougou/p/7107985.html
 [4].  MADlib——基于SQL的数据挖掘解决方案（2）——MADlib基础 https://blog.csdn.net/wzy0623/article/details/78845020
 
+<br>
 
-
-# 5  DM工具
+# 5 DM工具
 
 ## 5.1  DM工具比较
 表格 8 DM工具比较1
@@ -1209,9 +1205,7 @@ java MessageClassifier -m email1023.txt -t messageclassifier.model
 
 ## 本章参考
 
-
-
-<br>
+<br><br>
 
 # 参考资料
 
