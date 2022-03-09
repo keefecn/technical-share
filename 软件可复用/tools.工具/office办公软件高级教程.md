@@ -8,13 +8,7 @@
 
 
 
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -504,7 +498,7 @@ for a particular purpose.
 
    2）安装中文字体：编译时默认的字体时不支持中文的，所以我们得手动设置中文字体。显然，所设的字体应该为系统中已装的字体，且字体的名字不能写错。可用 fc-list 查看支持字体。
 
-   3）替换latex模板：生成模板命令 `pandoc -D latex > template.tex`，修改模板若干行 或者直接替换已修改好的模板 
+   3）替换latex模板：生成模板命令 `pandoc -D latex > template.tex`，修改模板若干行 或者直接替换已修改好的模板
 
 pandoc转换命令示例：`pandoc infile.md -o outfile.pdf -s --pdf-engine=xelatex -V mainfont="Microsoft YaHei" -V geometry:margin=2.5cm`
 

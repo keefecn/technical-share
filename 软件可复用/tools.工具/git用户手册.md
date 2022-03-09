@@ -333,7 +333,7 @@ usage:  `git remote add [<options>] <name> <url>`
   name = Keefe Wu
   email = keefe@gmail.com
 [core]
-  autocrlf = true
+  autocrlf = false
   excludesfile = ~/.gitignore_global
   filemode = false
   quotepath = false

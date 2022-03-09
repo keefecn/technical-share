@@ -12,15 +12,7 @@
 | 10 | 2021-6-11 | 更新python语言版本和更新装饰器内容。<br>迁移python源码剖析章节另文。 | 同上 |        |
 | 11 | 2021-11-19 | 更新python各版本特性 | 同上 | |
 
-
-
-
-
-
-
-
-
-<br>
+<br><br><br>
 
 ---
 
@@ -34,7 +26,7 @@
 
 ---
 
-# 1  Python概述
+# 1 Python概述
 ## 1.1  Python简介
 **发展历史**
 Python 是由 Guido van Rossum 在八十年代末和九十年代初，在荷兰国家数学和计算机科学研究所设计出来的。
@@ -182,11 +174,9 @@ $make
 $make install
 ```
 
+<br><br>
 
-
-<br>
-
-# 2  Python语言教程
+# 2 Python语言教程
 
 ## 2.1   python对象
 
@@ -905,16 +895,14 @@ traceback ---- 包含调用栈信息的对象。
 
 **py文件编码声明**
 
-Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编码开头重新声明编码类型
-常用的形式有以下几种，放在码文件的第一行或第二行.  下文示例中 <encoding name>为utf-8
+Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编码开头重新声明编码类型。
+常用的形式有以下几种，放在码文件的第一行或第二行。下文示例中编码为utf-8
 
 ```python
 #-*- coding:utf-8 -*-
 #coding=utf-8
 #coding:utf-8
 ```
-
-
 
 <br>
 
@@ -927,11 +915,9 @@ Python默认ASCII编码，如包含中文，为防止乱码，往往需要在编
 [5]. python 多继承详解http://www.pythontab.com/html/2013/pythonhexinbiancheng_0828/550.html
 [6]. 浅谈 Python 的 with 语句https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/
 
+<br><br>
 
-
-<br>
-
-# 3   Python开发环境
+# 3 Python开发环境
 
 ## 3.1  模块module
 Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Python 对象定义和Python语句。
@@ -2503,9 +2489,7 @@ PSD
 
 [7].  Python 程序员必知必会的开发者工具 http://blog.jobbole.com/58226/
 
-
-
-<br>
+<br><br>
 
 # 4 Python高级开发
 
@@ -2761,7 +2745,7 @@ python的dict和list不是线程安全的。可用list(dict.keys())获取副本�
 安全删除字典
 
 ```python
-def save_del_dict():
+def save_del_dict(dict1):
     """ 安全删除字典 """
     dict1 = {"a": "apple", "b": "banana", "c": "0", "d": "0", "o": "orange"}
     # for k in list(dict1):  # get copy of keys for traversal，list->list(xx.keys())
@@ -2791,21 +2775,39 @@ o orange {'a': 'apple', 'b': 'banana', 'o': 'orange'}
 
 
 
-安全删除列表：法1，列表长度要变化pop；法2，逆序遍历+remove
+安全删除列表：法1，逆序遍历+remove；法2，列表长度要变化remove。
 
 ```python
-def save_del_list():
-    """ 安全删除列表：计数 """
-    list1 = [{"apple", "banana"}, {"c": "0"}, {"d": "0"}, {"o": "orange"}]
-    for index, k in enumerate(list1[:]):
-        print(index, k)
-        if list1[index] == {"apple", "banana"}:
-            list1.remove(k)
-            print(k, list1)
+def save_del_list_reverse():
+    """ 安全删除列表：逆序 """
+    list1 = [{"a": "apple"}, {"b": "banana"}, {"c": "0"}, {"d": "0"}, {"o": "orange"}]
 
-    print(list1)
-    
-save_del_list()    
+    for item in list1[::-1]:
+        print(item)
+        if list(item.values()) == ['0']:
+            list1.remove(item)
+            print(list1)
+
+    print(f"reverse remove final result: {str(list1)}")
+
+
+def save_del_list_len():
+    """ 安全删除列表：变长 """
+    list1 = [{"a": "apple"}, {"b": "banana"}, {"c": "0"}, {"d": "0"}, {"o": "orange"}]
+    i = 0
+    while i < len(list1):	# 此处len是临时获取
+        item = list1[i]
+        if list(item.values()) == ['0']:
+            list1.remove(item)
+            i -= 1
+            print(list1)
+        i += 1
+
+    print(f"unfixed-len remove final result: {str(list1)}")
+
+
+save_del_list_reverse()
+save_del_list_len()
 ```
 
 
@@ -3531,7 +3533,7 @@ except Exception as error:
     print(error.traceback)  # Python's traceback of remote process
 ```
 
-
+<br>
 
 ## 4.4  python内存管理
 
@@ -3631,9 +3633,9 @@ https://github.com/LeoHuang2015/qqloginjs
 
 [10]. 深入理解uwsgi和gunicorn网络模型 [http://xiaorui.cc/2017/02/16/%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3uwsgi%e5%92%8cgunicorn%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e4%b8%8a/](http://xiaorui.cc/2017/02/16/深入理解uwsgi和gunicorn网络模型上/)
 
+<br>
 
-
-# 5  python扩展与嵌入
+# 5 Python扩展与嵌入
 
 ## 5.1   直接使用C语言程序
 ```python
@@ -3696,9 +3698,7 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 [3]. http://pypy.org/download.html#building-from-source
 [4]. 浅谈 Python 程序和 C 程序的整合https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/
 
-
-
-<br>
+<br><br>
 
 # 6 Python FAQ
 
@@ -3724,7 +3724,7 @@ pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sa
 ModuleNotFoundError: No module named '_bz2'
 ```
 
-原因：缺少Python3.6+的bz2模块需要的so文件
+原因：缺少Python3.6+的bz2模块需要的so文件。
 
 解决方法：1. 重新编译安装:  `yum install libzip2-devel && ./configure && make && make install`
 
@@ -3758,7 +3758,7 @@ python get-pip.py
 
 Q3:  python3.8.10下命令行执行 ipython 报错
 
-问题描述：  
+问题描述：
 
 ```shell
 File "/home/keefe/venv/ai-env/lib/python3.8/site-packages/IPython/core/interactiveshell.py", line 788, in init_virtualenv
@@ -3925,17 +3925,13 @@ pip install git+git://github.com/gawel/pyquery.git
 
 
 
-
-
 <br>
 
 ## 本章参考
 
 
 
-
-
-<br>
+<br><br>
 
 # 参考资料
 

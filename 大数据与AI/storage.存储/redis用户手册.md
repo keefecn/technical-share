@@ -150,11 +150,12 @@ config get dir # 恢复，获取配置目录，将dump.rdb移到此即可
 
 
 
-**3.** **性能测试**
+**3.** 性能测试
 
-\# 启动10000个请求测试
-
-`redis-benchmark -n 10000 -q`
+```shell
+# 启动10000个请求测试
+redis-benchmark -n 10000 -q
+```
 
 
 
@@ -428,7 +429,7 @@ Redis集群实现有三种方式：客户端分片、代理分片、RedisCluster
 
 * 复合分区：范围/列表/哈希组合分区的方式，使用一致性哈希（哈希槽16384，理论上集群节点数最多16384个）。
 
-  
+
 
 **集群模式**
 
@@ -463,7 +464,6 @@ Redis集群实现有三种方式：客户端分片、代理分片、RedisCluster
 
 ```shell
 # master port为 6379
-
 port 6380
 slaveof 127.0.0.1 6379
 ```
@@ -480,7 +480,7 @@ redis-server --service-install redis.windows-service-6380.conf --service-name re
 redis-server --service-start --service-name redis6380
 ```
 
-4.客户端启动：命令行输入
+4. 客户端启动：命令行输入
 
 ```shell
 redis-cli.exe -p 6379
@@ -489,7 +489,7 @@ redis-cli.exe -p 6380
 
 备注：linux配置一主多从会更简单点，去除服务注册，直接用redis-server [conf]启动。
 
-<br>
+<br><br>
 
 # 参考资料
 

@@ -245,7 +245,7 @@ linux下字体库较少，要正常显示非西欧字符，有时需要手动安
 | 缺省字体     | 微软雅黑         | 文泉驿            | SimSun仿宋 或者 Tahoma宋体                          |
 linux环境安装字体
 ```sh
-# 安装字体工具: fontconfig 
+# 安装字体工具: fontconfig
 $ sudo apt-get -y install fontconfig xfonts-utils
 
 # 文泉驿字体, libreoffice的缺省中文字体
@@ -296,7 +296,7 @@ $ fc-list :lang=zh
 
 
 
-表格  常用字体说明 
+表格  常用字体说明
 
 | 字体中文名     | 英文名                 | 字体文件                                                     |
 | -------------- | ---------------------- | ------------------------------------------------------------ |
@@ -331,7 +331,7 @@ $ wine WeChatSetup.exe
 $ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
 # 或者源码安装
 $ git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
-$ cd deepin-wine && ./install.sh                 
+$ cd deepin-wine && ./install.sh
 
 # 安装微信
 $ sudo apt-get install deepin.com.wechat
@@ -374,7 +374,7 @@ sudo ./run.sh
    "msyh"="msyh.ttc"
    "Arial"="msyh.ttc"
    "Arial Black"="msyh.ttc"
-   
+
    # 脚本命令 deepin-wine 有时为 deepin-wine-stable
    $ WINEPREFIX=~/.deepinwine/Deepin-WeChat deepin-wine regedit msyh_config.reg
    ```
