@@ -206,6 +206,8 @@ Windows8启动相关分区有三个:
   # usb-creator-gtk是Ubuntu系统自带的U盘系统启动盘制作工具，制作时将覆盖U盘中的所有内容。该工具仅支持制作Debian系的系统镜像。
   ```
 
+<br>
+
 ### 五笔输入法
 
 推荐：**搜狗输入法**
@@ -309,6 +311,26 @@ $ fc-list :lang=zh
 
 <br>
 
+### wine模拟
+
+wine可以在linux环境模块windows软件的运行环境。
+
+```shell
+# 1.wine安装及相关依赖
+# 存在问题：只能看，不能发信息。
+$ sudo apt-get install wine
+$ sudo apt-get install winetricks
+
+# 2。deep wine安装
+# 下载脚本安装
+$ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
+# 或者源码安装
+$ git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
+$ cd deepin-wine && ./install.sh
+```
+
+
+
 ### 微信
 
 「[electronic-wechat](https://github.com/kooritea/electronic-wechat)」是基于微信网页端开发的客户端，页面和网页一模一样，不过支持网页所不支持的最小化到顶栏和消息通知，同时相比[原版](https://github.com/geeeeeeeeek/electronic-wechat)添加了聊天历史记录功能，虽然 2019 年 2 月最后一个版本更新后就已停止维护。2021年底开始，微信网页端已经不可用。
@@ -316,24 +338,12 @@ $ fc-list :lang=zh
 **linux环境微信客户端安装**
 
 ```SHELL
-# 法1.安装wine及相关依赖
-# 存在问题：只能看，不能发信息。
-$ sudo apt-get install wine
-$ sudo apt-get install winetricks
-
+# 法1：wine下安装微信
 # 微信exe安装，安装后默认在HOME目录生成 WeChat Files目录，用来保存微信用户数据
 # 卸载要进入 ~/.wine/driver_c 相应目录下找到uninstall.exe执行
 $ wine WeChatSetup.exe
 
-
-# 法2: deep wine
-# 下载脚本安装
-$ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
-# 或者源码安装
-$ git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
-$ cd deepin-wine && ./install.sh
-
-# 安装微信
+# 法2：deep-wine下安装微信
 $ sudo apt-get install deepin.com.wechat
 
 # 启动微信
@@ -343,7 +353,7 @@ sudo ./run.sh
 
 <br>
 
-**解决微信聊天框字体为方块的问题**
+**问题1：微信聊天框字体为方块**
 
 1. 下载微软雅黑字体 msyh.ttc
 
@@ -374,12 +384,25 @@ sudo ./run.sh
    "msyh"="msyh.ttc"
    "Arial"="msyh.ttc"
    "Arial Black"="msyh.ttc"
-
-   # 脚本命令 deepin-wine 有时为 deepin-wine-stable
-   $ WINEPREFIX=~/.deepinwine/Deepin-WeChat deepin-wine regedit msyh_config.reg
+   
+   # 脚本命令 deepin-wine6-stable 或者 deepin-wine  
+   $ WINEPREFIX=~/.deepinwine/Deepin-WeChat 
+   $ deepin-wine6-stableregedit msyh_font.reg
    ```
 
 5. 重启微信：先关掉wine，再退出微信。再重新开启微信。
+
+   ```shell
+   # 更新wine配置
+   $ wine64-stable boot
+   ```
+
+
+备注：诡异现象是微信启动后第一次的聊天框输入文字是方块；然后换个聊天框输入文字正常；再切换回来就都正常了。
+
+**问题2：微信聊天框无法输出表情符号**
+
+一点击表情符号入口，程序就崩溃。
 
 <br><br>
 
@@ -465,12 +488,13 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 表格  Linux通用命令
 
-| 功能        | 命令         | 说明                                     |
-| --------- | ---------- | -------------------------------------- |
-| 运行级别      | runlevel   | 得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。 |
-| 查看OS内核版本  | `uname -a` |                                        |
-| 快捷键-返回到桌面 | win + D    | 快捷键大小写不敏感                              |
-| 快捷键-切换任务  | alt + tab  |                                        |
+| 功能               | 命令         | 说明                                                         |
+| ------------------ | ------------ | ------------------------------------------------------------ |
+| 运行级别           | runlevel     | 得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。 |
+| 查看OS内核版本     | `uname -a`   |                                                              |
+| 快捷键-返回到桌面  | win + D      | 快捷键大小写不敏感                                           |
+| 快捷键-切换任务    | alt + tab    |                                                              |
+| 终端打开图形端目录 | `xdg-open .` | 在ubuntu终端用命令打开图形化界面的当前目录                   |
 
 ### 开发环境初始化
 
@@ -653,9 +677,13 @@ WIN模拟 － wine
 
 字典 － stardict
 
+截屏 － flameshot
+
 其它工具 －gnochm, unrar
 
-开发软件列表：
+<br>
+
+**开发软件列表**
 
 apt-get build-essential
 
@@ -783,9 +811,7 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
    yum makecach## <br>
    ```
 
-<br>
-
-<br>
+<br><br>
 
 ## 本章参考
 

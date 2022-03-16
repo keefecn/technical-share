@@ -2,8 +2,6 @@
 | ---- | ---------- | ------------------------------------------------------ | ------ | ------ |
 | 1    | 2021-12-21 | 创建。从《数字化转型》、《产品管理》相关章节迁移成文。 | Keefe  | Keefe  |
 
-
-
 <br><br><br>
 
 ---
@@ -56,11 +54,9 @@ B端产品会针对某个行业做全领域的解决方案，例如：淘宝是�
 | 实施周期 | 7年上下                                | 1-2年                             | 最多6个月                                    |
 | 代表类型 | ERP                                    | OA、CRM                           | 小程序、APP、H5                              |
 
-
-
 <br>
 
-## 本章参考
+### 本章参考
 
 * 亿欧智库《Salesforce系列（一）20年发展史回顾》
 * 亿欧智库《Salesforce系列（二）从财务角度看商业模式》
@@ -68,7 +64,7 @@ B端产品会针对某个行业做全领域的解决方案，例如：淘宝是�
 * B端与C端的区别，并分析B端的SAAS市场  http://www.woshipm.com/it/5175321.html
 * 2021年中国企业级SaaS服务行业兴起背景及现状  https://k.sina.com.cn/article_1850460740_6e4bca4402000wd7u.html
 
-
+<br>
 
 ## 2 交付方式
 
@@ -174,7 +170,7 @@ ISV英文全称是Independent Software Vendors ，意为“独立软件开发商
 
 <br>
 
-## 本章参考
+### 本章参考
 
 * 中国 SaaS 的前世今生  https://baijiahao.baidu.com/s?id=1699418855401996566
 * 中国SaaS产业十年洞察研究报告 - 知乎  https://zhuanlan.zhihu.com/p/438621669
@@ -183,7 +179,7 @@ ISV英文全称是Independent Software Vendors ，意为“独立软件开发商
 * B端业务中ISV的生存困境和用户运营操盘解析   http://www.woshipm.com/operate/4094586.html
 * 影响一家SaaS公司的8个关键认知  www.woshipm.com/it/5268221.html
 
-
+<br>
 
 ## 3 竞品分析
 
@@ -282,18 +278,16 @@ where to paly？how to win？
 
 对于B端产品，主要需要对比的内容包含：做什么的&怎么做的，做得怎么样，商业模式，公司背景。
 
-
-
 <br>
 
-## 本章参考
+### 本章参考
 
 * B端产品该怎么做竞品分析？ https://zhuanlan.zhihu.com/p/115052311   2020-03-21
 * B端产品的竞品分析如何做？ https://www.zhihu.com/question/57411765%3Fsort%3Dcreated
 * 有道云笔记产品体验及其竞品分析 http://www.woshipm.com/evaluating/197751.html
 * 国内云计算主流服务商竞品分析 https://www.iwanshang.cn/info-2021010730222.html
 
-
+<br>
 
 ## 参考资料
 
