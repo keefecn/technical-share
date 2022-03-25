@@ -1,10 +1,8 @@
-| 序号 | 修改时间   | 修改内容                           | 修改人 | 审稿人 |
-| ---- | ---------- | ---------------------------------- | ------ | ------ |
-| 1    | 2019-12-24 | 创建。从《CNCF原生框架分析》拆分。 | Keefe  |        |
-| 2    | 2020-1-11  | 更新容器使用经验。                 | 同上   |        |
-| 3    | 2021-8-13  | 增加 harbor章节                    | 同上   |        |
-
-
+| 序号  | 修改时间       | 修改内容                | 修改人   | 审稿人 |
+| --- | ---------- | ------------------- | ----- | --- |
+| 1   | 2019-12-24 | 创建。从《CNCF原生框架分析》拆分。 | Keefe |     |
+| 2   | 2020-1-11  | 更新容器使用经验。           | 同上    |     |
+| 3   | 2021-8-13  | 增加 harbor章节         | 同上    |     |
 
 <br><br><br>
 
@@ -13,8 +11,6 @@
 目录
 
 [TOC]
-
-
 
 <br>
 
@@ -32,16 +28,12 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 2017.3.2，docker正式宣布推出企业版EE，原先的docker开源免费版本更名为社区版CE。
 
-
-
 **Docker的应用场景**
 
-*  Web 应用的自动化打包和发布。
-*  自动化测试和持续集成、发布。
-*  在服务型环境中部署和调整数据库或其他的后台应用。
-*  从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。
-
-
+* Web 应用的自动化打包和发布。
+* 自动化测试和持续集成、发布。
+* 在服务型环境中部署和调整数据库或其他的后台应用。
+* 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。
 
 ## docker开源项目
 
@@ -51,16 +43,14 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 * ~~(**deprecated** )  docker/docker-ce: Docker CE (github.com)~~  https://github.com/docker/docker-ce
 
-| 项目                | 源码仓库                                 | 简介                                                  | 版本说明                       |
-| ------------------- | ---------------------------------------- | ----------------------------------------------------- | ------------------------------ |
-| Containerd          | https://github.com/containerd/containerd | 容器运行工业级标准内核，已捐献给CNCF。                | 2018.11从docker-ce-18.09拆分。 |
+| 项目                  | 源码仓库                                     | 简介                                                    | 版本说明                       |
+| ------------------- | ---------------------------------------- | ----------------------------------------------------- | -------------------------- |
+| Containerd          | https://github.com/containerd/containerd | 容器运行工业级标准内核，已捐献给CNCF。                                 | 2018.11从docker-ce-18.09拆分。 |
 | Docker CLI          | https://github.com/docker/cli            | The cli used in the Docker CE and Docker EE products. | 2018.11从docker-ce-18.09拆分。 |
-| BuildKit            | https://github.com/moby/buildkit         | docker build工具                                      |                                |
-| Compose             | https://github.com/docker/compose        | 多容器管理                                            |                                |
-| Docker Distribution | https://github.com/docker/distribution   | docker私有镜像仓库registry2                           |                                |
-| ...                 |                                          |                                                       |                                |
-
-
+| BuildKit            | https://github.com/moby/buildkit         | docker build工具                                        |                            |
+| Compose             | https://github.com/docker/compose        | 多容器管理                                                 |                            |
+| Docker Distribution | https://github.com/docker/distribution   | docker私有镜像仓库registry2                                 |                            |
+| ...                 |                                          |                                                       |                            |
 
 ## docker CE版本
 
@@ -72,19 +62,17 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 * [部署并使用Docker（Alibaba Cloud Linux 2）](https://help.aliyun.com/document_detail/51853.html)  https://help.aliyun.com/document_detail/51853.html
 
-
-
 表格 各OS的docker源
 
-| OS                             | OS推荐源仓库                                                 | OS自带仓库文件的路径                           |
-| ------------------------------ | ------------------------------------------------------------ | ---------------------------------------------- |
+| OS                             | OS推荐源仓库                                                          | OS自带仓库文件的路径                                    |
+| ------------------------------ | ---------------------------------------------------------------- | ---------------------------------------------- |
 | alibaba cloud linux 2 (alinux) | https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo | /etc/yum.repos.d/docker-ce.repo                |
-| centos                         | https://download.docker.com/linux/centos/docker-ce.repo      | 同上                                           |
-| fedora                         | https://download.docker.com/linux/fedora/docker-ce.repo      | 同上                                           |
-| RHEL                           | https://download.docker.com/linux/rhel/docker-ce.repo        | 同上                                           |
-| sles                           | https://download.docker.com/linux/sles/docker-ce.repo        | 同上                                           |
-| ubuntu                         | https://download.docker.com/linux/ubuntu/gpg                 | /usr/share/keyrings/docker-archive-keyring.gpg |
-| debian                         | https://download.docker.com/linux/debian/gpg                 | 同上                                           |
+| centos                         | https://download.docker.com/linux/centos/docker-ce.repo          | 同上                                             |
+| fedora                         | https://download.docker.com/linux/fedora/docker-ce.repo          | 同上                                             |
+| RHEL                           | https://download.docker.com/linux/rhel/docker-ce.repo            | 同上                                             |
+| sles                           | https://download.docker.com/linux/sles/docker-ce.repo            | 同上                                             |
+| ubuntu                         | https://download.docker.com/linux/ubuntu/gpg                     | /usr/share/keyrings/docker-archive-keyring.gpg |
+| debian                         | https://download.docker.com/linux/debian/gpg                     | 同上                                             |
 
 说明：可用各OS的推荐源代替OS自带的docker源。alinux/centos/fedora/rhel/sles都支持yum安装，可以替换相应文件docker-ce.repo。
 
@@ -92,26 +80,22 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 * 配置源仓库脚本（需先安装yum-utils）：`sudo yum-config-manager --add-repo [dest_repo]`
 
-
-
 版本发布日志 https://docs.docker.com/engine/release-notes/
 
 表格 docker CE版本 （Docker Engine - Community）
 
-| 组件      | 版本    | 发布时间   | 功能特性                                                     |
-| --------- | ------- | ---------- | ------------------------------------------------------------ |
-| docker    | 1.0     | 2013       |                                                              |
-|           | 1.13.1  | 2017-2-8   | CE之前最后一个版本。                                         |
-| docker-ce | 17.03   | 2017-3     | CE第一个版本，此版本号为发布时间。                           |
-|           | 17.05.0 | 2017-05-04 | 引入参数 ARGS                                                |
+| 组件        | 版本      | 发布时间       | 功能特性                                                                                                                                      |
+| --------- | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| docker    | 1.0     | 2013       |                                                                                                                                           |
+|           | 1.13.1  | 2017-2-8   | CE之前最后一个版本。                                                                                                                               |
+| docker-ce | 17.03   | 2017-3     | CE第一个版本，此版本号为发布时间。                                                                                                                        |
+|           | 17.05.0 | 2017-05-04 | 引入参数 ARGS                                                                                                                                 |
 |           | 18.09   | 2018-11-08 | 此版本起，The client and container runtime 分离为2个项目。<br>完整功能要安装3个包：`apt install docker-ce docker-ce-cli containerd.io`.<br>18.x最后一个版本18.09.9()。 |
-|           | 19.03   | 2019-07-22 | 19.x最后一个版本19.03.15(2021-02-01).                     |
-|           | 20.10.8 | 2021-8-3   |                                                              |
-|           | ？      | ？         |                                                              |
+|           | 19.03   | 2019-07-22 | 19.x最后一个版本19.03.15(2021-02-01).                                                                                                           |
+|           | 20.10.8 | 2021-8-3   |                                                                                                                                           |
+|           | ？       | ？          |                                                                                                                                           |
 
-说明：docker-ce包括服务器(进程名dockerd) 和客户端(docker)。docker-ce的起始版本是 17.03， 该版本及更高版本建议安装到centos7+。docker-ce-18.09版本，将项目拆解为三个子项目，分别是docker-ce(服务端)，docker-ce-cli(客户端)和containerd.io。
-
-
+说明：docker-ce包括服务器(进程名dockerd) 和客户端(docker)。docker-ce的起始版本是 17.03， 该版本及更高版本建议安装到centos7+。docker-ce-18.09版本，将项目拆解为三个子项目，分别是docker-ce(服务端)，docker-ce-cli(客户端) 和containerd.io。
 
 <br>
 
@@ -120,8 +104,6 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 ​         ![1574518833495](../../media/sf_reuse/framework/frame_docker_001.png)
 
 图 1 容器技术与VM技术的比较
-
-
 
 Docker 容器通过 Docker 镜像来创建。
 
@@ -135,23 +117,23 @@ Docker 容器通过 Docker 镜像来创建。
 
 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信。
 
-
-
 表格 2 Docker组件说明表
 
-| 组件                   | 说明                                                         |
-| ---------------------- | ------------------------------------------------------------ |
-| Docker 镜像(Images)    | Docker 镜像是用于创建 Docker 容器的只读模板，它包含创建Docker容器的说明。 |
-| Docker 容器(Container) | 容器是独立运行的一个或一组应用，镜像的可运行实例。镜像和容器的关系类似面向对象中的类和对象的关系。 |
-| Docker  客户端(Client) | Docker  客户端通过命令行或者其他工具使用  Docker API (https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信。比如docker，docker-compose |
-| Docker 主机(Host)      | 一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。       |
-| Docker 仓库(Registry)  | Docker仓库用来保存镜像，类似代码控制中的代码仓库。可分为公有和私有仓库。Docker Hub(https://hub.docker.com)是官方也是默认的Docker仓库，存放着海量镜像，并可通过docker命令下载并使用。 |
-| Docker Daemon          | Docker守护进程。运行在宿主机(Docker Host)的后台进程(linux里此进程名为dockerd)，可通过Docker客户端与之通信。 |
-| Docker Machine         | Docker Machine是一个简化Docker安装的命令行工具，通过一个简单的命令行即可在相应的平台上安装Docker，比如VirtualBox、 Digital Ocean、Microsoft Azure。 |
+| 组件                   | 说明                                                                                                                                      |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Docker 镜像(Images)    | Docker 镜像是用于创建 Docker 容器的只读模板，它包含创建Docker容器的说明。                                                                                         |
+| Docker 容器(Container) | 容器是独立运行的一个或一组应用，镜像的可运行实例。镜像和容器的关系类似面向对象中的类和对象的关系。                                                                                       |
+| Docker  客户端(Client)  | Docker  客户端通过命令行或者其他工具使用  Docker API (https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信。比如docker，docker-compose |
+| Docker 主机(Host)      | 一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。                                                                                                         |
+| Docker 仓库(Registry)  | Docker仓库用来保存镜像，类似代码控制中的代码仓库。可分为公有和私有仓库。Docker Hub(https://hub.docker.com)是官方也是默认的Docker仓库，存放着海量镜像，并可通过docker命令下载并使用。                    |
+| Docker Daemon        | Docker守护进程。运行在宿主机(Docker Host)的后台进程(linux里此进程名为dockerd)，可通过Docker客户端与之通信。                                                               |
+| Docker Machine       | Docker Machine是一个简化Docker安装的命令行工具，通过一个简单的命令行即可在相应的平台上安装Docker，比如VirtualBox、 Digital Ocean、Microsoft Azure。                              |
 
 备注：docker客户端和服务端daemon可以在同一台机器也可分布在不同机器。
 
+* docker service:  服务。docker启动的一个服务。
 
+* docker stack:  指的是一个服务集。 一个 swarm 集群中可以启动多个stack， 一个stack 中可以有多个服务，一个服务可以有多个分片（容器）， 启动一个stack默认创建一个网络。功能类似docker-compose。
 
 <br>
 
@@ -165,13 +147,9 @@ To install Docker CE, you need the 64-bit version  要求安装在64位平台。
 
 - [Install Docker Desktop on Mac](https://docs.docker.com/docker-for-mac/install/)
 
-
-
 安装Docker Engine [Install Docker Engine | Docker Documentation](https://docs.docker.com/engine/install/) https://docs.docker.com/install/
 
 * [Install Docker Engine on CentOS | Docker Documentation](https://docs.docker.com/engine/install/centos/)
-
-
 
 ## ubuntu安装
 
@@ -179,12 +157,14 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 
 官网缺省不支持32位平台，需特殊处理。
 
-1)  ~~32位平台~~
-```SHELL
-$ sudo apt-get install docker.io
-# 导入32位ubuntu 14.04镜像
-$ sudo cat ubuntu-14.04-x86-minimal.tar.gz | docker import - ubuntu:14.04
-$ sudo docker run -it ubuntu:14.04 /bin/bash
+1) ~~32位平台~~
+   
+   ```SHELL
+   $ sudo apt-get install docker.io
+   # 导入32位ubuntu 14.04镜像
+   $ sudo cat ubuntu-14.04-x86-minimal.tar.gz | docker import - ubuntu:14.04
+   $ sudo docker run -it ubuntu:14.04 /bin/bash
+   ```
 
 denny@denny-ubuntu:~$ sudo docker version
 [sudo] password for denny:
@@ -198,9 +178,8 @@ Server API version: 1.18
 Go version (server): go1.2.1
 Git commit (server): 7c8fca2
 OS/Arch (server): linux/386
+
 ```
-
-
 2) 正常平台
 ```SHELL
 # 法1：自动检测平台，下载相应最新版本
@@ -217,8 +196,6 @@ $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docke
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-
-
 管理Docker守护进程。
 
 ```shell
@@ -229,8 +206,6 @@ systemctl enable docker    #设置Docker开机自启动
 systemctl status docker    #查看Docker的运行状态
 ```
 
-
-
 ## windows安装
 
 **win7、win8系统**
@@ -239,18 +214,16 @@ win7、win8 等需要利用 docker toolbox 来安装，国内可以使用阿里�
 
 docker toolbox 是一个工具集，它主要包含以下一些内容：
 
-*  Docker CLI 客户端，用来运行docker引擎创建镜像和容器
-*  Docker Machine. 可以让你在windows的命令行中运行docker引擎命令
-*  Docker Compose. 用来运行docker-compose命令
-*  Kitematic. 这是Docker的GUI版本
-*  Docker QuickStart shell. 这是一个已经配置好Docker的命令行环境
-*  Oracle VM Virtualbox. 虚拟机
+* Docker CLI 客户端，用来运行docker引擎创建镜像和容器
+* Docker Machine. 可以让你在windows的命令行中运行docker引擎命令
+* Docker Compose. 用来运行docker-compose命令
+* Kitematic. 这是Docker的GUI版本
+* Docker QuickStart shell. 这是一个已经配置好Docker的命令行环境
+* Oracle VM Virtualbox. 虚拟机
 
 官网安装教程：https://docs.docker.com/toolbox/toolbox_install_windows/
 
 下载安装后：点击Docker QuickStart图标，直到出现$。
-
-
 
 **boot2docker**（deprecated）
 
@@ -258,27 +231,19 @@ boot2docker is a lightweight Linux distribution based on Tiny Core Linux made sp
 
 This project is officially deprecated in favor of [Docker Machine](https://docs.docker.com/machine/). The code and documentation here only exist as a reference for users who have not yet switched over (but please do soon). The recommended way to install Machine is with the [Docker Toolbox](https://docker.com/toolbox).
 
-
-
 **Docker Toolbox** （win7+）
 
 To run Docker, your machine must have a 64-bit operating system running Windows 7 or higher.
 
 **Legacy desktop solution.** Docker Toolbox is for older Mac and Windows systems that do not meet the requirements of [Docker for Mac](https://docs.docker.com/docker-for-mac/) and [Docker for Windows](https://docs.docker.com/docker-for-windows/). We recommend updating to the newer applications, if possible.
 
-
-
 [Docker for Windows](https://docs.docker.com/docker-for-windows/) （win10+）
 
 Docker for Windows requires Windows 10 Pro or Enterprise version 14393, or Windows server 2016 RTM to run
 
-
-
 **win 10+**
 
 Docker for Windows is a desktop application based on [Docker Community Edition (CE)](https://www.docker.com/community-edition). The Docker for Windows install package includes everything you need to run Docker on a Windows system.
-
-
 
 <br>
 
@@ -287,6 +252,7 @@ Docker for Windows is a desktop application based on [Docker Community Edition (
 安装成功后，验证docker
 
 step 1: 启动 docker守护进程 ( dockerd:  Docker Daemon，服务端)
+
 ```shell
 # ubuntu/linux下服务启动
 $ sudo service docker start
@@ -301,8 +267,8 @@ $ dockerd -d
 $ docker-machine
 ```
 
-
 step 2: docker客户端运行hello-world镜像 （docker：Docker客户端）
+
 ```shell
 # run命令: 如果本地没有镜像，将默认从官网(docker.io)拉取镜像pull，再运行run
 $ docker run hello-world
@@ -310,8 +276,6 @@ $ docker run -it ubuntu bash
 ```
 
 备注：dockerd服务端和docker客户端可以同主机也要在不同host里，它们之间可以通过socket或REST进行通讯。
-
-
 
 **非root用户启动dockerd**
 
@@ -327,8 +291,6 @@ $ docker ps
 
 > docker服务的权限组是docker，对于docker组的用户都可以启动停止docker容器实例，非docker组用户无法操作docker。
 
-
-
 ## 4.1 配置文件 daemon.json
 
 Docker Engine V1.12 之后版本，用户可以自行创建 daemon.json 文件对 Docker Engine 进行配置和调整。要点如下：
@@ -337,13 +299,12 @@ Docker Engine V1.12 之后版本，用户可以自行创建 daemon.json 文件�
 - 不管是在哪个平台以何种方式启动, Docker 默认都会来这里读取配置。使用户可以统一管理不同系统下的 docker daemon 配置。
 - 相关参数的使用说明，可以参阅 `man dockerd` 帮助信息，或者参阅[官方文档](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon)。
 
-
-
 新版的 Docker 使用 如下配置文件来配置 Daemon
 
 * Linux: /etc/docker/daemon.json
 
 * Windows: %programdata%\docker\config\daemon.json
+
 * Windows: %HOME%\.docker\machine\machines\default\config.json
 
 修改配置文件之后需要重启 docker守护进程生效
@@ -364,14 +325,12 @@ systemctl enable docker.service
 docker run xxx --restart=always
 ```
 
-
-
 daemon.json 示例配置文件
 
 ```json
 # 注意: 下面不是规范JSON串,带#注释在实际环境中需要删除
 {
-	"registry-mirrors": ["http://hub-mirror.c.163.com"], # 镜像加载仓库，可用docker info查看
+    "registry-mirrors": ["http://hub-mirror.c.163.com"], # 镜像加载仓库，可用docker info查看
     "insecure-registries": [], #配置docker的私库地址
     "authorization-plugins": [],
     "data-root": "",  #Docker运行时使用的根路径,根路径下的内容稍后介绍，默认/var/lib/docker
@@ -397,8 +356,6 @@ daemon.json 示例配置文件
 }
 ```
 
-
-
 ### 镜像加速
 
 * Docker官方镜像：docker.io
@@ -408,6 +365,7 @@ daemon.json 示例配置文件
 鉴于国内网络问题，后续拉取 Docker 镜像十分缓慢，我们可以需要配置加速器来解决。
 
 请在配置文件daemon.json 中加入（没有该文件的话，请先建一个）：分别是 中文区官方镜像 / 网易 / 中科大。
+
 ```shell
 {
   "registry-mirrors": [
@@ -418,116 +376,102 @@ daemon.json 示例配置文件
 }
 ```
 
-
-
 ## 4.2  docker命令组
 
    ![1574518882918](../../media/sf_reuse/framework/frame_docker_003.png)
 
 图 3 docker_commands
 
-备注：镜像标签tag=$name:$version
-
-
+备注：镜像标签`tag=$name:$version`
 
 docker命令组可分为几大块：容器、镜像、运行
 
 **容器命令**
 
-| Command                                                      | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [docker container attach](https://docs.docker.com/engine/reference/commandline/container_attach/) | Attach local standard input, output, and error streams to a running container |
-| [docker container commit](https://docs.docker.com/engine/reference/commandline/container_commit/) | Create a new image from a container’s changes                |
-| [docker container cp](https://docs.docker.com/engine/reference/commandline/container_cp/) | Copy files/folders between a container and the local filesystem |
-| [docker container create](https://docs.docker.com/engine/reference/commandline/container_create/) | Create a new container                                       |
-| [docker container diff](https://docs.docker.com/engine/reference/commandline/container_diff/) | Inspect changes to files or directories on a container’s filesystem |
-| [docker container exec](https://docs.docker.com/engine/reference/commandline/container_exec/) | Run a command in a running container                         |
-| [docker container export](https://docs.docker.com/engine/reference/commandline/container_export/) | Export a container’s filesystem as a tar archive             |
-| [docker container inspect](https://docs.docker.com/engine/reference/commandline/container_inspect/) | Display detailed information on one or more containers  显示容器详细信息 |
-| [docker container kill](https://docs.docker.com/engine/reference/commandline/container_kill/) | Kill one or more running containers                          |
-| [docker container logs](https://docs.docker.com/engine/reference/commandline/container_logs/) | Fetch the logs of a container                                |
-| [docker container ls](https://docs.docker.com/engine/reference/commandline/container_ls/) | List containers                                              |
-| [docker container pause](https://docs.docker.com/engine/reference/commandline/container_pause/) | Pause all processes within one or more containers            |
-| [docker container port](https://docs.docker.com/engine/reference/commandline/container_port/) | List port mappings or a specific mapping for the container   |
-| [docker container prune](https://docs.docker.com/engine/reference/commandline/container_prune/) | Remove all stopped containers  移除所有停止容器              |
-| [docker container rename](https://docs.docker.com/engine/reference/commandline/container_rename/) | Rename a container                                           |
-| [docker container restart](https://docs.docker.com/engine/reference/commandline/container_restart/) | Restart one or more containers                               |
-| [docker container rm](https://docs.docker.com/engine/reference/commandline/container_rm/) | Remove one or more containers                                |
-| [docker container run](https://docs.docker.com/engine/reference/commandline/container_run/) | Run a command in a new container                             |
-| [docker container start](https://docs.docker.com/engine/reference/commandline/container_start/) | Start one or more stopped containers                         |
-| [docker container stats](https://docs.docker.com/engine/reference/commandline/container_stats/) | Display a live stream of container(s) resource usage statistics |
-| [docker container stop](https://docs.docker.com/engine/reference/commandline/container_stop/) | Stop one or more running containers                          |
-| [docker container top](https://docs.docker.com/engine/reference/commandline/container_top/) | Display the running processes of a container                 |
-| [docker container unpause](https://docs.docker.com/engine/reference/commandline/container_unpause/) | Unpause all processes within one or more containers          |
-| [docker container update](https://docs.docker.com/engine/reference/commandline/container_update/) | Update configuration of one or more containers               |
-| [docker container wait](https://docs.docker.com/engine/reference/commandline/container_wait/) | Block until one or more containers stop, then print their exit codes |
-
-
+| Command                                                                                             | Description                                                                   |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [docker container attach](https://docs.docker.com/engine/reference/commandline/container_attach/)   | Attach local standard input, output, and error streams to a running container |
+| [docker container commit](https://docs.docker.com/engine/reference/commandline/container_commit/)   | Create a new image from a container’s changes                                 |
+| [docker container cp](https://docs.docker.com/engine/reference/commandline/container_cp/)           | Copy files/folders between a container and the local filesystem               |
+| [docker container create](https://docs.docker.com/engine/reference/commandline/container_create/)   | Create a new container                                                        |
+| [docker container diff](https://docs.docker.com/engine/reference/commandline/container_diff/)       | Inspect changes to files or directories on a container’s filesystem           |
+| [docker container exec](https://docs.docker.com/engine/reference/commandline/container_exec/)       | Run a command in a running container                                          |
+| [docker container export](https://docs.docker.com/engine/reference/commandline/container_export/)   | Export a container’s filesystem as a tar archive                              |
+| [docker container inspect](https://docs.docker.com/engine/reference/commandline/container_inspect/) | Display detailed information on one or more containers  显示容器详细信息              |
+| [docker container kill](https://docs.docker.com/engine/reference/commandline/container_kill/)       | Kill one or more running containers                                           |
+| [docker container logs](https://docs.docker.com/engine/reference/commandline/container_logs/)       | Fetch the logs of a container                                                 |
+| [docker container ls](https://docs.docker.com/engine/reference/commandline/container_ls/)           | List containers                                                               |
+| [docker container pause](https://docs.docker.com/engine/reference/commandline/container_pause/)     | Pause all processes within one or more containers                             |
+| [docker container port](https://docs.docker.com/engine/reference/commandline/container_port/)       | List port mappings or a specific mapping for the container                    |
+| [docker container prune](https://docs.docker.com/engine/reference/commandline/container_prune/)     | Remove all stopped containers  移除所有停止容器                                       |
+| [docker container rename](https://docs.docker.com/engine/reference/commandline/container_rename/)   | Rename a container                                                            |
+| [docker container restart](https://docs.docker.com/engine/reference/commandline/container_restart/) | Restart one or more containers                                                |
+| [docker container rm](https://docs.docker.com/engine/reference/commandline/container_rm/)           | Remove one or more containers                                                 |
+| [docker container run](https://docs.docker.com/engine/reference/commandline/container_run/)         | Run a command in a new container                                              |
+| [docker container start](https://docs.docker.com/engine/reference/commandline/container_start/)     | Start one or more stopped containers                                          |
+| [docker container stats](https://docs.docker.com/engine/reference/commandline/container_stats/)     | Display a live stream of container(s) resource usage statistics               |
+| [docker container stop](https://docs.docker.com/engine/reference/commandline/container_stop/)       | Stop one or more running containers                                           |
+| [docker container top](https://docs.docker.com/engine/reference/commandline/container_top/)         | Display the running processes of a container                                  |
+| [docker container unpause](https://docs.docker.com/engine/reference/commandline/container_unpause/) | Unpause all processes within one or more containers                           |
+| [docker container update](https://docs.docker.com/engine/reference/commandline/container_update/)   | Update configuration of one or more containers                                |
+| [docker container wait](https://docs.docker.com/engine/reference/commandline/container_wait/)       | Block until one or more containers stop, then print their exit codes          |
 
 **镜像命令**
 
-| Command                                                      | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [docker image build](https://docs.docker.com/engine/reference/commandline/image_build/) | Build an image from a Dockerfile                             |
-| [docker image history](https://docs.docker.com/engine/reference/commandline/image_history/) | Show the history of an image                                 |
-| [docker image import](https://docs.docker.com/engine/reference/commandline/image_import/) | Import the contents from a tarball to create a filesystem image |
-| [docker image inspect](https://docs.docker.com/engine/reference/commandline/image_inspect/) | Display detailed information on one or more images           |
-| [docker image load](https://docs.docker.com/engine/reference/commandline/image_load/) | Load an image from a tar archive or STDIN                    |
-| [docker image ls](https://docs.docker.com/engine/reference/commandline/image_ls/) | List images                                                  |
-| [docker image prune](https://docs.docker.com/engine/reference/commandline/image_prune/) | Remove unused images                                         |
-| [docker image pull](https://docs.docker.com/engine/reference/commandline/image_pull/) | Pull an image or a repository from a registry                |
-| [docker image push](https://docs.docker.com/engine/reference/commandline/image_push/) | Push an image or a repository to a registry                  |
-| [docker image rm](https://docs.docker.com/engine/reference/commandline/image_rm/) | Remove one or more images                                    |
-| [docker image save](https://docs.docker.com/engine/reference/commandline/image_save/) | Save one or more images to a tar archive (streamed to STDOUT by default) |
-| [docker image tag](https://docs.docker.com/engine/reference/commandline/image_tag/) | Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE        |
-
-
+| Command                                                                                     | Description                                                              |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [docker image build](https://docs.docker.com/engine/reference/commandline/image_build/)     | Build an image from a Dockerfile                                         |
+| [docker image history](https://docs.docker.com/engine/reference/commandline/image_history/) | Show the history of an image                                             |
+| [docker image import](https://docs.docker.com/engine/reference/commandline/image_import/)   | Import the contents from a tarball to create a filesystem image          |
+| [docker image inspect](https://docs.docker.com/engine/reference/commandline/image_inspect/) | Display detailed information on one or more images                       |
+| [docker image load](https://docs.docker.com/engine/reference/commandline/image_load/)       | Load an image from a tar archive or STDIN                                |
+| [docker image ls](https://docs.docker.com/engine/reference/commandline/image_ls/)           | List images                                                              |
+| [docker image prune](https://docs.docker.com/engine/reference/commandline/image_prune/)     | Remove unused images                                                     |
+| [docker image pull](https://docs.docker.com/engine/reference/commandline/image_pull/)       | Pull an image or a repository from a registry                            |
+| [docker image push](https://docs.docker.com/engine/reference/commandline/image_push/)       | Push an image or a repository to a registry                              |
+| [docker image rm](https://docs.docker.com/engine/reference/commandline/image_rm/)           | Remove one or more images                                                |
+| [docker image save](https://docs.docker.com/engine/reference/commandline/image_save/)       | Save one or more images to a tar archive (streamed to STDOUT by default) |
+| [docker image tag](https://docs.docker.com/engine/reference/commandline/image_tag/)         | Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE                    |
 
 **docker cli基本命令： docker**
 
 ```shell
 $ docker
-Usage: docker [OPTIONS] COMMAND [arg...]
+Usage:  docker [OPTIONS] COMMAND
 
-A self-sufficient runtime for linux containers.
+A self-sufficient runtime for containers
+
 Options:
-  --api-cors-header=                   Set CORS headers in the remote API
-  -b, --bridge=                        Attach containers to a network bridge
-  --bip=                               Specify network bridge IP
-  -D, --debug=false                    Enable debug mode 	#调度模式
-  -d, --daemon=false                   Enable daemon mode   #后台模式
-  --default-ulimit=[]                  Set default ulimits for containers
-  --dns=[]                             DNS server to use
-  --dns-search=[]                      DNS search domains to use
-  -e, --exec-driver=native             Exec driver to use
-  --fixed-cidr=                        IPv4 subnet for fixed IPs
-  --fixed-cidr-v6=                     IPv6 subnet for fixed IPs
-  -G, --group=docker                   Group for the unix socket
-  -g, --graph=/var/lib/docker          Root of the Docker runtime
-  -H, --host=[]                        Daemon socket(s) to connect to
-  -h, --help=false                     Print usage
-  --icc=true                           Enable inter-container communication
-  --insecure-registry=[]               Enable insecure registry communication
-  --ip=0.0.0.0                         Default IP when binding container ports
-  --ip-forward=true                    Enable net.ipv4.ip_forward
-  --ip-masq=true                       Enable IP masquerading
-  --iptables=true                      Enable addition of iptables rules
-  --ipv6=false                         Enable IPv6 networking
-  -l, --log-level=info                 Set the logging level
-  --label=[]                           Set key=value labels to the daemon
-  --log-driver=json-file               Containers logging driver
-  --mtu=0                              Set the containers network MTU
-  -p, --pidfile=/var/run/docker.pid    Path to use for daemon PID file
-  --registry-mirror=[]                 Preferred Docker registry mirror
-  -s, --storage-driver=                Storage driver to use
-  --selinux-enabled=false              Enable selinux support    export    Export a container's filesystem as a tar archive
-  --storage-opt=[]                     Set storage driver options
-  --tls=false                          Use TLS; implied by --tlsverify
-  --tlscacert=~/.docker/ca.pem         Trust certs signed only by this CA
-  --tlscert=~/.docker/cert.pem         Path to TLS certificate file
-  --tlskey=~/.docker/key.pem           Path to TLS key file
-  --tlsverify=false                    Use TLS and verify the remote
-  -v, --version=false                  Print version information and quit
+      --config string      Location of client config files (default "/root/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/root/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/root/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/root/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  engine      Manage the docker engine
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
 
 Commands:
     attach    Attach to a running container
@@ -573,8 +517,6 @@ Commands:
 Run 'docker COMMAND --help' for more information on a command.
 ```
 
-
-
 ### 4.2.1 常用命令
 
 * docker version  获取docker服务端和客户端版本
@@ -582,8 +524,8 @@ Run 'docker COMMAND --help' for more information on a command.
 * docker inspect [containd_id|image_id]  会自动识别ID属于容器还是镜像，显示一或多个容器|镜像的详细信息
 * docker update --restart=always [contained_id]   开机时自动启动容器
 * docker network 容器网络
-
-
+* docker ps 查看进程
+* docker service 查看服务
 
 **docker version**： 获取docker服务端和客户端版本
 
@@ -640,8 +582,6 @@ Server: Docker Engine - Community
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
-
-
 
 **docker info命令**
 
@@ -718,8 +658,6 @@ Live Restore Enabled: false
 Registries: docker.io (secure)
 ```
 
-
-
 ### 4.2.3 容器运行 run
 
 **docker run命令**
@@ -751,13 +689,13 @@ Run a command in a new container
   --ipc=                     IPC namespace to use
   -l, --label=[]             Set meta data on a container
   --label-file=[]            Read in a line delimited file of labels
-  --link=[]              	 Add link to another container #容器链接 <contain_name>:<alias>
+  --link=[]                   Add link to another container #容器链接 <contain_name>:<alias>
   --log-driver=              Logging driver for container
   --lxc-conf=[]              Add custom lxc options
   -m, --memory=              Memory limit
   --mac-address=             Container MAC address (e.g. 92:d0:c6:0a:29:33)
   --memory-swap=             Total memory (memory + swap), '-1' to disable swap
-  --name=              	     Assign a name to the container  #容器别名
+  --name=                       Assign a name to the container  #容器别名
   --net=bridge               Set the Network mode for the container #设置网络模式
   -P, --publish-all=false    Publish all exposed ports to random ports
   -p, --publish=[]           Publish a container's port(s) to the host #端口映射 <宿主>:<容器>
@@ -768,7 +706,7 @@ Run a command in a new container
   --rm=false                 Automatically remove the container when it exits
   --security-opt=[]          Security Options
   --sig-proxy=true           Proxy received signals to the process
-  -t, --tty=false            Allocate a pseudo-TTY	TTY终端启动
+  -t, --tty=false            Allocate a pseudo-TTY    TTY终端启动
   -u, --user=                Username or UID (format: <name|uid>[:<group|gid>])
   --ulimit=[]                Ulimit options
   -v, --volume=[]            Bind mount a volume  挂载目录
@@ -787,15 +725,13 @@ Run a command in a new container
   使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。另外退出窗口时，可能也会导出容器退出。
 
 * 法2（推荐）：  `docker exec -it <docker_id> /bin/bash`
-
+  
   ```sh
   # 以root身份登陆docker容器 -u root
   $ docker exec -it -u root [docker_id] /bin/bash
   ```
 
 * 法3：SSH
-
-
 
 ## 4.3 docker网络
 
@@ -830,21 +766,19 @@ docker container run -d --name web --network localnet -p 5000:80 nginx
 brctl show
 ```
 
-
-
 ### 容器的网络模式
 
 docker容器的四种网络模式：bridge 桥接模式、host 模式、container 模式和 none 模式
 启动容器时可以使用 –net 参数指定，默认是桥接模式。
 
-| 网络模式  | 简介                                                         | 备注                                   |
-| --------- | ------------------------------------------------------------ | -------------------------------------- |
-| Bridge    | 此模式会为每一个容器分配、设置IP等，并将容器连接到一个docker0虚拟网桥，通过docker0网桥以及Iptables nat表配置与宿主机通信。 | 缺省模式。--link只能使用在此模式下。   |
-| Host      | 容器将不会虚拟出自己的网卡，配置自己的IP等，而是使用宿主机的IP和端口。 |                                        |
-| Container | 创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围。 | 两个容器的进程可以通过lo网卡设备通信。 |
-| None      | 该模式关闭了容器的网络功能。                                 |                                        |
+| 网络模式      | 简介                                                                          | 备注                    |
+| --------- | --------------------------------------------------------------------------- | --------------------- |
+| Bridge    | 此模式会为每一个容器分配、设置IP等，并将容器连接到一个docker0虚拟网桥，通过docker0网桥以及Iptables nat表配置与宿主机通信。 | 缺省模式。--link只能使用在此模式下。 |
+| Host      | 容器将不会虚拟出自己的网卡，配置自己的IP等，而是使用宿主机的IP和端口。                                       |                       |
+| Container | 创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围。                                 | 两个容器的进程可以通过lo网卡设备通信。  |
+| None      | 该模式关闭了容器的网络功能。                                                              |                       |
 
-**安装Docker时，它会自动创建三个网络，bridge（创建容器默认连接到此网络）、 none 、host**
+**安装Docker时，它会自动创建三个网络，bridge（创建容器默认连接到此网络）、none 、host**
 
 ```shell
 $ docker network ls
@@ -854,19 +788,15 @@ NETWORK ID     NAME      DRIVER    SCOPE
 f0909ee01a3d   none      null      local
 ```
 
-Docker内置这三个网络，运行容器时，你可以使用该–network标志来指定容器应连接到哪些网络。
+Docker内置这三个网络，运行容器时，你可以使用该 –network 标志来指定容器应连接到哪些网络。
 
-该bridge网络代表docker0所有Docker安装中存在的网络。除非你使用该docker run --network=选项指定，否则Docker守护程序默认将容器连接到此网络。
+该bridge网络代表docker0所有Docker安装中存在的网络。除非你使用该`docker run --network=选项指定`，否则Docker守护程序默认将容器连接到此网络。
 
-命令`ip a` 可查看当前支持的所有网络，其中docker0支docker网络。
-
-
+命令`ip a` 可查看当前支持的所有网络，其中docker0支docker网络。<br>
 
 **host 模式**
 
 采用 host 模式的 Docker Container,可以直接使用宿主机的 IP 地址与外界进行通信,若宿主机的 eth0 是一个公有 IP,那么容器也拥有这个公有 IP。同时容器内服务的端口也可以使用宿主机的端口,无需额外进行 NAT 转换。当然,有这样的方便,肯定会损失部分其他的特性,最明显的是 Docker Container 网络环境隔离性的弱化,即容器不再拥有隔离、独立的网络栈。另外,使用 host 模式的 Docker Container 虽然可以让容器内部的服务和传统情况无差别、无改造的使用,但是由于网络隔离性的弱化,该容器会与宿主机共享竞争网络栈的使用;另外,容器内部将不再拥有所有的端口资源。
-
-
 
 ### 容器间数据通讯
 
@@ -882,8 +812,6 @@ Docker内置这三个网络，运行容器时，你可以使用该–network标�
 
 直接使用 docker inspect 容器ID
 查看容器的元信息，可获取到宿主机分配给容器的IP。
-
-
 
 **2.Link机制**
 
@@ -904,9 +832,7 @@ docker run -d -v /Docker:/usr/java/tomcat/apache-tomcat-8.5.27/webapps -p 8080:8
 SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@aliasmysql:3306/superset_1.0'
 ```
 
-
-
-<br>
+<br/>
 
 ## 本章参考
 
@@ -914,24 +840,26 @@ SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@aliasmysql:3306/superset_1.0'
 
 * Docker网络详解——原理篇 https://blog.csdn.net/meltsnow/article/details/94490994
 
-
-
 # 5 高级篇
 
 ## 5.1  docker镜像仓库
 
 镜像存储路径
 
-*  linux:  /var/lib/docker
-*  windows: ~/.docker/
+* linux:  /var/lib/docker
+* windows: ~/.docker/
 
 镜像管理主要命令：
 
-*  docker images  # 查看本地镜像列表
-*  docker search xx   # 搜索某个镜像
-*  docker pull xx  # 下载某个镜像
+* docker images  # 查看本地镜像列表
+* docker search xx   # 搜索某个镜像
+* docker pull xx  # 下载某个镜像
 
+镜像仓库常用命令：
 
+* 登陆：`docker login [OPTIONS] [SERVER]`    #若未指定SERVER，则默认连接Daemon指定的服务器
+
+* 退出：`docker logout [SERVER]`
 
 ### 5.1.1 官方 docker Hub
 
@@ -957,8 +885,6 @@ $ docker login
 $ docker push [image:tag]
 ```
 
-
-
 ### 5.1.2 私有 Registry2
 
 docker官方开源的私有镜像仓库registry，分为二个版本。
@@ -967,8 +893,6 @@ docker官方开源的私有镜像仓库registry，分为二个版本。
 * registry2：即docker distribution，go语言开发，更加安全和快速。要求docker版本高于1.6。harbor是基于registry2开发的。
 
 Registry 2不包含界面、用户管理、权限控制等功能，如果想使用这些功能，可使用Docker Trusted Registry 或者 企业级镜像仓库harbor。
-
-
 
 docker配置文件 daemon.json 里增加私仓
 
@@ -979,8 +903,6 @@ docker配置文件 daemon.json 里增加私仓
   ]
 }
 ```
-
-
 
 服务启动：
 
@@ -994,8 +916,6 @@ $ docker run -d -p 5000:5000 --restart=always --name registry2 registry:2
 $ docker tag [old_image:tag] [localhost:5000/new_image:tag]
 $ docker push [localhost:5000/new_image:tag]
 ```
-
-
 
 ### 5.1.3 企业级Harbor
 
@@ -1019,8 +939,6 @@ VMware开源的企业级Registry项目Harbor，以Docker公司开源的registry 
 
 - 部署简单 - 提供在线和离线两种安装工具， 也可以安装到 vSphere 平台(OVA 方式)虚拟设备
 
-
-
 1）下载安装
 
 ```shell
@@ -1030,8 +948,6 @@ VMware开源的企业级Registry项目Harbor，以Docker公司开源的registry 
 [root@otrs004097 harbor]# ls
 harbor.v1.8.2.tar.gz harbor.yml install.sh LICENSE prepare
 ```
-
-
 
 2）**配置文件 harbor.yml**
 
@@ -1058,7 +974,6 @@ harbor.v1.8.2.tar.gz harbor.yml install.sh LICENSE prepare
 * private_key: SSL 密钥的路径，仅在协议设置为 https 时应用。
 
 ```yaml
-
 # The IP address or hostname to access admin UI and registry service.
 # DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients.
 hostname: 121.36.106.72
@@ -1189,13 +1104,9 @@ _version: 1.8.0
 #   ca_file: /path/to/ca
 ```
 
-
-
 3）运行安装脚本
 
 [root@registory harbor]# ./install.sh
-
-
 
 4）使用ADMIN账号登陆
 
@@ -1207,8 +1118,6 @@ _version: 1.8.0
 $ docker-compose stop|start|restart
 ```
 
-
-
 #### 技术原理
 
 Harbor由6个大的模块所组成：
@@ -1218,11 +1127,11 @@ Harbor由6个大的模块所组成：
 - **Registry**: 负责存储Docker镜像，以及处理Docker push/pull请求。因为Harbor强制要求对镜像的访问做权限控制， 在每一次push/pull请求时，Registry会强制要求客户端从token service那里获得一个有效的token。
 
 - **Core services**: Harbor的核心功能，主要包括如下3个服务:
-
+  
   - UI: 作为Registry Webhook, 以图像用户界面的方式辅助用户管理镜像。
-
+  
   - WebHook：WebHook是在registry中配置的一种机制， 当registry中镜像发生改变时，就可以通知到Harbor的webhook endpoint。Harbor使用webhook来更新日志、初始化同步job等。
-
+  
   - Token 服务：负责根据用户权限给每个docker push/pull命令签发token. Docker 客户端向Regiøstry服务发起的请求,如果不包含token，会被重定向到这里，获得token后再重新向Registry进行请求。
 
 - **Database**：为core services提供数据库服务，负责储存用户权限、审计日志、Docker image分组信息等数据。
@@ -1232,8 +1141,6 @@ Harbor由6个大的模块所组成：
 - **Log collector**: 负责收集其他组件的日志到一个地方
 
 这里我们与上面运行的7个容器对比，对`harbor-adminserver`感觉有些疑虑。其实这里`harbor-adminserver`主要是作为一个后端的配置数据管理，并没有太多的其他功能。`harbor-ui`所要操作的所有数据都通过harbor-adminserver这样一个数据配置管理中心来完成。
-
-
 
 harbor运行时有7个容器：`nginx`、`harbor-jobservice`、`harbor-ui`、`harbor-db`、`harbor-adminserver`、`registry`以及`harbor-log`。
 
@@ -1256,11 +1163,11 @@ Harbor由6个大的模块所组成：
 - **Registry**: 负责存储Docker镜像，以及处理Docker push/pull请求。因为Harbor强制要求对镜像的访问做权限控制， 在每一次push/pull请求时，Registry会强制要求客户端从token service那里获得一个有效的token。
 
 - **Core services**: Harbor的核心功能，主要包括如下3个服务:
-
+  
   - UI: 作为Registry Webhook, 以图像用户界面的方式辅助用户管理镜像。
-
+  
   - WebHook：WebHook是在registry中配置的一种机制， 当registry中镜像发生改变时，就可以通知到Harbor的webhook endpoint。Harbor使用webhook来更新日志、初始化同步job等。
-
+  
   - Token 服务：负责根据用户权限给每个docker push/pull命令签发token. Docker 客户端向Regiøstry服务发起的请求,如果不包含token，会被重定向到这里，获得token后再重新向Registry进行请求。
 
 - **Database**：为core services提供数据库服务，负责储存用户权限、审计日志、Docker image分组信息等数据。
@@ -1271,15 +1178,11 @@ Harbor由6个大的模块所组成：
 
 这里我们与上面运行的7个容器对比，对`harbor-adminserver`感觉有些疑虑。其实这里`harbor-adminserver`主要是作为一个后端的配置数据管理，并没有太多的其他功能。`harbor-ui`所要操作的所有数据都通过harbor-adminserver这样一个数据配置管理中心来完成。
 
-
-
 ## 5.2  容器镜像制作
 
 **环境变量优先级**
 
 docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
-
-
 
 ### 单容器 Dockerfile
 
@@ -1296,8 +1199,6 @@ docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
 # 容器有修改后，重新执行commit命令，会覆盖上一次标签。
 docker commit -m='xxx' -a=[author] [contain_id] [dst_image:tag]
 ```
-
-
 
 **2. Dockerfile**
 
@@ -1333,19 +1234,15 @@ ENTRYPOINT ['redis-server']
 CMD /usr/sbin/ngnix
 ```
 
-
-
 **docker build**
 
 命令读取指定路径下（包括子目录）所有的Dockefile，并且把目录下所有内容发送到服务端，由服务端创建镜像。另外可以通过创建.dockerignore文件（每一行添加一个匹配模式）让docker忽略指定目录或者文件。-t 创建标签。
 
 例如：Dockerfile路径为 /tmp/docker_build/，生成镜像的标签为build_repo/my_images
 
-````sh
+```sh
 $ docker build -t build_repo/my_images /tmp/docker_build/
-````
-
-
+```
 
 ### 多容器 docker-compose
 
@@ -1413,8 +1310,6 @@ Commands:
   version            Show the Docker-Compose version information
 ```
 
-
-
 配置文件：docker-compose.yml 或者 xxx.yml
 
 示例：容器服务web 可以使用 容器服务mysqldb，通过名称mysql
@@ -1443,9 +1338,29 @@ volumes:
 $ docker-compose up -d
 ```
 
+### docker stack
 
+表格 Docker Stack和Docker Compose区别
 
+|       | docker stack                                                | docker-compose                     |
+| ----- | ----------------------------------------------------------- | ---------------------------------- |
+| 镜像    | 会忽略了“构建”指令，无法使用stack命令构建新镜像，它是需要镜像是预先已经构建好的。                | 更适合于开发场景                           |
+| 工具    | 包含在Docker引擎中。你不需要安装额外的包来使用它，docker stacks 只是swarm mode的一部分。 | 需要安装单独工具。在内部，它使用Docker API规范来操作容器。 |
+| yml版本 | 版本3以上                                                       | 支持版本2和3                            |
 
+docker stack把docker compose的所有工作都做完了，因此docker stack将占主导地位。同时，对于大多数用户来说，切换到使用docker stack既不困难，也不需要太多的开销。如果您是Docker新手，或正在选择用于新项目的技术，请使用docker stack。
+
+表格 Docker Stack常用命令
+
+| 命令                    | 描述            |
+| --------------------- | ------------- |
+| docker stack deploy   | 部署新的堆栈或更新现有堆栈 |
+| docker stack ls       | 列出现有堆栈        |
+| docker stack ps       | 列出堆栈中的任务      |
+| docker stack rm       | 删除一个或多个堆栈     |
+| docker stack services | 列出堆栈中的服务      |
+
+<br>
 
 ## 5.3 镜像管理
 
@@ -1466,8 +1381,6 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 docker rmi $(docker images -f "dangling=true" -q)
 ```
 
-
-
 **清理容器** （可以在镜像清理前操作）
 
 ```shell
@@ -1478,56 +1391,45 @@ docker rm $(docker ps -a -q)
 docker system prune
 ```
 
-
-
-### **镜像体积裁减**
+### 镜像体积裁减
 
 * 选用体积小的基础镜像
 * 多使用 Dockerfile生成新镜像，减少commit方式生成的镜像。每commit一次相当于在原有基础镜像上再增加内容（删除的文件目录仍会占用存储空间）。
-
-
-
-
 
 <br>
 
 ## 本章参考
 
-
-
-
-
 # 6 镜像实例
 
 ## 6.1  docker常用镜像
 
-*  拉取镜像:  docker pull xxx:xxx
-*  运行镜像：docker run
+* 拉取镜像:  docker pull xxx:xxx
+* 运行镜像：docker run
 
 表格 3 常用镜像的实例和启动命令 （镜像来自于官网 docker.io）
 
-| images                | 镜像大小 | 实例描述                               | 实例启动命令 run                                             | 状态 | 访问URL                        |
-| --------------------- | -------- | -------------------------------------- | ------------------------------------------------------------ | ---- | ------------------------------ |
-| hello-world           | 13.3KB   | 运行：打印帮助文档                     | docker run  hello-world                                      | ok   |                                |
-| ui-for-docker         | 8.1MB    | docker可视化                           | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker | ok   | http://<dockerd  host_ip>:9000 |
-| register:2            | 26.2MB   | 后台启动：本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2 | ok   | http://xxx:5000/               |
-| nginx                 |          | 后台启动：nginx后台服务                | docker run --name keefe-nginx -p 8081:80 -d nginx            | ok   | http://xxx:8081/               |
-| tomcat                |          |                                        |                                                              |      |                                |
-| mysql                 | 448MB    | 后台启动：mysql                        | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | ok   |                                |
-| redis                 | 105MB    | 后台启动：redis后台服务                | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes | ok   |                                |
-| wordpress  +mysql     |          | 两个容器链接在一起                     | docker run --name  wordpress --link <contain_name]:mysql -p 80:80 -d wordpress |      | http://xxx/                    |
-| ubuntu                | 72.8MB   | 交互式启动：进入操作系统ubuntu         | docker run -i -t ubuntu:15.10 /bin/bash                      | ok   |                                |
-| tensorflow            | 800MB    | 交互式启动：进入操作系统ubuntu         | docker run -it tensorflow/tensorflow /bin/bash               | ok   |                                |
-| python:3.5            |          | 调用python解释器                       | docker run python:3.5 python3 -c 'import  copy;print("hello")' | ok   |                                |
-| jenkis                |          | 后台启动jenkis服务                     | docker run -d  jenkins/jenkins:lts /bin/bash                 | ok   | http://xxx:8080/               |
-| amancevice/superset   | 2.25GB   | 后台启动superset                       | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset | ok   | http://xxx:8088/               |
-| apache/superset:1.0.0 | 1.45GB   | 同上。压缩后535MB                      | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0 |      | 同上                           |
-| apache/drill          | 936MB    |                                        |                                                              |      |                                |
+| images                | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                                                | 状态  | 访问URL           |
+| --------------------- | ------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------- | --- | --------------- |
+| hello-world           | 13.3KB | 运行：打印帮助文档          | docker run  hello-world                                                                                                   | ok  |                 |
+| nginx                 |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                                                         | ok  | http://IP:8081/ |
+| tomcat                |        |                    |                                                                                                                           |     |                 |
+| mysql                 | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest                                 | ok  |                 |
+| redis                 | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes                                   | ok  |                 |
+| wordpress  +mysql     |        | 两个容器链接在一起          | docker run --name  wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                            |     | http://IP/      |
+| ubuntu                | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                                                   | ok  |                 |
+| tensorflow            | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                                                            | ok  |                 |
+| python:3.5            |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                                                            | ok  |                 |
+| jenkis                |        | 后台启动jenkis服务       | docker run -d  jenkins/jenkins:lts /bin/bash                                                                              | ok  | http://IP:8080/ |
+| amancevice/superset   | 2.25GB | 后台启动superset       | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | ok  | http://IP:8088/ |
+| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB        | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          |     | 同上              |
+| apache/drill          | 936MB  |                    |                                                                                                                           |     |                 |
+| elasticsearch         |        |                    | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |     |                 |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 
-1. 镜像用` : `分隔版本号。---name指的是当前启动容器名称
-2. windows下docker环境用docker-machine ip defalut获取虚拟IP，用此IP进行访问。
+1. 镜像用` : `分隔版本号。---name指的是当前启动容器名称。-d后台启动，-i交互式启动。
+2. windows下docker环境用`docker-machine ip defalut`获取虚拟IP，用此IP进行访问。
 
 ```shell
 # docker run时本地无镜像，则从官网下载；再运行
@@ -1548,10 +1450,6 @@ docker.io/registry              2                   1fd8e1b0bb7e        3 months
 docker.io/hello-world           latest              d1165f221234        5 months ago        13.3 kB
 docker.io/uifd/ui-for-docker    latest              965940f98fa5        4 years ago         8.1 MB
 ```
-
-
-
-
 
 **1.  运行入门容器hello-world**
 
@@ -1580,8 +1478,6 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-
-
 **2. nginx部署**
 
 ```sh
@@ -1595,9 +1491,6 @@ docker run -d -p 8082:80 --name runoob-nginx-test-web -v ~/nginx/www:/usr/share/
 * -v ~/nginx/www:/usr/share/nginx/html：将我们自己创建的 www 目录挂载到容器的 /usr/share/nginx/html。
 * -v ~/nginx/conf/nginx.conf:/etc/nginx/nginx.conf：将我们自己创建的 nginx.conf 挂载到容器的 /etc/nginx/nginx.conf。
 * -v ~/nginx/logs:/var/log/nginx：将我们自己创建的 logs 挂载到容器的 /var/log/nginx。
-
-
-
 
 ## 6.2  操作系统ubuntu
 
@@ -1624,23 +1517,22 @@ Docker容器启动的时候，如果要挂载宿主机的一个目录，可以�
 
 譬如我要启动一个centos容器，宿主机的/test目录挂载到容器的/soft目录，可通过以下方式指定：（要求两边都是全路径，不能出现相对路径）
 
-`$docker run -it -v /test:/soft centos /bin/bash`
+`$ docker run -it -v /test:/soft centos /bin/bash`
 
 这样在容器启动后，容器内会自动创建/soft的目录。通过这种方式，我们可以明确一点，即-v参数中，冒号":"前面的目录是宿主机目录，后面的目录是容器内目录。
 
 ```sh
 # 复制文件
-$docker cp [contain_id]:/xx xxx
+$ docker cp [contain_id]:/xx xxx
 ```
 
 4. **保存新镜像**
-```sh
-$docker commit -m='' -a=[author] [contain_id] [dst_image:tag]
-# 示例
-$docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
-```
-
-
+   
+   ```shell
+   $ docker commit -m='' -a=[author] [contain_id] [dst_image:tag]
+   # 示例
+   $ docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
+   ```
 
 ## 6.3  CICD之Jenkis
 
@@ -1658,8 +1550,6 @@ docker启动：创建容器，缺省8080端口。
 docker run --name jenkins -d -p 8080:8080 -p 50000:50000 --restart always \
        jenkins/jenkins:lts
 ```
-
-
 
 **法2：docker-compose up**
 
@@ -1682,13 +1572,40 @@ services:
       - /usr/bin/docker:/usr/bin/docker
 ```
 
+# 7 docker管理工具
 
+| 工具名           | 镜像大小   | 描述             | 使用                                                                                                                                            | 访问             |
+| ------------- | ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| ui-for-docker | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
+| portainer     | 79MB   | docker管理可视化。   | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
+| register:2    | 26.2MB | 本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
+| clair         |        | 镜像安全扫描         |                                                                                                                                               |                |
+
+备注：上表访问中IP指宿主机IP。
+
+## Portainer
+
+Portainer是Docker的图形化管理工具，提供状态显示面板、应用模板快速部署、容器镜像网络数据卷的基本操作（包括上传下载镜像，创建容器等操作）、事件日志显示、容器控制台操作、Swarm集群和服务等集中管理和操作、登录用户管理和控制等功能。功能十分全面，基本能满足中小型单位对容器管理的全部需求。
+
+**集群运行**
+
+默认是单节点运行。要改为集群运行，如下操作
+
+```shell
+# 先修改子节点服务器的docker.service配置文件
+$ vim /lib/systemd/system/docker.service
+#修改ExecStart行，IP为本机ip
+#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd -H tcp://$IP:2375 -H unix:///var/run/docker.sock  
+
+# 然后重启 docker
+$ systemctl daemon-reload
+$ systemctl restart docker
+```
 
 <br>
 
 ## 本章参考
-
-
 
 # FAQ
 
@@ -1705,8 +1622,6 @@ $ docker-machine ip defalut
 192.168.100.99
 ```
 
-
-
 **2. docker exec -it returns: cannot enable tty mode on non tty input**
 
 描述：不要用 -it交互式启动
@@ -1719,15 +1634,11 @@ $ docker-machine ip defalut
 
 `docker exec -i c $ c> docker exec -it`   // 备注：未测试成功
 
-
-
 **3. [docker login 报【Error response from daemon: Get https://172.17.8.201:8002/v2/: http: server gave HTTP response to HTTPS client】**
 
 原因：docker镜像仓库暂不支持https。
 
 解决方法：daemon.json里添加 { "insecure-registries":["172.17.8.201:8003"] }， 然后重启docker服务即可。
-
-
 
 ## 版本兼容问题
 
@@ -1745,8 +1656,6 @@ docker: Error response from daemon: OCI runtime create failed: container_linux.g
 
 解决方法：
 
-
-
 **2. docker build报错**
 
 描述：
@@ -1761,8 +1670,6 @@ Please provide a source image with `from` prior to commit
 原因：linux与docker版本的兼容性问题，通常需要降低docker版本。允许这种用法是在`docker 17.05.0-ce (2017-05-04)`之后才引入的。
 
 解决方法：升级版本至CE-17.05之后。
-
-
 
 <br>
 
@@ -1790,15 +1697,11 @@ boot2docker  http://boot2docker.io/  用于windows和 Mac，已Deprecated
 
 Github Docker源码：https://github.com/docker/docker
 
-
-
 **Docker中文资源**
 
 Docker中文网站：https://www.docker-cn.com/
 
 Docker安装手册：https://docs.docker-cn.com/engine/installation/
-
-
 
 **Docker** **国内镜像**
 
@@ -1810,7 +1713,7 @@ ustc的镜像：https://docker.mirrors.ustc.edu.cn
 
 daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
-
+<br>
 
 **参考链接**
 

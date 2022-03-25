@@ -1,17 +1,13 @@
-| 序号 | 修改时间  | 修改内容                           | 修改人 | 审稿人 |
-| ---- | --------- | ---------------------------------- | ------ | ------ |
-| 1    | 2020-4-17 | 创建。从《CNCF原生框架分析》拆分。 | Keefe |        |
-|      |           |                                    |        |        |
-
-
+| 序号  | 修改时间      | 修改内容                | 修改人   | 审稿人 |
+| --- | --------- | ------------------- | ----- | --- |
+| 1   | 2020-4-17 | 创建。从《CNCF原生框架分析》拆分。 | Keefe |     |
+|     |           |                     |       |     |
 
 <br><br><br>
 
 ---
 
 [TOC]
-
-
 
 <br>
 
@@ -31,17 +27,13 @@
 
 ​         Kubernetes 属于主从的分布式集群架构，包含 Master 和 Node：Master 作为控制节点，调度管理整个系统；Node 是运行节点，运行业务容器。
 
-
-
 **Kubernetes** **特点**
 
-*  可移植: 支持公有云，私有云，混合云，多重云（multi-cloud）
+* 可移植: 支持公有云，私有云，混合云，多重云（multi-cloud）
 
-*  可扩展: 模块化，插件化，可挂载，可组合
+* 可扩展: 模块化，插件化，可挂载，可组合
 
-*  自动化: 自动部署，自动重启，自动复制，自动伸缩/扩展
-
-
+* 自动化: 自动部署，自动重启，自动复制，自动伸缩/扩展
 
 **容器优势总结：**
 
@@ -54,41 +46,38 @@
 - 资源隔离
 - 资源利用：更高效
 
-
-
- <img src="../../media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
-
-
+<img src="../../media/sf_reuse/framework/frame_k8s_001.png" alt="1574519347217" style="zoom:200%;" />
 
 ### 1.2  K8s术语
 
 表格  K8s关键术语
 
-
-| 名词                   | 释义                                                         | 设计理念                                                     |
-| ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| API对象                | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。 | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
-| Pod                    | 微服务，也称实例。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。 |
-| 复制控制器 RC          | （Replication Controller，RC），RC是K8s集群中最早的保证Pod高可用的API对象。 | 通过监控运行中的Pod来保证集群中运行指定数目的Pod副本（1~多个）。 |
-| 副本集 RS              | （Replica Set，RS）新一代RC，提供同样的高可用能力，区别主要在于RS后来居上，能支持更多种类的匹配模式。 | 副本集对象一般不单独使用，而是作为Deployment的理想状态参数使用。 |
-| 部署(Deployment)       | 部署表示用户对K8s集群的一次更新操作。部署是一个比RS应用模式更广的API对象，可以是创建/更新/滚动升级新服务 |                                                              |
-| 服务（Service）        | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。Servcie Type目前有四种。 | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。 |
-| 任务（Job）            | Job是K8s用来控制批处理型任务的API对象。                      | Job管理的Pod根据用户的设置把任务成功完成就自动退出了。       |
-| 后台支撑服务集         | （DaemonSet）后台支撑型服务的核心关注点在K8s集群中的节点（物理机或虚拟机），要保证每个节点上都有一个此类Pod运行。 |                                                              |
-| 有状态服务集（PetSet） | PetSet用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。 | 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。 |
-| 集群联邦               | （Federation）为提供跨Region跨服务商K8s集群服务而设计的。    |                                                              |
-| 存储卷                 | （Volume）K8s的存储卷的生命周期和作用范围是一个Pod。         |                                                              |
-|                        | 持久存储卷（Persistent Volume，PV）和持久存储卷声明（Persistent Volume Claim，PVC） |                                                              |
-| 节点（Node）           | K8s集群中的计算能力由Node提供。 Node可以是物理机也可以是虚拟机。 | K8s集群中的Node也就等同于Mesos集群中的Slave节点，是所有Pod运行所在的工作主机。 |
-| 名字空间（Namespace）  | 名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system | 管理员可以可以创建新的名字空间满足需要。                     |
-| RBAC访问授权           | 基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。 | RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联 |
+| 名词              | 释义                                                                                                      | 设计理念                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| API对象           | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。                                       | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
+| Pod             | 微服务，也称实例。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。                   |
+| 复制控制器 RC        | （Replication Controller，RC），RC是K8s集群中最早的保证Pod高可用的API对象。                                                 | 通过监控运行中的Pod来保证集群中运行指定数目的Pod副本（1~多个）。                                      |
+| 副本集 RS          | （Replica Set，RS）新一代RC，提供同样的高可用能力，区别主要在于RS后来居上，能支持更多种类的匹配模式。                                             | 副本集对象一般不单独使用，而是作为Deployment的理想状态参数使用。                                     |
+| 部署(Deployment)  | 部署表示用户对K8s集群的一次更新操作。部署是一个比RS应用模式更广的API对象，可以是创建/更新/滚动升级新服务                                               |                                                                           |
+| 服务（Service）     | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。Servcie Type目前有四种。                         | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。                               |
+| 任务（Job）         | Job是K8s用来控制批处理型任务的API对象。                                                                                | Job管理的Pod根据用户的设置把任务成功完成就自动退出了。                                            |
+| 后台支撑服务集         | （DaemonSet）后台支撑型服务的核心关注点在K8s集群中的节点（物理机或虚拟机），要保证每个节点上都有一个此类Pod运行。                                        |                                                                           |
+| 有状态服务集（PetSet）  | PetSet用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。                                                           | 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。          |
+| 集群联邦            | （Federation）为提供跨Region跨服务商K8s集群服务而设计的。                                                                  |                                                                           |
+| 存储卷             | （Volume）K8s的存储卷的生命周期和作用范围是一个Pod。                                                                        |                                                                           |
+|                 | 持久存储卷（Persistent Volume，PV）和持久存储卷声明（Persistent Volume Claim，PVC）                                        |                                                                           |
+| 节点（Node）        | K8s集群中的计算能力由Node提供。 Node可以是物理机也可以是虚拟机。                                                                  | K8s集群中的Node也就等同于Mesos集群中的Slave节点，是所有Pod运行所在的工作主机。                         |
+| 名字空间（Namespace） | 名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system                                   | 管理员可以可以创建新的名字空间满足需要。                                                      |
+| RBAC访问授权        | 基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。               | RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联                                     |
 
 备注：其它常用术语还有密钥对象（Secret）、用户帐户（User Account）和服务帐户（Service Account）。从K8s的系统架构、技术概念和设计理念，我们可以看到K8s系统最核心的两个设计理念：一个是容错性，一个是易扩展性。容错性实际是保证K8s系统稳定性和安全性的基础，易扩展性是保证K8s对变更友好，可以快速迭代增加新功能的基础。
 
 1. API对象。每个API对象都有3大类属性：元数据metadata、规范spec和状态status。
-   1. 元数据是用来标识API对象的，每个对象都至少有3个元数据：namespace，name和uid；除此以外还有各种各样的标签labels用来标识和匹配不同的对象，例如用户可以用标签env来标识区分不同的服务部署环境，分别用env=dev、env=testing、env=production来标识开发、测试、生产的不同服务。
-   2. 规范描述了用户期望K8s集群中的分布式系统达到的理想状态（Desired State），例如用户可以通过复制控制器Replication Controller设置期望的Pod副本数为3；
-   3. status描述了系统实际当前达到的状态（Status），例如系统当前实际的Pod副本数为2；那么复制控制器当前的程序逻辑就是自动启动新的Pod，争取达到副本数为3。
+   - 元数据是用来标识API对象的，每个对象都至少有3个元数据：namespace，name和uid；除此以外还有各种各样的标签labels用来标识和匹配不同的对象，例如用户可以用标签env来标识区分不同的服务部署环境，分别用env=dev、env=testing、env=production来标识开发、测试、生产的不同服务。
+   
+   - 规范描述了用户期望K8s集群中的分布式系统达到的理想状态（Desired State），例如用户可以通过复制控制器Replication Controller设置期望的Pod副本数为3；
+   
+   - 状态描述了系统实际当前达到的状态（Status），例如系统当前实际的Pod副本数为2；那么复制控制器当前的程序逻辑就是自动启动新的Pod，争取达到副本数为3。
 2. Pod: 目前K8s中的业务主要可以分为长期伺服型（long-running）、批处理型（batch）、节点后台支撑型（node-daemon）和有状态应用型（stateful application）；分别对应的小机器人控制器为Deployment、Job、DaemonSet和PetSet.
 3. RC、RS和Deployment只是保证了支撑服务的微服务Pod的数量，但是没有解决如何访问这些服务的问题。Service解决服务访问的问题。RC和RS主要是控制提供无状态服务的，其所控制的Pod的名字是随机设置的，名字不重要，重要的是Pod总数。
 4. 在云计算环境中，服务的作用距离范围从近到远一般可以有：同主机（Host，Node）、跨主机同可用区（Available Zone）、跨可用区同地区（Region）、跨地区同服务商（Cloud Service Provider）、跨云平台。K8s的设计定位是单一集群在同一个地域内，因为同一个地区的网络性能才能满足K8s的调度和计算存储连接要求。而联合集群服务就是为提供跨Region跨服务商K8s集群服务而设计的。
@@ -97,8 +86,6 @@
    - *NodePort* - 通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 `<NodeIP>:<NodePort>`，可以从集群的外部访问一个 NodePort 服务。
    - *LoadBalancer* - 使用云提供商的负载均衡器（如果支持），可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
    - *ExternalName* - 通过返回 `CNAME` 和它的值，可以将服务映射到 `externalName` 字段的内容，没有任何类型代理被创建。这种类型需要v1.7版本或更高版本`kube-dnsc`才支持。
-
-
 
 ## 2  技术原理篇
 
@@ -112,15 +99,13 @@ Borg主要由BorgMaster、Borglet、borgcfg和Scheduler组成，如下图所示
 
 图  google_Borg架构
 
-*  BorgMaster是整个集群的大脑，负责维护整个集群的状态，并将数据持久化到Paxos存储中；
+* BorgMaster是整个集群的大脑，负责维护整个集群的状态，并将数据持久化到Paxos存储中；
 
-*  Scheduer负责任务的调度，根据应用的特点将其调度到具体的机器上去；
+* Scheduer负责任务的调度，根据应用的特点将其调度到具体的机器上去；
 
-*  Borglet负责真正运行任务（在容器中）；
+* Borglet负责真正运行任务（在容器中）；
 
-*  borgcfg是Borg的命令行工具，用于跟Borg系统交互，一般通过一个配置文件来提交任务。
-
-
+* borgcfg是Borg的命令行工具，用于跟Borg系统交互，一般通过一个配置文件来提交任务。
 
 ### 2.2  Kubernetes架构
 
@@ -132,25 +117,21 @@ Kubernetes借鉴了Borg的设计理念，比如Pod、Service、Labels和单Pod�
 
 图  Kubernetes架构
 
-
-
 ![img](../../media/sf_reuse/arch/arch_cncf_002.png)
 
 图  K8s结构
 
 Kubernetes基本概念：
 
-*  ControlPlane：暴露应用程序接口（API），调度部署和管理整个集群。
-*  WorkerNodes：物理或者虚拟的服务器，负责运行工作负载。
-*  APIServer：外部与Kubernetes的互动点。
-*  Etcd：默认采用CoreOS 的产品etcd ，提供键值存储、服务发现、服务注册功能。
-*  Kubelet：节点上的代理，负责执行Kubernetes Master分配的任务。
-*  Pods:由同一主机上部署的一个或几个容器组成的计算能力单位，执行相同的任务。
-*  Services：Pods的前端和Load Balancer ,为Pods提供Floating IP。
-*  Replicationcontrollers：负责维护指定数目的 Pods。
-*  Labels：key-value标签以一种非层次化、松散的方式标记、查找Kubernetes中的Pods/Replication Controllers/Services等资源。
-
-
+* ControlPlane：暴露应用程序接口（API），调度部署和管理整个集群。
+* WorkerNodes：物理或者虚拟的服务器，负责运行工作负载。
+* APIServer：外部与Kubernetes的互动点。
+* Etcd：默认采用CoreOS 的产品etcd ，提供键值存储、服务发现、服务注册功能。
+* Kubelet：节点上的代理，负责执行Kubernetes Master分配的任务。
+* Pods: 由同一主机上部署的一个或几个容器组成的计算能力单位，执行相同的任务。
+* Services：Pods的前端和Load Balancer，为Pods提供Floating IP。
+* Replicationcontrollers：负责维护指定数目的 Pods。
+* Labels：key-value标签以一种非层次化、松散的方式标记、查找Kubernetes中的Pods/Replication Controllers/Services等资源。
 
 ![1574519488689](../../media/sf_reuse/framework/frame_k8s_004.png)
 
@@ -165,31 +146,25 @@ Kubernetes基本概念：
 * Controller manager 负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；
 
 * etcd 保存了整个集群的状态；
-
-
-
+  
   ![1574519522443](../../media/sf_reuse/framework/frame_k8s_005.png)
 
 图 K8s Node
 
 Kubernetes主要由以下几个核心组件组成： K8s Master的4个和K8s Node的3个。
 
-*  kubelet: 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
-*  Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）；
-*  kube-proxy: 负责为Service提供cluster内部的服务发现和负载均衡；
-
-
+* kubelet: 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
+* Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）；
+* kube-proxy: 负责为Service提供cluster内部的服务发现和负载均衡；
 
 除了核心组件，还有一些推荐的Add-ons：
 
-*  kube-dns负责为整个集群提供DNS服务
-*  Ingress Controller为服务提供外网入口
-*  Heapster提供资源监控
-*  Dashboard提供GUI
-*  Federation提供跨可用区的集群
-*  Fluentd-elasticsearch提供集群日志采集、存储与查询
-
-
+* kube-dns负责为整个集群提供DNS服务
+* Ingress Controller为服务提供外网入口
+* Heapster提供资源监控
+* Dashboard提供GUI
+* Federation提供跨可用区的集群
+* Fluentd-elasticsearch提供集群日志采集、存储与查询
 
 **分层架构**
 
@@ -212,17 +187,13 @@ Kubernetes设计理念和功能其实就是一个类似Linux的分层架构，�
 - - Kubernetes外部：日志、监控、配置管理、CI、CD、Workflow、FaaS、OTS应用、ChatOps等
   - Kubernetes内部：CRI、CNI、CVI、镜像仓库、Cloud Provider、集群自身的配置和管理等
 
-
-
 ### 2.3  多集群架构
 
-*  全世界数据中心的统一 API
+* 全世界数据中心的统一 API
 
-*  多集群时代的 “ The Platform for Platform”
+* 多集群时代的 “ The Platform for Platform”
 
-
-
-Kubernetes 和它所推崇的声明式[容器编排与管理体系](https://yq.aliyun.com/go/articleRenderRedirect?url=https%3A%2F%2Fwww.infoq.cn%2Farticle%2FR1p3H3_29f4TYImExsyw)，让软件交付本身变得越来越标准化和统一化，并且实现了与底层基础设施的完全解耦；而另一方面，云原生技术体系在所有公有云和大量数据中心里的落地，使得软件面向一个统一的 API 实现“一次定义，到处部署”成为了可能。
+Kubernetes 和它所推崇的声明式[容器编排与管理体系](https://www.infoq.cn/article/R1p3H3_29f4TYImExsyw)，让软件交付本身变得越来越标准化和统一化，并且实现了与底层基础设施的完全解耦；而另一方面，云原生技术体系在所有公有云和大量数据中心里的落地，使得软件面向一个统一的 API 实现“一次定义，到处部署”成为了可能。
 
 Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用来构建“平台”的“平台”。 相比于 Mesos 和 Swarm 等容器管理平台，Kubernetes 项目最大的优势和关注点，在于它始终专注于如何帮助用户基于 Kubernetes 的声明式 API ，快速、便捷的构建健壮的分布式应用，并且按照统一的模型（容器设计模式和控制器机制）来驱动应用的实际状态向期望状态逼近和收敛。
 
@@ -232,8 +203,6 @@ Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用�
 
 如图所示，其核心分为两层，下层是被托管的集群，在其中会有一个 Agent，Agent 一方面在被托管的集群中运行，可以轻易的在内网访问被托管的集群，另一方面它通过公网与公有云接入层中的节点 (Stub) 构建一个隧道 (tunnel)。在上层，用户通过公有云统一的方式接入审计、鉴权、权限相关功能，通过访问 Stub，再通过隧道由 Agent 向用户自己的 Kubernetes 集群转发命令。
 
-
-
 ## 3  安装篇
 
 工具Vagrant & VirtualBox 详见 《运维专题》
@@ -242,50 +211,47 @@ Kubernetes 项目的本质其实是 Platform for Platform，也就是一个用�
 
 Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的虚拟机，再到机架上的裸机服务器。要创建一个Kubernetes集群，根据不同场景需要做的也不尽相同，可能是运行一条命令，也可能是配置自己的定制集群。
 
-*  本地服务器方案：包括三种，分别是本地Docker、Vagrant和无虚拟机本地集群（Linux）。基于Docker的本地方案：是众多能够完成快速搭建的本地集群方案中的一种，但是局限于单台机器。
-*  托管解决方案（如Google Container Engine）是最容易搭建和维护的。当你准备好扩展到多台机器和更高可用性时。
-*  全套云端方案（如AWS、Azure等）：只需要少数几个命令就可以在更多的云服务提供商搭建Kubernetes。
-*  定制方案 需要花费更多的精力，但是覆盖了从零开始搭建Kubernetes集群的通用建议到分步骤的细节指引。
-
+* 本地服务器方案：包括三种，分别是本地Docker、Vagrant和无虚拟机本地集群（Linux）。基于Docker的本地方案：是众多能够完成快速搭建的本地集群方案中的一种，但是局限于单台机器。
+* 托管解决方案（如Google Container Engine）是最容易搭建和维护的。当你准备好扩展到多台机器和更高可用性时。
+* 全套云端方案（如AWS、Azure等）：只需要少数几个命令就可以在更多的云服务提供商搭建Kubernetes。
+* 定制方案 需要花费更多的精力，但是覆盖了从零开始搭建Kubernetes集群的通用建议到分步骤的细节指引。
 
 表格 5 Kubernatess发行版
 
-| 发行版                                                       | 简介                                                         | 许可和定价模型                             | 安装                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------ |
-| 原版开源 Kubernetes                                          | Kubernetes 由 Cloud Native Computing Foundation（云原生计算资金会）和 Kubernetes 用户组成的多样化社区支持，也是第一个从 CNCF 毕业的项目。 | 开源且 100％免费                           |                                                              |
-| 红帽 [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) | 在 Kubernetes 之前，OpenShift 作为一个单独项目并使用完全不同的技术运行。后来，红帽意识到 Kubernetes 的能力越来越强大，因此在第 3 版中明智地将其作为 OpenShift 的核心。 | 三种定价模式：                             | 不是很复杂，但需要特定配置。                                 |
-| CoreOS  [Tectonic](https://coreos.com/tectonic/)             | 由 CoreOS 创建，CoreOS 是一家致力于发展容器技术公司，但已被红帽收购，目前正在与红帽集成。优势功能如下：易于设置、用户友好的 Web UI、用户管理 对供应商的支持 | 拥有商业许可模式，最多可免费提供 10 个节点 | 可以通过安装程序或 Terraform 安装。                          |
-| Stackube                                                     | 以 Kubernetes 为中心的 OpenStack 发行版。可根据所用容器运行时环境提供不同程度的多租户机制，用户可选择 Docker 或者虚拟机进行配置。 | KDC 和 Containerum 平台都是 100％开源      | 设置相对容易                                                 |
-| [Rancher](https://rancher.com/kubernetes/)                   | 包含 Kubernetes 的容器管理平台。主要特点如下：跨供应商集群部署、用户管理 Web、用户界面、集成CI/CD管道。 | 100％开源，该公司可提供咨询和支持服务      | 可使用名为 RKE 的 Kubernetes 安装工具。                      |
-| Canonical  Distribution of Kubernetes（[CDK](https://ubuntu.com/kubernetes)） | 由 Linux 发行版 Ubuntu 背后的公司 Canonical 支持，相当于是一个可在主流公有云提供商和 OpenStack 等私有云解决方案上轻松部署的  vanilla Kubernetes，能够轻松设置并管理跨供应商的 Kubernetes 集群，用户界面是官方 Kubernetes 仪表板。 | 完全免费。但是，每个虚拟节点有几个支持包   | 可使用 Canonical 开发的部署工具 Conjure-up 或 Juju 来完成安装。 |
-| [Docker ](https://www.docker.com/products/kubernetes)社区版 /企业版 | Docker  Enterprise 3.0添加了Docker Kubernetes服务            |                                            |                                                              |
-| Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service)) | 突出的特性是与VMware虚拟机堆栈紧密集成                       |                                            |                                                              |
-| [SUSE ](https://www.suse.com/products/caas-platform/)容器服务平台 | SUSE CaaS平台让人想起CoreOS Tectonic，它结合了运行容器的裸机“微型”操作系统、Kubernetes、内置的镜像仓库和集群配置工具。 |                                            |                                                              |
-
-
+| 发行版                                                                              | 简介                                                                                                                                                        | 许可和定价模型                       | 安装                                             |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------- |
+| 原版开源 Kubernetes                                                                  | Kubernetes 由 Cloud Native Computing Foundation（云原生计算资金会）和 Kubernetes 用户组成的多样化社区支持，也是第一个从 CNCF 毕业的项目。                                                      | 开源且 100％免费                    |                                                |
+| 红帽 [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) | 在 Kubernetes 之前，OpenShift 作为一个单独项目并使用完全不同的技术运行。后来，红帽意识到 Kubernetes 的能力越来越强大，因此在第 3 版中明智地将其作为 OpenShift 的核心。                                               | 三种定价模式：                       | 不是很复杂，但需要特定配置。                                 |
+| CoreOS  [Tectonic](https://coreos.com/tectonic/)                                 | 由 CoreOS 创建，CoreOS 是一家致力于发展容器技术公司，但已被红帽收购，目前正在与红帽集成。优势功能如下：易于设置、用户友好的 Web UI、用户管理 对供应商的支持                                                                 | 拥有商业许可模式，最多可免费提供 10 个节点       | 可以通过安装程序或 Terraform 安装。                        |
+| Stackube                                                                         | 以 Kubernetes 为中心的 OpenStack 发行版。可根据所用容器运行时环境提供不同程度的多租户机制，用户可选择 Docker 或者虚拟机进行配置。                                                                          | KDC 和 Containerum 平台都是 100％开源 | 设置相对容易                                         |
+| [Rancher](https://rancher.com/kubernetes/)                                       | 包含 Kubernetes 的容器管理平台。主要特点如下：跨供应商集群部署、用户管理 Web、用户界面、集成CI/CD管道。                                                                                            | 100％开源，该公司可提供咨询和支持服务          | 可使用名为 RKE 的 Kubernetes 安装工具。                   |
+| Canonical  Distribution of Kubernetes（[CDK](https://ubuntu.com/kubernetes)）      | 由 Linux 发行版 Ubuntu 背后的公司 Canonical 支持，相当于是一个可在主流公有云提供商和 OpenStack 等私有云解决方案上轻松部署的  vanilla Kubernetes，能够轻松设置并管理跨供应商的 Kubernetes 集群，用户界面是官方 Kubernetes 仪表板。 | 完全免费。但是，每个虚拟节点有几个支持包          | 可使用 Canonical 开发的部署工具 Conjure-up 或 Juju 来完成安装。 |
+| [Docker ](https://www.docker.com/products/kubernetes)社区版 /企业版                    | Docker  Enterprise 3.0添加了Docker Kubernetes服务                                                                                                              |                               |                                                |
+| Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service))   | 突出的特性是与VMware虚拟机堆栈紧密集成                                                                                                                                    |                               |                                                |
+| [SUSE ](https://www.suse.com/products/caas-platform/)容器服务平台                      | SUSE CaaS平台让人想起CoreOS Tectonic，它结合了运行容器的裸机“微型”操作系统、Kubernetes、内置的镜像仓库和集群配置工具。                                                                             |                               |                                                |
 
 **下载并解压** **Kubernetes** **二进制文件**
 
 $ git clone https://github.com/kubernetes/kubernetes.git
 
-1)  翻墙访问： googleapis. com  gcr.io
+1) 翻墙访问： googleapis. com  gcr.io
 
 ```shell
 # ./kubernetes/server/bin/kube-apiserver.tar  # 目标二进制文件
 $ ./kubernetes/cluster/get-kube-binaries.sh
 ```
 
- 2)  国内源下载:  apt-get install
+2) 国内源下载:  apt-get install
 
-| 组件          | 下载入口                                                    | 备注                                                         |
-| ------------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
-| kubectl       | https://github.com/kubernetes/kubernetes/releases           | 集群命令的管理工具                                           |
+| 组件            | 下载入口                                                        | 备注                                               |
+| ------------- | ----------------------------------------------------------- | ------------------------------------------------ |
+| kubectl       | https://github.com/kubernetes/kubernetes/releases           | 集群命令的管理工具                                        |
 | minikube      | https://github.com/AliyunContainerService/minikube/releases | 缺省Minikube使用VirtualBox驱动来创建Kubernetes本地环境-单节点集群。 |
-| kubeadm       |                                                             | 高可用                                                       |
-| kube-apiserve |                                                             |                                                              |
+| kubeadm       |                                                             | 高可用                                              |
+| kube-apiserve |                                                             |                                                  |
 
 1. kubectl
-
+   
    ```sh
    # apt-get方式安装，国内镜像：https://mirrors.aliyun.com/kubernetes/apt/
    apt-get update && apt-get install -y apt-transport-https
@@ -299,9 +265,9 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    ```
 
 2. minikube
-
+   
    K8S 官方为了开发者能在个人电脑上运行 K8S 而提供的一套工具。实现上是通过 Go 语言编写，通过调用虚拟化管理程序，创建出一个运行在虚拟机内的单节点集群。Minikube CLI可用于启动，停止，删除，获取状态，并在虚拟机上执行其他操作。一旦Minikube虚拟机启动，Kubectl CLI会在Kubernetes集群上执行操作。
-
+   
    ```shell
    $ curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.7.3/minikube-linux-amd64
    $ chmod +x minikube && sudo mv minikube /usr/local/bin
@@ -309,18 +275,14 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
    $ minikube start --registry-mirror=https://registry.docker-cn.com
    # 启动方式2：安装了docker， none driver
    $ minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com
-
+   
    $ 打开k8s控制台
    minikube dashboard
    ```
 
-
-
 **选择镜像**
 
 使用谷歌容器仓库（GCR）上托管的镜像 gcr.io/
-
-
 
 ### 3.2  本地Docker方案
 
@@ -330,13 +292,9 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
 
 图  K8s集群~本地Docker方案
 
-
-
 **第一步：运行Etcd**
 
 `docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd --addr=127.0.0.1:4001 --bind-addr=0.0.0.0:4001 --data-dir=/var/etcd/data`
-
-
 
 **第二步：启动master**
 
@@ -353,10 +311,8 @@ docker run \
     --privileged=true \
     -d \
     gcr.io/google_containers/hyperkube:v1.0.1 \
-    /hyperkube kubelet --containerized --hostname-override=&quot;127.0.0.1&quot; --address=&quot;0.0.0.0&quot; --api-servers=h
-
+    /hyperkube kubelet --containerized --hostname-override="127.0.0.1" --address="0.0.0.0" --api-servers=h
 ```
-
 
 **第三步：运行service proxy**
 
@@ -370,8 +326,6 @@ docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.0.1 
 $ kubectl get nodes
 ```
 
-
-
 ### 3.3  vagrant创建单节点集群
 
 \# vagrant启动每个虚拟机约需1G内存。get.k8s.ios可能需翻墙访问。
@@ -383,7 +337,6 @@ export KUBERNATES_PROVIDER=vagrant
 export NUM_MINIORS=2
 curl -s3 https://get.k8s.io/ |bash
 ```
-
 
 **法2：docker-compose部署**
 
@@ -397,8 +350,6 @@ $docker ps
 $./kubectl get nodes
 ```
 
-
-
 ## 4  使用篇
 
 ### 4.1 配置文件
@@ -409,8 +360,8 @@ namespace 就好比是一个大的分组，一个k8s集群内可以创建多个n
 
 关系： namespace - deployment  -  pod - container
 
-| 文件             | 说明           | 配置关键信息                              | 资源查看命令           |
-| ---------------- | -------------- | ----------------------------------------- | ---------------------- |
+| 文件               | 说明           | 配置关键信息                                    | 资源查看命令                 |
+| ---------------- | ------------ | ----------------------------------------- | ---------------------- |
 | ?_namespace.yaml | Namespace配置  | name, labels                              | kubectl get namespaces |
 | xxx_deploy.yaml  | Deployment配置 | selector,template,<br>strategy,containers | kubectl get deploy     |
 | xxx_pod.yaml     | Pod配置        | nodeSelector,containers,volumes           | kubectl get pod        |
@@ -429,8 +380,6 @@ $kubectl apply -f xxx.yaml
 $kubectl delete -f xxx.yaml
 ```
 
-
-
 **Namespace示例**
 
 ```yaml
@@ -441,8 +390,6 @@ metadata:
    labels:
      name: product
 ```
-
-
 
 **Pod示例**
 
@@ -521,8 +468,6 @@ spec:  #specification of the resource content 指定该资源的内容
       path: /opt           #挂载设备类型为hostPath，路径为宿主机下的/opt,这里设备类型支持很多种
 ```
 
-
-
 **Deployment示例**
 
 ```yaml
@@ -535,21 +480,21 @@ metadata:
     app: aas
 spec:
   selector:
-    matchLabels:	#定义pod启动在labels为aas的Deployment内
+    matchLabels:    #定义pod启动在labels为aas的Deployment内
       app: aas
   revisionHistoryLimit: 5
   replicas: 2
   minReadySeconds: 60
-  strategy:	#策略：回滚、升级
+  strategy:    #策略：回滚、升级
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  template:	#定义pod模板:如标签、详细启动参数
+  template:    #定义pod模板:如标签、详细启动参数
     metadata:
       labels:
         app: aas
-    spec:	#
+    spec:    #
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -638,8 +583,6 @@ spec:
             vers: "4.0"
 ```
 
-
-
 **Service示例**
 
 ```yaml
@@ -655,8 +598,6 @@ spec:
     app: aas
 ```
 
-
-
 ### 4.2 kubectl
 
 kubectl用于运行Kubernetes集群命令的管理工具。通过kubectl能够对集群本身进行管理，并能够在集群上进行容器化应用的安装部署。
@@ -668,7 +609,9 @@ kubectl [command] [TYPE] [NAME] [flags]
 * comand：指定要对资源执行的操作，例如create、get、describe和delete
 
 * TYPE：指定资源类型，资源类型是大小学敏感的，开发者能够以单数、复数和缩略的形式。例如：pod/pods/po
+
 * NAME:  指定资源的名称，名称也大小写敏感的。如果省略名称，则会显示所有的资源。
+
 * flags：指定可选的参数。例如，可以使用-s或者–server参数指定Kubernetes API server的地址和端口。
 
 ```shell
@@ -729,15 +672,9 @@ Other Commands:
   version        输出 client 和 server 的版本信息
 ```
 
-
-
 ### 4.3 kube-proxy
 
 kubue-proxy：负责服务发现和负载均衡（轮询）。
-
-
-
-
 
 ## 参考资料
 
@@ -757,4 +694,3 @@ kubue-proxy：负责服务发现和负载均衡（轮询）。
 [11].  "Minikube - Kubernetes本地实验环境" https://yq.aliyun.com/articles/221687
 
 [12]. "k8s之启动namespace 、pod 、service，yaml配置文件详解，以及如何启动pod、service，如何删除pod、service"  https://blog.csdn.net/qq_31547771/article/details/102526403
-

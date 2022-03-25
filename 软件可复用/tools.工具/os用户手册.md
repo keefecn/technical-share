@@ -83,17 +83,17 @@ MBR中分区表的组织将磁盘的可寻址存储空间限制为2TB（232×512
 备注：1. MBR总长度=446+64+2=512byte
 
 2. 标准分区表：4个16byte的主分区表入口。
-
+   
    （1） 第1个字节：如果为0x80，就表示该主分区是激活分区，控制权要转交给这个分区。四个主分区里面只能有一个是激活的。
-
+   
    （2） 第2-4个字节：主分区第一个扇区的物理位置（柱面、磁头、扇区号等等）。
-
+   
    （3） 第5个字节：主分区类型，比如FAT32、NTFS等。
-
+   
    （4） 第6-8个字节：主分区最后一个扇区的物理位置。
-
+   
    （5） 第9-12字节：该主分区第一个扇区的逻辑地址。
-
+   
    （6） 第13-16字节：主分区的扇区总数。
 
 <br>
@@ -192,16 +192,16 @@ Windows8启动相关分区有三个:
 * Windows：UltraISO、Universal USB Installer
 
 * Linux：dd命令、Etcher软件、usb-creator-gtk（ubuntu自带）
-
+  
   ```shell
   # 查看磁盘分区情况，获取U盘设备符，示例U盘设备是/dev/sdb是
   $ sudo fdisk -l
   # 卸载U盘
   $ sudo umount /dev/sdb
-
+  
   # 法1. dd命令制作U盘 (很不友好，没有任何进度提示，约需20分钟)
   $ sudo dd if=/home/lm/ubuntukylin-19.04-enhanced-amd64.iso of=/dev/sdb
-
+  
   # 法2. 启动盘创建器（usb-creator-gtk）
   # usb-creator-gtk是Ubuntu系统自带的U盘系统启动盘制作工具，制作时将覆盖U盘中的所有内容。该工具仅支持制作Debian系的系统镜像。
   ```
@@ -241,28 +241,28 @@ linux下字体库较少，要正常显示非西欧字符，有时需要手动安
 
 表格 不同OS环境的字体环境
 
-|              | windows          | linux             | wine & deepinwine                                   |
-| ------------ | ---------------- | ----------------- | --------------------------------------------------- |
-| 字体文件目录 | C:\Windows\Fonts | /usr/share/fonts/ | ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts ` |
-| 缺省字体     | 微软雅黑         | 文泉驿            | SimSun仿宋 或者 Tahoma宋体                          |
-linux环境安装字体
+|             | windows          | linux             | wine & deepinwine                                   |
+| ----------- | ---------------- | ----------------- | --------------------------------------------------- |
+| 字体文件目录      | C:\Windows\Fonts | /usr/share/fonts/ | ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts ` |
+| 缺省字体        | 微软雅黑             | 文泉驿               | SimSun仿宋 或者 Tahoma宋体                                |
+| linux环境安装字体 |                  |                   |                                                     |
+
 ```sh
 # 安装字体工具: fontconfig
-$ sudo apt-get -y install fontconfig xfonts-utils
+$ sudo apt-get -y install fontconfig 
+$ sudo apt-get -y install xfonts-utils
 
 # 文泉驿字体, libreoffice的缺省中文字体
 $ sudo apt-get -y install wqy-bitmap-fonts
 ```
 
-
-
 表格  字体工具列表
 
-| 工具名称 | 简述                   | 示例                                       |
-| -------- | ---------------------- | ------------------------------------------ |
+| 工具名称     | 简述          | 示例                                         |
+| -------- | ----------- | ------------------------------------------ |
 | fc-list  | 查看系统安装的字体列表 | fc-list \| grep 'CJK' <br>fc-list :lang=zh |
-| fc-cache | 构建字体缓存文件       |                                            |
-| fc-match | 查看字体详细信息       | fc-match -v '文泉'                         |
+| fc-cache | 构建字体缓存文件    |                                            |
+| fc-match | 查看字体详细信息    | fc-match -v '文泉'                           |
 
 > 其它字体工具还有：fc-scan fc-cat  fc-cache fc-pattern  fc-query
 
@@ -277,18 +277,16 @@ $ fc-cache
 $ fc-list :lang=zh
 ```
 
-
-
 表格 字体类型列表
 
-| 字体类型   | 简介                                                         | 应用场景       | 示例字体 |
-| ---------- | ------------------------------------------------------------ | -------------- | -------- |
-| TrueType   | 采用几何学中二次B样条曲线及直线来描述字体的外形轮廓。<br>分辨率无关，输出时总是按照打印机的分辨率输出。<br>字符光滑，无锯齿；质量略差点。 | 打印、屏幕显示 | <br>     |
-| PostScript | 又名Type 1。按PostScript 页面描述语言 (PDL) 规则定义的字体，并且只能在 PostScript 兼容的打印机上打印。 | 打印           |          |
-| OpenType   | 又名Type 2。Microsoft和Adobe公司开发的字体格式。也是轮廓字体，但比TrueType强大。是Type 1和TrueType的超集。 | 打印、屏显     |          |
-| X11        | 位图显示的视窗系统，几乎所有的操作系统都支持。               | 屏显           |          |
-| cmap       | Adobe公司专为autocad软件打造的一款字体文件。                 | 设计           |          |
-| cMap       | 字体中负责字符编码映射的表, 它可以含有多个子表，这些子表的功能与格式定义各不相同。 |                |          |
+| 字体类型       | 简介                                                                         | 应用场景    | 示例字体 |
+| ---------- | -------------------------------------------------------------------------- | ------- | ---- |
+| TrueType   | 采用几何学中二次B样条曲线及直线来描述字体的外形轮廓。<br>分辨率无关，输出时总是按照打印机的分辨率输出。<br>字符光滑，无锯齿；质量略差点。  | 打印、屏幕显示 | <br> |
+| PostScript | 又名Type 1。按PostScript 页面描述语言 (PDL) 规则定义的字体，并且只能在 PostScript 兼容的打印机上打印。      | 打印      |      |
+| OpenType   | 又名Type 2。Microsoft和Adobe公司开发的字体格式。也是轮廓字体，但比TrueType强大。是Type 1和TrueType的超集。 | 打印、屏显   |      |
+| X11        | 位图显示的视窗系统，几乎所有的操作系统都支持。                                                    | 屏显      |      |
+| cmap       | Adobe公司专为autocad软件打造的一款字体文件。                                               | 设计      |      |
+| cMap       | 字体中负责字符编码映射的表, 它可以含有多个子表，这些子表的功能与格式定义各不相同。                                 |         |      |
 
 备注：OpenType标准定义了OpenType文件名称的后缀名。
 
@@ -296,16 +294,14 @@ $ fc-list :lang=zh
 * 包含PostScript字体的文件后缀名为 OTF；
 * 如果是包含一系列TrueType字体的字体包文件，那么后缀名为TTC。
 
-
-
 表格  常用字体说明
 
-| 字体中文名     | 英文名                 | 字体文件                                                     |
-| -------------- | ---------------------- | ------------------------------------------------------------ |
-| 仿宋           | SimSun                 |                                                              |
-| 宋体           | Tahoma                 |                                                              |
-| 文泉驿等宽正黑 | WenQuanYi Zen Hei Mono | usr/share/fonts/truetype/wqy/wqy-zenhei.ttc                  |
-| 微软雅黑       | msyh                   | [msyh.ttf](https://github.com/chenqing/ng-mini/blob/master/font/msyh.ttf) |
+| 字体中文名   | 英文名                    | 字体文件                                                                      |
+| ------- | ---------------------- | ------------------------------------------------------------------------- |
+| 仿宋      | SimSun                 |                                                                           |
+| 宋体      | Tahoma                 |                                                                           |
+| 文泉驿等宽正黑 | WenQuanYi Zen Hei Mono | usr/share/fonts/truetype/wqy/wqy-zenhei.ttc                               |
+| 微软雅黑    | msyh                   | [msyh.ttf](https://github.com/chenqing/ng-mini/blob/master/font/msyh.ttf) |
 
 字体存储路径：linux环境一般是/usr/share/fonts/目录下。
 
@@ -328,8 +324,6 @@ $ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
 $ git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
 $ cd deepin-wine && ./install.sh
 ```
-
-
 
 ### 微信
 
@@ -360,7 +354,7 @@ sudo ./run.sh
 2. 添加字体 `cp msyh.ttc ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts `
 
 3. 修改系统注册表
-
+   
    ```shell
    $ vi ~/.deepinwine/Deepin-WeChat/system.reg
    # 将system.reg里面二行换成
@@ -371,7 +365,7 @@ sudo ./run.sh
    ```
 
 4. 字体注册
-
+   
    ```shell
    $ vi msyh_font.reg
    REGEDIT4
@@ -391,12 +385,11 @@ sudo ./run.sh
    ```
 
 5. 重启微信：先关掉wine，再退出微信。再重新开启微信。
-
+   
    ```shell
    # 更新wine配置
    $ wine64-stable boot
    ```
-
 
 备注：诡异现象是微信启动后第一次的聊天框输入文字是方块；然后换个聊天框输入文字正常；再切换回来就都正常了。
 
@@ -446,7 +439,7 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 1. win8系统桌面添加“我的电脑”图标
 
-桌面上右击，选择【个性化】； - 【更改桌面图标】，勾选‘计算机’选项。
+桌面上右击，选择【个性化】；【主题】 - 【更改桌面图标】，勾选‘计算机’选项。
 
 2. 设置静态IP
 
@@ -457,21 +450,21 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 ### Windows命令行
 
 1. 以管理员身份运行命令行 cmd
-
+   
    ```shell
    $ runas /user:administrator cmd
    ```
 
 2. **git bash在windows 10下启动很慢，达到分钟级。**
-
+   
    原因：有非常多的原因导致git bash启动很慢。比如双显卡工作的原因需移除AMD驱动；不是管理员权限启动；windows自带的病毒防范；windows cmd新样式等。
-
+   
    git缺省安装路径C:\Program Files\Git\mingw64\
-
+   
    解决方法：
-
+   
    1）恢复cmd旧样式方法：win+R 打开cmd 在标题栏上右键， 属性-- 选项--- 打勾---使用旧控制台样式。
-
+   
    2）(推荐)升级git版本到2.20+（发布于2018.12）版本。
 
 <br>
@@ -488,15 +481,42 @@ WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Window
 
 表格  Linux通用命令
 
-| 功能               | 命令         | 说明                                                         |
-| ------------------ | ------------ | ------------------------------------------------------------ |
-| 运行级别           | runlevel     | 得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。 |
-| 查看OS内核版本     | `uname -a`   |                                                              |
-| 快捷键-返回到桌面  | win + D      | 快捷键大小写不敏感                                           |
-| 快捷键-切换任务    | alt + tab    |                                                              |
-| 终端打开图形端目录 | `xdg-open .` | 在ubuntu终端用命令打开图形化界面的当前目录                   |
+| 功能        | 命令           | 说明                                     |
+| --------- | ------------ | -------------------------------------- |
+| 运行级别      | runlevel     | 得到当前的运行级别，可使用sysv-rc-conf来配置各运行级别的服务项。 |
+| 查看OS内核版本  | `uname -a`   |                                        |
+| 快捷键-返回到桌面 | win + D      | 快捷键大小写不敏感                              |
+| 快捷键-切换任务  | alt + tab    |                                        |
+| 终端打开图形端目录 | `xdg-open .` | 在ubuntu终端用命令打开图形化界面的当前目录               |
 
 ### 开发环境初始化
+
+* 命令行设置静态IP
+  
+  ```shell
+  # centos示例
+  $ cd /etc/sysconfig/network-s#rpts
+  
+  # 一般是名字ifcfg-en前缀文件，将ONBOOT改为YES，重启网络即可自动分配IP。
+  # 一般情况不用再修改其它内容
+  $ vi ifcfg-enxxx
+  #开机加载网络配置启动网络服务
+  ONBOOT="yes"
+  
+  #分配ip的协议 none static :不自动分配，手动设置ip / dhcp:动态分配ip
+  OOTPROTO=static
+  #手动指定的ip、网络掩码、网关、DNS
+  IPADDR=192.168.230.100
+  NETMASK=255.255.255.0
+  GATEWAY=192.168.230.10
+  #连接外网时解析域名使用， 如果不配置不能连接外网
+  DNS1=8.8.8.8
+  
+  # 重启网络服务
+  $ service network restart
+  # 查看网络配置。若ifconfig命令不可用，则需安装 net-tools
+  $ ifconfig
+  ```
 
 * 增加用户useradd（缺省建立home目录，可登陆）:  `$ useradd -s /bin/bash -g www -m denny`
 
@@ -763,6 +783,16 @@ auto lo iface lo inet loopback
 **问题原因**：软件源问题，某些文件URL请求失败，导致出现某些文件无法下载的问题
 **问题解决**：换源，在'software and update'里，将cn.ubuntu.com换成国内其它稳定源如 mirrors.bjtu.edu.cn.
 
+3. Ubuntu桌面很卡
+
+**问题描述**：Ubuntu桌面很卡，点击目录时会等待一会。  
+**问题原因**：  
+**问题解决**：换用gnome传统桌面，登陆时选择gnome传统桌面。解决效果不明显。
+
+```shell
+$ sudo apt-get install gnome-session-flashback
+```
+
 <br>
 
 ## 3.3 CentOS
@@ -798,11 +828,11 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 **常见问题**
 
 1. CentOS-8-AppStream  Failed to download metadata for repo 'AppStream'
-
+   
    原因：centos8默认源不可用，如官网源防火墙问题网速慢或不可访问。
-
+   
    解决方法：更换国内其它源如阿里源、腾讯源。或者回退到centos7.6。
-
+   
    ```shell
    # 下载替换yum源
    wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos8_base.repo
@@ -816,6 +846,7 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 ## 本章参考
 
 * Ubuntu 安装中文输入法  https://blog.csdn.net/Chamico/article/details/89788324
+* CentOS7服务器命令行配置静态IP  https://blog.csdn.net/Lance_welcome/article/details/106342179
 * ubuntu设置静态ip（WIRED） http://jingyan.baidu.com/article/b7001fe18f85fe0e7282ddaf.html
 * 安装 ubuntu 20.04 之后需要做的几件事  https://www.wenjinyu.me/zh/something-to-do-after-installing-ubuntu-20-04/
 * 解决Ubuntu 20.04挂载NTFS分区不能写入（只读权限）的问题  https://blog.csdn.net/wwlswj/article/details/106479600
@@ -866,6 +897,12 @@ Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统�
 | 1       | System 1              | 1984 |         | 引入了菜单栏，以及“桌面附件”应用程序，如计算器和闹钟。                              |
 
 <br>
+
+## mac工具
+
+* mac操作和基础工具 https://github.com/qianguyihao/Mac
+
+* mac工具大全 https://github.com/jaywcjlove/awesome-mac/blob/master/README-zh.md
 
 ## 本章参考
 
