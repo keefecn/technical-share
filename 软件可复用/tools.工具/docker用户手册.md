@@ -157,42 +157,40 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 
 官网缺省不支持32位平台，需特殊处理。
 
-1) ~~32位平台~~
+1) ~~32位平台~~ （可废弃）
    
    ```SHELL
    $ sudo apt-get install docker.io
    # 导入32位ubuntu 14.04镜像
    $ sudo cat ubuntu-14.04-x86-minimal.tar.gz | docker import - ubuntu:14.04
    $ sudo docker run -it ubuntu:14.04 /bin/bash
+   
+   $ sudo docker version
+   Client version: 1.6.2
+   Client API version: 1.18
+   Go version (client): go1.2.1
+   Git commit (client): 7c8fca2
+   OS/Arch (client): linux/386
+   Server version: 1.6.2
+   Server API version: 1.18
+   Go version (server): go1.2.1
+   Git commit (server): 7c8fca2
+   OS/Arch (server): linux/386
    ```
 
-denny@denny-ubuntu:~$ sudo docker version
-[sudo] password for denny:
-Client version: 1.6.2
-Client API version: 1.18
-Go version (client): go1.2.1
-Git commit (client): 7c8fca2
-OS/Arch (client): linux/386
-Server version: 1.6.2
-Server API version: 1.18
-Go version (server): go1.2.1
-Git commit (server): 7c8fca2
-OS/Arch (server): linux/386
+2) 64位平台
 
 ```
-2) 正常平台
-```SHELL
 # 法1：自动检测平台，下载相应最新版本
 $ wget -qO- https://get.docker.com/ | sh
 
 # 法2：手动替换源仓库URL，并安装
 sudo yum install docker-ce docker-ce-cli containerd.io
-
-# 安装后，启动docker后台服务
-$ sudo service docker start
+# 安装后，启动docker后台服务 
+sudo service docker start 
 
 # 安装 docker-compose
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -551,7 +549,8 @@ Server:
  OS/Arch:         linux/amd64
  Experimental:    false
 
- # docker-ce-20.10.8：2021发布。docker ce拆分成了4块，分别是ce, contained, docker-init, runc
+# docker-ce-20.10.8：2021发布。
+# docker-ce拆分成了4块，分别是ce, contained, docker-init, runc
 docker version
 Client: Docker Engine - Community
  Version:           20.10.8
@@ -1350,7 +1349,7 @@ $ docker-compose up -d
 
 docker stack把docker compose的所有工作都做完了，因此docker stack将占主导地位。同时，对于大多数用户来说，切换到使用docker stack既不困难，也不需要太多的开销。如果您是Docker新手，或正在选择用于新项目的技术，请使用docker stack。
 
-表格 Docker Stack常用命令
+表格 Docker Stack常用命令   
 
 | 命令                    | 描述            |
 | --------------------- | ------------- |
@@ -1359,6 +1358,28 @@ docker stack把docker compose的所有工作都做完了，因此docker stack将
 | docker stack ps       | 列出堆栈中的任务      |
 | docker stack rm       | 删除一个或多个堆栈     |
 | docker stack services | 列出堆栈中的服务      |
+
+```shell
+$ docker stack
+
+Usage:  docker stack [OPTIONS] COMMAND
+
+Manage Docker stacks
+
+Options:
+      --orchestrator string   Orchestrator to use (swarm|kubernetes|all)
+
+Commands:
+  deploy      Deploy a new stack or update an existing stack
+  ls          List stacks
+  ps          List the tasks in the stack
+  rm          Remove one or more stacks
+  services    List the services in the stack
+
+Run 'docker stack COMMAND --help' for more information on a command.
+```
+
+说明：实际上 docker stack COMMAND STACK_NAME ，STACK_NAME为栈名称，要有STACK_NAME才能执行。
 
 <br>
 
@@ -1381,7 +1402,7 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 docker rmi $(docker images -f "dangling=true" -q)
 ```
 
-**清理容器** （可以在镜像清理前操作）
+**2. 清理容器** （可以在镜像清理前操作）
 
 ```shell
 # （推荐）删除停止的容器，可以回收容器名。-a显示所有  正在运行的容器要先停止stop才会被删除rm
@@ -1394,7 +1415,7 @@ docker system prune
 ### 镜像体积裁减
 
 * 选用体积小的基础镜像
-* 多使用 Dockerfile生成新镜像，减少commit方式生成的镜像。每commit一次相当于在原有基础镜像上再增加内容（删除的文件目录仍会占用存储空间）。
+* 多使用 Dockerfile生成新镜像，减少commit方式生成的镜像。每commit一次相当于在原有基础镜像上再增加内容（因为docker文件系统为overlay，删除的文件目录仍会占用存储空间）。
 
 <br>
 
@@ -1406,25 +1427,37 @@ docker system prune
 
 * 拉取镜像:  docker pull xxx:xxx
 * 运行镜像：docker run
+* 镜像都来自于官网 docker.io
 
-表格 3 常用镜像的实例和启动命令 （镜像来自于官网 docker.io）
+表格 3 常用基础镜像 （不改源码，只作最基础服务的镜像）
 
-| images                | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                                                | 状态  | 访问URL           |
-| --------------------- | ------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------- | --- | --------------- |
-| hello-world           | 13.3KB | 运行：打印帮助文档          | docker run  hello-world                                                                                                   | ok  |                 |
-| nginx                 |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                                                         | ok  | http://IP:8081/ |
-| tomcat                |        |                    |                                                                                                                           |     |                 |
-| mysql                 | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest                                 | ok  |                 |
-| redis                 | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes                                   | ok  |                 |
-| wordpress  +mysql     |        | 两个容器链接在一起          | docker run --name  wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                            |     | http://IP/      |
-| ubuntu                | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                                                   | ok  |                 |
-| tensorflow            | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                                                            | ok  |                 |
-| python:3.5            |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                                                            | ok  |                 |
-| jenkis                |        | 后台启动jenkis服务       | docker run -d  jenkins/jenkins:lts /bin/bash                                                                              | ok  | http://IP:8080/ |
-| amancevice/superset   | 2.25GB | 后台启动superset       | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | ok  | http://IP:8088/ |
-| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB        | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          |     | 同上              |
-| apache/drill          | 936MB  |                    |                                                                                                                           |     |                 |
-| elasticsearch         |        |                    | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |     |                 |
+| images     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 状态  | 访问URL           |
+| ---------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --- | --------------- |
+| nginx      |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                         | ok  | http://IP:8081/ |
+| tomcat     |        |                    |                                                                                           |     |                 |
+| mysql      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | ok  | mysql://xx:3306 |
+| redis      | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   | ok  |                 |
+| python:3.5 |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                            | ok  |                 |
+| ubuntu     | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |     |                 |
+| tensorflow | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |     |                 |
+
+表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
+
+| images                | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                | 状态  | 访问URL           |
+| --------------------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- | --- | --------------- |
+| jenkis                |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                               | ok  | http://IP:8080/ |
+| elasticsearch         |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |     |                 |
+| amancevice/superset   | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | ok  | http://IP:8088/ |
+| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          |     | 同上              |
+| wordpress +mysql      |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                             |     | http://IP/      |
+| apache/drill          | 936MB  |               |                                                                                                                           |     |                 |
+
+表格 其它镜像 （基础和服务型镜像之外的）
+
+| images      | 镜像大小   | 实例描述      | 实例启动命令 run             | 状态  | 访问URL |
+| ----------- | ------ | --------- | ---------------------- | --- | ----- |
+| hello-world | 13.3KB | 运行：打印帮助文档 | docker run hello-world | ok  |       |
+|             |        |           |                        |     |       |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 
@@ -1433,7 +1466,7 @@ docker system prune
 
 ```shell
 # docker run时本地无镜像，则从官网下载；再运行
-[keefe@iZ2zebj7eoe7terrup37y4Z docker]$ docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker
+$ docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker
 Unable to find image 'uifd/ui-for-docker:latest' locally
 Trying to pull repository docker.io/uifd/ui-for-docker ...
 latest: Pulling from docker.io/uifd/ui-for-docker
@@ -1442,7 +1475,7 @@ Digest: sha256:fe371ff5a69549269b24073a5ab1244dd4c0b834cbadf244870572150b1cb749
 Status: Downloaded newer image for docker.io/uifd/ui-for-docker:latest
 743e47f7ece394774920b35990a72e39622b976042accb69543835e25b08e22c
 
-[keefe@iZ2zebj7eoe7terrup37y4Z docker]$ docker images
+$ docker images
 REPOSITORY                      TAG                 IMAGE ID            CREATED             SIZE
 docker.io/ubuntu                latest              1318b700e415        2 weeks ago         72.8 MB
 docker.io/amancevice/superset   latest              bc910e3fc165        5 weeks ago         2.25 GB
@@ -1576,8 +1609,8 @@ services:
 
 | 工具名           | 镜像大小   | 描述             | 使用                                                                                                                                            | 访问             |
 | ------------- | ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| ui-for-docker | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
 | portainer     | 79MB   | docker管理可视化。   | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
+| ui-for-docker | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
 | register:2    | 26.2MB | 本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
 | clair         |        | 镜像安全扫描         |                                                                                                                                               |                |
 

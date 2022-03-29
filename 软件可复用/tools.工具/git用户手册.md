@@ -141,7 +141,7 @@ git 分布式版本管理软件。
 
 gitk是git安装包中缺省的图形界面包。可以方便地用来查看历史日志，修改信息等。
 
-<br>
+下面章节主要是讲git客户端的使用。
 
 <br>
 
@@ -466,7 +466,7 @@ git show  #可以看某次的变更
 git status
 ```
 
-## 3.3   [分布式的工作流程 ](http://gitbook.liuhui998.com/3_6.html)
+## 3.3  分布式的工作流程
 
 ### 3.3.1 创建公共仓库/主干树
 
@@ -728,7 +728,7 @@ git merge --squash dev
 * linux     :~/.ssh
 2) 在linux服务器上将公钥加到git用户的authorized_keys文件中。
 
-**类似工具：**使用Gitosis的多用户访问
+**类似工具**：使用Gitosis的多用户访问
 
 在gitosis中, 有一个叫 authorized_keys 的文件，里面包括了所有授权可以访问仓库的用户的公钥(public key), 这样每个用户就可以直接使用'git'用户来推送(push)和拉(pull)代码.
 
@@ -738,16 +738,32 @@ git merge --squash dev
 
 译者注2: [Gitosis配置(中文)](http://progit.chunzi.me/zh/ch4-7.html)
 
-## 4.2   分支branch和tag管理
+### 4.1.2 开源协同开发
+
+示例：[git@github.com](mailto:git@github.com):looly/elasticsearch-definitive-guide-cn.git
+
+开始我对Pull Request流程不熟悉，后来参考了[@numbbbbb](https://github.com/numbbbbb)的《The Swift Programming Language》协作流程，在此感谢。
+
+1. 首先fork我的项目
+2. 把fork过去的项目也就是你的项目clone到你的本地
+3. 运行 git remote add looly [git@github.com](mailto:git@github.com):looly/elasticsearch-definitive-guide-cn.git 把我的库添加为远端库
+4. 运行 git pull looly master 拉取并合并到本地
+5. 翻译内容
+6. commit后push到自己的库（git push origin master）
+7. 登录Github在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
+
+1-3是初始化操作，执行一次即可。在翻译前必须执行第4步同步我的库（这样避免冲突），然后执行5-7既可。
+
+## 4.2  分支branch和tag管理
 
 版本号：x.x.x=主版本号.次版本号.发布序列。主版本号只用在重要架构级或功能大升级。
 
 表格  branch和tag比较表
 
-|           | 说明                                                                                                                                                                                                                | 主要命令                                                                                                                                                                                                                      |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x<br>$ git push --tags  #推送全部tag<br/>$ git push origin [xxx] #推送单个tag到远程<br/>$ git push origin -d [xxx]  #删除远程指定tag                                    | $ git tag  # 查看  <br>$ git tag  -a [xxx]  # 打tag<br>$ git tag -d [xxx]  #删除本地指定tag                                                                                                                                        |
-| branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用 -a  <br/>$ git branch -a  <br/>$ git push origin [xxx]    # 推送分支到远程   <br/>$ git push origin :[xxx]  # 删除远程分支，或者将:改为--delete | # 创建分支  <br/>`$git checkout --orphan [空分支]`  <br/>$ git checkout -b [to] [from]  <br/>$ git branch -d [xxx]  #删除分支<br/>$ git checkout [xxx]  #切换分支<br/>$ git merge [to]   #合并分支<br/>$ git branch -m [old] [new]   # 重命名分支 |
+|           | 说明                                                                                                                                                                                                                       | 主要命令                                                                                                                                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| tag 标签    | 组成为vx.x.x，完整的版本号，用来标识阶段性的发布版本（不再编辑的分支），<br/>相当于release-x.x.x<br>`git push --tags`  #推送全部tag<br/>`git push origin [xxx]`  #推送单个tag到远程<br/>`git push origin -d [xxx]`   #删除远程指定tag                                         | `git tag`  # 查看  <br>`git tag  -a [xxx]`   # 打tag<br>`git tag -d [xxx]`   #删除本地指定tag                                                                                                                                     |
+| branch 分支 | 组成为x.x，其中含义两个固定分支master和devel。<br/>如果项目不是太复杂，devel分支将取代所有版本分支。  <br/># 查看远程分支，查看本地不用 -a   <br/>`$ git branch -a`  <br/>`$ git push origin [xxx]`    # 推送分支到远程   <br/>`$ git push origin :[xxx]`  # 删除远程分支，或者将:改为--delete | # 创建分支  <br/>`git checkout --orphan [空分支]`  <br/>`git checkout -b [to] [from]`  <br/>`git branch -d [xxx]`  #删除分支<br/>`git checkout [xxx]`  #切换分支<br/>`git merge [to]`   #合并分支<br/>`git branch -m [old] [new]`   # 重命名分支 |
 
 备注：命令参数如-d/-D大小写不敏感。tag和branch推送远程的操作命令类似。
 
@@ -818,13 +834,14 @@ $ git branch -d bugfix-x
 **1) 本地管理分支**
 
 ```sh
-//create branch, branch_name default: local
+# create branch, branch_name default: local
 $ git branch [branch_name]
-// switch to branch
-$git checkout [branch_name]
-//merge branch，将branch_name合并到当前分支
+# switch to branch
+$ git checkout [branch_name]
+
+# merge branch，将branch_name合并到当前分支
 $git merge [branch_name]
-// delete branch
+# delete branch
 $git branch –D [branch_name]
 ```
 
@@ -836,11 +853,59 @@ b) git pull取其它成员的工作树到本地，如果有修改，将自动合
 
 c) git push将本地master分支更新到远程服务器。
 
-## 4.3   子模块
+## 4.3  子模块
 
 http://gitbook.liuhui998.com/5_10.html
 
 git submodule
+
+## 4.4  filter-branch 全局修改分支
+
+filter-branch 可以全局修改分支的历史记录。
+
+**1) 开源前修改用户信息**
+
+```sh
+do_commit_filter()
+{       # '=' seems 完全相同，通配符＊不起作用
+   git filter-branch -f --commit-filter '
+       if [ "${GIT_AUTHOR_NAME}" = denny ];
+       then
+         GIT_COMMITTER_NAME="Denny Wu";
+         GIT_AUTHOR_NAME="Denny Wu";
+         GIT_COMMITTER_EMAIL="wuqifu@gmail.com";
+         GIT_AUTHOR_EMAIL="wuqifu@gmail.com";
+          git commit-tree "$@";
+       else
+         git commit-tree "$@";
+       fi' HEAD
+}
+
+do_env_filter()
+{
+  git filter-branch -f --env-filter '
+   case "${GIT_AUTHOR_NAME} ${GIT_AUTHOR_EMAIL}" in
+   *enny*)
+   export GIT_AUTHOR_NAME="Denny Wu"
+   export GIT_AUTHOR_EMAIL="wuqifu@gmail.com"
+   ;;
+   esac
+   case "${GIT_COMMITTER_NAME}　${GIT_COMMITTER_EMAIL}" in
+   *enny*)
+   export GIT_COMMITTER_NAME="Denny Wu"
+   export GIT_COMMITTER_EMAIL="wuqifu@gmail.com"
+   ;;
+   esac
+   '
+}
+```
+
+**2）删除历史纪录中某个文件**
+
+```sh
+# remove unnecessay file or directory， 如passwords.txt
+git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
+```
 
 <br>
 
@@ -907,243 +972,17 @@ Any git command accepting any <object> can also use the following symbolic notat
     For a more complete list of ways to spell object names, see "SPECIFYING REVISIONS" section in git-rev-parse(1).
 ```
 
-<br><br>
-
 <br>
 
-# 6 git仓库托管
-
-常见托管仓库：[oschina](http://git.oschina.net/)  [github](http://wwww.github.com)  [repo.or.cz](http://repo.or.cz)
-
-## 6.1  仓库托管简介
-
-基本概念
-
-* public: 公共仓库
-* private: 私有仓库，github付费使用，oschina暂时提供免费1000个仓库。
-* fork：克隆别的仓库到自己仓库
-* pull requests: 分支合并请求
-
-**支持的克隆路径：SSH/https，示例如下，**
-
-* git clone git@git.oschina.net:dennycn/xxx.git
-* git cone https://git.oschina.net/dennycn/xxx.git
-
-### 6.1.1 filter-branch：全局修改分支历史纪录
-
-**1)  开源前修改用户信息**
-
-```sh
-do_commit_filter()
-{       # '=' seems 完全相同，通配符＊不起作用
-   git filter-branch -f --commit-filter '
-       if [ "${GIT_AUTHOR_NAME}" = denny ];
-       then
-         GIT_COMMITTER_NAME="Denny Wu";
-         GIT_AUTHOR_NAME="Denny Wu";
-         GIT_COMMITTER_EMAIL="wuqifu@gmail.com";
-         GIT_AUTHOR_EMAIL="wuqifu@gmail.com";
-          git commit-tree "$@";
-       else
-         git commit-tree "$@";
-       fi' HEAD
-}
-
-do_env_filter()
-{
-  git filter-branch -f --env-filter '
-   case "${GIT_AUTHOR_NAME} ${GIT_AUTHOR_EMAIL}" in
-   *enny*)
-   export GIT_AUTHOR_NAME="Denny Wu"
-   export GIT_AUTHOR_EMAIL="wuqifu@gmail.com"
-   ;;
-   esac
-   case "${GIT_COMMITTER_NAME}　${GIT_COMMITTER_EMAIL}" in
-   *enny*)
-   export GIT_COMMITTER_NAME="Denny Wu"
-   export GIT_COMMITTER_EMAIL="wuqifu@gmail.com"
-   ;;
-   esac
-   '
-}
-```
-
-**2）删除历史纪录中某个文件**
-
-```sh
-# remove unnecessay file or directory， 如passwords.txt
-git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
-```
-
-## 6.2 gitlab本地搭建
-
-gitlab是开源仓库，可以在本地搭建私有仓库。
-
-```sh
-[root@server1 ~]# yum install -y git
-[root@server1 ~]# yum install gitlab-ce-11.2.0-ce.0.el7.x86_64.rpm -y   #安装gitlab
-[root@server1 ~]# cd /etc/gitlab/
-[root@server1 gitlab]# ls
-gitlab.rb
-[root@server1 gitlab]# vim gitlab.rb  #更新本地IP
-  13 external_url 'http://172.25.76.1'
-
-[root@server1 gitlab]# gitlab-ctl reconfigure
-```
-
-在浏览器输入172.25.76.1，即可修改ROOT密码。
-
-## 6.3 gitee
-
-相对于github，[gitee](https://www.gitee.com/) 支持免费私有仓库（原git.oschina.net）。
-
-### 项目用户权限
-
-用户权限：管理者、开发者、报告者和观察者
-
-* 管理者：所有权限
-* 开发者：报告者权限 + 代码读写
-* 报告者：观察者权限 + 可提交问题issue
-* 观察者：仅可查看issue.
-
-### 开源协同开发
-
-示例：git@github.com:looly/elasticsearch-definitive-guide-cn.git
-
-开始我对Pull Request流程不熟悉，后来参考了[@numbbbbb](https://github.com/numbbbbb)的《The Swift Programming Language》协作流程，在此感谢。
-
-1. 首先fork我的项目
-2. 把fork过去的项目也就是你的项目clone到你的本地
-3. 运行 git remote add looly git@github.com:looly/elasticsearch-definitive-guide-cn.git 把我的库添加为远端库
-4. 运行 git pull looly master 拉取并合并到本地
-5. 翻译内容
-6. commit后push到自己的库（git push origin master）
-7. 登录Github在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
-
-1~3是初始化操作，执行一次即可。在翻译前必须执行第4步同步我的库（这样避免冲突），然后执行5~7既可。
-
-<br>
-
-## 本章参考
-
-* https://blog.csdn.net/zcx1203/article/details/90734055 "gitlab本地仓库搭建|Jenkins关联gitlab"
-
-<br>
-
-# 7  FAQ
-
-## 7.1  git与svn集成
-
-要先装软件git-svn
-
-### 7.1.1 svn转化为git
-
-http://rongjih.blog.163.com/blog/static/335744612010620105546475/
-
-1) 本地svn先转化到本地git
-
-$ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
-
-或 $ git svn clone file:///tmp/test-svn -s
-
-2) 获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了）
-   `$ git svn rebase`
-
-3) 转换SVN仓库的svn:ignore属性到Git仓库的.gitignore文件
-   `$ git svn create-ignore`
-
-4) 转换SVN的标签为Git标签
-   
-   ```sh
-   $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
-   $ rm -Rf .git/refs/remotes/tags
-   ```
-
-5) 转换SVN的分支为Git分支
-   
-   ```sh
-   $ cp -Rf .git/refs/remotes/* .git/refs/heads/
-   $ rm -Rf .git/refs/remotes
-   ```
-
-6) 最后把转换后的本地Git仓库推到公共的Git服务器
-   
-   ```sh
-   $ git remote add origin [远程Git服务器地址]
-   $ git push origin master --tags
-   ```
-
-### 7.1.2 git VS svn
-
-**1)支持的传输协议**
-
-svn:  http/https, svn(缺省端口9418)
-
-git:  http/https, git(缺省端口9418), ssh, rsync
-
-$man git-clone  //可查看支持的URL格式
-
-**2)缺省服务启动**
-
-svn: $svnserver –d --listen-port /home/denny/svnrepos
-
-git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
-
-**3)对比**
-
-* 仓库管理：svn集中式管理, git分布式管理，可以多个中心。
-* 权限管理：svn可设置目录级的权限，git都可读，只能设写限制。
-* 应用范围：svn公司多项目开发一仓库，git单一开源软件仓库。
-* 签出：svn允许部分签出，Git只能全部签出.
-
-## 7.2  中文乱码问题
-
-TODO: 效果不明显
-
-```sh
-alias ls=’ls –show-control-chars –color=auto’
-git config core.quotepath false
-```
-
-## 7.3   远程git命令找不到
-
-add to .git/config
-
-```ini
-[remote "origin"]
-     fetch = +refs/heads/*:refs/remotes/origin/*
-     url = ssh://qfwu@61.145.124.165:37856/~/git/yyusmodel
-     uploadpack = ~/app/bin/git-upload-pack
-     receivepack = ~/app/bin/git-receive-pack
-```
-
-## 7.4  git svn Can't locate SVN/Core.pm
-
-```sh
-$ cd ${SVN_SRC_PATH}
-$ make swig-pl
-$ make check-swig-pl
-$ sudo make install-swig-pl
-```
-
-用PERL安装所需模块：
-
-```perl
-$ perl -MCPAN -e shell
-cpan> install XXX:XXX
-```
-
-<br>
-
-# 8 gitbook
+# 6 gitbook
 
 项目地址：https://github.com/GitbookIO/gitbook
 
-GitBook is a command line tool (and Node.js library) for building beautiful books using **GitHub**/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
+GitBook is a command line tool (and Node.js library) for building beautiful books using GitHub/Git and Markdown (or AsciiDoc). Here is an example: [Learn Javascript](https://www.gitbook.com/book/GitBookIO/javascript).
 
 GitBook 分布式协作写书。
 
-## 8.1 Getting started
+## 6.1 Getting started
 
 GitBook can be used either on your computer for building local books or on GitBook.com for hosting them. To get started, check out [the installation instructions in the documentation](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md).
 
@@ -1157,7 +996,7 @@ GitBook can be used either on your computer for building local books or on GitBo
 
 格式化书： `gitbook pdf|epub|mobi  ../xx.pdf`    //依赖插件 ebook-convert
 
-## 8.2 插件
+## 6.2 插件
 
 book.json模板
 
@@ -1239,7 +1078,187 @@ book.json模板
 }
 ```
 
+<br>
+
+# 7 git服务端
+
+## 仓库托管
+
+常见托管仓库：[oschina](http://git.oschina.net/) [github](http://wwww.github.com) [repo.or.cz](http://repo.or.cz)
+
+基本概念
+
+- public: 公共仓库
+- private: 私有仓库，github付费使用，oschina暂时提供免费1000个仓库。
+- fork：克隆别的仓库到自己仓库
+- pull requests: 分支合并请求
+
+**支持的克隆路径：SSH/https，示例如下，**
+
+- git clone [git@git.oschina.net](mailto:git@git.oschina.net):dennycn/xxx.git
+- git cone https://git.oschina.net/dennycn/xxx.git
+
+### gitee
+
+相对于github，[gitee](https://www.gitee.com/) 支持免费私有仓库（原git.oschina.net）。
+
+项目用户权限
+
+用户权限：管理者、开发者、报告者和观察者
+
+- 管理者：所有权限
+- 开发者：报告者权限 + 代码读写
+- 报告者：观察者权限 + 可提交问题issue
+- 观察者：仅可查看issue.
+
+## 简易git服务端部署
+
+## gitlab
+
+Gitlab分为社区版Gitlab CE 和企业版Gitlab EE。
+
+Gitlab服务主要构成
+
+* nginx:静态web服务器
+
+* gitlab-shell：用于处理Git命令和修改authorized keys列表
+
+* gitlab-workhorse:轻量级的反向代理服务器
+
+* logrotate：日志文件管理工具
+
+* postgresql：数据库
+
+* redis：缓存数据库
+
+* sidekiq：用于在后台执行队列任务（异步执行）
+
+* unicorn：An HTTP server for Rack applications，GitLab Rails应用是托管在这个服务器上面的。
+
+gitlab本地搭建私有仓库，如下，
+
+```sh
+[root@server1 ~]# yum install -y git
+[root@server1 ~]# yum install gitlab-ce-11.2.0-ce.0.el7.x86_64.rpm -y   #安装gitlab
+[root@server1 ~]# cd /etc/gitlab/
+[root@server1 gitlab]# ls
+gitlab.rb
+[root@server1 gitlab]# vim gitlab.rb  #更新本地IP
+  13 external_url 'http://172.25.76.1'
+
+[root@server1 gitlab]# gitlab-ctl reconfigure
+```
+
+在浏览器输入172.25.76.1，即可修改ROOT密码。
+
+## 本章参考
+
+- 基于docker部署gitlab私有化 [基于docker部署gitlab私有化_向往--全栈--之路的博客-CSDN博客](https://blog.csdn.net/u014221090/article/details/103182229)
+
+- [gitlab本地仓库搭建|Jenkins关联gitlab_zcx1203的博客-CSDN博客_gitlab本地仓库](https://blog.csdn.net/zcx1203/article/details/90734055) "gitlab本地仓库搭建|Jenkins关联gitlab"
+
 <br><br>
+
+# FAQ
+
+## Q1 git与svn集成
+
+要先装软件git-svn
+
+### svn转化为git
+
+http://rongjih.blog.163.com/blog/static/335744612010620105546475/
+
+1. 本地svn先转化到本地git
+
+$ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
+
+或 $ git svn clone file:///tmp/test-svn -s
+
+2. 获取SVN服务器的最新更新到转换后的Git仓库（这步通常在连续的转换过程中就没必要了） `$ git svn rebase`
+
+3. 转换SVN仓库的svn:ignore属性到Git仓库的.gitignore文件 `$ git svn create-ignore`
+
+4. 转换SVN的标签为Git标签
+   
+   ```sh
+   $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
+   $ rm -Rf .git/refs/remotes/tags
+   ```
+
+5. 转换SVN的分支为Git分支
+   
+   ```sh
+   $ cp -Rf .git/refs/remotes/* .git/refs/heads/
+   $ rm -Rf .git/refs/remotes
+   ```
+
+6. 最后把转换后的本地Git仓库推到公共的Git服务器
+   
+   ```sh
+   $ git remote add origin [远程Git服务器地址]
+   $ git push origin master --tags
+   ```
+
+### git VS svn
+
+**1)支持的传输协议**
+
+svn: http/https, svn(缺省端口9418)
+
+git: http/https, git(缺省端口9418), ssh, rsync
+
+$man git-clone //可查看支持的URL格式
+
+**2)缺省服务启动**
+
+svn: $svnserver –d --listen-port /home/denny/svnrepos
+
+git: $git-daemon --reuseaddr –port=9418 --base-path=/home/git
+
+**3)对比**
+
+- 仓库管理：svn集中式管理, git分布式管理，可以多个中心。
+- 权限管理：svn可设置目录级的权限，git都可读，只能设写限制。
+- 应用范围：svn公司多项目开发一仓库，git单一开源软件仓库。
+- 签出：svn允许部分签出，Git只能全部签出.
+
+## Q2 中文乱码问题
+
+TODO: 效果不明显
+
+```sh
+alias ls=’ls –show-control-chars –color=auto’
+git config core.quotepath false
+```
+
+## Q3 远程git命令找不到
+
+add to .git/config
+
+```ini
+[remote "origin"]
+     fetch = +refs/heads/*:refs/remotes/origin/*
+     url = ssh://qfwu@61.145.124.165:37856/~/git/yyusmodel
+     uploadpack = ~/app/bin/git-upload-pack
+     receivepack = ~/app/bin/git-receive-pack
+```
+
+## Q4 git svn Can't locate SVN/Core.pm
+
+```sh
+$ cd ${SVN_SRC_PATH}
+$ make swig-pl
+$ make check-swig-pl
+$ sudo make install-swig-pl
+```
+
+用PERL安装所需模块：
+
+```perl
+$ perl -MCPAN -e shell
+cpan> install XXX:XXX
+```
 
 <br>
 
@@ -1260,6 +1279,8 @@ book.json模板
 [7]. Git配置管理  http://www.uml.org.cn/pzgl/201203084.asp
 
 [8]. github http://gooss.org/the-use-of-git-and-github-management-development/
+
+* 分布式的工作流程 http://gitbook.liuhui998.com/3_6.html
 
 <br>
 

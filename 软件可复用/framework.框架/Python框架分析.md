@@ -415,7 +415,7 @@ uvicorn django_cn.asgi:application
 
 ### django进阶篇
 
-#### **1. 架构分析**
+#### 1. 架构分析
 
 Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现的template和视图view的差异，另外MTV少了URL分发的逻辑。
 
@@ -436,7 +436,7 @@ Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现�
 * Template: 模板，用来渲染页面。
 
 * ViewModel，视图模型，Model层之上，用来在视图里传递和处理数据的模型。
-
+  
   ![1574518389091](../../media/sf_reuse/framework/frame_web_003.png)
 
 图  django运行视图
@@ -1218,23 +1218,29 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
 * 仓库： https://github.com/celery/celery
 
 * 中文文档：https://www.celerycn.io/
-
- 它支持
-
+  
+  它支持
 - 中间人
+  
   - [RabbitMQ]()
   - [Redis]()
   - [Amazon SQS]()
+
 - 结果存储
+  
   - AMQP、 Redis
   - Memcached
   - SQLAlchemy、Django ORM
   - Apache Cassandra、Elasticsearch
+
 - 并发
+  
   - prefork (multiprocessing)
   - [Eventlet](http://eventlet.net/)、[gevent](http://www.gevent.org/)
   - solo (single threaded)
+
 - 序列化
+  
   - pickle、json、yaml、msgpack
   - zlib、bzip2 compression
   - Cryptographic message signing

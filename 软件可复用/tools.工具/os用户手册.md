@@ -217,20 +217,24 @@ Windows8启动相关分区有三个:
 Linux三种输入框架：ibus(缺省自带)、fcitx（推荐，含搜狗五笔拼音输入法）和 xim，三种输入法可同时并存。
 
 ```shell
-sudo apt update
-# fcitx newest version is fctix5
-sudo apt install fcitx
+# 安装字体工具: fontconfig(必需)，xfonts-utils(可选)
+$ sudo apt-get -y install fontconfig 
+$ sudo apt-get -y install xfonts-utils
 
-# 设置fcitx开机自启动在终端执行
-sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+# 法1：直接安装字体如文泉驿字体, libreoffice的缺省中文字体
+$ sudo apt-get -y install wqy-bitmap-fonts
 
-# (optional)卸载系统ibus输入法框架
-sudo apt purge ibus
+# 法2：手动增加新字体，如simsun.ttf
+# 将缺失字体文件ttf或ttc放在指定目录
+$ sudo mkdir -p /usr/share/fonts/chinese/
+$ sudo cp simsun.ttf /usr/share/fonts/chinese/
+# 将新字体所在目录添加到 /etc/fonts/fonts.conf
+$ sudo vi /etc/fonts/fonts.conf
+<dir>/usr/share/fonts/chinese/</dir>
 
-# 安装搜狗输入法: 1.在官网下载搜狗输入法安装包如sogoupinyin_3.4.0.9700_amd64，并安装; # 2.安装输入法依赖
-sudo dpkg -i 安装包名
-sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
+$ fc-list |grep 'simsun'
+/usr/share/fonts/chinese/simsun.ttc: 宋体,SimSun:style=常规,Regular
+/usr/share/fonts/chinese/simsun.ttc: 新宋体,NSimSun:style=常规,Regular
 ```
 
 ### 字体.Font

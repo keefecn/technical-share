@@ -1,10 +1,8 @@
-| 序号 | 修改时间  | 修改内容                                   | 修改人 | 审稿人 |
-| ---- | --------- | ------------------------------------------ | ------ | ------ |
-| 1    | 2021-6-9  | 创建。从《PYTHON WEB框架分析》迁移相关章节 | Keefe  |        |
-| 2    | 2021-7-6  | 新增 gunicorn源码剖析 章节，7.18另文       | 同上   |        |
-| 3    | 2021-8-23 | 《flask源码剖析》拆分单独成文。            | 同上   |        |
-
-
+| 序号  | 修改时间      | 修改内容                       | 修改人   | 审稿人 |
+| --- | --------- | -------------------------- | ----- | --- |
+| 1   | 2021-6-9  | 创建。从《PYTHON WEB框架分析》迁移相关章节 | Keefe |     |
+| 2   | 2021-7-6  | 新增 gunicorn源码剖析 章节，7.18另文  | 同上    |     |
+| 3   | 2021-8-23 | 《flask源码剖析》拆分单独成文。         | 同上    |     |
 
 <br><br><br>
 
@@ -22,22 +20,20 @@
 
 表格  python三大框架的实现方式比较
 
-|                | Django                                             | Flask                                            | tornado                                                      |
-| -------------- | -------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| 简述           | 全能、重量级框架                                   | 轻量级框架，原生组件少                           | 轻量、异步高性能                                             |
-| 代码行数       | 120K                                               | 42K                                              | 6.5K                                                         |
-| 全局WEB实例    | startproject                                       | `from flask import Flask  g_app=Flask(__name__)` | tornado.web.Application                                      |
-| 应用app实例    | startapp                                           | 蓝图Blureprint                                   |                                                              |
-| restful扩展    | djangorestframework                                | flask_restplus                                   |                                                              |
-| 类基础视图View | `from django.views import View`                    | `from flask.views import View`                   |                                                              |
-| 类视图APIView  | `from rest_framework.views import APIView`         |                                                  |                                                              |
+|            | Django                                             | Flask                                            | tornado                                                                     |
+| ---------- | -------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
+| 简述         | 全能、重量级框架                                           | 轻量级框架，原生组件少                                      | 轻量、异步高性能                                                                    |
+| 代码行数       | 120K                                               | 42K                                              | 6.5K                                                                        |
+| 全局WEB实例    | startproject                                       | `from flask import Flask  g_app=Flask(__name__)` | tornado.web.Application                                                     |
+| 应用app实例    | startapp                                           | 蓝图Blureprint                                     |                                                                             |
+| restful扩展  | djangorestframework                                | flask_restplus                                   |                                                                             |
+| 类基础视图View  | `from django.views import View`                    | `from flask.views import View`                   |                                                                             |
+| 类视图APIView | `from rest_framework.views import APIView`         |                                                  |                                                                             |
 | 路由映射       | urlpatterns = [ path('admin/', admin.site.urls), ] | add_url_rule('/xx', viewfun=xxView.as_view())    | router = RuleRouter([     Rule(PathMatches("/router.*"), CustomRouter()) ]) |
-| ORM            | DRF                                                | flask_sqlalchemy                                 |                                                              |
-| swagger        | drf-yasg 或 coreapi                                | flassger 或 restplus                             |                                                              |
+| ORM        | DRF                                                | flask_sqlalchemy                                 |                                                                             |
+| swagger    | drf-yasg 或 coreapi                                 | flassger 或 restplus                              |                                                                             |
 
-
-
-#  1 django源码剖析
+# 1 django源码剖析
 
 源码版本：django-3.2.4
 
@@ -61,40 +57,36 @@ Requires: pytz, sqlparse
 Required-by: drf-yasg, djangorestframework
 ```
 
-
-
-##  源码结构
+## 源码结构
 
 表格 django源码结构
 
-| 目录          | 子目录或文件                                                 | 说明                           |
-| ------------- | ------------------------------------------------------------ | ------------------------------ |
-| app           |                                                              |                                |
-| bin           | django-admin.py                                              |                                |
-| conf          |                                                              | 配置信息，分语种               |
+| 目录            | 子目录或文件                                                                                                          | 说明                |
+| ------------- | --------------------------------------------------------------------------------------------------------------- | ----------------- |
+| app           |                                                                                                                 |                   |
+| bin           | django-admin.py                                                                                                 |                   |
+| conf          |                                                                                                                 | 配置信息，分语种          |
 | contrib       | 目录有admin auth contenttypes  flatpages gis  postgres <br>redirects sessions sitemaps sites statfiles syndication | 兼容旧版本的功能，包括各个 app |
-| core          | 缓存 序列化 代理 信号 验证器                                 | 核心功能                       |
-|               | 目录: cache check files handlers mail serializers servers    |                                |
-|               | 文件: asgi.py wsgi.py signals.py validator.py                |                                |
-| db            | 目录：backends migrations models                             | 数据库、迁移、ORM              |
-| dispatch      | dispatch.py                                                  |                                |
-| forms         | 目录有jiajia2, template                                      | 前端控件                       |
-| http          | request.py response.py cookie.py multipartparser.py          |                                |
-| middleware    | csrf.py gzip.py http.py locale.py security.py                | 中间件                         |
-| template      |                                                              | 模板                           |
-| tempatetags   |                                                              |                                |
-| test          |                                                              | 测试                           |
-| urls          | base.py conf.py converters.py resolvers.py                   | url检测、转换、解析            |
-| utils         | functional.py                                                | 工具                           |
-| views         | 目录有decorator, generic, template<br>文件有csrf.py static.py | 视图                           |
-| `__main__.py` |                                                              |                                |
-| shortcuts.py  |                                                              |                                |
-
-
+| core          | 缓存 序列化 代理 信号 验证器                                                                                                | 核心功能              |
+|               | 目录: cache check files handlers mail serializers servers                                                         |                   |
+|               | 文件: asgi.py wsgi.py signals.py validator.py                                                                     |                   |
+| db            | 目录：backends migrations models                                                                                   | 数据库、迁移、ORM        |
+| dispatch      | dispatch.py                                                                                                     |                   |
+| forms         | 目录有jiajia2, template                                                                                            | 前端控件              |
+| http          | request.py response.py cookie.py multipartparser.py                                                             |                   |
+| middleware    | csrf.py gzip.py http.py locale.py security.py                                                                   | 中间件               |
+| template      |                                                                                                                 | 模板                |
+| tempatetags   |                                                                                                                 |                   |
+| test          |                                                                                                                 | 测试                |
+| urls          | base.py conf.py converters.py resolvers.py                                                                      | url检测、转换、解析       |
+| utils         | functional.py                                                                                                   | 工具                |
+| views         | 目录有decorator, generic, template<br>文件有csrf.py static.py                                                         | 视图                |
+| `__main__.py` |                                                                                                                 |                   |
+| shortcuts.py  |                                                                                                                 |                   |
 
 ## 命令行指令
 
-###   命令行入口 execute_from_command_line
+### 命令行入口 execute_from_command_line
 
 无论 manager.py 还是 django-admin.py 最终执行的命令都是通过 调用 execute_from_command_line实现的
 
@@ -104,8 +96,6 @@ from django.core.management import execute_from_command_line
 
 execute_from_command_line(sys.argv)
 ```
-
-
 
 django/core/management/commands
 
@@ -121,16 +111,12 @@ diffsettings.py      migrate.py         sqlsequencereset.py
 dumpdata.py          runserver.py       squashmigrations.py
 ```
 
-
-
-###   程序启动命令: runserver
+### 程序启动命令: runserver
 
 django有两种运行方式
 
 1. 通过python manage.py runserver运行自带的web server
 2. 通过mod_python（弃）
-
-
 
 命令：`python manger.py runserver`
 
@@ -162,7 +148,7 @@ class Command(BaseCommand):
         """Run the server, using the autoreloader if needed."""
         use_reloader = options['use_reloader']
 
-        if use_reloader:	#运行时重载支持
+        if use_reloader:    #运行时重载支持
             autoreload.run_with_reloader(self.inner_run, **options)
         else:
             self.inner_run(None, **options) #实际run
@@ -174,10 +160,8 @@ class Command(BaseCommand):
             run(self.addr, int(self.port), handler,
                 ipv6=self.use_ipv6, threading=threading, server_cls=self.server_cls)
         except
-        	...
+            ...
 ```
-
-
 
 django/core/servers/basehttp.py
 
@@ -201,13 +185,13 @@ def run(addr, port, wsgi_handler, ipv6=False, threading=False, server_cls=WSGISe
         # and will prevent the need to kill the server manually if a thread
         # isn't terminating correctly.
         httpd.daemon_threads = True
-    httpd.set_app(wsgi_handler)	#设置处理句柄
-    httpd.serve_forever()   	#程序一直存活
+    httpd.set_app(wsgi_handler)    #设置处理句柄
+    httpd.serve_forever()       #程序一直存活
 
 
 class WSGIServer(simple_server.WSGIServer):
     """BaseHTTPServer that implements the Python WSGI protocol"""
-	# WSGI定义
+    # WSGI定义
     request_queue_size = 10
 
     def __init__(self, *args, ipv6=False, allow_reuse_address=True, **kwargs):
@@ -215,10 +199,7 @@ class WSGIServer(simple_server.WSGIServer):
             self.address_family = socket.AF_INET6
         self.allow_reuse_address = allow_reuse_address
         super().__init__(*args, **kwargs)
-
 ```
-
-
 
 ### 数据库转移命令 migrate
 
@@ -226,11 +207,9 @@ class WSGIServer(simple_server.WSGIServer):
 
 当数据库表、字段有变化时，可以通过migrate命令进行数据库重建。
 
-
-
 ## HTTP处理
 
-###   请求处理 WSGIServer/WSGIHandler
+### 请求处理 WSGIServer/WSGIHandler
 
 请求处理流程小结：
 
@@ -305,8 +284,6 @@ class WSGIHandler(base.BaseHandler):
         return response
 ```
 
-
-
 django/core/handlers/base.py
 
 ```python
@@ -322,7 +299,7 @@ class BaseHandler:
     def load_middleware(self, is_async=False):
         """
         Populate middleware lists from settings.MIDDLEWARE.
-		从settings.MIDDLEWARE加载中间件，要求在环境初始化后
+        从settings.MIDDLEWARE加载中间件，要求在环境初始化后
         Must be called after the environment is fixed (see __call__ in subclasses).
         """
         get_response = self._get_response_async if is_async else self._get_response
@@ -331,7 +308,7 @@ class BaseHandler:
 
         # 多个中间件时的处理
         for middleware_path in reversed(settings.MIDDLEWARE):
-        	# 略
+            # 略
 
         # Adapt the top of the stack, if needed.
         handler = self.adapt_method_mode(is_async, handler, handler_is_async)
@@ -356,7 +333,7 @@ class BaseHandler:
     async def get_response_async(self, request):
         """
         Asynchronous version of get_response.
-		异步响应： async + await
+        异步响应： async + await
         Funneling everything, including WSGI, into a single async
         get_response() is too slow. Avoid the context switch by using
         a separate async response path.
@@ -374,10 +351,6 @@ class BaseHandler:
         return response
 ```
 
-
-
-
-
 ## MVC
 
 ### Django原生MVC
@@ -385,8 +358,6 @@ class BaseHandler:
 * 视图 Views： 2种形式，分别是FBV（基于函数）和CBV（基于类）。
 
 * 序列化：
-
-
 
 ### 路由
 
@@ -426,10 +397,8 @@ def _path(route, view, kwargs=None, name=None, Pattern=None):
 
 
 path = partial(_path, Pattern=RoutePattern)     #路由模式
-re_path = partial(_path, Pattern=RegexPattern)	#正则模式
+re_path = partial(_path, Pattern=RegexPattern)    #正则模式
 ```
-
-
 
 django/urls/resolver.py
 
@@ -463,8 +432,6 @@ class RoutePattern(CheckURLMixin):
     def check(self):
         #...
 ```
-
-
 
 ## 扩展模块
 
@@ -520,8 +487,6 @@ class MiddlewareMixin:
         return response
 ```
 
-
-
 ### djangorestframework-DRF
 
 安装：`pip install djangorestframework `
@@ -539,8 +504,6 @@ Location: e:\dev\python\bin\python37\lib\site-packages
 Requires: django
 Required-by: drf-yasg, django-rest-swagger
 ```
-
-
 
 1. 序列化
 
@@ -624,32 +587,24 @@ class Field:
         self.error_messages = messages
 ```
 
-
-
 2. 视图
-
+   
    视图类层次：
-
+   
    ```sh
    View(object) -> APIView -> GenericAPIView -> ListAPIView/xxAPIView
                            -> ViewSets
    ```
 
-
-
 <br>
 
 ## 本章参考
 
-
-
-#  2 flask源码剖析
+# 2 flask源码剖析
 
 参见  《[flask源码剖析.md](./flask源码剖析.md)》
 
-
-
-#  3 tornado源码剖析
+# 3 tornado源码剖析
 
 Tornado 由前 google 员工开发，代码非常精练，实现也很轻巧，加上清晰的注释和丰富的 demo，我们可以很容易的阅读分析 tornado. 通过阅读 Tornado 的源码，你将学到：
 
@@ -658,8 +613,6 @@ Tornado 由前 google 员工开发，代码非常精练，实现也很轻巧，�
 - 如何实现一个 web 框架。
 - 各种网络编程的知识，比如 epoll
 - python 编程的绝佳实践
-
-
 
 源码版本：tornado-6.1
 
@@ -681,8 +634,6 @@ Required-by: terminado, notebook, jupyterlab, jupyter-server, jupyter-client, ip
 ykernel
 ```
 
-
-
 **程序demo**
 
 ```python
@@ -702,50 +653,46 @@ if __name__ == "__main__":
     tornado.ioloop.IOLoop.instance().start()
 ```
 
-
-
 ## 源码结构
 
 表格 tornado源码结构
 
-| 类别    | 目录或文件           | 主要类或函数                                                 | 说明                                             |
-| ------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
-|         | platform             | twisted.py asyncio.py asyncio.BaseAsyncIOLoop                | 依赖模块-网络异步IO                              |
-| utils   | test                 | xx.py                                                        | 单元测试                                         |
-|         | `__init__.py`        |                                                              | 版本号                                           |
-|         | _locale_data.py      |                                                              | 语言映射                                         |
-| other   | auth.py              | OpenIdMixin OAuthMixin OAuth2Mixin TwitterMixin GoogleOAuth2Mixin FacebookGraphMixin | 使用OpenId和OAuth进行第三方登录                  |
-| other   | autoreload.py        | start wait watch main                                        | 生产环境中自动检查代码更新                       |
-|         | concurrent.py        | Future DummyExecutor                                         | 并发                                             |
-|         | curl_httpclient.py   | CurlAsyncHTTPClient                                          | CURL实现的HTTP客户端                             |
-| core    | escape.py            | url_escape url_unescape json_encode json_decode              | HTML,JSON,URLs等的编码解码和一些字符串操作       |
-| core    | locale.py            | Locale                                                       | 国际化支持                                       |
-| core    | template.py          | BaseLoader Loader DictLoader                                 | 模板                                             |
-| core    | web.py               | Application RequestHandler                                   | WEB框架的大部分功能。                            |
-| core    | httpserver.py        | HTTPServer                                                   | 一个无阻塞HTTP服务器的实现                       |
-| utils   | gen.py               | Runner Return                                                | 一个基于生成器的接口，使用该模块保证代码异步运行 |
-|         | http1connection.py   | HTTP1Connection HTTP1ServerConnection                        | HTTP连接                                         |
-| network | httpclient.py        | AsyncHTTPClient HTTPRequest HTTPResponse                     | HTTP客户端                                       |
-| utils   | httputil.py          | HTTPServerRequest  HTTPHeaders HTTPFile HTTPConnection       | HTTP小工具，分析HTTP请求内容                     |
-| network | ioloop.py            | IOLoop                                                       | IO循环                                           |
-| network | iostream.py          | BaseIOStream                                                 | IO流                                             |
-| utils   | locks.py             | Condition Event Semaphore Lock                               | 锁                                               |
-| utils   | log.py               | LogFormatter                                                 | 日志                                             |
-| network | netutil.py           | Resolver ExecutorResolver BlockingResolver ThreadedResolver OverrideResolver | 网络小工具                                       |
-| utils   | options.py           | OptionParser                                                 | 解析终端参数                                     |
-| utils   | process.py           | Subprocess                                                   | 多进程实现的封装                                 |
-| utils   | queues.py            | Queue                                                        | 队列                                             |
-|         | routing.py           | Router                                                       | 路由                                             |
-|         | simple_httpclient.py | SimpleAsyncHTTPClient                                        | 简单HTTP客户端                                   |
-|         | tcpclient.py         | TCPClient                                                    | TCP客户端                                        |
-|         | tcpserver.py         | TCPServer                                                    | TCP服务端                                        |
-| utils   | util.py              | Configurable ArgReplacer                                     | 工具集合                                         |
-| other   | websocket.py         | WebSocketHandler                                             | 实现和浏览器的双向通信                           |
-| other   | wsgi.py              | WSGIContainer                                                | 与其他python网络框架/服务器的相互操作            |
+| 类别      | 目录或文件                | 主要类或函数                                                                               | 说明                           |
+| ------- | -------------------- | ------------------------------------------------------------------------------------ | ---------------------------- |
+|         | platform             | twisted.py asyncio.py asyncio.BaseAsyncIOLoop                                        | 依赖模块-网络异步IO                  |
+| utils   | test                 | xx.py                                                                                | 单元测试                         |
+|         | `__init__.py`        |                                                                                      | 版本号                          |
+|         | _locale_data.py      |                                                                                      | 语言映射                         |
+| other   | auth.py              | OpenIdMixin OAuthMixin OAuth2Mixin TwitterMixin GoogleOAuth2Mixin FacebookGraphMixin | 使用OpenId和OAuth进行第三方登录        |
+| other   | autoreload.py        | start wait watch main                                                                | 生产环境中自动检查代码更新                |
+|         | concurrent.py        | Future DummyExecutor                                                                 | 并发                           |
+|         | curl_httpclient.py   | CurlAsyncHTTPClient                                                                  | CURL实现的HTTP客户端               |
+| core    | escape.py            | url_escape url_unescape json_encode json_decode                                      | HTML,JSON,URLs等的编码解码和一些字符串操作 |
+| core    | locale.py            | Locale                                                                               | 国际化支持                        |
+| core    | template.py          | BaseLoader Loader DictLoader                                                         | 模板                           |
+| core    | web.py               | Application RequestHandler                                                           | WEB框架的大部分功能。                 |
+| core    | httpserver.py        | HTTPServer                                                                           | 一个无阻塞HTTP服务器的实现              |
+| utils   | gen.py               | Runner Return                                                                        | 一个基于生成器的接口，使用该模块保证代码异步运行     |
+|         | http1connection.py   | HTTP1Connection HTTP1ServerConnection                                                | HTTP连接                       |
+| network | httpclient.py        | AsyncHTTPClient HTTPRequest HTTPResponse                                             | HTTP客户端                      |
+| utils   | httputil.py          | HTTPServerRequest  HTTPHeaders HTTPFile HTTPConnection                               | HTTP小工具，分析HTTP请求内容           |
+| network | ioloop.py            | IOLoop                                                                               | IO循环                         |
+| network | iostream.py          | BaseIOStream                                                                         | IO流                          |
+| utils   | locks.py             | Condition Event Semaphore Lock                                                       | 锁                            |
+| utils   | log.py               | LogFormatter                                                                         | 日志                           |
+| network | netutil.py           | Resolver ExecutorResolver BlockingResolver ThreadedResolver OverrideResolver         | 网络小工具                        |
+| utils   | options.py           | OptionParser                                                                         | 解析终端参数                       |
+| utils   | process.py           | Subprocess                                                                           | 多进程实现的封装                     |
+| utils   | queues.py            | Queue                                                                                | 队列                           |
+|         | routing.py           | Router                                                                               | 路由                           |
+|         | simple_httpclient.py | SimpleAsyncHTTPClient                                                                | 简单HTTP客户端                    |
+|         | tcpclient.py         | TCPClient                                                                            | TCP客户端                       |
+|         | tcpserver.py         | TCPServer                                                                            | TCP服务端                       |
+| utils   | util.py              | Configurable ArgReplacer                                                             | 工具集合                         |
+| other   | websocket.py         | WebSocketHandler                                                                     | 实现和浏览器的双向通信                  |
+| other   | wsgi.py              | WSGIContainer                                                                        | 与其他python网络框架/服务器的相互操作       |
 
 将上面代码分为四个部分，分别是Core核心WEB框架、network网络底层模块、other其它服务、utils工具类。
-
-
 
 ## WEB核心对象
 
@@ -753,11 +700,9 @@ if __name__ == "__main__":
 * routing.py 路由对象
 * tcpserver.py TCP服务器
 
-
-
 web.py 包括
 
-*  Application应用程序对象: Application类启动web server，启动web server的相应功能。
+* Application应用程序对象: Application类启动web server，启动web server的相应功能。
 * RequestHandler: 内含大量方法用于处理网络请求，并生成对应的response。
 
 ```python
@@ -819,8 +764,6 @@ class RequestHandler(object):
     path_kwargs = None  # type: Dict[str, str]
 ```
 
-
-
 routing.py 路由对象
 
 ```python
@@ -848,10 +791,7 @@ class Router(httputil.HTTPServerConnectionDelegate):
 
 
 class ReversibleRouter(Router):
-
 ```
-
-
 
 tornado/tcpserver.py
 
@@ -862,7 +802,7 @@ tornado/tcpserver.py
 2. 简单多进程： bind, start
 
 3. 高级多进程： add_sockets start
-
+   
    ```PY
    sockets = tornado.netutil.bind_sockets(8888)
    tornado.process.fork_processes(0)
@@ -871,9 +811,8 @@ tornado/tcpserver.py
    IOLoop.current().start()
    ```
 
-
-
 定义
+
 ```python
 class TCPServer(object):
     def __init__(
@@ -912,10 +851,6 @@ class TCPServer(object):
                 sock, self._handle_connection
             )
 ```
-
-
-
-
 
 ## 网络处理 ioloop.py
 
@@ -987,8 +922,6 @@ class IOLoop(Configurable):
         return current
 ```
 
-
-
 ioloop.py 测试demo
 
 ```python
@@ -1027,8 +960,6 @@ if __name__ == '__main__':
     io_loop.start()
 ```
 
-
-
 ## 平台支持 platform
 
 **Platforms**: Tornado is designed for Unix-like platforms, with best performance and scalability on systems supporting `epoll` (Linux), `kqueue` (BSD/macOS), or `/dev/poll` (Solaris).
@@ -1037,8 +968,6 @@ tornado网络事件循环早期依赖于twisted，后期依赖于asyncio（pytho
 
 * asyncio 详见《python源码剖析》相关章节
 * twisted 第三方高性能网络库
-
-
 
 platform/asyncio.py
 
@@ -1066,8 +995,6 @@ class BaseAsyncIOLoop(IOLoop):
             asyncio.set_event_loop(old_loop)
 ```
 
-
-
 <br>
 
 ## 本章参考
@@ -1076,16 +1003,8 @@ class BaseAsyncIOLoop(IOLoop):
 * 知乎专栏--Tornado源码阅读 https://www.zhihu.com/column/tornado
 * asyncio https://docs.python.org/3/library/asyncio.html
 
-
-
-
 # celery源码剖析
-
-
-
-
 
 <br>
 
 # 参考资料
-

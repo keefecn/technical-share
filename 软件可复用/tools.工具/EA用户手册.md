@@ -1,16 +1,8 @@
-| 序号 | 修改时间  | 修改内容 | 修改人 | 审稿人 |
-| ---- | --------- | -------- | ------ | ------ |
-| 1    | 2021-6-11 | 创建     | Keefe  |        |
-
-
-
-
-
-
+| 序号  | 修改时间      | 修改内容 | 修改人   | 审稿人 |
+| --- | --------- | ---- | ----- | --- |
+| 1   | 2021-6-11 | 创建   | Keefe |     |
 
 [TOC]
-
-
 
 <br>
 
@@ -21,8 +13,6 @@
 Enterprise Architect （下面简称 EA）是用于软件系统的设计与开发、企业业务过程建模以及更广泛建模的可视化平台。Enterprise Architect 基于UML 2.3规范（参见www.omg.org）。UML是定义了用于特定领域或系统建
 模的可视化语言。
 Enterprise Architect 是一款不断进步和完善的工具，它覆盖了开发周期的所有方面，提供了从初始设计阶段到系统部署，维护，测试以及修改控制的全程可跟踪性。
-
-
 
 **Enterprise Architect 与其它UML工具的区别**
 
@@ -39,10 +29,9 @@ Enterprise Architect 是一款不断进步和完善的工具，它覆盖了开�
 * 可扩展性：Enterprise Architect 能处理非常巨大的模型并且支持多个并行用户
 * 价格：Enterprise Architect 为团队协作打造的合理价位，使团队开发及合作变得切实可行
 
-
-
 Enterprise Architect 的功能简介
 Enterprise Architect 使你能够：
+
 * 建模复杂的信息和软件系统开发
 * 建模，管理和跟踪所开发系统的需求
 * 生成详细、高质量的RTF，PDF和HTML格式的报告
@@ -73,23 +62,19 @@ Enterprise Architect 使你能够：
 * 将行为模型转换成可执行的源代码，用于诸如：Verilog, VHDL, 和 SystemC 等语言进行开发的系统*
 * 模拟 SysML 参数模型
 
-
-
 **企业架构的框架支持**
 Sparx Systems 支持行业标准架构框架使得企业建模变得轻松。Enterprise Architect 中的架
 构实现是基于UML及其相关规范，这使得架构的严密程度最大化，并让用户使用XMI 来交
 换模型信息。下面的模型框架是Enterprise Architect 的可用插件。
 
 * Zachman 框架 (参见
-http://www.sparxsystems.cn/products/mdg/tech/zachman/index.html)
+  http://www.sparxsystems.cn/products/mdg/tech/zachman/index.html)
 * DoDAF (参见h ttp://www.sparxsystems.cn/products/mdg/tech/dodaf modaf/
-index.ht m l)
+  index.ht m l)
 * MODAF (参见http://www.sparxsystems.cn/products/mdg/tech/dodafmodaf/
-index.html)
+  index.html)
 * UPDM (参见 http://www.sparxsystems.cn/products/mdg/tech/updm)
 * TOGAF (参见http://www.sparxsystems.cn/products/mdg/tech/togaf/index.html)
-
-
 
 <br>
 
@@ -111,19 +96,9 @@ EA支持包括TOGAF在内的多种架构框架，因此支持很多的视图。
 - 连接（Association）：结点之间的连线表示系统之间进行交互的通信路径，这个通信路径称为连接（Association）连接中有网络协议。
 - 结点容器（Node as Container）：一个结点可以包括其他的结点，比如组件或者物件，则称此结点为结点容器（Node as Container）。如下图所示，结点（Node）包容了物件（Artifact）。
 
-
-
-
-
 ## 部署视图
 
-
-
 ## 组件视图
-
-
-
-
 
 <br>
 
@@ -146,16 +121,13 @@ EA支持包括TOGAF在内的多种架构框架，因此支持很多的视图。
 3. 右击---源码工程----从ODBC中导入数据库
 4. 导入所有表，达成目标。
 
-
-
-
-
 # 4 模型代码双向工程
 
 代码工程包括自动的代码生成，代码的反向工程以及源代码与模型间的同步。该功能仅在
 Enterprise Architect的专业版和企业版中才有。
 Enterprise Architect 使你能够从UML模型生成立即可用的源代码，并支持10多种开发语
 言的代码生成，包括:
+
 * ActionScript
 * C
 * C#
@@ -166,14 +138,12 @@ Enterprise Architect 使你能够从UML模型生成立即可用的源代码，�
 * Python
 * Visual Basic
 * Visual Basic .NET
-导入 .jar 文件和 .NET 汇编数据文件
-Enterprise Architect 使你能够反向工程下列二进制模块：
+  导入 .jar 文件和 .NET 汇编数据文件
+  Enterprise Architect 使你能够反向工程下列二进制模块：
 * Java 文档(.jar)
 * .Net PE 文件 (.exe, .dll)*
 * 中间语言文件(.il).
 * 不支持Windows 的 .dll 和可执行程序导入, 仅支持包含 .Net 汇编数据的PE文件。
-
-
 
 **模板驱动的源代码生成**
 你可以在UML 的正向工程中使用Enterprise Architect 代码模板框架。代码模板指定从
@@ -183,8 +153,6 @@ UML元素到给定语言不同部分的定制转换。
 * 从UML模型生成源代码
 * 定制生成代码的方式
 * 对EA不支持的某些语言进行正向工程
-
-
 
 **面向需求的灵活代码生成**
 Enterprise Architect 提供一种灵活代码生成功能，当你修改模型时，它便立即自动更新你的
@@ -202,7 +170,7 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 * 让你更好的理解系统是如何工作的
 * 自动生成系统功能的文档
 * 提供导致错误或异常系统行为事件顺序的有关信息
-可视化执行分析器可以用来：
+  可视化执行分析器可以用来：
 * 生成顺序图，记录应用程序的执行，或特定的堆栈调用
 * 推导状态转换图，显示数据结构的变化
 * 创建分析报告，显示应用程序序列和运行调用频率
@@ -217,8 +185,6 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 * 对一个事件顺序为什么是重要的进行可视化
 * 即时建立系统故障前事件发生的顺序
 
-
-
 # FAQ
 
 说明：文中使用的EA版本是13.0
@@ -230,8 +196,6 @@ Enterprise Architect的可视化分析器提供了从建模环境中建模，开
 2. 边框怎么画
 
 common里的boundary。
-
-
 
 <br>
 

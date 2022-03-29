@@ -1,7 +1,7 @@
-| 序号 | 修改时间  | 修改内容                                                     | 修改人 | 审稿人 |
-| ---- | --------- | ------------------------------------------------------------ | ------ | ------ |
-| 1    | 2021-8-23 | 创建。从《python_web框架源码剖析》拆分成文。另拆分flask_appbuilder章节另文。 | Keefe  | Keefe  |
-|      |           |                                                              |        |        |
+| 序号  | 修改时间      | 修改内容                                                | 修改人   | 审稿人   |
+| --- | --------- | --------------------------------------------------- | ----- | ----- |
+| 1   | 2021-8-23 | 创建。从《python_web框架源码剖析》拆分成文。另拆分flask_appbuilder章节另文。 | Keefe | Keefe |
+|     |           |                                                     |       |       |
 
 <br><br><br>
 
@@ -9,13 +9,11 @@
 
 [TOC]
 
-
-
 <br>
 
 ---
 
-#  1 flask源码剖析
+# 1 flask源码剖析
 
 [pallets/flask](https://github.com/pallets/flask)  [Releases on PyPI](https://pypi.python.org/pypi/Flask)  [Documentation](https://flask.palletsprojects.com/)  [Test status](https://dev.azure.com/pallets/flask/_build)
 
@@ -67,34 +65,30 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0')
 ```
 
-
-
 ## 源码结构
 
 表格 flask源码结构
 
-| 目录或文件    | 主要类或函数                                                 | 说明                              |
-| ------------- | ------------------------------------------------------------ | --------------------------------- |
-| ext/          |                                                              | 扩展模块                          |
-| _compat.ppy   | with_metaclass                                               | python2&3的兼容处理：类型和元类   |
-| app.py        | Flask<br>::run route add_url_rule register_blueprint         | 全局WEB实例                       |
-| blueprints.py | Blueprint<br>::route add_url_rule                            | 蓝图，相当于django中的app，某应用 |
-| cli.py        | main run_command                                             | 命令行处理                        |
-| config.py     | ConfigAttribute Config                                       | 配置数据                          |
-| ctx.py        | AppContext RequestContext                                    | 上下文管理                        |
-| exthook.py    | ExtensionImporter                                            | 加载扩展模块                      |
-| globals.py    | current_app session request g                                | 全局变量                          |
-| helpers.py    | _PackageBoundObject                                          | 帮助工具                          |
-| json.py       | jsonify dump dumps load loads                                | json转化                          |
-| logging.py    |                                                              | 日志                              |
-| sessions.py   | SecureCookieSession  SessionInterface <br>SecureCookieSessionInterface | 会话                              |
-| signals.py    | Namespace::signal                                            | 定义若干信号，如消息，request...  |
-| templating.py | DispatchingJinjaLoader Environment                           | 前端用的模板，依赖jinja2          |
-| testing.py    | FlaskClient                                                  | 测试                              |
-| view.py       | View MethodViewType MethodView                               | 视图类                            |
-| wrappers.py   | Request Response                                             | 继承wsgi wrappers，依赖werkzeug   |
-
-
+| 目录或文件         | 主要类或函数                                                                 | 说明                         |
+| ------------- | ---------------------------------------------------------------------- | -------------------------- |
+| ext/          |                                                                        | 扩展模块                       |
+| _compat.ppy   | with_metaclass                                                         | python2&3的兼容处理：类型和元类       |
+| app.py        | Flask<br>::run route add_url_rule register_blueprint                   | 全局WEB实例                    |
+| blueprints.py | Blueprint<br>::route add_url_rule                                      | 蓝图，相当于django中的app，某应用      |
+| cli.py        | main run_command                                                       | 命令行处理                      |
+| config.py     | ConfigAttribute Config                                                 | 配置数据                       |
+| ctx.py        | AppContext RequestContext                                              | 上下文管理                      |
+| exthook.py    | ExtensionImporter                                                      | 加载扩展模块                     |
+| globals.py    | current_app session request g                                          | 全局变量                       |
+| helpers.py    | _PackageBoundObject                                                    | 帮助工具                       |
+| json.py       | jsonify dump dumps load loads                                          | json转化                     |
+| logging.py    |                                                                        | 日志                         |
+| sessions.py   | SecureCookieSession  SessionInterface <br>SecureCookieSessionInterface | 会话                         |
+| signals.py    | Namespace::signal                                                      | 定义若干信号，如消息，request...      |
+| templating.py | DispatchingJinjaLoader Environment                                     | 前端用的模板，依赖jinja2            |
+| testing.py    | FlaskClient                                                            | 测试                         |
+| view.py       | View MethodViewType MethodView                                         | 视图类                        |
+| wrappers.py   | Request Response                                                       | 继承wsgi wrappers，依赖werkzeug |
 
 ## WEB核心对象
 
@@ -112,12 +106,12 @@ flask启动调用 Flask.run，缺省监听参数是127.0.0.1:5000。
 from .helpers import _PackageBoundObject
 
 class Flask(_PackageBoundObject):
-	"""   Usually you create a :class:`Flask` instance in your main module or
+    """   Usually you create a :class:`Flask` instance in your main module or
     in the :file:`__init__.py` file of your package like this::
 
         from flask import Flask
         app = Flask(__name__)
-	"""
+    """
 
     def __init__(self, import_name, static_path=None, static_url_path=None,
                  static_folder='static', template_folder='templates',
@@ -204,7 +198,7 @@ class Flask(_PackageBoundObject):
             self._got_first_request = False
 
 
-	def route(self, rule, **options):
+    def route(self, rule, **options):
         """ 路由映射装饰器 route， 实际调用add_url_rule类静态方法 """
         def decorator(f):
             endpoint = options.pop("endpoint", None)
@@ -217,13 +211,13 @@ class Flask(_PackageBoundObject):
     def add_url_rule(
         self,
         rule,  #路由路径str
-        endpoint=None,	#名称，一般同路由函数名称str
-        view_func=None,	#路由函数func
+        endpoint=None,    #名称，一般同路由函数名称str
+        view_func=None,    #路由函数func
         provide_automatic_options=None,
         **options
     ):
-	"""
-	        Basically this example::
+    """
+            Basically this example::
             @app.route('/')
             def index():
                 pass
@@ -234,7 +228,7 @@ class Flask(_PackageBoundObject):
             app.add_url_rule('/', 'index', index)
 
         相当于： app.view_functions['index'] = index
-	"""
+    """
 
 if __name__ == '__main__':
     # 实际应用app定义，一般需要弄成全局实例
@@ -246,8 +240,6 @@ if __name__ == '__main__':
         # 生产环境推荐 gunicorn 或者 uwsgi
         app.run(host='0.0.0.0', port=5001)
 ```
-
-
 
 **调试示例 ipython**
 
@@ -306,8 +298,6 @@ late_ctx_processor()>]},
  'name': 'demo_app'}
 ```
 
-
-
 #### wsgi应用 wsgi_app
 
 ```python
@@ -321,20 +311,20 @@ class Flask(_PackageBoundObject):
             app = MyMiddleware(app)
         It's a better idea to do this instead::
             app.wsgi_app = MyMiddleware(app.wsgi_app)
-		"""
-        ctx = self.request_context(environ)	#得到请求上下文
+        """
+        ctx = self.request_context(environ)    #得到请求上下文
         error = None
         try:
             try:
                 ctx.push()
-                response = self.full_dispatch_request()	#分发请求
+                response = self.full_dispatch_request()    #分发请求
             except Exception as e:
                 error = e
                 response = self.handle_exception(e)
             except:  # noqa: B001
                 error = sys.exc_info()[1]
                 raise
-            return response(environ, start_response)	# 返回响应结果Response, 此处实现了WSGI协议
+            return response(environ, start_response)    # 返回响应结果Response, 此处实现了WSGI协议
         finally:
             if self.should_ignore_error(error):
                 error = None
@@ -347,8 +337,6 @@ class Flask(_PackageBoundObject):
         return self.wsgi_app(environ, start_response)
 ```
 
-
-
 ### 请求&响应 wrappers.py
 
 * flask/app.py   Request请求处理&生成响应Response
@@ -360,8 +348,8 @@ from .wrappers import Request
 from .wrappers import Response
 
 class Flask(_PackageBoundObject):
-    request_class = Request    	# 请求类
-    response_class = Response	# 响应类
+    request_class = Request        # 请求类
+    response_class = Response    # 响应类
 
     def dispatch_request(self):
         """ 分发请求并处理：从请求栈里获取请求，通过请求参数（包括路由）获取到相应的路由视图函数 """
@@ -374,17 +362,17 @@ class Flask(_PackageBoundObject):
 
     def full_dispatch_request(self):
         """ 分发请求完整流程：请求前函数 -> preprocess_request -> dispatch_request -> finalize_request """
-        self.try_trigger_before_first_request_functions()	# before请求
+        self.try_trigger_before_first_request_functions()    # before请求
         try:
             request_started.send(self)
-            rv = self.preprocess_request()		# 预处理请求
+            rv = self.preprocess_request()        # 预处理请求
             if rv is None:
-                rv = self.dispatch_request()	# 真正分发请求到处理函数
+                rv = self.dispatch_request()    # 真正分发请求到处理函数
         except Exception as e:
             rv = self.handle_user_exception(e)
-        return self.finalize_request(rv)	# after请求：处理完请求进行加工
+        return self.finalize_request(rv)    # after请求：处理完请求进行加工
 
-  	def preprocess_request(self):
+      def preprocess_request(self):
         """Called before the request is dispatched. Calls
         :attr:`url_value_preprocessors` registered with the app and the
         current blueprint (if any). Then calls :attr:`before_request_funcs`
@@ -402,7 +390,7 @@ class Flask(_PackageBoundObject):
         for func in funcs:
             func(request.endpoint, request.view_args)
 
-        funcs = self.before_request_funcs.get(None, ())	#@before_request
+        funcs = self.before_request_funcs.get(None, ())    #@before_request
         if bp is not None and bp in self.before_request_funcs:
             funcs = chain(funcs, self.before_request_funcs[bp])
         for func in funcs:
@@ -410,13 +398,13 @@ class Flask(_PackageBoundObject):
             if rv is not None:
                 return rv
 
-	def make_response(self, rv):
+    def make_response(self, rv):
         """ 生成 Response类 """
 
     @setupmethod
     def before_request(self, f):
         """Registers a function to run before each request.
-		注册每个请求处理前函数，可以作装饰器 @xx.before_request
+        注册每个请求处理前函数，可以作装饰器 @xx.before_request
         """
         self.before_request_funcs.setdefault(None, []).append(f)
         return f
@@ -438,8 +426,6 @@ class Flask(_PackageBoundObject):
         return f
 ```
 
-
-
 wrappers.py  请求/响应类包装，依赖于werkzeug模块的相应基类
 
 ```python
@@ -453,7 +439,7 @@ from .globals import current_app
 
 class JSONMixin(_JSONMixin):
     json_module = json
-	""" JSON加载异常返回 """
+    """ JSON加载异常返回 """
     def on_json_loading_failed(self, e):
         if current_app and current_app.debug:
             raise BadRequest("Failed to decode JSON object: {0}".format(e))
@@ -499,8 +485,6 @@ class Response(ResponseBase, JSONMixin):
     def max_cookie_size(self):
 ```
 
-
-
 ### 蓝图 blueprints.py
 
 类Flask 和Blueprint 都继承自  _PackageBoundObject， Bluepring粒度更小，一个Flask实例内可以有多个蓝图。
@@ -538,8 +522,6 @@ class Blueprint(_PackageBoundObject):
         self.url_values_defaults = url_defaults
 ```
 
-
-
 ### 视图 views.py
 
 视图View和 类视图函数方法as_view
@@ -558,7 +540,7 @@ class View(object):
     decorators = ()    #外部装饰器
 
     def dispatch_request(self):
-		""" 子类需要重载这方法 """
+        """ 子类需要重载这方法 """
 
     @classmethod
     def as_view(cls, name, *class_args, **class_kwargs):
@@ -587,8 +569,6 @@ class View(object):
         view.methods = cls.methods
         return view
 ```
-
-
 
 ### 会话 sessions.py
 
@@ -628,22 +608,22 @@ class SecureCookieSessionInterface(SessionInterface):
             key_derivation=self.key_derivation, digest_method=self.digest_method
         )
         return URLSafeTimedSerializer(
-            app.secret_key,	#外部传入的安全密钥
-            salt=self.salt,	#类成员变量有缺省值
+            app.secret_key,    #外部传入的安全密钥
+            salt=self.salt,    #类成员变量有缺省值
             serializer=self.serializer,
             signer_kwargs=signer_kwargs,
         )
 
     def open_session(self, app, request):
-        s = self.get_signing_serializer(app)	#获取签名类
+        s = self.get_signing_serializer(app)    #获取签名类
         if s is None:
             return None
         val = request.cookies.get(app.session_cookie_name)
-        if not val:	#获取cookie名为session的值
+        if not val:    #获取cookie名为session的值
             return self.session_class()
         max_age = total_seconds(app.permanent_session_lifetime)
         try:
-            data = s.loads(val, max_age=max_age)	#解析cookie值
+            data = s.loads(val, max_age=max_age)    #解析cookie值
             return self.session_class(data)
         except BadSignature:
             return self.session_class()
@@ -687,16 +667,10 @@ class SecureCookieSessionInterface(SessionInterface):
         )
 ```
 
-
-
-
-
 ### 导出模块/全局变量
 
 * `flask/__init__.py`:  导入了一堆对外使用的类、函数、变量
 * flask/globals.py:  依赖于werkzeug的Local对象
-
-
 
 `flask/__init__.py`
 
@@ -740,8 +714,6 @@ from .sessions import SecureCookieSession as Session
 json_available = True
 ```
 
-
-
 flask/globals.py
 
 flask框架自带的代理对象LocalStack有四个，分别是request，session，g和current_app。用代理而不是显式的对象的主要目的在于这四个对象使用太过频繁，贯穿整个请求周期，显式传递很容易造成循环导入的问题，需要一个第三方的对象来进行解耦。
@@ -763,14 +735,10 @@ session = LocalProxy(partial(_lookup_req_object, 'session'))
 g = LocalProxy(partial(_lookup_app_object, 'g'))
 ```
 
-
-
 ### 配置文件
 
 * flask/config.py  配置类，读取配置文件
 * flask/app.py  加载配置类
-
-
 
 flask/config.py
 
@@ -783,10 +751,10 @@ class Config(dict):
         self.root_path = root_path
 
     def from_envvar(self, variable_name, silent=False)：
-    	""" """
+        """ """
 
     def from_pyfile(self, filename, silent=False)：
-     	""" 从config.py加载数据 """
+         """ 从config.py加载数据 """
         filename = os.path.join(self.root_path, filename)
         d = types.ModuleType("config")
         d.__file__ = filename
@@ -802,7 +770,7 @@ class Config(dict):
         return True
 
     def from_object(self, obj):
-    	""" 加载字符串或者对象，K/V形式保存到字典结构里 """
+        """ 加载字符串或者对象，K/V形式保存到字典结构里 """
         if isinstance(obj, string_types):
             obj = import_string(obj)
         for key in dir(obj):
@@ -810,19 +778,17 @@ class Config(dict):
                 self[key] = getattr(obj, key)
 
     def from_json(self, filename, silent=False):
-    	""" """
+        """ """
 
     def from_mapping(self, *mapping, **kwargs):
-    	""" """
+        """ """
 
     def get_namespace(self, namespace, lowercase=True, trim_namespace=True):
-    	""" """
+        """ """
 
     def __repr__(self):
         return "<%s %s>" % (self.__class__.__name__, dict.__repr__(self))
 ```
-
-
 
 flask/app.py   `flask.app:__init__`时加载app实例所在目录下的config.py
 
@@ -836,7 +802,7 @@ class Flask(_PackageBoundObject):
     config_class = Config
     def __init__(...):
         ...
-		self.config = self.make_config(instance_relative_config)
+        self.config = self.make_config(instance_relative_config)
 
     def make_config(self, instance_relative=False):
         """Used to create the config attribute by the Flask constructor.
@@ -855,8 +821,6 @@ class Flask(_PackageBoundObject):
         defaults["DEBUG"] = get_debug_flag()
         return self.config_class(root_path, defaults)
 ```
-
-
 
 ## flask命令 cli.py
 
@@ -901,15 +865,11 @@ Commands:
   shell   Run a shell in the app context.
 ```
 
-
-
 **环境变量**：
 
 * FLASK_ENV： FLASK环境变量，development环境会启用交互式调试和自动重载。
 * FLASK_DEBUG：FLASK调试标识 boolean，FLASK_ENV=='development'
 * FLASK_APP： FLASK APP实例路径
-
-
 
 **app模块导入的搜索顺序** (flask.cli:ScriptInfo::load_app)
 
@@ -919,11 +879,7 @@ Commands:
    - ~~如果未设置FLASK_APP，flask命令会查找`wsgi.py`或`app.py`文件并探测应用实例或工厂函数。~~
    - (flask.cli:find_best_app)flask命令在给定的module导入内寻找一个名为`app`或者`application`的应用实例 或者 `module.__dict__`查找类型为Flask实例的值。
 
-
-
 **脚本入口定义**(setup.py)： 配置`entry_points -> flask.commands`
-
-
 
  flask命令真正调用处
 
@@ -933,8 +889,6 @@ if __name__ == '__main__':
     from .cli import main
     main(as_module=True)
 ```
-
-
 
 flask/cli.py
 
@@ -976,7 +930,7 @@ class FlaskGroup(AppGroup):
         """
         params = list(extra.pop('params', None) or ())
 
-        if add_version_option:	#缺省添加版本命令
+        if add_version_option:    #缺省添加版本命令
             params.append(version_option)
 
         AppGroup.__init__(self, params=params, **extra)
@@ -987,7 +941,7 @@ class FlaskGroup(AppGroup):
             self.add_command(shell_command)
             self.add_command(routes_command)
 
-        self._loaded_plugin_commands = False	#是否加载插件命令，如fab/db
+        self._loaded_plugin_commands = False    #是否加载插件命令，如fab/db
 
     def _load_plugin_commands(self):
         """ 加载插件命令 """
@@ -1121,8 +1075,6 @@ def find_best_app(module):
                          'using a factory function.' % module.__name__)
 ```
 
-
-
 ### flask run命令
 
 flask/cli.py
@@ -1153,8 +1105,8 @@ pass_script_info = click.make_pass_decorator(ScriptInfo, ensure=True)
 def run_command(info, host, port, reload, debugger, eager_loading,
                 with_threads):
     """Runs a local development server for the Flask application.
-	flask应用程序启动一个开发服务器，缺省值只推荐开发时使用，缺省开发模式，启用reload、debugger
-	用flask run启动，缺省不使用线程
+    flask应用程序启动一个开发服务器，缺省值只推荐开发时使用，缺省开发模式，启用reload、debugger
+    用flask run启动，缺省不使用线程
     This local server is recommended for development purposes only but it
     can also be used for simple intranet deployments.  By default it will
     not support any sort of concurrency at all to simplify debugging.  This
@@ -1185,8 +1137,6 @@ def run_command(info, host, port, reload, debugger, eager_loading,
     run_simple(host, port, app, use_reloader=reload,
                use_debugger=debugger, threaded=with_threads)
 ```
-
-
 
 ### flask shell命令
 
@@ -1226,8 +1176,6 @@ def shell_command():
     code.interact(banner=banner, local=ctx)
 ```
 
-
-
 ### flask routes命令
 
 可以用flask routes获取到 路由类方法 和 路由的一个对照。
@@ -1253,8 +1201,6 @@ ping                                    GET        /ping
 static                                  GET        /static/<path:filename>
 ```
 
-
-
 routes命令支持按methods, rule, endpoint等进行排序
 
 ```python
@@ -1274,14 +1220,14 @@ routes命令支持按methods, rule, endpoint等进行排序
 def routes_command(sort, all_methods):
     """Show all registered routes with endpoints and methods."""
 
-    rules = list(current_app.url_map.iter_rules())	# 获取到当前app注册的路由
+    rules = list(current_app.url_map.iter_rules())    # 获取到当前app注册的路由
     if not rules:
         click.echo("No routes were registered.")
         return
 
     ignored_methods = set(() if all_methods else ("HEAD", "OPTIONS"))
 
-    if sort in ("endpoint", "rule"):	# 排序方式
+    if sort in ("endpoint", "rule"):    # 排序方式
         rules = sorted(rules, key=attrgetter(sort))
     elif sort == "methods":
         rules = sorted(rules, key=lambda rule: sorted(rule.methods))
@@ -1303,10 +1249,6 @@ def routes_command(sort, all_methods):
     for rule, methods in zip(rules, rule_methods):
         click.echo(row.format(rule.endpoint, methods, rule.rule).rstrip())
 ```
-
-
-
-
 
 ## 扩展勾子 exthook.py
 
@@ -1332,11 +1274,7 @@ class ExtensionImporter(object):
             return sys.modules[fullname]
 ```
 
-
-
 ## 扩展 ext/
-
-
 
 <br>
 
@@ -1388,14 +1326,10 @@ Hello, Click!
 Hello, Click!
 ```
 
-
-
 源文件
 
 * click/core.py: 实现核心，定义了Group及其父类，Argument, Option
 * click/decorator.py 常用装饰器。如group, command, argument, option
-
-
 
 click/core.py
 
@@ -1442,8 +1376,6 @@ class Group(MultiCommand):
 
         return decorator
 ```
-
-
 
 click/decorator.py
 
@@ -1522,15 +1454,13 @@ def option(*param_decls, **attrs):
     return decorator
 ```
 
-
-
 click高效的装饰器： 以 flask fab命令组为例
 
 * @xx.group()   将当前方法名作为一个xx命令组的子命令组，如xx为click，那么fab的上级命令组是app实例
-
+  
   ```python
   import click
-
+  
   # 示例： flask fab命令组定义
   @click.group()
   def fab():
@@ -1539,7 +1469,7 @@ click高效的装饰器： 以 flask fab命令组为例
   ```
 
 * @xx.command()， 将当前方法名作为xx命令组里的最终命令，如`flask fab create-admin`
-
+  
   ```python
   @fab.command("create-admin")
   @click.option("--username", default="admin", prompt="Username")
@@ -1553,8 +1483,6 @@ click高效的装饰器： 以 flask fab命令组为例
           Creates an admin user
       """
   ```
-
-
 
 ## werkzeug
 
@@ -1590,51 +1518,45 @@ if __name__ == "__main__":
     run_simple("localhost", 5000, application)
 ```
 
-
-
 表格 werkzeug版本说明 详见 [Changes](https://werkzeug.palletsprojects.com/en/2.0.x/changes/)
 
-| 版本号 | 发布时间   | 功能或更新说明                             |
-| ------ | ---------- | ------------------------------------------ |
-| 0.1    | 2010-04-16 | 第一个公共发布版本。                       |
-| 0.16.1 | 2020-01-27 | 0.x系列最后一个版本。                      |
-| 1.0.0  | 2020-02-06 | 大版本。                                   |
+| 版本号    | 发布时间       | 功能或更新说明                      |
+| ------ | ---------- | ---------------------------- |
+| 0.1    | 2010-04-16 | 第一个公共发布版本。                   |
+| 0.16.1 | 2020-01-27 | 0.x系列最后一个版本。                 |
+| 1.0.0  | 2020-02-06 | 大版本。                         |
 | 1.0.1  | 2020-03-31 | 1.x系列仅发布了2个小版本，即1.0.0和1.0.1。 |
-| 2.0.0  | 2021-05-11 |                                            |
+| 2.0.0  | 2021-05-11 |                              |
 
 说明：2020.2开始，flask 1.x+版本盯紧werkzeug，二者大/中版本基本保持一致。
-
-
 
 ### 源码结构
 
 表格 werkzeug源码结构
 
-| 目录或文件        | 主要类或函数                                                 | 说明                                     |
-| ----------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| debug/            |                                                              | 扩展模块                                 |
-| middleware/       | 文件：dispatcher.py http_proxy.py lint.py profiler.py proxy_fix.py shared_data.py<br>类：DispatcherMiddleware | 中间件包括代理、共享数据                 |
-| wrappers/         |                                                              | 包括cors, etag, auth, user_agent         |
-| _compat.py        |                                                              | 兼容py2和py3的类型和函数。`flake8: noqa` |
-| _internal.py      | _log                                                         | 提供内部用的helper和常量                 |
-| _reloader.py      | ReloaderLoop StatReloaderLoop  WatchdogReloaderLoop          | 模块重载实现                             |
-| datastructures.py |                                                              | 用到的数据结构                           |
-| exceptions.py     | BadRequest                                                   | 异常，多继承自HTTPException              |
-| filesystem.py     | get_filesystem_encoding                                      | 文件系统                                 |
-| http.py           | parse_date ...                                            | 处理http数据的一组函数                   |
-| local.py          |                                                              | 本地代理/数据栈                          |
-| posixemulation.py | rename                                                       | POSIX模拟器                              |
-| routing.py        | BaseConverter AnyConverter RuleFactory Rule                  | 路由相关的转化器、规则类                 |
-| security.py       | check_password_hash generate_password_hash gen_salt safe_join safe_str_cmp | 安全相关工具，如密码哈希工具             |
-| serving.py        | BaseWSGIServer ForkingMixIn ForkingWSGIServer ThreadedWSGIServer WSGIRequestHandler | 请求处理方式。多进程/多线程/单进程线程。 |
-| test.py           | run_wsgi_app                                                 | WSGI客户端应用测试                       |
-| testapp.py        | test_app                                                     | 测试WSGI服务端                           |
-| urls.py           | 类：_URLTuple BaseURL  BytesURL URL Href  <br>函数：url_parse url_quote | URL解析                                  |
-| useragents.py     | UserAgent UserAgentParser                                    | 用户代理                                 |
-| utils.py          |                                                              | 工具                                     |
-| wsgi.py           | ClosingIterator FileWrapper LimitedStream                    | WSGI服务                                 |
-
-
+| 目录或文件             | 主要类或函数                                                                                                   | 说明                             |
+| ----------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| debug/            |                                                                                                          | 扩展模块                           |
+| middleware/       | 文件：dispatcher.py http_proxy.py lint.py profiler.py proxy_fix.py shared_data.py<br>类：DispatcherMiddleware | 中间件包括代理、共享数据                   |
+| wrappers/         |                                                                                                          | 包括cors, etag, auth, user_agent |
+| _compat.py        |                                                                                                          | 兼容py2和py3的类型和函数。`flake8: noqa` |
+| _internal.py      | _log                                                                                                     | 提供内部用的helper和常量                |
+| _reloader.py      | ReloaderLoop StatReloaderLoop  WatchdogReloaderLoop                                                      | 模块重载实现                         |
+| datastructures.py |                                                                                                          | 用到的数据结构                        |
+| exceptions.py     | BadRequest                                                                                               | 异常，多继承自HTTPException           |
+| filesystem.py     | get_filesystem_encoding                                                                                  | 文件系统                           |
+| http.py           | parse_date ...                                                                                           | 处理http数据的一组函数                  |
+| local.py          |                                                                                                          | 本地代理/数据栈                       |
+| posixemulation.py | rename                                                                                                   | POSIX模拟器                       |
+| routing.py        | BaseConverter AnyConverter RuleFactory Rule                                                              | 路由相关的转化器、规则类                   |
+| security.py       | check_password_hash generate_password_hash gen_salt safe_join safe_str_cmp                               | 安全相关工具，如密码哈希工具                 |
+| serving.py        | BaseWSGIServer ForkingMixIn ForkingWSGIServer ThreadedWSGIServer WSGIRequestHandler                      | 请求处理方式。多进程/多线程/单进程线程。          |
+| test.py           | run_wsgi_app                                                                                             | WSGI客户端应用测试                    |
+| testapp.py        | test_app                                                                                                 | 测试WSGI服务端                      |
+| urls.py           | 类：_URLTuple BaseURL  BytesURL URL Href  <br>函数：url_parse url_quote                                       | URL解析                          |
+| useragents.py     | UserAgent UserAgentParser                                                                                | 用户代理                           |
+| utils.py          |                                                                                                          | 工具                             |
+| wsgi.py           | ClosingIterator FileWrapper LimitedStream                                                                | WSGI服务                         |
 
 ### 服务 serving.py
 
@@ -1651,8 +1573,6 @@ if __name__ == "__main__":
 * ThreadedWSGIServer：threaded为True，启动一个后台线程来处理请求。
 * ForkingWSGIServer：processes>1，启动一个fork进程来处理请求。
 * BaseWSGIServer：缺省服务。总共1进程1线程，监听队列长度120，加入监听队列，等待poll或epoll监听。
-
-
 
 /wrkzeug/serving.py
 
@@ -1694,7 +1614,7 @@ def run_simple(
         srv.serve_forever()  # 服务器后台处理
 
     if use_reloader:
- 		#使用重载，要保证端口可用，用socket建立socke联接
+         #使用重载，要保证端口可用，用socket建立socke联接
         if not is_running_from_reloader():
             if port == 0 and not can_open_by_fd:
                 raise ValueError(
@@ -1726,7 +1646,7 @@ def run_simple(
         # Do not use relative imports, otherwise "python -m werkzeug.serving"
         # breaks. 要使用本地导入
         from ._reloader import run_with_reloader
-		# 信号终止旧线程，启动一个后台线程执行 inner函数
+        # 信号终止旧线程，启动一个后台线程执行 inner函数
         run_with_reloader(inner, extra_files, reloader_interval, reloader_type)
     else:
         inner()    # 实际启动函数
@@ -1735,7 +1655,7 @@ def make_server(
     host=None,
     port=None,
     app=None,
-    threaded=False,	# 是否每个请求对应一个独立线程
+    threaded=False,    # 是否每个请求对应一个独立线程
     processes=1,    # 如果大于1，那么每个请求对应一个进程，并发数受限于并发进程数
     request_handler=None,
     passthrough_errors=False,
@@ -1770,8 +1690,6 @@ def make_server(
         )
 ```
 
-
-
 三种WSGI服务:   都继承了 BaseWSGIServer，初始化方法不一样，但都是通过 `BaseWSGIServer.serve_forever()`进入到实际处理。
 
 * ThreadedWSGIServer： 调用 ThreadingMixIn.process_request()
@@ -1781,10 +1699,10 @@ def make_server(
 ```python
 import socketserver
 
-ThreadingMixIn = socketserver.ThreadingMixIn  	# 线程类
+ThreadingMixIn = socketserver.ThreadingMixIn      # 线程类
 can_fork = hasattr(os, "fork")  # 判断是否支持fork
 if can_fork:
-    ForkingMixIn = socketserver.ForkingMixIn	# 进程类
+    ForkingMixIn = socketserver.ForkingMixIn    # 进程类
 else:
     class ForkingMixIn(object):
         pass
@@ -1894,8 +1812,6 @@ class BaseWSGIServer(HTTPServer, object):
             self.server_close()
 ```
 
-
-
 服务器创建后，调用BaseServer.serve_forever。
 
 BaseServer.serve_forever 参见 《[python源码剖析](python源码剖析.md)》标准模块章节
@@ -1907,13 +1823,11 @@ BaseServer.serve_forever 参见 《[python源码剖析](python源码剖析.md)�
 ```shell
 # BaseServer.serve_forever处理流程
 selector.select(poll_interval) -> self._handle_request_noblock (非阻塞处理请求)
-		--> get_request, verify_request, process_request(一般派生类要重载,调用finish_request),  shutdown_request(异常时)
+        --> get_request, verify_request, process_request(一般派生类要重载,调用finish_request),  shutdown_request(异常时)
 -> self.service_actions()
 
 # process_request实现中的finish_request处理流程： BaseRequestHandler.handle()
 ```
-
-
 
 #### 请求处理 WSGIRequestHandler
 
@@ -1931,7 +1845,7 @@ except ImportError:
 
 
 class WSGIRequestHandler(BaseHTTPRequestHandler, object):
-	"""重载父类的handle_one_request，在这方法调用run_wsgi实现自己的写方式"""
+    """重载父类的handle_one_request，在这方法调用run_wsgi实现自己的写方式"""
     def run_wsgi(self):
         if self.headers.get("Expect", "").lower().strip() == "100-continue":
             self.wfile.write(b"HTTP/1.1 100 Continue\r\n\r\n")
@@ -1940,7 +1854,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
         headers_set = []
         headers_sent = []
 
-        def write(data):	# 重新实现写方法
+        def write(data):    # 重新实现写方法
             assert headers_set, "write() before start_response"
             if not headers_sent:
                 status, response_headers = headers_sent[:] = headers_set
@@ -1949,7 +1863,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
                 except ValueError:
                     code, msg = status, ""
                 code = int(code)
-                self.send_response(code, msg)	#设置响应头 和 日志
+                self.send_response(code, msg)    #设置响应头 和 日志
                 header_keys = set()
                 for key, value in response_headers:
                     self.send_header(key, value)
@@ -1978,7 +1892,7 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
     def handle(self):
         """Handles a request ignoring dropped connections."""
         try:
-            BaseHTTPRequestHandler.handle(self)	#直接调用父类的handle
+            BaseHTTPRequestHandler.handle(self)    #直接调用父类的handle
         except (_ConnectionError, socket.timeout) as e:
             self.connection_dropped(e)
         except Exception as e:
@@ -1992,20 +1906,18 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
         self.raw_requestline = self.rfile.readline()
         if not self.raw_requestline:
             self.close_connection = 1
-        elif self.parse_request():	#如果请求可以被解析
+        elif self.parse_request():    #如果请求可以被解析
             return self.run_wsgi()      #运行wsgi，实行的请求过程处理
 
     def send_response(self, code, message=None):
         """Send the response header and log the response code."""
-        self.log_request(code)	#日志处理，打印 请求行基本信息
+        self.log_request(code)    #日志处理，打印 请求行基本信息
         if message is None:
             message = code in self.responses and self.responses[code][0] or ""
         if self.request_version != "HTTP/0.9":
             hdr = "%s %d %s\r\n" % (self.protocol_version, code, message)
             self.wfile.write(hdr.encode("ascii"))
 ```
-
-
 
 ### 本地代理/数据栈 local.py
 
@@ -2021,8 +1933,6 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 * LocalProxy:  用于代理Local对象和LocalStack对象，而所谓代理就是作为中间的代理人来处理所有针对被代理对象的操作。
 * LocalManager：管理Local对象。
 
-
-
 **上下文需要放在栈中的原因**
 
   　　1. 应用上下文 _app_ctx_stack
@@ -2030,8 +1940,6 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 
  　　2. 请求上下文  _request_ctx_stack
       如果在写测试代码或者离线脚本的时候，有时候可能需要穿件多个请求上下文，这个时候就需要存放到另一个栈中，使用哪个请求上下文的时候，就把对应的请求上下文放到栈的顶部，用完了就要把这个请求上下文从栈中移除掉。
-
-
 
 ```python
 _identity = lambda x: x
@@ -2051,8 +1959,8 @@ class Local(object):
 
     def __init__(self):
         # 属性：__storage__初始化为空字典，__ident_func__调用get_ident
-        object.__setattr__(self, "__storage__", {})				#存储实际的数据，字典
-        object.__setattr__(self, "__ident_func__", get_ident)	#获取线程/协程ID方法
+        object.__setattr__(self, "__storage__", {})                #存储实际的数据，字典
+        object.__setattr__(self, "__ident_func__", get_ident)    #获取线程/协程ID方法
 
 
 class LocalStack(object):
@@ -2097,13 +2005,11 @@ class LocalProxy(object):
     def __init__(self, local, name=None):
         object.__setattr__(self, "_LocalProxy__local", local)
         object.__setattr__(self, "__name__", name)
-        if callable(local) and not hasattr(local, "__release_local__"):	 # 代理对象local必须是可调用的
+        if callable(local) and not hasattr(local, "__release_local__"):     # 代理对象local必须是可调用的
             # "local" is a callable that is not an instance of Local or
             # LocalManager: mark it as a wrapped function.
             object.__setattr__(self, "__wrapped__", local)
 ```
-
-
 
 ### 中间件 /middleware/
 
@@ -2151,12 +2057,9 @@ class DispatcherMiddleware(object):
         environ["SCRIPT_NAME"] = original_script_name + script
         environ["PATH_INFO"] = path_info
         return app(environ, start_response)
-
 ```
 
 说明：app dispatch技术实现了app的隔离（独立的login manager、secret_key等），同时让每层业务系统都能模块化（只关心自己的URL部分），很有用。
-
-
 
 ### 安全 security.py
 
@@ -2190,8 +2093,8 @@ def generate_password_hash(password, method="pbkdf2:sha256", salt_length=8):
 def check_password_hash(pwhash, password):
     """
     pbkdf2:method:iterations 比如
-	    pbkdf2:sha256:80000$salt$hash
-       	pbkdf2:sha256$salt$hash
+        pbkdf2:sha256:80000$salt$hash
+           pbkdf2:sha256$salt$hash
     示例：pbkdf2:sha256:150000$Q8pN9sv3$5208bb8d9930777039a21d46a26f0fb83dc7d31fecb42d59fa233b1e5ef322ad
     """
     if pwhash.count("$") < 2:
@@ -2237,8 +2140,6 @@ def safe_join(directory, *pathnames):
     return posixpath.join(*parts)
 ```
 
-
-
 ### 日志
 
 打印请求行基本信息
@@ -2261,8 +2162,6 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
         )
 ```
 
-
-
 /werkzeug/_internal.py
 
 ```python
@@ -2280,7 +2179,7 @@ def _log(type, message, *args, **kwargs):
     """
     global _logger
 
-    if _logger is None:	# 如果未设置 _logger，则设置日志流处理StreamHandler
+    if _logger is None:    # 如果未设置 _logger，则设置日志流处理StreamHandler
         _logger = logging.getLogger("werkzeug")
         if _logger.level == logging.NOTSET:
             _logger.setLevel(logging.INFO)
@@ -2290,10 +2189,6 @@ def _log(type, message, *args, **kwargs):
 
     getattr(_logger, type)(message.rstrip(), *args, **kwargs)
 ```
-
-
-
-
 
 ## jinja2
 
@@ -2328,34 +2223,30 @@ Required-by:
 {% endblock %}
 ```
 
-
-
 ### 源码结构
 
 表格 Jinja2源码结构
 
-| 文件            | 主要类或函数                                                 | 简介       |
-| --------------- | ------------------------------------------------------------ | ---------- |
-| asyncfilters.py |                                                              | 异步过滤器 |
-| asyncsupport.py |                                                              | 异步支持   |
-| bccache.py      |                                                              |            |
-| compiler.py     |                                                              |            |
-| constants.py    |                                                              | 常量       |
-| environment.py  | Environment Template TemplateExpression TemplateModule TemplateStream | 环境变量   |
-| filters.py      |                                                              | 过滤器     |
-| lexer.py        |                                                              |            |
-| loaders.py      |                                                              | 加载器     |
-| meta.py         |                                                              | 元数据     |
-| nativetypes.py  |                                                              | 原生类型   |
-| nodes.py        |                                                              |            |
-| optimizer.py    |                                                              | 优化       |
-| parser.py       |                                                              | 解析器     |
-| runtime.y       |                                                              |            |
-| sandbox.py      |                                                              | 沙盒       |
-| utils.py        |                                                              | 工具       |
-| visitor.py      |                                                              |            |
-
-
+| 文件              | 主要类或函数                                                                | 简介    |
+| --------------- | --------------------------------------------------------------------- | ----- |
+| asyncfilters.py |                                                                       | 异步过滤器 |
+| asyncsupport.py |                                                                       | 异步支持  |
+| bccache.py      |                                                                       |       |
+| compiler.py     |                                                                       |       |
+| constants.py    |                                                                       | 常量    |
+| environment.py  | Environment Template TemplateExpression TemplateModule TemplateStream | 环境变量  |
+| filters.py      |                                                                       | 过滤器   |
+| lexer.py        |                                                                       |       |
+| loaders.py      |                                                                       | 加载器   |
+| meta.py         |                                                                       | 元数据   |
+| nativetypes.py  |                                                                       | 原生类型  |
+| nodes.py        |                                                                       |       |
+| optimizer.py    |                                                                       | 优化    |
+| parser.py       |                                                                       | 解析器   |
+| runtime.y       |                                                                       |       |
+| sandbox.py      |                                                                       | 沙盒    |
+| utils.py        |                                                                       | 工具    |
+| visitor.py      |                                                                       |       |
 
 ### 环境 environment.py
 
@@ -2379,12 +2270,12 @@ class Template(object):
 
 class Environment(object):
 
-	@internalcode
+    @internalcode
     def get_or_select_template(self, template_name_or_list, parent=None, globals=None):
         """Does a typecheck and dispatches to :meth:`select_template`
         if an iterable of template names is given, otherwise to
         :meth:`get_template`.
-		模板继承实现
+        模板继承实现
         .. versionadded:: 2.3
         """
         if isinstance(template_name_or_list, (string_types, Undefined)):
@@ -2422,8 +2313,6 @@ class TemplateStream(object):
     ...
 ```
 
-
-
 ## itsdangerous
 
 ```shell
@@ -2460,24 +2349,20 @@ print(data["name"])
 # itsdangerous
 ```
 
-
-
 ### 源码结构
 
 表格 itsdangerous源码结构
 
-| 文件         | 主要类或函数                                                 | 简介             |
-| ------------ | ------------------------------------------------------------ | ---------------- |
-| url_safe.py  | URLSafeSerializerMixin URLSafeSerializer URLSafeTimedSerializer | url安全序列化器  |
-| serialize.py | Serialize                                                    | 序列化类         |
-| signer.py    | SigningAlgorithm Signer                                      | 签名和签名算法   |
-| encoding.py  | base64_encode base64_decode int_to_bytes bytes_to_int        | 编码             |
-| exc.py       |                                                              | 异常             |
-| jws.py       | JSONWebSignatureSerializer TimedJSONWebSignatureSerializer   | JSON序列化       |
-| timed.py     | TimedSerializer TimestampSigner                              | 时间序列化和签名 |
-| _json.py     | _CompactJSON                                                 | json兼容         |
-
-
+| 文件           | 主要类或函数                                                          | 简介        |
+| ------------ | --------------------------------------------------------------- | --------- |
+| url_safe.py  | URLSafeSerializerMixin URLSafeSerializer URLSafeTimedSerializer | url安全序列化器 |
+| serialize.py | Serialize                                                       | 序列化类      |
+| signer.py    | SigningAlgorithm Signer                                         | 签名和签名算法   |
+| encoding.py  | base64_encode base64_decode int_to_bytes bytes_to_int           | 编码        |
+| exc.py       |                                                                 | 异常        |
+| jws.py       | JSONWebSignatureSerializer TimedJSONWebSignatureSerializer      | JSON序列化   |
+| timed.py     | TimedSerializer TimestampSigner                                 | 时间序列化和签名  |
+| _json.py     | _CompactJSON                                                    | json兼容    |
 
 /itsdangerous/url_safe.py
 
@@ -2497,11 +2382,11 @@ class URLSafeSerializerMixin(object):
     def dump_payload(self, obj):
         json = super(URLSafeSerializerMixin, self).dump_payload(obj)
         is_compressed = False
-        compressed = zlib.compress(json)	#压缩
+        compressed = zlib.compress(json)    #压缩
         if len(compressed) < (len(json) - 1):
             json = compressed
             is_compressed = True
-        base64d = base64_encode(json)		#base64编码
+        base64d = base64_encode(json)        #base64编码
         if is_compressed:
             base64d = b"." + base64d
         return base64d
@@ -2533,8 +2418,6 @@ class URLSafeSerializer(URLSafeSerializerMixin, Serializer):
 class URLSafeTimedSerializer(URLSafeSerializerMixin, TimedSerializer):
 ```
 
-
-
 /itsdangerous/serialize.py
 
 ```python
@@ -2556,13 +2439,13 @@ class Serializer(object):
         serializer. The return value can be either a byte or unicode
         string depending on the format of the internal serializer.
         """
-        payload = want_bytes(self.dump_payload(obj))	#zlib压缩后base64编码
-        rv = self.make_signer(salt).sign(payload)  		#生成签名
+        payload = want_bytes(self.dump_payload(obj))    #zlib压缩后base64编码
+        rv = self.make_signer(salt).sign(payload)          #生成签名
         if self.is_text_serializer:
             rv = rv.decode("utf-8")
         return rv
 
-	def loads(self, s, salt=None):
+    def loads(self, s, salt=None):
         """Reverse of :meth:`dumps`. Raises :exc:`.BadSignature` if the
         signature validation fails.
         """
@@ -2583,8 +2466,6 @@ class Serializer(object):
             salt = self.salt
         return self.signer(self.secret_key, salt=salt, **self.signer_kwargs)
 ```
-
-
 
 /itsdangerous/signer.py
 
@@ -2630,8 +2511,6 @@ class Signer(object):
         return want_bytes(value) + want_bytes(self.sep) + self.get_signature(value)
 ```
 
-
-
 ## markupsafe
 
 安全地使用HTML和XML字符。
@@ -2656,7 +2535,7 @@ Required-by: Jinja2
 >>> from markupsafe import Markup, escape
 >>> # escape replaces special characters and wraps in Markup
 >>> escape('<script>alert(document.cookie);</script>')
-Markup(u'&lt;script&gt;alert(document.cookie);&lt;/script&gt;')
+Markup(u'<script>alert(document.cookie);</script>')
 >>> # wrap in Markup to mark text "safe" and prevent escaping
 >>> Markup('<strong>Hello</strong>')
 Markup('<strong>hello</strong>')
@@ -2669,44 +2548,34 @@ Markup('<strong>hello</strong>')
 Markup('Hello <em>&#34;World&#34;</em>')
 ```
 
-
-
-
-
 <br>
 
 # 3  扩展模块
 
 ## 推荐模块
 
-| 模块名           | 功能                                                         | 文档                                                         | 源码                                            | 最后版本&更新     |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- | ----------------- |
-| flask_appbuilder | Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID` | https://flask-appbuilder.readthedocs.io/en/latest/ or [flaskappbulder](http://flaskappbuilder.pythonanywhere.com/) | https://github.com/dpgaspar/flask-appbuilder/   | v3.3.3, 2021.9.14 |
-| flask_migrate    | SQLAlchemy database migrations for Flask applications using Alembic.<br>[Change Log](https://github.com/miguelgrinberg/Flask-Migrate/blob/master/CHANGES.md) | http://flask-migrate.readthedocs.io/en/latest/               | http://github.com/miguelgrinberg/flask-migrate/ | 3.0.1, 2021.8     |
-| flask_caching    | Adds caching support to your Flask application               | http://www.pythondoc.com/flask-cache/index.html              | https://github.com/sh4nks/flask-caching         | 1.10.1, 2021.3.18 |
-| flask_cors       | A Flask extension adding a decorator for CORS support. Cross Origin Resource Sharing ( CORS ) support for Flask.<br>[Changelog](https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md) | [flask-cors.corydolphin.com/](https://flask-cors.corydolphin.com/) | https://github.com/corydolphin/flask-cors       | 3.0.10, 2021.1.5  |
-| flask_restx      | 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。<BR>Flask-RESTX is a community driven fork of [Flask-RESTPlus](https://github.com/noirbizarre/flask-restplus)，于2020.1创建。 | [flask-restx.readthedocs.io/en/latest/](https://flask-restx.readthedocs.io/en/latest/) | https://github.com/python-restx/flask-restx     | 0.5.1, 2021.9.4   |
+| 模块名              | 功能                                                                                                                                                                                                  | 文档                                                                                                                 | 源码                                              | 最后版本&更新           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- | ----------------- |
+| flask_appbuilder | Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`                                                              | https://flask-appbuilder.readthedocs.io/en/latest/ or [flaskappbulder](http://flaskappbuilder.pythonanywhere.com/) | https://github.com/dpgaspar/flask-appbuilder/   | v3.3.3, 2021.9.14 |
+| flask_migrate    | SQLAlchemy database migrations for Flask applications using Alembic.<br>[Change Log](https://github.com/miguelgrinberg/Flask-Migrate/blob/master/CHANGES.md)                                        | http://flask-migrate.readthedocs.io/en/latest/                                                                     | http://github.com/miguelgrinberg/flask-migrate/ | 3.0.1, 2021.8     |
+| flask_caching    | Adds caching support to your Flask application                                                                                                                                                      | http://www.pythondoc.com/flask-cache/index.html                                                                    | https://github.com/sh4nks/flask-caching         | 1.10.1, 2021.3.18 |
+| flask_cors       | A Flask extension adding a decorator for CORS support. Cross Origin Resource Sharing ( CORS ) support for Flask.<br>[Changelog](https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md) | [flask-cors.corydolphin.com/](https://flask-cors.corydolphin.com/)                                                 | https://github.com/corydolphin/flask-cors       | 3.0.10, 2021.1.5  |
+| flask_restx      | 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。<BR>Flask-RESTX is a community driven fork of [Flask-RESTPlus](https://github.com/noirbizarre/flask-restplus)，于2020.1创建。                                         | [flask-restx.readthedocs.io/en/latest/](https://flask-restx.readthedocs.io/en/latest/)                             | https://github.com/python-restx/flask-restx     | 0.5.1, 2021.9.4   |
 
 说明：受欢迎的模块会慢慢由一个组织来托管，不再放到个人仓库名下，这样更有利于社区协作。
 
-
-
 ## 废弃模块.deprecated
 
-| 模块名             | 功能                                                         | 文档                                                       | 源码仓库                                                     | 最后版本&更新     | 废弃原因                                |
-| ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------ | ----------------- | --------------------------------------- |
+| 模块名                | 功能                                                                                            | 文档                                                         | 源码仓库                                                                               | 最后版本&更新           | 废弃原因                            |
+| ------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------- | ------------------------------- |
 | flask_restful      | 文档老旧，不可用。<br>添加了快速构建 REST APIs 的支持。它当然也是一个能够跟你现有的ORM/库协同工作的轻量级的扩展。Flask-RESTful 鼓励以最小设置的最佳实践。 | http://www.pythondoc.com/Flask-RESTful/index.html          | [flask-restful/flask-restful](https://www.github.com/flask-restful/flask-restful/) | v0.3.9, 2020      | 要求 Python 版本为 2.6, 2.7, 或者 3.3。 |
-| ~~flask_restplus~~ | 增加了对快速构建 REST API 的支持。它提供了一系列连贯的装饰器和工具来描述您的 API 并正确公开其文档（使用 Swagger）。 | https://flask-restplus.readthedocs.io/en/stable/index.html | [noirbizarre/flask-restplus](https://github.com/noirbizarre/flask-restplus) | 0.13.0, 2020.1.13 | 被社区版flask-restx替换                 |
-
-
+| ~~flask_restplus~~ | 增加了对快速构建 REST API 的支持。它提供了一系列连贯的装饰器和工具来描述您的 API 并正确公开其文档（使用 Swagger）。                         | https://flask-restplus.readthedocs.io/en/stable/index.html | [noirbizarre/flask-restplus](https://github.com/noirbizarre/flask-restplus)        | 0.13.0, 2020.1.13 | 被社区版flask-restx替换               |
 
 ## flask_appbuilder源码剖析
 
 详见 《[flask_appbuilder源码剖析.md](./flask_appbuilder源码剖析.md)》
 
 Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
-
-
 
 ## flask_migrate
 
@@ -2724,13 +2593,9 @@ Requires: Flask-SQLAlchemy, alembic, Flask
 Required-by: apache-superset
 ```
 
-
-
 ### 源码结构
 
 * `/flask_migrate/__init__.py`    定义配置类
-
-
 
 `/flask_migrate/__init__.py`
 
@@ -2790,8 +2655,6 @@ def upgrade(directory=None, revision='head', sql=False, tag=None, x_arg=None):
     command.upgrade(config, revision, sql=sql, tag=tag)
 ```
 
-
-
 ### db命令 cli.py
 
 ```python
@@ -2822,10 +2685,6 @@ def upgrade(directory, sql, tag, x_arg, revision):
     _upgrade(directory, revision, sql, tag, x_arg)
 ```
 
-
-
-
-
 ## flask_caching
 
 http://www.pythondoc.com/flask-cache/index.html
@@ -2842,7 +2701,6 @@ License: BSD
 Location: ~\superset-py38-env\lib\site-packages
 Requires: Flask
 Required-by: apache-superset
-
 ```
 
 Flask-Caching支持多个缓存后端（Redis，Memcached，SimpleCache（内存中）或本地文件系统）。
@@ -2874,14 +2732,12 @@ class Cache(object):
         if not (config is None or isinstance(config, dict)):
             raise ValueError("`config` must be an instance of dict or None")
 
-		...
+        ...
        config.setdefault('CACHE_DEFAULT_TIMEOUT', 300)  # 缓存过期时间缺省300秒
        config.setdefault('CACHE_DIR', None)   # 设置缓存路径
        # null改为'filesystem'，如果是redis/memache，则需要相应的服务器支持和安装python客户端模块
        config.setdefault('CACHE_TYPE', 'null')
 ```
-
-
 
 ## flask_cors
 
@@ -2905,15 +2761,11 @@ Requires: Flask, Six
 Required-by:
 ```
 
-
-
 源文件
 
 * core.py  用于扩展和装饰器的函数
 * decoratory.py  装饰器1个是cross_origin
 * extension.py
-
-
 
 /flask_cors/core.py
 
@@ -2925,7 +2777,7 @@ from werkzeug.datastructures import Headers, MultiDict
 def serialize_options(opts):
     """
     options序列化参数： origins allow_headers
-    	supports_credentials send_wildcard expose_headers methods max_age
+        supports_credentials send_wildcard expose_headers methods max_age
     A helper method to serialize and processes the options dictionary.
     """
     options = (opts or {}).copy()
@@ -2955,8 +2807,6 @@ def serialize_options(opts):
 
     return options
 ```
-
-
 
 /flask_cors/decoratory.py
 
@@ -3001,10 +2851,7 @@ def cross_origin(*args, **kwargs):
 
         return update_wrapper(wrapped_function, f)
     return decorator
-
 ```
-
-
 
 /falsk_cors/extension.py
 
@@ -3013,14 +2860,14 @@ from flask import request
 from .core import *
 
 class CORS(object):
-	"""
+    """
     The settings for CORS are determined in the following order
 
     1. Resource level settings (e.g when passed as a dictionary)
     2. Keyword argument settings
     3. App level configuration settings (e.g. CORS_*)
     4. Default settings
-	"""
+    """
     def __init__(self, app=None, **kwargs):
         self._options = kwargs
         if app is not None:
@@ -3084,8 +2931,6 @@ def make_after_request_function(resources):
     return cors_after_request
 ```
 
-
-
 ## flask_restx
 
 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。
@@ -3106,35 +2951,31 @@ Required-by:
 
 说明：依赖于flask-2.0.0，flask-2.0.1则导入werkzeug出错。
 
-
-
 ### 源码结构及示例
 
 表格 flask-restx源码结构
 
-| 目录或文件         | 主要类或函数                                                 | 说明                                   |
-| ------------------ | ------------------------------------------------------------ | -------------------------------------- |
-| schemas/           | LazySchema validate                                          |                                        |
-| static/            |                                                              | 静态文件                               |
-| templates/         | swagger-ui.html swagger-ui-css.html  swagger-ui-libs.html    | 模板                                   |
-| api.py             | Api SwaggerView                                              | Api类管理API文档                       |
-| apidoc.py          | Apidoc swagger_static ui_for                                 | API文档蓝图                            |
-| cors.py            | crossdomain                                                  | 跨域                                   |
-| errors.py          | abort RestError ValidationError SpecsError                   | 错误或异常                             |
-| fields.py          | Raw String Url ...                                           | 字段。定义API参数                      |
-| inputs.py          | boolean date ...                                             | 高级类型解析                           |
-| marshaling.py      | 类：marshal_with marshal_with_field<br>函数：marshal make    | 接口返回结果                           |
-| mask.py            | Mask                                                         |                                        |
-| model.py           | ModelBase RawModel Model OrderedModel SchemaModel            | 模型                                   |
-| namespace.py       | Namespace                                                    | 名字空间                               |
-| postman.py         | Request  Folder PostmanCollectionV1                          | postman工具类                          |
-| representations.py | output_json                                                  | 输出JSON数据                           |
-| reqparse.py        | Argument ParseResult RequestParser                           | 请求解析                               |
-| resource.py        | Resource                                                     | 资源。每个路由是一个资源，有各种方法。 |
-| swagger.py         | Swagger                                                      | Swagger文档                            |
-| utils.py           | merge camel_to_dash default_id not_none not_none_sorted unpack | 工具方法                               |
-
-
+| 目录或文件              | 主要类或函数                                                         | 说明                  |
+| ------------------ | -------------------------------------------------------------- | ------------------- |
+| schemas/           | LazySchema validate                                            |                     |
+| static/            |                                                                | 静态文件                |
+| templates/         | swagger-ui.html swagger-ui-css.html  swagger-ui-libs.html      | 模板                  |
+| api.py             | Api SwaggerView                                                | Api类管理API文档         |
+| apidoc.py          | Apidoc swagger_static ui_for                                   | API文档蓝图             |
+| cors.py            | crossdomain                                                    | 跨域                  |
+| errors.py          | abort RestError ValidationError SpecsError                     | 错误或异常               |
+| fields.py          | Raw String Url ...                                             | 字段。定义API参数          |
+| inputs.py          | boolean date ...                                               | 高级类型解析              |
+| marshaling.py      | 类：marshal_with marshal_with_field<br>函数：marshal make           | 接口返回结果              |
+| mask.py            | Mask                                                           |                     |
+| model.py           | ModelBase RawModel Model OrderedModel SchemaModel              | 模型                  |
+| namespace.py       | Namespace                                                      | 名字空间                |
+| postman.py         | Request  Folder PostmanCollectionV1                            | postman工具类          |
+| representations.py | output_json                                                    | 输出JSON数据            |
+| reqparse.py        | Argument ParseResult RequestParser                             | 请求解析                |
+| resource.py        | Resource                                                       | 资源。每个路由是一个资源，有各种方法。 |
+| swagger.py         | Swagger                                                        | Swagger文档           |
+| utils.py           | merge camel_to_dash default_id not_none not_none_sorted unpack | 工具方法                |
 
 示例DEMO:
 
@@ -3150,7 +2991,7 @@ api = Api(app, version='1.0', title='TodoMVC API',
 Api类定义了API文档，其路由是参数doc, 路由函数调用缺省模板 apidoc.url_for()
 """
 
-ns = api.namespace('todos', description='TODO operations')	# 第一个参数'todos'为路由前缀
+ns = api.namespace('todos', description='TODO operations')    # 第一个参数'todos'为路由前缀
 
 todo = api.model('Todo', {
     'id': fields.Integer(readonly=True, description='The task unique identifier'),
@@ -3244,8 +3085,6 @@ if __name__ == '__main__':
 * Apidoc继承Blueprints，可以更自由地定义文档结构。
 * Namespace可以很好地将资源进行隔离。
 
-
-
 ### Api对象 api.py
 
 /flask_restx/api.py
@@ -3289,7 +3128,7 @@ class Api(object):
         default_label="Default namespace",
         validate=None,
         tags=None,
-        prefix="",	#路由前缀
+        prefix="",    #路由前缀
         ordered=False,
         default_mediatype="application/json",
         decorators=None,
@@ -3300,10 +3139,10 @@ class Api(object):
         **kwargs
     ):
         self._validate = validate
-        self._doc = doc			#文档路由str
-        self._doc_view = None	#文档视图函数的名称str
+        self._doc = doc            #文档路由str
+        self._doc_view = None    #文档视图函数的名称str
         self._default_error_handler = None
-		...
+        ...
 
         if app is not None:
             self.app = app
@@ -3348,8 +3187,6 @@ class Api(object):
         return apidoc.ui_for(self)   # 渲染缺省模板
 ```
 
-
-
 ### apidoc.py
 
 ```python
@@ -3387,10 +3224,6 @@ def ui_for(api):
     return render_template("swagger-ui.html", title=api.title, specs_url=api.specs_url)
 ```
 
-
-
-
-
 ## flask_script
 
 示例DEMO:
@@ -3417,10 +3250,6 @@ python manage.py print
 > hello
 ```
 
-
-
-
-
 <br>
 
 # 参考资料
@@ -3431,12 +3260,9 @@ python manage.py print
 
 * [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)  http://werkzeug.pocoo.org/documentation/
 
-
-
-
-
 **参考链接**
 
 * FLask之Local、LocalStack和LocalProxy介绍 https://blog.csdn.net/weixin_45950544/article/details/103923191
 * Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
+
 

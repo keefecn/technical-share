@@ -468,27 +468,27 @@ Index:  NO, TOKENIZED, UN_TOKENZIED, NO_NORMS
 
 #### 2.2.3.4 索引各个阶段流程
 
-1)  索引创建
+1) 索引创建
 
 IndexWrite
 
-2)  索引合并
+2) 索引合并
 
 IndexWrite.addIndexes
 
-3)  索引优化
+3) 索引优化
 
 IndexWrite.optimize()
 
-4)  索引删除
+4) 索引删除
 
-5)  索引同步
+5) 索引同步
 
 wrte.lock
 
 commit.lock
 
-6)  索引读取
+6) 索引读取
 
 IndexReader.termDocs()
 
@@ -538,11 +538,11 @@ Weigh
 
 #### 2.2.4.2 查询各个阶段流程
 
-1)  查询流程IndexSearcher
+1) 查询流程IndexSearcher
 
-2)  结果排序，过滤和分页
+2) 结果排序，过滤和分页
 
-3)  高级搜索
+3) 高级搜索
 
 多Field搜索
 
@@ -601,13 +601,13 @@ l Plagiarism detection(抄袭检测)
 
 LD用m*n的矩阵存储距离值。算法大概过程：
 
-1)  str1或str2的长度为0返回另一个字符串的长度。
+1) str1或str2的长度为0返回另一个字符串的长度。
 
-2)  初始化(n+1)*(m+1)的矩阵d，并让第一行和第一列的值从0开始增长。
+2) 初始化(n+1)*(m+1)的矩阵d，并让第一行和第一列的值从0开始增长。
 
-3)  扫描两字符串（n*m级的），如果：str1[i] == str2[j]，用temp记录它，为0。否则temp记为1。然后在矩阵d[i][j]赋于d[i-1][j]+1 、d[i][j-1]+1、d[i-1][j-1]+temp三者的最小值。
+3) 扫描两字符串（n*m级的），如果：str1[i] == str2[j]，用temp记录它，为0。否则temp记为1。然后在矩阵d[i][j]赋于d[i-1][j]+1 、d[i][j-1]+1、d[i-1][j-1]+temp三者的最小值。
 
-4)  扫描完后，返回矩阵的最后一个值即d[n][m]
+4) 扫描完后，返回矩阵的最后一个值即d[n][m]
 
 ## 2.3   Lucene开发
 
@@ -748,16 +748,15 @@ public class IndexFiles {
     }
     isearcher.close();
     directory.close();
-
 ```
 
 说明：
 
-1)  索引创建过程，Analyzer 为分析器，Directory 为存储抽象，IndexWriter 根据传入的Analyzer和Directory来创建索引，指定索引的存储方式和处理方式。Document为数据文件，Field为数据组成。
+1) 索引创建过程，Analyzer 为分析器，Directory 为存储抽象，IndexWriter 根据传入的Analyzer和Directory来创建索引，指定索引的存储方式和处理方式。Document为数据文件，Field为数据组成。
 
-2)  查询过程：IndexSearcher通过传入的Directory索引抽象来进行查询。QueryParser 为查询解析器，与索引创建过程使用同样的Analyzer。Query为查询解析器分析后的检索串；ScoreDoc[]为检索后得到的带权重的文档集合, Document 为得到的文档。
+2) 查询过程：IndexSearcher通过传入的Directory索引抽象来进行查询。QueryParser 为查询解析器，与索引创建过程使用同样的Analyzer。Query为查询解析器分析后的检索串；ScoreDoc[]为检索后得到的带权重的文档集合, Document 为得到的文档。
 
-3)  回收过程：索引创建完，需关闭索引创建器IndexWriter ; 查询后，需关闭索引查询器IndexSearcher，关闭抽象索引directory.
+3) 回收过程：索引创建完，需关闭索引创建器IndexWriter ; 查询后，需关闭索引查询器IndexSearcher，关闭抽象索引directory.
 
 ### 2.3.2 扩展定制
 
@@ -878,7 +877,6 @@ $bin/post -c gettingstarted docs/
 $bin/post -c gettingstarted example/exampledocs/*.xml
 $bin/post -c gettingstarted example/exampledocs/books.json
 $bin/post -c gettingstarted example/exampledocs/books.csv
-
 ```
 
 // 删除数据
@@ -1604,8 +1602,6 @@ network.host: "0.0.0.0"
 discovery.zen.ping.unicast.hosts: ["localhost:9300","localhost:9301"]
 ```
 
-
-
 ### 4.4.2 分片shards
 
 一个分片(shard)是一个最小级别的“工作单元(worker unit)”,它只是保存索引中所有数据的一小片.我们的文档存储和被索引在分片中，但是我们的程序不知道如何直接与它们通信。取而代之的是，他们直接与索引通信.Elasticsearch中的分片分为主分片和副本分片,复制分片只是主分片的一个副本，它用于提供数据的冗余副本，在硬件故障之后提供数据保护，同时服务于像搜索和检索等只读请求，主分片的数量和复制分片的数量都可以通过配置文件配置。但是主切片的数量只能在创建索引时定义且不能修改.相同的分片不会放在同一个节点上。
@@ -1917,4 +1913,3 @@ Apache相关项目
 * [Open Relevance Project](http://lucene.apache.org/openrelevance/) is a new subproject with the aim of collecting and distributing free materials for relevance testing and performance.
 * [Mahout](http://lucene.apache.org/mahout/) is a subproject with the goal of creating a suite of scalable machine learning libraries.
 * [Droids](http://incubator.apache.org/droids/) is an intelligent robot crawling framework currently in incubation.
-

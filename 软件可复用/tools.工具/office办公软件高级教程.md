@@ -20,7 +20,7 @@
 
 ## 开放文档格式 ODF
 
-开放文档格式（OpenDocument Format，简称ODF）是一种规范，基于XML的[文件格式](https://baike.baidu.com/item/文件格式/6156907)，因应[试算表](https://baike.baidu.com/item/试算表/8690020)、[图表](https://baike.baidu.com/item/图表/1252386)、[简报](https://baike.baidu.com/item/简报/4502034)和文书处理文件等电子文件而设置。开放文档格式企图提供一个取代私有专利文件格式的一个方案，使得组织或个人不会因为文件格式而被厂商套牢（Vendor lock-in）。
+开放文档格式（OpenDocument Format，简称ODF）是一种规范，基于XML的文件格式，因应[试算表](https://baike.baidu.com/item/试算表/8690020)、图表、[简报](https://baike.baidu.com/item/简报/4502034)和文书处理文件等电子文件而设置。开放文档格式企图提供一个取代私有专利文件格式的一个方案，使得组织或个人不会因为文件格式而被厂商套牢（Vendor lock-in）。
 
 ODF规格原本由太阳微系统开发，标准则由OASIS Open Document Format for Office Applications（OpenDocument）TC（又称为OASIS ODF TC）所开发，2003年OASIS ODF TC通过第一份草案。
 
@@ -34,7 +34,7 @@ ODF规格原本由太阳微系统开发，标准则由OASIS Open Document Format
 
 # 二 Microsoft Office
 
-Microsoft Office 是由[Microsoft](https://baike.baidu.com/item/Microsoft/125917)(微软)公司开发的一套基于 Windows 操作系统的[办公软件](https://baike.baidu.com/item/办公软件/4703331)套装。常用组件有 [Word](https://baike.baidu.com/item/Word/2970534)、[Excel](https://baike.baidu.com/item/Excel/9564)、[PowerPoint](https://baike.baidu.com/item/PowerPoint/904847)等。
+Microsoft Office 是由Microsoft(微软)公司开发的一套基于 Windows 操作系统的办公软件套装。常用组件有 Word、Excel、PowerPoint等。
 
 最初的版本于1985年发布。MS Office常年垄断PC桌面办公软件，MS Office文档格式已成为事实上的行业标准，开源Office或其它商业Office一般都兼容MS Office的文档格式。
 
@@ -239,7 +239,7 @@ End Sub
 
 # 三 MS Office替代品
 
-## 基于OpenOffice.org
+## OpenOffice.org家族
 
 1999年，Sun Microsystems收购了StarSuite办公套件。
 
@@ -283,15 +283,15 @@ InfoWorld [对比了两个办公软件的Windows版本](https://www.oschina.net/
 | MS Office功能 | OpenOffice对应功能 | 详述                                   |
 | ----------- | -------------- | ------------------------------------ |
 | WORD 文档结构图  | 视图 - 导航        | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
-| WORD审阅      | 插入 - 批注        | 快捷键CTRL + ALT + C                    |
+| WORD审阅      | 插入 - 批注        | 快捷键 CTRL + ALT + C                   |
 | Excel 数据分析  |                |                                      |
 | ...         |                |                                      |
 
 **常用快捷键**
 
 ```
-F5     打开导航，即文档结构图
-Alt + F12 打开设置项
+F5         打开导航，即文档结构图
+Alt + F12  打开设置项
 Ctrl + Enter   表格单元格内换行
 ```
 
@@ -329,14 +329,25 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 
 **发展历程**
 
-- 1989年，金山创始人求伯君正式推出WPS1.0，并在2001年完成政府采购第一枪；
-- 2005年，WPS Office宣布个人版免费使用；
-- 2011年，金山办公正式发布WPS Office移动端；
-- 2012年，金山WPS通过核高基重大专项验收；
-- 2015年，WPS+一站式云办公发布；
-- 2017年，WPS Office PC端与移动端用户均过亿，5月份正式发布泰文版本；
-- 2018年，召开了主题为“简单.创造.不简单”云AI未来办公大会，发布了金山文档等新产品；
+- 1989年，金山创始人求伯君正式推出WPS1.0，并在2001年完成政府采购第一枪。
+- 2005年，WPS Office宣布个人版免费使用。
+- 2011年，金山办公正式发布WPS Office移动端。
+- 2012年，金山WPS通过核高基重大专项验收。
+- 2015年，WPS+一站式云办公发布。
+- 2017年，WPS Office PC端与移动端用户均过亿，5月份正式发布泰文版本。
+- 2018年，召开了主题为“简单.创造.不简单”云AI未来办公大会，发布了金山文档等新产品。
 - 2020年11月11日，金山办公正式发布“使命.愿景.价值观”。
+
+
+
+表格 WPS Office和MS Office关键功能对比
+
+| MS Office功能 | WPS Office对应功能 | 详述          |
+| ----------- | -------------- | ----------- |
+| WORD 文档结构图  | 视图 - 导航窗格      | 标题对应到文档结构图。 |
+| WORD审阅      | 插入 - 批注        |             |
+| Excel 数据分析  |                |             |
+| ...         |                |             |
 
 <br>
 
