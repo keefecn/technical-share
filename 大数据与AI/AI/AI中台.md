@@ -31,7 +31,7 @@
 | IAAS | 芯片      | TPU        |               |           |               | D系列       |
 
 > 备注：
->
+> 
 > 术语：GCP - Google Cloud Platform, HW - Huawei,  ADAS-Advanced Driver Assistance System，自动辅助驾驶。
 
 ## AI如何落地？
@@ -157,7 +157,7 @@ https://ai.baidu.com/
 - 阿里语音AI平台AliGenie https://www.aligenie.com/
 
 - 阿里机器学习PAI https://data.aliyun.com/product/learn
-
+  
   阿里机器学习PAI包含3个子产品分别是：
 1. 可视化开发工具 PAI-STUDIO，
 2. 交互式代码开发工具 PAI-DSW，

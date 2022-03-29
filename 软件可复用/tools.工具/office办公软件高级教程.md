@@ -1,12 +1,10 @@
-| 序号 | 修改时间   | 修改内容                                   | 修改人 | 审稿人 |
-| ---- | ---------- | ------------------------------------------ | ------ | ------ |
-| 1    | 2016-4-9   | 创建《办公软件高级教程》。                 | Keefe  |        |
-| 2    | 2021-6-28  | 办公软件高级教程章节单独成文。             | 同上   |        |
-| 3    | 2021-8-11  | 增加 OpenOffice章节。                      | 同上   |        |
-| 4    | 2021-11-18 | 增加 MS Office替代品 和 企业协同办公章节。 | 同上   |        |
-| 5    | 2022-2-26  | 增加markdown编辑章节                       | 同上   |        |
-
-
+| 序号  | 修改时间       | 修改内容                        | 修改人   | 审稿人 |
+| --- | ---------- | --------------------------- | ----- | --- |
+| 1   | 2016-4-9   | 创建《办公软件高级教程》。               | Keefe |     |
+| 2   | 2021-6-28  | 办公软件高级教程章节单独成文。             | 同上    |     |
+| 3   | 2021-8-11  | 增加 OpenOffice章节。            | 同上    |     |
+| 4   | 2021-11-18 | 增加 MS Office替代品 和 企业协同办公章节。 | 同上    |     |
+| 5   | 2022-2-26  | 增加markdown编辑章节              | 同上    |     |
 
 <br><br><br>
 
@@ -48,12 +46,12 @@ Microsoft Office 是由[Microsoft](https://baike.baidu.com/item/Microsoft/125917
 
 工具标题栏：开始、插入、页面布局、引用、邮件、审阅、视图、设计、布局
 
-*  页面布局：可页面设置等等
-*  引用：可生成目录、交叉引用等等。写论文必需。
-*  邮件：可通过数据关联，批量制作名片。
-*  审阅：包括校对、批注、修订、估计也是 、比较、保护。
-*  视图：主要用于浏览文档。
-*  表格工具~设计、布局：常用于表格内容。如合并行列、斜线表头、重复标题行等等。
+* 页面布局：可页面设置等等
+* 引用：可生成目录、交叉引用等等。写论文必需。
+* 邮件：可通过数据关联，批量制作名片。
+* 审阅：包括校对、批注、修订、估计也是 、比较、保护。
+* 视图：主要用于浏览文档。
+* 表格工具~设计、布局：常用于表格内容。如合并行列、斜线表头、重复标题行等等。
 
 **快捷键**
 
@@ -65,15 +63,11 @@ ctrl++ 上标
 
 ctrl+= 下标
 
-
-
 **边框和底坟**
 
 边框可对表格边框显示进行修改。
 
 底坟可对表面的背景色进行修改。
-
-
 
 **特殊图形，符号**
 
@@ -82,8 +76,6 @@ ctrl+= 下标
 还有各种箭头， { 符号等。
 
 设置字体上标， 下标等。
-
-
 
 ### 1.2 写作
 
@@ -107,8 +99,6 @@ ctrl+= 下标
 
 图 2 WORD设置段路的‘对齐方式’
 
-
-
 **2).** **审阅：文档安全，** **修订**
 
 工具->保护文档后，可以进行修订或批注。否则只有点击修订或批注纽才起作用。
@@ -117,15 +107,11 @@ ctrl+= 下标
 
 修订的使用: 删除状态，插入状态，批注状态，小气球表示，标记(突出显示)。
 
-
-
 ### 1.3 WORD模板
 
 要打开.dotx格式的模板，需选择‘文件’选项卡，在左侧选择‘打开’选项，点击‘浏览’按钮，在弹出的‘打开’对话框中单击‘文件名’后面的‘文件类型’下拉框，选择‘WORD模板’选项。
 
 简述：只能用‘文件’选项卡的‘打开’选项才能编辑模板。
-
-
 
 ## 2  MS Excel
 
@@ -139,23 +125,17 @@ Excel区别与WORD的工具栏：公式、数据
 
 * 数据： 包括获取外部数据、连接、排序和筛选、分级显示
 
-
-
 **1.** **首页标题不参与排序。**
 
 方法一：排序前‘隐藏’首行，排序完再‘取消隐藏’首行。
 
 方法二：点选“排序和筛选”选项；在弹出的对话框中“数据包含标题”前的小方框中打勾，然后点击确定，再次排序，首行就不在参加排序。
 
-
-
 **2.** **空值填充**
 
 1） 批量填充（不同值）：需要填写的空单元格以及其上方单元格一起选中，同时按住ctrl+G，跳出“定位”对话框，点击“定位条件”，选择‘空值’。(编辑 - 查找和选择 - 定位条件)
 
 2）空值填充为0
-
-
 
 **3.** **查找**
 
@@ -167,13 +147,9 @@ ctrl + F
 
  ![image-20210628152305296](../../media/sf_reuse/tools/office_excel_002.png)
 
-
-
 ### 2.2 数据处理
 
 **1.** **分列**
-
-
 
 **2.** **行列互换（倒置）：**
 
@@ -181,11 +157,7 @@ ctrl + F
 
 法2：公式：TRAMSPOSE， 按CTRL+SHIFT+ENTER 得到结果
 
-
-
 ### 2.3 合并多个工作表到一个
-
-
 
 ### 2.4 透视表
 
@@ -199,19 +171,13 @@ ctrl + F
 
 * 表内引用：[行列]，可忽略表名。
 
-
-
 ### 2.5 分级显示
 
 主要包括合并计算和分类汇总。
 
-
-
 ### 2.6 数据模拟分析与预测
 
 略。
-
-
 
 ### 2.7 VBA宏
 
@@ -231,8 +197,6 @@ Next
 End Sub
 ```
 
-
-
 ## 3 MS PPT
 
 ### 3.1 常用功能
@@ -242,8 +206,6 @@ End Sub
 2). 设计方案: 页面显示动画效果，页面母版，配色方案。
 
 3). 生成图表: 流程图、饼图、条形图...
-
-
 
 ### 3.2 PPT模板
 
@@ -255,19 +217,15 @@ End Sub
 
  ![image-20210628152340339](../../media/sf_reuse/tools/office_ppt_001.png)
 
-
-
 **模板切换**
 
 示例：把A.PPT的母模板应用到B.PPT
 
 步骤
 
-1)     A.PPT 在设计-母模板，适当修改后。文件- 另存为-其它格式（powerpoint(*.potx)）。保存路径为C:\Users\keefe\AppData\Roaming\Microsoft\Templates
+1) A.PPT 在设计-母模板，适当修改后。文件- 另存为-其它格式（powerpoint(*.potx)）。保存路径为C:\Users\keefe\AppData\Roaming\Microsoft\Templates
 
-2)     B.PPT
-
-
+2) B.PPT
 
 <br>
 
@@ -297,55 +255,45 @@ StarSuite(1999) ->  OpenOffice.org(2000)  -> Apache OpenOffice(2011)
   [IBM Lotus Symphony] LibreOffice(2011)  Go-oo
 ```
 
-
-
 InfoWorld [对比了两个办公软件的Windows版本](https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fwww.infoworld.com%2Fprint%2F151716)，寻找它们的差异和优缺点，以及用户是否可以抛弃甲骨文的OpenOffice。
 
-| 产品                                                         | 官网                           | 开源 | 简介                                                         |
-| ------------------------------------------------------------ | ------------------------------ | ---- | ------------------------------------------------------------ |
-| [StarOffice](http://en.wikipedia.org/wiki/StarOffice)        |                                |      | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。<br/>1999年被Sun收购，仍保留原名称。现在称为Oracle Open Office。 |
-| [OpenOffice.org](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔    | 2000年，Sun将StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。 |
-| [Go-oo](http://en.wikipedia.org/wiki/Go-oo)                  |                                | ✔    | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。 |
-| [IBM Lotus Symphony](http://symphony.lotus.com/)             |                                |      | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。 |
-| Apache OpenOffice                                            | http://www.openoffice.org/     | ✔    | 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。 |
-| LibreOffice                                                  | https://zh-cn.libreoffice.org/ | ✔    | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。<br>目前大多数Linux发行版换用了此版本。 |
-| WPS Office                                                   | https://www.wps.cn/            |      | 1989年推出WPS1.0。WPS Office是由金山软件股份有限公司自主研发的一款办公软件套装，可以实现办公软件最常用的文字、表格、演示等多种功能。<br/>具有内存占用低、运行速度快、体积小巧、强大插件平台支持、免费提供海量在线存储空间及文档模板、支持阅读和输出PDF 文件、全面兼容微软Office97-2010格式(doc/docx/xls/xlsx/ppt/pptx 等）独特优势，覆盖Windows、 Linux、 Android、 iOS等多个平台。 |
-
-
+| 产品                                                            | 官网                             | 开源  | 简介                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------- | ------------------------------ | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [StarOffice](http://en.wikipedia.org/wiki/StarOffice)         |                                |     | 所有分支的起点，商业软件。最早由StarDivision开发，所以称为StarOffice。<br/>1999年被Sun收购，仍保留原名称。现在称为Oracle Open Office。                                                                                                                                             |
+| [OpenOffice.org](http://en.wikipedia.org/wiki/OpenOffice.org) |                                | ✔   | 2000年，Sun将StarOffice公开源代码形成的社区开发版。关于其名称，本应该是OpenOffice，但因为该名称有版权问题，所以改称为 OpenOffice.org ，简称OOo。                                                                                                                                           |
+| [Go-oo](http://en.wikipedia.org/wiki/Go-oo)                   |                                | ✔   | OOo的分支，绝大多数Linux（ Ubuntu, openSUSE, Mandriva Linux）采用了该版本。                                                                                                                                                                                |
+| [IBM Lotus Symphony](http://symphony.lotus.com/)              |                                |     | 2007年9月，IBM公司基于OpenOffice.org推出的办公套件，是对OpenOffice改动最大的分支。                                                                                                                                                                                 |
+| Apache OpenOffice                                             | http://www.openoffice.org/     | ✔   | 2011年6月，甲骨文宣布将OpenOffice.org捐赠给[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache軟件基金會)，后来成为[Apache OpenOffice](https://zh.wikipedia.org/wiki/Apache_OpenOffice)。                                                                         |
+| LibreOffice                                                   | https://zh-cn.libreoffice.org/ | ✔   | 2010年9月由新基金 Document Foundation 推出的新分支，实际上基于Go-oo。<br>目前大多数Linux发行版换用了此版本。                                                                                                                                                                |
+| WPS Office                                                    | https://www.wps.cn/            |     | 1989年推出WPS1.0。WPS Office是由金山软件股份有限公司自主研发的一款办公软件套装，可以实现办公软件最常用的文字、表格、演示等多种功能。<br/>具有内存占用低、运行速度快、体积小巧、强大插件平台支持、免费提供海量在线存储空间及文档模板、支持阅读和输出PDF 文件、全面兼容微软Office97-2010格式(doc/docx/xls/xlsx/ppt/pptx 等）独特优势，覆盖Windows、 Linux、 Android、 iOS等多个平台。 |
 
 ### 功能和使用技巧
 
 表格 OpenOffice.org 和MS Office主要办公套件的比较
 
 | 办公套件 | Microsoft Office | OpenOffice.org |
-| -------- | ---------------- | -------------- |
+| ---- | ---------------- | -------------- |
 | 文字处理 | MS Word          | writer         |
-| 表格     | MS Excel         | calc           |
-| 演示     | MS PPT           | present        |
-| 数据库   | MS Access        | database       |
-
-
+| 表格   | MS Excel         | calc           |
+| 演示   | MS PPT           | present        |
+| 数据库  | MS Access        | database       |
 
 表格 OpenOffice.org 和MS Office关键功能对比
 
-| MS Office功能   | OpenOffice对应功能 | 详述                                                         |
-| --------------- | ------------------ | ------------------------------------------------------------ |
-| WORD 文档结构图 | 视图 - 导航        | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
-| WORD审阅        | 插入 - 批注        | 快捷键CTRL + ALT + C                                         |
-| Excel 数据分析  |                    |                                                              |
-| ...             |                    |                                                              |
-
-
+| MS Office功能 | OpenOffice对应功能 | 详述                                   |
+| ----------- | -------------- | ------------------------------------ |
+| WORD 文档结构图  | 视图 - 导航        | 导航快捷键 F5，标题对应到文档结构图，另外还有图片/链接/表格的结构。 |
+| WORD审阅      | 插入 - 批注        | 快捷键CTRL + ALT + C                    |
+| Excel 数据分析  |                |                                      |
+| ...         |                |                                      |
 
 **常用快捷键**
 
 ```
-F5 	打开导航，即文档结构图
+F5     打开导航，即文档结构图
 Alt + F12 打开设置项
 Ctrl + Enter   表格单元格内换行
 ```
-
-
 
 **windows环境，libreoffce性能提升**
 
@@ -355,15 +303,11 @@ Ctrl + Enter   表格单元格内换行
 2. 禁用Java运行时： 打开选项卡「工具」—「选项」—「高级」，取消勾选「使用 Java 运行时环境」选项。此项不影响日常功能，但如果要用到某些特殊功能时，需勾选。
 3. 字体固定：打开选项卡「工具」—「选项」—「字体」，“HTML、Basic及SQL源代码的字体设置” 从 “自动” 改为自己平常用的字体。
 
-
-
 **FAQ**
 
 **Q1:   粘贴过长的表格，数据常被截断。**
 
 可以右键 ’选择性粘贴‘，选择 电子表格。
-
-
 
 ### Apache OpenOffice
 
@@ -371,9 +315,7 @@ Ctrl + Enter   表格单元格内换行
 
 Apache OpenOffice是一款先进的**开源** **办公软件套件**，它包含**文本文档**、**电子表格**、**演示文稿**、**绘图**、**数据库**等。 它能够支持**许多语言**并且在所有**普通计算机**上工作。它将你所有的数据以**国际开放标准格式**存储下来，并能够读写从其它常用办公软件包来的文件。它可以被完全**免费**下载并使用于**任何用途**。
 
-
-
-###  Libreoffice
+### Libreoffice
 
 [主页 | LibreOffice 简体中文官方网站 - 自由免费的办公套件](https://zh-cn.libreoffice.org/)  https://zh-cn.libreoffice.org/
 
@@ -382,8 +324,6 @@ LibreOffice 是一款功能强大的办公软件，默认使用开放文档格�
 LibreOffice 采用对企业和个人用户均免费的 MPL 2.0 授权协议。您可以自由分发该软件，无需支付授权费用（但您仍然可以付费获得经认证的专业支持）。它的源代码完全公开，任何人都可以参与软件的开发和维护。
 
 LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个月发布一个主要的新版本。
-
-
 
 ## WPS Office
 
@@ -398,13 +338,11 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 - 2018年，召开了主题为“简单.创造.不简单”云AI未来办公大会，发布了金山文档等新产品；
 - 2020年11月11日，金山办公正式发布“使命.愿景.价值观”。
 
-
-
 <br>
 
 ## 本章参考
 
-*  [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office
+* [LibreOffice 与 Microsoft® Office 2016 的对比](https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office)  https://wiki.documentfoundation.org/Feature_Comparison:_LibreOffice_-_Microsoft_Office
 * LibreOffice:完全由开源社区主导的OpenOffice分支  https://xbeta.info/libreoffice.htm
 
 <br>
@@ -441,16 +379,14 @@ MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf�
 
 表格  markdown相关的工具
 
-| 工具名称                                      | 用途                                                         | 示例                    |
-| --------------------------------------------- | ------------------------------------------------------------ | ----------------------- |
-| typora                                        | markdown所见即所得编辑器，2021年底winows版付费使用。         |                         |
+| 工具名称                                          | 用途                                                                                                                      | 示例                      |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| typora                                        | markdown所见即所得编辑器，2021年底winows版付费使用。                                                                                     |                         |
 | marktext                                      | A simple and elegant markdown editor, available for Linux, macOS and Windows.<br>可替换typora，支持目录，但换行要显式使用`<br>`，不支持空行换行。 |                         |
-| [trilium](https://github.com/zadam/trilium)   | 可替换typora。支持目录，类似印象笔记，有网页版也有客户端。   |                         |
-| [notable](https://github.com/notable/notable) | The Markdown-based note-taking app that doesn't suck. 类似网易云笔记，但不支持目录。 |                         |
-| mkdocs                                        | 生成markdown文本。                                           |                         |
-| pandoc                                        | 可方便地在markdown和其它格式之间进行转换。                   | pandoc xx.docx -o xx.md |
-
-
+| [trilium](https://github.com/zadam/trilium)   | 可替换typora。支持目录，类似印象笔记，有网页版也有客户端。                                                                                        |                         |
+| [notable](https://github.com/notable/notable) | The Markdown-based note-taking app that doesn't suck. 类似网易云笔记，但不支持目录。                                                   |                         |
+| mkdocs                                        | 生成markdown文本。                                                                                                           |                         |
+| pandoc                                        | 可方便地在markdown和其它格式之间进行转换。                                                                                               | pandoc xx.docx -o xx.md |
 
 ### Typora
 
@@ -465,8 +401,6 @@ Typora 是一款十分简洁的 Markdown 编辑器，支持 Windows、Mac、Linu
 https://gitee.com/typora-mirror/Typora-Mirror/attach_files/432421/download/typora_0.9.92_amd64.deb
 
 ubuntu环境：可以先下载好deb，然后安装deb。`dpkg -i typora_0.9.92_amd64`
-
-
 
 ### Pandoc
 
@@ -491,13 +425,13 @@ for a particular purpose.
 `$ sudo apt install texlive texlive-latex-extra texlive-latex-recommended texlive-xetex pandoc`
 
 1. 将markdown格式转化成pdf
-
+   
    pandoc的pdf格式对中文支持不太好，一要更换pdf引擎；二要安装中文字体；三要中文文档边界没要处理好，需要替换latex模板。
-
+   
    1）更换pdf引擎：默认的latex引擎是pdflatex，是不支持中文的，因此需要手动设置编译时所用的引擎为xelatex，编译命令增加 `--pdf-engine=xelatex`
-
+   
    2）安装中文字体：编译时默认的字体时不支持中文的，所以我们得手动设置中文字体。显然，所设的字体应该为系统中已装的字体，且字体的名字不能写错。可用 fc-list 查看支持字体。
-
+   
    3）替换latex模板：生成模板命令 `pandoc -D latex > template.tex`，修改模板若干行 或者直接替换已修改好的模板
 
 pandoc转换命令示例：`pandoc infile.md -o outfile.pdf -s --pdf-engine=xelatex -V mainfont="Microsoft YaHei" -V geometry:margin=2.5cm`
@@ -513,16 +447,16 @@ pandoc转换命令示例：`pandoc infile.md -o outfile.pdf -s --pdf-engine=xela
 
 表格  Typora和Marktext的常用快捷键比较
 
-|            | Typora       | Marktext     | markdown符号                   |
-| ---------- | ------------ | ------------ | ------------------------------ |
-| 源代码模式 | ctrl+/       | ctrl+alt+s   |                                |
-| 超链接     | ctrl+k       | ctrl+L       | [title](link)                  |
-| 清除格式   | ctrl+\       | ctrl+shift+r |                                |
-| 代码块     | ctrl+shift+k | ctrl+`       | ``` 代码块 ```                 |
-| 删除线     | alt+shift+5  | ctrl+d       | ~~删除线~~                     |
-| 高亮       |              | ctrl+shfit+h | <mark>高亮</mark>              |
-| 复制       | ctrl+c       | ctrl+shift+c | 复制为markdown格式，即原有格式 |
-| 粘贴       | ctrl+v       | ctrl+shift+v | 粘贴为文本格式                 |
+|       | Typora       | Marktext     | markdown符号          |
+| ----- | ------------ | ------------ | ------------------- |
+| 源代码模式 | ctrl+/       | ctrl+alt+s   |                     |
+| 超链接   | ctrl+k       | ctrl+L       | [title](link)       |
+| 清除格式  | ctrl+\       | ctrl+shift+r |                     |
+| 代码块   | ctrl+shift+k | ctrl+`       | ``` 代码块 ```         |
+| 删除线   | alt+shift+5  | ctrl+d       | ~~删除线~~             |
+| 高亮    |              | ctrl+shfit+h | <mark>高亮</mark>     |
+| 复制    | ctrl+c       | ctrl+shift+c | 复制为markdown格式，即原有格式 |
+| 粘贴    | ctrl+v       | ctrl+shift+v |                     |
 
 备注：1. 快捷键大小写不敏感。
 
@@ -532,14 +466,14 @@ pandoc转换命令示例：`pandoc infile.md -o outfile.pdf -s --pdf-engine=xela
 
 4. Marktext 可设置新行符的处置方式(v0.16.3版本有BUG，此项配置无效，默认去除尾部空行)。可在 File - Perferences... - Editor - `Handling of trailing newline characters`
 
+5. marktext粘贴分为二种，一种是默认的原文粘贴ctrl+v，另外一种是粘贴为文本ctrl+shift+v，对于html特殊符号如`<BR/>`需要用第二种方式才能生效。
+
 <br>
 
 **Typora支持的md格式与传统md格式的差别**
 
 1. md格式表格头前要有空行，Typora没作要求。
 2. 脚注使用 `[^xx]`， 会在文末出现参考链接，xx可以是任意名称或数字。
-
-
 
 ## 数学公式语法
 
@@ -550,15 +484,11 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 1. 行内公式：将公式插入到本行内，符号：`$公式内容$`，如：$xyz$
 2. 独行公式：将公式插入到新的一行内，并且居中，符号：`$$公式内容$$`，如：$$xyz$$
 
-
-
 上标、下标与组合
 
 1. 上标符号，符号：`^`，如：$x^4$
 2. 下标符号，符号：`_`，如：$x_1$,   $x_{10}$
 3. 组合符号，符号：`{}`，如：${16}_{8}O{2+}_{2}$
-
-
 
 汉字、字体与格式
 
@@ -570,8 +500,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 6. 下大括号，符号：`\underbrace{算式}`，如：$a+\underbrace{b+c}_{1.0}+d$
 7. 上位符号，符号：`\stacrel{上位符号}{基位符号}`，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$
 
-
-
 占位符
 
 1. 两个quad空格，符号：`\qquad`，如：$x \qquad y$
@@ -581,8 +509,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 5. 小空格，符号`\,`，如：$x , y$
 6. 没有空格，符号``，如：$xy$
 7. 紧贴，符号`\!`，如：$x ! y$
-
-
 
 定界符与组合
 
@@ -610,8 +536,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 11. 分式表示，符号：`{分子} \voer {分母}`，如：${x+y} \over {y+z}$
 12. 绝对值表示，符号：`||`，如：$|x+y|$
 
-
-
 高级运算
 
 1. 平均数运算，符号：`\overline{算式}`，如：$\overline{xyz}$
@@ -627,8 +551,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 11. 微分运算，符号：`\partial`，如：$\frac{\partial x}{\partial y}$
 12. 矩阵表示，符号：`\begin{matrix} \end{matrix}`，如：$\left[ \begin{matrix} 1 &2 &\cdots &4\5 &6 &\cdots &8\\vdots &\vdots &\ddots &\vdots\13 &14 &\cdots &16\end{matrix} \right]$
 
-
-
 逻辑运算
 
 1. 等于运算，符号：`=`，如：$x+y=z$
@@ -643,8 +565,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 10. 不小于等于运算，符号：`\not\leq`，如：$x+y \not\leq z$
 11. 约等于运算，符号：`\approx`，如：$x+y \approx z$
 12. 恒定等于运算，符号：`\equiv`，如：$x+y \equiv z$
-
-
 
 集合运算
 
@@ -667,8 +587,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 17. 实数集合，符号：`\mathbb{R}`，如：`\mathbb{R}`
 18. 自然数集合，符号：`\mathbb{Z}`，如：`\mathbb{Z}`
 19. 空集，符号：`\emptyset`，如：$\emptyset$
-
-
 
 ### 数学符号
 
@@ -699,36 +617,34 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 25. 竖直对齐的省略号，符号：`\vdots`，如：$\vdots$
 26. 斜对齐的省略号，符号：`\ddots`，如：$\ddots$
 
-
-
 ### 希腊字母
 
-| 字母 | 实现       | 字母 | 实现       |
-| ---- | ---------- | ---- | ---------- |
-| A    | `A`        | α    | `\alhpa`   |
-| B    | `B`        | β    | `\beta`    |
-| Γ    | `\Gamma`   | γ    | `\gamma`   |
-| Δ    | `\Delta`   | δ    | `\delta`   |
-| E    | `E`        | ϵ    | `\epsilon` |
-| Z    | `Z`        | ζ    | `\zeta`    |
-| H    | `H`        | η    | `\eta`     |
-| Θ    | `\Theta`   | θ    | `\theta`   |
-| I    | `I`        | ι    | `\iota`    |
-| K    | `K`        | κ    | `\kappa`   |
-| Λ    | `\Lambda`  | λ    | `\lambda`  |
-| M    | `M`        | μ    | `\mu`      |
-| N    | `N`        | ν    | `\nu`      |
-| Ξ    | `\Xi`      | ξ    | `\xi`      |
-| O    | `O`        | ο    | `\omicron` |
-| Π    | `\Pi`      | π    | `\pi`      |
-| P    | `P`        | ρ    | `\rho`     |
-| Σ    | `\Sigma`   | σ    | `\sigma`   |
-| T    | `T`        | τ    | `\tau`     |
-| Υ    | `\Upsilon` | υ    | `\upsilon` |
-| Φ    | `\Phi`     | ϕ    | `\phi`     |
-| X    | `X`        | χ    | `\chi`     |
-| Ψ    | `\Psi`     | ψ    | `\psi`     |
-| Ω    | `\v`       | ω    | `\omega`   |
+| 字母  | 实现         | 字母  | 实现         |
+| --- | ---------- | --- | ---------- |
+| A   | `A`        | α   | `\alhpa`   |
+| B   | `B`        | β   | `\beta`    |
+| Γ   | `\Gamma`   | γ   | `\gamma`   |
+| Δ   | `\Delta`   | δ   | `\delta`   |
+| E   | `E`        | ϵ   | `\epsilon` |
+| Z   | `Z`        | ζ   | `\zeta`    |
+| H   | `H`        | η   | `\eta`     |
+| Θ   | `\Theta`   | θ   | `\theta`   |
+| I   | `I`        | ι   | `\iota`    |
+| K   | `K`        | κ   | `\kappa`   |
+| Λ   | `\Lambda`  | λ   | `\lambda`  |
+| M   | `M`        | μ   | `\mu`      |
+| N   | `N`        | ν   | `\nu`      |
+| Ξ   | `\Xi`      | ξ   | `\xi`      |
+| O   | `O`        | ο   | `\omicron` |
+| Π   | `\Pi`      | π   | `\pi`      |
+| P   | `P`        | ρ   | `\rho`     |
+| Σ   | `\Sigma`   | σ   | `\sigma`   |
+| T   | `T`        | τ   | `\tau`     |
+| Υ   | `\Upsilon` | υ   | `\upsilon` |
+| Φ   | `\Phi`     | ϕ   | `\phi`     |
+| X   | `X`        | χ   | `\chi`     |
+| Ψ   | `\Psi`     | ψ   | `\psi`     |
+| Ω   | `\v`       | ω   | `\omega`   |
 
 <br>
 
@@ -738,9 +654,6 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 * 神器pandoc的安装和使用  http://www.360doc.com/content/19/0507/17/13561030_834142392.shtml
 * Markdown数学公式语法  https://www.jianshu.com/p/e74eb43960a1
 
-
-
 <br>
 
 # 参考资料
-

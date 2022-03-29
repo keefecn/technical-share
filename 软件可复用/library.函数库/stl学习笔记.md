@@ -1,11 +1,9 @@
-| 序号 | 修改时间  | 修改内容 | 修改人 | 审稿人 |
-| ---- | --------- | -------- | ------ | ------ |
-| 1    | 2006-2007 | 创建     | Keefe | Keefe |
-<br>
+| 序号   | 修改时间      | 修改内容 | 修改人   | 审稿人   |
+| ---- | --------- | ---- | ----- | ----- |
+| 1    | 2006-2007 | 创建   | Keefe | Keefe |
+| <br> |           |      |       |       |
 
 ---
-
-
 
  目录
 
@@ -39,11 +37,7 @@
 
 [3 STL常用算法... 7](#_Toc27944857)
 
-
-
 [TOC]
-
-
 
 <br>
 
@@ -59,19 +53,17 @@ STL的一个重要特点是数据结构和算法的分离。尽管这是个简�
 
 表 1. STL头文件和容器类
 
-| #include | Container Class   |
-| ------------ | --------------------- |
-| <deque> | deque     |
-| <list> | list |
-| <map>  | map, multimap   |
-| <queue> | queue, priority_queue |
-| <set>  | set, multiset   |
-| <stack> | stack     |
-| <vector>     | vector, vector<bool>  |
+| #include | Container Class       |
+| -------- | --------------------- |
+| <deque>  | deque                 |
+| <list>   | list                  |
+| <map>    | map, multimap         |
+| <queue>  | queue, priority_queue |
+| <set>    | set, multiset         |
+| <stack>  | stack                 |
+| <vector> | vector, vector<bool>  |
 
  为了使用STL，可以将下面的指示符插入到你的源代码文件中，典型地是在所有的#include指示符的后面：using namespace std;
-
-
 
 <br>
 
@@ -85,16 +77,14 @@ STL的一个重要特点是数据结构和算法的分离。尽管这是个简�
 
 **以下是六大组件列表说明：**
 
-| 组件英文名 | 组件中文名 | 含义     | 备注      |
-| --------------- | ---------- | -------------------------- | -------------------------------------------- |
-| iterators | 迭代器     | 泛型指针  |     |
-| containers | 容器 | 就是数据结构，用来存放元素 |     |
-| algorithms | 算法 | 就是算法  |     |
-| function object | 函数对象   | 一种行为类似函数的东西     |     |
-| allocators | 配置器     | 用来分配内存空间     | 这一特性很多编译器不是很支持，建议使用默认值 |
-| adapters  | 适配器     | 用来修饰其它组件     | 可参考设计模式中的adapter   |
-
-
+| 组件英文名           | 组件中文名 | 含义            | 备注                     |
+| --------------- | ----- | ------------- | ---------------------- |
+| iterators       | 迭代器   | 泛型指针          |                        |
+| containers      | 容器    | 就是数据结构，用来存放元素 |                        |
+| algorithms      | 算法    | 就是算法          |                        |
+| function object | 函数对象  | 一种行为类似函数的东西   |                        |
+| allocators      | 配置器   | 用来分配内存空间      | 这一特性很多编译器不是很支持，建议使用默认值 |
+| adapters        | 适配器   | 用来修饰其它组件      | 可参考设计模式中的adapter       |
 
 ## 2.1 组件一：迭代器描述
 
@@ -102,16 +92,16 @@ STL的一个重要特点是数据结构和算法的分离。尽管这是个简�
 
 对于STL数据结构和算法，你可以使用五种迭代器。下面简要说明了这五种类型：
 
-*  Input iterators 提供对数据的只读访问。
-*  Output iterators 提供对数据的只写访问
-*  Forward iterators 提供读写操作，并能向前推进迭代器。
-*  Bidirectional iterators提供读写操作，并能向前和向后操作。
-*  Random access iterators提供读写操作，并能在数据中随机移动。
-
+* Input iterators 提供对数据的只读访问。
+* Output iterators 提供对数据的只写访问
+* Forward iterators 提供读写操作，并能向前推进迭代器。
+* Bidirectional iterators提供读写操作，并能向前和向后操作。
+* Random access iterators提供读写操作，并能在数据中随机移动。
 
 尽管各种不同的STL实现细节方面有所不同，还是可以将上面的迭代器想象为一种类继承关系。从这个意义上说，下面的迭代器继承自上面的迭代器。由于这种继承关系，你可以将一个Forward迭代器作为一个output或input迭代器使用。
 
 **下面是各种iterator类型之间的关系列图：**
+
 ```
 input iterators  output iterators
 
@@ -135,8 +125,6 @@ input iterators  output iterators
 
 和指针一样，你可以给一个迭代器赋值。
 
-
-
 ## 2.2 组件二：容器
 
 你可以生成STL容器，用来存放对象或者指向对象的指针。
@@ -147,13 +135,9 @@ typedef list<TMyClass> TMyClassList;     // 用于存放对象的list容器
 typedef list<TMyClass*> TMyClassPtrList; // 用于存放对象指针的list容器
 ```
 
-
-
 如果容器是保存的对象，则在容器析构的时候会自动清理这些对象。但，如果它保存的是对象的指针，删除指针就应该是程序员的责任了。
 
  ![1574506210649](../../media/sf_reuse/library/library_001.png)
-
-
 
 ### 2.2.1  容器类型
 
@@ -165,8 +149,6 @@ typedef list<TMyClass*> TMyClassPtrList; // 用于存放对象指针的list容�
 
 下图清晰的表明了不同类型的迭代器之间的转换关系：
 
-
-
 ## 2.3 组件三：函数对象(重点)
 
 STL算法通过重载operator()函数实现为模板类或模板函数。这些类用于创建函数对象，对容器中的数据进行各种各样的操作。下面解释如何使用函数和函数对象。
@@ -177,11 +159,9 @@ STL算法通过重载operator()函数实现为模板类或模板函数。这些�
 
 ```c++
 TAnyClass object;  // Construct object
-object();    	// Calls TAnyClass::operator()() function
+object();        // Calls TAnyClass::operator()() function
 for_each(v.begin(), v.end(), object);
 ```
-
-
 
 ### 2.3.1    发生器函数对象
 
@@ -234,8 +214,6 @@ unsigned int RandInt(const unsigned int n)
 }
 ```
 
-
-
 ### 2.3.2    绑定器函数对象
 
 一个绑定器使用另一个函数对象f()和参数值V创建一个函数对象。被绑定函数对象必须为双目函数，也就是说有两个参数,A和B。STL 中的帮定器有：
@@ -243,8 +221,6 @@ unsigned int RandInt(const unsigned int n)
 bind1st() 创建一个函数对象，该函数对象将值V作为第一个参数A。
 
 bind2nd()创建一个函数对象，该函数对象将值V作为第二个参数B。
-
-
 
 <br>
 
@@ -264,8 +240,6 @@ STL的算法可以分为不改变容器值的算法，改变容器值的与及�
 
 max, min
 
-
-
 **会改变容器值的算法有：**
 
 拷贝：copy, copy_backward
@@ -277,4 +251,3 @@ max, min
 3）  产生数：generate
 
 排序查找包括：sort...
-

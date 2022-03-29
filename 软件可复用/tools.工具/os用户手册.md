@@ -212,7 +212,7 @@ Windows8启动相关分区有三个:
 
 推荐：**搜狗输入法**
 
-搜狗输入法是由北京搜狗信息服务有限公司2006年6月推出的一款汉字输入法工具。业界首次利用先进的搜索引擎技术开发的输入法，被誉为“互联网输入法”。 搜狗输入法目前有windows, linux和mac版。
+搜狗输入法是由北京搜狗信息服务有限公司2006年6月推出的一款汉字输入法工具。业界首次利用先进的搜索引擎技术开发的输入法，被誉为“互联网输入法”。 搜狗输入法目前有windows、linux和mac版。
 
 Linux三种输入框架：ibus(缺省自带)、fcitx（推荐，含搜狗五笔拼音输入法）和 xim，三种输入法可同时并存。
 
@@ -241,11 +241,13 @@ linux下字体库较少，要正常显示非西欧字符，有时需要手动安
 
 表格 不同OS环境的字体环境
 
-|             | windows          | linux             | wine & deepinwine                                   |
-| ----------- | ---------------- | ----------------- | --------------------------------------------------- |
-| 字体文件目录      | C:\Windows\Fonts | /usr/share/fonts/ | ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts ` |
-| 缺省字体        | 微软雅黑             | 文泉驿               | SimSun仿宋 或者 Tahoma宋体                                |
-| linux环境安装字体 |                  |                   |                                                     |
+|           | windows          | linux                                           | wine & deepinwine                                   |
+| --------- | ---------------- | ----------------------------------------------- | --------------------------------------------------- |
+| 字体文件目录    | C:\Windows\Fonts | /usr/share/fonts/                               | ~/.deepinwine/Deepin-WeChat/drive_c/windows/Fonts ` |
+| 字体配置文件&目录 |                  | /etc/fonts/fonts.conf<br>/usr/share/fontconfig/ |                                                     |
+| 缺省字体      | 微软雅黑             | 文泉驿                                             | SimSun仿宋 或者 Tahoma宋体                                |
+
+linux环境安装字体
 
 ```sh
 # 安装字体工具: fontconfig
@@ -290,20 +292,19 @@ $ fc-list :lang=zh
 
 备注：OpenType标准定义了OpenType文件名称的后缀名。
 
-* 包含TureType字体的OpenType文件后缀名为 ttf；可下载的字体包文件格式为 ttf。
-* 包含PostScript字体的文件后缀名为 OTF；
-* 如果是包含一系列TrueType字体的字体包文件，那么后缀名为TTC。
+* 包含TureType字体的OpenType文件后缀名为 ttf；可下载的字体包文件格式为 ttf。ttf只会包含一种字体。
+* 如果是包含一系列TrueType字体的字体包文件，那么后缀名为ttc。ttc是多个ttf合成的字库，安装后会包含2个以上的字体。
+* 包含PostScript字体的文件后缀名为 otf。
 
 表格  常用字体说明
 
-| 字体中文名   | 英文名                    | 字体文件                                                                      |
-| ------- | ---------------------- | ------------------------------------------------------------------------- |
-| 仿宋      | SimSun                 |                                                                           |
-| 宋体      | Tahoma                 |                                                                           |
-| 文泉驿等宽正黑 | WenQuanYi Zen Hei Mono | usr/share/fonts/truetype/wqy/wqy-zenhei.ttc                               |
-| 微软雅黑    | msyh                   | [msyh.ttf](https://github.com/chenqing/ng-mini/blob/master/font/msyh.ttf) |
-
-字体存储路径：linux环境一般是/usr/share/fonts/目录下。
+| 字体中文名  | 英文名       | 字体文件                                                                      | 备注                                                                                  |
+| ------ | --------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 仿宋     | SimSun    | simsun.ttf                                                                | windows环境自带                                                                         |
+| 宋体     | Tahoma    | tahoma.ttf                                                                | windows环境自带                                                                         |
+| 微软雅黑   | msyh      | [msyh.ttf](https://github.com/chenqing/ng-mini/blob/master/font/msyh.ttf) | windows环境自带                                                                         |
+| 文泉驿    | WenQuanYi | /usr/share/fonts/truetype/wqy/如wqy-zenhei.ttf                             | 文泉驿有多种字体如等宽正黑                                                                       |
+| DejaVu | DejaVu    | /usr/share/fonts/dejavu/                                                  | DejaVu是一套改造自Bitstream Vera的电脑字体，大幅扩充了Unicode所含盖的字符。DejaVu以自由版权发布，因此亦为许多自由软件采用为显示字体。 |
 
 <br>
 
@@ -417,25 +418,7 @@ sudo ./run.sh
 
 ## 全新Windows配置
 
-### 防火墙设置
-
-WIN8自带防火墙，可在“控制面板” --“系统与安全”-“Windows 防火墙”启用或关闭。
-
-一般来讲关闭防火墙就能解决绝大部分问题，但从安全角度来讲，不推荐。
-
-1）局域网无法PING：
-
-修改规则：修改ICMP Echo规则。
-
-具体操作：“控制面板” - “Windows 防火墙” - “高级设置” - “入站规则” - “文件和打印机共享（回显请求 - ICMPv4 - In）”，然后根据你的实际情况选择其中一个，右键点击“启用规则”。
-
-2）局域网无法访问WEB服务
-
-新建规则：增加TCP80端口。
-
-具体操作：“控制面板” - “Windows 防火墙” - “高级设置” - “入站规则” - “新建规则”- “添加端口”。
-
-### 其它设置
+### 常用设置
 
 1. win8系统桌面添加“我的电脑”图标
 
@@ -817,7 +800,9 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 | 8        | -          | 2021-12-31              |
 | Stream   | N/A（滚动更新）  | N/A（滚动更新）               |
 
-### 全新CentOS配置
+> 2021年底CentOS 8已停止运维，官方相关支持已移除，不建议再使用centos8。
+
+<br>
 
 ### Kunpeng aarch64架构
 

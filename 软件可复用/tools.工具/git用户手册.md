@@ -353,7 +353,7 @@ usage:  `git remote add [<options>] <name> <url>`
 ```
 
 > 备注: 可用命令添加如 `git config --add core.filemode false `
->
+> 
 > autocrlf 换行符处理，excludesfile忽略文件，filemode 是否检测filemode，quotepath 路径是否转义，longpaths 是否支持长路径,
 
 <br><br>
@@ -405,16 +405,16 @@ $git revert HEAD
 ```
 
 2) 与远程同步
-
+   
    ```sh
    # 将本地的git档案与github(远程)上的同步
    git push
-
+   
    # 将github(远程)的git档案与本地的同步(即更新本地端的repo)
    git pull
-
+   
    # 例如,pull指令其实包含了fetch(將变更复制回來)以及merge(合并)操作
-
+   
    git pull git:**//**github.com**/**tom**/**test.git
    ```
 
@@ -474,7 +474,7 @@ git status
 `$git --bare init --shared`
 
 1) 创建一个开发仓库，文件信息放入.git目录，如示例仓库名proj.
-
+   
    ```sh
    $ cd {proj}
    $ git init
@@ -1053,21 +1053,21 @@ $ git svn clone file:///tmp/test-svn -T trunk -b branches -t tags
    `$ git svn create-ignore`
 
 4) 转换SVN的标签为Git标签
-
+   
    ```sh
    $ cp -Rf .git/refs/remotes/tags/* .git/refs/tags/
    $ rm -Rf .git/refs/remotes/tags
    ```
 
 5) 转换SVN的分支为Git分支
-
+   
    ```sh
    $ cp -Rf .git/refs/remotes/* .git/refs/heads/
    $ rm -Rf .git/refs/remotes
    ```
 
 6) 最后把转换后的本地Git仓库推到公共的Git服务器
-
+   
    ```sh
    $ git remote add origin [远程Git服务器地址]
    $ git push origin master --tags

@@ -1,10 +1,7 @@
-| 序号 | 修改时间  | 修改内容 | 修改人 | 审稿人 |
-| ---- | --------- | -------- | ------ | ------ |
-| 1    | 2016-5-12 | 创建     | Keefe | Keefe |
-|      |           |          |        |        |
-
-
-
+| 序号  | 修改时间      | 修改内容 | 修改人   | 审稿人   |
+| --- | --------- | ---- | ----- | ----- |
+| 1   | 2016-5-12 | 创建   | Keefe | Keefe |
+|     |           |      |       |       |
 
 <br><br><br>
 
@@ -26,27 +23,23 @@ Mediawiki分析版本v1-26.0
 
 表格 1 代码目录文件结构
 
-| 目录名      | 典型文件   | 简介             | 备注                |
-| ----------- | ---------- | ---------------- | ------------------- |
-| cache       |            | 页面缓存         |                     |
-| docs        |            | 文档             |                     |
-| extensions  |            | 模块扩展         |                     |
-| images      |            | 图片             | 保存用x/xx/文件原名 |
-| includes    |            |                  |                     |
-| languages   |            | 语言相关         |                     |
-| maintenance |            | 维护相关         |                     |
-|             | table.sql  | 数据库表创建脚本 |                     |
-|             | update.php | 版本更新         |                     |
-| mv-config   |            |                  |                     |
-| resources   |            |                  |                     |
-| serialized  |            |                  |                     |
-| skins       |            |                  |                     |
-| tests       |            |                  |                     |
-| vendor      |            |                  |                     |
-
-
-
-
+| 目录名         | 典型文件       | 简介       | 备注           |
+| ----------- | ---------- | -------- | ------------ |
+| cache       |            | 页面缓存     |              |
+| docs        |            | 文档       |              |
+| extensions  |            | 模块扩展     |              |
+| images      |            | 图片       | 保存用x/xx/文件原名 |
+| includes    |            |          |              |
+| languages   |            | 语言相关     |              |
+| maintenance |            | 维护相关     |              |
+|             | table.sql  | 数据库表创建脚本 |              |
+|             | update.php | 版本更新     |              |
+| mv-config   |            |          |              |
+| resources   |            |          |              |
+| serialized  |            |          |              |
+| skins       |            |          |              |
+| tests       |            |          |              |
+| vendor      |            |          |              |
 
 ## 1.2   数据库结构
 
@@ -58,155 +51,136 @@ Mediawiki分析版本v1-26.0
 
 注：功能分为users，
 
-
-
 ### 1.2.1 数据库表简述
 
 表格 2按字母排序的数据库表
 
-| 功能 | [表               ](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=table&sort_order=DESC) | [记录数](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=records&sort_order=DESC) 1 | [大小](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=size&sort_order=DESC) |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1.   | archive                                                  | 1                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_archive#showusage) |
-| 2.   | category                                                 | 11                                                           | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_category#showusage) |
-| 3.   | categorylinks                                            | 121                                                          | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_categorylinks#showusage) |
-| 4.   | change_tag                                               | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_change_tag#showusage) |
-| 5.   | externallinks                                            | 466                                                          | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_externallinks#showusage) |
-| 6.   | filearchive                                              | 0                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_filearchive#showusage) |
-| 7.   | image                                                    | 9                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_image#showusage) |
-| 8.   | imagelinks                                               | 21                                                           | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_imagelinks#showusage) |
-| 9.   | interwiki                                                | 74                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_interwiki#showusage) |
-| 10.  | ipblocks                                                 | 0                                                            | [112.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_ipblocks#showusage) |
-| 11.  | iwlinks                                                  | 2                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_iwlinks#showusage) |
-| 12.  | job                                                      | 0                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_job#showusage) |
-| 13.  | l10n_cache                                               | 10,460                                                       | [4.3 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_l10n_cache#showusage) |
-| 14.  | langlinks                                                | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_langlinks#showusage) |
-| 15.  | logging                                                  | 334                                                          | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_logging#showusage) |
-| 16.  | log_search                                               | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_log_search#showusage) |
-| 17.  | module_deps                                              | 41                                                           | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_module_deps#showusage) |
-| 18.  | msg_resource                                             | 66                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource#showusage) |
-| 19.  | msg_resource_links                                       | 43                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource_links#showusage) |
-| 20.  | objectcache                                              | 55                                                           | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_objectcache#showusage) |
-| 21.  | oldimage                                                 | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_oldimage#showusage) |
-| 22.  | page                                                     | 126                                                          | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page#showusage) |
-| 23.  | pagelinks                                                | 1,776                                                        | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_pagelinks#showusage) |
-| 24.  | page_props                                               | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_props#showusage) |
-| 25.  | page_restrictions                                        | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_restrictions#showusage) |
-| 26.  | protected_titles                                         | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_protected_titles#showusage) |
-| 27.  | querycache                                               | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache#showusage) |
-| 28.  | querycachetwo                                            | 1                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycachetwo#showusage) |
-| 29.  | querycache_info                                          | 1                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache_info#showusage) |
-| 30.  | recentchanges                                            | 334                                                          | [192.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_recentchanges#showusage) |
-| 31.  | redirect                                                 | 2                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_redirect#showusage) |
-| 32.  | revision                                                 | 1,004                                                        | [512.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_revision#showusage) |
-| 33.  | searchindex                                              | 126                                                          | [2.1 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_searchindex#showusage) |
-| 34.  | sites                                                    | 0                                                            | [144.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_sites#showusage) |
-| 35.  | site_identifiers                                         | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_identifiers#showusage) |
-| 36.  | site_stats                                               | 1                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_stats#showusage) |
-| 37.  | tag_summary                                              | 0                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_tag_summary#showusage) |
-| 38.  | templatelinks                                            | 8                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_templatelinks#showusage) |
-| 39.  | text                                                     | 905                                                          | [9.5 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_text#showusage) |
-| 40.  | transcache                                               | 0                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_transcache#showusage) |
-| 41.  | updatelog                                                | 6                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_updatelog#showusage) |
-| 42.  | uploadstash                                              | 0                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_uploadstash#showusage) |
-| 43.  | user                                                     | 2                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user#showusage) |
-| 44.  | user_former_groups                                       | 2                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_former_groups#showusage) |
-| 45.  | user_groups                                              | 3                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_groups#showusage) |
-| 46.  | user_newtalk                                             | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_newtalk#showusage) |
-| 47.  | user_properties                                          | 1                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_properties#showusage) |
-| 48.  | valid_tag                                                | 0                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_valid_tag#showusage) |
-| 49   | watchlist                                                | 196                                                          | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_watchlist#showusage) |
-|          | 49 个表                                              | 16,198                                                   | 19.6 MB                                                  |
+| 功能  | [表               ](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=table&sort_order=DESC) | [记录数](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=records&sort_order=DESC) 1 | [大小](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=size&sort_order=DESC)                                     |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1.  | archive                                                                                                                                                   | 1                                                                                                                                                | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_archive#showusage)            |
+| 2.  | category                                                                                                                                                  | 11                                                                                                                                               | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_category#showusage)           |
+| 3.  | categorylinks                                                                                                                                             | 121                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_categorylinks#showusage)      |
+| 4.  | change_tag                                                                                                                                                | 0                                                                                                                                                | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_change_tag#showusage)         |
+| 5.  | externallinks                                                                                                                                             | 466                                                                                                                                              | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_externallinks#showusage)     |
+| 6.  | filearchive                                                                                                                                               | 0                                                                                                                                                | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_filearchive#showusage)        |
+| 7.  | image                                                                                                                                                     | 9                                                                                                                                                | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_image#showusage)              |
+| 8.  | imagelinks                                                                                                                                                | 21                                                                                                                                               | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_imagelinks#showusage)         |
+| 9.  | interwiki                                                                                                                                                 | 74                                                                                                                                               | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_interwiki#showusage)          |
+| 10. | ipblocks                                                                                                                                                  | 0                                                                                                                                                | [112.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_ipblocks#showusage)          |
+| 11. | iwlinks                                                                                                                                                   | 2                                                                                                                                                | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_iwlinks#showusage)            |
+| 12. | job                                                                                                                                                       | 0                                                                                                                                                | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_job#showusage)                |
+| 13. | l10n_cache                                                                                                                                                | 10,460                                                                                                                                           | [4.3 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_l10n_cache#showusage)          |
+| 14. | langlinks                                                                                                                                                 | 0                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_langlinks#showusage)          |
+| 15. | logging                                                                                                                                                   | 334                                                                                                                                              | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_logging#showusage)           |
+| 16. | log_search                                                                                                                                                | 0                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_log_search#showusage)         |
+| 17. | module_deps                                                                                                                                               | 41                                                                                                                                               | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_module_deps#showusage)        |
+| 18. | msg_resource                                                                                                                                              | 66                                                                                                                                               | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource#showusage)       |
+| 19. | msg_resource_links                                                                                                                                        | 43                                                                                                                                               | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource_links#showusage) |
+| 20. | objectcache                                                                                                                                               | 55                                                                                                                                               | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_objectcache#showusage)       |
+| 21. | oldimage                                                                                                                                                  | 0                                                                                                                                                | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_oldimage#showusage)           |
+| 22. | page                                                                                                                                                      | 126                                                                                                                                              | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page#showusage)               |
+| 23. | pagelinks                                                                                                                                                 | 1,776                                                                                                                                            | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_pagelinks#showusage)         |
+| 24. | page_props                                                                                                                                                | 0                                                                                                                                                | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_props#showusage)         |
+| 25. | page_restrictions                                                                                                                                         | 0                                                                                                                                                | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_restrictions#showusage)  |
+| 26. | protected_titles                                                                                                                                          | 0                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_protected_titles#showusage)   |
+| 27. | querycache                                                                                                                                                | 0                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache#showusage)         |
+| 28. | querycachetwo                                                                                                                                             | 1                                                                                                                                                | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycachetwo#showusage)      |
+| 29. | querycache_info                                                                                                                                           | 1                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache_info#showusage)    |
+| 30. | recentchanges                                                                                                                                             | 334                                                                                                                                              | [192.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_recentchanges#showusage)     |
+| 31. | redirect                                                                                                                                                  | 2                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_redirect#showusage)           |
+| 32. | revision                                                                                                                                                  | 1,004                                                                                                                                            | [512.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_revision#showusage)          |
+| 33. | searchindex                                                                                                                                               | 126                                                                                                                                              | [2.1 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_searchindex#showusage)         |
+| 34. | sites                                                                                                                                                     | 0                                                                                                                                                | [144.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_sites#showusage)             |
+| 35. | site_identifiers                                                                                                                                          | 0                                                                                                                                                | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_identifiers#showusage)   |
+| 36. | site_stats                                                                                                                                                | 1                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_stats#showusage)         |
+| 37. | tag_summary                                                                                                                                               | 0                                                                                                                                                | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_tag_summary#showusage)        |
+| 38. | templatelinks                                                                                                                                             | 8                                                                                                                                                | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_templatelinks#showusage)      |
+| 39. | text                                                                                                                                                      | 905                                                                                                                                              | [9.5 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_text#showusage)                |
+| 40. | transcache                                                                                                                                                | 0                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_transcache#showusage)         |
+| 41. | updatelog                                                                                                                                                 | 6                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_updatelog#showusage)          |
+| 42. | uploadstash                                                                                                                                               | 0                                                                                                                                                | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_uploadstash#showusage)        |
+| 43. | user                                                                                                                                                      | 2                                                                                                                                                | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user#showusage)               |
+| 44. | user_former_groups                                                                                                                                        | 2                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_former_groups#showusage) |
+| 45. | user_groups                                                                                                                                               | 3                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_groups#showusage)        |
+| 46. | user_newtalk                                                                                                                                              | 0                                                                                                                                                | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_newtalk#showusage)       |
+| 47. | user_properties                                                                                                                                           | 1                                                                                                                                                | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_properties#showusage)    |
+| 48. | valid_tag                                                                                                                                                 | 0                                                                                                                                                | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_valid_tag#showusage)          |
+| 49  | watchlist                                                                                                                                                 | 196                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_watchlist#showusage)          |
+|     | 49 个表                                                                                                                                                     | 16,198                                                                                                                                           | 19.6 MB                                                                                                                                                                        |
 
 注：2016_为表前缀。共49个表。
 
 * 数据库：整理是**latin1_swedish_ci（系统缺省）。**
 
 * Searchindex表： 引擎类型是MyISAM，整理是*utf8_general_ci。*
+
 * 其它表：各表缺省存储引擎类型是InnoDB，整理（排序）是binary。
 
 * 存储：导出的SQL是UTF8编码，可以正常显示中文条目名称，但条目内容是用binary存储的。
 
-
-
 表格 3 按功能排序的数据库表
 
-| 1    | 功能           | 表                     | 简介                                        | 备注                           | [记录数](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=records&sort_order=DESC) | [大小 ](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=size&sort_order=DESC) |
-| ---- | -------------- | ---------------------- | ------------------------------------------- | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 2    | caching tables | trans_cache            |                                             |                                | 0                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_transcache#showusage) |
-| 3    | caching tables | querycache_info    |                                             |                                | 1                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache_info#showusage) |
-| 4    | caching tables | querycache         |                                             |                                | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache#showusage) |
-| 5    | caching tables | objectcache            |                                             |                                | 55                                                           | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_objectcache#showusage) |
-| 6    | caching tables | l10n_cache             | 多语言缓存项                                | 记录行最多                     | 10,460                                                       | [4.3 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_l10n_cache#showusage) |
-| 7    | caching tables | querycachetwo      |                                             |                                | 1                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycachetwo#showusage) |
-| 8    | interwiki      | sites              |                                             |                                | 1                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_stats#showusage) |
-| 9    | interwiki      | interwikis             | 内部链接条目名称[]                          |                                | 74                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_interwiki#showusage) |
-| 10   | interwiki      | site_identifiers   |                                             |                                | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_identifiers#showusage) |
-| 11   | Link tables    | externallinks      |                                             |                                | 466                                                          | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_externallinks#showusage) |
-| 12   | Link tables    | langlinks          |                                             |                                | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_langlinks#showusage) |
-| 13   | Link tables    | pagelinks          | 页面外部链接                                |                                | 1,776                                                        | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_pagelinks#showusage) |
-| 14   | Link tables    | iwlinks            |                                             |                                | 2                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_iwlinks#showusage) |
-| 15   | Link tables    | templatelinks      | 模板链接                                    |                                | 8                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_templatelinks#showusage) |
-| 16   | Link tables    | imagelinks         | 上传的图片链接地址                          |                                | 21                                                           | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_imagelinks#showusage) |
-| 17   | Link tables    | categorylinks      | 分类指向的链接                              |                                | 121                                                          | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_categorylinks#showusage) |
-| 18   | logging        | logging            |                                             |                                | 334                                                          | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_logging#showusage) |
-| 19   | logging        | log_search         |                                             |                                | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_log_search#showusage) |
-| 20   | mainterence    | updatelog              |                                             |                                | 6                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_updatelog#showusage) |
-| 21   | mainterence    | job                    |                                             |                                | 0                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_job#showusage) |
-| 22   | multimedia     | uploadslash            |                                             |                                | 0                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_uploadstash#showusage) |
-| 23   | multimedia     | oldimage               |                                             |                                | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_oldimage#showusage) |
-| 24   | multimedia     | filearchive            |                                             |                                | 0                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_filearchive#showusage) |
-| 25   | multimedia     | image                  | 上传的图片名称                              |                                | 9                                                            | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_image#showusage) |
-| 26   | pages          | protected_titles   |                                             |                                | 0                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_protected_titles#showusage) |
-| 27   | pages          | redirect               | 重定向条目                                  |                                | 2                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_redirect#showusage) |
-| 28   | pages          | page_props         |                                             |                                | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_props#showusage) |
-| 29   | pages          | category               | 分类名称                                    |                                | 11                                                           | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_category#showusage) |
-| 30   | pages          | revision               | 版本记录                                    |                                | 1,004                                                        | [512.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_revision#showusage) |
-| 31   | pages          | archive            |                                             |                                | 1                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_archive#showusage) |
-| 32   | pages          | page_restrictions  |                                             |                                | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_restrictions#showusage) |
-| 33   | pages          | page               | 条目名称，可以为中文,UTF8存储能正常显示     |                                | 126                                                          | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page#showusage) |
-| 34   | pages          | text                   | 条目的实际 内容，binary存储，包括修改记录。 | 体积最大                       | 905                                                          | [9.5 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_text#showusage) |
-| 35   | recent changes | recentchanges      | 最近更改                                    |                                | 334                                                          | [192.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_recentchanges#showusage) |
-| 36   | recent changes | watchlist              |                                             |                                | 196                                                          | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_watchlist#showusage) |
-| 37   | resourceloader | msg_resource_links |                                             |                                | 43                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource_links#showusage) |
-| 38   | resourceloader | msg_resource       |                                             |                                | 66                                                           | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource#showusage) |
-| 39   | resourceloader | module_deps        |                                             |                                | 41                                                           | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_module_deps#showusage) |
-| 40   | search         | searchindex            | 检索索引                                    | 整理和存储类型与其它表不一样。 | 126                                                          | [2.1 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_searchindex#showusage) |
-| 41   | statics        | sites_stats            |                                             |                                | 0                                                            | [144.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_sites#showusage) |
-| 42   | tags           | valid_tag          |                                             |                                | 0                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_valid_tag#showusage) |
-| 43   | tags           | tag_summary        |                                             |                                | 0                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_tag_summary#showusage) |
-| 44   | tags           | change_tag         |                                             |                                | 0                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_change_tag#showusage) |
-| 45   | Users          | ipblocks               |                                             |                                | 0                                                            | [112.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_ipblocks#showusage) |
-| 46   | Users          | user_former_groups |                                             |                                | 2                                                            | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_former_groups#showusage) |
-| 47   | Users          | user_properties    |                                             |                                | 1                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_properties#showusage) |
-| 48   | Users          | user_groups        |                                             |                                | 3                                                            | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_groups#showusage) |
-| 49   | Users          | user_newtalk       |                                             |                                | 0                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_newtalk#showusage) |
-| 50   | Users          | user               | 用户                                        |                                | 2                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user#showusage) |
-
-
+| 1   | 功能             | 表                  | 简介                        | 备注              | [记录数](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=records&sort_order=DESC) | [大小 ](http://192.168.0.220/phpmyadmin/db_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&pos=0&sort=size&sort_order=DESC)                                    |
+| --- | -------------- | ------------------ | ------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2   | caching tables | trans_cache        |                           |                 | 0                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_transcache#showusage)         |
+| 3   | caching tables | querycache_info    |                           |                 | 1                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache_info#showusage)    |
+| 4   | caching tables | querycache         |                           |                 | 0                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycache#showusage)         |
+| 5   | caching tables | objectcache        |                           |                 | 55                                                                                                                                             | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_objectcache#showusage)       |
+| 6   | caching tables | l10n_cache         | 多语言缓存项                    | 记录行最多           | 10,460                                                                                                                                         | [4.3 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_l10n_cache#showusage)          |
+| 7   | caching tables | querycachetwo      |                           |                 | 1                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_querycachetwo#showusage)      |
+| 8   | interwiki      | sites              |                           |                 | 1                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_stats#showusage)         |
+| 9   | interwiki      | interwikis         | 内部链接条目名称[]                |                 | 74                                                                                                                                             | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_interwiki#showusage)          |
+| 10  | interwiki      | site_identifiers   |                           |                 | 0                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_site_identifiers#showusage)   |
+| 11  | Link tables    | externallinks      |                           |                 | 466                                                                                                                                            | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_externallinks#showusage)     |
+| 12  | Link tables    | langlinks          |                           |                 | 0                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_langlinks#showusage)          |
+| 13  | Link tables    | pagelinks          | 页面外部链接                    |                 | 1,776                                                                                                                                          | [336.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_pagelinks#showusage)         |
+| 14  | Link tables    | iwlinks            |                           |                 | 2                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_iwlinks#showusage)            |
+| 15  | Link tables    | templatelinks      | 模板链接                      |                 | 8                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_templatelinks#showusage)      |
+| 16  | Link tables    | imagelinks         | 上传的图片链接地址                 |                 | 21                                                                                                                                             | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_imagelinks#showusage)         |
+| 17  | Link tables    | categorylinks      | 分类指向的链接                   |                 | 121                                                                                                                                            | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_categorylinks#showusage)      |
+| 18  | logging        | logging            |                           |                 | 334                                                                                                                                            | [224.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_logging#showusage)           |
+| 19  | logging        | log_search         |                           |                 | 0                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_log_search#showusage)         |
+| 20  | mainterence    | updatelog          |                           |                 | 6                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_updatelog#showusage)          |
+| 21  | mainterence    | job                |                           |                 | 0                                                                                                                                              | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_job#showusage)                |
+| 22  | multimedia     | uploadslash        |                           |                 | 0                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_uploadstash#showusage)        |
+| 23  | multimedia     | oldimage           |                           |                 | 0                                                                                                                                              | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_oldimage#showusage)           |
+| 24  | multimedia     | filearchive        |                           |                 | 0                                                                                                                                              | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_filearchive#showusage)        |
+| 25  | multimedia     | image              | 上传的图片名称                   |                 | 9                                                                                                                                              | [96.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_image#showusage)              |
+| 26  | pages          | protected_titles   |                           |                 | 0                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_protected_titles#showusage)   |
+| 27  | pages          | redirect           | 重定向条目                     |                 | 2                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_redirect#showusage)           |
+| 28  | pages          | page_props         |                           |                 | 0                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_props#showusage)         |
+| 29  | pages          | category           | 分类名称                      |                 | 11                                                                                                                                             | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_category#showusage)           |
+| 30  | pages          | revision           | 版本记录                      |                 | 1,004                                                                                                                                          | [512.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_revision#showusage)          |
+| 31  | pages          | archive            |                           |                 | 1                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_archive#showusage)            |
+| 32  | pages          | page_restrictions  |                           |                 | 0                                                                                                                                              | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page_restrictions#showusage)  |
+| 33  | pages          | page               | 条目名称，可以为中文,UTF8存储能正常显示    |                 | 126                                                                                                                                            | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_page#showusage)               |
+| 34  | pages          | text               | 条目的实际 内容，binary存储，包括修改记录。 | 体积最大            | 905                                                                                                                                            | [9.5 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_text#showusage)                |
+| 35  | recent changes | recentchanges      | 最近更改                      |                 | 334                                                                                                                                            | [192.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_recentchanges#showusage)     |
+| 36  | recent changes | watchlist          |                           |                 | 196                                                                                                                                            | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_watchlist#showusage)          |
+| 37  | resourceloader | msg_resource_links |                           |                 | 43                                                                                                                                             | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource_links#showusage) |
+| 38  | resourceloader | msg_resource       |                           |                 | 66                                                                                                                                             | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_msg_resource#showusage)       |
+| 39  | resourceloader | module_deps        |                           |                 | 41                                                                                                                                             | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_module_deps#showusage)        |
+| 40  | search         | searchindex        | 检索索引                      | 整理和存储类型与其它表不一样。 | 126                                                                                                                                            | [2.1 MB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_searchindex#showusage)         |
+| 41  | statics        | sites_stats        |                           |                 | 0                                                                                                                                              | [144.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_sites#showusage)             |
+| 42  | tags           | valid_tag          |                           |                 | 0                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_valid_tag#showusage)          |
+| 43  | tags           | tag_summary        |                           |                 | 0                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_tag_summary#showusage)        |
+| 44  | tags           | change_tag         |                           |                 | 0                                                                                                                                              | [80.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_change_tag#showusage)         |
+| 45  | Users          | ipblocks           |                           |                 | 0                                                                                                                                              | [112.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_ipblocks#showusage)          |
+| 46  | Users          | user_former_groups |                           |                 | 2                                                                                                                                              | [16.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_former_groups#showusage) |
+| 47  | Users          | user_properties    |                           |                 | 1                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_properties#showusage)    |
+| 48  | Users          | user_groups        |                           |                 | 3                                                                                                                                              | [32.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_groups#showusage)        |
+| 49  | Users          | user_newtalk       |                           |                 | 0                                                                                                                                              | [48.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user_newtalk#showusage)       |
+| 50  | Users          | user               | 用户                        |                 | 2                                                                                                                                              | [64.0 KB](http://192.168.0.220/phpmyadmin/tbl_structure.php?db=2016_wiki&token=195a249bf25c526ef89117e2428c6442&goto=db_structure.php&table=2016_user#showusage)               |
 
 ### 1.2.2 数据库表的结构组成
 
-
-
 ## 1.3   Main.php分析
-
-
-
-
-
-
 
 <br>
 
 # 2  MediaWiki用户指南
 
 ## 2.1   MediaWiki语法
-
-
-
-
-
-
 
 <br>
 
@@ -220,59 +194,57 @@ Mediawiki分析版本v1-26.0
 
 表格 4 DefaultSettings.PHP可设置变量
 
-|                         | 简介 | 典型字段                                              | 字段简介                         | 备注                                                         |
-| ----------------------- | ---- | ----------------------------------------------------- | -------------------------------- | ------------------------------------------------------------ |
-| 通用设置                |      | $wgServer  L                                          | 服务器的UR                       | $wgServer最好改成IP，如果使用缺省localhost，会导致两台机器在同一台访问时重载出错。 |
-|                         |      | $wgServerName                                         |                                  |                                                              |
-|                         |      | $wgSitename                                           |                                  |                                                              |
-| 路径                    |      | $IP                                                   |                                  |                                                              |
-|                         |      |                                                       |                                  |                                                              |
-| 共享上载                |      | $wgCacheSharedUploads                                 | 在memcached中缓存共享的元数据    |                                                              |
-|                         |      | $wgSharedUploadDirectory                              | 共享的上载目录所在的文件系统路径 |                                                              |
-|                         |      | $wgSharedUploadPath  $wgUseSharedUploads              |                                  |                                                              |
-| Email 设置              |      | $wgEmergencyContact                                   | 站点管理员的email地址。          |                                                              |
-|                         |      | $wgEnableEmail  $wgEnableUserEmail                    |                                  |                                                              |
-| 数据库设置              |      | $wgDBconnection                                       |                                  |                                                              |
-|                         |      | $wgDBname  $wgDBpassword                              | 名称、密码                       |                                                              |
-|                         |      | $wgDBprefix                                           |                                  |                                                              |
-| 共享数据库设置          |      | $wgSharedDB                                           | 多个wiki站点共享的数据库名称     |                                                              |
-| 系统管理员SQL查询       |      | $wgAllowSysopQueries   $wgDBsqlpassword  $wgDBsqluser |                                  |                                                              |
-| memcached  的设置       |      | $wgLinkCacheMemcached  $wgMemCachedServers  …         |                                  |                                                              |
-| 本地化配置              |      | $wgInputEncoding                                      | 输入文本编码方式                 |                                                              |
-| 调试/日志记录           |      |                                                       |                                  |                                                              |
-| Profiling               |      |                                                       |                                  |                                                              |
-| 网站定制                |      |                                                       |                                  |                                                              |
-| 名称空间                |      |                                                       |                                  |                                                              |
-| 皮肤                    |      | $wgDefaultSkin   $wgSkipSkin                          |                                  |                                                              |
-| 分类                    |      |                                                       |                                  |                                                              |
-| 缓存                    |      |                                                       |                                  |                                                              |
-| Persistent链接缓存      |      |                                                       |                                  |                                                              |
-| Interwiki               |      | $wgInterwikiExpiry  $wgLocalInterwiki                 | interwiki表的缓存有效期。        |                                                              |
-| 权限设置                |      |                                                       |                                  |                                                              |
-| 频率限制器              |      | $wgRateLimitLog   $wgRateLimits                       |                                  |                                                              |
-| 代理                    |      |                                                       |                                  |                                                              |
-| Squid                   |      |                                                       |                                  |                                                              |
-| Cookies                 |      |                                                       |                                  |                                                              |
-| 缩减某些网站功能        |      |                                                       |                                  |                                                              |
-| 上载                    |      |                                                       |                                  |                                                              |
-| MIME类型                |      |                                                       |                                  |                                                              |
-| 防止病毒                |      |                                                       |                                  |                                                              |
-| 解释器                  |      |                                                       |                                  |                                                              |
-| HTML                    |      |                                                       |                                  |                                                              |
-| TeX                     |      |                                                       |                                  |                                                              |
-| Tidy                    |      |                                                       |                                  |                                                              |
-| 图像                    |      |                                                       |                                  |                                                              |
-| 最新更改                |      |                                                       |                                  |                                                              |
-| UDP更新                 |      |                                                       |                                  |                                                              |
-| 版权                    |      |                                                       |                                  |                                                              |
-| 扩展                    |      |                                                       |                                  |                                                              |
-| HTCP  multicast purging |      |                                                       |                                  |                                                              |
-| 其他设置                |      |                                                       |                                  |                                                              |
-|                         |      |                                                       |                                  |                                                              |
+|                         | 简介  | 典型字段                                                  | 字段简介                | 备注                                                  |
+| ----------------------- | --- | ----------------------------------------------------- | ------------------- | --------------------------------------------------- |
+| 通用设置                    |     | $wgServer  L                                          | 服务器的UR              | $wgServer最好改成IP，如果使用缺省localhost，会导致两台机器在同一台访问时重载出错。 |
+|                         |     | $wgServerName                                         |                     |                                                     |
+|                         |     | $wgSitename                                           |                     |                                                     |
+| 路径                      |     | $IP                                                   |                     |                                                     |
+|                         |     |                                                       |                     |                                                     |
+| 共享上载                    |     | $wgCacheSharedUploads                                 | 在memcached中缓存共享的元数据 |                                                     |
+|                         |     | $wgSharedUploadDirectory                              | 共享的上载目录所在的文件系统路径    |                                                     |
+|                         |     | $wgSharedUploadPath  $wgUseSharedUploads              |                     |                                                     |
+| Email 设置                |     | $wgEmergencyContact                                   | 站点管理员的email地址。      |                                                     |
+|                         |     | $wgEnableEmail  $wgEnableUserEmail                    |                     |                                                     |
+| 数据库设置                   |     | $wgDBconnection                                       |                     |                                                     |
+|                         |     | $wgDBname  $wgDBpassword                              | 名称、密码               |                                                     |
+|                         |     | $wgDBprefix                                           |                     |                                                     |
+| 共享数据库设置                 |     | $wgSharedDB                                           | 多个wiki站点共享的数据库名称    |                                                     |
+| 系统管理员SQL查询              |     | $wgAllowSysopQueries   $wgDBsqlpassword  $wgDBsqluser |                     |                                                     |
+| memcached  的设置          |     | $wgLinkCacheMemcached  $wgMemCachedServers  …         |                     |                                                     |
+| 本地化配置                   |     | $wgInputEncoding                                      | 输入文本编码方式            |                                                     |
+| 调试/日志记录                 |     |                                                       |                     |                                                     |
+| Profiling               |     |                                                       |                     |                                                     |
+| 网站定制                    |     |                                                       |                     |                                                     |
+| 名称空间                    |     |                                                       |                     |                                                     |
+| 皮肤                      |     | $wgDefaultSkin   $wgSkipSkin                          |                     |                                                     |
+| 分类                      |     |                                                       |                     |                                                     |
+| 缓存                      |     |                                                       |                     |                                                     |
+| Persistent链接缓存          |     |                                                       |                     |                                                     |
+| Interwiki               |     | $wgInterwikiExpiry  $wgLocalInterwiki                 | interwiki表的缓存有效期。   |                                                     |
+| 权限设置                    |     |                                                       |                     |                                                     |
+| 频率限制器                   |     | $wgRateLimitLog   $wgRateLimits                       |                     |                                                     |
+| 代理                      |     |                                                       |                     |                                                     |
+| Squid                   |     |                                                       |                     |                                                     |
+| Cookies                 |     |                                                       |                     |                                                     |
+| 缩减某些网站功能                |     |                                                       |                     |                                                     |
+| 上载                      |     |                                                       |                     |                                                     |
+| MIME类型                  |     |                                                       |                     |                                                     |
+| 防止病毒                    |     |                                                       |                     |                                                     |
+| 解释器                     |     |                                                       |                     |                                                     |
+| HTML                    |     |                                                       |                     |                                                     |
+| TeX                     |     |                                                       |                     |                                                     |
+| Tidy                    |     |                                                       |                     |                                                     |
+| 图像                      |     |                                                       |                     |                                                     |
+| 最新更改                    |     |                                                       |                     |                                                     |
+| UDP更新                   |     |                                                       |                     |                                                     |
+| 版权                      |     |                                                       |                     |                                                     |
+| 扩展                      |     |                                                       |                     |                                                     |
+| HTCP  multicast purging |     |                                                       |                     |                                                     |
+| 其他设置                    |     |                                                       |                     |                                                     |
+|                         |     |                                                       |                     |                                                     |
 
 注：总共可分为三十九大设置，N多设置字段。
-
-
 
 修改LocalSettings.php，可修改数据库相关配置项、网站路径等等。
 
@@ -315,6 +287,7 @@ $wgGroupPermissions['user']['read'] = true;
 - **反垃圾留言**
 
 以下带图片链接的留言将被禁止
+
 ```ini
 $wgSpamRegex="/"."\[\[Image\:.*\.jpg\|thumb\|\]\]"."/";
 
@@ -324,8 +297,6 @@ $wgLanguageCode = "zh";
 # 支持HTML语言
 $wgRawHtml = true;
 ```
-
-
 
 ## 3.2   首页修改
 
@@ -352,8 +323,6 @@ $wgRawHtml = true;
 - 页脚的Privacy     policy： MediaWiki:Privacy ，网站的隐私政策
 - 页脚的Disclaimers： MediaWiki:Disclaimers ，网站的免责声明
 - 浏览器标题栏提示：     MediaWiki:pagetitle
-
-
 
 ## 3.3   清除页面缓存
 
@@ -392,8 +361,6 @@ $wgRawHtml = true;
 
 参考：http://www.mediawiki.org/wiki/Manual:Interwiki
 
-
-
 **安装步骤：**
 
 每种语言文字独立安装1套wiki、1套数据库。
@@ -416,8 +383,6 @@ mysql> INSERT INTO `interwiki` VALUES('zh','http://localhost/wiki/zh/$1',0,0);
 [[zh:你好]]
 
 Hello
-
-
 
 ### 3.4.2 方案2：1个wiki、1个数据库、多语言文字内链导航
 
@@ -482,11 +447,7 @@ $wgMFAutodetectMobileView = true;
 
 OK，可以用了。
 
-
-
 ## 3.6   多站点共用程序
-
-
 
 ## 3.7   模块扩展
 
@@ -495,13 +456,13 @@ OK，可以用了。
 ## 4.1   WIKI文件的备份：拷贝
 
 - 文件的必要备份：包括图片、icon、skin等等
-
+  
   localsetting.php：这是mediawiki的配置文件，里面包含数据库帐号信息、mediawiki部分参数的设置等
-
+  
   skins/common/images/wiki.png：这是老版本首页的LOGO，MediaWiki 1.26后缺省四个皮肤分别是CologneBlue、Modern、MonoBook和Vector
-
+  
   /images/目录：这是所有上传图片的存放目录，还包括自动生成的缩略图。图片路径包含数字。
-
+  
   AdminSetting.php：Template:?
 
 以下部分仅对使用了该特性的用户需要备份。
@@ -526,8 +487,6 @@ OK，可以用了。
 
 4. 使用MediaWiki自带的php命令：mwdumper。
 
-
-
 **WIKI条目页面的备份：导入导出**
 
 本备份针对WIKI编辑员，可通过特殊页面的[特殊:导出页面](http://localhost/mediawiki-1.26.0/index.php/特殊:导出页面)来获得内容。然后在另外一个WIKI用导入页面来生成内容。
@@ -536,21 +495,16 @@ OK，可以用了。
 
 二是链入页面：对部分重要条目，可以利用链接导出文件的XML格式。如[特殊:导出页面/首页](http://localhost/mediawiki-1.26.0/index.php/特殊:导出页面/首页)、[USER:denny](http://localhost/mediawiki-1.26.0/index.php/用户:Denny)
 
-
-
 ## 4.3   数据库的迁移
 
 可在LocalSettings修改数据库的名称、用户名、密码和表前缀。
 
 * 数据库表名修改：可在导出的SQL语句中修改表名。DROP TABLE 旧表名；CREATE TABLE 新表名
 
-
-
 数据库的备份恢复
+
 * 数据库备份： mysqldump -h [host] -u [user] -p[pwd] [dbname]
 * 数据库恢复： mysql -u[user] -p [dbname] < [xxx.sql]
-
-
 
 **mediawiki数据库的安装配置选项**
 
@@ -584,8 +538,6 @@ InnoDB + MySQL 4.1/5.0 UTF-8
 InnoDB + MySQL 4.0 backwards-compatible UTF-8
 
 --> $wgDBTableOptions  = "ENGINE=InnoDB"; $wgDBmysql5 = false;
-
-
 
 ==sodenny.com
 
@@ -623,11 +575,10 @@ character_set_system  utf8
 
 3） 备份数据库
 
-
-
 ### 4.4.2 升级中
 
 在Linux命令行下操作：
+
 ```sh
 # ; 修改老目录配置文件，增加$wgReadOnly="Read Only Now"，老网站改为只读方式
 vi oldpath/LocalSettin# gs.php
@@ -650,7 +601,6 @@ cd /usr/local/apache2/bin
 ./httpd -k restart
 ```
 
-
 ### 4.4.3 升级后
 
 - 根据需要，将MediaWiki重新生成的首页恢复为以前的内容
@@ -664,8 +614,6 @@ cd /usr/local/apache2/bin
 - 注意查看页面源文件的对比，包括是否正确使用文件缓存等
 - 反复修改、检查，直到确认完全升级成功
 
-
-
 <br>
 
 # 参考资料
@@ -677,8 +625,6 @@ cd /usr/local/apache2/bin
 [2].   [MediaWiki升级步骤](http://localhost/mediawiki-1.26.0/index.php/MediaWiki升级步骤)
 
 [3].   如何快速的为你的Mediawiki增加内容http://www.uedsc.com/how-fast-add-content-to-mediawiki.html
-
-
 
 官网帮助指南：
 
@@ -693,8 +639,6 @@ cd /usr/local/apache2/bin
 ·     [MediaWiki 发布邮件列表](http://lists.wikimedia.org/mailman/listinfo/mediawiki-announce)
 
 ·     https://dumps.wikimedia.org/zhwiki/20160501/
-
-
 
 ## 各类wiki收录
 
@@ -718,6 +662,3 @@ IT类
 - [实用查询](http://cn18dao.jamesqi.com/)
 - [背包攻略](http://www.backpackers.com.tw/guide/) 为全球华人旅游爱好者建立的免费网上导引。“背包客栈”志愿者制做。
 - [wikihow](http://www.wikihow.com/)      Ｔhe How to Manual 一个提供做一件事步骤的专题站点，蛮有创意的。
-
-
-

@@ -1,7 +1,7 @@
-| 序号 | 修改时间   | 修改内容                             | 修改人 | 审稿人 |
-| ---- | ---------- | ------------------------------------ | ------ | ------ |
-| 1    | 2020-12-16 | 创建。                               | Keefe |        |
-| 2    | 2021-6-9   | 从《WEB框架分析》迁移WEB框架相关章节 | 同上   |        |
+| 序号  | 修改时间       | 修改内容                  | 修改人   | 审稿人 |
+| --- | ---------- | --------------------- | ----- | --- |
+| 1   | 2020-12-16 | 创建。                   | Keefe |     |
+| 2   | 2021-6-9   | 从《WEB框架分析》迁移WEB框架相关章节 | 同上    |     |
 
 <br><br><br>
 
@@ -12,38 +12,31 @@
 
 ---
 
-
-
-
 # 1 Python框架
 
 表格 1 Python框架列表
 
-| **框架名称** | **简介** | **介绍** |
-| ------------ | -------- | -------- |
-| Celery          | 多任务队列 |          |
-| gunicorn | 多工作进程并发 | |
-
-
+| **框架名称** | **简介**  | **介绍** |
+| -------- | ------- | ------ |
+| Celery   | 多任务队列   |        |
+| gunicorn | 多工作进程并发 |        |
 
 ## python web框架列表
 
 表格 3 python WEB框架列表
 
-| 框架                                                         | 简介                                                         | 特点                     | 优点                                                         | 缺点               | <br>推荐   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------ | ------------------ | ---------- |
-| [Django](https://www.djangoproject.com/download/)            | 它源自一个在线新闻 Web 站点，于 2005 年开源。<br>一个开源的重量级Web框架，并且采用MVC设计模式。 | 全能型，重量级           | 自带ORM/template/view，全自动全功能的管理后台。              | 容易 臃肿          | 管理态后端 |
-| [flask](http://flask.pocoo.org/)                             | 使用 Python 编写的轻量级 Web 应用框架。其 [WSGI](http://baike.so.com/doc/1142343-1208497.html) 工具箱采用 Werkzeug ，[模板引擎](http://baike.so.com/doc/5846906-6059743.html)则使用 Jinja2 。<br>Flask使用 BSD 授权，2015年开源。 | 轻量级，原生组件几乎没有 | 简单；配置灵活；入门简单；低耦合                             | 不适用大网站，路由 | 微服务     |
-| [tornado](http://www.tornadoweb.org/)                        | 著名的Friendfeed 网站就是使用它搭建的。<br>在IO密集性和多任务上性能很好。 | 轻量、异步非阻塞         | 异步非阻塞。高可伸缩性（单线程异步）；websocket长连接。自定义模块。 |                    | 微服务     |
-| [Zope 2](http://zope2.zope.org/releases)                     | 一款基于Python的Web应用框架，是所有Python Web应用程序、工具的鼻祖，是Python家族一个强有力的分支。<br>Zope 2的“对象发布”系统非常适合面向对象开发方法，并且可以减轻开发者的学习曲线，还可以帮助你发现应用程序里一些不好的功能。 |                          |                                                              |                    |            |
-| [Web2py](http://web2py.com/examples/default/download)        | 一个用Python语言编写的免费的开源Web框架，旨在敏捷快速的开发Web应用，具有快速、可扩展、安全以及可移植的数据库驱动的应用，遵循LGPLv3开源协议。   Web2py提供一站式的解决方案，整个开发过程都可以在浏览器上进行，提供了Web版的在线开发，HTML模版编写，静态文件的上传，数据库的编写的功能。其它的还有日志功能，以及一个自动化的admin接口。 |                          |                                                              |                    |            |
-| [Web.py](http://webpy.org/install)                           | 一个轻量级的开源Python Web框架，小巧灵活、简单并且非常强大，在使用时没有任何限制。目前Web.py被广泛运用在许多大型网站，如西班牙的社交网站Frinki、主页日平均访问量达7000万次的Yandex等。 |                          |                                                              |                    |            |
-| [Pyramid](http://www.pylonsproject.org/projects/pyramid/download) | 一款轻量级的开源Python Web框架，是Pylons项目的一部分。Pyramid只能运行在Python 2.x或2.4以后的版本上。在使用后端数据库时无需声明，在开发时也不会强制使用一些特定的模板系统。 |                          |                                                              |                    |            |
-| pylons                                                       | 对WSGI标准进行了扩展应用，提升了重用性且将功能分割到独立的模块中。 |                          |                                                              |                    |            |
-| [CubicWeb](http://docs.cubicweb.org/admin/setup)             | 不仅是一个Web开发框架，而且还是一款语义Web开发框架。CubicWeb使用关系查询语言（RQL Relation Query Language）与数据库之间进行通信。 |                          |                                                              |                    |            |
-| [turbogears](http://www.turbogears.org/)                     | 一个可以扩展为全栈解决方案的微型框架。                       |                          |                                                              |                    |            |
-
-
+| 框架                                                                | 简介                                                                                                                                                                                           | 特点           | 优点                                     | 缺点        | <br>推荐 |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------- | --------- | ------ |
+| [Django](https://www.djangoproject.com/download/)                 | 它源自一个在线新闻 Web 站点，于 2005 年开源。<br>一个开源的重量级Web框架，并且采用MVC设计模式。                                                                                                                                   | 全能型，重量级      | 自带ORM/template/view，全自动全功能的管理后台。       | 容易 臃肿     | 管理态后端  |
+| [flask](http://flask.pocoo.org/)                                  | 使用 Python 编写的轻量级 Web 应用框架。其 [WSGI](http://baike.so.com/doc/1142343-1208497.html) 工具箱采用 Werkzeug ，[模板引擎](http://baike.so.com/doc/5846906-6059743.html)则使用 Jinja2 。<br>Flask使用 BSD 授权，2015年开源。 | 轻量级，原生组件几乎没有 | 简单；配置灵活；入门简单；低耦合                       | 不适用大网站，路由 | 微服务    |
+| [tornado](http://www.tornadoweb.org/)                             | 著名的Friendfeed 网站就是使用它搭建的。<br>在IO密集性和多任务上性能很好。                                                                                                                                                | 轻量、异步非阻塞     | 异步非阻塞。高可伸缩性（单线程异步）；websocket长连接。自定义模块。 |           | 微服务    |
+| [Zope 2](http://zope2.zope.org/releases)                          | 一款基于Python的Web应用框架，是所有Python Web应用程序、工具的鼻祖，是Python家族一个强有力的分支。<br>Zope 2的“对象发布”系统非常适合面向对象开发方法，并且可以减轻开发者的学习曲线，还可以帮助你发现应用程序里一些不好的功能。                                                            |              |                                        |           |        |
+| [Web2py](http://web2py.com/examples/default/download)             | 一个用Python语言编写的免费的开源Web框架，旨在敏捷快速的开发Web应用，具有快速、可扩展、安全以及可移植的数据库驱动的应用，遵循LGPLv3开源协议。   Web2py提供一站式的解决方案，整个开发过程都可以在浏览器上进行，提供了Web版的在线开发，HTML模版编写，静态文件的上传，数据库的编写的功能。其它的还有日志功能，以及一个自动化的admin接口。       |              |                                        |           |        |
+| [Web.py](http://webpy.org/install)                                | 一个轻量级的开源Python Web框架，小巧灵活、简单并且非常强大，在使用时没有任何限制。目前Web.py被广泛运用在许多大型网站，如西班牙的社交网站Frinki、主页日平均访问量达7000万次的Yandex等。                                                                                  |              |                                        |           |        |
+| [Pyramid](http://www.pylonsproject.org/projects/pyramid/download) | 一款轻量级的开源Python Web框架，是Pylons项目的一部分。Pyramid只能运行在Python 2.x或2.4以后的版本上。在使用后端数据库时无需声明，在开发时也不会强制使用一些特定的模板系统。                                                                                      |              |                                        |           |        |
+| pylons                                                            | 对WSGI标准进行了扩展应用，提升了重用性且将功能分割到独立的模块中。                                                                                                                                                          |              |                                        |           |        |
+| [CubicWeb](http://docs.cubicweb.org/admin/setup)                  | 不仅是一个Web开发框架，而且还是一款语义Web开发框架。CubicWeb使用关系查询语言（RQL Relation Query Language）与数据库之间进行通信。                                                                                                        |              |                                        |           |        |
+| [turbogears](http://www.turbogears.org/)                          | 一个可以扩展为全栈解决方案的微型框架。                                                                                                                                                                          |              |                                        |           |        |
 
 <br>
 
@@ -53,19 +46,17 @@
 
 表格 4 python WEB框架性能比较
 
-|                  | 性能 nums/sec |         | 依赖组件                                            | 启动方式                       |
-| ---------------- | ------------- | ------- | --------------------------------------------------- | ------------------------------ |
-| 框架名           | 单进程        | 并发100 |                                                     |                                |
-| Django           | 255           | x       | babel(10k)                                          | python manger.py runserver     |
-| Tornago          | 387           | 918     |                                                     |                                |
-| Flask            | 342           | 1694    | Jinjia2(12k), <br>MarkupSafe(22k),  <br>click(6.6k) | python xx.py                   |
-| uwsgi + Django   | 280           | 2947    |                                                     |                                |
-| uwsgi + Flask    | 343           | 4651    |                                                     | uwsgi --wsgi-file <file>       |
-| gunicorn + Flask |               |         |                                                     | gunicorn -w 2 <filename.Flask> |
+|                  | 性能 nums/sec |       | 依赖组件                                                | 启动方式                           |
+| ---------------- | ----------- | ----- | --------------------------------------------------- | ------------------------------ |
+| 框架名              | 单进程         | 并发100 |                                                     |                                |
+| Django           | 255         | x     | babel(10k)                                          | python manger.py runserver     |
+| Tornago          | 387         | 918   |                                                     |                                |
+| Flask            | 342         | 1694  | Jinjia2(12k), <br>MarkupSafe(22k),  <br>click(6.6k) | python xx.py                   |
+| uwsgi + Django   | 280         | 2947  |                                                     |                                |
+| uwsgi + Flask    | 343         | 4651  |                                                     | uwsgi --wsgi-file <file>       |
+| gunicorn + Flask |             |       |                                                     | gunicorn -w 2 <filename.Flask> |
 
 备注：测试环境4U8G。uwsgi启动4个工作进程。uwsgi使用C实现性能更高，gunicorn更易使用。Django/Falsk/Tornago都是单进程，可以搭配gunicorn/uwsgi才能发挥多核CPU性能。
-
-
 
 ## 2.1 Django
 
@@ -81,26 +72,22 @@ Django是一个开放源代码的Web应用框架，遵守BSD版权，由Python�
 
 django3.0之前django的Web服务器网关接口一直用的是WSGI，ASGI的A就是Async，也就是异步的意思，ASGI简单的来说就是异步的WSGI。
 
-
-
 表格 Django版本说明  (稳定版本号是A.B)
 
-| 版本号                                                     | 发布时间  | 功能或更新说明                                               |
-| ---------------------------------------------------------- | --------- | ------------------------------------------------------------ |
-| 0.x                                                        | 2005.7    | 0.x最后一个版本是0.96。                                      |
-| 1.0                                                        | 2008-9    | 正式版本。1.x最后一个版本是1.11.29（2020-3-4)。              |
-| ...                                                        |           |                                                              |
-| 1.11                                                       | 2017-4-4  | 1.11.x最后一个版本是1.11.29（2020-3-4）。                    |
-| 2.0                                                        | 2017-12-2 | 不再支持python2.x。2.x系列最后版本是2.2.26（2022-1-4）。     |
+| 版本号                                                        | 发布时间      | 功能或更新说明                                                                                         |
+| ---------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| 0.x                                                        | 2005.7    | 0.x最后一个版本是0.96。                                                                                 |
+| 1.0                                                        | 2008-9    | 正式版本。1.x最后一个版本是1.11.29（2020-3-4)。                                                               |
+| ...                                                        |           |                                                                                                 |
+| 1.11                                                       | 2017-4-4  | 1.11.x最后一个版本是1.11.29（2020-3-4）。                                                                 |
+| 2.0                                                        | 2017-12-2 | 不再支持python2.x。2.x系列最后版本是2.2.26（2022-1-4）。                                                       |
 | 3.0                                                        | 2019-12-2 | 3.x系列最后版本是3.2.11 (2022-1-4)。<br>新增三个特性：ASGI、支持MariaDB10.1+和自定义枚举类型（TextChoices，IntegerChoices）。 |
-| 3.1                                                        | 2020-8-4  | 3.1.x最后一个版本是3.1.14 (2021-12-7)，共15个版本。          |
-| 3.2                                                        | 2021-8-6  | 3.2.x最后一个版本是3.2.11，共12个版本。支持Python 3.6和3.7。 |
+| 3.1                                                        | 2020-8-4  | 3.1.x最后一个版本是3.1.14 (2021-12-7)，共15个版本。                                                          |
+| 3.2                                                        | 2021-8-6  | 3.2.x最后一个版本是3.2.11，共12个版本。支持Python 3.6和3.7。                                                     |
 | [4.0](https://docs.djangoproject.com/en/4.0/releases/4.0/) | 2021-12-7 | 4.0.x最后一个版本是4.0.X，共个版本。<br>支持Python 3.8, 3.9和3.10。<br>实现zoneinfo缺省时区；密码哈希加密。内置Redis缓存后端。模板渲染加强。 |
-| 5.0                                                        |           |                                                              |
+| 5.0                                                        |           |                                                                                                 |
 
 参见  [Release notes](https://docs.djangoproject.com/en/4.0/releases/)   [How to upgrade Django to a newer version](https://docs.djangoproject.com/en/4.0/howto/upgrade-version/)
-
-
 
 ### django开发篇
 
@@ -121,8 +108,6 @@ $ pip install -v django==1.7.1   #或者指定安装版本
 * 编辑 xxapp/views.py：完成业务处理逻辑。此处可引入DRF框架进行数据序列化和反序列化。
 * 编辑 xxproject/urls.py：处理URL路由，支持path/repath，path又支持视图-FBV和CBV。
 
-
-
 **1. 命令行创建项目** (示例项目名mysite)
 
 `$ django-admin.py startproject mysite`
@@ -130,17 +115,15 @@ $ pip install -v django==1.7.1   #或者指定安装版本
 Django将自动生成下面的目录结构：
 
 ```shell
-mysite/		# startproject生成的站点目录
+mysite/        # startproject生成的站点目录
 ├── manage.py   # Django管理主程序
 ├── mysite
 │   ├── __init__.py
 │   ├── settings.py  # 主配置文件
-│   ├── urls.py   	# URL路由系统文件，相当于MVC中的C
-│   └── asgi.py  	# 网络通信接口, djaongo3.0之前是wsgi.py
+│   ├── urls.py       # URL路由系统文件，相当于MVC中的C
+│   └── asgi.py      # 网络通信接口, djaongo3.0之前是wsgi.py
 └── template  # 该目录放置HTML文件模板
 ```
-
-
 
 **2. 创建APP** （示例app名为cmdb）
 
@@ -148,24 +131,21 @@ mysite/		# startproject生成的站点目录
 
 ```shell
 $ python manage.py startapp cmdb
-cmdb/	# startapp生成的app目录
+cmdb/    # startapp生成的app目录
 ├── admin.py     # 管理页面里需要管理的数据库表 可以注册到这
-├── apps.py  	 #
+├── apps.py       #
 ├── __init__.py  #
-├── migrations	 # migrate命令自动生成的ORM操作文件
+├── migrations     # migrate命令自动生成的ORM操作文件
 │   └── __init__.py
 ├── models.py   # 模型，负责业务对象和数据对象的ORM映射
 ├── tests.py
-└── views.py	# 视图，业务处理逻辑
-
+└── views.py    # 视图，业务处理逻辑
 ```
 
 **project 和 app 的区别**
 
 * project包含一些全局配置，这些配置构成一个全局的运行平台，各个APP都运行在这个全局的运行平台上.
 * APP代表的是一个相对独立的功能模块，所以程序的逻辑都在APP中。
-
-
 
 **3.  manger.py命令**
 
@@ -190,11 +170,11 @@ Available subcommands:
     dbshell
     diffsettings
     dumpdata
-    flush	#清空数据库数据
+    flush    #清空数据库数据
     inspectdb
     loaddata
     makemessages
-    makemigrations	#生成数据库文件
+    makemigrations    #生成数据库文件
     migrate
     sendtestemail
     shell
@@ -214,8 +194,7 @@ Available subcommands:
 [staticfiles]
     collectstatic
     findstatic
-    runserver	#启动监听服务
-
+    runserver    #启动监听服务
 ```
 
 1).  数据库表和表字段的创建、更新
@@ -229,8 +208,6 @@ $ python3 manage.py migrate   # 创建表结构 或 更新
 $ python3 manage.py makemigrations xxapp  # 新增加app时，才执行此步
 $ python3 manage.py migrate xxapp   # 创建xxapp的表结构
 ```
-
-
 
 **4、编写路由规则**
 
@@ -246,12 +223,10 @@ from django.contrib import admin
 from cmdb import views
 
 urlpatterns = [
-    url(r'admin/', admin.site.urls),	# FBV，django默认的管理界面,超级用户要通过命令创建
-    path(index', Indexview.as_view()),	# CBV基于类的视图
+    url(r'admin/', admin.site.urls),    # FBV，django默认的管理界面,超级用户要通过命令创建
+    path(index', Indexview.as_view()),    # CBV基于类的视图
 ]
 ```
-
-
 
 **5、编写业务处理逻辑 views或者template**
 
@@ -261,8 +236,6 @@ Django原生的视图使用View，请求响应是HttpRequest/HttpResponse
 from django.views.generic import View
 from django.shortcuts import HttpResponse
 ```
-
-
 
 视图实现二种方法： FBV和CBV
 
@@ -300,8 +273,6 @@ def login(request):
     return HttpResponse("other method")
 ```
 
-
-
 视图实现 CBV
 
 ```python
@@ -327,8 +298,6 @@ class Login(View):
             return HttpResponse("POST 方法 1")
 ```
 
-
-
 **运行Web服务**
 
 $ python manage.py runserver 127.0.0.1 8080
@@ -337,9 +306,7 @@ $ python manage.py runserver 127.0.0.1 8080
 
  django服务启动的同时，会启动两个进程，一个负责监控文件的变化，一个是主进程，如果文件发生变化，则会将退出当前进程，重新启动一个子进程。要想避免监控文件变化，加参数--noreload。
 
-
-
-####  配置项 settings.py
+#### 配置项 settings.py
 
 ```python
 # 调试项，prod环境要改为False
@@ -377,10 +344,7 @@ MIDDLEWARE = [
 ]
 
 # 配置swagger
-
 ```
-
-
 
 #### Django权限管理
 
@@ -393,19 +357,17 @@ django自带表分为二类，
 
 表格 django自带表
 
-| 表名                  | 表字段                                                       | 功能说明     | 备注       |
-| --------------------- | ------------------------------------------------------------ | ------------ | ---------- |
-| auth_group            | id,name                                                      | 认证组名称   | 创建时空组 |
-| auth_group_permission | id,group_id,permission_id                                    | 组和权限关联 |            |
-| auth_permission       | id,name,content_type_id,code_name                            | 权限项名称   | 预创建     |
-| auth_user             | id, password, last_login, is_superuser,<br/>username， first_name, last_name,email,<br/>is_staff, is_active, date_joined | 认证用户     |            |
-| auth_user_groups      | id,user_id,group_id                                          | 用户和组关联 |            |
-| django_admin_log      | active_time,object_id,user_id,,,                             | 管理日志     |            |
-| django_content_type   | id, app_label, model                                         | 内容对象     | app>model  |
-| django_migrations     | id, app,name, applied                                        | ORM记录      |            |
-| django_session        | session_key, session_date, expire_date                       | 会话管理     |            |
-
-
+| 表名                    | 表字段                                                                                                                     | 功能说明   | 备注        |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------ | --------- |
+| auth_group            | id,name                                                                                                                 | 认证组名称  | 创建时空组     |
+| auth_group_permission | id,group_id,permission_id                                                                                               | 组和权限关联 |           |
+| auth_permission       | id,name,content_type_id,code_name                                                                                       | 权限项名称  | 预创建       |
+| auth_user             | id, password, last_login, is_superuser,<br/>username， first_name, last_name,email,<br/>is_staff, is_active, date_joined | 认证用户   |           |
+| auth_user_groups      | id,user_id,group_id                                                                                                     | 用户和组关联 |           |
+| django_admin_log      | active_time,object_id,user_id,,,                                                                                        | 管理日志   |           |
+| django_content_type   | id, app_label, model                                                                                                    | 内容对象   | app>model |
+| django_migrations     | id, app,name, applied                                                                                                   | ORM记录  |           |
+| django_session        | session_key, session_date, expire_date                                                                                  | 会话管理   |           |
 
 激活认证应用-auth
 
@@ -421,15 +383,11 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 ```
 
-
-
 创建超级用户 admin（普通用户创建可以通过接口或页面上操作 ）
 
 ```shell
 python manage.py createsuperuser --email admin@example.com --username admin
 ```
-
-
 
 #### WSGI/ASGI部署
 
@@ -443,8 +401,6 @@ pip install gunicorn
 gunicorn xxxproject.wsgi
 ```
 
-
-
 **ASGI部署**
 
 ASGI服务器组件，我们有两种应用服务器可以来启动它，一种是用Uvicorn，Uvicorn是基于uvloop和httptools的ASGI服务器，它理论上是Python中最高性能的框架了。另一种是Daphne，Daphne是Django软件基金会开发的一个基于ASGI (HTTP/WebSocket)的服务器。
@@ -456,8 +412,6 @@ pip install uvicorn
 # 安装好之后我们用下面的命令来启动我们的项目
 uvicorn django_cn.asgi:application
 ```
-
-
 
 ### django进阶篇
 
@@ -483,12 +437,9 @@ Django支持二种设计模式：MVC和MTV。这二种差别在于前端展现�
 
 * ViewModel，视图模型，Model层之上，用来在视图里传递和处理数据的模型。
 
-
   ![1574518389091](../../media/sf_reuse/framework/frame_web_003.png)
 
 图  django运行视图
-
-
 
 #### 2.中间件 middleware
 
@@ -499,8 +450,6 @@ Django 中间件是修改 Django request 或者 response 对象的钩子，可�
 ![1574518414753](../../media/sf_reuse/framework/frame_web_003_02.png)
 
 备注：核心在于 middleware（中间件），django 所有的请求、返回都由中间件来完成。中间件，就是处理 HTTP 的 request 和 response 的，类似插件，比如有 Request 中间件、view 中间件、response 中间件、exception 中间件等，Middleware 都需要在 “project/settings.py” 中 MIDDLEWARE_CLASSES 的定义。
-
-
 
 Django 中间件作用：
 
@@ -525,8 +474,6 @@ MIDDLEWARE = [
 ]
 ```
 
-
-
 中间件可以定义四个方法，分别是：
 
 ```python
@@ -535,8 +482,6 @@ process_view(self, request, view_func, view_args, view_kwargs)
 process_exception(self, request, exception)
 process_response(self, request, response)
 ```
-
-
 
 ### django扩展（第三方库）
 
@@ -560,21 +505,17 @@ django-ckeditor：为表单提供富文本编辑器
 
 django-cors-headers：为CORS提供支持
 
-
-
 表格 Django第三方模块说明
 
-| django模块       | 最新版本 | 功能                                                         |
-| ---------------- | -------- | ------------------------------------------------------------ |
-| Django自身       | 3.2.4    | 模式：MVC、MTC、MVVM<br>权限管理：                           |
-| DRF              | 3.12.4   | `pip install djangorestframework` <BR>APIView、序列化和反序列化、ORM、认证和鉴权 |
-| drf-yasg/coreapi | 1.20.0   | swagger标准文档。官方已废弃django-rest-swagger。             |
-| gunicorn/uwsgi   |          | WSGI部署，并发支持                                           |
-| uvicorn/daphne   | 0.13.4/  | ASGI部署                                                     |
+| django模块         | 最新版本    | 功能                                                               |
+| ---------------- | ------- | ---------------------------------------------------------------- |
+| Django自身         | 3.2.4   | 模式：MVC、MTC、MVVM<br>权限管理：                                         |
+| DRF              | 3.12.4  | `pip install djangorestframework` <BR>APIView、序列化和反序列化、ORM、认证和鉴权 |
+| drf-yasg/coreapi | 1.20.0  | swagger标准文档。官方已废弃django-rest-swagger。                            |
+| gunicorn/uwsgi   |         | WSGI部署，并发支持                                                      |
+| uvicorn/daphne   | 0.13.4/ | ASGI部署                                                           |
 
 > 最新版本的截止时间是2021.6
-
-
 
 #### DRF框架 -djangorestframework
 
@@ -589,8 +530,6 @@ https://www.django-rest-framework.org/
 * 分页pagination: 根据查询参数页号和页数量，获取查询集结果，并可定制分页的响应结果。
 
 * 认证鉴权：
-
-
 
 安装：`pip install djangorestframework`
 
@@ -619,8 +558,6 @@ __all__ = [
 ]
 ```
 
-
-
 **类视图的体系**
 
 `View -> APIView -> GenericAPIView -> GenericViewSet`
@@ -629,13 +566,9 @@ __all__ = [
 
 * 视图集ViewSet：将操作同一组资源的处理函数放在同一个类中，这个类就是视图集。视图集中的处理函数不再以请求方式（比如：get,post等）命名，而是以对应的action操作命名，常见操作如下：list/create/retrieve/update/destory。
 
-
-
 **序列化类的体系**
 
 `Field ->  BaseSerializer -> Serializer -> ModelSerializer -> HyperlinkedModelSerializer`
-
-
 
 DRF视图使用示例：
 
@@ -694,8 +627,6 @@ class SnippetViewSet(viewsets.ModelViewSet):
     serializer_class = SnippetSerializer
 ```
 
-
-
 2. **分页处理**
 
 ```python
@@ -719,8 +650,6 @@ class OpenSceneView(APIView):
         scene = page_obj.paginate_queryset(scene, request, view=self)
 ```
 
-
-
 3. **DRF认证和鉴权 **
 
 DRF内置的四种API认证方式：
@@ -730,8 +659,6 @@ DRF内置的四种API认证方式：
 * **[SessionAuthentication](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/authentication/%23sessionauthentication)**  用户登录之后系统在cookies存入sessionid  进行认证
 * **[RemoteUserAuthentication](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/authentication/%23remoteuserauthentication)**   通过web服务器认证(apache/nginx这些)
 
-
-
 第三方认证
 
 **[Django OAuth Toolkit](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/authentication/%23django-oauth-toolkit)**
@@ -739,8 +666,6 @@ DRF内置的四种API认证方式：
 **[Django REST framework OAuth](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/authentication/%23django-rest-framework-oauth)**
 
 **[JSON Web Token Authentication](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/authentication/%23json-web-token-authentication)**
-
-
 
 认证方式配置 settings.py
 
@@ -755,8 +680,6 @@ REST_FRAMEWORK = {
 }
 ```
 
-
-
 **授权**
 
 DRF的接口权限有以下几种：
@@ -768,14 +691,9 @@ DRF的接口权限有以下几种：
 - **[DjangoModelPermissions](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/permissions/%23djangomodelpermissions)**：根据Django Auth的配置（权限细化到每个model）
 - **[DjangoModelPermissionsOrAnonReadOnly](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/permissions/%23djangomodelpermissionsoranonreadonly)**
 - **[DjangoObjectPermissions](https://link.zhihu.com/?target=https%3A//www.django-rest-framework.org/api-guide/permissions/%23djangoobjectpermissions)**：配合第三方权限控制，细化到每个对象
-
-
-
 4. 路由
-
+   
    使用Drf框架可以有两种路由方式，一种是Drf的路由，一直是Django的路由，两种搭配使用。
-
-
 
 #### Django接入Swgger
 
@@ -786,8 +704,6 @@ Swagger是一个规范和完整的框架，用于生成、描述、调用和可�
 * ~~django-rest-swagger~~（只支持djangorestframework<=3.9.2 django<3.0），2019.6起，django官方废弃。
 * coreapi：比较简单的swagger， DRF默认支持。
 * [drf-yasg](https://drf-yasg.readthedocs.io) (Yet another Swagger generator)，推荐使用，django推荐替换django-rest-swagger。
-
-
 
 drf-yasg使用示例： `pip install drf-yasg`
 
@@ -819,25 +735,22 @@ path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagg
 path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ```
 
-
-
 API文档定义： openapi, swagger_auto_schema
 
 ```python
 # 类视图需继承APIView或其子类，函数视图可用 @api_view来转化
-from drf_yasg import openapi	# 可提供自定义参数
-from drf_yasg.utils import swagger_auto_schema	#用装饰器@swagger_auto_schema 来填充文档
+from drf_yasg import openapi    # 可提供自定义参数
+from drf_yasg.utils import swagger_auto_schema    #用装饰器@swagger_auto_schema 来填充文档
 
 class PolygonView(APIView):
     """ apiview return xxx """
-    test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)	#自定义参数1
+    test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)    #自定义参数1
     user_response = openapi.Response('response description', UserSerializer) #响应结果
 
     # 'method' can be used to customize a single HTTP method of a view
     @swagger_auto_schema(method='get', manual_parameters=[test_param], responses={200: user_response})
     def get(self, request, generate_id):
-    	pass
-
+        pass
 ```
 
 swagger_auto_schema生成
@@ -852,8 +765,6 @@ def swagger_auto_schema(method=None, methods=None, auto_schema=unset, request_bo
     manual_parameters：swaager里用来输入的参数，一般用于GET方法
     """
 ```
-
-
 
 开放参数定义:  openapi.Parameter
 
@@ -878,10 +789,6 @@ class Parameter(SwaggerDict):
      """
 ```
 
-
-
-
-
 ### FAQ 常见问题
 
 1. Django2.x版本与MySQL5.6以下版本不适配！
@@ -891,8 +798,6 @@ class Parameter(SwaggerDict):
 将其中的`query = query.decode(errors='replace')`改为 `query = query.encode(errors='replace')`
 
 解决方法2：将django升级到3.x。
-
-
 
 2. 当app目录下自动生成目录migrates里的文件过多时，可进行重置回0001__init.py
 
@@ -926,27 +831,23 @@ python manage.py makemigrations
 python manage.py migrate --fake-initial
 ```
 
-
-
 <br>
 
 ## 本章参考
 
-[1]:  Django官网	"https://docs.djangoproject.com/"
+[1]:  Django官网    "https://docs.djangoproject.com/"
 
-[2]:  https://www.django-rest-framework.org/	"DRF"
+[2]:  https://www.django-rest-framework.org/    "DRF"
 
 [3]:  Django教程 https://www.runoob.com/django/django-tutorial.html
 
 [4]:  DRF框架知识点总结 https://blog.csdn.net/weixin_44143222/article/details/88878072
 
-[5]:  drf-yasg官网(https://drf-yasg.readthedocs.io/)	"https://drf-yasg.readthedocs.io/"
+[5]:  drf-yasg官网(https://drf-yasg.readthedocs.io/)    "https://drf-yasg.readthedocs.io/"
 
 [6]: Python3+ Django3：自动生成Swagger接口文档 https://cloud.tencent.com/developer/article/1576613
 
 [7]: 一小时完成后台开发：DjangoRestFramework开发实践 https://zhuanlan.zhihu.com/p/113367282
-
-
 
 ## 2.2 python-Flask
 
@@ -956,34 +857,30 @@ python manage.py migrate --fake-initial
 
 **特性**
 
-*  内置开发用服务器和debugger
-*  集成单元测试（unit testing）
-*  RESTful request dispatching
-*  使用Jinja2模板引擎
-*  支持secure cookies（client side sessions）
-*  100% WSGI 1.0兼容
-*  Unicode based
-*  详细的文件、教学
-*  Google App Engine兼容
-*  可用Extensions增加其他功能
-
-
+* 内置开发用服务器和debugger
+* 集成单元测试（unit testing）
+* RESTful request dispatching
+* 使用Jinja2模板引擎
+* 支持secure cookies（client side sessions）
+* 100% WSGI 1.0兼容
+* Unicode based
+* 详细的文件、教学
+* Google App Engine兼容
+* 可用Extensions增加其他功能
 
 表格 flask版本说明 详见 [CHANGES.rst](https://github.com/pallets/flask/blob/main/CHANGES.rst)
 
-| 版本号 | 发布时间   | 功能或更新说明                                               |
-| ------ | ---------- | ------------------------------------------------------------ |
-| 0.1    | 2010-04-16 | 第一个公共发布版本。                                         |
+| 版本号    | 发布时间       | 功能或更新说明                                                                                                                     |
+| ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 0.1    | 2010-04-16 | 第一个公共发布版本。                                                                                                                  |
 | 0.12.4 | 2018-04-29 | Repackage 0.12.3 to fix package layout issue. [:issue:`2728`](https://github.com/pallets/flask/blob/main/CHANGES.rst#id463) |
-| 0.12.5 | 2020-02-10 | Pin Werkzeug to < 1.0.0. [:issue:`3497`](https://github.com/pallets/flask/blob/main/CHANGES.rst#id461)  0.x系列最后一个版本。 |
-| 1.0    | 2018-04-26 | 大版本。                                                     |
-| 1.1.4  | 2021-05-13 | 1.x系列最后一个版本。1.0.x和1.1.x各发布5个版本。             |
-| 2.0.0  | 2021-05-11 | 大版本。移除python2和3.5支持。                               |
-| 2.0.2  | 2021-10-04 |                                                              |
-| 2.0.3  | Unreleased | 2.0.x发布3个版本。                                           |
-| 2.1.0  | Unreleased |                                                              |
-
-
+| 0.12.5 | 2020-02-10 | Pin Werkzeug to < 1.0.0. [:issue:`3497`](https://github.com/pallets/flask/blob/main/CHANGES.rst#id461)  0.x系列最后一个版本。        |
+| 1.0    | 2018-04-26 | 大版本。                                                                                                                        |
+| 1.1.4  | 2021-05-13 | 1.x系列最后一个版本。1.0.x和1.1.x各发布5个版本。                                                                                             |
+| 2.0.0  | 2021-05-11 | 大版本。移除python2和3.5支持。                                                                                                        |
+| 2.0.2  | 2021-10-04 |                                                                                                                             |
+| 2.0.3  | Unreleased | 2.0.x发布3个版本。                                                                                                                |
+| 2.1.0  | Unreleased |                                                                                                                             |
 
 ### flask开发篇
 
@@ -995,12 +892,12 @@ Flask 依赖两个外部库： [Jinja2](http://jinja.pocoo.org/2/) 模板引擎�
 
 **Werkzeug:** Werkzeug is an HTTP and WSGI utility library for Python.
 
- ```shell
+```shell
 $ sudo pip install flask flask-login flask-mail flask-sqlalchemy flask-wtf flask-babel flup
 $ pip install Flask
 $ python hello.py
 * Running on http://localhost:5000/
- ```
+```
 
 示例：hello.py
 
@@ -1014,29 +911,27 @@ def hello():
 
 if __name__ == "__main__":
     app.run()
-	# 监听所有公网IP
-	app.run(host='0.0.0.0')
+    # 监听所有公网IP
+    app.run(host='0.0.0.0')
 ```
 
 那么，这段代码做了什么？
 
 1. 首先，我们导入了 [Flask](http://docs.jinkan.org/docs/flask/api.html#flask.Flask) 类。这个类的实例将会是我们的 WSGI 应用程序。
+
 2. 接下来，我们创建一个该类的实例，第一个参数是应用模块或者包的名称。 如果你使用单一的模块（如本例），你应该使用 __name__ ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（ 也即是 '__main__' 或实际的导入名）。这是必须的，这样 Flask 才知道到哪去找模板、静态文件等等。详情见 [Flask](http://docs.jinkan.org/docs/flask/api.html#flask.Flask) 的文档。
 
 3. 然后，我们使用 [route()](http://docs.jinkan.org/docs/flask/api.html#flask.Flask.route) 装饰器告诉 Flask 什么样的URL 能触发我们的函数。
+
 4. 这个函数的名字也在生成 URL 时被特定的函数采用，这个函数返回我们想要显示在用户浏览器中的信息。
 
 5. 最后我们用 [run()](http://docs.jinkan.org/docs/flask/api.html#flask.Flask.run) 函数来让应用运行在本地服务器上。 其中 if __name__ == '__main__': 确保服务器只会在该脚本被 Python 解释器直接执行的时候才会运行，而不是作为模块导入的时候。
-
-
 
 **项目结构如下**
 
    ![1574518502921](../../media/sf_reuse/framework/frame_web_flask_001.png)
 
 备注：
-
-
 
 #### 路由映射
 
@@ -1050,8 +945,6 @@ def func():
   pass
 xxapp.add_url_rule('/xx',viewfunc=func)  # 函数
 ```
-
-
 
 #### 蓝图 Blureprint
 
@@ -1078,10 +971,8 @@ blueprint = Blueprint('api', __name__, url_prefix='/api')
 flask_app.register_blueprint(blueprint)
 
 if __name__ == "__main__":
-	flask_app.run(debug=True)
+    flask_app.run(debug=True)
 ```
-
-
 
 #### 其它
 
@@ -1095,34 +986,27 @@ app.config.from_object('config')
 app.config.from_pyfile('config.py')
 ```
 
-
-
 ### flask扩展
 
-| 扩展组件         | 简介                                                         | 使用示例                                                     |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| flask_restx      | 构建restful标准的API，包含swagger UI                         |                                                              |
-| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | `flask fab [OPTIONS] COMMAND [ARGS]`                         |
-| flask-login      | 登陆。                                                       |                                                              |
-| flask-migrate    | 数据库迁移migrate、升级upgrade。                             | `$python manage.py db migrate `<br>`$python manage.py db upgrade` |
-| flask-cache      | 缓存，支持redis/memcache/filesystem                          |                                                              |
-| flask-script     | 命令行脚本                                                   | from flask-script import Manager   Manager().run()           |
-| flask-sqlalchemy | DB的ORM模型。                                                | from flask_sqlalchemy   import SQLAlchemy<br>db =   SQLAlchemy(app) |
-| flask-cors       | 跨域资源共享                                                 | `CORS(app, resources=r'/*')`                                 |
-
-
+| 扩展组件             | 简介                                 | 使用示例                                                                |
+| ---------------- | ---------------------------------- | ------------------------------------------------------------------- |
+| flask_restx      | 构建restful标准的API，包含swagger UI       |                                                                     |
+| flask-appbuilder | 基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。 | `flask fab [OPTIONS] COMMAND [ARGS]`                                |
+| flask-login      | 登陆。                                |                                                                     |
+| flask-migrate    | 数据库迁移migrate、升级upgrade。            | `$python manage.py db migrate `<br>`$python manage.py db upgrade`   |
+| flask-cache      | 缓存，支持redis/memcache/filesystem     |                                                                     |
+| flask-script     | 命令行脚本                              | from flask-script import Manager   Manager().run()                  |
+| flask-sqlalchemy | DB的ORM模型。                          | from flask_sqlalchemy   import SQLAlchemy<br>db =   SQLAlchemy(app) |
+| flask-cors       | 跨域资源共享                             | `CORS(app, resources=r'/*')`                                        |
 
 #### flask-appbuilder
 
 Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
 
-*  Google charts CSS and JS
-*  BootStrap CSS and JS
-*  BootsWatch Themes
-*  Font-Awesome CSS and Fonts
-
-
-
+* Google charts CSS and JS
+* BootStrap CSS and JS
+* BootsWatch Themes
+* Font-Awesome CSS and Fonts
 1. fabmanger
 
 Superset中的安全性由Flask AppBuilder（FAB）处理。 FAB是一个“简单快速的应用程序开发框架，构建在Flask之上”。 FAB提供身份验证，用户管理，权限和角色。
@@ -1159,10 +1043,7 @@ Commands:
   run  Runs Flask dev web server.
   security-cleanup  Cleanup unused permissions from views and...
   version   Flask-AppBuilder package version
-
 ```
-
-
 
 **创建app目录结构**
 
@@ -1205,15 +1086,11 @@ $ flask fab run
 $ python3 run.py
 ```
 
-
-
 1). **配置 config.py**
 
 数据库配置
 
 如果使用SQLAlchemy可以通过配置SQLALCHEMY_DATABASE_URI的值来指定数据库连接。如果使用Mongdb可以配置MONGODB_SETTINGS的值。默认使用Sqlite数据库，SQLALCHEMY_DATABASE_URI的值为'sqlite:///' + os.path.join(basedir, 'app.db')。
-
-
 
 2). **Base Configuration**
 
@@ -1221,81 +1098,72 @@ $ python3 run.py
 
 Use config.py to configure the following parameters. By default it will use SQLLITE DB, and bootstrap’s default theme:
 
-| Key                                                          | Description                                                  | Mandatory |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | --------- |
-| SQLALCHEMY_DATABASE_URI                                      | DB connection string (flask-sqlalchemy)                      | Cond.  |
-| MONGODB_SETTINGS                                             | DB connection string (flask-mongoengine)                     | Cond.  |
-| AUTH_TYPE   = 0 \| 1 \| 2 \| 3 \| 4   or   AUTH_TYPE   = AUTH_OID, AUTH_DB,   AUTH_LDAP,    AUTH_REMOTE   AUTH_OAUTH | This is the authentication type   0 = Open ID   1 = Database style (user/password)   2 = LDAP, use AUTH_LDAP_SERVER also   3 = uses web server environ var   REMOTE_USER   4 = USE ONE OR MANY OAUTH PROVIDERS | Yes       |
-| AUTH_USER_REGISTRATION   = True\|False                       | Set to True to enable user self registration                 | No        |
-| AUTH_USER_REGISTRATION_ROLE                                  | Set role name, to be assign when a user   registers himself. This role must already exist. Mandatory when using user   registration | Cond.  |
-| AUTH_LDAP_SERVER                                             | define your ldap server when AUTH_TYPE=2   example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)” | Cond.  |
-| AUTH_LDAP_BIND_USER                                          | Define the DN for the user that will be   used for the initial LDAP BIND. This is necessary for OpenLDAP and can be   used on MSFT AD.   AUTH_LDAP_BIND_USER =   “cn=queryuser,dc=example,dc=com” | No        |
-| AUTH_LDAP_BIND_PASSWORD                                      | Define password for the bind user.                        | No        |
-| AUTH_LDAP_SEARCH                                             | Use search with self user registration or   when using AUTH_LDAP_BIND_USER.   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example” | No        |
-| AUTH_LDAP_UID_FIELD                                          | if doing an indirect bind to ldap, this   is the field that matches the username when searching for the account to bind   to. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_UID_FIELD = “uid” | No        |
-| AUTH_LDAP_FIRSTNAME_FIELD                                    | sets the field in the ldap directory that   stores the user’s first name. This field is used to propagate user’s first   name into the User database. Default is “givenName”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_FIRSTNAME_FIELD = “givenName” | No        |
-| AUTH_LDAP_LASTNAME_FIELD                                     | sets the field in the ldap directory that   stores the user’s last name. This field is used to propagate user’s last name   into the User database. Default is “sn”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_LASTNAME_FIELD = “sn” | No        |
-| AUTH_LDAP_EMAIL_FIELD                                        | sets the field in the ldap directory that   stores the user’s email address. This field is used to propagate user’s emai*   address into the User database. Default is “mail”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_EMAIL_FIELD = “mail” | No        |
-| AUTH_LDAP_ALLOW_SELF_SIGNED                                  | Allow LDAP authentication to use self   signed certificates  | No        |
-| AUTH_LDAP_APPEND_DOMAIN                                      | Append a domain to all logins. No need to   use [john@domain.local](mailto:john%40domain.local). Set it like:   AUTH_LDAP_APPEND_DOMAIN = ‘domain.local’   And the user can login using just ‘john’ | No        |
-| AUTH_LDAP_USERNAME_FORMAT                                    | It converts username to specific format   for LDAP authentications. For example,   username = “userexample”   AUTH_LDAP_USERNAME_FORMAT=”format-%s”.   It authenticates with   “format-userexample”. | No        |
-| AUTH_ROLE_ADMIN                                              | Configure the name of the admin role.                     | No        |
-| AUTH_ROLE_PUBLIC                                             | Special Role that holds the public   permissions, no authentication needed. | No        |
-| APP_NAME                                                     | The name of your application.                             | No        |
-| APP_THEME                                                    | Various themes for you to choose from   (bootwatch).      | No        |
-| APP_ICON                                                     | path of your application icons will be   shown on the left side of the menu | No        |
-| ADDON_MANAGERS                                               | A list of addon manager’s classes Take a   look at addon chapter on docs. | No        |
-| UPLOAD_FOLDER                                                | Files upload folder. Mandatory for file   uploads.        | No        |
-| FILE_ALLOWED_EXTENSIONS                                      | Tuple with allower extensions.   FILE_ALLOWED_EXTENSIONS = (‘txt’,’doc’) | No        |
-| IMG_UPLOAD_FOLDER                                            | Image upload folder. Mandatory for image   uploads.       | No        |
-| IMG_UPLOAD_URL                                               | Image relative URL. Mandatory for image   uploads.        | No        |
-| IMG_SIZE                                                     | tuple to define default image resize.   (width, height, True\|False). | No        |
-| BABEL_DEFAULT_LOCALE                                         | Babel’s default language.                                 | No        |
-| LANGUAGES                                                    | A dictionary mapping the existing   languages with th        |           |
-
-
+| Key                                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                        | Mandatory |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
+| SQLALCHEMY_DATABASE_URI                                                                                              | DB connection string (flask-sqlalchemy)                                                                                                                                                                                                                                                                                                                            | Cond.     |
+| MONGODB_SETTINGS                                                                                                     | DB connection string (flask-mongoengine)                                                                                                                                                                                                                                                                                                                           | Cond.     |
+| AUTH_TYPE   = 0 \| 1 \| 2 \| 3 \| 4   or   AUTH_TYPE   = AUTH_OID, AUTH_DB,   AUTH_LDAP,    AUTH_REMOTE   AUTH_OAUTH | This is the authentication type   0 = Open ID   1 = Database style (user/password)   2 = LDAP, use AUTH_LDAP_SERVER also   3 = uses web server environ var   REMOTE_USER   4 = USE ONE OR MANY OAUTH PROVIDERS                                                                                                                                                     | Yes       |
+| AUTH_USER_REGISTRATION   = True\|False                                                                               | Set to True to enable user self registration                                                                                                                                                                                                                                                                                                                       | No        |
+| AUTH_USER_REGISTRATION_ROLE                                                                                          | Set role name, to be assign when a user   registers himself. This role must already exist. Mandatory when using user   registration                                                                                                                                                                                                                                | Cond.     |
+| AUTH_LDAP_SERVER                                                                                                     | define your ldap server when AUTH_TYPE=2   example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”                                                                                                                                                                                                                          | Cond.     |
+| AUTH_LDAP_BIND_USER                                                                                                  | Define the DN for the user that will be   used for the initial LDAP BIND. This is necessary for OpenLDAP and can be   used on MSFT AD.   AUTH_LDAP_BIND_USER =   “cn=queryuser,dc=example,dc=com”                                                                                                                                                                  | No        |
+| AUTH_LDAP_BIND_PASSWORD                                                                                              | Define password for the bind user.                                                                                                                                                                                                                                                                                                                                 | No        |
+| AUTH_LDAP_SEARCH                                                                                                     | Use search with self user registration or   when using AUTH_LDAP_BIND_USER.   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”                                                                                                                                                                      | No        |
+| AUTH_LDAP_UID_FIELD                                                                                                  | if doing an indirect bind to ldap, this   is the field that matches the username when searching for the account to bind   to. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_UID_FIELD = “uid”                                                             | No        |
+| AUTH_LDAP_FIRSTNAME_FIELD                                                                                            | sets the field in the ldap directory that   stores the user’s first name. This field is used to propagate user’s first   name into the User database. Default is “givenName”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_FIRSTNAME_FIELD = “givenName” | No        |
+| AUTH_LDAP_LASTNAME_FIELD                                                                                             | sets the field in the ldap directory that   stores the user’s last name. This field is used to propagate user’s last name   into the User database. Default is “sn”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_LASTNAME_FIELD = “sn”                  | No        |
+| AUTH_LDAP_EMAIL_FIELD                                                                                                | sets the field in the ldap directory that   stores the user’s email address. This field is used to propagate user’s emai*   address into the User database. Default is “mail”. example:   AUTH_TYPE = 2   AUTH_LDAP_SERVER = “[ldap://ldapserver.new](ldap://ldapserver.new)”   AUTH_LDAP_SEARCH = “ou=people,dc=example”   AUTH_LDAP_EMAIL_FIELD = “mail”         | No        |
+| AUTH_LDAP_ALLOW_SELF_SIGNED                                                                                          | Allow LDAP authentication to use self   signed certificates                                                                                                                                                                                                                                                                                                        | No        |
+| AUTH_LDAP_APPEND_DOMAIN                                                                                              | Append a domain to all logins. No need to   use [john@domain.local](mailto:john%40domain.local). Set it like:   AUTH_LDAP_APPEND_DOMAIN = ‘domain.local’   And the user can login using just ‘john’                                                                                                                                                                | No        |
+| AUTH_LDAP_USERNAME_FORMAT                                                                                            | It converts username to specific format   for LDAP authentications. For example,   username = “userexample”   AUTH_LDAP_USERNAME_FORMAT=”format-%s”.   It authenticates with   “format-userexample”.                                                                                                                                                               | No        |
+| AUTH_ROLE_ADMIN                                                                                                      | Configure the name of the admin role.                                                                                                                                                                                                                                                                                                                              | No        |
+| AUTH_ROLE_PUBLIC                                                                                                     | Special Role that holds the public   permissions, no authentication needed.                                                                                                                                                                                                                                                                                        | No        |
+| APP_NAME                                                                                                             | The name of your application.                                                                                                                                                                                                                                                                                                                                      | No        |
+| APP_THEME                                                                                                            | Various themes for you to choose from   (bootwatch).                                                                                                                                                                                                                                                                                                               | No        |
+| APP_ICON                                                                                                             | path of your application icons will be   shown on the left side of the menu                                                                                                                                                                                                                                                                                        | No        |
+| ADDON_MANAGERS                                                                                                       | A list of addon manager’s classes Take a   look at addon chapter on docs.                                                                                                                                                                                                                                                                                          | No        |
+| UPLOAD_FOLDER                                                                                                        | Files upload folder. Mandatory for file   uploads.                                                                                                                                                                                                                                                                                                                 | No        |
+| FILE_ALLOWED_EXTENSIONS                                                                                              | Tuple with allower extensions.   FILE_ALLOWED_EXTENSIONS = (‘txt’,’doc’)                                                                                                                                                                                                                                                                                           | No        |
+| IMG_UPLOAD_FOLDER                                                                                                    | Image upload folder. Mandatory for image   uploads.                                                                                                                                                                                                                                                                                                                | No        |
+| IMG_UPLOAD_URL                                                                                                       | Image relative URL. Mandatory for image   uploads.                                                                                                                                                                                                                                                                                                                 | No        |
+| IMG_SIZE                                                                                                             | tuple to define default image resize.   (width, height, True\|False).                                                                                                                                                                                                                                                                                              | No        |
+| BABEL_DEFAULT_LOCALE                                                                                                 | Babel’s default language.                                                                                                                                                                                                                                                                                                                                          | No        |
+| LANGUAGES                                                                                                            | A dictionary mapping the existing   languages with th                                                                                                                                                                                                                                                                                                              |           |
 
 3). 主题配置
 
 Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改变应用的主题风格。下面是config.py文件中可供选择的主题：
 
-
-
 2. 路由定制
 
-| 路由                         | 功能详述           | 代码文件                                   | 代码实现                                                     |
-| ---------------------------- | ------------------ | ------------------------------------------ | ------------------------------------------------------------ |
-| @expose(uri)                 | 在现路由上扩展路径 |                                            |                                                              |
-| Baseview.   create_blueprint | 类名作为路由根前缀 | flask_appbuilder/baseview.py               | route_base = None   if self.route_base is None:  self.route_base = '/' + self.__class__.__name__.lower() |
-| route_base                   | 路由根路径         | flask_appbuilder/views.py                  | route_base = ''                                              |
-|                              |                    | flask_appbuilder/security/registerviews.py | route_base = '/register'                                     |
-|                              |                    | flask_appbuilder/security/views.py         | route_base = '/users'   roles permissions viewmenus permissionviews   resetmypassword resetpassword registeruser |
-|                              |                    | flask_appbuilder/babel/views.py            | route_base = '/lang'                                         |
+| 路由                           | 功能详述      | 代码文件                                       | 代码实现                                                                                                             |
+| ---------------------------- | --------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| @expose(uri)                 | 在现路由上扩展路径 |                                            |                                                                                                                  |
+| Baseview.   create_blueprint | 类名作为路由根前缀 | flask_appbuilder/baseview.py               | route_base = None   if self.route_base is None:  self.route_base = '/' + self.__class__.__name__.lower()         |
+| route_base                   | 路由根路径     | flask_appbuilder/views.py                  | route_base = ''                                                                                                  |
+|                              |           | flask_appbuilder/security/registerviews.py | route_base = '/register'                                                                                         |
+|                              |           | flask_appbuilder/security/views.py         | route_base = '/users'   roles permissions viewmenus permissionviews   resetmypassword resetpassword registeruser |
+|                              |           | flask_appbuilder/babel/views.py            | route_base = '/lang'                                                                                             |
 
 示例：@expose('/welcome')
 
 结果：/superset/welcome
 
-
-
 3. 类图
-
+   
    ![1574518633167](../../media/sf_reuse/framework/frame_web_flask_002.png)
 
 图 4 flask-appbuilder view
 
-
-
 ### 本节参考
 
-*  [Jinja2 文档](http://jinja.pocoo.org/2/documentation/)
+* [Jinja2 文档](http://jinja.pocoo.org/2/documentation/)
 
 * [Werkzeug 文档](http://werkzeug.pocoo.org/documentation/)
 
 * Building beautiful REST APIs using Flask, Swagger UI and Flask-RESTPlus https://michal.karzynski.pl/blog/2016/06/19/building-beautiful-restful-apis-using-flask-swagger-ui-flask-restplus/
+
 * 使用swagger 生成 Flask RESTful API  https://blog.csdn.net/IAlexanderI/article/details/79613910
-
-
 
 ## 2.3 python-Tornado
 
@@ -1305,18 +1173,16 @@ Flask-AppBuilder集成了bootwatch，只需要配置APP_THEME的值就可以改�
 
 表格 tornado版本说明  详见 [[release](https://www.tornadoweb.org/en/stable/releases.html)]
 
-| 版本号 | 发布时间  | 功能或更新说明 |
-| ------ | --------- | -------------- |
-| 1.0    | 2010-7-22 |                |
-| 2.0    | 2011-6-21 |                |
-| 3.0    | 2013-3-29 |                |
-| 4.0    | 2014-7-15 |                |
-| 5.0    | 2018-3-5  |                |
-| 6.0    | 2019-3-1  |                |
+| 版本号 | 发布时间      | 功能或更新说明 |
+| --- | --------- | ------- |
+| 1.0 | 2010-7-22 |         |
+| 2.0 | 2011-6-21 |         |
+| 3.0 | 2013-3-29 |         |
+| 4.0 | 2014-7-15 |         |
+| 5.0 | 2018-3-5  |         |
+| 6.0 | 2019-3-1  |         |
 
 备注：最新版本 6.1.0，发布于2020-10-30.
-
-
 
 ### 入门篇
 
@@ -1339,11 +1205,7 @@ if __name__ == "__main__":
     tornado.ioloop.IOLoop.instance().start()
 ```
 
-
-
 ### 本节参考
-
-
 
 <br>
 
@@ -1353,13 +1215,9 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
 
 特性：高可用、快速、灵活
 
-
-
 * 仓库： https://github.com/celery/celery
 
 * 中文文档：https://www.celerycn.io/
-
-
 
  它支持
 
@@ -1381,20 +1239,16 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
   - zlib、bzip2 compression
   - Cryptographic message signing
 
-
-
 Celery可以快速的集成一些常用的Web框架，详细如下：
 
-| Web框架                                                      | 集成包                                                       |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Pyramid](http://docs.pylonsproject.org/en/latest/docs/pyramid.html) | [pyramid_celery](https://pypi.org/project/pyramid_celery/)   |
-| [Pylons](http://pylonshq.com/)                               | [celery-pylons](https://pypi.python.org/pypi/celery-pylons/) |
-| [Flask](http://flask.pocoo.org/)                             | 不需要                                                       |
-| [web2py](http://web2py.com/)                                 | [web2py-celery](https://pypi.python.org/pypi/web2py-celery/) |
-| [Tornado](http://www.tornadoweb.org/)                        | [tornado-celery](https://pypi.python.org/pypi/tornado-celery/) |
-| [Tryton](http://www.tryton.org/)                             | [celery_tryton](https://pypi.python.org/pypi/celery_tryton/) |
-
-
+| Web框架                                                                | 集成包                                                            |
+| -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Pyramid](http://docs.pylonsproject.org/en/latest/docs/pyramid.html) | [pyramid_celery](https://pypi.org/project/pyramid_celery/)     |
+| [Pylons](http://pylonshq.com/)                                       | [celery-pylons](https://pypi.python.org/pypi/celery-pylons/)   |
+| [Flask](http://flask.pocoo.org/)                                     | 不需要                                                            |
+| [web2py](http://web2py.com/)                                         | [web2py-celery](https://pypi.python.org/pypi/web2py-celery/)   |
+| [Tornado](http://www.tornadoweb.org/)                                | [tornado-celery](https://pypi.python.org/pypi/tornado-celery/) |
+| [Tryton](http://www.tryton.org/)                                     | [celery_tryton](https://pypi.python.org/pypi/celery_tryton/)   |
 
 ## 入门篇
 
@@ -1413,11 +1267,9 @@ def add(x, y):
 
 @app.task(bind=True)
 def add(x, y):
- 	print(self.request.id)
+     print(self.request.id)
     return x + y
 ```
-
-
 
 celery执行过程
 
@@ -1436,11 +1288,9 @@ $ celery multi start|stop|stopwait|restart -A [project]
 ```python
 $ celery shell
 >>> from tasks import add
->>> resut = add.delay(4, 4)		# 执行任务的方法: delay, apply_async,
->>> result.get(timeout=8)		# 获取任务结果的方法：get ready
+>>> resut = add.delay(4, 4)        # 执行任务的方法: delay, apply_async,
+>>> result.get(timeout=8)        # 获取任务结果的方法：get ready
 ```
-
-
 
 **常用配置项**
 
@@ -1448,8 +1298,8 @@ $ celery shell
 
 ```python
 # 获取配置参数项， app为celery对象
-app.config_from_object('celeryconfig')	# 法1：文件中获取
-app.conf.broker_url = 'pyamqp://'	# 法2：直接赋值
+app.config_from_object('celeryconfig')    # 法1：文件中获取
+app.conf.broker_url = 'pyamqp://'    # 法2：直接赋值
 
 # celeryconfig.py
 broker_url = 'pyamqp://'
@@ -1470,17 +1320,11 @@ task_acks_late = True
 worker_prefetch_multiplier = 1
 ```
 
-
-
 celery常用命令
 
 ```shell
 
 ```
-
-
-
-
 
 ## 应用篇
 
@@ -1494,26 +1338,18 @@ task状态state:  PENDING  STARTED  RETRY  SUCCESS
 
 PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 
-
-
 **故障自愈**
 
 * worker:  *CELERY*D_MAX_TASKS_*PER_CH*ILD  重启进程
 * task:  软超时soft_time_limit 和 硬超时time_limit
 
-
-
 ## 原理篇
-
-
 
 <br>
 
 ## 本章参考
 
 [1]. https://www.celerycn.io/ celery中文手册
-
-
 
 <br>
 
@@ -1524,8 +1360,6 @@ PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 django https://www.djangoproject.com/
 
 flask 官网 http://flask.pocoo.org/
-
-
 
 参考链接：
 

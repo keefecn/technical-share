@@ -1,15 +1,13 @@
-| 序号 | 修改时间  | 修改内容 | 修改人 | 审稿人 |
-| ---- | --------- | -------- | ------ | ------ |
-| 1    | 2021-4-23 | 创建     | Keefe  |        |
-|      |           |          |        |        |
+| 序号  | 修改时间      | 修改内容 | 修改人   | 审稿人 |
+| --- | --------- | ---- | ----- | --- |
+| 1   | 2021-4-23 | 创建   | Keefe |     |
+|     |           |      |       |     |
 
 <br><br><br>
 
 ---
 
 [TOC]
-
-
 
 <br>
 
@@ -24,7 +22,9 @@ Ipython是一个加强版的python解释器。
 - %run 命令运行python文件
 
 - 使用Ctrl+C终端代码的执行
+
 - 使用%paste和%cpaste魔术函数粘贴代码
+
 - Ipython终端快捷键
 
 ```shell
@@ -70,8 +70,6 @@ Ctrl+l                         清楚本屏内容
 %matplotlib inline     在Jupyter notebook中输入
 ```
 
-
-
 ## Jupyter Notebook
 
 Jupyter是一个科学计算IDE，由Anaconda公司开发并将其开源。
@@ -87,8 +85,6 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
 4. 对代码编写说明文档或语句时，支持Markdown语法。
 5. 支持使用LaTeX编写数学性说明。
 
-
-
 ```shell
 # 安装
 $ pip3 install jupyter
@@ -102,8 +98,6 @@ $ jupyter notebook
 ```
 http://localhost:8888/?token=c8de56fa...
 ```
-
-
 
 ## Jupyter Lab
 
@@ -127,8 +121,6 @@ JupyterLab有以下特点：
 
 - **云服务：**使用Jupyter Lab连接Google Drive等服务，极大得提升生产力
 
-
-
 ```shell
 # 安装
 $ pip3 install jupyterlab
@@ -139,13 +131,9 @@ $ jupyter lab
 
 网络访问：缺省端口8888。如果端口被占用，则端口数量渐增。
 
-
-
 # 入门篇
 
 调用shell命令： 可以在notebook里 !符号 调用 shell命令，如 `!pip install rpy2`
-
-
 
 ## 密码管理和远程访问
 
@@ -156,8 +144,6 @@ $ jupyter notebook list
 Currently running servers:
 http://localhost:8888/?token=7c9064bfb5139e72eb8774248df75d0564f450b09a13d57a :: E:\dev\python\bin\python36\Scripts
 ```
-
-
 
 **设置密码**
 
@@ -180,8 +166,6 @@ Verify password:
 ```
 
 说明：Ipython把输入的密码转换成sha，并用于认证JupyterLab，如果在Ipython输入密码和确认密码时直接回车，相当于不设密码，因此登录JupyterLab时可以不输入密码直接点击登录。
-
-
 
 **jupyterlab配置文件**
 
@@ -210,8 +194,6 @@ c.NotebookApp.allow_remote_access = True
 $ jupyter notebook --ip=127.0.0.1 --port 8000 --allow-root
 ```
 
-
-
 # 进阶篇
 
 ## 多内核支持
@@ -237,8 +219,6 @@ Jupyter Notebook 与 IPython终端 共享同一个内核。
 $ pip install ipykernel
 $ python -m ipykernel install --user
 ```
-
-
 
 内核配置查看
 
@@ -268,8 +248,6 @@ $ cat ~/AppData/Roaming/jupyter/kernels/python3/kernel.json
 
 最后重启jupyter-lab服务即可。
 
-
-
 ### R内核
 
 - 快捷选择：使用anaconda安装 R kernel
@@ -290,19 +268,13 @@ devtools::install_github('IRkernel/IRkernel')
 IRkernel::installspec() # to register the kernel in the current R installation
 ```
 
-
-
 开始一个新的R环境，只需要运行Jupyterlab后选择“New -> R”即可！熟悉的界面加入了新的成员。
-
-
 
 ### 同一个notebook里使用Python和R
 
 ```shell
 $ pip install rpy2
 ```
-
-
 
 ## 调试器debugger
 
@@ -322,48 +294,38 @@ s=f1()
 print(s)
 ```
 
-
-
 表格 pdb命令
 
-| 完整命令  | 简写命令  | 描述                               |
-| --------- | --------- | ---------------------------------- |
-| args      | a         | 打印当前函数的参数                 |
-| break     | b         | 设置断点                           |
-| clear     | cl        | 清除断点                           |
-| condition | 无        | 设置条件断点                       |
+| 完整命令      | 简写命令    | 描述                |
+| --------- | ------- | ----------------- |
+| args      | a       | 打印当前函数的参数         |
+| break     | b       | 设置断点              |
+| clear     | cl      | 清除断点              |
+| condition | 无       | 设置条件断点            |
 | continue  | c或者cont | 继续运行，知道遇到断点或者脚本结束 |
-| disable   | 无        | 禁用断点                           |
-| enable    | 无        | 启用断点                           |
-| help      | h         | 查看pdb帮助                        |
-| ignore    | 无        | 忽略断点                           |
-| jump      | j         | 跳转到指定行数运行                 |
-| list      | l         | 列出脚本清单                       |
-| next      | n         | 执行下条语句，遇到函数不进入其内部 |
-| p         | p         | 打印变量值，也可以用print          |
-| quit      | q         | 退出 pdb                           |
-| return    | r         | 一直运行到函数返回                 |
-| tbreak    | 无        | 设置临时断点，断点只中断一次       |
-| step      | s         | 执行下一条语句，遇到函数进入其内部 |
-| where     | w         | 查看所在的位置                     |
-| !         | 无        | 在pdb中执行语句                    |
-
-
+| disable   | 无       | 禁用断点              |
+| enable    | 无       | 启用断点              |
+| help      | h       | 查看pdb帮助           |
+| ignore    | 无       | 忽略断点              |
+| jump      | j       | 跳转到指定行数运行         |
+| list      | l       | 列出脚本清单            |
+| next      | n       | 执行下条语句，遇到函数不进入其内部 |
+| p         | p       | 打印变量值，也可以用print   |
+| quit      | q       | 退出 pdb            |
+| return    | r       | 一直运行到函数返回         |
+| tbreak    | 无       | 设置临时断点，断点只中断一次    |
+| step      | s       | 执行下一条语句，遇到函数进入其内部 |
+| where     | w       | 查看所在的位置           |
+| !         | 无       | 在pdb中执行语句         |
 
 ### xeus-python
-
-
-
-
 
 # FAQ
 
 1) pylab支持
-\# 在开头添加pylab的内嵌语句，pylab是 Matplotlib 和Ipython提供的一个模块，提供了类似Matlab的语法。
-%pylab inline
-%matplotlib inline
-
-
+   \# 在开头添加pylab的内嵌语句，pylab是 Matplotlib 和Ipython提供的一个模块，提供了类似Matlab的语法。
+   %pylab inline
+   %matplotlib inline
 
 2) No module named xxx但在命令行中可以导入
 
@@ -375,25 +337,19 @@ print(sys.path)
 print(sys.executable)
 ```
 
-
-
-
-
 <br>
 
 # 附录
 
 ## 参考资料
 
-**官网 **
+**官网**
 
 https://jupyter.readthedocs.io/
 
 https://jupyterlab.readthedocs.io/en/stable/
 
 https://jupyter-notebook.readthedocs.io/en/stable/notebook.html
-
-
 
 **参考链接**
 
@@ -403,8 +359,6 @@ https://jupyter-notebook.readthedocs.io/en/stable/notebook.html
 
 [3]. 27 个Jupyter Notebook的小提示与技巧 https://www.cnblogs.com/lvdongjie/p/11231648.html
 
-
-
 ## 插件plugins
 
 安装插件
@@ -412,4 +366,3 @@ https://jupyter-notebook.readthedocs.io/en/stable/notebook.html
 ```shell
 $ jupyter labextension install @jupyterlab/
 ```
-
