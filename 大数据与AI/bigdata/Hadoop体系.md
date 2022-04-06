@@ -405,11 +405,11 @@ Hadoop在2.0将资源管理从MapReduce中独立出来变成通用框架后，�
 
 #### 计算框架
 
-详见 《[大数据计算框架](大数据计算框架.md)》 MapReduce、Spark、Flink、Storm
+详见 《[大数据计算框架](./大数据计算框架.md)》 MapReduce、Spark、Flink、Storm
 
 #### 集群管理
 
-详见 《[大数据集群管理](大数据集群管理.md)》 ZooKeeper、YARN、Mesos
+详见 《[大数据集群管理](./大数据集群管理.md)》 ZooKeeper、YARN、Mesos
 
 ### 1.2.2  Hadoop生态的编年史
 
@@ -658,12 +658,16 @@ FI：FusionInsgiht
 FusionInsight解决方案由4个子产品FusionInsight HD、FusionInsight MPPDB、FusionInsight Miner、FusionInsight Farmer和1个操作运维系统FusionInsight Manager构成。
 
 * FusionInsight HD：企业级的大数据处理环境，是一个分布式数据处理系统，对外提供大容量的数据存储、分析查询和实时流式数据处理分析能力。
-* FusionInsight MPPDB：企业级的大规模并行处理关系型数据库。FusionInsight MPPDB采用MPP(Massive Parallel Processing)架构，支持行存储和列存储，提供PB(Petabyte，2的50次方字节)级别数据量的处理能力。 2018年特指libra（原gauss）。
-* FusionInsight Miner：企业级的数据分析平台，基于华为FusionInsight HD的分布式存储和并行计算技术，提供从海量数据中挖掘出价值信息的平台。
-* FusionInsight Farmer：企业级的大数据应用容器，为企业业务提供统一开发、运行和管理的平台。
-* FusionInsight Manager：企业级大数据的操作运维系统，提供高可靠、安全、容错、易用的集群管理能力，支持大规模集群的安装部署、监控、告警、用户管理、权限管理、审计、服务管理、健康检查、问题定位、升级和补丁等功能。
 
- ![image-20191205203817612](../../media/bigdata/hadoop/hadoop_007.png)
+* FusionInsight MPPDB：企业级的大规模并行处理关系型数据库。FusionInsight MPPDB采用MPP(Massive Parallel Processing)架构，支持行存储和列存储，提供PB(Petabyte，2的50次方字节)级别数据量的处理能力。 2018年特指libra（原gauss）。
+
+* FusionInsight Miner：企业级的数据分析平台，基于华为FusionInsight HD的分布式存储和并行计算技术，提供从海量数据中挖掘出价值信息的平台。
+
+* FusionInsight Farmer：企业级的大数据应用容器，为企业业务提供统一开发、运行和管理的平台。
+
+* FusionInsight Manager：企业级大数据的操作运维系统，提供高可靠、安全、容错、易用的集群管理能力，支持大规模集群的安装部署、监控、告警、用户管理、权限管理、审计、服务管理、健康检查、问题定位、升级和补丁等功能。
+  
+  ![image-20191205203817612](../../media/bigdata/hadoop/hadoop_007.png)
 
 图 6 FusionInsight HD系统逻辑架构图
 

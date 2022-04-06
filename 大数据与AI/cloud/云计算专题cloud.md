@@ -127,9 +127,10 @@ management effort or service provider interaction.
 根据NIST的定义，云计算分为：
 
 * 三种服务模型：SaaS, PaaS, IaaS
-* 三种部署模型：私有云、公有云、混合云
 
- ![image-20191201164903786](../../media/cloud/cloud_002.png)
+* 三种部署模型：私有云、公有云、混合云
+  
+  ![image-20191201164903786](../../media/cloud/cloud_002.png)
 
 图 2 SPI云服务模型
 

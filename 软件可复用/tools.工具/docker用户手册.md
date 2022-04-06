@@ -1607,12 +1607,17 @@ services:
 
 # 7 docker管理工具
 
-| 工具名           | 镜像大小   | 描述             | 使用                                                                                                                                            | 访问             |
-| ------------- | ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| portainer     | 79MB   | docker管理可视化。   | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
-| ui-for-docker | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
-| register:2    | 26.2MB | 本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
-| clair         |        | 镜像安全扫描         |                                                                                                                                               |                |
+| 工具名                                                       | 镜像大小   | 描述             | 使用                                                                                                                                            | 访问             |
+| --------------------------------------------------------- | ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| portainer                                                 | 79MB   | docker管理可视化。   | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
+| ui-for-docker                                             | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
+| register:2                                                | 26.2MB | 本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
+| clair                                                     |        | 镜像安全扫描         |                                                                                                                                               |                |
+| [docker-slim](https://github.com/docker-slim/docker-slim) | 无      | 镜像压缩工具         | 从Github下载其二进制文件。                                                                                                                              |                |
+| Docker Desktop                                            | 无      | 桌面应用软件         |                                                                                                                                               |                |
+| DockStation                                               | 无      | 桌面应用软件         |                                                                                                                                               |                |
+| Lazydocker                                                |        | UI终端           |                                                                                                                                               |                |
+| Docui                                                     |        | UI终端           |                                                                                                                                               |                |
 
 备注：上表访问中IP指宿主机IP。
 
@@ -1639,6 +1644,10 @@ $ systemctl restart docker
 <br>
 
 ## 本章参考
+
+* 5 款顶级 Docker GUI 工具！免费又好用  https://mp.weixin.qq.com/s/rPPZmT2IiZ8QmzvHMhiibw
+
+<br>
 
 # FAQ
 
