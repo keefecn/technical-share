@@ -416,7 +416,9 @@ with open(r'somefileName') as somefile:
 ### 2.3.3  三元表达式
 
 * variable = a if exper else b
+
 * variable = (exper and [b] or [c])[0]
+
 * variable = exper and b or c
   示例：取两值中较大者max
   
@@ -1735,6 +1737,7 @@ Usage:  pylint [options] module_or_package
 
 * -A包括父类，-S包括关联，-p生成的文件名，以.dot为后缀
   $ pyreverse -A -S [xxx.py] -p xxx
+
 * dot的查看：需软件graphviz支持。
   下载：http://www.graphviz.org/Download_windows.php
   使用: dot -Txxx [?.dot]  //xxx为输出的文件格式，如jpg/png/pdf等等。
@@ -2914,6 +2917,7 @@ pool.join()   # 主进程阻塞等待子进程的退出
 **Pthread和Gthread**
 
 * Pthread即POSIX thread，Posix线程是一个POSIX标准线程，该标准定义内部API创建和操纵线程。
+
 * Gthread调用的是Glib库中的线程部分；GLib是GTK+和GNOME工程的基础底层核心程序库，是一个综合用途的实用的轻量级的C程序库。
   
   ```python

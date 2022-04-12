@@ -272,7 +272,7 @@ $ sudo apt-get -y install wqy-bitmap-fonts
 
 > 其它字体工具还有：fc-scan fc-cat  fc-cache fc-pattern  fc-query
 
-~~字体缓存更新~~
+**字体缓存更新**
 
 ```sh
 # ubuntu20.04实测未能更新字体，表现为fc-list命令仍未找到新安装字体
@@ -465,6 +465,10 @@ sudo ./run.sh
 # 3  Linux
 
 ## 3.1 Linux环境综述
+
+**Linux登录过程中加载配置文件顺序：**
+
+/etc/profile → /etc/profile.d/*.sh → ~/.bash_profile → ~/.bashrc → [/etc/bashrc]
 
 表格  Linux通用命令
 
@@ -840,6 +844,7 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 * 安装 ubuntu 20.04 之后需要做的几件事  https://www.wenjinyu.me/zh/something-to-do-after-installing-ubuntu-20-04/
 * 解决Ubuntu 20.04挂载NTFS分区不能写入（只读权限）的问题  https://blog.csdn.net/wwlswj/article/details/106479600
 * kunpeng yum仓库  https://repo.huaweicloud.com/kunpeng/yum/el/8/aarch64/Packages/database/
+* Linux系统重置和修改root密码  https://www.cnblogs.com/flower-0626/p/11425280.html
 
 <br>
 

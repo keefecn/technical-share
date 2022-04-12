@@ -338,8 +338,6 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 - 2018年，召开了主题为“简单.创造.不简单”云AI未来办公大会，发布了金山文档等新产品。
 - 2020年11月11日，金山办公正式发布“使命.愿景.价值观”。
 
-
-
 表格 WPS Office和MS Office关键功能对比
 
 | MS Office功能 | WPS Office对应功能 | 详述          |

@@ -337,7 +337,8 @@ daemon.json 示例配置文件
     "dns-opts": [],
      #容器 /etc/resolv.conf 文件，其他设置
     "dns-search": [],
-     #设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的 主机时，DNS不仅搜索host，还会搜索host.example.com。注意：如果不设置，Docker 会默认用主机上的 /etc/resolv.conf来配置容器。
+     #设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的 主机时，DNS不仅搜索host，还会搜索host.example.com。
+注意：如果不设置，Docker 会默认用主机上的 /etc/resolv.conf来配置容器。
     "exec-opts": [],
     "exec-root": "",
     "experimental": false,
@@ -1309,9 +1310,19 @@ Commands:
   version            Show the Docker-Compose version information
 ```
 
-配置文件：docker-compose.yml 或者 xxx.yml
+**配置文件**：docker-compose.yml 或者 xxx.yml
 
-示例：容器服务web 可以使用 容器服务mysqldb，通过名称mysql
+yml文件规范 （以下是四大顶级关键词）
+
+* version: 代表了Compose文件格式的版本号。为了应用于Stack，需要3.0或者更高的版本。
+
+* services: 定义了组成当前应用的服务都有哪些。
+
+* networks: 列出了必需的网络。
+
+* secrets: 定义了应用用到的密钥。
+
+示例：容器服务web，依赖于redis
 
 ```yaml
 version: "3.9"  # optional since v1.27.0
@@ -1347,17 +1358,19 @@ $ docker-compose up -d
 | 工具    | 包含在Docker引擎中。你不需要安装额外的包来使用它，docker stacks 只是swarm mode的一部分。 | 需要安装单独工具。在内部，它使用Docker API规范来操作容器。 |
 | yml版本 | 版本3以上                                                       | 支持版本2和3                            |
 
+备注：同服务名称的配置项，yml文件后面的会覆盖前面的。
+
 docker stack把docker compose的所有工作都做完了，因此docker stack将占主导地位。同时，对于大多数用户来说，切换到使用docker stack既不困难，也不需要太多的开销。如果您是Docker新手，或正在选择用于新项目的技术，请使用docker stack。
 
 表格 Docker Stack常用命令   
 
-| 命令                    | 描述            |
-| --------------------- | ------------- |
-| docker stack deploy   | 部署新的堆栈或更新现有堆栈 |
-| docker stack ls       | 列出现有堆栈        |
-| docker stack ps       | 列出堆栈中的任务      |
-| docker stack rm       | 删除一个或多个堆栈     |
-| docker stack services | 列出堆栈中的服务      |
+| 命令                    | 描述              |
+| --------------------- | --------------- |
+| docker stack deploy   | 部署新的堆栈 或 更新现有堆栈 |
+| docker stack ls       | 列出现有堆栈          |
+| docker stack ps       | 列出堆栈中的任务        |
+| docker stack rm       | 删除一个或多个堆栈       |
+| docker stack services | 列出堆栈中的服务        |
 
 ```shell
 $ docker stack
@@ -1377,9 +1390,69 @@ Commands:
   services    List the services in the stack
 
 Run 'docker stack COMMAND --help' for more information on a command.
+
+
+$ docker stack deploy --help
+
+Usage:  docker stack deploy [OPTIONS] STACK
+
+Deploy a new stack or update an existing stack
+
+Aliases:
+  deploy, up
+
+Options:
+  -c, --compose-file strings   Path to a Compose file, or "-" to read from stdin
+      --orchestrator string    rchestrator to use (swarm|kubernetes|all)  容器编排方式
+      --prune                  Prune services that are no longer referenced
+      --resolve-image string   Query the registry to resolve image digest and supported platforms ("always"|"changed"|"never") (default "always")
+      --with-registry-auth     Send registry authentication details to Swarm agents, default false
 ```
 
 说明：实际上 docker stack COMMAND STACK_NAME ，STACK_NAME为栈名称，要有STACK_NAME才能执行。
+
+**进阶**
+
+1. 只重启stack单个服务
+
+```shell
+# 法1：stack depoly命令部署更新，只更新标记需要更新的服务？
+docker stack deploy STACK_NAME
+
+# 法2：指定service id 强制更新某个service, 这个命令只能用于swarm管理节点
+#  示例中service_id是3xrdy2c7pfm3
+$ docker stack services STACK_NAME
+$ docker service update --force 3xrdy2c7pfm3
+```
+
+2. 查看服务问题
+   
+   ```shell
+   # 查看服务报错信息
+   $ docker ps --no-trunc STACK_NAME
+   
+   # 查看服务日志, -f 日志持续查看
+   $ docker service logs -f SERVICE_NAME 
+   ```
+
+**docker stack集群部署**
+
+docker stack默认使用 swarm模式部署。
+
+```shell
+# 初化化 默认成为主节点，管理节点
+$ docker swarm init
+
+# 添加工作节点 Worker 1 (wrk-1)
+$ docker swarm join --token SWMTKN-1-2hl6...-...3lqg 172.31.40.192:2377
+This node joined a swarm as a worker. 
+
+# 查看节点
+$ docker node ls
+ID            HOSTNAME  STATUS    AVAILABILITY   MANAGER STATUS
+lhm...4nn *   mgr-1     Ready     Active         Leader
+b74...gz3     wrk-1     Ready     Active
+```
 
 <br>
 
@@ -1420,6 +1493,10 @@ docker system prune
 <br>
 
 ## 本章参考
+
+* 使用Docker Stack部署应用  https://zhuanlan.zhihu.com/p/182198031
+
+<br><br>
 
 # 6 镜像实例
 
@@ -1604,6 +1681,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
 ```
+
+<br><br>
 
 # 7 docker管理工具
 

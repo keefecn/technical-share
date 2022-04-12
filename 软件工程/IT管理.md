@@ -606,6 +606,21 @@ QCC(Quality Control Circle,品管圈)
 
 <br>
 
+# 业界典范
+
+## Atlassian
+
+Atlassian 致力于为技术工程团队构建最好的项目管理工具。
+
+在 Atlassian 的业务版图中，主要有 4 大块
+
+1. **计划跟踪与支持**：提供了 Jira（Align，Chore，Service Desk），StatusPage 等套件。
+2. 知识管理与协作：提供了 Confluence，Trello 等套件。
+3. **持续集成与发布**：提供了 Bitbucket，Sourcetree，Bamboo 等套件。
+4. 用户管理与安全：提供了 Crowd，Atlassian Access 等套件。
+
+<br>
+
 # 参考资料
 
 **参考书目**
