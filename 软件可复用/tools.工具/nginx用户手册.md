@@ -67,14 +67,23 @@ nginx支持以下功能
 
 # 2   入门篇
 
+安装
+
+```shell
+# ubuntu安装，安装后配置文件在 /etc/nginx/nginx.conf
+$ sudo apt-get install nginx
+```
+
+
+
 ## 常用命令
 
 ```sh
-$ nginx -v  # 查看nginx版本
-$ nginx -s reload  # 重新加载配置文件
+$ nginx -v 			 # 查看nginx版本
+$ nginx -s reload  	# 重新加载配置文件
 $ nginx -s stop  # 关闭服务
-$ nginx         # 启动服务
-$ nginx -t      # 检测配置文件
+$ nginx          # 启动服务
+$ nginx -t       # 检测配置文件
 ```
 
 **nginx控制信号**
@@ -119,7 +128,38 @@ nginx重启可以分成几种类型
 
 <br>
 
-# 3  配置篇nginx.conf
+# 3  配置篇
+
+默认配置路径：/etc/nginx/
+
+```shell
+/etc/nginx$ tree 
+.
+├── conf.d
+├── fastcgi.conf
+├── fastcgi_params
+├── mime.types
+├── modules-available
+├── modules-enabled
+│   ├── 50-mod-http-image-filter.conf -> /usr/share/nginx/modules-available/mod-http-image-filter.conf
+│   ├── 50-mod-http-xslt-filter.conf -> /usr/share/nginx/modules-available/mod-http-xslt-filter.conf
+│   ├── 50-mod-mail.conf -> /usr/share/nginx/modules-available/mod-mail.conf
+│   └── 50-mod-stream.conf -> /usr/share/nginx/modules-available/mod-stream.conf
+├── nginx.conf   #常规设置，如代理、负载均衡
+├── proxy_params	#代理参数
+├── scgi_params
+├── sites-available
+│   └── default		#缺省设置如listen port、index
+├── sites-enabled
+│   └── default -> /etc/nginx/sites-available/default
+├── snippets
+│   ├── fastcgi-php.conf
+│   └── snakeoil.conf
+├── uwsgi_params
+└── win-utf
+```
+
+最主要的配置文件是 nginx.conf
 
 ## 3.1  配置基础
 
@@ -770,12 +810,14 @@ server {
 
 # 4 原理篇
 
+<br><br>
+
 # 5 模块开发篇
 
-<br>
+<br><br>
 
 # 参考资料
 
-[1].   nginx基本配置与参数说明 [www.nginx.cn/76.html](http://www.nginx.cn/76.html)
+* nginx基本配置与参数说明 [www.nginx.cn/76.html](http://www.nginx.cn/76.html)
 
-[2].   nginx的rewrite开发实例解析 https://www.2cto.com/kf/201711/548951.html
+* nginx的rewrite开发实例解析 https://www.2cto.com/kf/201711/548951.html

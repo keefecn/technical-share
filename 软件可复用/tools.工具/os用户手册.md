@@ -1303,6 +1303,80 @@ $ sudo php5enmod mcrypt
 $sudo /etc/init.d/apache2 restart
 ```
 
+#### nginx支持PHP
+
+nginx支持PHP有二种方式，
+
+* 一是将会连接本地 9000 端口执行PHP文件，使用的tcp/ip协议，速度较慢。
+* 二是若在本地可以换成socket方式，去连接php-fpm的sock文件，改成fastcgi_pass unix:/var/run/phpfpm.sock;
+
+```shell
+# ubuntu环境安装
+$ sudo apt-get install nginx
+$ sudo apt-get install php, php-fpm
+
+# 配置nginx.conf 详见下方
+
+# 启动服务 start
+$ sudo systemctl start nginx 
+$ sudo systemctl start php7.0-fpm 
+
+# 重启服务 restart reload
+$ sudo service php7.0-fpm reload
+$ sudo service nginx reload
+
+$ nginx -v
+nginx version: nginx/1.18.0 (Ubuntu)
+$ php -v
+PHP 7.4.3 (cli) (built: Mar  2 2022 15:36:52) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
+```
+
+nginx配置支持PHP:  /etc/nginx/nginx.conf
+
+```nginx
+index index.htm index.html index.php
+
+# 法1：sock
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html/www;
+    index index.php index.htm index.html;
+    
+    location ~ .php$ {
+        include snippets/fastcgi-php.conf;
+        # # With php7.0-cgi alone:
+        # fastcgi_pass 127.0.0.1:9000;
+        # # With php7.0-fpm:
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    }
+
+    # 法2: ip:port
+    location ~ .php$ {
+        try_files $uri =404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+    }
+}    
+```
+
+php-fpm配置:  /etc/php/7.4/fpm/php-fpm.conf
+
+```ini
+;法1，法2
+;listen = /run/php/php7.4-fpm.sock
+listen = 127.0.0.1:9000
+```
+
+
+
+<br>
+
 #### MySQL和PHPMyadmin配置
 
 **MySQL配置**
