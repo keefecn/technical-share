@@ -468,7 +468,7 @@ Management Commands:
   service     Manage services
   stack       Manage Docker stacks
   swarm       Manage Swarm
-  system      Manage Docker
+  system      Manage Docker 如查看占用空间df，清理空间prune
   trust       Manage trust on Docker images
   volume      Manage volumes
 
@@ -489,7 +489,7 @@ Commands:
     inspect   Return low-level information on a container or image
     kill      Kill a running container
     load      Load an image from a tar archive
-    logi*     Register or log in to a Docker registry server
+    login     Register or log in to a Docker registry server
     logout    Log out from a Docker registry server
     logs      Fetch the logs of a container  #查看运行镜像实例的日志
     port      Lookup the public-facing port that is NAT-ed to PRIVATE_PORT
@@ -1393,9 +1393,7 @@ Run 'docker stack COMMAND --help' for more information on a command.
 
 
 $ docker stack deploy --help
-
 Usage:  docker stack deploy [OPTIONS] STACK
-
 Deploy a new stack or update an existing stack
 
 Aliases:
@@ -1416,8 +1414,10 @@ Options:
 1. 只重启stack单个服务
 
 ```shell
+# 若报错 image could not be accessed on a registry to record its digest
+# 则加上参数 --with-registry-auth
 # 法1：stack depoly命令部署更新，只更新标记需要更新的服务？
-docker stack deploy STACK_NAME
+$ docker stack deploy STACK_NAME --with-registry-auth
 
 # 法2：指定service id 强制更新某个service, 这个命令只能用于swarm管理节点
 #  示例中service_id是3xrdy2c7pfm3

@@ -1346,7 +1346,7 @@ server {
 
     root /var/www/html/www;
     index index.php index.htm index.html;
-    
+
     location ~ .php$ {
         include snippets/fastcgi-php.conf;
         # # With php7.0-cgi alone:
@@ -1372,8 +1372,6 @@ php-fpm配置:  /etc/php/7.4/fpm/php-fpm.conf
 ;listen = /run/php/php7.4-fpm.sock
 listen = 127.0.0.1:9000
 ```
-
-
 
 <br>
 
