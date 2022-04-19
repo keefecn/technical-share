@@ -19,7 +19,7 @@
 
 参见  《[操作系统实现原理.md](../../平台与编程语言/platform.平台/操作系统实现原理.md)》、《[linux内核源码剖析.md](./linux内核源码剖析.md)》
 
-Windows是主要的办公OS。
+Windows和Mac是主要的办公OS。
 
 CentOS和Ubuntu是主要的开发OS。
 
@@ -184,6 +184,31 @@ Windows8启动相关分区有三个:
 
 * 办公：参见 《[office办公软件高级教程.md](./office办公软件高级教程.md)》
 * 开发：参见  《[项目开发环境工具.md](./项目开发环境工具.md)》
+
+### 软件推荐
+
+表格  开源软件推荐 （源代码开放）
+
+| 工具                                                                                       | 功能简述                | 支持平台            | 功能详述                 |
+| ---------------------------------------------------------------------------------------- | ------------------- | --------------- | -------------------- |
+| [LibreOffice](https://zh-cn.libreoffice.org/)                                            | 办公软件，替换MS Office功能。 | Win, Linux, Mac |                      |
+| [DBeaven社区版](https://dbeaver.io/)                                                        | 数据库管理工具，替换navicat。  | Win, Linux, Mac |                      |
+| [Filezilla](https://www.filezilla.cn/)                                                   | 文件传输。               | Win, Linux, Mac |                      |
+| [FinalShell](http://www.hostbuf.com/c/131.html)                                          | 远程终端工具。             | Win, Linux, Mac |                      |
+| [Eclipse]([http://www.Eclipse.org/)                                                      | IDE                 | Win, Linux, Mac | 支持Java,python, c++等。 |
+| [VScode ]([Visual Studio Code - Code Editing. Redefined](https://code.visualstudio.com)) | IDE                 | Win, Linux, Mac | 支持Java,python, c++等。 |
+| 7-ZIP                                                                                    | 压缩                  | Win, Linux      |                      |
+| [frp](https://github.com/fatedier/frp/releases)                                          | 代理软件。               | Win, Linux      |                      |
+| docker                                                                                   |                     |                 |                      |
+
+表格 自由软件推荐 （软件免费使用，但不开放源码）
+
+| 工具                               | 功能简述    | 支持平台            | 功能详述      |
+| -------------------------------- | ------- | --------------- | --------- |
+| 钉钉                               | 协同办公软件。 | Win, Linux, Mac |           |
+| 微信                               | 协同办公软件。 | Win, Mac        |           |
+| [搜狗输入法](https://wubi.sogou.com/) | 输入法。    | Win, Linux, Mac | 支持五笔、拼音等。 |
+| 网易云笔记                            | 云笔记     | Win, Linux, Mac |           |
 
 ### U盘启动盘
 
@@ -890,6 +915,50 @@ Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统�
 | 2       | System 2              | 1985 |         | 增加了对 AppleTalk 网络协议的支持。                                   |
 | 1       | System 1              | 1984 |         | 引入了菜单栏，以及“桌面附件”应用程序，如计算器和闹钟。                              |
 
+## 快速使用指南
+
+表格 MacBook Pro常用快捷键 （一般大小写不敏感）
+
+| 快捷键                       | 功能                                      | 备注        |
+| ------------------------- | --------------------------------------- | --------- |
+| command + c               | 复制                                      |           |
+| command + v               | 粘贴                                      |           |
+| command + tab             | 程序切换                                    |           |
+| command + N               | 新建网页+新建智能文件夹                            |           |
+| command + Q               | 退出当前程序                                  |           |
+| command + M               | 将当前程序最小化至程序坞                            |           |
+| Command + F               | 查找文稿中的项目或打开“查找”窗口。                      |           |
+| command + T               | 打开新tab                                  |           |
+| control+command+F         | 全屏/退出全屏                                 |           |
+| control+command+空格 或者  fn | 表情符号                                    |           |
+| option+command+D          | 程序坞显示切换                                 |           |
+| Command + Shift + 4       | 截图                                      | +3全图，+4指定 |
+| command + <--             | 删除，相当于win里的delete键                      |           |
+| fn + 箭头                   | 翻页功能。类似win里的pagedown, pageup, home, end |           |
+
+**Mac使用特点**
+
+* 触控栏：Mac独有，相当于当前窗口程序的一些快捷功能。
+* 触控板：多点触控手势，比其它笔记本电脑更多的手势组合，如单指、二指、三指的单击、拖动等。
+  * 默认单击要用力长按，有点类似其它笔记本电脑的右键；双指移动相当于翻页。
+  * 可以在系统偏好里设置手势默认操作。
+* 特殊功能键：一般有5个分别是command, option, control, shift, fn, 中/英。其中mac独有键是command 和option。
+  * Command是Mac里最重要的修饰键，在大多数情况下相当于Windows下的Ctrl。如通用的复制、粘贴、撤销、全选、查找等。
+  * option类似windows的alt。
+  * fn 函数功能键，长按显示F1...F9，点按显示表情符号。
+  * 中/英键，如果使用自带拼音输入 法，那么 <u>长按</u>是大写，<u>点按 </u>切换输入法。如果安装了第三方输入法如搜狗五笔，那么输入法切换是ctrl+空格，此键类似win里的capsLock键。
+* 右键菜单：默认键盘按住【control】后单指按压触控板(听到按压声反馈)即可呼出右键菜单；双指同时按压触控板(听到按压声反馈)也可以呼出右键菜单。
+
+**常用设置**
+
+1. **允许安装任何来源软件**
+
+进入终端界面后,在里面我们输入以下代码: `sudo spctl --master-disable`。 
+
+2. 迁移助理
+   
+   路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。
+
 <br>
 
 ## mac工具
@@ -901,8 +970,10 @@ Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统�
 ## 本章参考
 
 * [确定您的 Mac 使用的是哪个 macOS 版本 - Apple 支持 (中国)](https://support.apple.com/zh-cn/HT201260)
+* mac手册 https://support.apple.com/zh-cn/guide/macbook-pro/welcome/mac
 * 苹果 MacOS 操作系统版本历史汇总  www.dayanzai.me/mac-operating-system-versions.html
 * Mac OS X和macOS版本的完整列表  https://www.imymac.com/zh-CN/mac-tips/mac-os-versions.html
+* 最全Mac系统快捷键一览 https://blog.csdn.net/xujingzhong0077/article/details/69939012
 
 <br>
 
@@ -1498,12 +1569,15 @@ $ crontab -l
 
 ## 服务缺省端口
 
-| 端口   | 服务         | 备注           |
-| ---- | ---------- | ------------ |
-| 22   | ftp        |              |
-| 80   | http       | nginx/apache |
-| 443  | ftp        | 安全ftp        |
-| 1521 | oracle     |              |
-| 5432 | postgresql |              |
-| 6379 | mysql      |              |
-| 8080 | tomcat     |              |
+| 端口   | 服务           | 备注                              |
+| ---- | ------------ | ------------------------------- |
+| 22   | ftp          |                                 |
+| 80   | http         | nginx/apache                    |
+| 443  | ftp          | 安全ftp                           |
+| 1521 | oracle       |                                 |
+| 2377 | docker swarm | 集群管理通信端口，只需要在管理节点开启             |
+| 4789 | docker swarm | overlay network 使用的端口           |
+| 5432 | postgresql   |                                 |
+| 6379 | mysql        |                                 |
+| 7496 | docker swarm | docker swarm节点间通信使用端口，包括tcp和udp |
+| 8080 | tomcat       |                                 |

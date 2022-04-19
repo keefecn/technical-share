@@ -689,7 +689,7 @@ Run a command in a new container
   --ipc=                     IPC namespace to use
   -l, --label=[]             Set meta data on a container
   --label-file=[]            Read in a line delimited file of labels
-  --link=[]                   Add link to another container #容器链接 <contain_name>:<alias>
+  --link=[]                  Add link to another container #容器链接 <contain_name>:<alias>
   --log-driver=              Logging driver for container
   --lxc-conf=[]              Add custom lxc options
   -m, --memory=              Memory limit
@@ -1429,30 +1429,21 @@ $ docker service update --force 3xrdy2c7pfm3
    
    ```shell
    # 查看服务报错信息
-   $ docker ps --no-trunc STACK_NAME
+   $ docker ps --no-trunc
    
    # 查看服务日志, -f 日志持续查看
    $ docker service logs -f SERVICE_NAME 
+   
+   # 若容器失败，查看对应失败容器的日志. docker ps -a 可以查看所有历史启动容器
+   $ docker logs -f <container_id>
+   
+   # 查看stack的启动状态
+   $ docker stack ps <stack-name>
    ```
 
 **docker stack集群部署**
 
-docker stack默认使用 swarm模式部署。
-
-```shell
-# 初化化 默认成为主节点，管理节点
-$ docker swarm init
-
-# 添加工作节点 Worker 1 (wrk-1)
-$ docker swarm join --token SWMTKN-1-2hl6...-...3lqg 172.31.40.192:2377
-This node joined a swarm as a worker. 
-
-# 查看节点
-$ docker node ls
-ID            HOSTNAME  STATUS    AVAILABILITY   MANAGER STATUS
-lhm...4nn *   mgr-1     Ready     Active         Leader
-b74...gz3     wrk-1     Ready     Active
-```
+docker stack默认使用 swarm模式部署。部署细节 详见下文章节。
 
 <br>
 
@@ -1727,6 +1718,107 @@ $ systemctl restart docker
 * 5 款顶级 Docker GUI 工具！免费又好用  https://mp.weixin.qq.com/s/rPPZmT2IiZ8QmzvHMhiibw
 
 <br>
+
+# 容器新技术
+
+### 容器 Podman
+
+官网 [Podman](https://podman.io/)
+
+Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。Podman 提供与 Docker 非常相似的功能。它不需要在你的系统上运行任何<u>守护进程</u>，并且它也可以在没有 root 权限的情况下运行。
+
+Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像。Podman 提供了一个与 Docker 兼容的命令行前端来管理 Docker 镜像。
+
+<br>
+
+# 容器编排
+
+编排Orchestration这一术语来源于音乐领域，根据作曲家的作品，编曲决定音乐作品的某一部分由某种乐器以某种方式在某个时机来演奏，这一过程称为编排。
+
+编排这一术语被借用到了IT领域，
+
+- Service Orchestration： 在SOA和微服务体系中，针对Service。
+
+- Cloud Orchestration：在Cloud 体系中，针对云资源描述。
+
+- 容器编排：负责容器的启停调度，并且通过管理容器集群来提升容器使用率。
+
+表格6 容器编排K8s/Mesos/Swarm比较
+
+|        | K8s                                                                                                        | Mesos                                                                        | Swarm                                                                                                              |
+| ------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| <br>简介 | 基于Google在过去十五年来大量生产环境中运行工作负载的经验。 高度通用，开源。                                                                  | 分布式调度系统内核。作为资源管理器的Apache Mesos在容器之前就已经出现很久了，支持运行容器化化和非容器化的工作负载。 适用于大型系统      | Docker开发的调度框架。 标准Docker API的使用。 易于集成和设置，灵活的API，有限的定制。                                                              |
+| 支撑厂商   | Google                                                                                                     | Mesosphere                                                                   | Docker                                                                                                             |
+| 核心概念   | APIServer Pod Label Service kubelet                                                                        | Master Slave Zookeeper Framework                                             |                                                                                                                    |
+| 特性     | 通过Pods这一抽象的概念，解决Container之间的依赖与通信问题。Pods, Services, Deployments是独立部署的部分，可以通过Selector提供更多的灵活性。内置服务注册表和负载平衡。 | 可以支持应用程序的健康检查，开放的架构。支持多个框架和多个调度器，通过不同的Framework可以运行Haddop/Spark/MPI等多种不同的任务。 | 由于随Docker引擎一起发布，无需额外安装，配置简单。支持服务注册、服务发现，内置Overlay Network以及Load Balancer。与Docker CLI非常类似的操作命令，对熟悉Docker的人非常容易上手学习。 |
+
+备注：2016年容器三家平分秋色；到2017年，K8s成为主流。
+
+### K8s
+
+详见 《[kubernetes用户手册.md](../tools.%E5%B7%A5%E5%85%B7/kubernetes%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.md)》
+
+### Mesos
+
+参见 《[大数据集群管理.md](../%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8EAI/bigdata/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86.md)》 Mesos章节
+
+### Docker Swarm
+
+Docker Swarm是一个由Docker开发的调度框架。由Docker自身开发的好处之一就是标准Docker API的使用，Swarm由多个代理（Agent）组成，把这些代理称之为节点（Node）。这些节点就是主机，这些主机在启动Docker Daemon的时候就会打开相应的端口，以此支持Docker远程API。这些机器会根据Swarm调度器分配给它们的任务，拉取和运行不同的镜像。
+
+图 Docker Swarm结构
+
+Swarm基本概念：
+
+- Manager：在整个集群中分配任务，集群中控制Worker的节点。
+- Worker：运行由Manager节点分配的任务.
+- Services：跨节点的执行特定接口的一组容器。.
+- Key-valuestore：内建的Key-Value存储解决方案，做服务发现、服务注册以及主节点选举工作。
+
+docker stack默认使用 swarm模式部署。
+
+```shell
+# 初化化 默认成为主节点，管理节点
+$ docker swarm init
+
+# 添加工作节点 Worker 1 (wrk-1)
+$ docker swarm join --token SWMTKN-1-2hl6...-...3lqg 172.31.40.192:2377
+This node joined a swarm as a worker. 
+
+# 添加管理节点
+$ docker swarm join-token manager
+To add a manager to this swarm, run the following command:
+    docker swarm join --token SWMTKN-1-106itx81w- 192.168.0.240:2377
+
+
+# 查看节点
+$ docker node ls
+ID            HOSTNAME  STATUS    AVAILABILITY   MANAGER STATUS
+lhm...4nn *   mgr-1     Ready     Active         Leader
+b74...gz3     wrk-1     Ready     Active
+```
+
+**监听端口**
+
+```shell
+firewall-cmd --zone=public -add-port=2377/tcp --permanent &&
+firewall-cmd --zone=public --add-port=7946/tcp --permanent &&
+firewall-cmd --zone=public --add-port=7946/udp --permanent &&
+firewall-cmd --zone=public --add-port=4789/udp --permanent &&
+firewall-cmd --reload
+```
+
+说明：2377 端口是集群管理通信端口，只需要在管理节点开启。7946 tcp,udp 是节点间通信使用端口，4789 是 overlay network 使用的端口。
+
+<br>
+
+### 本章参考
+
+* Swarm 集群管理 https://www.runoob.com/docker/docker-swarm.html
+
+* Docker Swarm 集群搭建  https://learnku.com/articles/37840
+
+<br><br>
 
 # FAQ
 
