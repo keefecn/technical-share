@@ -1428,17 +1428,17 @@ $ docker service update --force 3xrdy2c7pfm3
 2. 查看服务问题
    
    ```shell
-   # 查看服务报错信息
-   $ docker ps --no-trunc
-   
-   # 查看服务日志, -f 日志持续查看
+   # 服务有启动：查看某个服务的日志, -f 日志持续查看
    $ docker service logs -f SERVICE_NAME 
+   
+   # 查看容器报错信息
+   $ docker ps --no-trunc
    
    # 若容器失败，查看对应失败容器的日志. docker ps -a 可以查看所有历史启动容器
    $ docker logs -f <container_id>
    
-   # 查看stack的启动状态
-   $ docker stack ps <stack-name>
+   # 查看stack的启动状态, --no-trunc 查看服务详细报错 如yml加载错误的信息
+   $ docker stack ps <stack-name> --no-trunc
    ```
 
 **docker stack集群部署**

@@ -131,9 +131,9 @@
 
 **人工智能**（Artificial Intelligence或简称AI）有时也称作**机器智能**，是指由人工制造出来的系统所表现出来的智能。通常人工智能是指通过普通计算机实现的智能。该词同时也指研究这样的智能系统是否能够实现，以及如何实现的科学领域。
 
-**人工智能定义**：人工智能=人工(计算机)　＋　智能（特殊化程序）．从智能体角度来看，有两类智能，人类和计算机。
+**人工智能定义**：人工智能=人工（计算机）＋ 智能（特殊化程序）。从智能体角度来看，有两类智能，人类和计算机。
 
-人工智能的定义有以下四种方法： [4]
+人工智能的定义有以下四种方法： 
 
 * Action humanly: 图灵测试方法1950年提出
 * Thinking humanly:
@@ -144,7 +144,11 @@
 
 智能媒介又叫智能体，是指某种能够行动的东西．
 
-强智能和弱智能．强智能认为人是精密的计算机．（评：非常远大的梦想，但不是人类智能所能达到的）．弱智能关注的是提示人类和动物的形为所到达到的程度，智能机器被用作理解智能形为的手段．
+强智能和弱智能。
+
+* 强智能认为人是精密的计算机。（评：非常远大的梦想，但不是人类智能所能达到的）。
+
+* 弱智能关注的是提示人类和动物的形为所到达到的程度，智能机器被用作理解智能形为的手段。
 
 ### 1.1.1 各学科的贡献  （哲学…）
 
@@ -152,7 +156,7 @@
 
 Main article: [Philosophy of artificial intelligence](http://en.wikipedia.org/wiki/Philosophy_of_artificial_intelligence)
 
-Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousness](http://en.wikipedia.org/wiki/Consciousness)? A few of the most influential answers to these questions are given below.[[147\]](http://en.wikipedia.org/wiki/Artificial_intelligence#cite_note-146)
+Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousness](http://en.wikipedia.org/wiki/Consciousness)? A few of the most influential answers to these questions are given below.
 
 * [Turing's "polite convention"](http://en.wikipedia.org/wiki/Computing_Machinery_and_Intelligence)
 
@@ -211,20 +215,22 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 表格  AI发展历程表
 
-| 年代    | 事件                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 备注  |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| 1950  | 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |     |
-| 1953  | [博弈论](http://zh.wikipedia.org/wiki/博弈論)。<br>Metropolis提出 模拟退火算法SA 的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |     |
-| 1956  | 美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生。参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)． 约翰·麦卡锡首度提出「人工智能」这一概念，提出者约翰·麦卡锡也被誉为「人工智能之父」。                                                                                                                                                                                                                                                                                                                                    |     |
-| 1960s | 1960年产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)。<br>1963 年，「人工智能之父」约翰·麦卡锡创建了斯坦福人工智能实验室（SAIL，Stanford Ar[ti](http://www.elecfans.com/tags/ti/)ficial [Intel](http://www.elecfans.com/tags/intel/)ligence Laboratory）。该实验室拥有多个领域的专家，涉及机器人技术、计算机视觉、机器学习、图像处理、自然语言处理等多个领域，代表人物包括一大批在人工智能领域闻名遐迩的人物，如 Christopher Manning 、吴恩达、李飞飞等。。<br>1966 年，MIT 计算机科学家 Joseph Weizenbaum 开发出首个自然语言处理程序——ELIZA，它是一个模拟罗杰斯心理治疗的聊天机器人。<br>1967 年，斯坦福大学 E.A. Feigenbaum 领导开发出第一个「专家系统」——DENRAL， 使得人工智能的研究以推理算法为主转变为以知识为主。<br>1969 年，阿瑟·布莱森（Arthur Bryson）和何毓琦（Yu-Chi Ho）提出机器学习领域最重要的算法——反向传播算法（Backpropaga[TI](http://bbs.elecfans.com/zhuti_715_1.html)on）。这种算法可用于多层人工[神经网络](http://www.elecfans.com/tags/神经网络/)，2000 年至今[深度学习](http://www.elecfans.com/tags/深度学习/)的发展都离不开它的启发。 |     |
-| 1970s | 1973年，[生产系统](http://zh.wikipedia.org/wiki/生產系統)。1973年产生[PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)。<br>美国斯坦福国际研究所（Stanford Research Ins[TI](http://bbs.elecfans.com/zhuti_715_1.html)tu[te](http://www.elecfans.com/tags/te/)， SRI）研制出首台采用了人工智能学的移动机器人——Shakey。<br>1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。<br>1976年，[框架理论](http://zh.wikipedia.org/wiki/框架理論) <br>1979年，汉斯·摩拉维克（Hans Moravec）在斯坦福大学就读研究生时期发明的 Stanford Cart，在无人干预的情况下自动穿过摆满椅子的房间并前后行驶了 5 小时。Stanford Cart 相当于早期[无人驾驶](http://www.elecfans.com/tags/无人驾驶/)汽车。                                                                                                                                                            |     |
-| 1988  | IBM 沃森研究中心发表《机器翻译的统计方法》（A STA[TI](http://bbs.elecfans.com/zhuti_715_1.html)S[TI](http://bbs.elecfans.com/zhuti_715_1.html)CAL APPROACH TO LANGUAGE TRANSLATION），预示着基于规则的机器翻译方法开始转变为基于概率的方法，并反映了一个更为广泛的转变：从「理解」眼前的任务的「机器学习」方法转变为基于已知例子的统计分析方法。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |     |
-| 1990s | 1991年，蒂姆·伯纳斯－李（Tim Berne[rs](http://www.elecfans.com/tags/rs/)-Lee）发明的万维网首次上线。<br>1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。<br>1997 年，IBM 研发的「深蓝」（Deep Blue）成为第一个击败人类象棋冠军 Garry Kasparov 的电脑程序。<br>1998 年，斯坦福大学教授肯尼斯·萨里斯伯里（Kenneth Salisbury）公开外科机器人（robotic surgery）专利。                                                                                                                                                                                                                                                                                                                                                                                                    |     |
-| 2000s | 2005 年，斯坦福大学教授 Sebastian Thrun 联合斯坦福大学 AI 实验室发明的第一辆自动驾驶汽车完成了 132 英里的 Mojava 沙漠路线，在 DARPA 超级挑战赛（DARPA Grand Challenge）上一举夺冠。<br/>2009 年，李飞飞主导的 ImageNet 项目诞生了一个含有 1500 万张照片的数据库，涵盖了 22000 种物品。这个项目以及后来的一系列工作影响了整个计算机视觉领域发展。<br/>2010 年，苹果公司推出一款内建在苹果 iOS 系统中的人工智能助理软件 Siri。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |     |
-| 2010s | 2011 年，IBM 开发的自然语言问答计算机沃森在美国老牌益智节目「危险边缘」（Jeopardy！）中击败人类。<br/>2012 年，杰夫·迪恩（Jeff Dean）和吴恩达（Andrew Ng）发布一份实验报告，他们给一个大型神经网络展示 1000 万张未标记的网络图片，发现神经网络能够识别出猫的形象。<br/>2014 年，亚马逊推出了智能音箱 Echo 以及智能语音助手 Alexa。<br/>2016 年，谷歌 DeepMind 研发的 AlphaGo 击败围棋世界冠军李世石。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |     |
-| 2020s |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |     |
+| 年代    | 事件                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 备注  |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| 1950  | 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |     |
+| 1953  | [博弈论](http://zh.wikipedia.org/wiki/博弈論)。<br>Metropolis提出 模拟退火算法SA 的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |     |
+| 1956  | 美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生。参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)． 约翰·麦卡锡首度提出「人工智能」这一概念，提出者约翰·麦卡锡也被誉为「人工智能之父」。                                                                                                                                                                                                                   |     |
+| 1960s | 1960年产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)。<br>1963 年，「人工智能之父」约翰·麦卡锡创建了斯坦福人工智能实验室（SAIL，Stanford Artificial Intelligence Laboratory）。该实验室拥有多个领域的专家，涉及机器人技术、计算机视觉、机器学习、图像处理、自然语言处理等多个领域，代表人物包括一大批在人工智能领域闻名遐迩的人物，如 Christopher Manning 、吴恩达、李飞飞等。。<br>1966 年，MIT 计算机科学家 Joseph Weizenbaum 开发出首个自然语言处理程序——ELIZA，它是一个模拟罗杰斯心理治疗的聊天机器人。<br>1967 年，斯坦福大学 E.A. Feigenbaum 领导开发出第一个「专家系统」——DENRAL， 使得人工智能的研究以推理算法为主转变为以知识为主。<br>1969 年，阿瑟·布莱森（Arthur Bryson）和何毓琦（Yu-Chi Ho）提出机器学习领域最重要的算法——反向传播算法（[BackpropagaTIon](http://bbs.elecfans.com/zhuti_715_1.html)）。这种算法可用于多层人工神经网络，2000 年至今[深度学习](http://www.elecfans.com/tags/深度学习/)的发展都离不开它的启发。 |     |
+| 1970s | 1973年，[生产系统](http://zh.wikipedia.org/wiki/生產系統)。1973年产生[PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)。<br>美国斯坦福国际研究所（Stanford Research InsTItute， SRI）研制出首台采用了人工智能学的移动机器人——Shakey。<br>1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。<br>1976年，[框架理论](http://zh.wikipedia.org/wiki/框架理論) <br>1979年，汉斯·摩拉维克（Hans Moravec）在斯坦福大学就读研究生时期发明的 Stanford Cart，在无人干预的情况下自动穿过摆满椅子的房间并前后行驶了 5 小时。Stanford Cart 相当于早期[无人驾驶](http://www.elecfans.com/tags/无人驾驶/)汽车。                                                                                                                           |     |
+| 1988  | IBM 沃森研究中心发表《机器翻译的统计方法》（A  STATISTICAL APPROACH TO LANGUAGE TRANSLATION），预示着基于规则的机器翻译方法开始转变为基于概率的方法，并反映了一个更为广泛的转变：从「理解」眼前的任务的「机器学习」方法转变为基于已知例子的统计分析方法。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |     |
+| 1990s | 1991年，蒂姆·伯纳斯－李（Tim Berners-Lee）发明的万维网首次上线。<br>1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。<br>1997 年，IBM 研发的「深蓝」（Deep Blue）成为第一个击败人类象棋冠军 Garry Kasparov 的电脑程序。<br>1998 年，斯坦福大学教授肯尼斯·萨里斯伯里（Kenneth Salisbury）公开外科机器人（robotic surgery）专利。                                                                                                                                                                                                                                                                                                                       |     |
+| 2000s | 2005 年，斯坦福大学教授 Sebastian Thrun 联合斯坦福大学 AI 实验室发明的第一辆自动驾驶汽车完成了 132 英里的 Mojava 沙漠路线，在 DARPA 超级挑战赛（DARPA Grand Challenge）上一举夺冠。<br/>2009 年，李飞飞主导的 ImageNet 项目诞生了一个含有 1500 万张照片的数据库，涵盖了 22000 种物品。这个项目以及后来的一系列工作影响了整个计算机视觉领域发展。<br/>2010 年，苹果公司推出一款内建在苹果 iOS 系统中的人工智能助理软件 Siri。                                                                                                                                                                                                                                                                                                                                                                                |     |
+| 2010s | 2011 年，IBM 开发的自然语言问答计算机沃森在美国老牌益智节目「危险边缘」（Jeopardy！）中击败人类。<br/>2012 年，杰夫·迪恩（Jeff Dean）和吴恩达（Andrew Ng）发布一份实验报告，他们给一个大型神经网络展示 1000 万张未标记的网络图片，发现神经网络能够识别出猫的形象。<br/>2014 年，亚马逊推出了智能音箱 Echo 以及智能语音助手 Alexa。<br/>2016 年，谷歌 DeepMind 研发的 AlphaGo 击败围棋世界冠军李世石。                                                                                                                                                                                                                                                                                                                                                                                                    |     |
+| 2020s |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |     |
 
 > 备注：1990s表示1990-1999十年间，同理类推。
+> 
+> 智能发展阶段：数据智能（完成计算过程）、感知智能（模仿人类的五官感知）、认知智能。
 
 典型案例：MIT Eliza程序—聊天机器人，积木世界，中文屋等
 
@@ -285,11 +291,11 @@ AI多种学习方式
 
 他是AI研究的先驱者, 经济组织决策管理大师，于1978年获得诺贝尔经济学奖, 是因为他早年的工作: 基于满意度的模型-制定"足够好"的决策, 而不是艰苦计算获得最优化决策-能更好地描述真实人类行为.　CMU
 
-[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell) **(**亚伦.纽厄尔1927~1992**)**
+[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell) (**亚伦.纽厄尔1927~1992**)
 
 1975年与图灵奖获得者. CMU. 达特茅斯会议中与西蒙一起提出*物理符号系统假说*，为符号主义的经典理论．
 
-[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)(马文.明期基1927~)
+[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)  (马文.明期基1927~)
 
 1969年图灵奖获得者，创建麻省理工学院(MIT)人工智能实验室。1975年他首创框架理论(frame theory).
 
@@ -446,17 +452,17 @@ Home: http://www.cs.cmu.edu/~tom/
 
 **分类二：学术界UCLA朱松纯将AI分为六个领域，分别是：**
 
-（1）计算机视觉（暂且把模式识别，图像处理等问题归入其中）、
+（1）计算机视觉（暂且把模式识别，图像处理等问题归入其中）；
 
-（2）自然语言理解与交流（暂且把语音识别、合成归入其中，包括对话）、
+（2）自然语言理解与交流（暂且把语音识别、合成归入其中，包括对话）；
 
-（3）认知与推理（包含各种物理和社会常识）、
+（3）认知与推理（包含各种物理和社会常识）；
 
-（4）机器人学（机械、控制、设计、运动规划、任务规划等）、
+（4）机器人学（机械、控制、设计、运动规划、任务规划等）；
 
-（5）博弈与伦理（多代理人agents的交互、对抗与合作，机器人与社会融合等议题）、
+（5）博弈与伦理（多代理人agents的交互、对抗与合作，机器人与社会融合等议题）；
 
-（6）机器学习（各种统计的建模、分析工具和计算的方法），
+（6）机器学习（各种统计的建模、分析工具和计算的方法）。
 
 分类三：工业界按应用场景将AI分为
 
@@ -476,13 +482,13 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### 模式识别
 
-模式识别（英语：Pattern Recognition），就是通过[计算机](https://baike.baidu.com/item/计算机)用[数学](https://baike.baidu.com/item/数学)技术方法来研究模式的自动处理和判读。我们把[环境](https://baike.baidu.com/item/环境)与[客体](https://baike.baidu.com/item/客体)统称为“模式”。
+模式识别（英语：Pattern Recognition），就是通过计算机用数学技术方法来研究模式的自动处理和判读。我们把环境与[客体](https://baike.baidu.com/item/客体)统称为“模式”。
 
-信息处理过程的一个重要形式是生命体对环境及客体的识别。对人类来说，特别重要的是对[光学](https://baike.baidu.com/item/光学)信息（通过[视觉](https://baike.baidu.com/item/视觉)器官来获得）和[声学](https://baike.baidu.com/item/声学)信息（通过听觉器官来获得）的识别。这是模式识别的两个重要方面。市场上可见到的代表性产品有[光学字符识别](https://baike.baidu.com/item/光学字符识别)、[语音识别](https://baike.baidu.com/item/语音识别)系统。
+信息处理过程的一个重要形式是生命体对环境及客体的识别。对人类来说，特别重要的是对光学信息（通过视觉器官来获得）和声学信息（通过听觉器官来获得）的识别。这是模式识别的两个重要方面。市场上可见到的代表性产品有[光学字符识别](https://baike.baidu.com/item/光学字符识别)、[语音识别](https://baike.baidu.com/item/语音识别)系统。
 
 **研究领域**
 
-模式识别研究主要集中在两方面，一是研究生物体(包括人)是如何感知对象的，属于认识科学的范畴，二是在给定的任务下，如何用计算机实现模式识别的理论和方法。前者是生理学家、心理学家、[生物学](https://baike.baidu.com/item/生物学)家和神经生理学家的研究内容，后者通过数学家、信息学专家和[计算机科学](https://baike.baidu.com/item/计算机科学)工作者近几十年来的努力，已经取得了系统的研究成果。
+模式识别研究主要集中在两方面，一是研究生物体(包括人)是如何感知对象的，属于认识科学的范畴，二是在给定的任务下，如何用计算机实现模式识别的理论和方法。前者是生理学家、心理学家、生物学家和神经生理学家的研究内容，后者通过数学家、信息学专家和计算机科学工作者近几十年来的努力，已经取得了系统的研究成果。
 
 **应用**
 
@@ -667,11 +673,11 @@ AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能�
 
 信息抽取是一种自动化地从半结构化和无结构数据中抽取实体、关系以及实体属性等结构化信息的技术。涉及的关键技术包括：实体抽取、关系抽取和属性抽取。
 
-**实体抽取(命名实体识别NER) **
+**实体抽取(命名实体识别NER)**
  监督学习和规则相结合的办法：Lin等人采用字典辅助下的最大熵算法，在基于Medline论文摘要的GENIA数据集上取得了实体抽取准确率和召回率均超过70%的实验结果。
 
 **关系抽取**
- 2007年，华盛顿大学图灵中心的Banko等人[1](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:1)提出了面向开放域的信息抽取方法框架(open information extraction, OIE)，并发布了基于自监督(self-supervised)学习方式的开放信息抽取原型系统(TextRunner)。该系统采用少量人工标记数据作为训练集，据此得到一个实体关系分类模型，再依据该模型对开放数据进行分类，依据分类结果训练朴素贝叶斯模型来识别“实体－关系－实体”三元组，经过大规模真实数据测试，取得了显著优于同时期其他方法的结果。
+ 2007年，华盛顿大学图灵中心的Banko等人[$1](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:1)$提出了面向开放域的信息抽取方法框架(open information extraction, OIE)，并发布了基于自监督(self-supervised)学习方式的开放信息抽取原型系统(TextRunner)。该系统采用少量人工标记数据作为训练集，据此得到一个实体关系分类模型，再依据该模型对开放数据进行分类，依据分类结果训练朴素贝叶斯模型来识别“实体－关系－实体”三元组，经过大规模真实数据测试，取得了显著优于同时期其他方法的结果。
 
 实体关系的抽取包含隐藏关系抽取和确定关系抽取。使用方法如SVM。
 
@@ -707,12 +713,10 @@ AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能�
 
 **本体构建**
 
-**知识推理
-** 从知识库中已有的实体关系数据出发，经过计算机推理，建立实体间的新关联，从而拓展和丰富知识网络。
+**知识推理** 从知识库中已有的实体关系数据出发，经过计算机推理，建立实体间的新关联，从而拓展和丰富知识网络。
  知识推理的方法分为：基于逻辑的推理和基于图的推理，前者主要包括一阶谓词逻辑、描述逻辑以及基于规则的推理，后者主要基于神经网络模型或Path Ranking算法，比如Socher等人[8](https://blog.csdn.net/qq_34435926/article/details/79926633#fn:8)将知识库的实体表达为词向量的形式，进而采用神经张量网络模型(neural tensor networks)进行关系推理，在WordNet和FreeBase等开放本体库上对未知关系进行推理的准确率分别达到86.2%和90.0%。
 
-**质量评估
-** 对知识的可信度进行量化，通过舍弃置信度较低的知识，可以保障知识库的质量。
+**质量评估** 对知识的可信度进行量化，通过舍弃置信度较低的知识，可以保障知识库的质量。
 
 ### 2.2.4 知识更新
 
@@ -854,7 +858,7 @@ AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能�
 
 **标签的生产**
 
-主题模型，最开始运用于内容领域，目的是找到用户的偏好，它将内容划分为了3个层级：**分类、主题、关键词。**在用户标签中我们可以参照分类算法将用户进行分类、聚类，使用关键词的算法挖掘用户的偏好，从而生产标签。
+主题模型，最开始运用于内容领域，目的是找到用户的偏好，它将内容划分为了3个层级：**分类、主题、关键词**。在用户标签中我们可以参照分类算法将用户进行分类、聚类，使用关键词的算法挖掘用户的偏好，从而生产标签。
 
 | 内容层次 | 主要算法      | 说明                |
 | ---- | --------- | ----------------- |
@@ -900,6 +904,73 @@ $$
 ## 本章参考
 
 <br>
+
+# 5 OCR
+
+示例项目：https://github.com/Vincent131499/Chinese-OCR3
+
+光学字符识别（Optical Character Recognition，OCR）一般包括文本检测（主要用于定位文本的位置）和文本识别（主要用于识别文本的具体内容）两个步骤。
+
+OCR处理过程包括图像预处理、文本检测、文本识别等步骤。
+
+* 图像预处理包括图像二值化处理、图像去噪、倾斜角检测矫正。
+
+* 文本检测：获取到文字区域的位置 
+
+* 文本识别：借助各类算法转译文字区域的内容。
+
+表格  图像预处理主要算法
+
+| 类别      | 方法       | 算法                                           | 原理&说明        |
+| ------- | -------- | -------------------------------------------- | ------------ |
+| 二值化     | 全局阈值     | 固定阈值                                         |              |
+|         |          | OSTU                                         | 最大类间方差法      |
+|         | 局部阈值     | 自适应阈值                                        | 用到积分图        |
+|         |          | Niblack                                      | 根据窗口内的像素值来计算 |
+|         |          | Sauvola                                      |              |
+|         | 基于深度学习   |                                              |              |
+|         | 基于形态学和阈值 |                                              |              |
+| 图像去噪    | 空间滤波     | 线性、非线性                                       |              |
+|         | 小波阈值去噪   |                                              |              |
+|         | 非局部方法    | NL-means                                     |              |
+|         |          | [BM3D](https://github.com/ericmjonas/pybm3d) | 效果最好的算法之一    |
+|         | 基于神经网络   |                                              |              |
+| 倾斜角检测矫正 | 霍夫变换     |                                              |              |
+|         | RANDOM变换 |                                              |              |
+|         | 基于PCA    |                                              |              |
+
+
+
+表格 文本检测主要算法
+
+| 方法     | 算法     | 原理&说明                |
+| ------ | ------ | -------------------- |
+| 传统方法   | 基于连通域  | 通过提取图像中的连通域获得文本侯选区域。 |
+|        | 基于滑动窗口 |                      |
+| 基于深度学习 | 基于回归   |                      |
+|        | 基于图像分割 |                      |
+
+
+
+表格 文本识别主要算法 (基于深度学习)
+
+| 模型   | 算法                                | 原理&说明                                                                                |
+| ---- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| CRNN |                                   |                                                                                      |
+| RARE |                                   | 在识别变形的图像文本时效果很好。网络流程如下图所示，针对输入图像，模型首先对其进行空间变换网络处理达到矫正的目的，随后将矫正过的图像送入序列识别网络中得到文本预测结果。 |
+| 端到端  | FOTS(Fast Oriented Text Spotting) | 图像文本检测与识别同步训练、端到端可学习的网络模型。                                                           |
+|      | STN-OCR                           |                                                                                      |
+
+针对场景文字识别（Scene Text Recognition，STR）逐渐形成两种主流方法：一种是基于CTC的方法，典型代表是CRNN，即CRNN-OCR；另一种是基于Attention的方法，即Attention-OCR。其实这两类方法主要区别在于最后的输出层，即如何将网络学习到的序列特征信息转化为最终的识别结果。这两类方法在特征学习阶段都采用了CNN+RNN的网络结构，而CRNN-OCR在对齐时采用的是CTC算法，而Attention-OCR采用的是attention机制。
+
+<br>
+
+## 本章参考
+
+* OCR深度实践系列  https://mp.weixin.qq.com/s?__biz=MzI5MjYzNzAyMw==&mid=2247484153&idx=1&sn=b65e9e99047ae20ed44cd99e4b0ff2e0&chksm=ec7f12c9db089bdf84281eaa54dad96679fa15b4c915d739597a57885625bc9a1fef15b8b52e&scene=21#wechat_redirect
+* 逸轩：OCR深度实践系列-文本识别 http://47.99.39.229:8000/article-detials/12
+
+<br><br>
 
 # AI实例
 
