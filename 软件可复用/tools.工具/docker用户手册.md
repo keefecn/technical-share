@@ -1,8 +1,10 @@
-| 序号  | 修改时间       | 修改内容                | 修改人   | 审稿人 |
-| --- | ---------- | ------------------- | ----- | --- |
-| 1   | 2019-12-24 | 创建。从《CNCF原生框架分析》拆分。 | Keefe |     |
-| 2   | 2020-1-11  | 更新容器使用经验。           | 同上    |     |
-| 3   | 2021-8-13  | 增加 harbor章节         | 同上    |     |
+| 序号  | 修改时间       | 修改内容                              | 修改人   | 审稿人 |
+| --- | ---------- | --------------------------------- | ----- | --- |
+| 1   | 2019-12-24 | 创建。从《CNCF原生框架分析》拆分。               | Keefe |     |
+| 2   | 2020-1-11  | 更新容器使用经验。                         | 同上    |     |
+| 3   | 2021-8-13  | 增加 harbor章节                       | 同上    |     |
+| 4   | 2022-4-1   | 增加docker stack章节；更新docker swarm章节 | 同上    |     |
+| 5   | 2022-4-26  | 增加nvidia-docker章节                 | 同上    |     |
 
 <br><br><br>
 
@@ -184,10 +186,10 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 # 法1：自动检测平台，下载相应最新版本
 $ wget -qO- https://get.docker.com/ | sh
 
-# 法2：手动替换源仓库URL，并安装
-sudo yum install docker-ce docker-ce-cli containerd.io
+# 法2：手动替换源仓库URL，并安装 (下面示例是centos环境)
+$ sudo yum install docker-ce docker-ce-cli containerd.io
 # 安装后，启动docker后台服务 
-sudo service docker start 
+$ sudo service docker start 
 
 # 安装 docker-compose
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
@@ -242,6 +244,68 @@ Docker for Windows requires Windows 10 Pro or Enterprise version 14393, or Windo
 **win 10+**
 
 Docker for Windows is a desktop application based on [Docker Community Edition (CE)](https://www.docker.com/community-edition). The Docker for Windows install package includes everything you need to run Docker on a Windows system.
+
+## mac安装
+
+```shell
+# 此处安装为 docker desktop，缺省使用k8s编排 
+# 安装后，docker路径在/Application/Docker.app
+$ brew install --cask docker
+
+# 启动
+$ open /Application/Docker.app
+$ docker ps
+```
+
+## nvidia-docker2安装
+
+[nvidia-官网](https://www.nvidia.cn/Download/index.aspx?lang=cn)
+
+GPU环境需要安装nvidia驱动，安装docker、nvidia-docker2。
+
+1. 安装显卡驱动
+   
+   ```shell
+   # 查找获取能直接安装的软件
+   $ yum search nvidia
+   
+   # 若未找到nvindia可用软件，则装添加仓库源
+   # 先导入公共密钥
+   $ sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 
+   # 导入仓库源，以centos7为例，其它版本详见 http://elrepo.org/tiki/HomePage
+   $ sudo yum install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+   
+   # 若lsmod存在nouveau（系统缺省使用的显卡驱动）, 则禁用nouveau
+   $ lsmod | grep nouveau
+   $ vi /etc/modprobe.d/blacklist-nouveau.conf 
+   blacklist nouveau
+   options nouveau modeset=0
+   # 重启内核
+   $ sudo dracut --force
+   
+   # 1.安装 nvidia-driver
+   # centos为例, xxx为gpu Kernel Module版本，如495
+   $ sudo yum install nvidia-xxx    
+   $ sudo yum install nvidia-container-runtime
+   
+   # 安装完，执行nivdia-smi，测试驱动是否安装成功。若nvidia-smi命令有报错提示，则重启机器reboot
+   $ nvidia-smi
+   ```
+
+2. 安装容器docker, nvidia-docker2
+
+```shell
+# 安装容器, nvidia-docker2 依赖于docker
+# 1)配置仓库源docker-ce
+$ wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
+$ sudo yum makecache
+$ sudo yum install docker-ce
+
+# 2)配置仓库源 nvidia-docker2
+$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+$ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.repo | sudo tee /etc/yum.repos.d/nvidia-docker.repo
+$ sudo yum install nvidia-docker2
+```
 
 <br>
 
@@ -1499,33 +1563,33 @@ docker system prune
 
 表格 3 常用基础镜像 （不改源码，只作最基础服务的镜像）
 
-| images     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 状态  | 访问URL           |
-| ---------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --- | --------------- |
-| nginx      |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                         | ok  | http://IP:8081/ |
-| tomcat     |        |                    |                                                                                           |     |                 |
-| mysql      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | ok  | mysql://xx:3306 |
-| redis      | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   | ok  |                 |
-| python:3.5 |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                            | ok  |                 |
-| ubuntu     | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |     |                 |
-| tensorflow | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |     |                 |
+| images     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 访问URL           |
+| ---------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --------------- |
+| nginx      |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                         | http://IP:8081/ |
+| tomcat     |        |                    |                                                                                           |                 |
+| mysql      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306 |
+| redis      | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   |                 |
+| python:3.5 |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                            |                 |
+| ubuntu     | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |                 |
+| tensorflow | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |                 |
 
 表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
 
-| images                | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                | 状态  | 访问URL           |
-| --------------------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- | --- | --------------- |
-| jenkis                |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                               | ok  | http://IP:8080/ |
-| elasticsearch         |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |     |                 |
-| amancevice/superset   | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | ok  | http://IP:8088/ |
-| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          |     | 同上              |
-| wordpress +mysql      |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                             |     | http://IP/      |
-| apache/drill          | 936MB  |               |                                                                                                                           |     |                 |
+| images                | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                | 访问URL           |
+| --------------------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| jenkis                |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                               | http://IP:8080/ |
+| elasticsearch         |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |                 |
+| amancevice/superset   | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | http://IP:8088/ |
+| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          | 同上              |
+| wordpress +mysql      |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                             | http://IP/      |
+| apache/drill          | 936MB  |               |                                                                                                                           |                 |
 
 表格 其它镜像 （基础和服务型镜像之外的）
 
-| images      | 镜像大小   | 实例描述      | 实例启动命令 run             | 状态  | 访问URL |
-| ----------- | ------ | --------- | ---------------------- | --- | ----- |
-| hello-world | 13.3KB | 运行：打印帮助文档 | docker run hello-world | ok  |       |
-|             |        |           |                        |     |       |
+| images          | 镜像大小   | 实例描述       | 实例启动命令 run                                    | 访问URL |
+| --------------- | ------ | ---------- | --------------------------------------------- | ----- |
+| hello-world     | 13.3KB | 运行：打印帮助文档  | docker run hello-world                        |       |
+| getting-started | 27.4MB | docker帮助文档 | docker run -d -p 80:80 docker/getting-started |       |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 

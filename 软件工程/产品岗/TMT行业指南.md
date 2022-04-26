@@ -770,6 +770,8 @@
 
 ![img](../../media/domain/tmt_004.png)
 
+<br/>
+
 ### 通信
 
 ![img](../../media/domain/tmt_005.png)
@@ -1042,6 +1044,8 @@ Sun: (1982--2009) 2009年被Oracle收购。
 http://it.icxo.com/specialreport/ITIndex/apple.html
 
 [史蒂夫乔布斯](http://baike.baidu.com/view/90660.htm)（Steve Paul Jobs）1955~2011
+
+Apple通过五款产品影响世界，分别是iPhone、iPad、Mac、AppleWatch和AppleTV。
 
 表格 44  苹果发展史表
 

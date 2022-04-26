@@ -294,7 +294,7 @@ typedef struct LexIconNode{
 - 全模式，把句子中所有的可以成词的词语都扫描出来, 速度非常快，但是不能解决歧义；
 - 搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适合用于搜索引擎分词。
 
-**在线演示：**http://jiebademo.ap01.aws.af.cm/
+**在线演示**  http://jiebademo.ap01.aws.af.cm/
 
 **网站代码**：https://github.com/fxsjy/jiebademo
 

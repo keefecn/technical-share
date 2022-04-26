@@ -2,6 +2,7 @@
 | --- | ---------- | -------------- | ----- | --- |
 | 1   | 2021-12-20 | 创建。            | Keefe |     |
 | 2   | 2022-1-25  | 更新Linux安装软件章节。 | 同上    |     |
+| 3   | 2022-4-20  | 更新macOS章节      | 同上    |     |
 
 <br>
 
@@ -189,28 +190,37 @@ Windows8启动相关分区有三个:
 
 表格  开源软件推荐 （源代码开放）
 
-| 工具                                                                                       | 功能简述                | 支持平台            | 功能详述                 |
-| ---------------------------------------------------------------------------------------- | ------------------- | --------------- | -------------------- |
-| [LibreOffice](https://zh-cn.libreoffice.org/)                                            | 办公软件，替换MS Office功能。 | Win, Linux, Mac |                      |
-| [WPS Office](https://www.wps.cn/)                                                        | 同上                  | Win, Linux, Mac |                      |
-| [DBeaven社区版](https://dbeaver.io/)                                                        | 数据库管理工具，替换navicat。  | Win, Linux, Mac |                      |
-| [Filezilla](https://www.filezilla.cn/)                                                   | 文件传输。               | Win, Linux, Mac |                      |
-| [FinalShell](http://www.hostbuf.com/c/131.html)                                          | 远程终端工具。             | Win, Linux, Mac |                      |
-| [Eclipse]([http://www.Eclipse.org/)                                                      | IDE                 | Win, Linux, Mac | 支持Java,python, c++等。 |
-| [VScode ]([Visual Studio Code - Code Editing. Redefined](https://code.visualstudio.com)) | IDE                 | Win, Linux, Mac | 支持Java,python, c++等。 |
-| 7-ZIP                                                                                    | 压缩                  | Win, Linux      |                      |
-| [frp](https://github.com/fatedier/frp/releases)                                          | 代理软件。               | Win, Linux      |                      |
-| docker                                                                                   |                     |                 |                      |
+| 工具                                                                                       | 功能简述                                                      | 支持平台                        | 功能详述                                                             |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------- | ---------------------------------------------------------------- |
+| [LibreOffice](https://zh-cn.libreoffice.org/)                                            | 办公软件，替换MS Office功能。                                       | Win, Linux, Mac             |                                                                  |
+| [DBeaven社区版](https://dbeaver.io/)                                                        | 数据库管理工具，替换navicat。                                        | Win, Linux, Mac             | 跨平台 SQL 客户端，支持大部分主流数据库                                           |
+| [Filezilla](https://www.filezilla.cn/)                                                   | 文件传输。                                                     | Win, Linux, Mac             |                                                                  |
+| [FinalShell](http://www.hostbuf.com/c/131.html)                                          | 远程终端工具，替换secureCRT。                                       | Win, Linux, Mac             |                                                                  |
+| [Eclipse]([http://www.Eclipse.org/)                                                      | IDE                                                       | Win, Linux, Mac             | 支持Java,python, c++等。                                             |
+| [VScode ]([Visual Studio Code - Code Editing. Redefined](https://code.visualstudio.com)) | IDE                                                       | Win, Linux, Mac             | 支持JS, Java,python, c++等。                                         |
+| [DiffMerge](http://sourcegear.com/diffmerge/downloads.php)                               | 文件比对，替换[Beyond Compare](https://www.scootersoftware.com/) | Win, Linux, Mac             | 对比两个文件夹或者文件，并将差异以颜色标示。                                           |
+| [marktext](https://github.com/marktext/marktext/releases)                                | markdown编辑器，替换typora。                                     | Win, Linux, Mac             | 可见可编辑，有目录。                                                       |
+| [docker-ce](https://www.docker.com/)                                                     | 容器                                                        | Win, Linux, Mac             | windows要win10+版本。win, mac环境有docker desktop。                      |
+| [Google Chrome](https://www.google.cn/chrome/)                                           | 浏览器                                                       | Win, Linux, Mac             |                                                                  |
+| [frp](https://github.com/fatedier/frp/releases)                                          | 代理软件                                                      | Win, Linux, freebsd, darwin |                                                                  |
+| [VLC](http://www.videolan.org/vlc/)                                                      | 多媒体播放器                                                    | Win, Linux, Mac             | VLC 是一款自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件，以及 DVD、音频 CD、VCD 及各类流媒体协议。 |
+
+<br>
 
 表格 自由软件推荐 （软件免费使用，但不开放源码）
 
-| 工具                                              | 功能简述    | 支持平台            | 功能详述             |
-| ----------------------------------------------- | ------- | --------------- | ---------------- |
-| 钉钉                                              | 协同办公软件。 | Win, Linux, Mac |                  |
-| 微信                                              | 协同办公软件。 | Win, Mac        | liunx环境需用wine模拟。 |
-| [搜狗输入法](https://wubi.sogou.com/)                | 输入法。    | Win, Linux, Mac | 支持五笔、拼音等。        |
-| 网易云笔记                                           | 云笔记     | Win, Linux, Mac |                  |
-| [Googlel Chrome](https://www.google.cn/chrome/) | 浏览器     | Win, Linux, Mac |                  |
+| 工具                                             | 功能简述    | 支持平台                                 | 功能详述             |
+| ---------------------------------------------- | ------- | ------------------------------------ | ---------------- |
+| [WPS Office](https://www.wps.cn/)              | 办公软件    | Win, Linux, Mac, Android             |                  |
+| [微信](https://weixin.qq.com)                    | 协同办公软件。 | Win, Mac                             | liunx环境需用wine模拟。 |
+| [钉钉](https://www.dingtalk.com/)                | 协同办公软件。 | Win, Linux, Mac, <br>Android, iPhone |                  |
+| [搜狗输入法](https://wubi.sogou.com/)               | 输入法     | Win, Linux, Mac                      | 支持五笔、拼音等。        |
+| [有道云笔记](https://note.youdao.com/download.html) | 云笔记     | Win, Linux, Mac                      |                  |
+| [postman](https://www.postman.com)             | API测试   | Win, Linux, Mac                      | 支持网络存储数据         |
+| [腾讯会议](https://meeting.tencent.com/)           | 视频会议    | Win, Linux, Mac                      |                  |
+| [向日葵](https://sunlogin.oray.com/download/)     | 远程控制    | Win, Linux, Mac, Android             |                  |
+| [网易云音乐](https://music.163.com/)                | 云音乐     | Win, Linux, Mac                      |                  |
+|                                                |         |                                      |                  |
 
 ### U盘启动盘
 
@@ -349,7 +359,7 @@ wine可以在linux环境模块windows软件的运行环境。
 $ sudo apt-get install wine
 $ sudo apt-get install winetricks
 
-# 2。deep wine安装
+# 2.deep wine安装
 # 下载脚本安装
 $ wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
 # 或者源码安装
@@ -877,49 +887,13 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 
 # 4 macOS
 
-macOS是一套由苹果开发的运行于[Macintosh](https://baike.baidu.com/item/Macintosh/8310244)系列电脑上的操作系统。macOS是首个在商用领域成功的图形用户界面操作系统。
-
-macOS是基于XNU[混合内核](https://baike.baidu.com/item/混合内核/4239577)的图形化操作系统，一般情况下在普通PC上无法安装的操作系统。
-
-Apple I，Apple 的第一台计算机，实际上并没有操作系统。 它可以将程序保存到盒式磁带中，但 Apple II 拥有可以在软盘上组织、读取和写入的内部磁盘操作系统。
-
-Macintosh 计算机于 1984 年发布，其操作系统称为 Macintosh 系统软件或系统 1。
-
-表格  Mac操作系统完整列表
-
-| macOS序号 | macOS名称               | 发布时间 | 最新版本    | 特性                                                        |
-| ------- |:--------------------- | ---- |:------- | --------------------------------------------------------- |
-| 12      | macOS Monterey        | 2021 | 12.1    | 包含大量新功能，例如 SharePlay 和 Universal Control，并将快捷方式引入 Mac。    |
-| 11      | macOS Big Sur         | 2020 | 11.6.2  | 停止对 32 位应用程序的支持                                           |
-| 10.15   | macOS Catalina        | 2019 | 10.15.7 |                                                           |
-| 10.14   | macOS Mojave          | 2018 | 10.14.6 |                                                           |
-| 10.13   | macOS High Sierra     | 2017 | 10.13.6 |                                                           |
-| 10.12   | macOS Sierra          | 2016 | 10.12.6 | Mac OS X 正式更名为 macOS。                                     |
-| 10.11   | OS X El Capitan       | 2015 | 10.11.6 |                                                           |
-| 10.10   | OS X Yosemite         | 2014 | 10.10.5 |                                                           |
-| 10.9    | OS X Mavericks        | 2013 | 10.9.5  |                                                           |
-| 10.8    | OS X Mountain Lion    | 2012 | 10.8.5  | 添加游戏中心和通知中心以及提醒、便笺和消息应用程序。                                |
-| 10.7    | OS X Lion             | 2011 | 10.7.5  | 可以使用更多多点触控手势                                              |
-| 10.6    | Mac OS X Snow Leopard | 2009 | 10.6.8  |                                                           |
-| 10.5    | Mac OS X Leopard      | 2007 | 10.5.8  |                                                           |
-| 10.4    | Mac OS X Tiger        | 2005 | 10.4.11 |                                                           |
-| 10.3    | Mac OS X Panther      | 2003 | 10.3.9  | Panther 添加到 Safari 和 FileVault 中，允许更快的用户切换，并包含 Finder 更新。 |
-| 10.2    | Mac OS X Jaguar       | 2002 | 10.2.8  | 更好的性能和更好的合成图形，允许 iChat 和地址簿在 Mac 上运行。                     |
-| 10.1    | Mac OS X Puma         | 2001 | 10.1.5  | 苹果宣布 Mac OS X 将成为其电脑的默认操作系统。                              |
-| 10.0    | Mac OS X Cheetah      | 2001 | 10.0.4  | 更名为Mac OS X。                                              |
-| 9       | Mac OS 9              |      |         | 改进了无线网络支持，并引入了远程网络、动态文件加密和早期版本的多用户支持。                     |
-| 8       | Mac OS 8              |      |         | 更名为Mac OS。添加了 HFS+ 和至少在后台克隆文件的能力。                         |
-| 7       | System 7              | 1991 |         | 具有虚拟内存支持、内置协作多任务处理和添加的别名。<br>它还添加了新的应用程序，并大大改变了用户界面。      |
-| 6       | System 6              | 1988 |         |                                                           |
-| 5       | System 5              | 1987 |         | 允许 Mac 用户一次运行多个应用程序                                       |
-| 4       | System 4              | 1987 |         | 允许 Macintosh 计算机与更多外部设备一起工作。                              |
-| 3       | System 3              | 1986 |         |                                                           |
-| 2       | System 2              | 1985 |         | 增加了对 AppleTalk 网络协议的支持。                                   |
-| 1       | System 1              | 1984 |         | 引入了菜单栏，以及“桌面附件”应用程序，如计算器和闹钟。                              |
+macOS是一套由苹果开发的运行于Macintosh系列电脑上的操作系统。macOS是首个在商用领域成功的图形用户界面操作系统。
 
 ## 快速使用指南
 
 Mac的易用性在操作系统里属于最好的。终端功能类似linux的命令行，桌面操作类似windows。文件目录组织形式类似linux。
+
+
 
 表格 MacBook Pro常用快捷键 （一般大小写不敏感）
 
@@ -936,6 +910,8 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 | command + T         | 打开新tab                                  | 常用在浏览器、终端 |
 | control+command+F   | 全屏/退出全屏                                 |           |
 | option+command+D    | 程序坞显示切换                                 |           |
+| option+command+esc  | 打开强制退出的窗口                               |           |
+| option+command+W    | 快速关闭当前应用程序的所有窗口                         |           |
 | fn + F11            | 显示桌面                                    |           |
 | control+command+空格  | 表情符号                                    |           |
 | command + Shift + 4 | 截图                                      | +3全图，+4指定 |
@@ -955,6 +931,7 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
   * fn 函数功能键，长按显示F1 F2...F12，点按显示表情符号。F11显示桌面
   * 中/英键，如果使用自带拼音输入 法，那么 <u>长按</u>是大写，<u>点按 </u>切换输入法。如果安装了第三方输入法如搜狗五笔，那么输入法切换是ctrl+空格，此键类似win里的capsLock键。
 * 右键菜单：默认键盘按住【control】后单指按压触控板(听到按压声反馈)即可呼出右键菜单；双指同时按压触控板(听到按压声反馈)也可以呼出右键菜单。
+* 重启恢复：关机重启后会快速恢复上次启动的进程和状态，类似睡眠效果。
 
 **常用设置**
 
@@ -962,9 +939,21 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 
 进入终端界面后,在里面我们输入以下代码: `sudo spctl --master-disable`。 
 
-2. 迁移助理
+2. 在Finder的当前目录打开终端
    
-   路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。
+   Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置的终端窗口
+   
+   若菜单服务中无上述选项，可进入 系统偏好设置->键盘->快捷键->服务，在右边新建位于文件夹位置的终端窗口上打勾。
+
+3. 迁移助理
+   
+   路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。如果传输内容太大（超过2G）且小文件多，建议用U盘，用迁移助理太慢。
+
+4. 新建文件：跟windows当前目录下右键或快捷键新建文件方式不同，mac新建文件的操作非常不人性化。
+   
+   法1：终端进入指定目录用命令生成文件，`touch 文件名` 
+   
+   法2：安装访达扩展工具，右键新建文件（未验证）。
 
 <br>
 
@@ -974,6 +963,32 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 
 * mac工具大全 https://github.com/jaywcjlove/awesome-mac/blob/master/README-zh.md
 
+**软件安装**
+
+mac环境可用brew安装软件。dmg或pkg格式双击安装包，然后拖到applications文件夹下即可。可执行包名以.app结尾。
+
+- Homebrew 可以非常方便的安装命令行程序，`brew install xxx`。
+- Homebrew Cask 则可以优雅、简单、快速的安装和管理 macOS 图形界面(GUI)程序(.dmg/.pkg)，比如 Google Chrome 、Atom 和 Sublime Text 等。`brew install --cask xxx`
+
+```shell
+# 安装app， 
+# 不加--cask，安装路径在 /opt/homebrew，app图标不出现在启动台
+# --cask是整个bundle结构app, 安装路径在/Application，app图标出现在启动台
+brew install --cask docker
+
+# 启动app
+open /Application/Docker.app
+
+# app查找服务
+launchctl list | grep docker
+111117   0       com.docker.docker.2388
+# app关闭和重启
+launchctl stop com.docker.docker.2388 
+launchctl start com.docker.docker.2388
+```
+
+ <br>
+
 ## 本章参考
 
 * [确定您的 Mac 使用的是哪个 macOS 版本 - Apple 支持 (中国)](https://support.apple.com/zh-cn/HT201260)
@@ -982,6 +997,8 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 * Mac OS X和macOS版本的完整列表  https://www.imymac.com/zh-CN/mac-tips/mac-os-versions.html
 * 最全Mac系统快捷键一览 https://blog.csdn.net/xujingzhong0077/article/details/69939012
 * 如何使用Mac自带的邮件管理阿里企业邮箱  https://jingyan.baidu.com/article/375c8e19803c1964f2a229ee.html
+* [程序员的macOS系列：Mac开发环境配置](https://ihtcboy.com/2018/09/30/2018-09-30_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9AMac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
+* 程序员的macOS系列：高效Alfred进阶  https://juejin.cn/post/6844904062484217863
 
 <br>
 
@@ -1528,7 +1545,6 @@ phpinfo.php,  检索AMP配置参数
 ### Linux Crontab
 
 ```sh
-denny@denny-ubuntu:~/backup/database.mysql
 $ crontab -l
 # min hour  day month week   command
 30 22 * * * /home/denny/backup/script/backup_mysql.sh#00 09
