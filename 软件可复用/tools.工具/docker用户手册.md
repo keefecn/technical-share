@@ -160,7 +160,7 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 官网缺省不支持32位平台，需特殊处理。
 
 1) ~~32位平台~~ （可废弃）
-   
+
    ```SHELL
    $ sudo apt-get install docker.io
    # 导入32位ubuntu 14.04镜像
@@ -255,6 +255,8 @@ $ brew install --cask docker
 # 启动
 $ open /Application/Docker.app
 $ docker ps
+
+# 关闭要使用 launchctl list寻找任务名，再 launchctl stop [任务名]
 ```
 
 ## nvidia-docker2安装
@@ -269,7 +271,7 @@ GPU环境需要安装nvidia驱动，安装docker、nvidia-docker2。
    # 查找获取能直接安装的软件
    $ yum search nvidia
    
-   # 若未找到nvindia可用软件，则装添加仓库源
+   # 若未找到nvidia可用软件，则装添加仓库源
    # 先导入公共密钥
    $ sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 
    # 导入仓库源，以centos7为例，其它版本详见 http://elrepo.org/tiki/HomePage
@@ -296,8 +298,8 @@ GPU环境需要安装nvidia驱动，安装docker、nvidia-docker2。
 
 ```shell
 # 安装容器, nvidia-docker2 依赖于docker
-# 1)配置仓库源docker-ce
-$ wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
+# 1)配置仓库源 docker-ce
+$ sudo wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum makecache
 $ sudo yum install docker-ce
 
@@ -307,7 +309,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
 $ sudo yum install nvidia-docker2
 ```
 
-<br>
+<br><br>
 
 # 4 用户篇
 
@@ -416,6 +418,32 @@ daemon.json 示例配置文件
     "hosts": [],
     "log-level": "",
     "tls": true,  #默认 false, 启动TLS认证开关
+}
+```
+
+### nvidia环境
+
+nvidia环境 daemon.json配置示例如下，
+
+```json
+{
+	"default-runtime": "nvidia",
+	"runtimes": {
+		"nvidia": {
+			"path": "nvidia-container-runtime",
+			"runtimeArgs": []
+		}
+	},
+	"log-driver": "json-file",
+	"log-opts": {
+		"max-size": "100m"
+	},
+	"storage-driver": "overlay2",
+	"storage-opts": [
+		"overlay2.override_kernel_check = true"
+	],
+	"registry-mirrors": ["https://4p5gxeik.mirror.aliyuncs.com"],
+	"data-root": "/home/lib/docker/"
 }
 ```
 
@@ -1486,7 +1514,9 @@ $ docker stack deploy STACK_NAME --with-registry-auth
 # 法2：指定service id 强制更新某个service, 这个命令只能用于swarm管理节点
 #  示例中service_id是3xrdy2c7pfm3
 $ docker stack services STACK_NAME
+# 重启服务，重启服务并更新某个服务的镜像
 $ docker service update --force 3xrdy2c7pfm3
+$ docker service update --image image_name service_name
 ```
 
 2. 查看服务问题

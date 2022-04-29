@@ -794,7 +794,7 @@ Markdown 使用一种和链接很相似的语法来标记图片，同样也允�
 
 
 
-# 5 参考资料
+# 参考资料
 
 [1].   [Running Jekyll on Windows](http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html)
 

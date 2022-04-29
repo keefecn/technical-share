@@ -529,11 +529,11 @@ SAE International 设计了一套 系统，将驾驶自动化级别分为 0 到 
 
 整个AI产业链通过三个层级将从业的公司分为了20个子类，简要说明如下：
 
-- ​基础层为整体产业提供算力，其中硬件部分包括芯片、传感器与中间件。芯片领域典型公司如寒武纪、深鉴科技，从事包括GPU、FPGA及ASIC等各类AI芯片的研发设计，由于技术门槛过高、投资周期长，目前国内仅有极少部分具备足够技术积累的初创企业参与其中。而计算能力平台以云计算为整个AI产业链提供算力，除了3A(AWS、Azure、阿里云)外，国内典型的初创公司有如七牛云、青云，由于深度学习的持续火爆让全球AI产业普遍面临算力瓶颈，未来预期将有更多参与者进入计算能力平台这一领域。
+- 基础层为整体产业提供算力，其中硬件部分包括芯片、传感器与中间件。芯片领域典型公司如寒武纪、深鉴科技，从事包括GPU、FPGA及ASIC等各类AI芯片的研发设计，由于技术门槛过高、投资周期长，目前国内仅有极少部分具备足够技术积累的初创企业参与其中。而计算能力平台以云计算为整个AI产业链提供算力，除了3A(AWS、Azure、阿里云)外，国内典型的初创公司有如七牛云、青云，由于深度学习的持续火爆让全球AI产业普遍面临算力瓶颈，未来预期将有更多参与者进入计算能力平台这一领域。
 
-- ​技术层主要为整体产业链提供通用AI技术能力。其中感知层包括计算机视觉和语言识别两项重要的机器感知任务，由于这两项技术由于相对成熟，目前有大量的初创公司选择了这两个领域，如计算机视觉云集了商汤科技、旷视科技、云从科技等大量独角兽；而认知层定位为“机器大脑”，包括知识图谱/语义分析，以及智能问答/虚拟助手两个核心领域，顶部的平台层则以通用技术应用平台的形式提供深度学习、模式识别等技术应用服务，对接应用层。
+- 技术层主要为整体产业链提供通用AI技术能力。其中感知层包括计算机视觉和语言识别两项重要的机器感知任务，由于这两项技术由于相对成熟，目前有大量的初创公司选择了这两个领域，如计算机视觉云集了商汤科技、旷视科技、云从科技等大量独角兽；而认知层定位为“机器大脑”，包括知识图谱/语义分析，以及智能问答/虚拟助手两个核心领域，顶部的平台层则以通用技术应用平台的形式提供深度学习、模式识别等技术应用服务，对接应用层。
 
-- ​ 应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
+-  应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
 
 最后需要说明的是，深耕AI行业应用场景的公司往往也具备了技术层的一些核心技术能。
 
@@ -574,6 +574,75 @@ GPU制造可分为IDM和Fab+Fabless。
 * Foundry只负责制造，不负责芯片设计，可以同时为多家设计公司服务，但受制于公司间的竞争关系。台积电为Foundry的代表。
 
 Fab+Fabless的模式通过充分发挥比较优势，分散了GPU设计和制造的风险，符合半导体分工的大趋势。
+
+##### **Nvidia.英伟达**
+
+```shell
+# gpu
+# lspci查看PCI设备
+$ lspci | grep -i 'NVIDIA'
+02:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)
+
+$ lspci -v -s 02:00.0
+02:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)
+	Subsystem: NVIDIA Corporation Device 12a2
+	Physical Slot: 1
+	Flags: bus master, fast devsel, latency 0, IRQ 26, NUMA node 0
+	Memory at c6000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at b0000000 (64-bit, prefetchable) [size=256M]
+	Memory at c0000000 (64-bit, prefetchable) [size=32M]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nouveau, nvidia_drm, nvidia
+
+# 查看nvidia显卡模块内核版本，示例中是510.47.03
+$ cat /proc/driver/nvidia/version
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  510.47.03  Mon Jan 24 22:58:54 UTC 2022
+GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
+
+# nvida-smi 系统管理接口，查看nvidia显卡GPU使用情况
+$ nvida-smi      
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            Off  | 00000000:02:00.0 Off |                    0 |
+| N/A   33C    P8    15W /  70W |   2430MiB / 15360MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A     19274      C   ocr_service                      1363MiB |
+|    0   N/A  N/A     22286      C   classify_language_service        1067MiB |
++-----------------------------------------------------------------------------+
+```
+
+表格 nvidia-smi 结果字段说明
+
+| 字段              | 字段说明                   | 备注&示例值                                       |
+| ----------------- | -------------------------- | ------------------------------------------------- |
+| GPU Name          | GPU名称                    | Tesla T4                                          |
+| Fan               | 风扇转速（0%--100%）       | N/A表示没有风扇                                   |
+| Temp              | GPU温度                    | GPU温度过高会导致GPU频率下降                      |
+| Perf              | 性能状态                   | 从P0（最大性能）到P12（最小性能）                 |
+| Pwr               | GPU功耗                    |                                                   |
+| Persistence-M     | 持续模式的状态             | 持续模式耗能大，但在新的GPU应用启动时花费时间更少 |
+| Bus-Id            | GPU总线                    | 值组成：`domain:bus:device.function`              |
+| Disp.A            | Display Active             | 表示GPU的显示是否初始化                           |
+| Memory-Usage      | 显存使用量                 | 当明使用 / 可用显存                               |
+| Volatile GPU-Util | GPU使用率                  |                                                   |
+| ECC               | 是否开启错误检查和纠正技术 | 0-DISABLED, 1-ENABLED                             |
+| Compute M.        | 计算模式                   | 0-DEFAULT, 1-EXCLUSIVE_PROCESS, 2-PROHIBITED      |
+| Processes         | 进程                       | 会罗列当前使用了GPU的进程列表的详情情况           |
+
+
 
 **CUDA**
 
@@ -692,6 +761,8 @@ SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“
 - 2020年人工智能百强 http://www.enet.com.cn/article/2021/0412/A202104121264535.html
 - 自动驾驶：是炒作还是现实？ https://mp.weixin.qq.com/s/1AaGIY0BzinrO9DYrQJsIw#
 - GPU深度报告，三大巨头，十四个国内玩家一文看懂  https://m.thepaper.cn/newsDetail_forward_11705617
+- 深度学习GPU显卡选型攻略  https://blog.csdn.net/wjinjie/article/details/118751181
+- tensorflow各个版本的CUDA以及Cudnn版本对应关系  https://blog.csdn.net/qq_27825451/article/details/89082978
 
 <br><br>
 
@@ -800,8 +871,9 @@ SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“
 ## 本章参考
 
 * 知识图谱构建技术综述 《计算机研究与发展》, 2016, 53 (3):582-600 https://blog.csdn.net/qq_34435926/article/details/79926633
-
 * [知识图谱实战篇] 一.数据抓取之Python3抓取JSON格式的电影实体)  https://blog.csdn.net/eastmount/article/details/86714051
+* 这是一份通俗易懂的知识图谱技术应用落地指南  https://mp.weixin.qq.com/s/8IJTEVtgFaoJWUi9cZVQGQ
+* 一文详解知识图谱关键技术与应用  https://mp.weixin.qq.com/s/XPJkKbawCCudq1WGR_xjbA
 
 <br>
 

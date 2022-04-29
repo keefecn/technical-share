@@ -955,6 +955,8 @@ Apriori算法对于一条规则L->R，有以下度量：
 
 [7]. 干货|机器学习超全综述！ https://zhuanlan.zhihu.com/p/46320419
 
-[8]. 推荐算法设计综述 https://zhuanlan.zhihu.com/p/69478126
+* 推荐算法设计综述 https://zhuanlan.zhihu.com/p/69478126
+
+* 常用推荐算法（50页干货）  https://mp.weixin.qq.com/s/Vt33mLS_P9s4yy_fvNRXfw
 
 [^C4.5]: http://blog.csdn.net/aladdina/archive/2009/04/30/4141048.aspx  数据挖掘十大经典算法(1) C4.5

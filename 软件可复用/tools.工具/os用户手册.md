@@ -835,17 +835,25 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 
 表格 CentOS 系统官方支持时间表
 
-| **发布版本** | 完整更新       | 维护更新                    |
-| -------- | ---------- | ----------------------- |
-| 3        | 2006-07-20 | 2010-10-31              |
-| 4        | 2009-03-31 | 2012-02-29              |
-| 5        | Q1 2014    | 2017-03-31              |
-| 6        | Q2 2017    | 2020-11-30              |
-| 7        | Q4 2019    | <mark>2024-06-30</mark> |
-| 8        | -          | 2021-12-31              |
-| Stream   | N/A（滚动更新）  | N/A（滚动更新）               |
+| **发布版本** | 完整更新        | 维护更新                |
+| ------------ | --------------- | ----------------------- |
+| 3            | 2006-07-20      | 2010-10-31              |
+| 4            | 2009-03-31      | 2012-02-29              |
+| 5            | Q1 2014         | 2017-03-31              |
+| 6            | Q2 2017         | 2020-11-30              |
+| 7            | Q4 2019         | <mark>2024-06-30</mark> |
+| 8            | -               | 2021-12-31              |
+| Stream       | N/A（滚动更新） | N/A（滚动更新）         |
 
 > 2021年底CentOS 8已停止运维，官方相关支持已移除，不建议再使用centos8。
+>
+> 2022年社区主要工作将转向 RHEL 上游，开发维护新的 CentOS Linux 版本——CentOS Stream。
+
+开发模式
+
+* 上游优先，是指社区版先发布，在这之后发布企业版，这样有些新特性就可以在社区优先出现，这是CentOS Stream采用的做法。上游优先迭代速度会更快。
+
+* 下游优先，是指在RHL新版本基础上发布，兼容RHL新功能，之前CentOS的做法。相当于企业用户更先体验新功能。
 
 <br>
 
@@ -893,30 +901,29 @@ macOS是一套由苹果开发的运行于Macintosh系列电脑上的操作系统
 
 Mac的易用性在操作系统里属于最好的。终端功能类似linux的命令行，桌面操作类似windows。文件目录组织形式类似linux。
 
-
-
 表格 MacBook Pro常用快捷键 （一般大小写不敏感）
 
-| 快捷键                 | 功能                                      | 备注        |
-| ------------------- | --------------------------------------- | --------- |
-| command + c         | 复制                                      |           |
-| command + v         | 粘贴                                      |           |
-| command + tab       | 程序切换                                    |           |
-| command + N         | 新建网页+新建智能文件夹                            |           |
-| command + Q         | 退出当前程序                                  |           |
-| command + M         | 将当前程序最小化至程序坞                            |           |
-| command + H         | 隐藏当前程序，功能类似最小化                          |           |
-| command + F         | 查找文稿中的项目或打开“查找”窗口。                      |           |
-| command + T         | 打开新tab                                  | 常用在浏览器、终端 |
-| control+command+F   | 全屏/退出全屏                                 |           |
-| option+command+D    | 程序坞显示切换                                 |           |
-| option+command+esc  | 打开强制退出的窗口                               |           |
-| option+command+W    | 快速关闭当前应用程序的所有窗口                         |           |
-| fn + F11            | 显示桌面                                    |           |
-| control+command+空格  | 表情符号                                    |           |
-| command + Shift + 4 | 截图                                      | +3全图，+4指定 |
-| command + <--       | 删除，相当于win里的delete键                      |           |
-| fn + 箭头             | 翻页功能。类似win里的pagedown, pageup, home, end |           |
+| 快捷键                | 功能                                      | 备注        |
+| ------------------ | --------------------------------------- | --------- |
+| command + c        | 复制                                      |           |
+| command + v        | 粘贴                                      |           |
+| command + tab      | 程序切换                                    |           |
+| command + N        | 新建网页+新建智能文件夹                            |           |
+| command + Q        | 退出当前程序                                  |           |
+| command + M        | 将当前程序最小化至程序坞                            |           |
+| command + H        | 隐藏当前程序，功能类似最小化                          |           |
+| command + F        | 查找文稿中的项目或打开“查找”窗口。                      |           |
+| command + T        | 打开新tab                                  | 常用在浏览器、终端 |
+| control+command+F  | 全屏/退出全屏                                 |           |
+| control+command+空格 | 表情符号                                    |           |
+| option+command+D   | 程序坞显示切换                                 |           |
+| option+command+esc | 打开强制退出的窗口                               |           |
+| option+command+W   | 快速关闭当前应用程序的所有窗口                         |           |
+| fn + F11           | 显示桌面                                    |           |
+| Shift+command + 4  | 截图                                      | +3全图，+4指定 |
+| Shift+command + 。  | Finder文件夹里显示隐藏文件开关                      |           |
+| command + <--      | 删除，相当于win里的delete键                      |           |
+| fn + 箭头            | 翻页功能。类似win里的pagedown, pageup, home, end |           |
 
 **Mac使用特点**
 
@@ -932,28 +939,6 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
   * 中/英键，如果使用自带拼音输入 法，那么 <u>长按</u>是大写，<u>点按 </u>切换输入法。如果安装了第三方输入法如搜狗五笔，那么输入法切换是ctrl+空格，此键类似win里的capsLock键。
 * 右键菜单：默认键盘按住【control】后单指按压触控板(听到按压声反馈)即可呼出右键菜单；双指同时按压触控板(听到按压声反馈)也可以呼出右键菜单。
 * 重启恢复：关机重启后会快速恢复上次启动的进程和状态，类似睡眠效果。
-
-**常用设置**
-
-1. **允许安装任何来源软件**
-
-进入终端界面后,在里面我们输入以下代码: `sudo spctl --master-disable`。 
-
-2. 在Finder的当前目录打开终端
-   
-   Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置的终端窗口
-   
-   若菜单服务中无上述选项，可进入 系统偏好设置->键盘->快捷键->服务，在右边新建位于文件夹位置的终端窗口上打勾。
-
-3. 迁移助理
-   
-   路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。如果传输内容太大（超过2G）且小文件多，建议用U盘，用迁移助理太慢。
-
-4. 新建文件：跟windows当前目录下右键或快捷键新建文件方式不同，mac新建文件的操作非常不人性化。
-   
-   法1：终端进入指定目录用命令生成文件，`touch 文件名` 
-   
-   法2：安装访达扩展工具，右键新建文件（未验证）。
 
 <br>
 
@@ -979,13 +964,73 @@ brew install --cask docker
 # 启动app
 open /Application/Docker.app
 
-# app查找服务
+# launchctl命令查找app
+# launchctl方式可关闭后台服务进程（无法通过点击退出的进程），如docker守护进程
 launchctl list | grep docker
 111117   0       com.docker.docker.2388
 # app关闭和重启
 launchctl stop com.docker.docker.2388 
 launchctl start com.docker.docker.2388
 ```
+
+<br>
+
+**Finder（访达）常见设置**
+
+1. **在Finder的当前目录打开终端**
+
+Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置的终端窗口
+
+若菜单服务中无上述选项，可进入 系统偏好设置->键盘->快捷键->服务，在右边新建位于文件夹位置的终端窗口上打勾。
+
+2. **新建文件**：跟windows当前目录下右键或快捷键新建文件方式不同，mac新建文件的操作非常不人性化。
+
+法1：终端进入指定目录用命令生成文件，`touch 文件名`
+
+法2：安装访达扩展工具，右键新建文件（未验证）。
+
+3. 是否**显示隐藏文件** 
+
+   法1：当前目录切换显示隐藏快捷键 Shift+command + 。
+
+   法2：终端设置
+
+   ```shell
+   # true为显示，false为隐藏
+   % defaults write com.apple.finder AppleShowAllFiles -bool true
+   # 重启finder生效
+   % killall Finder
+   ```
+
+4. Finder快速预览QuickLook扩展插件
+
+   ```shell
+   # https://github.com/sindresorhus/quick-look-plugins
+   brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+   ```
+
+
+5. .DS_Store（Desktop Services Store，桌面服务存储） 是 Finder用来存储这个文件夹的显示属性的，比如文件图标的摆放位置。删除了没影响，可以在终端设置是否生成，修改后退出再重新登陆mac账号生效。
+
+   ```shell
+   # 禁止生成
+   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+   
+   # 恢复.DS_store生成：
+   defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+   ```
+
+   
+
+**其它常用设置**
+
+1. **允许安装任何来源软件**
+
+进入终端界面后,在里面我们输入以下代码: `sudo spctl --master-disable`。 
+
+2. 迁移助理
+
+   路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。如果传输内容太大（超过2G）且小文件多，建议用U盘，用迁移助理太慢。
 
  <br>
 

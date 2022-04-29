@@ -188,7 +188,7 @@ Required-by:
 ​    TensorFlow由谷歌人工智能团队谷歌大脑（Google Brain）开发和维护，拥有包括TensorFlow Hub、TensorFlow Lite、TensorFlow Research Cloud在内的多个项目以及各类应用程序接口API。自2015年11月9日起，TensorFlow依据阿帕奇授权协议（Apache 2.0 open source license）开放源代码。
 
 **什么是张量(tensor)**
-对于张量这个概念的理解很不容易。我看介绍TensorFlow的说明上说张量就是N维数组，百度百科上说它是一个可用来表示在一些矢量、标量和其他张量之间的线性关系的多线性函数。在不同的领域，张量有不同的理解。我认为这句话讲得比较好：张量是不随坐标系而改变的物理系统内在的量。在机器视觉领域，我个人理解为在不同坐标系/参考系下变的CV特征。
+张量就是N维数组，百度百科上说它是一个可用来表示在一些矢量、标量和其他张量之间的线性关系的多线性函数。在不同的领域，张量有不同的理解。我认为这句话讲得比较好：张量是不随坐标系而改变的物理系统内在的量。在机器视觉领域，我个人理解为在不同坐标系/参考系下变的CV特征。
 
 **术语**
 
@@ -604,6 +604,8 @@ CNTK允许用户非常轻松地实现和组合流行的模型，包括前馈DNN�
 [1]. Keras官网  https://keras.io/datasets/
 
 [2]. PaddlePaddle https://www.paddlepaddle.org.cn/
+
+* 收藏|NLP入门模型Tensorflow实现  https://mp.weixin.qq.com/s/-NEKxUOio8YS5EnRxHcvvw
 
 <br>
 
