@@ -465,7 +465,11 @@ sudo ./run.sh
 
 桌面上右击，选择【个性化】；【主题】 - 【更改桌面图标】，勾选‘计算机’选项。
 
-2. 设置静态IP
+2. 显示隐藏文件 
+
+打开‘我的电脑’，点击【查看选项卡】- 【查看】，勾选‘显示隐藏的文件、文件夹和驱动器’。
+
+3. 设置静态IP
 
 右键点击网络图标，Edit Connections，这个选项一开始可能并不会出现，但网络稳定后才出现。
 
@@ -835,18 +839,18 @@ CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复�
 
 表格 CentOS 系统官方支持时间表
 
-| **发布版本** | 完整更新        | 维护更新                |
-| ------------ | --------------- | ----------------------- |
-| 3            | 2006-07-20      | 2010-10-31              |
-| 4            | 2009-03-31      | 2012-02-29              |
-| 5            | Q1 2014         | 2017-03-31              |
-| 6            | Q2 2017         | 2020-11-30              |
-| 7            | Q4 2019         | <mark>2024-06-30</mark> |
-| 8            | -               | 2021-12-31              |
-| Stream       | N/A（滚动更新） | N/A（滚动更新）         |
+| **发布版本** | 完整更新       | 维护更新                    |
+| -------- | ---------- | ----------------------- |
+| 3        | 2006-07-20 | 2010-10-31              |
+| 4        | 2009-03-31 | 2012-02-29              |
+| 5        | Q1 2014    | 2017-03-31              |
+| 6        | Q2 2017    | 2020-11-30              |
+| 7        | Q4 2019    | <mark>2024-06-30</mark> |
+| 8        | -          | 2021-12-31              |
+| Stream   | N/A（滚动更新）  | N/A（滚动更新）               |
 
 > 2021年底CentOS 8已停止运维，官方相关支持已移除，不建议再使用centos8。
->
+> 
 > 2022年社区主要工作将转向 RHEL 上游，开发维护新的 CentOS Linux 版本——CentOS Stream。
 
 开发模式
@@ -899,7 +903,7 @@ macOS是一套由苹果开发的运行于Macintosh系列电脑上的操作系统
 
 ## 快速使用指南
 
-Mac的易用性在操作系统里属于最好的。终端功能类似linux的命令行，桌面操作类似windows。文件目录组织形式类似linux。
+Mac的易用性在操作系统里属于最好的。终端功能类似linux的命令行，桌面操作类似windows。文件目录组织形式类似linux，缺省文件系统是APFS。
 
 表格 MacBook Pro常用快捷键 （一般大小写不敏感）
 
@@ -983,6 +987,8 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 
 若菜单服务中无上述选项，可进入 系统偏好设置->键盘->快捷键->服务，在右边新建位于文件夹位置的终端窗口上打勾。
 
+另外，打开终端，将文件夹拖到终端，会在终端自动显示此文件夹全路径。
+
 2. **新建文件**：跟windows当前目录下右键或快捷键新建文件方式不同，mac新建文件的操作非常不人性化。
 
 法1：终端进入指定目录用命令生成文件，`touch 文件名`
@@ -990,11 +996,11 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 法2：安装访达扩展工具，右键新建文件（未验证）。
 
 3. 是否**显示隐藏文件** 
-
+   
    法1：当前目录切换显示隐藏快捷键 Shift+command + 。
-
+   
    法2：终端设置
-
+   
    ```shell
    # true为显示，false为隐藏
    % defaults write com.apple.finder AppleShowAllFiles -bool true
@@ -1003,15 +1009,14 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
    ```
 
 4. Finder快速预览QuickLook扩展插件
-
+   
    ```shell
    # https://github.com/sindresorhus/quick-look-plugins
    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
    ```
 
-
 5. .DS_Store（Desktop Services Store，桌面服务存储） 是 Finder用来存储这个文件夹的显示属性的，比如文件图标的摆放位置。删除了没影响，可以在终端设置是否生成，修改后退出再重新登陆mac账号生效。
-
+   
    ```shell
    # 禁止生成
    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
@@ -1020,8 +1025,6 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
    defaults delete com.apple.desktopservices DSDontWriteNetworkStores
    ```
 
-   
-
 **其它常用设置**
 
 1. **允许安装任何来源软件**
@@ -1029,8 +1032,31 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 进入终端界面后,在里面我们输入以下代码: `sudo spctl --master-disable`。 
 
 2. 迁移助理
-
+   
    路径：启动台 - 其它 - 迁移助理。支持从mac、windows迁移相关数据到新mac。如果传输内容太大（超过2G）且小文件多，建议用U盘，用迁移助理太慢。
+
+3. 读写ntfs分区U盘：ntfs是windows特有分区，在linux和mac系统默认都是只读的，需要修改缺省设置。更简易的做法是把NTFS磁盘格式化成exFAT或者APFS文件格式。
+   
+   ```shell
+   # 切换到root
+   sudo -s
+   # 查看分区情况mount 或者 diskutil list 或者 df -h
+   mount
+   # 根据实际情况修改/dev/diskxx, /Volumes/xx
+   unmount /dev/diskxx
+   mount -t ntfs -o rw,auto,nobrowse /dev/disk2s1 /Volumes/disk2s1 
+   ```
+
+4. root账号在/bin, /sbin下操作报 operation not permitted
+   
+   原理：mac电脑启用了SIP（System Integrity Protection），增加了rootless机制，导致即使在root权限下依然无法修改文件。
+   
+   ```shell
+   step1: 重启，过程中按住 command+R，进入保护模式
+   step2: 打开terminal终端，输入 csrutil disable
+   step3: 再次重启，即可对 usr/bin 目录下文件进行修改
+   step4: 恢复保护机制，重新进入保护模式，打开终端输入 csrutil enable，重启生效 
+   ```
 
  <br>
 
@@ -1044,6 +1070,7 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 * 如何使用Mac自带的邮件管理阿里企业邮箱  https://jingyan.baidu.com/article/375c8e19803c1964f2a229ee.html
 * [程序员的macOS系列：Mac开发环境配置](https://ihtcboy.com/2018/09/30/2018-09-30_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9AMac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
 * 程序员的macOS系列：高效Alfred进阶  https://juejin.cn/post/6844904062484217863
+* 在macOS最新的Monterey上打开读写NTFS功能  https://zhuanlan.zhihu.com/p/442351683
 
 <br>
 

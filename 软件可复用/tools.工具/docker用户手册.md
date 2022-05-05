@@ -160,7 +160,7 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 官网缺省不支持32位平台，需特殊处理。
 
 1) ~~32位平台~~ （可废弃）
-
+   
    ```SHELL
    $ sudo apt-get install docker.io
    # 导入32位ubuntu 14.04镜像
@@ -427,23 +427,23 @@ nvidia环境 daemon.json配置示例如下，
 
 ```json
 {
-	"default-runtime": "nvidia",
-	"runtimes": {
-		"nvidia": {
-			"path": "nvidia-container-runtime",
-			"runtimeArgs": []
-		}
-	},
-	"log-driver": "json-file",
-	"log-opts": {
-		"max-size": "100m"
-	},
-	"storage-driver": "overlay2",
-	"storage-opts": [
-		"overlay2.override_kernel_check = true"
-	],
-	"registry-mirrors": ["https://4p5gxeik.mirror.aliyuncs.com"],
-	"data-root": "/home/lib/docker/"
+    "default-runtime": "nvidia",
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "100m"
+    },
+    "storage-driver": "overlay2",
+    "storage-opts": [
+        "overlay2.override_kernel_check = true"
+    ],
+    "registry-mirrors": ["https://4p5gxeik.mirror.aliyuncs.com"],
+    "data-root": "/home/lib/docker/"
 }
 ```
 
@@ -1605,14 +1605,18 @@ docker system prune
 
 表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
 
-| images                | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                | 访问URL           |
-| --------------------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| jenkis                |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                               | http://IP:8080/ |
-| elasticsearch         |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0 |                 |
-| amancevice/superset   | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                     | http://IP:8088/ |
-| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                          | 同上              |
-| wordpress +mysql      |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                             | http://IP/      |
-| apache/drill          | 936MB  |               |                                                                                                                           |                 |
+| images                         | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                                                                         | 访问URL           |
+| ------------------------------ | ------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| jenkis                         |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                                                                                        | http://IP:8080/ |
+| elasticsearch                  |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0                                                          |                 |
+| amancevice/superset            | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                                                                              | http://IP:8088/ |
+| apache/superset:1.0.0          | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                                                                                   | 同上              |
+| wordpress +mysql               |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                                                                                      | http://IP/      |
+| apache/drill                   | 936MB  |               |                                                                                                                                                                                    |                 |
+| gitlab/gitlab-ce               | 1.92G  | 源仓管理          |                                                                                                                                                                                    |                 |
+| gitlab/gitlab-runner           | 390MB  | CICD支持        |                                                                                                                                                                                    |                 |
+| caturbhuja/vscode-server-3.1.1 | 885MB  | web版vscode    |                                                                                                                                                                                    |                 |
+| codercom/code-server           | 1.63GB | web版vscode    | docker run -d -u root -p 8088:8080 --name code-server -v /home/docker/code/config.yaml:/root/.config/code-server/config.yaml  -v /home/docker/code:/home/code codercom/code-server | http://IP:8088/ |
 
 表格 其它镜像 （基础和服务型镜像之外的）
 
@@ -1904,6 +1908,13 @@ firewall-cmd --reload
 
 说明：2377 端口是集群管理通信端口，只需要在管理节点开启。7946 tcp,udp 是节点间通信使用端口，4789 是 overlay network 使用的端口。
 
+如果docker daemon运行时没有指定端口，默认用`unix:///var/run/docker.sock`
+
+```shell
+# 相当于将默认的socket绑定在本机的2376
+docker -d -H unix:///var/run/docker.sock -H 0.0.0.0:2376
+```
+
 <br>
 
 ### 本章参考
@@ -2028,7 +2039,7 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
 [2]: Docker教程 https://www.w3cschool.cn/docker/
 
-[3]: Docker从入门到进阶 https://yq.aliyun.com/topic/78?spm=5176.8275330.622780.11.LK3KRG
+[3]: Docker从入门到进阶 https://yq.aliyun.com/topic/78 
 
 [4]: 32bit-Docker跑32bit-Ubuntu14.04 https://www.jianshu.com/p/61fe3c78464a
 
@@ -2037,3 +2048,11 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 [6]: Docker容器进入的4种方式 https://www.cnblogs.com/xhyan/p/6593075.html
 
 [7]: jenkins https://jenkins.io/zh/doc/book/installing/
+
+* Docker Secret管理和使用  https://www.jianshu.com/p/e1df30077d75
+
+* Docker安全配置及Docker-TLS加密  https://blog.csdn.net/kele_baba/article/details/119395564
+
+* Docker Security: Using Docker Secrets With Swarm. https://dzone.com/articles/docker-security-using-docker-secrets-with-swarm
+
+* docker部署code-server https://www.cnblogs.com/barwe/p/14685389.html
