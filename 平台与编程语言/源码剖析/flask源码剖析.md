@@ -2554,13 +2554,14 @@ Markup('Hello <em>&#34;World&#34;</em>')
 
 ## 推荐模块
 
-| 模块名              | 功能                                                                                                                                                                                                  | 文档                                                                                                                 | 源码                                              | 最后版本&更新           |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- | ----------------- |
-| flask_appbuilder | Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`                                                              | https://flask-appbuilder.readthedocs.io/en/latest/ or [flaskappbulder](http://flaskappbuilder.pythonanywhere.com/) | https://github.com/dpgaspar/flask-appbuilder/   | v3.3.3, 2021.9.14 |
-| flask_migrate    | SQLAlchemy database migrations for Flask applications using Alembic.<br>[Change Log](https://github.com/miguelgrinberg/Flask-Migrate/blob/master/CHANGES.md)                                        | http://flask-migrate.readthedocs.io/en/latest/                                                                     | http://github.com/miguelgrinberg/flask-migrate/ | 3.0.1, 2021.8     |
-| flask_caching    | Adds caching support to your Flask application                                                                                                                                                      | http://www.pythondoc.com/flask-cache/index.html                                                                    | https://github.com/sh4nks/flask-caching         | 1.10.1, 2021.3.18 |
-| flask_cors       | A Flask extension adding a decorator for CORS support. Cross Origin Resource Sharing ( CORS ) support for Flask.<br>[Changelog](https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md) | [flask-cors.corydolphin.com/](https://flask-cors.corydolphin.com/)                                                 | https://github.com/corydolphin/flask-cors       | 3.0.10, 2021.1.5  |
-| flask_restx      | 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。<BR>Flask-RESTX is a community driven fork of [Flask-RESTPlus](https://github.com/noirbizarre/flask-restplus)，于2020.1创建。                                         | [flask-restx.readthedocs.io/en/latest/](https://flask-restx.readthedocs.io/en/latest/)                             | https://github.com/python-restx/flask-restx     | 0.5.1, 2021.9.4   |
+| 模块名              | 功能                                                                                                                                                                                                  | 文档                                                                                                                 | 源码 (github)                                                                     | 最后版本&更新           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | ----------------- |
+| flask_appbuilder | Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`                                                              | https://flask-appbuilder.readthedocs.io/en/latest/ or [flaskappbulder](http://flaskappbuilder.pythonanywhere.com/) | [dpgaspar/flask-appbuilder](https://github.com/dpgaspar/flask-appbuilder/)      | v3.3.3, 2021.9.14 |
+| flask_migrate    | SQLAlchemy database migrations for Flask applications using Alembic.<br>[Change Log](https://github.com/miguelgrinberg/Flask-Migrate/blob/master/CHANGES.md)                                        | http://flask-migrate.readthedocs.io/en/latest/                                                                     | [miguelgrinberg/flask-migrate](http://github.com/miguelgrinberg/flask-migrate/) | 3.0.1, 2021.8     |
+| flask_caching    | Adds caching support to your Flask application                                                                                                                                                      | http://www.pythondoc.com/flask-cache/index.html                                                                    | [sh4nks/flask-caching]([https://github.com/sh4nks/flask-caching)                | 1.10.1, 2021.3.18 |
+| flask_cors       | A Flask extension adding a decorator for CORS support. Cross Origin Resource Sharing ( CORS ) support for Flask.<br>[Changelog](https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md) | [flask-cors.corydolphin.com](https://flask-cors.corydolphin.com)                                                   | [corydolphin/flask-cors](https://github.com/corydolphin/flask-cors)             | 3.0.10, 2021.1.5  |
+| flask_restx      | 使用 Flask 进行快速、简单和文档化的 API 开发的全功能框架。<BR>Flask-RESTX is a community driven fork of [Flask-RESTPlus](https://github.com/noirbizarre/flask-restplus)，于2020.1创建。                                         | [flask-restx.readthedocs.io/en/latest/](https://flask-restx.readthedocs.io/en/latest/)                             | [python-restx/flask-restx](https://github.com/python-restx/flask-restx)         | 0.5.1, 2021.9.4   |
+| flask-smorest    | （原名为flask-rest-api）是一个用于创建于数据库无关的REST API的架库。                                                                                                                                                       |                                                                                                                    |                                                                                 |                   |
 
 说明：受欢迎的模块会慢慢由一个组织来托管，不再放到个人仓库名下，这样更有利于社区协作。
 
@@ -3252,7 +3253,7 @@ python manage.py print
 
 <br>
 
-# 参考资料
+# 参考资源
 
 **官网**
 
@@ -3264,5 +3265,3 @@ python manage.py print
 
 * FLask之Local、LocalStack和LocalProxy介绍 https://blog.csdn.net/weixin_45950544/article/details/103923191
 * Jinja2中文文档  http://docs.jinkan.org/docs/jinja2/
-
-

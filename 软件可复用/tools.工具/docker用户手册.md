@@ -750,6 +750,21 @@ Live Restore Enabled: false
 Registries: docker.io (secure)
 ```
 
+1. 获取某个容器的IP
+   
+   ```shell
+   docker inspect --format '{{ .NetworkSettings.IPAddress }}' <CONTAINER ID or NAME>
+   ```
+
+2. 给容器指定一个固定 IP 地址，而不是容器每次启动时IP地址变化
+   
+   ```shell
+   # 创建一个桥接网络，示例中网关掩码为172.25.0.0/16, IP为172.15.3.3
+   $ docker network create -d bridge --subnet 172.25.0.0/16 my-net
+   
+   $ docker run --network=my-net --ip=172.25.3.3 -itd --name=my-container busybox
+   ```
+
 ### 4.2.3 容器运行 run
 
 **docker run命令**
@@ -944,8 +959,33 @@ SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@aliasmysql:3306/superset_1.0'
 镜像管理主要命令：
 
 * docker images  # 查看本地镜像列表
+
 * docker search xx   # 搜索某个镜像
+
 * docker pull xx  # 下载某个镜像
+  
+  ```shell
+  # 以python为例 找能用的python版本
+  # 先找带有python名称的镜像
+  docker search python
+  
+  # 打印出python镜像的所有tag
+  curl https://registry.hub.docker.com/v1/repositories/python/tags| tr -d '[\[\]" ]' | tr '}' '\n'| awk -F: -v image='python' '{if(NR!=NF && $3 != ""){printf("%s:%s\n",image,$3)}}'
+  python:3.9.8
+  python:3.9.8-alpine
+  python:3.9.8-alpine3.13
+  python:3.9.8-alpine3.14
+  python:3.9.8-bullseye
+  python:3.9.8-buster
+  python:3.9.8-slim
+  python:3.9.8-slim-bullseye
+  python:3.9.8-slim-buster
+  python:3.9.8-windowsservercore
+  python:3.9.8-windowsservercore-1809
+  python:3.9.8-windowsservercore-ltsc2016
+  python:3.9.8-windowsservercore-ltsc2022
+  ...
+  ```
 
 镜像仓库常用命令：
 
@@ -1282,8 +1322,12 @@ docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
 
 当我们从docker镜像仓库中下载的镜像不能满足我们的需求时，我们可以通过以下两种方式对镜像进行更改。
 
-* 从已经创建的容器中更新镜像，并且提交这个镜像
-* 使用 Dockerfile 指令来创建一个新的镜像
+镜像构建方式
+
+* docker build方式，使用 Dockerfile 指令来创建一个新的镜像。
+* docker commit方式，从已经创建的容器中更新镜像，并且提交这个镜像。
+
+通常我们都是使用第一种方式来构建容器，二者的区别就像批处理和单步执行一样。
 
 **1. 更新镜像docker commit**
 
@@ -1543,7 +1587,11 @@ docker stack默认使用 swarm模式部署。部署细节 详见下文章节。
 
 ## 5.3 镜像管理
 
-### 镜像清理
+### 镜像&容器清理
+
+* <none>：<none> iamge : 它们代表中间映像，可以使用`docker images -a`看到, 它们不会导致磁盘空间问题，但这绝对是屏幕空间问题。
+
+* <none>:<none> —— dangling=true（会导致磁盘空间问题），可用`docker image prune`清除，可释放磁盘空间。
 
 **1. 批量删除tag为None的镜像**
 
@@ -1557,22 +1605,100 @@ docker stack默认使用 swarm模式部署。部署细节 详见下文章节。
 # 删除镜像
 docker images|grep none|awk '{print $3}'|xargs docker rmi
 docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+
+# 清除dangling 悬空镜像，下面二种清除方法
+docker image prune
 docker rmi $(docker images -f "dangling=true" -q)
 ```
 
 **2. 清理容器** （可以在镜像清理前操作）
 
 ```shell
-# （推荐）删除停止的容器，可以回收容器名。-a显示所有  正在运行的容器要先停止stop才会被删除rm
+# （推荐）删除停止的容器，可以回容器名。-a显示所有  正在运行的容器要先停止stop才会被删除rm
 docker rm $(docker ps -a -q)
 
-# 清理当前未运行的容器（未验证）
-docker system prune
+# 清理当前未运行的容器
+docker container prune
+
+# 停止正在运行的容器
+docker stop $(docker container ls -q)
 ```
+
+3. 清理镜像和容器
+   
+   ```shell
+   # 清理已停止的容器、没有被容器使用的网络、悬空镜像、悬空构建缓存
+   $ docker system prune
+   WARNING! This will remove:
+     - all stopped containers
+     - all networks not used by at least one container
+     - all dangling images
+     - all dangling build cache
+   ```
 
 ### 镜像体积裁减
 
-* 选用体积小的基础镜像
+**体积分析**
+
+Docker镜像是由很多镜像层（Layers）组成的（最多127层）， Dockerfile 中的每条指定都会创建镜像层，不过**只有 `RUN`, `COPY`, `ADD` 会使镜像的体积增加**。这个可以通过命令 `docker history image_id` 来查看每一层的大小。 这里我们以官方的 [alpine:3.12](https://github.com/alpinelinux/docker-alpine/blob/90788e211ec6d5df183d79d6cb02e068b258d198/x86_64/Dockerfile) 为例看看它的镜像层情况。
+
+```shell
+$ docker images |grep alpine
+alpine                                          latest       0ac33e5f5afa   5 weeks ago     5.57MB
+redis                                           alpine       3900abf41552   5 months ago    32.4MB
+python                                          3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
+$ docker image ls alpine
+$ docker history 
+$ docker history 3900abf41552
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+3900abf41552   5 months ago   /bin/sh -c #(nop)  CMD ["redis-server"]         0B        
+<missing>      5 months ago   /bin/sh -c #(nop)  EXPOSE 6379                  0B        
+<missing>      5 months ago   /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B        
+<missing>      5 months ago   /bin/sh -c #(nop) COPY file:c48b97ea65422782…   377B      
+<missing>      5 months ago   /bin/sh -c #(nop) WORKDIR /data                 0B        
+<missing>      5 months ago   /bin/sh -c #(nop)  VOLUME [/data]               0B        
+<missing>      5 months ago   /bin/sh -c mkdir /data && chown redis:redis …   0B        
+<missing>      5 months ago   /bin/sh -c set -eux;   apk add --no-cache --…   25.5MB    
+<missing>      5 months ago   /bin/sh -c #(nop)  ENV REDIS_DOWNLOAD_SHA=5b…   0B        
+<missing>      5 months ago   /bin/sh -c #(nop)  ENV REDIS_DOWNLOAD_URL=ht…   0B        
+<missing>      5 months ago   /bin/sh -c #(nop)  ENV REDIS_VERSION=6.2.6      0B        
+<missing>      5 months ago   /bin/sh -c apk add --no-cache   'su-exec>=0.…   1.34MB    
+<missing>      5 months ago   /bin/sh -c addgroup -S -g 1000 redis && addu…   4.7kB     
+<missing>      5 months ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      5 months ago   /bin/sh -c #(nop) ADD file:9233f6f2237d79659…   5.58MB    
+```
+
+说明：如上面示例，ADD, apk命令会带来体积增长，CMD命令并不占空间。
+
+**体积压缩方式**
+
+了解了镜像构建中体积增大的原因，那么就可以对症下药：**精简层数**或**精简每一层大小**。 
+
+精简层数的方法有如下几种： 
+
+1. [RUN指令合并](https://zhuanlan.zhihu.com/p/161685245/edit#run%E6%8C%87%E4%BB%A4%E5%90%88%E5%B9%B6) ：指令合并是最简单也是最方便的降低镜像层数的方式。该操作节省空间的原理是在同一层中清理“缓存”和工具软件。
+
+2. [多阶段构建](https://zhuanlan.zhihu.com/p/161685245/edit#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA)：多阶段构建方法是官方打包镜像的最佳实践，它是将精简层数做到极致的方法。通俗点讲它是将打包镜像分成两个阶段，一个阶段用于开发，打包，该阶段包含构建应用程序所需的所有内容；一个用于生产运行，该阶段只包含你的应用程序以及运行它所需的内容。这被称为“建造者模式”。两个阶段的关系有点像JDK和JRE的关系。使用多阶段构建肯定会降低镜像大小，但是瘦身的粒度和编程语言有关系，对编译型语言效果比较好，因为它去掉了编译环境中多余的依赖，直接使用编译后的二进制文件或jar包。而对于解释型语言效果就不那么明显了。
+
+精简每一层的方法有如下几种：
+
+- [使用合适的基础镜像](https://zhuanlan.zhihu.com/p/161685245/edit#%E4%BD%BF%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F)（首选alpine，体积通常较小）Alpine 是一个高度精简又包含了基本工具的轻量级 Linux 发行版，基础镜像只有 4.41M，各开发语言和框架都有基于 Alpine 制作的基础镜像，强烈推荐使用它。进阶可以尝试使用scratch和busybox镜像进行基础镜像的构建。
+- [删除RUN的缓存文件](https://zhuanlan.zhihu.com/p/161685245/edit#%E5%88%A0%E9%99%A4run%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%87%E4%BB%B6)
+
+**Dockfile最佳实践**
+
+- 编写.dockerignore文件
+- 一个容器只运行单个应用
+- 基础镜像和生产镜像的标签不要使用latest
+- 设置WORKDIR和CMD
+- 使用ENTRYPOINT，并用exec启动命令（可选）
+- 相比ADD，优先使用COPY
+- 设置默认的环境变量，映射端口和数据卷
+- 使用LABEL设置镜像元数据
+- 添加HEALTHCHECK
+
+小结
+
 * 多使用 Dockerfile生成新镜像，减少commit方式生成的镜像。每commit一次相当于在原有基础镜像上再增加内容（因为docker文件系统为overlay，删除的文件目录仍会占用存储空间）。
 
 <br>
@@ -1580,6 +1706,16 @@ docker system prune
 ## 本章参考
 
 * 使用Docker Stack部署应用  https://zhuanlan.zhihu.com/p/182198031
+
+* Best practices for writing Dockerfiles. https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+* [docker多阶段构建](https://docs.docker.com/develop/develop-images/multistage-build/)
+
+* [三个技巧，将 Docker 镜像体积减小 90%](https://www.infoq.cn/article/3-simple-tricks-for-smaller-docker-images)
+
+* [优化Dockerfile最佳实践](https://blog.csdn.net/xyz_dream/article/details/89741751%3Futm_medium%3Ddistribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase%26depth_1-utm_source%3Ddistribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
+
+* [alpine3.12镜像](https://github.com/alpinelinux/docker-alpine/blob/90788e211ec6d5df183d79d6cb02e068b258d198/x86_64/Dockerfile)
 
 <br><br>
 
@@ -1591,7 +1727,25 @@ docker system prune
 * 运行镜像：docker run
 * 镜像都来自于官网 docker.io
 
-表格 3 常用基础镜像 （不改源码，只作最基础服务的镜像）
+表格 alpine基础镜像
+
+| images            | 镜像大小   | 实例描述        | 实例启动命令 run                   | 访问URL |
+| ----------------- | ------ | ----------- | ---------------------------- | ----- |
+| alpine            | 5.57MB | 安全的轻量级linux | docker run alpine echo '123' |       |
+| redis:alpine      | 32.4MB |             |                              |       |
+| python:3.4-alpine | 72.9MB |             |                              |       |
+|                   |        |             |                              |       |
+
+> Alpine: `Alpine` 操作系统是一个面向安全的轻型 `Linux` 发行版。它不同于通常 `Linux` 发行版，`Alpine` 采用了 `musl libc` 和 `busybox` 以减小系统的体积和运行时资源消耗，但功能上比 `busybox` 又完善的多，因此得到开源社区越来越多的青睐。在保持瘦身的同时，`Alpine` 还提供了自己的包管理工具 `apk`，可以通过 `https://pkgs.alpinelinux.org/packages` 网站上查询包信息，也可以直接通过 `apk` 命令直接查询和安装各种软件。
+
+```shell
+$ docker images |grep alpine
+alpine   latest       0ac33e5f5afa   5 weeks ago     5.57MB
+redis    alpine       3900abf41552   5 months ago    32.4MB
+python   3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
+```
+
+表格 常用基础镜像 （不改源码，只作最基础服务的镜像）
 
 | images     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 访问URL           |
 | ---------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --------------- |
@@ -1599,31 +1753,32 @@ docker system prune
 | tomcat     |        |                    |                                                                                           |                 |
 | mysql      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306 |
 | redis      | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   |                 |
+| mongo      |        |                    | docker run --name mongo -d mongo                                                          |                 |
 | python:3.5 |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                            |                 |
 | ubuntu     | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |                 |
 | tensorflow | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |                 |
 
 表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
 
-| images                         | 镜像大小   | 实例描述          | 实例启动命令 run                                                                                                                                                                         | 访问URL           |
-| ------------------------------ | ------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| jenkis                         |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                                                                                        | http://IP:8080/ |
-| elasticsearch                  |        | 单节点ES         | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0                                                          |                 |
-| amancevice/superset            | 2.25GB | 后台启动superset  | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                                                                              | http://IP:8088/ |
-| apache/superset:1.0.0          | 1.45GB | 同上。压缩后535MB   | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                                                                                   | 同上              |
-| wordpress +mysql               |        | 两个容器链接在一起     | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                                                                                      | http://IP/      |
-| apache/drill                   | 936MB  |               |                                                                                                                                                                                    |                 |
-| gitlab/gitlab-ce               | 1.92G  | 源仓管理          |                                                                                                                                                                                    |                 |
-| gitlab/gitlab-runner           | 390MB  | CICD支持        |                                                                                                                                                                                    |                 |
-| caturbhuja/vscode-server-3.1.1 | 885MB  | web版vscode    |                                                                                                                                                                                    |                 |
-| codercom/code-server           | 1.63GB | web版vscode    | docker run -d -u root -p 8088:8080 --name code-server -v /home/docker/code/config.yaml:/root/.config/code-server/config.yaml  -v /home/docker/code:/home/code codercom/code-server | http://IP:8088/ |
+| images                | 镜像大小   | 实例描述         | 实例启动命令 run                                                                                                                                                                                             | 访问URL            |
+| --------------------- | ------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| elasticsearch         |        | 单节点ES        | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0                                                                              |                  |
+| amancevice/superset   | 2.25GB | 后台启动superset | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                                                                                                  | http://IP:8088/  |
+| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB  | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                                                                                                       | 同上               |
+| wordpress +mysql      |        | 两个容器链接在一起    | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                                                                                                          | http://IP/       |
+| apache/drill          | 936MB  |              |                                                                                                                                                                                                        |                  |
+| minio                 | 406MB  | 对象存储         | `docker run -d -p 9000:9000 -p 9090:9090 --name minio1 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_PASSWORD=123456" -v /data:/data  --restart=always minio/minio server /data --console-address ':9090'` | `http://IP:9090/ |
+|                       |        |              |                                                                                                                                                                                                        |                  |
+
+> minio: **MinIO** 是一个基于 Apache License v2.0 开源协议的对象存储服务。它兼容亚马逊 S3 云存储服务接口，非常适合于存储大容量非结构化的数据，例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几 kb 到最大 5T 不等。
 
 表格 其它镜像 （基础和服务型镜像之外的）
 
-| images          | 镜像大小   | 实例描述       | 实例启动命令 run                                    | 访问URL |
-| --------------- | ------ | ---------- | --------------------------------------------- | ----- |
-| hello-world     | 13.3KB | 运行：打印帮助文档  | docker run hello-world                        |       |
-| getting-started | 27.4MB | docker帮助文档 | docker run -d -p 80:80 docker/getting-started |       |
+| images                   | 镜像大小   | 实例描述       | 实例启动命令 run                                                                                       | 访问URL |
+| ------------------------ | ------ | ---------- | ------------------------------------------------------------------------------------------------ | ----- |
+| hello-world              | 13.3KB | 运行：打印帮助文档  | docker run hello-world                                                                           |       |
+| docker/getting-started   | 27.4MB | docker入门文档 | docker run -d -p 80:80 docker/getting-started                                                    |       |
+| docker_practice:vuepress | 46.9MB | docker实践文档 | docker run -it --rm -p 4000:80 ccr.ccs.tencentyun.com/dockerpracticesig/docker_practice:vuepress |       |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 
@@ -1733,11 +1888,25 @@ $ docker cp [contain_id]:/xx xxx
    $ docker commit -m='add gcc' -a=keefewu [contain_id] keefe/ubuntu:3
    ```
 
-## 6.3  CICD之Jenkis
+## 6.3 Devop全家桶
 
-jenkis进阶使用详见：  [jenkins用户手册](./jenkins用户手册.md)
+表格  devops常用镜像
 
-jenkins官网 https://jenkins.io/
+| 镜像                             | 镜像大小   | 简介            | 运行命令                                                                                                                                                                                | 访问              |
+| ------------------------------ | ------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| gitlab/gitlab-ce               | 1.92G  | 源仓管理          |                                                                                                                                                                                     |                 |
+| gitlab/gitlab-runner           | 390MB  | CICD支持        |                                                                                                                                                                                     |                 |
+| caturbhuja/vscode-server-3.1.1 | 885MB  | web版vscode    |                                                                                                                                                                                     |                 |
+| codercom/code-server           | 1.63GB | web版vscode    | docker run -d -u root -p 8088:8080 --name code-server -v /home/docker/code/config.yaml:/root/.config/code-server/config.yaml  -v /home/ docker/code:/home/code codercom/code-server | http://IP:8088/ |
+| jenkis                         |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                                                                                         | http://IP:8080/ |
+
+### CICD之Jenkis
+
+jenkis进阶使用详见： [jenkins用户手册](./jenkins%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.md)
+
+jenkins官网 [https://jenkins.io/](https://jenkins.io/)
+
+安装： https://jenkins.io/zh/doc/book/installing/
 
 镜像：jenkins/jenkins:lts
 
@@ -2021,7 +2190,7 @@ Docker中文网站：https://www.docker-cn.com/
 
 Docker安装手册：https://docs.docker-cn.com/engine/installation/
 
-**Docker** **国内镜像**
+**Docker 国内镜像**
 
 网易加速器：http://hub-mirror.c.163.com
 
@@ -2047,8 +2216,6 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 
 [6]: Docker容器进入的4种方式 https://www.cnblogs.com/xhyan/p/6593075.html
 
-[7]: jenkins https://jenkins.io/zh/doc/book/installing/
-
 * Docker Secret管理和使用  https://www.jianshu.com/p/e1df30077d75
 
 * Docker安全配置及Docker-TLS加密  https://blog.csdn.net/kele_baba/article/details/119395564
@@ -2056,3 +2223,5 @@ daocloud：https://www.daocloud.io/mirror#accelerator-doc （注册后使用）
 * Docker Security: Using Docker Secrets With Swarm. https://dzone.com/articles/docker-security-using-docker-secrets-with-swarm
 
 * docker部署code-server https://www.cnblogs.com/barwe/p/14685389.html
+
+* docker从入门到实践  https://yeasy.gitbook.io/docker_practice/
