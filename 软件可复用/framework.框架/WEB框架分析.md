@@ -57,7 +57,7 @@
 
 ### python WEB框架
 
-详见 《[python框架分析](python框架分析.md)》web框架章节。
+详见 《[python框架分析](./python框架分析.md)》web框架章节。
 
 ## 1.2  WEB程序部署方式
 

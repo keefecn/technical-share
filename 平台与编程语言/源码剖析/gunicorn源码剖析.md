@@ -1,6 +1,6 @@
-| 序号 | 修改时间 | 修改内容                                   | 修改人 | 审稿人 |
-| ---- | -------- | ------------------------------------------ | ------ | ------ |
-| 1   | 2021-7-6 | 创建。新增gunicorn源码剖析。 | 同上   |   Keefe     |
+| 序号  | 修改时间     | 修改内容               | 修改人 | 审稿人   |
+| --- | -------- | ------------------ | --- | ----- |
+| 1   | 2021-7-6 | 创建。新增gunicorn源码剖析。 | 同上  | Keefe |
 
 <br><br><br>
 
@@ -8,12 +8,9 @@
 
 [TOC]
 
-
-
 <br>
 
 ---
-
 
 # gunicorn源码剖析
 
@@ -33,8 +30,6 @@ Requires: setuptools
 Required-by:
 ```
 
-
-
 **gunicorn特点**
 
 * Gunicorn是一个基于Python实现的动态Web服务器，实现了WSGI协议，可以与Django、Flask等Web框架集成。
@@ -49,53 +44,47 @@ Required-by:
 
 * Gunicorn的日志功能丰富，可以输出到控制台、日志文件或者syslog服务器，另外日志分为http请求访问日志和程序运行时的错误日志，这点借鉴了Apache的思路。
 
-
-
 ## 源码结构
 
 表格 gunicorn源码结构
 
-| 目录或文件       | 主要类或函数                               | 说明                                                      |
-| ---------------- | ------------------------------------------ | --------------------------------------------------------- |
-| app/             |                                            | app应用程序                                               |
-| app/base.py      | BaseApplication Application                | app基类                                                   |
-| app/pasterapp.py | PasterServerApplication                    |                                                           |
-| app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口                            |
-| http/            |                                            | http协议实现                                              |
-| http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                                             |
-| http/message.py  | Message, Request                           | HTTP请求体                                                |
-| http/parser.py   | Parser RequestParser                       | HTTP请求解析器                                            |
-| http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                                              |
-| http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                                                |
-| instrument/      | statsd.py                                  | Statsd类，客户端侧协议                                    |
-| works/           | base.py                                    | 工作进程基类，子类需要重载Worker:run                      |
-|                  | base_async.py                              | 异步模式的基类                                            |
-|                  | ggevent.py                                 | gevent模式                                                |
-|                  | geventlent.py                              | eventlet模式                                              |
-|                  | gtornado.py                                | tornado模式                                               |
-|                  | gthread.py                                 | gthread模式 单进程多线程(线程池)                          |
-|                  | sync.py                                    | 同步模式 单进程单线程                                     |
-|                  | workertmp.py                               | tmp文件，master监控worker进程的机制                       |
-| **arbiter.py**   | Arbiter                                    | 主进程，维护工作进程存活。                                |
+| 目录或文件            | 主要类或函数                                     | 说明                               |
+| ---------------- | ------------------------------------------ | -------------------------------- |
+| app/             |                                            | app应用程序                          |
+| app/base.py      | BaseApplication Application                | app基类                            |
+| app/pasterapp.py | PasterServerApplication                    |                                  |
+| app/wsgiapp.py   | WSGIApplication                            | WSGI应用实现，程序启动真正入口                |
+| http/            |                                            | http协议实现                         |
+| http/body.py     | ChunkedReader LengthReader EOFReader Body  | 读取HTTP BODY                      |
+| http/message.py  | Message, Request                           | HTTP请求体                          |
+| http/parser.py   | Parser RequestParser                       | HTTP请求解析器                        |
+| http/unreader.py | Unreader SocketUnreader IterUnreader       | 没读内容处理                           |
+| http/wsgi.py     | FileWrapper WSGIErrorsWrapper Response     | HTTP响应体                          |
+| instrument/      | statsd.py                                  | Statsd类，客户端侧协议                   |
+| works/           | base.py                                    | 工作进程基类，子类需要重载Worker:run          |
+|                  | base_async.py                              | 异步模式的基类                          |
+|                  | ggevent.py                                 | gevent模式                         |
+|                  | geventlent.py                              | eventlet模式                       |
+|                  | gtornado.py                                | tornado模式                        |
+|                  | gthread.py                                 | gthread模式 单进程多线程(线程池)            |
+|                  | sync.py                                    | 同步模式 单进程单线程                      |
+|                  | workertmp.py                               | tmp文件，master监控worker进程的机制        |
+| **arbiter.py**   | Arbiter                                    | 主进程，维护工作进程存活。                    |
 | config.py        | Config Setting                             | 配置相关包括配置文件和命令行参数，配置字段基类是Setting。 |
-| debug.py         | Spew                                       | 调试类                                                    |
-| erros.py         | HaltServer ConfigError AppImportError      | 定义了几种异常                                            |
-| glogging.py      | SafeAtoms  Logger                          | 全局日志                                                  |
-| reloader.py      | Reloader InotifyReloader                   | 模块重载实现                                              |
-| pidfile.py       | Pidfile                                    | gunicorn主进程ID文件                                      |
-| sock.py          | BaseSocket TCPSocket TCP6Socket UnixSocket | socket类，用来与客户端通讯                                |
-| systemd.py       | listen_fds sd_notify                       | socket函数封装扩展                                        |
-| util.py          |                                            | 工具函数                                                  |
+| debug.py         | Spew                                       | 调试类                              |
+| erros.py         | HaltServer ConfigError AppImportError      | 定义了几种异常                          |
+| glogging.py      | SafeAtoms  Logger                          | 全局日志                             |
+| reloader.py      | Reloader InotifyReloader                   | 模块重载实现                           |
+| pidfile.py       | Pidfile                                    | gunicorn主进程ID文件                  |
+| sock.py          | BaseSocket TCPSocket TCP6Socket UnixSocket | socket类，用来与客户端通讯                 |
+| systemd.py       | listen_fds sd_notify                       | socket函数封装扩展                     |
+| util.py          |                                            | 工具函数                             |
 
 说明：源码按目录结构可分为app实现、http实现和works实现、
-
-
 
 ![img](../../media/code/code_gunicorn_001.png)
 
 图 gunicorn代码间关联
-
-
 
 ## 主流程
 
@@ -105,8 +94,6 @@ gunicorn启动方式有二种，一是 自行启动方式；二是命令行启�
 
 * 自行启动：`python main.py`  要求main.py里面至少要实现一个app handler函数或者app handler类和一个app server类。本启动方式主要用于调试gunicorn
 * 命令行启动：`python -m gunicorn.app.wsgiapp $project.wsgi --chdir /path/to/$project-root -c /path/to/$project-cfg.py`
-
-
 
 法1： 自行启动
 
@@ -180,8 +167,6 @@ if __name__ == '__main__':
     # APPServer(APPHandler, options).run()
 ```
 
-
-
 法2： gunicorn脚本
 
 ```python
@@ -194,8 +179,6 @@ if __name__ == '__main__':
     sys.exit(run())
 ```
 
-
-
 **gunicorn启动方式（用户级）**
 
 ```shell
@@ -205,8 +188,6 @@ $ gunicorn -c gunicorn.conf app:app
 # 命令行启动：
 $ gunicorn --bind 0.0.0.0:8091 --access-logfile ~/.xx/g.access.log --error-logfile ~/.xx/g.error.log --log-level info --workers 4 --worker-class gevent --threads 20 --timeout 60  'xx.app:create_app()' &
 ```
-
-
 
 **gunicorn.conf** 配置文件示例:
 
@@ -232,8 +213,6 @@ errorlog = '/var/log/gunicorn_error.log'
 loglevel = 'warning'
 ```
 
-
-
 ### 主进程 arbiter.py
 
 主要通过信号量来控制查看工作进程状态。
@@ -248,6 +227,7 @@ loglevel = 'warning'
     USR1，重新打开由master和worker所有的日志处理
     USR2，重新运行master和worker
     WINCH，正常关闭所有worker进程，保持主控master进程的运行
+
 下面通过handle_xx 来作相应处理，xx为信号，如hanler_hup。
 
 ```python
@@ -314,7 +294,7 @@ class Arbiter(object):
     def run(self):
         """Main master loop.
         主循环，启动主进程并一直存活，管理工作进程manage_workers """
-        self.start()	# 启动监听socket，加载配置信息
+        self.start()    # 启动监听socket，加载配置信息
         util._setproctitle("master [%s]" % self.proc_name)
 
         try:
@@ -358,8 +338,6 @@ class Arbiter(object):
                 self.pidfile.unlink()
             sys.exit(-1)
 ```
-
-
 
 ## app应用程序 /app/
 
@@ -424,8 +402,6 @@ def run():
 if __name__ == '__main__':
     run()
 ```
-
-
 
 ### base.py
 
@@ -544,8 +520,6 @@ class Application(BaseApplication):
         super().run()    #调用父类方法启动主进程
 ```
 
-
-
 ## http协议  /http/
 
 ```python
@@ -556,13 +530,11 @@ from gunicorn.http.parser import RequestParser
 __all__ = ['Message', 'Request', 'RequestParser']
 ```
 
-
-
 ## works工作模式  /works/
 
 类体系：基类Worker -> SyncWorker -> AsyncWorker -> GeventWorker/EventletWorker/
 
-​									 -> ThreadWorker/TornadoWorker
+​                                     -> ThreadWorker/TornadoWorker
 
 工作进程支持多种工作模式，可分为同步sync 和异步async。
 
@@ -575,8 +547,6 @@ __all__ = ['Message', 'Request', 'RequestParser']
 * tornado  直接导入tornado模块，调用相关方法
 
 * gthread  单进程多线程，使用了标准库的线程池
-
-
 
 ```python
 #/gunicorn/works/__init__.py
@@ -592,8 +562,6 @@ SUPPORTED_WORKERS = {
 }
 ```
 
-
-
 ### 工作基类 base.py
 
 works/base.py
@@ -605,9 +573,9 @@ from gunicorn.workers.workertmp import WorkerTmp
 
 
 class Worker(object):
-	""" 工作模式基类,
-	run方法子类需要重载
-	init_process() 进程初始化，在方法最后调用 run()
+    """ 工作模式基类,
+    run方法子类需要重载
+    init_process() 进程初始化，在方法最后调用 run()
     """
     SIGNALS = [getattr(signal, "SIG%s" % x)
             for x in "ABRT HUP QUIT INT TERM USR1 USR2 WINCH CHLD".split()]
@@ -712,7 +680,7 @@ class Worker(object):
 
         # （重要）Enter main run loop  进入主循环
         self.booted = True
-        self.run() 	#派生类重载方法
+        self.run()     #派生类重载方法
 
     def load_wsgi(self)                  # 获得实现wsgi协议的app，如Flask
     def init_signals(self)
@@ -723,8 +691,6 @@ class Worker(object):
     def handle_error(self, req, client, addr, exc)
     def handle_winch(self, sig, fname)
 ```
-
-
 
 ### 同步模式 sync.py
 
@@ -740,7 +706,7 @@ import gunicorn.util as util
 import gunicorn.workers.base as base
 
 class SyncWorker(base.Worker):
-	""" 同步工作模式: run_for_one()处理单个时调用accept，处理多个时调用wait """
+    """ 同步工作模式: run_for_one()处理单个时调用accept，处理多个时调用wait """
     def accept(self, listener):
         client, addr = listener.accept()
         client.setblocking(1)
@@ -779,11 +745,9 @@ class SyncWorker(base.Worker):
 
         if len(self.sockets) > 1:  # 处理多个
             self.run_for_multiple(timeout)
-        else:	# 处理一个
+        else:    # 处理一个
             self.run_for_one(timeout)
 ```
-
-
 
 ### 异步模式基类 base_async.py
 
@@ -805,7 +769,7 @@ ALREADY_HANDLED = object()
 
 
 class AsyncWorker(base.Worker):
-	""" 继承 Worker"""
+    """ 继承 Worker"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.worker_connections = self.cfg.worker_connections
@@ -933,8 +897,6 @@ class AsyncWorker(base.Worker):
         return True
 ```
 
-
-
 ### 线程池模式 gthread.py
 
 依赖标准库模块 并发futures。
@@ -943,11 +905,11 @@ class AsyncWorker(base.Worker):
 
 ThreadWorker::init_process() ->
 
-​		run() ->
+​        run() ->
 
-​			accept() -->
+​            accept() -->
 
-​				enqueue_req 请求入队 (finish_request, handle, handle_request )
+​                enqueue_req 请求入队 (finish_request, handle, handle_request )
 
 ```python
 import concurrent.futures as futures  # 标准库并发，本处用了线程池
@@ -1040,10 +1002,7 @@ class ThreadWorker(base.Worker):
         # submit the connection to a worker
         fs = self.tpool.submit(self.handle, conn)
         self._wrap_future(fs, conn)
-
 ```
-
-
 
 ### gevent模式  ggevent.py
 
@@ -1147,10 +1106,7 @@ class GeventPyWSGIWorker(GeventWorker):
     "The Gevent StreamServer based workers."
     server_class = PyWSGIServer
     wsgi_handler = PyWSGIHandler
-
 ```
-
-
 
 ### eventlet模式  geventlet.py
 
@@ -1216,8 +1172,6 @@ class EventletWorker(AsyncWorker):
         eventlet.monkey_patch()
         patch_sendfile()
 ```
-
-
 
 ### tornado模式 gtornado.py
 
@@ -1329,8 +1283,6 @@ class TornadoWorker(Worker):
         self.ioloop.start()
 ```
 
-
-
 ## 配置信息 config.py
 
 config.py 定义了各种配置项，基类是Setting
@@ -1342,13 +1294,13 @@ from gunicorn import __version__, util
 from gunicorn.errors import ConfigError
 from gunicorn.reloader import reloader_engines
 
-KNOWN_SETTINGS = []		# 配置对象列表
+KNOWN_SETTINGS = []        # 配置对象列表
 PLATFORM = sys.platform
 
 class Config(object):
-	"""配置类"""
+    """配置类"""
     def __init__(self, usage=None, prog=None):
-        self.settings = make_settings()	 #构建一个配置名称和配置对象的字典 { str: Setting }
+        self.settings = make_settings()     #构建一个配置名称和配置对象的字典 { str: Setting }
         self.usage = usage
         self.prog = prog or os.path.basename(sys.argv[0])
         self.env_orig = os.environ.copy()
@@ -1428,16 +1380,9 @@ class Bind(Setting):
         """
 ```
 
-
-
-
-
-
-
 <br>
 
 ## 本章参考
 
 * 知乎专栏--Gunicorn源码分析 https://www.zhihu.com/column/c_1111933629604880384
 * Gunicorn源码分析（二）Worker进程 https://www.jianshu.com/p/ef50cc1706d5
-

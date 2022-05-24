@@ -4370,7 +4370,7 @@ curl -X 'POST' \
 
 #### 资源权限
 
-##### **菜单资源 menu**
+##### 菜单资源 menu
 
 使用flask_appbuilder模块的AppBuilder 来处理菜单权限。
 
@@ -4507,7 +4507,7 @@ class SecurityManager(BaseSecurityManager):
         """ 通过视图名获取所有权限 """
 ```
 
-#### **API访问权限**
+#### API访问权限
 
 API访问权限体现在二个方面，
 

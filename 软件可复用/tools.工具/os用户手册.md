@@ -220,7 +220,16 @@ Windows8启动相关分区有三个:
 | [腾讯会议](https://meeting.tencent.com/)           | 视频会议    | Win, Linux, Mac                      |                  |
 | [向日葵](https://sunlogin.oray.com/download/)     | 远程控制    | Win, Linux, Mac, Android             |                  |
 | [网易云音乐](https://music.163.com/)                | 云音乐     | Win, Linux, Mac                      |                  |
-|                                                |         |                                      |                  |
+
+### 常用功能
+
+表格  各OS环境常用功能的差异
+
+| 功能 \ OS        | Linux                                                                                  | Win             | MacOS                                                                      |
+| -------------- | -------------------------------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------- |
+| find 查找文件      | find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]  路径path是可选项，默认当前目录 | 不支持             | find [-H \| -L \| -P] [-EXdsx] [-f path] path ... [expression]  路径path是必选项 |
+| rename 批量重命名文件 | rename                                                                                 | move 功能较弱，不支持正则 | rename 批量文件名，然后右键重命名文件，支持字符串替换、首尾添加。                                       |
+|                |                                                                                        |                 |                                                                            |
 
 ### U盘启动盘
 
@@ -437,7 +446,7 @@ sudo ./run.sh
 
 **问题2：微信聊天框无法输出表情符号**
 
-一点击表情符号入口，程序就崩溃。
+描述：一点击表情符号入口，程序就崩溃。
 
 <br><br>
 
@@ -1071,6 +1080,7 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 * [程序员的macOS系列：Mac开发环境配置](https://ihtcboy.com/2018/09/30/2018-09-30_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9AMac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
 * 程序员的macOS系列：高效Alfred进阶  https://juejin.cn/post/6844904062484217863
 * 在macOS最新的Monterey上打开读写NTFS功能  https://zhuanlan.zhihu.com/p/442351683
+* 一分钟教你学会在MacOS中如何给文件批量重命名的技巧  https://www.jianshu.com/p/a814cad1a290
 
 <br>
 

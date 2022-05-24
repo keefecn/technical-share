@@ -1,17 +1,13 @@
-
-
-| 序号 | 修改时间  | 修改内容                            | 修改人 | 审稿人 |
-| ---- | --------- | ----------------------------------- | ------ | ------ |
-| 1    | 2021-8-24 | 创建。从《flask源码剖析》拆分成文。 | Keefe  | Keefe  |
-|      |           |                                     |        |        |
+| 序号  | 修改时间      | 修改内容                 | 修改人   | 审稿人   |
+| --- | --------- | -------------------- | ----- | ----- |
+| 1   | 2021-8-24 | 创建。从《flask源码剖析》拆分成文。 | Keefe | Keefe |
+|     |           |                      |       |       |
 
 <br><br><br>
 
 ---
 
 [TOC]
-
-
 
 <br>
 
@@ -23,16 +19,14 @@
 
 Flask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
 
-*  Google charts CSS and JS
-*  BootStrap CSS and JS
-*  BootsWatch Themes
-*  Font-Awesome CSS and FontsFlask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
-   *  Google charts CSS and JS
-   *  BootStrap CSS and JS
-   *  BootsWatch Themes
-   *  Font-Awesome CSS and Fonts
-
-
+* Google charts CSS and JS
+* BootStrap CSS and JS
+* BootsWatch Themes
+* Font-Awesome CSS and FontsFlask-AppBuilder是基于Flask实现的一个用于快速构建Web后台管理系统的简单的框架。主要用于解决构建Web后台管理系统时避免一些重复而繁琐的工作，提高项目完成时间，它可以和 Flask/Jinja2自定义的页面进行无缝集成，并且可以进行高级的配置。这个框架还集成了一些CSS和JS库，包括以下内容：
+  * Google charts CSS and JS
+  * BootStrap CSS and JS
+  * BootsWatch Themes
+  * Font-Awesome CSS and Fonts
 
 源码版本：Flask-AppBuilder-3.1.1
 
@@ -52,41 +46,37 @@ Required-by:
 
 Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-SQLAlchemy, Flask-JWT-Extended, Flask-Login, Flask, Flask-Babel, Flask-WTF, Flask-OpenID`
 
-
-
 ## 源码结构
 
 表格 flask_appbuilder源码结构
 
-| 目录或文件     | 主要类或函数                                                 | 说明                          |
-| -------------- | ------------------------------------------------------------ | ----------------------------- |
-| api            | 文件：convert.py manager.py schemas.py<br>类：BaseApi BaseModelApi ModelRestApi OpenApi OpenApiManager SwaggerView  BaseModelSchema<br>装饰器：rison safe expose |                               |
-| babel          | BabelManager LocaleView                                      | 依赖于flask_babel模块         |
-| charts         | dict_to_json views.py widgets.py                             | 图表                          |
-| models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py | 模型                          |
-| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py | 安全。                        |
-| static         | 目录：css datapicker fonts img js select2                    | 静态文件                      |
-| templates      | appbuilder/                                                  | Jinja2模板                    |
-| tests          |                                                              | 测试                          |
-| translations   |                                                              | 翻译                          |
-| utils          | get_column_root_relation  get_column_leaf  is_column_dotted lazy_formatter_gettext | 工具                          |
-| `__init__.py`  | BaseApi BaseModelApi ModelRestApi                            |                               |
-| actions.py     | action ActionItem                                            |                               |
-| base.py        | AppBuilder dynamic_class_import                              | app构建类（主类）             |
-| basemanager.py | BaseManager                                                  | 管理基类                      |
-| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView | 视图基类                      |
-| cli.py         | fab create_admin create_user...                              | 命令行，依赖click模块         |
-| console.py     | cli_app                                                      | 控制台命令工具，依赖click模块 |
-| const.py       |                                                              | 常量                          |
-| fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField | 值域，依赖于wtforms模块       |
-| filters.py     | app_template_filter TemplateFilters                          | 过滤器                        |
-| forms.py       | FieldConverter GeneralModelConverter DynamicForm             | 依赖于flask_wtf模块           |
-| hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks | 勾子方法                      |
-| menu.py        | MenuItem Menu MenuApi MenuApiManager                         | 菜单管理                      |
-| views.py       | IndexView UtilView SimpleFormView PublicFormView...          | 各种视图                      |
-| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...        | 依赖于flask_wtf模块           |
-
-
+| 目录或文件          | 主要类或函数                                                                                                                                                  | 说明                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| api            | 文件：convert.py manager.py schemas.py<br>类：BaseApi BaseModelApi ModelRestApi OpenApi OpenApiManager SwaggerView  BaseModelSchema<br>装饰器：rison safe expose |                   |
+| babel          | BabelManager LocaleView                                                                                                                                 | 依赖于flask_babel模块  |
+| charts         | dict_to_json views.py widgets.py                                                                                                                        | 图表                |
+| models         | generic/ mongoengine/ sqla/  filters.py groups.py mixins.py base.py                                                                                     | 模型                |
+| security       | mongoengine/ sqla/  api.py decorators.py forms.py manager.py registerviews.py views.py                                                                  | 安全。               |
+| static         | 目录：css datapicker fonts img js select2                                                                                                                  | 静态文件              |
+| templates      | appbuilder/                                                                                                                                             | Jinja2模板          |
+| tests          |                                                                                                                                                         | 测试                |
+| translations   |                                                                                                                                                         | 翻译                |
+| utils          | get_column_root_relation  get_column_leaf  is_column_dotted lazy_formatter_gettext                                                                      | 工具                |
+| `__init__.py`  | BaseApi BaseModelApi ModelRestApi                                                                                                                       |                   |
+| actions.py     | action ActionItem                                                                                                                                       |                   |
+| base.py        | AppBuilder dynamic_class_import                                                                                                                         | app构建类（主类）        |
+| basemanager.py | BaseManager                                                                                                                                             | 管理基类              |
+| baseviews.py   | expose expose_api  <br>BaseView BaseFormView BaseModelView BaseCRUDView                                                                                 | 视图基类              |
+| cli.py         | fab create_admin create_user...                                                                                                                         | 命令行，依赖click模块     |
+| console.py     | cli_app                                                                                                                                                 | 控制台命令工具，依赖click模块 |
+| const.py       |                                                                                                                                                         | 常量                |
+| fields.py      | AJAXSelectField QuerySelectField QuerySelectMultipleField EnumField                                                                                     | 值域，依赖于wtforms模块   |
+| filters.py     | app_template_filter TemplateFilters                                                                                                                     | 过滤器               |
+| forms.py       | FieldConverter GeneralModelConverter DynamicForm                                                                                                        | 依赖于flask_wtf模块    |
+| hooks.py       | before_request wrap_route_handler_with_hooks get_before_request_hooks                                                                                   | 勾子方法              |
+| menu.py        | MenuItem Menu MenuApi MenuApiManager                                                                                                                    | 菜单管理              |
+| views.py       | IndexView UtilView SimpleFormView PublicFormView...                                                                                                     | 各种视图              |
+| widgets.py     | RenderTemplateWidget FormWidget FormVerticalWidget...                                                                                                   | 依赖于flask_wtf模块    |
 
 ## 核心模块
 
@@ -130,8 +120,8 @@ class AppBuilder(object):
     # temporary list that hold addon_managers config key
     _addon_managers = None
 
-    menu = None			# 菜单对象
-    indexview = None	# 首页视图
+    menu = None            # 菜单对象
+    indexview = None    # 首页视图
 
     static_folder = None
     static_url_path = None
@@ -150,10 +140,10 @@ class AppBuilder(object):
         security_manager_class=None,
         update_perms=True,
     ):
-    	"""
-    	构建函数传参有app/session/menu/static/...
-    	security_manager_class -安全管理类，缺省是SecurityManager。用户可以自定义类。
-    	"""
+        """
+        构建函数传参有app/session/menu/static/...
+        security_manager_class -安全管理类，缺省是SecurityManager。用户可以自定义类。
+        """
         self.baseviews = []
         self._addon_managers = []
         self.addon_managers = {}
@@ -181,12 +171,12 @@ class AppBuilder(object):
         if _index_view is not None:
             self.indexview = dynamic_class_import(_index_view)
         else:
-            self.indexview = self.indexview or IndexView	# 若无值，则为IndexView对象（/根视图）
+            self.indexview = self.indexview or IndexView    # 若无值，则为IndexView对象（/根视图）
         _menu = app.config.get("FAB_MENU", None)
         if _menu is not None:
             self.menu = dynamic_class_import(_menu)
         else:
-            self.menu = self.menu or Menu()	# 若无值，则为Menu对象
+            self.menu = self.menu or Menu()    # 若无值，则为Menu对象
 
         if self.update_perms:  # default is True, if False takes precedence from config
             self.update_perms = app.config.get("FAB_UPDATE_PERMS", True)
@@ -201,7 +191,7 @@ class AppBuilder(object):
             from flask_appbuilder.security.sqla.manager import SecurityManager
             self.security_manager_class = SecurityManager  # 若无值，为SecurityManager对象
 
-      	self._addon_managers = app.config["ADDON_MANAGERS"]
+          self._addon_managers = app.config["ADDON_MANAGERS"]
         self.session = session
         self.sm = self.security_manager_class(self)
         self.bm = BabelManager(self)
@@ -214,7 +204,7 @@ class AppBuilder(object):
         # 增加2个视图：admin, addon
         self._add_admin_views()
         self._add_addon_views()
-        if self.app:	# 添加菜单权限
+        if self.app:    # 添加菜单权限
             self._add_menu_permissions()
         else:
             self.post_init()
@@ -223,7 +213,7 @@ class AppBuilder(object):
     def add_view_no_menu(self, baseview, endpoint=None, static_folder=None):
         """
             Add your views without creating a menu.
-			添加无菜单视图
+            添加无菜单视图
         :param baseview:
             A BaseView type class instantiated.
         """
@@ -266,8 +256,6 @@ class AppBuilder(object):
                 self._add_permissions_menu(category)
 ```
 
-
-
 ### 视图
 
 视图包括 API视图和普通视图。
@@ -275,21 +263,21 @@ class AppBuilder(object):
 * `/flask_appbuilder/api/__init__.py `    API基类 BaseApi(object)  -> BaseModelApi -> ModelRestApi 。API视图详见下文 API视图章节
 
 * /flask_appbuilder/baseview.py
+  
   * 路由装饰器函数  expose expose_api
   * 视图基类  BaseView(object) ->  BaseFormView/BaseModelView  --> BaseCRUDView(BaseModelView)
+
 * /flask_appbuilder/views.py  视图常见路由实现，如list/add/edit/download/...
 
 ```shell
 # 视图的层次体系: 类名带Base的实现一般在baseview.py
 RestAPI:   BaseApi(object)  -> BaseModelApi -> ModelRestApi
 ModelView:
-	BaseView(object)
-		-> BaseModelView -> BaseCRUDView	(baseview.py)
-			-> RestCRUDView -> ModelView    (views.py)
-		-> BaseFormView
+    BaseView(object)
+        -> BaseModelView -> BaseCRUDView    (baseview.py)
+            -> RestCRUDView -> ModelView    (views.py)
+        -> BaseFormView
 ```
-
-
 
 1. **路由扩展装饰器**：expose expose_api
 
@@ -333,12 +321,10 @@ def expose_api(name="", url="", methods=("GET",), description=""):
     return wrap
 ```
 
-
-
 2. **基础视图**： 包括CRUD方法的真正实现
-
+   
    flask_appbuilder/baseview.py
-
+   
    BaseView类的公有方法有：create_blueprint  render_template  get_redirect  get_default_url
 
 ```python
@@ -356,7 +342,7 @@ class BaseView(object):
     blueprint = None
     endpoint = None
 
-    route_base = None	# 此处基类根路由为空, 大create_blueprint中将类名作为根路由
+    route_base = None    # 此处基类根路由为空, 大create_blueprint中将类名作为根路由
     """ Override this if you want to define your own relative url """
 
     template_folder = "templates"
@@ -469,7 +455,7 @@ class BaseView(object):
         # If endpoint name is not provided, get it from the class name
         self.endpoint = endpoint or self.__class__.__name__
 
-        if self.route_base is None:	# 根路由为空时，用小写类名作为根路由。因此子类继承根路由就是子类的小写类名
+        if self.route_base is None:    # 根路由为空时，用小写类名作为根路由。因此子类继承根路由就是子类的小写类名
             self.route_base = "/" + self.__class__.__name__.lower()
 
         self.static_folder = static_folder
@@ -489,7 +475,7 @@ class BaseView(object):
                 template_folder=self.template_folder,
                 static_folder=static_folder,
             )
-        self._register_urls()	# 注册urls
+        self._register_urls()    # 注册urls
         return self.blueprint
 
     def _register_urls(self):
@@ -499,19 +485,16 @@ class BaseView(object):
         """
             Use this method on your own endpoints, will pass the extra_args
             to the templates.
-			填充2个参数：base_teimplate, appbuilder，然后调用flask模块的render_template函数
+            填充2个参数：base_teimplate, appbuilder，然后调用flask模块的render_template函数
             :param template: The template relative path
             :param kwargs: arguments to be passed to the template
         """
         kwargs["base_template"] = self.appbuilder.base_template
         kwargs["appbuilder"] = self.appbuilder
-        return render_template(	# 渲染模板
+        return render_template(    # 渲染模板
             template, **dict(list(kwargs.items()) + list(self.extra_args.items()))
         )
-
 ```
-
-
 
 3. 路由API实现  /flask_appbuilder/views.py
 
@@ -520,17 +503,15 @@ from .baseviews import BaseCRUDView, BaseFormView, BaseView, expose, expose_api
 
 class ModelView(RestCRUDView):
     """ 实现方法: list/add/edit/download/... """
-	@expose("/list/")
+    @expose("/list/")
     @has_access
     def list(self):
 
-        widgets = self._list()	#实现在BaseView._list()
+        widgets = self._list()    #实现在BaseView._list()
         return self.render_template(
             self.list_template, title=self.list_title, widgets=widgets
         )
 ```
-
-
 
 ### 菜单 menu.py
 
@@ -586,7 +567,7 @@ class MenuItem(object):
 class Menu(object):
     """ 菜单对象 """
     def __init__(self, reverse=True, extra_classes=""):
-        self.menu = []	#列表存储MenuItem
+        self.menu = []    #列表存储MenuItem
         if reverse:
             extra_classes = extra_classes + "navbar-inverse"
         self.extra_classes = extra_classes
@@ -598,7 +579,7 @@ class Menu(object):
     def find(self, name, menu=None):
     def add_category(self, category, icon="", label="", parent_category=""):
 
- 	def add_link( self, name, href="", icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None, ):
+     def add_link( self, name, href="", icon="", label="", category="", category_icon="", category_label="", baseview=None, cond=None, ):
         """ 根据category得到菜单，将name和对应的href添加到菜单下拉项 """
         label = label or name
         category_label = category_label or category
@@ -667,8 +648,6 @@ class MenuApiManager(BaseManager):
             self.appbuilder.add_api(MenuApi)
 ```
 
-
-
 ## 命令行 cli.py
 
 依赖模块click
@@ -687,8 +666,8 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  babel-compile       Babel, Compiles all translations	#1.3.0之前相当于pybable compile
-  babel-extract       Babel, Extracts and updates all messages marked for...	#相当于pybable extract
+  babel-compile       Babel, Compiles all translations    #1.3.0之前相当于pybable compile
+  babel-extract       Babel, Extracts and updates all messages marked for...    #相当于pybable extract
   collect-static      Copies flask-appbuilder static files to your projects...
   create-addon        Create a Skeleton AddOn (needs internet connection to...
   create-admin        Creates an admin user
@@ -705,8 +684,6 @@ Commands:
       1 [sig] bash 10116! get_proc_lock: Couldn't acquire sync_proc_subproc for(5,1), last 7, Win32 error 0
    2249 [sig] bash 10116! proc_subproc: couldn't get proc lock. what 5, val 1
 ```
-
-
 
 **命令示例 create-admin**
 
@@ -768,16 +745,9 @@ def create_admin(username, firstname, lastname, email, password):
         click.echo(click.style("Admin User {0} created.".format(username), fg="green"))
     else:
         click.echo(click.style("No user created an error occured", fg="red"))
-
 ```
 
-
-
 ## 模型 /models/
-
-
-
-
 
 ## 安全 /security/
 
@@ -789,17 +759,13 @@ def create_admin(username, firstname, lastname, email, password):
 * decorators.py 装饰器如has_access, has_access_api, permission_name, protect
 * api.py  API登陆认证
 
-
-
 ### 管理类 xx/manager.py
 
 类体系：(sqla/manager.py)SecurityManager ->
 
-​			   (manager.py)BaseSecurityManager -> AbstractSecurityManager ->
+​               (manager.py)BaseSecurityManager -> AbstractSecurityManager ->
 
-​			   (/flask_appbuilder/basemanager.py)BaseManager 管理类基类
-
-
+​               (/flask_appbuilder/basemanager.py)BaseManager 管理类基类
 
 /flask_appbuilder/basemanager.py
 
@@ -821,8 +787,6 @@ class BaseManager(object):
     def post_process(self):
         pass  # pragma: no cover
 ```
-
-
 
 /flask_appbuilder/security/manager.py
 
@@ -884,7 +848,7 @@ class BaseSecurityManager(AbstractSecurityManager):
     def is_item_public(self, permission_name, view_name):
         """
             Check if view has public permissions
-			检查视图是否有公共权限
+            检查视图是否有公共权限
             :param permission_name:
                 the permission: can_show, can_edit...
             :param view_name:
@@ -921,15 +885,15 @@ class BaseSecurityManager(AbstractSecurityManager):
         self, user: object, permission_name: str, view_name: str
     ) -> bool:
         """ 检查视图是否可访问：遍历用户拥有的所有角色，
-	        	先检查是否有内建角色并拥有权限，有则退出。
-    	    	再检查非内建角色的视图访问权限。
+                先检查是否有内建角色并拥有权限，有则退出。
+                再检查非内建角色的视图访问权限。
         """
         roles = user.roles
         db_role_ids = list()
         # First check against builtin (statically configured) roles
         # because no database query is needed
         for role in roles:  # 依次检查用户的每个角色
-            if role.name in self.builtin_roles:	#检查内建角色（一般有5个如Admin）权限
+            if role.name in self.builtin_roles:    #检查内建角色（一般有5个如Admin）权限
                 if self._has_access_builtin_roles(role, permission_name, view_name):
                     return True
             else: #非公共角色，添加角色到此
@@ -943,15 +907,13 @@ class BaseSecurityManager(AbstractSecurityManager):
         Check if current user or public has access to view or menu
         检查当前用户或公共用户是否能够访问视图或菜单
         """
-        if current_user.is_authenticated:	# 当前用户已认证
+        if current_user.is_authenticated:    # 当前用户已认证
             return self._has_view_access(g.user, permission_name, view_name)
-        elif current_user_jwt:	# 当前用户是JWT登陆
+        elif current_user_jwt:    # 当前用户是JWT登陆
             return self._has_view_access(current_user_jwt, permission_name, view_name)
-        else:	# 公共用户
+        else:    # 公共用户
             return self.is_item_public(permission_name, view_name)
 ```
-
-
 
 /flask_appbuilder/security/sqla/manager.py
 
@@ -981,12 +943,12 @@ class SecurityManager(BaseSecurityManager):
     """ 安全管理类，BRAC基于角色的访问控制，通过用户所拥有的角色集得到相应权限集。
     主要就是查找DB里的权限相关6张表，判断用户要访问的资源view/menu是否有相应权限(read/write/list/...)
     """
-    user_model = User						# ab_user表
-    role_model = Role						# ab_role表
-    permission_model = Permission			# ab_permisson表
-    viewmenu_model = ViewMenu				# ab_view_menu表
-    permissionview_model = PermissionView	# ab_permission_view表
-    registeruser_model = RegisterUser		# ab_regitser_user表
+    user_model = User                        # ab_user表
+    role_model = Role                        # ab_role表
+    permission_model = Permission            # ab_permisson表
+    viewmenu_model = ViewMenu                # ab_view_menu表
+    permissionview_model = PermissionView    # ab_permission_view表
+    registeruser_model = RegisterUser        # ab_regitser_user表
 
     def __init__(self, appbuilder):
 
@@ -998,9 +960,9 @@ class SecurityManager(BaseSecurityManager):
         示例：用户test1拥有角色[gamma,datasource_sync]，需要查看的视图Datasets，权限是can_read
         """
        q = (
-            self.appbuilder.get_session.query(self.permissionview_model)	# ab_permission_view表
+            self.appbuilder.get_session.query(self.permissionview_model)    # ab_permission_view表
             .join(
-                assoc_permissionview_role,	# ab_permission_view_role表
+                assoc_permissionview_role,    # ab_permission_view_role表
                 and_(
                     (
                         self.permissionview_model.id
@@ -1008,9 +970,9 @@ class SecurityManager(BaseSecurityManager):
                     )
                 ),
             )
-            .join(self.role_model)			# ab_role表
-            .join(self.permission_model)	# ab_permisson表
-            .join(self.viewmenu_model)		# ab_view_menu表
+            .join(self.role_model)            # ab_role表
+            .join(self.permission_model)    # ab_permisson表
+            .join(self.viewmenu_model)        # ab_view_menu表
             .filter(
                 self.viewmenu_model.name == view_name,
                 self.permission_model.name == permission_name,
@@ -1023,8 +985,6 @@ class SecurityManager(BaseSecurityManager):
             return self.appbuilder.get_session.query(literal(True)).filter(q).scalar()
         return self.appbuilder.get_session.query(q).scalar()
 ```
-
-
 
 ### 认证视图类 views.py
 
@@ -1080,8 +1040,6 @@ class AuthDBView(AuthView):
         )
 ```
 
-
-
 ### 安全装饰器 decorator.py
 
 /flask_appbuilder/security/decorators.py
@@ -1099,8 +1057,8 @@ from flask_login import current_user
 
 def protect(allow_browser_login=False):
     """
-    	浏览器登陆时，如果已经登陆，可以从session中取出相关数据作访问权限判断；若未登陆，需同下方非浏览器登陆。
-    	非浏览器登陆，需JWT验证，然后验证成功后作访问权限判断。
+        浏览器登陆时，如果已经登陆，可以从session中取出相关数据作访问权限判断；若未登陆，需同下方非浏览器登陆。
+        非浏览器登陆，需JWT验证，然后验证成功后作访问权限判断。
         Use this decorator to enable granular security permissions
         to your API methods (BaseApi and child classes).
         Permissions will be associated to a role, and roles are associated to users.
@@ -1134,25 +1092,25 @@ def protect(allow_browser_login=False):
             # Apply method permission name override if exists,
             # 赋值permission_str PERMISSION_PREFIX="can_", f._permission_name="read|write|list"
             permission_str = "{}{}".format(PERMISSION_PREFIX, f._permission_name)
-            if self.method_permission_name:	# dict={'method':"permisson_name"}
+            if self.method_permission_name:    # dict={'method':"permisson_name"}
                 _permission_name = self.method_permission_name.get(f.__name__)
                 if _permission_name:
                     permission_str = "{}{}".format(PERMISSION_PREFIX, _permission_name)
-            class_permission_name = self.class_permission_name	# 要作权限控制的类，如Dataset
+            class_permission_name = self.class_permission_name    # 要作权限控制的类，如Dataset
             if permission_str not in self.base_permissions:  #判断当前权限是否在基础权限范围
                 return self.response_401()
-            if current_app.appbuilder.sm.is_item_public(	#判断是否在公共权限内，是则正常执行
+            if current_app.appbuilder.sm.is_item_public(    #判断是否在公共权限内，是则正常执行
                 permission_str, class_permission_name
             ):
                 return f(self, *args, **kwargs)
             if not (self.allow_browser_login or allow_browser_login):
-                verify_jwt_in_request()	#非浏览器登陆，验证请求里的JWT
-            if current_app.appbuilder.sm.has_access(	#判断是否可访问
+                verify_jwt_in_request()    #非浏览器登陆，验证请求里的JWT
+            if current_app.appbuilder.sm.has_access(    #判断是否可访问
                 permission_str, class_permission_name
             ):
                 return f(self, *args, **kwargs)
-            elif self.allow_browser_login or allow_browser_login:	#浏览器登陆
-                if not current_user.is_authenticated:	#用户未认证，验证JWT
+            elif self.allow_browser_login or allow_browser_login:    #浏览器登陆
+                if not current_user.is_authenticated:    #用户未认证，验证JWT
                     verify_jwt_in_request()
                 if current_app.appbuilder.sm.has_access(
                     permission_str, class_permission_name
@@ -1216,8 +1174,6 @@ def has_access_api(f):
 
 def permission_name(name):
 ```
-
-
 
 ### api登陆 api.py
 
@@ -1295,10 +1251,6 @@ class SecurityApi(BaseApi):
         return self.response(200, **resp)
 ```
 
-
-
-
-
 ## 模板 /templates/
 
 依赖模块Jinja2。
@@ -1318,8 +1270,6 @@ class SecurityApi(BaseApi):
 
 **首页模板继承关系**： index.html  -> base.html -> baselayout.html -> init.html
 
-
-
 **首页布局**  /flask_appbuilder/templates/appbuilder/index.html
 
 ```jinja2
@@ -1333,8 +1283,6 @@ class SecurityApi(BaseApi):
 </div>
 {% endblock %}
 ```
-
-
 
 **首页缺省布局  appbuilder/baselayout.html **
 
@@ -1375,8 +1323,6 @@ class SecurityApi(BaseApi):
     {% endblock %}
 {% endblock %}
 ```
-
-
 
 **appbuilder/init.html  此模板才是最终HTML页面**
 
@@ -1440,8 +1386,6 @@ body实体定义4块，分别是body、tail_js、add_tail_js、tail。
 </html>
 ```
 
-
-
 appbuilder/baselib.html
 
 定义常用宏，主要是菜单和导航栏相关的代码块。包括menu_item menu_debug menu_block locale_menu navbar_block
@@ -1451,9 +1395,9 @@ appbuilder/baselib.html
     {% for item1 in menu.get_list() %}
         {{ item1.label }} {{ item1.href }}
             {% for item2 in item1.childs %}
-		        {{ item2.label }} {{ item2.href }}
-        	{% endfor %}
-	{% endfor %}
+                {{ item2.label }} {{ item2.href }}
+            {% endfor %}
+    {% endfor %}
 {% endmacro %}
 
 
@@ -1462,13 +1406,13 @@ appbuilder/baselib.html
     {% if item1 | is_menu_visible %}
         {% if item1.childs %}
             <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
             {% if item1.icon %}
-                <i class="fa {{item1.icon}}"></i>&nbsp;
+                <i class="fa {{item1.icon}}"></i> 
             {% endif %}
-				{{_(item1.label)}}<b class="caret"></b></a>
-		        <ul class="dropdown-menu">
-				{% set divider = False %}
+                {{_(item1.label)}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                {% set divider = False %}
             {% for item2 in item1.childs %}
                 {% if item2.name == '-' %}
                     {% set divider = True %}
@@ -1478,16 +1422,16 @@ appbuilder/baselib.html
                             <li class="divider"></li>
                             {% set divider = False %}
                         {% endif %}
-					        <li>{{ menu_item(item2) }}</li>
+                            <li>{{ menu_item(item2) }}</li>
                     {% endif %}
-					{% endif %}
-				{% endfor %}
-				</ul></li>
-			{% else %}
-				<li>
+                    {% endif %}
+                {% endfor %}
+                </ul></li>
+            {% else %}
+                <li>
                 {{ menu_item(item1) }}
-				</li>
-    	{% endif %}
+                </li>
+        {% endif %}
     {% endif %}
 {% endfor %}
 
@@ -1496,23 +1440,23 @@ appbuilder/baselib.html
 {% macro locale_menu(languages) %}
 {% set locale = session['locale'] %}
 {% if not locale %}
-	{% set locale = 'en' %}
+    {% set locale = 'en' %}
 {% endif %}
 <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-	   <div class="f16"><i class="flag {{languages[locale].get('flag')}}"></i><b class="caret"></b>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+       <div class="f16"><i class="flag {{languages[locale].get('flag')}}"></i><b class="caret"></b>
        </div>
-	</a>
+    </a>
     {% if languages.keys()|length > 1 %}
-	<ul class="dropdown-menu">
-	<li class="dropdown">
-		{% for lang in languages %}
-			{% if lang != locale %}
-        		<a tabindex="-1" href="{{appbuilder.get_url_for_locale(lang)}}">
-        		  <div class="f16"><i class="flag {{languages[lang].get('flag')}}"></i> - {{languages[lang].get('name')}}
-        		</div></a>
-        		{% endif %}
-        	{% endfor %}
+    <ul class="dropdown-menu">
+    <li class="dropdown">
+        {% for lang in languages %}
+            {% if lang != locale %}
+                <a tabindex="-1" href="{{appbuilder.get_url_for_locale(lang)}}">
+                  <div class="f16"><i class="flag {{languages[lang].get('flag')}}"></i> - {{languages[lang].get('name')}}
+                </div></a>
+                {% endif %}
+            {% endfor %}
         </li>
         </ul>
     {% endif %}
@@ -1530,15 +1474,15 @@ appbuilder/baselib.html
                     <span class="icon-bar"></span>
                 </button>
                 {% if appbuilder.app_icon %}
-                	<a class="navbar-brand" href="{{appbuilder.get_url_for_index}}">
-                	<img src="{{appbuilder.app_icon}}" >
-                	</a>
+                    <a class="navbar-brand" href="{{appbuilder.get_url_for_index}}">
+                    <img src="{{appbuilder.app_icon}}" >
+                    </a>
                 {% else %}
-                	<span class="navbar-brand">
-                	<a href="{{appbuilder.get_url_for_index}}">
-                	{{ appbuilder.app_name }}
-                	</a>
-                	</span>
+                    <span class="navbar-brand">
+                    <a href="{{appbuilder.get_url_for_index}}">
+                    {{ appbuilder.app_name }}
+                    </a>
+                    </span>
                 {% endif %}
         </div>
         <div class="navbar-collapse collapse">
@@ -1549,12 +1493,12 @@ appbuilder/baselib.html
                 {{ locale_menu(languages) }}
                 {% if not current_user.is_anonymous %}
                 <li class="dropdown">
-	               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	               <span class="fa fa-user"></span> {{g.user.get_full_name()}}<b class="caret"></b>
+                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                   <span class="fa fa-user"></span> {{g.user.get_full_name()}}<b class="caret"></b>
                    </a>
                     <ul class="dropdown-menu">
-			<li><a href="{{appbuilder.get_url_for_userinfo}}"><span class="fa fa-fw fa-user"></span>{{_("Profile")}}</a></li>
-			<li><a href="{{appbuilder.get_url_for_logout}}"><span class="fa fa-fw fa-sign-out"></span>{{_("Logout")}}</a></li>
+            <li><a href="{{appbuilder.get_url_for_userinfo}}"><span class="fa fa-fw fa-user"></span>{{_("Profile")}}</a></li>
+            <li><a href="{{appbuilder.get_url_for_logout}}"><span class="fa fa-fw fa-sign-out"></span>{{_("Logout")}}</a></li>
                     </ul>
 
                 </li>
@@ -1568,8 +1512,6 @@ appbuilder/baselib.html
 </div>
 {% endmacro %}
 ```
-
-
 
 appbuilder/nav_bar.html
 
@@ -1611,8 +1553,6 @@ appbuilder/nav_bar.html
 </div>
 ```
 
-
-
 **appbuilder/navbar_menu.html**
 
 导航栏菜单。从Appbuilder.menu获取菜单列表，宏menu_item获取单个菜单下拉项的icon/url/label。
@@ -1621,7 +1561,7 @@ appbuilder/nav_bar.html
 {% macro menu_item(item) %}
     <a tabindex="-1" href="{{item.get_url()}}">
        {% if item.icon %}
-        <i class="fa fa-fw {{item.icon}}"></i>&nbsp;
+        <i class="fa fa-fw {{item.icon}}"></i> 
     {% endif %}
     {{_(item.label)}}</a>
 {% endmacro %}
@@ -1633,7 +1573,7 @@ appbuilder/nav_bar.html
             <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
             {% if item1.icon %}
-                <i class="fa {{item1.icon}}"></i>&nbsp;
+                <i class="fa {{item1.icon}}"></i> 
             {% endif %}
             {{_(item1.label)}}<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -1657,8 +1597,6 @@ appbuilder/nav_bar.html
     {% endif %}
 {% endfor %}
 ```
-
-
 
 **appbuilder/navbar_right.html**
 
@@ -1711,12 +1649,10 @@ appbuilder/nav_bar.html
 {% endif %}
 ```
 
-
-
 ## API  /api/
 
 * `/flask_appbuilder/api/__init__.py `   API视图基类和装饰器
-*  /flask_appbuilder/api/manager.py  API文档
+* /flask_appbuilder/api/manager.py  API文档
 
 ### API视图和权限
 
@@ -1733,8 +1669,8 @@ class BaseApi(object):
     appbuilder = None
     blueprint = None
     endpoint: Optional[str] = None
-    version: Optional[str] = "v1"		 # 此处定义了API版本，若有版本升级，继承类可重新赋值，如v2
-    route_base: Optional[str] = None	 # 有值，则是路由根前缀
+    version: Optional[str] = "v1"         # 此处定义了API版本，若有版本升级，继承类可重新赋值，如v2
+    route_base: Optional[str] = None     # 有值，则是路由根前缀
     resource_name: Optional[str] = None  # 若route_base无值，则用来构建路由根前缀。若本变量值为空，则赋值为当前类名小写。
 
     """ 蓝图路径是 self.route_base or /api/vi/{resource_name.lower()} """
@@ -1805,7 +1741,7 @@ def safe(f):
 
 def rison(schema=None):
 """
-	示例：
+    示例：
             schema = {
                 "type": "object",
                 "properties": {
@@ -1823,8 +1759,6 @@ def rison(schema=None):
 """
 ```
 
-
-
 ### API文档
 
 API文档依赖于 apispec和marshmallow模块，文档传参字段类型要用到marshmallow的字段类型, 字段定义要继承marshmallow模块的Schema。
@@ -1836,11 +1770,10 @@ API文档schema定义在/docs/src/resources.openapi.json。
 openapi和swagger二种格式的API页面
 
 * `/api/<version>`     返回JSON格式，涉及配置项FAB_ADD_SECURITY_VIEWS 和 FAB_API_SWAGGER_UI
+
 * `/swagger/<version>`    返回HTML格式，涉及配置项FAB_API_SWAGGER_TEMPLATE
-
-
-
- /flask_appbuilder/api/manager.py
+  
+  /flask_appbuilder/api/manager.py
 
 ```python
 from apispec import APISpec
@@ -1942,11 +1875,9 @@ class OpenApiManager(BaseManager):
         if not self.appbuilder.app.config.get("FAB_ADD_SECURITY_VIEWS", True):
             return
         if self.appbuilder.get_app.config.get("FAB_API_SWAGGER_UI", False):
-            self.appbuilder.add_api(OpenApi)	#添加API类
-            self.appbuilder.add_view_no_menu(SwaggerView)	#添加视图类
+            self.appbuilder.add_api(OpenApi)    #添加API类
+            self.appbuilder.add_view_no_menu(SwaggerView)    #添加视图类
 ```
-
-
 
 /flask_appbuilder/template/appbuilder/swagger/swagger.html
 
@@ -1969,18 +1900,14 @@ class OpenApiManager(BaseManager):
         url: '{{openapi_uri}}',
         dom_id: '#swagger-ui',
         presets: [
-        	SwaggerUIBundle.presets.apis,
-        	SwaggerUIBundle.SwaggerUIStandalonePreset
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIBundle.SwaggerUIStandalonePreset
         ],
         layout: "BaseLayout"
     })
     </script>
 {% endblock %}
 ```
-
-
-
-
 
 <br>
 
@@ -2002,33 +1929,29 @@ Requires:
 Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-AppBuilder, apache-superset, alembic
 ```
 
-
-
 表格 sqlalchemy源码结构
 
-| 目录或文件    | 主要类或函数                                                 | 说明                                                         |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| connectors    | Connector MxODBCConnector PyODBCConnector ZxJDBCConnector    | 连接器                                                       |
-| databases     | `__all__`                                                    | 数据库。导入dialects目录下各种数据库名字空间。               |
-| dialects      | 目录：firebird mssql mysql oracle postgresql sqlite sybase   | 数据库方言，指符合SQL规范的数据库语言实现。<br>比如分页、限流等的关键字和实现方式不同。 |
-| engine        | create_engine engine_from_config  Engine<br>文件：base.py ... | 引擎                                                         |
-| event         | api.py attr.py base.py legacy.py registry.py                 | 事件处理                                                     |
-| ext           |                                                              | 扩展                                                         |
-| orm           | 重要                                                         | ORM模型                                                      |
-| pool          |                                                              | 数据库连接池的实现。                                         |
-| sql           | 重要                                                         |                                                              |
-| testing       |                                                              | 测试目录                                                     |
-| util          |                                                              | 工具                                                         |
-| events.py     | ConnectionEvents DDLEvents DialectEvents PoolEvents          | 事件。继承自event/base.py:Events                             |
-| exc.py        |                                                              | 定义各种异常。                                               |
-| inspection.py | inspect                                                      |                                                              |
-| interfaces.py | ConnectionProxy PoolListener                                 | 接口                                                         |
-| log.py        | InstanceLogger echo_property Identified                      | 日志                                                         |
-| processors.py |                                                              | 处理器。定义通用类型转化成函数。                             |
-| schema.py     | `__all__`                                                    | 模式。导入sql目录下模式相关各种类。                          |
-| types.py      | `__all__`                                                    | 定义可以导出的类/函数符号。                                  |
-
-
+| 目录或文件         | 主要类或函数                                                     | 说明                                              |
+| ------------- | ---------------------------------------------------------- | ----------------------------------------------- |
+| connectors    | Connector MxODBCConnector PyODBCConnector ZxJDBCConnector  | 连接器                                             |
+| databases     | `__all__`                                                  | 数据库。导入dialects目录下各种数据库名字空间。                     |
+| dialects      | 目录：firebird mssql mysql oracle postgresql sqlite sybase    | 数据库方言，指符合SQL规范的数据库语言实现。<br>比如分页、限流等的关键字和实现方式不同。 |
+| engine        | create_engine engine_from_config  Engine<br>文件：base.py ... | 引擎                                              |
+| event         | api.py attr.py base.py legacy.py registry.py               | 事件处理                                            |
+| ext           |                                                            | 扩展                                              |
+| orm           | 重要                                                         | ORM模型                                           |
+| pool          |                                                            | 数据库连接池的实现。                                      |
+| sql           | 重要                                                         |                                                 |
+| testing       |                                                            | 测试目录                                            |
+| util          |                                                            | 工具                                              |
+| events.py     | ConnectionEvents DDLEvents DialectEvents PoolEvents        | 事件。继承自event/base.py:Events                      |
+| exc.py        |                                                            | 定义各种异常。                                         |
+| inspection.py | inspect                                                    |                                                 |
+| interfaces.py | ConnectionProxy PoolListener                               | 接口                                              |
+| log.py        | InstanceLogger echo_property Identified                    | 日志                                              |
+| processors.py |                                                            | 处理器。定义通用类型转化成函数。                                |
+| schema.py     | `__all__`                                                  | 模式。导入sql目录下模式相关各种类。                             |
+| types.py      | `__all__`                                                  | 定义可以导出的类/函数符号。                                  |
 
 ![sqlalchemy](../../media/sf_reuse/framework/frame_sqlalchema.png)
 
@@ -2036,7 +1959,11 @@ Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-A
 
 说明：ORM框架在上层实现了无差别调用，归一化各种数据库连接参数Connection、查询语句关键字Dialect，屏蔽了数据库底层实现逻辑。
 
+* DBAPI: 第三方插件。如pymysql, mysqldb等等。
 
+* Dialect： 方言。指符合SQL语言规范的数据库语言实现，如不同数据库的分页关键字不一样。
+
+* Engine：
 
 **Database Urls**
 dialect[+driver]://username:password@host:port/database
@@ -2055,22 +1982,20 @@ engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
 engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 ```
 
-
-
 ### 引擎 /engine/
 
-| 文件           | 主要类或函数                                                 | 说明                                                       |
-| -------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
-| __`init__.py`  | create_engine engine_from_config                             | 定义了2个供外部使用的方法                                  |
-| base.py        | Connection Engine ExceptionContextImpl  Transaction <br/>NestedTransaction RootTransaction OptionEngine  TwoPhaseTransaction | 定义基类：连接、引擎、事务                                 |
-| default.py     |                                                              |                                                            |
-| interface.py   | Connectable CreateEnginePlugin Dialect  <br/>ExceptionContext ExecutionContext | 定义接口类                                                 |
-| reflection.py  |                                                              |                                                            |
-| result.y       |                                                              |                                                            |
-| strategirs.py  | EngineStrategy  DefaultEngineStrategy PlainEngineStrategy ThreadLocalEngineStrategy MockEngineStrategy | 引擎策略。                                                 |
-| threadlocal.py |                                                              | 线程本地数据                                               |
-| url.py         |                                                              | eingine组成 (RFC1738)： name://user:pwd@host:port/database |
-| utils.py       |                                                              | 工具                                                       |
+| 文件             | 主要类或函数                                                                                                                       | 说明                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| __`init__.py`  | create_engine engine_from_config                                                                                             | 定义了2个供外部使用的方法                                           |
+| base.py        | Connection Engine ExceptionContextImpl  Transaction <br/>NestedTransaction RootTransaction OptionEngine  TwoPhaseTransaction | 定义基类：连接、引擎、事务                                           |
+| default.py     |                                                                                                                              |                                                         |
+| interface.py   | Connectable CreateEnginePlugin Dialect  <br/>ExceptionContext ExecutionContext                                               | 定义接口类                                                   |
+| reflection.py  |                                                                                                                              |                                                         |
+| result.y       |                                                                                                                              |                                                         |
+| strategirs.py  | EngineStrategy  DefaultEngineStrategy PlainEngineStrategy ThreadLocalEngineStrategy MockEngineStrategy                       | 引擎策略。                                                   |
+| threadlocal.py |                                                                                                                              | 线程本地数据                                                  |
+| url.py         |                                                                                                                              | eingine组成 (RFC1738)： name://user:pwd@host:port/database |
+| utils.py       |                                                                                                                              | 工具                                                      |
 
 `/sqlalchemy/engine/__init__.py`
 
@@ -2101,8 +2026,6 @@ def engine_from_config(configuration, prefix="sqlalchemy.", **kwargs):
 __all__ = ("create_engine", "engine_from_config")
 ```
 
-
-
 /sqlalchemy/engine/strategies.py
 
 ```python
@@ -2130,15 +2053,15 @@ class DefaultEngineStrategy(EngineStrategy):
         最终返回 Engine实例
         """
         # create url.URL object
-        u = url.make_url(name_or_url)	#根据uri生成URL对象实例
+        u = url.make_url(name_or_url)    #根据uri生成URL对象实例
 
-        plugins = u._instantiate_plugins(kwargs)	#插件初始化
+        plugins = u._instantiate_plugins(kwargs)    #插件初始化
 
         u.query.pop("plugin", None)
         kwargs.pop("plugins", None)
 
-        entrypoint = u._get_entrypoint()	#根据传入url中的数据库类型(mysql)和驱动库(pymysql),来注册插件，返回dialect类
-        dialect_cls = entrypoint.get_dialect_cls(u)	#获取 dialect实例
+        entrypoint = u._get_entrypoint()    #根据传入url中的数据库类型(mysql)和驱动库(pymysql),来注册插件，返回dialect类
+        dialect_cls = entrypoint.get_dialect_cls(u)    #获取 dialect实例
 
         if kwargs.pop("_coerce_config", False):
 
@@ -2287,10 +2210,10 @@ class DefaultEngineStrategy(EngineStrategy):
 
         dialect_cls.engine_created(engine)
         if entrypoint is not dialect_cls:
-            entrypoint.engine_created(engine)	#创建引擎
+            entrypoint.engine_created(engine)    #创建引擎
 
         for plugin in plugins:
-            plugin.engine_created(engine)		#创建插件
+            plugin.engine_created(engine)        #创建插件
 
         return engine
 
@@ -2299,7 +2222,7 @@ class PlainEngineStrategy(DefaultEngineStrategy):
     """Strategy for configuring a regular Engine."""
 
     name = "plain"
-    engine_cls = base.Engine	#指定引擎类
+    engine_cls = base.Engine    #指定引擎类
 
 
 PlainEngineStrategy()
@@ -2322,29 +2245,15 @@ class MockEngineStrategy(EngineStrategy):
         ...
 ```
 
-
-
-
-
 /sqlalchemy/engine/url.py
-
-
-
-
 
 ### 方言 /dialects/
 
 Dialect就是用来操作不同数据库的行为，对应接口调用dbapi操作。
 
-
-
 ### ORM /orm/
 
-
-
 ### SQL /sql/
-
-
 
 ## apispec
 
@@ -2364,8 +2273,6 @@ Requires:
 Required-by: Flask-AppBuilder
 ```
 
-
-
 ## colorama
 
 跨平台的彩色终端文本支持。定义了颜色代码。
@@ -2384,20 +2291,16 @@ Requires:
 Required-by: Flask-AppBuilder, apache-superset
 ```
 
-
-
 表格 colorama源码结构说明
 
-| 目录或文件     | 主要类或函数                                     | 说明                 |
-| -------------- | ------------------------------------------------ | -------------------- |
+| 目录或文件          | 主要类或函数                                           | 说明           |
+| -------------- | ------------------------------------------------ | ------------ |
 | ansi.py        | AnsiCodes AnsiBack AnsiCursor AnsiFore AnsiStyle | 定义name和数值的对照 |
-| ansitowin32.py | StreamWrapper AnsiToWin32                        |                      |
-| initialise.py  | reset_all                                        |                      |
-| win32.py       | CONSOLE_SCREEN_BUFFER_INFO                       |                      |
-| winterm.py     | WinColor WinStyle WinTerm                        | 定义windows终端      |
-| `__init__.py`  | __`version__ = '0.4.4'`                          | 导入模块和版本定义   |
-
-
+| ansitowin32.py | StreamWrapper AnsiToWin32                        |              |
+| initialise.py  | reset_all                                        |              |
+| win32.py       | CONSOLE_SCREEN_BUFFER_INFO                       |              |
+| winterm.py     | WinColor WinStyle WinTerm                        | 定义windows终端  |
+| `__init__.py`  | __`version__ = '0.4.4'`                          | 导入模块和版本定义    |
 
 ## jsonschema
 
@@ -2417,8 +2320,6 @@ Requires: attrs, pyrsistent, setuptools, six
 Required-by: flask-restx, Flask-AppBuilder
 ```
 
-
-
 ## marshmallow
 
 用于将复杂数据类型与原生 Python 数据类型相互转换的轻量级库。
@@ -2437,27 +2338,23 @@ Requires:
 Required-by: marshmallow-sqlalchemy, marshmallow-enum, Flask-AppBuilder
 ```
 
-
-
 表格 marshmallow源码结构说明
 
-| 目录或文件        | 主要类或函数                                  | 说明                               |
-| ----------------- | --------------------------------------------- | ---------------------------------- |
-| base.py           | FieldABC SchemaABC                            | 基类                               |
-| class_registry.py | get_class register                            | 类注册，通过schema字符串找到类     |
-| decorators.py     | validates validates_schema ...                | 装饰器                             |
-| error_store.py    | ErrorStore  merge_errors                      | 错误存储                           |
-| exceptions.py     |                                               | 异常                               |
+| 目录或文件             | 主要类或函数                                        | 说明                   |
+| ----------------- | --------------------------------------------- | -------------------- |
+| base.py           | FieldABC SchemaABC                            | 基类                   |
+| class_registry.py | get_class register                            | 类注册，通过schema字符串找到类   |
+| decorators.py     | validates validates_schema ...                | 装饰器                  |
+| error_store.py    | ErrorStore  merge_errors                      | 错误存储                 |
+| exceptions.py     |                                               | 异常                   |
 | fields.py         | Field AwareDateTime Boolean Constant Date ... | 将各种复杂字段转化成python原生类型 |
-| orderedset.py     | OrderedSet                                    | 排序set                            |
-| py.typed          |                                               |                                    |
-| schema.py         | Schema SchemaMeta SchemaOpts                  | 模式                               |
-| types.py          | StrSequenceOrSet Tag Validator                | 定义3种类型的成员组成              |
-| utils.py          |                                               | 工具                               |
-| validate.py       | Validator And ContainsNoneOf ...              | 验证                               |
-| warnings.py       | RemovedInMarshmallow4Warning                  | 警告。空文件。                     |
-
-
+| orderedset.py     | OrderedSet                                    | 排序set                |
+| py.typed          |                                               |                      |
+| schema.py         | Schema SchemaMeta SchemaOpts                  | 模式                   |
+| types.py          | StrSequenceOrSet Tag Validator                | 定义3种类型的成员组成          |
+| utils.py          |                                               | 工具                   |
+| validate.py       | Validator And ContainsNoneOf ...              | 验证                   |
+| warnings.py       | RemovedInMarshmallow4Warning                  | 警告。空文件。              |
 
 fields.py
 
@@ -2503,8 +2400,6 @@ __all__ = [
 ]
 ```
 
-
-
 ## prison
 
 Rison编解码。
@@ -2522,8 +2417,6 @@ Location: d:\dev\venv\superset-py38-env\lib\site-packages
 Requires: six
 Required-by: Flask-AppBuilder
 ```
-
-
 
 ## PyJWT
 
@@ -2543,26 +2436,20 @@ Requires:
 Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
 ```
 
-
-
 表格 pyjwt源码结构说明 /jwt/
 
-| 目录或文件    | 主要类或函数 | 说明 |
-| ------------- | ------------ | ---- |
-| contrib/      |              |      |
-| `__init__.py` |              |      |
-| `__main__.py` |              |      |
-| algorithms.py |              | 算法 |
-| api_jws.py    |              |      |
-| api_jwt.py    |              |      |
-| compat.py     |              | 兼容 |
-| exceptions.py |              | 异常 |
-| help.py       |              | 帮助 |
-| utils.py      |              | 工具 |
-
-
-
-
+| 目录或文件         | 主要类或函数 | 说明  |
+| ------------- | ------ | --- |
+| contrib/      |        |     |
+| `__init__.py` |        |     |
+| `__main__.py` |        |     |
+| algorithms.py |        | 算法  |
+| api_jws.py    |        |     |
+| api_jwt.py    |        |     |
+| compat.py     |        | 兼容  |
+| exceptions.py |        | 异常  |
+| help.py       |        | 帮助  |
+| utils.py      |        | 工具  |
 
 <br>
 
@@ -2572,13 +2459,9 @@ Required-by: Flask-JWT, Flask-JWT-Extended, Flask-AppBuilder
 
 详见 《[flask源码剖析.md](./flask源码剖析.md)》
 
-
-
 ## flask_babel
 
 详见 《[中文化专题](../中文化专题.md)》babel章节
-
-
 
 ## flask_login
 
@@ -2617,8 +2500,6 @@ Flask-Login 为 Flask 提供了用户会话管理。它处理了日常的登入�
 - 处理超越 “登入或者登出” 之外的权限。
 - 处理用户注册或者账号恢复。
 
-
-
 **源码**
 
 * config.py  配置项如COOKIE_DURATION, COOKIE_SECURE, COOKIE_HTTPONLY, SESSION_PROTECTION等
@@ -2627,15 +2508,11 @@ Flask-Login 为 Flask 提供了用户会话管理。它处理了日常的登入�
 * signals.py  定义了一些信号
 * utils.py  工具类如user_login, user_logout, login_required
 
-
-
 **小结**：
 
 * flask-login 使用 Flask 提供的 session 来保存用户信息，通过 user_id 来记录用户身份，_id 来防止攻击者对 session 的伪造。
 * 通过 _request_ctx_stack.top.user，flask-login 实现了线程安全。
 * 通过 cookie 来实现 remember 功能。
-
-
 
 ### 配置项 config.py
 
@@ -2701,8 +2578,6 @@ USE_SESSION_FOR_NEXT = False
 SESSION_PROTECTION = "basic"
 ```
 
-
-
 ### 登陆管理 login_manager.py
 
 /flask_login/login_manager.py
@@ -2748,17 +2623,17 @@ class LoginManager(object):
 
         self._login_disabled = app.config.get('LOGIN_DISABLED', False)
 
-        if add_context_processor:	# Flask的上下文处理器中添加了一个用户上下文处理器， _user_context_processor为当前用户
+        if add_context_processor:    # Flask的上下文处理器中添加了一个用户上下文处理器， _user_context_processor为当前用户
             app.context_processor(_user_context_processor)
 
     def unauthorized(self):
        """ 未登陆的处理过程 """
        user_unauthorized.send(current_app._get_current_object())
 
-        if self.unauthorized_callback:	# 调用 未登陆回调函数
+        if self.unauthorized_callback:    # 调用 未登陆回调函数
             return self.unauthorized_callback()
 
-        if request.blueprint in self.blueprint_login_views:	# 定义登陆视图
+        if request.blueprint in self.blueprint_login_views:    # 定义登陆视图
             login_view = self.blueprint_login_views[request.blueprint]
         else:
             login_view = self.login_view
@@ -2766,7 +2641,7 @@ class LoginManager(object):
         if not login_view:
             abort(401)
 
-        if self.login_message:	# 登陆消息本地化显示回调函数
+        if self.login_message:    # 登陆消息本地化显示回调函数
             if self.localize_callback is not None:
                 flash(self.localize_callback(self.login_message),
                       category=self.login_message_category)
@@ -2790,19 +2665,19 @@ class LoginManager(object):
 
        config = current_app.config
        if config.get('SESSION_PROTECTION', self.session_protection):
-           deleted = self._session_protection()	# 配置项受保护会话，则需重新登陆用户
+           deleted = self._session_protection()    # 配置项受保护会话，则需重新登陆用户
            if deleted:
                return self.reload_user()
 
        is_missing_user_id = 'user_id' not in session
-       if is_missing_user_id:	# 会话中没有user_id，尝试从cookie或者header里获取用户信息
+       if is_missing_user_id:    # 会话中没有user_id，尝试从cookie或者header里获取用户信息
            cookie_name = config.get('REMEMBER_COOKIE_NAME', COOKIE_NAME)
            header_name = config.get('AUTH_HEADER_NAME', AUTH_HEADER_NAME)
            has_cookie = (cookie_name in request.cookies and
                          session.get('remember') != 'clear')
-           if has_cookie:  		# 有cookie 从cookie获取用户信息
+           if has_cookie:          # 有cookie 从cookie获取用户信息
                return self._load_from_cookie(request.cookies[cookie_name])
-           elif self.request_callback:			# 从request_callback获取用户信息
+           elif self.request_callback:            # 从request_callback获取用户信息
                return self._load_from_request(request)
            elif header_name in request.headers: # 从认证头获取用户信息
                return self._load_from_header(request.headers[header_name])
@@ -2811,8 +2686,6 @@ class LoginManager(object):
 
     ...
 ```
-
-
 
 ### 工具函数 utils.py
 
@@ -2913,11 +2786,11 @@ def login_required(func):
     """ 登陆需要装饰器，判断当前用户是否已验证 """
     @wraps(func)
     def decorated_view(*args, **kwargs):
-        if request.method in EXEMPT_METHODS:	# 例外方法
+        if request.method in EXEMPT_METHODS:    # 例外方法
             return func(*args, **kwargs)
-        elif current_app.login_manager._login_disabled:	# 不登陆
+        elif current_app.login_manager._login_disabled:    # 不登陆
             return func(*args, **kwargs)
-        elif not current_user.is_authenticated:	# 判断当前用户是否已验证，若未验证，跳转到未验证函数
+        elif not current_user.is_authenticated:    # 判断当前用户是否已验证，若未验证，跳转到未验证函数
             return current_app.login_manager.unauthorized()
         return func(*args, **kwargs)
     return decorated_view
@@ -2935,8 +2808,6 @@ def _create_identifier():
     return h.hexdigest()
 ```
 
-
-
 ### cookie里的session信息破解
 
 浏览器端的header信息
@@ -2953,8 +2824,6 @@ Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 说明：浏览器端的cookie保存的是JWT token信息，组成格式是`header.payload.signature`，完整格式是` f"{Base64URL(header)}.{Base64URL(payload)}.{signature}"`。
 
-
-
 session生成过程
 
 ```python
@@ -2965,10 +2834,7 @@ ident = self._session_identifier_generator()
 # /flask_login/utils.py
 # _create_identifier： base是作为哈希的盐值。示例：base = 'b\'127.0.0.1\'|b\'PostmanRuntime/7.28.1\''
 base = '{0}|{1}'.format(_get_remote_addr(), user_agent)
-
 ```
-
-
 
 cookie的操作
 
@@ -3018,9 +2884,9 @@ class LoginManager(object):
         secure = config.get('REMEMBER_COOKIE_SECURE', COOKIE_SECURE)
         httponly = config.get('REMEMBER_COOKIE_HTTPONLY', COOKIE_HTTPONLY)
 
-        if 'remember_seconds' in session:	# 记住秒数
+        if 'remember_seconds' in session:    # 记住秒数
             duration = timedelta(seconds=session['remember_seconds'])
-        else:	# 默认365天
+        else:    # 默认365天
             duration = config.get('REMEMBER_COOKIE_DURATION', COOKIE_DURATION)
 
         # prepare data: 生成cookie数据，实际数据是 f"{user_id}|{user_id的摘要数据}""
@@ -3103,10 +2969,6 @@ def decode_cookie(cookie):
         return payload
 ```
 
-
-
-
-
 ## flask_sqlalchemy
 
 http://www.pythondoc.com/flask-sqlalchemy/index.html
@@ -3135,8 +2997,6 @@ Required-by: Flask-Migrate, Flask-AppBuilder
 * _compat.py   py2&py3的兼容
 * model.py    定义3个新类型有NameMetaMixin, BindMetaMixin, DefaultMeta。定义Model基类。
 * utils.py 3个函数分别是parse_version, sqlalchemy_version, engine_config_warning
-
-
 
 /flask_sqlalchemy/model.py
 
@@ -3188,8 +3048,6 @@ class Model(object):
         return '<{0} {1}>'.format(type(self).__name__, pk)
 ```
 
-
-
 ## flask_wtf
 
 http://www.pythondoc.com/flask-wtf/
@@ -3210,8 +3068,6 @@ Requires: itsdangerous, WTForms, Flask
 Required-by: Flask-AppBuilder
 ```
 
-
-
 **功能**
 
 - 集成 wtforms。
@@ -3226,16 +3082,11 @@ Required-by: Flask-AppBuilder
 
 - 国际化集成。
 
-
-
-
 源文件
 
 * /flask_wtf/csrf.py  CSRFProtect类，产生和验证token方法
-
-
-
- /flask_wtf/csrf.py
+  
+  /flask_wtf/csrf.py
 
 ```python
 # /flask_wtf/csrf.py
@@ -3259,8 +3110,6 @@ class CSRFProtect(object):
 
             self.protect()
 ```
-
-
 
 ## flask-openid
 
@@ -3287,8 +3136,6 @@ if self.auth_type == AUTH_OID:
     self.oid = OpenID(app)
 ```
 
-
-
 ## flask-jwt
 
 依赖模块 PyJWT.
@@ -3306,8 +3153,6 @@ Location: d:\dev\venv\superset-py38-env\lib\site-packages
 Requires: PyJWT, Flask
 Required-by:
 ```
-
-
 
 仅一个源文件 `/flask_jwt/__init__.py`
 
@@ -3391,8 +3236,6 @@ class JWT(object):
     def init_app(self, app):
 ```
 
-
-
 ## flask-jwt-extended
 
 依赖模块 PyJWT.
@@ -3411,8 +3254,6 @@ Requires: Werkzeug, Flask, PyJWT, six
 Required-by: Flask-AppBuilder
 ```
 
-
-
 源文件：
 
 * config.py
@@ -3422,10 +3263,6 @@ Required-by: Flask-AppBuilder
 * tokens.py
 * utils.py
 * view_decorators.py
-
-
-
-
 
 <br>
 
