@@ -1940,6 +1940,29 @@ services:
       - /usr/bin/docker:/usr/bin/docker
 ```
 
+### docker远程调试sshd
+
+```shell
+# linux安装sshd：
+apt-get install openssh-server
+
+# linux开通ssh服务：
+/usr/sbin/sshd -D
+
+# 修改root密码：
+passwd root
+
+# 配置sshd：
+vim /etc/ssh/sshd_config
+PermitRootLogin yes         #允许root认证登录
+PasswordAuthentication yes  #允许密码认证
+
+# 重启sshd：
+service ssh restart
+```
+
+然后将上面容器重新保存为镜像，打个dev标签，后续就可将 用于远程登陆调试。
+
 <br><br>
 
 # 7 docker管理工具

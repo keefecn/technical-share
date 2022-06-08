@@ -184,7 +184,7 @@ Windows8启动相关分区有三个:
 ## 跨OS工具
 
 * 办公：参见 《[office办公软件高级教程.md](./office办公软件高级教程.md)》
-* 开发：参见  《[项目开发环境工具.md](./项目开发环境工具.md)》
+* 开发：参见 《[项目开发环境工具.md](./项目开发环境工具.md)》
 
 ### 软件推荐
 
@@ -229,7 +229,26 @@ Windows8启动相关分区有三个:
 | -------------- | -------------------------------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------- |
 | find 查找文件      | find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]  路径path是可选项，默认当前目录 | 不支持             | find [-H \| -L \| -P] [-EXdsx] [-f path] path ... [expression]  路径path是必选项 |
 | rename 批量重命名文件 | rename                                                                                 | move 功能较弱，不支持正则 | rename 批量文件名，然后右键重命名文件，支持字符串替换、首尾添加。                                       |
-|                |                                                                                        |                 |                                                                            |
+| md5 计算文件的md5值  | md5sum                                                                                 |                 | md5                                                                        |
+
+**小工具**
+
+* base64
+  
+  ```shell
+  # echo -n 不包括换行符；若命令行base64解码后尾部显示%，那说明没有换行符
+  # 编码
+  $ echo hello |base64
+  aGVsbG8K
+  $ echo -n hello |base64
+  aGVsbG8=
+  
+  # 解码
+  $ echo aGVsbG8K |base64 -d
+  hello
+  $ echo aGVsbG8= | base64 -d
+  hello% 
+  ```
 
 ### U盘启动盘
 
@@ -932,10 +951,11 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 | option+command+D   | 程序坞显示切换                                 |           |
 | option+command+esc | 打开强制退出的窗口                               |           |
 | option+command+W   | 快速关闭当前应用程序的所有窗口                         |           |
-| fn + F11           | 显示桌面                                    |           |
+| option+command+I   | 开发工具打开开关                                |           |
 | Shift+command + 4  | 截图                                      | +3全图，+4指定 |
 | Shift+command + 。  | Finder文件夹里显示隐藏文件开关                      |           |
 | command + <--      | 删除，相当于win里的delete键                      |           |
+| fn + F11           | 显示桌面                                    |           |
 | fn + 箭头            | 翻页功能。类似win里的pagedown, pageup, home, end |           |
 
 **Mac使用特点**
