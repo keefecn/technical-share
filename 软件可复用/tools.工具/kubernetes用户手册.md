@@ -52,23 +52,23 @@
 
 表格  K8s关键术语
 
-| 名词              | 释义                                                                                                      | 设计理念                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| API对象           | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。                                       | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
-| Pod             | 微服务，也称实例。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。                   |
-| 复制控制器 RC        | （Replication Controller，RC），RC是K8s集群中最早的保证Pod高可用的API对象。                                                 | 通过监控运行中的Pod来保证集群中运行指定数目的Pod副本（1~多个）。                                      |
-| 副本集 RS          | （Replica Set，RS）新一代RC，提供同样的高可用能力，区别主要在于RS后来居上，能支持更多种类的匹配模式。                                             | 副本集对象一般不单独使用，而是作为Deployment的理想状态参数使用。                                     |
-| 部署(Deployment)  | 部署表示用户对K8s集群的一次更新操作。部署是一个比RS应用模式更广的API对象，可以是创建/更新/滚动升级新服务                                               |                                                                           |
-| 服务（Service）     | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。Servcie Type目前有四种。                         | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。                               |
-| 任务（Job）         | Job是K8s用来控制批处理型任务的API对象。                                                                                | Job管理的Pod根据用户的设置把任务成功完成就自动退出了。                                            |
-| 后台支撑服务集         | （DaemonSet）后台支撑型服务的核心关注点在K8s集群中的节点（物理机或虚拟机），要保证每个节点上都有一个此类Pod运行。                                        |                                                                           |
-| 有状态服务集（PetSet）  | PetSet用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。                                                           | 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。          |
-| 集群联邦            | （Federation）为提供跨Region跨服务商K8s集群服务而设计的。                                                                  |                                                                           |
-| 存储卷             | （Volume）K8s的存储卷的生命周期和作用范围是一个Pod。                                                                        |                                                                           |
-|                 | 持久存储卷（Persistent Volume，PV）和持久存储卷声明（Persistent Volume Claim，PVC）                                        |                                                                           |
-| 节点（Node）        | K8s集群中的计算能力由Node提供。 Node可以是物理机也可以是虚拟机。                                                                  | K8s集群中的Node也就等同于Mesos集群中的Slave节点，是所有Pod运行所在的工作主机。                         |
-| 名字空间（Namespace） | 名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system                                   | 管理员可以可以创建新的名字空间满足需要。                                                      |
-| RBAC访问授权        | 基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。               | RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联                                     |
+| 名词               | 释义                                                                                                      | 设计理念                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| API对象            | K8s集群中的管理操作单元。K8s集群系统每支持一项新功能，引入一项新技术，一定会新引入对应的API对象，支持对该功能的管理操作。                                       | K8s中所有的配置都是通过API对象的spec去设置的。即所有的操作都是声明式（Declarative）的而不是命令式（Imperative）的。 |
+| Pod              | 微服务，也称实例。K8s集群中运行部署应用或服务的最小单元，它是可以支持多容器的。Pod是K8s集群中所有业务类型的基础，可以看作运行在K8s集群中的小机器人，不同类型的业务就需要不同类型的小机器人去执行。 | 支持多个容器在一个Pod中共享网络地址和文件系统，可以通过进程间通信和文件共享这种简单高效的方式组合完成服务。                   |
+| 复制控制器 RC         | （Replication Controller，RC），RC是K8s集群中最早的保证Pod高可用的API对象。                                                 | 通过监控运行中的Pod来保证集群中运行指定数目的Pod副本（1~多个）。                                      |
+| 副本集 RS           | （Replica Set，RS）新一代RC，提供同样的高可用能力，区别主要在于RS后来居上，能支持更多种类的匹配模式。                                             | 副本集对象一般不单独使用，而是作为Deployment的理想状态参数使用。                                     |
+| 部署(Deployment)   | 部署表示用户对K8s集群的一次更新操作。部署是一个比RS应用模式更广的API对象，可以是创建/更新/滚动升级新服务                                               |                                                                           |
+| 服务（Service）      | 在K8s集群中，客户端需要访问的服务就是Service对象。在K8s集群中微服务的负载均衡是由Kube-proxy实现的。Servcie Type目前有四种。                         | 每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。                               |
+| 任务（Job）          | Job是K8s用来控制批处理型任务的API对象。                                                                                | Job管理的Pod根据用户的设置把任务成功完成就自动退出了。                                            |
+| 后台支撑服务集          | （DaemonSet）后台支撑型服务的核心关注点在K8s集群中的节点（物理机或虚拟机），要保证每个节点上都有一个此类Pod运行。                                        |                                                                           |
+| 有状态服务集（PetSet）   | PetSet用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。                                                           | 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。          |
+| 集群联邦（Federation） | 为提供跨Region跨服务商K8s集群服务而设计的。                                                                              |                                                                           |
+| 存储卷（Volume）      | K8s的存储卷的生命周期和作用范围是一个Pod。                                                                                |                                                                           |
+|                  | 持久存储卷（Persistent Volume，PV）和持久存储卷声明（Persistent Volume Claim，PVC）                                        |                                                                           |
+| 节点（Node）         | K8s集群中的计算能力由Node提供。 Node可以是物理机也可以是虚拟机。                                                                  | K8s集群中的Node也就等同于Mesos集群中的Slave节点，是所有Pod运行所在的工作主机。                         |
+| 名字空间（Namespace）  | 名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system                                   | 管理员可以可以创建新的名字空间满足需要。                                                      |
+| RBAC访问授权         | 基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。               | RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联                                     |
 
 备注：其它常用术语还有密钥对象（Secret）、用户帐户（User Account）和服务帐户（Service Account）。从K8s的系统架构、技术概念和设计理念，我们可以看到K8s系统最核心的两个设计理念：一个是容错性，一个是易扩展性。容错性实际是保证K8s系统稳定性和安全性的基础，易扩展性是保证K8s对变更友好，可以快速迭代增加新功能的基础。
 
@@ -86,12 +86,12 @@
 
 4. 在云计算环境中，服务的作用距离范围从近到远一般可以有：同主机（Host，Node）、跨主机同可用区（Available Zone）、跨可用区同地区（Region）、跨地区同服务商（Cloud Service Provider）、跨云平台。K8s的设计定位是单一集群在同一个地域内，因为同一个地区的网络性能才能满足K8s的调度和计算存储连接要求。而联合集群服务就是为提供跨Region跨服务商K8s集群服务而设计的。
 
-5. Service的四种type:
+5. Service的四种type:  K8S通过Service对外暴露服务。
    
    - *ClusterIP*（默认） - 在集群中内部IP上暴露服务。此类型使Service只能从集群中访问。
    - *NodePort* - 通过每个 Node 上的 IP 和静态端口（NodePort）暴露服务。NodePort 服务会路由到 ClusterIP 服务，这个 ClusterIP 服务会自动创建。通过请求 `<NodeIP>:<NodePort>`，可以从集群的外部访问一个 NodePort 服务。
    - *LoadBalancer* - 使用云提供商的负载均衡器（如果支持），可以向外部暴露服务。外部的负载均衡器可以路由到 NodePort 服务和 ClusterIP 服务。
-   - *ExternalName* - 通过返回 `CNAME` 和它的值，可以将服务映射到 `externalName` 字段的内容，没有任何类型代理被创建。这种类型需要v1.7版本或更高版本`kube-dnsc`才支持。
+   - *ExternalName* - 通过返回 CNAME和它的值，可以将服务映射到 externalName 字段的内容，没有任何类型代理被创建。这种类型需要v1.7版本或更高版本`kube-dnsc`才支持。
 
 ## 2  技术原理篇
 
@@ -165,12 +165,12 @@ Kubernetes主要由以下几个核心组件组成： K8s Master的4个和K8s Nod
 
 除了核心组件，还有一些推荐的Add-ons：
 
-* kube-dns负责为整个集群提供DNS服务
-* Ingress Controller为服务提供外网入口
-* Heapster提供资源监控
-* Dashboard提供GUI
-* Federation提供跨可用区的集群
-* Fluentd-elasticsearch提供集群日志采集、存储与查询
+* kube-dns 负责为整个集群提供DNS服务
+* Ingress Controller 为服务提供外网入口
+* Heapster 提供资源监控
+* Dashboard 提供GUI，类似管理UI有scope, Promethus.
+* Federation 提供跨可用区的集群
+* Fluentd-elasticsearch 提供集群日志采集、存储与查询
 
 **分层架构**
 
@@ -233,7 +233,7 @@ Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的�
 | [Rancher](https://rancher.com/kubernetes/)                                       | 包含 Kubernetes 的容器管理平台。主要特点如下：跨供应商集群部署、用户管理 Web、用户界面、集成CI/CD管道。                                                                                            | 100％开源，该公司可提供咨询和支持服务          | 可使用名为 RKE 的 Kubernetes 安装工具。                   |
 | Canonical  Distribution of Kubernetes（[CDK](https://ubuntu.com/kubernetes)）      | 由 Linux 发行版 Ubuntu 背后的公司 Canonical 支持，相当于是一个可在主流公有云提供商和 OpenStack 等私有云解决方案上轻松部署的  vanilla Kubernetes，能够轻松设置并管理跨供应商的 Kubernetes 集群，用户界面是官方 Kubernetes 仪表板。 | 完全免费。但是，每个虚拟节点有几个支持包          | 可使用 Canonical 开发的部署工具 Conjure-up 或 Juju 来完成安装。 |
 | [Docker ](https://www.docker.com/products/kubernetes)社区版 /企业版                    | Docker  Enterprise 3.0添加了Docker Kubernetes服务                                                                                                              |                               |                                                |
-| Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service))   | 突出的特性是与VMware虚拟机堆栈紧密集成                                                                                                                                    |                               |                                                |
+| Pivotal 容器服务 ([PKS](https://pivotal.io/cn/platform/pivotal-container-service))   | 突出的特性是与VMware虚拟机堆栈紧密集成。                                                                                                                                   |                               |                                                |
 | [SUSE ](https://www.suse.com/products/caas-platform/)容器服务平台                      | SUSE CaaS平台让人想起CoreOS Tectonic，它结合了运行容器的裸机“微型”操作系统、Kubernetes、内置的镜像仓库和集群配置工具。                                                                             |                               |                                                |
 
 **下载并解压** **Kubernetes** **二进制文件**
@@ -258,16 +258,17 @@ $ ./kubernetes/cluster/get-kube-binaries.sh
 
 1. kubectl
    
-   ```sh
+   ```shell
    # apt-get方式安装，国内镜像：https://mirrors.aliyun.com/kubernetes/apt/
-   apt-get update && apt-get install -y apt-transport-https
-   curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
-   cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+   $ apt-get update && apt-get install -y apt-transport-https
+   $ curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+   $ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
    deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
    EOF
-   apt-get update
+   $ apt-get update
+   
    # 安装kubectl kubeadm
-   apt-get install -y kubelet kubeadm kubectl
+   $apt-get install -y kubelet kubeadm kubectl
    ```
 
 2. minikube
@@ -334,7 +335,7 @@ $ kubectl get nodes
 
 ### 3.3  vagrant创建单节点集群
 
-\# vagrant启动每个虚拟机约需1G内存。get.k8s.ios可能需翻墙访问。
+vagrant启动每个虚拟机约需1G内存。get.k8s.ios可能需翻墙访问。
 
 **法1：脚本部署**
 
@@ -351,12 +352,29 @@ curl -s3 https://get.k8s.io/ |bash
 2）进入虚拟机 /vagrant目录，执行下列命令
 
 ```shell
-$docker-compose -f k8s.yml up -d
-$docker ps
+$ docker-compose -f k8s.yml up -d
+$ docker ps
 $./kubectl get nodes
 ```
 
 ## 4  使用篇
+
+表格 K8S控制平面的开放端口
+
+| 协议  | 方向  | 端范围       | 作用                      | 使用者                        |
+| --- | --- | --------- | ----------------------- | -------------------------- |
+| TCP | 入站  | 6443      | Kubernetes API 服务器      | 所有组件                       |
+| TCP | 入站  | 2379-2380 | etcd 服务器客户端 AP          | kube-apiserver, etcd       |
+| TCP | 入站  | 10250     | Kubelet API             | kubelet 自身、控制平面组件          |
+| TCP | 入站  | 10251     | kube-scheduler          | kube-scheduler 自身          |
+| TCP | 入站  | 10252     | kube-controller-manager | kube-controller-manager 自身 |
+
+表格 K8S工作节点的开放端口
+
+| 协议  | 方向  | 端口范围        | 作用          | 使用者               |
+| --- | --- | ----------- | ----------- | ----------------- |
+| TCP | 入站  | 10250       | Kubelet API | kubelet 自身、控制平面组件 |
+| TCP | 入站  | 30000-32767 | NodePort 服务 | 所有组件              |
 
 ### 4.1 配置文件
 
@@ -379,11 +397,11 @@ namespace 就好比是一个大的分组，一个k8s集群内可以创建多个n
 
 ```shell
 # 创建资源对象命令
-$kubectl create -f xxx.yaml
+$ kubectl create -f xxx.yaml
 # 更新yaml文件
-$kubectl apply -f xxx.yaml
+$ kubectl apply -f xxx.yaml
 # 通过yaml文件删除此文件对应的资源对象，也可不用yaml文件删除资源对象
-$kubectl delete -f xxx.yaml
+$ kubectl delete -f xxx.yaml
 ```
 
 **Namespace示例**
@@ -621,6 +639,7 @@ kubectl [command] [TYPE] [NAME] [flags]
 * flags：指定可选的参数。例如，可以使用-s或者–server参数指定Kubernetes API server的地址和端口。
 
 ```shell
+# 以下是 kubectl支持命令
 Basic Commands (Beginner):
   create         Create a resource from a file or from stdin.
   expose         使用 replication controller, service, deployment 或者 pod 并暴露它作为一个新的Kubernetes Service
@@ -700,3 +719,5 @@ kubue-proxy：负责服务发现和负载均衡（轮询）。
 [11].  "Minikube - Kubernetes本地实验环境" https://yq.aliyun.com/articles/221687
 
 [12]. "k8s之启动namespace 、pod 、service，yaml配置文件详解，以及如何启动pod、service，如何删除pod、service"  https://blog.csdn.net/qq_31547771/article/details/102526403
+
+* k8s群集的三种的Web-UI界面部署（dashboard、scope、Prometheus）  https://blog.51cto.com/u_14320361/2473879

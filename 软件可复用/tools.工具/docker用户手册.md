@@ -250,13 +250,17 @@ Docker for Windows is a desktop application based on [Docker Community Edition (
 ```shell
 # 此处安装为 docker desktop，缺省使用k8s编排 
 # 安装后，docker路径在/Application/Docker.app
-$ brew install --cask docker
+% brew install --cask docker
 
 # 启动
-$ open /Application/Docker.app
-$ docker ps
+% open /Application/Docker.app
+% docker ps
 
 # 关闭要使用 launchctl list寻找任务名，再 launchctl stop [任务名]
+% launchctl list |grep docker
+-    0    com.docker.helper
+2264    0    application.com.docker.docker.1711053.1711058
+% launchctl stop 
 ```
 
 ## nvidia-docker2安装
@@ -617,6 +621,7 @@ Run 'docker COMMAND --help' for more information on a command.
 * docker network 容器网络
 * docker ps 查看进程
 * docker service 查看服务
+* docker stats 实时统计服务使用的资源情况
 
 **docker version**： 获取docker服务端和客户端版本
 
@@ -765,7 +770,21 @@ Registries: docker.io (secure)
    $ docker run --network=my-net --ip=172.25.3.3 -itd --name=my-container busybox
    ```
 
+3. 查看服务资源占用情况
+   
+   ```shell
+   # —no-stream可以不实时展示
+   $ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
+   NAME                                                     CPU %               MEM USAGE / LIMIT
+   sretest_extract_admin_html.1.rd0hmftqmkmkj6l72er8rme0a   0.00%               5.301MiB / 15.51GiB
+   sretest_retest.1.zbf6or7l08u7a8f99xcmw3g03               0.10%               137.7MiB / 15.51GiB
+   sretest_mysql.1.8scutj0ecm7wvxb1zbuklyd6d                3.73%               872.4MiB / 15.51GiB
+   prtainer-test                                            0.00%               19.46MiB / 15.51GiB
+   ```
+
 ### 4.2.3 容器运行 run
+
+
 
 **docker run命令**
 
@@ -869,7 +888,7 @@ docker container run -d --name web --expose 22 --expose 20 nginx
 # 运行一个新的容器，并且将这个容器的 80 端口映射到主机的 5000 端口
 docker container run -d --name web --network localnet -p 5000:80 nginx
 
-# 查看系统中的网桥
+# 查看系统中的网桥（centos命令不可用）
 brctl show
 ```
 
@@ -881,9 +900,25 @@ docker容器的四种网络模式：bridge 桥接模式、host 模式、containe
 | 网络模式      | 简介                                                                          | 备注                    |
 | --------- | --------------------------------------------------------------------------- | --------------------- |
 | Bridge    | 此模式会为每一个容器分配、设置IP等，并将容器连接到一个docker0虚拟网桥，通过docker0网桥以及Iptables nat表配置与宿主机通信。 | 缺省模式。--link只能使用在此模式下。 |
-| Host      | 容器将不会虚拟出自己的网卡，配置自己的IP等，而是使用宿主机的IP和端口。                                       |                       |
+| Host      | 容器将不会虚拟出自己的网卡、配置自己的IP等，而是使用宿主机的IP和端口。                                       |                       |
 | Container | 创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围。                                 | 两个容器的进程可以通过lo网卡设备通信。  |
 | None      | 该模式关闭了容器的网络功能。                                                              |                       |
+| overlay   | docker swarm支持模式。用于连接不同机器上的docker容器，允许不同机器上的容器相互通信，同时支持对消息进行加密。             |                       |
+
+**docker swarm网络**
+
+当我们初始化一个swarm或是加入到一个swarm中时，在docker主机上会出现两种网络：
+
+1. 名称为ingress的overlay网络，用于传递集群服务的控制或是数据消息，若在创建swarm服务时没有指定连接用户自定义的overlay网络，将会加入到默认的ingress网络。
+
+2. 名称为docker_gwbridge桥接网络会连接swarm中所有独立的docker系统进程。docker_gwbridge 默认就是使用`172.18.0.0/16`作为子网范围。
+   
+   ```shell
+   $ docker network ls
+   NETWORK ID          NAME                   DRIVER              SCOPE
+   e64a4026851d        docker_gwbridge        bridge              local
+   bgckv5kskicv        ingress                overlay             swarm
+   ```
 
 **安装Docker时，它会自动创建三个网络，bridge（创建容器默认连接到此网络）、none 、host**
 
@@ -1316,6 +1351,32 @@ Harbor由6个大的模块所组成：
 
 docker run -e > Dockerfile里定义的ENV > ~/.bashrc > /etc/.bashrc
 
+**容器运行时执行指令**
+
+CMD和ENTRYPOINT这两个指令配置容器的运行命令。Dockerfile里是CMD和ENTRYPOINT；Docker Compose files则是使用小写，command和entrypoint。
+
+* CMD/command指令：是当Docker镜像被启动后Docker容器将会默认执行的命令。一个Dockerfile仅仅最后一个CMD起作用。
+
+* ENTRYPOINT：用于设定容器启动时第一个运行的命令及其参数。运行镜像的时候，可以通过 `--entrypoint` 来覆盖默认的 `ENTRYPOINT` 命令。任何使用`docker run <image>`命令传入的参数都会附加在`entrypoint`指令之后，并且用此命令传入的参数会覆盖在Dockerfile中使用`CMD`指令设定的值。比如`docker run <image> bash`命令会将`bash`命令附加在`entrypoint`指令设定的值的后面。
+
+* RUN指令：是创建Docker镜像（image）的步骤，RUN指令对Docker容器（ container）造成的改变是会被反映到创建的Docker镜像上的。一个Dockerfile中可以有许多个RUN命令。另外docker run命令可用于启动一个容器。
+
+`CMD`和`ENTRYPOINT`都定义了容器运行时的执行命令。如下是它们的一些使用规则：
+
+1. `CMD`和`ENTRYPOINT`在Dockerfiles中应该至少应该有一个被定义。
+2. 当构建可执行容器时，应该定义`ENTRYPOINT`指令。
+3. `CMD`要么用于给`ENTRYPOINT`提供默认参数，要么用于在容器中执行一个特定命令。
+4. `CMD`可以通过容器启动命令`docker run`的参数来替换它。
+
+```shell
+# 法1 shell语法：命令作为字符串执行，并且会执行变量替换。
+ENTRYPOINT command param1 param2
+CMD command param1 param2
+
+# 法2 exce语法：命令和其参数以JSON数组的格式书写，更加安全
+CMD [“executable”, “param1”, “param2”…]
+```
+
 ### 单容器 Dockerfile
 
 [Dockerfile reference | Docker Documentation](https://docs.docker.com/engine/reference/builder/)
@@ -1366,6 +1427,7 @@ COPY redis.conf $BASE_DIR
 VOLUME $BASE_DIR/data
 
 # 容器启动时执行指令 CMD 或 ENTRYPOINT执行镜像中main命令
+# 下面示例：ENTRYPOINT启动redis-server，然后CMD启动了nginx
 ENTRYPOINT ['redis-server']
 CMD /usr/sbin/ngnix
 ```
@@ -1465,15 +1527,20 @@ version: "3.9"  # optional since v1.27.0
 services:
   web:
     build: .
-    ports:
+    ports:    #映射端口：宿主:容器
       - "5000:5000"
-    volumes:
+    volumes:  #挂载卷
       - .:/code
       - logvolume01:/var/log
-    links:
+    links:    # 或者用depends_on
       - redis
   redis:
-    image: redis
+    image: redis    # 镜像
+    restart: always    # 容器是否重启
+    environment:    # 环境变量
+      REDIS_HOST: redisx
+      REDIS_PORT: 6379
+
 volumes:
   logvolume01: {}
 ```
@@ -1482,6 +1549,9 @@ volumes:
 
 ```sh
 $ docker-compose up -d
+
+# 停止
+$ docker-compose down
 ```
 
 ### docker stack
@@ -1716,6 +1786,8 @@ IMAGE          CREATED        CREATED BY                                      SI
 * [优化Dockerfile最佳实践](https://blog.csdn.net/xyz_dream/article/details/89741751%3Futm_medium%3Ddistribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase%26depth_1-utm_source%3Ddistribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
 
 * [alpine3.12镜像](https://github.com/alpinelinux/docker-alpine/blob/90788e211ec6d5df183d79d6cb02e068b258d198/x86_64/Dockerfile)
+
+* Dockerfile中ENTRYPOINT和CMD的区别和最佳实践  https://www.jianshu.com/p/54cfa5721d5f
 
 <br><br>
 
@@ -2079,6 +2151,23 @@ This node joined a swarm as a worker.
 $ docker swarm join-token manager
 To add a manager to this swarm, run the following command:
     docker swarm join --token SWMTKN-1-106itx81w- 192.168.0.240:2377
+
+# 节点管理
+$ docker node
+Usage:  docker node COMMAND
+
+Manage Swarm nodes
+
+Commands:
+  demote      Demote one or more nodes from manager in the swarm
+  inspect     Display detailed information on one or more nodes
+  ls          List nodes in the swarm
+  promote     Promote one or more nodes to manager in the swarm
+  ps          List tasks running on one or more nodes, defaults to current node
+  rm          Remove one or more nodes from the swarm
+  update      Update a node
+
+Run 'docker node COMMAND --help' for more information on a command.
 
 
 # 查看节点

@@ -2482,32 +2482,34 @@ $ /d/dev/python/pypy2/pypy xxx.py       # pypy 2.5.8
    
    ```sh
    $ pip install virtualenv
+   
+   #下载离线包
+   $ pip download $package
+   $ pip install --download ${HOME}/.pip-packages'
    ```
 
-# 下载离线包
-
-$ pip download $package
-$ pip install --download ${HOME}/.pip-packages'
-
-```
 2. 离线安装
- $ pip install --no-index --find-links=file://${HOME}/.pip-packages/'
-
-**搭建virutalenv环境**
-*  创建环境，会在当前目录下自动生成gameprice-env目录，目录初始大小在30MB左右。若删除此目录，则相当于彻底删除了这个环境。
-*  刚开始创建环境(缺省--clear), 可用pip freeze查看当前环境已安装的第三方库，缺省为空；后续激活环境后pip安装的软件会放在此目录下。
-*  搭建环境过程会自动复制pip和python二进制程序。
-*  搭建完成后如果移动环境目录，则需要修改bin目录里的activate和pip里面的环境变量，这样才能保证正常找到环境里python路径。
-*  *virtualenv不能混用，python2和python3都需要安装自己的virtualenv。*
-
-```sh
-# -p 指定解释器,如下目录venv使用python2.7
-$ virtualenv -p /usr/bin/python2.7 --clear gameprice-env
-
-# 环境初始化时的目录结构
- (gameprice-env) denny@denny-ubuntu:~/venv/gameprice-env$ ls
-bin  include  lib  loca*  pip-selfcheck.json
-```
+   
+    $ pip install --no-index --find-links=file://${HOME}/.pip-packages/'`
+* * 搭建virutalenv环境**
+    
+    * 创建环境，会在当前目录下自动生成gameprice-env目录，目录初始大小在30MB左右。若删除此目录，则相当于彻底删除了这个环境。
+      
+      * 刚开始创建环境(缺省--clear), 可用pip freeze查看当前环境已安装的第三方库，缺省为空；后续激活环境后pip安装的软件会放在此目录下。
+        
+        * 搭建环境过程会自动复制pip和python二进制程序。
+          
+          * 搭建完成后如果移动环境目录，则需要修改bin目录里的activate和pip里面的环境变量，这样才能保证正常找到环境里python路径。
+            
+            * *virtualenv不能混用，python2和python3都需要安装自己的virtualenv。*
+        
+        ```
+        # -p 指定解释器,如下目录venv使用python2.7
+        $ virtualenv -p /usr/bin/python2.7 --clear gameprice-env
+        # 环境初始化时的目录结构
+        (gameprice-env) denny@denny-ubuntu:~/venv/gameprice-env$ ls
+        bin include lib loca* pip-selfcheck.json
+        ```
 
 **启动、停止virtaulenv**
 
@@ -2674,31 +2676,31 @@ except ImportError:
 
 说明：python2.7于2020.1.1终止支持，因此现在的python3版本无需再使用上述导入，已经默认支持。
 
-## 4.2     python安全编码
+## 4.2  python安全编码
 
 表格 26  已知不安全的库列表
 
-| 库名                       | 解决方案               | 库名              | 解决方案 |
-| ------------------------ | ------------------ | --------------- | ---- |
-| ast                      |                    | multiprocessing |      |
-| bastion                  |                    | os.exec         |      |
-| commands                 |                    | os.popen        |      |
-| cookie                   |                    | os.spawn        |      |
-| cPickle/pickle           |                    | os.system       |      |
-| eval                     | 换用ast.literal_eval | parser          |      |
-| marshal                  |                    | pipes           |      |
-| mktemp                   | 使用mktemps          | pty             |      |
-| rexec                    |                    | urlib2          |      |
-| shelve                   |                    | urlparse        |      |
-| subprocess               |                    | yaml            |      |
-| tarfile                  |                    | zipfile         |      |
-| 备注：                      |                    |                 |      |
-| 1.time.sleep             |                    |                 |      |
-| 因为time模块的广泛使用，有一定几率IO异常。 |                    |                 |      |
+| 库名             | 解决方案               | 库名              | 解决方案 |
+| -------------- | ------------------ | --------------- | ---- |
+| ast            |                    | multiprocessing |      |
+| bastion        |                    | os.exec         |      |
+| commands       |                    | os.popen        |      |
+| cookie         |                    | os.spawn        |      |
+| cPickle/pickle |                    | os.system       |      |
+| eval           | 换用ast.literal_eval | parser          |      |
+| marshal        |                    | pipes           |      |
+| mktemp         | 使用mktemps          | pty             |      |
+| rexec          |                    | urlib2          |      |
+| shelve         |                    | urlparse        |      |
+| subprocess     |                    | yaml            |      |
+| tarfile        |                    | zipfile         |      |
 
-2.随机数
-Python中的random模块用于生成随机数，虽然提供了多种方法，但都是伪随机数。
-使用/dev/random的随机数。
+> 备注： 
+
+1. time.sleep  因为time模块的广泛使用，有一定几率IO异常。
+2. 随机数
+   Python中的random模块用于生成随机数，虽然提供了多种方法，但都是伪随机数。
+   使用/dev/random的随机数。
 
 ```python
 >>> import random
@@ -2707,6 +2709,10 @@ Python中的random模块用于生成随机数，虽然提供了多种方法，�
 ```
 
 ### 安全遍历容器
+
+进程安全容器：   ``` from multiprocessing import Queue```
+
+线程安全容器：
 
 python的dict和list不是线程安全的。可用list(dict.keys())获取副本进行遍历。
 
@@ -2919,45 +2925,41 @@ pool.join()   # 主进程阻塞等待子进程的退出
 * Pthread即POSIX thread，Posix线程是一个POSIX标准线程，该标准定义内部API创建和操纵线程。
 
 * Gthread调用的是Glib库中的线程部分；GLib是GTK+和GNOME工程的基础底层核心程序库，是一个综合用途的实用的轻量级的C程序库。
-  
-  ```python
-  >>> dir(threading)
+
+```python
+>>> dir(threading)
   ['BoundedSemaphore', 'Condition', 'Event', 'Lock', 'RLock', 'Semaphore', 'Thread', 'ThreadError', 'Timer', '_BoundedSemaphore', '_Condition', '_DummyThread', '_Event', '_MainThread', '_RLock', '_Semaphore', '_Timer', '_VERBOSE', '_Verbose', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_active', '_active_limbo_lock', '_after_fork', '_allocate_lock', '_count', '_counter', '_deque', '_enumerate', '_format_exc', '_get_ident', '_limbo', '_newname', '_pickSomeNonDaemonThread', '_profile_hook', '_shutdown', '_sleep', '_start_new_thread', '_sys', '_test', '_time', '_trace_hook', 'activeCount', 'active_count', 'currentThread', 'current_thread', 'enumerate', 'local', 'setprofile', 'settrace', 'stack_size', 'warnings']
-  ```
+>>> dir(threading.Thread)
+>>> ['_Thread__bootstrap', '_Thread__bootstrap_inner', '_Thread__delete', '_Thread__exc_clear', '_Thread__exc_info', '_Thread__initialized', '_Thread__stop', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_block', '_note', '_reset_internal_locks', '_set_daemon', '_set_ident', 'daemon', 'getName', 'ident', 'isAlive', 'isDaemon', 'is_alive', 'join', 'name', 'run', 'setDaemon', 'setName', 'start']
 
-> > > dir(threading.Thread)
-> > > ['_Thread__bootstrap', '_Thread__bootstrap_inner', '_Thread__delete', '_Thread__exc_clear', '_Thread__exc_info', '_Thread__initialized', '_Thread__stop', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_block', '_note', '_reset_internal_locks', '_set_daemon', '_set_ident', 'daemon', 'getName', 'ident', 'isAlive', 'isDaemon', 'is_alive', 'join', 'name', 'run', 'setDaemon', 'setName', 'start']
-
-> > > import thread
-> > > dir(thread)
-> > > ['LockType', '__doc__', '__name__', '__package__', '_count', '_local', 'allocate', 'allocate_lock', 'error', 'exit', 'exit_thread', 'get_ident', 'interrupt_main', 'stack_size', 'start_new', 'start_new_thread']
-
+>>> import thread
+>>> dir(thread)
+>>> ['LockType', '__doc__', '__name__', '__package__', '_count', '_local', 'allocate', 'allocate_lock', 'error', 'exit', 'exit_thread', 'get_ident', 'interrupt_main', 'stack_size', 'start_new', 'start_new_thread']
 ```
+
 **全局解释性锁（Global Interpreter Lock, GIL）**
+
 Python并不支持真正意义上的多线程。Python中提供了[多线程包](https://docs.python.org/2/library/threading.html)，但是如果你想通过多线程提高代码的速度，使用多线程包并不是个好主意。Python中有一个被称为Global Interpreter Lock（GIL）的东西，它会确保任何时候你的多个线程中，只有一个被执行。线程的执行速度非常之快，会让你误以为线程是并行执行的，但是实际上都是轮流执行。经过GIL这一道关卡处理，会增加执行的开销。这意味着，如果你想提高代码的运行速度，使用threading包并不是一个很好的方法。
 
 表格 29 python多线程模块列表
-| 模块名称     | 说明     | 备注  |
-| ------------ | ------------------------------------------------------------ | ------------------ |
-| thread       | 只有一种原子操作。不支持守护线程。  | 不建议使用此模块。 |
-| threading    | 线程对象threading.Thread，支持较多的同步机制。没有读写锁，只有可重入锁RLock。 | OK    |
-| Queue        | python2已删，同步的先进先出队列FIFO。源码在lib/Queue.c。<br>python3的Queue是线程安全的，from queue import Queue | OK                 |
-| mutex        | 互斥对象。            |       |
-| SocketServer | 具有线程控制的TCP和UDP管理器       |       |
 
-
+| 模块名称         | 说明                                                                                     | 备注        |
+| ------------ | -------------------------------------------------------------------------------------- | --------- |
+| thread       | 只有一种原子操作。不支持守护线程。                                                                      | 不建议使用此模块。 |
+| threading    | 线程对象threading.Thread，支持较多的同步机制。没有读写锁，只有可重入锁RLock。                                      | OK        |
+| Queue        | python2已删，同步的先进先出队列FIFO。源码在lib/Queue.c。<br>python3的Queue是线程安全的，from queue import Queue | OK        |
+| mutex        | 互斥对象。                                                                                  |           |
+| SocketServer | 具有线程控制的TCP和UDP管理器                                                                      |           |
 
 #### 4.3.2.1 线程安全
 
 python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)是线程安全的（使用了threading模块的同步机制Lock/Condition），而其它的容器如list/dict是线程不安全的。
 多线程编程的准标准库[posix pthread](https://computing.llnl.gov/tutorials/pthreads/)库拥有rwlock, 而python2.7自带的threading库没有读写锁，只有可重入锁RLock。
 
-*  可重入锁。 可重入锁是指同一个锁可以多次被同一线程加锁而不会死锁。 实现可重入锁的目的是防止递归函数内的加锁行为，或者某些场景内无法获取锁A是否已经被加锁，这时如果不使用可重入锁就会对同一锁多次重复加锁，导致立即死锁。
-*  读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
- *  当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
- *  当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
-
-
+* 可重入锁。 可重入锁是指同一个锁可以多次被同一线程加锁而不会死锁。 实现可重入锁的目的是防止递归函数内的加锁行为，或者某些场景内无法获取锁A是否已经被加锁，这时如果不使用可重入锁就会对同一锁多次重复加锁，导致立即死锁。
+* 读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
+  * 当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
+  * 当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
 
 **多锁的嵌套使用方式**
 正确的实现应该是按照C++中的RAII（resource acquisition is initialization， 资源获取初始化）原则加解锁， 在Python中使用with语法
