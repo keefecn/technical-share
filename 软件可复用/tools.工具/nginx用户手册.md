@@ -67,20 +67,25 @@ nginx支持以下功能
 
 # 2   入门篇
 
-安装
+## 安装
 
 ```shell
 # ubuntu安装，安装后配置文件在 /etc/nginx/nginx.conf
 $ sudo apt-get install nginx
+
+# mac安装，安装后配置文件在 /opt/homebrew/etc/nginx/nginx.conf
+% brew install nginx
+% brew services start nginx 
+# 查看nginx相关信息
+% brew info nginx
+% nginx -V
 ```
-
-
 
 ## 常用命令
 
 ```sh
-$ nginx -v 			 # 查看nginx版本
-$ nginx -s reload  	# 重新加载配置文件
+$ nginx -v              # 查看nginx版本
+$ nginx -s reload      # 重新加载配置文件
 $ nginx -s stop  # 关闭服务
 $ nginx          # 启动服务
 $ nginx -t       # 检测配置文件
@@ -117,7 +122,9 @@ nginx重启可以分成几种类型
    kill -QUIT `cat /usr/local/nginx/nginx.pid`
    sudo /usr/local/nginx/nginx
    ```
+
 2. [重新加载配置文件，不重启进程，不会停止处理请求](http://www.nginx.cn/nginxchscommandline#reload config)
+
 3. [平滑更新nginx二进制，不会停止处理请求](http://www.nginx.cn/nginxchscommandline#reload bin)
 
 **nginx日志切割**
@@ -146,10 +153,10 @@ nginx重启可以分成几种类型
 │   ├── 50-mod-mail.conf -> /usr/share/nginx/modules-available/mod-mail.conf
 │   └── 50-mod-stream.conf -> /usr/share/nginx/modules-available/mod-stream.conf
 ├── nginx.conf   #常规设置，如代理、负载均衡
-├── proxy_params	#代理参数
+├── proxy_params    #代理参数
 ├── scgi_params
 ├── sites-available
-│   └── default		#缺省设置如listen port、index
+│   └── default        #缺省设置如listen port、index
 ├── sites-enabled
 │   └── default -> /etc/nginx/sites-available/default
 ├── snippets
@@ -315,7 +322,7 @@ alias是一个目录别名的定义，root则是最上层目录的定义。alias
 
 ```nginx
 location /request_path/image/ {
-   root /local_path/;      #实际访问路径:/local_path/request_path/image/cat.png
+   root /local_path/;    #实际访问路径:/local_path/request_path/image/cat.png
    alias /local_path/;   #实际访问路径:/local_path/cat.png
 }
 ```
@@ -419,7 +426,7 @@ http {  #http块
         server_name  localhost;
 
         location / {
-            root   html;
+            root   html;    # 默认根路径
             index  index.html index.htm;
         }
 

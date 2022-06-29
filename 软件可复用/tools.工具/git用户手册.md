@@ -433,7 +433,15 @@ git branch -r  # 查看远程branch
 git checkout -b bug_fix_local bug_fix_remote  # 把本地端切换为远程的bug_fix_remote branch并命名为bug_fix_local
 ```
 
-## 3.2   正常的工作流程
+## 3.2  正常的工作流程
+
+表格  git工作流模式
+
+| Git工作流模式    | 特性概要                                                            | 适用团队规模 |
+| ----------- | --------------------------------------------------------------- | ------ |
+| Git Flow    | · 经典工作模式 <br>· 复杂但严谨<br>· 内耗大但安全稳定<br>· 全流程可控可追溯                | 20人以上  |
+| GitHub Flow | · 基于分支合并评审的工作模式<br>· 重视小团队的线上合作<br>· 适用于敏捷开发及DevOps             | 5~20人  |
+| Trunk Based | · 仅使用一条Trunk分支<br>·简约的工作模式<br>· 规避合并冲突<br>· 适用于个人项目、敏捷开发及DevOps | 5人以下   |
 
 常用命令：git  init/diff/add/rm/status/show/log/commit
 
@@ -868,7 +876,7 @@ filter-branch 可以全局修改分支的历史记录。
 ```sh
 do_commit_filter()
 {       # '=' seems 完全相同，通配符＊不起作用
-   git filter-branch -f --commit-filter '
+       git filter-branch -f --commit-filter '
        if [ "${GIT_AUTHOR_NAME}" = denny ];
        then
          GIT_COMMITTER_NAME="Denny Wu";
@@ -1281,6 +1289,7 @@ cpan> install XXX:XXX
 [8]. github http://gooss.org/the-use-of-git-and-github-management-development/
 
 * 分布式的工作流程 http://gitbook.liuhui998.com/3_6.html
+* 3种常用Git工作流推荐  https://huaweicloud.blog.csdn.net/article/details/125555796?
 
 <br>
 

@@ -952,14 +952,16 @@ pip提供了对virtualenv更好的整合。
 
 说明：pip实质是个脚本（Linux下可cat查看），其执行与对应的python解释程序相关，其模块安装后也是放在相应的python解释器的site-packages。
 
-|                                                          | 简介                                                                                                                                                                                |                                                     |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| 安装pip工具                                                  | **# ubuntu下安装pip**<br>$ apt-get   install python-pip <br>**# windows下安装pip** <br>$ cd PYTHON_PATH/script<br>$ easy_instal   pip  <br># pypy下安装pip   <br>$ pypy get-pip.py install | # 更新pip   <br>$ python -m pip install --upgrade pip |
-| pip 路径                                                   | windows: $PYTHON_PATH/script   linux: $PYTHON_PATH/bin                                                                                                                            | pypy类似cpython的安装方式。                                 |
-| pip常用命令                                                  | pip freeze   其它：show search ...                                                                                                                                                   | 查看已安装的模块                                            |
-| 离线下载                                                     | $ pip download -d [DST_DIR] [package]                                                                                                                                             | 可自动下载模块及依赖包。                                        |
-| 离线安装                                                     | $ pip install --no-index -f [DST_DIR] [package]                                                                                                                                   |                                                     |
-| 备注：1. pypy下pip的下载路径：https://bootstrap.pypa.io/get-pip.py |                                                                                                                                                                                   |                                                     |
+|           | 简介                                                                                                                                                                     | 备注                                                   |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| 安装pip工具   | // ubuntu下安装pip<br>apt-get   install python-pip <br>// windows下安装pip <br>cd PYTHON_PATH/script<br> easy_instal   pip  <br>// pypy下安装pip   <br> pypy get-pip.py install | // 更新pip   <br>$ python -m pip install --upgrade pip |
+| pip 路径    | windows: PYTHON_PATH/script <br>linux: PYTHON_PATH/bin                                                                                                                 | pypy类似cpython的安装方式。                                  |
+| pip常用命令   | pip freeze <br>其它：show search ...                                                                                                                                      | 查看已安装的模块                                             |
+| 离线下载      | $ pip download -d [DST_DIR] [package]                                                                                                                                  | 可自动下载模块及依赖包。                                         |
+| 离线安装      | $ pip install --no-index -f [DST_DIR] [package]                                                                                                                        |                                                      |
+| 临时指定镜像源安装 | pip install -i [mirror_repos] numpy                                                                                                                                    | 示例镜像源如http://mirrors.aliyun.com/pypi/simple/         |
+
+> 备注：1. pypy下pip的下载路径：https://bootstrap.pypa.io/get-pip.py
 
 2. pip command
 
@@ -976,7 +978,7 @@ Commands:
   show           Show information about installed packages.
   check          Verify installed packages have compatible dependencies.
   search         Search PyPI for packages.
-  whee*          Build wheels from your requirements.
+  wheel          Build wheels from your requirements.
   hash           Compute hashes of package archives.
   completion     A helper command used for command completion.
   help           Show help for commands.
@@ -1409,6 +1411,7 @@ prune examples/sample?/build
 **用requirements.txt来管理依赖包**
 # 创建requirements.txt
 $ pip freeze > requirements.txt
+
 # 用 requirements.txt 进行安装
 $ pip install -r requirements.txt
 ```
@@ -1433,14 +1436,18 @@ option=value
 说明：本章所说的常用模块为个人所常用的。在3.4 见下方 的常见开发库收集了常用标准库和第三方库，两者多有交叉。
 
 表格 19 python常用第三方模块列表
-| 模块名      | 简介     | 备注     | 模块安装/导入示例   |
-| -------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
-| mysql-pthon  | mysql的python接口。最新[MySQL-python 1.2.5](https://pypi.python.org/pypi/MySQL-python/1.2.5)。 | 官网只提供python 2.7.x的32位版本，64位版本需要自行编译。pip安装易出错，可下载官方二进制文件安装。   64位编译参考：http://blog.csdn.net/daniel_h1986/article/details/49446423 | pip install mysql-python       import MySQLdb |
-| pyquery     | jquery库的python版本。   [pyquery 1.2.17](https://pypi.python.org/pypi/pyquery/1.2.17)。 | 依赖库cssselect、libboost、lxml等等。若lxml报错，可先单独装lxml.whl，然后再安装pyquery. | from pyquery import PyQuery      |
-| pyv8        | google v8的python版本。   最新[PyV8 1.0-dev](https://pypi.python.org/pypi/PyV8/1.0-dev)。 | PyV8-1.0-preview-r443.win32-py2.7  | import pyv8         |
-| [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm) | 机器学习库。          | http://www.csie.ntu.edu.tw/~cjlin/libsvm   windows需VC库支持。 |        |
-| pybloomfiltermmap        | 布隆过滤库   [pybloomfiltermmap3 0.4.15](https://pypi.python.org/pypi/pybloomfiltermmap3/0.4.15) | A Bloom filter (bloomfilter) for Python 3   built on mmap.   依赖库cython | from pybloomfilter import BloomFilter         |
-备注：1. 模块名为pip安装时的名称，模块导入名不一定同模块名相同，可能带有目录。有些模块用pip安装易出错，如mysql-python, pyv8，可用官网提供的二进制文件安装或者源码安装。
+
+| 模块名                                                | 简介                                                                                        | 备注                                                                                                                            | 模块安装/导入示例                               |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| mysql-pthon                                        | mysql的python接口。最新[MySQL-python 1.2.5](https://pypi.python.org/pypi/MySQL-python/1.2.5)。   | 官网只提供python 2.7.x的32位版本，64位版本需要自行编译。pip安装易出错，可下载官方二进制文件安装。 64位编译参考：http://blog.csdn.net/daniel_h1986/article/details/49446423 | pip install mysql-python import MySQLdb |
+| pyquery                                            | jquery库的python版本。 [pyquery 1.2.17](https://pypi.python.org/pypi/pyquery/1.2.17)。          | 依赖库cssselect、libboost、lxml等等。若lxml报错，可先单独装lxml.whl，然后再安装pyquery.                                                              | from pyquery import PyQuery             |
+| pyv8                                               | google v8的python版本。 最新[PyV8 1.0-dev](https://pypi.python.org/pypi/PyV8/1.0-dev)。          | PyV8-1.0-preview-r443.win32-py2.7                                                                                             | import pyv8                             |
+| [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm) | 机器学习库。                                                                                    | http://www.csie.ntu.edu.tw/~cjlin/libsvm windows需VC库支持。                                                                       |                                         |
+| pybloomfiltermmap                                  | 布隆过滤库 [pybloomfiltermmap3 0.4.15](https://pypi.python.org/pypi/pybloomfiltermmap3/0.4.15) | A Bloom filter (bloomfilter) for Python 3 built on mmap. 依赖库cython                                                            |                                         |
+
+备注：
+
+1. 模块名为pip安装时的名称，模块导入名不一定同模块名相同，可能带有目录。有些模块用pip安装易出错，如mysql-python, pyv8，可用官网提供的二进制文件安装或者源码安装。
 
 2. libsvm: 在libsvm-3.16的python文件夹下主要包括了两个文件svm.py和svmutil.py。svm.py接口主要包括了一些low-level的应用。svm.py主要运用了四个**数据结构**: svm_node, svm_problem, svm_parameter和svm_model。
 
@@ -1489,7 +1496,7 @@ Objects that when printed, print a message like “Type license() to see the ful
 **Dynamic objects:**
 
 ```
-    argv -- command line arguments; argv[0] is the script pathname if known
+   argv -- command line arguments; argv[0] is the script pathname if known
    path -- module search path; path[0] is the script directory, else ''
    modules -- dictionary of loaded modules
 
@@ -1917,8 +1924,8 @@ if __name__ == "__main__":
 | 并发                            |                                                                                                 | pytest-xdist                                                                                                    | 命令行并发             |
 
 > 备注：1. setup/teardown是特殊的fixture。
-
-2. 安装测试模块 `$ pip install pytest nose toxs`
+> 
+> 2. 安装测试模块 `$ pip install pytest nose toxs`
 
 #### 3.3.5.1 unittest
 

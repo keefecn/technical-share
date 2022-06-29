@@ -186,6 +186,10 @@ Windows8启动相关分区有三个:
 * 办公：参见 《[office办公软件高级教程.md](./office办公软件高级教程.md)》
 * 开发：参见 《[项目开发环境工具.md](./项目开发环境工具.md)》
 
+linux环境可用 <u>wine</u> 模拟windows环境。
+
+windows环境可安装Windows 子系统 (<u>WSL</u>) 来直接运行 GNU/Linux 环境（包括大多数命令行工具、实用工具和应用程序），且不会产生传统虚拟机或双启动设置开销。
+
 ### 软件推荐
 
 表格  开源软件推荐 （源代码开放）
@@ -229,9 +233,10 @@ Windows8启动相关分区有三个:
 | -------------- | -------------------------------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------- |
 | find 查找文件      | find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]  路径path是可选项，默认当前目录 | 不支持             | find [-H \| -L \| -P] [-EXdsx] [-f path] path ... [expression]  路径path是必选项 |
 | rename 批量重命名文件 | rename                                                                                 | move 功能较弱，不支持正则 | rename 批量文件名，然后右键重命名文件，支持字符串替换、首尾添加。                                       |
-| md5 计算文件的md5值  | md5sum                                                                                 |                 | md5                                                                        |
+| md5 计算文件的md5值  | md5sum                                                                                 | 不支持             | md5                                                                        |
+| 查看本机IP         | ip route                                                                               | ipconfig        | ifconfig en0                                                               |
 
-**小工具**
+**小工具**        
 
 * base64
   
@@ -480,6 +485,7 @@ sudo ./run.sh
 * 搜狗输入法 for linux 安装指南 (sogou.com) [搜狗输入法 for linux 安装指南](https://pinyin.sogou.com/linux/help.php)
 * [Ubuntu 20.04上通过Wine 安装微信 - RandalBryant - 博客园](https://www.cnblogs.com/sbrk/p/wine.html)
 * 解决linux mint wine微信字体显示问题  https://www.jianshu.com/p/b396f9aa4b8d
+* [适用于 Linux 的 Windows 子系统文档 | Microsoft Docs](https://docs.microsoft.com/zh-cn/windows/wsl/)
 
 <br><br>
 

@@ -780,11 +780,18 @@ Registries: docker.io (secure)
    sretest_retest.1.zbf6or7l08u7a8f99xcmw3g03               0.10%               137.7MiB / 15.51GiB
    sretest_mysql.1.8scutj0ecm7wvxb1zbuklyd6d                3.73%               872.4MiB / 15.51GiB
    prtainer-test                                            0.00%               19.46MiB / 15.51GiB
+   
+   # 查看磁盘使用情况, Docker 1.13引入，RECLAMABLE指可回收的磁盘（镜像/容器未使用）
+   #   RECLAIMABLE不为0时，可用docker system prune清理回收磁盘空间。
+   $ docker system df  
+   TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+   Images          49        15        20.99GB   19.29GB (91%)
+   Containers      34        25        172kB     16B (0%)
+   Local Volumes   3         1         200.1MB   199.3MB (99%)
+   Build Cache     2         0         725B      725B
    ```
 
 ### 4.2.3 容器运行 run
-
-
 
 **docker run命令**
 
@@ -1004,7 +1011,10 @@ SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@aliasmysql:3306/superset_1.0'
   # 先找带有python名称的镜像
   docker search python
   
-  # 打印出python镜像的所有tag
+  # 打印出python镜像的所有layer
+  curl https://registry.hub.docker.com/v1/repositories/python/tags| tr -d '[\[\]" ]' | tr '}' '\n'
+  
+  # 在上面语句基础上用awk提取:的第三段，组合成python:[3]
   curl https://registry.hub.docker.com/v1/repositories/python/tags| tr -d '[\[\]" ]' | tr '}' '\n'| awk -F: -v image='python' '{if(NR!=NF && $3 != ""){printf("%s:%s\n",image,$3)}}'
   python:3.9.8
   python:3.9.8-alpine
@@ -1421,9 +1431,10 @@ RUN echo "\ndaemon off;">>/etc/ngnix/nignix.conf
 
 # EXPOSE 打开端口并映射到docker主机的外部端口上
 EXPOSE 6379
-# ADD/COPY 将文件移入镜像，ADD会将TAR文件解压, VOLUEM挂载卷并映射到外部位置
+# ADD/COPY 将文件移入镜像，ADD会将TAR文件解压, 
 ADD redis.tgz /rdis
 COPY redis.conf $BASE_DIR
+# VOLUEM挂载卷并映射到外部位置
 VOLUME $BASE_DIR/data
 
 # 容器启动时执行指令 CMD 或 ENTRYPOINT执行镜像中main命令
@@ -1434,13 +1445,49 @@ CMD /usr/sbin/ngnix
 
 **docker build**
 
-命令读取指定路径下（包括子目录）所有的Dockefile，并且把目录下所有内容发送到服务端，由服务端创建镜像。另外可以通过创建.dockerignore文件（每一行添加一个匹配模式）让docker忽略指定目录或者文件。-t 创建标签。
+命令读取指定路径下（包括子目录）所有的Dockefile，并且把目录下所有内容发送到服务端，由服务端创建镜像。另外可以通过创建.dockerignore文件（每一行添加一个匹配模式）让docker忽略指定目录或者文件。
+
+```SHELL
+% docker build --help
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+Options:
+      --add-host list           Add a custom host-to-IP mapping (host:ip)
+      --build-arg list          Set build-time variables
+      --cache-from strings      Images to consider as cache sources
+      --disable-content-trust   Skip image verification (default true)
+  -f, --file string             Name of the Dockerfile (Default is 'PATH/Dockerfile')
+      --iidfile string          Write the image ID to the file
+      --isolation string        Container isolation technology
+      --label list              Set metadata for an image
+      --network string          Set the networking mode for the RUN instructions during build (default "default")
+      --no-cache                Do not use cache when building the image
+  -o, --output stringArray      Output destination (format: type=local,dest=path)
+      --platform string         Set platform if server is multi-platform capable
+      --progress string         Set type of progress output (auto, plain, tty). Use plain to show container output (default "auto")
+      --pull                    Always attempt to pull a newer version of the image
+  -q, --quiet                   Suppress the build output and print image ID on success
+      --secret stringArray      Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret
+      --ssh stringArray         SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format:
+                                default|<id>[=<socket>|<key>[,<key>]])
+  -t, --tag list                创建标签。Name and optionally a tag in the 'name:tag' format
+      --target string           Set the target build stage to build.
+```
 
 例如：Dockerfile路径为 /tmp/docker_build/，生成镜像的标签为build_repo/my_images
 
 ```sh
 $ docker build -t build_repo/my_images /tmp/docker_build/
+
+# 多平台支持：目前支持linux/arm64, linux/amd64, linux/riscv64, linux/ppc64le,
+#   linux/s390x, linux/386, linux/arm/v7, linux/arm/v6
+$ docker build --platform linux/amd64 -t build_repo/my_images [dockfile_path]
 ```
+
+说明：
 
 ### 多容器 docker-compose
 
@@ -1719,6 +1766,7 @@ redis                                           alpine       3900abf41552   5 mo
 python                                          3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
 $ docker image ls alpine
 $ docker history 
+# 查看redis镜像图层组成，使用redis镜像ID
 $ docker history 3900abf41552
 IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
 3900abf41552   5 months ago   /bin/sh -c #(nop)  CMD ["redis-server"]         0B        
@@ -1798,14 +1846,17 @@ IMAGE          CREATED        CREATED BY                                      SI
 * 拉取镜像:  docker pull xxx:xxx
 * 运行镜像：docker run
 * 镜像都来自于官网 docker.io
+* 镜像tag不要用latest，要固化明确的版本。
 
 表格 alpine基础镜像
 
 | images            | 镜像大小   | 实例描述        | 实例启动命令 run                   | 访问URL |
 | ----------------- | ------ | ----------- | ---------------------------- | ----- |
 | alpine            | 5.57MB | 安全的轻量级linux | docker run alpine echo '123' |       |
-| redis:alpine      | 32.4MB |             |                              |       |
-| python:3.4-alpine | 72.9MB |             |                              |       |
+| redis:alpine      | 32.4MB | redis       |                              |       |
+| python:3.7-alpine | 41.8MB | python3.7   |                              |       |
+| python:3.4-alpine | 72.9MB | python3.4   |                              |       |
+| nginx:alpine      | 286MB  |             |                              |       |
 |                   |        |             |                              |       |
 
 > Alpine: `Alpine` 操作系统是一个面向安全的轻型 `Linux` 发行版。它不同于通常 `Linux` 发行版，`Alpine` 采用了 `musl libc` 和 `busybox` 以减小系统的体积和运行时资源消耗，但功能上比 `busybox` 又完善的多，因此得到开源社区越来越多的青睐。在保持瘦身的同时，`Alpine` 还提供了自己的包管理工具 `apk`，可以通过 `https://pkgs.alpinelinux.org/packages` 网站上查询包信息，也可以直接通过 `apk` 命令直接查询和安装各种软件。
@@ -1817,30 +1868,32 @@ redis    alpine       3900abf41552   5 months ago    32.4MB
 python   3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
 ```
 
-表格 常用基础镜像 （不改源码，只作最基础服务的镜像）
+表格 常用基础镜像 （不改源码，只作最基础服务的镜像 ）
 
-| images     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 访问URL           |
-| ---------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --------------- |
-| nginx      |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx                                         | http://IP:8081/ |
-| tomcat     |        |                    |                                                                                           |                 |
-| mysql      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306 |
-| redis      | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   |                 |
-| mongo      |        |                    | docker run --name mongo -d mongo                                                          |                 |
-| python:3.5 |        | 调用python解释器        | docker run python:3.5 python3 -c 'import  copy;print("hello")'                            |                 |
-| ubuntu     | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |                 |
-| tensorflow | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |                 |
+| images                     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 访问URL           |
+| -------------------------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --------------- |
+| nginx:1.9                  |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx:1.9                                     | http://IP:8081/ |
+| linuxserver/nginx          |        | linux服务器的nginx服务   |                                                                                           |                 |
+| tomcat                     |        | tomcat             |                                                                                           |                 |
+| ubuntu:15.10               | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |                 |
+| redis:3.2                  | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   |                 |
+| rqbbitmq:3.6.15-management | 138MB  |                    |                                                                                           |                 |
+| mysql                      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306 |
+| mongo                      |        | mongo              | docker run --name mongo -d mongo                                                          |                 |
+| tensorflow                 | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |                 |
+| python:3.7                 | 852MB  | 调用python解释器        | docker run python:3.7 python3 -c 'import  copy;print("hello")'                            |                 |
 
 表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
 
-| images                | 镜像大小   | 实例描述         | 实例启动命令 run                                                                                                                                                                                             | 访问URL            |
-| --------------------- | ------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| elasticsearch         |        | 单节点ES        | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0                                                                              |                  |
-| amancevice/superset   | 2.25GB | 后台启动superset | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                                                                                                  | http://IP:8088/  |
-| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB  | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                                                                                                       | 同上               |
-| wordpress +mysql      |        | 两个容器链接在一起    | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                                                                                                          | http://IP/       |
-| apache/drill          | 936MB  |              |                                                                                                                                                                                                        |                  |
-| minio                 | 406MB  | 对象存储         | `docker run -d -p 9000:9000 -p 9090:9090 --name minio1 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_PASSWORD=123456" -v /data:/data  --restart=always minio/minio server /data --console-address ':9090'` | `http://IP:9090/ |
-|                       |        |              |                                                                                                                                                                                                        |                  |
+| images                | 镜像大小   | 实例描述         | 实例启动命令 run                                                                                                                                                                                           | 访问URL           |
+| --------------------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| minio                 | 406MB  | 对象存储         | docker run -d -p 9000:9000 -p 9090:9090 --name minio1 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_PASSWORD=123456" -v /data:/data  --restart=always minio/minio server /data --console-address ':9090' | http://IP:9090/ |
+| elasticsearch         |        | 单节点ES        | docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.12.0                                                                            |                 |
+| apache/superset:1.0.0 | 1.45GB | 同上。压缩后535MB  | docker run -d -p 8088:8088 --name superset apache/superset:1.0.0                                                                                                                                     | 同上              |
+| amancevice/superset   | 2.25GB | 后台启动superset | docker run --name my_superset -d -p 8088:8088 -v /home/ai/superset:/home/superset amancevice/superset                                                                                                | http://IP:8088/ |
+| wordpress +mysql      |        | 两个容器链接在一起    | docker run --name wordpress --link <contain_name]:mysql -p 80:80 -d wordpress                                                                                                                        | http://IP/      |
+| apache/drill          | 936MB  |              |                                                                                                                                                                                                      |                 |
+|                       |        |              |                                                                                                                                                                                                      |                 |
 
 > minio: **MinIO** 是一个基于 Apache License v2.0 开源协议的对象存储服务。它兼容亚马逊 S3 云存储服务接口，非常适合于存储大容量非结构化的数据，例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几 kb 到最大 5T 不等。
 
@@ -1851,6 +1904,7 @@ python   3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
 | hello-world              | 13.3KB | 运行：打印帮助文档  | docker run hello-world                                                                           |       |
 | docker/getting-started   | 27.4MB | docker入门文档 | docker run -d -p 80:80 docker/getting-started                                                    |       |
 | docker_practice:vuepress | 46.9MB | docker实践文档 | docker run -it --rm -p 4000:80 ccr.ccs.tencentyun.com/dockerpracticesig/docker_practice:vuepress |       |
+| hashicorp/http-echo      | 3.97MB | 服务端回显      | //回显内容来自入参-text的值，go实现，不支持mac平台<br>docker run -p 5678:5678 hashicorp/http-echo -text apple       |       |
 
 备注：如果docker run在git bash下无法启动，可换用docker toolbox shell。
 
@@ -1964,13 +2018,13 @@ $ docker cp [contain_id]:/xx xxx
 
 表格  devops常用镜像
 
-| 镜像                             | 镜像大小   | 简介            | 运行命令                                                                                                                                                                                | 访问              |
-| ------------------------------ | ------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| gitlab/gitlab-ce               | 1.92G  | 源仓管理          |                                                                                                                                                                                     |                 |
-| gitlab/gitlab-runner           | 390MB  | CICD支持        |                                                                                                                                                                                     |                 |
-| caturbhuja/vscode-server-3.1.1 | 885MB  | web版vscode    |                                                                                                                                                                                     |                 |
-| codercom/code-server           | 1.63GB | web版vscode    | docker run -d -u root -p 8088:8080 --name code-server -v /home/docker/code/config.yaml:/root/.config/code-server/config.yaml  -v /home/ docker/code:/home/code codercom/code-server | http://IP:8088/ |
-| jenkis                         |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                                                                                         | http://IP:8080/ |
+| 镜像                                            | 镜像大小   | 简介            | 运行命令                                                                                                                                                                                | 访问              |
+| --------------------------------------------- | ------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| gitlab/gitlab-ce:12.9.3-ce.0                  | 1.92G  | 源仓管理          |                                                                                                                                                                                     |                 |
+| gitlab/gitlab-runner:v12.9.0                  | 390MB  | CICD支持        |                                                                                                                                                                                     |                 |
+| caturbhuja/vscode-server-3.1.1:python3.6-base | 885MB  | web版vscode    |                                                                                                                                                                                     |                 |
+| codercom/code-server                          | 1.63GB | web版vscode    | docker run -d -u root -p 8088:8080 --name code-server -v /home/docker/code/config.yaml:/root/.config/code-server/config.yaml  -v /home/ docker/code:/home/code codercom/code-server | http://IP:8088/ |
+| jenkis                                        |        | jenkis CICD服务 | docker run -d jenkins/jenkins:lts /bin/bash                                                                                                                                         | http://IP:8080/ |
 
 ### CICD之Jenkis
 
@@ -2039,17 +2093,17 @@ service ssh restart
 
 # 7 docker管理工具
 
-| 工具名                                                       | 镜像大小   | 描述             | 使用                                                                                                                                            | 访问             |
-| --------------------------------------------------------- | ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| portainer                                                 | 79MB   | docker管理可视化。   | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
-| ui-for-docker                                             | 8.1MB  | docker管理可视化。   | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
-| register:2                                                | 26.2MB | 本地私有镜像仓库（常驻服务） | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
-| clair                                                     |        | 镜像安全扫描         |                                                                                                                                               |                |
-| [docker-slim](https://github.com/docker-slim/docker-slim) | 无      | 镜像压缩工具         | 从Github下载其二进制文件。                                                                                                                              |                |
-| Docker Desktop                                            | 无      | 桌面应用软件         |                                                                                                                                               |                |
-| DockStation                                               | 无      | 桌面应用软件         |                                                                                                                                               |                |
-| Lazydocker                                                |        | UI终端           |                                                                                                                                               |                |
-| Docui                                                     |        | UI终端           |                                                                                                                                               |                |
+| 工具名                                                       | 镜像大小   | 描述               | 使用                                                                                                                                            | 访问             |
+| --------------------------------------------------------- | ------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| portainer                                                 | 79MB   | docker管理可视化。     | `docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test docker.io/portainer/portainer` | http://IP:9000 |
+| ui-for-docker                                             | 8.1MB  | docker管理可视化。     | docker run -d -p  9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock  uifd/ui-for-docker                                     | http://IP:9000 |
+| register:2                                                | 26.2MB | 本地私有镜像仓库（常驻服务）   | docker run -d -p 5000:5000 --restart=always  --name registry2 registry:2                                                                      | http://IP:5000 |
+| clair                                                     |        | 镜像安全扫描           |                                                                                                                                               |                |
+| [docker-slim](https://github.com/docker-slim/docker-slim) | 无      | 镜像压缩工具           | 从Github下载其二进制文件。                                                                                                                              |                |
+| Docker Desktop                                            | 无      | 桌面应用软件，支持mac和win |                                                                                                                                               |                |
+| DockStation                                               | 无      | 桌面应用软件           |                                                                                                                                               |                |
+| Lazydocker                                                |        | UI终端             |                                                                                                                                               |                |
+| Docui                                                     |        | UI终端             |                                                                                                                                               |                |
 
 备注：上表访问中IP指宿主机IP。
 
@@ -2233,7 +2287,7 @@ $ docker-machine ip defalut
 
 `docker exec -i c $ c> docker exec -it`   // 备注：未测试成功
 
-**3. [docker login 报【Error response from daemon: Get https://172.17.8.201:8002/v2/: http: server gave HTTP response to HTTPS client】**
+**3. docker login 报【Error response from daemon: Get https://172.17.8.201:8002/v2/: http: server gave HTTP response to HTTPS client】**
 
 原因：docker镜像仓库暂不支持https。
 
