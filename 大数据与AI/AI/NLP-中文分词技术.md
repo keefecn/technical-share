@@ -395,8 +395,6 @@ Prefix dict has been built succesfully.
 [搜索引擎模式]: 我/ 来到/ 北京/ 清华/ 华大/ 大学/ 清华大学
 ```
 
-<br>
-
 示例2：自定义词典 
 
 dict.txt格式为：词语  词频（可选） 词性（可选）
