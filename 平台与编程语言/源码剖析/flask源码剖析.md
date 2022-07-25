@@ -2580,6 +2580,8 @@ Flask-AppBuilder功能强大，同时需要依赖很多flask扩展，如`Flask-S
 
 ## flask_migrate
 
+[flask-migrate](https://github.com/miguelgrinberg/flask-migrate) 基于 alembic 来处理 Sqlalchemy 的数据库迁移。alembic 是用来处理表结构变化的，其实不建议在迁移脚本中做数据清洗工作。
+
 ```shell
 $ pip show flask_migrate
 Name: Flask-Migrate

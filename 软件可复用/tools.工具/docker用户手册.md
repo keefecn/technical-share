@@ -1688,7 +1688,6 @@ $ docker service update --image image_name service_name
    
    # 查看容器报错信息
    $ docker ps --no-trunc
-   
    # 若容器失败，查看对应失败容器的日志. docker ps -a 可以查看所有历史启动容器
    $ docker logs -f <container_id>
    
@@ -2069,25 +2068,30 @@ services:
 ### docker远程调试sshd
 
 ```shell
+# 进入容器内执行以下操作：安装sshd
 # linux安装sshd：
 apt-get install openssh-server
-
-# linux开通ssh服务：
-/usr/sbin/sshd -D
-
-# 修改root密码：
-passwd root
 
 # 配置sshd：
 vim /etc/ssh/sshd_config
 PermitRootLogin yes         #允许root认证登录
 PasswordAuthentication yes  #允许密码认证
 
-# 重启sshd：
+# linux开通ssh服务
+/usr/sbin/sshd -D
+
+# 修改root密码 用于远程ssh root密码登陆
+passwd root
+
+# 重启sshd(可选)
 service ssh restart
+
+# 在宿主机保存镜像为开发镜像，启动导出SSH端口的容器
+docker commit <container_id> xxx_service:dev_20220729
+docker run -p 55555:22 -it xxx_service:dev_20220729 /bin/bash
 ```
 
-然后将上面容器重新保存为镜像，打个dev标签，后续就可将 用于远程登陆调试。
+然后将上面容器重新保存为镜像，打个dev标签，后续就可将此镜像用于远程登陆调试。
 
 <br><br>
 
@@ -2182,6 +2186,8 @@ Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规�
 
 Docker Swarm是一个由Docker开发的调度框架。由Docker自身开发的好处之一就是标准Docker API的使用，Swarm由多个代理（Agent）组成，把这些代理称之为节点（Node）。这些节点就是主机，这些主机在启动Docker Daemon的时候就会打开相应的端口，以此支持Docker远程API。这些机器会根据Swarm调度器分配给它们的任务，拉取和运行不同的镜像。
 
+![1574518882918](../../media/sf_reuse/framework/frame_docker_003.png)
+
 图 Docker Swarm结构
 
 Swarm基本概念：
@@ -2192,6 +2198,45 @@ Swarm基本概念：
 - Key-valuestore：内建的Key-Value存储解决方案，做服务发现、服务注册以及主节点选举工作。
 
 docker stack默认使用 swarm模式部署。
+
+docker swarm命令
+
+```shell
+$ docker swarm --help
+Usage:  docker swarm COMMAND
+
+Manage Swarm
+Commands:
+  ca          Display and rotate the root CA
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  leave       Leave the swarm
+  unlock      Unlock swarm
+  unlock-key  Manage the unlock key
+  update      Update the swarm
+
+Run 'docker swarm COMMAND --help' for more information on a command.
+
+
+# 节点管理
+$ docker node
+Usage:  docker node COMMAND
+Manage Swarm nodes
+
+Commands:
+  demote      Demote one or more nodes from manager in the swarm
+  inspect     Display detailed information on one or more nodes
+  ls          List nodes in the swarm
+  promote     Promote one or more nodes to manager in the swarm
+  ps          List tasks running on one or more nodes, defaults to current node
+  rm          Remove one or more nodes from the swarm
+  update      Update a node
+
+Run 'docker node COMMAND --help' for more information on a command.
+```
+
+docker swarm命令示例
 
 ```shell
 # 初化化 默认成为主节点，管理节点
@@ -2205,24 +2250,6 @@ This node joined a swarm as a worker.
 $ docker swarm join-token manager
 To add a manager to this swarm, run the following command:
     docker swarm join --token SWMTKN-1-106itx81w- 192.168.0.240:2377
-
-# 节点管理
-$ docker node
-Usage:  docker node COMMAND
-
-Manage Swarm nodes
-
-Commands:
-  demote      Demote one or more nodes from manager in the swarm
-  inspect     Display detailed information on one or more nodes
-  ls          List nodes in the swarm
-  promote     Promote one or more nodes to manager in the swarm
-  ps          List tasks running on one or more nodes, defaults to current node
-  rm          Remove one or more nodes from the swarm
-  update      Update a node
-
-Run 'docker node COMMAND --help' for more information on a command.
-
 
 # 查看节点
 $ docker node ls

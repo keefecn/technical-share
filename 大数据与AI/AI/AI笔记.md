@@ -533,7 +533,7 @@ SAE International 设计了一套 系统，将驾驶自动化级别分为 0 到 
 
 - 技术层主要为整体产业链提供通用AI技术能力。其中感知层包括计算机视觉和语言识别两项重要的机器感知任务，由于这两项技术由于相对成熟，目前有大量的初创公司选择了这两个领域，如计算机视觉云集了商汤科技、旷视科技、云从科技等大量独角兽；而认知层定位为“机器大脑”，包括知识图谱/语义分析，以及智能问答/虚拟助手两个核心领域，顶部的平台层则以通用技术应用平台的形式提供深度学习、模式识别等技术应用服务，对接应用层。
 
--  应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
+- 应用层按照对象不同，可分为消费级终端应用以及行业场景应用两部分。消费级终端包括智能机器人、智能无人机以及智能硬件三个方向，其中智能硬件领域从业公司包括如Rokid等智能音箱玩家，致力于消费级硬件的智能化。场景应用部分对接各类外部行业的AI应用场景，比如智慧医疗、智慧金融等。
 
 最后需要说明的是，深耕AI行业应用场景的公司往往也具备了技术层的一些核心技术能。
 
@@ -585,15 +585,15 @@ $ lspci | grep -i 'NVIDIA'
 
 $ lspci -v -s 02:00.0
 02:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)
-	Subsystem: NVIDIA Corporation Device 12a2
-	Physical Slot: 1
-	Flags: bus master, fast devsel, latency 0, IRQ 26, NUMA node 0
-	Memory at c6000000 (32-bit, non-prefetchable) [size=16M]
-	Memory at b0000000 (64-bit, prefetchable) [size=256M]
-	Memory at c0000000 (64-bit, prefetchable) [size=32M]
-	Capabilities: <access denied>
-	Kernel driver in use: nvidia
-	Kernel modules: nouveau, nvidia_drm, nvidia
+    Subsystem: NVIDIA Corporation Device 12a2
+    Physical Slot: 1
+    Flags: bus master, fast devsel, latency 0, IRQ 26, NUMA node 0
+    Memory at c6000000 (32-bit, non-prefetchable) [size=16M]
+    Memory at b0000000 (64-bit, prefetchable) [size=256M]
+    Memory at c0000000 (64-bit, prefetchable) [size=32M]
+    Capabilities: <access denied>
+    Kernel driver in use: nvidia
+    Kernel modules: nouveau, nvidia_drm, nvidia
 
 # 查看nvidia显卡模块内核版本，示例中是510.47.03
 $ cat /proc/driver/nvidia/version
@@ -626,23 +626,21 @@ $ nvida-smi
 
 表格 nvidia-smi 结果字段说明
 
-| 字段              | 字段说明                   | 备注&示例值                                       |
-| ----------------- | -------------------------- | ------------------------------------------------- |
-| GPU Name          | GPU名称                    | Tesla T4                                          |
-| Fan               | 风扇转速（0%--100%）       | N/A表示没有风扇                                   |
-| Temp              | GPU温度                    | GPU温度过高会导致GPU频率下降                      |
-| Perf              | 性能状态                   | 从P0（最大性能）到P12（最小性能）                 |
-| Pwr               | GPU功耗                    |                                                   |
-| Persistence-M     | 持续模式的状态             | 持续模式耗能大，但在新的GPU应用启动时花费时间更少 |
-| Bus-Id            | GPU总线                    | 值组成：`domain:bus:device.function`              |
-| Disp.A            | Display Active             | 表示GPU的显示是否初始化                           |
-| Memory-Usage      | 显存使用量                 | 当明使用 / 可用显存                               |
-| Volatile GPU-Util | GPU使用率                  |                                                   |
-| ECC               | 是否开启错误检查和纠正技术 | 0-DISABLED, 1-ENABLED                             |
-| Compute M.        | 计算模式                   | 0-DEFAULT, 1-EXCLUSIVE_PROCESS, 2-PROHIBITED      |
-| Processes         | 进程                       | 会罗列当前使用了GPU的进程列表的详情情况           |
-
-
+| 字段                | 字段说明           | 备注&示例值                                       |
+| ----------------- | -------------- | -------------------------------------------- |
+| GPU Name          | GPU名称          | Tesla T4                                     |
+| Fan               | 风扇转速（0%--100%） | N/A表示没有风扇                                    |
+| Temp              | GPU温度          | GPU温度过高会导致GPU频率下降                            |
+| Perf              | 性能状态           | 从P0（最大性能）到P12（最小性能）                          |
+| Pwr               | GPU功耗          |                                              |
+| Persistence-M     | 持续模式的状态        | 持续模式耗能大，但在新的GPU应用启动时花费时间更少                   |
+| Bus-Id            | GPU总线          | 值组成：`domain:bus:device.function`             |
+| Disp.A            | Display Active | 表示GPU的显示是否初始化                                |
+| Memory-Usage      | 显存使用量          | 当明使用 / 可用显存                                  |
+| Volatile GPU-Util | GPU使用率         |                                              |
+| ECC               | 是否开启错误检查和纠正技术  | 0-DISABLED, 1-ENABLED                        |
+| Compute M.        | 计算模式           | 0-DEFAULT, 1-EXCLUSIVE_PROCESS, 2-PROHIBITED |
+| Processes         | 进程             | 会罗列当前使用了GPU的进程列表的详情情况                        |
 
 **CUDA**
 

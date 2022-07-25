@@ -941,28 +941,31 @@ Mac的易用性在操作系统里属于最好的。终端功能类似linux的命
 
 表格 MacBook Pro常用快捷键 （一般大小写不敏感）
 
-| 快捷键                | 功能                                      | 备注        |
-| ------------------ | --------------------------------------- | --------- |
-| command + c        | 复制                                      |           |
-| command + v        | 粘贴                                      |           |
-| command + tab      | 程序切换                                    |           |
-| command + N        | 新建网页+新建智能文件夹                            |           |
-| command + Q        | 退出当前程序                                  |           |
-| command + M        | 将当前程序最小化至程序坞                            |           |
-| command + H        | 隐藏当前程序，功能类似最小化                          |           |
-| command + F        | 查找文稿中的项目或打开“查找”窗口。                      |           |
-| command + T        | 打开新tab                                  | 常用在浏览器、终端 |
-| control+command+F  | 全屏/退出全屏                                 |           |
-| control+command+空格 | 表情符号                                    |           |
-| option+command+D   | 程序坞显示切换                                 |           |
-| option+command+esc | 打开强制退出的窗口                               |           |
-| option+command+W   | 快速关闭当前应用程序的所有窗口                         |           |
-| option+command+I   | 开发工具打开开关                                |           |
-| Shift+command + 4  | 截图                                      | +3全图，+4指定 |
-| Shift+command + 。  | Finder文件夹里显示隐藏文件开关                      |           |
-| command + <--      | 删除，相当于win里的delete键                      |           |
-| fn + F11           | 显示桌面                                    |           |
-| fn + 箭头            | 翻页功能。类似win里的pagedown, pageup, home, end |           |
+| 快捷键                | 功能                                      | 备注                  |
+| ------------------ | --------------------------------------- | ------------------- |
+| command + c        | 复制                                      |                     |
+| command + v        | 粘贴                                      |                     |
+| command + tab      | 程序切换                                    |                     |
+| command + N        | 新建网页+新建智能文件夹                            |                     |
+| command + Q        | 退出当前程序                                  |                     |
+| command + M        | 将当前程序最小化至程序坞                            |                     |
+| command + H        | 隐藏当前程序，功能类似最小化                          |                     |
+| command + F        | 查找文稿中的项目或打开“查找”窗口。                      |                     |
+| command + T        | 打开新tab                                  | 常用在浏览器、终端           |
+| control+command+F  | 全屏/退出全屏                                 |                     |
+| control+command+空格 | 表情符号                                    |                     |
+| option+command+D   | 程序坞显示切换                                 |                     |
+| option+command+esc | 打开强制退出的窗口                               |                     |
+| option+command+W   | 快速关闭当前应用程序的所有窗口                         |                     |
+| option+command+I   | 开发工具打开开关                                |                     |
+| Shift+command + 4  | 截图                                      | +3全图，+4指定           |
+| control+command+A  | 区域截图                                    | ishot的快捷键则是option+A |
+| Shift+command + 。  | Finder文件夹里显示隐藏文件开关                      |                     |
+| command + <--      | 删除，相当于win里的delete键                      |                     |
+| command + 光标勾选     | 长按Command，不连续多选                         |                     |
+| shift + <--        | 长按shift，相邻连续多选                          |                     |
+| fn + F11           | 显示桌面                                    |                     |
+| fn + 箭头            | 翻页功能。类似win里的pagedown, pageup, home, end |                     |
 
 **Mac使用特点**
 

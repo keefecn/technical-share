@@ -848,9 +848,9 @@ $ git branch [branch_name]
 $ git checkout [branch_name]
 
 # merge branch，将branch_name合并到当前分支
-$git merge [branch_name]
+$ git merge [branch_name]
 # delete branch
-$git branch –D [branch_name]
+$ git branch –D [branch_name]
 ```
 
 **2)  分支协同开发**
@@ -861,7 +861,7 @@ b) git pull取其它成员的工作树到本地，如果有修改，将自动合
 
 c) git push将本地master分支更新到远程服务器。
 
-## 4.3  子模块
+## 4.3  子模块 submodule
 
 http://gitbook.liuhui998.com/5_10.html
 
@@ -913,6 +913,16 @@ do_env_filter()
 ```sh
 # remove unnecessay file or directory， 如passwords.txt
 git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
+```
+
+## 4.5 小技巧
+
+```shell
+# git通过commit_id 找到开发分支。 
+$ git branch -r –contains [commit_id] 
+
+# git通过代码 找到代码当前分支的commit_id。
+git log -S "代码关键字"
 ```
 
 <br>
