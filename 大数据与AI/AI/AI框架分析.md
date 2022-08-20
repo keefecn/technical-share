@@ -435,7 +435,7 @@ PyTorch由4个主要的包组成：
 
 * torch.optim：具有通用优化算法（如SGD、Adam等）的优化包。
 
-**示例：ResNet18神经网络 **
+**示例：ResNet18神经网络**
 
 ```python
 # 在CPU版本自动下载模型参数

@@ -2429,7 +2429,7 @@ fab: flask_appbuild
 
 备注：安装Oracle/MySQL/SQLite报错，详见 《[Python开发](Python开发.md)》FAQ章节。
 
-**Q1： windows/linux环境安装报错模块 python-geohash   **
+**Q1**： windows/linux环境安装报错模块 python-geohash   
 
 报错信息：
 
@@ -2448,7 +2448,7 @@ ERROR: Failed building wheel for python-geohash
 
 解决方法2： windows下安装vc++14.0+，linux下安装 python3-devel 或者 gcc-c++
 
-**Q2: Linux环境安装报错： command '[gcc](https://www.laozuo.org/tag/gcc)' failed with exit status 1**
+**Q2**: Linux环境安装报错： command '[gcc](https://www.laozuo.org/tag/gcc)' failed with exit status 1
 
 报错信息： command '[gcc](https://www.laozuo.org/tag/gcc)' failed with exit status 1
 

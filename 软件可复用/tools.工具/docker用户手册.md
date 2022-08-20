@@ -1477,7 +1477,7 @@ Options:
       --target string           Set the target build stage to build.
 ```
 
-例如：Dockerfile路径为 /tmp/docker_build/，生成镜像的标签为build_repo/my_images
+例如：Dockerfile路径为 /tmp/docker_build/，生成镜像的标签为build_repo/my_images， -f 可指定Dockerfile件名，默认名称就是Dockerfile
 
 ```sh
 $ docker build -t build_repo/my_images /tmp/docker_build/
@@ -1715,7 +1715,7 @@ docker stack默认使用 swarm模式部署。部署细节 详见下文章节。
 
 **原因**：有时候重新构建镜像(build) 的时候，该镜像正在被某容器使用中，那么在重新构建同名同版本镜像后，docker保留原来的镜像，即容器还是用原来的，除非重启。那么原来的镜像名称变成NONE，TAG也成了NONE。
 
-**解决方法：（3种方法，慎用）**
+**解决方法：（4种方法，慎用）**
 
 ```shell
 # 删除镜像
@@ -1835,6 +1835,8 @@ IMAGE          CREATED        CREATED BY                                      SI
 * [alpine3.12镜像](https://github.com/alpinelinux/docker-alpine/blob/90788e211ec6d5df183d79d6cb02e068b258d198/x86_64/Dockerfile)
 
 * Dockerfile中ENTRYPOINT和CMD的区别和最佳实践  https://www.jianshu.com/p/54cfa5721d5f
+
+* Docker镜像优化：从1.16GB到22.4MB！  https://zhuanlan.zhihu.com/p/427116788
 
 <br><br>
 

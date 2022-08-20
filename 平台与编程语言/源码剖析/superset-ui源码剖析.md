@@ -1,15 +1,13 @@
-| 序号 | 修改时间 | 修改内容                                   | 修改人 | 审稿人 |
-| ---- | -------- | ------------------------------------------ | ------ | ------ |
-| 1   | 2021-11-17 | 创建。 | Keefe |   Keefe     |
-|      |            |          |        |        |
+| 序号  | 修改时间       | 修改内容 | 修改人   | 审稿人   |
+| --- | ---------- | ---- | ----- | ----- |
+| 1   | 2021-11-17 | 创建。  | Keefe | Keefe |
+|     |            |      |       |       |
 
 <br><br><br>
 
 ---
 
 [TOC]
-
-
 
 <br>
 
@@ -20,8 +18,6 @@
 官网： https://apache-superset.github.io/superset-ui/
 
 文档： https://superset-ui.now.sh/
-
-
 
 ```shell
 # 说明: 下面superset-ui版本是0.17.84（插件版本号同cahrt-controls），图表插件模块一般依赖core和chart-controls.
@@ -61,26 +57,22 @@
 
 **备注**：下面章节的模块路径会忽略前缀 @superset-ui。
 
-
-
 ## 源码结构
 
 表格 模块包说明
 
-| 一级目录 | 二级目录                   | 包.Package                                                   | 说明                                                         |
-| -------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| packages | superset-ui-demo           |                                                              | demo，包括在线调试页面storybook                              |
-| 同上     | superset-ui-core           | [@superset-ui/core](https://github.com/apache-superset/superset-ui/tree/master/packages/superset-ui-core) | 公共代码。                                                   |
-| 同上     | superset-ui-chart-controls | [@superset-ui/chart-controls](https://github.com/apache-superset/superset-ui/tree/master/packages/superset-ui-chart-controls) | 图表控制项。                                                 |
-| 同上     | generator-superset         | [@superset-ui/generator-superset](https://github.com/apache-superset/superset-ui/tree/master/packages/generator-superset) | 用来生成superset-ui包或插件。                                |
-| plugins  | legacy-plugin-chart-xx     | `@superset-ui/legacy-*`                                      | 软件包从经典的中提取并转换为插件。 这些包的提取只需很小的更改（几乎保持原样）。<br>它们还依靠旧版API（ viz.py ）起作用。<br>图表有20个：calendar chord country-map event-flow force-directed heatmap histogram horizon map-box paired-t-test parallel-coordinates partition pivot-table rose sankey sankey-loop sunburst time-table treemap world-map |
-| 同上     | legacy-preset-chart-xx     | 同上                                                         | 当前正在转化的包。<br>图表有2个：big-number nvd3             |
-| 同上     | plugin-chart-xx            | `@superset-ui/plugin-*`                                      | 软件包通常较新且质量更高。 <br/>它们不依赖viz.py（包含可视化特定的python代码）并与/api/v1/query/交互的主要区别在于：新的通用终结点旨在提供所有可视化。 还应该用Typescript编写。<br>图表有：**echarts** (boxplot funnel gauge graph mixedTimeseries pie radar timeseries tree treemap)  hello-world  **table**  **pivot-table**  **word-cloud**  **xy** |
-| scripts  | build.js                   |                                                              | build命令的实际执行脚本。                                    |
-|          | commitlint.js              |                                                              |                                                              |
-|          | copyAssets.js              |                                                              |                                                              |
-
-
+| 一级目录     | 二级目录                       | 包.Package                                                                                                                     | 说明                                                                                                                                                                                                                                                                                           |
+| -------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| packages | superset-ui-demo           |                                                                                                                               | demo，包括在线调试页面storybook                                                                                                                                                                                                                                                                       |
+| 同上       | superset-ui-core           | [@superset-ui/core](https://github.com/apache-superset/superset-ui/tree/master/packages/superset-ui-core)                     | 公共代码。                                                                                                                                                                                                                                                                                        |
+| 同上       | superset-ui-chart-controls | [@superset-ui/chart-controls](https://github.com/apache-superset/superset-ui/tree/master/packages/superset-ui-chart-controls) | 图表控制项。                                                                                                                                                                                                                                                                                       |
+| 同上       | generator-superset         | [@superset-ui/generator-superset](https://github.com/apache-superset/superset-ui/tree/master/packages/generator-superset)     | 用来生成superset-ui包或插件。                                                                                                                                                                                                                                                                         |
+| plugins  | legacy-plugin-chart-xx     | `@superset-ui/legacy-*`                                                                                                       | 软件包从经典的中提取并转换为插件。 这些包的提取只需很小的更改（几乎保持原样）。<br>它们还依靠旧版API（ viz.py ）起作用。<br>图表有20个：calendar chord country-map event-flow force-directed heatmap histogram horizon map-box paired-t-test parallel-coordinates partition pivot-table rose sankey sankey-loop sunburst time-table treemap world-map |
+| 同上       | legacy-preset-chart-xx     | 同上                                                                                                                            | 当前正在转化的包。<br>图表有2个：big-number nvd3                                                                                                                                                                                                                                                           |
+| 同上       | plugin-chart-xx            | `@superset-ui/plugin-*`                                                                                                       | 软件包通常较新且质量更高。 <br/>它们不依赖viz.py（包含可视化特定的python代码）并与/api/v1/query/交互的主要区别在于：新的通用终结点旨在提供所有可视化。 还应该用Typescript编写。<br>图表有：**echarts** (boxplot funnel gauge graph mixedTimeseries pie radar timeseries tree treemap)  hello-world  **table**  **pivot-table**  **word-cloud**  **xy**             |
+| scripts  | build.js                   |                                                                                                                               | build命令的实际执行脚本。                                                                                                                                                                                                                                                                              |
+|          | commitlint.js              |                                                                                                                               |                                                                                                                                                                                                                                                                                              |
+|          | copyAssets.js              |                                                                                                                               |                                                                                                                                                                                                                                                                                              |
 
 **文件组织结构**
 
@@ -115,8 +107,6 @@ $ npm ci
 $ npm run build
 ```
 
-
-
 ## 贡献指南 Contributing guidelines
 
 Please read the [contributing guidelines](CONTRIBUTING.md) which include development environment setup and other things you should know about coding in this repo.
@@ -126,8 +116,6 @@ Please read the [contributing guidelines](CONTRIBUTING.md) which include develop
 * build  构建打包
 * demo
 * storybook  生成不依赖superset的在线调试页面
-
-
 
 ## 二次开发示例
 
@@ -145,38 +133,32 @@ Please read the [contributing guidelines](CONTRIBUTING.md) which include develop
 
 Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
-
-
 <br>
 
 # 2 核心模块 /core/
 
 表格  core的源码结构
 
-| 一级目录&文件      | 二级目录或文件 | 主要类&函数 | 说明       |
-| ------------------ | -------------- | ----------- | ---------- |
-| chart/             |                |             | 图表       |
-| chart-composition/ |                |             |            |
-| color/             |                |             | 颜色       |
-| components/        |                |             | 组件       |
-| connection/        |                |             | 连接       |
-| dimension/         |                |             | 尺寸       |
-| dynamic-plugins/   |                |             | 动态插件   |
-| math-expression    |                |             | 数学表达式 |
-| models/            |                |             | 模型       |
-| number-format/     |                |             | 数字格式   |
-| query/             |                |             | 查询       |
-| style/             |                |             | 风格       |
-| time-format/       |                |             | 时间格式   |
-| translation/       |                |             | 翻译       |
-| types/             |                |             |            |
-| utils/             |                |             | 工具库     |
-| validator/         |                |             | 验证器     |
-| index.ts           |                |             | 全局导入   |
-
-
-
-
+| 一级目录&文件            | 二级目录或文件 | 主要类&函数 | 说明    |
+| ------------------ | ------- | ------ | ----- |
+| chart/             |         |        | 图表    |
+| chart-composition/ |         |        |       |
+| color/             |         |        | 颜色    |
+| components/        |         |        | 组件    |
+| connection/        |         |        | 连接    |
+| dimension/         |         |        | 尺寸    |
+| dynamic-plugins/   |         |        | 动态插件  |
+| math-expression    |         |        | 数学表达式 |
+| models/            |         |        | 模型    |
+| number-format/     |         |        | 数字格式  |
+| query/             |         |        | 查询    |
+| style/             |         |        | 风格    |
+| time-format/       |         |        | 时间格式  |
+| translation/       |         |        | 翻译    |
+| types/             |         |        |       |
+| utils/             |         |        | 工具库   |
+| validator/         |         |        | 验证器   |
+| index.ts           |         |        | 全局导入  |
 
 <br>
 
@@ -186,20 +168,16 @@ Superset v1.3+前端用到的Pie来自于 plugin-chart-echarts.
 
 国家地图文档 [Legacy Chart Plugins / legacy-plugin-chart-country-map - Basic ⋅ Storybook (superset-ui.vercel.app)](https://superset-ui.vercel.app/?path=/story/legacy-chart-plugins-legacy-plugin-chart-country-map--basic)
 
-
-
 **country-map 源码结构**
 
-| 一级目录 | 目录或文件                                                   | 详述                                                         |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| scripts  | Country Map GeoJSON Generator.ipynb                          | 更新地图                                                     |
-| src      | countries/*.geojson                                          | 各国（目前共44个）的geo数据，如将中国地名英文改为中文，可在china.geojson修改。 |
-|          | images                                                       |                                                              |
-|          | controlPanel.ts countries.ts<br>CountryMap.css CountryMap.js |                                                              |
-|          | geojson.d.ts index                                           |                                                              |
-|          | ReactCountryMap.tx transformProps.js                         |                                                              |
-
-
+| 一级目录    | 目录或文件                                                        | 详述                                               |
+| ------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| scripts | Country Map GeoJSON Generator.ipynb                          | 更新地图                                             |
+| src     | countries/*.geojson                                          | 各国（目前共44个）的geo数据，如将中国地名英文改为中文，可在china.geojson修改。 |
+|         | images                                                       |                                                  |
+|         | controlPanel.ts countries.ts<br>CountryMap.css CountryMap.js |                                                  |
+|         | geojson.d.ts index                                           |                                                  |
+|         | ReactCountryMap.tx transformProps.js                         |                                                  |
 
 **使用**
 
@@ -220,13 +198,7 @@ new CountryMapChartPlugin().configure({ key: 'country-map' }).register();
 />
 ```
 
-
-
-##  legacy-plugin-chart-xx/
-
-
-
-
+## legacy-plugin-chart-xx/
 
 # 4 优质模块 /plugin-*
 
@@ -234,26 +206,24 @@ new CountryMapChartPlugin().configure({ key: 'country-map' }).register();
 
 表格  plugin-chart-echarts的源码结构
 
-| 一级目录&文件    | 二级目录或文件 | 说明         |
-| ---------------- | -------------- | ------------ |
-| BoxPlot/         |                | 箱图         |
-| components/      | Echarts.tsx    | 公共组件     |
-| Funnel/          |                | 漏斗         |
-| Gauge/           |                | 仪表         |
-| Graph/           |                | 图           |
-| MixedTimeseries/ |                | 混合时间序列 |
-| Pie/             |                | 饼图         |
-| Radar/           |                | 雷达图       |
-| Timeseries/      |                | 时间序列     |
-| Tree/            |                | 树           |
-| Treemap/         |                | 树           |
-| utils/           |                | 工具库       |
-| test/            |                |              |
-| types/           |                |              |
-| package.json     |                |              |
-| tsconfig.json    |                |              |
-
-
+| 一级目录&文件          | 二级目录或文件     | 说明     |
+| ---------------- | ----------- | ------ |
+| BoxPlot/         |             | 箱图     |
+| components/      | Echarts.tsx | 公共组件   |
+| Funnel/          |             | 漏斗     |
+| Gauge/           |             | 仪表     |
+| Graph/           |             | 图      |
+| MixedTimeseries/ |             | 混合时间序列 |
+| Pie/             |             | 饼图     |
+| Radar/           |             | 雷达图    |
+| Timeseries/      |             | 时间序列   |
+| Tree/            |             | 树      |
+| Treemap/         |             | 树      |
+| utils/           |             | 工具库    |
+| test/            |             |        |
+| types/           |             |        |
+| package.json     |             |        |
+| tsconfig.json    |             |        |
 
 ### components/Echarts.tsx
 
@@ -290,27 +260,19 @@ function Echart(
 export default forwardRef(Echart);
 ```
 
-
-
-
-
-
-
 ### Pie/ 饼图
 
 表格  饼图插件的源码结构
 
-| 目录&文件         | 主要类&函数                                                  | 说明                                       |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
-| images/           | 图片6张                                                      | 示例图                                     |
-| buildQuery.ts     | buildQuery                                                   | 构建查询数据：查询对象、排序指标           |
-| controlPanel.tsx  | config                                                       | 图表控制页板配置的参数（出现在图表详情页） |
-| EchartsPie.tsx    | EchartsPie                                                   | pie数据/事件更改时的处理逻辑               |
-| index.ts          | EchartsPieChartPlugin                                        | 定义Pie插件                                |
-| transformProps.ts | formatPieLabel transformProps                                | 数据转换：格式化饼图标签、全局数据         |
-| types.tx          | EchartsPieFormData EchartsPieLabelType<br>EchartsPieChartProps  DEFAULT_FORM_DATA <br>PieChartTransformedProps | 导出表单数据、标签类型、全局数据           |
-
-
+| 目录&文件             | 主要类&函数                                                                                                         | 说明                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- |
+| images/           | 图片6张                                                                                                           | 示例图                   |
+| buildQuery.ts     | buildQuery                                                                                                     | 构建查询数据：查询对象、排序指标      |
+| controlPanel.tsx  | config                                                                                                         | 图表控制页板配置的参数（出现在图表详情页） |
+| EchartsPie.tsx    | EchartsPie                                                                                                     | pie数据/事件更改时的处理逻辑      |
+| index.ts          | EchartsPieChartPlugin                                                                                          | 定义Pie插件               |
+| transformProps.ts | formatPieLabel transformProps                                                                                  | 数据转换：格式化饼图标签、全局数据     |
+| types.tx          | EchartsPieFormData EchartsPieLabelType<br>EchartsPieChartProps  DEFAULT_FORM_DATA <br>PieChartTransformedProps | 导出表单数据、标签类型、全局数据      |
 
 buildQuery.ts
 
@@ -329,8 +291,6 @@ export default function buildQuery(formData: QueryFormData) {
   ]);
 }
 ```
-
-
 
 controlPanel.tsx
 
@@ -384,8 +344,6 @@ const config: ControlPanelConfig = {
 export default config;
 ```
 
-
-
 EchartsPie.tsx
 
 ```tsx
@@ -433,8 +391,6 @@ export default function EchartsPie({
   );
 }
 ```
-
-
 
 index.ts
 
@@ -493,8 +449,6 @@ export default class EchartsPieChartPlugin extends ChartPlugin<
   }
 }
 ```
-
-
 
 transformProps.ts
 
@@ -575,43 +529,31 @@ export default function transformProps(chartProps: EchartsPieChartProps): PieCha
 }
 ```
 
-
-
 ### Timeseries/ 时间序列图
 
 时间序列图包括多种图表类型：面积图、直方图、线图、平滑线图、离散图等。
 
 表格  时间序列图插件的源码结构
 
-| 目录&文件             | 主要类&函数                                                  | 说明                                       |
-| --------------------- | ------------------------------------------------------------ | ------------------------------------------ |
-| Area/                 | images/ controlPanel.tsx index.tsx                           | 时间序列面积图                             |
-| images/               | 图片2张                                                      | 示例图片                                   |
-| Regular/              | Bar/ Line/ Scatter/  <br>SmoothLine/  controlPanel.tsx       | 常规时间序列图，包括4种                    |
-| Step/                 | images/  controlPanel.tsx index.tsx                          |                                            |
-| buildQuery.ts         | buildQuery                                                   | 构建查询数据：查询对象、排序指标           |
-| controlPanel.tsx      | config                                                       | 图表控制页板配置的参数（出现在图表详情页） |
-| EchartsTimeseries.tsx | EchartsTimeseries                                            | 数据/事件更改时的处理逻辑                  |
-| index.ts              | EchartsTimeseriesChartPlugin                                 | 定义插件                                   |
-| transformers.ts       | transformSeries  transformFormulaAnnotation   <br/>transformIntervalAnnotation  transformEventAnnotation  <br/>transformTimeseriesAnnotation  getPadding getTooltipTimeFormatter  <br/>getXAxisFormatter |                                            |
-| transformProps.ts     | transformProps                                               | 数据转换：格式化标签、全局数据             |
-| types.tx              | EchartsTimeseriesContributionType  EchartsTimeseriesSeriesType<br>EchartsTimeseriesFormData  EchartsTimeseriesFormData <br>EchartsTimeseriesChartProps TimeseriesChartTransformedProps | 导出表单数据、标签类型、全局数据           |
-
-
+| 目录&文件                 | 主要类&函数                                                                                                                                                                                                   | 说明                    |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| Area/                 | images/ controlPanel.tsx index.tsx                                                                                                                                                                       | 时间序列面积图               |
+| images/               | 图片2张                                                                                                                                                                                                     | 示例图片                  |
+| Regular/              | Bar/ Line/ Scatter/  <br>SmoothLine/  controlPanel.tsx                                                                                                                                                   | 常规时间序列图，包括4种          |
+| Step/                 | images/  controlPanel.tsx index.tsx                                                                                                                                                                      |                       |
+| buildQuery.ts         | buildQuery                                                                                                                                                                                               | 构建查询数据：查询对象、排序指标      |
+| controlPanel.tsx      | config                                                                                                                                                                                                   | 图表控制页板配置的参数（出现在图表详情页） |
+| EchartsTimeseries.tsx | EchartsTimeseries                                                                                                                                                                                        | 数据/事件更改时的处理逻辑         |
+| index.ts              | EchartsTimeseriesChartPlugin                                                                                                                                                                             | 定义插件                  |
+| transformers.ts       | transformSeries  transformFormulaAnnotation   <br/>transformIntervalAnnotation  transformEventAnnotation  <br/>transformTimeseriesAnnotation  getPadding getTooltipTimeFormatter  <br/>getXAxisFormatter |                       |
+| transformProps.ts     | transformProps                                                                                                                                                                                           | 数据转换：格式化标签、全局数据       |
+| types.tx              | EchartsTimeseriesContributionType  EchartsTimeseriesSeriesType<br>EchartsTimeseriesFormData  EchartsTimeseriesFormData <br>EchartsTimeseriesChartProps TimeseriesChartTransformedProps                   | 导出表单数据、标签类型、全局数据      |
 
 ## 4.2 plugin-chart-table/
 
-
-
 ## 4.3 plugin-chart-pivot-table/
 
-
-
 ## 4.4 plugin-chart-xy/
-
-
-
-
 
 # 5 脚本 /scripts/
 
@@ -630,7 +572,7 @@ process.env.PATH = `./node_modules/.bin:${process.env.PATH}`;
 const rimraf = require('rimraf');
 const { spawnSync } = require('child_process');
 const fastGlob = require('fast-glob');
-const { argv } = require('yargs')	//解析传参
+const { argv } = require('yargs')    //解析传参
   .option('lint', {
     describe: 'whether to run ESLint',
     type: 'boolean',
@@ -659,7 +601,7 @@ const {
   babel: shouldRunBabel,
   clean: shouldCleanup,
   type: shouldRunTyping,
-} = argv;	//从传参中获取各变量的值
+} = argv;    //从传参中获取各变量的值
 const glob = globs.length > 1 ? `{${globs.join(',')}}` : globs[0] || '*';
 
 const BABEL_CONFIG = '--config-file=../../babel.config.js';
@@ -736,10 +678,6 @@ if (shouldRunTyping) {
 }
 ```
 
-
-
-
-
 <br>
 
 # 参考资料
@@ -748,9 +686,6 @@ if (shouldRunTyping) {
 
 * lerna  https://www.lernajs.cn/
 
-
-
 **参考链接**
 
 * superset 二次开发之看板渲染为深色大屏 https://juejin.cn/post/7004462914765586445
-
