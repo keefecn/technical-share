@@ -160,7 +160,7 @@ Docker CE is supported on Ubuntu on x86_64, armhf, s390x (IBM Z), and ppc64le (I
 官网缺省不支持32位平台，需特殊处理。
 
 1) ~~32位平台~~ （可废弃）
-   
+
    ```SHELL
    $ sudo apt-get install docker.io
    # 导入32位ubuntu 14.04镜像
@@ -1871,18 +1871,18 @@ python   3.4-alpine   c06adcf62f6e   3 years ago     72.9MB
 
 表格 常用基础镜像 （不改源码，只作最基础服务的镜像 ）
 
-| images                     | 镜像大小   | 实例描述               | 实例启动命令 run                                                                                | 访问URL           |
-| -------------------------- | ------ | ------------------ | ----------------------------------------------------------------------------------------- | --------------- |
-| nginx:1.9                  |        | nginx后台服务          | docker run --name keefe-nginx -p 8081:80 -d nginx:1.9                                     | http://IP:8081/ |
-| linuxserver/nginx          |        | linux服务器的nginx服务   |                                                                                           |                 |
-| tomcat                     |        | tomcat             |                                                                                           |                 |
-| ubuntu:15.10               | 72.8MB | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                                                   |                 |
-| redis:3.2                  | 105MB  | redis后台服务          | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes   |                 |
-| rqbbitmq:3.6.15-management | 138MB  |                    |                                                                                           |                 |
-| mysql                      | 448MB  | mysql后台服务          | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306 |
-| mongo                      |        | mongo              | docker run --name mongo -d mongo                                                          |                 |
-| tensorflow                 | 800MB  | 交互式启动tensorflow    | docker run -it tensorflow/tensorflow /bin/bash                                            |                 |
-| python:3.7                 | 852MB  | 调用python解释器        | docker run python:3.7 python3 -c 'import  copy;print("hello")'                            |                 |
+| images                     | 镜像大小 | 实例描述                       | 实例启动命令 run                                             | 访问URL          |
+| -------------------------- | -------- | ------------------------------ | ------------------------------------------------------------ | ---------------- |
+| nginx:1.9                  |          | nginx后台服务                  | docker run --name keefe-nginx -p 8081:80 -d nginx:1.9        | http://IP:8081/  |
+| linuxserver/nginx          |          | linux服务器的nginx服务         |                                                              |                  |
+| tomcat                     |          | tomcat                         |                                                              |                  |
+| ubuntu:15.10               | 72.8MB   | 交互式启动：进入操作系统ubuntu | docker run -i -t ubuntu:15.10 /bin/bash                      |                  |
+| redis:3.2                  | 105MB    | redis后台服务                  | docker run -p 6379:6379 -v  $PWD/data:/data -d redis:3.2  redis-server --appendonly yes |                  |
+| rqbbitmq:3.6.15-management | 138MB    | rabbitmq server                | docker run -d --log-driver=syslog -e RABBITMQ_NODENAME=my-rabbit --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.6.15-management | http://IP:15672/ |
+| mysql                      | 448MB    | mysql后台服务                  | docker run --name keefe-mysql -p 3306:3306 -e  MYSQL_ROOT_PASSWORD=123456 -d mysql:latest | mysql://xx:3306  |
+| mongo                      |          | mongo                          | docker run --name mongo -d mongo                             |                  |
+| tensorflow                 | 800MB    | 交互式启动tensorflow           | docker run -it tensorflow/tensorflow /bin/bash               |                  |
+| python:3.7                 | 852MB    | 调用python解释器               | docker run python:3.7 python3 -c 'import  copy;print("hello")' |                  |
 
 表格 常用服务型镜像（镜像实例可以直接作为提供为业务服务）
 

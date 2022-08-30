@@ -405,7 +405,7 @@ $git revert HEAD
 ```
 
 2) 与远程同步
-   
+
    ```sh
    # 将本地的git档案与github(远程)上的同步
    git push
@@ -482,7 +482,7 @@ git status
 `$git --bare init --shared`
 
 1) 创建一个开发仓库，文件信息放入.git目录，如示例仓库名proj.
-   
+
    ```sh
    $ cd {proj}
    $ git init
@@ -1137,7 +1137,7 @@ Gitlab分为社区版Gitlab CE 和企业版Gitlab EE。
 
 Gitlab服务主要构成
 
-* nginx:静态web服务器
+* nginx: 静态web服务器
 
 * gitlab-shell：用于处理Git命令和修改authorized keys列表
 
