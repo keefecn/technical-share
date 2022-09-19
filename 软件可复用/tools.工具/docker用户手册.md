@@ -1629,7 +1629,6 @@ docker stack把docker compose的所有工作都做完了，因此docker stack将
 $ docker stack
 
 Usage:  docker stack [OPTIONS] COMMAND
-
 Manage Docker stacks
 
 Options:

@@ -4,9 +4,7 @@
 | 2   | 2022-1-25  | 更新Linux安装软件章节。 | 同上    |     |
 | 3   | 2022-4-20  | 更新macOS章节      | 同上    |     |
 
-<br>
-
-<br>
+<br><br><br>
 
 ---
 
@@ -543,9 +541,7 @@ sudo ./run.sh
 
 ## 本章参考
 
-<br>
-
-<br>
+<br><br>
 
 # 3  Linux
 
@@ -938,8 +934,9 @@ kunpeng的yum仓库有7和8版本，其中v7支持的软件会多些。
 * 解决Ubuntu 20.04挂载NTFS分区不能写入（只读权限）的问题  https://blog.csdn.net/wwlswj/article/details/106479600
 * kunpeng yum仓库  https://repo.huaweicloud.com/kunpeng/yum/el/8/aarch64/Packages/database/
 * Linux系统重置和修改root密码  https://www.cnblogs.com/flower-0626/p/11425280.html
+* Ubuntu 设置合上笔记本盖子休眠的方法  https://blog.csdn.net/allenxiong/article/details/124290167
 
-<br>
+<br><br>
 
 # 4 macOS
 
@@ -1121,7 +1118,7 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 * 在macOS最新的Monterey上打开读写NTFS功能  https://zhuanlan.zhihu.com/p/442351683
 * 一分钟教你学会在MacOS中如何给文件批量重命名的技巧  https://www.jianshu.com/p/a814cad1a290
 
-<br>
+<br><br>
 
 # 5 跨平台开发环境配置
 
@@ -1710,7 +1707,7 @@ $ crontab -l
 
 * [2004.pdf (ubuntukylin.com)](https://www.ubuntukylin.com/public/pdf/2004.pdf)
 
-<br>
+<br><br>
 
 # 附录
 
