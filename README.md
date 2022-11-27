@@ -180,22 +180,22 @@ Personal Technical Share,  个人技术分享
 │          前端工程化工具.md
 │
 ├─软件工程
-│      DevOps指南.md
-│      IT管理.md
-│      敏捷开发.md
 │      测试管理.md
+│      敏捷开发.md
 │      软件工程可信.md
 │      运维专题.md
-│      运营专题.md
+│      DevOps指南.md
+│      IT管理.md
 │
 │  ├─产品岗
 │          产品管理.md
 │          产品管理-B端.md
 │          产品和解决方案.md
 │          互联网经济.md
-│          行业业务知识.md
-│          TMT行业指南.md
 │          竞品分析案例.md
+│          行业数字化转型.md
+│          运营专题.md
+│          TMT行业指南.md
 |
 └─领域开发
         IOT物联网技术.md
