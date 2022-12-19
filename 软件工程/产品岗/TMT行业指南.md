@@ -833,7 +833,7 @@ O2O，特指本地服务电商化。从广义上讲，O2O是指通过线上营�
 
 ### 芯片
 
-全球芯片企业
+**全球芯片企业**
 
 * 芯片设计：英伟达（GPU）、AMD、英特尔（CPU）
 * 晶圆代工：台积电（市场份额50%+）、三电、中芯国际
@@ -843,6 +843,16 @@ O2O，特指本地服务电商化。从广义上讲，O2O是指通过线上营�
 - 芯片设计：寒武纪、海思半导体、中芯国际、地平线、四维图新
 - 晶圆代工：中芯国际、华虹半导体、华力微
 - 存储器：长江存储、合肥长鑫、福建晋华
+
+**芯片行业运作模式**
+
+半导体芯片行业依据其生产设计及制造能力不同有三种运作模式，分别是IDM、Fabless和Foundry模式。
+
+* IDM：Integrated Device Manufacture，集成设备制造。集芯片设计、芯片制造、芯片封装和测试等多个产业链环节于一身。IDM代表有英特尔（Intel）、三星、意法半导体（ST）、德州仪器（TI）等。。
+* Fabless：俗称“无工厂芯片供应商”或“无晶圆厂”。只负责芯片的电路设计与销售，将生产、测试、封装等环节外包。Fabless代表有AMD、苹果、高通（Qualcomm）、海思、联发科（MTK）、博通（Broadcom）、等。
+* Foundry：即我们常说的“代工厂”。只负责制造，不负责芯片设计，可以同时为多家设计公司服务，但受制于公司间的竞争关系。Foundry代表有台积电（TSMC）、联电（UMC）、格罗方德（Global Foundry）等。。
+* CIDM：C指Commune，即多个设计公司共享产能。
+* Fab+Fabless的模式通过充分发挥比较优势，分散了GPU设计和制造的风险，符合半导体分工的大趋势。
 
 **美国芯片政策**
 
@@ -957,6 +967,8 @@ AI产业的发展阶段：第一阶段是技术找场景；第二阶段是场景
 
 ### 元宇宙
 
+参见 另文《元宇宙技术.md》
+
 元宇宙（Metaverse），是人类运用数字技术构建的，由现实世界映射或超越现实世界，可与现实世界交互的虚拟世界，具备新型社会体系的数字生活空间。
 
 涉及技术：AR（增强现实）、VR（虚拟现实）、[扩展现实](https://baike.baidu.com/item/扩展现实/56042847)（[XR](https://baike.baidu.com/item/XR/56042848)）、[区块链](https://baike.baidu.com/item/区块链/13465666)、[云计算](https://baike.baidu.com/item/云计算/9969353)、[数字孪生](https://baike.baidu.com/item/数字孪生/22197545)
@@ -984,7 +996,9 @@ AI产业的发展阶段：第一阶段是技术找场景；第二阶段是场景
 * 介绍一个真实的中国芯片产业现状  https://www.sohu.com/a/317039535_530597
 * 中国芯片产业深度分析报告：一文看懂真实国产芯片现状 2020.12 https://www.163.com/dy/article/FT622K0P0519X10F.html
 * 中国芯片产业链发展现状，一文带你全面了解一下 https://t.cj.sina.com.cn/articles/view/7147850123/1aa0b898b00100oi59?from=tech
-* 美国“芯”焦的背后 https://baijiahao.baidu.com/s?id=1675806835879006493&wfr=spider&for=pc
+* 美国“芯”焦的背后 https://baijiahao.baidu.com/s?id=1675806835879006493
+* 半导体行业俗语IDM、Fabless和Foundry之间有何区别？  https://baijiahao.baidu.com/s?id=1726110902005264254
+* 怎么开一家芯片设计公司？  https://view.inews.qq.com/a/20221220A059IN00
 * 创业不易，他们倒在了2021  https://new.qq.com/omn/20211229/20211229A01YOD00.html
 * 投投投，谁在瓜分万亿跨境市场？  https://m.thepaper.cn/baijiahao_20576853
 

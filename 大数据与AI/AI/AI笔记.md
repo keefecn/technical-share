@@ -526,7 +526,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### AI芯片
 
-参见  《[运维专题](../../软件工程/运维专题.md)》芯片计算架构章节、《TMT行业指南》芯片章节
+参见  《[运维专题](../../软件工程/运维专题.md)》芯片章节、《TMT行业指南》芯片章节
 
 AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 [GPU](https://baike.baidu.com/item/GPU/105524) 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)、TPU（推理处理器）。
 
@@ -551,16 +551,6 @@ GPU类型:
 > 2019年全球GPU市场三强几乎占据全部市场份额，分别是英伟达(56%)、AMD(26%)和英特尔(18%)。独立显卡主要由英伟达和AMD控制，集成显卡主要由AMD和英特尔控制。
 > 
 > 曾经的巨头：Imagination、3dfx、东芝陆续被三强超越，已经末落。
-
-GPU制造可分为IDM和Fab+Fabless。
-
-* IDM集芯片设计、芯片制造、芯片封装和测试等多个产业链环节于一身。英特尔为IDM的代表。
-
-* Fabless只负责芯片的电路设计与销售，将生产、测试、封装等环节外包。苹果和AMD为Fabless的代表。
-
-* Foundry只负责制造，不负责芯片设计，可以同时为多家设计公司服务，但受制于公司间的竞争关系。台积电为Foundry的代表。
-
-Fab+Fabless的模式通过充分发挥比较优势，分散了GPU设计和制造的风险，符合半导体分工的大趋势。
 
 ##### **Nvidia.英伟达**
 
@@ -758,6 +748,7 @@ SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“
 - GPU深度报告，三大巨头，十四个国内玩家一文看懂  https://m.thepaper.cn/newsDetail_forward_11705617
 - 深度学习GPU显卡选型攻略  https://blog.csdn.net/wjinjie/article/details/118751181
 - tensorflow各个版本的CUDA以及Cudnn版本对应关系  https://blog.csdn.net/qq_27825451/article/details/89082978
+- IDM的进击与撤退  https://baijiahao.baidu.com/s?id=1747534221552159256&wfr=spider&for=pc
 
 <br><br>
 
