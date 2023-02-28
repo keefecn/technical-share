@@ -1118,7 +1118,17 @@ OCR处理过程包括图像预处理、文本检测、文本识别、后处理�
 
 ## ChatGPT
 
+ChatGPT（全名：Chat Generative Pre-trained Transformer），美国OpenAI 研发的聊天机器人程序，于2022年11月30日发布。ChatGPT是人工智能技术驱动的自然语言处理工具，它能够通过理解和学习人类的语言来进行对话，还能根据聊天的上下文进行互动，真正像人类一样来聊天交流，甚至能完成撰写邮件、视频脚本、文案、翻译、代码，写论文等任务。
 
+在OpenAI的官网上，ChatGPT被描述为优化对话的语言模型，是GPT-3.5架构的主力模型。
+
+结合ChatGPT的底层技术逻辑，有媒体曾列出了中短期内ChatGPT的潜在产业化方向：归纳性的文字类工作、代码开发相关工作、[图像生成](https://baike.baidu.com/item/图像生成/22073368?fromModule=lemma_inlink)领域、[智能客服](https://baike.baidu.com/item/智能客服/8124098?fromModule=lemma_inlink)类工作。
+
+ChatGPT受到关注的重要原因是引入新技术RLHF (Reinforcement Learning with Human Feedback，即基于人类反馈的强化学习)。RLHF 解决了生成模型的一个核心问题，即如何让人工智能模型的产出和人类的常识、认知、需求、价值观保持一致。ChatGPT是AIGC（AI- Generated Content，人工智能生成内容）技术进展的成果。该模型能够促进利用人工智能进行内容创作、提升内容生产效率与丰富度。
+
+### 本节参考
+
+* 百度百科-ChatGPT  https://baike.baidu.com/item/ChatGPT/62446358?fr=aladdin
 
 <br>
 
