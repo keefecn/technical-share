@@ -118,7 +118,7 @@ Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的
   Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
   ```
   
-  ![1574525105512](../media/program_lang/java_001.png)
+  ![1574525105512](../../media/program_lang/java_001.png)
 
 图 1 JDK结构图
 
@@ -381,7 +381,7 @@ public class Hashtable<K,V>
 　　Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。
 
 **2.集合框架(Collection)**
-   ![1574525249551](../media/program_lang/java_002.png)
+   ![1574525249551](../../media/program_lang/java_002.png)
 图2 Java集合框架(Collection)体系图
 说明：上图方框是青色填充为接口如Collection/List/Map，其它方框为具体类。
 
@@ -559,7 +559,7 @@ Apache Tomcat® is an open source software implementation of the Java Servlet an
 
 ### 3.2.2  Tomcat框架
 
-   ![1574525431908](../media/program_lang/java_tomcat_001.png)
+   ![1574525431908](../../media/program_lang/java_tomcat_001.png)
 图3 tomcat framework
 //server.xml,核心元素包括{server{service{connector,engine{realm,host{context}}}}}
 
@@ -638,9 +638,9 @@ Tomcat提供了servlet与JSP规范的实现。
 配置示例:
 
 1) servlet的配置
-   
+
          WEB-INF/web.xml，web-app为根元素。
-   
+
    ```xml
    <?xmlversion="1.0"encoding="UTF-8"?>
    <web-app xmlns=http://Java.sun.com/xml/ns/j2ee xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance xsi:schemaLocation=" http://Java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
@@ -654,16 +654,16 @@ Tomcat提供了servlet与JSP规范的实现。
    </servlet-mapping>
    </web-app>
    ```
-   
+
    说明:
    <servlet>注册servelet，其中servlet-name为注册名称，可用在url和其它定制中；servlet-class设置servlet的相对路径。
    <servlet-mapping>设置servlet的URL规则，使用url-pattern标签。
    此外，listerner类用于特定事件（如产生或删除）发生于整个应用程序或特定的HTTP会话时，系统会通知的程序。
 
 2) 虚拟主机与目录的配置
-   
+
    $TOMCAT_HOEM/conf /server.xml
-   
+
    ```xml
    <Host name="localhost"  appBase="webapps"  unpackWARs="true"  autoDeploy="true"
    xml Validation="false"  xmlNamespaceAware="false">
@@ -671,7 +671,7 @@ Tomcat提供了servlet与JSP规范的实现。
    <Context path="/myapp"  docBase="D:\myapp" debug="0" reloadable="true" crossContext="true"/>
    </Host>
    ```
-   
+
    说明：appBase默认目录，相对于服务器docBase的相对或绝对路径。Context中的path指请求URL的前缀，上例为[http://localhost/path/.path](http://localhost/path/.path相对于虚拟主机Host的URL) 相对于虚拟主机Host的URL；docBase应用程序的绝对路径。
 
 ### 3.2.6  Tomcat性能调优
@@ -886,9 +886,9 @@ JVM的生命周期
 
 ## 6.1  JVM的体系结构
 
-   ![1574525629352](../media/program_lang/java_jvm_001.png)
+   ![1574525629352](../../media/program_lang/java_jvm_001.png)
 
-![1574525666606](../media/program_lang/java_jvm_003.png)
+![1574525666606](../../media/program_lang/java_jvm_003.png)
 图4JVM架构
 说明：
 
@@ -897,7 +897,7 @@ JVM的生命周期
 * JNI：Java本机接口（JavaNativeInterface），提供了从Java虚拟机（JVM)进入JVM运行所在计算机的本机世界的入口。
 
 ​     在Java假虚拟机规范中，一个虚拟机实例的行为时分别按照子系统、内存区、数据类型以及指令这几个术语来描述的。这些组成部分一起展示了抽象的虚拟机的内部抽象体系结构。
-   ![1574525690102](../media/program_lang/java_jvm_002.png)
+   ![1574525690102](../../media/program_lang/java_jvm_002.png)
 图5 JVM的内部结构图
 说明：JVM的内部体系结构分为三部分，分别是：类装载器（ClassLoader)子系统，运行时数据区，和执行引擎。
 
@@ -908,7 +908,7 @@ JVM的生命周期
 ### 6.1.1  Java的类加载过程
 
 Java类加载器是Java运行时环境（Java Runtime Environment）的一部分，负责动态加载Java类到Java虚拟机的内存空间中。类通常是按需加载，即第一次使用该类时才加载。由于有了类加载器，Java运行时系统不需要知道文件与文件系统。每个Java类必须由某个类加载器装入到内存。
-   ![1574525708421](../media/program_lang/java_jvm_004.png)
+   ![1574525708421](../../media/program_lang/java_jvm_004.png)
 Java虚拟机通过装载、连接和初始化一个类型，使该类型可以被正在运行的Java程序使用。
 
 * 装载：把二进制形式的Java类型读入Java虚拟机中。
@@ -930,7 +930,7 @@ Java虚拟机通过装载、连接和初始化一个类型，使该类型可以�
 
 ### 6.1.2  JVM的运行时数据区
 
-   ![1574525726622](../media/program_lang/java_jvm_005.png)
+   ![1574525726622](../../media/program_lang/java_jvm_005.png)
 图6JVM运行时数据区的垃圾回收比例统计(IBM)
 JVM运行时数据区说明：
 
@@ -950,7 +950,7 @@ JVM运行时数据区的回收比例
 
 ### 6.1.3  JVM堆内存分布
 
-   ![1574525742198](../media/program_lang/java_jvm_006.png)
+   ![1574525742198](../../media/program_lang/java_jvm_006.png)
 图 7 JVM堆内存划分
 根据对象的存活率（年龄），Java对内存划分为3种：年轻代（Young Generation）、年老代（Old Gen）、持久代（Perm Gen）。
 
@@ -1018,7 +1018,7 @@ HotSpot中新生代被划分为3个区域： Eden区、两个相对小点的区�
 垃圾收集器
 典型的垃圾收集器有G1、CMS。
 垃圾回收器又分为串行回收方式、并行回收方式合并发回收方式执行，分别运用于不同的场景。如下图所示
-   ![1574525774924](../media/program_lang/java_jvm_007.png)
+   ![1574525774924](../../media/program_lang/java_jvm_007.png)
 图8各种垃圾收集器
 
 Minor GC和Full GC

@@ -3293,7 +3293,7 @@ class ChartRestApi(BaseSupersetModelRestApi):
     def export(self, **kwargs: Any) -> Response:
 ```
 
-#### **dao逻辑 dao.py**
+#### dao逻辑 dao.py
 
 dao逻辑实现了 操作数据库的事务方法，如bulk_delete, save, overwrite等等
 
@@ -3310,7 +3310,7 @@ class ChartDAO(BaseDAO):
     def bulk_delete(models: Optional[List[Slice]], commit: bool = True) -> None:
 ```
 
-#### **过滤逻辑 filters.py**
+#### 过滤逻辑 filters.py
 
 示例：filters:!((col:slice_name,opr:chart_all_text,value:test)
 

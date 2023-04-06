@@ -3,7 +3,11 @@
 | 1    | 2006-2007 | 创建   | Keefe | Keefe |
 | <br> |           |      |       |       |
 
+<br><br><br>
+
 ---
+
+[TOC]
 
 <br>
 
@@ -416,7 +420,7 @@ void    xmlFreeProp            (xmlAttrPtr cur)
 LibXML2自身已经支持了中文编码.只是他的所有api处理的数据都是UTF-8类型的，所以只要在读入和写入数据时进行相应转换即可！代码1是使用linux下C API进行编码转换；代码2因为libxml2已融合了iconv，使用了libxml2的函数来进行编码转换.
 
 1) iconv
-   
+
    ```c++
    /*
    compile:  gcc -I/usr/include/libxml2/ -lxml2 iconv.c
@@ -476,7 +480,7 @@ int main(void)
 2)  xmlFindCharEncodingHandler
 
 使用数据类型：xmlCharEncodingHandlerPtr
-```c++
+​```c++
 /***
  * compile: gcc -I/usr/include/libxml2/ -lxml2 convert.c
  * usage:  convert utf-8 string or null

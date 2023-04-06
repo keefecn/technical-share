@@ -126,63 +126,7 @@
 
 [3.6       本章参考... 68](#_Toc2547358)
 
-[4    集群运维篇... 69](#_Toc2547359)
 
-[4.1       集群... 69](#_Toc2547360)
-
-[4.1.1     集群相关概念... 69](#_Toc2547361)
-
-[4.1.2     集群部署模式... 70](#_Toc2547362)
-
-[4.1.3     集群管理工具... 73](#_Toc2547363)
-
-[4.2       运营工具... 74](#_Toc2547364)
-
-[4.2.1     一般工具... 74](#_Toc2547365)
-
-[4.2.2     Hadoop生态专用工具... 74](#_Toc2547366)
-
-[4.3       Hadoop优化... 77](#_Toc2547367)
-
-[4.4       本章参考... 78](#_Toc2547368)
-
-[5    Spark. 78](#_Toc2547369)
-
-[5.1       简介... 78](#_Toc2547370)
-
-[5.2       Spark安装使用篇... 79](#_Toc2547371)
-
-[5.2.1     示例1：交互终端... 79](#_Toc2547372)
-
-[5.2.2     示例2：文件  sc.textFile().count() 80](#_Toc2547373)
-
-[5.3       Spark技术原理篇... 81](#_Toc2547374)
-
-[5.3.1     作业执行流程... 81](#_Toc2547375)
-
-[5.3.2     作业调度... 81](#_Toc2547376)
-
-[5.4       Spark开发篇... 82](#_Toc2547377)
-
-[5.4.1     spark各种语言开发... 82](#_Toc2547378)
-
-[5.4.2     RDD.. 83](#_Toc2547379)
-
-[5.4.3     Spark SQL. 88](#_Toc2547380)
-
-[5.4.4     Spark Streaming. 88](#_Toc2547381)
-
-[5.4.5     Spark MLlib. 89](#_Toc2547382)
-
-[5.4.6     Spark GraphX. 89](#_Toc2547383)
-
-[5.5       本章参考... 89](#_Toc2547384)
-
-[6    FAQ.. 90](#_Toc2547385)
-
-[6.1       Hadoop. 90](#_Toc2547386)
-
-[7    参考资料... 90](#_Toc2547387)
 
 表目录
 
@@ -1165,7 +1109,7 @@ $ ./sbin/start-yarn.sh
 start-all.sh = start-master.sh + start-slave.sh
 
 1) spark master
-   
+
    ```sh
    /home/denny/source/jdk1.8.0_121/bin/java -cp /home/hadoop/bin/spark-2.1.0-bin-hadoop2.6/conf/:/home/hadoop/bin/spark-
    2.1.0-bin-hadoop2.6/jars/*:/usr/local/hadoop/etc/hadoop/ -Xmx1g org.apache.spark.deploy.master.Master --host denny-ubuntu --port 707

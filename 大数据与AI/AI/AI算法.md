@@ -906,3 +906,4 @@ BERT的全称是Bidirectional Encoder Representation from Transformers，基于T
 
 [^C4.5]: http://blog.csdn.net/aladdina/archive/2009/04/30/4141048.aspx  数据挖掘十大经典算法(1) C4.5
 
+* 聊聊工业界“AI算法创新”乱象  https://blog.csdn.net/weixin_36896856/article/details/126983829

@@ -1103,7 +1103,7 @@ parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0,parentdir)
 ```
 
-#### 3.1.3.2 动态导入__import__/del
+#### 3.1.3.2 动态导入`__import__/del`
 
 **__import__**
  作用：
@@ -1804,7 +1804,7 @@ Options:
 **用help(文件名 或 类/函数)就可得到文档化注释。**
 
 **示例**：python_doc.py
-```python
+​```python
 #!/usr/bin/env python
 # -*-coding: utf-8 -*-
 *文档快速生成注释的方法介绍,首先我们要用到__all__属性*
@@ -2595,13 +2595,13 @@ Python 3.6.5
 ```
 
 2) python shell
-   
+
    ```sh
    >>> import sys
    >>> sys.version_info.major
    3
    ```
-   
+
    表格 24 python2和python3的比较列表
 
 |          | python 2.x                                                                    | python 3                                                      |
@@ -3250,7 +3250,7 @@ com back from foo in to bar
 
 ### 4.3.4  WSGI
 
-   ![1574530834766](../media/program_lang/lang_python_001.png)
+   ![1574530834766](../../media/program_lang/lang_python_001.png)
 备注：上图nginx主要处理静态文件，动态文件通过wsgi http server转发请求到web server。
 
 **WSGI**: Web服务器网关接口（Python Web Server Gateway Interface，缩写为WSGI）是为[Python](https://baike.baidu.com/item/Python)语言定义的[Web服务器](https://baike.baidu.com/item/Web服务器)和Web应用程序或框架之间的一种简单而通用的接口。自从WSGI被开发出来以后，许多其它语言中也出现了类似接口。
@@ -3340,7 +3340,7 @@ gunicorn \
 
 * uwsgi：是uWSGI服务器的独占通信协议（线路协议），用于定义传输信息的类型(type of information)。每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。定义了在uWSGI服务器上与其他网络服务器进行数据的通讯。
   
-  ![1574530867822](../media/program_lang/lang_python_002.png)
+  ![1574530867822](../../media/program_lang/lang_python_002.png)
   图 3 nginx+uwsgi+django关联
 
 **安装 uwsgi**

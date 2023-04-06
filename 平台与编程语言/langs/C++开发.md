@@ -292,7 +292,7 @@ template <class type> ret-type func-name(parameter list)
 
 异常处理机制exception
 
-   ![1574516375149](../media/sf_reuse/framework/frame_class_011.png)
+   ![1574516375149](../../media/sf_reuse/framework/frame_class_011.png)
 
 C++ 异常是指在程序运行时发生的特殊情况，比如尝试除以零的操作。
 异常提供了一种转移程序控制权的方式。C++ 异常处理涉及到三个关键字：try、catch、throw。
@@ -323,7 +323,7 @@ try
 
  方法1：引用计数法，将所有对象都使用指针，继承share，使用handle<>
  方法2：智能指针auto_ptr
-   ![1574516353806](../media/sf_reuse/framework/frame_class_010.png)
+   ![1574516353806](../../media/sf_reuse/framework/frame_class_010.png)
 
 <br>
 
