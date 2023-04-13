@@ -3513,18 +3513,6 @@ import tkinter
 
 在深入学习 SOAP web 服务之前，你需要安装三个库：PyXML、fpconst 和 SOAPpy。
 
-## 4.7  项目实例
-
-### 12306抢票
-
-12306 售票网站新版验证码识别对抗 https://zhuanlan.zhihu.com/p/19979300
-https://gist.github.com/Evi1m0/fbbdb1ba7c66cc4e1bb2
-
-### QQ模拟登陆
-
-http://www.2cto.com/Article/201603/493457.html
-https://github.com/LeoHuang2015/qqloginjs
-
 <br>
 
 ## 本章参考

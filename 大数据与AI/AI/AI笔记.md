@@ -215,18 +215,18 @@ Can a machine have a [mind](http://en.wikipedia.org/wiki/Mind) and [consciousnes
 
 表格  AI发展历程表
 
-| 年代    | 事件                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 备注  |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| 1950  | 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |     |
-| 1953  | [博弈论](http://zh.wikipedia.org/wiki/博弈論)。<br>Metropolis提出 模拟退火算法SA 的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |     |
-| 1956  | 美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生。参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)． 约翰·麦卡锡首度提出「人工智能」这一概念，提出者约翰·麦卡锡也被誉为「人工智能之父」。                                                                                                                                                                                                                   |     |
-| 1960s | 1960年产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)。<br>1963 年，「人工智能之父」约翰·麦卡锡创建了斯坦福人工智能实验室（SAIL，Stanford Artificial Intelligence Laboratory）。该实验室拥有多个领域的专家，涉及机器人技术、计算机视觉、机器学习、图像处理、自然语言处理等多个领域，代表人物包括一大批在人工智能领域闻名遐迩的人物，如 Christopher Manning 、吴恩达、李飞飞等。。<br>1966 年，MIT 计算机科学家 Joseph Weizenbaum 开发出首个自然语言处理程序——ELIZA，它是一个模拟罗杰斯心理治疗的聊天机器人。<br>1967 年，斯坦福大学 E.A. Feigenbaum 领导开发出第一个「专家系统」——DENRAL， 使得人工智能的研究以推理算法为主转变为以知识为主。<br>1969 年，阿瑟·布莱森（Arthur Bryson）和何毓琦（Yu-Chi Ho）提出机器学习领域最重要的算法——反向传播算法（[BackpropagaTIon](http://bbs.elecfans.com/zhuti_715_1.html)）。这种算法可用于多层人工神经网络，2000 年至今[深度学习](http://www.elecfans.com/tags/深度学习/)的发展都离不开它的启发。 |     |
-| 1970s | 1973年，[生产系统](http://zh.wikipedia.org/wiki/生產系統)。1973年产生[PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)。<br>美国斯坦福国际研究所（Stanford Research InsTItute， SRI）研制出首台采用了人工智能学的移动机器人——Shakey。<br>1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。<br>1976年，[框架理论](http://zh.wikipedia.org/wiki/框架理論) <br>1979年，汉斯·摩拉维克（Hans Moravec）在斯坦福大学就读研究生时期发明的 Stanford Cart，在无人干预的情况下自动穿过摆满椅子的房间并前后行驶了 5 小时。Stanford Cart 相当于早期[无人驾驶](http://www.elecfans.com/tags/无人驾驶/)汽车。                                                                                                                           |     |
-| 1988  | IBM 沃森研究中心发表《机器翻译的统计方法》（A  STATISTICAL APPROACH TO LANGUAGE TRANSLATION），预示着基于规则的机器翻译方法开始转变为基于概率的方法，并反映了一个更为广泛的转变：从「理解」眼前的任务的「机器学习」方法转变为基于已知例子的统计分析方法。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |     |
-| 1990s | 1991年，蒂姆·伯纳斯－李（Tim Berners-Lee）发明的万维网首次上线。<br>1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。<br>1997 年，IBM 研发的「深蓝」（Deep Blue）成为第一个击败人类象棋冠军 Garry Kasparov 的电脑程序。<br>1998 年，斯坦福大学教授肯尼斯·萨里斯伯里（Kenneth Salisbury）公开外科机器人（robotic surgery）专利。                                                                                                                                                                                                                                                                                                                       |     |
-| 2000s | 2005 年，斯坦福大学教授 Sebastian Thrun 联合斯坦福大学 AI 实验室发明的第一辆自动驾驶汽车完成了 132 英里的 Mojava 沙漠路线，在 DARPA 超级挑战赛（DARPA Grand Challenge）上一举夺冠。<br/>2009 年，李飞飞主导的 ImageNet 项目诞生了一个含有 1500 万张照片的数据库，涵盖了 22000 种物品。这个项目以及后来的一系列工作影响了整个计算机视觉领域发展。<br/>2010 年，苹果公司推出一款内建在苹果 iOS 系统中的人工智能助理软件 Siri。                                                                                                                                                                                                                                                                                                                                                                                |     |
-| 2010s | 2011 年，IBM 开发的自然语言问答计算机沃森在美国老牌益智节目「危险边缘」（Jeopardy！）中击败人类。<br/>2012 年，杰夫·迪恩（Jeff Dean）和吴恩达（Andrew Ng）发布一份实验报告，他们给一个大型神经网络展示 1000 万张未标记的网络图片，发现神经网络能够识别出猫的形象。<br/>2014 年，亚马逊推出了智能音箱 Echo 以及智能语音助手 Alexa。<br/>2016 年，谷歌 DeepMind 研发的 AlphaGo 击败围棋世界冠军李世石。                                                                                                                                                                                                                                                                                                                                                                                                    |     |
-| 2020s |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |     |
+| 年代  | 事件                                                         |
+| ----- | ------------------------------------------------------------ |
+| 1950  | 图灵的论文(Computing Machinery and Intelligence)提出了图灵测试、机器学习、遗传算法、增量学习，第一个清晰地描绘出AI的完整图像。 |
+| 1953  | [博弈论](http://zh.wikipedia.org/wiki/博弈論)。<br>Metropolis提出 模拟退火算法SA 的思想，Kirkpatrick在1983年成功地将其应用在组合最优化问题中。 |
+| 1956  | 美国达特茅斯会议[Dartmouth](http://en.wikipedia.org/wiki/Dartmouth_College)，AI正式诞生。参与人共10人，其中包括赫伯特.西蒙[Herbert Simon](http://en.wikipedia.org/wiki/Herbert_Simon)，约翰.麦卡锡[John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)),，克劳德.香农, 亚伦.纽厄尔[Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell)，马文.明期基[Marvin Minsky](http://en.wikipedia.org/wiki/Marvin_Minsky)． 约翰·麦卡锡首度提出「人工智能」这一概念，提出者约翰·麦卡锡也被誉为「人工智能之父」。 |
+| 1960s | 1960年产生了**人工智能语言** [LISP语言](http://zh.wikipedia.org/wiki/LISP语言)。<br>1963 年，「人工智能之父」约翰·麦卡锡创建了斯坦福人工智能实验室（SAIL，Stanford Artificial Intelligence Laboratory）。该实验室拥有多个领域的专家，涉及机器人技术、计算机视觉、机器学习、图像处理、自然语言处理等多个领域，代表人物包括一大批在人工智能领域闻名遐迩的人物，如 Christopher Manning 、吴恩达、李飞飞等。。<br>1966 年，MIT 计算机科学家 Joseph Weizenbaum 开发出首个自然语言处理程序——ELIZA，它是一个模拟罗杰斯心理治疗的聊天机器人。<br>1967 年，斯坦福大学 E.A. Feigenbaum 领导开发出第一个「专家系统」——DENRAL， 使得人工智能的研究以推理算法为主转变为以知识为主。<br>1969 年，阿瑟·布莱森（Arthur Bryson）和何毓琦（Yu-Chi Ho）提出机器学习领域最重要的算法——反向传播算法（[BackpropagaTIon](http://bbs.elecfans.com/zhuti_715_1.html)）。这种算法可用于多层人工神经网络，2000 年至今[深度学习](http://www.elecfans.com/tags/深度学习/)的发展都离不开它的启发。 |
+| 1970s | 1973年，[生产系统](http://zh.wikipedia.org/wiki/生產系統)。1973年产生[PROLOG语言](http://zh.wikipedia.org/wiki/PROLOG语言)。<br>美国斯坦福国际研究所（Stanford Research InsTItute， SRI）研制出首台采用了人工智能学的移动机器人——Shakey。<br>1975年，美国Michigan大学J.Holland教授提出，并出版专著《Adaptation in Natural and Artificial Systems》。J.Holland教授所提出的GA通常为简单遗传算法（SGA）。<br>1976年，[框架理论](http://zh.wikipedia.org/wiki/框架理論)。<br>1979年，汉斯·摩拉维克（Hans Moravec）在斯坦福大学就读研究生时期发明的 Stanford Cart，在无人干预的情况下自动穿过摆满椅子的房间并前后行驶了 5 小时。Stanford Cart 相当于早期无人驾驶汽车。 |
+| 1988  | IBM 沃森研究中心发表《机器翻译的统计方法》（A  STATISTICAL APPROACH TO LANGUAGE TRANSLATION），预示着基于规则的机器翻译方法开始转变为基于概率的方法，并反映了一个更为广泛的转变：从「理解」眼前的任务的「机器学习」方法转变为基于已知例子的统计分析方法。 |
+| 1990s | 1991年，蒂姆·伯纳斯－李（Tim Berners-Lee）发明的万维网首次上线。<br>1992年，Marco Dorigo在他的博士论文中引入[蚁群算法](http://baike.baidu.com/view/539346.htm#_blank)(ant colony optimization, ACO)，其灵感来源于蚂蚁在寻找食物过程中发现路径的行为。<br>1997 年，IBM 研发的「深蓝」（Deep Blue）成为第一个击败人类象棋冠军 Garry Kasparov 的电脑程序。<br>1998 年，斯坦福大学教授肯尼斯·萨里斯伯里（Kenneth Salisbury）公开外科机器人（robotic surgery）专利。 |
+| 2000s | 2005 年，斯坦福大学教授 Sebastian Thrun 联合斯坦福大学 AI 实验室发明的第一辆自动驾驶汽车完成了 132 英里的 Mojava 沙漠路线，在 DARPA 超级挑战赛（DARPA Grand Challenge）上一举夺冠。<br/>2009 年，李飞飞主导的 ImageNet 项目诞生了一个含有 1500 万张照片的数据库，涵盖了 22000 种物品。这个项目以及后来的一系列工作影响了整个计算机视觉领域发展。<br/>2010 年，苹果公司推出一款内建在苹果 iOS 系统中的人工智能助理软件 Siri。 |
+| 2010s | 2011 年，IBM 开发的自然语言问答计算机沃森在美国老牌益智节目「危险边缘」（Jeopardy！）中击败人类。<br/>2012 年，杰夫·迪恩（Jeff Dean）和吴恩达（Andrew Ng）发布一份实验报告，他们给一个大型神经网络展示 1000 万张未标记的网络图片，发现神经网络能够识别出猫的形象。<br/>2014 年，亚马逊推出了智能音箱 Echo 以及智能语音助手 Alexa。<br/>2016 年，谷歌 DeepMind 研发的 AlphaGo 击败围棋世界冠军李世石。 |
+| 2020s | 2022.12，OpenAI发布Chatgpt，60天后月活过亿，成为历史上增长最快的消费者应用程序。 |
 
 > 备注：1990s表示1990-1999十年间，同理类推。
 > 
@@ -482,7 +482,7 @@ Home: http://www.cs.cmu.edu/~tom/
 
 ### 模式识别
 
-模式识别（英语：Pattern Recognition），就是通过计算机用数学技术方法来研究模式的自动处理和判读。我们把环境与[客体](https://baike.baidu.com/item/客体)统称为“模式”。
+模式识别（英语：Pattern Recognition），就是通过计算机用数学技术方法来研究模式的自动处理和判读。我们把环境与客体统称为“模式”。
 
 信息处理过程的一个重要形式是生命体对环境及客体的识别。对人类来说，特别重要的是对光学信息（通过视觉器官来获得）和声学信息（通过听觉器官来获得）的识别。这是模式识别的两个重要方面。市场上可见到的代表性产品有[光学字符识别](https://baike.baidu.com/item/光学字符识别)、[语音识别](https://baike.baidu.com/item/语音识别)系统。
 
@@ -504,7 +504,7 @@ Home: http://www.cs.cmu.edu/~tom/
 * 自动驾驶：SAE设计了一套 系统，将驾驶自动化级别分为 0 到 5 级。详见《行篇-汽车行业.md》
 * 智能客服
 
-
+<br>
 
 ## 1.4 AI业界
 
@@ -524,116 +524,19 @@ Home: http://www.cs.cmu.edu/~tom/
 
 最后需要说明的是，深耕AI行业应用场景的公司往往也具备了技术层的一些核心技术能。
 
-### AI芯片
+### AI生产要素
 
-参见  《[运维专题](../../软件工程/运维专题.md)》芯片章节、《TMT行业指南》芯片章节
+AI生产要素是三算，即算法、算力和算据（数据）。
 
-AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 [GPU](https://baike.baidu.com/item/GPU/105524) 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)、TPU（推理处理器）。
+* 算法 详见 《[AI算法](./AI算法.md)》
+* 算力 详见 《[AI算力](./AI算力.md)》
+* 算据 详见 《[开放数据集说明](../开放数据集说明.md)》
 
-#### GPU
-
-显卡就是GPU，下载GPU显卡驱动一定要和硬件GPU显卡型号一致。
-
-GPU类型:
-
-1. **虚拟式gpu**: 只能用于图像展示.功能和效果不支持计算。
-2. **直通式gpu**: 可以用于深度学习的算法模型计算和模型训练。
-
-表格  全球主要GPU厂商和产品
-
-| 厂商    | 厂商简介                                        | GPU产品                                                                    |
-| ----- | ------------------------------------------- | ------------------------------------------------------------------------ |
-| 英伟达   | 全球GPU领导者。                                   | [GeForce](https://www.nvidia.cn/geforce/drivers/)，DGX、EGX、HGX，Quadro、AGX |
-| AMD   | 全球GPU竞争者，显卡能力来自于其2006年收购的ATI公司。             | Radeon                                                                   |
-| Intel | 全球GPU追赶者。全球最大的PC GPU供应商，也是PC和服务器显卡唯一的IDM厂商。 |                                                                          |
-| Apple | 移动GPU新秀。                                    | A11(2017)、M1(2020.11.11)                                                 |
-
-> 2019年全球GPU市场三强几乎占据全部市场份额，分别是英伟达(56%)、AMD(26%)和英特尔(18%)。独立显卡主要由英伟达和AMD控制，集成显卡主要由AMD和英特尔控制。
-> 
-> 曾经的巨头：Imagination、3dfx、东芝陆续被三强超越，已经末落。
-
-##### **Nvidia.英伟达**
-
-```shell
-# gpu
-# lspci查看PCI设备
-$ lspci | grep -i 'NVIDIA'
-02:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)
-
-$ lspci -v -s 02:00.0
-02:00.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)
-    Subsystem: NVIDIA Corporation Device 12a2
-    Physical Slot: 1
-    Flags: bus master, fast devsel, latency 0, IRQ 26, NUMA node 0
-    Memory at c6000000 (32-bit, non-prefetchable) [size=16M]
-    Memory at b0000000 (64-bit, prefetchable) [size=256M]
-    Memory at c0000000 (64-bit, prefetchable) [size=32M]
-    Capabilities: <access denied>
-    Kernel driver in use: nvidia
-    Kernel modules: nouveau, nvidia_drm, nvidia
-
-# 查看nvidia显卡模块内核版本，示例中是510.47.03
-$ cat /proc/driver/nvidia/version
-NVRM version: NVIDIA UNIX x86_64 Kernel Module  510.47.03  Mon Jan 24 22:58:54 UTC 2022
-GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
-
-# nvida-smi 系统管理接口，查看nvidia显卡GPU使用情况
-$ nvida-smi      
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  Tesla T4            Off  | 00000000:02:00.0 Off |                    0 |
-| N/A   33C    P8    15W /  70W |   2430MiB / 15360MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|    0   N/A  N/A     19274      C   ocr_service                      1363MiB |
-|    0   N/A  N/A     22286      C   classify_language_service        1067MiB |
-+-----------------------------------------------------------------------------+
-```
-
-表格 nvidia-smi 结果字段说明
-
-| 字段                | 字段说明           | 备注&示例值                                       |
-| ----------------- | -------------- | -------------------------------------------- |
-| GPU Name          | GPU名称          | Tesla T4                                     |
-| Fan               | 风扇转速（0%--100%） | N/A表示没有风扇                                    |
-| Temp              | GPU温度          | GPU温度过高会导致GPU频率下降                            |
-| Perf              | 性能状态           | 从P0（最大性能）到P12（最小性能）                          |
-| Pwr               | GPU功耗          |                                              |
-| Persistence-M     | 持续模式的状态        | 持续模式耗能大，但在新的GPU应用启动时花费时间更少                   |
-| Bus-Id            | GPU总线          | 值组成：`domain:bus:device.function`             |
-| Disp.A            | Display Active | 表示GPU的显示是否初始化                                |
-| Memory-Usage      | 显存使用量          | 当明使用 / 可用显存                                  |
-| Volatile GPU-Util | GPU使用率         |                                              |
-| ECC               | 是否开启错误检查和纠正技术  | 0-DISABLED, 1-ENABLED                        |
-| Compute M.        | 计算模式           | 0-DEFAULT, 1-EXCLUSIVE_PROCESS, 2-PROHIBITED |
-| Processes         | 进程             | 会罗列当前使用了GPU的进程列表的详情情况                        |
-
-**CUDA**
-
-CUDA(Compute Unified Device Architecture)，是显卡厂商(NVIDIA)英伟达公司推出的一种基于新的并行编程模型和指令集架构的通用并行计算架构，它能利用英伟达GPU的并行计算引擎，比CPU更高效的解决许多复杂计算任务。
-
-运行CUDA应用程序要求系统至少具有一个具有CUDA功能的GPU和与CUDA Toolkit兼容的驱动程序。
-
-> 官方说：CUDA是一个并行计算平台和编程模型，能够使得使用GPU进行通用计算变得简单和优雅。
-
-#### SOC
-
-SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“片上系统”。SoC更多的是对处理器（包括CPU、DSP）、存储器、各种接口控制模块、各种互联总线的集成，其典型代表为[手机芯片](https://baike.baidu.com/item/%E6%89%8B%E6%9C%BA%E8%8A%AF%E7%89%87/6030703)（参见术语“终端芯片”的介绍）。
-
-苹果的自研GPU首次出现于2017年的A11 SoC。Apple M1 芯片发布于2020年11月11日，Apple 全新打造的强大芯片，也是第一款专为 Mac 设计的芯片。M1配备 8 核中央处理器（其中包括四个高性能核心和四个高能效核心），8核图形处理器，16核神经网络引擎。
+AI 分布式计算的市场主要由算力芯片 (55-75%)、内存 (10-20%) 和互联设备（10-20%）三部分组成。
 
 ### AI企业
+
+#### 头部企业
 
 表格 1 AI能力的头部企业
 
@@ -676,7 +579,7 @@ SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“
 | Salesforce                              | Einstein的母公司。Einstein是Salesforce在全球范围内部署的全新人工智能平台。Einstein同样以顾客为导向，从大量数据中学习，形成预测从而使商业程序获益。 | SAAS头部企业       |
 | AWS                                     | 智能语音助手Alexa，AWS-全球最大的云服务平台提供商。          | 云计算、           |
 | Banjo                                   | 利用人工智能在社交媒体领域进行搜索，从而根据重要的场合和环境来确定一家公司的地位。 |                    |
-| OpenAI                                  | 非盈利研究小组                                               |                    |
+| OpenAI                                  | 非盈利研究小组。2023年发布GPT-4后已经转为盈利公司。          | 通用AI             |
 
 说明：
 
@@ -741,6 +644,14 @@ AI业务模式可以从交付形式、定制程度、客户类型、行业范围
 
 芯：芯片
 
+AI：Artificial Intelligence，人工智能。
+
+AGI：即Artificial general intelligence的简写，计算机科学与技术专业用语，专指通用人工智能。这一领域主要专注于研制像人一样思考、像人一样从事多种用途的机器。这一单词源于AI，但是由于主流AI研究逐渐走向某一领域的智能化（如机器视觉、语音输入等），因此为了与它们相区分，增加了general。
+
+AIGC：AI Generated Content，即人工智能生产的内容。
+
+多模态：指的是多种模态的信息，包括：文本、图像、视频、音频等。多模态研究的就是这些不同类型的数据的融合的问题。多模态研究的是视觉语言问题，其任务是关于图像和文字的分类、问答、匹配、排序、定位等问题。
+
 <br>
 
 ## 本章参考
@@ -756,6 +667,7 @@ AI业务模式可以从交付形式、定制程度、客户类型、行业范围
 - 2020年人工智能百强 http://www.enet.com.cn/article/2021/0412/A202104121264535.html
 - 自动驾驶：是炒作还是现实？ https://mp.weixin.qq.com/s/1AaGIY0BzinrO9DYrQJsIw#
 - 一文带你了解人工智能业务模式  http://field.10jqka.com.cn/20230407/c646249768.shtml
+- 什么是多模态？  https://zhuanlan.zhihu.com/p/473760099
 
 AI芯片
 
