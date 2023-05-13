@@ -21,9 +21,9 @@ Spring 框架的所有组件都通过依赖注入粘在一起。依赖注入（�
 
 Spring Boot / Cloud 是微服务实践的最佳落地方案。
 
-* Spring **Boot** 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
+* Spring Boot 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。
 
-* Spring **Cloud** 是一个基于 Spring Boot 实现的服务治理工具包。Spring Boot 专注于快速、方便集成的单个微服务个体。Spring Cloud 关注全局的服务治理框架。
+* Spring Cloud 是一个基于 Spring Boot 实现的服务治理工具包。Spring Boot 专注于快速、方便集成的单个微服务个体。Spring Cloud 关注全局的服务治理框架。
 
 ## 版本
 

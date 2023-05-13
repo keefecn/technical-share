@@ -76,6 +76,10 @@ AI大模型是算力、算法和算据（数据）的结合，其中算力是当
 
 ChatGPT（全名：Chat Generative Pre-trained Transformer），美国<u>OpenAI</u> 研发的聊天机器人程序，于2022年11月30日发布。ChatGPT是人工智能技术驱动的自然语言处理工具，它能够通过理解和学习人类的语言来进行对话，还能根据聊天的上下文进行互动，真正像人类一样来聊天交流，甚至能完成撰写邮件、视频脚本、文案、翻译、代码，写论文等任务。
 
+**OpenAI**
+
+2015 年12月11日OpenAI成立。OpenAI，在美国成立的人工智能研究公司，核心宗旨在于“实现安全的通用人工智能(AGI)”，使其有益于人类。OpenAI由一群科技领袖，包括[山姆·阿尔特曼](https://baike.baidu.com/item/山姆·阿尔特曼/15957359?fromModule=lemma_inlink)（Sam Altman）、[彼得·泰尔](https://baike.baidu.com/item/彼得·泰尔/3103049?fromModule=lemma_inlink)（Peter Thiel）、[里德·霍夫曼](https://baike.baidu.com/item/里德·霍夫曼/4757094?fromModule=lemma_inlink)（Reid Hoffman）和[埃隆·马斯克](https://baike.baidu.com/item/埃隆·马斯克/3776526?fromModule=lemma_inlink)（Elon Musk）等人创办。2017年马斯克退出；2018年微软给OpenAI 投资10亿美元。
+
 在OpenAI的官网上，ChatGPT被描述为优化对话的语言模型，是GPT-3.5架构的主力模型。
 
 结合ChatGPT的底层技术逻辑，有媒体曾列出了中短期内ChatGPT的潜在产业化方向：归纳性的文字类工作、代码开发相关工作、图像生成领域、智能客服类工作。
@@ -86,11 +90,9 @@ ChatGPT是生成式AI的一种形式，Gartner（一家技术研究及分析公�
 
 ## ChatGPT技术发展
 
-2015 年12月11日OpenAI成立。OpenAI，在美国成立的人工智能研究公司，核心宗旨在于“实现安全的通用人工智能(AGI)”，使其有益于人类。OpenAI由一群科技领袖，包括[山姆·阿尔特曼](https://baike.baidu.com/item/山姆·阿尔特曼/15957359?fromModule=lemma_inlink)（Sam Altman）、[彼得·泰尔](https://baike.baidu.com/item/彼得·泰尔/3103049?fromModule=lemma_inlink)（Peter Thiel）、[里德·霍夫曼](https://baike.baidu.com/item/里德·霍夫曼/4757094?fromModule=lemma_inlink)（Reid Hoffman）和[埃隆·马斯克](https://baike.baidu.com/item/埃隆·马斯克/3776526?fromModule=lemma_inlink)（Elon Musk）等人创办。2017年马斯克退出；2018年微软给OpenAI 投资10亿美元。
+2012年，深度学习元年，以ImageNet中引入深度学习算法为重要节点，通过构建深度神经网络<u>AlexNet</u>成功将图片识别错误率降低了10.8pcts，证明了深度学习的发展潜力。
 
-2012年，深度学习元年，以ImageNet中引入深度学习算法为重要节点，通过构建深度神经网络AlexNet成功将图片识别错误率降低了10.8pcts，证明了深度学习的发展潜力。
-
-2017年，谷歌发布大模型（Transformer）技术路线，将降低边际成本，开始被业界和国内外巨头的关注，逐渐成为发展共识。以当前热门预训练模型为例，BERT(仅使用了Transformer的Encoder部分)，GPT-2、GPT-3(使用的是Decoder部分)等，都是基于Transformer模型而构建。
+2017年，6月谷歌发布大模型（<u>Transformer</u>）技术路线，将降低边际成本，开始被业界和国内外巨头的关注，逐渐成为发展共识。以当前热门预训练模型为例，BERT(仅使用了Transformer的Encoder部分)，GPT-2、GPT-3(使用的是Decoder部分)等，都是基于Transformer模型而构建。
 
 2022年，10月Stable Diffusion、DALL-E 2、Midjourney等可以生成图片的AIGC模型风行一时。**OpenAI**推出DALL·E 2，实现文生图创作，并将分辨率提升；11月30日ChatGPT-3.5发布之后，短短5天，注册用户数就超过100万，60天后月活用户超过1亿人，成为历史上增长最快的消费者应用程序。
 
@@ -116,7 +118,7 @@ ChatGPT团队关键项目有RLHF, CodeX, GPT-1/2/3, ChatGPT等。
 | GPT-2       | 2019-2     | 多任务学习。使用了更多参数的模型和更多的训练数据, 且使用zero-shot设定实现仅通过一次预训练的就能完成多种任务，减少了下游微调的频率。 | 15亿    |
 | GPT-3       | 2020-7     | 海量参数。拓展了之前创建的基于15亿参数的GPT-2语言模型，微软于9月22日取得独家授权。<br>GPT3的缺陷是存在预训练模型的偏见性，由于预训练模型都是通过海量数据在超大参数量级的模型上训练出来的，其生成的内容无法被保证，会存在包括种族歧视，暴力血腥等危险内容。 | 1750亿  |
 | **GPT-3.5** | 2022-11-30 | 针对对话场景优化。InstructGPT和ChatGPT。极强的语言理解和语言生成能力。<br>能够回答问题、生成代码、构思剧本和小说。成为历史上增长最快的消费者应用程序。 | 1750亿  |
-| GPT-4       | 2023-3     | 万亿参数。                                                   | 100万亿 |
+| GPT-4       | 2023-3     | 拥有多模态能力，可接受图像输入并理解图像内容。               | 100万亿 |
 | GPT-5       | ？         |                                                              |         |
 
 说明：ChatGPT是由最初的GPT迭代而来：基于文本预训练的GPT-1，GPT-2，GPT-3都是采用的以Transformer为核心结构的模型。
@@ -195,6 +197,8 @@ ChatGPT使用的核心技术之一是Transformer，它是近几年人工智能�
 
 2023.4.10，商汤正式发布自研类ChatGPT产品"商量（SenseChat）"。
 
+2023.5.6日，科大讯飞发布了讯飞星火认知大模型。
+
 <br>
 
 ## 华为盘古大模型
@@ -226,6 +230,7 @@ ModelArts 是面向开发者的一站式AI平台，为机器学习与深度学�
 * 拆解华为盘古大模型：与ChatGPT有何不同？  https://baijiahao.baidu.com/s?id=1762619118352444565 2023.4.8
 * 【德邦证券2023-03-08】AIGC行业专题报告：国内大模型概览  https://baijiahao.baidu.com/s?id=1759763595359185241
 * 【国金证券2023-04-12】华为盘古大模型研究：盘古开天，AI落地 https://baijiahao.baidu.com/s?id=1762938971407815759
+* 国产AI大模型之战：得技术者胜，得市场者强  https://baijiahao.baidu.com/s?id=1765690288023828253
 
 <br><br>
 

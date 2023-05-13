@@ -22,13 +22,21 @@
 
 官网： http://www.docker.com
 
-Docker 是 [PaaS](http://baike.baidu.com/view/1413359.htm) 提供商 dotCloud 于2013年开源的一个基于 [LXC](http://baike.baidu.com/view/6572152.htm) 的高级容器引擎，源代码托管在 [Github](http://baike.baidu.com/view/3366456.htm) 上, 基于[go语言](http://baike.baidu.com/view/2976233.htm)并遵从Apache2.0协议开源。
+Docker 是 [PaaS](http://baike.baidu.com/view/1413359.htm) 提供商 dotCloud 于2013年3月开源的一个基于 [LXC](http://baike.baidu.com/view/6572152.htm) （Linux Container，一种内核虚拟化技术，可以提供轻量级的虚拟化，以便隔离进程和资源）的高级容器引擎，源代码托管在 Github 上, 基于[go语言](http://baike.baidu.com/view/2976233.htm)并遵从Apache2.0协议开源。
 
 Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化（操作系统层虚拟化）。
 
 容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
 
-2017.3.2，docker正式宣布推出企业版EE，原先的docker开源免费版本更名为社区版CE。
+2013年3月，docker正式发布开源版本0.1.0。2014.6，发布第一次正式版本1.0。
+
+2014年底，GOOGLE发布容器引擎GOOGLE CONTAIN ENGINE (GCE)；AMAZON发布ECS CONTIANER SERVICE (ECS)。
+
+2015年6月，GOOGLE、DOCKER等业内巨头共同宣布成立容器化标准组织OCP（OPEN CONTAINER PROJECT），旨在实现容器标准化。7月，IBM、华为等宣布成立云原生基金化-CNCF（CONTAINER NATIVE CLOUD FOUDATION ）。
+
+2016年2月，DOCKER发布商业版容器及平台DDC（Docker DataCenter），迈出了商业化重要一步。
+
+2017年3月2日，docker正式宣布推出企业版EE，原先的docker开源免费版本更名为社区版CE。
 
 **Docker的应用场景**
 
@@ -86,16 +94,17 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 表格 docker CE版本 （Docker Engine - Community）
 
-| 组件        | 版本      | 发布时间       | 功能特性                                                                                                                                      |
-| --------- | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| docker    | 1.0     | 2013       |                                                                                                                                           |
-|           | 1.13.1  | 2017-2-8   | CE之前最后一个版本。                                                                                                                               |
-| docker-ce | 17.03   | 2017-3     | CE第一个版本，此版本号为发布时间。                                                                                                                        |
-|           | 17.05.0 | 2017-05-04 | 引入参数 ARGS                                                                                                                                 |
+| 组件      | 版本    | 发布时间   | 功能特性                                                     |
+| --------- | ------- | ---------- | ------------------------------------------------------------ |
+| docker    | 0.1.0   | 2013.3     | 正式发布开源版本。                                           |
+|           | 1.0     | 2014.6     | Docker第一个正式版本。                                       |
+|           | 1.13.1  | 2017-2-8   | CE之前最后一个版本。                                         |
+| docker-ce | 17.03   | 2017-3     | CE第一个版本，此版本号为发布时间。                           |
+|           | 17.05.0 | 2017-05-04 | 引入参数 ARGS                                                |
 |           | 18.09   | 2018-11-08 | 此版本起，The client and container runtime 分离为2个项目。<br>完整功能要安装3个包：`apt install docker-ce docker-ce-cli containerd.io`.<br>18.x最后一个版本18.09.9()。 |
-|           | 19.03   | 2019-07-22 | 19.x最后一个版本19.03.15(2021-02-01).                                                                                                           |
-|           | 20.10.8 | 2021-8-3   |                                                                                                                                           |
-|           | ？       | ？          |                                                                                                                                           |
+|           | 19.03   | 2019-07-22 | 19.x最后一个版本19.03.15(2021-02-01).                        |
+|           | 20.10.8 | 2021-8-3   |                                                              |
+|           | ？      | ？         |                                                              |
 
 说明：docker-ce包括服务器(进程名dockerd) 和客户端(docker)。docker-ce的起始版本是 17.03， 该版本及更高版本建议安装到centos7+。docker-ce-18.09版本，将项目拆解为三个子项目，分别是docker-ce(服务端)，docker-ce-cli(客户端) 和containerd.io。
 
@@ -2187,7 +2196,7 @@ Podman 可以管理和运行任何符合 OCI（Open Container Initiative）规�
 
 Docker Swarm是一个由Docker开发的调度框架。由Docker自身开发的好处之一就是标准Docker API的使用，Swarm由多个代理（Agent）组成，把这些代理称之为节点（Node）。这些节点就是主机，这些主机在启动Docker Daemon的时候就会打开相应的端口，以此支持Docker远程API。这些机器会根据Swarm调度器分配给它们的任务，拉取和运行不同的镜像。
 
-![1574518882918](../../media/sf_reuse/framework/frame_docker_003.png)
+![1574518882918](../../media/sf_reuse/framework/frame_docker_swarm.png)
 
 图 Docker Swarm结构
 
