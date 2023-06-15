@@ -13,7 +13,7 @@
 
 ---
 
-# 半导体行业
+# 1 半导体行业
 
 半导体是信息技术产业的核心，是支撑现代经济社会发展和保障国家安全的战略性、基础性和先导性产业。毋庸置疑，近几年来，半导体产业已然成为全球主要国家争相争夺的战略高地，是经济、科技和国防的战略性支柱产业之一。
 
@@ -52,7 +52,7 @@
 | 环节 | 简介                                                         | 全球企业                                                  | 国内企业                                       |
 | ---- | ------------------------------------------------------------ | --------------------------------------------------------- | ---------------------------------------------- |
 | 设计 | 包括工具软件EDA、IC设计。                                    | 英伟达（GPU）、AMD、英特尔（CPU）、高通、联发科、联咏科技 | 海思半导体、中芯国际、寒武纪、地平线、四维图新 |
-| 制造 | 芯片制造也叫晶圆代工，包括制造厂、制造设备、材料与辅料。<br>制造核心工具是光刻机EUV，目前全球只有荷兰生产。 | 台积电（市场份额50%+）、三电、                            | 中芯国际、华虹半导体、华力微                   |
+| 制造 | 芯片制造也叫晶圆代工，包括制造厂、制造设备、材料与辅料。<br>制造核心工具是光刻机EUV，目前全球只有荷兰生产。 | 台积电（市场份额50%+）、三星、                            | 中芯国际、华虹半导体、华力微                   |
 | 封测 | 封装和测试常合并为封测。包括封测厂、封测设备、辅材。         | 台积电                                                    | 长电科技、通富微电、华天科技、智路封测         |
 
 说明：芯片有时也称半导体。芯片设计龙头是英伟达、AMD和英特尔。芯片制造主要是台积电。芯片封测全球前十大企业中国占了9家，美国1家。
@@ -171,7 +171,7 @@ Fab+Fabless的模式通过充分发挥比较优势，分散了GPU设计和制造
 
 对于 AI 服务器来讲，较为常见的是配备 2 个 CPU，以及8个 AI 卡。而相比 于 AI 服务器，传统的通用服务器则以 CPU 为主。
 
-AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由[CPU](https://baike.baidu.com/item/CPU/120556)负责）。当前，AI芯片主要分为 GPGPU（比如英伟达GPU、谷歌TPU推理处理器） 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)。
+AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能应用中的大量计算任务的模块（其他非计算任务仍由CPU负责）。当前，AI芯片主要分为 GPGPU（比如英伟达GPU、谷歌TPU推理处理器） 、[FPGA](https://baike.baidu.com/item/FPGA/935826) 、[ASIC](https://baike.baidu.com/item/ASIC/2014676)。
 
 2022 年，中国的 AI 芯片市场规模约 385 亿元。据艾瑞咨询测算，到 2027 年，中国的 AI 芯片市场规模预计将达到 2164亿元。另外，在我国高性能及 AI 服务器中， GPGPU 凭借其优秀的性能和通用能力占比 92%，剩下份额由 AISC 和 FPGA 分享。
 
@@ -179,13 +179,13 @@ AI芯片也被称为AI加速器或计算卡，即专门用于处理人工智能�
 
 目前，在 AI 芯 片领域，有三类玩家。
 
-一种是以 Nvidia、AMD 为代表的实力强劲的老牌芯片巨头，这些企业积累 了丰富的经验，产品性能突出。
+* 一种是以 Nvidia、AMD 为代表的实力强劲的老牌芯片巨头，这些企业积累 了丰富的经验，产品性能突出。
 
-另一种是以 Google、百度、华为为代表的云计算巨头，这些企业 纷纷布局通用大模型，并自己开发了 AI 芯片、深度学习平台等支持大模型发展。如 google 的 TensorFlow 以及 TPU，华为的鲲鹏昇腾、CANN及Mindspore。
+* 另一种是以 Google、百度、华为为代表的云计算巨头，这些企业 纷纷布局通用大模型，并自己开发了 AI 芯片、深度学习平台等支持大模型发展。如 google 的 TensorFlow 以及 TPU，华为的鲲鹏昇腾、CANN及Mindspore。
 
-最后是一些小而美的 AI 芯片独角兽，如寒武纪、壁仞等。 
+* 最后是一些小而美的 AI 芯片独角兽，如寒武纪、壁仞等。 
 
-英伟达占据 80%以上中国加速卡市场份额，国产 AI 芯片亟待发展。根据 IDC 的数据显示，2021 年中国加速卡的出货数量已经超过 80 万片，其中 Nvidia 占据了超过 80%的市场份额。剩下的份 额有 AMD、百度、寒武纪、燧原科技、新华三、华为、Intel 和赛灵思等品牌。
+英伟达占据 80%以上中国加速卡市场份额，国产 AI 芯片亟待发展。根据 IDC 的数据显示，2021 年中国加速卡的出货数量已经超过 80 万片，其中 Nvidia 占据了超过 80%的市场份额。剩下的份 额有 AMD、百度、寒武纪、燧原科技、新华三、华为、Intel 和赛灵思等品牌。<BR>
 
 ### 计算芯片
 
@@ -282,6 +282,35 @@ CPU作为计算机系统的运算和控制核心，分为通用高性能微处�
 
 国产 CPU 在性能方面与国际领先水平仍有差距。虽然国内桌面和服务器产品性能正在提升，尤其是海光和华为的服务器产品性能已接近国外中端 产品水平，但是整体上国产 CPU 性能仍然落后于国际先进水平。2018-2020 中国 微处理器市场规模不断增加，2020 年中国微处理器市场规模达到 2335.87 亿元， 占全球微处理器市场的39.8%，中国微处理器在全球的市场份额占比有所提升。 据前瞻产业研究院初步估算，2021 年我国微处理器市场规模约 2742 亿元。国内主要上市公司有海光信息、炬芯科技、国民技术、北京君正、龙芯中科等。
 
+表格 英特尔和AMD CPU型号对比
+
+| 简介                                 | AMD                            | Intel                     |
+| ------------------------------------ | ------------------------------ | ------------------------- |
+| 桌面低端CPU                          | 毒龙（2000）、闪龙（2004）     | 赛扬                      |
+| 桌面主流CPU。<br>酷睿2出现于2008年。 | 速龙（1999）、锐龙 （2017）    | 酷睿 i3/i5/i7、i9（2021） |
+| 服务器CPU                            | ~~皓龙~~（2003）、霄龙（2017） | 至强                      |
+| 移动CPU                              | 炫龙（2005）                   |                           |
+
+表格  Intel/AMD CPU世代表
+
+| 代号                          | <br>世代   | 年代      | 制造工艺                  | VS   | 代号       | 类别                    | 年代      | 制造工艺 |
+| ----------------------------- | ---------- | --------- | ------------------------- | ---- | ---------- | ----------------------- | --------- | -------- |
+| Alder Lake                    | 第12代酷睿 | 2021-2022 | 7 (10nm Ehanced SuperFin) |      | Zen 4      | 锐龙7000                | 2022      | 5nm      |
+| Rocket Lake                   | 第11代酷睿 | 2021      | 14nm+++                   |      | Zen 3      | 锐龙5000                | 2020      | 7nm      |
+| Comet Lake-S/Skylake-X        | 第十代酷睿 | 2019-2020 | 14nm+++                   |      | Zen 2      | 锐龙3000/线程撕裂者3000 | 2019      | 7nm      |
+| Coffee Lake-Refresh/Skylake-X | 第九代酷睿 | 2018-2019 | 14nm++                    |      | Zen+       | 锐龙2000线程撕裂者2000  | 2018      | 12nm     |
+| Coffee Lake                   | 第八代酷睿 | 2017-2018 | 14nm++                    |      | Zen        | 锐龙1000/线程撕裂者1000 | 2017      | 14nm     |
+| Kaby Lake                     | 第七代酷睿 | 2016      | 14nm+                     |      | Piledrever | 第二代FX                | 2012-2013 | 32nm     |
+| Skylake                       | 第六代酷睿 | 2015      | 14nm                      |      | Bulldozer  | 第一代FX                | 2011      | 32nm     |
+| Broadwell                     | 第五代酷睿 | 2014-2015 | 14nm                      |      | Godavari   | 第七代APU               | 2015      | 28nm     |
+| Haswell                       | 第四代酷睿 | 2013      | 22nm                      |      | Carrizo    | 第五代APU               | 2014      | 28nm     |
+| Ivy Bridge                    | 第三代酷睿 | 2012      | 22nm                      |      | Richland   | 第三代APU               | 2013      | 32nm     |
+| Sandy Bridge                  | 第二代酷睿 | 2011      | 32nm                      |      | Trinity    | 第二代APU               | 2012      | 32nm     |
+| Nehalem/Westmere              | 第一代酷睿 | 2008-2011 | 32nm                      |      | Llano      | 第一代APU               | 2011      | 32nm     |
+| Conroe                        | 酷睿2      | 2006-2008 | 65/45nm                   |      | K10        | 弈龙/速龙               | 2007-2011 | 45nm     |
+| Netburst                      | 奔腾4/D    | 2000-2008 | 65nm                      |      | K8         | 速龙64                  | 2003-2007 | 65nm     |
+| Tualatin                      | 奔腾3      | 1999-2001 | 130nm                     |      | K7         | 速龙XP                  | 1999-2004 | 130nm    |
+
 #### GPU
 
 GPU，即图形处理器，是一种专门在个人电脑、工作站、游戏机和一些移动 设备（如平板电脑、智能手机等）上做图像和图形相关运算工作的微处理器，在 AI 计算中负责进行大规模的计算和数据处理。
@@ -302,7 +331,7 @@ GPU类型:
 | 厂商   | 厂商简介                                                     | GPU产品                                                      |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 英伟达 | 全球GPU领导者。                                              | [GeForce](https://www.nvidia.cn/geforce/drivers/)，DGX、EGX、HGX，Quadro、AGX |
-| AMD    | 全球GPU竞争者，显卡能力来自于其2006年收购的ATI公司。         | Radeon                                                       |
+| AMD    | 全球GPU竞争者，显卡能力来自于其2006年收购的ATI公司。         | Radeon、Instinct                                             |
 | Intel  | 全球GPU追赶者。全球最大的PC GPU供应商，也是PC和服务器显卡唯一的IDM厂商。 |                                                              |
 | Apple  | 移动GPU新秀。                                                | A11(2017)、M1(2020.11.11)                                    |
 
@@ -320,7 +349,7 @@ SoC是System on Chip的缩写，直译是“芯片级系统”，通常简称“
 
 不同于 CPU 和 GPU，FPGA 可对芯片硬件层进行灵活编译（可编程的逻辑芯片），且功耗远小于前两者。FPGA 可编程带来的配置灵活性使其能更快地适应市场，具有明显的实 用性。随着开发者生态的逐渐丰富，适用的编程语言增加，FPGA 运用将会更加 广泛。
 
-根据前瞻产业研究院预计，2025 年全球 FPGA 市场规模有望达到 125 亿 美元。目前，FPGA 市场基本上全部被国外 Xilinx、Altera(现并入 Intel)、Lattice、 Microchip 四家占据。其中，Xilinx 和 Altera 两大公司对 FPGA 的技术与市场占据 绝对垄断地位，占据了近 90%的市场份额。国内研究 FPGA 芯片的公司有安路科 技和紫光国微等。
+根据前瞻产业研究院预计，2025 年全球 FPGA 市场规模有望达到 125 亿 美元。目前，FPGA 市场基本上全部被国外 Xilinx（赛灵思，2022年被AMD 498亿美元收购）、Altera（阿尔卡特，2015年被Intel 167亿美元收购）、Lattice、 Microchip 四家占据。其中，Xilinx 和 Altera 两大公司对 FPGA 的技术与市场占据绝对垄断地位，占据了近 90%的市场份额。国内研究 FPGA 芯片的公司有安路科 技和紫光国微等。
 
 #### ASIC
 
@@ -513,14 +542,10 @@ ASIC（专用芯片）可以针对专门任务进行架构层优化设计。全�
 * 芯片、半导体和集成电路之间的区别是什么？  https://m.thepaper.cn/baijiahao_20996538
 * 电子电路、电子（元）器件、集成电路、数字电路、模拟电路、半导体区别与关系  https://zhuanlan.zhihu.com/p/585041299
 * “AI革命”存储篇：算力拉动 拐点提前  http://stock.hexun.com/2023-04-11/208257623.html
-* 近期全球主要国家半导体政策梳理及解读  https://new.qq.com/rain/a/20230411A07H5G00
-* 半导体市场行情监测报告｜2023年3月  https://new.qq.com/rain/a/20230410A072QT00
 * 揭开芯片工艺的秘密  http://www.chinaaet.com/article/3000141395
 * 芯片大厂们的制程“撒谎”史  https://news.ifeng.com/c/8N2rX8GogFJ
 * 带大家了解芯片原理制作流程  https://www.gongshengyun.cn/yunying/article-39420-1.html
 * 深度解析芯片设计、制造、封装测试的全流程及各环节世界顶尖厂商技术说明  https://www.zhihu.com/tardis/bd/art/228757435?source_id=1001
-* 半导体设备全景图：国产替代加速，12大设备龙头全梳理   https://baijiahao.baidu.com/s?id=1763220261045847407
-* 全球半导体市场的现状  https://baijiahao.baidu.com/s?id=1747192042622947916
 
 国产芯片
 
@@ -541,36 +566,47 @@ ASIC（专用芯片）可以针对专门任务进行架构层优化设计。全�
 * 大基金二期投资全版图原创  https://guba.sina.com.cn/?s=thread&tid=637&bid=9872
 * 兆易创新vs北京君正vs长江存储：谁能扛起国产存储大旗？  https://cj.sina.com.cn/articles/view/5224789915/1376bf79b0190165qp
 
+比较
+
+* 全球半导体市场的现状  https://baijiahao.baidu.com/s?id=1747192042622947916
+* 近期全球主要国家半导体政策梳理及解读  https://new.qq.com/rain/a/20230411A07H5G00
+* 半导体市场行情监测报告｜2023年3月  https://new.qq.com/rain/a/20230410A072QT00
+* 半导体设备全景图：国产替代加速，12大设备龙头全梳理   https://baijiahao.baidu.com/s?id=1763220261045847407
+
 <br><br>
 
-# 半导体厂商
+# 2 半导体厂商
 
-知名市场领导者包括博通公司（美国）、英特尔公司（美国）、高通公司（美国）、三星电子（韩国）、SK海力士（韩国）、台积电（中国台湾）、德州仪器（美国）、东芝公司（日本）、美信半导体（美国）、美光科技（美国）、英伟达公司（美国）和恩智浦半导体（荷兰）。
-
-半导体巨头：英特尔、三星、SK海力士(SK Hynix)、[美光](https://baike.baidu.com/item/%E7%BE%8E%E5%85%89%E7%A7%91%E6%8A%80/3870379)([Micron](https://cn.micron.com/))、德州仪器、台积电、英伟达、高通、荷兰ASML、新思科技
+知名市场领导者包括美信半导体（美国，1983）、新思科技（Synopsys，1986）。
 
 表格  半导体巨头简介（按创立时间升序排列，共16家）
 
-| 公司             | 国家   | 创立时间 | 主营业务   | 简介                                                         |
-| ---------------- | ------ | -------- | ---------- | ------------------------------------------------------------ |
-| 东芝             | 日本   | 1875     |            | 日本最大的半导体制造商，隶属于三井集团旗下。东芝集团日薄西山，业务不断被收购。 |
-| 德州仪器.TI      | 美国   | 1930     |            | 德州仪器公司（Texas Instruments，纳斯达克股票代码：TXN）是一家半导体跨国公司，以开发、制造、销售半导体和计算机技术闻名于世，主要从事创新型数字信号处理与模拟电路方面的研究、制造和销售。 |
-| 三星电子.Samsung | 韩国   | 1938     | 芯片代工   | 三星电子有限公司（KRX：005930.KS）是韩国三星集团旗下最大的子公司，生产和销售各种半导体设备。该公司为自己的智能手机和小工具生产芯片，同时也为 NVIDIA Corporation 等其他公司生产芯片。 |
-| 英伟达.Nvidia    | 美国   | 1968     | GPU        | NVIDIA Corporation（纳斯达克股票代码：NVDA）是一家美国半导体设计公司，已慢慢崛起成为世界上最重要的参与者之一。它的图形处理单元 (GPU) 是同类产品中适用于各种应用程序的最佳选择，最近，NVIDIA 因为轰动一时的人工智能聊天机器人 ChatGPT 提供动力而成为媒体的焦点。 |
-| 阿斯麦.ASML      | 荷兰   | 1984     | 光刻机     | ASML Holding NV（纳斯达克股票代码：ASML）是世界上最重要的公司之一，因为它是世界唯一一家能够制造高端芯片制造机器——极紫外（EUV）光源的新型光刻机的公司。它位于荷兰的 Veldhoven，由飞利浦分离出来的公司。 |
-| 台积电.TSMC      | 台湾   | 1987     | 芯片代工   | 台积电 (NYSE:TSM) 是全球最大的代工芯片制造商。               |
-| 博通.Broadcom    | 美国   | 1991     | 芯片       | Broadcom Inc.（纳斯达克股票代码：AVGO）是一家美国公司，销售用于电信设备和智能手机等各种应用的通信芯片和信号传感器。 |
-| 应用材料.AMAT    | 美国   | 1967     | 半导体设备 | Applied Materials, Inc.（纳斯达克股票代码：AMAT）制造和销售芯片制造设备。 |
-| AMD              | 美国   | 1968     | CPU        | Advanced Micro Devices, Inc.（纳斯达克股票代码：AMD）是一家中央处理器和图形处理单元设计公司，总部位于加利福尼亚州圣克拉拉。 |
-| 英特尔.Intel     | 美国   | 1968     | CPU        | 英特尔公司（纳斯达克股票代码：INTC）是世界上最大的芯片制造商之一，拥有自己的制造工厂。 |
-| 美光.Micron      | 美国   | 1978     | 存储       |                                                              |
-| 高通.Qualcomm    | 美国   | 1985     | 移动通信   | QUALCOMM Incorporated（纳斯达克股票代码：QCOM）是一家为智能手机和其他设备提供处理和连接产品的美国公司。由于它是移动产品的唯一主要供应商，它是世界上最大的半导体公司之一。 |
-| SK海力士.hynix   | 韩国   | 1983     | 存储       | 1983在韩国现代集团内成立，2001年改现名从现代集团分离。2012年，被韩国第三大财阀SK集团收购。 |
-| 意法半导体       | 意大利 | 1987     |            | 意大利SGS半导体和法国汤姆逊半导体合并形成。                  |
-| 博通             | 美国   | 1991     | 通信半导体 |                                                              |
-| 瑞萨             | 日本   | 2003     |            | 日立制作所半导体部门和三菱电机半导体部门合并形成。           |
+| 公司                                                         | 国家   | 创立时间 | 主营业务   | 简介                                                         |
+| ------------------------------------------------------------ | ------ | -------- | ---------- | ------------------------------------------------------------ |
+| 东芝                                                         | 日本   | 1875     | 存储       | 日本最大的半导体制造商，隶属于三井集团旗下。东芝集团日薄西山，业务不断被收购。 |
+| 德州仪器.TI                                                  | 美国   | 1930     |            | 德州仪器公司（Texas Instruments，纳斯达克股票代码：TXN）是一家半导体跨国公司，以开发、制造、销售半导体和计算机技术闻名于世，主要从事创新型数字信号处理与模拟电路方面的研究、制造和销售。 |
+| 三星电子.Samsung                                             | 韩国   | 1938     | 芯片代工   | 三星电子有限公司（KRX：005930.KS）是韩国三星集团旗下最大的子公司，生产和销售各种半导体设备。该公司为自己的智能手机和小工具生产芯片，同时也为 NVIDIA Corporation 等其他公司生产芯片。 |
+| 应用材料.AMAT                                                | 美国   | 1967     | 半导体设备 | Applied Materials, Inc.（纳斯达克股票代码：AMAT）制造和销售芯片制造设备。 |
+| 英伟达.Nvidia                                                | 美国   | 1968     | GPU        | NVIDIA Corporation（纳斯达克股票代码：NVDA）是一家美国半导体设计公司，已慢慢崛起成为世界上最重要的参与者之一。它的图形处理单元 (GPU) 是同类产品中适用于各种应用程序的最佳选择，最近，NVIDIA 因为轰动一时的人工智能聊天机器人 ChatGPT 提供动力而成为媒体的焦点。 |
+| 英特尔.Intel                                                 | 美国   | 1968     | CPU        | 英特尔公司（纳斯达克股票代码：INTC）是世界上最大的芯片制造商之一，拥有自己的制造工厂。<br>CPU型号酷睿i系列（3/5/7/9）, X系列。 |
+| AMD                                                          | 美国   | 1969     | CPU        | Advanced Micro Devices, Inc.（纳斯达克股票代码：AMD）是一家中央处理器和图形处理单元设计公司，总部位于加利福尼亚州圣克拉拉。 |
+| 美光.Micron                                                  | 美国   | 1978     | 存储       | 全球最大的半导体储存及影像产品制造商之一，其主要产品包括DRAM、NAND闪存、NOR闪存、SSD固态硬盘和CMOS影像传感器。<br>2023年5月，国家互联网信息办公室宣布美光公司在华销售产品未通过网络安全审查。 |
+| SK海力士.SK Hynix                                            | 韩国   | 1983     | 存储       | 1983在韩国现代集团内成立，2001年改现名从现代集团分离。2012年，被韩国第三大财阀SK集团收购。 |
+| 阿斯麦.ASML                                                  | 荷兰   | 1984     | 光刻机     | ASML Holding NV（纳斯达克股票代码：ASML）是世界上最重要的公司之一，因为它是世界唯一一家能够制造高端芯片制造机器——极紫外（EUV）光源的新型光刻机的公司。它位于荷兰的 Veldhoven，由飞利浦分离出来的公司。 |
+| 高通.Qualcomm                                                | 美国   | 1985     | 移动通信   | QUALCOMM Incorporated（纳斯达克股票代码：QCOM）是一家为智能手机和其他设备提供处理和连接产品的美国公司。由于它是移动产品的唯一主要供应商，它是世界上最大的半导体公司之一。 |
+| 台积电.TSMC                                                  | 台湾   | 1987     | 芯片代工   | 台积电 (NYSE:TSM) 是全球最大的代工芯片制造商。               |
+| 意法半导体                                                   | 意大利 | 1987     |            | 意大利SGS半导体和法国汤姆逊半导体合并形成。                  |
+| 博通.Broadcom                                                | 美国   | 1991     | 通信半导体 | Broadcom Inc.（纳斯达克股票代码：AVGO）是一家美国公司，销售用于电信设备和智能手机等各种应用的通信芯片和信号传感器。 |
+| [瑞萨](https://baike.baidu.com/item/%E7%91%9E%E8%90%A8%E7%A7%91%E6%8A%80?).Renesas | 日本   | 2003     | 芯片       | 日立制作所半导体部门和三菱电机半导体部门合并形成。产品有凯侠等。 |
+| 恩智浦半导体.NXP                                             | 荷兰   | 2006     | 汽车半导体 | 前身为荷兰飞利浦公司于1953年成立的半导体事业部，总部位于荷兰埃因霍温。<br>2015年，恩智浦收购了由摩托罗拉创立的[飞思卡尔](https://baike.baidu.com/item/飞思卡尔/2292191?fromModule=lemma_inlink)半导体，成为全球前十大非存储类半导体公司，以及全球最大的汽车半导体供应商。 |
 
-备注：美国公司9家除了德州仪器，其它总部都位于加州。韩国2家分别是三星和SK海力土；日本2家分别是东莞和瑞萨；欧洲2家分别是荷兰ASML和意大利意法半导体；台湾1家台积电。
+备注：
+
+* 美国公司8家除了德州仪器，其它总部都位于加州。分别是德州仪器.TI、应用材料.AMAT、英伟达.Nvidia、英特尔.Intel、AMD、美光.Micron、高通.Qualcomm、博通.Broadcom。
+* 韩国2家分别是三星和SK海力土；
+* 日本2家分别是东芝和瑞萨；
+* 欧洲3家分别是荷兰ASML 、意法半导体和恩智浦半导体；
+* 台湾1家台积电。
 
 ## Nvidia.英伟达 GPU
 
@@ -583,6 +619,16 @@ ASIC（专用芯片）可以针对专门任务进行架构层优化设计。全�
 此处 Compute Capability 并不是我们常说的 TFLOPS 算力，它只是英伟达给自己支持 CUDA 的 GPU 设置的一个“版本号”而已，代表着这个GPU具备什么样的功能，版本号越高说明 GPU 的工具包越新，支持的功能越新。
 
 对于深度学习，官方指出在GPU算力高于5.0时，可以用来跑神经网络
+
+[Tesla Workstation Products](https://www.nvidia.com/object/personal_computing.html)
+
+| GPU                                                          | Compute Capability |
+| ------------------------------------------------------------ | ------------------ |
+| [Tesla K80](https://www.nvidia.com/object/personal-supercomputing.html) | 3.7                |
+| [Tesla K40](https://www.nvidia.com/object/personal-supercomputing.html) | 3.5                |
+| [Tesla K20](https://www.nvidia.com/object/personal-supercomputing.html) | 3.5                |
+| [Tesla C2075](https://www.nvidia.com/object/personal-supercomputing.html) | 2.0                |
+| [Tesla C2050/C2070](https://www.nvidia.com/object/product_tesla_C2050_C2070_us.html) | 2.0                |
 
 [Jetson Products](https://developer.nvidia.com/embedded/develop/hardware)
 
@@ -601,16 +647,6 @@ ASIC（专用芯片）可以针对专门任务进行架构层优化设计。全�
 | [GeForce RTX 3090](https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/) | 8.6                |
 | [GeForce RTX 3080](https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/) | 8.6                |
 | [GeForce RTX 3070](https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3070/) | 8.6                |
-
-[Tesla Workstation Products](https://www.nvidia.com/object/personal_computing.html)
-
-| GPU                                                          | Compute Capability |
-| ------------------------------------------------------------ | ------------------ |
-| [Tesla K80](https://www.nvidia.com/object/personal-supercomputing.html) | 3.7                |
-| [Tesla K40](https://www.nvidia.com/object/personal-supercomputing.html) | 3.5                |
-| [Tesla K20](https://www.nvidia.com/object/personal-supercomputing.html) | 3.5                |
-| [Tesla C2075](https://www.nvidia.com/object/personal-supercomputing.html) | 2.0                |
-| [Tesla C2050/C2070](https://www.nvidia.com/object/product_tesla_C2050_C2070_us.html) | 2.0                |
 
 查看GPU
 
@@ -687,9 +723,89 @@ CUDA(Compute Unified Device Architecture)，是显卡厂商(NVIDIA)英伟达公�
 
 > 官方说：CUDA是一个并行计算平台和编程模型，能够使得使用GPU进行通用计算变得简单和优雅。
 
+<BR>
+
+## Intel.英特尔
+
+英特尔是半导体行业和计算创新领域的全球领先厂商，创始于1968年。如今，英特尔正转型为一家以数据为中心的公司。英特尔与合作伙伴一起，推动人工智能、5G、智能边缘等转折性技术的创新和应用突破，驱动智能互联世界。
+
+英特尔 CPU型号：[奔腾](https://baike.baidu.com/item/%E5%A5%94%E8%85%BE%E5%A4%84%E7%90%86%E5%99%A8/673315)Pentium（1993-2005）、至强xeon（1998-）、酷睿Core（2006-）、
+
+* 赛扬（Celeron）：面向低端市场。
+* 奔腾.Pentium：单核处理器。奔腾处理器是Intel公司在1992年10月发布的第五代微处理器系列，该产品在1993年3月正式推向市场：奔腾处理器与以前的Intel公司处理器完全兼容，并有新的内容。值得一提的是奔腾处理器中有两条数据流水线，可以同时执行两条指令，Intel公司把这种同时执行两条指令的能力称为<u>超标量技术</u>。该技术使奔腾处理器能以每周期两条指令的速率更快地工作。
+* 至强.Xeon：英特尔生产的微处理器，它用于"中间范围"的企业服务器和工作站。在英特尔的服务器主板上，最多达八个Xeon处理器能够共用100MHz的总线而进行多路处理。Xeon设计用于因特网以及大量的数据处理服务，例如工程、图像和多媒体等需要快速传送大量数据的应用。
+* 酷睿.Core：多核处理器。分为酷睿1和酷睿2系列，目前主要是酷睿2。英特尔公司继使用长达12年之久的“奔腾”的处理器之后推出“Core 2 Duo”和“Core 2 Quad” 品牌，以及最新出的Core i9 , Core i7 , Core i5, Core i3四个级别的CPU。
+
+表格 英特尔CPU型号奔腾Pentium系列
+
+| 型号                                                         | 推出时间 | 简介                                                         |
+| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
+| 奔腾1                                                        | 1992     | 主频有60MHz和66MHz。                                         |
+| [奔腾Ⅱ](https://baike.baidu.com/item/奔腾Ⅱ/7973750?fromModule=lemma_inlink) | 1994.3   | 增加了片内的可编程中断控制器(APIC)和双处理器接口，实现了同一主机板上两个第2代处理器的同时运行，拓宽了文件服务器的设计途径。 |
+| 奔腾Ⅲ                                                        | 1997.1   | [MMX](https://baike.baidu.com/item/MMX?fromModule=lemma_inlink)技术结合进第2代奔腾处理器 |
+| 奔腾Ⅳ                                                        | 1999.2   | 其最重要的改进是带有70条新指令的流式SIMD扩展(SSE)。神奇的增强性能使该芯片更适用于高级图像处理、3D技术、流式音频、视频、Web访问和语音识别等应用。 |
+| 奔腾Ⅳ                                                        | 2000     | 它的网络成组微架构已有效地工作于1．30GHz，1.40GHz和1.50GHz，超流水线技术成倍地加深多达20个流水线，成功地提升了处理器的性能和频率。高速执行引擎使处理器的ALu(算术逻辑单元)工作于两倍的核心频率，取得了极高的执行吞吐。400MHz的系统总线速度改善了高级动态执行和浮点处理。奔腾Ⅳ处理器的144条新指令的SSE2指令集合里，有76条是新增加的指令，还有68条是原有的SSE指令集合。该处理器的目标是占领服务器和工作站的市场。 |
+
+表格 英特尔CPU型号酷睿Core系列
+
+| 型号 | 推出时间 | 简介                                                         | 性能参数                                   |
+| ---- | -------- | ------------------------------------------------------------ | ------------------------------------------ |
+| i3   | 2010     | 作为[酷睿i5](https://baike.baidu.com/item/酷睿i5/10201999?fromModule=lemma_inlink)的进一步精简版，是面向主流用户的CPU家族标识。拥有[Clarkdale](https://baike.baidu.com/item/Clarkdale/8441999?fromModule=lemma_inlink)(2010年)、[Arrandale](https://baike.baidu.com/item/Arrandale/2031051?fromModule=lemma_inlink)(2010年)、[Sandy Bridge](https://baike.baidu.com/item/Sandy Bridge/3114353?fromModule=lemma_inlink)(2011年)、[Ivy bridge](https://baike.baidu.com/item/Ivy bridge/9381735?fromModule=lemma_inlink) （2012年）、[Haswell](https://baike.baidu.com/item/Haswell/9381357?fromModule=lemma_inlink)（2013年）、[Broadwell](https://baike.baidu.com/item/Broadwell/10817778?fromModule=lemma_inlink)（2015年）、[Skylake](https://baike.baidu.com/item/Skylake/10817907?fromModule=lemma_inlink)（2015年）、[Kaby Lake](https://baike.baidu.com/item/Kaby Lake/19687829?fromModule=lemma_inlink)（2017年）、Coffee Lake（2018年）和Comet Lake（2020年）等多款子系列。 | 核心2-4个，制作工艺32nm 至 10nm            |
+| i5   | 2009     | 基于Nehalem架构的四核处理器，其依旧采用整合内存控制器，三级缓存模式，L3达到8MB，支持Turbo Boost等技术。 | 4核，制作工艺45nm~14nm                     |
+| i7   | 2008     | 沿用x86-64指令集，并以Intel [Nehalem](https://baike.baidu.com/item/Nehalem/10770925?fromModule=lemma_inlink)[微架构](https://baike.baidu.com/item/微架构/10506659?fromModule=lemma_inlink)为基础，取代[Intel Core 2](https://baike.baidu.com/item/Intel Core 2/10962245?fromModule=lemma_inlink)系列处理器。<BR>面向中高端用户的CPU家族标识，包含[Bloomfield](https://baike.baidu.com/item/Bloomfield/10224912?fromModule=lemma_inlink)（2008年）、[Lynnfield](https://baike.baidu.com/item/Lynnfield/10245658?fromModule=lemma_inlink)（2009年）、Clarksfield（2009年）、[Arrandale](https://baike.baidu.com/item/Arrandale/2031051?fromModule=lemma_inlink)（2010年）、[Gulftown](https://baike.baidu.com/item/Gulftown/8254582?fromModule=lemma_inlink)（2010年）、[Sandy Bridge](https://baike.baidu.com/item/Sandy Bridge/3114353?fromModule=lemma_inlink)（2011年）、[Ivy Bridge](https://baike.baidu.com/item/Ivy Bridge/9381735?fromModule=lemma_inlink)（2012年）、[Haswell](https://baike.baidu.com/item/Haswell/9381357?fromModule=lemma_inlink)（2013年）、Haswell Devil's Canyon（2014年）、[Broadwell](https://baike.baidu.com/item/Broadwell/10817778?fromModule=lemma_inlink)（2015年）、[Skylake](https://baike.baidu.com/item/Skylake/10817907?fromModule=lemma_inlink)（2015年）等多款子系列。 | 核心2-8个，制作工艺45nm-14nm，支持超线程。 |
+| i9   | 2021     | 第12代酷睿i9采用混合架构，将性能内核与效率内核相结合，智能调控工作负载，支持PCIe 5.0和DDR5内存，超核芯显卡最高支持8K HDR，能够同时查看4个4K显示器。<BR>包含12900（E H HK F T TE K KF KS）共10种型号。 | 16核24线程，14MB二级缓存，内存DDR5         |
+
+说明：iX系列X数字越大，说明技术越先进。发布时间不能说明代际，有时先进型号先发布，然后再降低标准发布中低端型号。<BR>
+
+## AMD.超威
+
+AMD 于 1969 年在硅谷创立。美国AMD半导体公司专门为计算机、通信和消费电子行业设计和制造各种创新的微处理器（CPU、GPU、主板芯片组、电视卡芯片等），以及提供闪存和低功率处理器解决方案。AMD致力为技术用户——从企业、政府机构到个人消费者——提供基于标准的、以客户为中心的解决方案。
+
+AMD 是高性能与自适应计算领域的领先企业，致力于提供优质的产品和服务，助力客户解决各种重大的挑战。我们的技术推动着<u>数据中心</u>、<u>嵌入式系统</u>、<u>游戏</u>和 <u>PC 市场</u>迈向未来。<br>
+
+1979 年 AMD 公司股票在纽约证券交易所上市。
+
+1982 年 AMD 和英特尔签订了关于 iAPX86 系列微机处理器和技术交换协议。设在奥斯汀的第一条生产线投入使用。<br/>1983 年 AMD 推出了 INT.STD.1000 标准，这是当时行业中的最高质量标准。<br/>1985 年 AMD 进入《财富》杂志 500 强。<br/>1991 年 AMD 开始生产 386 系列 CPU ，打破了英特尔的垄断，当年产销量超过百万片。<br/>1992 年 和英特尔长达 5 年的诉讼结束， AMD 获得生产和销售 386 系列产品的合作。
+
+1993 年 AMD 和富士通公司合作生产内存； AMD 486 系列芯片问世。<br/>1994 年 和 Compaq 形成长期战略联盟， Compaq 电脑大量装配 AMD CPU 。AMD 在微处理器技术论坛年会上展示了 K5 处理器。<br/>1997 年 推出 K6 处理器。<br/>1998 年 引入 K6 － 3D 技术；低价 PC 趋势给 AMD 带来新的机遇。<br/>2000 年 AMD 先于英特尔，率先推出了当时运算速度最快的 850 兆赫芯片。<br/>2002 年 4 月 桑德斯辞去首席执行官职务， AMD 结束一个时代。 鲁尔兹接任CEO。
+
+2003 年 2003 Opteron（皓龙） 发布。2003 全球气候保护计划。Athlon 64 发布。
+2004 90nm - 刀片服务器。
+2005 双内核推出。
+2006 第三十六家装配工厂建成。
+
+2006年7月24日，AMD宣布以54亿美元收购[ATI](https://baike.baidu.com/item/ATI/126106?fromModule=lemma_inlink)，从此ATI成为了AMD的显卡部门。<br>
+
+2022年2月，AMD 498亿美元收购FPGA厂商赛灵思。4月，19亿美元收购DPU芯片厂商Pensando。
+
+### AMD CPU
+
+**AMD CPU型号**：处理器型号通过字母和数字代表，比如“0302”中的03是指2003年，02指第二周生产。目前一共发布了八条龙，分别是速龙、钻龙（毒龙）、皓龙、闪龙、炫龙、羿龙、锐龙、霄龙。目前在舞台的还有三条龙：速龙（桌面低端）、锐龙（桌面中高端）、霄龙（服务器）。AMD 产品可以大致分为桌面级和服务器级处理器。
+
+* 桌面级处理器有闪龙（Sempron），速龙（Athlon），羿龙（Phenom）三个品牌，它们将AMD桌面处理器划分为高中低端。锐龙是速龙的升级版本。
+* 服务器处理器：皓龙、霄龙。
+
+| 型号               | 推出时间  | 代表型号                      | 简介                                                         |
+| ------------------ | --------- | ----------------------------- | ------------------------------------------------------------ |
+| 速龙.Athlon        | 1999-6-23 | X4740、X4750、X4850和X4950等  | 核心2-4个。                                                  |
+| 钻龙（毒龙）.Duron | 2000-6    | Duron 600、Duron 1G           | 速龙（雷鸟核心）的简化版本。同英特尔的低端处理器赛扬二代竞争。主要应用于各种终端机、精简型终端机（Thin client）和移动数码设备（如PDA）。 |
+| 皓龙.Opteron       | 2003-4-22 | Opteron 275                   | 64位微处理器，定位是服务器领域，竞争对手为intel至强，第一代皓龙给予K8架构。 |
+| 闪龙.Sempron       | 2004-7    | 闪龙2500+、闪龙3000+          | 入门级微处理器，同英特尔公司的赛扬（Celeron）处理器竞争。<br>闪龙是毒龙的接任者。第一代闪龙是速龙XP的简化版，还不支持64位，第二代闪龙是速龙64的简化版。 |
+| 炫龙.Turion        | 2005-4    | 炫龙64 ML-40、炫龙64 X2 TL-50 | 移动处理器，最早是单核，后期发展到双核。                     |
+| 羿龙.Phenom        | 2007-11   | Phenom 9500、Phenom II X4 955 | 羿”取自中国神话“后羿射日”，定位中高端。采用真四核设计，架构有K10和K10.5，制程工艺有65纳米和45纳米。<br>2009年1月，羿龙进化到第二代，有X2、X3、X4和X6等四种规格。 |
+| 锐龙.Ryzen         | 2017-2    | 锐龙5-2600、 锐龙7-2700X      | 采用全新的Zen架构，基于14nm制作工艺打造，全新的制程带来了更低的功耗和发热量该系列处理器包含Ryzen3、Ryzen5和Ryzen7系列，全面针对Inter公司的酷睿i3、i5和i7系列。<br>Ryzen(锐龙)系列处理器常见型号有Ryden31200、Ryzen31300X、Ryzen51600、Ryzen52600、Ryzen52600X、Ryzen71700、Ryzen71700X、Ryzen72700、Ryzen72700X等。 |
+| 霄龙.EPYC          | 2017-6    | X4740、X4750、X4850和X4950    | 皓龙退休后，霄龙接班，定位服务器领域，采用Zen架构，14nm工艺、支持八通道DDR4内存、每路最多2TB内存、128条PCI-E通道。如采用双路EPYC 7601，则可达到64核128线程。 |
+
+注：AMD的“K”架构有K5、K6、K6-2/K6-3、K7、K8、K10、K10改进版（K10.5），没有K9。锐龙一代是ZEN架构，锐龙二代是ZEN+架构（2018，12NM制程），锐龙三代对应ZEN2架构（2019，7NM制程）。
+
+* 推土机.FX：是AMD开发的x86桌上型处理器，是Bulldozer微架构的正式产物之一，于2011年9月19日正式上市。速龙系列中的高端产品，是为满足那些对游戏有极高要求的玩家所设计，主要以四、六、八核心为主，常见型号有FX8300、FX6300、FX6330、FX9590、FX4350、FX8370和FX9370等。2017年2月22日宣布「Summit Ridge」处理器核心使用Ryzen品牌，取代旧有的AMD FX系列。
+* APU：将中央处理器的处理卡核心集成在一个芯片上；同时具有高性能处理器和独立显卡的处理功能，因此具有很高的性价比，APU系列处理器主要包括A4、A6、A8和A10等系列，常见型号有A46300、A67400K、A67470K、87650K、A83850、A87500、107870K、A107890K、A129700P、A12973P。
+
+<br>
+
 ## 中国厂商
 
-国内IC公司设计人数规模排行（降序）：华为海思、紫光展锐、中兴微、韦尔/豪威、哲库科技（OPPO旗下，2023.5.13倒闭）、智芯微、汇项科技、紫光国微、平头哥、兆易创新。
+国内IC公司设计人数规模排行（降序）：华为海思（1.2万人）、紫光展锐、中兴微、韦尔/豪威、哲库科技（OPPO旗下，3000人，2023.5.13倒闭）、智芯微、汇项科技、紫光国微、平头哥、兆易创新。
 
 **芯片厂商**
 
@@ -705,8 +821,7 @@ CUDA(Compute Unified Device Architecture)，是显卡厂商(NVIDIA)英伟达公�
 
 - 芯原股份：国产 IP 龙头，Chiplet 持续加速
 
-
-**AI服务器厂商**
+**AI 服务器厂商**
 
 * 浪潮信息：全球 AI 服务器第一大品牌商
 * 工业富联：全球服务器 ODM 龙头
@@ -719,19 +834,24 @@ CUDA(Compute Unified Device Architecture)，是显卡厂商(NVIDIA)英伟达公�
 
 ### 中芯国际
 
+https://www.smics.com/
 
+中芯国际成立于2000年，（证券代码：00981.HK/688981.SH，2004年于香港联合交易所上市，2020年于上海证券交易所科创板上市）是世界领先的集成电路晶圆代工企业之一，也是中国大陆集成电路制造业领导者，拥有领先的工艺制造能力、产能优势、服务配套，向全球客户提供0.35微米到FinFET不同技术节点的晶圆代工与技术服务。中芯国际总部位于中国上海，拥有全球化的制造和服务基地，在上海、北京、天津、深圳建有三座8英寸晶圆厂和四座12英寸晶圆厂；在上海、北京、天津各有一座12英寸晶圆厂在建中。中芯国际还在美国、欧洲、日本和中国台湾设立营销办事处、提供客户服务，同时在中国香港设立了代表处。
 
 ## 本章参考
 
+* 百度百科：英特尔、奔腾、酷睿
 * 全球十大半导体厂商  https://www.maigoo.com/top/358021.html
 * nvidia-smi 命令解读 https://blog.csdn.net/sallyxyl1993/article/details/62220424
 * nvidia显卡驱动概念理解及GPU原理. https://zhuanlan.zhihu.com/p/266652844
 * OPPO 停止造芯的教训和启示  https://wallstreetcn.com/articles/3688674
 * 很遗憾，全球芯片衰退，中国芯片逃不过，跌幅比台积电严重多了  https://baijiahao.baidu.com/s?id=1765679550654893241
+* AMD处理器的发展历程  https://blog.csdn.net/qq275650963/article/details/87071581
+* amd cpu型号大全  https://baijiahao.baidu.com/s?id=1737702125536884109
 
 <br><br>
 
-# 算力
+# 3 算力
 
 算力分成三类，分别是通用算力（CPU）、智能算力、超级计算（尚未商用）。
 
@@ -809,7 +929,7 @@ MOPS（Million Operation Per Second）：1MOPS代表处理器每秒钟可进行�
 |            | 格芯       | 6%       |          |        |          |
 |            | 中芯国际   | 5%       | 495      | 38%    | 148      |
 
-
+备注：格芯是AMD拆分出芯片代工单独成立的企业。
 
 ## 算力资源
 
@@ -877,13 +997,11 @@ MOPS（Million Operation Per Second）：1MOPS代表处理器每秒钟可进行�
 | 海光       | 海光7000系列 | CPU            | -        | -      | 出售             |
 | 龙芯       | 龙芯3号      | CPU            | -        | -      | 出售             |
 
-
+<br>
 
 ## 算力平台
 
-参见 《[AI中台](../AI中台.md)》
-
-<br>
+参见 《[AI中台](../AI中台.md)》  <br>
 
 ## 本章参考
 
@@ -898,17 +1016,30 @@ MOPS（Million Operation Per Second）：1MOPS代表处理器每秒钟可进行�
 
 # 参考资料
 
-官网
+半导体厂商官网
 
 * 英伟达.Nvidia  https://developer.nvidia.com/
 * 英特尔Intel   https://www.intel.com/
 * AMD   https://www.amd.com/
-* Micron  https://www.micron.com/
+* 美光.Micron  https://www.micron.com/
+* 中芯国际  https://www.smics.com/
+
+其它官网
+
 * [IC insights](https://www.icinsights.com/)   因总裁退休，在网站运营25年后于2020-12-30永久关闭。
+* 科技排行榜  https://rank.kkj.cn/
 
 微信公众号 
 
 * 芯八哥
+
+性能天梯图
+
+* 桌面CPU性能天梯图 https://www.mydrivers.com/zhuanti/tianti/cpu/index.html
+* 手机CPU性能天梯图 https://www.mydrivers.com/zhuanti/tianti/01/index.html
+* 笔记本CPU性能天梯图 https://www.mydrivers.com/zhuanti/tianti/cpum/index.html
+* 桌面显卡性能天梯图 https://www.mydrivers.com/zhuanti/tianti/gpu/index.html#rx7000
+* 笔记本显卡性能天梯图 https://www.mydrivers.com/zhuanti/tianti/gpum/index.html
 
 参考链接
 
