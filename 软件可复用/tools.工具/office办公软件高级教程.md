@@ -388,14 +388,14 @@ MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf�
 
 表格  markdown相关的工具
 
-| 工具名称                                          | 用途                                                                                                                      | 示例                      |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| typora                                        | markdown所见即所得编辑器，2021年底winows版付费使用。                                                                                     |                         |
-| marktext                                      | A simple and elegant markdown editor, available for Linux, macOS and Windows.<br>可替换typora，支持目录，但换行要显式使用`<br>`，不支持空行换行。 |                         |
-| [trilium](https://github.com/zadam/trilium)   | 可替换typora。支持目录，类似印象笔记，有网页版也有客户端。                                                                                        |                         |
-| [notable](https://github.com/notable/notable) | The Markdown-based note-taking app that doesn't suck. 类似网易云笔记，但不支持目录。                                                   |                         |
-| mkdocs                                        | 生成markdown文本。                                                                                                           |                         |
-| pandoc                                        | 可方便地在markdown和其它格式之间进行转换。                                                                                               | pandoc xx.docx -o xx.md |
+| 工具名称                                                 | 用途                                                                                                                            | 示例                      |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| typora                                               | markdown所见即所得编辑器，2021年底winows版付费使用，linux版本仍免费。                                                                                | 所见即所得编辑器                |
+| **[marktext](https://github.com/marktext/marktext)** | A simple and elegant markdown editor, available for Linux, macOS and Windows. <br>开源免费，可替换typora，支持目录，但换行要显式使用`<br>`，不支持空行换行。 | 同上                      |
+| [trilium](https://github.com/zadam/trilium)          | 可替换typora。支持目录，类似印象笔记，有网页版也有客户端。                                                                                              | 同上                      |
+| [notable](https://github.com/notable/notable)        | The Markdown-based note-taking app that doesn't suck. 类似网易云笔记，但不支持目录。                                                         |                         |
+| mkdocs                                               | 生成markdown文本。                                                                                                                 |                         |
+| pandoc                                               | 可方便地在markdown和其它格式之间进行转换。                                                                                                     | pandoc xx.docx -o xx.md |
 
 ### Typora
 
@@ -452,7 +452,7 @@ pandoc转换命令示例：`pandoc infile.md -o outfile.pdf -s --pdf-engine=xela
 **通用快捷键**
 
 * 格式：ctrl+b 加粗，ctrl+u 下划线，ctrl+i 斜线, ctrl+D 删除线
-* 段落：ctrl+1, +2, +3...
+* 段落：ctrl++, ctrl+-, ctrl+1, +2, +3...
 
 表格  Typora和Marktext的常用快捷键比较
 
