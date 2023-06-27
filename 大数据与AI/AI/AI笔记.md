@@ -1107,8 +1107,9 @@ OCR处理过程包括图像预处理、文本检测、文本识别、后处理�
 学术会议：详见见 章节1.4 AI业界交流资源
 
 * 全球人工智能技术大会（2017） https://gaitc.caai.cn
-* 世界人工智能大会（2018年始上海）  https://www.worldaic.com.cn/
-* [北京智源大会](https://2023.baai.ac.cn/)（2019年始北京）
+* 世界人工智能大会（2018年始于上海）  https://www.worldaic.com.cn/
+* [北京智源大会](https://2023.baai.ac.cn/)（2019年始于北京） https://2023.baai.ac.cn/ 
+* 全球数字经济大会（2022年始于北京，设有AI高峰论坛） [https://www.gdec.net.cn/](https://www.gdec.net.cn/)
 
 **科研组织**
 

@@ -397,6 +397,33 @@ MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf�
 | mkdocs                                               | 生成markdown文本。                                                                                                                 |                         |
 | pandoc                                               | 可方便地在markdown和其它格式之间进行转换。                                                                                                     | pandoc xx.docx -o xx.md |
 
+### marktext
+
+下载：[0.17.1](https://github.com/marktext/marktext/releases/tag/v0.17.1)（GitHub）
+
+marktext开源免费，可替换typora。
+
+MarkText修改快捷键的步骤为：左下角设置图标-->Key Bindings-->Options-->edit（笔）-->修改的快捷键-->save（划到最下方）-->关闭MarkText重启生效。
+
+优点：
+
+1. 免费、开源。
+2. 页面整体颜值挺高的。
+3. 占用的内存并没有Typora高，Typora所占用的内存通常会爆红，而MarkText并不会（对比的Typora版本为0.11.18，但是并没有截图，因为已经无法打开Typora了）。
+4. 图片可以根据四个角来拖动设置大小。
+5. 喜好设置页面是一个独立页面。
+
+缺点：
+
+1. 使用MarkText打开会自动删除空行。这点会对typora过来的人极不友好，表格和空行都受影响。
+2. 无法支持打开就显示左侧侧边工具栏。
+3. 不支持修改样式，行内代码块的样式不太喜欢，可是发现没有地方可以修改。
+4. 每次对于设置的修改都需要重新启动才能够生效。
+5. 无法使用快捷键来缩进有序或者无序列表。
+6. 无法重复使用快捷键来删除当前标题样式，例如标题：如果使用快捷键将段落设置为标题后，再使用该快捷键无法恢复为段落。
+7. 无法使用快捷键删除表格，只能够使用Delete来删除单个表格，而且还不受控制。
+8. 第二标题和第三标题在文本编辑区和左侧大纲栏中显示的几乎一样，无法辨认标题。
+
 ### Typora
 
 [官网](https://typora.io/) [Typora中文](https://www.typora.net/)
@@ -662,6 +689,7 @@ Typora支持单行公式的方法：点开 “文件” -- “偏好设置” --
 * 再见 Typora！这款 Markdown 神器绝了！ https://blog.csdn.net/sinat_33224091/article/details/122150807
 * 神器pandoc的安装和使用  http://www.360doc.com/content/19/0507/17/13561030_834142392.shtml
 * Markdown数学公式语法  https://www.jianshu.com/p/e74eb43960a1
+* Typora更换MarkText，MarkText调出工具栏和大纲栏、设置文本编辑区宽度、编辑快捷键 https://www.cnblogs.com/linxuannihao/p/16483341.html
 
 <br>
 

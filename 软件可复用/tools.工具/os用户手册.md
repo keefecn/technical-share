@@ -142,7 +142,7 @@ $ vi /etc/fstab
 
 #### 预安装win8的联想g40
 
-Windows8启动相关分区有三个:
+Windows 8启动相关分区有三个:
 
 - ESP (EFI系统分区)，
 
@@ -478,6 +478,49 @@ sudo ./run.sh
 
 描述：一点击表情符号入口，程序就崩溃。
 
+## 常用设置
+
+### 快捷键
+
+说明：快捷键不区分英文字母大小写。
+
+通用快捷键：ctrl+c 复制, ctrl+v 粘贴 
+
+表格  常用功能在不同OS的快捷键
+
+| 常用功能 / OS | windows    | linux | macOS  |
+| --------- | ---------- | ----- | ------ |
+| 重命名文件名    | 右键勾选文件名，F2 | 右键，M  | 同linux |
+| 显示桌面      | win+D      |       |        |
+
+表格 不同OS的专用快捷键
+
+| OS      | 特殊快捷键                                   | 简述            |
+| ------- | --------------------------------------- | ------------- |
+| windows | win                                     | win+D 显示命令跳转框 |
+| macOS   | command 最重要修饰键，<br>option 类似windows的alt |               |
+| linux   |                                         |               |
+
+### 电脑工作模式
+
+因为关机后恢复到原先工作状态较慢，由此产生以下工作模式：待机、休眠和睡眠。
+
+表格 电脑各种工作模式差别
+
+|     | 原理                                | 耗电情况  | 文件是否消失 | 恢复速度             | 支持OS     |
+| --- | --------------------------------- | ----- | ------ | ---------------- | -------- |
+| 待机  | 数据保存在内存里                          | 内存耗电  | 断电会丢失  | 最快，5秒内           | 都支持      |
+| 休眠  | 内存数据保存到硬盘休眠文件里，然后断电。恢复时，从休眠文件读入内存 | 完全不耗电 | 不会丢失   | 较慢，类似正常开机时间      | 都支持      |
+| 睡眠  | 结合了待机和休眠缺点。内存数据备份到硬盘休眠文件，内存仍供电。   | 内存耗电  | 丢失     | 未断电时恢复较慢，断电时恢复较慢 | Wiindows |
+
+备注：笔记本电脑关盖一般默认切换到睡眠（windows）或休眠状态（linux和mac）。
+
+### 护眼模式
+
+所谓的护眼模式，其实就是减少屏幕的蓝光，从而减少对眼睛的伤害。蓝光是什么？蓝光是指对液晶屏幕发出的波长在400nm-500nm之间的光，这部分的光线能够直接穿透眼睛的角膜的晶状体，到达视网膜，从而诱发眼睛疲劳、干眼、生物钟紊乱等不适症状。而护眼模式就是调节屏幕色温，让蓝光减少，利用的是红和黄光柔和产生光线，所以我们看到屏幕会变黄变暗。
+
+windows:  电脑桌面，鼠标右击选择【显示设置】。点击【显示】，点击【夜间模式设置】。拖动颜色色温选择适合自己的颜色后点击【立即启用】。
+
 <br><br>
 
 ## 本章参考
@@ -492,14 +535,13 @@ sudo ./run.sh
 * [Ubuntu 20.04上通过Wine 安装微信 - RandalBryant - 博客园](https://www.cnblogs.com/sbrk/p/wine.html)
 * 解决linux mint wine微信字体显示问题  https://www.jianshu.com/p/b396f9aa4b8d
 * [适用于 Linux 的 Windows 子系统文档 | Microsoft Docs](https://docs.microsoft.com/zh-cn/windows/wsl/)
+* 电脑待机，休眠，睡眠的区别  https://jingyan.baidu.com/article/eb9f7b6d63a192869364e887.html
 
 <br><br>
 
 # 2 Windows
 
 ## 全新Windows配置
-
-### 常用设置
 
 1. win8系统桌面添加 “我的电脑” 图标
 
@@ -509,13 +551,7 @@ sudo ./run.sh
 
 打开‘我的电脑’，点击【查看选项卡】- 【查看】，勾选‘显示隐藏的文件、文件夹和驱动器’。
 
-3. 护眼模式
-
-所谓的护眼模式，其实就是减少屏幕的蓝光，从而减少对眼睛的伤害。蓝光是什么？蓝光是指对液晶屏幕发出的波长在400nm-500nm之间的光，这部分的光线能够直接穿透眼睛的角膜的晶状体，到达视网膜，从而诱发眼睛疲劳、干眼、生物钟紊乱等不适症状。而护眼模式就是调节屏幕色温，让蓝光减少，利用的是红和黄光柔和产生光线，所以我们看到屏幕会变黄变暗。
-
-电脑桌面，鼠标右击选择【显示设置】。点击【显示】，点击【夜间模式设置】。拖动颜色色温选择适合自己的颜色后点击【立即启用】。
-
-4. 设置静态IP
+3. 设置静态IP
 
 右键点击网络图标，Edit Connections，这个选项一开始可能并不会出现，但网络稳定后才出现。
 
@@ -625,7 +661,7 @@ $ sudo apt-get install gnome-shell-extension-system-monitor
 
 Ubuntu由[马克·舍特尔沃斯](https://baike.baidu.com/item/马克·舍特尔沃斯)亦译为沙特尔沃斯(*Mark Shuttleworth)*创立，其首个版本Ubuntu4.10以Debian为开发蓝本发布于2004年10月20日。Ubuntu的开发目的是为了使个人电脑变得简单易用，同时也提供针对企业应用的服务器版本。
 
-Ubuntu（友帮拓、优般图、乌班图）是一个以桌面应用为主的开源GNU/Linux操作系统。Ubuntu基于[Debian](https://baike.baidu.com/item/Debian/748667)发行版和Gnome桌面环境。
+Ubuntu（友帮拓、优般图、乌班图）是一个以桌面应用为主的开源GNU/Linux操作系统。Ubuntu基于Debian发行版和Gnome桌面环境。
 
 Ubuntu基于debian的Linux发行版，采用DPG的软件管理包(区别于redhat的RPM包)，安装软件常用apt-get命令，管理软件包文本界面aptitude，图形界面synaptic。
 
@@ -1116,14 +1152,14 @@ Finder中右击某文件，右键菜单：服务 -> 新建位于文件夹位置�
 
 * [确定您的 Mac 使用的是哪个 macOS 版本 - Apple 支持 (中国)](https://support.apple.com/zh-cn/HT201260)
 * mac手册 https://support.apple.com/zh-cn/guide/macbook-pro/welcome/mac
-* 苹果 MacOS 操作系统版本历史汇总  www.dayanzai.me/mac-operating-system-versions.html
-* Mac OS X和macOS版本的完整列表  https://www.imymac.com/zh-CN/mac-tips/mac-os-versions.html
+* iPad 使用手册 https://support.apple.com/zh-cn/guide/ipad/toc/16.0
 * 最全Mac系统快捷键一览 https://blog.csdn.net/xujingzhong0077/article/details/69939012
 * 如何使用Mac自带的邮件管理阿里企业邮箱  https://jingyan.baidu.com/article/375c8e19803c1964f2a229ee.html
 * [程序员的macOS系列：Mac开发环境配置](https://ihtcboy.com/2018/09/30/2018-09-30_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9AMac%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
 * 程序员的macOS系列：高效Alfred进阶  https://juejin.cn/post/6844904062484217863
 * 在macOS最新的Monterey上打开读写NTFS功能  https://zhuanlan.zhihu.com/p/442351683
 * 一分钟教你学会在MacOS中如何给文件批量重命名的技巧  https://www.jianshu.com/p/a814cad1a290
+* iPad生产力指南——编程 https://zhuanlan.zhihu.com/p/403546001
 
 <br><br>
 
