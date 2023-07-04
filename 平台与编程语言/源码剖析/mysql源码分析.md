@@ -234,11 +234,11 @@ typedef struct st_mysql {
 
 
 
-**MySQL结构大小：**
+**MySQL结构大小**：
 
 `printf("size = %u\n", sizeof(MySQL));`
 
-**测试结果：**
+**测试结果**：
 
 ```c
 [wuqifu@localhost sqltest]$ ./a.out
@@ -428,7 +428,7 @@ MySQL *mysql_init(MySQL *mysql)
 
 
 
-**测试说明：**
+**测试说明**：
 
 1）`mysql_init()``初始化一个对象`，传入参数不为空，那么它的参数与它的返回值指向的是同一地址，这个对象要用户自己销毁，并还得调用mysql_close.
 
@@ -440,7 +440,7 @@ MySQL *mysql_init(MySQL *mysql)
 
 ​    printf("l_mysql=%x, ll_mysql=%x\n", l_mysql, ll_mysql);
 
-**测试结果1：**
+**测试结果1**：
 
  [wuqifu@localhost sqltest]$ ./a.out
 
@@ -544,7 +544,7 @@ mysql_real_connect()执行后，每一个参数与返回值的MySQL*都与前面
     printf("l_mysql=%x, ll_mysql=%x\n", l_mysql, ll_mysql);
 ```
 
-**测试结果：**
+**测试结果**：
 
 [wuqifu@localhost mysql]$ ./a.out
 
@@ -574,7 +574,7 @@ l_mysql=9fd7008, ll_mysql=9fd7008
  }
 ```
 
-**测试结果：**
+**测试结果**：
 
 Connected...
 
@@ -756,7 +756,7 @@ CR_COMMANDS_OUT_OF_SYNC 命令以一个不适当的次序被执行。
 CR_SERVER_GONE_ERROR    MySQL服务器关闭了。
 CR_UNKNOWN_ERROR    发生一个未知的错误。
 ```
-**版本差异导致的结果：**
+**版本差异导致的结果**：
 
 mysql默认使用了8小时将会自动关闭连接，但是我们可以通过mysql_ping将其激活。
 

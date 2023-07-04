@@ -337,7 +337,7 @@ MapReduce 是大规模数据（TB 级）计算的利器，Map 和Reduce 是它�
 
 ### 程序示例
 
-**Map程序：**
+**Map程序**：
 
 ```java
 public class EarthQuakesPerDateMapper extends Mapper<LongWritable,
@@ -363,7 +363,7 @@ public class EarthQuakesPerDateMapper extends Mapper<LongWritable,
 
 
 
-**Reduce程序：**
+**Reduce程序**：
 
 ```java
 public class EarthQuakesPerDateReducer extends Reducer<Text, IntWritable, Text,
@@ -443,7 +443,7 @@ HBase以表的形式存储数据。表有行和列组成。列划分为若干个
 
 图 1 HBase table logic-view
 
-**定义：**
+**定义**：
 
 * **Row Key**：与nosql数据库们一样,row key是用来检索记录的主键。访问HBase table中的行，只有三种方式：1）通过单个row key访问；2）通过row key的range；3）全表扫描。
 
@@ -491,7 +491,7 @@ HFile的格式为：(更多细节，参见[http://www.tbdata.org/arcHives/1551](
 
 
 
-**HFile分为六个部分：**
+**HFile分为六个部分**：
 
 Data Block 段–保存表中的数据，这部分可以被压缩
 
@@ -591,7 +591,7 @@ bigtable 使用三层类似B+树的结构来保存region位置。
 
 图 7 Region find Sequence digram
 
-**说明：**
+**说明**：
 
 1 root region永远不会被split，保证了最需要三次跳转，就能定位到任意region 。
 

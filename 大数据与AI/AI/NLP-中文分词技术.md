@@ -298,7 +298,7 @@ typedef struct LexIconNode{
 
 **网站代码**：https://github.com/fxsjy/jiebademo
 
-**算法：**  Bigram + HMM
+**算法**：  Bigram + HMM
 
 - 基于前缀词典实现高效的词图扫描，生成句子中汉字所有可能成词情况所构成的有向无环图 (DAG)
 - 采用了动态规划查找最大概率路径, 找出基于词频的最大切分组合

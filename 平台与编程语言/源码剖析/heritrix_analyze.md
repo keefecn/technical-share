@@ -160,7 +160,7 @@ l 管理：浏览器上输入 http://localhost:PORT/
 
 
 
-**配置文件：** heritrix.properties
+**配置文件**： heritrix.properties
 
 ```ini
 # 设定管理账号密码：启动必需。

@@ -508,7 +508,7 @@ Pygments代码高亮语法使用介绍： [点击这里](https://github.com/mojo
 
 ### 3.4.2 评论：Disqus/duoshuo
 
-*备注：**2017.6**多说评论系统关闭。*
+*备注**：2017.6**多说评论系统关闭。*
 
 comment config: default Disqus
 ```ini

@@ -71,7 +71,7 @@ C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实
 | void | void          | void 表明没有可用的值。如函数返回值、函数参数、指针。                                                                                         |                                                                                                                                                       |
 | 派生类型 | 指针 *          | 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。访问指针地址使用 &操作符。                                                                        | `type *var-name;`                                                                                                                                     |
 |      | 数组            | 存储一个固定大小的相同类型元素的顺序集合。                                                                                                 | `type arrayName [ arraySize ];`                                                                                                                       |
-|      | 结构体    struct | 结构体是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。   结构体语句说明：**structure tag** 是可选的，每个 member definition 是标准的变量定义，结结构变量也是可选的。 | struct [structure tag] {  member definition;          member definition;          ...      member definition;    } [one or more structure variables]; |
+|      | 结构体    struct | 结构体是 C 编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。   结构体语句说明**：structure tag** 是可选的，每个 member definition 是标准的变量定义，结结构变量也是可选的。 | struct [structure tag] {  member definition;          member definition;          ...      member definition;    } [one or more structure variables]; |
 |      | 共用体   union   | 共用体是一种特殊的数据类型，允许您在相同的内存位置存储不同的数据类型。您可以定义一个带有多成员的共用体，但是任何时候只能有一个成员带有值。共用体提供了一种使用相同的内存位置的有效方式。                          | union [union tag] { member definition;   member definition; ... member definition; } [one or more union variables];                                   |
 |      | 函数            | 是一组一起执行一个任务的语句。函数还有很多叫法，比如方法、子例程或程序等等。                                                                                | return_type function_name( parameter list   )   {        body of the function   }                                                                     |
 
@@ -186,7 +186,7 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 ### 2.3.2  位域
 
 位域是带有预定义宽度的变量。
-**位域声明：**
+**位域声明**：
 
 ```c
 {
@@ -194,7 +194,7 @@ C 预处理器提供了下列的运算符来帮助您创建宏：
 };
 ```
 
-**示例：**
+**示例**：
 
 ```c
 struct
@@ -301,7 +301,7 @@ C++ 异常是指在程序运行时发生的特殊情况，比如尝试除以零�
 * catch: 在您想要处理问题的地方，通过异常处理程序捕获异常。catch 关键字用于捕获异常。
 * try: try 块中的代码标识将被激活的特定异常。它后面通常跟着一个或多个 catch 块。
 
-**使用 try/catch** **语句的语法如下所示：**
+**使用 try/catch** **语句的语法如下所示**：
 
 ```c++
 try

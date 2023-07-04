@@ -225,15 +225,15 @@ Tensorflow目前发布了两个版本：1.x和2.0，通过对这两个版本的�
 
 Tensorflow2去除了冗余的接口，并将计算过程封装成了函数，方便开发者调用。同时，Tensorflow2内置了Keras,使用Keras开发神经网络更加便捷。
 
-**（2）工具多样化：**
+**（2）工具多样化**：
 
 Tensorflow2提供绝大多数AI开发及落地应用的函数，从数据处理，到搭建及可视化网络，从训练网络到部署应用网络，从各种文件读取到保存等，几乎实现了Opencv\pillow\Matplotlib所包含的所有功能。
 
-**（3）兼容性好，受众广：**
+**（3）兼容性好，受众广**：
 
 Tensorflow2针对不同等级的AI开发者提供了不同等级的接口，为底层开发者提供了底层接口，为高层开发者提供了高层接口。
 
-**（4）高效：**
+**（4）高效**：
 
 Tensorflow2使用了Eager execution机制，与python运行时集成度更高，动态图机制可以实时获取结果，开发效率更高。新的装饰器的加入，可将python对象转换为图结构，实现张量的跟踪。
 
@@ -641,7 +641,7 @@ SciKit-learn 是老牌的开源 Python 算法框架，始于 2007 年的 Google 
 - Sympy: 符号数学
 - Pandas: 数据结构和分析
 
-**命名的由来：**SciPy 的扩展和模块在传统上被命名为 SciKits。而提供学习算法的模组就被命名为 scikit-learn。
+**命名的由来**：SciPy 的扩展和模块在传统上被命名为 SciKits。而提供学习算法的模组就被命名为 scikit-learn。
 
 表格 sklearn六大功能
 
@@ -1011,7 +1011,7 @@ WEKA存储数据的格式是ARFF（Attribute-Relation File Format）文件，这
 * 模型：训练后得到的模型，包括算法，各类参数等
 
 **常用算法**：NB…
-**运行结果分析：**
+**运行结果分析**：
 //说明：正确率，越大越好
 Correctly Classified Instances     25     50      %
 
@@ -1021,7 +1021,7 @@ Correctly Classified Instances     25     50      %
 * 空间距离
 * 欧氏距离：通常用于数值的属性。
   **常用算法**：KNN…
-  **运行结果分析：**
+  **运行结果分析**：
   //说明：衡量标准，越小越好
   Within cluster sum of squared errors: 540.7387788014682
 

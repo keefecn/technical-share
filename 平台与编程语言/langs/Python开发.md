@@ -218,7 +218,7 @@ False
 ```
 
 **类和实例**
-**示例：**
+**示例**：
 
 ```python
 >>> class Foo():
@@ -273,7 +273,7 @@ copy.copy( )
 * 使用工厂函数（如list/dir/set）
 * 使用copy模块中的copy()函数
 
-**小结：**
+**小结**：
 
 * Python中对象的赋值都是进行对象引用（内存地址）传递
 * 使用copy.copy()，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，依然使用原始的引用.
@@ -738,7 +738,7 @@ else:
    无异常时处理的语句。实际用处不大。
 ```
 
-**断言：**
+**断言**：
 他是一句必须等价于布尔真的判定。
 断言是通过assert语句实现的，你可以简简单单的想像为 raise-if语句。
 
@@ -889,7 +889,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
   
   ### 3.1.1  python的名字空间
   
-  **LEGB含义解释：**
+  **LEGB含义解释**：
 
 * L-Local(function)；函数内的名字空间
 
@@ -904,7 +904,7 @@ Python 模块(Module)，是一个 Python 文件，以.py 结尾，包含了 Pyth
 
 ### 3.1.2  模块安装
 
-**模块安装工具：**ez_setup或者pip(更佳，支持自动寻找依赖库)
+**模块安装工具**：ez_setup或者pip(更佳，支持自动寻找依赖库)
 
 模块按照(python2.7/python3.5.x/x86/x64）有四种组合，*其中python3.5.x + x64在win8.1 64位系统下完全正常；python3.5在WINDOWS平台要求在vista以上的版本。*
 表格 18 不同OS下的第三方模块的缺省安装路径
@@ -1084,7 +1084,7 @@ from .. spidermodult/util/util import ..
 
 #### 3.1.3.1 重新导入reload
 
-**作用：** 对已经加载的模块进行重新加载，一般用于原模块有变化等特殊情况，reload前该模块必须已经import过。
+**作用**： 对已经加载的模块进行重新加载，一般用于原模块有变化等特殊情况，reload前该模块必须已经import过。
 Eg.:
 
 ```python
@@ -1195,7 +1195,7 @@ $MV mypkpath.pth $dstdir
 错误描述：到达了包的最顶层，而最顶层不是一个包。
  解决方法：在main.py同级添加一个目录mod，包含components和utilities，并在mod中添加一个**init**.py，即可解决
 
-错误2：**no module named ***
+错误2**：no module named ***
 错误描述：在指定路径下没有找到该模块。
 另外：在main.py执行的时候，没有指定路径的文件默认与main.py是同一路径。
 
@@ -1371,7 +1371,7 @@ List of available distribution formats:
   --formats=msi      Microsoft Installer
 ```
 
-**setup函数还有一些参数：**
+**setup函数还有一些参数**：
 1、packages
  告诉Distutils需要处理那些包（包含__init__.py的文件夹）
  2、package_dir
@@ -2018,7 +2018,7 @@ fixture 是 pytest 特有的功能，它用 pytest.fixture 标识，定义在函
 s`etup/teardown` 是指在模块、函数、类开始运行以及结束运行时执行一些动作。比如在一个函数中测试一个数据库应用，测需要在函数开始前连接数据库，在函数运行结束后断开与数据库的连接。setup/teardown 是特殊的 fixture.
 pytest.fixture(scope='function', params=None, autouse=False, ids=None)
 
-**作用范围 ：**
+**作用范围 **：
 
 * scope: session/modules/class/function
 * auto_use=True，默认是False，是否自动调用
@@ -2833,7 +2833,7 @@ def calc_loop_time():
 
 python并发主要有多进程multiprocessing、多线程thread和协程Coroutine。
 并发机制包括socket、[asynchat](https://docs.python.org/2/library/asynchat.html#module-asynchat)、 [asyncore](https://docs.python.org/2/library/asyncore.html#module-asyncore)(select)。
-**应用场景：**
+**应用场景**：
 
 * cpu密集型: line>多进程>多线程；
 * io密集型：多进程>line>多线程
@@ -2964,7 +2964,7 @@ python窗口中[threading.Queue](https://docs.python.org/2/library/queue.html)�
 多线程编程的准标准库[posix pthread](https://computing.llnl.gov/tutorials/pthreads/)库拥有rwlock, 而python2.7自带的threading库没有读写锁，只有可重入锁RLock。
 
 * 可重入锁。 可重入锁是指同一个锁可以多次被同一线程加锁而不会死锁。 实现可重入锁的目的是防止递归函数内的加锁行为，或者某些场景内无法获取锁A是否已经被加锁，这时如果不使用可重入锁就会对同一锁多次重复加锁，导致立即死锁。
-* 读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是：**
+* 读写锁。 读写锁与一般锁最大的区别是对同一共享资源多个线程的读取行为是并行的，同时保持该资源同一时刻只能由一个写进程独占，且写请求相对读请求有更高的优先级以防止writer starvation。( 一般锁同一时刻只能由一个线程独占，不论是读进程还是写进程， 即读写都是串行的，而读写锁读是并行的，写是串行的。**读写锁的特点是**：
   * 当且仅当 锁没有被写进程占用且没有写请求时，可以获得读权限锁
   * 当且仅当 锁没有被占用且没有读写请求时，可以获得写权限锁
 
@@ -3108,13 +3108,13 @@ def terminate_thread(thread):
 协程可从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(...)函数，通常调用方会把值推送给协程。
 **协程的特点**：“子程序就是协程的一种特例。”
 
-**协程的优点：**
+**协程的优点**：
 　　（1）在同一个线程执行，无需线程上下文切换的开销，协程避免了无意义的调度，由此可以提高性能（但也因此，程序员必须自己承担调度的责任；同时，协程也失去了标准线程使用多CPU的能力）。
 　　（2）无需原子操作锁定及同步的开销（在协程中控制共享资源不加锁，只需要判断状态）。
 　　（3）方便切换控制流，简化编程模型。
 　　（4）高并发+高扩展性+低成本：一个CPU支持上万的协程都不是问题。所以很适合用于高并发处理。
 
-**协程的缺点：**
+**协程的缺点**：
 　　（1）无法利用多核资源：协程的本质是个单线程,它不能同时将 单个CPU 的多个核用上,协程需要和进程配合才能运行在多CPU上.当然我们日常所编写的绝大部分应用都没有这个必要，除非是cpu密集型应用。
 　　（2）进行阻塞（Blocking）操作（如IO时）会阻塞掉整个程序。
 
@@ -3364,7 +3364,7 @@ def application(env, start_response):
     return "Hello World"
 ```
 
-**方法1： 终端运行：**
+**方法1： 终端运行**：
 
 ```shell
 uwsgi --http :8001 --wsgi-file test.py

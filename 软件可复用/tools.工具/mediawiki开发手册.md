@@ -257,7 +257,7 @@ $wgServer = "http://giprs.org";
 ```
 
 - **修改数据库相关：数据库名称、用户、密码、表前缀**
-- **禁止新用户注册：**
+- **禁止新用户注册**：
 
 ```ini
 #Prevent new user registrations
@@ -361,7 +361,7 @@ $wgRawHtml = true;
 
 参考：http://www.mediawiki.org/wiki/Manual:Interwiki
 
-**安装步骤：**
+**安装步骤**：
 
 每种语言文字独立安装1套wiki、1套数据库。
 
@@ -398,7 +398,7 @@ wiki首页：http://localhost/wiki/test/index.php/
 
 备注：界面随着文章内容变化，比如Hello的界面是英文的，Hello/zh的界面是汉字的。需要自己修改一下mediawiki的代码。
 
-**步骤：**
+**步骤**：
 
 ```sql
 mysql -uwiki_test -p1 wiki_test

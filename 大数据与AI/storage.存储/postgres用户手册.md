@@ -27,7 +27,7 @@ PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS
 
 PostgreSQL(也称为Post-gress-Q-L)由PostgreSQL全球开发集团(全球志愿者团队)开发。 它不受任何公司或其他私人实体控制。 它是开源的，其源代码是免费提供的。PostgreSQL最初设想于1986年，当时被叫做Berkley Postgres Project。该项目一直到1994年都处于演进和修改中，直到开发人员Andrew Yu和Jolly Chen在Postgres中添加了一个SQL（Structured Query Language，结构化查询语言）翻译程序，该版本叫做Postgres95，在开放源代码社区发放。
 
-**PostgreSQL** **的 主要优点如下：**
+**PostgreSQL** **的 主要优点如下**：
 
 1）维护者是PostgreSQL Global Development Group，首次发布于1989年6月。
 

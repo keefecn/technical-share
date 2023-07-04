@@ -1255,7 +1255,7 @@ class SecurityApi(BaseApi):
 
 依赖模块Jinja2。
 
-**首页相关的模板：**（说明：下面模板忽略路径前缀 /flask_appbuilder/templates/）
+**首页相关的模板**：（说明：下面模板忽略路径前缀 /flask_appbuilder/templates/）
 
 * appbuilder/index.html  继承自 appbuilder/base.html
 * appbuilder/base.html 继承自 base_template
@@ -1968,7 +1968,7 @@ Required-by: SQLAlchemy-Utils, marshmallow-sqlalchemy, Flask-SQLAlchemy, Flask-A
 **Database Urls**
 dialect[+driver]://username:password@host:port/database
 
-示例：**MySQL**
+示例**：MySQL**
 The MySQL dialect uses mysql-python as the default DBAPI. There are many MySQL DBAPIs available, including MySQL-connector-python and OurSQL:
 
 ```python

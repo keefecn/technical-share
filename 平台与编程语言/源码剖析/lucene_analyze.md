@@ -1109,7 +1109,7 @@ Elasticsearch主要特性
 | GET [/_cluster/nodes/shutdown](http://localhost:9200/_cluster/nodes/shutdown)                                                               | 向集群中所有节点发送一个关闭请求                                                                        |
 |                                                                                                                                             |                                                                                         |
 
-*备注：**1.**简写命令，*
+*备注**：1.**简写命令，*
 
 如`curl -XGET http://localhost:9200/`*可简写成* *GET /**，省略**HOST；*
 
@@ -1279,7 +1279,7 @@ curl -XGET 'http://localhost:9200/twitter/tweet/2?pretty=true'
 
 ### 4.2.3 Searching
 
-**查询子句格式（可复合子句）：**
+**查询子句格式（可复合子句）**：
 
 ```json
 {
@@ -1492,7 +1492,7 @@ Plus, our [community has contributed many more](https://www.elastic.co/guide/en/
 
 * BODY JSON数据
 
-示例：**典型**Restful API**为** curl -XPUT 'http://localhost:9200/twitter/tweet/1?pretty' -d '
+示例**：典型**Restful API**为** curl -XPUT 'http://localhost:9200/twitter/tweet/1?pretty' -d '
 
 表格 11 elasticsearch Restful API列表
 

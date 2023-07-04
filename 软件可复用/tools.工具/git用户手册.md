@@ -674,7 +674,7 @@ $git push origin [branch] -f
 
 有时我们并不需要分支太多的commit，只需保留最新一条。
 
-**1. 直接合并(straight merge)：**
+**1. 直接合并(straight merge)**：
 
 首先先到master分支，然后直接合并：
 
@@ -685,7 +685,7 @@ git merge dev
 
  说明：注意没参数的情况下merge是快进式(Fast-forward)的，即Git将master分支的指针直接移到dev的最前方。
 
-**2. 压合合并(squashed commits)：**
+**2. 压合合并(squashed commits)**：
 
 将一条分支上的若干个提交条目压合成一个提交条目，提交到另一条分支的末梢。
 

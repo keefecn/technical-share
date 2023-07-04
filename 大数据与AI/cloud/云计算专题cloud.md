@@ -84,13 +84,13 @@
 
 **定义**
 
-**维基百科：**
+**维基百科**：
 
 云计算是一种能够将动态伸缩的虚拟资源通过互联网以服务的方式提供给
 
 用户的计算模式，用户不需要知道如何管理那些支持云计算的基础设施。
 
-**Whatis.com：**
+**Whatis.com**：
 
 云计算是一种通过网络连接来获取软件和服务的计算模式，云计算使得用
 
@@ -98,7 +98,7 @@
 
 入云中获取需要的资源。
 
-**The NIST Definition of Cloud Computing：**
+**The NIST Definition of Cloud Computing**：
 
 Cloud computing is a model for enabling ubiquitous, convenient, ondemand
 
@@ -377,7 +377,7 @@ management effort or service provider interaction.
 
 应用实现对“多租户”的支持，需要相应的“多租户架构”（Multi-tenancy architecture）。
 
-**经典的多租户架构：**
+**经典的多租户架构**：
 
 * Shared nothing
 * Shared hardware

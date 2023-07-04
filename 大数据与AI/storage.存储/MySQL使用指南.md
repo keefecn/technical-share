@@ -246,7 +246,7 @@ $ yum install mysql-community-server
 * SELECT语句的JOIN语法：这些语法用于SELECT语句的*table_references*部分和多表DELETE和UPDATE语句：
 * SELECT语句的UNION语法
 
-**INSERT：**
+**INSERT**：
 
 ```mysql
 INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
@@ -465,11 +465,11 @@ UPDATE cast SET bust=(select bust from cast WHERE bust LIKE '%カップ%')
 
 #### 2.1.1.5     批量操作数据
 
-**批量插入：**
+**批量插入**：
 
 INSERT INTO tbl_name(field1,field2…) VALUES(value1,value2…)
 
-**批量更新：**
+**批量更新**：
 
 * 单次更新：最慢，如update test_tbl set dr='2' where id=1;
 * replace into: 最快，如replace into test_tbl (id,dr) values (1,'2'),(2,'3'),...(x,'y');
@@ -598,7 +598,7 @@ mysql> SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
 * CURTIME: 返回TIME类型HH:MM:SS
 * UNNIX_TIMESTAMP：返回1970年至今的秒数
 
-**2）时间戳函数TIMESTAMP：**
+**2）时间戳函数TIMESTAMP**：
 
 * unix_timestamp：返回1970年至今的秒数。
 * from_unixtime：将秒数转化为可读的时间格式。
@@ -654,7 +654,7 @@ HOUR_MICROSECOND, HOUR_SECOND, HOUR_MINUTE,
 
 DAY_MICROSECOND, DAY_SECOND, DAY_MINUTE, DAY_HOUR, YEAR_MONT
 
-**示例：**
+**示例**：
 
 ```sql
 mysql> select DATE_SUB(CURDATE(),INTERVAL 30 DAY);
@@ -666,7 +666,7 @@ mysql> select DATE_SUB(CURDATE(),INTERVAL 30 DAY);
 1 row in set (0.00 sec)
 ```
 
-4） **日期和时间格式的转化函数：**，
+4） **日期和时间格式的转化函数**：，
 
 DATE类型：DATE, DATE_FORMAT，DAYOFWEEK，WEEKDAY，DAYOFYEAR，MONTH，DAYNAME，MONTHNAME，QUARTER，WEEK
 
@@ -695,15 +695,15 @@ TIME类型：HOUR(time) ，MINUTE，SECOND
     GROUP BY concat(YEAR,QUARTER);
   ```
 
-**按日汇总，统计：**
+**按日汇总，统计**：
 
 `SELECT date_format(ctime, '%Y-%m-%d') AS DAY, count(*) FROM news GROUP BY DAY;`
 
-**按时汇总，统计：**
+**按时汇总，统计**：
 
 `SELECT date_format(ctime, '%Y-%m-%d %H') AS HOUR,count(*) FROM news GROUP BY HOUR;`
 
-**某天按时统计：**
+**某天按时统计**：
 
 ```mysql
 SELECT date_format(ctime, '%Y-%m-%d %H ') AS HOUR,count(*)
@@ -1125,7 +1125,7 @@ master-connect-retry=60
 report-host=192.168.1.220
 ```
 
-**5.** **启动从服务器线程：**
+**5.** **启动从服务器线程**：
 
 说明：可在主服务器用show master status获取master_log_file的文件名和pos
 
@@ -1963,7 +1963,7 @@ shell >/etc//init.d/mysql restart
 
 `shell> mysqldump samp_db ｜tar zxvf >/usr/archives/mysql/samp_db.1999-10-02.tar.gz`
 
-**导入导出参数：**
+**导入导出参数**：
 
 ```mysql
 -default-character-set=latin1  #原数据库的字符编码
@@ -2048,7 +2048,7 @@ shell> mysql -u[user] -p [dbname] < [xxx.sql]
 
 ## 使用的常见问题
 
-**常见的小问题：**
+**常见的小问题**：
 
 * 表名：数据库的表名不要使用MySQL保留关键字如desc/sql等等，否则插入失败。表名带有-，则表名需用引号圈起来，否则语法错误。
 
@@ -2176,7 +2176,7 @@ collation-server=utf8_unicode_ci
 skip-character-set-client-handshake
 ```
 
-**常规修改命令：**
+**常规修改命令**：
 
 a) 影响character_set_database
 
@@ -2234,11 +2234,11 @@ collation_database latin1_swedish_ci
 
 collation_server latin1_swedish_ci
 
-**备注：**
+**备注**：
 
 **utf8_general_ci和utf8_unicode_ci的差别**：主要在德语和法语上。对于我们中国人来说，一般使用general，因为general更快。
 
-**utf8_bin_ci：**在字符对比时，unicode和general都不是大小写敏感的；如果要求大小写敏感的话，就使用**utf8_bin_ci.**
+**utf8_bin_ci**：在字符对比时，unicode和general都不是大小写敏感的；如果要求大小写敏感的话，就使用**utf8_bin_ci.**
 
 ### 2.数据库表字段内容中文的正常显示
 

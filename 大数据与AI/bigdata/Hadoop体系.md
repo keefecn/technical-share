@@ -1329,7 +1329,7 @@ $ sbin/stop-dfs.sh
 
 前提：安装jdk、Hadoop对应版本
 
-**安装步骤：**
+**安装步骤**：
 
 1、下载hbase-x.x.x.tar.gz，并解压
 
@@ -1392,7 +1392,7 @@ p002
 
 在一台机器上编辑完成hbase-site.xml、hbase-env.sh、regionservers几个文件后，通过scp命令将hbase安装目录分发到各个机器上。
 
-**注意：**
+**注意**：
 
 /hbase/lib/Hadoop-core-x.x-append-r1056497.jar需要删除，替换HADOOP_HOME下的Hadoop-x.x.x-core.jar
 

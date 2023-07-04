@@ -36,7 +36,7 @@ libmemcached http://libmemcached.org/
 
 **linux下载:**  http://memcached.org/
 
-**windows下载：**[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/)
+**windows下载**：[**http://www.splinedancer.com/memcached-win32/**](http://www.splinedancer.com/memcached-win32/)
 
 1) 安装
 
@@ -68,7 +68,7 @@ memcache依赖于[libevent](http://www.monkey.org/~provos/libevent/)库。
 
 ![img](../../media/bigdata/db_memcache_001.png)
 
-**服务器端程序提供服务：**
+**服务器端程序提供服务**：
 
 可调用方法：add()、get()、replace() 和 delete()等。
 
@@ -411,7 +411,7 @@ bool Memcache::flush ( void )
 
 **memcache服务端**的实现：libevent网络通讯 + slab allocation
 
-**主要的技术实现点：**
+**主要的技术实现点**：
 
 内存分配：slab allocation, fixed-size memoryPool
 

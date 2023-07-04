@@ -23,7 +23,7 @@ Linux官网：https://kernel.org/
 
 ## 前言
 
-**学习的目的：**
+**学习的目的**：
 
 1）通过优秀的代码prety code来提高increase编程经验；
 

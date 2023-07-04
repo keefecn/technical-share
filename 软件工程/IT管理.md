@@ -415,7 +415,7 @@ QCC(Quality Control Circle,品管圈)
 
 ### 7.1.1 配置管理内容
 
-**配置管理包含如下内容：**
+**配置管理包含如下内容**：
 标识：识别产品的结构、产品的[构件](https://baike.baidu.com/item/构件)及其类型，为其分配唯一的[标识符](https://baike.baidu.com/item/标识符)，并以某种形式提供对它们的存取。
 控制：通过一定的机制控制对[配置项](https://baike.baidu.com/item/配置项)的修改。
 状态报告：记录并报告配置项以及元数据的状态。
@@ -427,7 +427,7 @@ QCC(Quality Control Circle,品管圈)
 
 **关键活动**包括：配置项（基本单位)、工作空间管理、版本控制、变更控制、状态报告、配置审计等。
 
-**配置识别：**
+**配置识别**：
 
 * 确定需要纳入配置管理的配置项
 * 确定配置项的获取时间和所有者
@@ -538,7 +538,7 @@ QCC(Quality Control Circle,品管圈)
 
 一个完整的SCM系统要具有三个核心功能：版本控制、变更控制、配置控制以及两个支持功能：状态统计和配置审计。
 
-**主流配置管理工具：**
+**主流配置管理工具**：
 
 * Marc Rochkind的SCCS（Source Code Control System）
 * Walter Tichy的RCS（Revision Control System）、

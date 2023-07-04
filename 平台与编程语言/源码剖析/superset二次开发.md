@@ -1227,7 +1227,7 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 
 说明：查询参数的语法类似 ES查询语法。
 
-示例：**图表列表/api/v1/chart/  的响应结果 JSON**
+示例**：图表列表/api/v1/chart/  的响应结果 JSON**
 
 ```json
 {
@@ -1357,7 +1357,7 @@ API swagger文档实现在flask_appbuild模块，通过变量FAB_API_SWAGGER_UI�
 | API实现 | /views/datasets/api.py              | /views/datasource.py                           |
 | 权限检验  | @has_access_api                     | @has_access_api 需要有权限项`can save on datasource` |
 
-示例：**数据集查询/api/v1/dataset/ 的响应结果 JSON**
+示例**：数据集查询/api/v1/dataset/ 的响应结果 JSON**
 
 ```json
 {
@@ -2107,7 +2107,7 @@ AUTH_LDAP_USERNAME_FORMAT:  flask会把你输入的用户名替换进去，得�
 * 用户注册：AUTH_USER_REGISTRATION  AUTH_USER_REGISTRATION_ROLE
 * 安全：SECRET_KEY
 
-**其它配置项：**
+**其它配置项**：
 
 * 目录：BASE_DIR  DATA_DIR
 * 静态文件：VERSION_INFO_FILE  PACKAGE_JSON_FILE  FAVICONS  APP_ICON

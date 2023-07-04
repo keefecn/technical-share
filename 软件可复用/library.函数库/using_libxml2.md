@@ -17,7 +17,7 @@
 
 Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform), it is free software available under the [MIT License](http://www.opensource.org/licenses/mit-license.html).
 
-**数据类型：**
+**数据类型**：
 
 * xmlChar  替代char,使用UTF-8编码的一字节字符串。如果你的数据使用其它编码，它必须被转换到UTF-8才能使用libxml的函数。
 * XmlDoc  包含由解析文档建立的树结构，xmlDocPtr是指向这个结构的指针。
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 </root>
 ```
 
-**执行序列：**
+**执行序列**：
 
 1. 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
 
@@ -203,7 +203,7 @@ int main(void) {
 #endif
 ```
 
-**执行序列：**
+**执行序列**：
 
 1. 声明指针：文档指针(xmlDocPtr)，结点指针(xmlNodePtr)；
 

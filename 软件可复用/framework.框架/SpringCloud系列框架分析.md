@@ -171,7 +171,7 @@ Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发
 
 ## 3.1  Spring Cloud架构
 
-**Spring Cloud** **的核心功能：**
+**Spring Cloud** **的核心功能**：
 
 * 分布式/版本化配置。
 * 服务注册和发现。

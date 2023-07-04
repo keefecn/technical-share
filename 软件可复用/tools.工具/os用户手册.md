@@ -286,7 +286,7 @@ windows环境可安装Windows 子系统 (<u>WSL</u>) 来直接运行 GNU/Linux �
 
 ### 五笔输入法
 
-推荐：**搜狗输入法**
+推荐**：搜狗输入法**
 
 搜狗输入法是由北京搜狗信息服务有限公司2006年6月推出的一款汉字输入法工具。业界首次利用先进的搜索引擎技术开发的输入法，被誉为“互联网输入法”。 搜狗输入法目前有windows、linux和mac版。
 
@@ -589,7 +589,7 @@ windows:  电脑桌面，鼠标右击选择【显示设置】。点击【显示�
 
 ## 3.1 Linux环境综述
 
-**Linux登录过程中加载配置文件顺序：**
+**Linux登录过程中加载配置文件顺序**：
 
 /etc/profile → /etc/profile.d/*.sh → ~/.bash_profile → ~/.bashrc → [/etc/bashrc]
 
@@ -884,7 +884,7 @@ $ swapon /dev/sda9
 **问题描述**：开机时启动很慢，在网络配置检查花近二分钟，Waiting up to 60 seconds for network configuration。
 
 **问题原因**：使用 sudo pppoeconf 命令时，会有信息写入/etc/network/interfaces 文件内，直接导致出现了上面的问题。
-**问题解决：**
+**问题解决**：
 
 ```shell
 $ sudo vi /etc/network/interfaces

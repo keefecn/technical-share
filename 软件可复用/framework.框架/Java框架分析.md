@@ -170,7 +170,7 @@ EJB 从技术上而言不是一种"产品",EJB 是一种描述了构建应用组
 
 * **JSP**：Java Server Page, 提供一种简单快速的方法来*创建动态网页*。Java Servlets的一种扩展。
 
-* **EJB：**Enterprise Java Bean即企业Beans, 定义了一个应用程序接口, 可以使程序员快速开发,发布和管理跨平台的基于组件的企业级应用程序。
+* **EJB**：Enterprise Java Bean即企业Beans, 定义了一个应用程序接口, 可以使程序员快速开发,发布和管理跨平台的基于组件的企业级应用程序。
 
 * **JDBC**：Java的数据库访问接口, 通过它来访问DBMS.
 
@@ -385,7 +385,7 @@ step 6: 运行显示视图，启动tomcat，访问http://localhost:8080/web_test
 
 Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(IOC)框架，以帮助分离项目组件之间的依赖关系。Spring是一个轻量级的IOC和AOP的容器框架。
 
-**Spring的目标：**
+**Spring的目标**：
 
 1、可以令人方便愉快的使用Spring。
 
@@ -393,7 +393,7 @@ Spring框架，由**Rod Johnson**开发，是一个非常强大的反转控制(I
 
 3、Spring不和现有的解决方案竞争，而是致力于将它们融合在一起。
 
-**Spring的基本组成：**
+**Spring的基本组成**：
 
 1、最完善的轻量级核心框架。
 
