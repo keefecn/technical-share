@@ -366,13 +366,37 @@ LibreOffice 是目前最活跃的 OpenOffice.org 代码库后继者，每 6 个�
 
 ## Adobe PDF
 
+Adobe PDF分Reader和 Pro，Reader是只读，免费使用；Pro可以进行PDF编辑、转化等诸多操作，付费使用，免费试用7天。
+
 MS Office办公套件有PDF格式转换插件，可以将word格式转化成pdf格式。
 
 1). 生成pdf文件;
 
-2). 裁剪pdf文件大小;
+2). 裁剪pdf文件大小。
+
+## Edge浏览器
+
+浏览器按市场份额排行是Chrome（插件在国内不可下载）、Safari（只能用于APPLE系列机器）、Edge、Firefox。
+
+Edge有许多扩展。如现在最流行的Sider - ChatGPT Sidebar，PDF插件等等。
 
 <br>
+
+# 文档转化
+
+## HTML转化成PDF
+
+使用Edge浏览器右键菜单打印，会跳出打印机选项，
+
+* 另存为PDF：生成的PDF是可复制可编辑的文本。
+
+* Microsoft to PDF：生成的PDF是图片。
+
+生成的PDF默认为全部网页，也可以自己选择打印页。
+
+## 本章参考
+
+<br><br>
 
 # Markdown编辑
 

@@ -834,8 +834,8 @@ http://kernel.org/doc/man-pages/
 http://linuxmanpages.com/
 
 [**1. General Commands**](http://linuxmanpages.com/man1/)
- [**2. System Calls**](http://linuxmanpages.com/man2/)
- [**3. Subroutines**](http://linuxmanpages.com/man3/)
+[**2. System Calls**](http://linuxmanpages.com/man2/)
+[**3. Subroutines**](http://linuxmanpages.com/man3/)
 
 provided by the standard C library (with particular focus on [glibc](http://www.gnu.org/software/libc/), the [GNU](http://www.gnu.org) C library).
  [**4. Special Files**](http://linuxmanpages.com/man4/)
