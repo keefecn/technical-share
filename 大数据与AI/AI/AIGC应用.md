@@ -214,3 +214,4 @@ GPT结果有字数限制，一般不超过1500个汉字。
 # 参考资料
 
 * 助力开发者，基于GPT的开发者实用工具合集  https://mp.weixin.qq.com/s?t=pages/image_detail&scene=24&__biz=MjM5NzM0MjcyMQ==&mid=2650184331&idx=2&sn=ca99f8c560c94c156b7a3c67d4a50143
+* 首份中国AIGC产业全景报告发布！三大类玩家，四种商业模式，万亿规模市场，还有最值得关注50家企业  https://www.qbitai.com/2023/03/43241.html
