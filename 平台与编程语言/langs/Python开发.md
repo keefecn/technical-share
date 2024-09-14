@@ -2595,13 +2595,13 @@ Python 3.6.5
 ```
 
 2) python shell
-
+   
    ```sh
    >>> import sys
    >>> sys.version_info.major
    3
    ```
-
+   
    表格 24 python2和python3的比较列表
 
 |          | python 2.x                                                                    | python 3                                                      |
