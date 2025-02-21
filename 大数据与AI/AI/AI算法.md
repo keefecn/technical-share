@@ -528,7 +528,7 @@ Classification and Regression *Trees* 分类与回归树，是二叉树，可以
 
 ## 4 ML机器学习算法
 
-参考 《AI笔记》相关章节
+参考 《[机器学习&深度学习](./机器学习&深度学习.md)》相关章节
 
 主要包括分类、聚类、回归和降维。
 
@@ -785,7 +785,7 @@ LightGBM（Light Gradient Boosting Machine）， LightGBM是2017年由微软推�
 
 **卷积**
 
-在[泛函分析](https://baike.baidu.com/item/泛函分析/4151)中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f和g 生成第三个函数的一种[数学](https://baike.baidu.com/item/数学/107037)[算子](https://baike.baidu.com/item/算子/970194)，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
+在泛函分析中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f和g 生成第三个函数的一种数学算子，表征函数f与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。
 
 <br>
 
